@@ -4,6 +4,7 @@ import Layout from "@/components/Layout";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "@/lib/supabaseClient";
+import { ensureUserProfile } from "@/lib/profile";
 
 export default function Signup() {
   const router = useRouter();
@@ -32,6 +33,10 @@ export default function Signup() {
       if (signUpError) {
         setError(signUpError.message);
         return;
+      }
+
+      if (data.user) {
+        await ensureUserProfile(data.user.id, email);
       }
 
       if (data.session) {

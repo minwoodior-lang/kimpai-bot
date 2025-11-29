@@ -1,0 +1,226 @@
+We already finished Phase 1 and basic Supabase Auth integration. The app is running, email signup/login works, and dashboard/analysis/alerts are protected with a client-side guard.
+
+Now please implement Phase 2.5 + Phase 3 (Users profile sync + Alerts CRUD using Supabase) without changing the existing routing or layout.
+
+======================================================================
+
+✅ 1) Sync public.users with auth.users on signup
+
+Goal: whenever a user signs up, we should also have a row in public.users with:
+
+id = auth user id
+
+email = auth user email
+
+plan = 'free' by default
+
+Implementation details:
+
+In lib/supabaseClient.ts keep the existing browser client as is.
+
+In /pages/signup.tsx:
+
+After a successful supabase.auth.signUp({ email, password }),
+
+Get the user id from data.user?.id.
+
+Call supabase.from('users').upsert({ id, email, plan: 'free' }).
+
+Ignore errors if the row already exists, but log them to console.
+
+Then redirect to /dashboard as before.
+
+For safety, also add a small helper function somewhere (for example in src/lib/profile.ts or inside signup.tsx) that wraps the upsert logic in a clean way. Naming example:
+
+async function ensureUserProfile(userId: string, email: string) {
+  await supabase.from('users').upsert({
+    id: userId,
+    email,
+    plan: 'free',
+  });
+}
+
+
+Call this helper after signUp success.
+
+======================================================================
+
+✅ 2) Implement Alerts CRUD using Supabase on /alerts page
+
+We already have a protected /alerts page with a placeholder.
+
+Now connect it to the public.alerts table in Supabase.
+
+Requirements:
+
+Use the existing supabase client from lib/supabaseClient.
+
+Use the current session to get userId = session.user.id.
+
+Only fetch alerts that belong to the current user.
+
+Allow creating, listing, toggling, and deleting alerts.
+
+Data model (already exists in DB):
+
+id (uuid, primary key)
+
+user_id (uuid, fk → auth.users.id)
+
+symbol (text)
+
+condition_type (text) -- 'above' | 'below'
+
+threshold (numeric)
+
+is_active (boolean, default true)
+
+created_at (timestamp)
+
+Implementation in src/pages/alerts.tsx:
+
+Session + userId
+
+Reuse the existing auth guard logic (it’s already there).
+
+After the guard passes, call supabase.auth.getSession() and extract userId = data.session?.user.id.
+
+State
+
+const [alerts, setAlerts] = useState<AlertRow[]>([]);
+
+const [loadingAlerts, setLoadingAlerts] = useState(true);
+
+const [form, setForm] = useState({ symbol: '', conditionType: 'above', threshold: '' });
+
+Define a TypeScript type for the alerts rows, e.g.:
+
+type AlertRow = {
+  id: string;
+  symbol: string;
+  condition_type: 'above' | 'below';
+  threshold: number;
+  is_active: boolean;
+  created_at: string;
+};
+
+
+Fetch alerts for current user
+
+After you have userId, run:
+
+const { data, error } = await supabase
+  .from('alerts')
+  .select('*')
+  .eq('user_id', userId)
+  .order('created_at', { ascending: false });
+
+
+On success, set alerts state.
+
+Show a loading spinner or simple "Loading alerts..." while loadingAlerts is true.
+
+Create alert
+
+Add a simple form at the top/right:
+
+Symbol (input, e.g. "BTC/KRW")
+
+Condition type (select: above / below)
+
+Threshold (number input, percentage or price – for now just numeric)
+
+On submit:
+
+const { error } = await supabase.from('alerts').insert({
+  user_id: userId,
+  symbol: form.symbol,
+  condition_type: form.conditionType,
+  threshold: Number(form.threshold),
+  is_active: true,
+});
+
+
+If success, reload alerts (call the fetch function again) and clear the form.
+
+Show basic error message if something fails.
+
+Toggle is_active
+
+In the alerts list, display each alert with:
+
+symbol
+
+condition_type + threshold
+
+status: Active / Paused
+
+buttons: "Toggle" and "Delete"
+
+When user clicks "Toggle":
+
+const { error } = await supabase
+  .from('alerts')
+  .update({ is_active: !current.is_active })
+  .eq('id', current.id)
+  .eq('user_id', userId);
+
+
+Then reload alerts.
+
+Delete alert
+
+const { error } = await supabase
+  .from('alerts')
+  .delete()
+  .eq('id', current.id)
+  .eq('user_id', userId);
+
+
+Then reload alerts.
+
+UI / Styling
+
+Keep using Tailwind and the existing design style.
+
+You can structure it like:
+
+Left: explanation text (what alerts do)
+
+Right/top: "Create Alert" form
+
+Below: list (cards or table) of existing alerts.
+
+======================================================================
+
+✅ 3) Keep all existing behavior
+
+Please do not change:
+
+Existing navigation structure
+
+Layout component
+
+Route names and file paths
+
+SEO text and copy
+
+Auth guards already implemented on dashboard/analysis/alerts
+
+Just add:
+
+Profile upsert on signup
+
+Alerts CRUD connected to Supabase on /alerts
+
+======================================================================
+
+✅ 4) After finishing, please:
+
+List all files you created
+
+List all files you modified
+
+Briefly summarize the changes in each file
+
+End of request.
