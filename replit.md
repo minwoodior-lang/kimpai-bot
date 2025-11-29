@@ -7,7 +7,8 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 ```
 ├── src/
 │   ├── lib/
-│   │   └── supabaseClient.ts  # Supabase client configuration
+│   │   ├── supabaseClient.ts  # Supabase client configuration
+│   │   └── profile.ts         # User profile helper (ensureUserProfile)
 │   ├── components/
 │   │   └── Layout.tsx         # Shared layout with navigation and footer
 │   ├── pages/
@@ -30,10 +31,10 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 │   │   ├── index.tsx          # Homepage
 │   │   ├── markets.tsx        # Crypto premium table
 │   │   ├── analysis.tsx       # AI analysis page (protected)
-│   │   ├── alerts.tsx         # User alerts page (protected)
+│   │   ├── alerts.tsx         # User alerts with Supabase CRUD (protected)
 │   │   ├── pricing.tsx        # Free vs Pro pricing
 │   │   ├── login.tsx          # User login with Supabase auth
-│   │   ├── signup.tsx         # User signup with Supabase auth
+│   │   ├── signup.tsx         # User signup with profile sync
 │   │   └── dashboard.tsx      # Pro user dashboard (protected)
 │   └── styles/
 │       └── globals.css        # Global styles with Tailwind
@@ -63,7 +64,7 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 ## Supabase Database Tables
 - `public.users` - User profiles (id, email, plan, created_at)
 - `public.price_snapshots` - Historical price data
-- `public.alerts` - User alerts (with user_id → auth.users.id)
+- `public.alerts` - User alerts (id, user_id, symbol, condition_type, threshold, is_active, created_at)
 - `public.ai_reports` - AI analysis reports (with seo_title, seo_description)
 - `public.banners` - Marketing banners (with seo_title, seo_description)
 
@@ -73,7 +74,7 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 | `/` | Landing page with features and premium stats | No |
 | `/markets` | Real-time Kimchi Premium table | No |
 | `/analysis` | AI-powered market analysis | Yes |
-| `/alerts` | Create and manage price alerts | Yes |
+| `/alerts` | Create and manage price alerts (Supabase CRUD) | Yes |
 | `/pricing` | Free vs Pro plan comparison | No |
 | `/login` | User login form | No |
 | `/signup` | User registration form | No |
@@ -118,9 +119,21 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 - [x] Auth guards on protected pages (dashboard, analysis, alerts)
 - [x] Dashboard displays user email from session
 
+## Phase 2.5 Complete
+- [x] Profile helper function (src/lib/profile.ts)
+- [x] ensureUserProfile upserts to public.users on signup
+- [x] Default plan set to 'free'
+
+## Phase 3 Complete
+- [x] Alerts CRUD connected to Supabase
+- [x] Fetch alerts for current user only
+- [x] Create new alerts with symbol, condition_type, threshold
+- [x] Toggle is_active status
+- [x] Delete alerts
+- [x] All operations filtered by user_id for security
+
 ## Recent Changes
-- Phase 2 implementation complete (2024-11-29)
-- Added Supabase client configuration
-- Implemented email/password authentication on login/signup
-- Added client-side auth guards to protected pages
-- Dashboard now shows logged-in user email and logout button
+- Phase 2.5 + Phase 3 implementation complete (2024-11-29)
+- Added profile sync on signup (ensureUserProfile)
+- Alerts page now uses real Supabase data instead of mock data
+- Full CRUD operations for alerts with proper user filtering
