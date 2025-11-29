@@ -2,14 +2,40 @@ import Head from "next/head";
 import Link from "next/link";
 import Layout from "@/components/Layout";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function Login() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login attempt:", { email, password });
+    setError("");
+    setLoading(true);
+
+    try {
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (signInError) {
+        setError(signInError.message);
+        return;
+      }
+
+      if (data.session) {
+        router.push("/dashboard");
+      }
+    } catch {
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -27,6 +53,12 @@ export default function Login() {
           </div>
 
           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-8">
+            {error && (
+              <div className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm">
+                {error}
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="email" className="block text-slate-300 text-sm font-medium mb-2">
@@ -65,9 +97,10 @@ export default function Login() {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white py-3 rounded-lg font-medium transition-all"
+                disabled={loading}
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white py-3 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Sign In
+                {loading ? "Signing In..." : "Sign In"}
               </button>
             </form>
 

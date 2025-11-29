@@ -1,8 +1,44 @@
 import Head from "next/head";
 import Layout from "@/components/Layout";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
+import { Session } from "@supabase/supabase-js";
 
 export default function Dashboard() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      if (!data.session) {
+        router.replace("/login");
+      } else {
+        setSession(data.session);
+        setLoading(false);
+      }
+    });
+  }, [router]);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/");
+  };
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="flex items-center justify-center h-screen">
+          <div className="text-white text-xl">Loading...</div>
+        </div>
+      </Layout>
+    );
+  }
+
+  const email = session?.user?.email;
+
   return (
     <Layout>
       <Head>
@@ -11,9 +47,17 @@ export default function Dashboard() {
       </Head>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Dashboard</h1>
-          <p className="text-slate-400">Welcome back! Here&apos;s your market overview.</p>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-white mb-2">Dashboard</h1>
+            <p className="text-slate-400">Welcome back, {email}</p>
+          </div>
+          <button
+            onClick={handleLogout}
+            className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+          >
+            Sign Out
+          </button>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

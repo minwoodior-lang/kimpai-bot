@@ -1,0 +1,193 @@
+We already finished Phase 1 and basic Supabase setup.
+
+Current status:
+
+Next.js 14 + TypeScript + Tailwind project is running.
+
+Routes already exist: "/", "/markets", "/analysis", "/alerts", "/pricing", "/login", "/signup", "/dashboard", "/admin", "/admin/login", "/patterns/[patternId]".
+
+Mock API routes exist: "/api/prices", "/api/premium/table", "/api/alerts", "/api/ai/daily".
+
+Supabase project is already created. Replit Secrets are already set:
+
+NEXT_PUBLIC_SUPABASE_URL
+
+NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+SUPABASE_SERVICE_ROLE_KEY
+
+SESSION_SECRET
+
+PostgreSQL tables already created in Supabase:
+
+public.users (id, email, plan, created_at)
+
+public.price_snapshots
+
+public.alerts (with user_id → auth.users.id)
+
+public.ai_reports (with seo_title, seo_description)
+
+public.banners (with seo_title, seo_description)
+
+Now please implement Phase 2 (Supabase + Authentication) without modifying the current routing structure or layout.
+
+======================================================================
+
+✅ 1) Install Supabase client
+
+Install:
+
+@supabase/supabase-js (v2)
+
+Then create a new file:
+/lib/supabaseClient.ts
+
+Content:
+
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: true,
+  },
+});
+
+
+======================================================================
+
+✅ 2) Implement email/password sign up & login
+/pages/signup.tsx
+
+Implement:
+
+Fields: email, password
+
+On submit → supabase.auth.signUp({ email, password })
+
+If success → redirect to "/dashboard"
+
+Show error messages
+
+/pages/login.tsx
+
+Implement:
+
+Fields: email, password
+
+On submit → supabase.auth.signInWithPassword({ email, password })
+
+If success → redirect to "/dashboard"
+
+Show error messages
+
+Logout button
+
+Add inside /dashboard.tsx (temporary location is fine):
+
+On click:
+
+supabase.auth.signOut();
+router.push('/');
+
+
+======================================================================
+
+✅ 3) Protect pages using client-side auth guard
+
+Apply this guard to:
+
+/dashboard
+
+/analysis
+
+/alerts
+
+Use this pattern:
+
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { supabase } from '@/lib/supabaseClient';
+
+export default function Page() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      if (!data.session) {
+        router.replace('/login');
+      } else {
+        setLoading(false);
+      }
+    });
+  }, [router]);
+
+  if (loading) {
+    return <div className="flex items-center justify-center h-screen">Loading...</div>;
+  }
+
+  return (
+    <div>
+      {/* Page content here */}
+    </div>
+  );
+}
+
+
+======================================================================
+
+✅ 4) Dashboard content
+
+Inside /dashboard:
+
+Get session email via:
+
+const email = session.user.email;
+
+
+Display:
+
+Welcome back, {email}
+
+
+Add links/buttons to:
+
+/analysis
+
+/alerts
+
+======================================================================
+
+✅ 5) Keep everything in English
+
+Do NOT modify:
+
+Navigation
+
+Layout
+
+Design
+
+SEO text
+
+Routes
+
+Only add authentication & guards.
+
+======================================================================
+
+✅ 6) After finishing, please provide:
+
+List of all files created
+
+List of all files modified
+
+Short summary of changes in each file
+
+======================================================================
+
+End of Phase 2 implementation request.

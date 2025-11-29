@@ -1,7 +1,33 @@
 import Head from "next/head";
 import Layout from "@/components/Layout";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function Analysis() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      if (!data.session) {
+        router.replace("/login");
+      } else {
+        setLoading(false);
+      }
+    });
+  }, [router]);
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="flex items-center justify-center h-screen">
+          <div className="text-white text-xl">Loading...</div>
+        </div>
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
       <Head>

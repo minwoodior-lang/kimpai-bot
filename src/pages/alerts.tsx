@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Layout from "@/components/Layout";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { supabase } from "@/lib/supabaseClient";
 
 interface Alert {
   id: string;
@@ -19,7 +21,29 @@ const mockAlerts: Alert[] = [
 ];
 
 export default function Alerts() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      if (!data.session) {
+        router.replace("/login");
+      } else {
+        setLoading(false);
+      }
+    });
+  }, [router]);
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="flex items-center justify-center h-screen">
+          <div className="text-white text-xl">Loading...</div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

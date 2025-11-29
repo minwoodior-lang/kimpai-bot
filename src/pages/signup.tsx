@@ -2,15 +2,48 @@ import Head from "next/head";
 import Link from "next/link";
 import Layout from "@/components/Layout";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function Signup() {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Signup attempt:", { name, email, password });
+    setError("");
+    setLoading(true);
+
+    try {
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: name,
+          },
+        },
+      });
+
+      if (signUpError) {
+        setError(signUpError.message);
+        return;
+      }
+
+      if (data.session) {
+        router.push("/dashboard");
+      } else {
+        setError("Please check your email to confirm your account.");
+      }
+    } catch {
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -28,6 +61,12 @@ export default function Signup() {
           </div>
 
           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-8">
+            {error && (
+              <div className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm">
+                {error}
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-slate-300 text-sm font-medium mb-2">
@@ -71,15 +110,17 @@ export default function Signup() {
                   className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-colors"
                   placeholder="Create a strong password"
                   required
+                  minLength={8}
                 />
                 <p className="text-slate-500 text-xs mt-1">Must be at least 8 characters</p>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white py-3 rounded-lg font-medium transition-all"
+                disabled={loading}
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white py-3 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Create Account
+                {loading ? "Creating Account..." : "Create Account"}
               </button>
 
               <p className="text-slate-500 text-xs text-center">
