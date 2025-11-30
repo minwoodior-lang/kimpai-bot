@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useMemo } from "react";
 import { useMarkets } from "@/hooks/useMarkets";
+import { useExchangeSelection, DOMESTIC_EXCHANGES, FOREIGN_EXCHANGES } from "@/contexts/ExchangeSelectionContext";
 
 type SortField = "symbol" | "premium" | "volume" | "change";
 type SortOrder = "asc" | "desc";
@@ -15,6 +16,10 @@ type MarketTableProps = {
 const MarketTable = ({ limit = 12, showControls = false }: MarketTableProps) => {
   const router = useRouter();
   const { data: rows, loading, error } = useMarkets(limit);
+  const { domesticExchange, foreignExchange } = useExchangeSelection();
+  
+  const domesticLabel = DOMESTIC_EXCHANGES.find(e => e.value === domesticExchange)?.label || "업비트 KRW";
+  const foreignLabel = FOREIGN_EXCHANGES.find(e => e.value === foreignExchange)?.label || "Binance USDT";
   
   const [search, setSearch] = useState("");
   const [sortField, setSortField] = useState<SortField>("symbol");
@@ -148,8 +153,8 @@ const MarketTable = ({ limit = 12, showControls = false }: MarketTableProps) => 
               >
                 종목 <SortIcon field="symbol" />
               </th>
-              <th className="py-3 px-4 text-right">업비트(추정)</th>
-              <th className="py-3 px-4 text-right">바이낸스(원화 환산)</th>
+              <th className="py-3 px-4 text-right">{domesticLabel}</th>
+              <th className="py-3 px-4 text-right">{foreignLabel} (원화)</th>
               <th
                 className="py-3 px-4 text-right cursor-pointer hover:text-white"
                 onClick={() => handleSort("premium")}

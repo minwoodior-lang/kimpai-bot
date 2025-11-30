@@ -8,9 +8,10 @@ interface PremiumDataPoint {
 interface PremiumHistoryChartProps {
   symbol: string;
   hours?: number;
+  height?: number;
 }
 
-export default function PremiumHistoryChart({ symbol, hours = 24 }: PremiumHistoryChartProps) {
+export default function PremiumHistoryChart({ symbol, hours = 24, height }: PremiumHistoryChartProps) {
   const [data, setData] = useState<PremiumDataPoint[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -73,7 +74,7 @@ export default function PremiumHistoryChart({ symbol, hours = 24 }: PremiumHisto
           </span>
         </div>
       </div>
-      <svg viewBox="0 0 100 100" className="w-full h-24" preserveAspectRatio="none">
+      <svg viewBox="0 0 100 100" className="w-full" style={{ height: height ? `${height}px` : '6rem' }} preserveAspectRatio="none">
         <defs>
           <linearGradient id={`gradient-${symbol}`} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor={currentPremium > 0 ? "#22c55e" : "#ef4444"} stopOpacity="0.3" />
