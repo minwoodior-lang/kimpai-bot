@@ -1,4 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 interface PremiumTableRow {
   symbol: string;
@@ -18,6 +24,19 @@ interface PremiumTableResponse {
   averagePremium: number;
   fxRate: number;
   updatedAt: string;
+}
+
+interface PriceSnapshot {
+  id: number;
+  symbol: string;
+  name: string;
+  upbit_price: number;
+  binance_price_usd: number;
+  fx_rate: number;
+  premium: number;
+  volume_24h: number | null;
+  change_24h: number | null;
+  created_at: string;
 }
 
 const mockPremiumTable: PremiumTableRow[] = [
@@ -100,17 +119,81 @@ const mockPremiumTable: PremiumTableRow[] = [
   },
 ];
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<PremiumTableResponse>
 ) {
-  const averagePremium = mockPremiumTable.reduce((acc, row) => acc + row.premium, 0) / mockPremiumTable.length;
+  try {
+    const { data: latestSnapshots, error } = await supabase
+      .from("price_snapshots")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(100);
 
-  res.status(200).json({
-    success: true,
-    data: mockPremiumTable,
-    averagePremium: Math.round(averagePremium * 100) / 100,
-    fxRate: 1325.5,
-    updatedAt: new Date().toISOString(),
-  });
+    if (error || !latestSnapshots || latestSnapshots.length === 0) {
+      console.warn("No snapshots found, using mock data:", error?.message);
+      const averagePremium = mockPremiumTable.reduce((acc, row) => acc + row.premium, 0) / mockPremiumTable.length;
+      return res.status(200).json({
+        success: true,
+        data: mockPremiumTable,
+        averagePremium: Math.round(averagePremium * 100) / 100,
+        fxRate: 1325.5,
+        updatedAt: new Date().toISOString(),
+      });
+    }
+
+    const latestBySymbol = new Map<string, PriceSnapshot>();
+    for (const snapshot of latestSnapshots) {
+      if (!latestBySymbol.has(snapshot.symbol)) {
+        latestBySymbol.set(snapshot.symbol, snapshot);
+      }
+    }
+
+    const tableData: PremiumTableRow[] = Array.from(latestBySymbol.values()).map((snapshot) => {
+      const koreanPrice = Number(snapshot.upbit_price);
+      const globalPrice = Number(snapshot.binance_price_usd);
+      const premium = Number(snapshot.premium);
+      const volume24h = Number(snapshot.volume_24h) || 0;
+      const change24h = Number(snapshot.change_24h) || 0;
+      
+      return {
+        symbol: snapshot.symbol,
+        name: snapshot.name || snapshot.symbol,
+        koreanPrice,
+        globalPrice,
+        premium,
+        volume24h,
+        change24h,
+        high24h: koreanPrice * 1.01,
+        low24h: koreanPrice * 0.99,
+      };
+    });
+
+    const sortedData = tableData.sort((a, b) => {
+      const order = ["BTC", "ETH", "XRP", "SOL", "ADA", "DOGE", "AVAX"];
+      return order.indexOf(a.symbol) - order.indexOf(b.symbol);
+    });
+
+    const averagePremium = sortedData.reduce((acc, row) => acc + row.premium, 0) / sortedData.length;
+    const latestSnapshot = latestSnapshots[0];
+    const fxRate = Number(latestSnapshot?.fx_rate) || 1350;
+
+    res.status(200).json({
+      success: true,
+      data: sortedData,
+      averagePremium: Math.round(averagePremium * 100) / 100,
+      fxRate,
+      updatedAt: latestSnapshot?.created_at || new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error("API error:", error);
+    const averagePremium = mockPremiumTable.reduce((acc, row) => acc + row.premium, 0) / mockPremiumTable.length;
+    res.status(200).json({
+      success: true,
+      data: mockPremiumTable,
+      averagePremium: Math.round(averagePremium * 100) / 100,
+      fxRate: 1325.5,
+      updatedAt: new Date().toISOString(),
+    });
+  }
 }
