@@ -1,7 +1,12 @@
 import { useMarkets } from "@/hooks/useMarkets";
+import { useExchangeSelection } from "@/contexts/ExchangeSelectionContext";
 
 const AIInsightBox = () => {
-  const { data, loading, averagePremium, fxRate, updatedAt } = useMarkets();
+  const { domesticExchange, foreignExchange } = useExchangeSelection();
+  const { data, loading, averagePremium, fxRate, updatedAt } = useMarkets({
+    domestic: domesticExchange,
+    foreign: foreignExchange,
+  });
 
   const maxPremium = data.length > 0 
     ? data.reduce((max, item) => item.premium > max.premium ? item : max, data[0])

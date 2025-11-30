@@ -38,6 +38,23 @@ const SYMBOLS = [
   { symbol: "AVAX", name: "Avalanche" },
 ];
 
+async function insertExchangePrices(records: any[]): Promise<boolean> {
+  try {
+    const { data, error } = await supabase.rpc('bulk_insert_exchange_prices', {
+      data: records
+    });
+
+    if (error) {
+      console.error(`[${new Date().toISOString()}] Exchange prices RPC insert error:`, error.message);
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error(`[${new Date().toISOString()}] Exchange prices insert error:`, error);
+    return false;
+  }
+}
+
 async function updateExchangePrices(): Promise<void> {
   const startTime = Date.now();
 
@@ -105,10 +122,7 @@ async function updateExchangePrices(): Promise<void> {
         change_24h: p.change24h,
       }));
 
-      const { error } = await supabase.from("exchange_prices").insert(records);
-      if (error) {
-        console.error(`[${new Date().toISOString()}] Exchange prices insert error:`, error.message);
-      }
+      await insertExchangePrices(records);
     }
 
     const upbitBtcPrice = upbitKrw.find((p) => p.symbol === "BTC");
@@ -176,13 +190,22 @@ async function cleanupOldData(): Promise<void> {
     console.error("Snapshots cleanup error:", snapshotsError.message);
   }
 
-  const { error: exchangeError } = await supabase
-    .from("exchange_prices")
-    .delete()
-    .lt("created_at", oneDayAgo);
-
-  if (exchangeError) {
-    console.error("Exchange prices cleanup error:", exchangeError.message);
+  try {
+    const response = await fetch(
+      `${supabaseUrl}/rest/v1/exchange_prices?created_at=lt.${oneDayAgo}`,
+      {
+        method: "DELETE",
+        headers: {
+          "apikey": supabaseServiceKey,
+          "Authorization": `Bearer ${supabaseServiceKey}`,
+        },
+      }
+    );
+    if (!response.ok) {
+      console.error("Exchange prices cleanup error:", await response.text());
+    }
+  } catch (error) {
+    console.error("Exchange prices cleanup error:", error);
   }
 
   console.log(`[${new Date().toISOString()}] Cleaned up data older than 24h`);

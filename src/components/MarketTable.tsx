@@ -15,8 +15,12 @@ type MarketTableProps = {
 
 const MarketTable = ({ limit = 12, showControls = false }: MarketTableProps) => {
   const router = useRouter();
-  const { data: rows, loading, error } = useMarkets(limit);
   const { domesticExchange, foreignExchange } = useExchangeSelection();
+  const { data: rows, loading, error, refetch } = useMarkets({
+    limit,
+    domestic: domesticExchange,
+    foreign: foreignExchange,
+  });
   
   const domesticLabel = DOMESTIC_EXCHANGES.find(e => e.value === domesticExchange)?.label || "업비트 KRW";
   const foreignLabel = FOREIGN_EXCHANGES.find(e => e.value === foreignExchange)?.label || "Binance USDT";

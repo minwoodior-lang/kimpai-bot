@@ -3,11 +3,20 @@ import { useRouter } from "next/router";
 import Layout from "@/components/Layout";
 import { useState, useEffect } from "react";
 import { useMarkets } from "@/hooks/useMarkets";
+import { useExchangeSelection, DOMESTIC_EXCHANGES, FOREIGN_EXCHANGES } from "@/contexts/ExchangeSelectionContext";
+import ExchangeSelector from "@/components/ExchangeSelector";
 
 export default function Markets() {
   const router = useRouter();
-  const { data, loading, error, fxRate, averagePremium, refetch } = useMarkets();
+  const { domesticExchange, foreignExchange } = useExchangeSelection();
+  const { data, loading, error, fxRate, averagePremium, refetch } = useMarkets({
+    domestic: domesticExchange,
+    foreign: foreignExchange,
+  });
   const [lastUpdated, setLastUpdated] = useState<string>("");
+
+  const domesticLabel = DOMESTIC_EXCHANGES.find(e => e.value === domesticExchange)?.label || "업비트 KRW";
+  const foreignLabel = FOREIGN_EXCHANGES.find(e => e.value === foreignExchange)?.label || "Binance USDT";
 
   const handleRowClick = (symbol: string) => {
     const cleanSymbol = symbol.replace("/KRW", "").toLowerCase();
@@ -25,17 +34,24 @@ export default function Markets() {
     return () => clearInterval(interval);
   }, [refetch]);
 
+  useEffect(() => {
+    refetch();
+  }, [domesticExchange, foreignExchange, refetch]);
+
   return (
     <Layout>
       <Head>
         <title>Markets - KimpAI</title>
-        <meta name="description" content="실시간 김치프리미엄 데이터 - 업비트, 바이낸스 가격 비교" />
+        <meta name="description" content="실시간 김치프리미엄 데이터 - 한국/해외 거래소 비교" />
       </Head>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">암호화폐 시장</h1>
-          <p className="text-slate-400">실시간 김치프리미엄 데이터 - 한국/해외 거래소 비교</p>
+        <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold text-white mb-2">암호화폐 시장</h1>
+            <p className="text-slate-400">실시간 김치프리미엄 데이터 - 한국/해외 거래소 비교</p>
+          </div>
+          <ExchangeSelector />
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
@@ -76,8 +92,8 @@ export default function Markets() {
                 <thead>
                   <tr className="border-b border-slate-700/50">
                     <th className="text-left text-slate-400 font-medium px-6 py-4">종목</th>
-                    <th className="text-right text-slate-400 font-medium px-6 py-4">업비트 (KRW)</th>
-                    <th className="text-right text-slate-400 font-medium px-6 py-4">바이낸스 (원화 환산)</th>
+                    <th className="text-right text-slate-400 font-medium px-6 py-4">{domesticLabel}</th>
+                    <th className="text-right text-slate-400 font-medium px-6 py-4">{foreignLabel} (원화)</th>
                     <th className="text-right text-slate-400 font-medium px-6 py-4">김프</th>
                     <th className="text-right text-slate-400 font-medium px-6 py-4">24h 거래량</th>
                     <th className="text-right text-slate-400 font-medium px-6 py-4">24h 변동</th>

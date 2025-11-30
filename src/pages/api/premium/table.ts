@@ -63,6 +63,30 @@ function parseExchangeParam(param: string): { exchange: string; quote: string } 
   return { exchange: param, quote: "USDT" };
 }
 
+async function fetchExchangePrices(exchange: string, quote: string): Promise<ExchangePriceRecord[]> {
+  try {
+    const response = await fetch(
+      `${supabaseUrl}/rest/v1/exchange_prices?exchange=eq.${exchange}&quote=eq.${quote}&order=created_at.desc&limit=50`,
+      {
+        headers: {
+          "apikey": supabaseServiceKey,
+          "Authorization": `Bearer ${supabaseServiceKey}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      console.error("Failed to fetch exchange prices:", await response.text());
+      return [];
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching exchange prices:", error);
+    return [];
+  }
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<PremiumTableResponse>
@@ -74,25 +98,10 @@ export default async function handler(
     const domestic = parseExchangeParam(domesticParam);
     const foreign = parseExchangeParam(foreignParam);
 
-    const { data: domesticPrices, error: domesticError } = await supabase
-      .from("exchange_prices")
-      .select("*")
-      .eq("exchange", domestic.exchange)
-      .eq("quote", domestic.quote)
-      .order("created_at", { ascending: false })
-      .limit(50);
-
-    const { data: foreignPrices, error: foreignError } = await supabase
-      .from("exchange_prices")
-      .select("*")
-      .eq("exchange", foreign.exchange)
-      .eq("quote", foreign.quote)
-      .order("created_at", { ascending: false })
-      .limit(50);
-
-    if (domesticError || foreignError) {
-      console.error("Database error:", domesticError?.message || foreignError?.message);
-    }
+    const [domesticPrices, foreignPrices] = await Promise.all([
+      fetchExchangePrices(domestic.exchange, domestic.quote),
+      fetchExchangePrices(foreign.exchange, foreign.quote),
+    ]);
 
     const domesticMap = new Map<string, ExchangePriceRecord>();
     const foreignMap = new Map<string, ExchangePriceRecord>();
@@ -162,30 +171,7 @@ export default async function handler(
       : 0;
 
     if (fxRate < 1000 || fxRate > 2000) {
-      const { data: fxData } = await supabase
-        .from("exchange_prices")
-        .select("price, price_krw")
-        .eq("exchange", "BINANCE")
-        .eq("symbol", "BTC")
-        .eq("quote", "USDT")
-        .order("created_at", { ascending: false })
-        .limit(1);
-      
-      if (fxData && fxData[0] && fxData[0].price > 0) {
-        const { data: upbitData } = await supabase
-          .from("exchange_prices")
-          .select("price_krw")
-          .eq("exchange", "UPBIT")
-          .eq("symbol", "BTC")
-          .eq("quote", "KRW")
-          .order("created_at", { ascending: false })
-          .limit(1);
-        
-        if (upbitData && upbitData[0]) {
-          const btcPremium = tableData.find(d => d.symbol === "BTC")?.premium || 2;
-          fxRate = Number(upbitData[0].price_krw) / Number(fxData[0].price) / (1 + btcPremium / 100);
-        }
-      }
+      fxRate = 1400;
     }
 
     res.status(200).json({
