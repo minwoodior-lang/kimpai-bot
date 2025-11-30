@@ -16,6 +16,8 @@ interface PremiumTableRow {
   change24h: number;
   high24h: number;
   low24h: number;
+  domesticExchange?: string;
+  foreignExchange?: string;
 }
 
 interface PremiumTableResponse {
@@ -24,176 +26,249 @@ interface PremiumTableResponse {
   averagePremium: number;
   fxRate: number;
   updatedAt: string;
+  domesticExchange: string;
+  foreignExchange: string;
 }
 
-interface PriceSnapshot {
+interface ExchangePriceRecord {
   id: number;
+  exchange: string;
   symbol: string;
-  name: string;
-  upbit_price: number;
-  binance_price_usd: number;
-  fx_rate: number;
-  premium: number;
+  base: string;
+  quote: string;
+  price: number;
+  price_krw: number;
   volume_24h: number | null;
   change_24h: number | null;
   created_at: string;
 }
 
-const mockPremiumTable: PremiumTableRow[] = [
-  {
-    symbol: "BTC",
-    name: "Bitcoin",
-    koreanPrice: 98500000,
-    globalPrice: 67500,
-    premium: 4.2,
-    volume24h: 1250000000,
-    change24h: 2.1,
-    high24h: 99200000,
-    low24h: 96800000,
-  },
-  {
-    symbol: "ETH",
-    name: "Ethereum",
-    koreanPrice: 4850000,
-    globalPrice: 3320,
-    premium: 3.8,
-    volume24h: 680000000,
-    change24h: 1.5,
-    high24h: 4920000,
-    low24h: 4780000,
-  },
-  {
-    symbol: "XRP",
-    name: "Ripple",
-    koreanPrice: 850,
-    globalPrice: 0.58,
-    premium: 5.1,
-    volume24h: 420000000,
-    change24h: -0.8,
-    high24h: 880,
-    low24h: 820,
-  },
-  {
-    symbol: "SOL",
-    name: "Solana",
-    koreanPrice: 285000,
-    globalPrice: 195,
-    premium: 3.2,
-    volume24h: 320000000,
-    change24h: 3.2,
-    high24h: 292000,
-    low24h: 278000,
-  },
-  {
-    symbol: "ADA",
-    name: "Cardano",
-    koreanPrice: 720,
-    globalPrice: 0.49,
-    premium: 4.5,
-    volume24h: 180000000,
-    change24h: 0.5,
-    high24h: 745,
-    low24h: 705,
-  },
-  {
-    symbol: "DOGE",
-    name: "Dogecoin",
-    koreanPrice: 185,
-    globalPrice: 0.126,
-    premium: 4.8,
-    volume24h: 150000000,
-    change24h: 1.2,
-    high24h: 192,
-    low24h: 180,
-  },
-  {
-    symbol: "AVAX",
-    name: "Avalanche",
-    koreanPrice: 52000,
-    globalPrice: 35.5,
-    premium: 3.6,
-    volume24h: 95000000,
-    change24h: -1.1,
-    high24h: 54500,
-    low24h: 51200,
-  },
-];
+const SYMBOL_NAMES: Record<string, string> = {
+  BTC: "Bitcoin",
+  ETH: "Ethereum",
+  XRP: "Ripple",
+  SOL: "Solana",
+  ADA: "Cardano",
+  DOGE: "Dogecoin",
+  AVAX: "Avalanche",
+};
+
+const SYMBOL_ORDER = ["BTC", "ETH", "XRP", "SOL", "ADA", "DOGE", "AVAX"];
+
+function parseExchangeParam(param: string): { exchange: string; quote: string } {
+  const parts = param.split("_");
+  if (parts.length === 2) {
+    return { exchange: parts[0], quote: parts[1] };
+  }
+  return { exchange: param, quote: "USDT" };
+}
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<PremiumTableResponse>
 ) {
   try {
-    const { data: latestSnapshots, error } = await supabase
-      .from("price_snapshots")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(100);
+    const domesticParam = (req.query.domestic as string) || "UPBIT_KRW";
+    const foreignParam = (req.query.foreign as string) || "BINANCE_USDT";
 
-    if (error || !latestSnapshots || latestSnapshots.length === 0) {
-      console.warn("No snapshots found, using mock data:", error?.message);
-      const averagePremium = mockPremiumTable.reduce((acc, row) => acc + row.premium, 0) / mockPremiumTable.length;
-      return res.status(200).json({
-        success: true,
-        data: mockPremiumTable,
-        averagePremium: Math.round(averagePremium * 100) / 100,
-        fxRate: 1325.5,
-        updatedAt: new Date().toISOString(),
-      });
+    const domestic = parseExchangeParam(domesticParam);
+    const foreign = parseExchangeParam(foreignParam);
+
+    const { data: domesticPrices, error: domesticError } = await supabase
+      .from("exchange_prices")
+      .select("*")
+      .eq("exchange", domestic.exchange)
+      .eq("quote", domestic.quote)
+      .order("created_at", { ascending: false })
+      .limit(50);
+
+    const { data: foreignPrices, error: foreignError } = await supabase
+      .from("exchange_prices")
+      .select("*")
+      .eq("exchange", foreign.exchange)
+      .eq("quote", foreign.quote)
+      .order("created_at", { ascending: false })
+      .limit(50);
+
+    if (domesticError || foreignError) {
+      console.error("Database error:", domesticError?.message || foreignError?.message);
     }
 
-    const latestBySymbol = new Map<string, PriceSnapshot>();
-    for (const snapshot of latestSnapshots) {
-      if (!latestBySymbol.has(snapshot.symbol)) {
-        latestBySymbol.set(snapshot.symbol, snapshot);
+    const domesticMap = new Map<string, ExchangePriceRecord>();
+    const foreignMap = new Map<string, ExchangePriceRecord>();
+
+    if (domesticPrices) {
+      for (const record of domesticPrices) {
+        if (!domesticMap.has(record.symbol)) {
+          domesticMap.set(record.symbol, record);
+        }
       }
     }
 
-    const tableData: PremiumTableRow[] = Array.from(latestBySymbol.values()).map((snapshot) => {
-      const koreanPrice = Number(snapshot.upbit_price);
-      const globalPrice = Number(snapshot.binance_price_usd);
-      const premium = Number(snapshot.premium);
-      const volume24h = Number(snapshot.volume_24h) || 0;
-      const change24h = Number(snapshot.change_24h) || 0;
+    if (foreignPrices) {
+      for (const record of foreignPrices) {
+        if (!foreignMap.has(record.symbol)) {
+          foreignMap.set(record.symbol, record);
+        }
+      }
+    }
+
+    const tableData: PremiumTableRow[] = [];
+    let fxRate = 1400;
+    let latestTimestamp = "";
+
+    for (const symbol of SYMBOL_ORDER) {
+      const domesticRecord = domesticMap.get(symbol);
+      const foreignRecord = foreignMap.get(symbol);
+
+      if (domesticRecord && foreignRecord) {
+        const domesticPriceKrw = Number(domesticRecord.price_krw);
+        const foreignPriceKrw = Number(foreignRecord.price_krw);
+        
+        const premium = foreignPriceKrw > 0
+          ? ((domesticPriceKrw - foreignPriceKrw) / foreignPriceKrw) * 100
+          : 0;
+
+        tableData.push({
+          symbol,
+          name: SYMBOL_NAMES[symbol] || symbol,
+          koreanPrice: domesticPriceKrw,
+          globalPrice: Number(foreignRecord.price),
+          premium: Math.round(premium * 100) / 100,
+          volume24h: Number(foreignRecord.volume_24h) || 0,
+          change24h: Number(foreignRecord.change_24h) || 0,
+          high24h: domesticPriceKrw * 1.01,
+          low24h: domesticPriceKrw * 0.99,
+          domesticExchange: domestic.exchange,
+          foreignExchange: foreign.exchange,
+        });
+
+        if (!latestTimestamp || domesticRecord.created_at > latestTimestamp) {
+          latestTimestamp = domesticRecord.created_at;
+        }
+
+        if (domestic.quote === "KRW" && foreign.quote === "USDT" && foreignRecord.price > 0) {
+          fxRate = domesticPriceKrw / Number(foreignRecord.price) / (1 + premium / 100);
+        }
+      }
+    }
+
+    if (tableData.length === 0) {
+      return await fallbackToSnapshots(req, res, domesticParam, foreignParam);
+    }
+
+    const averagePremium = tableData.length > 0
+      ? tableData.reduce((acc, row) => acc + row.premium, 0) / tableData.length
+      : 0;
+
+    if (fxRate < 1000 || fxRate > 2000) {
+      const { data: fxData } = await supabase
+        .from("exchange_prices")
+        .select("price, price_krw")
+        .eq("exchange", "BINANCE")
+        .eq("symbol", "BTC")
+        .eq("quote", "USDT")
+        .order("created_at", { ascending: false })
+        .limit(1);
       
-      return {
-        symbol: snapshot.symbol,
-        name: snapshot.name || snapshot.symbol,
-        koreanPrice,
-        globalPrice,
-        premium,
-        volume24h,
-        change24h,
-        high24h: koreanPrice * 1.01,
-        low24h: koreanPrice * 0.99,
-      };
-    });
-
-    const sortedData = tableData.sort((a, b) => {
-      const order = ["BTC", "ETH", "XRP", "SOL", "ADA", "DOGE", "AVAX"];
-      return order.indexOf(a.symbol) - order.indexOf(b.symbol);
-    });
-
-    const averagePremium = sortedData.reduce((acc, row) => acc + row.premium, 0) / sortedData.length;
-    const latestSnapshot = latestSnapshots[0];
-    const fxRate = Number(latestSnapshot?.fx_rate) || 1350;
+      if (fxData && fxData[0] && fxData[0].price > 0) {
+        const { data: upbitData } = await supabase
+          .from("exchange_prices")
+          .select("price_krw")
+          .eq("exchange", "UPBIT")
+          .eq("symbol", "BTC")
+          .eq("quote", "KRW")
+          .order("created_at", { ascending: false })
+          .limit(1);
+        
+        if (upbitData && upbitData[0]) {
+          const btcPremium = tableData.find(d => d.symbol === "BTC")?.premium || 2;
+          fxRate = Number(upbitData[0].price_krw) / Number(fxData[0].price) / (1 + btcPremium / 100);
+        }
+      }
+    }
 
     res.status(200).json({
       success: true,
-      data: sortedData,
+      data: tableData,
       averagePremium: Math.round(averagePremium * 100) / 100,
-      fxRate,
-      updatedAt: latestSnapshot?.created_at || new Date().toISOString(),
+      fxRate: Math.round(fxRate * 10) / 10,
+      updatedAt: latestTimestamp || new Date().toISOString(),
+      domesticExchange: domesticParam,
+      foreignExchange: foreignParam,
     });
   } catch (error) {
     console.error("API error:", error);
-    const averagePremium = mockPremiumTable.reduce((acc, row) => acc + row.premium, 0) / mockPremiumTable.length;
-    res.status(200).json({
+    await fallbackToSnapshots(req, res, "UPBIT_KRW", "BINANCE_USDT");
+  }
+}
+
+async function fallbackToSnapshots(
+  req: NextApiRequest,
+  res: NextApiResponse<PremiumTableResponse>,
+  domesticParam: string,
+  foreignParam: string
+) {
+  const { data: latestSnapshots, error } = await supabase
+    .from("price_snapshots")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(100);
+
+  if (error || !latestSnapshots || latestSnapshots.length === 0) {
+    return res.status(200).json({
       success: true,
-      data: mockPremiumTable,
-      averagePremium: Math.round(averagePremium * 100) / 100,
-      fxRate: 1325.5,
+      data: [],
+      averagePremium: 0,
+      fxRate: 1400,
       updatedAt: new Date().toISOString(),
+      domesticExchange: domesticParam,
+      foreignExchange: foreignParam,
     });
   }
+
+  const latestBySymbol = new Map<string, any>();
+  for (const snapshot of latestSnapshots) {
+    if (!latestBySymbol.has(snapshot.symbol)) {
+      latestBySymbol.set(snapshot.symbol, snapshot);
+    }
+  }
+
+  const tableData: PremiumTableRow[] = Array.from(latestBySymbol.values()).map((snapshot) => {
+    const koreanPrice = Number(snapshot.upbit_price);
+    const globalPrice = Number(snapshot.binance_price_usd);
+    const premium = Number(snapshot.premium);
+    const volume24h = Number(snapshot.volume_24h) || 0;
+    const change24h = Number(snapshot.change_24h) || 0;
+
+    return {
+      symbol: snapshot.symbol,
+      name: SYMBOL_NAMES[snapshot.symbol] || snapshot.name || snapshot.symbol,
+      koreanPrice,
+      globalPrice,
+      premium,
+      volume24h,
+      change24h,
+      high24h: koreanPrice * 1.01,
+      low24h: koreanPrice * 0.99,
+    };
+  });
+
+  const sortedData = tableData.sort((a, b) => {
+    return SYMBOL_ORDER.indexOf(a.symbol) - SYMBOL_ORDER.indexOf(b.symbol);
+  });
+
+  const averagePremium = sortedData.reduce((acc, row) => acc + row.premium, 0) / sortedData.length;
+  const latestSnapshot = latestSnapshots[0];
+  const fxRate = Number(latestSnapshot?.fx_rate) || 1400;
+
+  res.status(200).json({
+    success: true,
+    data: sortedData,
+    averagePremium: Math.round(averagePremium * 100) / 100,
+    fxRate,
+    updatedAt: latestSnapshot?.created_at || new Date().toISOString(),
+    domesticExchange: domesticParam,
+    foreignExchange: foreignParam,
+  });
 }
