@@ -3,8 +3,8 @@ import { useMarkets } from "@/hooks/useMarkets";
 export default function PremiumTicker() {
   const { data, fxRate, averagePremium } = useMarkets();
 
-  const btc = data.find((d) => d.symbol === "BTC");
-  const eth = data.find((d) => d.symbol === "ETH");
+  const btc = data.find((d) => d.symbol.replace("/KRW", "") === "BTC");
+  const eth = data.find((d) => d.symbol.replace("/KRW", "") === "ETH");
 
   return (
     <div className="bg-slate-900/80 border-b border-slate-700/50 py-2 px-4">
