@@ -240,7 +240,7 @@ BTC, ETH, XRP, SOL, ADA, DOGE, AVAX
 |----------|-------------|
 | `GET /api/premium/history?symbol=BTC` | Historical premium data for symbol |
 
-## Multi-Exchange Selection (Phase 5) - UI Complete
+## Multi-Exchange Selection (Phase 5) - Complete
 - [x] ExchangeSelectionContext for global exchange state
 - [x] ExchangeSelector component with grouped dropdowns
 - [x] Domestic exchanges: 업비트 KRW/BTC/USDT, 빗썸 KRW/BTC/USDT, 코인원 KRW
@@ -248,8 +248,33 @@ BTC, ETH, XRP, SOL, ADA, DOGE, AVAX
 - [x] TradingView charts switch based on selected exchange
 - [x] Detail page shows dual charts (domestic + foreign) side by side
 - [x] MarketTable column headers update with selected exchange names
-- [ ] Backend: Multi-exchange price fetching (pending)
-- [ ] Backend: Dynamic premium calculation based on selected exchanges (pending)
+- [x] Backend: exchangeFetchers.ts with 14 exchange fetcher functions
+- [x] Backend: priceWorker.ts fetches from all exchanges (66-86 prices per cycle)
+- [x] Backend: API accepts domestic/foreign query parameters
+- [x] Backend: Dynamic premium calculation with fallback to Upbit/Binance
+
+## Exchange Fetchers (scripts/exchangeFetchers.ts)
+| Function | Exchange | Quote |
+|----------|----------|-------|
+| fetchUpbitKRW | Upbit | KRW |
+| fetchUpbitBTC | Upbit | BTC |
+| fetchBithumbKRW | Bithumb | KRW |
+| fetchBithumbBTC | Bithumb | BTC |
+| fetchCoinoneKRW | Coinone | KRW |
+| fetchBinanceUSDT | Binance | USDT |
+| fetchBinanceBTC | Binance | BTC |
+| fetchBinanceFutures | Binance Futures | USDT |
+| fetchOKX | OKX | USDT |
+| fetchBybit | Bybit | USDT |
+| fetchBitget | Bitget | USDT |
+| fetchGate | Gate.io | USDT |
+| fetchHTX | HTX | USDT |
+| fetchMEXC | MEXC | USDT |
+
+## Known Limitations
+- Multi-exchange data currently falls back to Upbit/Binance via price_snapshots
+- Full multi-exchange support requires exchange_prices table in Supabase Dashboard
+- Binance API may be blocked in some regions (uses CoinGecko fallback)
 
 ## New Context
 | Context | Description |
@@ -258,6 +283,10 @@ BTC, ETH, XRP, SOL, ADA, DOGE, AVAX
 | `useExchangeSelection` | Hook to access exchange selection state and helpers |
 
 ## Recent Changes
+- Multi-exchange backend complete (2025-11-30)
+- Created exchangeFetchers.ts with 14 exchange fetcher functions
+- priceWorker.ts now fetches from 10+ exchanges every 5 seconds
+- API accepts domestic/foreign query parameters for dynamic premium calculation
 - Multi-exchange UI complete (2024-11-30)
 - Added ExchangeSelectionContext with domestic/foreign exchange state
 - TradingView charts now change based on selected exchange pair
