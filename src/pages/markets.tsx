@@ -1,11 +1,18 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import Layout from "@/components/Layout";
 import { useState, useEffect } from "react";
 import { useMarkets } from "@/hooks/useMarkets";
 
 export default function Markets() {
+  const router = useRouter();
   const { data, loading, error, fxRate, averagePremium, refetch } = useMarkets();
   const [lastUpdated, setLastUpdated] = useState<string>("");
+
+  const handleRowClick = (symbol: string) => {
+    const cleanSymbol = symbol.replace("/KRW", "").toLowerCase();
+    router.push(`/markets/${cleanSymbol}`);
+  };
 
   useEffect(() => {
     setLastUpdated(new Date().toLocaleTimeString());
@@ -78,7 +85,11 @@ export default function Markets() {
                 </thead>
                 <tbody>
                   {data.map((item) => (
-                    <tr key={item.symbol} className="border-b border-slate-700/30 hover:bg-slate-700/20 transition-colors">
+                    <tr
+                      key={item.symbol}
+                      className="border-b border-slate-700/30 hover:bg-slate-700/40 transition-colors cursor-pointer"
+                      onClick={() => handleRowClick(item.symbol)}
+                    >
                       <td className="px-6 py-4">
                         <div>
                           <span className="text-white font-medium">{item.symbol}</span>
