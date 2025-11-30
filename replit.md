@@ -211,8 +211,40 @@ BTC, ETH, XRP, SOL, ADA, DOGE, AVAX
 - Price Worker includes 24-hour data cleanup
 - SIGTERM/SIGINT handlers for graceful shutdown
 
+## Dashboard v2.0 Upgrade Complete (2024-11-30)
+- [x] TradingView Chart components (TradingViewChart.tsx, ChartWithControls.tsx)
+- [x] Premium History Chart component (PremiumHistoryChart.tsx)
+- [x] PremiumTicker component (top bar with BTC/ETH/avg premium and FX rate)
+- [x] AlertSummary component (login prompt for non-authenticated users)
+- [x] /markets/[symbol] detail pages with price cards, charts, and market info
+- [x] Enhanced MarketTable with search, filter (premium 2%+/low, volume top 5), sort
+- [x] Homepage v2.0 layout: ticker, chart+AI insight grid, enhanced table
+- [x] /api/premium/history endpoint for symbol-specific premium data
+
+## New Components
+| Component | Description |
+|-----------|-------------|
+| `TradingViewChart` | TradingView advanced chart widget with dynamic symbol |
+| `ChartWithControls` | Wrapper with symbol and exchange dropdown selectors |
+| `PremiumHistoryChart` | SVG line chart for 24h premium history |
+| `PremiumTicker` | Top bar showing BTC/ETH/avg premium and FX rate |
+| `AlertSummary` | Alert feature summary with login prompt |
+
+## New Pages
+| Route | Description | Protected |
+|-------|-------------|-----------|
+| `/markets/[symbol]` | Coin detail page with charts and market info | No |
+
+## New API Routes
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/premium/history?symbol=BTC` | Historical premium data for symbol |
+
 ## Recent Changes
-- Real-time price updates complete (2024-11-30)
-- Price Worker running with 5-second interval
-- UI displays live data: avg/max/min premium, exchange rate, timestamps
+- Dashboard v2.0 upgrade complete (2024-11-30)
+- TradingView charts integrated with symbol/exchange selection
+- Detail pages for each coin with price cards and premium history
+- Enhanced MarketTable with search, filter, and sort functionality
+- PremiumTicker shows live BTC/ETH/avg premium and FX rate
+- Real-time price updates with 5-second interval
 - Database cleanup removes data older than 24 hours
