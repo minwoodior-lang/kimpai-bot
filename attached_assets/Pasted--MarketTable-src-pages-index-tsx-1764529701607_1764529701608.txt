@@ -1,0 +1,83 @@
+📩 레플릿 개발팀에게 그대로 보내면 되는 문구
+안녕하세요! 홈 MarketTable 실데이터 연동 관련해서 추가 요청드립니다.
+
+현재 상태
+- src/pages/index.tsx : 새 홈 페이지 구조 적용 완료
+- src/components/MarketTable.tsx : mockData 기반으로만 동작
+- src/pages/markets.tsx (또는 비슷한 파일) : 실제 김프 데이터(업비트/바이낸스/김프%)를 불러와서 테이블로 보여주는 상태
+
+목표
+- Home에서 사용하는 <MarketTable /> 컴포넌트가
+  현재 Markets 페이지에서 사용하는 것과 동일한 "실제 김프 데이터"를 사용하도록 연동하고 싶습니다.
+- 가능하면 데이터 로딩 로직을 재사용 가능한 형태로 분리해서
+  Markets 페이지와 Home의 MarketTable이 같은 소스를 공유하면 좋겠습니다.
+
+요청 드리는 작업
+
+1) 데이터 로딩 로직 분리
+- 지금 Markets 페이지에서 김프 데이터를 가져오는 부분(예: Supabase 쿼리 또는 /api/xxx 호출)을
+  아래 위치 중 하나로 분리해 주세요.
+
+  예시:
+  - src/lib/fetchMarkets.ts
+  혹은
+  - src/hooks/useMarkets.ts
+
+- 반환 타입 예시는 아래처럼 맞춰주시면 됩니다.
+
+  type MarketRow = {
+    symbol: string;
+    upbitPrice: number;
+    binancePrice: number;
+    premium: number; // %
+  };
+
+  export async function fetchMarkets(limit?: number): Promise<MarketRow[]> {
+    // Supabase or API 호출
+  }
+
+  또는
+
+  export function useMarkets(limit?: number) {
+    const [data, setData] = useState<MarketRow[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<Error | null>(null);
+    ...
+    return { data, loading, error };
+  }
+
+2) MarketTable.tsx 수정
+- 현재는 mockData를 사용하고 있는데, 이를 위에서 분리한 로직으로 교체해 주세요.
+
+  파일: src/components/MarketTable.tsx
+
+  변경 방향(예시):
+
+  import { useMarkets } from "@/hooks/useMarkets";
+
+  const MarketTable = ({ limit = 12 }: MarketTableProps) => {
+    const { data: rows, loading, error } = useMarkets(limit);
+
+    if (loading) { ... }
+    if (error) { ... }
+
+    // 나머지 렌더링 로직은 지금 UI 그대로 사용 (업비트/바이낸스/김프 컬럼)
+  };
+
+- Home에서는 기존대로 <MarketTable limit={12} /> 만 호출하면,
+  Markets 페이지와 동일한 실데이터를 보여주도록 연결 부탁드립니다.
+
+3) Markets 페이지 유지
+- 기존 Markets 페이지의 UI/기능은 그대로 유지하고,
+  데이터 로딩만 위에서 분리한 fetch/useMarkets 로직을 재사용하도록 리팩터링 해주시면 좋겠습니다.
+
+4) 기타
+- Supabase 쿼리, price_snapshots 테이블 구조는 현재 구현되어 있는 그대로 사용해 주세요.
+- 특별한 제한이 없다면, 가장 최근 스냅샷 기준 데이터만 가져오는 형태면 됩니다.
+- 성능 이슈가 있다면 간단한 캐싱(SWR 등) 적용도 괜찮습니다.
+
+작업 완료 후
+- Home의 MarketTable이 실제 김프 데이터 기준으로 잘 나오는지 확인해주시고,
+- /markets 페이지에서도 동일한 데이터 기준으로 화면이 깨지지 않는지만 체크 부탁드립니다.
+
+감사합니다!

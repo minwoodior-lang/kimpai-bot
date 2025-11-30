@@ -1,67 +1,25 @@
-import { useEffect, useState } from "react";
 import Link from "next/link";
-
-type MarketRow = {
-  symbol: string;
-  upbitPrice: number;
-  binancePrice: number;
-  premium: number;
-};
+import { useMarkets } from "@/hooks/useMarkets";
 
 type MarketTableProps = {
   limit?: number;
 };
 
-const mockData: MarketRow[] = [
-  {
-    symbol: "BTC/KRW",
-    upbitPrice: 101_000_000,
-    binancePrice: 72_000 * 1400,
-    premium: 4.8,
-  },
-  {
-    symbol: "ETH/KRW",
-    upbitPrice: 3_200_000,
-    binancePrice: 2_250 * 1400,
-    premium: 3.2,
-  },
-  {
-    symbol: "XRP/KRW",
-    upbitPrice: 950,
-    binancePrice: 0.63 * 1400,
-    premium: 2.7,
-  },
-  {
-    symbol: "SOL/KRW",
-    upbitPrice: 190_000,
-    binancePrice: 135 * 1400,
-    premium: -1.1,
-  },
-  {
-    symbol: "ADA/KRW",
-    upbitPrice: 780,
-    binancePrice: 0.54 * 1400,
-    premium: 1.9,
-  },
-];
-
 const MarketTable = ({ limit = 12 }: MarketTableProps) => {
-  const [rows, setRows] = useState<MarketRow[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    setLoading(true);
-    const timer = setTimeout(() => {
-      setRows(mockData.slice(0, limit));
-      setLoading(false);
-    }, 300);
-    return () => clearTimeout(timer);
-  }, [limit]);
+  const { data: rows, loading, error } = useMarkets(limit);
 
   if (loading) {
     return (
       <div className="bg-slate-800/60 p-6 rounded-xl border border-slate-700 text-slate-300">
         김프 데이터를 불러오는 중입니다…
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-slate-800/60 p-6 rounded-xl border border-slate-700 text-red-400">
+        데이터를 불러오는 중 오류가 발생했습니다: {error.message}
       </div>
     );
   }
@@ -108,7 +66,7 @@ const MarketTable = ({ limit = 12 }: MarketTableProps) => {
                   row.premium >= 0 ? "text-green-400" : "text-red-400"
                 }`}
               >
-                {row.premium.toFixed(1)}%
+                {row.premium >= 0 ? "+" : ""}{row.premium.toFixed(1)}%
               </td>
             </tr>
           ))}
