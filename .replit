@@ -14,6 +14,10 @@ author = "agent"
 task = "workflow.run"
 args = "KimpAI Dev Server"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Price Worker"
+
 [[workflows.workflow]]
 name = "KimpAI Dev Server"
 author = "agent"
@@ -26,6 +30,17 @@ waitForPort = 5000
 [workflows.workflow.metadata]
 outputType = "webview"
 
+[[workflows.workflow]]
+name = "Price Worker"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run price:worker"
+
+[workflows.workflow.metadata]
+outputType = "console"
+
 [[ports]]
 localPort = 5000
 externalPort = 80
@@ -37,6 +52,10 @@ externalPort = 3001
 [[ports]]
 localPort = 39269
 externalPort = 3000
+
+[[ports]]
+localPort = 39399
+externalPort = 3002
 
 [nix]
 channel = "stable-25_05"

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start -p 5000 -H 0.0.0.0",
     "lint": "next lint",
-    "update:prices": "tsx scripts/updatePrices.ts"
+    "update:prices": "tsx scripts/updatePrices.ts",
+    "price:worker": "tsx scripts/priceWorker.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.86.0",
