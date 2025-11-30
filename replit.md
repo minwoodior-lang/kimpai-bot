@@ -155,7 +155,7 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 ## Homepage Redesign Complete
 - [x] New index.tsx with component-based structure
 - [x] HeroSection component (Korean headline + CTA)
-- [x] AIInsightBox component (mock AI summary data)
+- [x] AIInsightBox component (uses useMarkets hook for real data)
 - [x] MarketTable component (uses useMarkets hook)
 - [x] AlertCTA component (alert feature promotion)
 - [x] All internal links use next/link
@@ -169,9 +169,14 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 - [x] Shows loading and error states
 - [x] Both pages share consistent data source
 
+## AIInsightBox Data Integration Complete
+- [x] AIInsightBox uses useMarkets hook for real data
+- [x] Shows averagePremium from API
+- [x] Calculates max/min premium from data array
+- [x] Displays fxRate and updatedAt timestamp
+- [x] Generates dynamic AI comment based on data
+
 ## Recent Changes
-- MarketTable data integration complete (2024-11-30)
-- Created useMarkets hook for shared data fetching
-- Home and Markets pages now use same data source
-- Markets page shows summary stats (avg premium, fx rate, count)
-- Auto-refresh every 30 seconds on Markets page
+- AIInsightBox data integration complete (2024-11-30)
+- AIInsightBox now shows real data: avg premium, max/min, fx rate, timestamp
+- Dynamic AI comment generated based on market data
