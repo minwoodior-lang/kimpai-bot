@@ -3,6 +3,7 @@ import { useEffect, useRef, memo, useCallback } from "react";
 interface TradingViewChartProps {
   symbol?: string;
   exchange?: "UPBIT" | "BINANCE";
+  tvSymbol?: string;
   interval?: string;
   height?: number;
   theme?: "dark" | "light";
@@ -11,6 +12,7 @@ interface TradingViewChartProps {
 function TradingViewChart({
   symbol = "BTC",
   exchange = "BINANCE",
+  tvSymbol,
   interval = "60",
   height = 400,
   theme = "dark",
@@ -18,11 +20,14 @@ function TradingViewChart({
   const containerRef = useRef<HTMLDivElement>(null);
 
   const getFullSymbol = useCallback(() => {
+    if (tvSymbol) {
+      return tvSymbol;
+    }
     if (exchange === "UPBIT") {
       return `UPBIT:${symbol}KRW`;
     }
     return `BINANCE:${symbol}USDT`;
-  }, [exchange, symbol]);
+  }, [exchange, symbol, tvSymbol]);
 
   useEffect(() => {
     const container = containerRef.current;
