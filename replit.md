@@ -9,11 +9,13 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 │   ├── lib/
 │   │   ├── supabaseClient.ts  # Supabase client configuration
 │   │   └── profile.ts         # User profile helper (ensureUserProfile)
+│   ├── hooks/
+│   │   └── useMarkets.ts      # Shared hook for market data fetching
 │   ├── components/
 │   │   ├── Layout.tsx         # Shared layout with navigation and footer
 │   │   ├── HeroSection.tsx    # Homepage hero section (Korean)
 │   │   ├── AIInsightBox.tsx   # AI summary box with mock data
-│   │   ├── MarketTable.tsx    # Premium table component (limit prop)
+│   │   ├── MarketTable.tsx    # Premium table component (uses useMarkets)
 │   │   └── AlertCTA.tsx       # Alert feature CTA section
 │   ├── pages/
 │   │   ├── api/               # API routes
@@ -33,7 +35,7 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 │   │   ├── _app.tsx           # App wrapper
 │   │   ├── _document.tsx      # Document customization
 │   │   ├── index.tsx          # Homepage (redesigned with components)
-│   │   ├── markets.tsx        # Crypto premium table
+│   │   ├── markets.tsx        # Crypto premium table (uses useMarkets)
 │   │   ├── analysis.tsx       # AI analysis page (protected)
 │   │   ├── alerts.tsx         # User alerts with Supabase CRUD (protected)
 │   │   ├── pricing.tsx        # Free vs Pro pricing
@@ -72,19 +74,24 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 - `public.ai_reports` - AI analysis reports (with seo_title, seo_description)
 - `public.banners` - Marketing banners (with seo_title, seo_description)
 
+## Shared Hooks
+| Hook | Description |
+|------|-------------|
+| `useMarkets(limit?)` | Fetches market data from /api/premium/table, returns data, loading, error, fxRate, averagePremium, refetch |
+
 ## Homepage Components
 | Component | Description |
 |-----------|-------------|
 | `HeroSection` | Main headline with Korean text and CTA button |
 | `AIInsightBox` | AI summary box showing avg/max/min premium and analysis (mock) |
-| `MarketTable` | Premium table with configurable limit, mock data |
+| `MarketTable` | Premium table with configurable limit, uses useMarkets hook |
 | `AlertCTA` | Call-to-action section for alert feature |
 
 ## Pages
 | Route | Description | Protected |
 |-------|-------------|-----------|
 | `/` | Landing page with Hero, AI Insight, Market Table, Alert CTA | No |
-| `/markets` | Real-time Kimchi Premium table | No |
+| `/markets` | Real-time Kimchi Premium table with auto-refresh | No |
 | `/analysis` | AI-powered market analysis | Yes |
 | `/alerts` | Create and manage price alerts (Supabase CRUD) | Yes |
 | `/pricing` | Free vs Pro plan comparison | No |
@@ -149,13 +156,22 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 - [x] New index.tsx with component-based structure
 - [x] HeroSection component (Korean headline + CTA)
 - [x] AIInsightBox component (mock AI summary data)
-- [x] MarketTable component (mock premium data with limit prop)
+- [x] MarketTable component (uses useMarkets hook)
 - [x] AlertCTA component (alert feature promotion)
 - [x] All internal links use next/link
 - [x] Korean language content throughout
 
+## MarketTable Data Integration Complete
+- [x] Created src/hooks/useMarkets.ts for shared data fetching
+- [x] MarketTable now fetches from /api/premium/table
+- [x] Markets page uses same useMarkets hook
+- [x] Auto-refresh every 30 seconds on Markets page
+- [x] Shows loading and error states
+- [x] Both pages share consistent data source
+
 ## Recent Changes
-- Homepage redesign complete (2024-11-30)
-- Added 4 new components: HeroSection, AIInsightBox, MarketTable, AlertCTA
-- index.tsx now uses component-based architecture
-- MarketTable uses mock data (API integration pending)
+- MarketTable data integration complete (2024-11-30)
+- Created useMarkets hook for shared data fetching
+- Home and Markets pages now use same data source
+- Markets page shows summary stats (avg premium, fx rate, count)
+- Auto-refresh every 30 seconds on Markets page
