@@ -240,11 +240,30 @@ BTC, ETH, XRP, SOL, ADA, DOGE, AVAX
 |----------|-------------|
 | `GET /api/premium/history?symbol=BTC` | Historical premium data for symbol |
 
+## Multi-Exchange Selection (Phase 5) - UI Complete
+- [x] ExchangeSelectionContext for global exchange state
+- [x] ExchangeSelector component with grouped dropdowns
+- [x] Domestic exchanges: 업비트 KRW/BTC/USDT, 빗썸 KRW/BTC/USDT, 코인원 KRW
+- [x] Foreign exchanges: Binance USDT/BTC/Futures, OKX, Bybit, Bitget, Gate, HTX, MEXC USDT
+- [x] TradingView charts switch based on selected exchange
+- [x] Detail page shows dual charts (domestic + foreign) side by side
+- [x] MarketTable column headers update with selected exchange names
+- [ ] Backend: Multi-exchange price fetching (pending)
+- [ ] Backend: Dynamic premium calculation based on selected exchanges (pending)
+
+## New Context
+| Context | Description |
+|---------|-------------|
+| `ExchangeSelectionContext` | Global state for domestic/foreign exchange selection |
+| `useExchangeSelection` | Hook to access exchange selection state and helpers |
+
 ## Recent Changes
-- Dashboard v2.0 upgrade complete (2024-11-30)
-- TradingView charts integrated with symbol/exchange selection
-- Detail pages for each coin with price cards and premium history
+- Multi-exchange UI complete (2024-11-30)
+- Added ExchangeSelectionContext with domestic/foreign exchange state
+- TradingView charts now change based on selected exchange pair
+- Detail page shows dual charts (domestic/foreign) with spread chart
+- MarketTable columns dynamically labeled with selected exchange
+- Dashboard v2.0 upgrade complete
 - Enhanced MarketTable with search, filter, and sort functionality
-- PremiumTicker shows live BTC/ETH/avg premium and FX rate
 - Real-time price updates with 5-second interval
 - Database cleanup removes data older than 24 hours
