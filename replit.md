@@ -10,7 +10,11 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 │   │   ├── supabaseClient.ts  # Supabase client configuration
 │   │   └── profile.ts         # User profile helper (ensureUserProfile)
 │   ├── components/
-│   │   └── Layout.tsx         # Shared layout with navigation and footer
+│   │   ├── Layout.tsx         # Shared layout with navigation and footer
+│   │   ├── HeroSection.tsx    # Homepage hero section (Korean)
+│   │   ├── AIInsightBox.tsx   # AI summary box with mock data
+│   │   ├── MarketTable.tsx    # Premium table component (limit prop)
+│   │   └── AlertCTA.tsx       # Alert feature CTA section
 │   ├── pages/
 │   │   ├── api/               # API routes
 │   │   │   ├── hello.ts       # Health check endpoint
@@ -28,7 +32,7 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 │   │   ├── fonts/             # Local font files
 │   │   ├── _app.tsx           # App wrapper
 │   │   ├── _document.tsx      # Document customization
-│   │   ├── index.tsx          # Homepage
+│   │   ├── index.tsx          # Homepage (redesigned with components)
 │   │   ├── markets.tsx        # Crypto premium table
 │   │   ├── analysis.tsx       # AI analysis page (protected)
 │   │   ├── alerts.tsx         # User alerts with Supabase CRUD (protected)
@@ -68,10 +72,18 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 - `public.ai_reports` - AI analysis reports (with seo_title, seo_description)
 - `public.banners` - Marketing banners (with seo_title, seo_description)
 
+## Homepage Components
+| Component | Description |
+|-----------|-------------|
+| `HeroSection` | Main headline with Korean text and CTA button |
+| `AIInsightBox` | AI summary box showing avg/max/min premium and analysis (mock) |
+| `MarketTable` | Premium table with configurable limit, mock data |
+| `AlertCTA` | Call-to-action section for alert feature |
+
 ## Pages
 | Route | Description | Protected |
 |-------|-------------|-----------|
-| `/` | Landing page with features and premium stats | No |
+| `/` | Landing page with Hero, AI Insight, Market Table, Alert CTA | No |
 | `/markets` | Real-time Kimchi Premium table | No |
 | `/analysis` | AI-powered market analysis | Yes |
 | `/alerts` | Create and manage price alerts (Supabase CRUD) | Yes |
@@ -104,6 +116,7 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 - Dark theme with gradient styling
 - Mobile-first responsive design
 - Protected pages use client-side auth guards with Supabase
+- Homepage uses Korean language content
 
 ## Phase 1 Complete
 - [x] Routing & pages setup
@@ -132,8 +145,17 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 - [x] Delete alerts
 - [x] All operations filtered by user_id for security
 
+## Homepage Redesign Complete
+- [x] New index.tsx with component-based structure
+- [x] HeroSection component (Korean headline + CTA)
+- [x] AIInsightBox component (mock AI summary data)
+- [x] MarketTable component (mock premium data with limit prop)
+- [x] AlertCTA component (alert feature promotion)
+- [x] All internal links use next/link
+- [x] Korean language content throughout
+
 ## Recent Changes
-- Phase 2.5 + Phase 3 implementation complete (2024-11-29)
-- Added profile sync on signup (ensureUserProfile)
-- Alerts page now uses real Supabase data instead of mock data
-- Full CRUD operations for alerts with proper user filtering
+- Homepage redesign complete (2024-11-30)
+- Added 4 new components: HeroSection, AIInsightBox, MarketTable, AlertCTA
+- index.tsx now uses component-based architecture
+- MarketTable uses mock data (API integration pending)
