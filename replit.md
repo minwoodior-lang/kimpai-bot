@@ -176,29 +176,43 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 - [x] Displays fxRate and updatedAt timestamp
 - [x] Generates dynamic AI comment based on data
 
-## Automated Price Updates (Phase 4)
-- [x] Created `scripts/updatePrices.ts` - fetches from Upbit/CoinGecko
+## Automated Price Updates (Phase 4) - Complete
+- [x] Created `scripts/updatePrices.ts` - one-time price update script
+- [x] Created `scripts/priceWorker.ts` - continuous 5-second interval worker
 - [x] Created `scripts/supabaseAdmin.ts` - server-side Supabase client
 - [x] Created `scripts/create_price_snapshots_table.sql` - table schema
 - [x] Updated `/api/premium/table` to read from price_snapshots
 - [x] Fixed Supabase numeric parsing (DECIMAL returns strings)
-- [ ] Configure scheduled deployment for 1-minute updates
+- [x] Set up Price Worker workflow for continuous updates
 
-## Price Update Script
-- **Script**: `scripts/updatePrices.ts`
-- **Command**: `npm run update:prices`
-- **Data Sources**:
-  - Upbit API (Korean prices in KRW)
-  - CoinGecko API (Global prices in USD)
-  - Exchange Rate API (USD/KRW)
-- **Symbols**: BTC, ETH, XRP, SOL, ADA, DOGE, AVAX
+## Price Update Scripts
+| Script | Command | Description |
+|--------|---------|-------------|
+| `updatePrices.ts` | `npm run update:prices` | One-time price update |
+| `priceWorker.ts` | `npm run price:worker` | Continuous 5s interval worker |
+
+## Data Sources
+- **Upbit API**: Korean exchange prices (KRW)
+- **CoinGecko API**: Global prices (USD)
+- **Exchange Rate API**: USD/KRW exchange rate
+
+## Supported Symbols
+BTC, ETH, XRP, SOL, ADA, DOGE, AVAX
+
+## Workflows
+| Workflow | Command | Description |
+|----------|---------|-------------|
+| KimpAI Dev Server | `npm run dev` | Next.js development server |
+| Price Worker | `npm run price:worker` | Continuous price updates (5s) |
 
 ## Technical Notes
 - Supabase returns DECIMAL/BIGINT as strings - always parse with Number()
 - Binance API blocked by geo-restrictions, use CoinGecko instead
-- Recommended update interval: 1 minute (scheduled deployment)
+- Price Worker includes 24-hour data cleanup
+- SIGTERM/SIGINT handlers for graceful shutdown
 
 ## Recent Changes
-- Automated price update system complete (2024-11-30)
-- Fixed Supabase numeric parsing issue
-- API route now reads from price_snapshots with mock fallback
+- Real-time price updates complete (2024-11-30)
+- Price Worker running with 5-second interval
+- UI displays live data: avg/max/min premium, exchange rate, timestamps
+- Database cleanup removes data older than 24 hours
