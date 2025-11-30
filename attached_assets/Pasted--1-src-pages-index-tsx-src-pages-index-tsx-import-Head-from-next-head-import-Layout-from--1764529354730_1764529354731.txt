@@ -1,0 +1,249 @@
+📁 1) src/pages/index.tsx
+// src/pages/index.tsx
+import Head from "next/head";
+import Layout from "@/components/Layout";
+import HeroSection from "@/components/HeroSection";
+import AIInsightBox from "@/components/AIInsightBox";
+import MarketTable from "@/components/MarketTable";
+import AlertCTA from "@/components/AlertCTA";
+
+export default function Home() {
+  return (
+    <Layout>
+      <Head>
+        <title>KimpAI - 실시간 김프 & AI 분석</title>
+        <meta
+          name="description"
+          content="코인 김프 실시간 확인, AI 시장 분석, 자동 가격/김프 알림 서비스. 무료로 BTC·ETH·XRP·SOL 실시간 김치프리미엄 데이터를 확인하세요."
+        />
+      </Head>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <HeroSection />
+
+        <div className="mt-10">
+          <AIInsightBox />
+        </div>
+
+        <div className="mt-12">
+          <MarketTable limit={12} />
+        </div>
+
+        <div className="mt-16">
+          <AlertCTA />
+        </div>
+      </div>
+    </Layout>
+  );
+}
+
+📁 2) src/components/HeroSection.tsx
+// src/components/HeroSection.tsx
+const HeroSection = () => {
+  return (
+    <div className="text-center text-white">
+      <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">
+        실시간 김프 확인 + AI 분석 플랫폼
+      </h1>
+      <p className="text-slate-300 mt-4 text-lg">
+        업비트·바이낸스 가격을 비교해{" "}
+        <span className="font-semibold">김치프리미엄</span>을 즉시 확인하고,
+        AI 분석으로 시장 흐름을 예측하세요.
+      </p>
+      <a
+        href="/alerts"
+        className="inline-block mt-8 px-8 py-4 text-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:opacity-90 rounded-xl font-semibold"
+      >
+        🔔 무료 김프 알림 받기
+      </a>
+    </div>
+  );
+};
+
+export default HeroSection;
+
+📁 3) src/components/AIInsightBox.tsx
+// src/components/AIInsightBox.tsx
+// 현재는 목(mock) 데이터 기반이며, 추후 실제 AI 분석 API와 연동 예정입니다.
+const AIInsightBox = () => {
+  const mock = {
+    avg: "+2.4%",
+    max: "+5.8% (BTC)",
+    min: "-1.1% (SOL)",
+    volatility: "중간",
+    ai: "BTC 프리미엄이 지난 30분간 완만한 상승세를 보이고 있습니다. 단기 변동성 확대 구간으로, 김프 급변 시 구간별 대응이 중요합니다.",
+  };
+
+  return (
+    <div className="bg-slate-800/80 border border-slate-700 rounded-xl p-6 shadow-lg">
+      <h2 className="text-xl font-bold text-white mb-4">
+        📊 오늘의 AI 김프 요약
+      </h2>
+
+      <div className="grid sm:grid-cols-2 gap-4 text-slate-300 text-sm">
+        <p>• 평균 김프: {mock.avg}</p>
+        <p>• 최대 김프: {mock.max}</p>
+        <p>• 최소 김프: {mock.min}</p>
+        <p>• 해외 변동성: {mock.volatility}</p>
+      </div>
+
+      <div className="mt-4 text-slate-200 text-sm bg-slate-700/40 p-3 rounded-lg">
+        {mock.ai}
+      </div>
+    </div>
+  );
+};
+
+export default AIInsightBox;
+
+📁 4) src/components/MarketTable.tsx
+
+⚠️ 현재는 목(mock) 데이터로 동작하도록 만든 버전입니다.
+나중에 실제 Supabase/백엔드 API 스키마 확인 후 mockData 부분만 교체하면 됩니다.
+
+// src/components/MarketTable.tsx
+import { useEffect, useState } from "react";
+
+type MarketRow = {
+  symbol: string;
+  upbitPrice: number;
+  binancePrice: number;
+  premium: number; // %
+};
+
+type MarketTableProps = {
+  limit?: number;
+};
+
+const mockData: MarketRow[] = [
+  {
+    symbol: "BTC/KRW",
+    upbitPrice: 101_000_000,
+    binancePrice: 72_000 * 1400,
+    premium: 4.8,
+  },
+  {
+    symbol: "ETH/KRW",
+    upbitPrice: 3_200_000,
+    binancePrice: 2_250 * 1400,
+    premium: 3.2,
+  },
+  {
+    symbol: "XRP/KRW",
+    upbitPrice: 950,
+    binancePrice: 0.63 * 1400,
+    premium: 2.7,
+  },
+  {
+    symbol: "SOL/KRW",
+    upbitPrice: 190_000,
+    binancePrice: 135 * 1400,
+    premium: -1.1,
+  },
+  {
+    symbol: "ADA/KRW",
+    upbitPrice: 780,
+    binancePrice: 0.54 * 1400,
+    premium: 1.9,
+  },
+];
+
+const MarketTable = ({ limit = 12 }: MarketTableProps) => {
+  const [rows, setRows] = useState<MarketRow[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    // TODO: 추후 실제 Supabase/백엔드 API 연동 예정
+    setLoading(true);
+    const timer = setTimeout(() => {
+      setRows(mockData.slice(0, limit));
+      setLoading(false);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [limit]);
+
+  if (loading) {
+    return (
+      <div className="bg-slate-800/60 p-6 rounded-xl border border-slate-700 text-slate-300">
+        김프 데이터를 불러오는 중입니다…
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-slate-800/60 border border-slate-700 rounded-xl overflow-hidden">
+      <div className="p-4 border-b border-slate-700 text-white text-lg font-semibold flex items-center justify-between">
+        <span>주요 코인 김프 현황</span>
+        <a
+          href="/markets"
+          className="text-sm text-blue-400 hover:text-blue-300"
+        >
+          전체 보기 →
+        </a>
+      </div>
+
+      <table className="w-full text-sm text-slate-300">
+        <thead className="bg-slate-700/50">
+          <tr>
+            <th className="py-3 px-4 text-left">종목</th>
+            <th className="py-3 px-4 text-right">업비트(추정)</th>
+            <th className="py-3 px-4 text-right">바이낸스(원화 환산)</th>
+            <th className="py-3 px-4 text-right">김프</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {rows.map((row) => (
+            <tr
+              key={row.symbol}
+              className="border-b border-slate-700/40 hover:bg-slate-800/60"
+            >
+              <td className="py-3 px-4 font-medium text-white">
+                {row.symbol}
+              </td>
+              <td className="py-3 px-4 text-right">
+                {row.upbitPrice.toLocaleString("ko-KR")}₩
+              </td>
+              <td className="py-3 px-4 text-right">
+                {Math.round(row.binancePrice).toLocaleString("ko-KR")}₩
+              </td>
+              <td
+                className={`py-3 px-4 text-right font-semibold ${
+                  row.premium >= 0 ? "text-green-400" : "text-red-400"
+                }`}
+              >
+                {row.premium.toFixed(1)}%
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default MarketTable;
+
+📁 5) src/components/AlertCTA.tsx
+// src/components/AlertCTA.tsx
+const AlertCTA = () => {
+  return (
+    <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-slate-700 rounded-xl p-8 text-center text-white">
+      <h2 className="text-2xl font-bold">자동 김프 알림 기능</h2>
+      <p className="mt-3 text-slate-300">
+        원하는 김프 구간에 도달하면 자동으로 알려드립니다.
+        <br />
+        무료로 몇 개의 알림부터 바로 써볼 수 있어요.
+      </p>
+
+      <a
+        href="/alerts"
+        className="mt-6 inline-block px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg text-lg font-semibold hover:opacity-90"
+      >
+        🔔 김프 알림 설정하러 가기
+      </a>
+    </div>
+  );
+};
+
+export default AlertCTA;
