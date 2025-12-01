@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import ChartModal from "./ChartModal";
 
 interface PremiumData {
   symbol: string;
@@ -100,6 +101,7 @@ export default function PremiumTable({
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("premium");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
+  const [modalSymbol, setModalSymbol] = useState<string | null>(null);
 
   const fetchData = async () => {
     try {
@@ -416,7 +418,7 @@ export default function PremiumTable({
                             </div>
                           </button>
                           <button
-                            onClick={() => window.open(`https://www.tradingview.com/chart/?symbol=BINANCE:${row.symbol}USDT`, '_blank')}
+                            onClick={() => setModalSymbol(row.symbol)}
                             className="text-gray-500 hover:text-blue-400 transition-colors p-1"
                             title="차트 열기"
                           >
@@ -494,6 +496,8 @@ export default function PremiumTable({
           )}
         </div>
       )}
+
+      <ChartModal symbol={modalSymbol} onClose={() => setModalSymbol(null)} />
     </div>
   );
 }
