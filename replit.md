@@ -45,6 +45,20 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 - **Admin Interface**: Dedicated admin dashboard for management.
 
 ### Recent Changes (2025-12-01)
+- **v2.2.2 Binance 프록시 + 모바일 반응형 레이아웃**:
+  - Binance API 프록시 구현 (`/api/proxy/binance`) - 451/403 에러 시 CoinGecko 자동 폴백
+  - Binance Futures에도 CoinGecko 폴백 추가 (spot 데이터 변환)
+  - `getProxyBaseUrl()` 헬퍼 함수로 환경별 baseUrl 자동 감지 (REPLIT_DEV_DOMAIN, NEXT_PUBLIC_SITE_URL, PORT)
+  - 캐시 메커니즘: Binance 5초, CoinGecko 30초 TTL
+  - 모바일 테이블: 5컬럼 표시 (코인명, 현재가, 김프, 24h 변동, 거래액)
+  - 데스크톱: 전체 8컬럼 표시 (해외가격 md:table-cell, 고가/저가대비 lg:table-cell)
+  - 모바일 현재가 셀: 국내가+해외가 2줄 통합 표시
+  - 코인 아이콘: cryptocurrency-icons CDN + gradient 폴백
+  - 결과: binance:122, binance_futures:122 코인 지속 제공
+- **v2.2.1 코인 아이콘 시스템 개선**:
+  - CoinMarketCap CDN → cryptocurrency-icons CDN 전환
+  - 심볼 기반 로딩 (CMC ID 의존성 제거)
+  - 미등록 아이콘 시 gradient 폴백 표시
 - **v2.2.0 UI/UX 개선 + 플래시 애니메이션**:
   - 해외 거래소 드롭다운 레이블 개선: 한국어 풀네임 (예: "바이낸스 USDT 마켓")
   - 이모지 아이콘 추가: 🟡 바이낸스, 🟠 Bybit, ⚪ OKX, 🔵 Bitget, 🟢 Gate.io, 🔶 HTX, 🔷 MEXC
