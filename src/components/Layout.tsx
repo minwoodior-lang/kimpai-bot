@@ -12,7 +12,6 @@ export default function Layout({ children }: LayoutProps) {
 
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/premium", label: "프리미엄" },
     { href: "/markets", label: "Markets" },
     { href: "/analysis", label: "Analysis" },
     { href: "/alerts", label: "Alerts" },
