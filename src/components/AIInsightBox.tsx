@@ -86,7 +86,7 @@ const AIInsightBox = () => {
           <p>• 최소 김프: <span className={minPremium && minPremium.premium < 0 ? "text-red-400" : "text-green-400"}>
             {minPremium ? `${minPremium.premium >= 0 ? "+" : ""}${minPremium.premium.toFixed(1)}% (${minPremium.symbol.replace("/KRW", "")})` : "-"}
           </span></p>
-          <p>• 환율: <span className="text-white">₩{fxRate.toLocaleString()}/USD</span></p>
+          <p>• 환율: <span className="text-white">₩{fxRate.toLocaleString()}/USDT</span></p>
         </div>
 
         <div className="mt-4 text-slate-200 text-sm bg-slate-700/40 p-3 rounded-lg">
@@ -103,31 +103,35 @@ const AIInsightBox = () => {
 
       {!isPro && (
         <div className="border-t border-slate-700 p-4 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-800/95 to-transparent z-10 rounded-lg flex flex-col items-center justify-center">
-              <div className="text-center px-4">
-                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white px-3 py-1 rounded-full text-xs font-medium mb-2">
-                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                  </svg>
-                  PRO 전용
-                </div>
-                <p className="text-slate-300 text-xs mb-3">48시간 김프 예측 및 상세 분석</p>
-                <Link
-                  href="/pricing"
-                  className="inline-block bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all"
-                >
-                  PRO 구독하기
-                </Link>
-              </div>
-            </div>
-            
-            <div className="blur-sm select-none pointer-events-none p-3">
-              <div className="text-xs text-slate-400 mb-2">📈 48시간 김프 예측</div>
-              <div className="space-y-1 text-sm text-slate-500">
+          <div className="relative overflow-hidden rounded-lg">
+            <div className="blur-[6px] select-none pointer-events-none p-4 bg-slate-900/50">
+              <div className="text-sm text-slate-400 mb-3 font-medium">📈 48시간 김프 예측</div>
+              <div className="space-y-2 text-sm text-slate-500">
                 <p>• 예상 상승: BTC +3.2% → +4.1%</p>
                 <p>• 추세 신호: 상승 지속 가능성 높음</p>
                 <p>• 권장 전략: 분할 매수 유지</p>
+                <p>• AI 신뢰도: 87%</p>
+              </div>
+            </div>
+            
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/80 to-slate-900/95 flex flex-col items-center justify-center">
+              <div className="text-center px-4">
+                <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <p className="text-slate-200 text-sm font-medium mb-1">48시간 김프 예측은 PRO에서 확인 가능합니다.</p>
+                <p className="text-slate-400 text-xs mb-4">AI 기반 예측으로 최적의 매매 타이밍을 잡으세요</p>
+                <Link
+                  href="/pricing"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-all shadow-lg shadow-purple-500/25"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                  </svg>
+                  PRO 분석 전체 보기
+                </Link>
               </div>
             </div>
           </div>

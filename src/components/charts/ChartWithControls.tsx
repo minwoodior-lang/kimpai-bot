@@ -10,10 +10,20 @@ const TradingViewChart = dynamic(() => import("./TradingViewChart"), {
   ),
 });
 
+const KoreaPremiumChart = dynamic(() => import("./KoreaPremiumChart"), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[400px] bg-slate-800/50 rounded-xl flex items-center justify-center">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+    </div>
+  ),
+});
+
 interface ChartPreset {
   id: string;
   label: string;
   tvSymbol: string;
+  isCustom?: boolean;
 }
 
 const CHART_PRESETS: ChartPreset[] = [
@@ -75,7 +85,8 @@ const CHART_PRESETS: ChartPreset[] = [
   {
     id: "korea_premium_index",
     label: "Korea Premium Index",
-    tvSymbol: "UPBIT:BTCKRW*CRYPTOCAP:USD/BINANCE:BTCUSDT",
+    tvSymbol: "",
+    isCustom: true,
   },
 ];
 
@@ -148,30 +159,38 @@ export default function ChartWithControls({
             </optgroup>
           </select>
 
-          <select
-            value={timeframe.id}
-            onChange={(e) => {
-              const tf = TIMEFRAMES.find((t) => t.id === e.target.value);
-              if (tf) {
-                setTimeframe(tf);
-              }
-            }}
-            className="bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 focus:outline-none focus:border-blue-500 text-sm min-w-[80px]"
-          >
-            {TIMEFRAMES.map((tf) => (
-              <option key={tf.id} value={tf.id}>
-                {tf.label}
-              </option>
-            ))}
-          </select>
+          {!chartPreset.isCustom && (
+            <select
+              value={timeframe.id}
+              onChange={(e) => {
+                const tf = TIMEFRAMES.find((t) => t.id === e.target.value);
+                if (tf) {
+                  setTimeframe(tf);
+                }
+              }}
+              className="bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 focus:outline-none focus:border-blue-500 text-sm min-w-[80px]"
+            >
+              {TIMEFRAMES.map((tf) => (
+                <option key={tf.id} value={tf.id}>
+                  {tf.label}
+                </option>
+              ))}
+            </select>
+          )}
         </div>
-        <span className="text-slate-500 text-xs hidden sm:inline">TradingView</span>
+        <span className="text-slate-500 text-xs hidden sm:inline">
+          {chartPreset.isCustom ? "KimpAI" : "TradingView"}
+        </span>
       </div>
-      <TradingViewChart 
-        tvSymbol={chartPreset.tvSymbol} 
-        interval={timeframe.interval}
-        height={height} 
-      />
+      {chartPreset.isCustom ? (
+        <KoreaPremiumChart height={height} />
+      ) : (
+        <TradingViewChart 
+          tvSymbol={chartPreset.tvSymbol} 
+          interval={timeframe.interval}
+          height={height} 
+        />
+      )}
     </div>
   );
 }

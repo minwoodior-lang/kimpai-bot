@@ -6,7 +6,7 @@ interface RateLimitRecord {
 const rateLimitMap = new Map<string, RateLimitRecord>();
 
 const RATE_LIMIT_WINDOW_MS = 2000;
-const RATE_LIMIT_MAX_REQUESTS = 10;
+const RATE_LIMIT_MAX_REQUESTS = 2;
 
 setInterval(() => {
   const now = Date.now();

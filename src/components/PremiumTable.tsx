@@ -212,8 +212,8 @@ export default function PremiumTable({
   };
 
   const getChangeColor = (change: number) => {
-    if (change > 0) return "text-red-400";
-    if (change < 0) return "text-blue-400";
+    if (change > 0) return "text-green-400";
+    if (change < 0) return "text-red-400";
     return "text-gray-400";
   };
 
@@ -262,7 +262,7 @@ export default function PremiumTable({
             </div>
           </div>
           <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
-            <div className="text-gray-400 text-xs mb-1">환율 (USD/KRW)</div>
+            <div className="text-gray-400 text-xs mb-1">환율 (USDT/KRW)</div>
             <div className="text-xl font-bold text-white">₩{fxRate.toLocaleString()}</div>
           </div>
           <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
@@ -305,7 +305,7 @@ export default function PremiumTable({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="코인 검색 (이름, 심볼, 초성)"
+              placeholder="예: BTC, 비트코인, ㅂㅌ"
               className="w-full bg-slate-700 text-white rounded-lg px-3 py-2 border border-slate-600 focus:border-blue-500 focus:outline-none text-sm"
             />
           </div>
@@ -357,19 +357,19 @@ export default function PremiumTable({
                     className="px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("high24h")}
                   >
-                    고가대비<SortIcon columnKey="high24h" />
+                    고가대비(24h)<SortIcon columnKey="high24h" />
                   </th>
                   <th
                     className="px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("low24h")}
                   >
-                    저가대비<SortIcon columnKey="low24h" />
+                    저가대비(24h)<SortIcon columnKey="low24h" />
                   </th>
                   <th
                     className="px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("volume24h")}
                   >
-                    거래액<SortIcon columnKey="volume24h" />
+                    거래액(일)<SortIcon columnKey="volume24h" />
                   </th>
                 </tr>
               </thead>
@@ -388,24 +388,36 @@ export default function PremiumTable({
                       }`}
                     >
                       <td className="px-3 py-2">
-                        <button
-                          onClick={() => openCoinMarketCap(row.symbol)}
-                          className="flex items-center gap-2 hover:text-blue-400 transition-colors text-left"
-                        >
-                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">
-                            {row.symbol.charAt(0)}
-                          </div>
-                          <div>
-                            <div className="text-white font-medium text-sm">{row.name}</div>
-                            <div className="text-gray-500 text-xs">{row.symbol}</div>
-                          </div>
-                        </button>
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => openCoinMarketCap(row.symbol)}
+                            className="flex items-center gap-2 hover:text-blue-400 transition-colors text-left"
+                          >
+                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">
+                              {row.symbol.charAt(0)}
+                            </div>
+                            <div>
+                              <div className="text-white font-medium text-sm">{row.name}</div>
+                              <div className="text-gray-500 text-xs">{row.symbol}</div>
+                            </div>
+                          </button>
+                          <button
+                            onClick={() => window.open(`https://www.tradingview.com/chart/?symbol=BINANCE:${row.symbol}USDT`, '_blank')}
+                            className="text-gray-500 hover:text-blue-400 transition-colors p-1"
+                            title="차트 열기"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                            </svg>
+                          </button>
+                        </div>
                       </td>
                       <td className="px-3 py-2 text-right">
                         <div className="text-white font-medium">₩{formatKRW(row.koreanPrice)}</div>
                       </td>
                       <td className="px-3 py-2 text-right">
-                        <div className="text-gray-300">{formatUSD(row.globalPrice)}</div>
+                        <div className="text-white font-medium">₩{formatKRW(row.globalPrice * fxRate)}</div>
+                        <div className="text-xs text-gray-500">${row.globalPrice.toFixed(2)} USDT</div>
                       </td>
                       <td className="px-3 py-2 text-right">
                         <div className={`font-bold ${getPremiumColor(row.premium)}`}>
