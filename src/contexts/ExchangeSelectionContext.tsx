@@ -20,16 +20,16 @@ export const DOMESTIC_EXCHANGES: { value: string; label: string; exchange: Domes
   { value: "COINONE_KRW", label: "코인원 KRW", exchange: "COINONE", quote: "KRW" },
 ];
 
-export const FOREIGN_EXCHANGES: { value: string; label: string; exchange: ForeignExchange["exchange"]; quote: ForeignExchange["quote"] }[] = [
-  { value: "BINANCE_USDT", label: "Binance USDT", exchange: "BINANCE", quote: "USDT" },
-  { value: "BINANCE_BTC", label: "Binance BTC", exchange: "BINANCE", quote: "BTC" },
-  { value: "BINANCE_FUTURES", label: "Binance Futures USD-M", exchange: "BINANCE_FUTURES", quote: "USD" },
-  { value: "OKX_USDT", label: "OKX USDT", exchange: "OKX", quote: "USDT" },
-  { value: "BYBIT_USDT", label: "Bybit USDT", exchange: "BYBIT", quote: "USDT" },
-  { value: "BITGET_USDT", label: "Bitget USDT", exchange: "BITGET", quote: "USDT" },
-  { value: "GATE_USDT", label: "Gate USDT", exchange: "GATE", quote: "USDT" },
-  { value: "HTX_USDT", label: "HTX USDT", exchange: "HTX", quote: "USDT" },
-  { value: "MEXC_USDT", label: "MEXC USDT", exchange: "MEXC", quote: "USDT" },
+export const FOREIGN_EXCHANGES: { value: string; label: string; exchange: ForeignExchange["exchange"]; quote: ForeignExchange["quote"]; icon: string }[] = [
+  { value: "BINANCE_USDT", label: "바이낸스 USDT 마켓", exchange: "BINANCE", quote: "USDT", icon: "binance" },
+  { value: "BINANCE_BTC", label: "바이낸스 BTC 마켓", exchange: "BINANCE", quote: "BTC", icon: "binance" },
+  { value: "BINANCE_FUTURES", label: "바이낸스 선물 USDS-M 마켓", exchange: "BINANCE_FUTURES", quote: "USD", icon: "binance" },
+  { value: "OKX_USDT", label: "OKX USDT 마켓", exchange: "OKX", quote: "USDT", icon: "okx" },
+  { value: "BYBIT_USDT", label: "Bybit USDT 마켓", exchange: "BYBIT", quote: "USDT", icon: "bybit" },
+  { value: "BITGET_USDT", label: "Bitget USDT 마켓", exchange: "BITGET", quote: "USDT", icon: "bitget" },
+  { value: "GATE_USDT", label: "Gate.io USDT 마켓", exchange: "GATE", quote: "USDT", icon: "gate" },
+  { value: "HTX_USDT", label: "HTX USDT 마켓", exchange: "HTX", quote: "USDT", icon: "htx" },
+  { value: "MEXC_USDT", label: "MEXC USDT 마켓", exchange: "MEXC", quote: "USDT", icon: "mexc" },
 ];
 
 interface ExchangeSelectionContextType {

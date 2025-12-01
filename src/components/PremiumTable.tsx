@@ -40,13 +40,13 @@ const DOMESTIC_EXCHANGES = [
 ];
 
 const FOREIGN_EXCHANGES = [
-  { id: "BINANCE_USDT", name: "바이낸스", exchange: "Binance" },
-  { id: "BYBIT_USDT", name: "Bybit", exchange: "Bybit" },
-  { id: "OKX_USDT", name: "OKX", exchange: "OKX" },
-  { id: "BITGET_USDT", name: "Bitget", exchange: "Bitget" },
-  { id: "GATE_USDT", name: "Gate.io", exchange: "Gate" },
-  { id: "MEXC_USDT", name: "MEXC", exchange: "MEXC" },
-  { id: "HTX_USDT", name: "HTX", exchange: "HTX" },
+  { id: "BINANCE_USDT", name: "바이낸스 USDT 마켓", shortName: "바이낸스", exchange: "Binance", icon: "🟡" },
+  { id: "BYBIT_USDT", name: "Bybit USDT 마켓", shortName: "Bybit", exchange: "Bybit", icon: "🟠" },
+  { id: "OKX_USDT", name: "OKX USDT 마켓", shortName: "OKX", exchange: "OKX", icon: "⚪" },
+  { id: "BITGET_USDT", name: "Bitget USDT 마켓", shortName: "Bitget", exchange: "Bitget", icon: "🔵" },
+  { id: "GATE_USDT", name: "Gate.io USDT 마켓", shortName: "Gate.io", exchange: "Gate", icon: "🟢" },
+  { id: "MEXC_USDT", name: "MEXC USDT 마켓", shortName: "MEXC", exchange: "MEXC", icon: "🔷" },
+  { id: "HTX_USDT", name: "HTX USDT 마켓", shortName: "HTX", exchange: "HTX", icon: "🔶" },
 ];
 
 const CHOSUNG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
@@ -262,7 +262,7 @@ export default function PremiumTable({
 
   const getForeignName = () => {
     const exchange = FOREIGN_EXCHANGES.find((e) => e.id === foreignExchange);
-    return exchange ? exchange.name : "해외";
+    return exchange ? exchange.shortName : "해외";
   };
 
   const calcDiff = (current: number, base: number) => {
@@ -324,7 +324,7 @@ export default function PremiumTable({
             className="bg-slate-700 text-white rounded-lg px-3 py-2 border border-slate-600 focus:border-blue-500 focus:outline-none text-sm"
           >
             {FOREIGN_EXCHANGES.map((ex) => (
-              <option key={ex.id} value={ex.id}>{ex.name}</option>
+              <option key={ex.id} value={ex.id}>{ex.icon} {ex.name}</option>
             ))}
           </select>
 
