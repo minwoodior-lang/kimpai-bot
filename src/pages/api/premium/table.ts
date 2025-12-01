@@ -37,7 +37,6 @@ interface ExchangePriceRecord {
   base: string;
   quote: string;
   price: number;
-  price_krw: number;
   volume_24h: number | null;
   change_24h: number | null;
   created_at: string;
@@ -58,32 +57,18 @@ const SYMBOL_ORDER = ["BTC", "ETH", "XRP", "SOL", "ADA", "DOGE", "AVAX"];
 function parseExchangeParam(param: string): { exchange: string; quote: string } {
   const parts = param.split("_");
   if (parts.length === 2) {
-    return { exchange: parts[0], quote: parts[1] };
+    return { exchange: parts[0].toLowerCase(), quote: parts[1].toUpperCase() };
   }
-  return { exchange: param, quote: "USDT" };
+  return { exchange: param.toLowerCase(), quote: "USDT" };
 }
 
-async function fetchExchangePrices(exchange: string, quote: string): Promise<ExchangePriceRecord[]> {
+async function fetchExchangeRate(): Promise<number> {
   try {
-    const response = await fetch(
-      `${supabaseUrl}/rest/v1/exchange_prices?exchange=eq.${exchange}&quote=eq.${quote}&order=created_at.desc&limit=50`,
-      {
-        headers: {
-          "apikey": supabaseServiceKey,
-          "Authorization": `Bearer ${supabaseServiceKey}`,
-        },
-      }
-    );
-
-    if (!response.ok) {
-      console.error("Failed to fetch exchange prices:", await response.text());
-      return [];
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Error fetching exchange prices:", error);
-    return [];
+    const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+    const data = await response.json();
+    return data.rates.KRW || 1400;
+  } catch {
+    return 1400;
   }
 }
 
@@ -98,41 +83,88 @@ export default async function handler(
     const domestic = parseExchangeParam(domesticParam);
     const foreign = parseExchangeParam(foreignParam);
 
-    const [domesticPrices, foreignPrices] = await Promise.all([
-      fetchExchangePrices(domestic.exchange, domestic.quote),
-      fetchExchangePrices(foreign.exchange, foreign.quote),
-    ]);
+    const fxRate = await fetchExchangeRate();
+
+    const { data: allPrices, error } = await supabase
+      .from("exchange_prices")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(1000);
+
+    if (error) {
+      console.error("Database error:", error.message);
+      return res.status(200).json({
+        success: true,
+        data: [],
+        averagePremium: 0,
+        fxRate,
+        updatedAt: new Date().toISOString(),
+        domesticExchange: domesticParam,
+        foreignExchange: foreignParam,
+      });
+    }
 
     const domesticMap = new Map<string, ExchangePriceRecord>();
     const foreignMap = new Map<string, ExchangePriceRecord>();
+    const fallbackForeignMap = new Map<string, ExchangePriceRecord>();
 
-    if (domesticPrices) {
-      for (const record of domesticPrices) {
+    for (const record of allPrices || []) {
+      const recordExchange = record.exchange.toLowerCase();
+      const recordQuote = record.quote.toUpperCase();
+      
+      if (recordExchange === domestic.exchange && recordQuote === domestic.quote) {
         if (!domesticMap.has(record.symbol)) {
           domesticMap.set(record.symbol, record);
         }
       }
-    }
-
-    if (foreignPrices) {
-      for (const record of foreignPrices) {
+      
+      if (recordExchange === foreign.exchange && recordQuote === foreign.quote) {
         if (!foreignMap.has(record.symbol)) {
           foreignMap.set(record.symbol, record);
         }
       }
+      
+      if (recordQuote === "USDT" && !fallbackForeignMap.has(record.symbol)) {
+        fallbackForeignMap.set(record.symbol, record);
+      }
     }
 
     const tableData: PremiumTableRow[] = [];
-    let fxRate = 1400;
     let latestTimestamp = "";
 
     for (const symbol of SYMBOL_ORDER) {
       const domesticRecord = domesticMap.get(symbol);
-      const foreignRecord = foreignMap.get(symbol);
+      let foreignRecord = foreignMap.get(symbol);
+      
+      if (!foreignRecord && fallbackForeignMap.has(symbol)) {
+        foreignRecord = fallbackForeignMap.get(symbol);
+      }
 
       if (domesticRecord && foreignRecord) {
-        const domesticPriceKrw = Number(domesticRecord.price_krw);
-        const foreignPriceKrw = Number(foreignRecord.price_krw);
+        let domesticPriceKrw = Number(domesticRecord.price);
+        let foreignPriceKrw = Number(foreignRecord.price);
+        
+        if (domestic.quote === "KRW") {
+          domesticPriceKrw = Number(domesticRecord.price);
+        } else if (domestic.quote === "USDT") {
+          domesticPriceKrw = Number(domesticRecord.price) * fxRate;
+        } else if (domestic.quote === "BTC") {
+          const btcDomestic = domesticMap.get("BTC");
+          if (btcDomestic) {
+            domesticPriceKrw = Number(domesticRecord.price) * Number(btcDomestic.price);
+          }
+        }
+        
+        if (foreignRecord.quote.toUpperCase() === "KRW") {
+          foreignPriceKrw = Number(foreignRecord.price);
+        } else if (foreignRecord.quote.toUpperCase() === "USDT") {
+          foreignPriceKrw = Number(foreignRecord.price) * fxRate;
+        } else if (foreignRecord.quote.toUpperCase() === "BTC") {
+          const btcForeign = foreignMap.get("BTC") || fallbackForeignMap.get("BTC");
+          if (btcForeign) {
+            foreignPriceKrw = Number(foreignRecord.price) * Number(btcForeign.price) * fxRate;
+          }
+        }
         
         const premium = foreignPriceKrw > 0
           ? ((domesticPriceKrw - foreignPriceKrw) / foreignPriceKrw) * 100
@@ -141,38 +173,26 @@ export default async function handler(
         tableData.push({
           symbol,
           name: SYMBOL_NAMES[symbol] || symbol,
-          koreanPrice: domesticPriceKrw,
+          koreanPrice: Math.round(domesticPriceKrw),
           globalPrice: Number(foreignRecord.price),
           premium: Math.round(premium * 100) / 100,
           volume24h: Number(foreignRecord.volume_24h) || 0,
-          change24h: Number(foreignRecord.change_24h) || 0,
-          high24h: domesticPriceKrw * 1.01,
-          low24h: domesticPriceKrw * 0.99,
-          domesticExchange: domestic.exchange,
-          foreignExchange: foreign.exchange,
+          change24h: Math.round((Number(foreignRecord.change_24h) || 0) * 100) / 100,
+          high24h: Math.round(domesticPriceKrw * 1.01),
+          low24h: Math.round(domesticPriceKrw * 0.99),
+          domesticExchange: domestic.exchange.toUpperCase(),
+          foreignExchange: foreignRecord.exchange.toUpperCase(),
         });
 
         if (!latestTimestamp || domesticRecord.created_at > latestTimestamp) {
           latestTimestamp = domesticRecord.created_at;
         }
-
-        if (domestic.quote === "KRW" && foreign.quote === "USDT" && foreignRecord.price > 0) {
-          fxRate = domesticPriceKrw / Number(foreignRecord.price) / (1 + premium / 100);
-        }
       }
-    }
-
-    if (tableData.length === 0) {
-      return await fallbackToSnapshots(req, res, domesticParam, foreignParam);
     }
 
     const averagePremium = tableData.length > 0
       ? tableData.reduce((acc, row) => acc + row.premium, 0) / tableData.length
       : 0;
-
-    if (fxRate < 1000 || fxRate > 2000) {
-      fxRate = 1400;
-    }
 
     res.status(200).json({
       success: true,
@@ -185,76 +205,14 @@ export default async function handler(
     });
   } catch (error) {
     console.error("API error:", error);
-    await fallbackToSnapshots(req, res, "UPBIT_KRW", "BINANCE_USDT");
-  }
-}
-
-async function fallbackToSnapshots(
-  req: NextApiRequest,
-  res: NextApiResponse<PremiumTableResponse>,
-  domesticParam: string,
-  foreignParam: string
-) {
-  const { data: latestSnapshots, error } = await supabase
-    .from("price_snapshots")
-    .select("*")
-    .order("created_at", { ascending: false })
-    .limit(100);
-
-  if (error || !latestSnapshots || latestSnapshots.length === 0) {
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       data: [],
       averagePremium: 0,
       fxRate: 1400,
       updatedAt: new Date().toISOString(),
-      domesticExchange: domesticParam,
-      foreignExchange: foreignParam,
+      domesticExchange: "UPBIT_KRW",
+      foreignExchange: "BINANCE_USDT",
     });
   }
-
-  const latestBySymbol = new Map<string, any>();
-  for (const snapshot of latestSnapshots) {
-    if (!latestBySymbol.has(snapshot.symbol)) {
-      latestBySymbol.set(snapshot.symbol, snapshot);
-    }
-  }
-
-  const tableData: PremiumTableRow[] = Array.from(latestBySymbol.values()).map((snapshot) => {
-    const koreanPrice = Number(snapshot.upbit_price);
-    const globalPrice = Number(snapshot.binance_price_usd);
-    const premium = Number(snapshot.premium);
-    const volume24h = Number(snapshot.volume_24h) || 0;
-    const change24h = Number(snapshot.change_24h) || 0;
-
-    return {
-      symbol: snapshot.symbol,
-      name: SYMBOL_NAMES[snapshot.symbol] || snapshot.name || snapshot.symbol,
-      koreanPrice,
-      globalPrice,
-      premium,
-      volume24h,
-      change24h,
-      high24h: koreanPrice * 1.01,
-      low24h: koreanPrice * 0.99,
-    };
-  });
-
-  const sortedData = tableData.sort((a, b) => {
-    return SYMBOL_ORDER.indexOf(a.symbol) - SYMBOL_ORDER.indexOf(b.symbol);
-  });
-
-  const averagePremium = sortedData.reduce((acc, row) => acc + row.premium, 0) / sortedData.length;
-  const latestSnapshot = latestSnapshots[0];
-  const fxRate = Number(latestSnapshot?.fx_rate) || 1400;
-
-  res.status(200).json({
-    success: true,
-    data: sortedData,
-    averagePremium: Math.round(averagePremium * 100) / 100,
-    fxRate,
-    updatedAt: latestSnapshot?.created_at || new Date().toISOString(),
-    domesticExchange: domesticParam,
-    foreignExchange: foreignParam,
-  });
 }

@@ -48,6 +48,34 @@ export async function fetchUpbitKRW(fxRate: number): Promise<ExchangePrice[]> {
   }
 }
 
+export async function fetchUpbitUSDT(fxRate: number): Promise<ExchangePrice[]> {
+  try {
+    const markets = SYMBOLS.map(s => `USDT-${s}`).join(',');
+    const response = await fetch(`https://api.upbit.com/v1/ticker?markets=${markets}`);
+    const data = await response.json();
+    
+    if (!Array.isArray(data)) return [];
+    
+    return data.map((ticker: any) => {
+      const symbol = ticker.market.replace('USDT-', '');
+      const priceUsdt = ticker.trade_price;
+      return {
+        exchange: 'UPBIT',
+        symbol,
+        base: symbol,
+        quote: 'USDT',
+        price: priceUsdt,
+        priceKrw: priceUsdt * fxRate,
+        volume24h: ticker.acc_trade_price_24h,
+        change24h: ticker.signed_change_rate * 100,
+      };
+    });
+  } catch (error) {
+    console.error('Upbit USDT fetch error:', error);
+    return [];
+  }
+}
+
 export async function fetchUpbitBTC(fxRate: number): Promise<ExchangePrice[]> {
   try {
     const markets = SYMBOLS.filter(s => s !== 'BTC').map(s => `BTC-${s}`).join(',');
@@ -468,6 +496,7 @@ export async function fetchExchangeRate(): Promise<number> {
 export const allFetchers = [
   { name: 'UPBIT_KRW', fn: fetchUpbitKRW },
   { name: 'UPBIT_BTC', fn: fetchUpbitBTC },
+  { name: 'UPBIT_USDT', fn: fetchUpbitUSDT },
   { name: 'BITHUMB_KRW', fn: fetchBithumbKRW },
   { name: 'BITHUMB_BTC', fn: fetchBithumbBTC },
   { name: 'COINONE_KRW', fn: fetchCoinoneKRW },

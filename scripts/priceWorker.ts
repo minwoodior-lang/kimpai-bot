@@ -3,6 +3,7 @@ import {
   fetchExchangeRate,
   fetchUpbitKRW,
   fetchUpbitBTC,
+  fetchUpbitUSDT,
   fetchBithumbKRW,
   fetchBithumbBTC,
   fetchCoinoneKRW,
@@ -40,12 +41,12 @@ const SYMBOLS = [
 
 async function insertExchangePrices(records: any[]): Promise<boolean> {
   try {
-    const { data, error } = await supabase.rpc('bulk_insert_exchange_prices', {
-      data: records
-    });
+    const { error } = await supabase
+      .from("exchange_prices")
+      .insert(records);
 
     if (error) {
-      console.error(`[${new Date().toISOString()}] Exchange prices RPC insert error:`, error.message);
+      console.error(`[${new Date().toISOString()}] Exchange prices insert error:`, error.message);
       return false;
     }
     return true;
@@ -64,6 +65,7 @@ async function updateExchangePrices(): Promise<void> {
     const [
       upbitKrw,
       upbitBtc,
+      upbitUsdt,
       bithumbKrw,
       bithumbBtc,
       coinoneKrw,
@@ -79,6 +81,7 @@ async function updateExchangePrices(): Promise<void> {
     ] = await Promise.all([
       fetchUpbitKRW(fxRate),
       fetchUpbitBTC(fxRate),
+      fetchUpbitUSDT(fxRate),
       fetchBithumbKRW(fxRate),
       fetchBithumbBTC(fxRate),
       fetchCoinoneKRW(fxRate),
@@ -96,6 +99,7 @@ async function updateExchangePrices(): Promise<void> {
     const allPrices: ExchangePrice[] = [
       ...upbitKrw,
       ...upbitBtc,
+      ...upbitUsdt,
       ...bithumbKrw,
       ...bithumbBtc,
       ...coinoneKrw,
@@ -110,68 +114,42 @@ async function updateExchangePrices(): Promise<void> {
       ...mexc,
     ];
 
+    let insertedCount = 0;
     if (allPrices.length > 0) {
       const records = allPrices.map((p) => ({
-        exchange: p.exchange,
+        exchange: p.exchange.toLowerCase(),
         symbol: p.symbol,
         base: p.base,
         quote: p.quote,
         price: p.price,
-        price_krw: p.priceKrw,
-        volume_24h: p.volume24h,
-        change_24h: p.change24h,
+        volume_24h: p.volume24h || 0,
+        change_24h: p.change24h || 0,
       }));
 
-      await insertExchangePrices(records);
-    }
-
-    const upbitBtcPrice = upbitKrw.find((p) => p.symbol === "BTC");
-    const binanceBtcPrice = binanceUsdt.find((p) => p.symbol === "BTC");
-
-    if (upbitBtcPrice && binanceBtcPrice) {
-      const snapshots = SYMBOLS.map((coin) => {
-        const upbit = upbitKrw.find((p) => p.symbol === coin.symbol);
-        const binance = binanceUsdt.find((p) => p.symbol === coin.symbol);
-
-        if (upbit && binance) {
-          const premium = ((upbit.priceKrw - binance.priceKrw) / binance.priceKrw) * 100;
-          return {
-            symbol: coin.symbol,
-            name: coin.name,
-            upbit_price: upbit.price,
-            binance_price_usd: binance.price,
-            fx_rate: fxRate,
-            premium: Math.round(premium * 100) / 100,
-            volume_24h: Math.round(binance.volume24h || 0),
-            change_24h: Math.round((binance.change24h || 0) * 100) / 100,
-          };
-        }
-        return null;
-      }).filter(Boolean);
-
-      if (snapshots.length > 0) {
-        const { error } = await supabase.from("price_snapshots").insert(snapshots);
-        if (error) {
-          console.error(`[${new Date().toISOString()}] Snapshots insert error:`, error.message);
-        }
+      const success = await insertExchangePrices(records);
+      if (success) {
+        insertedCount = records.length;
       }
     }
 
     const elapsed = Date.now() - startTime;
     const exchangeCounts: Record<string, number> = {};
     for (const p of allPrices) {
-      exchangeCounts[p.exchange] = (exchangeCounts[p.exchange] || 0) + 1;
+      const key = p.exchange.toLowerCase();
+      exchangeCounts[key] = (exchangeCounts[key] || 0) + 1;
     }
     const countSummary = Object.entries(exchangeCounts)
       .map(([ex, count]) => `${ex}:${count}`)
       .join(" ");
-    
+
+    const upbitBtcPrice = upbitKrw.find((p) => p.symbol === "BTC");
+    const binanceBtcPrice = binanceUsdt.find((p) => p.symbol === "BTC");
     const btcPremium = upbitBtcPrice && binanceBtcPrice
       ? ((upbitBtcPrice.priceKrw - binanceBtcPrice.priceKrw) / binanceBtcPrice.priceKrw * 100).toFixed(2)
       : "N/A";
-    
+
     console.log(
-      `[${new Date().toISOString()}] Updated ${allPrices.length} prices (${elapsed}ms) | BTC김프:${btcPremium}% | ${countSummary}`
+      `[${new Date().toISOString()}] Inserted ${insertedCount} rows (${elapsed}ms) | BTC김프:${btcPremium}% | ${countSummary}`
     );
   } catch (error) {
     console.error(`[${new Date().toISOString()}] Update error:`, error);
@@ -181,31 +159,13 @@ async function updateExchangePrices(): Promise<void> {
 async function cleanupOldData(): Promise<void> {
   const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
 
-  const { error: snapshotsError } = await supabase
-    .from("price_snapshots")
+  const { error: exchangeError } = await supabase
+    .from("exchange_prices")
     .delete()
     .lt("created_at", oneDayAgo);
 
-  if (snapshotsError) {
-    console.error("Snapshots cleanup error:", snapshotsError.message);
-  }
-
-  try {
-    const response = await fetch(
-      `${supabaseUrl}/rest/v1/exchange_prices?created_at=lt.${oneDayAgo}`,
-      {
-        method: "DELETE",
-        headers: {
-          "apikey": supabaseServiceKey,
-          "Authorization": `Bearer ${supabaseServiceKey}`,
-        },
-      }
-    );
-    if (!response.ok) {
-      console.error("Exchange prices cleanup error:", await response.text());
-    }
-  } catch (error) {
-    console.error("Exchange prices cleanup error:", error);
+  if (exchangeError) {
+    console.error("Exchange prices cleanup error:", exchangeError.message);
   }
 
   console.log(`[${new Date().toISOString()}] Cleaned up data older than 24h`);
@@ -215,7 +175,8 @@ const UPDATE_INTERVAL = 5000;
 const CLEANUP_INTERVAL = 60 * 60 * 1000;
 
 console.log(`[${new Date().toISOString()}] Multi-exchange price worker started (${UPDATE_INTERVAL / 1000}s interval)`);
-console.log(`[${new Date().toISOString()}] Domestic: UPBIT, BITHUMB, COINONE | Foreign: BINANCE, OKX, BYBIT, BITGET, GATE, HTX, MEXC`);
+console.log(`[${new Date().toISOString()}] Domestic: UPBIT(KRW/BTC/USDT), BITHUMB(KRW/BTC), COINONE(KRW)`);
+console.log(`[${new Date().toISOString()}] Foreign: BINANCE(USDT/BTC/Futures), OKX, BYBIT, BITGET, GATE, HTX, MEXC`);
 
 updateExchangePrices();
 
