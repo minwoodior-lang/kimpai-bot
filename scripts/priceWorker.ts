@@ -17,6 +17,8 @@ import {
   fetchHTX,
   fetchMEXC,
   ExchangePrice,
+  initializeMarkets,
+  getDomesticSymbols,
 } from "./exchangeFetchers";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -29,29 +31,22 @@ if (!supabaseUrl || !supabaseServiceKey) {
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-const SYMBOLS = [
-  { symbol: "BTC", name: "Bitcoin" },
-  { symbol: "ETH", name: "Ethereum" },
-  { symbol: "XRP", name: "Ripple" },
-  { symbol: "SOL", name: "Solana" },
-  { symbol: "ADA", name: "Cardano" },
-  { symbol: "DOGE", name: "Dogecoin" },
-  { symbol: "AVAX", name: "Avalanche" },
-];
-
 async function insertExchangePrices(records: any[]): Promise<boolean> {
   try {
-    const { error } = await supabase
+    const { data, error, status, statusText } = await supabase
       .from("exchange_prices")
-      .insert(records);
+      .insert(records)
+      .select('id')
+      .limit(1);
 
     if (error) {
-      console.error(`[${new Date().toISOString()}] Exchange prices insert error:`, error.message);
+      console.error(`[${new Date().toISOString()}] Exchange prices insert error:`, error.message, error.code, error.details);
       return false;
     }
+    
     return true;
   } catch (error) {
-    console.error(`[${new Date().toISOString()}] Exchange prices insert error:`, error);
+    console.error(`[${new Date().toISOString()}] Exchange prices insert exception:`, error);
     return false;
   }
 }
@@ -174,15 +169,22 @@ async function cleanupOldData(): Promise<void> {
 const UPDATE_INTERVAL = 5000;
 const CLEANUP_INTERVAL = 60 * 60 * 1000;
 
-console.log(`[${new Date().toISOString()}] Multi-exchange price worker started (${UPDATE_INTERVAL / 1000}s interval)`);
-console.log(`[${new Date().toISOString()}] Domestic: UPBIT(KRW/BTC/USDT), BITHUMB(KRW/BTC), COINONE(KRW)`);
-console.log(`[${new Date().toISOString()}] Foreign: BINANCE(USDT/BTC/Futures), OKX, BYBIT, BITGET, GATE, HTX, MEXC`);
+async function startWorker() {
+  console.log(`[${new Date().toISOString()}] Initializing market data from domestic exchanges...`);
+  await initializeMarkets();
+  
+  const symbols = getDomesticSymbols();
+  console.log(`[${new Date().toISOString()}] Loaded ${symbols.length} unique symbols from domestic exchanges`);
+  console.log(`[${new Date().toISOString()}] Multi-exchange price worker started (${UPDATE_INTERVAL / 1000}s interval)`);
+  console.log(`[${new Date().toISOString()}] Domestic: UPBIT(KRW/BTC/USDT), BITHUMB(KRW/BTC), COINONE(KRW)`);
+  console.log(`[${new Date().toISOString()}] Foreign: BINANCE(USDT/BTC/Futures), OKX, BYBIT, BITGET, GATE, HTX, MEXC`);
 
-updateExchangePrices();
+  updateExchangePrices();
+  setInterval(updateExchangePrices, UPDATE_INTERVAL);
+  setInterval(cleanupOldData, CLEANUP_INTERVAL);
+}
 
-setInterval(updateExchangePrices, UPDATE_INTERVAL);
-
-setInterval(cleanupOldData, CLEANUP_INTERVAL);
+startWorker();
 
 process.on("SIGTERM", () => {
   console.log("Received SIGTERM, shutting down...");

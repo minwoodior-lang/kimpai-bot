@@ -10,17 +10,21 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey);
 interface PremiumTableRow {
   symbol: string;
   name: string;
+  koreanName: string;
   koreanPrice: number;
-  globalPrice: number;
-  premium: number;
+  globalPrice: number | null;
+  globalPriceKrw: number | null;
+  premium: number | null;
   volume24hKrw: number;
-  volume24hUsdt: number;
-  volume24hForeignKrw: number;
-  change24h: number;
+  volume24hUsdt: number | null;
+  volume24hForeignKrw: number | null;
+  change24h: number | null;
   high24h: number;
   low24h: number;
   domesticExchange?: string;
   foreignExchange?: string;
+  isListed: boolean;
+  cmcSlug?: string;
 }
 
 interface PremiumTableResponse {
@@ -31,6 +35,8 @@ interface PremiumTableResponse {
   updatedAt: string;
   domesticExchange: string;
   foreignExchange: string;
+  totalCoins: number;
+  listedCoins: number;
 }
 
 interface ExchangePriceRecord {
@@ -45,17 +51,51 @@ interface ExchangePriceRecord {
   created_at: string;
 }
 
-const SYMBOL_NAMES: Record<string, string> = {
-  BTC: "Bitcoin",
-  ETH: "Ethereum",
-  XRP: "Ripple",
-  SOL: "Solana",
-  ADA: "Cardano",
-  DOGE: "Dogecoin",
-  AVAX: "Avalanche",
-};
+interface CoinMetadata {
+  symbol: string;
+  koreanName: string;
+  englishName: string;
+  cmcSlug?: string;
+}
 
-const SYMBOL_ORDER = ["BTC", "ETH", "XRP", "SOL", "ADA", "DOGE", "AVAX"];
+const VOLUME_ANOMALY_THRESHOLD = 50;
+
+let cachedMetadata: Map<string, CoinMetadata> = new Map();
+let lastMetadataFetch = 0;
+const METADATA_CACHE_TTL = 5 * 60 * 1000;
+
+async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
+  const now = Date.now();
+  if (cachedMetadata.size > 0 && now - lastMetadataFetch < METADATA_CACHE_TTL) {
+    return cachedMetadata;
+  }
+
+  try {
+    const response = await fetch('https://api.upbit.com/v1/market/all?isDetails=true');
+    const data = await response.json();
+    
+    if (Array.isArray(data)) {
+      const metadata = new Map<string, CoinMetadata>();
+      for (const market of data) {
+        const [quote, base] = market.market.split('-');
+        if (!metadata.has(base)) {
+          metadata.set(base, {
+            symbol: base,
+            koreanName: market.korean_name || base,
+            englishName: market.english_name || base,
+            cmcSlug: market.english_name?.toLowerCase().replace(/\s+/g, '-'),
+          });
+        }
+      }
+      cachedMetadata = metadata;
+      lastMetadataFetch = now;
+    }
+  } catch (error) {
+    console.error('Failed to fetch coin metadata:', error);
+  }
+  
+  return cachedMetadata;
+}
 
 function parseExchangeParam(param: string): { exchange: string; quote: string } {
   const parts = param.split("_");
@@ -92,21 +132,47 @@ export default async function handler(
 
   try {
     const domesticParam = (req.query.domestic as string) || "UPBIT_KRW";
-    const foreignParam = (req.query.foreign as string) || "BINANCE_USDT";
+    const foreignParam = (req.query.foreign as string) || "OKX_USDT";
 
     const domestic = parseExchangeParam(domesticParam);
     const foreign = parseExchangeParam(foreignParam);
 
-    const fxRate = await fetchExchangeRate();
+    const [fxRate, metadata] = await Promise.all([
+      fetchExchangeRate(),
+      fetchCoinMetadata(),
+    ]);
 
-    const { data: allPrices, error } = await supabase
-      .from("exchange_prices")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(1000);
+    const [domesticResult, foreignResult, krwResult, usdtResult] = await Promise.all([
+      supabase
+        .from("exchange_prices")
+        .select("*")
+        .eq("exchange", domestic.exchange)
+        .eq("quote", domestic.quote)
+        .order("created_at", { ascending: false })
+        .limit(1000),
+      supabase
+        .from("exchange_prices")
+        .select("*")
+        .eq("exchange", foreign.exchange)
+        .eq("quote", foreign.quote)
+        .order("created_at", { ascending: false })
+        .limit(1000),
+      supabase
+        .from("exchange_prices")
+        .select("*")
+        .eq("quote", "KRW")
+        .order("created_at", { ascending: false })
+        .limit(1000),
+      supabase
+        .from("exchange_prices")
+        .select("*")
+        .eq("quote", "USDT")
+        .order("created_at", { ascending: false })
+        .limit(1000),
+    ]);
 
-    if (error) {
-      console.error("Database error:", error.message);
+    if (domesticResult.error) {
+      console.error("Database error:", domesticResult.error.message);
       return res.status(200).json({
         success: true,
         data: [],
@@ -115,138 +181,165 @@ export default async function handler(
         updatedAt: new Date().toISOString(),
         domesticExchange: domesticParam,
         foreignExchange: foreignParam,
+        totalCoins: 0,
+        listedCoins: 0,
       });
     }
 
     const domesticMap = new Map<string, ExchangePriceRecord>();
     const foreignMap = new Map<string, ExchangePriceRecord>();
-    const fallbackForeignMap = new Map<string, ExchangePriceRecord>();
     const krwPriceMap = new Map<string, ExchangePriceRecord>();
+    const usdtPriceMap = new Map<string, ExchangePriceRecord>();
 
-    for (const record of allPrices || []) {
-      const recordExchange = record.exchange.toLowerCase();
-      const recordQuote = record.quote.toUpperCase();
-      
-      if (recordExchange === domestic.exchange && recordQuote === domestic.quote) {
-        if (!domesticMap.has(record.symbol)) {
-          domesticMap.set(record.symbol, record);
-        }
+    for (const record of domesticResult.data || []) {
+      if (!domesticMap.has(record.symbol)) {
+        domesticMap.set(record.symbol, record);
       }
-      
-      if (recordExchange === foreign.exchange && recordQuote === foreign.quote) {
-        if (!foreignMap.has(record.symbol)) {
-          foreignMap.set(record.symbol, record);
-        }
+    }
+
+    for (const record of foreignResult.data || []) {
+      if (!foreignMap.has(record.symbol)) {
+        foreignMap.set(record.symbol, record);
       }
-      
-      if (recordQuote === "USDT" && !fallbackForeignMap.has(record.symbol)) {
-        fallbackForeignMap.set(record.symbol, record);
-      }
-      
-      if (recordQuote === "KRW" && !krwPriceMap.has(record.symbol)) {
+    }
+
+    for (const record of krwResult.data || []) {
+      if (!krwPriceMap.has(record.symbol)) {
         krwPriceMap.set(record.symbol, record);
+      }
+    }
+
+    for (const record of usdtResult.data || []) {
+      if (!usdtPriceMap.has(record.symbol)) {
+        usdtPriceMap.set(record.symbol, record);
       }
     }
 
     const btcKrwRecord = krwPriceMap.get("BTC");
     const btcKrwPrice = btcKrwRecord ? Number(btcKrwRecord.price) : 0;
-    const btcUsdtRecord = fallbackForeignMap.get("BTC");
+    const btcUsdtRecord = usdtPriceMap.get("BTC");
     const btcUsdtPrice = btcUsdtRecord ? Number(btcUsdtRecord.price) : 0;
 
     const tableData: PremiumTableRow[] = [];
     let latestTimestamp = "";
+    let listedCount = 0;
 
-    for (const symbol of SYMBOL_ORDER) {
-      let domesticRecord = domesticMap.get(symbol);
-      let foreignRecord = foreignMap.get(symbol);
+    const allDomesticSymbols = Array.from(domesticMap.keys());
+    
+    const sortedSymbols = allDomesticSymbols.sort((a, b) => {
+      const priorityOrder = ['BTC', 'ETH', 'XRP', 'SOL', 'ADA', 'DOGE', 'AVAX'];
+      const aIdx = priorityOrder.indexOf(a);
+      const bIdx = priorityOrder.indexOf(b);
       
-      if (!foreignRecord && fallbackForeignMap.has(symbol)) {
-        foreignRecord = fallbackForeignMap.get(symbol);
-      }
+      if (aIdx !== -1 && bIdx !== -1) return aIdx - bIdx;
+      if (aIdx !== -1) return -1;
+      if (bIdx !== -1) return 1;
+      
+      const aRecord = domesticMap.get(a);
+      const bRecord = domesticMap.get(b);
+      const aVolume = Number(aRecord?.volume_24h) || 0;
+      const bVolume = Number(bRecord?.volume_24h) || 0;
+      return bVolume - aVolume;
+    });
 
-      if (symbol === "BTC" && domestic.quote === "BTC" && !domesticRecord) {
-        domesticRecord = krwPriceMap.get("BTC");
-      }
-      if (symbol === "BTC" && foreign.quote === "BTC" && !foreignRecord) {
-        foreignRecord = fallbackForeignMap.get("BTC");
-      }
+    for (const symbol of sortedSymbols) {
+      const domesticRecord = domesticMap.get(symbol);
+      if (!domesticRecord) continue;
 
-      if (domesticRecord && foreignRecord) {
-        let domesticPriceKrw = Number(domesticRecord.price);
-        let foreignPriceKrw = Number(foreignRecord.price);
-        let globalPriceUsd = Number(foreignRecord.price);
-        
-        if (domestic.quote === "KRW") {
-          domesticPriceKrw = Number(domesticRecord.price);
-        } else if (domestic.quote === "USDT") {
-          domesticPriceKrw = Number(domesticRecord.price) * fxRate;
-        } else if (domestic.quote === "BTC") {
-          if (symbol === "BTC") {
-            domesticPriceKrw = btcKrwPrice > 0 ? btcKrwPrice : btcUsdtPrice * fxRate;
-          } else if (btcKrwPrice > 0) {
-            domesticPriceKrw = Number(domesticRecord.price) * btcKrwPrice;
-          } else if (btcUsdtPrice > 0) {
-            domesticPriceKrw = Number(domesticRecord.price) * btcUsdtPrice * fxRate;
-          }
+      const foreignRecord = foreignMap.get(symbol);
+      const coinMeta = metadata.get(symbol);
+      
+      let domesticPriceKrw = Number(domesticRecord.price);
+      
+      if (domestic.quote === "USDT") {
+        domesticPriceKrw = Number(domesticRecord.price) * fxRate;
+      } else if (domestic.quote === "BTC") {
+        if (symbol === "BTC") {
+          domesticPriceKrw = btcKrwPrice > 0 ? btcKrwPrice : btcUsdtPrice * fxRate;
+        } else if (btcKrwPrice > 0) {
+          domesticPriceKrw = Number(domesticRecord.price) * btcKrwPrice;
+        } else if (btcUsdtPrice > 0) {
+          domesticPriceKrw = Number(domesticRecord.price) * btcUsdtPrice * fxRate;
         }
+      }
+      
+      const domesticVolumeKrw = Number(domesticRecord.volume_24h) || 0;
+      
+      let globalPriceUsd: number | null = null;
+      let globalPriceKrw: number | null = null;
+      let foreignVolumeUsdt: number | null = null;
+      let foreignVolumeKrw: number | null = null;
+      let premium: number | null = null;
+      let isListed = false;
+      
+      if (foreignRecord) {
+        isListed = true;
+        listedCount++;
         
-        if (foreignRecord.quote.toUpperCase() === "KRW") {
-          foreignPriceKrw = Number(foreignRecord.price);
-          globalPriceUsd = Number(foreignRecord.price) / fxRate;
-        } else if (foreignRecord.quote.toUpperCase() === "USDT") {
-          foreignPriceKrw = Number(foreignRecord.price) * fxRate;
+        if (foreign.quote === "KRW") {
+          globalPriceKrw = Number(foreignRecord.price);
+          globalPriceUsd = globalPriceKrw / fxRate;
+        } else if (foreign.quote === "USDT") {
           globalPriceUsd = Number(foreignRecord.price);
-        } else if (foreignRecord.quote.toUpperCase() === "BTC") {
+          globalPriceKrw = globalPriceUsd * fxRate;
+        } else if (foreign.quote === "BTC") {
           if (symbol === "BTC") {
             globalPriceUsd = btcUsdtPrice;
-            foreignPriceKrw = btcUsdtPrice * fxRate;
+            globalPriceKrw = btcUsdtPrice * fxRate;
           } else if (btcUsdtPrice > 0) {
             globalPriceUsd = Number(foreignRecord.price) * btcUsdtPrice;
-            foreignPriceKrw = globalPriceUsd * fxRate;
-          } else if (btcKrwPrice > 0) {
-            foreignPriceKrw = Number(foreignRecord.price) * btcKrwPrice;
-            globalPriceUsd = foreignPriceKrw / fxRate;
+            globalPriceKrw = globalPriceUsd * fxRate;
           }
         }
         
-        const premium = foreignPriceKrw > 0
-          ? ((domesticPriceKrw - foreignPriceKrw) / foreignPriceKrw) * 100
-          : 0;
-
-        const domesticVolumeKrw = Number(domesticRecord.volume_24h) || 0;
-        
         const foreignVolumeRaw = Number(foreignRecord.volume_24h) || 0;
-        let foreignVolumeUsdt = foreignVolumeRaw;
-        if (foreignRecord.quote.toUpperCase() === "KRW") {
+        if (foreign.quote === "KRW") {
           foreignVolumeUsdt = foreignVolumeRaw / fxRate;
+        } else {
+          foreignVolumeUsdt = foreignVolumeRaw;
+        }
+        foreignVolumeKrw = foreignVolumeUsdt * fxRate;
+        
+        if (domesticVolumeKrw > 0 && foreignVolumeKrw > domesticVolumeKrw * VOLUME_ANOMALY_THRESHOLD) {
+          console.warn(`[Volume Anomaly] ${symbol}: Foreign volume ${foreignVolumeKrw} > Domestic ${domesticVolumeKrw} * ${VOLUME_ANOMALY_THRESHOLD}`);
+          foreignVolumeUsdt = null;
+          foreignVolumeKrw = null;
         }
         
-        const foreignVolumeKrw = foreignVolumeUsdt * fxRate;
-        
-        tableData.push({
-          symbol,
-          name: SYMBOL_NAMES[symbol] || symbol,
-          koreanPrice: Math.round(domesticPriceKrw),
-          globalPrice: globalPriceUsd,
-          premium: Math.round(premium * 100) / 100,
-          volume24hKrw: Math.round(domesticVolumeKrw),
-          volume24hUsdt: foreignVolumeUsdt,
-          volume24hForeignKrw: Math.round(foreignVolumeKrw),
-          change24h: Math.round((Number(foreignRecord.change_24h) || 0) * 100) / 100,
-          high24h: Math.round(domesticPriceKrw * 1.01),
-          low24h: Math.round(domesticPriceKrw * 0.99),
-          domesticExchange: domestic.exchange.toUpperCase(),
-          foreignExchange: foreignRecord.exchange.toUpperCase(),
-        });
+        if (globalPriceKrw && globalPriceKrw > 0) {
+          premium = ((domesticPriceKrw - globalPriceKrw) / globalPriceKrw) * 100;
+          premium = Math.round(premium * 100) / 100;
+        }
+      }
 
-        if (!latestTimestamp || domesticRecord.created_at > latestTimestamp) {
-          latestTimestamp = domesticRecord.created_at;
-        }
+      tableData.push({
+        symbol,
+        name: coinMeta?.englishName || symbol,
+        koreanName: coinMeta?.koreanName || symbol,
+        koreanPrice: Math.round(domesticPriceKrw),
+        globalPrice: globalPriceUsd,
+        globalPriceKrw: globalPriceKrw ? Math.round(globalPriceKrw) : null,
+        premium,
+        volume24hKrw: Math.round(domesticVolumeKrw),
+        volume24hUsdt: foreignVolumeUsdt,
+        volume24hForeignKrw: foreignVolumeKrw ? Math.round(foreignVolumeKrw) : null,
+        change24h: foreignRecord ? Math.round((Number(foreignRecord.change_24h) || 0) * 100) / 100 : null,
+        high24h: Math.round(domesticPriceKrw * 1.01),
+        low24h: Math.round(domesticPriceKrw * 0.99),
+        domesticExchange: domestic.exchange.toUpperCase(),
+        foreignExchange: foreignRecord ? foreignRecord.exchange.toUpperCase() : foreign.exchange.toUpperCase(),
+        isListed,
+        cmcSlug: coinMeta?.cmcSlug,
+      });
+
+      if (!latestTimestamp || domesticRecord.created_at > latestTimestamp) {
+        latestTimestamp = domesticRecord.created_at;
       }
     }
 
-    const averagePremium = tableData.length > 0
-      ? tableData.reduce((acc, row) => acc + row.premium, 0) / tableData.length
+    const listedData = tableData.filter(row => row.isListed && row.premium !== null);
+    const averagePremium = listedData.length > 0
+      ? listedData.reduce((acc, row) => acc + (row.premium || 0), 0) / listedData.length
       : 0;
 
     res.status(200).json({
@@ -257,6 +350,8 @@ export default async function handler(
       updatedAt: latestTimestamp || new Date().toISOString(),
       domesticExchange: domesticParam,
       foreignExchange: foreignParam,
+      totalCoins: tableData.length,
+      listedCoins: listedCount,
     });
   } catch (error) {
     console.error("API error:", error);
@@ -267,7 +362,9 @@ export default async function handler(
       fxRate: 1400,
       updatedAt: new Date().toISOString(),
       domesticExchange: "UPBIT_KRW",
-      foreignExchange: "BINANCE_USDT",
+      foreignExchange: "OKX_USDT",
+      totalCoins: 0,
+      listedCoins: 0,
     });
   }
 }

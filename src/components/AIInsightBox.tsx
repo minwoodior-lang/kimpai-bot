@@ -12,12 +12,16 @@ const AIInsightBox = () => {
   const { plan, isAuthenticated } = useUserPlan();
   const isPro = plan === "pro";
 
-  const maxPremium = data.length > 0 
-    ? data.reduce((max, item) => item.premium > max.premium ? item : max, data[0])
+  const listedData = data.filter(item => item.premium !== null);
+  
+  const maxPremium = listedData.length > 0 
+    ? listedData.reduce((max, item) => 
+        (item.premium || 0) > (max.premium || 0) ? item : max, listedData[0])
     : null;
   
-  const minPremium = data.length > 0
-    ? data.reduce((min, item) => item.premium < min.premium ? item : min, data[0])
+  const minPremium = listedData.length > 0
+    ? listedData.reduce((min, item) => 
+        (item.premium || 0) < (min.premium || 0) ? item : min, listedData[0])
     : null;
 
   const formatTime = (isoString: string) => {
@@ -30,9 +34,14 @@ const AIInsightBox = () => {
     });
   };
 
+  const formatPremium = (value: number | null | undefined): string => {
+    if (value === null || value === undefined) return "-";
+    return `${value >= 0 ? "+" : ""}${value.toFixed(1)}%`;
+  };
+
   const calculateRiskScore = () => {
-    if (!maxPremium) return 5;
-    const absAvg = Math.abs(averagePremium);
+    if (!maxPremium || maxPremium.premium === null) return 5;
+    const absAvg = Math.abs(averagePremium || 0);
     if (absAvg >= 8) return 10;
     if (absAvg >= 6) return 8;
     if (absAvg >= 4) return 6;
@@ -41,15 +50,17 @@ const AIInsightBox = () => {
   };
 
   const generateAIComment = () => {
-    if (!maxPremium) return "데이터를 불러오는 중입니다...";
+    if (!maxPremium || maxPremium.premium === null) return "데이터를 불러오는 중입니다...";
     
-    const trend = averagePremium >= 4 ? "상승세" : averagePremium >= 2 ? "보합세" : "하락세";
+    const avgPremium = averagePremium || 0;
+    const trend = avgPremium >= 4 ? "상승세" : avgPremium >= 2 ? "보합세" : "하락세";
     const topCoin = maxPremium.symbol.replace("/KRW", "");
     
-    return `${topCoin} 프리미엄이 ${maxPremium.premium.toFixed(1)}%로 가장 높습니다. 전체 시장은 ${trend}를 보이고 있으며, 평균 김프 ${averagePremium >= 0 ? "+" : ""}${averagePremium.toFixed(1)}% 수준입니다. 급격한 김프 변동 시 구간별 대응이 중요합니다.`;
+    return `${topCoin} 프리미엄이 ${formatPremium(maxPremium.premium)}로 가장 높습니다. 전체 시장은 ${trend}를 보이고 있으며, 평균 김프 ${formatPremium(avgPremium)} 수준입니다. 급격한 김프 변동 시 구간별 대응이 중요합니다.`;
   };
 
   const riskScore = calculateRiskScore();
+  const safeAvgPremium = averagePremium || 0;
 
   if (loading) {
     return (
@@ -77,16 +88,20 @@ const AIInsightBox = () => {
         </div>
 
         <div className="grid sm:grid-cols-2 gap-4 text-slate-300 text-sm">
-          <p>• 평균 김프: <span className={averagePremium >= 0 ? "text-green-400" : "text-red-400"}>
-            {averagePremium >= 0 ? "+" : ""}{averagePremium.toFixed(1)}%
+          <p>• 평균 김프: <span className={safeAvgPremium >= 0 ? "text-green-400" : "text-red-400"}>
+            {formatPremium(safeAvgPremium)}
           </span></p>
           <p>• 최대 김프: <span className="text-green-400">
-            {maxPremium ? `+${maxPremium.premium.toFixed(1)}% (${maxPremium.symbol.replace("/KRW", "")})` : "-"}
+            {maxPremium && maxPremium.premium !== null 
+              ? `${formatPremium(maxPremium.premium)} (${maxPremium.symbol.replace("/KRW", "")})`
+              : "-"}
           </span></p>
-          <p>• 최소 김프: <span className={minPremium && minPremium.premium < 0 ? "text-red-400" : "text-green-400"}>
-            {minPremium ? `${minPremium.premium >= 0 ? "+" : ""}${minPremium.premium.toFixed(1)}% (${minPremium.symbol.replace("/KRW", "")})` : "-"}
+          <p>• 최소 김프: <span className={minPremium && (minPremium.premium || 0) < 0 ? "text-red-400" : "text-green-400"}>
+            {minPremium && minPremium.premium !== null 
+              ? `${formatPremium(minPremium.premium)} (${minPremium.symbol.replace("/KRW", "")})`
+              : "-"}
           </span></p>
-          <p>• 환율: <span className="text-white">₩{fxRate.toLocaleString()}/USDT</span></p>
+          <p>• 환율: <span className="text-white">₩{(fxRate || 0).toLocaleString()}/USDT</span></p>
         </div>
 
         <div className="mt-4 text-slate-200 text-sm bg-slate-700/40 p-3 rounded-lg">
@@ -153,13 +168,13 @@ const AIInsightBox = () => {
           <div className="rounded-xl bg-black/20 px-3 py-3">
             <div className="space-y-2 text-sm">
               <p className="text-slate-300">
-                • 예상 추이: <span className="text-green-400">BTC {averagePremium.toFixed(1)}% → {(averagePremium + 0.5).toFixed(1)}%</span>
+                • 예상 추이: <span className="text-green-400">BTC {safeAvgPremium.toFixed(1)}% → {(safeAvgPremium + 0.5).toFixed(1)}%</span>
               </p>
               <p className="text-slate-300">
-                • 추세 신호: <span className="text-yellow-400">{averagePremium >= 3 ? "상승 지속 가능성" : "안정화 예상"}</span>
+                • 추세 신호: <span className="text-yellow-400">{safeAvgPremium >= 3 ? "상승 지속 가능성" : "안정화 예상"}</span>
               </p>
               <p className="text-slate-300">
-                • 권장 전략: <span className="text-blue-400">{averagePremium >= 4 ? "익절 고려" : "관망 또는 분할 매수"}</span>
+                • 권장 전략: <span className="text-blue-400">{safeAvgPremium >= 4 ? "익절 고려" : "관망 또는 분할 매수"}</span>
               </p>
               <p className="text-slate-300">
                 • AI 신뢰도: <span className="text-purple-400">87%</span>

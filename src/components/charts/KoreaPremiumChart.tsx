@@ -11,7 +11,7 @@ export default function KoreaPremiumChart({ height = 400 }: { height?: number })
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { averagePremium, fxRate, updatedAt } = useMarkets({
     domestic: "UPBIT_KRW",
-    foreign: "BINANCE_USDT",
+    foreign: "OKX_USDT",
   });
 
   useEffect(() => {

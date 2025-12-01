@@ -10,15 +10,19 @@ const TradingViewChart = dynamic(
 interface PremiumData {
   symbol: string;
   name: string;
+  koreanName: string;
   koreanPrice: number;
-  globalPrice: number;
-  premium: number;
+  globalPrice: number | null;
+  globalPriceKrw: number | null;
+  premium: number | null;
   volume24hKrw: number;
-  volume24hUsdt: number;
-  volume24hForeignKrw: number;
-  change24h: number;
+  volume24hUsdt: number | null;
+  volume24hForeignKrw: number | null;
+  change24h: number | null;
   high24h: number;
   low24h: number;
+  isListed: boolean;
+  cmcSlug?: string;
 }
 
 interface ApiResponse {
@@ -29,6 +33,8 @@ interface ApiResponse {
   updatedAt: string;
   domesticExchange: string;
   foreignExchange: string;
+  totalCoins: number;
+  listedCoins: number;
 }
 
 type SortKey = "symbol" | "premium" | "volume24hKrw" | "change24h" | "koreanPrice" | "high24h" | "low24h";
@@ -75,15 +81,12 @@ function matchSearch(item: PremiumData, query: string): boolean {
   const lowerQuery = query.toLowerCase().trim();
   if (!lowerQuery) return true;
   
-  const symbolMatch = item.symbol.toLowerCase().includes(lowerQuery);
-  if (symbolMatch) return true;
+  if (item.symbol.toLowerCase().includes(lowerQuery)) return true;
+  if (item.name.toLowerCase().includes(lowerQuery)) return true;
+  if (item.koreanName.toLowerCase().includes(lowerQuery)) return true;
   
-  const nameMatch = item.name.toLowerCase().includes(lowerQuery);
-  if (nameMatch) return true;
-  
-  const chosung = getChosung(item.name);
-  const chosungMatch = chosung.toLowerCase().includes(lowerQuery);
-  if (chosungMatch) return true;
+  const chosung = getChosung(item.koreanName);
+  if (chosung.toLowerCase().includes(lowerQuery)) return true;
   
   return false;
 }
@@ -107,15 +110,17 @@ export default function PremiumTable({
   const [updatedAt, setUpdatedAt] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [totalCoins, setTotalCoins] = useState(0);
+  const [listedCoins, setListedCoins] = useState(0);
 
   const [domesticExchange, setDomesticExchange] = useState("UPBIT_KRW");
-  const [foreignExchange, setForeignExchange] = useState("BINANCE_USDT");
+  const [foreignExchange, setForeignExchange] = useState("OKX_USDT");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("premium");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
   const [expandedSymbol, setExpandedSymbol] = useState<string | null>(null);
   const [flashStates, setFlashStates] = useState<FlashState>({});
-  const prevDataRef = useRef<Record<string, { price: number; premium: number }>>({});
+  const prevDataRef = useRef<Record<string, { price: number; premium: number | null }>>({});
 
   const toggleChart = (symbol: string) => {
     setExpandedSymbol(prev => prev === symbol ? null : symbol);
@@ -125,7 +130,7 @@ export default function PremiumTable({
 
   const detectChanges = useCallback((newData: PremiumData[]) => {
     const newFlashStates: FlashState = {};
-    const newPrevData: Record<string, { price: number; premium: number }> = {};
+    const newPrevData: Record<string, { price: number; premium: number | null }> = {};
 
     newData.forEach(item => {
       const prev = prevDataRef.current[item.symbol];
@@ -140,7 +145,7 @@ export default function PremiumTable({
             price: item.koreanPrice > prev.price ? "up" : "down"
           };
         }
-        if (Math.abs(item.premium - prev.premium) > 0.01) {
+        if (item.premium !== null && prev.premium !== null && Math.abs(item.premium - prev.premium) > 0.01) {
           newFlashStates[item.symbol] = {
             ...newFlashStates[item.symbol],
             premium: item.premium > prev.premium ? "up" : "down"
@@ -163,13 +168,8 @@ export default function PremiumTable({
         `/api/premium/table?domestic=${domesticExchange}&foreign=${foreignExchange}`
       );
 
-      if (response.status === 429) {
-        return;
-      }
-
-      if (!response.ok) {
-        return;
-      }
+      if (response.status === 429) return;
+      if (!response.ok) return;
 
       const json: ApiResponse = await response.json();
 
@@ -179,6 +179,8 @@ export default function PremiumTable({
         setAveragePremium(json.averagePremium);
         setFxRate(json.fxRate);
         setUpdatedAt(json.updatedAt);
+        setTotalCoins(json.totalCoins);
+        setListedCoins(json.listedCoins);
         setError(null);
       }
     } catch {
@@ -211,8 +213,11 @@ export default function PremiumTable({
     }
 
     result.sort((a, b) => {
-      let aVal = a[sortKey];
-      let bVal = b[sortKey];
+      let aVal: any = a[sortKey];
+      let bVal: any = b[sortKey];
+
+      if (aVal === null) aVal = sortOrder === "asc" ? Infinity : -Infinity;
+      if (bVal === null) bVal = sortOrder === "asc" ? Infinity : -Infinity;
 
       if (typeof aVal === "string") {
         aVal = aVal.toLowerCase();
@@ -234,47 +239,60 @@ export default function PremiumTable({
     return result;
   }, [data, searchQuery, sortKey, sortOrder, limit]);
 
-  const formatKRW = (value: number) => {
-    if (!value || isNaN(value)) return "-";
+  const formatKRW = (value: number | null) => {
+    if (value === null || value === undefined || isNaN(value)) return "-";
     return value.toLocaleString("ko-KR");
   };
 
-  const formatKrwPrice = (value: number) => {
-    if (!value || isNaN(value)) return "-";
+  const formatKrwPrice = (value: number | null) => {
+    if (value === null || value === undefined || isNaN(value)) return "-";
     if (value >= 1000) {
       return Math.round(value).toLocaleString("ko-KR");
     }
     if (value >= 1) {
       return value.toFixed(1);
     }
-    return value.toFixed(1);
+    return value.toFixed(4);
   };
 
-  const formatUsdtPrice = (value: number) => {
-    if (!value || isNaN(value)) return "-";
+  const formatUsdtPrice = (value: number | null) => {
+    if (value === null || value === undefined || isNaN(value)) return "-";
     if (value >= 1000) {
       return `$${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     }
-    return `$${value.toFixed(2)}`;
+    return `$${value.toFixed(4)}`;
   };
 
-  const formatVolumeKRW = (value: number) => {
-    if (!value || isNaN(value)) return "-";
-    if (value >= 1e12) return `${(value / 1e12).toFixed(1)}조`;
-    if (value >= 1e8) return `${(value / 1e8).toFixed(1)}억`;
-    if (value >= 1e4) return `${(value / 1e4).toFixed(0)}만`;
-    return value.toLocaleString();
+  const formatVolumeKRW = (value: number | null) => {
+    if (value === null || value === undefined || isNaN(value) || value === 0) return "-";
+    
+    if (value >= 1e12) {
+      const jo = Math.floor(value / 1e12);
+      const eok = Math.floor((value % 1e12) / 1e8);
+      if (eok > 0) {
+        return `${jo}조 ${eok}억`;
+      }
+      return `${jo}조`;
+    }
+    if (value >= 1e8) {
+      return `${Math.floor(value / 1e8)}억`;
+    }
+    if (value >= 1e4) {
+      return `${Math.floor(value / 1e4)}만`;
+    }
+    return Math.round(value).toLocaleString();
   };
 
-  const formatVolumeUsdt = (value: number) => {
-    if (!value || isNaN(value)) return "-";
+  const formatVolumeUsdt = (value: number | null) => {
+    if (value === null || value === undefined || isNaN(value) || value === 0) return "-";
     if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
     if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
     if (value >= 1e3) return `$${(value / 1e3).toFixed(2)}K`;
     return `$${value.toFixed(2)}`;
   };
 
-  const getPremiumColor = (premium: number) => {
+  const getPremiumColor = (premium: number | null) => {
+    if (premium === null) return "text-gray-500";
     if (premium >= 5) return "text-red-400";
     if (premium >= 3) return "text-orange-400";
     if (premium >= 1) return "text-yellow-400";
@@ -282,7 +300,8 @@ export default function PremiumTable({
     return "text-blue-400";
   };
 
-  const getChangeColor = (change: number) => {
+  const getChangeColor = (change: number | null) => {
+    if (change === null) return "text-gray-500";
     if (change > 0) return "text-green-400";
     if (change < 0) return "text-red-400";
     return "text-gray-400";
@@ -325,8 +344,9 @@ export default function PremiumTable({
     return { percent, diff, valid: true };
   };
 
-  const openCoinMarketCap = (symbol: string) => {
-    const cmcUrl = `https://coinmarketcap.com/currencies/${symbol.toLowerCase()}/`;
+  const openCoinMarketCap = (symbol: string, cmcSlug?: string) => {
+    const slug = cmcSlug || symbol.toLowerCase();
+    const cmcUrl = `https://coinmarketcap.com/currencies/${slug}/`;
     window.open(cmcUrl, '_blank', 'noopener,noreferrer');
   };
 
@@ -335,7 +355,7 @@ export default function PremiumTable({
       {showHeader && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
           <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
-            <div className="text-gray-400 text-xs mb-1">평균 프리미엄</div>
+            <div className="text-gray-400 text-xs mb-1">평균 김프</div>
             <div className={`text-xl font-bold ${getPremiumColor(averagePremium)}`}>
               {averagePremium >= 0 ? "+" : ""}{averagePremium.toFixed(2)}%
             </div>
@@ -346,7 +366,9 @@ export default function PremiumTable({
           </div>
           <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
             <div className="text-gray-400 text-xs mb-1">코인 수</div>
-            <div className="text-xl font-bold text-white">{data.length}개</div>
+            <div className="text-xl font-bold text-white">
+              {listedCoins}<span className="text-sm text-gray-400">/{totalCoins}개</span>
+            </div>
           </div>
           <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
             <div className="text-gray-400 text-xs mb-1">업데이트</div>
@@ -454,8 +476,12 @@ export default function PremiumTable({
               </thead>
               <tbody>
                 {filteredAndSortedData.map((row, index) => {
-                  const prevClose = row.koreanPrice / (1 + row.change24h / 100);
-                  const prevDiff = calcDiff(row.koreanPrice, prevClose);
+                  const prevClose = row.change24h !== null 
+                    ? row.koreanPrice / (1 + row.change24h / 100)
+                    : row.koreanPrice;
+                  const prevDiff = row.change24h !== null 
+                    ? calcDiff(row.koreanPrice, prevClose) 
+                    : { percent: 0, diff: 0, valid: false };
                   const highDiff = calcDiff(row.koreanPrice, row.high24h);
                   const lowDiff = calcDiff(row.koreanPrice, row.low24h);
                   
@@ -464,53 +490,74 @@ export default function PremiumTable({
                     <tr
                       className={`border-t border-slate-700/50 hover:bg-slate-700/30 transition-colors ${
                         index % 2 === 0 ? "bg-slate-800/30" : ""
-                      }`}
+                      } ${!row.isListed ? "opacity-60" : ""}`}
                     >
                       <td className="px-3 py-2">
                         <div className="flex items-center gap-2">
                           <button
-                            onClick={() => openCoinMarketCap(row.symbol)}
+                            onClick={() => openCoinMarketCap(row.symbol, row.cmcSlug)}
                             className="flex items-center gap-2 hover:text-blue-400 transition-colors text-left"
                           >
                             <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">
                               {row.symbol.charAt(0)}
                             </div>
                             <div>
-                              <div className="text-white font-medium text-sm">{row.name}</div>
+                              <div className="text-white font-medium text-sm">{row.koreanName}</div>
                               <div className="text-gray-500 text-xs">{row.symbol}</div>
                             </div>
                           </button>
-                          <button
-                            onClick={() => toggleChart(row.symbol)}
-                            className={`p-1 transition-colors ${expandedSymbol === row.symbol ? 'text-blue-400' : 'text-gray-500 hover:text-blue-400'}`}
-                            title={expandedSymbol === row.symbol ? "차트 닫기" : "차트 열기"}
-                          >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
-                            </svg>
-                          </button>
+                          {row.isListed && (
+                            <button
+                              onClick={() => toggleChart(row.symbol)}
+                              className={`p-1 transition-colors ${expandedSymbol === row.symbol ? 'text-blue-400' : 'text-gray-500 hover:text-blue-400'}`}
+                              title={expandedSymbol === row.symbol ? "차트 닫기" : "차트 열기"}
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                              </svg>
+                            </button>
+                          )}
+                          {!row.isListed && (
+                            <span className="text-xs text-gray-500 bg-gray-700/50 px-1.5 py-0.5 rounded">미상장</span>
+                          )}
                         </div>
                       </td>
                       <td className={`px-3 py-2 text-right ${getFlashClass(row.symbol, "price")}`}>
                         <div className="text-white font-medium">₩{formatKRW(row.koreanPrice)}</div>
                       </td>
                       <td className="px-3 py-2 text-right">
-                        <div className="text-white font-medium">₩{formatKrwPrice(row.globalPrice * fxRate)}</div>
-                        <div className="text-xs text-gray-500">{formatUsdtPrice(row.globalPrice)} USDT</div>
+                        {row.isListed && row.globalPriceKrw !== null ? (
+                          <>
+                            <div className="text-white font-medium">₩{formatKrwPrice(row.globalPriceKrw)}</div>
+                            <div className="text-xs text-gray-500">{formatUsdtPrice(row.globalPrice)} USDT</div>
+                          </>
+                        ) : (
+                          <div className="text-gray-500">-</div>
+                        )}
                       </td>
                       <td className={`px-3 py-2 text-right ${getFlashClass(row.symbol, "premium")}`}>
-                        <div className={`font-bold ${getPremiumColor(row.premium)}`}>
-                          {row.premium >= 0 ? "+" : ""}{row.premium.toFixed(2)}%
-                        </div>
+                        {row.premium !== null ? (
+                          <div className={`font-bold ${getPremiumColor(row.premium)}`}>
+                            {row.premium >= 0 ? "+" : ""}{row.premium.toFixed(2)}%
+                          </div>
+                        ) : (
+                          <div className="text-gray-500">-</div>
+                        )}
                       </td>
                       <td className="px-3 py-2 text-right">
-                        <div className={getChangeColor(row.change24h)}>
-                          {row.change24h >= 0 ? "+" : ""}{row.change24h.toFixed(2)}%
-                        </div>
-                        {prevDiff.valid && (
-                          <div className={`text-xs ${getChangeColor(prevDiff.diff)}`}>
-                            {prevDiff.diff >= 0 ? "+" : ""}₩{formatKRW(Math.round(prevDiff.diff))}
-                          </div>
+                        {row.change24h !== null ? (
+                          <>
+                            <div className={getChangeColor(row.change24h)}>
+                              {row.change24h >= 0 ? "+" : ""}{row.change24h.toFixed(2)}%
+                            </div>
+                            {prevDiff.valid && (
+                              <div className={`text-xs ${getChangeColor(prevDiff.diff)}`}>
+                                {prevDiff.diff >= 0 ? "+" : ""}₩{formatKRW(Math.round(prevDiff.diff))}
+                              </div>
+                            )}
+                          </>
+                        ) : (
+                          <div className="text-gray-500">-</div>
                         )}
                       </td>
                       <td className="px-3 py-2 text-right">
@@ -547,17 +594,23 @@ export default function PremiumTable({
                             ₩{formatVolumeKRW(row.volume24hKrw)}
                             <span className="ml-1 text-xs text-gray-500">(국내)</span>
                           </span>
-                          <span className="text-gray-300">
-                            ₩{formatVolumeKRW(row.volume24hForeignKrw)}
-                            <span className="ml-1 text-xs text-gray-500">(해외)</span>
-                          </span>
-                          <span className="mt-0.5 text-[11px] text-gray-500">
-                            {formatVolumeUsdt(row.volume24hUsdt)} USDT
-                          </span>
+                          {row.isListed && row.volume24hForeignKrw !== null ? (
+                            <>
+                              <span className="text-gray-300">
+                                ₩{formatVolumeKRW(row.volume24hForeignKrw)}
+                                <span className="ml-1 text-xs text-gray-500">(해외)</span>
+                              </span>
+                              <span className="mt-0.5 text-[11px] text-gray-500">
+                                {formatVolumeUsdt(row.volume24hUsdt)} USDT
+                              </span>
+                            </>
+                          ) : (
+                            <span className="text-gray-500 text-xs">해외: -</span>
+                          )}
                         </div>
                       </td>
                     </tr>
-                    {expandedSymbol === row.symbol && (
+                    {expandedSymbol === row.symbol && row.isListed && (
                       <tr key={`${row.symbol}-chart`}>
                         <td colSpan={8} className="p-0">
                           <div className="bg-[#0F111A] border-t border-b border-slate-700/50 py-3 px-3">
@@ -578,12 +631,6 @@ export default function PremiumTable({
               </tbody>
             </table>
           </div>
-
-          {filteredAndSortedData.length === 0 && (
-            <div className="text-center py-8 text-gray-400">
-              검색 결과가 없습니다.
-            </div>
-          )}
         </div>
       )}
     </div>

@@ -1,3 +1,5 @@
+import { getAllDomesticMarkets, DomesticMarkets, CoinMetadata } from './coinMetadata';
+
 export interface ExchangePrice {
   exchange: string;
   symbol: string;
@@ -9,22 +11,39 @@ export interface ExchangePrice {
   change24h: number | null;
 }
 
-const SYMBOLS = ['BTC', 'ETH', 'XRP', 'SOL', 'ADA', 'DOGE', 'AVAX'];
+let domesticMarkets: DomesticMarkets | null = null;
+let coinMetadata: Map<string, CoinMetadata> = new Map();
 
-const COINGECKO_IDS: Record<string, string> = {
-  BTC: 'bitcoin',
-  ETH: 'ethereum',
-  XRP: 'ripple',
-  SOL: 'solana',
-  ADA: 'cardano',
-  DOGE: 'dogecoin',
-  AVAX: 'avalanche-2',
-};
+export async function initializeMarkets(): Promise<void> {
+  const result = await getAllDomesticMarkets();
+  domesticMarkets = result.markets;
+  coinMetadata = result.metadata;
+}
+
+export function getDomesticSymbols(): string[] {
+  if (!domesticMarkets) return [];
+  const allSymbols = new Set<string>();
+  domesticMarkets.upbitKrw.forEach(s => allSymbols.add(s));
+  domesticMarkets.bithumbKrw.forEach(s => allSymbols.add(s));
+  domesticMarkets.coinoneKrw.forEach(s => allSymbols.add(s));
+  return Array.from(allSymbols);
+}
+
+export function getCoinMetadataMap(): Map<string, CoinMetadata> {
+  return coinMetadata;
+}
 
 // Upbit KRW: acc_trade_price_24h = 24h trading volume in KRW (already in quote currency)
 export async function fetchUpbitKRW(fxRate: number): Promise<ExchangePrice[]> {
   try {
-    const markets = SYMBOLS.map(s => `KRW-${s}`).join(',');
+    if (!domesticMarkets || domesticMarkets.upbitKrw.length === 0) {
+      await initializeMarkets();
+    }
+    
+    const symbols = domesticMarkets?.upbitKrw || [];
+    if (symbols.length === 0) return [];
+
+    const markets = symbols.map(s => `KRW-${s}`).join(',');
     const response = await fetch(`https://api.upbit.com/v1/ticker?markets=${markets}`);
     const data = await response.json();
     
@@ -39,7 +58,7 @@ export async function fetchUpbitKRW(fxRate: number): Promise<ExchangePrice[]> {
         quote: 'KRW',
         price: ticker.trade_price,
         priceKrw: ticker.trade_price,
-        volume24h: ticker.acc_trade_price_24h, // Already in KRW quote volume
+        volume24h: ticker.acc_trade_price_24h,
         change24h: ticker.signed_change_rate * 100,
       };
     });
@@ -51,7 +70,14 @@ export async function fetchUpbitKRW(fxRate: number): Promise<ExchangePrice[]> {
 
 export async function fetchUpbitUSDT(fxRate: number): Promise<ExchangePrice[]> {
   try {
-    const markets = SYMBOLS.map(s => `USDT-${s}`).join(',');
+    if (!domesticMarkets || domesticMarkets.upbitUsdt.length === 0) {
+      await initializeMarkets();
+    }
+    
+    const symbols = domesticMarkets?.upbitUsdt || [];
+    if (symbols.length === 0) return [];
+
+    const markets = symbols.map(s => `USDT-${s}`).join(',');
     const response = await fetch(`https://api.upbit.com/v1/ticker?markets=${markets}`);
     const data = await response.json();
     
@@ -79,7 +105,14 @@ export async function fetchUpbitUSDT(fxRate: number): Promise<ExchangePrice[]> {
 
 export async function fetchUpbitBTC(fxRate: number): Promise<ExchangePrice[]> {
   try {
-    const markets = SYMBOLS.filter(s => s !== 'BTC').map(s => `BTC-${s}`).join(',');
+    if (!domesticMarkets || domesticMarkets.upbitBtc.length === 0) {
+      await initializeMarkets();
+    }
+    
+    const symbols = domesticMarkets?.upbitBtc || [];
+    if (symbols.length === 0) return [];
+
+    const markets = symbols.map(s => `BTC-${s}`).join(',');
     const response = await fetch(`https://api.upbit.com/v1/ticker?markets=${markets}`);
     const data = await response.json();
     
@@ -111,13 +144,19 @@ export async function fetchUpbitBTC(fxRate: number): Promise<ExchangePrice[]> {
 
 export async function fetchBithumbKRW(fxRate: number): Promise<ExchangePrice[]> {
   try {
+    if (!domesticMarkets || domesticMarkets.bithumbKrw.length === 0) {
+      await initializeMarkets();
+    }
+    
     const response = await fetch('https://api.bithumb.com/public/ticker/ALL_KRW');
     const data = await response.json();
     
     if (data.status !== '0000') return [];
     
     const results: ExchangePrice[] = [];
-    for (const symbol of SYMBOLS) {
+    const symbols = domesticMarkets?.bithumbKrw || [];
+    
+    for (const symbol of symbols) {
       const ticker = data.data[symbol];
       if (ticker) {
         results.push({
@@ -141,6 +180,10 @@ export async function fetchBithumbKRW(fxRate: number): Promise<ExchangePrice[]> 
 
 export async function fetchBithumbBTC(fxRate: number): Promise<ExchangePrice[]> {
   try {
+    if (!domesticMarkets || domesticMarkets.bithumbBtc.length === 0) {
+      await initializeMarkets();
+    }
+    
     const response = await fetch('https://api.bithumb.com/public/ticker/ALL_BTC');
     const data = await response.json();
     
@@ -151,7 +194,9 @@ export async function fetchBithumbBTC(fxRate: number): Promise<ExchangePrice[]> 
     const btcKrwPrice = Number(btcKrwData.data?.closing_price) || 0;
     
     const results: ExchangePrice[] = [];
-    for (const symbol of SYMBOLS.filter(s => s !== 'BTC')) {
+    const symbols = domesticMarkets?.bithumbBtc || [];
+    
+    for (const symbol of symbols) {
       const ticker = data.data[symbol];
       if (ticker) {
         const priceInBtc = Number(ticker.closing_price);
@@ -176,15 +221,21 @@ export async function fetchBithumbBTC(fxRate: number): Promise<ExchangePrice[]> 
 
 export async function fetchCoinoneKRW(fxRate: number): Promise<ExchangePrice[]> {
   try {
+    if (!domesticMarkets || domesticMarkets.coinoneKrw.length === 0) {
+      await initializeMarkets();
+    }
+    
     const response = await fetch('https://api.coinone.co.kr/public/v2/ticker_new/krw');
     const data = await response.json();
     
     if (data.result !== 'success') return [];
     
     const results: ExchangePrice[] = [];
+    const symbols = new Set(domesticMarkets?.coinoneKrw || []);
+    
     for (const ticker of data.tickers) {
       const symbol = ticker.target_currency.toUpperCase();
-      if (SYMBOLS.includes(symbol)) {
+      if (symbols.has(symbol)) {
         const price = Number(ticker.last);
         const openPrice = Number(ticker.first);
         const change24h = openPrice > 0 ? ((price - openPrice) / openPrice) * 100 : null;
@@ -208,83 +259,8 @@ export async function fetchCoinoneKRW(fxRate: number): Promise<ExchangePrice[]> 
   }
 }
 
-// Binance: Using CoinGecko API as fallback (Binance API blocked from this region)
-// NOTE: usd_24h_vol is GLOBAL trading volume, not Binance-specific
-// Ideal: Use Binance /api/v3/ticker/24hr quoteVolume field directly
-export async function fetchBinanceUSDT(fxRate: number): Promise<ExchangePrice[]> {
-  try {
-    const ids = Object.values(COINGECKO_IDS).join(',');
-    const response = await fetch(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_vol=true&include_24hr_change=true`
-    );
-    const data = await response.json();
-    
-    const results: ExchangePrice[] = [];
-    for (const symbol of SYMBOLS) {
-      const id = COINGECKO_IDS[symbol];
-      const coinData = data[id];
-      if (coinData) {
-        results.push({
-          exchange: 'BINANCE',
-          symbol,
-          base: symbol,
-          quote: 'USDT',
-          price: coinData.usd,
-          priceKrw: coinData.usd * fxRate,
-          volume24h: coinData.usd_24h_vol || null, // Global volume (CoinGecko fallback)
-          change24h: coinData.usd_24h_change || null,
-        });
-      }
-    }
-    return results;
-  } catch (error) {
-    console.error('Binance USDT (via CoinGecko) fetch error:', error);
-    return [];
-  }
-}
-
-export async function fetchBinanceBTC(fxRate: number): Promise<ExchangePrice[]> {
-  try {
-    const ids = Object.values(COINGECKO_IDS).join(',');
-    const response = await fetch(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=btc,usd&include_24hr_vol=true&include_24hr_change=true`
-    );
-    const data = await response.json();
-    
-    const btcUsdPrice = data['bitcoin']?.usd || 0;
-    
-    const results: ExchangePrice[] = [];
-    for (const symbol of SYMBOLS.filter(s => s !== 'BTC')) {
-      const id = COINGECKO_IDS[symbol];
-      const coinData = data[id];
-      if (coinData && coinData.btc) {
-        const priceInBtc = coinData.btc;
-        results.push({
-          exchange: 'BINANCE',
-          symbol,
-          base: symbol,
-          quote: 'BTC',
-          price: priceInBtc,
-          priceKrw: priceInBtc * btcUsdPrice * fxRate,
-          volume24h: coinData.usd_24h_vol || null,
-          change24h: coinData.usd_24h_change || null,
-        });
-      }
-    }
-    return results;
-  } catch (error) {
-    console.error('Binance BTC (via CoinGecko) fetch error:', error);
-    return [];
-  }
-}
-
-export async function fetchBinanceFutures(fxRate: number): Promise<ExchangePrice[]> {
-  return fetchBinanceUSDT(fxRate).then(results => 
-    results.map(r => ({ ...r, exchange: 'BINANCE_FUTURES' }))
-  );
-}
-
 // OKX: volCcy24h = 24h quote volume in USDT (NOT vol24h which is base volume)
+// GET https://www.okx.com/api/v5/market/tickers?instType=SPOT
 export async function fetchOKX(fxRate: number): Promise<ExchangePrice[]> {
   try {
     const response = await fetch('https://www.okx.com/api/v5/market/tickers?instType=SPOT');
@@ -292,18 +268,19 @@ export async function fetchOKX(fxRate: number): Promise<ExchangePrice[]> {
     
     if (data.code !== '0') return [];
     
+    const domesticSymbols = new Set(getDomesticSymbols());
     const results: ExchangePrice[] = [];
+    
     for (const ticker of data.data) {
       const parts = ticker.instId.split('-');
       const symbol = parts[0];
       const quote = parts[1];
       
-      if (SYMBOLS.includes(symbol) && quote === 'USDT') {
+      if (domesticSymbols.has(symbol) && quote === 'USDT') {
         const price = Number(ticker.last);
         const open = Number(ticker.open24h);
         const change24h = open > 0 ? ((price - open) / open) * 100 : null;
         
-        // volCcy24h is the 24h trading volume in quote currency (USDT)
         results.push({
           exchange: 'OKX',
           symbol,
@@ -323,26 +300,27 @@ export async function fetchOKX(fxRate: number): Promise<ExchangePrice[]> {
   }
 }
 
-// Bybit: turnover24h = 24h trading volume in quote currency (USDT)
-// Falls back to CoinGecko if Bybit API is blocked
+// Bybit Spot: turnover24h = 24h trading volume in quote currency (USDT)
+// GET https://api.bybit.com/v5/market/tickers?category=spot
 export async function fetchBybit(fxRate: number): Promise<ExchangePrice[]> {
   try {
     const response = await fetch('https://api.bybit.com/v5/market/tickers?category=spot');
     
     if (!response.ok) {
-      return fetchBinanceUSDT(fxRate).then(results => 
-        results.map(r => ({ ...r, exchange: 'BYBIT' }))
-      );
+      console.error('Bybit API blocked or error:', response.status);
+      return [];
     }
     
     const data = await response.json();
     
     if (data.retCode !== 0) return [];
     
+    const domesticSymbols = new Set(getDomesticSymbols());
     const results: ExchangePrice[] = [];
+    
     for (const ticker of data.result.list) {
       const symbol = ticker.symbol.replace('USDT', '');
-      if (SYMBOLS.includes(symbol) && ticker.symbol.endsWith('USDT')) {
+      if (domesticSymbols.has(symbol) && ticker.symbol.endsWith('USDT')) {
         results.push({
           exchange: 'BYBIT',
           symbol,
@@ -350,21 +328,20 @@ export async function fetchBybit(fxRate: number): Promise<ExchangePrice[]> {
           quote: 'USDT',
           price: Number(ticker.lastPrice),
           priceKrw: Number(ticker.lastPrice) * fxRate,
-          volume24h: Number(ticker.turnover24h) || null, // 24h quote volume in USDT
+          volume24h: Number(ticker.turnover24h) || null,
           change24h: Number(ticker.price24hPcnt) * 100 || null,
         });
       }
     }
     return results;
   } catch (error) {
-    console.error('Bybit fetch error, using fallback:', error);
-    return fetchBinanceUSDT(fxRate).then(results => 
-      results.map(r => ({ ...r, exchange: 'BYBIT' }))
-    );
+    console.error('Bybit fetch error:', error);
+    return [];
   }
 }
 
 // Bitget: usdtVolume = 24h trading volume in USDT (same as quoteVolume)
+// GET https://api.bitget.com/api/v2/spot/market/tickers
 export async function fetchBitget(fxRate: number): Promise<ExchangePrice[]> {
   try {
     const response = await fetch('https://api.bitget.com/api/v2/spot/market/tickers');
@@ -372,10 +349,12 @@ export async function fetchBitget(fxRate: number): Promise<ExchangePrice[]> {
     
     if (data.code !== '00000') return [];
     
+    const domesticSymbols = new Set(getDomesticSymbols());
     const results: ExchangePrice[] = [];
+    
     for (const ticker of data.data) {
       const symbol = ticker.symbol.replace('USDT', '');
-      if (SYMBOLS.includes(symbol) && ticker.symbol.endsWith('USDT')) {
+      if (domesticSymbols.has(symbol) && ticker.symbol.endsWith('USDT')) {
         results.push({
           exchange: 'BITGET',
           symbol,
@@ -383,7 +362,7 @@ export async function fetchBitget(fxRate: number): Promise<ExchangePrice[]> {
           quote: 'USDT',
           price: Number(ticker.lastPr),
           priceKrw: Number(ticker.lastPr) * fxRate,
-          volume24h: Number(ticker.usdtVolume) || null, // 24h quote volume in USDT
+          volume24h: Number(ticker.usdtVolume) || null,
           change24h: Number(ticker.change24h) * 100 || null,
         });
       }
@@ -396,6 +375,7 @@ export async function fetchBitget(fxRate: number): Promise<ExchangePrice[]> {
 }
 
 // Gate: quote_volume = 24h trading volume in quote currency (USDT)
+// GET https://api.gateio.ws/api/v4/spot/tickers
 export async function fetchGate(fxRate: number): Promise<ExchangePrice[]> {
   try {
     const response = await fetch('https://api.gateio.ws/api/v4/spot/tickers');
@@ -403,13 +383,15 @@ export async function fetchGate(fxRate: number): Promise<ExchangePrice[]> {
     
     if (!Array.isArray(data)) return [];
     
+    const domesticSymbols = new Set(getDomesticSymbols());
     const results: ExchangePrice[] = [];
+    
     for (const ticker of data) {
       const parts = ticker.currency_pair.split('_');
       const symbol = parts[0];
       const quote = parts[1];
       
-      if (SYMBOLS.includes(symbol) && quote === 'USDT') {
+      if (domesticSymbols.has(symbol) && quote === 'USDT') {
         results.push({
           exchange: 'GATE',
           symbol,
@@ -417,7 +399,7 @@ export async function fetchGate(fxRate: number): Promise<ExchangePrice[]> {
           quote: 'USDT',
           price: Number(ticker.last),
           priceKrw: Number(ticker.last) * fxRate,
-          volume24h: Number(ticker.quote_volume) || null, // 24h quote volume in USDT
+          volume24h: Number(ticker.quote_volume) || null,
           change24h: Number(ticker.change_percentage) || null,
         });
       }
@@ -431,6 +413,7 @@ export async function fetchGate(fxRate: number): Promise<ExchangePrice[]> {
 
 // HTX: vol = 24h trading volume in quote currency (USDT), amount = base volume
 // NOTE: Do NOT multiply vol by close - vol is already in USDT
+// GET https://api.huobi.pro/market/tickers
 export async function fetchHTX(fxRate: number): Promise<ExchangePrice[]> {
   try {
     const response = await fetch('https://api.huobi.pro/market/tickers');
@@ -438,14 +421,14 @@ export async function fetchHTX(fxRate: number): Promise<ExchangePrice[]> {
     
     if (data.status !== 'ok') return [];
     
+    const domesticSymbols = getDomesticSymbols();
     const results: ExchangePrice[] = [];
+    
     for (const ticker of data.data) {
       const symbolLower = ticker.symbol;
-      for (const sym of SYMBOLS) {
+      for (const sym of domesticSymbols) {
         if (symbolLower === `${sym.toLowerCase()}usdt`) {
           const change24h = ticker.open > 0 ? ((ticker.close - ticker.open) / ticker.open) * 100 : null;
-          // ticker.vol is already the 24h quote volume in USDT
-          // ticker.amount is the base volume (coin quantity)
           results.push({
             exchange: 'HTX',
             symbol: sym,
@@ -468,6 +451,7 @@ export async function fetchHTX(fxRate: number): Promise<ExchangePrice[]> {
 }
 
 // MEXC: quoteVolume = 24h trading volume in quote currency (USDT)
+// GET https://api.mexc.com/api/v3/ticker/24hr
 export async function fetchMEXC(fxRate: number): Promise<ExchangePrice[]> {
   try {
     const response = await fetch('https://api.mexc.com/api/v3/ticker/24hr');
@@ -475,10 +459,12 @@ export async function fetchMEXC(fxRate: number): Promise<ExchangePrice[]> {
     
     if (!Array.isArray(data)) return [];
     
+    const domesticSymbols = new Set(getDomesticSymbols());
     const results: ExchangePrice[] = [];
+    
     for (const ticker of data) {
       const symbol = ticker.symbol.replace('USDT', '');
-      if (SYMBOLS.includes(symbol) && ticker.symbol.endsWith('USDT')) {
+      if (domesticSymbols.has(symbol) && ticker.symbol.endsWith('USDT')) {
         results.push({
           exchange: 'MEXC',
           symbol,
@@ -486,14 +472,145 @@ export async function fetchMEXC(fxRate: number): Promise<ExchangePrice[]> {
           quote: 'USDT',
           price: Number(ticker.lastPrice),
           priceKrw: Number(ticker.lastPrice) * fxRate,
-          volume24h: Number(ticker.quoteVolume) || null, // 24h quote volume in USDT
-          change24h: Number(ticker.priceChangePercent) * 100 || null,
+          volume24h: Number(ticker.quoteVolume) || null,
+          change24h: Number(ticker.priceChangePercent) || null,
         });
       }
     }
     return results;
   } catch (error) {
     console.error('MEXC fetch error:', error);
+    return [];
+  }
+}
+
+// Binance USDT Spot: quoteVolume = 24h trading volume in USDT
+// GET https://api.binance.com/api/v3/ticker/24hr
+// NOTE: Direct Binance API may be blocked from some regions
+export async function fetchBinanceUSDT(fxRate: number): Promise<ExchangePrice[]> {
+  try {
+    const response = await fetch('https://api.binance.com/api/v3/ticker/24hr', {
+      headers: { 'Accept': 'application/json' },
+    });
+    
+    if (!response.ok) {
+      console.error('Binance API blocked or error:', response.status);
+      return [];
+    }
+    
+    const data = await response.json();
+    
+    if (!Array.isArray(data)) return [];
+    
+    const domesticSymbols = new Set(getDomesticSymbols());
+    const results: ExchangePrice[] = [];
+    
+    for (const ticker of data) {
+      const symbol = ticker.symbol.replace('USDT', '');
+      if (domesticSymbols.has(symbol) && ticker.symbol.endsWith('USDT')) {
+        results.push({
+          exchange: 'BINANCE',
+          symbol,
+          base: symbol,
+          quote: 'USDT',
+          price: Number(ticker.lastPrice),
+          priceKrw: Number(ticker.lastPrice) * fxRate,
+          volume24h: Number(ticker.quoteVolume) || null,
+          change24h: Number(ticker.priceChangePercent) || null,
+        });
+      }
+    }
+    return results;
+  } catch (error) {
+    console.error('Binance USDT fetch error:', error);
+    return [];
+  }
+}
+
+// Binance BTC Market: quoteVolume = 24h trading volume in BTC
+// GET https://api.binance.com/api/v3/ticker/24hr
+export async function fetchBinanceBTC(fxRate: number): Promise<ExchangePrice[]> {
+  try {
+    const response = await fetch('https://api.binance.com/api/v3/ticker/24hr', {
+      headers: { 'Accept': 'application/json' },
+    });
+    
+    if (!response.ok) {
+      console.error('Binance API blocked:', response.status);
+      return [];
+    }
+    
+    const data = await response.json();
+    
+    if (!Array.isArray(data)) return [];
+    
+    const btcUsdtTicker = data.find((t: any) => t.symbol === 'BTCUSDT');
+    const btcUsdtPrice = btcUsdtTicker ? Number(btcUsdtTicker.lastPrice) : 0;
+    
+    const domesticSymbols = new Set(getDomesticSymbols());
+    const results: ExchangePrice[] = [];
+    
+    for (const ticker of data) {
+      const symbol = ticker.symbol.replace('BTC', '');
+      if (domesticSymbols.has(symbol) && ticker.symbol.endsWith('BTC') && symbol !== '') {
+        const priceInBtc = Number(ticker.lastPrice);
+        results.push({
+          exchange: 'BINANCE',
+          symbol,
+          base: symbol,
+          quote: 'BTC',
+          price: priceInBtc,
+          priceKrw: priceInBtc * btcUsdtPrice * fxRate,
+          volume24h: Number(ticker.quoteVolume) * btcUsdtPrice || null,
+          change24h: Number(ticker.priceChangePercent) || null,
+        });
+      }
+    }
+    return results;
+  } catch (error) {
+    console.error('Binance BTC fetch error:', error);
+    return [];
+  }
+}
+
+// Binance Futures USDT-M: quoteVolume = 24h trading volume in USDT
+// GET https://fapi.binance.com/fapi/v1/ticker/24hr
+export async function fetchBinanceFutures(fxRate: number): Promise<ExchangePrice[]> {
+  try {
+    const response = await fetch('https://fapi.binance.com/fapi/v1/ticker/24hr', {
+      headers: { 'Accept': 'application/json' },
+    });
+    
+    if (!response.ok) {
+      console.error('Binance Futures API blocked:', response.status);
+      return [];
+    }
+    
+    const data = await response.json();
+    
+    if (!Array.isArray(data)) return [];
+    
+    const domesticSymbols = new Set(getDomesticSymbols());
+    const results: ExchangePrice[] = [];
+    
+    for (const ticker of data) {
+      const symbol = ticker.symbol.replace('USDT', '');
+      if (domesticSymbols.has(symbol) && ticker.symbol.endsWith('USDT')) {
+        results.push({
+          exchange: 'BINANCE_FUTURES',
+          symbol,
+          base: symbol,
+          quote: 'USDT',
+          price: Number(ticker.lastPrice),
+          priceKrw: Number(ticker.lastPrice) * fxRate,
+          volume24h: Number(ticker.quoteVolume) || null,
+          change24h: Number(ticker.priceChangePercent) || null,
+        });
+      }
+    }
+    return results;
+  } catch (error) {
+    console.error('Binance Futures fetch error:', error);
     return [];
   }
 }

@@ -6,17 +6,53 @@ import { useMarkets } from "@/hooks/useMarkets";
 import { useExchangeSelection, DOMESTIC_EXCHANGES, FOREIGN_EXCHANGES } from "@/contexts/ExchangeSelectionContext";
 import ExchangeSelector from "@/components/ExchangeSelector";
 
+function formatVolumeKRW(value: number | null): string {
+  if (value === null || value === undefined || isNaN(value) || value === 0) return "-";
+  
+  if (value >= 1e12) {
+    const jo = Math.floor(value / 1e12);
+    const eok = Math.floor((value % 1e12) / 1e8);
+    if (eok > 0) {
+      return `${jo}조 ${eok}억`;
+    }
+    return `${jo}조`;
+  }
+  if (value >= 1e8) {
+    return `${Math.floor(value / 1e8)}억`;
+  }
+  if (value >= 1e4) {
+    return `${Math.floor(value / 1e4)}만`;
+  }
+  return Math.round(value).toLocaleString();
+}
+
+function formatVolumeUsdt(value: number | null): string {
+  if (value === null || value === undefined || isNaN(value) || value === 0) return "-";
+  if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
+  if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
+  if (value >= 1e3) return `$${(value / 1e3).toFixed(2)}K`;
+  return `$${value.toFixed(2)}`;
+}
+
+function formatPrice(value: number | null): string {
+  if (value === null || value === undefined) return "-";
+  if (value >= 1000) return Math.round(value).toLocaleString();
+  if (value >= 1) return value.toFixed(1);
+  return value.toFixed(4);
+}
+
 export default function Markets() {
   const router = useRouter();
   const { domesticExchange, foreignExchange } = useExchangeSelection();
-  const { data, loading, error, fxRate, averagePremium, refetch } = useMarkets({
+  const { data, loading, error, fxRate, averagePremium, refetch, totalCoins, listedCoins } = useMarkets({
     domestic: domesticExchange,
     foreign: foreignExchange,
   });
   const [lastUpdated, setLastUpdated] = useState<string>("");
 
   const domesticLabel = DOMESTIC_EXCHANGES.find(e => e.value === domesticExchange)?.label || "업비트 KRW";
-  const foreignLabel = FOREIGN_EXCHANGES.find(e => e.value === foreignExchange)?.label || "Binance USDT";
+  const foreignEx = FOREIGN_EXCHANGES.find(e => e.value === foreignExchange);
+  const foreignLabel = foreignEx?.shortName || "해외";
 
   const handleRowClick = (symbol: string) => {
     const cleanSymbol = symbol.replace("/KRW", "").toLowerCase();
@@ -56,7 +92,9 @@ export default function Markets() {
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-4 text-center">
-            <div className="text-2xl font-bold text-green-400">+{averagePremium.toFixed(1)}%</div>
+            <div className={`text-2xl font-bold ${averagePremium >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+              {averagePremium >= 0 ? '+' : ''}{averagePremium.toFixed(1)}%
+            </div>
             <div className="text-slate-400 text-sm">평균 김프</div>
           </div>
           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-4 text-center">
@@ -64,7 +102,9 @@ export default function Markets() {
             <div className="text-slate-400 text-sm">USDT/KRW 환율</div>
           </div>
           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-4 text-center">
-            <div className="text-2xl font-bold text-white">{data.length}</div>
+            <div className="text-2xl font-bold text-white">
+              {listedCoins}<span className="text-lg text-slate-400">/{totalCoins}</span>
+            </div>
             <div className="text-slate-400 text-sm">종목 수</div>
           </div>
           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-4 text-center">
@@ -95,7 +135,7 @@ export default function Markets() {
                     <th className="text-right text-slate-400 font-medium px-6 py-4">{domesticLabel}</th>
                     <th className="text-right text-slate-400 font-medium px-6 py-4">{foreignLabel} (원화)</th>
                     <th className="text-right text-slate-400 font-medium px-6 py-4">김프</th>
-                    <th className="text-right text-slate-400 font-medium px-6 py-4">24h 거래량</th>
+                    <th className="text-right text-slate-400 font-medium px-6 py-4">거래액(일)</th>
                     <th className="text-right text-slate-400 font-medium px-6 py-4">24h 변동</th>
                   </tr>
                 </thead>
@@ -103,34 +143,59 @@ export default function Markets() {
                   {data.map((item) => (
                     <tr
                       key={item.symbol}
-                      className="border-b border-slate-700/30 hover:bg-slate-700/40 transition-colors cursor-pointer"
-                      onClick={() => handleRowClick(item.symbol)}
+                      className={`border-b border-slate-700/30 hover:bg-slate-700/40 transition-colors cursor-pointer ${!item.isListed ? 'opacity-60' : ''}`}
+                      onClick={() => item.isListed && handleRowClick(item.symbol)}
                     >
                       <td className="px-6 py-4">
-                        <div>
-                          <span className="text-white font-medium">{item.symbol}</span>
-                          <span className="text-slate-500 text-sm ml-2">{item.name}</span>
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs">
+                            {item.symbol.replace('/KRW', '').charAt(0)}
+                          </div>
+                          <div>
+                            <span className="text-white font-medium">{item.koreanName || item.name}</span>
+                            <span className="text-slate-500 text-sm ml-2">{item.symbol.replace('/KRW', '')}</span>
+                          </div>
+                          {!item.isListed && (
+                            <span className="text-xs text-slate-500 bg-slate-700/50 px-1.5 py-0.5 rounded">미상장</span>
+                          )}
                         </div>
                       </td>
                       <td className="px-6 py-4 text-right text-white">
                         ₩{item.upbitPrice.toLocaleString()}
                       </td>
                       <td className="px-6 py-4 text-right text-white">
-                        ₩{item.binancePrice >= 1000 ? Math.round(item.binancePrice).toLocaleString() : item.binancePrice.toFixed(1)}
+                        {item.binancePrice !== null ? `₩${formatPrice(item.binancePrice)}` : '-'}
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <span className={`font-medium ${item.premium > 0 ? "text-green-400" : "text-red-400"}`}>
-                          {item.premium > 0 ? "+" : ""}{item.premium.toFixed(2)}%
-                        </span>
+                        {item.premium !== null ? (
+                          <span className={`font-medium ${item.premium > 0 ? "text-green-400" : "text-red-400"}`}>
+                            {item.premium > 0 ? "+" : ""}{item.premium.toFixed(2)}%
+                          </span>
+                        ) : (
+                          <span className="text-slate-500">-</span>
+                        )}
                       </td>
                       <td className="px-6 py-4 text-right text-slate-300">
-                        <div>₩{item.volume24hKrw >= 1e12 ? `${(item.volume24hKrw / 1e12).toFixed(1)}조` : item.volume24hKrw >= 1e8 ? `${(item.volume24hKrw / 1e8).toFixed(1)}억` : item.volume24hKrw >= 1e4 ? `${(item.volume24hKrw / 1e4).toFixed(0)}만` : item.volume24hKrw.toLocaleString()}</div>
-                        <div className="text-xs text-slate-500">{item.volume24hUsdt >= 1e9 ? `$${(item.volume24hUsdt / 1e9).toFixed(2)}B` : item.volume24hUsdt >= 1e6 ? `$${(item.volume24hUsdt / 1e6).toFixed(2)}M` : `$${(item.volume24hUsdt / 1e3).toFixed(2)}K`} USDT</div>
+                        <div className="flex flex-col items-end">
+                          <span>₩{formatVolumeKRW(item.volume24hKrw)} <span className="text-xs text-slate-500">(국내)</span></span>
+                          {item.isListed && item.volume24hForeignKrw !== null ? (
+                            <>
+                              <span>₩{formatVolumeKRW(item.volume24hForeignKrw)} <span className="text-xs text-slate-500">(해외)</span></span>
+                              <span className="text-xs text-slate-500">{formatVolumeUsdt(item.volume24hUsdt)} USDT</span>
+                            </>
+                          ) : (
+                            <span className="text-slate-500 text-xs">해외: -</span>
+                          )}
+                        </div>
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <span className={item.change24h >= 0 ? "text-green-400" : "text-red-400"}>
-                          {item.change24h >= 0 ? "+" : ""}{item.change24h.toFixed(2)}%
-                        </span>
+                        {item.change24h !== null ? (
+                          <span className={item.change24h >= 0 ? "text-green-400" : "text-red-400"}>
+                            {item.change24h >= 0 ? "+" : ""}{item.change24h.toFixed(2)}%
+                          </span>
+                        ) : (
+                          <span className="text-slate-500">-</span>
+                        )}
                       </td>
                     </tr>
                   ))}
