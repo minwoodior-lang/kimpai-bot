@@ -2,10 +2,20 @@ import React, { useEffect } from 'react';
 
 // 심볼 정규화 함수: 거래소별 다양한 형식 통일
 export function normalizeSymbol(raw: string): string {
-  return raw
-    .replace(/[-_/]/g, '')           // 구분자 제거 (BTC-KRW, BTC_KRW, BTC/USDT 등)
-    .replace(/KRW|USDT|BTC|ETH$/i, '') // 마켓 접미사 제거
-    .toUpperCase();
+  let symbol = raw.replace(/[-_/]/g, '').toUpperCase(); // 구분자 제거 (BTC-KRW, BTC_KRW, BTC/USDT 등)
+  
+  // 마켓 접미사 제거 (단, 심볼 자체가 해당 토큰인 경우는 유지)
+  // 예: BTCKRW -> BTC, ETHUSDT -> ETH, XRPBTC -> XRP
+  // 예외: BTC -> BTC (유지), ETH -> ETH (유지), USDT -> USDT (유지)
+  const marketSuffixes = ['KRW', 'USDT', 'BTC', 'ETH'];
+  for (const suffix of marketSuffixes) {
+    if (symbol.length > suffix.length && symbol.endsWith(suffix)) {
+      symbol = symbol.slice(0, -suffix.length);
+      break;
+    }
+  }
+  
+  return symbol;
 }
 
 // 업비트/빗썸/코인원 상장 코인 기준 심볼 → CoinGecko ID 매핑 (상위 200+)
@@ -264,6 +274,74 @@ export const COIN_ID_MAP: Record<string, string> = {
   'RAY': 'raydium',
   'ORCA': 'orca',
   'MNDE': 'marinade',
+  
+  // 업비트/빗썸/코인원 추가 상장 코인 (2024-2025)
+  'MON': 'mon-protocol',
+  'SAHARA': 'sahara',
+  'DEEP': 'deepbook-protocol',
+  'KAITO': 'kaito',
+  'MORPHO': 'morpho',
+  'ANIME': 'anime',
+  'LAYER': 'layer',
+  'PUMP': 'pump',
+  'PNUT': 'peanut-the-squirrel',
+  'LAYER3': 'layer3',
+  'VIRTUAL': 'virtual-protocol',
+  'AI16Z': 'ai16z',
+  'ZEREBRO': 'zerebro',
+  'FARTCOIN': 'fartcoin',
+  'GRIFFAIN': 'griffain',
+  'ARC': 'arc',
+  'AIXBT': 'aixbt',
+  'GOAT': 'goatseus-maximus',
+  'ACT': 'act-i-the-ai-prophecy',
+  'PRCL': 'parcl',
+  'MYRO': 'myro',
+  'SLERF': 'slerf',
+  'ZETA': 'zetachain',
+  'JITO': 'jito-governance-token',
+  'MANTA': 'manta-network',
+  'XAI': 'xai-games',
+  'MAVIA': 'heroes-of-mavia',
+  'BSQUARED': 'b2-network',
+  'PANDORA': 'pandora',
+  
+  // 한국 거래소 특화 코인 (중복 제외)
+  'WEMIX': 'wemix-token',
+  'KAVA': 'kava',
+  'CBK': 'cobak-token',
+  'MBL': 'moviebloc',
+  'OBSR': 'observer-coin',
+  'UPP': 'sentinel-protocol',
+  'SBD': 'steem-dollars',
+  'VALOR': 'smart-valor',
+  'ONIT': 'onit',
+  'QKC': 'quark-chain',
+  'CRO': 'crypto-com-chain',
+  'GNO': 'gnosis',
+  'PUNDIX': 'pundi-x-2',
+  'MVL': 'mass-vehicle-ledger',
+  'ASTR': 'astar',
+  'GLMR': 'moonbeam',
+  'MOVR': 'moonriver',
+  'CFG': 'centrifuge',
+  'AZERO': 'aleph-zero',
+  'KDA': 'kadena',
+  'FLR': 'flare-networks',
+  'SGB': 'songbird',
+  'COTI': 'coti',
+  'ERG': 'ergo',
+  'KAS': 'kaspa',
+  'ALPH': 'alephium',
+  'XCH': 'chia',
+  'CTC': 'creditcoin-2',
+  'CORE': 'coredao',
+  'BAL': 'balancer',
+  'LUSD': 'liquity-usd',
+  'GNS': 'gains-network',
+  'KWENTA': 'kwenta',
+  'VELO': 'velodrome-finance',
+  'AERO': 'aerodrome-finance',
 };
 
 // 심볼별 그라데이션 컬러 (폴백용)
@@ -314,6 +392,30 @@ const GRADIENT_COLORS: Record<string, string> = {
   'RNDR': 'from-orange-400 to-red-500',
   'FET': 'from-purple-500 to-indigo-500',
   'AGIX': 'from-purple-400 to-blue-500',
+  
+  // 신규 상장 코인 그라데이션
+  'MON': 'from-indigo-500 to-purple-600',
+  'SAHARA': 'from-amber-400 to-orange-500',
+  'DEEP': 'from-blue-600 to-cyan-500',
+  'KAITO': 'from-pink-400 to-rose-500',
+  'MORPHO': 'from-blue-400 to-indigo-500',
+  'ANIME': 'from-pink-500 to-purple-500',
+  'LAYER': 'from-teal-400 to-emerald-500',
+  'PUMP': 'from-green-400 to-lime-500',
+  'PNUT': 'from-amber-500 to-yellow-400',
+  'VIRTUAL': 'from-violet-500 to-purple-600',
+  'AI16Z': 'from-gray-700 to-slate-800',
+  'ZEREBRO': 'from-green-500 to-teal-500',
+  'FARTCOIN': 'from-green-400 to-lime-400',
+  'GRIFFAIN': 'from-orange-500 to-red-500',
+  'ARC': 'from-blue-500 to-purple-500',
+  'AIXBT': 'from-cyan-500 to-blue-600',
+  'GOAT': 'from-amber-600 to-yellow-500',
+  'ACT': 'from-blue-500 to-indigo-600',
+  'WEMIX': 'from-blue-600 to-indigo-700',
+  'KAVA': 'from-red-500 to-pink-500',
+  'KAS': 'from-teal-500 to-cyan-500',
+  'CORE': 'from-orange-500 to-amber-400',
 };
 
 interface CoinIconProps {

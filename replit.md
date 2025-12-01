@@ -45,6 +45,13 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 - **Admin Interface**: Dedicated admin dashboard for management.
 
 ### Recent Changes (2025-12-01)
+- **v3.0.5 CoinIcon normalizeSymbol 버그 수정 및 코인 매핑 확장**:
+  - normalizeSymbol 함수 수정: BTC/ETH/USDT 심볼이 빈 문자열이 되던 버그 해결
+  - 마켓 접미사 제거 로직 개선: 심볼 길이 > 접미사 길이인 경우만 제거
+  - 100+ 신규 코인 매핑 추가: MON, SAHARA, DEEP, KAITO, MORPHO, ANIME 등 2024-2025 상장 코인
+  - 한국 거래소 특화 코인 추가: WEMIX, KAVA, CBK, MBL, MVL, KAS, CORE 등 70+ 코인
+  - 신규 그라데이션 폴백 컬러 추가: MON, SAHARA, SIGN 등 CDN 미지원 코인용
+  - 개발 모드 콘솔 경고 유지: 누락된 아이콘 디버깅 지원
 - **v3.0.4 CoinIcon 컴포넌트 개선 - 200+ 코인 아이콘 지원**:
   - 독립 CoinIcon 컴포넌트 분리: `src/components/CoinIcon.tsx`
   - COIN_ID_MAP: 200+ 암호화폐 심볼→CoinGecko ID 매핑 추가
