@@ -1,4 +1,4 @@
-import { useExchangeSelection, DOMESTIC_EXCHANGES, FOREIGN_EXCHANGES } from "@/contexts/ExchangeSelectionContext";
+import { useExchangeSelection, DOMESTIC_EXCHANGES, FOREIGN_EXCHANGES, EXCHANGE_LOGOS } from "@/contexts/ExchangeSelectionContext";
 
 interface ExchangeSelectorProps {
   compact?: boolean;
@@ -17,7 +17,7 @@ export default function ExchangeSelector({ compact = false, showLabels = true }:
         {showLabels && <span className="text-slate-400 text-xs hidden md:inline">기준</span>}
         <div className="flex items-center gap-2 bg-slate-800/80 rounded-lg px-3 py-2 border border-slate-600/50 hover:border-slate-500 transition-colors">
           <img 
-            src={currentDomestic?.logo || '/exchanges/upbit.svg'} 
+            src={currentDomestic?.logo || EXCHANGE_LOGOS.UPBIT} 
             alt={currentDomestic?.exchange || 'exchange'}
             className="w-6 h-6 flex-shrink-0 rounded"
           />
@@ -57,7 +57,7 @@ export default function ExchangeSelector({ compact = false, showLabels = true }:
         {showLabels && <span className="text-slate-400 text-xs hidden md:inline">해외</span>}
         <div className="flex items-center gap-2 bg-slate-800/80 rounded-lg px-3 py-2 border border-slate-600/50 hover:border-slate-500 transition-colors">
           <img 
-            src={currentForeign?.logo || '/exchanges/binance.svg'} 
+            src={currentForeign?.logo || EXCHANGE_LOGOS.BINANCE} 
             alt={currentForeign?.exchange || 'exchange'}
             className="w-6 h-6 flex-shrink-0 rounded"
           />
@@ -94,7 +94,7 @@ export function DomesticExchangeSelector({ compact = false }: { compact?: boolea
   return (
     <div className="flex items-center gap-2 bg-slate-800/80 rounded-lg px-3 py-2 border border-slate-600/50 hover:border-slate-500 transition-colors">
       <img 
-        src={currentDomestic?.logo || '/exchanges/upbit.svg'} 
+        src={currentDomestic?.logo || EXCHANGE_LOGOS.UPBIT} 
         alt={currentDomestic?.exchange || 'exchange'}
         className="w-5 h-5 flex-shrink-0 rounded"
       />
@@ -136,7 +136,7 @@ export function ForeignExchangeSelector({ compact = false }: { compact?: boolean
   return (
     <div className="flex items-center gap-2 bg-slate-800/80 rounded-lg px-3 py-2 border border-slate-600/50 hover:border-slate-500 transition-colors">
       <img 
-        src={currentForeign?.logo || '/exchanges/binance.svg'} 
+        src={currentForeign?.logo || EXCHANGE_LOGOS.BINANCE} 
         alt={currentForeign?.exchange || 'exchange'}
         className="w-5 h-5 flex-shrink-0 rounded"
       />

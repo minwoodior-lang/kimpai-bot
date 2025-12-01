@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import dynamic from "next/dynamic";
-import { FOREIGN_EXCHANGES as CONTEXT_FOREIGN_EXCHANGES } from "@/contexts/ExchangeSelectionContext";
+import { FOREIGN_EXCHANGES as CONTEXT_FOREIGN_EXCHANGES, EXCHANGE_LOGOS } from "@/contexts/ExchangeSelectionContext";
 
 const TradingViewChart = dynamic(
   () => import("./charts/TradingViewChart"),
@@ -48,13 +48,13 @@ interface FlashState {
 }
 
 const DOMESTIC_EXCHANGES = [
-  { id: "UPBIT_KRW", name: "🇰🇷 업비트 KRW", exchange: "Upbit", logo: "/exchanges/upbit.svg" },
-  { id: "UPBIT_BTC", name: "🇰🇷 업비트 BTC", exchange: "Upbit", logo: "/exchanges/upbit.svg" },
-  { id: "UPBIT_USDT", name: "🇰🇷 업비트 USDT", exchange: "Upbit", logo: "/exchanges/upbit.svg" },
-  { id: "BITHUMB_KRW", name: "🇰🇷 빗썸 KRW", exchange: "Bithumb", logo: "/exchanges/bithumb.svg" },
-  { id: "BITHUMB_BTC", name: "🇰🇷 빗썸 BTC", exchange: "Bithumb", logo: "/exchanges/bithumb.svg" },
-  { id: "BITHUMB_USDT", name: "🇰🇷 빗썸 USDT", exchange: "Bithumb", logo: "/exchanges/bithumb.svg" },
-  { id: "COINONE_KRW", name: "🇰🇷 코인원 KRW", exchange: "Coinone", logo: "/exchanges/coinone.svg" },
+  { id: "UPBIT_KRW", name: "🇰🇷 업비트 KRW", exchange: "Upbit", logo: EXCHANGE_LOGOS.UPBIT },
+  { id: "UPBIT_BTC", name: "🇰🇷 업비트 BTC", exchange: "Upbit", logo: EXCHANGE_LOGOS.UPBIT },
+  { id: "UPBIT_USDT", name: "🇰🇷 업비트 USDT", exchange: "Upbit", logo: EXCHANGE_LOGOS.UPBIT },
+  { id: "BITHUMB_KRW", name: "🇰🇷 빗썸 KRW", exchange: "Bithumb", logo: EXCHANGE_LOGOS.BITHUMB },
+  { id: "BITHUMB_BTC", name: "🇰🇷 빗썸 BTC", exchange: "Bithumb", logo: EXCHANGE_LOGOS.BITHUMB },
+  { id: "BITHUMB_USDT", name: "🇰🇷 빗썸 USDT", exchange: "Bithumb", logo: EXCHANGE_LOGOS.BITHUMB },
+  { id: "COINONE_KRW", name: "🇰🇷 코인원 KRW", exchange: "Coinone", logo: EXCHANGE_LOGOS.COINONE },
 ];
 
 const FOREIGN_EXCHANGES = CONTEXT_FOREIGN_EXCHANGES.map(ex => ({
@@ -482,7 +482,7 @@ export default function PremiumTable({
             <span className="text-gray-400 text-xs hidden md:inline">기준</span>
             <div className="flex items-center gap-1 bg-slate-700 rounded-lg px-2 py-1.5 border border-slate-600">
               <img 
-                src={DOMESTIC_EXCHANGES.find(e => e.id === domesticExchange)?.logo || '/exchanges/upbit.svg'} 
+                src={DOMESTIC_EXCHANGES.find(e => e.id === domesticExchange)?.logo || EXCHANGE_LOGOS.UPBIT} 
                 alt="" 
                 className="w-4 h-4"
               />
@@ -504,7 +504,7 @@ export default function PremiumTable({
             <span className="text-gray-400 text-xs hidden md:inline">해외</span>
             <div className="flex items-center gap-1 bg-slate-700 rounded-lg px-2 py-1.5 border border-slate-600">
               <img 
-                src={FOREIGN_EXCHANGES.find(e => e.id === foreignExchange)?.logo || '/exchanges/binance.svg'} 
+                src={FOREIGN_EXCHANGES.find(e => e.id === foreignExchange)?.logo || EXCHANGE_LOGOS.BINANCE} 
                 alt="" 
                 className="w-4 h-4"
               />
