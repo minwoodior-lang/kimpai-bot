@@ -45,8 +45,8 @@ function MiniDropdown({
         {selectedOption && (
           <img src={selectedOption.logo} alt="" className="w-4 h-4 rounded" />
         )}
-        <span className="text-white text-sm truncate max-w-[80px]">
-          {showShortName ? selectedOption?.shortName || selectedOption?.name : selectedOption?.name?.replace('🇰🇷 ', '')}
+        <span className="text-white text-sm whitespace-nowrap">
+          {selectedOption?.name?.replace('🇰🇷 ', '')}
         </span>
         <svg 
           className={`w-3 h-3 text-slate-400 transition-transform flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} 
@@ -562,26 +562,22 @@ export default function PremiumTable({
 
       {showFilters && (
         <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-4 text-sm">
-          <div className="flex items-center gap-1">
-            <span className="text-gray-400 text-xs">기준거래소</span>
-            <MiniDropdown
-              value={domesticExchange}
-              options={DOMESTIC_EXCHANGES}
-              onChange={setDomesticExchange}
-            />
-          </div>
+          <span className="text-gray-400 text-xs whitespace-nowrap">기준 거래소 🇰🇷</span>
+          <MiniDropdown
+            value={domesticExchange}
+            options={DOMESTIC_EXCHANGES}
+            onChange={setDomesticExchange}
+          />
 
-          <span className="text-gray-500">↔</span>
+          <span className="text-gray-500">⇄</span>
 
-          <div className="flex items-center gap-1">
-            <span className="text-gray-400 text-xs">해외거래소</span>
-            <MiniDropdown
-              value={foreignExchange}
-              options={FOREIGN_EXCHANGES}
-              onChange={setForeignExchange}
-              showShortName={true}
-            />
-          </div>
+          <MiniDropdown
+            value={foreignExchange}
+            options={FOREIGN_EXCHANGES}
+            onChange={setForeignExchange}
+            showShortName={false}
+          />
+          <span className="text-gray-400 text-xs whitespace-nowrap">해외 거래소 🌐</span>
 
           <div className="hidden md:flex items-center text-gray-400 text-xs px-2">
             <span>암호화폐 <span className="text-white font-medium">{totalCoins}</span>개</span>

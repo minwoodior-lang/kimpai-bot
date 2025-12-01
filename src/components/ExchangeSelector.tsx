@@ -111,27 +111,23 @@ export default function ExchangeSelector({ compact = false, showLabels = true }:
   }));
 
   return (
-    <div className={`flex ${compact ? "gap-2" : "gap-4"} items-center flex-wrap`}>
-      <div className="flex items-center gap-2">
-        {showLabels && <span className="text-slate-400 text-xs">기준거래소</span>}
-        <CustomDropdown
-          value={domesticExchange}
-          options={domesticOptions}
-          onChange={setDomesticExchange}
-        />
-      </div>
+    <div className={`flex ${compact ? "gap-2" : "gap-3"} items-center flex-wrap`}>
+      {showLabels && <span className="text-slate-400 text-xs whitespace-nowrap">기준 거래소 🇰🇷</span>}
+      <CustomDropdown
+        value={domesticExchange}
+        options={domesticOptions}
+        onChange={setDomesticExchange}
+      />
 
-      <span className="text-slate-500 text-lg">↔</span>
+      <span className="text-slate-500 text-lg">⇄</span>
 
-      <div className="flex items-center gap-2">
-        {showLabels && <span className="text-slate-400 text-xs">해외거래소</span>}
-        <CustomDropdown
-          value={foreignExchange}
-          options={foreignOptions}
-          onChange={setForeignExchange}
-          showShortName={true}
-        />
-      </div>
+      <CustomDropdown
+        value={foreignExchange}
+        options={foreignOptions}
+        onChange={setForeignExchange}
+        showShortName={false}
+      />
+      {showLabels && <span className="text-slate-400 text-xs whitespace-nowrap">해외 거래소 🌐</span>}
     </div>
   );
 }
