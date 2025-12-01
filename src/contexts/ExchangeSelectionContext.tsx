@@ -13,7 +13,7 @@ export interface ForeignExchange {
 export const EXCHANGE_LOGOS: Record<string, string> = {
   UPBIT: "https://s2.coinmarketcap.com/static/img/exchanges/64x64/351.png",
   BITHUMB: "https://s2.coinmarketcap.com/static/img/exchanges/64x64/200.png",
-  COINONE: "https://s2.coinmarketcap.com/static/img/exchanges/64x64/154.png",
+  COINONE: "https://s2.coinmarketcap.com/static/img/exchanges/64x64/174.png",
   BINANCE: "https://s2.coinmarketcap.com/static/img/exchanges/64x64/270.png",
   BINANCE_FUTURES: "https://s2.coinmarketcap.com/static/img/exchanges/64x64/270.png",
   OKX: "https://s2.coinmarketcap.com/static/img/exchanges/64x64/294.png",
