@@ -106,6 +106,15 @@ export default function PremiumTable({
       const response = await fetch(
         `/api/premium/table?domestic=${domesticExchange}&foreign=${foreignExchange}`
       );
+
+      if (response.status === 429) {
+        return;
+      }
+
+      if (!response.ok) {
+        return;
+      }
+
       const json: ApiResponse = await response.json();
 
       if (json.success) {
@@ -114,12 +123,8 @@ export default function PremiumTable({
         setFxRate(json.fxRate);
         setUpdatedAt(json.updatedAt);
         setError(null);
-      } else {
-        setError("데이터를 불러오는데 실패했습니다.");
       }
-    } catch (err) {
-      console.error("Fetch error:", err);
-      setError("데이터를 불러오는데 실패했습니다.");
+    } catch {
     } finally {
       setLoading(false);
     }
