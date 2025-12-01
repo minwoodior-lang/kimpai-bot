@@ -20,16 +20,16 @@ export const DOMESTIC_EXCHANGES: { value: string; label: string; exchange: Domes
   { value: "COINONE_KRW", label: "코인원 KRW", exchange: "COINONE", quote: "KRW" },
 ];
 
-export const FOREIGN_EXCHANGES: { value: string; label: string; exchange: ForeignExchange["exchange"]; quote: ForeignExchange["quote"]; icon: string }[] = [
-  { value: "BINANCE_USDT", label: "바이낸스 USDT 마켓", exchange: "BINANCE", quote: "USDT", icon: "binance" },
-  { value: "BINANCE_BTC", label: "바이낸스 BTC 마켓", exchange: "BINANCE", quote: "BTC", icon: "binance" },
-  { value: "BINANCE_FUTURES", label: "바이낸스 선물 USDS-M 마켓", exchange: "BINANCE_FUTURES", quote: "USD", icon: "binance" },
-  { value: "OKX_USDT", label: "OKX USDT 마켓", exchange: "OKX", quote: "USDT", icon: "okx" },
-  { value: "BYBIT_USDT", label: "Bybit USDT 마켓", exchange: "BYBIT", quote: "USDT", icon: "bybit" },
-  { value: "BITGET_USDT", label: "Bitget USDT 마켓", exchange: "BITGET", quote: "USDT", icon: "bitget" },
-  { value: "GATE_USDT", label: "Gate.io USDT 마켓", exchange: "GATE", quote: "USDT", icon: "gate" },
-  { value: "HTX_USDT", label: "HTX USDT 마켓", exchange: "HTX", quote: "USDT", icon: "htx" },
-  { value: "MEXC_USDT", label: "MEXC USDT 마켓", exchange: "MEXC", quote: "USDT", icon: "mexc" },
+export const FOREIGN_EXCHANGES: { value: string; label: string; shortName: string; exchange: ForeignExchange["exchange"]; quote: ForeignExchange["quote"]; icon: string }[] = [
+  { value: "BINANCE_USDT", label: "바이낸스 USDT 마켓", shortName: "바이낸스", exchange: "BINANCE", quote: "USDT", icon: "🟡" },
+  { value: "BINANCE_BTC", label: "바이낸스 BTC 마켓", shortName: "바이낸스", exchange: "BINANCE", quote: "BTC", icon: "🟡" },
+  { value: "BINANCE_FUTURES", label: "바이낸스 선물 USDS-M 마켓", shortName: "바이낸스 선물", exchange: "BINANCE_FUTURES", quote: "USD", icon: "🟡" },
+  { value: "OKX_USDT", label: "OKX USDT 마켓", shortName: "OKX", exchange: "OKX", quote: "USDT", icon: "⚪" },
+  { value: "BYBIT_USDT", label: "Bybit USDT 마켓", shortName: "Bybit", exchange: "BYBIT", quote: "USDT", icon: "🟠" },
+  { value: "BITGET_USDT", label: "Bitget USDT 마켓", shortName: "Bitget", exchange: "BITGET", quote: "USDT", icon: "🔵" },
+  { value: "GATE_USDT", label: "Gate.io USDT 마켓", shortName: "Gate.io", exchange: "GATE", quote: "USDT", icon: "🟢" },
+  { value: "HTX_USDT", label: "HTX USDT 마켓", shortName: "HTX", exchange: "HTX", quote: "USDT", icon: "🔶" },
+  { value: "MEXC_USDT", label: "MEXC USDT 마켓", shortName: "MEXC", exchange: "MEXC", quote: "USDT", icon: "🔷" },
 ];
 
 interface ExchangeSelectionContextType {

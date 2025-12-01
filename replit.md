@@ -45,6 +45,13 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 - **Admin Interface**: Dedicated admin dashboard for management.
 
 ### Recent Changes (2025-12-01)
+- **v2.2.0 UI/UX 개선 + 플래시 애니메이션**:
+  - 해외 거래소 드롭다운 레이블 개선: 한국어 풀네임 (예: "바이낸스 USDT 마켓")
+  - 이모지 아이콘 추가: 🟡 바이낸스, 🟠 Bybit, ⚪ OKX, 🔵 Bitget, 🟢 Gate.io, 🔶 HTX, 🔷 MEXC
+  - 거래소 상수 통합: ExchangeSelectionContext에서 단일 소스로 관리 (shortName, icon 필드)
+  - 가격/김프 변경 시 플래시 애니메이션: 상승=초록, 하락=빨강 (0.6초 페이드)
+  - CSS 키프레임 애니메이션 추가 (flash-green, flash-red)
+  - 거래소 볼륨 검증 완료: Bitget(usdtVolume), Gate(quote_volume), MEXC(quoteVolume) 정확성 확인
 - **v2.1.8 해외 거래액 정확도 개선**:
   - OKX: vol24h (base volume) → volCcy24h (quote volume in USDT) 수정
   - HTX: vol × close (이중 계산) → vol 직접 사용 (이미 USDT 볼륨)

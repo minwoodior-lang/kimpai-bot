@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import dynamic from "next/dynamic";
+import { FOREIGN_EXCHANGES as CONTEXT_FOREIGN_EXCHANGES } from "@/contexts/ExchangeSelectionContext";
 
 const TradingViewChart = dynamic(
   () => import("./charts/TradingViewChart"),
@@ -33,21 +34,26 @@ interface ApiResponse {
 type SortKey = "symbol" | "premium" | "volume24hKrw" | "change24h" | "koreanPrice" | "high24h" | "low24h";
 type SortOrder = "asc" | "desc";
 
+interface FlashState {
+  [key: string]: {
+    price?: "up" | "down";
+    premium?: "up" | "down";
+  };
+}
+
 const DOMESTIC_EXCHANGES = [
   { id: "UPBIT_KRW", name: "업비트", exchange: "Upbit" },
   { id: "BITHUMB_KRW", name: "빗썸", exchange: "Bithumb" },
   { id: "COINONE_KRW", name: "코인원", exchange: "Coinone" },
 ];
 
-const FOREIGN_EXCHANGES = [
-  { id: "BINANCE_USDT", name: "바이낸스 USDT 마켓", shortName: "바이낸스", exchange: "Binance", icon: "🟡" },
-  { id: "BYBIT_USDT", name: "Bybit USDT 마켓", shortName: "Bybit", exchange: "Bybit", icon: "🟠" },
-  { id: "OKX_USDT", name: "OKX USDT 마켓", shortName: "OKX", exchange: "OKX", icon: "⚪" },
-  { id: "BITGET_USDT", name: "Bitget USDT 마켓", shortName: "Bitget", exchange: "Bitget", icon: "🔵" },
-  { id: "GATE_USDT", name: "Gate.io USDT 마켓", shortName: "Gate.io", exchange: "Gate", icon: "🟢" },
-  { id: "MEXC_USDT", name: "MEXC USDT 마켓", shortName: "MEXC", exchange: "MEXC", icon: "🔷" },
-  { id: "HTX_USDT", name: "HTX USDT 마켓", shortName: "HTX", exchange: "HTX", icon: "🔶" },
-];
+const FOREIGN_EXCHANGES = CONTEXT_FOREIGN_EXCHANGES.map(ex => ({
+  id: ex.value,
+  name: ex.label,
+  shortName: ex.shortName,
+  exchange: ex.exchange,
+  icon: ex.icon,
+}));
 
 const CHOSUNG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
 
@@ -108,12 +114,48 @@ export default function PremiumTable({
   const [sortKey, setSortKey] = useState<SortKey>("premium");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
   const [expandedSymbol, setExpandedSymbol] = useState<string | null>(null);
+  const [flashStates, setFlashStates] = useState<FlashState>({});
+  const prevDataRef = useRef<Record<string, { price: number; premium: number }>>({});
 
   const toggleChart = (symbol: string) => {
     setExpandedSymbol(prev => prev === symbol ? null : symbol);
   };
 
   const getTvSymbol = (symbol: string) => `BINANCE:${symbol}USDT`;
+
+  const detectChanges = useCallback((newData: PremiumData[]) => {
+    const newFlashStates: FlashState = {};
+    const newPrevData: Record<string, { price: number; premium: number }> = {};
+
+    newData.forEach(item => {
+      const prev = prevDataRef.current[item.symbol];
+      newPrevData[item.symbol] = { price: item.koreanPrice, premium: item.premium };
+
+      if (prev) {
+        const priceDiff = Math.abs(item.koreanPrice - prev.price);
+        const priceThreshold = prev.price * 0.0001;
+        if (priceDiff > priceThreshold && priceDiff > 0) {
+          newFlashStates[item.symbol] = {
+            ...newFlashStates[item.symbol],
+            price: item.koreanPrice > prev.price ? "up" : "down"
+          };
+        }
+        if (Math.abs(item.premium - prev.premium) > 0.01) {
+          newFlashStates[item.symbol] = {
+            ...newFlashStates[item.symbol],
+            premium: item.premium > prev.premium ? "up" : "down"
+          };
+        }
+      }
+    });
+
+    prevDataRef.current = newPrevData;
+
+    if (Object.keys(newFlashStates).length > 0) {
+      setFlashStates(newFlashStates);
+      setTimeout(() => setFlashStates({}), 600);
+    }
+  }, []);
 
   const fetchData = async () => {
     try {
@@ -132,6 +174,7 @@ export default function PremiumTable({
       const json: ApiResponse = await response.json();
 
       if (json.success) {
+        detectChanges(json.data);
         setData(json.data);
         setAveragePremium(json.averagePremium);
         setFxRate(json.fxRate);
@@ -243,6 +286,14 @@ export default function PremiumTable({
     if (change > 0) return "text-green-400";
     if (change < 0) return "text-red-400";
     return "text-gray-400";
+  };
+
+  const getFlashClass = (symbol: string, field: "price" | "premium") => {
+    const flash = flashStates[symbol]?.[field];
+    if (!flash) return "";
+    return flash === "up" 
+      ? "animate-flash-green" 
+      : "animate-flash-red";
   };
 
   const SortIcon = ({ columnKey }: { columnKey: SortKey }) => {
@@ -440,14 +491,14 @@ export default function PremiumTable({
                           </button>
                         </div>
                       </td>
-                      <td className="px-3 py-2 text-right">
+                      <td className={`px-3 py-2 text-right ${getFlashClass(row.symbol, "price")}`}>
                         <div className="text-white font-medium">₩{formatKRW(row.koreanPrice)}</div>
                       </td>
                       <td className="px-3 py-2 text-right">
                         <div className="text-white font-medium">₩{formatKrwPrice(row.globalPrice * fxRate)}</div>
                         <div className="text-xs text-gray-500">{formatUsdtPrice(row.globalPrice)} USDT</div>
                       </td>
-                      <td className="px-3 py-2 text-right">
+                      <td className={`px-3 py-2 text-right ${getFlashClass(row.symbol, "premium")}`}>
                         <div className={`font-bold ${getPremiumColor(row.premium)}`}>
                           {row.premium >= 0 ? "+" : ""}{row.premium.toFixed(2)}%
                         </div>
