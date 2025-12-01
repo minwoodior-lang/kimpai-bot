@@ -5,7 +5,7 @@ const TradingViewChart = dynamic(() => import("./TradingViewChart"), {
   ssr: false,
   loading: () => (
     <div className="h-[400px] bg-slate-800/50 rounded-xl flex items-center justify-center">
-      <div className="text-slate-400">차트 로딩 중...</div>
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
     </div>
   ),
 });
@@ -19,49 +19,86 @@ interface ChartPreset {
 const CHART_PRESETS: ChartPreset[] = [
   {
     id: "btc_binance",
-    label: "BTC 바이낸스",
+    label: "BTC Binance",
     tvSymbol: "BINANCE:BTCUSDT",
   },
   {
     id: "btc_kimp_upbit",
-    label: "BTC 김치프리미엄 (업비트)",
+    label: "BTC 김치프리미엄 (Upbit)",
     tvSymbol: "UPBIT:BTCKRW/BINANCE:BTCUSDT",
   },
   {
     id: "btc_kimp_bithumb",
-    label: "BTC 김치프리미엄 (빗썸)",
+    label: "BTC 김치프리미엄 (Bithumb)",
     tvSymbol: "BITHUMB:BTCKRW/BINANCE:BTCUSDT",
   },
   {
     id: "btc_coinbase_premium",
-    label: "BTC 코인베이스 프리미엄",
+    label: "BTC Coinbase Premium",
     tvSymbol: "COINBASE:BTCUSD/BINANCE:BTCUSDT",
   },
   {
-    id: "btc_long",
-    label: "BTC 롱 비율",
-    tvSymbol: "BINANCE:BTCUSDTPERP*BINANCE:BTCLONGSUSDT/BINANCE:BTCUSDT",
+    id: "btc_longs",
+    label: "BTC Longs",
+    tvSymbol: "BITFINEX:BTCUSDLONGS",
   },
   {
-    id: "btc_short",
-    label: "BTC 숏 비율",
-    tvSymbol: "BINANCE:BTCUSDTPERP*BINANCE:BTCSHORTSUSDT/BINANCE:BTCUSDT",
+    id: "btc_shorts",
+    label: "BTC Shorts",
+    tvSymbol: "BITFINEX:BTCUSDSHORTS",
   },
   {
     id: "btc_dominance",
-    label: "BTC 도미넌스",
+    label: "BTC Dominance",
     tvSymbol: "CRYPTOCAP:BTC.D",
   },
   {
+    id: "total_marketcap",
+    label: "TOTAL Market Cap",
+    tvSymbol: "CRYPTOCAP:TOTAL",
+  },
+  {
+    id: "total2_marketcap",
+    label: "TOTAL2 (BTC 제외)",
+    tvSymbol: "CRYPTOCAP:TOTAL2",
+  },
+  {
+    id: "total3_marketcap",
+    label: "TOTAL3 (BTC·ETH 제외)",
+    tvSymbol: "CRYPTOCAP:TOTAL3",
+  },
+  {
     id: "alt_dominance",
-    label: "알트코인 도미넌스",
+    label: "ALT Dominance",
     tvSymbol: "CRYPTOCAP:OTHERS.D",
   },
   {
-    id: "total3",
-    label: "TOTAL3 (알트 시총)",
-    tvSymbol: "CRYPTOCAP:TOTAL3",
+    id: "korea_premium_index",
+    label: "Korea Premium Index",
+    tvSymbol: "UPBIT:BTCKRW*CRYPTOCAP:USD/BINANCE:BTCUSDT",
   },
+];
+
+interface TimeframeOption {
+  id: string;
+  label: string;
+  interval: string;
+}
+
+const TIMEFRAMES: TimeframeOption[] = [
+  { id: "1m", label: "1분", interval: "1" },
+  { id: "3m", label: "3분", interval: "3" },
+  { id: "5m", label: "5분", interval: "5" },
+  { id: "15m", label: "15분", interval: "15" },
+  { id: "30m", label: "30분", interval: "30" },
+  { id: "45m", label: "45분", interval: "45" },
+  { id: "1h", label: "1시간", interval: "60" },
+  { id: "2h", label: "2시간", interval: "120" },
+  { id: "3h", label: "3시간", interval: "180" },
+  { id: "4h", label: "4시간", interval: "240" },
+  { id: "1d", label: "1일", interval: "D" },
+  { id: "1w", label: "1주", interval: "W" },
+  { id: "1M", label: "1월", interval: "M" },
 ];
 
 interface ChartWithControlsProps {
@@ -72,29 +109,69 @@ export default function ChartWithControls({
   height = 400,
 }: ChartWithControlsProps) {
   const [chartPreset, setChartPreset] = useState<ChartPreset>(CHART_PRESETS[0]);
+  const [timeframe, setTimeframe] = useState<TimeframeOption>(TIMEFRAMES[6]);
 
   return (
     <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl overflow-hidden">
-      <div className="flex items-center justify-between p-3 border-b border-slate-700/50">
-        <select
-          value={chartPreset.id}
-          onChange={(e) => {
-            const preset = CHART_PRESETS.find((p) => p.id === e.target.value);
-            if (preset) {
-              setChartPreset(preset);
-            }
-          }}
-          className="bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 focus:outline-none focus:border-blue-500 text-sm min-w-[200px]"
-        >
-          {CHART_PRESETS.map((preset) => (
-            <option key={preset.id} value={preset.id}>
-              {preset.label}
-            </option>
-          ))}
-        </select>
+      <div className="flex flex-wrap items-center justify-between gap-2 p-3 border-b border-slate-700/50">
+        <div className="flex flex-wrap items-center gap-2">
+          <select
+            value={chartPreset.id}
+            onChange={(e) => {
+              const preset = CHART_PRESETS.find((p) => p.id === e.target.value);
+              if (preset) {
+                setChartPreset(preset);
+              }
+            }}
+            className="bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 focus:outline-none focus:border-blue-500 text-sm min-w-[180px]"
+          >
+            <optgroup label="김프가 기본">
+              {CHART_PRESETS.slice(0, 7).map((preset) => (
+                <option key={preset.id} value={preset.id}>
+                  {preset.label}
+                </option>
+              ))}
+            </optgroup>
+            <optgroup label="시장 지표">
+              {CHART_PRESETS.slice(7, 10).map((preset) => (
+                <option key={preset.id} value={preset.id}>
+                  {preset.label}
+                </option>
+              ))}
+            </optgroup>
+            <optgroup label="확장 지표">
+              {CHART_PRESETS.slice(10).map((preset) => (
+                <option key={preset.id} value={preset.id}>
+                  {preset.label}
+                </option>
+              ))}
+            </optgroup>
+          </select>
+
+          <select
+            value={timeframe.id}
+            onChange={(e) => {
+              const tf = TIMEFRAMES.find((t) => t.id === e.target.value);
+              if (tf) {
+                setTimeframe(tf);
+              }
+            }}
+            className="bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 focus:outline-none focus:border-blue-500 text-sm min-w-[80px]"
+          >
+            {TIMEFRAMES.map((tf) => (
+              <option key={tf.id} value={tf.id}>
+                {tf.label}
+              </option>
+            ))}
+          </select>
+        </div>
         <span className="text-slate-500 text-xs hidden sm:inline">TradingView</span>
       </div>
-      <TradingViewChart tvSymbol={chartPreset.tvSymbol} height={height} />
+      <TradingViewChart 
+        tvSymbol={chartPreset.tvSymbol} 
+        interval={timeframe.interval}
+        height={height} 
+      />
     </div>
   );
 }
