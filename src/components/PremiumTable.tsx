@@ -640,9 +640,7 @@ export default function PremiumTable({
                           >
                             {favorites.has(row.symbol) ? '★' : '☆'}
                           </button>
-                          <div className="hidden md:block">
-                            <CoinIcon symbol={row.symbol} />
-                          </div>
+                          <CoinIcon symbol={row.symbol} size="sm" className="md:w-6 md:h-6" />
                           <button
                             onClick={() => openCoinMarketCap(row.symbol, row.cmcSlug)}
                             className="flex flex-col hover:text-blue-400 transition-colors text-left min-w-0"
