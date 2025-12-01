@@ -587,17 +587,16 @@ export default function PremiumTable({
             />
           </div>
 
-          <div className="flex md:hidden items-center text-gray-400 text-[10px] px-1">
-            <span>암호화폐 <span className="text-white font-medium">{totalCoins}</span>개</span>
-          </div>
-
-          <div className="flex-1 min-w-[120px] md:min-w-[200px]">
+          <div className="flex items-center gap-2 ml-auto">
+            <span className="text-gray-400 text-[10px] md:text-xs whitespace-nowrap">
+              암호화폐 <span className="text-white font-medium">{totalCoins}</span>개
+            </span>
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="검색: BTC, ㅂㅌ"
-              className="w-full bg-slate-700 text-white rounded-lg px-2 md:px-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-sm"
+              className="w-[100px] md:w-[160px] bg-slate-700 text-white rounded-lg px-2 md:px-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs md:text-sm"
             />
           </div>
         </div>
