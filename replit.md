@@ -45,6 +45,13 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 - **Admin Interface**: Dedicated admin dashboard for management.
 
 ### Recent Changes (2025-12-01)
+- **v2.1.7 거래액 표시 + PRO UI 개선**:
+  - 거래액(일) 셀: 국내 KRW (국내) + 해외 KRW (해외) + USDT 보조 텍스트
+  - API에 volume24hForeignKrw 필드 추가 (해외 USDT × 환율)
+  - 환율 라벨: USD/KRW → USDT/KRW 전면 교체 (PremiumTicker, markets, dashboard)
+  - AIInsightBox PRO 영역: 전체 너비 그라데이션 카드 레이아웃
+    - Free: 자물쇠 아이콘, 흐린 미리보기, FOMO 문구 (90% 급변 포착), 보라색 CTA
+    - Pro: 동일 카드 스타일 + 실제 예측 내용 + 면책 조항
 - **v2.1.6 인라인 차트 + 거래액 정확성**:
   - 차트 표시 방식: 모달 팝업 → 인라인 행 확장 (김프가 스타일)
   - 차트 아이콘 클릭 시 해당 행 아래에 TradingView 차트 확장/축소
