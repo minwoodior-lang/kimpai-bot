@@ -13,7 +13,7 @@ export interface ForeignExchange {
 export const EXCHANGE_LOGOS: Record<string, string> = {
   UPBIT: "https://s2.coinmarketcap.com/static/img/exchanges/64x64/351.png",
   BITHUMB: "https://s2.coinmarketcap.com/static/img/exchanges/64x64/200.png",
-  COINONE: "https://static.coinone.co.kr/icons/icon_coinone_192x192.png",
+  COINONE: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230052FF'/%3E%3Cpath d='M32 14c9.941 0 18 8.059 18 18s-8.059 18-18 18c-7.732 0-14.329-4.875-16.876-11.719-.347-.933.453-1.906 1.453-1.781.7.088 1.2.7 1.423 1.375C20.293 44.625 25.707 48 32 48c8.837 0 16-7.163 16-16s-7.163-16-16-16c-6.293 0-11.707 3.375-14 9.125-.223.675-.723 1.287-1.423 1.375-1 .125-1.8-.848-1.453-1.781C17.671 18.875 24.268 14 32 14z' fill='white'/%3E%3Ccircle cx='32' cy='32' r='5' fill='white'/%3E%3C/svg%3E",
   BINANCE: "https://s2.coinmarketcap.com/static/img/exchanges/64x64/270.png",
   BINANCE_FUTURES: "https://s2.coinmarketcap.com/static/img/exchanges/64x64/270.png",
   OKX: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='black'/%3E%3Cg fill='white'%3E%3Crect x='12' y='12' width='12' height='12' rx='2'/%3E%3Crect x='26' y='26' width='12' height='12' rx='2'/%3E%3Crect x='40' y='12' width='12' height='12' rx='2'/%3E%3Crect x='12' y='40' width='12' height='12' rx='2'/%3E%3Crect x='40' y='40' width='12' height='12' rx='2'/%3E%3C/g%3E%3C/svg%3E",
