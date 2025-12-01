@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from "react";
-import Link from "next/link";
 
 interface PremiumData {
   symbol: string;
@@ -11,8 +10,6 @@ interface PremiumData {
   change24h: number;
   high24h: number;
   low24h: number;
-  domesticExchange?: string;
-  foreignExchange?: string;
 }
 
 interface ApiResponse {
@@ -25,29 +22,57 @@ interface ApiResponse {
   foreignExchange: string;
 }
 
-type SortKey = "symbol" | "premium" | "volume24h" | "change24h" | "koreanPrice";
+type SortKey = "symbol" | "premium" | "volume24h" | "change24h" | "koreanPrice" | "high24h" | "low24h";
 type SortOrder = "asc" | "desc";
 
 const DOMESTIC_EXCHANGES = [
-  { id: "UPBIT_KRW", name: "업비트 KRW", exchange: "Upbit" },
-  { id: "UPBIT_BTC", name: "업비트 BTC", exchange: "Upbit" },
-  { id: "UPBIT_USDT", name: "업비트 USDT", exchange: "Upbit" },
-  { id: "BITHUMB_KRW", name: "빗썸 KRW", exchange: "Bithumb" },
-  { id: "BITHUMB_BTC", name: "빗썸 BTC", exchange: "Bithumb" },
-  { id: "COINONE_KRW", name: "코인원 KRW", exchange: "Coinone" },
+  { id: "UPBIT_KRW", name: "업비트", exchange: "Upbit" },
+  { id: "BITHUMB_KRW", name: "빗썸", exchange: "Bithumb" },
+  { id: "COINONE_KRW", name: "코인원", exchange: "Coinone" },
 ];
 
 const FOREIGN_EXCHANGES = [
-  { id: "BINANCE_USDT", name: "바이낸스 USDT", exchange: "Binance" },
-  { id: "BINANCE_BTC", name: "바이낸스 BTC", exchange: "Binance" },
-  { id: "BINANCE_FUTURES", name: "바이낸스 선물", exchange: "Binance" },
-  { id: "OKX_USDT", name: "OKX USDT", exchange: "OKX" },
-  { id: "BYBIT_USDT", name: "Bybit USDT", exchange: "Bybit" },
-  { id: "BITGET_USDT", name: "Bitget USDT", exchange: "Bitget" },
-  { id: "GATE_USDT", name: "Gate.io USDT", exchange: "Gate" },
-  { id: "HTX_USDT", name: "HTX USDT", exchange: "HTX" },
-  { id: "MEXC_USDT", name: "MEXC USDT", exchange: "MEXC" },
+  { id: "BINANCE_USDT", name: "바이낸스", exchange: "Binance" },
+  { id: "BYBIT_USDT", name: "Bybit", exchange: "Bybit" },
+  { id: "OKX_USDT", name: "OKX", exchange: "OKX" },
+  { id: "BITGET_USDT", name: "Bitget", exchange: "Bitget" },
+  { id: "GATE_USDT", name: "Gate.io", exchange: "Gate" },
+  { id: "MEXC_USDT", name: "MEXC", exchange: "MEXC" },
+  { id: "HTX_USDT", name: "HTX", exchange: "HTX" },
 ];
+
+const CHOSUNG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+
+function getChosung(str: string): string {
+  let result = '';
+  for (let i = 0; i < str.length; i++) {
+    const code = str.charCodeAt(i);
+    if (code >= 0xAC00 && code <= 0xD7A3) {
+      const chosungIndex = Math.floor((code - 0xAC00) / 588);
+      result += CHOSUNG[chosungIndex];
+    } else {
+      result += str[i];
+    }
+  }
+  return result;
+}
+
+function matchSearch(item: PremiumData, query: string): boolean {
+  const lowerQuery = query.toLowerCase().trim();
+  if (!lowerQuery) return true;
+  
+  const symbolMatch = item.symbol.toLowerCase().includes(lowerQuery);
+  if (symbolMatch) return true;
+  
+  const nameMatch = item.name.toLowerCase().includes(lowerQuery);
+  if (nameMatch) return true;
+  
+  const chosung = getChosung(item.name);
+  const chosungMatch = chosung.toLowerCase().includes(lowerQuery);
+  if (chosungMatch) return true;
+  
+  return false;
+}
 
 export interface PremiumTableProps {
   showHeader?: boolean;
@@ -60,7 +85,7 @@ export default function PremiumTable({
   showHeader = true,
   showFilters = true,
   limit = 0,
-  refreshInterval = 5000,
+  refreshInterval = 2000,
 }: PremiumTableProps) {
   const [data, setData] = useState<PremiumData[]>([]);
   const [averagePremium, setAveragePremium] = useState(0);
@@ -74,7 +99,6 @@ export default function PremiumTable({
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("premium");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
-  const [premiumFilter, setPremiumFilter] = useState<string>("all");
 
   const fetchData = async () => {
     try {
@@ -120,24 +144,7 @@ export default function PremiumTable({
     let result = [...data];
 
     if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      result = result.filter(
-        (item) =>
-          item.symbol.toLowerCase().includes(query) ||
-          item.name.toLowerCase().includes(query)
-      );
-    }
-
-    if (premiumFilter !== "all") {
-      if (premiumFilter === "high") {
-        result = result.filter((item) => item.premium >= 3);
-      } else if (premiumFilter === "medium") {
-        result = result.filter((item) => item.premium >= 1 && item.premium < 3);
-      } else if (premiumFilter === "low") {
-        result = result.filter((item) => item.premium >= 0 && item.premium < 1);
-      } else if (premiumFilter === "negative") {
-        result = result.filter((item) => item.premium < 0);
-      }
+      result = result.filter((item) => matchSearch(item, searchQuery));
     }
 
     result.sort((a, b) => {
@@ -162,16 +169,15 @@ export default function PremiumTable({
     }
 
     return result;
-  }, [data, searchQuery, sortKey, sortOrder, premiumFilter, limit]);
+  }, [data, searchQuery, sortKey, sortOrder, limit]);
 
   const formatKRW = (value: number) => {
-    if (value >= 1000000) {
-      return `₩${(value / 1000000).toFixed(2)}M`;
-    }
-    return `₩${value.toLocaleString()}`;
+    if (!value || isNaN(value)) return "-";
+    return value.toLocaleString("ko-KR");
   };
 
   const formatUSD = (value: number) => {
+    if (!value || isNaN(value)) return "-";
     if (value >= 1000) {
       return `$${value.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
     }
@@ -181,11 +187,20 @@ export default function PremiumTable({
     return `$${value.toFixed(4)}`;
   };
 
-  const formatVolume = (value: number) => {
-    if (value >= 1e9) return `$${(value / 1e9).toFixed(1)}B`;
-    if (value >= 1e6) return `$${(value / 1e6).toFixed(1)}M`;
-    if (value >= 1e3) return `$${(value / 1e3).toFixed(1)}K`;
-    return `$${value.toFixed(0)}`;
+  const formatVolumeKRW = (value: number) => {
+    if (!value || isNaN(value)) return "-";
+    if (value >= 1e12) return `${(value / 1e12).toFixed(1)}조`;
+    if (value >= 1e8) return `${(value / 1e8).toFixed(1)}억`;
+    if (value >= 1e4) return `${(value / 1e4).toFixed(0)}만`;
+    return value.toLocaleString();
+  };
+
+  const formatVolumeUSD = (value: number) => {
+    if (!value || isNaN(value)) return "-";
+    if (value >= 1e9) return `${(value / 1e9).toFixed(1)}B`;
+    if (value >= 1e6) return `${(value / 1e6).toFixed(1)}M`;
+    if (value >= 1e3) return `${(value / 1e3).toFixed(0)}K`;
+    return value.toLocaleString();
   };
 
   const getPremiumColor = (premium: number) => {
@@ -197,18 +212,18 @@ export default function PremiumTable({
   };
 
   const getChangeColor = (change: number) => {
-    if (change > 0) return "text-green-400";
-    if (change < 0) return "text-red-400";
+    if (change > 0) return "text-red-400";
+    if (change < 0) return "text-blue-400";
     return "text-gray-400";
   };
 
   const SortIcon = ({ columnKey }: { columnKey: SortKey }) => {
     if (sortKey !== columnKey)
-      return <span className="text-gray-600 ml-1">↕</span>;
+      return <span className="text-gray-600 ml-1 text-xs">↕</span>;
     return sortOrder === "asc" ? (
-      <span className="text-blue-400 ml-1">↑</span>
+      <span className="text-blue-400 ml-1 text-xs">↑</span>
     ) : (
-      <span className="text-blue-400 ml-1">↓</span>
+      <span className="text-blue-400 ml-1 text-xs">↓</span>
     );
   };
 
@@ -222,111 +237,84 @@ export default function PremiumTable({
     return exchange ? exchange.name : "해외";
   };
 
+  const calcDiff = (current: number, base: number) => {
+    if (!current || !base || isNaN(current) || isNaN(base) || base === 0) {
+      return { percent: 0, diff: 0, valid: false };
+    }
+    const percent = ((current - base) / base) * 100;
+    const diff = current - base;
+    return { percent, diff, valid: true };
+  };
+
+  const openCoinMarketCap = (symbol: string) => {
+    const cmcUrl = `https://coinmarketcap.com/currencies/${symbol.toLowerCase()}/`;
+    window.open(cmcUrl, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div>
       {showHeader && (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-            <div className="text-gray-400 text-sm mb-1">평균 프리미엄</div>
-            <div
-              className={`text-2xl font-bold ${getPremiumColor(averagePremium)}`}
-            >
-              {averagePremium >= 0 ? "+" : ""}
-              {averagePremium.toFixed(2)}%
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+          <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
+            <div className="text-gray-400 text-xs mb-1">평균 프리미엄</div>
+            <div className={`text-xl font-bold ${getPremiumColor(averagePremium)}`}>
+              {averagePremium >= 0 ? "+" : ""}{averagePremium.toFixed(2)}%
             </div>
           </div>
-          <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-            <div className="text-gray-400 text-sm mb-1">환율 (USD/KRW)</div>
-            <div className="text-2xl font-bold text-white">
-              ₩{fxRate.toLocaleString()}
-            </div>
+          <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
+            <div className="text-gray-400 text-xs mb-1">환율 (USD/KRW)</div>
+            <div className="text-xl font-bold text-white">₩{fxRate.toLocaleString()}</div>
           </div>
-          <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-            <div className="text-gray-400 text-sm mb-1">코인 수</div>
-            <div className="text-2xl font-bold text-white">{data.length}개</div>
+          <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
+            <div className="text-gray-400 text-xs mb-1">코인 수</div>
+            <div className="text-xl font-bold text-white">{data.length}개</div>
           </div>
-          <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-            <div className="text-gray-400 text-sm mb-1">업데이트</div>
+          <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
+            <div className="text-gray-400 text-xs mb-1">업데이트</div>
             <div className="text-lg font-medium text-white">
-              {updatedAt
-                ? new Date(updatedAt).toLocaleTimeString("ko-KR")
-                : "--:--:--"}
+              {updatedAt ? new Date(updatedAt).toLocaleTimeString("ko-KR") : "--:--:--"}
             </div>
           </div>
         </div>
       )}
 
       {showFilters && (
-        <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700/50 mb-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div>
-              <label className="block text-gray-400 text-sm mb-2">
-                국내 거래소
-              </label>
-              <select
-                value={domesticExchange}
-                onChange={(e) => setDomesticExchange(e.target.value)}
-                className="w-full bg-slate-700 text-white rounded-lg px-4 py-2 border border-slate-600 focus:border-blue-500 focus:outline-none"
-              >
-                {DOMESTIC_EXCHANGES.map((ex) => (
-                  <option key={ex.id} value={ex.id}>
-                    {ex.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+        <div className="flex flex-wrap items-center gap-3 mb-4">
+          <select
+            value={domesticExchange}
+            onChange={(e) => setDomesticExchange(e.target.value)}
+            className="bg-slate-700 text-white rounded-lg px-3 py-2 border border-slate-600 focus:border-blue-500 focus:outline-none text-sm"
+          >
+            {DOMESTIC_EXCHANGES.map((ex) => (
+              <option key={ex.id} value={ex.id}>{ex.name}</option>
+            ))}
+          </select>
 
-            <div>
-              <label className="block text-gray-400 text-sm mb-2">
-                해외 거래소
-              </label>
-              <select
-                value={foreignExchange}
-                onChange={(e) => setForeignExchange(e.target.value)}
-                className="w-full bg-slate-700 text-white rounded-lg px-4 py-2 border border-slate-600 focus:border-blue-500 focus:outline-none"
-              >
-                {FOREIGN_EXCHANGES.map((ex) => (
-                  <option key={ex.id} value={ex.id}>
-                    {ex.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+          <select
+            value={foreignExchange}
+            onChange={(e) => setForeignExchange(e.target.value)}
+            className="bg-slate-700 text-white rounded-lg px-3 py-2 border border-slate-600 focus:border-blue-500 focus:outline-none text-sm"
+          >
+            {FOREIGN_EXCHANGES.map((ex) => (
+              <option key={ex.id} value={ex.id}>{ex.name}</option>
+            ))}
+          </select>
 
-            <div>
-              <label className="block text-gray-400 text-sm mb-2">검색</label>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="코인명, 심볼 검색..."
-                className="w-full bg-slate-700 text-white rounded-lg px-4 py-2 border border-slate-600 focus:border-blue-500 focus:outline-none"
-              />
-            </div>
-
-            <div>
-              <label className="block text-gray-400 text-sm mb-2">
-                프리미엄 필터
-              </label>
-              <select
-                value={premiumFilter}
-                onChange={(e) => setPremiumFilter(e.target.value)}
-                className="w-full bg-slate-700 text-white rounded-lg px-4 py-2 border border-slate-600 focus:border-blue-500 focus:outline-none"
-              >
-                <option value="all">전체</option>
-                <option value="high">높음 (3%+)</option>
-                <option value="medium">보통 (1~3%)</option>
-                <option value="low">낮음 (0~1%)</option>
-                <option value="negative">역프리미엄 (0% 미만)</option>
-              </select>
-            </div>
+          <div className="flex-1 min-w-[200px]">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="코인 검색 (이름, 심볼, 초성)"
+              className="w-full bg-slate-700 text-white rounded-lg px-3 py-2 border border-slate-600 focus:border-blue-500 focus:outline-none text-sm"
+            />
           </div>
         </div>
       )}
 
       {loading && data.length === 0 ? (
         <div className="flex items-center justify-center py-20">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
         </div>
       ) : error ? (
         <div className="bg-red-900/30 border border-red-700 rounded-lg p-4 text-red-400">
@@ -335,119 +323,140 @@ export default function PremiumTable({
       ) : (
         <div className="bg-slate-800/50 rounded-lg border border-slate-700/50 overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full text-sm">
               <thead>
-                <tr className="bg-slate-900/50 text-gray-400 text-sm">
+                <tr className="bg-slate-900/80 text-gray-400 text-xs">
                   <th
-                    className="px-4 py-3 text-left cursor-pointer hover:text-white transition-colors"
+                    className="px-3 py-2 text-left cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("symbol")}
                   >
-                    코인
-                    <SortIcon columnKey="symbol" />
-                  </th>
-                  <th className="px-4 py-3 text-right">
-                    {getDomesticName()} 가격
-                  </th>
-                  <th className="px-4 py-3 text-right">
-                    {getForeignName()} 가격
+                    코인명<SortIcon columnKey="symbol" />
                   </th>
                   <th
-                    className="px-4 py-3 text-right cursor-pointer hover:text-white transition-colors"
+                    className="px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    onClick={() => handleSort("koreanPrice")}
+                  >
+                    {getDomesticName()}<SortIcon columnKey="koreanPrice" />
+                  </th>
+                  <th className="px-3 py-2 text-right whitespace-nowrap">
+                    {getForeignName()}
+                  </th>
+                  <th
+                    className="px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("premium")}
                   >
-                    프리미엄
-                    <SortIcon columnKey="premium" />
+                    김프<SortIcon columnKey="premium" />
                   </th>
                   <th
-                    className="px-4 py-3 text-right cursor-pointer hover:text-white transition-colors"
+                    className="px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("change24h")}
                   >
-                    24h 변동
-                    <SortIcon columnKey="change24h" />
+                    전일대비<SortIcon columnKey="change24h" />
                   </th>
                   <th
-                    className="px-4 py-3 text-right cursor-pointer hover:text-white transition-colors"
+                    className="px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    onClick={() => handleSort("high24h")}
+                  >
+                    고가대비<SortIcon columnKey="high24h" />
+                  </th>
+                  <th
+                    className="px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    onClick={() => handleSort("low24h")}
+                  >
+                    저가대비<SortIcon columnKey="low24h" />
+                  </th>
+                  <th
+                    className="px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("volume24h")}
                   >
-                    24h 거래량
-                    <SortIcon columnKey="volume24h" />
+                    거래액<SortIcon columnKey="volume24h" />
                   </th>
-                  <th className="px-4 py-3 text-center">상세</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredAndSortedData.map((row, index) => (
-                  <tr
-                    key={row.symbol}
-                    className={`border-t border-slate-700/50 hover:bg-slate-700/30 transition-colors ${
-                      index % 2 === 0 ? "bg-slate-800/30" : ""
-                    }`}
-                  >
-                    <td className="px-4 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">
-                          {row.symbol.charAt(0)}
-                        </div>
-                        <div>
-                          <div className="text-white font-medium">
-                            {row.symbol}
-                          </div>
-                          <div className="text-gray-500 text-sm">{row.name}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-4 py-4 text-right">
-                      <div className="text-white font-medium">
-                        {formatKRW(row.koreanPrice)}
-                      </div>
-                    </td>
-                    <td className="px-4 py-4 text-right">
-                      <div className="text-gray-300">
-                        {formatUSD(row.globalPrice)}
-                      </div>
-                    </td>
-                    <td className="px-4 py-4 text-right">
-                      <div
-                        className={`font-bold ${getPremiumColor(row.premium)}`}
-                      >
-                        {row.premium >= 0 ? "+" : ""}
-                        {row.premium.toFixed(2)}%
-                      </div>
-                    </td>
-                    <td className="px-4 py-4 text-right">
-                      <div className={getChangeColor(row.change24h)}>
-                        {row.change24h >= 0 ? "+" : ""}
-                        {row.change24h.toFixed(2)}%
-                      </div>
-                    </td>
-                    <td className="px-4 py-4 text-right">
-                      <div className="text-gray-400">
-                        {formatVolume(row.volume24h)}
-                      </div>
-                    </td>
-                    <td className="px-4 py-4 text-center">
-                      <Link
-                        href={`/markets/${row.symbol}?domestic=${domesticExchange}&foreign=${foreignExchange}`}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-sm rounded-lg transition-colors"
-                      >
-                        차트
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
+                {filteredAndSortedData.map((row, index) => {
+                  const prevClose = row.koreanPrice / (1 + row.change24h / 100);
+                  const prevDiff = calcDiff(row.koreanPrice, prevClose);
+                  const highDiff = calcDiff(row.koreanPrice, row.high24h);
+                  const lowDiff = calcDiff(row.koreanPrice, row.low24h);
+                  
+                  return (
+                    <tr
+                      key={row.symbol}
+                      className={`border-t border-slate-700/50 hover:bg-slate-700/30 transition-colors ${
+                        index % 2 === 0 ? "bg-slate-800/30" : ""
+                      }`}
+                    >
+                      <td className="px-3 py-2">
+                        <button
+                          onClick={() => openCoinMarketCap(row.symbol)}
+                          className="flex items-center gap-2 hover:text-blue-400 transition-colors text-left"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 5l7 7-7 7"
-                          />
-                        </svg>
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
+                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">
+                            {row.symbol.charAt(0)}
+                          </div>
+                          <div>
+                            <div className="text-white font-medium text-sm">{row.name}</div>
+                            <div className="text-gray-500 text-xs">{row.symbol}</div>
+                          </div>
+                        </button>
+                      </td>
+                      <td className="px-3 py-2 text-right">
+                        <div className="text-white font-medium">₩{formatKRW(row.koreanPrice)}</div>
+                      </td>
+                      <td className="px-3 py-2 text-right">
+                        <div className="text-gray-300">{formatUSD(row.globalPrice)}</div>
+                      </td>
+                      <td className="px-3 py-2 text-right">
+                        <div className={`font-bold ${getPremiumColor(row.premium)}`}>
+                          {row.premium >= 0 ? "+" : ""}{row.premium.toFixed(2)}%
+                        </div>
+                      </td>
+                      <td className="px-3 py-2 text-right">
+                        <div className={getChangeColor(row.change24h)}>
+                          {row.change24h >= 0 ? "+" : ""}{row.change24h.toFixed(2)}%
+                        </div>
+                        {prevDiff.valid && (
+                          <div className={`text-xs ${getChangeColor(prevDiff.diff)}`}>
+                            {prevDiff.diff >= 0 ? "+" : ""}₩{formatKRW(Math.round(prevDiff.diff))}
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-3 py-2 text-right">
+                        {highDiff.valid ? (
+                          <>
+                            <div className={getChangeColor(highDiff.percent)}>
+                              {highDiff.percent >= 0 ? "+" : ""}{highDiff.percent.toFixed(2)}%
+                            </div>
+                            <div className={`text-xs ${getChangeColor(highDiff.diff)}`}>
+                              {highDiff.diff >= 0 ? "+" : ""}₩{formatKRW(Math.round(highDiff.diff))}
+                            </div>
+                          </>
+                        ) : (
+                          <div className="text-gray-500">-</div>
+                        )}
+                      </td>
+                      <td className="px-3 py-2 text-right">
+                        {lowDiff.valid ? (
+                          <>
+                            <div className={getChangeColor(lowDiff.percent)}>
+                              {lowDiff.percent >= 0 ? "+" : ""}{lowDiff.percent.toFixed(2)}%
+                            </div>
+                            <div className={`text-xs ${getChangeColor(lowDiff.diff)}`}>
+                              {lowDiff.diff >= 0 ? "+" : ""}₩{formatKRW(Math.round(lowDiff.diff))}
+                            </div>
+                          </>
+                        ) : (
+                          <div className="text-gray-500">-</div>
+                        )}
+                      </td>
+                      <td className="px-3 py-2 text-right">
+                        <div className="text-gray-300">₩{formatVolumeKRW(row.volume24h * fxRate)}</div>
+                        <div className="text-xs text-gray-500">${formatVolumeUSD(row.volume24h)}</div>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
