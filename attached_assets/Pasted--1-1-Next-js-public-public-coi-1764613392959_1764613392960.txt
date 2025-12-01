@@ -1,0 +1,66 @@
+목표:
+1) 앞으로 코인 아이콘을 다음 우선순위로 사용하도록 구조를 정리하고 싶다.
+   - 1순위: Next.js public 폴더에 있는 로컬 아이콘 (/public/coins/{SYMBOL}.png)
+   - 2순위: 현재 COIN_ID_MAP + CDN을 통한 외부 아이콘 (지금 있는 로직 그대로)
+   - 3순위: 최종 폴백인 그라데이션 배지
+
+2) 이렇게 만들어두면,
+   - 나중에 /public/coins/BTC.png 같은 파일만 추가해도
+     KimpAI 화면에서 자동으로 공식 로고가 적용되도록 만들 수 있다.
+
+요청 사항:
+
+1) public/coins 구조 준비
+--------------------------------
+- 프로젝트 루트 기준으로 `public/coins` 폴더가 없다면 만들어줘.
+  예: /public/coins
+- 지금 당장 실제 아이콘 이미지를 넣을 필요는 없고,
+  테스트 용도로 `btc.png` 같은 더미 파일 하나만 넣어도 된다.
+  (existence 체크만 제대로 되면 됨)
+
+2) CoinIcon.tsx에 로컬 아이콘 우선 로직 추가
+-----------------------------------------------
+- CoinIcon.tsx에서 symbol을 normalize한 뒤,
+  아래 우선순위로 아이콘을 찾도록 로직을 변경해줘.
+
+  1순위: public/coins/{SYMBOL}.png
+    - 예: symbol이 "BTC"라면, "/coins/BTC.png" 경로를 먼저 시도
+    - Next.js 기준으로는 <Image src={`/coins/${symbol}.png`} ...> 형태 사용 가능
+    - 파일 존재 여부는 try/catch 또는 onError 핸들러에서 처리해도 좋다.
+      (파일이 없으면 자동으로 2순위 로직으로 폴백)
+
+  2순위: 현재 COIN_ID_MAP + CDN 체인
+    - 이미 구현된 COIN_ID_MAP, CDN 우선순위, CoinGecko, CryptoCompare 로직은 그대로 유지하되,
+      "로컬 아이콘이 실패한 경우"에만 동작하도록 순서를 뒤로 밀어줘.
+
+  3순위: 그라데이션 폴백
+    - 이미 있는 그라데이션 배지 로직은 최종 폴백으로 그대로 둔다.
+
+- 정리하면,
+  CoinIcon.tsx에서 대략 이런 순서로 렌더링되도록 구현해줘:
+
+  1. normalizeSymbol(symbol) → key
+  2. `/coins/${key}.png` 로컬 파일 시도
+     - 성공하면 그 이미지 렌더
+  3. 실패하면 현재 외부 CDN / COIN_ID_MAP 기반 아이콘 로직 실행
+  4. 그래도 실패하면 그라데이션 폴백 렌더
+
+3) loggedMissingIcons / 디버그 출력 유지
+-----------------------------------------
+- 현재 dev 모드에서 [CoinIcon] missing icon 로그를 찍는
+  loggedMissingIcons Set / console.warn 로직은 그대로 유지해줘.
+- 다만, 로컬 아이콘까지 포함해서 "정말로 아무 아이콘도 못 찾았을 때"만
+  missing icon 경고가 찍히도록 정리해주면 좋겠다.
+  (즉, /public/coins, CDN, COIN_ID_MAP, 아무 데서도 못 찾을 때만 경고)
+
+4) PremiumTable 및 다른 파일은 수정 금지
+-----------------------------------------
+- PremiumTable.tsx, API, TradingView 관련 파일은 이번 작업에서 수정하지 마.
+- 오직 CoinIcon.tsx와 필요한 최소한의 보조 파일(public/coins 폴더 등)만 다뤄줘.
+
+완료 기준:
+- 코드 상으로는 CoinIcon이 다음과 같은 우선순위를 가지면 된다:
+  1) /coins/{SYMBOL}.png (로컬) → 2) 외부 CDN/COIN_ID_MAP → 3) 그라데이션 폴백
+- 워크플로우 재시작 후에도 기존 기능은 그대로 동작해야 하고,
+  public/coins에 아이콘 이미지를 추가했을 때
+  해당 심볼의 코인 아이콘이 바로 로컬 이미지로 교체되면 성공이다.

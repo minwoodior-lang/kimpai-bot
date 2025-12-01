@@ -586,17 +586,23 @@ export default function CoinIcon({ symbol, size = 'md', className = '' }: CoinIc
   const gradient = GRADIENT_COLORS[upperSymbol] || 'from-slate-500 to-slate-600';
   const coingeckoId = COIN_ID_MAP[upperSymbol];
   
-  // 우선순위 기반 CDN URL 목록
+  // 우선순위 기반 아이콘 URL 목록
+  // 1순위: 로컬 아이콘 (/public/coins/{SYMBOL}.png)
+  // 2순위: 외부 CDN (cryptocurrency-icons, spothq, CoinCap 등)
+  // 3순위: 그라데이션 폴백 (hasError=true)
+  const localIconPath = `/coins/${upperSymbol}.png`;
   const cdnUrls = [
-    // 1순위: cryptocurrency-icons (가장 안정적)
+    // 1순위: 로컬 아이콘 (public/coins 폴더)
+    localIconPath,
+    // 2순위: cryptocurrency-icons (가장 안정적)
     `https://cdn.jsdelivr.net/npm/cryptocurrency-icons@0.18.1/32/color/${lowerSymbol}.png`,
-    // 2순위: spothq GitHub (백업)
+    // 3순위: spothq GitHub (백업)
     `https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/${lowerSymbol}.png`,
-    // 3순위: CoinCap (대부분 커버)
+    // 4순위: CoinCap (대부분 커버)
     `https://static.coincap.io/assets/icons/${lowerSymbol}@2x.png`,
-    // 4순위: CoinGecko ID 기반 (매핑된 코인만)
+    // 5순위: CoinGecko ID 기반 (매핑된 코인만)
     coingeckoId ? `https://assets.coingecko.com/coins/images/1/small/${coingeckoId}.png` : null,
-    // 5순위: CryptoCompare
+    // 6순위: CryptoCompare
     `https://www.cryptocompare.com/media/37746251/${lowerSymbol}.png`,
   ].filter(Boolean) as string[];
 
