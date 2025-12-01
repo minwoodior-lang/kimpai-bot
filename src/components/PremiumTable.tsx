@@ -563,7 +563,7 @@ export default function PremiumTable({
       {showFilters && (
         <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-4 text-sm">
           <div className="flex items-center gap-1">
-            <span className="text-gray-400 text-xs hidden md:inline">기준</span>
+            <span className="text-gray-400 text-xs">기준거래소</span>
             <MiniDropdown
               value={domesticExchange}
               options={DOMESTIC_EXCHANGES}
@@ -574,7 +574,7 @@ export default function PremiumTable({
           <span className="text-gray-500">↔</span>
 
           <div className="flex items-center gap-1">
-            <span className="text-gray-400 text-xs hidden md:inline">해외</span>
+            <span className="text-gray-400 text-xs">해외거래소</span>
             <MiniDropdown
               value={foreignExchange}
               options={FOREIGN_EXCHANGES}

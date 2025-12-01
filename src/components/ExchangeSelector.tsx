@@ -113,7 +113,7 @@ export default function ExchangeSelector({ compact = false, showLabels = true }:
   return (
     <div className={`flex ${compact ? "gap-2" : "gap-4"} items-center flex-wrap`}>
       <div className="flex items-center gap-2">
-        {showLabels && <span className="text-slate-400 text-xs hidden md:inline">기준</span>}
+        {showLabels && <span className="text-slate-400 text-xs">기준거래소</span>}
         <CustomDropdown
           value={domesticExchange}
           options={domesticOptions}
@@ -124,7 +124,7 @@ export default function ExchangeSelector({ compact = false, showLabels = true }:
       <span className="text-slate-500 text-lg">↔</span>
 
       <div className="flex items-center gap-2">
-        {showLabels && <span className="text-slate-400 text-xs hidden md:inline">해외</span>}
+        {showLabels && <span className="text-slate-400 text-xs">해외거래소</span>}
         <CustomDropdown
           value={foreignExchange}
           options={foreignOptions}
