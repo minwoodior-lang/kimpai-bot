@@ -21,6 +21,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'coin-images.coingecko.com',
       },
+      {
+        protocol: 'https',
+        hostname: 's2.coinmarketcap.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+      },
     ],
   },
   async headers() {
