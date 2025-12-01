@@ -424,6 +424,9 @@ interface CoinIconProps {
   className?: string;
 }
 
+// 개발 모드에서 누락된 아이콘 추적 (중복 로그 방지)
+const loggedMissingIcons = new Set<string>();
+
 export default function CoinIcon({ symbol, size = 'md', className = '' }: CoinIconProps) {
   const [cdnIndex, setCdnIndex] = React.useState(0);
   const [hasError, setHasError] = React.useState(false);
@@ -470,10 +473,13 @@ export default function CoinIcon({ symbol, size = 'md', className = '' }: CoinIc
     }
   };
 
-  // 개발 모드에서 폴백 발생 시 콘솔 경고
+  // 개발 모드에서 폴백 발생 시 콘솔 경고 (중복 방지)
   useEffect(() => {
     if (hasError && process.env.NODE_ENV === 'development') {
-      console.warn('[CoinIcon] missing icon for symbol:', upperSymbol, '| original:', symbol);
+      if (!loggedMissingIcons.has(upperSymbol)) {
+        loggedMissingIcons.add(upperSymbol);
+        console.warn('[CoinIcon] missing icon for symbol:', upperSymbol, '| original:', symbol);
+      }
     }
   }, [hasError, upperSymbol, symbol]);
 
