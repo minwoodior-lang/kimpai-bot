@@ -67,24 +67,48 @@ const FOREIGN_EXCHANGES = CONTEXT_FOREIGN_EXCHANGES.map(ex => ({
 
 const CHOSUNG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
 
+const COIN_ID_MAP: Record<string, string> = {
+  'BTC': 'bitcoin', 'ETH': 'ethereum', 'XRP': 'ripple', 'SOL': 'solana',
+  'DOGE': 'dogecoin', 'ADA': 'cardano', 'AVAX': 'avalanche-2', 'SHIB': 'shiba-inu',
+  'DOT': 'polkadot', 'LINK': 'chainlink', 'TRX': 'tron', 'MATIC': 'matic-network',
+  'UNI': 'uniswap', 'ATOM': 'cosmos', 'LTC': 'litecoin', 'ETC': 'ethereum-classic',
+  'XLM': 'stellar', 'BCH': 'bitcoin-cash', 'NEAR': 'near', 'APT': 'aptos',
+  'FIL': 'filecoin', 'ICP': 'internet-computer', 'HBAR': 'hedera-hashgraph',
+  'VET': 'vechain', 'ARB': 'arbitrum', 'OP': 'optimism', 'SAND': 'the-sandbox',
+  'MANA': 'decentraland', 'AAVE': 'aave', 'GRT': 'the-graph', 'AXS': 'axie-infinity',
+  'ENS': 'ethereum-name-service', 'ALGO': 'algorand', 'EOS': 'eos', 'XTZ': 'tezos',
+  'FLOW': 'flow', 'THETA': 'theta-token', 'KLAY': 'klaytn', 'IMX': 'immutable-x',
+  'USDT': 'tether', 'USDC': 'usd-coin', 'SUI': 'sui', 'SEI': 'sei-network',
+};
+
 function CoinIcon({ symbol }: { symbol: string }) {
+  const [imgSrc, setImgSrc] = React.useState<string | null>(null);
   const [hasError, setHasError] = React.useState(false);
-  const lowercaseSymbol = symbol.toLowerCase();
+  const upperSymbol = symbol.toUpperCase();
   
   const gradientColors: Record<string, string> = {
-    'btc': 'from-orange-500 to-yellow-500',
-    'eth': 'from-blue-500 to-purple-500',
-    'xrp': 'from-gray-500 to-blue-500',
-    'sol': 'from-purple-500 to-green-500',
-    'doge': 'from-yellow-400 to-yellow-600',
-    'ada': 'from-blue-600 to-blue-400',
-    'usdt': 'from-green-500 to-green-700',
-    'usdc': 'from-blue-400 to-blue-600',
+    'BTC': 'from-orange-500 to-yellow-500',
+    'ETH': 'from-indigo-500 to-purple-500',
+    'XRP': 'from-gray-400 to-blue-500',
+    'SOL': 'from-purple-500 to-green-400',
+    'DOGE': 'from-yellow-400 to-amber-500',
+    'ADA': 'from-blue-600 to-cyan-400',
+    'USDT': 'from-green-500 to-emerald-600',
+    'USDC': 'from-blue-400 to-blue-600',
   };
   
-  const gradient = gradientColors[lowercaseSymbol] || 'from-blue-500 to-purple-500';
+  const gradient = gradientColors[upperSymbol] || 'from-blue-500 to-purple-500';
+
+  React.useEffect(() => {
+    const coinId = COIN_ID_MAP[upperSymbol];
+    if (coinId) {
+      setImgSrc(`https://assets.coingecko.com/coins/images/1/small/${coinId === 'bitcoin' ? 'bitcoin' : coinId}.png`);
+    } else {
+      setImgSrc(`https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/${symbol.toLowerCase()}.png`);
+    }
+  }, [symbol, upperSymbol]);
   
-  if (hasError) {
+  if (hasError || !imgSrc) {
     return (
       <div className={`w-6 h-6 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center text-white font-bold text-xs flex-shrink-0`}>
         {symbol.charAt(0)}
@@ -94,7 +118,7 @@ function CoinIcon({ symbol }: { symbol: string }) {
   
   return (
     <img
-      src={`https://cryptoicons.org/api/icon/${lowercaseSymbol}/32`}
+      src={imgSrc}
       alt={symbol}
       className="w-6 h-6 rounded-full flex-shrink-0"
       onError={() => setHasError(true)}
@@ -141,7 +165,7 @@ export default function PremiumTable({
   showHeader = true,
   showFilters = true,
   limit = 0,
-  refreshInterval = 2000,
+  refreshInterval = 1000,
 }: PremiumTableProps) {
   const [data, setData] = useState<PremiumData[]>([]);
   const [averagePremium, setAveragePremium] = useState(0);
@@ -435,34 +459,60 @@ export default function PremiumTable({
       )}
 
       {showFilters && (
-        <div className="flex flex-wrap items-center gap-3 mb-4">
-          <select
-            value={domesticExchange}
-            onChange={(e) => setDomesticExchange(e.target.value)}
-            className="bg-slate-700 text-white rounded-lg px-3 py-2 border border-slate-600 focus:border-blue-500 focus:outline-none text-sm"
-          >
-            {DOMESTIC_EXCHANGES.map((ex) => (
-              <option key={ex.id} value={ex.id}>{ex.name}</option>
-            ))}
-          </select>
+        <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-4 text-sm">
+          <div className="flex items-center gap-1">
+            <span className="text-gray-400 text-xs hidden md:inline">기준</span>
+            <div className="flex items-center gap-1 bg-slate-700 rounded-lg px-2 py-1.5 border border-slate-600">
+              <img 
+                src={DOMESTIC_EXCHANGES.find(e => e.id === domesticExchange)?.logo || '/exchanges/upbit.svg'} 
+                alt="" 
+                className="w-4 h-4"
+              />
+              <select
+                value={domesticExchange}
+                onChange={(e) => setDomesticExchange(e.target.value)}
+                className="bg-transparent text-white focus:outline-none text-sm cursor-pointer"
+              >
+                {DOMESTIC_EXCHANGES.map((ex) => (
+                  <option key={ex.id} value={ex.id}>{ex.name.replace('🇰🇷 ', '')}</option>
+                ))}
+              </select>
+            </div>
+          </div>
 
-          <select
-            value={foreignExchange}
-            onChange={(e) => setForeignExchange(e.target.value)}
-            className="bg-slate-700 text-white rounded-lg px-3 py-2 border border-slate-600 focus:border-blue-500 focus:outline-none text-sm"
-          >
-            {FOREIGN_EXCHANGES.map((ex) => (
-              <option key={ex.id} value={ex.id}>{ex.name}</option>
-            ))}
-          </select>
+          <span className="text-gray-500">↔</span>
 
-          <div className="flex-1 min-w-[200px]">
+          <div className="flex items-center gap-1">
+            <span className="text-gray-400 text-xs hidden md:inline">해외</span>
+            <div className="flex items-center gap-1 bg-slate-700 rounded-lg px-2 py-1.5 border border-slate-600">
+              <img 
+                src={FOREIGN_EXCHANGES.find(e => e.id === foreignExchange)?.logo || '/exchanges/binance.svg'} 
+                alt="" 
+                className="w-4 h-4"
+              />
+              <select
+                value={foreignExchange}
+                onChange={(e) => setForeignExchange(e.target.value)}
+                className="bg-transparent text-white focus:outline-none text-sm cursor-pointer"
+              >
+                {FOREIGN_EXCHANGES.map((ex) => (
+                  <option key={ex.id} value={ex.id}>{ex.shortName}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div className="hidden md:flex items-center text-gray-400 text-xs px-2">
+            <span>암호화폐 <span className="text-white font-medium">{totalCoins}</span>개</span>
+          </div>
+
+          <div className="flex-1 min-w-[120px] md:min-w-[200px]">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="예: BTC, 비트코인, ㅂㅌ"
-              className="w-full bg-slate-700 text-white rounded-lg px-3 py-2 border border-slate-600 focus:border-blue-500 focus:outline-none text-sm"
+              placeholder="검색: BTC, ㅂㅌ"
+              className="w-full bg-slate-700 text-white rounded-lg px-2 md:px-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-sm"
             />
           </div>
         </div>
@@ -481,15 +531,17 @@ export default function PremiumTable({
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-slate-900/80 text-gray-400 text-xs">
+                <tr className="bg-slate-900/80 text-gray-400 text-[10px] md:text-xs">
                   <th
-                    className="px-2 md:px-3 py-2 text-left cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    className="px-1 md:px-3 py-1.5 md:py-2 text-left cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("symbol")}
                   >
-                    코인명<SortIcon columnKey="symbol" />
+                    <span className="hidden md:inline">코인명</span>
+                    <span className="md:hidden">코인</span>
+                    <SortIcon columnKey="symbol" />
                   </th>
                   <th
-                    className="px-2 md:px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    className="px-1 md:px-3 py-1.5 md:py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("koreanPrice")}
                   >
                     <span className="hidden md:inline">{getDomesticName()}</span>
@@ -500,13 +552,13 @@ export default function PremiumTable({
                     {getForeignName()}
                   </th>
                   <th
-                    className="px-2 md:px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    className="px-1 md:px-3 py-1.5 md:py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("premium")}
                   >
                     김프<SortIcon columnKey="premium" />
                   </th>
                   <th
-                    className="px-2 md:px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    className="px-1 md:px-3 py-1.5 md:py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("change24h")}
                   >
                     <span className="hidden md:inline">전일대비</span>
@@ -526,7 +578,7 @@ export default function PremiumTable({
                     저가대비(24h)<SortIcon columnKey="low24h" />
                   </th>
                   <th
-                    className="px-2 md:px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    className="px-1 md:px-3 py-1.5 md:py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("volume24hKrw")}
                   >
                     <span className="hidden md:inline">거래액(일)</span>
@@ -553,44 +605,46 @@ export default function PremiumTable({
                         index % 2 === 0 ? "bg-slate-800/30" : ""
                       }`}
                     >
-                      <td className="px-3 py-2">
-                        <div className="flex items-center gap-2">
+                      <td className="px-1 md:px-3 py-1.5 md:py-2">
+                        <div className="flex items-center gap-1 md:gap-2">
                           <button
                             onClick={() => toggleFavorite(row.symbol)}
-                            className={`text-lg transition-colors ${favorites.has(row.symbol) ? 'text-yellow-400' : 'text-gray-600 hover:text-yellow-400'}`}
+                            className={`text-sm md:text-lg transition-colors flex-shrink-0 ${favorites.has(row.symbol) ? 'text-yellow-400' : 'text-gray-600 hover:text-yellow-400'}`}
                             title={favorites.has(row.symbol) ? "즐겨찾기 해제" : "즐겨찾기 추가"}
                           >
                             {favorites.has(row.symbol) ? '★' : '☆'}
                           </button>
-                          <CoinIcon symbol={row.symbol} />
+                          <div className="hidden md:block">
+                            <CoinIcon symbol={row.symbol} />
+                          </div>
                           <button
                             onClick={() => openCoinMarketCap(row.symbol, row.cmcSlug)}
-                            className="flex flex-col hover:text-blue-400 transition-colors text-left"
+                            className="flex flex-col hover:text-blue-400 transition-colors text-left min-w-0"
                           >
-                            <div className="text-white font-medium text-sm">{row.koreanName}</div>
-                            <div className="text-gray-500 text-xs">{row.symbol}</div>
+                            <div className="text-white font-medium text-xs md:text-sm truncate">{row.koreanName}</div>
+                            <div className="text-gray-500 text-[10px] md:text-xs">{row.symbol}</div>
                           </button>
                           <button
                             onClick={() => toggleChart(row.symbol)}
-                            className={`p-1 transition-colors ${expandedSymbol === row.symbol ? 'text-blue-400' : 'text-gray-500 hover:text-blue-400'}`}
+                            className={`p-0.5 md:p-1 transition-colors flex-shrink-0 ${expandedSymbol === row.symbol ? 'text-blue-400' : 'text-gray-500 hover:text-blue-400'}`}
                             title={expandedSymbol === row.symbol ? "차트 닫기" : "차트 열기"}
                           >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
                             </svg>
                           </button>
                           {!row.isListed && (
-                            <span className="text-xs text-orange-400 bg-orange-400/20 px-1.5 py-0.5 rounded">미상장</span>
+                            <span className="text-[8px] md:text-xs text-orange-400 bg-orange-400/20 px-1 py-0.5 rounded flex-shrink-0">미상장</span>
                           )}
                         </div>
                       </td>
-                      <td className={`px-2 md:px-3 py-2 text-right ${getFlashClass(row.symbol, "price")}`}>
-                        <div className="text-white font-medium">₩{formatKrwPrice(row.koreanPrice)}</div>
-                        <div className="md:hidden text-xs text-gray-500">
-                          {row.globalPrice !== null ? (
-                            <span>{formatUsdtPrice(row.globalPrice)}</span>
+                      <td className={`px-1 md:px-3 py-2 text-right ${getFlashClass(row.symbol, "price")}`}>
+                        <div className="text-white font-medium text-xs md:text-sm">₩{formatKrwPrice(row.koreanPrice)}</div>
+                        <div className="md:hidden text-[10px] text-gray-500">
+                          {row.globalPriceKrw !== null && row.globalPrice !== null ? (
+                            <span>₩{formatKrwPrice(row.globalPriceKrw)} / ${formatUsdtPrice(row.globalPrice)}</span>
                           ) : (
-                            <span>-</span>
+                            <span className="text-gray-600">-</span>
                           )}
                         </div>
                       </td>
@@ -604,19 +658,19 @@ export default function PremiumTable({
                           <div className="text-gray-500">-</div>
                         )}
                       </td>
-                      <td className={`px-2 md:px-3 py-2 text-right ${getFlashClass(row.symbol, "premium")}`}>
+                      <td className={`px-1 md:px-3 py-1.5 md:py-2 text-right ${getFlashClass(row.symbol, "premium")}`}>
                         {row.premium !== null ? (
-                          <div className={`font-bold ${getPremiumColor(row.premium)}`}>
+                          <div className={`font-bold text-xs md:text-sm ${getPremiumColor(row.premium)}`}>
                             {row.premium >= 0 ? "+" : ""}{row.premium.toFixed(2)}%
                           </div>
                         ) : (
-                          <div className="text-gray-500">-</div>
+                          <div className="text-gray-500 text-xs">-</div>
                         )}
                       </td>
-                      <td className="px-2 md:px-3 py-2 text-right">
+                      <td className="px-1 md:px-3 py-1.5 md:py-2 text-right">
                         {row.change24h !== null ? (
                           <>
-                            <div className={getChangeColor(row.change24h)}>
+                            <div className={`text-xs md:text-sm ${getChangeColor(row.change24h)}`}>
                               {row.change24h >= 0 ? "+" : ""}{row.change24h.toFixed(2)}%
                             </div>
                             <div className={`hidden md:block text-xs ${getChangeColor(prevDiff.diff)}`}>
@@ -626,7 +680,7 @@ export default function PremiumTable({
                             </div>
                           </>
                         ) : (
-                          <div className="text-gray-500">-</div>
+                          <div className="text-gray-500 text-xs">-</div>
                         )}
                       </td>
                       <td className="hidden lg:table-cell px-3 py-2 text-right">
@@ -657,9 +711,9 @@ export default function PremiumTable({
                           <div className="text-gray-500">-</div>
                         )}
                       </td>
-                      <td className="px-2 md:px-3 py-2 text-right">
+                      <td className="px-1 md:px-3 py-1.5 md:py-2 text-right">
                         <div className="flex flex-col items-end leading-tight">
-                          <span className="text-gray-300 text-xs md:text-sm">
+                          <span className="text-gray-300 text-[10px] md:text-sm">
                             ₩{formatVolumeKRW(row.volume24hKrw)}
                             <span className="hidden md:inline ml-1 text-xs text-gray-500">(국내)</span>
                           </span>
