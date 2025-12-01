@@ -564,7 +564,7 @@ export default function PremiumTable({
         <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-4 text-sm">
           <div className="flex flex-col items-center gap-0.5">
             <span className="text-gray-400 text-[10px] md:text-xs whitespace-nowrap flex items-center gap-1">
-              기준 거래소 <span className="inline-block w-4 h-3 bg-white rounded-sm relative overflow-hidden border border-gray-300"><span className="absolute inset-0 flex items-center justify-center"><span className="w-2 h-2 rounded-full bg-red-500 flex items-center justify-center"><span className="w-1 h-1 rounded-full bg-blue-600"></span></span></span></span>
+              기준 거래소 <img src="https://flagcdn.com/w20/kr.png" alt="🇰🇷" className="w-4 h-3 object-cover rounded-sm" />
             </span>
             <MiniDropdown
               value={domesticExchange}
