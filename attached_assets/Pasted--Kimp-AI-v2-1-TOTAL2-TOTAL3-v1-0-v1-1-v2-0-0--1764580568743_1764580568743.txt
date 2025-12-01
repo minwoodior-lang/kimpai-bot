@@ -1,0 +1,235 @@
+🚀 Kimp AI – 최종 개발 지시문 v2.1 (TOTAL2/TOTAL3 보완 포함)
+📌 이 문서는 v1.0/v1.1/v2.0을 모두 대체하는 “최종 기준”입니다.
+🔷 0. 프로젝트 핵심 목표
+
+김프가(kimpga.com) 홈 화면 UX → 99% 동일하게 복제
+
+차별화는 오직 AI 분석 기능에서만 발생하도록 한다.
+
+데이터 속도는 무료/유료 동일하게 1~2초 실시간 제공.
+
+🔷 1. 페이지 및 컴포넌트 구조
+1-1. PremiumTable 컴포넌트화
+
+/premium.tsx의 테이블 + 필터 UI를
+src/components/PremiumTable.tsx로 분리.
+
+export type PremiumTableProps = {
+  showHeader?: boolean;
+  showFilters?: boolean;
+  limit?: number;
+};
+
+1-2. 홈(/) 적용
+<PremiumTable
+  showHeader={false}
+  showFilters={true}
+  limit={0}
+/>
+
+1-3. Premium 페이지 처리
+
+네비게이션에서 Premium 메뉴 제거
+
+/premium 페이지는 유지(고급 모드로 재사용 가능)
+
+🔷 2. 홈 상단 레이아웃 (김프가 동일)
+<div className="flex flex-col lg:flex-row gap-4">
+  <div className="flex-1">
+    {/* 차트 프리셋 드롭다운 + TradingView 차트 */}
+  </div>
+
+  <div className="w-full lg:w-[320px]">
+    <AIInsightBox />
+  </div>
+</div>
+
+
+좌측: 차트
+
+우측: AI 요약 카드
+
+🔷 3. 차트 프리셋 드롭다운 – 최종 12종 구성
+
+(김프가 7종 + TOTAL 지표 3종 + 선택 2종)
+
+아래 12개를 드롭다운에 구성합니다.
+
+🟦 김프가 기반 필수 7종
+
+BTC Binance
+
+BTC 김치프리미엄 (Upbit)
+
+BTC 김치프리미엄 (Bithumb)
+
+BTC Coinbase Premium
+
+BTC Longs
+
+BTC Shorts
+
+BTC Dominance
+
+🟩 정석 시장 지표 (필수 추가)
+
+TOTAL Market Cap (BTC 포함 전체)
+
+TOTAL2 Market Cap (BTC 제외 전체 알트)
+
+TOTAL3 Market Cap (BTC & ETH 제외 순수 알트)
+
+🟣 우리가 넣으면 차별화되는 선택 확장
+
+ALT Dominance
+
+Korea Premium Index (향후 우리 custom)
+
+3-2. 프리셋 타입
+type ChartPreset = {
+  id: string;
+  label: string;
+  tvSymbol?: string;
+};
+
+3-3. 프리셋 상태 관리
+const [chartPreset, setChartPreset] = useState<ChartPreset>(CHART_PRESETS[0]);
+
+3-4. TradingView 타임프레임
+
+1m / 3m / 5m / 15m / 30m / 45m
+
+1H / 2H / 3H / 4H
+
+1D / 1W / 1M / 3M / 6M / 12M
+
+Range (1 / 10 / 100 / 1000)
+
+🔷 4. 테이블 상단 컨트롤 바
+김프가와 100% 동일하게:
+
+국내 거래소 드롭다운
+
+해외 거래소 드롭다운
+→ 두 개는 서로 독립 선택
+
+검색 기능
+
+4가지 모두 지원 (실시간 필터):
+
+한글명 “리플”
+
+초성 “ㄹㅍ”
+
+심볼 “XRP”
+
+한 글자 “x”
+
+🔷 5. 테이블 본문 (김프가 완전 복제)
+컬럼 구성 (순서 동일)
+
+코인명 (한글+심볼)
+
+현재가(국내)
+
+해외가
+
+김프 %
+
+전일대비(위 %, 아래 원)
+
+고가대비(52주)
+
+저가대비(52주)
+
+거래액(국내/해외)
+
+동작
+
+행 클릭: 동작 없음
+
+코인명 클릭 → CoinMarketCap 새창
+
+열 제목 클릭 → 오름/내림 정렬
+
+스크롤 구조
+
+페이지네이션 없음
+
+전체 리스트 렌더링
+
+김프가와 동일하게 스크롤만 길어지는 구조
+
+🔷 6. 데이터 갱신 전략 (서버 보호 포함)
+핵심 정책
+
+무료·유료 모두 동일한 1~2초 실시간 업데이트 제공
+속도 차별 없음
+
+기술 구현
+
+WebSocket or 1~2초 polling
+
+전체 리렌더 금지 → 값만 갱신
+
+서버 보호용 Rate Limit (모든 유저 공통 적용)
+GET /api/premium/table  
+→ 2초당 1회 요청 허용 (IP 기반)
+
+폐기되는 로직
+
+무료/유료 속도 차등 로직 전면 폐기
+
+🔷 7. Stripe 결제·인증 보안 (감리 요청사항)
+Stripe Webhook 보안 필수
+
+/api/webhooks/stripe에서 다음 적용:
+
+Webhook Secret 기반 signature 검증
+
+timestamp + signature + payload 비교
+
+실패 시 즉시 400
+
+결제 상태 업데이트는 검증 성공 후에만 진행
+
+이 로직은 최우선 적용해야 함.
+
+🔷 8. AIInsightBox (AI 요약 박스) 유료화 구조
+🟢 무료 제공 구간
+
+현재 시장 요약 1~2줄
+
+“KR Premium Score N/10” 같은 위험도 지수
+
+🔒 PRO 전용 구간 (유료 차별화 핵심)
+
+PRO 분석 미리보기(마스킹 처리)
+
+“48시간 김프 예상 패턴” 등 핵심 내용 잠금
+
+클릭 시 /pricing 이동
+
+user.plan === “free” → 잠금
+
+user.plan === “pro” → 전체 로딩
+
+🔷 9. 모바일 UX
+
+상단 차트 전체폭
+
+드롭다운 2개
+
+검색바
+
+테이블 가로 스크롤
+
+전체 흐름 김프가와 동일하게 유지
+
+🔷 10. 최종 요약 (개발자용 3줄)
+
+UX·테이블·검색·차트 구조는 김프가와 99% 동일
+
+실시간 데이터 속도는 무료·유료 동일(1~2초)
+
+유료 기능은 AI 분석에서만 발생 (Analysis + InsightBox)

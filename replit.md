@@ -29,9 +29,22 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 - **AI-powered Analysis**: Daily AI reports providing market insights.
 - **User Alerts**: CRUD operations for managing price alerts with user-specific filtering.
 - **Multi-Exchange Data**: Supports 10+ domestic and foreign exchanges for comprehensive data.
-- **Interactive Charts**: TradingView charts and custom SVG premium history charts with dynamic symbol and exchange selection.
+- **Interactive Charts**: TradingView charts with 9 preset views (BTC 바이낸스, BTC 김프 업비트/빗썸, 코인베이스 프리미엄, 롱/숏 포지션, 도미넌스).
+- **Advanced Search**: Korean initial consonant (초성) search support (e.g., ㅂㅋ → 비트코인).
+- **Comparison Metrics**: 전일대비, 고가대비, 저가대비 columns with % and KRW values.
+- **Localized Volume Formatting**: KRW (만/억/조) and USD (K/M/B) with proper currency prefixes.
+- **CoinMarketCap Integration**: Direct links on coin names for external reference.
+- **2-Second Data Refresh**: Real-time feel with rapid data updates.
 - **User Authentication**: Secure signup and login with Supabase, protecting pro-user features.
 - **Admin Interface**: Dedicated admin dashboard for management.
+
+### Recent Changes (2025-12-01)
+- Replicated Kimpga.com homepage layout (chart left, AI box right, table below)
+- Added 9 TradingView chart presets with unique symbols
+- Implemented Korean 초성 search with getChosung() function
+- Added null-safe calcDiff() for comparison metrics
+- Created separate volume formatters for KRW and USD currencies
+- Reduced data refresh interval from 5 seconds to 2 seconds
 
 ### System Design Choices
 - **Client-side Auth Guards**: Implemented for protected pages using Supabase.
