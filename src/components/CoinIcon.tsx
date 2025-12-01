@@ -354,6 +354,7 @@ export const COIN_ID_MAP: Record<string, string> = {
   'ERA': 'era-swap-token',
   'CYBER': 'cyberconnect',
   'ARKM': 'arkham-intelligence-usd',
+  'STG': 'stargate-finance',
 };
 
 // 심볼별 그라데이션 컬러 (폴백용)
