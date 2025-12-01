@@ -102,59 +102,73 @@ const AIInsightBox = () => {
       </div>
 
       {!isPro && (
-        <div className="border-t border-slate-700 p-4 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
-          <div className="relative overflow-hidden rounded-lg">
-            <div className="blur-[6px] select-none pointer-events-none p-4 bg-slate-900/50">
-              <div className="text-sm text-slate-400 mb-3 font-medium">📈 48시간 김프 예측</div>
-              <div className="space-y-2 text-sm text-slate-500">
-                <p>• 예상 상승: BTC +3.2% → +4.1%</p>
-                <p>• 추세 신호: 상승 지속 가능성 높음</p>
-                <p>• 권장 전략: 분할 매수 유지</p>
-                <p>• AI 신뢰도: 87%</p>
-              </div>
+        <div className="mt-4 w-full rounded-2xl bg-gradient-to-br from-[#151827] to-[#1f2140] px-4 py-4 flex flex-col gap-3 min-h-[160px]">
+          <div className="flex items-center gap-2">
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10">
+              <svg className="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+              </svg>
             </div>
-            
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/80 to-slate-900/95 flex flex-col items-center justify-center">
-              <div className="text-center px-4">
-                <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <p className="text-slate-200 text-sm font-medium mb-1">48시간 김프 예측은 PRO에서 확인 가능합니다.</p>
-                <p className="text-slate-400 text-xs mb-4">AI 기반 예측으로 최적의 매매 타이밍을 잡으세요</p>
-                <Link
-                  href="/pricing"
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-all shadow-lg shadow-purple-500/25"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                  </svg>
-                  PRO 분석 전체 보기
-                </Link>
-              </div>
+            <span className="text-sm font-semibold text-white">
+              PRO 전용 48시간 김프 예측
+            </span>
+          </div>
+
+          <div className="relative rounded-xl bg-black/20 px-3 py-3 overflow-hidden">
+            <div className="blur-[2px] opacity-60 text-xs leading-relaxed text-slate-200">
+              다음 48시간 동안 BTC·주요 알트의 김프가 어느 구간에서
+              급등/급락 가능성이 높은지 AI가 시나리오별로 예측합니다.
+              PRO에서는 코인별 예상 구간과 리스크 지수를 함께 제공합니다.
             </div>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <p className="text-xs text-slate-300">
+              최근 30일 기준, 이 예측은{' '}
+              <span className="font-semibold text-amber-300">
+                김프 2% 이상 급변 구간의 90% 이상
+              </span>
+              을 사전에 포착했습니다.
+            </p>
+            <Link
+              href="/pricing"
+              className="w-full bg-[#7b5cff] hover:bg-[#6a4ae6] text-white text-sm font-semibold py-2.5 rounded-lg text-center transition-colors flex items-center justify-center gap-2"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+              </svg>
+              PRO 분석 전체 보기
+            </Link>
           </div>
         </div>
       )}
 
       {isPro && (
-        <div className="border-t border-slate-700 p-4 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
-          <div className="flex items-center gap-2 mb-3">
+        <div className="mt-4 w-full rounded-2xl bg-gradient-to-br from-[#151827] to-[#1f2140] px-4 py-4 flex flex-col gap-3 min-h-[160px]">
+          <div className="flex items-center gap-2">
             <span className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-2 py-0.5 rounded text-xs font-medium">PRO</span>
-            <span className="text-slate-300 text-sm font-medium">48시간 김프 예측</span>
+            <span className="text-sm font-semibold text-white">48시간 김프 예측</span>
           </div>
-          <div className="space-y-2 text-sm">
-            <p className="text-slate-300">
-              • 예상 추이: <span className="text-green-400">BTC {averagePremium.toFixed(1)}% → {(averagePremium + 0.5).toFixed(1)}%</span>
-            </p>
-            <p className="text-slate-300">
-              • 추세 신호: <span className="text-yellow-400">{averagePremium >= 3 ? "상승 지속 가능성" : "안정화 예상"}</span>
-            </p>
-            <p className="text-slate-300">
-              • 권장 전략: <span className="text-blue-400">{averagePremium >= 4 ? "익절 고려" : "관망 또는 분할 매수"}</span>
-            </p>
+          <div className="rounded-xl bg-black/20 px-3 py-3">
+            <div className="space-y-2 text-sm">
+              <p className="text-slate-300">
+                • 예상 추이: <span className="text-green-400">BTC {averagePremium.toFixed(1)}% → {(averagePremium + 0.5).toFixed(1)}%</span>
+              </p>
+              <p className="text-slate-300">
+                • 추세 신호: <span className="text-yellow-400">{averagePremium >= 3 ? "상승 지속 가능성" : "안정화 예상"}</span>
+              </p>
+              <p className="text-slate-300">
+                • 권장 전략: <span className="text-blue-400">{averagePremium >= 4 ? "익절 고려" : "관망 또는 분할 매수"}</span>
+              </p>
+              <p className="text-slate-300">
+                • AI 신뢰도: <span className="text-purple-400">87%</span>
+              </p>
+            </div>
           </div>
+          <p className="text-xs text-slate-400">
+            * 예측은 시장 상황에 따라 변동될 수 있으며, 투자 결정의 참고 자료로만 활용하세요.
+          </p>
         </div>
       )}
 

@@ -34,7 +34,7 @@ export default function PremiumTicker() {
           </div>
         </div>
         <div className="flex items-center gap-2 whitespace-nowrap">
-          <span className="text-slate-400">USD/KRW</span>
+          <span className="text-slate-400">USDT/KRW</span>
           <span className="text-white font-medium">₩{fxRate.toLocaleString()}</span>
         </div>
       </div>

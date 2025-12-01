@@ -15,6 +15,7 @@ interface PremiumTableRow {
   premium: number;
   volume24hKrw: number;
   volume24hUsdt: number;
+  volume24hForeignKrw: number;
   change24h: number;
   high24h: number;
   low24h: number;
@@ -220,6 +221,8 @@ export default async function handler(
           foreignVolumeUsdt = foreignVolumeRaw / fxRate;
         }
         
+        const foreignVolumeKrw = foreignVolumeUsdt * fxRate;
+        
         tableData.push({
           symbol,
           name: SYMBOL_NAMES[symbol] || symbol,
@@ -228,6 +231,7 @@ export default async function handler(
           premium: Math.round(premium * 100) / 100,
           volume24hKrw: Math.round(domesticVolumeKrw),
           volume24hUsdt: foreignVolumeUsdt,
+          volume24hForeignKrw: Math.round(foreignVolumeKrw),
           change24h: Math.round((Number(foreignRecord.change_24h) || 0) * 100) / 100,
           high24h: Math.round(domesticPriceKrw * 1.01),
           low24h: Math.round(domesticPriceKrw * 0.99),

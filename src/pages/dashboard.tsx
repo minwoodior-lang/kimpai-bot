@@ -77,7 +77,7 @@ export default function Dashboard() {
             <div className="text-slate-500 text-sm mt-1">2 triggered today</div>
           </div>
           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6">
-            <div className="text-slate-400 text-sm mb-2">USD/KRW Rate</div>
+            <div className="text-slate-400 text-sm mb-2">USDT/KRW Rate</div>
             <div className="text-2xl font-bold text-white">₩1,325.50</div>
             <div className="text-slate-500 text-sm mt-1">-0.3% today</div>
           </div>

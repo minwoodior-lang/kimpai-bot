@@ -61,7 +61,7 @@ export default function Markets() {
           </div>
           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-4 text-center">
             <div className="text-2xl font-bold text-white">₩{fxRate.toLocaleString()}</div>
-            <div className="text-slate-400 text-sm">USD/KRW 환율</div>
+            <div className="text-slate-400 text-sm">USDT/KRW 환율</div>
           </div>
           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-4 text-center">
             <div className="text-2xl font-bold text-white">{data.length}</div>

@@ -14,6 +14,7 @@ interface PremiumData {
   premium: number;
   volume24hKrw: number;
   volume24hUsdt: number;
+  volume24hForeignKrw: number;
   change24h: number;
   high24h: number;
   low24h: number;
@@ -224,10 +225,10 @@ export default function PremiumTable({
 
   const formatVolumeUsdt = (value: number) => {
     if (!value || isNaN(value)) return "-";
-    if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B USDT`;
-    if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M USDT`;
-    if (value >= 1e3) return `$${(value / 1e3).toFixed(2)}K USDT`;
-    return `$${value.toFixed(2)} USDT`;
+    if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
+    if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
+    if (value >= 1e3) return `$${(value / 1e3).toFixed(2)}K`;
+    return `$${value.toFixed(2)}`;
   };
 
   const getPremiumColor = (premium: number) => {
@@ -490,8 +491,19 @@ export default function PremiumTable({
                         )}
                       </td>
                       <td className="px-3 py-2 text-right">
-                        <div className="text-gray-300">₩{formatVolumeKRW(row.volume24hKrw)}</div>
-                        <div className="text-xs text-gray-500">{formatVolumeUsdt(row.volume24hUsdt)}</div>
+                        <div className="flex flex-col items-end leading-tight">
+                          <span className="text-gray-300">
+                            ₩{formatVolumeKRW(row.volume24hKrw)}
+                            <span className="ml-1 text-xs text-gray-500">(국내)</span>
+                          </span>
+                          <span className="text-gray-300">
+                            ₩{formatVolumeKRW(row.volume24hForeignKrw)}
+                            <span className="ml-1 text-xs text-gray-500">(해외)</span>
+                          </span>
+                          <span className="mt-0.5 text-[11px] text-gray-500">
+                            {formatVolumeUsdt(row.volume24hUsdt)} USDT
+                          </span>
+                        </div>
                       </td>
                     </tr>
                     {expandedSymbol === row.symbol && (

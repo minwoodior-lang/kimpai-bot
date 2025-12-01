@@ -1,0 +1,217 @@
+📩 Kimp AI – 홈 화면 보완 작업 지시문 v2.1.7
+[요청 1] 거래액(일) 셀 표기 방식 개선 (국내/해외 둘 다 KRW 메인)
+
+현재:
+
+거래액(일) 셀에 국내/해외가 섞여 보이고, 아래쪽 USDT 표기가 눈에 많이 띄는 편입니다.
+
+목표:
+
+국내·해외 모두 “KRW 기준”으로 한눈에 비교 가능하게 하고
+
+USDT 값은 제일 아래 작게 보조 정보로만 표기합니다.
+
+구현 가이드 (PremiumTable.tsx):
+
+// 이미 계산된 값이 있다고 가정
+const domesticVolumeKrw = row.domesticVolumeKrw;     // Upbit acc_trade_price_24h
+const overseasVolumeKrw = row.overseasVolumeKrw;     // quoteVolume * usdtKrw
+const overseasVolumeUsdt = row.overseasVolumeUsdt;   // 24h quote volume (USDT)
+
+// 기존 거래액 셀 대체
+<td className="px-4 py-3 text-right align-middle">
+  <div className="flex flex-col items-end leading-tight">
+    {/* 국내 거래액 */}
+    <span>
+      {formatKrwVolume(domesticVolumeKrw)}
+      <span className="ml-1 text-xs text-muted-foreground">
+        (국내)
+      </span>
+    </span>
+
+    {/* 해외 거래액 – KRW 기준 */}
+    <span>
+      {formatKrwVolume(overseasVolumeKrw)}
+      <span className="ml-1 text-xs text-muted-foreground">
+        (해외)
+      </span>
+    </span>
+
+    {/* USDT 보조 표기 – 아주 작게 */}
+    <span className="mt-0.5 text-[11px] text-muted-foreground">
+      {formatUsdtVolume(overseasVolumeUsdt)} USDT
+    </span>
+  </div>
+</td>
+
+
+formatKrwVolume : 기존에 쓰는 ₩5,114.0억 / ₩3.7조 포맷 그대로 사용
+
+formatUsdtVolume : $66.89B / $3.77B 등 2자리 소수 + B/M/K
+
+검증 기준:
+
+BTC 기준으로
+
+1행: 업비트 거래대금(24h) KRW ≈ 업비트 공식 화면 값
+
+2행: 바이낸스 거래대금(24h) KRW
+
+두 줄 모두 KRW 기준이라 직관적으로 비교 가능해야 합니다.
+
+[요청 2] 상단 우측 환율 라벨 수정 (USD → USDT 표기 명확화)
+
+현재:
+
+우측 상단에 USD/KRW ₩1,467.9 로 표기되어 있습니다.
+
+실제 의미:
+
+내부적으로 테더(USDT) 환율을 기준으로 사용하고 있으므로
+USD/KRW 문구는 다소 모호합니다.
+
+수정 사항:
+
+라벨 텍스트 변경
+
+USD/KRW → USDT/KRW
+
+또는 테더 환율 로 변경 (예: USDT/KRW ₩1,467.9)
+
+선택 (가능하면):
+
+hover 시 작은 툴팁: "바이낸스 USDT 호가 기준 환율" 정도 문구 노출
+
+위치/스타일은 기존과 동일하게 유지하고,
+표기만 명확히 “USDT 기준 환율”로 보이게 해주세요.
+
+[요청 3] AIInsightBox 하단 PRO 잠금 영역 UX/레이아웃 보완
+
+현재:
+
+“48시간 김프 예측은 PRO에서 확인 가능” 카드가
+우측 컬럼 폭을 다 채우지 못한 느낌이고,
+카피/구성이 감리가 제안한 구조보다 단순합니다.
+
+목표:
+
+무료 유저 기준 “유인 + 잠금 + CTA” 구조를 더 분명하게 만들고
+
+카드가 우측 컬럼 폭을 꽉 채우는 레이아웃으로 보이게 합니다.
+
+구현 대상: src/components/AIInsightBox.tsx
+
+3-1. 레이아웃 / 스타일 수정
+
+상단 요약 카드와 동일한 width, padding, border-radius 사용
+
+예: className="mt-4 w-full rounded-2xl bg-[#151827] px-4 py-4 ..." 수준
+
+세로로 너무 납작하지 않게, min-h 140~160px 정도 확보
+(지금처럼 공간이 비어 보이지 않도록)
+
+3-2. Free / Pro 분기 로직
+const { plan } = useUserPlan(); // 'free' | 'pro'
+
+
+plan === 'free':
+
+잠금 + 블러 + CTA 버전 (유료 전환 유도)
+
+plan === 'pro':
+
+잠금/블러 제거, 실제 분석 내용 표시
+
+(백엔드 연동 전이라면 placeholder 텍스트라도 꽉 차게)
+
+3-3. Free(무료) 상태 UI 상세
+{plan === 'free' && (
+  <div className="mt-4 w-full rounded-2xl bg-gradient-to-br from-[#151827] to-[#1f2140] px-4 py-4 flex flex-col gap-3">
+    {/* 상단 라벨 + 자물쇠 */}
+    <div className="flex items-center gap-2">
+      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10">
+        <LockIcon className="h-4 w-4 text-white" />
+      </div>
+      <span className="text-sm font-semibold text-white">
+        PRO 전용 48시간 김프 예측
+      </span>
+    </div>
+
+    {/* 흐려진 미리보기 텍스트 */}
+    <div className="relative rounded-xl bg-black/20 px-3 py-3 overflow-hidden">
+      <div className="blur-[2px] opacity-60 text-xs leading-relaxed text-slate-200">
+        다음 48시간 동안 BTC·주요 알트의 김프가 어느 구간에서
+        급등/급락 가능성이 높은지 AI가 시나리오별로 예측합니다.
+        PRO에서는 코인별 예상 구간과 리스크 지수를 함께 제공합니다.
+      </div>
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
+    </div>
+
+    {/* FOMO 문구 + CTA 버튼 */}
+    <div className="flex flex-col gap-2">
+      <p className="text-xs text-slate-300">
+        최근 30일 기준, 이 예측은{' '}
+        <span className="font-semibold text-amber-300">
+          김프 2% 이상 급변 구간의 90% 이상
+        </span>
+        을 사전에 포착했습니다.
+      </p>
+      <Button
+        className="w-full bg-[#7b5cff] hover:bg-[#6a4ae6] text-sm font-semibold"
+        onClick={() => router.push('/pricing')}
+      >
+        🔒 PRO 분석 전체 보기
+      </Button>
+    </div>
+  </div>
+)}
+
+
+핵심 포인트:
+
+볼드한 제목 + 자물쇠 아이콘 → PRO 전용 영역임을 명확히
+
+중앙의 흐려진 설명 블록 → “분석이 있는데, 잠겨 있다”는 느낌
+
+FOMO 문구:
+
+“김프 2% 이상 급변 구간의 90% 이상 포착” 식으로 기대감 조성
+
+CTA 버튼:
+
+텍스트: 🔒 PRO 분석 전체 보기
+
+클릭 시 /pricing 으로 이동
+
+3-4. Pro 상태(참고)
+
+plan === 'pro'일 때는 동일한 카드 레이아웃 안에:
+
+“향후 48시간 예측 요약 + 리스트” 등 실제 콘텐츠가 들어가도록
+
+잠금 아이콘/블러/CTA 버튼은 제거
+
+(백엔드 연동 이전이라면, 임시로 “PRO용 예측 결과 영역”이라는 더미 텍스트라도 넣어서, 카드가 꽉 차 보이게 처리해 주세요.)
+
+✅ 정리
+
+이번 v2.1.7에서 처리해 주셨으면 하는 것은:
+
+거래액(일) 셀:
+
+국내/해외 모두 KRW 메인, USDT는 보조 작은 텍스트
+
+상단 환율 라벨:
+
+USD/KRW → USDT/KRW 등으로 명확화
+
+AIInsightBox 하단 PRO 영역:
+
+우측 칼럼 폭을 꽉 쓰는 카드 레이아웃
+
+Free일 때: 잠금 + 블러 + FOMO + 🔒 PRO 분석 전체 보기 버튼
+
+Pro일 때: 잠금 제거, 실제 예측 내용 표시용 컨테이너
+
+위 3개 반영 후에 다시 홈 화면 캡처를 보내주시면,
+김프가 UX 기준으로 한 번 더 전체 검수하겠습니다.
