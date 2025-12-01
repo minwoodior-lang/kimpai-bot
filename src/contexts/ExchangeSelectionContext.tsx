@@ -56,7 +56,7 @@ export function ExchangeSelectionProvider({ children }: { children: ReactNode })
 
   const getForeignExchangeInfo = (): ForeignExchange => {
     const found = FOREIGN_EXCHANGES.find((e) => e.value === foreignExchange);
-    return found ? { exchange: found.exchange, quote: found.quote } : { exchange: "BINANCE", quote: "USDT" };
+    return found ? { exchange: found.exchange, quote: found.quote } : { exchange: "OKX", quote: "USDT" };
   };
 
   const getTradingViewDomesticSymbol = (baseSymbol: string): string => {
