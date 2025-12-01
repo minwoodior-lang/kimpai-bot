@@ -45,6 +45,15 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 - **Admin Interface**: Dedicated admin dashboard for management.
 
 ### Recent Changes (2025-12-01)
+- **v3.0.0 Major UX/Data Overhaul**:
+  - 국내 거래소 마켓 세분화: 업비트 KRW/BTC/USDT, 빗썸 KRW/BTC/USDT, 코인원 KRW (총 7개 마켓)
+  - 한국 국기 이모지 적용 (🇰🇷) - HTML select 이미지 제한으로 이모지 사용
+  - CoinIcon 컴포넌트 분리: cryptoicons.org CDN + 코인별 그라데이션 폴백
+  - 가격 소수점 규칙 개선: ≥1000원=정수, 100-999원=1자리, 1-99원=2자리, <1원=4자리
+  - 모바일 레이아웃 정규화: 국내가(KRW) 위 / 해외가(USDT) 아래 표시
+  - Binance/Bybit CoinGecko 폴백 시 볼륨 null 처리 (글로벌 볼륨 오표시 방지)
+  - 즐겨찾기 별 아이콘(★/☆) 구현
+  - 미상장 코인 차트 버튼 유지 (TradingView 연동)
 - **v2.2.2 Binance 프록시 + 모바일 반응형 레이아웃**:
   - Binance API 프록시 구현 (`/api/proxy/binance`) - 451/403 에러 시 CoinGecko 자동 폴백
   - Binance Futures에도 CoinGecko 폴백 추가 (spot 데이터 변환)
