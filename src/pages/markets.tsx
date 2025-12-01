@@ -49,6 +49,7 @@ export default function Markets() {
     foreign: foreignExchange,
   });
   const [lastUpdated, setLastUpdated] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const domesticLabel = DOMESTIC_EXCHANGES.find(e => e.value === domesticExchange)?.label || "업비트 KRW";
   const foreignEx = FOREIGN_EXCHANGES.find(e => e.value === foreignExchange);
@@ -74,6 +75,14 @@ export default function Markets() {
     refetch();
   }, [domesticExchange, foreignExchange, refetch]);
 
+  const filteredData = data.filter((item) => {
+    if (!searchQuery) return true;
+    const query = searchQuery.toLowerCase();
+    const symbol = item.symbol.replace('/KRW', '').toLowerCase();
+    const name = (item.koreanName || item.name || '').toLowerCase();
+    return symbol.includes(query) || name.includes(query);
+  });
+
   return (
     <Layout>
       <Head>
@@ -90,7 +99,7 @@ export default function Markets() {
           <ExchangeSelector />
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-4 text-center">
             <div className={`text-2xl font-bold ${averagePremium >= 0 ? 'text-green-400' : 'text-red-400'}`}>
               {averagePremium >= 0 ? '+' : ''}{averagePremium.toFixed(1)}%
@@ -111,6 +120,19 @@ export default function Markets() {
             <div className="text-2xl font-bold text-blue-400">30초</div>
             <div className="text-slate-400 text-sm">갱신 주기</div>
           </div>
+        </div>
+
+        <div className="flex items-center justify-center gap-3 mb-6">
+          <span className="text-slate-400 text-xs md:text-sm whitespace-nowrap">
+            암호화폐 <span className="text-white font-medium">{totalCoins}</span>개
+          </span>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="검색: BTC, 비트코인, ㅂㅌ"
+            className="w-[180px] md:w-[280px] bg-slate-700 text-white rounded-lg px-3 py-2 border border-slate-600 focus:border-blue-500 focus:outline-none text-sm"
+          />
         </div>
 
         {loading && (
@@ -140,7 +162,7 @@ export default function Markets() {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.map((item) => (
+                  {filteredData.map((item) => (
                     <tr
                       key={item.symbol}
                       className={`border-b border-slate-700/30 hover:bg-slate-700/40 transition-colors cursor-pointer ${!item.isListed ? 'opacity-60' : ''}`}

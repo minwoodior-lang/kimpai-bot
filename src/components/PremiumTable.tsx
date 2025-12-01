@@ -561,7 +561,7 @@ export default function PremiumTable({
       )}
 
       {showFilters && (
-        <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-4 text-sm">
+        <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-4 text-sm">
           <div className="flex flex-col items-center gap-0.5">
             <span className="text-gray-400 text-[10px] md:text-xs whitespace-nowrap flex items-center gap-1">
               기준 거래소 <img src="https://flagcdn.com/w20/kr.png" alt="🇰🇷" className="w-4 h-3 object-cover rounded-sm" />
@@ -587,7 +587,7 @@ export default function PremiumTable({
             />
           </div>
 
-          <div className="flex items-center gap-2 ml-auto">
+          <div className="flex items-center gap-2">
             <span className="text-gray-400 text-[10px] md:text-xs whitespace-nowrap">
               암호화폐 <span className="text-white font-medium">{totalCoins}</span>개
             </span>
@@ -596,7 +596,7 @@ export default function PremiumTable({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="검색: BTC, ㅂㅌ"
-              className="w-[100px] md:w-[160px] bg-slate-700 text-white rounded-lg px-2 md:px-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs md:text-sm"
+              className="w-[140px] md:w-[220px] bg-slate-700 text-white rounded-lg px-2 md:px-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs md:text-sm"
             />
           </div>
         </div>
