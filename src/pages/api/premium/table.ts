@@ -107,6 +107,7 @@ export default async function handler(
     const domesticMap = new Map<string, ExchangePriceRecord>();
     const foreignMap = new Map<string, ExchangePriceRecord>();
     const fallbackForeignMap = new Map<string, ExchangePriceRecord>();
+    const krwPriceMap = new Map<string, ExchangePriceRecord>();
 
     for (const record of allPrices || []) {
       const recordExchange = record.exchange.toLowerCase();
@@ -127,42 +128,70 @@ export default async function handler(
       if (recordQuote === "USDT" && !fallbackForeignMap.has(record.symbol)) {
         fallbackForeignMap.set(record.symbol, record);
       }
+      
+      if (recordQuote === "KRW" && !krwPriceMap.has(record.symbol)) {
+        krwPriceMap.set(record.symbol, record);
+      }
     }
+
+    const btcKrwRecord = krwPriceMap.get("BTC");
+    const btcKrwPrice = btcKrwRecord ? Number(btcKrwRecord.price) : 0;
+    const btcUsdtRecord = fallbackForeignMap.get("BTC");
+    const btcUsdtPrice = btcUsdtRecord ? Number(btcUsdtRecord.price) : 0;
 
     const tableData: PremiumTableRow[] = [];
     let latestTimestamp = "";
 
     for (const symbol of SYMBOL_ORDER) {
-      const domesticRecord = domesticMap.get(symbol);
+      let domesticRecord = domesticMap.get(symbol);
       let foreignRecord = foreignMap.get(symbol);
       
       if (!foreignRecord && fallbackForeignMap.has(symbol)) {
         foreignRecord = fallbackForeignMap.get(symbol);
       }
 
+      if (symbol === "BTC" && domestic.quote === "BTC" && !domesticRecord) {
+        domesticRecord = krwPriceMap.get("BTC");
+      }
+      if (symbol === "BTC" && foreign.quote === "BTC" && !foreignRecord) {
+        foreignRecord = fallbackForeignMap.get("BTC");
+      }
+
       if (domesticRecord && foreignRecord) {
         let domesticPriceKrw = Number(domesticRecord.price);
         let foreignPriceKrw = Number(foreignRecord.price);
+        let globalPriceUsd = Number(foreignRecord.price);
         
         if (domestic.quote === "KRW") {
           domesticPriceKrw = Number(domesticRecord.price);
         } else if (domestic.quote === "USDT") {
           domesticPriceKrw = Number(domesticRecord.price) * fxRate;
         } else if (domestic.quote === "BTC") {
-          const btcDomestic = domesticMap.get("BTC");
-          if (btcDomestic) {
-            domesticPriceKrw = Number(domesticRecord.price) * Number(btcDomestic.price);
+          if (symbol === "BTC") {
+            domesticPriceKrw = btcKrwPrice > 0 ? btcKrwPrice : btcUsdtPrice * fxRate;
+          } else if (btcKrwPrice > 0) {
+            domesticPriceKrw = Number(domesticRecord.price) * btcKrwPrice;
+          } else if (btcUsdtPrice > 0) {
+            domesticPriceKrw = Number(domesticRecord.price) * btcUsdtPrice * fxRate;
           }
         }
         
         if (foreignRecord.quote.toUpperCase() === "KRW") {
           foreignPriceKrw = Number(foreignRecord.price);
+          globalPriceUsd = Number(foreignRecord.price) / fxRate;
         } else if (foreignRecord.quote.toUpperCase() === "USDT") {
           foreignPriceKrw = Number(foreignRecord.price) * fxRate;
+          globalPriceUsd = Number(foreignRecord.price);
         } else if (foreignRecord.quote.toUpperCase() === "BTC") {
-          const btcForeign = foreignMap.get("BTC") || fallbackForeignMap.get("BTC");
-          if (btcForeign) {
-            foreignPriceKrw = Number(foreignRecord.price) * Number(btcForeign.price) * fxRate;
+          if (symbol === "BTC") {
+            globalPriceUsd = btcUsdtPrice;
+            foreignPriceKrw = btcUsdtPrice * fxRate;
+          } else if (btcUsdtPrice > 0) {
+            globalPriceUsd = Number(foreignRecord.price) * btcUsdtPrice;
+            foreignPriceKrw = globalPriceUsd * fxRate;
+          } else if (btcKrwPrice > 0) {
+            foreignPriceKrw = Number(foreignRecord.price) * btcKrwPrice;
+            globalPriceUsd = foreignPriceKrw / fxRate;
           }
         }
         
@@ -174,7 +203,7 @@ export default async function handler(
           symbol,
           name: SYMBOL_NAMES[symbol] || symbol,
           koreanPrice: Math.round(domesticPriceKrw),
-          globalPrice: Number(foreignRecord.price),
+          globalPrice: globalPriceUsd,
           premium: Math.round(premium * 100) / 100,
           volume24h: Number(foreignRecord.volume_24h) || 0,
           change24h: Math.round((Number(foreignRecord.change_24h) || 0) * 100) / 100,

@@ -70,6 +70,7 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 ## Supabase Database Tables
 - `public.users` - User profiles (id, email, plan, created_at)
 - `public.price_snapshots` - Historical price data
+- `public.exchange_prices` - Multi-exchange price data (exchange, symbol, base, quote, price, volume_24h, change_24h, created_at)
 - `public.alerts` - User alerts (id, user_id, symbol, condition_type, threshold, is_active, created_at)
 - `public.ai_reports` - AI analysis reports (with seo_title, seo_description)
 - `public.banners` - Marketing banners (with seo_title, seo_description)
@@ -91,7 +92,9 @@ KimpAI is a Next.js 14 SaaS dashboard for tracking the Kimchi Premium (the price
 | Route | Description | Protected |
 |-------|-------------|-----------|
 | `/` | Landing page with Hero, AI Insight, Market Table, Alert CTA | No |
+| `/premium` | Full premium page with search, sort, exchange selection | No |
 | `/markets` | Real-time Kimchi Premium table with auto-refresh | No |
+| `/markets/[symbol]` | Coin detail page with TradingView charts | No |
 | `/analysis` | AI-powered market analysis | Yes |
 | `/alerts` | Create and manage price alerts (Supabase CRUD) | Yes |
 | `/pricing` | Free vs Pro plan comparison | No |

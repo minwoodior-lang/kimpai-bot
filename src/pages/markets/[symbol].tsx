@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Layout from "@/components/Layout";
@@ -37,7 +38,7 @@ const COIN_INFO: Record<string, { name: string; icon: string }> = {
 
 export default function SymbolDetail() {
   const router = useRouter();
-  const { symbol } = router.query;
+  const { symbol, domestic, foreign } = router.query;
   const symbolStr = (symbol as string)?.toUpperCase() || "BTC";
 
   const { data, loading, fxRate } = useMarkets();
@@ -48,7 +49,24 @@ export default function SymbolDetail() {
     getForeignExchangeInfo,
     domesticExchange,
     foreignExchange,
+    setDomesticExchange,
+    setForeignExchange,
   } = useExchangeSelection();
+
+  useEffect(() => {
+    if (domestic && typeof domestic === "string") {
+      const validDomestic = DOMESTIC_EXCHANGES.find(e => e.value === domestic);
+      if (validDomestic) {
+        setDomesticExchange(domestic);
+      }
+    }
+    if (foreign && typeof foreign === "string") {
+      const validForeign = FOREIGN_EXCHANGES.find(e => e.value === foreign);
+      if (validForeign) {
+        setForeignExchange(foreign);
+      }
+    }
+  }, [domestic, foreign, setDomesticExchange, setForeignExchange]);
 
   const coinData = data.find((d) => d.symbol.replace("/KRW", "") === symbolStr);
   const coinInfo = COIN_INFO[symbolStr] || { name: symbolStr, icon: "?" };
