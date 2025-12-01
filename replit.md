@@ -40,16 +40,26 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 - **CoinMarketCap Integration**: Direct links on coin names for external reference.
 - **2-Second Data Refresh**: Real-time feel with rapid data updates (무료/유료 동일).
 - **PRO Tier Features**: 48시간 김프 예측, 상세 분석 (마스킹 + 잠금 처리).
-- **Rate Limiting**: IP-based API protection (10 requests per 2 seconds).
+- **Rate Limiting**: IP-based API protection (2 requests per 2 seconds).
 - **User Authentication**: Secure signup and login with Supabase, protecting pro-user features.
 - **Admin Interface**: Dedicated admin dashboard for management.
 
 ### Recent Changes (2025-12-01)
+- **v2.1.3 업데이트**: 전체 UI/UX 개선 및 안정화
+  - Rate Limit 2초당 2회로 강화 (기존 10회)
+  - 고가대비(24h)/저가대비(24h) 라벨 명확화
+  - 해외 가격 KRW 메인 표시 + USDT 서브 표시
+  - 거래액(일) 헤더로 변경
+  - Korea Premium Index 커스텀 차트 (0% 값 정상 표시)
+  - AIInsightBox PRO UX (blur, 자물쇠, FOMO 문구, CTA 버튼)
+  - 코인명 옆 TradingView 차트 아이콘 추가
+  - 검색창 placeholder: "예: BTC, 비트코인, ㅂㅌ"
+  - USD → USDT 라벨 전면 교체
+  - 전일대비 색상 통일 (상승=초록, 하락=빨강)
 - v2.1 업데이트: 차트 프리셋 12종 확장 (TOTAL/TOTAL2/TOTAL3/ALT Dominance 추가)
 - TradingView 타임프레임 선택기 추가 (1분~1월)
 - AIInsightBox PRO 유료화 구조 구현 (마스킹 + 잠금)
 - KR Premium Score (위험도 지수 1~10) 추가
-- API Rate Limit 적용 (2초당 10회 IP 기반)
 - useUserPlan 훅 생성 (유료/무료 플랜 감지)
 
 ### System Design Choices
