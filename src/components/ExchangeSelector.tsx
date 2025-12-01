@@ -24,25 +24,25 @@ export default function ExchangeSelector({ compact = false, showLabels = true }:
           <select
             value={domesticExchange}
             onChange={(e) => setDomesticExchange(e.target.value)}
-            className="bg-transparent text-white focus:outline-none text-sm cursor-pointer font-medium min-w-[100px]"
+            className="bg-slate-800 text-white focus:outline-none text-sm cursor-pointer font-medium min-w-[100px] [&>optgroup]:bg-slate-800 [&>optgroup]:text-white [&_option]:bg-slate-800 [&_option]:text-white"
           >
-            <optgroup label="업비트">
+            <optgroup label="업비트" className="bg-slate-800 text-white">
               {DOMESTIC_EXCHANGES.filter((e) => e.exchange === "UPBIT").map((e) => (
-                <option key={e.value} value={e.value}>
+                <option key={e.value} value={e.value} className="bg-slate-800 text-white">
                   {e.label.replace('🇰🇷 ', '')}
                 </option>
               ))}
             </optgroup>
-            <optgroup label="빗썸">
+            <optgroup label="빗썸" className="bg-slate-800 text-white">
               {DOMESTIC_EXCHANGES.filter((e) => e.exchange === "BITHUMB").map((e) => (
-                <option key={e.value} value={e.value}>
+                <option key={e.value} value={e.value} className="bg-slate-800 text-white">
                   {e.label.replace('🇰🇷 ', '')}
                 </option>
               ))}
             </optgroup>
-            <optgroup label="코인원">
+            <optgroup label="코인원" className="bg-slate-800 text-white">
               {DOMESTIC_EXCHANGES.filter((e) => e.exchange === "COINONE").map((e) => (
-                <option key={e.value} value={e.value}>
+                <option key={e.value} value={e.value} className="bg-slate-800 text-white">
                   {e.label.replace('🇰🇷 ', '')}
                 </option>
               ))}
@@ -64,18 +64,18 @@ export default function ExchangeSelector({ compact = false, showLabels = true }:
           <select
             value={foreignExchange}
             onChange={(e) => setForeignExchange(e.target.value)}
-            className="bg-transparent text-white focus:outline-none text-sm cursor-pointer font-medium min-w-[80px]"
+            className="bg-slate-800 text-white focus:outline-none text-sm cursor-pointer font-medium min-w-[80px] [&>optgroup]:bg-slate-800 [&>optgroup]:text-white [&_option]:bg-slate-800 [&_option]:text-white"
           >
-            <optgroup label="Binance">
+            <optgroup label="Binance" className="bg-slate-800 text-white">
               {FOREIGN_EXCHANGES.filter((e) => e.exchange === "BINANCE" || e.exchange === "BINANCE_FUTURES").map((e) => (
-                <option key={e.value} value={e.value}>
+                <option key={e.value} value={e.value} className="bg-slate-800 text-white">
                   {e.shortName}
                 </option>
               ))}
             </optgroup>
-            <optgroup label="기타 거래소">
+            <optgroup label="기타 거래소" className="bg-slate-800 text-white">
               {FOREIGN_EXCHANGES.filter((e) => !e.exchange.startsWith("BINANCE")).map((e) => (
-                <option key={e.value} value={e.value}>
+                <option key={e.value} value={e.value} className="bg-slate-800 text-white">
                   {e.shortName}
                 </option>
               ))}
@@ -101,25 +101,25 @@ export function DomesticExchangeSelector({ compact = false }: { compact?: boolea
       <select
         value={domesticExchange}
         onChange={(e) => setDomesticExchange(e.target.value)}
-        className={`bg-transparent text-white focus:outline-none cursor-pointer font-medium ${compact ? 'text-xs' : 'text-sm'}`}
+        className={`bg-slate-800 text-white focus:outline-none cursor-pointer font-medium [&>optgroup]:bg-slate-800 [&>optgroup]:text-white [&_option]:bg-slate-800 [&_option]:text-white ${compact ? 'text-xs' : 'text-sm'}`}
       >
-        <optgroup label="업비트">
+        <optgroup label="업비트" className="bg-slate-800 text-white">
           {DOMESTIC_EXCHANGES.filter((e) => e.exchange === "UPBIT").map((e) => (
-            <option key={e.value} value={e.value}>
+            <option key={e.value} value={e.value} className="bg-slate-800 text-white">
               {e.label.replace('🇰🇷 ', '')}
             </option>
           ))}
         </optgroup>
-        <optgroup label="빗썸">
+        <optgroup label="빗썸" className="bg-slate-800 text-white">
           {DOMESTIC_EXCHANGES.filter((e) => e.exchange === "BITHUMB").map((e) => (
-            <option key={e.value} value={e.value}>
+            <option key={e.value} value={e.value} className="bg-slate-800 text-white">
               {e.label.replace('🇰🇷 ', '')}
             </option>
           ))}
         </optgroup>
-        <optgroup label="코인원">
+        <optgroup label="코인원" className="bg-slate-800 text-white">
           {DOMESTIC_EXCHANGES.filter((e) => e.exchange === "COINONE").map((e) => (
-            <option key={e.value} value={e.value}>
+            <option key={e.value} value={e.value} className="bg-slate-800 text-white">
               {e.label.replace('🇰🇷 ', '')}
             </option>
           ))}
@@ -143,18 +143,18 @@ export function ForeignExchangeSelector({ compact = false }: { compact?: boolean
       <select
         value={foreignExchange}
         onChange={(e) => setForeignExchange(e.target.value)}
-        className={`bg-transparent text-white focus:outline-none cursor-pointer font-medium ${compact ? 'text-xs' : 'text-sm'}`}
+        className={`bg-slate-800 text-white focus:outline-none cursor-pointer font-medium [&>optgroup]:bg-slate-800 [&>optgroup]:text-white [&_option]:bg-slate-800 [&_option]:text-white ${compact ? 'text-xs' : 'text-sm'}`}
       >
-        <optgroup label="Binance">
+        <optgroup label="Binance" className="bg-slate-800 text-white">
           {FOREIGN_EXCHANGES.filter((e) => e.exchange === "BINANCE" || e.exchange === "BINANCE_FUTURES").map((e) => (
-            <option key={e.value} value={e.value}>
+            <option key={e.value} value={e.value} className="bg-slate-800 text-white">
               {e.shortName}
             </option>
           ))}
         </optgroup>
-        <optgroup label="기타 거래소">
+        <optgroup label="기타 거래소" className="bg-slate-800 text-white">
           {FOREIGN_EXCHANGES.filter((e) => !e.exchange.startsWith("BINANCE")).map((e) => (
-            <option key={e.value} value={e.value}>
+            <option key={e.value} value={e.value} className="bg-slate-800 text-white">
               {e.shortName}
             </option>
           ))}

@@ -489,10 +489,10 @@ export default function PremiumTable({
               <select
                 value={domesticExchange}
                 onChange={(e) => setDomesticExchange(e.target.value)}
-                className="bg-transparent text-white focus:outline-none text-sm cursor-pointer"
+                className="bg-slate-700 text-white focus:outline-none text-sm cursor-pointer [&_option]:bg-slate-700 [&_option]:text-white"
               >
                 {DOMESTIC_EXCHANGES.map((ex) => (
-                  <option key={ex.id} value={ex.id}>{ex.name.replace('🇰🇷 ', '')}</option>
+                  <option key={ex.id} value={ex.id} className="bg-slate-700 text-white">{ex.name.replace('🇰🇷 ', '')}</option>
                 ))}
               </select>
             </div>
@@ -511,10 +511,10 @@ export default function PremiumTable({
               <select
                 value={foreignExchange}
                 onChange={(e) => setForeignExchange(e.target.value)}
-                className="bg-transparent text-white focus:outline-none text-sm cursor-pointer"
+                className="bg-slate-700 text-white focus:outline-none text-sm cursor-pointer [&_option]:bg-slate-700 [&_option]:text-white"
               >
                 {FOREIGN_EXCHANGES.map((ex) => (
-                  <option key={ex.id} value={ex.id}>{ex.shortName}</option>
+                  <option key={ex.id} value={ex.id} className="bg-slate-700 text-white">{ex.shortName}</option>
                 ))}
               </select>
             </div>
