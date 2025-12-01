@@ -58,8 +58,8 @@ function CustomDropdown({ value, options, onChange, placeholder = "선택", show
       </button>
       
       {isOpen && (
-        <div className="absolute z-50 mt-1 w-full min-w-[160px] bg-slate-800 border border-slate-600 rounded-lg shadow-xl overflow-hidden">
-          <div className="max-h-[300px] overflow-y-auto">
+        <div className="absolute z-50 mt-1 w-full min-w-[180px] bg-slate-800 border border-slate-600 rounded-lg shadow-xl overflow-hidden">
+          <div>
             {options.map((option) => (
               <button
                 key={option.value}

@@ -59,8 +59,8 @@ function MiniDropdown({
       </button>
       
       {isOpen && (
-        <div className="absolute z-50 mt-1 min-w-[140px] bg-slate-800 border border-slate-600 rounded-lg shadow-xl overflow-hidden">
-          <div className="max-h-[250px] overflow-y-auto">
+        <div className="absolute z-50 mt-1 min-w-[180px] bg-slate-800 border border-slate-600 rounded-lg shadow-xl overflow-hidden">
+          <div>
             {options.map((option) => (
               <button
                 key={option.id}

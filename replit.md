@@ -45,6 +45,13 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 - **Admin Interface**: Dedicated admin dashboard for management.
 
 ### Recent Changes (2025-12-01)
+- **v3.0.3 거래소 로고 개선 및 드롭다운 UX 향상**:
+  - OKX 공식 로고: 검은 배경 + 흰색 5개 사각형 그리드 (SVG 인라인)
+  - Bybit 공식 로고: 검은 배경 + 주황색 심볼 (SVG 인라인)
+  - Coinone 공식 로고: 파란색 원형 "C" 심볼 (SVG 인라인)
+  - 커스텀 드롭다운 스크롤 제거: 모든 옵션 한눈에 표시
+  - 바이낸스 마켓 라벨 개선: "바이낸스 USDT 마켓", "바이낸스 BTC 마켓", "바이낸스 선물 USDS-M 마켓"
+  - 드롭다운 최소 너비 확대: 180px로 라벨 완전 표시
 - **v3.0.2 거래소 공식 로고 CDN 전환**:
   - CoinMarketCap CDN 사용: s2.coinmarketcap.com/static/img/exchanges/64x64/{ID}.png
   - 10개 거래소 공식 로고 적용 (Upbit-351, Bithumb-200, Coinone-154, Binance-270, OKX-294, Bybit-521, Bitget-513, Gate-302, HTX-102, MEXC-544)
