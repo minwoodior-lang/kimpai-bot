@@ -59,12 +59,12 @@ const CHART_PRESETS: ChartPreset[] = [
   },
   {
     id: "total2_marketcap",
-    label: "TOTAL2 (BTC 제외)",
+    label: "TOTAL2 (Ex-BTC)",
     tvSymbol: "CRYPTOCAP:TOTAL2",
   },
   {
     id: "total3_marketcap",
-    label: "TOTAL3 (BTC·ETH 제외)",
+    label: "TOTAL3 (Ex-BTC & ETH)",
     tvSymbol: "CRYPTOCAP:TOTAL3",
   },
   {
@@ -125,21 +125,21 @@ export default function ChartWithControls({
             }}
             className="bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 focus:outline-none focus:border-blue-500 text-sm min-w-[180px]"
           >
-            <optgroup label="김프가 기본">
+            <optgroup label="BTC / 프리미엄 지표">
               {CHART_PRESETS.slice(0, 7).map((preset) => (
                 <option key={preset.id} value={preset.id}>
                   {preset.label}
                 </option>
               ))}
             </optgroup>
-            <optgroup label="시장 지표">
+            <optgroup label="시장 전체 지표 (Market Index)">
               {CHART_PRESETS.slice(7, 10).map((preset) => (
                 <option key={preset.id} value={preset.id}>
                   {preset.label}
                 </option>
               ))}
             </optgroup>
-            <optgroup label="확장 지표">
+            <optgroup label="추가 분석 지표 (Extended Indicators)">
               {CHART_PRESETS.slice(10).map((preset) => (
                 <option key={preset.id} value={preset.id}>
                   {preset.label}

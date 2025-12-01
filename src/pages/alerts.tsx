@@ -255,8 +255,8 @@ export default function Alerts() {
                         <div className="text-white font-medium">
                           {alert.symbol}{" "}
                           {alert.condition_type === "above"
-                            ? "김프가 이상일 때"
-                            : "김프가 이하일 때"}{" "}
+                            ? "프리미엄 이상일 때"
+                            : "프리미엄 이하일 때"}{" "}
                           {alert.threshold}%
                         </div>
                         <div className="text-slate-500 text-sm">
@@ -360,8 +360,8 @@ export default function Alerts() {
                     }
                     className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500"
                   >
-                    <option value="above">김프가 ○○% 이상일 때</option>
-                    <option value="below">김프가 ○○% 이하일 때</option>
+                    <option value="above">프리미엄 ○○% 이상일 때</option>
+                    <option value="below">프리미엄 ○○% 이하일 때</option>
                   </select>
                 </div>
 
@@ -383,7 +383,7 @@ export default function Alerts() {
                     required
                   />
                   <p className="text-xs text-slate-500 mt-1">
-                    예) 5 입력 시, 김프가 5% 이상 / 이하가 될 때 알림을 받습니다.
+                    예) 5 입력 시, 프리미엄이 5% 이상 / 이하가 될 때 알림을 받습니다.
                     (범위: {MIN_THRESHOLD}% ~ {MAX_THRESHOLD}%)
                   </p>
                 </div>

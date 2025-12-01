@@ -30,9 +30,9 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 - **User Alerts**: CRUD operations for managing price alerts with user-specific filtering.
 - **Multi-Exchange Data**: Supports 10+ domestic and foreign exchanges for comprehensive data.
 - **Interactive Charts**: TradingView charts with 12 preset views organized in 3 groups:
-  - 김프가 기본 (7종): BTC Binance, BTC 김프 Upbit/Bithumb, Coinbase Premium, Longs, Shorts, Dominance
-  - 시장 지표 (3종): TOTAL, TOTAL2, TOTAL3 Market Cap
-  - 확장 지표 (2종): ALT Dominance, Korea Premium Index
+  - BTC / 프리미엄 지표 (7종): BTC Binance, BTC 김치프리미엄 Upbit/Bithumb, Coinbase Premium, Longs, Shorts, Dominance
+  - 시장 전체 지표 (3종): TOTAL, TOTAL2 (Ex-BTC), TOTAL3 (Ex-BTC & ETH)
+  - 추가 분석 지표 (2종): ALT Dominance, Korea Premium Index
 - **Timeframe Selector**: 13 intervals from 1분 to 1월 (1m/3m/5m/15m/30m/45m/1H/2H/3H/4H/1D/1W/1M)
 - **Advanced Search**: Korean initial consonant (초성) search support (e.g., ㅂㅋ → 비트코인).
 - **Comparison Metrics**: 전일대비, 고가대비, 저가대비 columns with % and KRW values.
