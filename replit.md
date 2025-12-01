@@ -26,25 +26,31 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 
 ### Feature Specifications
 - **Kimchi Premium Tracking**: Real-time display of premium across various crypto pairs and exchanges.
-- **AI-powered Analysis**: Daily AI reports providing market insights.
+- **AI-powered Analysis**: Daily AI reports providing market insights with PRO tier for advanced predictions.
 - **User Alerts**: CRUD operations for managing price alerts with user-specific filtering.
 - **Multi-Exchange Data**: Supports 10+ domestic and foreign exchanges for comprehensive data.
-- **Interactive Charts**: TradingView charts with 9 preset views (BTC 바이낸스, BTC 김프 업비트/빗썸, 코인베이스 프리미엄, 롱/숏 포지션, 도미넌스).
+- **Interactive Charts**: TradingView charts with 12 preset views organized in 3 groups:
+  - 김프가 기본 (7종): BTC Binance, BTC 김프 Upbit/Bithumb, Coinbase Premium, Longs, Shorts, Dominance
+  - 시장 지표 (3종): TOTAL, TOTAL2, TOTAL3 Market Cap
+  - 확장 지표 (2종): ALT Dominance, Korea Premium Index
+- **Timeframe Selector**: 13 intervals from 1분 to 1월 (1m/3m/5m/15m/30m/45m/1H/2H/3H/4H/1D/1W/1M)
 - **Advanced Search**: Korean initial consonant (초성) search support (e.g., ㅂㅋ → 비트코인).
 - **Comparison Metrics**: 전일대비, 고가대비, 저가대비 columns with % and KRW values.
 - **Localized Volume Formatting**: KRW (만/억/조) and USD (K/M/B) with proper currency prefixes.
 - **CoinMarketCap Integration**: Direct links on coin names for external reference.
-- **2-Second Data Refresh**: Real-time feel with rapid data updates.
+- **2-Second Data Refresh**: Real-time feel with rapid data updates (무료/유료 동일).
+- **PRO Tier Features**: 48시간 김프 예측, 상세 분석 (마스킹 + 잠금 처리).
+- **Rate Limiting**: IP-based API protection (10 requests per 2 seconds).
 - **User Authentication**: Secure signup and login with Supabase, protecting pro-user features.
 - **Admin Interface**: Dedicated admin dashboard for management.
 
 ### Recent Changes (2025-12-01)
-- Replicated Kimpga.com homepage layout (chart left, AI box right, table below)
-- Added 9 TradingView chart presets with unique symbols
-- Implemented Korean 초성 search with getChosung() function
-- Added null-safe calcDiff() for comparison metrics
-- Created separate volume formatters for KRW and USD currencies
-- Reduced data refresh interval from 5 seconds to 2 seconds
+- v2.1 업데이트: 차트 프리셋 12종 확장 (TOTAL/TOTAL2/TOTAL3/ALT Dominance 추가)
+- TradingView 타임프레임 선택기 추가 (1분~1월)
+- AIInsightBox PRO 유료화 구조 구현 (마스킹 + 잠금)
+- KR Premium Score (위험도 지수 1~10) 추가
+- API Rate Limit 적용 (2초당 10회 IP 기반)
+- useUserPlan 훅 생성 (유료/무료 플랜 감지)
 
 ### System Design Choices
 - **Client-side Auth Guards**: Implemented for protected pages using Supabase.
