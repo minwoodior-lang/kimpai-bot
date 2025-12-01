@@ -1,5 +1,10 @@
-import { useState, useEffect, useMemo } from "react";
-import ChartModal from "./ChartModal";
+import React, { useState, useEffect, useMemo } from "react";
+import dynamic from "next/dynamic";
+
+const TradingViewChart = dynamic(
+  () => import("./charts/TradingViewChart"),
+  { ssr: false, loading: () => <div className="h-[360px] bg-slate-900/50 animate-pulse rounded-xl" /> }
+);
 
 interface PremiumData {
   symbol: string;
@@ -101,7 +106,13 @@ export default function PremiumTable({
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("premium");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
-  const [modalSymbol, setModalSymbol] = useState<string | null>(null);
+  const [expandedSymbol, setExpandedSymbol] = useState<string | null>(null);
+
+  const toggleChart = (symbol: string) => {
+    setExpandedSymbol(prev => prev === symbol ? null : symbol);
+  };
+
+  const getTvSymbol = (symbol: string) => `BINANCE:${symbol}USDT`;
 
   const fetchData = async () => {
     try {
@@ -397,8 +408,8 @@ export default function PremiumTable({
                   const lowDiff = calcDiff(row.koreanPrice, row.low24h);
                   
                   return (
+                    <React.Fragment key={row.symbol}>
                     <tr
-                      key={row.symbol}
                       className={`border-t border-slate-700/50 hover:bg-slate-700/30 transition-colors ${
                         index % 2 === 0 ? "bg-slate-800/30" : ""
                       }`}
@@ -418,9 +429,9 @@ export default function PremiumTable({
                             </div>
                           </button>
                           <button
-                            onClick={() => setModalSymbol(row.symbol)}
-                            className="text-gray-500 hover:text-blue-400 transition-colors p-1"
-                            title="차트 열기"
+                            onClick={() => toggleChart(row.symbol)}
+                            className={`p-1 transition-colors ${expandedSymbol === row.symbol ? 'text-blue-400' : 'text-gray-500 hover:text-blue-400'}`}
+                            title={expandedSymbol === row.symbol ? "차트 닫기" : "차트 열기"}
                           >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
@@ -483,6 +494,22 @@ export default function PremiumTable({
                         <div className="text-xs text-gray-500">{formatVolumeUsdt(row.volume24hUsdt)}</div>
                       </td>
                     </tr>
+                    {expandedSymbol === row.symbol && (
+                      <tr key={`${row.symbol}-chart`}>
+                        <td colSpan={8} className="p-0">
+                          <div className="bg-[#0F111A] border-t border-b border-slate-700/50 py-3 px-3">
+                            <div className="h-[360px] rounded-xl overflow-hidden bg-slate-900/50">
+                              <TradingViewChart
+                                tvSymbol={getTvSymbol(row.symbol)}
+                                height={360}
+                                interval="60"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
+                  </React.Fragment>
                   );
                 })}
               </tbody>
@@ -496,8 +523,6 @@ export default function PremiumTable({
           )}
         </div>
       )}
-
-      <ChartModal symbol={modalSymbol} onClose={() => setModalSymbol(null)} />
     </div>
   );
 }

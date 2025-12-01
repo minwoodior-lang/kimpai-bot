@@ -1,0 +1,90 @@
+[1] 코인별 차트 아이콘 동작 변경 (김프가 스타일 인라인 차트)
+
+현재:
+- 코인명 옆 차트 아이콘 클릭 시 전체 화면 모달(ChartModal)이 열립니다.
+
+요구사항:
+- 김프가처럼 "해당 코인 행 바로 아래에 TradingView 차트가 인라인으로 열리는 구조"로 변경해 주세요.
+- 모달 팝업 방식은 사용하지 않습니다.
+
+구현 가이드:
+- PremiumTable에서 모달 대신 "확장 행(expanded row)"를 사용합니다.
+  - 상태: const [expandedSymbol, setExpandedSymbol] = useState<string | null>(null);
+  - 아이콘 클릭 시: 같은 symbol이면 닫고(null), 다른 symbol이면 그 symbol로 변경.
+- rows.map 렌더링 시, 각 row 밑에 조건부로 차트용 <tr>를 추가합니다.
+
+예시:
+
+<tr>  // 기존 데이터 행
+  ...코인 정보, 가격, 김프 등...
+  <td>
+    <button onClick={() => toggleExpanded(row.symbol)}>📈</button>
+  </td>
+</tr>
+
+{expandedSymbol === row.symbol && (
+  <tr>
+    <td colSpan={전체 컬럼 수}>
+      <div className="h-[360px] rounded-xl bg-[#0F111A] ...">
+        <TradingViewWidget symbol={getTvSymbol(row.symbol)} />
+      </div>
+    </td>
+  </tr>
+)}
+
+- getTvSymbol 예시: BINANCE:BTCUSDT, BINANCE:XRPUSDT 등
+- 동시에 한 개의 차트만 열리도록 구현해 주세요.
+
+주의:
+- ChartModal / 전체 화면 팝업 / window.open 등은 PremiumTable에서는 더 이상 사용하지 않습니다.
+- 차트는 "행 아래 인라인"으로만 열립니다.
+
+검증 기준:
+- XRP 행 차트 버튼 클릭 → XRPUSDT 차트가 그 행 바로 아래에 표시.
+- 다시 클릭 → 차트 닫힘.
+- BTC 행 클릭 → XRP 차트 닫히고 BTC 차트만 열림.
+
+
+[2] 거래액(일) 계산 및 값 검증 요청
+
+현재:
+- BTC 기준으로 업비트/김프가에 비해 거래액(일) 값이 지나치게 큰 수치(수십 조 단위)로 표시되고 있습니다.
+- 업비트 공식 화면에서 BTC 거래대금(24H)이 약 4,9xx억인데,
+  우리 쪽은 97조 단위로 표시되는 등 큰 차이가 납니다.
+
+요구사항:
+- 거래액(일) 계산 로직을 아래 기준으로 통일하고,
+  BTC 기준으로 업비트/김프가와 비슷한 수준의 숫자가 나오도록 수정해 주세요.
+
+1) 업비트 (KRW 마켓)
+- Upbit API의 ticker 응답에서 acc_trade_price_24h 필드를 그대로 사용합니다.
+- 이 값이 이미 "24시간 KRW 기준 거래대금"이므로, 추가로 price를 곱하지 않습니다.
+
+  domesticVolumeKrw = acc_trade_price_24h;
+
+2) 바이낸스 등 해외 거래소 (USDT 마켓)
+- 24h USDT 기준 거래대금 필드만 사용합니다.
+  - Binance: quoteVolume(또는 그에 상응하는 24h quote volume)
+- 이 값에만 USDT→KRW 환율을 곱해서 KRW로 변환합니다.
+
+  overseasVolumeUsdt = quoteVolume;
+  overseasVolumeKrw = overseasVolumeUsdt * usdtKrwRate;
+
+- quoteVolume를 사용할 경우, 다시 lastPrice를 곱하지 않습니다
+  (이미 price * volume 값이기 때문).
+
+3) 표시 규칙
+- "거래액(일)" 셀:
+  - 1행: 국내 거래액(KRW) → 만/억/조 단위 포매팅
+  - 2행: 해외 거래액(KRW) → 동일 포매팅
+  - (선택) 작은 폰트로 "$xx.xB USDT" 보조 표기
+
+검증 기준:
+- BTC 기준으로
+  - Upbit 공식 화면 상 "거래대금(24H)" 값과
+  - 우리 테이블의 1행 거래액(일) 값이 거의 같아야 합니다.
+- 김프가 BTC 행과 비교했을 때도 수준이 비슷해야 합니다
+  (몇 % 차이 이내).
+
+위 두 가지(행 아래 인라인 차트 + 거래액 로직)를 반영 후,
+BTC/XRP 기준으로 한 번 더 캡처해 주시면 제가 실제 값과 비교해서 최종 확인하겠습니다.

@@ -212,8 +212,13 @@ export default async function handler(
           ? ((domesticPriceKrw - foreignPriceKrw) / foreignPriceKrw) * 100
           : 0;
 
-        const rawVolumeUsdt = Number(foreignRecord.volume_24h) || 0;
-        const volumeKrw = rawVolumeUsdt * fxRate;
+        const domesticVolumeKrw = Number(domesticRecord.volume_24h) || 0;
+        
+        const foreignVolumeRaw = Number(foreignRecord.volume_24h) || 0;
+        let foreignVolumeUsdt = foreignVolumeRaw;
+        if (foreignRecord.quote.toUpperCase() === "KRW") {
+          foreignVolumeUsdt = foreignVolumeRaw / fxRate;
+        }
         
         tableData.push({
           symbol,
@@ -221,8 +226,8 @@ export default async function handler(
           koreanPrice: Math.round(domesticPriceKrw),
           globalPrice: globalPriceUsd,
           premium: Math.round(premium * 100) / 100,
-          volume24hKrw: Math.round(volumeKrw),
-          volume24hUsdt: rawVolumeUsdt,
+          volume24hKrw: Math.round(domesticVolumeKrw),
+          volume24hUsdt: foreignVolumeUsdt,
           change24h: Math.round((Number(foreignRecord.change_24h) || 0) * 100) / 100,
           high24h: Math.round(domesticPriceKrw * 1.01),
           low24h: Math.round(domesticPriceKrw * 0.99),
