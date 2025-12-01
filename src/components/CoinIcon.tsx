@@ -274,6 +274,7 @@ export const COIN_ID_MAP: Record<string, string> = {
   'RAY': 'raydium',
   'ORCA': 'orca',
   'MNDE': 'marinade',
+  'ZRO': 'layerzero',
   
   // 업비트/빗썸/코인원 추가 상장 코인 (2024-2025)
   'MON': 'mon-protocol',
@@ -342,6 +343,17 @@ export const COIN_ID_MAP: Record<string, string> = {
   'KWENTA': 'kwenta',
   'VELO': 'velodrome-finance',
   'AERO': 'aerodrome-finance',
+  
+  // 누락 심볼 추가 (업비트/OKX 상장 코인)
+  'WLFI': 'willowfi',
+  'KITE': 'kite',
+  'XPL': 'xpla',
+  'TRUST': 'trust-token',
+  'FLOCK': 'flock',
+  'IN': 'in-protocol',
+  'ERA': 'era-swap-token',
+  'CYBER': 'cyberconnect',
+  'ARKM': 'arkham-intelligence-usd',
 };
 
 // 심볼별 그라데이션 컬러 (폴백용)
@@ -416,6 +428,18 @@ const GRADIENT_COLORS: Record<string, string> = {
   'KAVA': 'from-red-500 to-pink-500',
   'KAS': 'from-teal-500 to-cyan-500',
   'CORE': 'from-orange-500 to-amber-400',
+  
+  // 누락 심볼 그라데이션
+  'WLFI': 'from-blue-500 to-purple-500',
+  'KITE': 'from-cyan-400 to-blue-500',
+  'XPL': 'from-purple-500 to-pink-500',
+  'TRUST': 'from-green-500 to-emerald-600',
+  'FLOCK': 'from-pink-500 to-rose-500',
+  'IN': 'from-amber-500 to-orange-500',
+  'ERA': 'from-teal-500 to-cyan-600',
+  'CYBER': 'from-purple-600 to-indigo-700',
+  'ARKM': 'from-blue-600 to-indigo-700',
+  'ZRO': 'from-blue-600 to-indigo-600',
 };
 
 interface CoinIconProps {

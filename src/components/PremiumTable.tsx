@@ -191,7 +191,7 @@ export default function PremiumTable({
   showHeader = true,
   showFilters = true,
   limit = 0,
-  refreshInterval = 1000,
+  refreshInterval = 3000,
 }: PremiumTableProps) {
   const [data, setData] = useState<PremiumData[]>([]);
   const [averagePremium, setAveragePremium] = useState(0);
@@ -201,6 +201,7 @@ export default function PremiumTable({
   const [error, setError] = useState<string | null>(null);
   const [totalCoins, setTotalCoins] = useState(0);
   const [listedCoins, setListedCoins] = useState(0);
+  const [rateLimitRetryAfter, setRateLimitRetryAfter] = useState(0);
 
   const [domesticExchange, setDomesticExchange] = useState("UPBIT_KRW");
   const [foreignExchange, setForeignExchange] = useState("OKX_USDT");
@@ -266,11 +267,21 @@ export default function PremiumTable({
 
   const fetchData = async () => {
     try {
+      if (rateLimitRetryAfter > 0) return;
+
       const response = await fetch(
         `/api/premium/table?domestic=${domesticExchange}&foreign=${foreignExchange}`
       );
 
-      if (response.status === 429) return;
+      if (response.status === 429) {
+        const retryAfter = parseInt(response.headers.get('retry-after') || '10');
+        setRateLimitRetryAfter(retryAfter);
+        if (process.env.NODE_ENV === 'development') {
+          console.warn(`[PremiumTable] 429 Rate Limited. Retrying after ${retryAfter}s`);
+        }
+        setTimeout(() => setRateLimitRetryAfter(0), retryAfter * 1000);
+        return;
+      }
       if (!response.ok) return;
 
       const json: ApiResponse = await response.json();

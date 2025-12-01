@@ -1,0 +1,133 @@
+프로젝트: KimpAI (김프 AI 서비스)
+목표: 아이콘 누락 심볼 처리 + 불필요 콘솔 에러 정리 + 429 레이트 리밋 완화
+
+⚠️ 모드 관련 전제
+- 이번 작업은 Fast 모드 기준으로만 처리해줘.
+- Autonomous 모드는 우리가 별도로 요청하기 전에는 절대 켜지지 않는다는 약속을 전제로 한다.
+- 여러 파일을 광범위하게 리팩토링하기보다는, 아래 범위 내에서 “필요한 부분만 최소한으로” 수정해줘.
+
+
+==================================================
+1) CoinIcon.tsx – 누락 심볼 매핑 보완
+==================================================
+
+상황 정리:
+- CoinIcon.tsx에 loggedMissingIcons Set과 dev 전용 콘솔 로그 기능이 이미 추가된 상태다.
+- 현재 콘솔에서 아래와 같은 심볼들이 누락 아이콘으로 표시되고 있다.
+
+누락 심볼 목록:
+- WLFI
+- KITE
+- XPL
+- 0G
+- TRUST
+- FLOCK
+- IN
+- ERA
+- CYBER
+- MON
+- SAHARA
+- SIGN
+- ORCA
+- ZRO
+- ARKM
+
+요청 사항:
+1) CoinIcon.tsx / COIN_ID_MAP 내부에 위 심볼들만 추가 매핑해줘.
+   - 형식: "심볼": "coingecko-id" 형태
+   - 실제 업비트/OKX 등에서 상장된 해당 심볼이 어떤 토큰인지 확인해서, 올바른 CoinGecko ID로 연결해줘.
+   - 이미 존재하는 항목은 건드리지 말고, 위 심볼에 대한 신규 엔트리만 추가해.
+
+2) CDN 우선순위(cryptocurrency-icons, spothq, coincap, coingecko, cryptocompare)는 건드릴 필요 없고,
+   - 위 심볼들이 COIN_ID_MAP에 들어가면 가능한 한 공식 로고가 잘 뜨도록 조합해줘.
+   - 그래도 이미지가 전혀 없는 코인은, 현재 시스템대로 커스텀 그라데이션 폴백을 사용하되
+     “완전 기본 동그라미”보다는 각 심볼별로 색 조합이 조금이라도 다르게 보이도록 유지해줘.
+
+3) normalizeSymbol, loggedMissingIcons, dev 전용 콘솔 로그 로직은 현재 동작하는 상태를 유지하고,
+   - 이번 작업에서는 해당 로직을 건드리지 말고 COIN_ID_MAP 데이터 보완에만 집중해줘.
+
+완료 기준:
+- 위 나열된 심볼들이 Markets / PremiumTable / 모바일 리스트 화면에서 모두 아이콘(또는 의도된 커스텀 그라데이션)으로 표시되고,
+- 더 이상 해당 심볼에 대해 [CoinIcon] missing icon 콘솔 로그가 찍히지 않아야 한다.
+
+
+==================================================
+2) /api/premium/table – 429(Too Many Requests) 완화
+==================================================
+
+콘솔 에러:
+- GET /api/premium/table?domestic=UPBIT_KRW&foreign=OKX_USDT 429 (Too Many Requests)
+
+상황:
+- 현재 PremiumTable.tsx에서 해당 API를 호출하는 주기가 너무 짧거나,
+  탭/컴포넌트 마운트 시점에 중복 호출이 발생해서 레이트 리밋에 걸리는 것 같다.
+
+요청 사항:
+1) PremiumTable.tsx에서 /api/premium/table 호출 주기를 확인해줘.
+   - 만약 setInterval 또는 폴링 방식이라면, 최소 3~5초 이상 간격으로 호출하도록 완화해줘.
+   - 실시간성이 중요한 서비스이긴 하지만, 초당 1회 수준의 공격적인 폴링은 피하고 싶다.
+
+2) 429 응답이 왔을 때는:
+   - 즉시 재시도하지 말고, 일정 시간(예: 5~10초) 딜레이를 둔 후 다시 시도하거나,
+   - 해당 요청을 아예 중단하고 “잠시 후 자동 갱신” 정도의 UI 메시지를 띄우는 방향으로 방어 로직을 추가해줘.
+
+3) 개발 환경에서만, 429가 연속으로 발생할 경우 콘솔에 경고를 찍어서
+   폴링 주기를 더 늘릴 필요가 있는지 판단할 수 있게 해주면 좋겠다.
+
+완료 기준:
+- 일반적인 사용 시나리오(PC/모바일에서 Markets/Premium 화면 한두 개 켜둔 상태)에서
+  /api/premium/table 429 에러가 더 이상 발생하지 않는 수준으로 호출 빈도가 조정되어야 한다.
+
+
+==================================================
+3) embed-widget-advanced-chart.js TypeError 처리
+==================================================
+
+콘솔 에러:
+- embed-widget-advanced-chart.js:3 Uncaught TypeError: Cannot read properties of null (reading 'querySelector')
+
+상황:
+- 외부 차트 위젯(TradingView 또는 유사 스크립트)이
+  DOM에 아직 존재하지 않는 컨테이너를 대상으로 querySelector를 호출하면서 null을 리턴받고,
+  거기서 추가 메서드를 호출하다가 터지는 전형적인 패턴처럼 보인다.
+
+요청 사항:
+1) 차트가 렌더링되는 컴포넌트(예: ChartWrapper, MarketsChart 등)를 확인해서,
+   - 위젯 스크립트가 실행되기 전에 해당 컨테이너 DOM이 확실히 렌더되어 있도록 보장해줘.
+   - Next.js라면 useEffect 안에서 document.querySelector로 컨테이너를 찾되,
+     컨테이너가 없으면 그냥 early return 하도록 방어 로직을 넣어줘.
+
+예시 (참고용):
+
+useEffect(() => {
+  if (typeof window === 'undefined') return;
+
+  const container = document.querySelector('#tradingview_chart');
+  if (!container) {
+    // 컨테이너가 없는 환경이면 스크립트 실행하지 않음
+    return;
+  }
+
+  // 여기에서만 embed-widget-advanced-chart 관련 초기화 수행
+}, []);
+
+2) embed-widget-advanced-chart.js를 직접 <script>로 불러오는 구조라면,
+   - Next.js <Script> 컴포넌트와 afterInteractive / lazyOnload 전략을 활용해서
+     DOM 렌더 이후에만 실행되도록 조정해줘.
+
+완료 기준:
+- 콘솔에서 해당 TypeError가 더 이상 발생하지 않고,
+- 차트 위젯이 정상적으로 표시되거나, 최소한 DOM이 없을 경우에는 조용히 스킵되도록 처리되는 상태.
+
+
+==================================================
+정리
+==================================================
+
+이번 작업에서 가장 중요한 우선순위는 다음과 같다:
+
+1) CoinIcon 누락 심볼(WLFI, KITE, XPL, 0G, TRUST, FLOCK, IN, ERA, CYBER, MON, SAHARA, SIGN, ORCA, ZRO, ARKM)에 대한 COIN_ID_MAP 매핑 보완
+2) /api/premium/table 429 레이트 리밋 완화(폴링 주기 조정 + 간단한 방어 로직)
+3) embed-widget-advanced-chart.js TypeError 방어(컨테이너 존재 여부 체크)
+
+위 세 가지를 Fast 모드 범위 안에서, 불필요한 전역 리팩토링 없이 최소 변경으로 처리해주면 좋겠다.
