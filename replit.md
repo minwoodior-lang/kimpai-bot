@@ -45,6 +45,12 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 - **Admin Interface**: Dedicated admin dashboard for management.
 
 ### Recent Changes (2025-12-01)
+- **v2.1.8 해외 거래액 정확도 개선**:
+  - OKX: vol24h (base volume) → volCcy24h (quote volume in USDT) 수정
+  - HTX: vol × close (이중 계산) → vol 직접 사용 (이미 USDT 볼륨)
+  - 모든 거래소 fetcher에 사용 필드 설명 주석 추가
+  - 검증: OKX/HTX API 응답과 백엔드 값 일치 확인
+  - 알려진 제한: Binance API 차단으로 CoinGecko 글로벌 볼륨 사용 (폴백)
 - **v2.1.7 거래액 표시 + PRO UI 개선**:
   - 거래액(일) 셀: 국내 KRW (국내) + 해외 KRW (해외) + USDT 보조 텍스트
   - API에 volume24hForeignKrw 필드 추가 (해외 USDT × 환율)
