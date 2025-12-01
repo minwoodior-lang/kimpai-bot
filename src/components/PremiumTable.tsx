@@ -116,8 +116,21 @@ export default function PremiumTable({
   const [domesticExchange, setDomesticExchange] = useState("UPBIT_KRW");
   const [foreignExchange, setForeignExchange] = useState("OKX_USDT");
   const [searchQuery, setSearchQuery] = useState("");
-  const [sortKey, setSortKey] = useState<SortKey>("premium");
+  const [sortKey, setSortKey] = useState<SortKey>("volume24hKrw");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
+  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+
+  const toggleFavorite = (symbol: string) => {
+    setFavorites(prev => {
+      const newFavorites = new Set(prev);
+      if (newFavorites.has(symbol)) {
+        newFavorites.delete(symbol);
+      } else {
+        newFavorites.add(symbol);
+      }
+      return newFavorites;
+    });
+  };
   const [expandedSymbol, setExpandedSymbol] = useState<string | null>(null);
   const [flashStates, setFlashStates] = useState<FlashState>({});
   const prevDataRef = useRef<Record<string, { price: number; premium: number | null }>>({});
@@ -246,11 +259,14 @@ export default function PremiumTable({
 
   const formatKrwPrice = (value: number | null) => {
     if (value === null || value === undefined || isNaN(value)) return "-";
-    if (value >= 1000) {
+    if (value >= 100) {
       return Math.round(value).toLocaleString("ko-KR");
     }
-    if (value >= 1) {
+    if (value >= 10) {
       return value.toFixed(1);
+    }
+    if (value >= 1) {
+      return value.toFixed(2);
     }
     return value.toFixed(4);
   };
@@ -428,49 +444,55 @@ export default function PremiumTable({
               <thead>
                 <tr className="bg-slate-900/80 text-gray-400 text-xs">
                   <th
-                    className="px-3 py-2 text-left cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    className="px-2 md:px-3 py-2 text-left cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("symbol")}
                   >
                     코인명<SortIcon columnKey="symbol" />
                   </th>
                   <th
-                    className="px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    className="px-2 md:px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("koreanPrice")}
                   >
-                    {getDomesticName()}<SortIcon columnKey="koreanPrice" />
+                    <span className="hidden md:inline">{getDomesticName()}</span>
+                    <span className="md:hidden">현재가</span>
+                    <SortIcon columnKey="koreanPrice" />
                   </th>
-                  <th className="px-3 py-2 text-right whitespace-nowrap">
+                  <th className="hidden md:table-cell px-3 py-2 text-right whitespace-nowrap">
                     {getForeignName()}
                   </th>
                   <th
-                    className="px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    className="px-2 md:px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("premium")}
                   >
                     김프<SortIcon columnKey="premium" />
                   </th>
                   <th
-                    className="px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    className="px-2 md:px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("change24h")}
                   >
-                    전일대비<SortIcon columnKey="change24h" />
+                    <span className="hidden md:inline">전일대비</span>
+                    <span className="md:hidden">24h</span>
+                    <SortIcon columnKey="change24h" />
                   </th>
                   <th
-                    className="px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    className="hidden lg:table-cell px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("high24h")}
                   >
                     고가대비(24h)<SortIcon columnKey="high24h" />
                   </th>
                   <th
-                    className="px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    className="hidden lg:table-cell px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("low24h")}
                   >
                     저가대비(24h)<SortIcon columnKey="low24h" />
                   </th>
                   <th
-                    className="px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    className="px-2 md:px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("volume24hKrw")}
                   >
-                    거래액(일)<SortIcon columnKey="volume24hKrw" />
+                    <span className="hidden md:inline">거래액(일)</span>
+                    <span className="md:hidden">거래액</span>
+                    <SortIcon columnKey="volume24hKrw" />
                   </th>
                 </tr>
               </thead>
@@ -490,42 +512,65 @@ export default function PremiumTable({
                     <tr
                       className={`border-t border-slate-700/50 hover:bg-slate-700/30 transition-colors ${
                         index % 2 === 0 ? "bg-slate-800/30" : ""
-                      } ${!row.isListed ? "opacity-60" : ""}`}
+                      }`}
                     >
                       <td className="px-3 py-2">
                         <div className="flex items-center gap-2">
                           <button
-                            onClick={() => openCoinMarketCap(row.symbol, row.cmcSlug)}
-                            className="flex items-center gap-2 hover:text-blue-400 transition-colors text-left"
+                            onClick={() => toggleFavorite(row.symbol)}
+                            className={`text-lg transition-colors ${favorites.has(row.symbol) ? 'text-yellow-400' : 'text-gray-600 hover:text-yellow-400'}`}
+                            title={favorites.has(row.symbol) ? "즐겨찾기 해제" : "즐겨찾기 추가"}
                           >
-                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">
-                              {row.symbol.charAt(0)}
-                            </div>
-                            <div>
-                              <div className="text-white font-medium text-sm">{row.koreanName}</div>
-                              <div className="text-gray-500 text-xs">{row.symbol}</div>
-                            </div>
+                            {favorites.has(row.symbol) ? '★' : '☆'}
                           </button>
-                          {row.isListed && (
-                            <button
-                              onClick={() => toggleChart(row.symbol)}
-                              className={`p-1 transition-colors ${expandedSymbol === row.symbol ? 'text-blue-400' : 'text-gray-500 hover:text-blue-400'}`}
-                              title={expandedSymbol === row.symbol ? "차트 닫기" : "차트 열기"}
-                            >
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
-                              </svg>
-                            </button>
-                          )}
+                          <img
+                            src={`https://cdn.jsdelivr.net/gh/AlistairRobinson/cryptocurrency-icons@master/32/color/${row.symbol.toLowerCase()}.png`}
+                            alt={row.symbol}
+                            className="w-6 h-6 rounded-full flex-shrink-0"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.onerror = null;
+                              target.src = `https://s2.coinmarketcap.com/static/img/coins/64x64/1.png`;
+                              target.style.display = 'none';
+                              const fallback = target.nextElementSibling as HTMLElement;
+                              if (fallback) fallback.classList.remove('hidden');
+                            }}
+                          />
+                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs flex-shrink-0 hidden">
+                            {row.symbol.charAt(0)}
+                          </div>
+                          <button
+                            onClick={() => openCoinMarketCap(row.symbol, row.cmcSlug)}
+                            className="flex flex-col hover:text-blue-400 transition-colors text-left"
+                          >
+                            <div className="text-white font-medium text-sm">{row.koreanName}</div>
+                            <div className="text-gray-500 text-xs">{row.symbol}</div>
+                          </button>
+                          <button
+                            onClick={() => toggleChart(row.symbol)}
+                            className={`p-1 transition-colors ${expandedSymbol === row.symbol ? 'text-blue-400' : 'text-gray-500 hover:text-blue-400'}`}
+                            title={expandedSymbol === row.symbol ? "차트 닫기" : "차트 열기"}
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                            </svg>
+                          </button>
                           {!row.isListed && (
-                            <span className="text-xs text-gray-500 bg-gray-700/50 px-1.5 py-0.5 rounded">미상장</span>
+                            <span className="text-xs text-orange-400 bg-orange-400/20 px-1.5 py-0.5 rounded">미상장</span>
                           )}
                         </div>
                       </td>
-                      <td className={`px-3 py-2 text-right ${getFlashClass(row.symbol, "price")}`}>
-                        <div className="text-white font-medium">₩{formatKRW(row.koreanPrice)}</div>
+                      <td className={`px-2 md:px-3 py-2 text-right ${getFlashClass(row.symbol, "price")}`}>
+                        <div className="text-white font-medium">₩{formatKrwPrice(row.koreanPrice)}</div>
+                        <div className="md:hidden text-xs text-gray-500">
+                          {row.isListed && row.globalPrice !== null ? (
+                            <span>{formatUsdtPrice(row.globalPrice)} / ₩{formatKrwPrice(row.globalPriceKrw)}</span>
+                          ) : (
+                            <span>-</span>
+                          )}
+                        </div>
                       </td>
-                      <td className="px-3 py-2 text-right">
+                      <td className="hidden md:table-cell px-3 py-2 text-right">
                         {row.isListed && row.globalPriceKrw !== null ? (
                           <>
                             <div className="text-white font-medium">₩{formatKrwPrice(row.globalPriceKrw)}</div>
@@ -535,7 +580,7 @@ export default function PremiumTable({
                           <div className="text-gray-500">-</div>
                         )}
                       </td>
-                      <td className={`px-3 py-2 text-right ${getFlashClass(row.symbol, "premium")}`}>
+                      <td className={`px-2 md:px-3 py-2 text-right ${getFlashClass(row.symbol, "premium")}`}>
                         {row.premium !== null ? (
                           <div className={`font-bold ${getPremiumColor(row.premium)}`}>
                             {row.premium >= 0 ? "+" : ""}{row.premium.toFixed(2)}%
@@ -544,23 +589,23 @@ export default function PremiumTable({
                           <div className="text-gray-500">-</div>
                         )}
                       </td>
-                      <td className="px-3 py-2 text-right">
+                      <td className="px-2 md:px-3 py-2 text-right">
                         {row.change24h !== null ? (
                           <>
                             <div className={getChangeColor(row.change24h)}>
                               {row.change24h >= 0 ? "+" : ""}{row.change24h.toFixed(2)}%
                             </div>
-                            {prevDiff.valid && (
-                              <div className={`text-xs ${getChangeColor(prevDiff.diff)}`}>
-                                {prevDiff.diff >= 0 ? "+" : ""}₩{formatKRW(Math.round(prevDiff.diff))}
-                              </div>
-                            )}
+                            <div className={`hidden md:block text-xs ${getChangeColor(prevDiff.diff)}`}>
+                              {prevDiff.valid && (
+                                <span>{prevDiff.diff >= 0 ? "+" : ""}₩{formatKRW(Math.round(prevDiff.diff))}</span>
+                              )}
+                            </div>
                           </>
                         ) : (
                           <div className="text-gray-500">-</div>
                         )}
                       </td>
-                      <td className="px-3 py-2 text-right">
+                      <td className="hidden lg:table-cell px-3 py-2 text-right">
                         {highDiff.valid ? (
                           <>
                             <div className={getChangeColor(highDiff.percent)}>
@@ -574,7 +619,7 @@ export default function PremiumTable({
                           <div className="text-gray-500">-</div>
                         )}
                       </td>
-                      <td className="px-3 py-2 text-right">
+                      <td className="hidden lg:table-cell px-3 py-2 text-right">
                         {lowDiff.valid ? (
                           <>
                             <div className={getChangeColor(lowDiff.percent)}>
@@ -588,31 +633,30 @@ export default function PremiumTable({
                           <div className="text-gray-500">-</div>
                         )}
                       </td>
-                      <td className="px-3 py-2 text-right">
+                      <td className="px-2 md:px-3 py-2 text-right">
                         <div className="flex flex-col items-end leading-tight">
-                          <span className="text-gray-300">
+                          <span className="text-gray-300 text-xs md:text-sm">
                             ₩{formatVolumeKRW(row.volume24hKrw)}
-                            <span className="ml-1 text-xs text-gray-500">(국내)</span>
+                            <span className="hidden md:inline ml-1 text-xs text-gray-500">(국내)</span>
                           </span>
-                          {row.isListed && row.volume24hForeignKrw !== null ? (
-                            <>
-                              <span className="text-gray-300">
-                                ₩{formatVolumeKRW(row.volume24hForeignKrw)}
-                                <span className="ml-1 text-xs text-gray-500">(해외)</span>
-                              </span>
-                              <span className="mt-0.5 text-[11px] text-gray-500">
-                                {formatVolumeUsdt(row.volume24hUsdt)} USDT
-                              </span>
-                            </>
-                          ) : (
-                            <span className="text-gray-500 text-xs">해외: -</span>
-                          )}
+                          <span className="hidden md:inline">
+                            {row.isListed && row.volume24hForeignKrw !== null ? (
+                              <>
+                                <span className="text-gray-300">
+                                  ₩{formatVolumeKRW(row.volume24hForeignKrw)}
+                                  <span className="ml-1 text-xs text-gray-500">(해외)</span>
+                                </span>
+                              </>
+                            ) : (
+                              <span className="text-gray-500 text-xs">해외: -</span>
+                            )}
+                          </span>
                         </div>
                       </td>
                     </tr>
-                    {expandedSymbol === row.symbol && row.isListed && (
+                    {expandedSymbol === row.symbol && (
                       <tr key={`${row.symbol}-chart`}>
-                        <td colSpan={8} className="p-0">
+                        <td colSpan={8} className="p-0 lg:table-cell">
                           <div className="bg-[#0F111A] border-t border-b border-slate-700/50 py-3 px-3">
                             <div className="h-[360px] rounded-xl overflow-hidden bg-slate-900/50">
                               <TradingViewChart
