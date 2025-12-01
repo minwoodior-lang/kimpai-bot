@@ -2,6 +2,90 @@ import React, { useState, useEffect, useMemo, useRef, useCallback } from "react"
 import dynamic from "next/dynamic";
 import { FOREIGN_EXCHANGES as CONTEXT_FOREIGN_EXCHANGES, EXCHANGE_LOGOS } from "@/contexts/ExchangeSelectionContext";
 
+interface DropdownOption {
+  id: string;
+  name: string;
+  shortName?: string;
+  logo: string;
+}
+
+function MiniDropdown({ 
+  value, 
+  options, 
+  onChange, 
+  showShortName = false 
+}: { 
+  value: string; 
+  options: DropdownOption[]; 
+  onChange: (value: string) => void;
+  showShortName?: boolean;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  
+  const selectedOption = options.find(o => o.id === value);
+  
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <div ref={dropdownRef} className="relative">
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-1 bg-slate-700 rounded-lg px-2 py-1.5 border border-slate-600 hover:border-slate-500 transition-colors"
+      >
+        {selectedOption && (
+          <img src={selectedOption.logo} alt="" className="w-4 h-4 rounded" />
+        )}
+        <span className="text-white text-sm truncate max-w-[80px]">
+          {showShortName ? selectedOption?.shortName || selectedOption?.name : selectedOption?.name?.replace('🇰🇷 ', '')}
+        </span>
+        <svg 
+          className={`w-3 h-3 text-slate-400 transition-transform flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      
+      {isOpen && (
+        <div className="absolute z-50 mt-1 min-w-[140px] bg-slate-800 border border-slate-600 rounded-lg shadow-xl overflow-hidden">
+          <div className="max-h-[250px] overflow-y-auto">
+            {options.map((option) => (
+              <button
+                key={option.id}
+                type="button"
+                onClick={() => {
+                  onChange(option.id);
+                  setIsOpen(false);
+                }}
+                className={`w-full flex items-center gap-2 px-2 py-1.5 hover:bg-slate-700 transition-colors text-left ${
+                  value === option.id ? 'bg-slate-700/50' : ''
+                }`}
+              >
+                <img src={option.logo} alt="" className="w-4 h-4 rounded flex-shrink-0" />
+                <span className="text-white text-sm truncate">
+                  {showShortName ? option.shortName || option.name : option.name?.replace('🇰🇷 ', '')}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 const TradingViewChart = dynamic(
   () => import("./charts/TradingViewChart"),
   { ssr: false, loading: () => <div className="h-[360px] bg-slate-900/50 animate-pulse rounded-xl" /> }
@@ -480,44 +564,23 @@ export default function PremiumTable({
         <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-4 text-sm">
           <div className="flex items-center gap-1">
             <span className="text-gray-400 text-xs hidden md:inline">기준</span>
-            <div className="flex items-center gap-1 bg-slate-700 rounded-lg px-2 py-1.5 border border-slate-600">
-              <img 
-                src={DOMESTIC_EXCHANGES.find(e => e.id === domesticExchange)?.logo || EXCHANGE_LOGOS.UPBIT} 
-                alt="" 
-                className="w-4 h-4"
-              />
-              <select
-                value={domesticExchange}
-                onChange={(e) => setDomesticExchange(e.target.value)}
-                className="bg-slate-700 text-white focus:outline-none text-sm cursor-pointer [&_option]:bg-slate-700 [&_option]:text-white"
-              >
-                {DOMESTIC_EXCHANGES.map((ex) => (
-                  <option key={ex.id} value={ex.id} className="bg-slate-700 text-white">{ex.name.replace('🇰🇷 ', '')}</option>
-                ))}
-              </select>
-            </div>
+            <MiniDropdown
+              value={domesticExchange}
+              options={DOMESTIC_EXCHANGES}
+              onChange={setDomesticExchange}
+            />
           </div>
 
           <span className="text-gray-500">↔</span>
 
           <div className="flex items-center gap-1">
             <span className="text-gray-400 text-xs hidden md:inline">해외</span>
-            <div className="flex items-center gap-1 bg-slate-700 rounded-lg px-2 py-1.5 border border-slate-600">
-              <img 
-                src={FOREIGN_EXCHANGES.find(e => e.id === foreignExchange)?.logo || EXCHANGE_LOGOS.BINANCE} 
-                alt="" 
-                className="w-4 h-4"
-              />
-              <select
-                value={foreignExchange}
-                onChange={(e) => setForeignExchange(e.target.value)}
-                className="bg-slate-700 text-white focus:outline-none text-sm cursor-pointer [&_option]:bg-slate-700 [&_option]:text-white"
-              >
-                {FOREIGN_EXCHANGES.map((ex) => (
-                  <option key={ex.id} value={ex.id} className="bg-slate-700 text-white">{ex.shortName}</option>
-                ))}
-              </select>
-            </div>
+            <MiniDropdown
+              value={foreignExchange}
+              options={FOREIGN_EXCHANGES}
+              onChange={setForeignExchange}
+              showShortName={true}
+            />
           </div>
 
           <div className="hidden md:flex items-center text-gray-400 text-xs px-2">
