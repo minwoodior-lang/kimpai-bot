@@ -48,9 +48,13 @@ interface FlashState {
 }
 
 const DOMESTIC_EXCHANGES = [
-  { id: "UPBIT_KRW", name: "업비트", exchange: "Upbit" },
-  { id: "BITHUMB_KRW", name: "빗썸", exchange: "Bithumb" },
-  { id: "COINONE_KRW", name: "코인원", exchange: "Coinone" },
+  { id: "UPBIT_KRW", name: "🇰🇷 업비트 KRW", exchange: "Upbit", logo: "/exchanges/upbit.svg" },
+  { id: "UPBIT_BTC", name: "🇰🇷 업비트 BTC", exchange: "Upbit", logo: "/exchanges/upbit.svg" },
+  { id: "UPBIT_USDT", name: "🇰🇷 업비트 USDT", exchange: "Upbit", logo: "/exchanges/upbit.svg" },
+  { id: "BITHUMB_KRW", name: "🇰🇷 빗썸 KRW", exchange: "Bithumb", logo: "/exchanges/bithumb.svg" },
+  { id: "BITHUMB_BTC", name: "🇰🇷 빗썸 BTC", exchange: "Bithumb", logo: "/exchanges/bithumb.svg" },
+  { id: "BITHUMB_USDT", name: "🇰🇷 빗썸 USDT", exchange: "Bithumb", logo: "/exchanges/bithumb.svg" },
+  { id: "COINONE_KRW", name: "🇰🇷 코인원 KRW", exchange: "Coinone", logo: "/exchanges/coinone.svg" },
 ];
 
 const FOREIGN_EXCHANGES = CONTEXT_FOREIGN_EXCHANGES.map(ex => ({
@@ -62,6 +66,41 @@ const FOREIGN_EXCHANGES = CONTEXT_FOREIGN_EXCHANGES.map(ex => ({
 }));
 
 const CHOSUNG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+
+function CoinIcon({ symbol }: { symbol: string }) {
+  const [hasError, setHasError] = React.useState(false);
+  const lowercaseSymbol = symbol.toLowerCase();
+  
+  const gradientColors: Record<string, string> = {
+    'btc': 'from-orange-500 to-yellow-500',
+    'eth': 'from-blue-500 to-purple-500',
+    'xrp': 'from-gray-500 to-blue-500',
+    'sol': 'from-purple-500 to-green-500',
+    'doge': 'from-yellow-400 to-yellow-600',
+    'ada': 'from-blue-600 to-blue-400',
+    'usdt': 'from-green-500 to-green-700',
+    'usdc': 'from-blue-400 to-blue-600',
+  };
+  
+  const gradient = gradientColors[lowercaseSymbol] || 'from-blue-500 to-purple-500';
+  
+  if (hasError) {
+    return (
+      <div className={`w-6 h-6 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center text-white font-bold text-xs flex-shrink-0`}>
+        {symbol.charAt(0)}
+      </div>
+    );
+  }
+  
+  return (
+    <img
+      src={`https://cryptoicons.org/api/icon/${lowercaseSymbol}/32`}
+      alt={symbol}
+      className="w-6 h-6 rounded-full flex-shrink-0"
+      onError={() => setHasError(true)}
+    />
+  );
+}
 
 function getChosung(str: string): string {
   let result = '';
@@ -259,10 +298,10 @@ export default function PremiumTable({
 
   const formatKrwPrice = (value: number | null) => {
     if (value === null || value === undefined || isNaN(value)) return "-";
-    if (value >= 100) {
+    if (value >= 1000) {
       return Math.round(value).toLocaleString("ko-KR");
     }
-    if (value >= 10) {
+    if (value >= 100) {
       return value.toFixed(1);
     }
     if (value >= 1) {
@@ -523,22 +562,7 @@ export default function PremiumTable({
                           >
                             {favorites.has(row.symbol) ? '★' : '☆'}
                           </button>
-                          <img
-                            src={`https://cdn.jsdelivr.net/gh/AlistairRobinson/cryptocurrency-icons@master/32/color/${row.symbol.toLowerCase()}.png`}
-                            alt={row.symbol}
-                            className="w-6 h-6 rounded-full flex-shrink-0"
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.onerror = null;
-                              target.src = `https://s2.coinmarketcap.com/static/img/coins/64x64/1.png`;
-                              target.style.display = 'none';
-                              const fallback = target.nextElementSibling as HTMLElement;
-                              if (fallback) fallback.classList.remove('hidden');
-                            }}
-                          />
-                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs flex-shrink-0 hidden">
-                            {row.symbol.charAt(0)}
-                          </div>
+                          <CoinIcon symbol={row.symbol} />
                           <button
                             onClick={() => openCoinMarketCap(row.symbol, row.cmcSlug)}
                             className="flex flex-col hover:text-blue-400 transition-colors text-left"
@@ -563,8 +587,8 @@ export default function PremiumTable({
                       <td className={`px-2 md:px-3 py-2 text-right ${getFlashClass(row.symbol, "price")}`}>
                         <div className="text-white font-medium">₩{formatKrwPrice(row.koreanPrice)}</div>
                         <div className="md:hidden text-xs text-gray-500">
-                          {row.isListed && row.globalPrice !== null ? (
-                            <span>{formatUsdtPrice(row.globalPrice)} / ₩{formatKrwPrice(row.globalPriceKrw)}</span>
+                          {row.globalPrice !== null ? (
+                            <span>{formatUsdtPrice(row.globalPrice)}</span>
                           ) : (
                             <span>-</span>
                           )}

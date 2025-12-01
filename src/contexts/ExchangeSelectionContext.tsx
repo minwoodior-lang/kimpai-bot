@@ -25,13 +25,13 @@ export const EXCHANGE_LOGOS: Record<string, string> = {
 };
 
 export const DOMESTIC_EXCHANGES: { value: string; label: string; exchange: DomesticExchange["exchange"]; quote: DomesticExchange["quote"]; logo: string }[] = [
-  { value: "UPBIT_KRW", label: "업비트 KRW", exchange: "UPBIT", quote: "KRW", logo: "/exchanges/upbit.svg" },
-  { value: "UPBIT_BTC", label: "업비트 BTC", exchange: "UPBIT", quote: "BTC", logo: "/exchanges/upbit.svg" },
-  { value: "UPBIT_USDT", label: "업비트 USDT", exchange: "UPBIT", quote: "USDT", logo: "/exchanges/upbit.svg" },
-  { value: "BITHUMB_KRW", label: "빗썸 KRW", exchange: "BITHUMB", quote: "KRW", logo: "/exchanges/bithumb.svg" },
-  { value: "BITHUMB_BTC", label: "빗썸 BTC", exchange: "BITHUMB", quote: "BTC", logo: "/exchanges/bithumb.svg" },
-  { value: "BITHUMB_USDT", label: "빗썸 USDT", exchange: "BITHUMB", quote: "USDT", logo: "/exchanges/bithumb.svg" },
-  { value: "COINONE_KRW", label: "코인원 KRW", exchange: "COINONE", quote: "KRW", logo: "/exchanges/coinone.svg" },
+  { value: "UPBIT_KRW", label: "🇰🇷 업비트 KRW", exchange: "UPBIT", quote: "KRW", logo: "/exchanges/upbit.svg" },
+  { value: "UPBIT_BTC", label: "🇰🇷 업비트 BTC", exchange: "UPBIT", quote: "BTC", logo: "/exchanges/upbit.svg" },
+  { value: "UPBIT_USDT", label: "🇰🇷 업비트 USDT", exchange: "UPBIT", quote: "USDT", logo: "/exchanges/upbit.svg" },
+  { value: "BITHUMB_KRW", label: "🇰🇷 빗썸 KRW", exchange: "BITHUMB", quote: "KRW", logo: "/exchanges/bithumb.svg" },
+  { value: "BITHUMB_BTC", label: "🇰🇷 빗썸 BTC", exchange: "BITHUMB", quote: "BTC", logo: "/exchanges/bithumb.svg" },
+  { value: "BITHUMB_USDT", label: "🇰🇷 빗썸 USDT", exchange: "BITHUMB", quote: "USDT", logo: "/exchanges/bithumb.svg" },
+  { value: "COINONE_KRW", label: "🇰🇷 코인원 KRW", exchange: "COINONE", quote: "KRW", logo: "/exchanges/coinone.svg" },
 ];
 
 export const FOREIGN_EXCHANGES: { value: string; label: string; shortName: string; exchange: ForeignExchange["exchange"]; quote: ForeignExchange["quote"]; logo: string }[] = [
