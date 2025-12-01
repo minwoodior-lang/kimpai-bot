@@ -202,6 +202,7 @@ export default function PremiumTable({
   const [totalCoins, setTotalCoins] = useState(0);
   const [listedCoins, setListedCoins] = useState(0);
   const [rateLimitRetryAfter, setRateLimitRetryAfter] = useState(0);
+  const [consecutiveRateLimits, setConsecutiveRateLimits] = useState(0);
 
   const [domesticExchange, setDomesticExchange] = useState("UPBIT_KRW");
   const [foreignExchange, setForeignExchange] = useState("OKX_USDT");
@@ -267,6 +268,7 @@ export default function PremiumTable({
 
   const fetchData = async () => {
     try {
+      // 429 상태 복구 중이면 재시도 안 함
       if (rateLimitRetryAfter > 0) return;
 
       const response = await fetch(
@@ -274,14 +276,25 @@ export default function PremiumTable({
       );
 
       if (response.status === 429) {
-        const retryAfter = parseInt(response.headers.get('retry-after') || '10');
-        setRateLimitRetryAfter(retryAfter);
+        const retryAfter = Math.max(parseInt(response.headers.get('retry-after') || '10'), 10);
+        const newCount = consecutiveRateLimits + 1;
+        setConsecutiveRateLimits(newCount);
+
+        // 5번 이상 연속 429 발생 시 1분 대기
+        const delayMs = newCount >= 5 ? 60000 : retryAfter * 1000;
+        
         if (process.env.NODE_ENV === 'development') {
-          console.warn(`[PremiumTable] 429 Rate Limited. Retrying after ${retryAfter}s`);
+          console.warn(`[PremiumTable] 429 #${newCount}. Delaying ${delayMs / 1000}s...`);
         }
-        setTimeout(() => setRateLimitRetryAfter(0), retryAfter * 1000);
+        
+        setRateLimitRetryAfter(delayMs / 1000);
+        setTimeout(() => {
+          setRateLimitRetryAfter(0);
+          setConsecutiveRateLimits(0);
+        }, delayMs);
         return;
       }
+
       if (!response.ok) return;
 
       const json: ApiResponse = await response.json();
@@ -295,6 +308,7 @@ export default function PremiumTable({
         setTotalCoins(json.totalCoins);
         setListedCoins(json.listedCoins);
         setError(null);
+        setConsecutiveRateLimits(0); // 성공 시 카운트 리셋
       }
     } catch {
     } finally {

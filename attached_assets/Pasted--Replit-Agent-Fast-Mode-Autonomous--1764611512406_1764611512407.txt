@@ -1,0 +1,121 @@
+🧾 Replit Agent 전달용 지시문
+
+모드는 반드시 Fast Mode(⚡)로만 사용해주세요. Autonomous / 자율 모드로는 절대 올리지 마세요. 과금 이슈가 있어서 한 번 더 강조합니다.
+
+작업 목표:
+현재 KimpAI의 PremiumTable에서 사용하는 모든 코인 심볼에 대해 100% 아이콘이 표시되도록 CoinIcon.tsx와 관련 로직을 정리해주세요.
+콘솔에 [CoinIcon] missing icon for symbol: 로그가 하나도 안 남는 상태가 최종 완료 기준입니다.
+
+1) COIN_ID_MAP 전수 정리 (현재 missing 심볼 전부 반영)
+
+이미 CoinIcon.tsx에는 COIN_ID_MAP이 있고, 최근 버전에서 100+ 코인이 추가되었습니다.
+그런데 아직 아래 심볼들이 콘솔에 missing icon 경고로 뜨고 있습니다:
+
+0G, WLFI, KITE, XPL,
+TRUST, FLOCK, IN, ERA,
+CYBER, MON, SAHARA, SIGN,
+ORCA, ZRO, ARKM, PLUME,
+MMT, W, AWE, LA, AVNT, ATH, BARD, ALT,
+MIRA, STG, FF, NXPC, A
+
+
+위 목록을 기준으로, 다음을 수행해주세요.
+
+각 심볼에 대해 정확한 CoinGecko ID를 찾아 COIN_ID_MAP에 추가
+예시 (실제 ID는 아래 예시 참고):
+
+const COIN_ID_MAP: Record<string, string> = {
+  // ... 기존 맵핑들
+  WLFI: 'world-liberty-financial',
+  KITE: 'kite-ai',
+  XPL: 'plasma',
+  '0G': '0g',
+  TRUST: 'intuition',
+  FLOCK: 'flock-2',
+  IN: 'infinit',
+  PLUME: 'plume',
+  ALT: 'altlayer',
+  ATH: 'aethir',
+  MIRA: 'mira-network',
+  STG: 'stargate-finance',
+  FF: 'falcon-finance-ff',
+  // 나머지 심볼도 동일한 형태로 전부 추가
+};
+
+
+Upbit 기준으로 실제 코인이 맞는지,
+심볼이 겹치는 다른 프로젝트가 없는지 코드 주석으로 간단히 표기해주세요.
+(예: // Upbit: IN = INFINIT (AI DeFi 플랫폼) 이런 식)
+
+CoinGecko에 아이콘이 없는 경우엔:
+
+CDN 아이콘(cryptoicons, spothq, coincap 등)을 먼저 시도
+
+그래도 없으면 GRADIENT_COLORS에 해당 심볼 전용 색상을 등록해 주세요.
+(즉, “그라데이션 폴백이지만, 최소한 심볼마다 색은 고유하게”)
+
+2) “PremiumTable에 나오는 심볼 전부 커버” 구조 만들기
+
+단순히 위 심볼 몇 개만 때우는 걸로 끝내지 말고,
+앞으로 새 코인이 추가돼도 바로 확인 가능한 구조로 만들고 싶습니다.
+
+PremiumTable.tsx에서 현재 사용 중인 모든 심볼을 Set으로 모읍니다.
+
+예: /api/premium/table 호출 결과의 각 row에서 symbol만 뽑아서 Set<string>에 저장
+
+CoinIcon 쪽의 loggedMissingIcons Set을 그대로 두되,
+
+개발 모드에서만 console.warn('[CoinIcon] missing icon for symbol: ...')를 찍고
+
+심볼 목록을 한 번에 복사하기 쉽도록 console.log([...loggedMissingIcons]) 같은 디버그용 출력도 추가해주세요.
+
+이 Set을 기준으로, 현재 PremiumTable에서 쓰이는 모든 심볼을 커버할 때까지
+COIN_ID_MAP과 GRADIENT_COLORS를 채워 넣으면 됩니다.
+최종적으로 개발 모드에서 페이지 새로고침 시 missing icon 경고가 0개가 되어야 합니다.
+
+3) 429(Too Many Requests) 재확인
+
+현재 콘솔에서 여전히 아래 로그가 반복되고 있습니다.
+
+/api/premium/table?domestic=UPBIT_KRW&foreign=OKX_USDT:1  Failed to load resource: the server responded with a status of 429 (Too Many Requests)
+[PremiumTable] 429 Rate Limited. Retrying after 1s
+
+
+PremiumTable.tsx의 폴링 주기를 실제 코드 상에서 확인해주세요.
+
+현재 로그상으로는 여전히 1초 간격 재시도처럼 동작하고 있습니다.
+
+의도는 아래와 같습니다.
+
+기본 폴링 주기: 최소 3000ms 이상 (3초 이상)
+
+429 발생 시: 10초 이상 딜레이 후 재시도, 그리고
+
+연속 429가 5번 이상 발생하면 일정 시간(예: 1분) 동안 폴링 중단
+
+개발 모드에서 429가 발생해도 서버에 과도한 부하를 주지 않도록
+위 정책대로 코드가 맞게 반영되어 있는지 확인 후 수정해주세요.
+
+4) 완료 기준
+
+domestic=UPBIT_KRW&foreign=OKX_USDT 기준으로 PremiumTable을 열었을 때
+
+BTC, ETH, XRP, SUI, DOGE, LSK, SIGN, WLFI, MON, SAHARA, MIRA, ALT, FF 등
+표에 뜨는 모든 코인이 PC/모바일에서 전부 정상 아이콘이 보여야 합니다.
+
+브라우저 콘솔에서:
+
+[CoinIcon] missing icon for symbol: 로그가 단 한 줄도 나오지 않아야 합니다.
+
+429 관련 경고 로그도 “짧은 주기로 무한 재시도” 형태가 아니어야 합니다.
+
+변경된 CoinIcon.tsx, PremiumTable.tsx 내용은 주석으로
+
+어떤 심볼들을 새로 매핑했는지
+
+폴링/백오프 정책이 어떻게 바뀌었는지
+간단히 남겨 주세요.
+
+Fast 모드에서 위 작업을 여러 번 나눠서 진행해도 괜찮습니다.
+중요한 건 Autonomous 모드로 올라가지 않게 하는 것과
+missing icon 로그가 완전히 사라지는 것입니다.

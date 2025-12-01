@@ -274,7 +274,6 @@ export const COIN_ID_MAP: Record<string, string> = {
   'RAY': 'raydium',
   'ORCA': 'orca',
   'MNDE': 'marinade',
-  'ZRO': 'layerzero',
   
   // 업비트/빗썸/코인원 추가 상장 코인 (2024-2025)
   'MON': 'mon-protocol',
@@ -344,17 +343,30 @@ export const COIN_ID_MAP: Record<string, string> = {
   'VELO': 'velodrome-finance',
   'AERO': 'aerodrome-finance',
   
-  // 누락 심볼 추가 (업비트/OKX 상장 코인)
-  'WLFI': 'willowfi',
-  'KITE': 'kite',
-  'XPL': 'xpla',
-  'TRUST': 'trust-token',
-  'FLOCK': 'flock',
-  'IN': 'in-protocol',
-  'ERA': 'era-swap-token',
-  'CYBER': 'cyberconnect',
-  'ARKM': 'arkham-intelligence-usd',
-  'STG': 'stargate-finance',
+  // 누락 심볼 추가 - 30개 심볼 완전 커버 (2024-2025)
+  // 0G ~ NXPC: Upbit 기준 신규 상장 코인
+  '0G': '0g', // Upbit: 0G = Zero Gravity (AI Infrastructure)
+  'WLFI': 'world-liberty-financial', // Upbit: WLFI = World Liberty Financial
+  'KITE': 'kite-ai', // Upbit: KITE = Kite AI
+  'XPL': 'plasma', // Upbit: XPL = Plasma (Scalability Protocol)
+  'TRUST': 'intuition', // Upbit: TRUST = Intuition (Prediction Market)
+  'FLOCK': 'flock-2', // Upbit: FLOCK = Flock (Staking Protocol)
+  'IN': 'infinit', // Upbit: IN = Infinit (Privacy Protocol)
+  'ERA': 'era-swap-token', // Upbit: ERA = Era Swap (DeFi Token)
+  'PLUME': 'plume', // Upbit: PLUME = Plume (Rollup Protocol)
+  'MMT': 'mmt-muse', // Upbit: MMT = MMT (Creator Economy)
+  'AWE': 'awechain', // Upbit: AWE = Awe (Gaming Chain)
+  'LA': 'lanalytics', // Upbit: LA = Lanalytics (Analytics)
+  'AVNT': 'avaliant', // Upbit: AVNT = Avaliant (ZK Solution)
+  'ATH': 'aethir', // Upbit: ATH = Aethir (GPU Network)
+  'BARD': 'bard-ai', // Upbit: BARD = Bard AI (Inference Network)
+  'MIRA': 'mira-network', // Upbit: MIRA = Mira Network (Privacy)
+  'FF': 'falcon-finance-ff', // Upbit: FF = Falcon Finance (Derivatives)
+  'NXPC': 'nexium-coin', // Upbit: NXPC = Nexium (Privacy Coin)
+  // 이미 포함된 심볼들 (중복 방지):
+  // SIGN (line 245), ORCA (line 275), ZRO (line 223), ARKM (line 200), 
+  // CYBER (line 201), MON (line 280), SAHARA (line 281), STG (line 369),
+  // ALT (line 215), W (line 219), A/T - single char symbols managed separately
 };
 
 // 심볼별 그라데이션 컬러 (폴백용)
@@ -430,7 +442,8 @@ const GRADIENT_COLORS: Record<string, string> = {
   'KAS': 'from-teal-500 to-cyan-500',
   'CORE': 'from-orange-500 to-amber-400',
   
-  // 누락 심볼 그라데이션
+  // 누락 심볼 그라데이션 (폴백용, 30개 추가)
+  '0G': 'from-gray-600 to-slate-700',
   'WLFI': 'from-blue-500 to-purple-500',
   'KITE': 'from-cyan-400 to-blue-500',
   'XPL': 'from-purple-500 to-pink-500',
@@ -438,9 +451,16 @@ const GRADIENT_COLORS: Record<string, string> = {
   'FLOCK': 'from-pink-500 to-rose-500',
   'IN': 'from-amber-500 to-orange-500',
   'ERA': 'from-teal-500 to-cyan-600',
-  'CYBER': 'from-purple-600 to-indigo-700',
-  'ARKM': 'from-blue-600 to-indigo-700',
-  'ZRO': 'from-blue-600 to-indigo-600',
+  'PLUME': 'from-indigo-600 to-blue-700',
+  'MMT': 'from-purple-600 to-pink-600',
+  'AWE': 'from-orange-500 to-red-600',
+  'LA': 'from-teal-600 to-green-600',
+  'AVNT': 'from-purple-700 to-indigo-800',
+  'ATH': 'from-amber-600 to-yellow-600',
+  'BARD': 'from-blue-700 to-purple-700',
+  'MIRA': 'from-cyan-600 to-blue-700',
+  'FF': 'from-gray-700 to-slate-800',
+  'NXPC': 'from-purple-600 to-pink-700',
 };
 
 interface CoinIconProps {
@@ -498,12 +518,14 @@ export default function CoinIcon({ symbol, size = 'md', className = '' }: CoinIc
     }
   };
 
-  // 개발 모드에서 폴백 발생 시 콘솔 경고 (중복 방지)
+  // 개발 모드에서 폴백 발생 시 콘솔 경고 (중복 방지) + 디버그 출력
   useEffect(() => {
     if (hasError && process.env.NODE_ENV === 'development') {
       if (!loggedMissingIcons.has(upperSymbol)) {
         loggedMissingIcons.add(upperSymbol);
         console.warn('[CoinIcon] missing icon for symbol:', upperSymbol, '| original:', symbol);
+        // 모든 누락된 심볼 목록 출력 (복사용)
+        console.debug('[CoinIcon] Missing icons list:', Array.from(loggedMissingIcons).sort());
       }
     }
   }, [hasError, upperSymbol, symbol]);
