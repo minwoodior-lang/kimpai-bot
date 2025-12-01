@@ -484,23 +484,40 @@ export async function fetchMEXC(fxRate: number): Promise<ExchangePrice[]> {
   }
 }
 
+// Helper function to get the proxy base URL
+function getProxyBaseUrl(): string {
+  if (process.env.REPLIT_DEV_DOMAIN) {
+    return `https://${process.env.REPLIT_DEV_DOMAIN}`;
+  }
+  if (process.env.NEXT_PUBLIC_SITE_URL) {
+    return process.env.NEXT_PUBLIC_SITE_URL;
+  }
+  const port = process.env.PORT || '5000';
+  return `http://localhost:${port}`;
+}
+
 // Binance USDT Spot: quoteVolume = 24h trading volume in USDT
-// GET https://api.binance.com/api/v3/ticker/24hr
-// NOTE: Direct Binance API may be blocked from some regions
+// Uses internal proxy to bypass API blocks: /api/proxy/binance
+// NOTE: Direct Binance API is blocked from some regions (451/403)
 export async function fetchBinanceUSDT(fxRate: number): Promise<ExchangePrice[]> {
   try {
-    const response = await fetch('https://api.binance.com/api/v3/ticker/24hr', {
+    const baseUrl = getProxyBaseUrl();
+    
+    const response = await fetch(`${baseUrl}/api/proxy/binance?market=spot`, {
       headers: { 'Accept': 'application/json' },
     });
     
     if (!response.ok) {
-      console.error('Binance API blocked or error:', response.status);
+      console.error('Binance proxy error:', response.status);
       return [];
     }
     
-    const data = await response.json();
+    const result = await response.json();
+    const data = result.data;
     
     if (!Array.isArray(data)) return [];
+    
+    console.log(`Binance source: ${result.source}, coins: ${data.length}`);
     
     const domesticSymbols = new Set(getDomesticSymbols());
     const results: ExchangePrice[] = [];
@@ -528,19 +545,22 @@ export async function fetchBinanceUSDT(fxRate: number): Promise<ExchangePrice[]>
 }
 
 // Binance BTC Market: quoteVolume = 24h trading volume in BTC
-// GET https://api.binance.com/api/v3/ticker/24hr
+// Uses internal proxy to bypass API blocks: /api/proxy/binance
 export async function fetchBinanceBTC(fxRate: number): Promise<ExchangePrice[]> {
   try {
-    const response = await fetch('https://api.binance.com/api/v3/ticker/24hr', {
+    const baseUrl = getProxyBaseUrl();
+    
+    const response = await fetch(`${baseUrl}/api/proxy/binance?market=spot`, {
       headers: { 'Accept': 'application/json' },
     });
     
     if (!response.ok) {
-      console.error('Binance API blocked:', response.status);
+      console.error('Binance proxy error:', response.status);
       return [];
     }
     
-    const data = await response.json();
+    const result = await response.json();
+    const data = result.data;
     
     if (!Array.isArray(data)) return [];
     
@@ -574,19 +594,22 @@ export async function fetchBinanceBTC(fxRate: number): Promise<ExchangePrice[]> 
 }
 
 // Binance Futures USDT-M: quoteVolume = 24h trading volume in USDT
-// GET https://fapi.binance.com/fapi/v1/ticker/24hr
+// Uses internal proxy to bypass API blocks: /api/proxy/binance?market=futures
 export async function fetchBinanceFutures(fxRate: number): Promise<ExchangePrice[]> {
   try {
-    const response = await fetch('https://fapi.binance.com/fapi/v1/ticker/24hr', {
+    const baseUrl = getProxyBaseUrl();
+    
+    const response = await fetch(`${baseUrl}/api/proxy/binance?market=futures`, {
       headers: { 'Accept': 'application/json' },
     });
     
     if (!response.ok) {
-      console.error('Binance Futures API blocked:', response.status);
+      console.error('Binance Futures proxy error:', response.status);
       return [];
     }
     
-    const data = await response.json();
+    const result = await response.json();
+    const data = result.data;
     
     if (!Array.isArray(data)) return [];
     
