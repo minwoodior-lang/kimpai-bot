@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createClient } from "@supabase/supabase-js";
+import { checkRateLimit, getClientIp } from "@/lib/rateLimit";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
@@ -74,8 +75,19 @@ async function fetchExchangeRate(): Promise<number> {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<PremiumTableResponse>
+  res: NextApiResponse<PremiumTableResponse | { error: string; retryAfter?: number }>
 ) {
+  const clientIp = getClientIp(req);
+  const rateCheck = checkRateLimit(clientIp);
+
+  if (!rateCheck.allowed) {
+    res.setHeader("Retry-After", String(rateCheck.retryAfter || 2));
+    return res.status(429).json({
+      error: "Too many requests",
+      retryAfter: rateCheck.retryAfter,
+    } as { error: string; retryAfter?: number });
+  }
+
   try {
     const domesticParam = (req.query.domestic as string) || "UPBIT_KRW";
     const foreignParam = (req.query.foreign as string) || "BINANCE_USDT";
