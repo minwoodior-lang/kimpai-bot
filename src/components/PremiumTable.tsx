@@ -561,43 +561,61 @@ export default function PremiumTable({
       )}
 
       {showFilters && (
-        <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-4 text-sm">
-          <div className="flex flex-col items-center gap-0.5">
-            <span className="text-gray-400 text-[10px] md:text-xs whitespace-nowrap flex items-center gap-1">
-              기준 거래소 <img src="https://flagcdn.com/w20/kr.png" alt="🇰🇷" className="w-4 h-3 object-cover rounded-sm" />
-            </span>
-            <MiniDropdown
-              value={domesticExchange}
-              options={DOMESTIC_EXCHANGES}
-              onChange={setDomesticExchange}
-            />
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4 text-sm bg-slate-800/30 border border-slate-700/50 rounded-xl p-3">
+          {/* Exchange selector section */}
+          <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-3">
+            {/* Mobile: Labels on top row */}
+            <div className="flex md:hidden justify-between w-full">
+              <span className="text-gray-400 text-[10px] whitespace-nowrap flex items-center gap-1">
+                기준 거래소 <img src="https://flagcdn.com/w20/kr.png" alt="🇰🇷" className="w-4 h-3 object-cover rounded-sm" />
+              </span>
+              <span className="text-gray-400 text-[10px] whitespace-nowrap flex items-center gap-1">
+                해외 거래소 <span className="text-sm">🌐</span>
+              </span>
+            </div>
+
+            {/* Dropdowns */}
+            <div className="flex items-center gap-2 md:gap-3">
+              <span className="hidden md:flex text-gray-400 text-xs whitespace-nowrap items-center gap-1">
+                기준 거래소 <img src="https://flagcdn.com/w20/kr.png" alt="🇰🇷" className="w-4 h-3 object-cover rounded-sm" />
+              </span>
+              <MiniDropdown
+                value={domesticExchange}
+                options={DOMESTIC_EXCHANGES}
+                onChange={setDomesticExchange}
+              />
+              <span className="text-gray-500">⇄</span>
+              <MiniDropdown
+                value={foreignExchange}
+                options={FOREIGN_EXCHANGES}
+                onChange={setForeignExchange}
+                showShortName={false}
+              />
+              <span className="hidden md:flex text-gray-400 text-xs whitespace-nowrap items-center gap-1">
+                해외 거래소 <span className="text-sm">🌐</span>
+              </span>
+            </div>
           </div>
 
-          <span className="text-gray-500 self-end mb-1.5">⇄</span>
-
-          <div className="flex flex-col items-center gap-0.5">
-            <span className="text-gray-400 text-[10px] md:text-xs whitespace-nowrap flex items-center gap-1">
-              해외 거래소 <span className="text-sm">🌐</span>
-            </span>
-            <MiniDropdown
-              value={foreignExchange}
-              options={FOREIGN_EXCHANGES}
-              onChange={setForeignExchange}
-              showShortName={false}
-            />
-          </div>
-
-          <div className="flex items-center gap-2">
+          {/* Coin count + Search */}
+          <div className="flex items-center gap-2 md:gap-3">
             <span className="text-gray-400 text-[10px] md:text-xs whitespace-nowrap">
-              암호화폐 <span className="text-white font-medium">{totalCoins}</span>개
+              암호화폐 총 <span className="text-white font-medium">{totalCoins}</span>개
             </span>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="검색: BTC, ㅂㅌ"
-              className="w-[140px] md:w-[220px] bg-slate-700 text-white rounded-lg px-2 md:px-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs md:text-sm"
-            />
+            <div className="relative flex-1 md:flex-none">
+              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </span>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="BTC, 비트코인, ㅂㅌ"
+                className="w-full md:w-[180px] bg-slate-700 text-white rounded-lg pl-8 pr-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs md:text-sm"
+              />
+            </div>
           </div>
         </div>
       )}

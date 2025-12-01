@@ -111,34 +111,47 @@ export default function ExchangeSelector({ compact = false, showLabels = true }:
   }));
 
   return (
-    <div className={`flex ${compact ? "gap-2" : "gap-3"} items-center flex-wrap`}>
-      <div className="flex flex-col items-center gap-1">
+    <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-3">
+      {/* Mobile: Labels on top row */}
+      <div className="flex md:hidden justify-between w-full">
+        <span className="text-slate-400 text-[10px] whitespace-nowrap flex items-center gap-1">
+          기준 거래소 <img src="https://flagcdn.com/w20/kr.png" alt="🇰🇷" className="w-4 h-3 object-cover rounded-sm" />
+        </span>
+        <span className="text-slate-400 text-[10px] whitespace-nowrap flex items-center gap-1">
+          해외 거래소 <span className="text-sm">🌐</span>
+        </span>
+      </div>
+
+      {/* Dropdowns row */}
+      <div className="flex items-center gap-2 md:gap-3">
+        {/* PC only: Left label */}
         {showLabels && (
-          <span className="text-slate-400 text-[10px] md:text-xs whitespace-nowrap flex items-center gap-1">
+          <span className="hidden md:flex text-slate-400 text-xs whitespace-nowrap items-center gap-1">
             기준 거래소 <img src="https://flagcdn.com/w20/kr.png" alt="🇰🇷" className="w-4 h-3 object-cover rounded-sm" />
           </span>
         )}
+        
         <CustomDropdown
           value={domesticExchange}
           options={domesticOptions}
           onChange={setDomesticExchange}
         />
-      </div>
 
-      <span className="text-slate-500 text-lg self-end mb-2">⇄</span>
+        <span className="text-slate-500 text-lg">⇄</span>
 
-      <div className="flex flex-col items-center gap-1">
-        {showLabels && (
-          <span className="text-slate-400 text-[10px] md:text-xs whitespace-nowrap flex items-center gap-1">
-            해외 거래소 <span className="text-base">🌐</span>
-          </span>
-        )}
         <CustomDropdown
           value={foreignExchange}
           options={foreignOptions}
           onChange={setForeignExchange}
           showShortName={false}
         />
+
+        {/* PC only: Right label */}
+        {showLabels && (
+          <span className="hidden md:flex text-slate-400 text-xs whitespace-nowrap items-center gap-1">
+            해외 거래소 <span className="text-base">🌐</span>
+          </span>
+        )}
       </div>
     </div>
   );
