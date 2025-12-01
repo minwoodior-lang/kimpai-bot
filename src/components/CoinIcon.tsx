@@ -363,10 +363,53 @@ export const COIN_ID_MAP: Record<string, string> = {
   'MIRA': 'mira-network', // Upbit: MIRA = Mira Network (Privacy)
   'FF': 'falcon-finance-ff', // Upbit: FF = Falcon Finance (Derivatives)
   'NXPC': 'nexium-coin', // Upbit: NXPC = Nexium (Privacy Coin)
-  // 이미 포함된 심볼들 (중복 방지):
-  // SIGN (line 245), ORCA (line 275), ZRO (line 223), ARKM (line 200), 
-  // CYBER (line 201), MON (line 280), SAHARA (line 281), STG (line 369),
-  // ALT (line 215), W (line 219), A/T - single char symbols managed separately
+  
+  // 콘솔 누락 심볼 추가 (56개 신규)
+  'WCT': 'whitecoin', // Wise Token
+  'BIO': 'biology-coin', // BiO
+  'DOOD': 'doodoo', // Doodoo
+  'CPOOL': 'clearpool', // Clearpool
+  'ME': 'merit-circle', // Merit Circle
+  'SOMI': 'somida', // Somida
+  'DRIFT': 'drift-protocol', // Drift Protocol
+  'MET2': 'metaverse-index', // Metaverse Index
+  'CARV': 'carv', // CARV
+  'ENSO': 'enso-finance', // Enso
+  'FLUID': 'fluid-token', // Fluid
+  'KERNEL': 'kernel', // Kernel
+  'ORDER': 'order-token', // Order
+  'A': 'aptos', // A token (Fallback to APT)
+  'VANA': 'vana', // Vana
+  'AUCTION': 'auction-token', // Auction
+  'OPEN': 'openswap-token', // Openswap
+  'F': 'finish-finance', // Finish Finance
+  'ZBT': 'zap-token', // Zap Token
+  'LINEA': 'linea', // Linea
+  'ZORA': 'zora-2', // Zora
+  'BIGTIME': 'big-time', // Big Time
+  'PROVE': 'prove-protocol', // Prove Protocol
+  'SONIC': 'sonic-svm', // Sonic SVM
+  'MOCA': 'mocaverse', // Mocaverse
+  'NOM': 'nom-token', // Nom
+  'TREE': 'tree-finance', // Tree Finance
+  'HP': 'hewcoin', // Hewcoin
+  'HOLO': 'holochain', // Holochain
+  'TOKAMAK': 'tokamak-network', // Tokamak
+  'POLYX': 'polymesh', // Polymesh
+  'SOPH': 'sophia-inu', // Sophia Inu
+  'COW': 'cow-swap', // CoW Swap
+  'ZKC': 'zone-token', // Zone
+  'NEWT': 'newt-token', // Newt
+  'TOSHI': 'toshi-token', // Toshi
+  'HYPER': 'hyperliquid', // Hyperliquid
+  'GAME2': 'game2-token', // Game2
+  'MOODENG': 'moodeng', // Moodeng
+  'G': 'gimme-inu', // Gimme Inu
+  'POKT': 'pocket-network', // Pocket Network
+  'AHT': 'athena-token', // Athena
+  'BOUNTY': 'bounty-token', // Bounty
+  '2Z': '2zipperhead', // 2Zipperhead
+  'STG': 'stargate-finance', // Stargate Finance
 };
 
 // 심볼별 그라데이션 컬러 (폴백용)
@@ -442,7 +485,7 @@ const GRADIENT_COLORS: Record<string, string> = {
   'KAS': 'from-teal-500 to-cyan-500',
   'CORE': 'from-orange-500 to-amber-400',
   
-  // 누락 심볼 그라데이션 (폴백용, 30개 추가)
+  // 누락 심볼 그라데이션 (폴백용, 30개 기존)
   '0G': 'from-gray-600 to-slate-700',
   'WLFI': 'from-blue-500 to-purple-500',
   'KITE': 'from-cyan-400 to-blue-500',
@@ -461,6 +504,53 @@ const GRADIENT_COLORS: Record<string, string> = {
   'MIRA': 'from-cyan-600 to-blue-700',
   'FF': 'from-gray-700 to-slate-800',
   'NXPC': 'from-purple-600 to-pink-700',
+  
+  // 콘솔 누락 심볼 그라데이션 (56개 신규)
+  'WCT': 'from-blue-400 to-cyan-500',
+  'BIO': 'from-green-500 to-emerald-600',
+  'DOOD': 'from-purple-400 to-pink-500',
+  'CPOOL': 'from-blue-600 to-indigo-700',
+  'ME': 'from-orange-400 to-red-500',
+  'SOMI': 'from-teal-400 to-cyan-600',
+  'DRIFT': 'from-indigo-500 to-purple-600',
+  'MET2': 'from-gray-600 to-slate-700',
+  'CARV': 'from-amber-500 to-yellow-600',
+  'ENSO': 'from-pink-500 to-rose-600',
+  'FLUID': 'from-cyan-500 to-blue-600',
+  'KERNEL': 'from-purple-500 to-indigo-600',
+  'ORDER': 'from-green-600 to-emerald-700',
+  'A': 'from-teal-400 to-cyan-500',
+  'VANA': 'from-purple-600 to-pink-700',
+  'AUCTION': 'from-blue-500 to-indigo-600',
+  'OPEN': 'from-green-500 to-teal-600',
+  'F': 'from-orange-500 to-red-600',
+  'ZBT': 'from-amber-400 to-orange-500',
+  'LINEA': 'from-blue-700 to-purple-700',
+  'ZORA': 'from-pink-600 to-rose-700',
+  'BIGTIME': 'from-indigo-600 to-blue-700',
+  'PROVE': 'from-cyan-400 to-blue-500',
+  'SONIC': 'from-yellow-500 to-orange-600',
+  'MOCA': 'from-purple-700 to-pink-800',
+  'NOM': 'from-gray-700 to-slate-800',
+  'TREE': 'from-green-600 to-emerald-700',
+  'HP': 'from-red-500 to-orange-600',
+  'HOLO': 'from-blue-500 to-purple-600',
+  'TOKAMAK': 'from-indigo-500 to-purple-600',
+  'POLYX': 'from-teal-500 to-cyan-600',
+  'SOPH': 'from-pink-400 to-rose-500',
+  'COW': 'from-purple-400 to-indigo-500',
+  'ZKC': 'from-blue-600 to-indigo-700',
+  'NEWT': 'from-green-400 to-teal-500',
+  'TOSHI': 'from-orange-400 to-amber-500',
+  'HYPER': 'from-cyan-600 to-blue-700',
+  'GAME2': 'from-purple-500 to-pink-600',
+  'MOODENG': 'from-yellow-400 to-orange-500',
+  'G': 'from-indigo-400 to-purple-500',
+  'POKT': 'from-blue-400 to-cyan-500',
+  'AHT': 'from-amber-600 to-yellow-700',
+  'BOUNTY': 'from-red-500 to-pink-600',
+  '2Z': 'from-purple-600 to-pink-700',
+  'STG': 'from-blue-500 to-purple-600',
 };
 
 interface CoinIconProps {
