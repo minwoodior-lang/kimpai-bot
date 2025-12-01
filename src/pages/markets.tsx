@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useMarkets } from "@/hooks/useMarkets";
 import { useExchangeSelection, DOMESTIC_EXCHANGES, FOREIGN_EXCHANGES } from "@/contexts/ExchangeSelectionContext";
 import ExchangeSelector from "@/components/ExchangeSelector";
+import CoinIcon from "@/components/CoinIcon";
 
 function formatVolumeKRW(value: number | null): string {
   if (value === null || value === undefined || isNaN(value) || value === 0) return "-";
@@ -181,9 +182,7 @@ export default function Markets() {
                     >
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs">
-                            {item.symbol.replace('/KRW', '').charAt(0)}
-                          </div>
+                          <CoinIcon symbol={item.symbol.replace('/KRW', '')} size="lg" />
                           <div>
                             <span className="text-white font-medium">{item.koreanName || item.name}</span>
                             <span className="text-slate-500 text-sm ml-2">{item.symbol.replace('/KRW', '')}</span>

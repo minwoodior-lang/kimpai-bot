@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import dynamic from "next/dynamic";
 import { FOREIGN_EXCHANGES as CONTEXT_FOREIGN_EXCHANGES, EXCHANGE_LOGOS } from "@/contexts/ExchangeSelectionContext";
+import CoinIcon from "@/components/CoinIcon";
 
 interface DropdownOption {
   id: string;
@@ -150,83 +151,6 @@ const FOREIGN_EXCHANGES = CONTEXT_FOREIGN_EXCHANGES.map(ex => ({
 }));
 
 const CHOSUNG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
-
-const COINGECKO_ID_MAP: Record<string, string> = {
-  'BTC': 'bitcoin', 'ETH': 'ethereum', 'XRP': 'ripple', 'SOL': 'solana',
-  'DOGE': 'dogecoin', 'ADA': 'cardano', 'AVAX': 'avalanche-2', 'SHIB': 'shiba-inu',
-  'DOT': 'polkadot', 'LINK': 'chainlink', 'TRX': 'tron', 'MATIC': 'matic-network',
-  'UNI': 'uniswap', 'ATOM': 'cosmos', 'LTC': 'litecoin', 'ETC': 'ethereum-classic',
-  'XLM': 'stellar', 'BCH': 'bitcoin-cash', 'NEAR': 'near', 'APT': 'aptos',
-  'FIL': 'filecoin', 'ICP': 'internet-computer', 'HBAR': 'hedera-hashgraph',
-  'VET': 'vechain', 'ARB': 'arbitrum', 'OP': 'optimism', 'SAND': 'the-sandbox',
-  'MANA': 'decentraland', 'AAVE': 'aave', 'GRT': 'the-graph', 'AXS': 'axie-infinity',
-  'ALGO': 'algorand', 'EOS': 'eos', 'XTZ': 'tezos', 'FLOW': 'flow',
-  'THETA': 'theta-token', 'KLAY': 'klaytn', 'IMX': 'immutable-x', 'SUI': 'sui',
-  'SEI': 'sei-network', 'TON': 'the-open-network', 'PEPE': 'pepe', 'BONK': 'bonk',
-  'WIF': 'dogwifcoin', 'FLOKI': 'floki', 'CAKE': 'pancakeswap-token',
-};
-
-function CoinIcon({ symbol }: { symbol: string }) {
-  const [cdnIndex, setCdnIndex] = React.useState(0);
-  const [hasError, setHasError] = React.useState(false);
-  const lowerSymbol = symbol.toLowerCase();
-  const upperSymbol = symbol.toUpperCase();
-  
-  const gradientColors: Record<string, string> = {
-    'BTC': 'from-orange-500 to-yellow-500',
-    'ETH': 'from-indigo-500 to-purple-500',
-    'XRP': 'from-gray-400 to-blue-500',
-    'SOL': 'from-purple-500 to-green-400',
-    'DOGE': 'from-yellow-400 to-amber-500',
-    'ADA': 'from-blue-600 to-cyan-400',
-    'USDT': 'from-green-500 to-emerald-600',
-    'USDC': 'from-blue-400 to-blue-600',
-    'SHIB': 'from-red-500 to-orange-500',
-    'AVAX': 'from-red-600 to-pink-500',
-    'DOT': 'from-pink-500 to-purple-600',
-    'LINK': 'from-blue-500 to-indigo-600',
-    'MATIC': 'from-purple-600 to-violet-500',
-    'TRX': 'from-red-500 to-red-700',
-    'TON': 'from-blue-400 to-sky-500',
-    'PEPE': 'from-green-400 to-green-600',
-  };
-  
-  const gradient = gradientColors[upperSymbol] || 'from-slate-500 to-slate-600';
-
-  const coingeckoId = COINGECKO_ID_MAP[upperSymbol];
-  const cdnUrls = [
-    `https://cdn.jsdelivr.net/npm/cryptocurrency-icons@0.18.1/32/color/${lowerSymbol}.png`,
-    `https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/${lowerSymbol}.png`,
-    coingeckoId ? `https://cdn.jsdelivr.net/gh/AleneMcCullworking/crypto-icons@main/icons/${coingeckoId}.png` : null,
-    `https://static.coincap.io/assets/icons/${lowerSymbol}@2x.png`,
-  ].filter(Boolean) as string[];
-
-  const handleError = () => {
-    if (cdnIndex < cdnUrls.length - 1) {
-      setCdnIndex(prev => prev + 1);
-    } else {
-      setHasError(true);
-    }
-  };
-
-  if (hasError) {
-    return (
-      <div className={`w-6 h-6 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center text-white font-bold text-xs flex-shrink-0`}>
-        {symbol.charAt(0)}
-      </div>
-    );
-  }
-  
-  return (
-    <img
-      src={cdnUrls[cdnIndex]}
-      alt={symbol}
-      className="w-6 h-6 rounded-full flex-shrink-0"
-      onError={handleError}
-      loading="lazy"
-    />
-  );
-}
 
 function getChosung(str: string): string {
   let result = '';

@@ -45,6 +45,14 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 - **Admin Interface**: Dedicated admin dashboard for management.
 
 ### Recent Changes (2025-12-01)
+- **v3.0.4 CoinIcon 컴포넌트 개선 - 200+ 코인 아이콘 지원**:
+  - 독립 CoinIcon 컴포넌트 분리: `src/components/CoinIcon.tsx`
+  - COIN_ID_MAP: 200+ 암호화폐 심볼→CoinGecko ID 매핑 추가
+  - 5단계 우선순위 CDN 폴백: cryptocurrency-icons → spothq GitHub → CoinCap → CoinGecko → CryptoCompare
+  - 심볼별 커스텀 그라데이션 폴백 (40+ 주요 코인)
+  - 3가지 사이즈 옵션: sm(20px), md(24px), lg(32px)
+  - PremiumTable, markets.tsx 공유 컴포넌트 사용으로 통일
+  - 업비트/빗썸/코인원 상장 코인 전체 아이콘 지원
 - **v3.0.3 거래소 로고 개선 및 드롭다운 UX 향상**:
   - OKX 공식 로고: 검은 배경 + 흰색 5개 사각형 그리드 (SVG 인라인)
   - Bybit 공식 로고: 검은 배경 + 주황색 심볼 (SVG 인라인)
