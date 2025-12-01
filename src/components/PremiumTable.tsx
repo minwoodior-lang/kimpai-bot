@@ -587,7 +587,7 @@ export default function PremiumTable({
             />
           </div>
 
-          <div className="hidden md:flex items-center text-gray-400 text-xs px-2">
+          <div className="flex md:hidden items-center text-gray-400 text-[10px] px-1">
             <span>암호화폐 <span className="text-white font-medium">{totalCoins}</span>개</span>
           </div>
 
