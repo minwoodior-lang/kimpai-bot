@@ -112,22 +112,34 @@ export default function ExchangeSelector({ compact = false, showLabels = true }:
 
   return (
     <div className={`flex ${compact ? "gap-2" : "gap-3"} items-center flex-wrap`}>
-      {showLabels && <span className="text-slate-400 text-xs whitespace-nowrap">기준 거래소 🇰🇷</span>}
-      <CustomDropdown
-        value={domesticExchange}
-        options={domesticOptions}
-        onChange={setDomesticExchange}
-      />
+      <div className="flex flex-col items-center gap-1">
+        {showLabels && (
+          <span className="text-slate-400 text-[10px] md:text-xs whitespace-nowrap flex items-center gap-1">
+            기준 거래소 <span className="inline-block w-4 h-3 bg-gradient-to-b from-white via-white to-white rounded-sm relative overflow-hidden"><span className="absolute inset-0 flex items-center justify-center"><span className="w-2 h-2 rounded-full bg-red-500 flex items-center justify-center"><span className="w-1 h-1 rounded-full bg-blue-600"></span></span></span></span>
+          </span>
+        )}
+        <CustomDropdown
+          value={domesticExchange}
+          options={domesticOptions}
+          onChange={setDomesticExchange}
+        />
+      </div>
 
-      <span className="text-slate-500 text-lg">⇄</span>
+      <span className="text-slate-500 text-lg self-end mb-2">⇄</span>
 
-      <CustomDropdown
-        value={foreignExchange}
-        options={foreignOptions}
-        onChange={setForeignExchange}
-        showShortName={false}
-      />
-      {showLabels && <span className="text-slate-400 text-xs whitespace-nowrap">해외 거래소 🌐</span>}
+      <div className="flex flex-col items-center gap-1">
+        {showLabels && (
+          <span className="text-slate-400 text-[10px] md:text-xs whitespace-nowrap flex items-center gap-1">
+            해외 거래소 <span className="text-base">🌐</span>
+          </span>
+        )}
+        <CustomDropdown
+          value={foreignExchange}
+          options={foreignOptions}
+          onChange={setForeignExchange}
+          showShortName={false}
+        />
+      </div>
     </div>
   );
 }

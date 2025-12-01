@@ -562,22 +562,30 @@ export default function PremiumTable({
 
       {showFilters && (
         <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-4 text-sm">
-          <span className="text-gray-400 text-xs whitespace-nowrap">기준 거래소 🇰🇷</span>
-          <MiniDropdown
-            value={domesticExchange}
-            options={DOMESTIC_EXCHANGES}
-            onChange={setDomesticExchange}
-          />
+          <div className="flex flex-col items-center gap-0.5">
+            <span className="text-gray-400 text-[10px] md:text-xs whitespace-nowrap flex items-center gap-1">
+              기준 거래소 <span className="inline-block w-4 h-3 bg-white rounded-sm relative overflow-hidden border border-gray-300"><span className="absolute inset-0 flex items-center justify-center"><span className="w-2 h-2 rounded-full bg-red-500 flex items-center justify-center"><span className="w-1 h-1 rounded-full bg-blue-600"></span></span></span></span>
+            </span>
+            <MiniDropdown
+              value={domesticExchange}
+              options={DOMESTIC_EXCHANGES}
+              onChange={setDomesticExchange}
+            />
+          </div>
 
-          <span className="text-gray-500">⇄</span>
+          <span className="text-gray-500 self-end mb-1.5">⇄</span>
 
-          <MiniDropdown
-            value={foreignExchange}
-            options={FOREIGN_EXCHANGES}
-            onChange={setForeignExchange}
-            showShortName={false}
-          />
-          <span className="text-gray-400 text-xs whitespace-nowrap">해외 거래소 🌐</span>
+          <div className="flex flex-col items-center gap-0.5">
+            <span className="text-gray-400 text-[10px] md:text-xs whitespace-nowrap flex items-center gap-1">
+              해외 거래소 <span className="text-sm">🌐</span>
+            </span>
+            <MiniDropdown
+              value={foreignExchange}
+              options={FOREIGN_EXCHANGES}
+              onChange={setForeignExchange}
+              showShortName={false}
+            />
+          </div>
 
           <div className="hidden md:flex items-center text-gray-400 text-xs px-2">
             <span>암호화폐 <span className="text-white font-medium">{totalCoins}</span>개</span>
