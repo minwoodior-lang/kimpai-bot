@@ -45,6 +45,10 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 - **Admin Interface**: Dedicated admin dashboard for management.
 
 ### Recent Changes (2025-12-01)
+- **v2.1.5 차트 모달 팝업**:
+  - 차트 아이콘 클릭 시 외부 링크 대신 내부 모달 팝업으로 TradingView 차트 표시
+  - ChartModal 컴포넌트 추가 (ESC/배경/X 버튼으로 닫기)
+  - 전체 화면 블러 + 중앙 차트 UI
 - **v2.1.4 데이터 정확성 개선**:
   - 거래액(일) 계산 로직 수정 (quoteVolume 기반으로 통일)
   - OKX: volCcy24h → vol24h (USDT quote volume)
