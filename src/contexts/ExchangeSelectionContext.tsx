@@ -10,26 +10,40 @@ export interface ForeignExchange {
   quote: "USDT" | "BTC" | "USD";
 }
 
-export const DOMESTIC_EXCHANGES: { value: string; label: string; exchange: DomesticExchange["exchange"]; quote: DomesticExchange["quote"] }[] = [
-  { value: "UPBIT_KRW", label: "업비트 KRW", exchange: "UPBIT", quote: "KRW" },
-  { value: "UPBIT_BTC", label: "업비트 BTC", exchange: "UPBIT", quote: "BTC" },
-  { value: "UPBIT_USDT", label: "업비트 USDT", exchange: "UPBIT", quote: "USDT" },
-  { value: "BITHUMB_KRW", label: "빗썸 KRW", exchange: "BITHUMB", quote: "KRW" },
-  { value: "BITHUMB_BTC", label: "빗썸 BTC", exchange: "BITHUMB", quote: "BTC" },
-  { value: "BITHUMB_USDT", label: "빗썸 USDT", exchange: "BITHUMB", quote: "USDT" },
-  { value: "COINONE_KRW", label: "코인원 KRW", exchange: "COINONE", quote: "KRW" },
+export const EXCHANGE_LOGOS: Record<string, string> = {
+  UPBIT: "/exchanges/upbit.svg",
+  BITHUMB: "/exchanges/bithumb.svg",
+  COINONE: "/exchanges/coinone.svg",
+  BINANCE: "/exchanges/binance.svg",
+  BINANCE_FUTURES: "/exchanges/binance.svg",
+  OKX: "/exchanges/okx.svg",
+  BYBIT: "/exchanges/bybit.svg",
+  BITGET: "/exchanges/bitget.svg",
+  GATE: "/exchanges/gate.svg",
+  HTX: "/exchanges/htx.svg",
+  MEXC: "/exchanges/mexc.svg",
+};
+
+export const DOMESTIC_EXCHANGES: { value: string; label: string; exchange: DomesticExchange["exchange"]; quote: DomesticExchange["quote"]; logo: string }[] = [
+  { value: "UPBIT_KRW", label: "업비트 KRW", exchange: "UPBIT", quote: "KRW", logo: "/exchanges/upbit.svg" },
+  { value: "UPBIT_BTC", label: "업비트 BTC", exchange: "UPBIT", quote: "BTC", logo: "/exchanges/upbit.svg" },
+  { value: "UPBIT_USDT", label: "업비트 USDT", exchange: "UPBIT", quote: "USDT", logo: "/exchanges/upbit.svg" },
+  { value: "BITHUMB_KRW", label: "빗썸 KRW", exchange: "BITHUMB", quote: "KRW", logo: "/exchanges/bithumb.svg" },
+  { value: "BITHUMB_BTC", label: "빗썸 BTC", exchange: "BITHUMB", quote: "BTC", logo: "/exchanges/bithumb.svg" },
+  { value: "BITHUMB_USDT", label: "빗썸 USDT", exchange: "BITHUMB", quote: "USDT", logo: "/exchanges/bithumb.svg" },
+  { value: "COINONE_KRW", label: "코인원 KRW", exchange: "COINONE", quote: "KRW", logo: "/exchanges/coinone.svg" },
 ];
 
-export const FOREIGN_EXCHANGES: { value: string; label: string; shortName: string; exchange: ForeignExchange["exchange"]; quote: ForeignExchange["quote"]; icon: string }[] = [
-  { value: "BINANCE_USDT", label: "바이낸스 USDT 마켓", shortName: "바이낸스", exchange: "BINANCE", quote: "USDT", icon: "🟡" },
-  { value: "BINANCE_BTC", label: "바이낸스 BTC 마켓", shortName: "바이낸스", exchange: "BINANCE", quote: "BTC", icon: "🟡" },
-  { value: "BINANCE_FUTURES", label: "바이낸스 선물 USDS-M 마켓", shortName: "바이낸스 선물", exchange: "BINANCE_FUTURES", quote: "USD", icon: "🟡" },
-  { value: "OKX_USDT", label: "OKX USDT 마켓", shortName: "OKX", exchange: "OKX", quote: "USDT", icon: "⚪" },
-  { value: "BYBIT_USDT", label: "Bybit USDT 마켓", shortName: "Bybit", exchange: "BYBIT", quote: "USDT", icon: "🟠" },
-  { value: "BITGET_USDT", label: "Bitget USDT 마켓", shortName: "Bitget", exchange: "BITGET", quote: "USDT", icon: "🔵" },
-  { value: "GATE_USDT", label: "Gate.io USDT 마켓", shortName: "Gate.io", exchange: "GATE", quote: "USDT", icon: "🟢" },
-  { value: "HTX_USDT", label: "HTX USDT 마켓", shortName: "HTX", exchange: "HTX", quote: "USDT", icon: "🔶" },
-  { value: "MEXC_USDT", label: "MEXC USDT 마켓", shortName: "MEXC", exchange: "MEXC", quote: "USDT", icon: "🔷" },
+export const FOREIGN_EXCHANGES: { value: string; label: string; shortName: string; exchange: ForeignExchange["exchange"]; quote: ForeignExchange["quote"]; logo: string }[] = [
+  { value: "BINANCE_USDT", label: "바이낸스 USDT 마켓", shortName: "바이낸스", exchange: "BINANCE", quote: "USDT", logo: "/exchanges/binance.svg" },
+  { value: "BINANCE_BTC", label: "바이낸스 BTC 마켓", shortName: "바이낸스", exchange: "BINANCE", quote: "BTC", logo: "/exchanges/binance.svg" },
+  { value: "BINANCE_FUTURES", label: "바이낸스 선물 USDS-M 마켓", shortName: "바이낸스 선물", exchange: "BINANCE_FUTURES", quote: "USD", logo: "/exchanges/binance.svg" },
+  { value: "OKX_USDT", label: "OKX USDT 마켓", shortName: "OKX", exchange: "OKX", quote: "USDT", logo: "/exchanges/okx.svg" },
+  { value: "BYBIT_USDT", label: "Bybit USDT 마켓", shortName: "Bybit", exchange: "BYBIT", quote: "USDT", logo: "/exchanges/bybit.svg" },
+  { value: "BITGET_USDT", label: "Bitget USDT 마켓", shortName: "Bitget", exchange: "BITGET", quote: "USDT", logo: "/exchanges/bitget.svg" },
+  { value: "GATE_USDT", label: "Gate.io USDT 마켓", shortName: "Gate.io", exchange: "GATE", quote: "USDT", logo: "/exchanges/gate.svg" },
+  { value: "HTX_USDT", label: "HTX USDT 마켓", shortName: "HTX", exchange: "HTX", quote: "USDT", logo: "/exchanges/htx.svg" },
+  { value: "MEXC_USDT", label: "MEXC USDT 마켓", shortName: "MEXC", exchange: "MEXC", quote: "USDT", logo: "/exchanges/mexc.svg" },
 ];
 
 interface ExchangeSelectionContextType {

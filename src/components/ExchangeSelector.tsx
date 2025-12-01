@@ -57,14 +57,14 @@ export default function ExchangeSelector({ compact = false, showLabels = true }:
           <optgroup label="Binance">
             {FOREIGN_EXCHANGES.filter((e) => e.exchange === "BINANCE" || e.exchange === "BINANCE_FUTURES").map((e) => (
               <option key={e.value} value={e.value}>
-                {e.icon} {e.label}
+                {e.label}
               </option>
             ))}
           </optgroup>
           <optgroup label="기타 거래소">
             {FOREIGN_EXCHANGES.filter((e) => !e.exchange.startsWith("BINANCE")).map((e) => (
               <option key={e.value} value={e.value}>
-                {e.icon} {e.label}
+                {e.label}
               </option>
             ))}
           </optgroup>
@@ -128,14 +128,14 @@ export function ForeignExchangeSelector({ compact = false }: { compact?: boolean
       <optgroup label="Binance">
         {FOREIGN_EXCHANGES.filter((e) => e.exchange === "BINANCE" || e.exchange === "BINANCE_FUTURES").map((e) => (
           <option key={e.value} value={e.value}>
-            {e.icon} {e.label}
+            {e.label}
           </option>
         ))}
       </optgroup>
       <optgroup label="기타 거래소">
         {FOREIGN_EXCHANGES.filter((e) => !e.exchange.startsWith("BINANCE")).map((e) => (
           <option key={e.value} value={e.value}>
-            {e.icon} {e.label}
+            {e.label}
           </option>
         ))}
       </optgroup>

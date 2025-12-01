@@ -58,7 +58,7 @@ const FOREIGN_EXCHANGES = CONTEXT_FOREIGN_EXCHANGES.map(ex => ({
   name: ex.label,
   shortName: ex.shortName,
   exchange: ex.exchange,
-  icon: ex.icon,
+  logo: ex.logo,
 }));
 
 const CHOSUNG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
@@ -397,7 +397,7 @@ export default function PremiumTable({
             className="bg-slate-700 text-white rounded-lg px-3 py-2 border border-slate-600 focus:border-blue-500 focus:outline-none text-sm"
           >
             {FOREIGN_EXCHANGES.map((ex) => (
-              <option key={ex.id} value={ex.id}>{ex.icon} {ex.name}</option>
+              <option key={ex.id} value={ex.id}>{ex.name}</option>
             ))}
           </select>
 
