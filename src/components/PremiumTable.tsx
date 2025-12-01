@@ -6,7 +6,8 @@ interface PremiumData {
   koreanPrice: number;
   globalPrice: number;
   premium: number;
-  volume24h: number;
+  volume24hKrw: number;
+  volume24hUsdt: number;
   change24h: number;
   high24h: number;
   low24h: number;
@@ -22,7 +23,7 @@ interface ApiResponse {
   foreignExchange: string;
 }
 
-type SortKey = "symbol" | "premium" | "volume24h" | "change24h" | "koreanPrice" | "high24h" | "low24h";
+type SortKey = "symbol" | "premium" | "volume24hKrw" | "change24h" | "koreanPrice" | "high24h" | "low24h";
 type SortOrder = "asc" | "desc";
 
 const DOMESTIC_EXCHANGES = [
@@ -176,15 +177,23 @@ export default function PremiumTable({
     return value.toLocaleString("ko-KR");
   };
 
-  const formatUSD = (value: number) => {
+  const formatKrwPrice = (value: number) => {
     if (!value || isNaN(value)) return "-";
     if (value >= 1000) {
-      return `$${value.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+      return Math.round(value).toLocaleString("ko-KR");
     }
     if (value >= 1) {
-      return `$${value.toFixed(2)}`;
+      return value.toFixed(1);
     }
-    return `$${value.toFixed(4)}`;
+    return value.toFixed(1);
+  };
+
+  const formatUsdtPrice = (value: number) => {
+    if (!value || isNaN(value)) return "-";
+    if (value >= 1000) {
+      return `$${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
+    return `$${value.toFixed(2)}`;
   };
 
   const formatVolumeKRW = (value: number) => {
@@ -195,12 +204,12 @@ export default function PremiumTable({
     return value.toLocaleString();
   };
 
-  const formatVolumeUSD = (value: number) => {
+  const formatVolumeUsdt = (value: number) => {
     if (!value || isNaN(value)) return "-";
-    if (value >= 1e9) return `${(value / 1e9).toFixed(1)}B`;
-    if (value >= 1e6) return `${(value / 1e6).toFixed(1)}M`;
-    if (value >= 1e3) return `${(value / 1e3).toFixed(0)}K`;
-    return value.toLocaleString();
+    if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B USDT`;
+    if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M USDT`;
+    if (value >= 1e3) return `$${(value / 1e3).toFixed(2)}K USDT`;
+    return `$${value.toFixed(2)} USDT`;
   };
 
   const getPremiumColor = (premium: number) => {
@@ -367,9 +376,9 @@ export default function PremiumTable({
                   </th>
                   <th
                     className="px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
-                    onClick={() => handleSort("volume24h")}
+                    onClick={() => handleSort("volume24hKrw")}
                   >
-                    거래액(일)<SortIcon columnKey="volume24h" />
+                    거래액(일)<SortIcon columnKey="volume24hKrw" />
                   </th>
                 </tr>
               </thead>
@@ -416,8 +425,8 @@ export default function PremiumTable({
                         <div className="text-white font-medium">₩{formatKRW(row.koreanPrice)}</div>
                       </td>
                       <td className="px-3 py-2 text-right">
-                        <div className="text-white font-medium">₩{formatKRW(row.globalPrice * fxRate)}</div>
-                        <div className="text-xs text-gray-500">${row.globalPrice.toFixed(2)} USDT</div>
+                        <div className="text-white font-medium">₩{formatKrwPrice(row.globalPrice * fxRate)}</div>
+                        <div className="text-xs text-gray-500">{formatUsdtPrice(row.globalPrice)} USDT</div>
                       </td>
                       <td className="px-3 py-2 text-right">
                         <div className={`font-bold ${getPremiumColor(row.premium)}`}>
@@ -463,8 +472,8 @@ export default function PremiumTable({
                         )}
                       </td>
                       <td className="px-3 py-2 text-right">
-                        <div className="text-gray-300">₩{formatVolumeKRW(row.volume24h * fxRate)}</div>
-                        <div className="text-xs text-gray-500">${formatVolumeUSD(row.volume24h)}</div>
+                        <div className="text-gray-300">₩{formatVolumeKRW(row.volume24hKrw)}</div>
+                        <div className="text-xs text-gray-500">{formatVolumeUsdt(row.volume24hUsdt)}</div>
                       </td>
                     </tr>
                   );

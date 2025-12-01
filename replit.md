@@ -40,11 +40,18 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 - **CoinMarketCap Integration**: Direct links on coin names for external reference.
 - **2-Second Data Refresh**: Real-time feel with rapid data updates (무료/유료 동일).
 - **PRO Tier Features**: 48시간 김프 예측, 상세 분석 (마스킹 + 잠금 처리).
-- **Rate Limiting**: IP-based API protection (2 requests per 2 seconds).
+- **Rate Limiting**: Token bucket rate limiting (burst 10 requests, refill 2 per 2 seconds).
 - **User Authentication**: Secure signup and login with Supabase, protecting pro-user features.
 - **Admin Interface**: Dedicated admin dashboard for management.
 
 ### Recent Changes (2025-12-01)
+- **v2.1.4 데이터 정확성 개선**:
+  - 거래액(일) 계산 로직 수정 (quoteVolume 기반으로 통일)
+  - OKX: volCcy24h → vol24h (USDT quote volume)
+  - HTX: vol × close 계산 (coin → USDT 변환)
+  - 거래액 표기 개선: 메인 KRW(조/억/만), 보조 $xxB/M/K USDT
+  - 해외 가격 소수점 정리: KRW 1자리, USDT 2자리
+  - Rate Limit 토큰 버킷 방식으로 변경 (버스트 10회 + 2초당 2회 충전)
 - **v2.1.3 업데이트**: 전체 UI/UX 개선 및 안정화
   - Rate Limit 2초당 2회로 강화 (기존 10회)
   - 고가대비(24h)/저가대비(24h) 라벨 명확화

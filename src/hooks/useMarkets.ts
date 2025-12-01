@@ -6,7 +6,8 @@ export type MarketRow = {
   upbitPrice: number;
   binancePrice: number;
   premium: number;
-  volume24h: number;
+  volume24hKrw: number;
+  volume24hUsdt: number;
   change24h: number;
   domesticExchange?: string;
   foreignExchange?: string;
@@ -70,7 +71,8 @@ export function useMarkets(options?: UseMarketsOptions | number): UseMarketsResu
           koreanPrice: number;
           globalPrice: number;
           premium: number;
-          volume24h: number;
+          volume24hKrw: number;
+          volume24hUsdt: number;
           change24h: number;
           domesticExchange?: string;
           foreignExchange?: string;
@@ -80,7 +82,8 @@ export function useMarkets(options?: UseMarketsOptions | number): UseMarketsResu
           upbitPrice: item.koreanPrice,
           binancePrice: item.globalPrice * json.fxRate,
           premium: item.premium,
-          volume24h: item.volume24h,
+          volume24hKrw: item.volume24hKrw,
+          volume24hUsdt: item.volume24hUsdt,
           change24h: item.change24h,
           domesticExchange: item.domesticExchange,
           foreignExchange: item.foreignExchange,

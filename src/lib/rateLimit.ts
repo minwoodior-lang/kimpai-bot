@@ -1,46 +1,50 @@
-interface RateLimitRecord {
-  timestamp: number;
-  count: number;
+interface TokenBucket {
+  tokens: number;
+  lastRefill: number;
 }
 
-const rateLimitMap = new Map<string, RateLimitRecord>();
+const bucketMap = new Map<string, TokenBucket>();
 
-const RATE_LIMIT_WINDOW_MS = 2000;
-const RATE_LIMIT_MAX_REQUESTS = 2;
+const MAX_TOKENS = 10;
+const REFILL_RATE = 2;
+const REFILL_INTERVAL_MS = 2000;
 
 setInterval(() => {
   const now = Date.now();
-  const entries = Array.from(rateLimitMap.entries());
-  entries.forEach(([key, record]) => {
-    if (now - record.timestamp > RATE_LIMIT_WINDOW_MS * 10) {
-      rateLimitMap.delete(key);
+  const entries = Array.from(bucketMap.entries());
+  entries.forEach(([key, bucket]) => {
+    if (now - bucket.lastRefill > 60000) {
+      bucketMap.delete(key);
     }
   });
 }, 60000);
 
 export function checkRateLimit(ip: string): { allowed: boolean; retryAfter?: number } {
   const now = Date.now();
-  const record = rateLimitMap.get(ip);
+  let bucket = bucketMap.get(ip);
 
-  if (!record) {
-    rateLimitMap.set(ip, { timestamp: now, count: 1 });
+  if (!bucket) {
+    bucket = { tokens: MAX_TOKENS - 1, lastRefill: now };
+    bucketMap.set(ip, bucket);
     return { allowed: true };
   }
 
-  const elapsed = now - record.timestamp;
+  const elapsed = now - bucket.lastRefill;
+  const refillCount = Math.floor(elapsed / REFILL_INTERVAL_MS) * REFILL_RATE;
+  
+  if (refillCount > 0) {
+    bucket.tokens = Math.min(MAX_TOKENS, bucket.tokens + refillCount);
+    bucket.lastRefill = now;
+  }
 
-  if (elapsed >= RATE_LIMIT_WINDOW_MS) {
-    rateLimitMap.set(ip, { timestamp: now, count: 1 });
+  if (bucket.tokens >= 1) {
+    bucket.tokens -= 1;
     return { allowed: true };
   }
 
-  if (record.count >= RATE_LIMIT_MAX_REQUESTS) {
-    const retryAfter = Math.ceil((RATE_LIMIT_WINDOW_MS - elapsed) / 1000);
-    return { allowed: false, retryAfter };
-  }
-
-  record.count += 1;
-  return { allowed: true };
+  const nextRefillIn = REFILL_INTERVAL_MS - (elapsed % REFILL_INTERVAL_MS);
+  const retryAfter = Math.ceil(nextRefillIn / 1000);
+  return { allowed: false, retryAfter };
 }
 
 export function getClientIp(req: { headers: { [key: string]: string | string[] | undefined }; socket?: { remoteAddress?: string } }): string {

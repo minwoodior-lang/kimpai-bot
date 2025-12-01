@@ -13,7 +13,8 @@ interface PremiumTableRow {
   koreanPrice: number;
   globalPrice: number;
   premium: number;
-  volume24h: number;
+  volume24hKrw: number;
+  volume24hUsdt: number;
   change24h: number;
   high24h: number;
   low24h: number;
@@ -211,13 +212,17 @@ export default async function handler(
           ? ((domesticPriceKrw - foreignPriceKrw) / foreignPriceKrw) * 100
           : 0;
 
+        const rawVolumeUsdt = Number(foreignRecord.volume_24h) || 0;
+        const volumeKrw = rawVolumeUsdt * fxRate;
+        
         tableData.push({
           symbol,
           name: SYMBOL_NAMES[symbol] || symbol,
           koreanPrice: Math.round(domesticPriceKrw),
           globalPrice: globalPriceUsd,
           premium: Math.round(premium * 100) / 100,
-          volume24h: Number(foreignRecord.volume_24h) || 0,
+          volume24hKrw: Math.round(volumeKrw),
+          volume24hUsdt: rawVolumeUsdt,
           change24h: Math.round((Number(foreignRecord.change_24h) || 0) * 100) / 100,
           high24h: Math.round(domesticPriceKrw * 1.01),
           low24h: Math.round(domesticPriceKrw * 0.99),

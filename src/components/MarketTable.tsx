@@ -50,7 +50,7 @@ const MarketTable = ({ limit = 12, showControls = false }: MarketTableProps) => 
         result = result.filter((row) => row.premium < 2);
         break;
       case "volume_high":
-        result.sort((a, b) => b.volume24h - a.volume24h);
+        result.sort((a, b) => b.volume24hKrw - a.volume24hKrw);
         result = result.slice(0, 5);
         break;
     }
@@ -66,7 +66,7 @@ const MarketTable = ({ limit = 12, showControls = false }: MarketTableProps) => 
             comparison = a.premium - b.premium;
             break;
           case "volume":
-            comparison = a.volume24h - b.volume24h;
+            comparison = a.volume24hKrw - b.volume24hKrw;
             break;
           case "change":
             comparison = a.change24h - b.change24h;
@@ -201,7 +201,7 @@ const MarketTable = ({ limit = 12, showControls = false }: MarketTableProps) => 
                   {row.upbitPrice.toLocaleString("ko-KR")}₩
                 </td>
                 <td className="py-3 px-4 text-right">
-                  {Math.round(row.binancePrice).toLocaleString("ko-KR")}₩
+                  {row.binancePrice >= 1000 ? Math.round(row.binancePrice).toLocaleString("ko-KR") : row.binancePrice.toFixed(1)}₩
                 </td>
                 <td
                   className={`py-3 px-4 text-right font-semibold ${
@@ -213,7 +213,8 @@ const MarketTable = ({ limit = 12, showControls = false }: MarketTableProps) => 
                 {showControls && (
                   <>
                     <td className="py-3 px-4 text-right hidden sm:table-cell">
-                      ${(row.volume24h / 1000000000).toFixed(1)}B
+                      <div>₩{row.volume24hKrw >= 1e12 ? `${(row.volume24hKrw / 1e12).toFixed(1)}조` : row.volume24hKrw >= 1e8 ? `${(row.volume24hKrw / 1e8).toFixed(1)}억` : `${(row.volume24hKrw / 1e4).toFixed(0)}만`}</div>
+                      <div className="text-xs text-slate-500">{row.volume24hUsdt >= 1e9 ? `$${(row.volume24hUsdt / 1e9).toFixed(2)}B` : row.volume24hUsdt >= 1e6 ? `$${(row.volume24hUsdt / 1e6).toFixed(2)}M` : `$${(row.volume24hUsdt / 1e3).toFixed(2)}K`} USDT</div>
                     </td>
                     <td className={`py-3 px-4 text-right hidden sm:table-cell ${row.change24h >= 0 ? "text-green-400" : "text-red-400"}`}>
                       {row.change24h >= 0 ? "+" : ""}{row.change24h.toFixed(2)}%

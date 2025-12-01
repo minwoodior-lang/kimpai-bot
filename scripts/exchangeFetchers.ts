@@ -305,7 +305,7 @@ export async function fetchOKX(fxRate: number): Promise<ExchangePrice[]> {
           quote: 'USDT',
           price,
           priceKrw: price * fxRate,
-          volume24h: Number(ticker.volCcy24h) || null,
+          volume24h: Number(ticker.vol24h) || null,
           change24h,
         });
       }
@@ -432,6 +432,7 @@ export async function fetchHTX(fxRate: number): Promise<ExchangePrice[]> {
       for (const sym of SYMBOLS) {
         if (symbolLower === `${sym.toLowerCase()}usdt`) {
           const change24h = ticker.open > 0 ? ((ticker.close - ticker.open) / ticker.open) * 100 : null;
+          const quoteVolume = ticker.vol * ticker.close;
           results.push({
             exchange: 'HTX',
             symbol: sym,
@@ -439,7 +440,7 @@ export async function fetchHTX(fxRate: number): Promise<ExchangePrice[]> {
             quote: 'USDT',
             price: ticker.close,
             priceKrw: ticker.close * fxRate,
-            volume24h: ticker.vol || null,
+            volume24h: quoteVolume || null,
             change24h,
           });
           break;

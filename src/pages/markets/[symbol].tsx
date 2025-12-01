@@ -191,11 +191,11 @@ export default function SymbolDetail() {
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-slate-400">24시간 거래량</span>
-                  <span className="text-white">${(coinData.volume24h / 1000000000).toFixed(2)}B</span>
+                  <span className="text-white">₩{coinData.volume24hKrw >= 1e12 ? `${(coinData.volume24hKrw / 1e12).toFixed(1)}조` : coinData.volume24hKrw >= 1e8 ? `${(coinData.volume24hKrw / 1e8).toFixed(1)}억` : `${(coinData.volume24hKrw / 1e4).toFixed(0)}만`}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">환율</span>
-                  <span className="text-white">₩{fxRate.toLocaleString()}/USD</span>
+                  <span className="text-white">₩{fxRate.toLocaleString()}/USDT</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">프리미엄 금액</span>

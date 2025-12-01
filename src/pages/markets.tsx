@@ -116,7 +116,7 @@ export default function Markets() {
                         ₩{item.upbitPrice.toLocaleString()}
                       </td>
                       <td className="px-6 py-4 text-right text-white">
-                        ₩{Math.round(item.binancePrice).toLocaleString()}
+                        ₩{item.binancePrice >= 1000 ? Math.round(item.binancePrice).toLocaleString() : item.binancePrice.toFixed(1)}
                       </td>
                       <td className="px-6 py-4 text-right">
                         <span className={`font-medium ${item.premium > 0 ? "text-green-400" : "text-red-400"}`}>
@@ -124,7 +124,8 @@ export default function Markets() {
                         </span>
                       </td>
                       <td className="px-6 py-4 text-right text-slate-300">
-                        ${(item.volume24h / 1000000).toFixed(1)}M
+                        <div>₩{item.volume24hKrw >= 1e12 ? `${(item.volume24hKrw / 1e12).toFixed(1)}조` : item.volume24hKrw >= 1e8 ? `${(item.volume24hKrw / 1e8).toFixed(1)}억` : item.volume24hKrw >= 1e4 ? `${(item.volume24hKrw / 1e4).toFixed(0)}만` : item.volume24hKrw.toLocaleString()}</div>
+                        <div className="text-xs text-slate-500">{item.volume24hUsdt >= 1e9 ? `$${(item.volume24hUsdt / 1e9).toFixed(2)}B` : item.volume24hUsdt >= 1e6 ? `$${(item.volume24hUsdt / 1e6).toFixed(2)}M` : `$${(item.volume24hUsdt / 1e3).toFixed(2)}K`} USDT</div>
                       </td>
                       <td className="px-6 py-4 text-right">
                         <span className={item.change24h >= 0 ? "text-green-400" : "text-red-400"}>
