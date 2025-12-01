@@ -21,6 +21,7 @@ const COINGECKO_IDS: Record<string, string> = {
   AVAX: 'avalanche-2',
 };
 
+// Upbit KRW: acc_trade_price_24h = 24h trading volume in KRW (already in quote currency)
 export async function fetchUpbitKRW(fxRate: number): Promise<ExchangePrice[]> {
   try {
     const markets = SYMBOLS.map(s => `KRW-${s}`).join(',');
@@ -38,7 +39,7 @@ export async function fetchUpbitKRW(fxRate: number): Promise<ExchangePrice[]> {
         quote: 'KRW',
         price: ticker.trade_price,
         priceKrw: ticker.trade_price,
-        volume24h: ticker.acc_trade_price_24h,
+        volume24h: ticker.acc_trade_price_24h, // Already in KRW quote volume
         change24h: ticker.signed_change_rate * 100,
       };
     });
@@ -207,6 +208,9 @@ export async function fetchCoinoneKRW(fxRate: number): Promise<ExchangePrice[]> 
   }
 }
 
+// Binance: Using CoinGecko API as fallback (Binance API blocked from this region)
+// NOTE: usd_24h_vol is GLOBAL trading volume, not Binance-specific
+// Ideal: Use Binance /api/v3/ticker/24hr quoteVolume field directly
 export async function fetchBinanceUSDT(fxRate: number): Promise<ExchangePrice[]> {
   try {
     const ids = Object.values(COINGECKO_IDS).join(',');
@@ -227,7 +231,7 @@ export async function fetchBinanceUSDT(fxRate: number): Promise<ExchangePrice[]>
           quote: 'USDT',
           price: coinData.usd,
           priceKrw: coinData.usd * fxRate,
-          volume24h: coinData.usd_24h_vol || null,
+          volume24h: coinData.usd_24h_vol || null, // Global volume (CoinGecko fallback)
           change24h: coinData.usd_24h_change || null,
         });
       }
@@ -280,6 +284,7 @@ export async function fetchBinanceFutures(fxRate: number): Promise<ExchangePrice
   );
 }
 
+// OKX: volCcy24h = 24h quote volume in USDT (NOT vol24h which is base volume)
 export async function fetchOKX(fxRate: number): Promise<ExchangePrice[]> {
   try {
     const response = await fetch('https://www.okx.com/api/v5/market/tickers?instType=SPOT');
@@ -298,6 +303,7 @@ export async function fetchOKX(fxRate: number): Promise<ExchangePrice[]> {
         const open = Number(ticker.open24h);
         const change24h = open > 0 ? ((price - open) / open) * 100 : null;
         
+        // volCcy24h is the 24h trading volume in quote currency (USDT)
         results.push({
           exchange: 'OKX',
           symbol,
@@ -305,7 +311,7 @@ export async function fetchOKX(fxRate: number): Promise<ExchangePrice[]> {
           quote: 'USDT',
           price,
           priceKrw: price * fxRate,
-          volume24h: Number(ticker.vol24h) || null,
+          volume24h: Number(ticker.volCcy24h) || null,
           change24h,
         });
       }
@@ -317,6 +323,8 @@ export async function fetchOKX(fxRate: number): Promise<ExchangePrice[]> {
   }
 }
 
+// Bybit: turnover24h = 24h trading volume in quote currency (USDT)
+// Falls back to CoinGecko if Bybit API is blocked
 export async function fetchBybit(fxRate: number): Promise<ExchangePrice[]> {
   try {
     const response = await fetch('https://api.bybit.com/v5/market/tickers?category=spot');
@@ -342,7 +350,7 @@ export async function fetchBybit(fxRate: number): Promise<ExchangePrice[]> {
           quote: 'USDT',
           price: Number(ticker.lastPrice),
           priceKrw: Number(ticker.lastPrice) * fxRate,
-          volume24h: Number(ticker.turnover24h) || null,
+          volume24h: Number(ticker.turnover24h) || null, // 24h quote volume in USDT
           change24h: Number(ticker.price24hPcnt) * 100 || null,
         });
       }
@@ -356,6 +364,7 @@ export async function fetchBybit(fxRate: number): Promise<ExchangePrice[]> {
   }
 }
 
+// Bitget: usdtVolume = 24h trading volume in USDT (same as quoteVolume)
 export async function fetchBitget(fxRate: number): Promise<ExchangePrice[]> {
   try {
     const response = await fetch('https://api.bitget.com/api/v2/spot/market/tickers');
@@ -374,7 +383,7 @@ export async function fetchBitget(fxRate: number): Promise<ExchangePrice[]> {
           quote: 'USDT',
           price: Number(ticker.lastPr),
           priceKrw: Number(ticker.lastPr) * fxRate,
-          volume24h: Number(ticker.usdtVolume) || null,
+          volume24h: Number(ticker.usdtVolume) || null, // 24h quote volume in USDT
           change24h: Number(ticker.change24h) * 100 || null,
         });
       }
@@ -386,6 +395,7 @@ export async function fetchBitget(fxRate: number): Promise<ExchangePrice[]> {
   }
 }
 
+// Gate: quote_volume = 24h trading volume in quote currency (USDT)
 export async function fetchGate(fxRate: number): Promise<ExchangePrice[]> {
   try {
     const response = await fetch('https://api.gateio.ws/api/v4/spot/tickers');
@@ -407,7 +417,7 @@ export async function fetchGate(fxRate: number): Promise<ExchangePrice[]> {
           quote: 'USDT',
           price: Number(ticker.last),
           priceKrw: Number(ticker.last) * fxRate,
-          volume24h: Number(ticker.quote_volume) || null,
+          volume24h: Number(ticker.quote_volume) || null, // 24h quote volume in USDT
           change24h: Number(ticker.change_percentage) || null,
         });
       }
@@ -419,6 +429,8 @@ export async function fetchGate(fxRate: number): Promise<ExchangePrice[]> {
   }
 }
 
+// HTX: vol = 24h trading volume in quote currency (USDT), amount = base volume
+// NOTE: Do NOT multiply vol by close - vol is already in USDT
 export async function fetchHTX(fxRate: number): Promise<ExchangePrice[]> {
   try {
     const response = await fetch('https://api.huobi.pro/market/tickers');
@@ -432,7 +444,8 @@ export async function fetchHTX(fxRate: number): Promise<ExchangePrice[]> {
       for (const sym of SYMBOLS) {
         if (symbolLower === `${sym.toLowerCase()}usdt`) {
           const change24h = ticker.open > 0 ? ((ticker.close - ticker.open) / ticker.open) * 100 : null;
-          const quoteVolume = ticker.vol * ticker.close;
+          // ticker.vol is already the 24h quote volume in USDT
+          // ticker.amount is the base volume (coin quantity)
           results.push({
             exchange: 'HTX',
             symbol: sym,
@@ -440,7 +453,7 @@ export async function fetchHTX(fxRate: number): Promise<ExchangePrice[]> {
             quote: 'USDT',
             price: ticker.close,
             priceKrw: ticker.close * fxRate,
-            volume24h: quoteVolume || null,
+            volume24h: ticker.vol || null,
             change24h,
           });
           break;
@@ -454,6 +467,7 @@ export async function fetchHTX(fxRate: number): Promise<ExchangePrice[]> {
   }
 }
 
+// MEXC: quoteVolume = 24h trading volume in quote currency (USDT)
 export async function fetchMEXC(fxRate: number): Promise<ExchangePrice[]> {
   try {
     const response = await fetch('https://api.mexc.com/api/v3/ticker/24hr');
@@ -472,7 +486,7 @@ export async function fetchMEXC(fxRate: number): Promise<ExchangePrice[]> {
           quote: 'USDT',
           price: Number(ticker.lastPrice),
           priceKrw: Number(ticker.lastPrice) * fxRate,
-          volume24h: Number(ticker.quoteVolume) || null,
+          volume24h: Number(ticker.quoteVolume) || null, // 24h quote volume in USDT
           change24h: Number(ticker.priceChangePercent) * 100 || null,
         });
       }
