@@ -67,7 +67,7 @@ const FOREIGN_EXCHANGES = CONTEXT_FOREIGN_EXCHANGES.map(ex => ({
 
 const CHOSUNG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
 
-const COIN_ID_MAP: Record<string, string> = {
+const COINGECKO_ID_MAP: Record<string, string> = {
   'BTC': 'bitcoin', 'ETH': 'ethereum', 'XRP': 'ripple', 'SOL': 'solana',
   'DOGE': 'dogecoin', 'ADA': 'cardano', 'AVAX': 'avalanche-2', 'SHIB': 'shiba-inu',
   'DOT': 'polkadot', 'LINK': 'chainlink', 'TRX': 'tron', 'MATIC': 'matic-network',
@@ -76,14 +76,16 @@ const COIN_ID_MAP: Record<string, string> = {
   'FIL': 'filecoin', 'ICP': 'internet-computer', 'HBAR': 'hedera-hashgraph',
   'VET': 'vechain', 'ARB': 'arbitrum', 'OP': 'optimism', 'SAND': 'the-sandbox',
   'MANA': 'decentraland', 'AAVE': 'aave', 'GRT': 'the-graph', 'AXS': 'axie-infinity',
-  'ENS': 'ethereum-name-service', 'ALGO': 'algorand', 'EOS': 'eos', 'XTZ': 'tezos',
-  'FLOW': 'flow', 'THETA': 'theta-token', 'KLAY': 'klaytn', 'IMX': 'immutable-x',
-  'USDT': 'tether', 'USDC': 'usd-coin', 'SUI': 'sui', 'SEI': 'sei-network',
+  'ALGO': 'algorand', 'EOS': 'eos', 'XTZ': 'tezos', 'FLOW': 'flow',
+  'THETA': 'theta-token', 'KLAY': 'klaytn', 'IMX': 'immutable-x', 'SUI': 'sui',
+  'SEI': 'sei-network', 'TON': 'the-open-network', 'PEPE': 'pepe', 'BONK': 'bonk',
+  'WIF': 'dogwifcoin', 'FLOKI': 'floki', 'CAKE': 'pancakeswap-token',
 };
 
 function CoinIcon({ symbol }: { symbol: string }) {
-  const [imgSrc, setImgSrc] = React.useState<string | null>(null);
+  const [cdnIndex, setCdnIndex] = React.useState(0);
   const [hasError, setHasError] = React.useState(false);
+  const lowerSymbol = symbol.toLowerCase();
   const upperSymbol = symbol.toUpperCase();
   
   const gradientColors: Record<string, string> = {
@@ -95,20 +97,35 @@ function CoinIcon({ symbol }: { symbol: string }) {
     'ADA': 'from-blue-600 to-cyan-400',
     'USDT': 'from-green-500 to-emerald-600',
     'USDC': 'from-blue-400 to-blue-600',
+    'SHIB': 'from-red-500 to-orange-500',
+    'AVAX': 'from-red-600 to-pink-500',
+    'DOT': 'from-pink-500 to-purple-600',
+    'LINK': 'from-blue-500 to-indigo-600',
+    'MATIC': 'from-purple-600 to-violet-500',
+    'TRX': 'from-red-500 to-red-700',
+    'TON': 'from-blue-400 to-sky-500',
+    'PEPE': 'from-green-400 to-green-600',
   };
   
-  const gradient = gradientColors[upperSymbol] || 'from-blue-500 to-purple-500';
+  const gradient = gradientColors[upperSymbol] || 'from-slate-500 to-slate-600';
 
-  React.useEffect(() => {
-    const coinId = COIN_ID_MAP[upperSymbol];
-    if (coinId) {
-      setImgSrc(`https://assets.coingecko.com/coins/images/1/small/${coinId === 'bitcoin' ? 'bitcoin' : coinId}.png`);
+  const coingeckoId = COINGECKO_ID_MAP[upperSymbol];
+  const cdnUrls = [
+    `https://cdn.jsdelivr.net/npm/cryptocurrency-icons@0.18.1/32/color/${lowerSymbol}.png`,
+    `https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/${lowerSymbol}.png`,
+    coingeckoId ? `https://cdn.jsdelivr.net/gh/AleneMcCullworking/crypto-icons@main/icons/${coingeckoId}.png` : null,
+    `https://static.coincap.io/assets/icons/${lowerSymbol}@2x.png`,
+  ].filter(Boolean) as string[];
+
+  const handleError = () => {
+    if (cdnIndex < cdnUrls.length - 1) {
+      setCdnIndex(prev => prev + 1);
     } else {
-      setImgSrc(`https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/${symbol.toLowerCase()}.png`);
+      setHasError(true);
     }
-  }, [symbol, upperSymbol]);
-  
-  if (hasError || !imgSrc) {
+  };
+
+  if (hasError) {
     return (
       <div className={`w-6 h-6 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center text-white font-bold text-xs flex-shrink-0`}>
         {symbol.charAt(0)}
@@ -118,10 +135,11 @@ function CoinIcon({ symbol }: { symbol: string }) {
   
   return (
     <img
-      src={imgSrc}
+      src={cdnUrls[cdnIndex]}
       alt={symbol}
       className="w-6 h-6 rounded-full flex-shrink-0"
-      onError={() => setHasError(true)}
+      onError={handleError}
+      loading="lazy"
     />
   );
 }
