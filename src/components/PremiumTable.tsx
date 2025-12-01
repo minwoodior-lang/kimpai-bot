@@ -74,8 +74,8 @@ function MiniDropdown({
                 }`}
               >
                 <img src={option.logo} alt="" className="w-4 h-4 rounded flex-shrink-0" />
-                <span className="text-white text-sm truncate">
-                  {showShortName ? option.shortName || option.name : option.name?.replace('🇰🇷 ', '')}
+                <span className="text-white text-sm whitespace-nowrap">
+                  {option.name?.replace('🇰🇷 ', '')}
                 </span>
               </button>
             ))}

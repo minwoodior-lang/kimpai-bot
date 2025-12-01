@@ -77,8 +77,8 @@ function CustomDropdown({ value, options, onChange, placeholder = "선택", show
                   alt="" 
                   className="w-5 h-5 flex-shrink-0 rounded"
                 />
-                <span className="text-white text-sm truncate">
-                  {showShortName ? option.shortName || option.label : option.label}
+                <span className="text-white text-sm whitespace-nowrap">
+                  {option.label}
                 </span>
                 {value === option.value && (
                   <svg className="w-4 h-4 text-blue-400 ml-auto flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
