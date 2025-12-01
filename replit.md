@@ -45,12 +45,17 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 - **Admin Interface**: Dedicated admin dashboard for management.
 
 ### Recent Changes (2025-12-01)
+- **v3.0.2 거래소 공식 로고 CDN 전환**:
+  - CoinMarketCap CDN 사용: s2.coinmarketcap.com/static/img/exchanges/64x64/{ID}.png
+  - 10개 거래소 공식 로고 적용 (Upbit-351, Bithumb-200, Coinone-154, Binance-270, OKX-294, Bybit-521, Bitget-513, Gate-302, HTX-102, MEXC-544)
+  - EXCHANGE_LOGOS 중앙 관리 객체로 모든 컴포넌트에서 참조
+  - 로컬 SVG 파일 제거 (public/exchanges 폴더 삭제)
+  - ExchangeSelector, PremiumTable, ExchangeLogo 컴포넌트 CDN URL 사용으로 통일
 - **v3.0.1 거래소 로고 및 코인 아이콘 개선**:
-  - ExchangeSelector 컴포넌트: 거래소 SVG 로고가 드롭다운 옆에 표시
+  - ExchangeSelector 컴포넌트: 거래소 로고가 드롭다운 옆에 표시
   - CoinIcon 멀티티어 CDN 폴백: jsDelivr → spothq GitHub → coincap → 그라데이션 폴백
   - COINGECKO_ID_MAP: 40+ 주요 코인 ID 매핑 (BTC, ETH, XRP, SOL 등)
   - next.config.mjs: 외부 이미지 CDN 허용 (remotePatterns 추가)
-  - 거래소 로고 경로: /exchanges/*.svg (upbit, bithumb, coinone, binance, okx, bybit, bitget, gate, htx, mexc)
 - **v3.0.0 Major UX/Data Overhaul**:
   - 국내 거래소 마켓 세분화: 업비트 KRW/BTC/USDT, 빗썸 KRW/BTC/USDT, 코인원 KRW (총 7개 마켓)
   - 한국 국기 이모지 적용 (🇰🇷) - HTML select 이미지 제한으로 이모지 사용
