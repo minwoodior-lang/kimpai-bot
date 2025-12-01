@@ -45,7 +45,14 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 - **Admin Interface**: Dedicated admin dashboard for management.
 
 ### Recent Changes (2025-12-01)
-- **v2.1.5 차트 모달 팝업**:
+- **v2.1.6 인라인 차트 + 거래액 정확성**:
+  - 차트 표시 방식: 모달 팝업 → 인라인 행 확장 (김프가 스타일)
+  - 차트 아이콘 클릭 시 해당 행 아래에 TradingView 차트 확장/축소
+  - expandedSymbol 상태로 단일 차트만 열기 관리
+  - 거래액(일) 계산: 국내 거래소 volume_24h 직접 사용 (acc_trade_price_24h)
+  - BTC 거래액 ₩4960억 표시 (Upbit 공식값 ₩4,957억과 일치)
+  - React.Fragment 패턴으로 데이터 행 + 차트 행 렌더링
+- **v2.1.5 차트 모달 팝업** (deprecated):
   - 차트 아이콘 클릭 시 외부 링크 대신 내부 모달 팝업으로 TradingView 차트 표시
   - ChartModal 컴포넌트 추가 (ESC/배경/X 버튼으로 닫기)
   - 전체 화면 블러 + 중앙 차트 UI
