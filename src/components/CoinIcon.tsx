@@ -1,4 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+// 심볼 정규화 함수: 거래소별 다양한 형식 통일
+export function normalizeSymbol(raw: string): string {
+  return raw
+    .replace(/[-_/]/g, '')           // 구분자 제거 (BTC-KRW, BTC_KRW, BTC/USDT 등)
+    .replace(/KRW|USDT|BTC|ETH$/i, '') // 마켓 접미사 제거
+    .toUpperCase();
+}
 
 // 업비트/빗썸/코인원 상장 코인 기준 심볼 → CoinGecko ID 매핑 (상위 200+)
 export const COIN_ID_MAP: Record<string, string> = {
@@ -318,9 +326,10 @@ export default function CoinIcon({ symbol, size = 'md', className = '' }: CoinIc
   const [cdnIndex, setCdnIndex] = React.useState(0);
   const [hasError, setHasError] = React.useState(false);
   
-  const cleanSymbol = symbol.replace('/KRW', '').replace('/USDT', '').replace('/BTC', '');
-  const lowerSymbol = cleanSymbol.toLowerCase();
-  const upperSymbol = cleanSymbol.toUpperCase();
+  // 심볼 정규화 적용
+  const normalizedSymbol = normalizeSymbol(symbol);
+  const lowerSymbol = normalizedSymbol.toLowerCase();
+  const upperSymbol = normalizedSymbol.toUpperCase();
   
   const sizeClasses = {
     sm: 'w-5 h-5',
@@ -359,11 +368,18 @@ export default function CoinIcon({ symbol, size = 'md', className = '' }: CoinIc
     }
   };
 
+  // 개발 모드에서 폴백 발생 시 콘솔 경고
+  useEffect(() => {
+    if (hasError && process.env.NODE_ENV === 'development') {
+      console.warn('[CoinIcon] missing icon for symbol:', upperSymbol, '| original:', symbol);
+    }
+  }, [hasError, upperSymbol, symbol]);
+
   // 폴백: 그라데이션 배지
   if (hasError) {
     return (
       <div className={`${sizeClasses[size]} rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center text-white font-bold ${textSizes[size]} flex-shrink-0 ${className}`}>
-        {cleanSymbol.charAt(0)}
+        {upperSymbol.charAt(0)}
       </div>
     );
   }
@@ -371,7 +387,7 @@ export default function CoinIcon({ symbol, size = 'md', className = '' }: CoinIc
   return (
     <img
       src={cdnUrls[cdnIndex]}
-      alt={cleanSymbol}
+      alt={upperSymbol}
       className={`${sizeClasses[size]} rounded-full flex-shrink-0 ${className}`}
       onError={handleError}
       loading="lazy"
