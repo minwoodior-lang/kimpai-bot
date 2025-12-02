@@ -347,7 +347,9 @@
     "exchange": "BITHUMB",
     "market_code": "YFI-KRW",
     "base_symbol": "YFI",
-    "quote_symbol": "KRW"
+    "quote_symbol": "KRW",
+    "name_ko": "예피나인스",
+    "name_en": "Yearn Finance"
   },
   {
     "exchange": "BITHUMB",
@@ -481,7 +483,9 @@
     "exchange": "BITHUMB",
     "market_code": "SNX-KRW",
     "base_symbol": "SNX",
-    "quote_symbol": "KRW"
+    "quote_symbol": "KRW",
+    "name_ko": "신세틱스",
+    "name_en": "Synthetix"
   },
   {
     "exchange": "BITHUMB",
@@ -815,7 +819,9 @@
     "exchange": "BITHUMB",
     "market_code": "CRV-KRW",
     "base_symbol": "CRV",
-    "quote_symbol": "KRW"
+    "quote_symbol": "KRW",
+    "name_ko": "커브",
+    "name_en": "Curve"
   },
   {
     "exchange": "BITHUMB",
@@ -1480,7 +1486,7 @@
     "market_code": "USDC-KRW",
     "base_symbol": "USDC",
     "quote_symbol": "KRW",
-    "name_ko": "USDC",
+    "name_ko": "유에스디씨",
     "name_en": "USDC"
   },
   {

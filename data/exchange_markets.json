@@ -855,6 +855,8 @@
     "market": "CRV-KRW",
     "base": "CRV",
     "quote": "KRW",
+    "name_ko": "커브",
+    "name_en": "Curve",
     "isDomestic": true
   },
   {
@@ -2769,6 +2771,8 @@
     "market": "SNX-KRW",
     "base": "SNX",
     "quote": "KRW",
+    "name_ko": "신세틱스",
+    "name_en": "Synthetix",
     "isDomestic": true
   },
   {
@@ -3173,7 +3177,7 @@
     "market": "USDC-KRW",
     "base": "USDC",
     "quote": "KRW",
-    "name_ko": "USDC",
+    "name_ko": "유에스디씨",
     "name_en": "USDC",
     "isDomestic": true
   },
@@ -3453,6 +3457,8 @@
     "market": "YFI-KRW",
     "base": "YFI",
     "quote": "KRW",
+    "name_ko": "예피나인스",
+    "name_en": "Yearn Finance",
     "isDomestic": true
   },
   {

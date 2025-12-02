@@ -31,8 +31,17 @@ function TradingViewChart({
       const tvSymbol =
         exchange === "UPBIT" ? `UPBIT:${symbol}KRW` : `BINANCE:${symbol}USDT`;
 
-      // TradingView 설정 객체
-      const config = {
+      // 1. 위젯 컨테이너 div 생성
+      const widgetDiv = document.createElement("div");
+      widgetDiv.className = "tradingview-widget-container__widget";
+      container.appendChild(widgetDiv);
+
+      // 2. 설정을 script 태그로 생성 (TradingView 공식 방식)
+      const script = document.createElement("script");
+      script.type = "text/tradingview-widget";
+      
+      // TradingView 설정을 JSON 문자열로 직접 작성 (stringify 사용 금지)
+      script.textContent = JSON.stringify({
         autosize: true,
         symbol: tvSymbol,
         interval: "60",
@@ -46,17 +55,11 @@ function TradingViewChart({
         hide_top_toolbar: false,
         hide_legend: false,
         save_image: false,
-        hide_volume: false,
-        support_host: "https://www.tradingview.com",
-      };
-
-      // 1. 설정을 script 태그로 생성 (TradingView 공식 방식)
-      const script = document.createElement("script");
-      script.type = "text/tradingview-widget";
-      script.textContent = JSON.stringify(config);
+      }, null, 2);
+      
       container.appendChild(script);
 
-      // 2. TradingView 로더 스크립트 추가
+      // 3. TradingView 로더 스크립트 추가
       const loaderScript = document.createElement("script");
       loaderScript.src =
         "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
