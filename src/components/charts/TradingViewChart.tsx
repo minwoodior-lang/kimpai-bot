@@ -1,26 +1,8 @@
-import { useEffect, useRef, memo, useCallback, useState } from "react";
-
-// TradingView 심볼 오버라이드 (특수 마켓용)
-const TV_SYMBOL_OVERRIDES: Record<string, string> = {
-  // 필요 시 하나씩 추가. 예: H: "OKX:HUSDT"
-};
-
-const getTvSymbol = (symbol: string, exchange: "UPBIT" | "BINANCE" = "BINANCE"): string => {
-  const base = symbol.split("/")[0].toUpperCase();
-  if (TV_SYMBOL_OVERRIDES[base]) {
-    return TV_SYMBOL_OVERRIDES[base];
-  }
-  if (exchange === "UPBIT") {
-    return `UPBIT:${base}KRW`;
-  }
-  return `BINANCE:${base}USDT`;
-};
+import { useEffect, useRef, memo, useState } from "react";
 
 interface TradingViewChartProps {
   symbol?: string;
   exchange?: "UPBIT" | "BINANCE";
-  tvSymbol?: string;
-  interval?: string;
   height?: number;
   theme?: "dark" | "light";
 }
@@ -28,23 +10,14 @@ interface TradingViewChartProps {
 function TradingViewChart({
   symbol = "BTC",
   exchange = "BINANCE",
-  tvSymbol,
-  interval = "60",
   height = 400,
   theme = "dark",
 }: TradingViewChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const getFullSymbol = useCallback(() => {
-    if (tvSymbol) {
-      return tvSymbol;
-    }
-    return getTvSymbol(symbol, exchange);
-  }, [exchange, symbol, tvSymbol]);
-
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     const container = containerRef.current;
     if (!container) return;
@@ -54,11 +27,15 @@ function TradingViewChart({
     try {
       container.innerHTML = "";
 
-      // TradingView 위젯 설정
+      // TradingView 심볼 결정
+      const tvSymbol =
+        exchange === "UPBIT" ? `UPBIT:${symbol}KRW` : `BINANCE:${symbol}USDT`;
+
+      // TradingView 설정 객체
       const config = {
         autosize: true,
-        symbol: getFullSymbol(),
-        interval: interval,
+        symbol: tvSymbol,
+        interval: "60",
         timezone: "Asia/Seoul",
         theme: theme,
         style: "1",
@@ -73,50 +50,49 @@ function TradingViewChart({
         support_host: "https://www.tradingview.com",
       };
 
-      // 1. 설정을 script 요소로 정확히 생성
+      // 1. 설정을 script 태그로 생성 (TradingView 공식 방식)
       const script = document.createElement("script");
       script.type = "text/tradingview-widget";
-      const configStr = JSON.stringify(config);
-      if (!configStr || configStr === '{}') {
-        console.warn('[TradingViewChart] Invalid config, skipping widget');
-        setIsLoading(false);
-        return;
-      }
-      script.textContent = configStr;
-      
+      script.textContent = JSON.stringify(config);
       container.appendChild(script);
 
-      // 2. 로더 스크립트 생성 및 로드
+      // 2. TradingView 로더 스크립트 추가
       const loaderScript = document.createElement("script");
-      loaderScript.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+      loaderScript.src =
+        "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
       loaderScript.async = true;
-      loaderScript.onload = () => setIsLoading(false);
+      loaderScript.onload = () => {
+        setIsLoading(false);
+      };
       loaderScript.onerror = () => {
-        console.warn('[TradingViewChart] Widget loader failed');
+        console.warn("[TradingViewChart] Widget loader failed");
         setIsLoading(false);
       };
 
       container.appendChild(loaderScript);
     } catch (err) {
-      console.error('[TradingViewChart] Error:', err);
+      console.error("[TradingViewChart] Error:", err);
       setIsLoading(false);
     }
 
     return () => {
-      if (container) {
-        try {
+      try {
+        if (container) {
           container.innerHTML = "";
-        } catch (e) {
-          // Ignore cleanup errors
         }
+      } catch (e) {
+        // Ignore cleanup errors
       }
     };
-  }, [getFullSymbol, interval, theme]);
+  }, [exchange, symbol, theme]);
 
   return (
-    <div className="tradingview-widget-container" style={{ height: `${height}px`, width: "100%" }}>
-      <div 
-        ref={containerRef} 
+    <div
+      className="tradingview-widget-container"
+      style={{ height: `${height}px`, width: "100%" }}
+    >
+      <div
+        ref={containerRef}
         style={{ height: "100%", width: "100%" }}
         className="bg-slate-800/50 rounded"
       />
