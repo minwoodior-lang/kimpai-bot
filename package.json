@@ -13,6 +13,7 @@
     "update:notices": "tsx scripts/noticeUpdateWorker.ts",
     "backfill:korean-names": "tsx scripts/backfillKoreanNames.ts",
     "refresh:markets": "tsx scripts/refreshExchangeMarkets.ts",
+    "market:scheduler": "tsx scripts/marketRefreshScheduler.ts",
     "update:icons": "node fetchIcons.js",
 
     "sync:symbols": "tsx scripts/syncSymbols.ts"

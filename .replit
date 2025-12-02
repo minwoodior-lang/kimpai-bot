@@ -18,17 +18,21 @@ args = "KimpAI Dev Server"
 task = "workflow.run"
 args = "Price Worker"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Market Refresh Scheduler"
+
 [[workflows.workflow]]
 name = "KimpAI Dev Server"
 author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
-
-[workflows.workflow.metadata]
-outputType = "webview"
 
 [[workflows.workflow]]
 name = "Price Worker"
@@ -41,21 +45,24 @@ args = "npm run price:worker"
 [workflows.workflow.metadata]
 outputType = "console"
 
+[[workflows.workflow]]
+name = "Market Refresh Scheduler"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run market:scheduler"
+
+[workflows.workflow.metadata]
+outputType = "console"
+
 [[ports]]
 localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 33665
-externalPort = 3001
-
-[[ports]]
 localPort = 35369
 externalPort = 3002
-
-[[ports]]
-localPort = 38555
-externalPort = 5000
 
 [[ports]]
 localPort = 39269

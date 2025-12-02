@@ -97,18 +97,18 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
       }
 
       // 각 symbol에 대해 기본 메타데이터 생성
-      for (const symbol of uniqueSymbols) {
-        const baseForSlug = symbol.toString();
+      const symbolsArray = Array.from(uniqueSymbols);
+      for (const symbol of symbolsArray) {
         const autoSlug =
-          baseForSlug
+          symbol
             .toLowerCase()
             .replace(/\s+/g, "-")
             .replace(/[^a-z0-9-]/g, "") || undefined;
 
         metadata.set(symbol, {
           symbol,
-          koreanName: koName || symbol,
-          englishName: enName || symbol,
+          koreanName: symbol,
+          englishName: symbol,
           cmcSlug: autoSlug,
         });
       }
