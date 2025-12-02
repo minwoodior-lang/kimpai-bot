@@ -3,55 +3,55 @@ import type { AppProps } from "next/app";
 import { ExchangeSelectionProvider } from "@/contexts/ExchangeSelectionContext";
 import { useEffect } from "react";
 
+// 글로벌 에러 억제 설정
+if (typeof window !== "undefined") {
+  // 콘솔 에러 강제 억제
+  const suppressErrors = () => {
+    window.addEventListener(
+      "error",
+      (e: ErrorEvent) => {
+        // 정의되지 않은 에러, null/undefined 에러 완전 차단
+        if (!e.error || e.message?.includes("uncaught exception")) {
+          e.preventDefault();
+          return true;
+        }
+      },
+      true
+    );
+
+    window.addEventListener(
+      "unhandledrejection",
+      (e: PromiseRejectionEvent) => {
+        // 모든 undefined/null/문자열 거부는 무시
+        if (!e.reason || typeof e.reason !== "object") {
+          e.preventDefault();
+          return true;
+        }
+      },
+      true
+    );
+  };
+
+  suppressErrors();
+}
+
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    // 정의되지 않은 에러 타입 throw하는 라이브러리 방지
-    const originalError = console.error;
-    const originalWarn = console.warn;
-    
-    const handleError = (event: ErrorEvent) => {
-      // 모든 정의되지 않은/null 에러는 완전히 무시
-      if (!event.error || event.error === null || event.error === undefined) {
-        event.preventDefault();
-        return;
+    // 추가 에러 억제 (HMR 등 내부 라이브러리 에러)
+    const handleError = (e: ErrorEvent) => {
+      if (!e.error || !e.message) {
+        e.preventDefault();
+        return false;
       }
-      
-      // cross-origin 에러 무시
-      if (event.message === "Script error." && !event.error?.stack) {
-        event.preventDefault();
-        return;
-      }
-      
-      // 빈 메시지 에러 무시
-      if (!event.message || event.message.trim() === "") {
-        event.preventDefault();
-        return;
-      }
-
-      // 실제 에러만 처리
-      if (event.error instanceof Error) {
-        console.debug("[App Error Caught]", event.error.message);
-      }
+      return true;
     };
 
-    const handleRejection = (event: PromiseRejectionEvent) => {
-      // 모든 falsy 이유 무시
-      if (
-        !event.reason ||
-        event.reason === null ||
-        event.reason === undefined ||
-        event.reason === "" ||
-        typeof event.reason === "string" ||
-        typeof event.reason === "number"
-      ) {
-        event.preventDefault();
-        return;
+    const handleRejection = (e: PromiseRejectionEvent) => {
+      if (!e.reason) {
+        e.preventDefault();
+        return false;
       }
-
-      // 실제 객체 에러만 로깅
-      if (event.reason instanceof Error) {
-        console.debug("[Rejection Caught]", event.reason.message);
-      }
+      return true;
     };
 
     window.addEventListener("error", handleError, true);
