@@ -1,0 +1,120 @@
+레플릿, 지금 Markets/PremiumTable에서 코인 아이콘/코인명이 여전히 예전 방식으로 나오고 있어.
+아래 요구사항대로 코드 수정해줘.
+
+1) PremiumTable.tsx 에서 CoinIcon에 iconUrl 넘기기
+
+현재 코드(대략 이런 형태):
+
+<CoinIcon
+  symbol={row.symbol}
+  size="sm"
+  className="md:w-6 md:h-6"
+/>
+
+
+이 부분을 아래 코드로 교체해줘:
+
+<CoinIcon
+  symbol={row.symbol}
+  iconUrl={row.icon_url ?? undefined}
+  size="sm"
+  className="md:w-6 md:h-6"
+/>
+
+
+row.icon_url은 /api/premium/table 응답에 들어오는
+"/coins/BTC.png" 같은 값이야. 이걸 CoinIcon으로 넘겨서 최우선으로 쓰게 만들고 싶어.
+
+2) CoinIcon.tsx 에서 iconUrl을 최우선 소스로 사용하도록 수정
+
+지금 CoinIcon.tsx 상단에 이런 주석/코드가 있을 거야:
+
+// base_symbol 기준으로만 아이콘 불러오기 (iconUrl 파라미터는 무시)
+// 심볼 정규화 적용
+const normalizedSymbol = normalizeSymbol(symbol);
+...
+const localIconPath = `/coins/${upperSymbol}.png`;
+const cdnUrls = [
+  // 1순위: 로컬 아이콘 (public/coins 폴더)
+  localIconPath,
+  // 2순위: cryptocurrency-icons
+  `https://cdn.jsdelivr.net/npm/cryptocurrency-icons@0.18.1/32/color/${lowerSymbol}.png`,
+  `https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/${lowerSymbol}.png`,
+  `https://static.coincap.io/assets/icons/${lowerSymbol}@2x.png`,
+  coingeckoId ? `https://assets.coingecko.com/coins/images/1/small/${coingeckoId}.png` : null,
+  `https://www.cryptocompare.com/media/37746251/${lowerSymbol}.png`,
+].filter(Boolean) as string[];
+
+
+이 부분을 아래처럼 수정해줘:
+
+// 심볼 정규화 적용
+const normalizedSymbol = normalizeSymbol(symbol);
+const lowerSymbol = normalizedSymbol.toLowerCase();
+const upperSymbol = normalizedSymbol.toUpperCase();
+
+const [cdnIndex, setCdnIndex] = React.useState(0);
+const [hasError, setHasError] = React.useState(false);
+
+const localIconPath = `/coins/${upperSymbol}.png`;
+
+// ✅ 아이콘 소스 우선순위
+// 1순위: 백엔드에서 내려준 iconUrl (master_symbols.icon_url)
+// 2순위: /public/coins/{SYMBOL}.png
+// 3순위 이후: 외부 CDN 들
+const cdnUrls = [
+  iconUrl || null,
+  localIconPath,
+  `https://cdn.jsdelivr.net/npm/cryptocurrency-icons@0.18.1/32/color/${lowerSymbol}.png`,
+  `https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/${lowerSymbol}.png`,
+  `https://static.coincap.io/assets/icons/${lowerSymbol}@2x.png`,
+  coingeckoId
+    ? `https://assets.coingecko.com/coins/images/1/small/${coingeckoId}.png`
+    : null,
+  `https://www.cryptocompare.com/media/37746251/${lowerSymbol}.png`,
+].filter(Boolean) as string[];
+
+
+그리고 // base_symbol 기준으로만 아이콘 불러오기 (iconUrl 파라미터는 무시)
+이 주석은 더 이상 맞지 않으니까 지워줘.
+
+나머지 handleError, hasError 폴백 로직은 그대로 두면 돼.
+
+3) 한글 코인명 관련
+
+PremiumTable 안의 getDisplayName 함수가 아래처럼 되어 있는지 확인해줘:
+
+const getDisplayName = (item: PremiumData): string => {
+  if (item.name_ko && item.name_ko.trim()) return item.name_ko;
+  if (item.name_en && item.name_en.trim()) return item.name_en;
+  return item.symbol;
+};
+
+
+그리고 /api/premium/table 쪽에서 row를 만들 때:
+
+name_ko: coinMeta?.name_ko || symbol,
+name_en: coinMeta?.name_en || symbol,
+koreanName: coinMeta?.name_ko || symbol,
+
+
+이렇게 내려오도록 되어 있는지 최종 확인해줘.
+
+master_symbols.ko_name 이 채워진 코인은 무조건 한글,
+ko_name 이 비어 있는 코인만 영어/심볼로 나오면 정상이다.
+
+4) 적용 후 확인
+
+dev 서버 완전 재시작 (기존 next dev 프로세스 종료 후 다시 실행)
+
+크롬 DevTools → Network → Disable cache 체크
+
+/markets 새로고침 후,
+
+아이콘 요청이 /coins/BTC.png 처럼 나오는지
+
+이름이 name_ko가 있는 코인은 전부 한글로 보이는지
+확인해줘.
+
+아이콘/코인명 둘 다 이 방식이 최종 기준이야.
+이상 있으면 변경된 코드 기준으로 다시 로그 찍어서 알려줘.
