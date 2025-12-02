@@ -71,6 +71,28 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
   }
 
   try {
+    // Try to fetch from master_symbols table first
+    const { data: masterSymbols, error } = await supabase
+      .from('master_symbols')
+      .select('base_symbol, ko_name, coingecko_id')
+      .eq('is_active', true);
+
+    if (!error && masterSymbols && masterSymbols.length > 0) {
+      const metadata = new Map<string, CoinMetadata>();
+      for (const record of masterSymbols) {
+        metadata.set(record.base_symbol, {
+          symbol: record.base_symbol,
+          koreanName: record.ko_name || record.base_symbol,
+          englishName: record.base_symbol,
+          cmcSlug: record.base_symbol.toLowerCase(),
+        });
+      }
+      cachedMetadata = metadata;
+      lastMetadataFetch = now;
+      return metadata;
+    }
+
+    // Fallback: fetch from Upbit API if master_symbols unavailable
     const response = await fetch('https://api.upbit.com/v1/market/all?isDetails=true');
     const data = await response.json();
     

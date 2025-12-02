@@ -108,6 +108,7 @@ interface PremiumData {
   low24h: number;
   isListed: boolean;
   cmcSlug?: string;
+  displayName?: string;
 }
 
 interface ApiResponse {
