@@ -670,7 +670,7 @@ export default function PremiumTable({
                             onClick={() => openCoinMarketCap(row.symbol, row.cmcSlug)}
                             className="flex flex-col hover:text-blue-400 transition-colors text-left min-w-0"
                           >
-                            <div className="text-white font-medium text-xs md:text-sm truncate">{row.koreanName}</div>
+                            <div className="text-white font-medium text-xs md:text-sm truncate">{row.koreanName} / {row.name}</div>
                             <div className="text-gray-500 text-[10px] md:text-xs">{row.symbol}</div>
                           </button>
                           <button
