@@ -1,0 +1,237 @@
+🚨🚨🚨
+🔥 [레플릿 개발자에게 보내는 최종 통합 전달문 + 전체 코드 포함본]
+
+🔧 “여기 있는 코드 및 지시사항을 그대로 적용해 주세요”
+🚨 Supabase 기반 기능은 모두 제거되었습니다
+🚨 시세/프리미엄/심볼/아이콘/마켓 정보는 이제 전부 Replit 로컬 JSON 기반으로 동작합니다
+
+✅ 1. 이번 구조 변경 이유 (요약)
+
+Supabase에서 PGRST002, READ-ONLY, Schema Cache Error 등이 계속 발생해
+프리미엄 계산/시세/심볼/마켓 로딩 전체가 반복적으로 중단되었습니다.
+
+따라서 Supabase 의존성을 완전히 제거하고
+Replit 로컬 파일(JSON) 기반의 구조로 전환했습니다.
+
+이제 서비스는 Supabase 상태와 관계없이 정상작동합니다.
+
+Supabase는 앞으로 아래 기능에서만 사용됩니다:
+
+users
+
+alerts
+
+notice
+
+시세/프리미엄/심볼/마켓 관련 기능은 Supabase를 절대 사용하지 않습니다.
+
+✅ 2. Replit에서 적용해야 할 신규/교체 파일 전체 목록
+
+아래 3개 파일을 프로젝트에 그대로 덮어쓰기/추가해야 합니다:
+
+scripts/priceWorker.ts
+
+src/pages/api/premium/table.ts
+
+src/utils/metadataMapper.ts
+
+그리고 필요한 JSON 데이터 파일들은 /data 폴더에 저장됩니다.
+
+data/master_symbols.json ✔ 존재함
+
+data/premiumTable.json ✔ priceWorker 실행 후 생성됨
+
+data/exchange_markets.json ✔ 샘플 상태 → 이후 전체로 대체 필요
+
+data/exchange_symbol_mappings.json ✔ 샘플 상태 → 이후 전체로 대체 필요
+
+🚀 3. 적용해야 하는 코드 전체
+
+아래 코드를 레플릿이 그대로 붙여넣으면 됩니다.
+(누락 없이 전부 포함됨)
+
+🔥 [파일 1] scripts/priceWorker.ts
+// scripts/priceWorker.ts
+import fs from "fs";
+import path from "path";
+import axios from "axios";
+
+interface ExchangeMarket {
+  exchange: string;
+  market_symbol: string;
+  base_symbol: string;
+  quote_symbol: string;
+  is_active?: boolean;
+}
+
+interface PremiumRow {
+  symbol: string;
+  koreanPrice: number | null;
+  globalPrice: number | null;
+  globalPriceKrw: number | null;
+  premium: number | null;
+  domesticExchange: string | null;
+  foreignExchange: string | null;
+}
+
+const FX_DEFAULT = 1350;
+
+function loadExchangeMarkets(): ExchangeMarket[] {
+  const filePath = path.join(process.cwd(), "data", "exchange_markets.json");
+  const raw = fs.readFileSync(filePath, "utf8");
+  const json = JSON.parse(raw);
+  return json as ExchangeMarket[];
+}
+
+async function fetchUpbitTickers(markets: string[]) {
+  if (!markets.length) return {};
+  const url = `https://api.upbit.com/v1/ticker?markets=${markets.join(",")}`;
+  const { data } = await axios.get(url);
+  const result: Record<string, any> = {};
+  for (const row of data) result[row.market] = row;
+  return result;
+}
+
+async function fetchOkxTicker(instId: string) {
+  const url = `https://www.okx.com/api/v5/market/ticker?instId=${instId}`;
+  const { data } = await axios.get(url);
+  return data?.data?.[0] || null;
+}
+
+async function main() {
+  console.log("[priceWorker] start");
+
+  const markets = loadExchangeMarkets().filter((m) => m.is_active ?? true);
+
+  const upbitKrwMarkets = markets.filter(
+    (m) => m.exchange === "UPBIT" && m.quote_symbol === "KRW"
+  );
+
+  const upbitIds = upbitKrwMarkets.map((m) => m.market_symbol);
+  const upbitTickers = await fetchUpbitTickers(upbitIds);
+
+  const okxUsdtMarkets = markets.filter(
+    (m) => m.exchange === "OKX" && m.quote_symbol === "USDT"
+  );
+
+  const rows: PremiumRow[] = [];
+
+  for (const m of upbitKrwMarkets) {
+    const base = m.base_symbol.toUpperCase();
+    const upbitTicker = upbitTickers[m.market_symbol];
+    const koreanPrice = upbitTicker ? Number(upbitTicker.trade_price) : null;
+
+    let globalPrice: number | null = null;
+    let globalPriceKrw: number | null = null;
+    const okxMarket = okxUsdtMarkets.find(
+      (om) => om.base_symbol.toUpperCase() === base
+    );
+
+    if (okxMarket) {
+      const ticker = await fetchOkxTicker(okxMarket.market_symbol);
+      if (ticker?.last) {
+        globalPrice = Number(ticker.last);
+        globalPriceKrw = globalPrice * FX_DEFAULT;
+      }
+    }
+
+    let premium: number | null = null;
+    if (koreanPrice && globalPriceKrw) {
+      premium = ((koreanPrice - globalPriceKrw) / globalPriceKrw) * 100;
+    }
+
+    rows.push({
+      symbol: base,
+      koreanPrice,
+      globalPrice,
+      globalPriceKrw,
+      premium,
+      domesticExchange: "UPBIT",
+      foreignExchange: okxMarket ? "OKX" : null,
+    });
+  }
+
+  const outPath = path.join(process.cwd(), "data", "premiumTable.json");
+  fs.writeFileSync(outPath, JSON.stringify(rows, null, 2));
+
+  console.log(`[priceWorker] done. count=${rows.length}`);
+}
+
+main().catch((err) => {
+  console.error("[priceWorker] error:", err);
+  process.exit(1);
+});
+
+🔥 [파일 2] src/pages/api/premium/table.ts
+// pages/api/premium/table.ts
+import fs from "fs";
+import path from "path";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { attachMetadata } from "@/utils/metadataMapper";
+
+function loadPremium() {
+  const file = path.join(process.cwd(), "data/premiumTable.json");
+  if (!fs.existsSync(file)) return [];
+  return JSON.parse(fs.readFileSync(file, "utf8"));
+}
+
+function loadMeta() {
+  const file = path.join(process.cwd(), "data/master_symbols.json");
+  return JSON.parse(fs.readFileSync(file, "utf8"));
+}
+
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    const premium = loadPremium();
+    const meta = loadMeta();
+
+    const result = premium.map((row: any) => attachMetadata(row, meta));
+    return res.status(200).json({ data: result });
+  } catch (err) {
+    console.error("[API] /premium/table error:", err);
+    return res.status(500).json({ data: [] });
+  }
+}
+
+🔥 [파일 3] src/utils/metadataMapper.ts
+// src/utils/metadataMapper.ts
+export function normalizeSymbol(symbol: string) {
+  return symbol.replace(/[^A-Za-z0-9]/g, "").toUpperCase();
+}
+
+export function attachMetadata(item: any, meta: any) {
+  const sym = normalizeSymbol(item.symbol);
+  const m = meta[sym] || {};
+
+  return {
+    ...item,
+    nameKo: m.name_ko || null,
+    nameEn: m.name_en || null,
+    iconUrl: m.icon_url || null,
+    displayName: m.name_ko || m.name_en || sym,
+  };
+}
+
+✅ 4. Replit에서 해야 할 후속 작업
+① 워커 실행 (필수)
+npx tsx scripts/priceWorker.ts
+
+② 서버 재시작
+③ /api/premium/table 호출하여 정상 출력 확인
+⚠️ 5. 남은 1개 — exchange_markets.json 전체 export
+
+현재 exchange_markets.json은 샘플 6개만 있음.
+Supabase SELECT 오류가 풀리면 10초 만에 전체 export 가능.
+
+이 파일만 전체로 대체되면
+프리미엄 테이블 코인 전부 정상 표시됨.
+
+🔥 최종 요약
+
+Supabase 시세/프리미엄/심볼/마켓 기능은 완전 제거됨
+
+Replit 로컬 JSON 기반으로 구조 완전 전환됨
+
+위 3개 파일과 2개의 JSON만 있으면 전체 기능 정상
+
+exchange_markets.json 전체화만 남음

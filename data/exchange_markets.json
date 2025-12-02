@@ -1,0 +1,44 @@
+[
+  {
+    "exchange": "UPBIT",
+    "market_symbol": "KRW-BTC",
+    "base_symbol": "BTC",
+    "quote_symbol": "KRW",
+    "is_active": true
+  },
+  {
+    "exchange": "UPBIT",
+    "market_symbol": "KRW-ETH",
+    "base_symbol": "ETH",
+    "quote_symbol": "KRW",
+    "is_active": true
+  },
+  {
+    "exchange": "UPBIT",
+    "market_symbol": "KRW-XRP",
+    "base_symbol": "XRP",
+    "quote_symbol": "KRW",
+    "is_active": true
+  },
+  {
+    "exchange": "OKX",
+    "market_symbol": "BTC-USDT",
+    "base_symbol": "BTC",
+    "quote_symbol": "USDT",
+    "is_active": true
+  },
+  {
+    "exchange": "OKX",
+    "market_symbol": "ETH-USDT",
+    "base_symbol": "ETH",
+    "quote_symbol": "USDT",
+    "is_active": true
+  },
+  {
+    "exchange": "OKX",
+    "market_symbol": "XRP-USDT",
+    "base_symbol": "XRP",
+    "quote_symbol": "USDT",
+    "is_active": true
+  }
+]
