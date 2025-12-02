@@ -488,6 +488,9 @@ export default function PremiumTable({
       } finally {
         setLoading(false);
       }
+    } catch (err) {
+      // Silent error suppression
+    }
   };
 
   useEffect(() => {
