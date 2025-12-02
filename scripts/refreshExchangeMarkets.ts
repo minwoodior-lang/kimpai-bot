@@ -109,26 +109,24 @@ async function fetchUpbitMarkets(): Promise<ExchangeMarketRow[]> {
     const result = markets
       .filter((m: any) => {
         const market = m.market || "";
-        // 형식: "BTC-KRW", "BTC-BTC", "ETH-USDT" 등
-        // 마지막 "-" 기준으로 quote 심볼 추출
-        const lastDashIdx = market.lastIndexOf("-");
-        if (lastDashIdx === -1) return false;
-        const quote = market.substring(lastDashIdx + 1);
+        // 형식: "KRW-BTC", "BTC-BTC", "USDT-ETH" 등
+        const parts = market.split("-");
+        if (parts.length < 2) return false;
+        const quote = parts[0];
         return quote === "KRW" || quote === "BTC" || quote === "USDT";
       })
       .map((m: any) => {
         const market = m.market || "";
-        // "BTC-KRW" → base="BTC", quote="KRW"
-        // "BTC-BERA" → base="BTC-BERA", quote=""는 필터링됨
-        const lastDashIdx = market.lastIndexOf("-");
-        const baseSymbol = market.substring(0, lastDashIdx) || "";
-        const quoteSymbol = market.substring(lastDashIdx + 1) || "KRW";
+        // "KRW-BTC" → quote="KRW", base="BTC"
+        // "KRW-BTC-BERA" → quote="KRW", base="BTC-BERA"
+        const [quote, ...rest] = market.split("-");
+        const base = rest.join("-");
         
         return {
           exchange: "UPBIT",
           market_code: market,
-          base_symbol: baseSymbol,
-          quote_symbol: quoteSymbol,
+          base_symbol: base,
+          quote_symbol: quote,
           name_ko: m.korean_name || null,
           name_en: m.english_name || null,
         };
@@ -210,62 +208,30 @@ async function fetchCoinoneMarkets(): Promise<ExchangeMarketRow[]> {
   try {
     console.log("[Coinone] 마켓 + 한글명 수집 중...");
     
-    let data: any[] = [];
+    // Coinone v2/markets/KRW API 사용
+    const response = await fetch("https://api.coinone.co.kr/public/v2/markets/KRW");
     
-    // Coinone 공식 ticker API 사용 (모든 KRW 마켓)
-    try {
-      const response = await fetch("https://api.coinone.co.kr/public/ticker/all", {
-        headers: { "Accept": "application/json" }
-      });
-      
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-      
-      const jsonData = await response.json();
-      
-      // data 객체의 각 심볼을 markets로 변환
-      if (jsonData && jsonData.data && typeof jsonData.data === "object") {
-        data = Object.keys(jsonData.data)
-          .filter(symbol => symbol.toUpperCase() !== "RESULT_CODE" && symbol.toUpperCase() !== "RESULT_MSG")
-          .map(symbol => ({
-            target_currency: symbol.toUpperCase(),
-          }));
-        console.log(`[Coinone] ✅ API에서 ${data.length}개 심볼 수집`);
-      } else {
-        console.log("[Coinone] API 응답 형식 예상 벗어남");
-        data = [];
-      }
-    } catch (apiErr) {
-      console.log("[Coinone] API 수집 실패:", apiErr instanceof Error ? apiErr.message : String(apiErr));
-      // fallback: 공통 코인들만 반환
-      data = [];
-    }
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
     
-    if (!Array.isArray(data)) {
-      console.warn("[Coinone] 최종 데이터 형식 오류");
+    const json = await response.json();
+    
+    // 응답이 { data: [...] } 또는 [...] 형식일 수 있음
+    let data = Array.isArray(json) ? json : (Array.isArray(json.data) ? json.data : []);
+    
+    if (!Array.isArray(data) || data.length === 0) {
+      console.log("[Coinone] 응답 데이터가 없음:", typeof json, Object.keys(json || {}).slice(0, 5));
       return [];
     }
     
-    // 2단계: HTML 크롤링으로 한글명 수집
-    const htmlMap = await fetchCoinoneKoreanNames();
-    
-    const markets: ExchangeMarketRow[] = [];
-    for (const market of data) {
-      const symbol = market.target_currency?.toUpperCase() || "";
-      if (!symbol) continue;
-      
-      const nameKo = htmlMap[symbol] || null;
-      
-      markets.push({
-        exchange: "COINONE",
-        market_code: `${symbol}/KRW`,
-        base_symbol: symbol,
-        quote_symbol: "KRW",
-        name_ko: nameKo,
-        name_en: null,
-      });
-    }
+    // data는 { symbol, name_ko, name_en, ... } 배열
+    const markets: ExchangeMarketRow[] = data.map((m: any) => ({
+      exchange: "COINONE",
+      market_code: `${m.symbol}/KRW`,
+      base_symbol: m.symbol,
+      quote_symbol: "KRW",
+      name_ko: m.name_ko || null,
+      name_en: m.name_en || null,
+    }));
     
     console.log(`[Coinone] ✅ ${markets.length}개 마켓`);
     return markets;
