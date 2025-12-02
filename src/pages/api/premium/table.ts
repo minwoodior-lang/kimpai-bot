@@ -38,6 +38,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       premium: row.premium,
       isListed: true,
       displayName: row.name_ko || row.name_en || row.symbol,
+      change24h: null,
+      high24h: 0,
+      low24h: 0,
+      volume24hKrw: 0,
+      volume24hUsdt: null,
+      volume24hForeignKrw: null,
     }));
 
     return res.status(200).json({

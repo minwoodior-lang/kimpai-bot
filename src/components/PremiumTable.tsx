@@ -1050,14 +1050,14 @@ export default function PremiumTable({
                             "premium",
                           )}`}
                         >
-                          {row.premium !== null ? (
+                          {row.premium !== null && row.premium !== undefined ? (
                             <div
                               className={`font-bold text-xs md:text-sm ${getPremiumColor(
                                 row.premium,
                               )}`}
                             >
                               {row.premium >= 0 ? "+" : ""}
-                              {row.premium.toFixed(2)}%
+                              {Number(row.premium).toFixed(2)}%
                             </div>
                           ) : (
                             <div className="text-gray-500 text-xs">-</div>
@@ -1065,7 +1065,7 @@ export default function PremiumTable({
                         </td>
 
                         <td className="px-1 md:px-3 py-1.5 md:py-2 text-right">
-                          {row.change24h !== null ? (
+                          {row.change24h !== null && row.change24h !== undefined ? (
                             <>
                               <div
                                 className={`text-xs md:text-sm ${getChangeColor(
@@ -1073,7 +1073,7 @@ export default function PremiumTable({
                                 )}`}
                               >
                                 {row.change24h >= 0 ? "+" : ""}
-                                {row.change24h.toFixed(2)}%
+                                {Number(row.change24h).toFixed(2)}%
                               </div>
                               <div
                                 className={`hidden md:block text-xs ${getChangeColor(
@@ -1094,11 +1094,11 @@ export default function PremiumTable({
                         </td>
 
                         <td className="hidden lg:table-cell px-3 py-2 text-right">
-                          {highDiff.valid ? (
+                          {highDiff.valid && highDiff.percent !== null && highDiff.percent !== undefined ? (
                             <>
                               <div className={getChangeColor(highDiff.percent)}>
                                 {highDiff.percent >= 0 ? "+" : ""}
-                                {highDiff.percent.toFixed(2)}%
+                                {Number(highDiff.percent).toFixed(2)}%
                               </div>
                               <div
                                 className={`text-xs ${getChangeColor(
@@ -1115,11 +1115,11 @@ export default function PremiumTable({
                         </td>
 
                         <td className="hidden lg:table-cell px-3 py-2 text-right">
-                          {lowDiff.valid ? (
+                          {lowDiff.valid && lowDiff.percent !== null && lowDiff.percent !== undefined ? (
                             <>
                               <div className={getChangeColor(lowDiff.percent)}>
                                 {lowDiff.percent >= 0 ? "+" : ""}
-                                {lowDiff.percent.toFixed(2)}%
+                                {Number(lowDiff.percent).toFixed(2)}%
                               </div>
                               <div
                                 className={`text-xs ${getChangeColor(
