@@ -1,0 +1,116 @@
+[3단계 작업 요청 — CMC 링크 100% 정확 연결 + 아이콘 구조 정리]
+
+현재 상태 요약:
+- master_symbols + 공지 크롤러 기반 한글명 자동화 시스템 구축 완료 ✔
+- fetchCoinMetadata에서 아래 형태로 메타데이터 반환 중:
+
+  {
+    symbol: "BTC",           // base_symbol
+    koreanName: "비트코인",   // master_symbols.ko_name (최우선)
+    englishName: "Bitcoin",  // Upbit API
+    cmcSlug: "bitcoin"
+  }
+
+- 프론트 표기는 "비트코인 / BTC" 형태로 잘 나오는 것 확인했습니다.
+
+이제 다음 2가지를 튼튼하게 고정하고 싶습니다:
+
+  1) 테이블/리스트에서 코인명 클릭 시 → 항상 정확한 CMC 상세 페이지로 이동
+  2) 아이콘은 당장 크게 바꾸진 않되, 나중에 master_symbols.icon_url로도 쓸 수 있게 구조만 마련
+
+
+==================================================
+[요청 1 — CMC 링크 클릭 로직 통일]
+
+지금 각 코인 row를 클릭하면 CoinMarketCap 페이지로 가는 로직이
+파일마다 조금씩 다르거나, symbol 기반으로만 열리는 부분이 있을 수 있습니다.
+
+이 부분을 아래 규칙으로 통일해 주세요:
+
+1) 클릭 핸들러에서 cmcSlug를 최우선으로 사용
+
+   의사코드 예시:
+
+   function openCmcPage(symbol: string, cmcSlug?: string) {
+     const base = symbol.split("/")[0].toLowerCase();
+
+     const slug = (cmcSlug && cmcSlug.trim().length > 0)
+       ? cmcSlug.trim()
+       : base; // fallback
+
+     const url = `https://coinmarketcap.com/currencies/${slug}/`;
+     window.open(url, "_blank", "noopener,noreferrer");
+   }
+
+2) PremiumTable / ChartModal / 코인 상세 관련 컴포넌트에서
+   - 지금 symbol만 넘기고 있는 곳이 있다면,
+   - fetchCoinMetadata에서 받은 cmcSlug도 함께 넘겨서 위 함수로 처리할 수 있게 해주세요.
+
+3) 만약 slug가 잘못됐더라도,
+   - /currencies/{slug}는 404가 아닌 경우도 많고,
+   - 최소한 “해당 슬러그에 대한 CMC 내부 처리”로 이어지므로
+   - 기존의 search 기반 링크보다 더 안정적일 것 같습니다.
+
+중요:
+- symbol 기반 search URL(`/search/?q=${symbol}`)을 쓰는 기존 코드가 있다면,
+  위 slug 기반 URL로 통일해 주세요.
+- cmcSlug가 없는 극히 일부 코인은 fallback으로
+  base symbol의 소문자를 slug로 사용해도 괜찮습니다.
+
+
+==================================================
+[요청 2 — 아이콘 구조: 지금 로직 유지 + master_symbols.icon_url 진입점 마련]
+
+아이콘에 대해 지금 단계에서 "100% 정확"을 강하게 요구하진 않습니다.
+다만, 나중에 CoinMarketCap이나 다른 소스에서 icon_url을 master_symbols에 채우게 되면,
+그걸 바로 사용할 수 있도록 "확장성 있는 구조"만 준비하려고 합니다.
+
+요청사항:
+
+1) CoinIcon.tsx 내부에서 현재 COIN_ID_MAP, GRADIENT_COLORS 기반 로직은 그대로 유지하되,
+   props 또는 메타데이터에서 iconUrl을 넘길 수 있는 훅을 하나 추가해 주세요.
+
+   예시:
+
+   interface CoinIconProps {
+     symbol: string;
+     iconUrl?: string; // 선택 필드
+   }
+
+   export function CoinIcon({ symbol, iconUrl }: CoinIconProps) {
+     if (iconUrl) {
+       return <img src={iconUrl} alt={symbol} ... />;
+     }
+
+     // 기존 COIN_ID_MAP / GRADIENT_COLORS 기반 렌더링 로직 그대로
+     ...
+   }
+
+2) PremiumTable나 코인 리스트에서 이미 fetchCoinMetadata로부터
+   cmcSlug, koreanName 등을 받고 있으니,
+   나중에 master_symbols.icon_url이 준비되면,
+   그 값을 CoinIcon의 iconUrl로 넘겨주는 형태로 확장만 하면 되게끔,
+   지금부터 props 레벨에서 구조만 잡아두고 싶습니다.
+
+3) 지금은 iconUrl 실제 값 주입은 안 해도 괜찮습니다.
+   (어차피 master_symbols.icon_url이 아직 채워지지 않았기 때문에)
+   단지, "iconUrl이 있으면 우선적으로 사용"하는 분기만 추가해 주세요.
+
+
+==================================================
+[요약]
+
+- 한글명 자동화는 이미 완성된 상태라 손대지 말고,
+- 이번 3단계에서는:
+
+  1) CMC 링크를 cmcSlug 기반으로 100% 정확하게 열리게 만들고,
+  2) CoinIcon이 나중에 master_symbols.icon_url을 바로 사용할 수 있도록
+     iconUrl props를 추가하는 수준까지만 작업해 주세요.
+
+- 기존 COIN_ID_MAP, GRADIENT_COLORS, TV_SYMBOL_OVERRIDES, 차트 로직은
+  손대지 않고 그대로 유지하는 것이 중요합니다.
+
+작업 완료되면,
+- CMC 링크가 잘 열리는지,
+- CoinIcon에 iconUrl props 연결이 가능한지
+이 두 가지 결과만 공유해 주시면 됩니다.

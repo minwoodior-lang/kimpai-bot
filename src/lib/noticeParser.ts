@@ -1,11 +1,13 @@
 /**
  * 빗썸/코인원 상장 공지 크롤러
  * 공식 상장 공지에서 "한글명 / 심볼" 정보 추출
+ * 
+ * ⚠️ SERVER-ONLY: scripts/ 및 API routes에서만 사용 가능
  */
 
-// 브라우저에서 실행되지 않도록 가드
-if (typeof window !== 'undefined') {
-  throw new Error('[NoticeParser] This module should only run in Node.js/server context');
+// 브라우저 컨텍스트에서 로드되지 않도록 strict guard
+if (typeof globalThis !== 'undefined' && 'window' in globalThis) {
+  throw new Error('[NoticeParser] Server-only module. Cannot run in browser context.');
 }
 
 interface CoinNoticeData {
@@ -72,7 +74,7 @@ export async function crawlBithumbNotices(): Promise<CoinNoticeData[]> {
             if (symbol && koName && symbol.length >= 2 && koName.length >= 2) {
               results.push({ symbol, koName, source: 'bithumb' });
             }
-          } catch (matchError) {
+          } catch {
             // Skip individual match errors
             continue;
           }
@@ -120,7 +122,7 @@ export async function crawlCoinoneNotices(): Promise<CoinNoticeData[]> {
             if (symbol && koName && symbol.length >= 2 && koName.length >= 2) {
               results.push({ symbol, koName, source: 'coinone' });
             }
-          } catch (matchError) {
+          } catch {
             continue;
           }
         }

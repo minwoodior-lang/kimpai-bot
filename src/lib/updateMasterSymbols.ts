@@ -1,13 +1,15 @@
 /**
  * master_symbols 자동 업데이트 로직
  * 크롤린 공지 데이터로 한글명 저장
+ * 
+ * ⚠️ SERVER-ONLY: scripts/ 및 API routes에서만 사용 가능
  */
 
 import { createClient } from '@supabase/supabase-js';
 
-// 브라우저에서 실행되지 않도록 가드
-if (typeof window !== 'undefined') {
-  throw new Error('[UpdateMasterSymbols] This module should only run in Node.js/server context');
+// 브라우저 컨텍스트에서 로드되지 않도록 strict guard
+if (typeof globalThis !== 'undefined' && 'window' in globalThis) {
+  throw new Error('[UpdateMasterSymbols] Server-only module. Cannot run in browser context.');
 }
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
