@@ -5,22 +5,34 @@ import { useEffect } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    // Global error handler - catch and suppress ALL exceptions
-    const errorHandler = (event: Event): void => {
+    // Global error handler - debug uncaught errors
+    function onError(event: ErrorEvent) {
+      console.log("[GLOBAL ERROR]", {
+        message: event.message,
+        error: event.error,
+        errorType: typeof event.error,
+        errorConstructor: event.error?.constructor?.name,
+        stack: event.error?.stack,
+      });
       event.preventDefault();
-      event.stopImmediatePropagation();
-    };
+    }
 
-    const rejectionHandler = (event: Event): void => {
+    function onUnhandledRejection(event: PromiseRejectionEvent) {
+      console.log("[UNHANDLED REJECTION]", {
+        reason: event.reason,
+        reasonType: typeof event.reason,
+        reasonConstructor: event.reason?.constructor?.name,
+        reasonStack: event.reason?.stack,
+      });
       event.preventDefault();
-    };
+    }
 
-    window.addEventListener('error', errorHandler, true);
-    window.addEventListener('unhandledrejection', rejectionHandler, true);
+    window.addEventListener('error', onError, true);
+    window.addEventListener('unhandledrejection', onUnhandledRejection, true);
 
     return () => {
-      window.removeEventListener('error', errorHandler, true);
-      window.removeEventListener('unhandledrejection', rejectionHandler, true);
+      window.removeEventListener('error', onError, true);
+      window.removeEventListener('unhandledrejection', onUnhandledRejection, true);
     };
   }, []);
 
