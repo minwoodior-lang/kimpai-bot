@@ -1,0 +1,141 @@
+1. 레플릿 AI한테 줄 전달문
+
+그대로 복붙해서 보내면 돼.
+
+src/pages/api/premium/table.ts 파일 열어줘.
+
+거기 있는 기존 fetchCoinMetadata 함수랑,
+그 위쪽에 선언된 메타데이터 캐시 관련 코드 부분을
+아래 코드로 **완전히 교체**해줘.
+
+```ts
+// =======================
+//  메타데이터 캐시
+// =======================
+let cachedMetadata: Map<string, CoinMetadata> = new Map();
+let lastMetadataFetch = 0;
+const METADATA_CACHE_TTL = 5 * 60 * 1000; // 5분
+
+const DOMESTIC_EXCHANGES = ["UPBIT", "BITHUMB", "COINONE"];
+
+function hasHangul(text?: string | null) {
+  if (!text) return false;
+  return /[ㄱ-ㅎ가-힣]/.test(text);
+}
+
+/**
+ * exchange_markets + master_symbols 메타데이터 수집
+ * - base_symbol, name_ko, name_en (exchange_markets)
+ * - icon_url (master_symbols)
+ */
+async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
+  const now = Date.now();
+  if (cachedMetadata.size > 0 && now - lastMetadataFetch < METADATA_CACHE_TTL) {
+    return cachedMetadata;
+  }
+
+  const metadata = new Map<string, CoinMetadata>();
+
+  try {
+    // 1) exchange_markets: base_symbol, name_ko, name_en, exchange, quote_symbol
+    const { data: marketData, error: marketError } = await supabase
+      .from("exchange_markets")
+      .select("base_symbol, name_ko, name_en, exchange, quote_symbol")
+      .limit(5000);
+
+    if (marketError || !marketData) {
+      console.error("[fetchCoinMetadata] exchange_markets error:", marketError);
+      return metadata;
+    }
+
+    // 2) master_symbols: icon_url + ko_name + en_name
+    const { data: masterData, error: masterError } = await supabase
+      .from("master_symbols")
+      .select("symbol, ko_name, en_name, icon_url");
+
+    if (masterError) {
+      console.warn("[fetchCoinMetadata] master_symbols error:", masterError);
+    }
+
+    const masterMap = new Map<
+      string,
+      { ko_name: string | null; en_name: string | null; icon_url: string | null }
+    >();
+
+    for (const row of masterData ?? []) {
+      masterMap.set(row.symbol.toUpperCase(), {
+        ko_name: row.ko_name ?? null,
+        en_name: row.en_name ?? null,
+        icon_url: row.icon_url ?? null,
+      });
+    }
+
+    // ✅ 국내 + KRW + 한글 있는 행이 먼저 오도록 정렬
+    const sortedMarkets = [...marketData].sort((a, b) => {
+      const aEx = (a.exchange || "").toUpperCase();
+      const bEx = (b.exchange || "").toUpperCase();
+      const aDom = DOMESTIC_EXCHANGES.includes(aEx) ? 0 : 1;
+      const bDom = DOMESTIC_EXCHANGES.includes(bEx) ? 0 : 1;
+      if (aDom !== bDom) return aDom - bDom;
+
+      const aIsKrw = (a.quote_symbol || "").toUpperCase() === "KRW" ? 0 : 1;
+      const bIsKrw = (b.quote_symbol || "").toUpperCase() === "KRW" ? 0 : 1;
+      if (aIsKrw !== bIsKrw) return aIsKrw - bIsKrw;
+
+      const aHasKo = hasHangul(a.name_ko) ? 0 : 1;
+      const bHasKo = hasHangul(b.name_ko) ? 0 : 1;
+      if (aHasKo !== bHasKo) return aHasKo - bHasKo;
+
+      return 0;
+    });
+
+    const processed = new Set<string>();
+
+    for (const row of sortedMarkets) {
+      const base = (row.base_symbol || "").toUpperCase();
+      if (!base || processed.has(base)) continue;
+
+      processed.add(base);
+
+      const master = masterMap.get(base);
+      const autoSlug =
+        base
+          .toLowerCase()
+          .replace(/\s+/g, "-")
+          .replace(/[^a-z0-9-]/g, "") || undefined;
+
+      const koName =
+        (master?.ko_name ??
+          row.name_ko ??
+          row.name_en ??
+          base) || base;
+
+      const enName =
+        (master?.en_name ?? row.name_en ?? row.name_ko ?? base) || base;
+
+      metadata.set(base, {
+        symbol: base,
+        name_ko: koName,
+        name_en: enName,
+        icon_url: master?.icon_url ?? null,
+        cmcSlug: autoSlug,
+      });
+    }
+
+    cachedMetadata = metadata;
+    lastMetadataFetch = now;
+  } catch (error) {
+    console.error("Failed to fetch coin metadata:", error);
+  }
+
+  return metadata;
+}
+
+
+위 코드로 교체한 다음에:
+
+파일 저장
+
+dev 서버 완전 재시작 (pkill -f next → rm -rf .next → npm run dev 순서로, 평소에 하던 방식)
+
+여기까지 자동으로 다 진행해줘.

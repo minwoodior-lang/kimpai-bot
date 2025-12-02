@@ -72,7 +72,14 @@ const VOLUME_ANOMALY_THRESHOLD = 50;
 // =======================
 let cachedMetadata: Map<string, CoinMetadata> = new Map();
 let lastMetadataFetch = 0;
-const METADATA_CACHE_TTL = 1 * 60 * 1000; // 1분 (빠른 업데이트 반영)
+const METADATA_CACHE_TTL = 5 * 60 * 1000; // 5분
+
+const DOMESTIC_EXCHANGES = ["UPBIT", "BITHUMB", "COINONE"];
+
+function hasHangul(text?: string | null) {
+  if (!text) return false;
+  return /[ㄱ-ㅎ가-힣]/.test(text);
+}
 
 /**
  * exchange_markets + master_symbols 메타데이터 수집
@@ -88,11 +95,11 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
   const metadata = new Map<string, CoinMetadata>();
 
   try {
-    // 1) exchange_markets: base_symbol, name_ko, name_en
+    // 1) exchange_markets: base_symbol, name_ko, name_en, exchange, quote_symbol
     const { data: marketData, error: marketError } = await supabase
       .from("exchange_markets")
-      .select("base_symbol, name_ko, name_en")
-      .limit(2000);
+      .select("base_symbol, name_ko, name_en, exchange, quote_symbol")
+      .limit(5000);
 
     if (marketError || !marketData) {
       console.error("[fetchCoinMetadata] exchange_markets error:", marketError);
@@ -108,57 +115,70 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
       console.warn("[fetchCoinMetadata] master_symbols error:", masterError);
     }
 
-    // master_symbols 맵 생성 (symbol 기준)
     const masterMap = new Map<
       string,
       { ko_name: string | null; en_name: string | null; icon_url: string | null }
     >();
 
     for (const row of masterData ?? []) {
-      masterMap.set(row.symbol, {
+      masterMap.set(row.symbol.toUpperCase(), {
         ko_name: row.ko_name ?? null,
         en_name: row.en_name ?? null,
         icon_url: row.icon_url ?? null,
       });
     }
 
-    // 3) 최종 메타맵: exchange_markets 기준으로 master_symbols 합쳐서 구성
+    // ✅ 국내 + KRW + 한글 있는 행이 먼저 오도록 정렬
+    const sortedMarkets = [...marketData].sort((a, b) => {
+      const aEx = (a.exchange || "").toUpperCase();
+      const bEx = (b.exchange || "").toUpperCase();
+      const aDom = DOMESTIC_EXCHANGES.includes(aEx) ? 0 : 1;
+      const bDom = DOMESTIC_EXCHANGES.includes(bEx) ? 0 : 1;
+      if (aDom !== bDom) return aDom - bDom;
+
+      const aIsKrw = (a.quote_symbol || "").toUpperCase() === "KRW" ? 0 : 1;
+      const bIsKrw = (b.quote_symbol || "").toUpperCase() === "KRW" ? 0 : 1;
+      if (aIsKrw !== bIsKrw) return aIsKrw - bIsKrw;
+
+      const aHasKo = hasHangul(a.name_ko) ? 0 : 1;
+      const bHasKo = hasHangul(b.name_ko) ? 0 : 1;
+      if (aHasKo !== bHasKo) return aHasKo - bHasKo;
+
+      return 0;
+    });
+
     const processed = new Set<string>();
-    for (const row of marketData) {
+
+    for (const row of sortedMarkets) {
       const base = (row.base_symbol || "").toUpperCase();
-      if (base && !processed.has(base)) {
-        processed.add(base);
-        const master = masterMap.get(base);
-        const autoSlug =
-          base
-            .toLowerCase()
-            .replace(/\s+/g, "-")
-            .replace(/[^a-z0-9-]/g, "") || undefined;
+      if (!base || processed.has(base)) continue;
 
-        metadata.set(base, {
-          symbol: base,
-          // master_symbols.ko_name 우선, 없으면 exchange_markets.name_ko
-          name_ko: (master?.ko_name ?? row.name_ko) || base,
-          // master_symbols.en_name 우선, 없으면 exchange_markets.name_en
-          name_en: (master?.en_name ?? row.name_en) || base,
-          // icon_url은 master_symbols에서만 (null 허용)
-          icon_url: master?.icon_url || null,
-          cmcSlug: autoSlug,
-        });
-      }
+      processed.add(base);
+
+      const master = masterMap.get(base);
+      const autoSlug =
+        base
+          .toLowerCase()
+          .replace(/\s+/g, "-")
+          .replace(/[^a-z0-9-]/g, "") || undefined;
+
+      const koName =
+        (master?.ko_name ??
+          row.name_ko ??
+          row.name_en ??
+          base) || base;
+
+      const enName =
+        (master?.en_name ?? row.name_en ?? row.name_ko ?? base) || base;
+
+      metadata.set(base, {
+        symbol: base,
+        name_ko: koName,
+        name_en: enName,
+        icon_url: master?.icon_url ?? null,
+        cmcSlug: autoSlug,
+      });
     }
-
-    console.log(
-      `[fetchCoinMetadata] Loaded ${metadata.size} symbols. Sample: ${
-        Array.from(metadata.entries())
-          .slice(0, 3)
-          .map(
-            ([k, v]) =>
-              `${k}=${v.name_ko}(icon:${v.icon_url ? "yes" : "no"})`,
-          )
-          .join(", ") || "No data"
-      }`
-    );
 
     cachedMetadata = metadata;
     lastMetadataFetch = now;
