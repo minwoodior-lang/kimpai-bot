@@ -1,0 +1,151 @@
+[요청사항 – 3개 거래소 마켓/심볼 완전 자동화 동기화 구현 요청]
+
+현재 상황:
+
+exchange_markets, master_symbols 두 테이블 모두 제가 비운 상태입니다.
+
+앞으로는 **SQL로 직접 만지는 게 아니라, 스크립트만 돌려서 항상 최신 상태를 유지하는 구조(완전 자동화)**로 고정하고 싶습니다.
+
+그래서 아래 요구사항대로
+
+refreshExchangeMarkets.ts
+
+updateMasterSymbols.ts
+
+두 스크립트를 정리해 주시고,
+npm run sync:symbols 한 번으로 전체 동기화가 되도록 만들어 주세요.
+
+1. refreshExchangeMarkets.ts – 거래소 마켓 + 한글명 수집
+
+이 스크립트는 3개 거래소(업비트 / 빗썸 / 코인원)의 마켓을 전부 가져와서 exchange_markets 테이블을 “완전 동기화” 하는 역할이면 됩니다.
+
+1) 업비트
+
+API: GET https://api.upbit.com/v1/market/all?isDetails=true
+
+여기서 KRW-, BTC-, USDT- 마켓만 사용
+
+필드 매핑 예시:
+
+market → "KRW-SUI"
+
+korean_name → "수이"
+
+english_name → "Sui"
+
+exchange_markets에는 대략 다음 형태로 저장되면 좋겠습니다:
+
+{
+  exchange: "UPBIT",
+  market: "KRW-SUI",
+  base_symbol: "SUI",
+  quote_symbol: "KRW",
+  name_ko: "수이",
+  name_en: "Sui"
+}
+
+2) 코인원
+
+심볼/마켓 목록: 코인원 공식 API 사용 (예: KRW 마켓 리스트)
+
+한글명은 코인원 웹 화면에 노출되는 리스트를 HTML 크롤링해서
+심볼 → 한글명 매핑을 만들고, 그걸 같이 붙여 주세요.
+
+최종적으로 exchange_markets에:
+
+{
+  exchange: "COINONE",
+  market: "SUI/KRW",      // 형식은 프로젝트 기준에 맞게
+  base_symbol: "SUI",
+  quote_symbol: "KRW",
+  name_ko: "수이",        // 웹에 보이는 한글명
+  name_en: null           // 필요 시 영문명 추가
+}
+
+3) 빗썸
+
+빗썸도 마켓 리스트는 기존에 쓰시던 방식(API든 JSON이든) 그대로 사용하되,
+
+웹에 보이는 코인 리스트 페이지(스크린샷처럼 한글 이름이 나오는 화면)를 HTML 크롤링해서
+심볼 → 한글명 매핑을 만든 뒤, 각각의 마켓에 name_ko로 붙여 주세요.
+
+이렇게 하면 제가 수동으로 관리하던 BITHUMB_NAMES 매핑 없이도
+대부분 코인이 자동으로 한글명을 갖게 되는 구조가 됩니다.
+
+4) 저장 로직
+
+refreshExchangeMarkets.ts 실행 시:
+
+exchange_markets를 TRUNCATE 또는 DELETE ALL 해서 비우고
+
+방금 수집한 3개 거래소 마켓을 전부 INSERT (또는 upsert)
+
+즉, 이 스크립트를 돌리면 exchange_markets가 항상 “현재 거래소 상태와 동일”하게 유지되도록 해 주세요.
+
+2. updateMasterSymbols.ts – master_symbols 재생성
+
+이 스크립트는 exchange_markets를 기반으로 master_symbols를 싹 재생성하는 역할입니다.
+
+요구사항:
+
+심볼 단위 그룹핑
+
+base_symbol(필요하면 quote까지 포함) 기준으로 하나의 레코드 생성
+
+참여하고 있는 거래소 목록 등은 기존 구조대로 유지해 주시면 됩니다.
+
+이름 우선순위
+
+name_ko(한글명)는 아래 우선순위로 채워 주세요.
+
+업비트 한글명 (있으면 최우선)
+
+빗썸 한글명
+
+코인원 한글명
+
+name_en(영문명)는
+
+각 거래소에서 제공하는 영문명
+
+기존에 사용하던 메타데이터/CMC 정보
+순으로 채워 주시면 됩니다.
+
+실행 방식
+
+updateMasterSymbols.ts 실행 시:
+
+기존 master_symbols를 초기화(TRUNCATE or DELETE ALL) 한 뒤
+
+위 로직으로 전부 다시 INSERT
+
+3. npm 스크립트 통합
+
+package.json에 아래처럼 스크립트를 정리해 주세요 (이름은 편하신 대로 맞추셔도 됩니다).
+
+"scripts": {
+  "refresh:exchange-markets": "ts-node scripts/refreshExchangeMarkets.ts",
+  "update:master-symbols": "ts-node scripts/updateMasterSymbols.ts",
+  "sync:symbols": "npm run refresh:exchange-markets && npm run update:master-symbols"
+}
+
+
+→ 앞으로는 제가 npm run sync:symbols만 실행하면,
+3개 거래소 마켓 + master_symbols가 전부 최신 상태로 다시 채워지는 구조로 만들고 싶습니다.
+
+4. 최종 확인용 쿼리
+
+구현 후에는 아래 쿼리 결과만 공유해 주시면 제가 체크하겠습니다.
+
+SELECT COUNT(*) FROM public.exchange_markets;
+
+SELECT 
+  COUNT(*)                                    AS total,
+  SUM( (name_ko IS NULL)::int )              AS null_ko,
+  SUM( (name_en IS NULL)::int )              AS null_en
+FROM public.master_symbols;
+
+
+그리고 프론트에서는 코인 이름을
+name_ko ?? name_en ?? symbol
+순서로 사용하도록 통일해 주시면 됩니다.

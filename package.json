@@ -7,19 +7,19 @@
     "build": "next build",
     "start": "next start -p ${PORT:-5000} -H 0.0.0.0",
     "lint": "next lint",
-
     "update:prices": "tsx scripts/updatePrices.ts",
     "price:worker": "tsx scripts/priceWorker.ts",
     "update:notices": "tsx scripts/noticeUpdateWorker.ts",
     "backfill:korean-names": "tsx scripts/backfillKoreanNames.ts",
-    "refresh:markets": "tsx scripts/refreshExchangeMarkets.ts",
+    "refresh:exchange-markets": "tsx scripts/refreshExchangeMarkets.ts",
+    "update:master-symbols": "tsx scripts/updateMasterSymbols.ts",
+    "sync:symbols": "npm run refresh:exchange-markets && npm run update:master-symbols",
     "market:scheduler": "tsx scripts/marketRefreshScheduler.ts",
-    "update:icons": "node fetchIcons.js",
-
-    "sync:symbols": "tsx scripts/syncSymbols.ts"
+    "update:icons": "node fetchIcons.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.86.0",
+    "cheerio": "^1.1.2",
     "next": "14.2.33",
     "react": "^18",
     "react-dom": "^18",
