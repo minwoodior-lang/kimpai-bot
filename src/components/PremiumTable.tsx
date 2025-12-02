@@ -671,7 +671,7 @@ export default function PremiumTable({
                             className="flex flex-col hover:text-blue-400 transition-colors text-left min-w-0"
                           >
                             <div className="text-white font-medium text-xs md:text-sm truncate">
-                              {(row.koreanName || row.name) && row.name ? `${row.koreanName || row.name} / ${row.name}` : row.koreanName || row.name}
+                              {row.name || row.koreanName || row.symbol}
                             </div>
                             <div className="text-gray-500 text-[10px] md:text-xs">{row.symbol}</div>
                           </button>
