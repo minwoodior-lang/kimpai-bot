@@ -193,65 +193,69 @@ async function fetchBithumbMarkets(): Promise<ExchangeMarketRow[]> {
 }
 
 /**
- * 빗썸 HTML에서 한글명 크롤링 (코인 리스트 페이지)
+ * 빗썸 API에서 한글명 가져오기 (CSR 페이지 대신 내부 API 사용)
  */
 async function fetchBithumbKoreanNames(): Promise<Record<string, string>> {
   const nameMap: Record<string, string> = {};
   try {
-    // 빗썸 트레이딩 페이지에서 코인 리스트 크롤링
-    const response = await fetch("https://www.bithumb.com/trade/spot/krw", {
-      headers: { 
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-      }
+    // 방법 1: assetsstatus API 시도 (심볼과 한글명 포함 가능)
+    let apiEndpoint = "https://api.bithumb.com/public/assetsstatus/ticker/ALL_KRW";
+    let response = await fetch(apiEndpoint, {
+      headers: { "Accept": "application/json" }
     });
     
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    
-    const html = await response.text();
-    const $ = cheerio.load(html);
-    
-    // 여러 셀렉터 시도 - 빗썸 DOM 구조에 맞게
-    // 1. 테이블 행에서 심볼과 한글명 찾기
-    $("tr").each((_, el) => {
-      const row = $(el);
-      
-      // 각 셀 텍스트 추출
-      const cells = row.find("td, th").map((_, cell) => $(cell).text().trim()).get();
-      
-      if (cells.length >= 2) {
-        // 첫 번째 셀이 심볼 (대문자), 두 번째가 한글명인 경우
-        const possibleSymbol = cells[0].toUpperCase();
-        const possibleName = cells[1];
-        
-        // 심볼 검증: 2-10자 영문+숫자
-        if (/^[A-Z0-9]{2,10}$/.test(possibleSymbol)) {
-          // 한글 검증
-          const koreanChars = possibleName.match(/[\uAC00-\uD7AF]+/g);
-          if (koreanChars && koreanChars.length > 0) {
-            const koreanName = koreanChars.join("");
-            if (koreanName.length > 0) {
-              nameMap[possibleSymbol] = koreanName;
-            }
-          }
-        }
-      }
-    });
-    
-    // 2. 다른 방식: 임의의 요소에서 "심볼 + 한글명" 텍스트 찾기
-    if (Object.keys(nameMap).length < 50) {
-      $("*").each((_, el) => {
-        const text = $(el).text().trim();
-        // "BTC 비트코인" 같은 패턴 찾기
-        const match = text.match(/^([A-Z0-9]{2,10})\s+([\uAC00-\uD7AF]+)$/);
-        if (match && !nameMap[match[1]]) {
-          nameMap[match[1]] = match[2];
-        }
+    if (response.status === 404) {
+      // 방법 2: ticker API 시도
+      apiEndpoint = "https://api.bithumb.com/public/ticker/ALL_KRW";
+      response = await fetch(apiEndpoint, {
+        headers: { "Accept": "application/json" }
       });
     }
     
-    console.log(`[Bithumb HTML] 한글명 ${Object.keys(nameMap).length}개 추출`);
+    if (response.status === 404) {
+      // 방법 3: 소문자 시도
+      apiEndpoint = "https://api.bithumb.com/public/ticker/all_krw";
+      response = await fetch(apiEndpoint, {
+        headers: { "Accept": "application/json" }
+      });
+    }
+    
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    
+    const data = await response.json();
+    
+    // API 응답 포맷에 따라 처리
+    if (data && typeof data === "object") {
+      // 응답이 { symbol: { name_ko, ... }, ... } 형식인 경우
+      for (const [symbol, coinData] of Object.entries(data)) {
+        if (symbol.toUpperCase() === "DATE") continue;
+        
+        const coin = coinData as any;
+        
+        // 한글명이 있는지 확인
+        let koreanName = null;
+        if (coin.name_ko) {
+          koreanName = coin.name_ko;
+        } else if (coin.korean_name) {
+          koreanName = coin.korean_name;
+        } else if (coin.name && typeof coin.name === "string") {
+          // name 필드에서 한글 추출
+          const match = coin.name.match(/[\uAC00-\uD7AF]+/);
+          if (match) {
+            koreanName = match[0];
+          }
+        }
+        
+        if (koreanName) {
+          nameMap[symbol.toUpperCase()] = koreanName;
+        }
+      }
+    }
+    
+    console.log(`[Bithumb API] 한글명 ${Object.keys(nameMap).length}개 수집 (from ${apiEndpoint})`);
   } catch (err) {
-    console.log(`[Bithumb HTML] 크롤링 실패:`, err instanceof Error ? err.message : String(err));
+    console.log(`[Bithumb API] 수집 실패:`, err instanceof Error ? err.message : String(err));
+    console.log(`[Bithumb API] HTML 크롤링 방식은 CSR 페이지라 사용 불가능 - BITHUMB_NAMES fallback으로만 진행`);
   }
   
   return nameMap;
