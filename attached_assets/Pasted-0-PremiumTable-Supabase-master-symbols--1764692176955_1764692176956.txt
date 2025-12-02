@@ -1,0 +1,186 @@
+0. 목표
+
+지금 PremiumTable 화면에 예전 아이콘 / 예전 영문 이름이 그대로 노출되고 있다.
+우리가 Supabase master_symbols 테이블에 구축한 메타데이터(ko_name, en_name, icon_url, cmc_slug)를 기준으로:
+
+코인 이름:
+
+ko_name → 예전 koreanName → en_name → 마지막으로 symbol 순서로 노출
+
+검색:
+
+한글명/영문명까지 모두 검색
+
+아이콘:
+
+master_symbols.icon_url 을 최우선으로 사용하고, 없을 때만 기존 CDN/그라데이션 폴백
+
+이 3가지를 확실하게 맞추고 싶다.
+
+1. 백엔드 /api/premium/table 에 master_symbols 메타데이터 조인
+
+app/api/premium/table/route.ts (또는 이 API가 구현된 파일)을 찾아서 연다.
+
+프리미엄 테이블 데이터를 조회하는 SQL/쿼리에서 master_symbols 를 LEFT JOIN 해라.
+
+요구사항:
+
+조인 조건: 기존에 쓰는 기준 심볼(예: base_symbol 또는 symbol)에 맞게 아래 중 하나로 조인
+
+ON ms.symbol = em.base_symbol
+-- 또는
+ON ms.symbol = em.symbol
+
+
+SELECT 에 다음 컬럼을 포함:
+
+ms.ko_name      AS name_ko,
+ms.en_name      AS name_en,
+ms.icon_url     AS icon_url,
+ms.cmc_slug     AS cmc_slug
+
+
+API 응답을 PremiumData 타입에 맵핑할 때, 아래 필드를 정확히 넣어라:
+
+const data: PremiumData[] = rows.map((row) => ({
+  symbol: row.symbol,
+  name: row.name,
+  koreanName: row.korean_name,
+  // 기존 필드들 그대로 유지
+  premium: row.premium,
+  // ...
+  name_ko: row.name_ko,
+  name_en: row.name_en,
+  icon_url: row.icon_url,
+  cmcSlug: row.cmc_slug,
+}));
+
+
+PremiumData 타입 정의 파일이 따로 있다면, PremiumTable.tsx 에 선언된 것과 타입이 일치하는지 확인하고 맞춰줘.
+
+2. PremiumTable.tsx 수정 (이름/검색/아이콘)
+
+PremiumTable.tsx 파일에서 아래 내용을 반영해줘.
+
+2-1. 검색 로직에서 name_en 까지 포함
+
+matchSearch 함수에 name_en 조건을 추가해라.
+
+function matchSearch(item: PremiumData, query: string): boolean {
+  const lowerQuery = query.toLowerCase().trim();
+  if (!lowerQuery) return true;
+
+  if (item.symbol.toLowerCase().includes(lowerQuery)) return true;
+  if ((item.name || "").toLowerCase().includes(lowerQuery)) return true;
+  if ((item.koreanName || "").toLowerCase().includes(lowerQuery)) return true;
+  if ((item.name_ko || "").toLowerCase().includes(lowerQuery)) return true;
+  if ((item.name_en || "").toLowerCase().includes(lowerQuery)) return true; // ✅ 추가
+
+  const displayName = item.name_ko || item.koreanName || item.symbol;
+  const chosung = getChosung(displayName);
+  if (chosung.toLowerCase().includes(lowerQuery)) return true;
+
+  return false;
+}
+
+2-2. 표시 이름 함수 정리
+
+getDisplayName 함수를 다음처럼 교체해라.
+
+const getDisplayName = (item: PremiumData): string => {
+  // 백엔드에서 displayName 만들어줄 수도 있으므로 최우선
+  if (item.displayName && item.displayName.trim()) return item.displayName;
+
+  if (item.name_ko && item.name_ko.trim()) return item.name_ko;
+  if (item.koreanName && item.koreanName.trim()) return item.koreanName;
+  if (item.name_en && item.name_en.trim()) return item.name_en;
+
+  return item.symbol;
+};
+
+2-3. CoinIcon 에 icon_url 넘겨주기
+
+코인 리스트 렌더링 부분에서 CoinIcon 사용하는 곳을 찾아 아래처럼 수정해라.
+
+<CoinIcon
+  symbol={row.symbol}
+  size="sm"
+  className="md:w-6 md:h-6"
+  iconUrl={row.icon_url}   // ✅ master_symbols.icon_url 전달
+/>
+
+3. CoinIcon.tsx 수정 (iconUrl 최우선 사용)
+
+현재 CoinIcon 컴포넌트는 iconUrl prop을 받고 있지만 실제로는 무시하고 있다.
+iconUrl 을 1순위 아이콘 소스로 사용하도록 수정해라.
+
+핵심 요구사항:
+
+cdnUrls 배열을 만들 때 iconUrl 을 맨 앞에 둔다.
+
+iconUrl 이 실패할 경우에만 기존 로컬/외부 CDN 들을 순서대로 시도한다.
+
+나머지 그라데이션 폴백 로직은 그대로 유지한다.
+
+예시 형태:
+
+export default function CoinIcon({
+  symbol,
+  size = 'md',
+  className = '',
+  iconUrl,
+}: CoinIconProps) {
+  const normalizedSymbol = normalizeSymbol(symbol);
+  const lowerSymbol = normalizedSymbol.toLowerCase();
+  const upperSymbol = normalizedSymbol.toUpperCase();
+
+  const [cdnIndex, setCdnIndex] = React.useState(0);
+  const [hasError, setHasError] = React.useState(false);
+
+  const sizeClasses = { sm: 'w-5 h-5', md: 'w-6 h-6', lg: 'w-8 h-8' };
+  const textSizes = { sm: 'text-[8px]', md: 'text-[10px]', lg: 'text-xs' };
+
+  const gradient = GRADIENT_COLORS[upperSymbol] || 'from-slate-500 to-slate-600';
+  const coingeckoId = COIN_ID_MAP[upperSymbol];
+
+  const localIconPath = `/coins/${upperSymbol}.png`;
+
+  // ✅ iconUrl을 1순위로 사용
+  const cdnUrls = [
+    iconUrl || null, // 1순위: master_symbols.icon_url
+    localIconPath,   // 2순위: /public/coins
+    `https://cdn.jsdelivr.net/npm/cryptocurrency-icons@0.18.1/32/color/${lowerSymbol}.png`,
+    `https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/${lowerSymbol}.png`,
+    `https://static.coincap.io/assets/icons/${lowerSymbol}@2x.png`,
+    coingeckoId
+      ? `https://assets.coingecko.com/coins/images/1/small/${coingeckoId}.png`
+      : null,
+    `https://www.cryptocompare.com/media/37746251/${lowerSymbol}.png`,
+  ].filter(Boolean) as string[];
+
+  const handleError = () => {
+    if (cdnIndex < cdnUrls.length - 1) {
+      setCdnIndex(prev => prev + 1);
+    } else {
+      setHasError(true);
+    }
+  };
+
+  // 이하 useEffect + 폴백 그라데이션 로직은 기존 코드 유지
+}
+
+4. 확인 사항
+
+/api/premium/table 호출 결과 JSON에 아래 필드가 실제로 들어오는지 확인:
+
+name_ko, name_en, icon_url, cmcSlug
+
+프론트 빌드/실행 후:
+
+프리미엄 테이블에서 코인명이 master_symbols.ko_name 기준으로 한글로 보이는지
+
+검색창에 영문 이름(ethereum)이나 한글 이름(예: 이더리움) 입력 시 필터가 동작하는지
+
+아이콘이 빗썸/업비트/코인원에서 가져온 실제 아이콘으로 보이는지 (흰 바탕 가짜 아이콘이 아닌지)
+
+이 요구사항을 전부 만족하도록 코드를 수정해 줘.

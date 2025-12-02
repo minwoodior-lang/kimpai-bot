@@ -275,6 +275,7 @@ function matchSearch(item: PremiumData, query: string): boolean {
   if ((item.name || "").toLowerCase().includes(lowerQuery)) return true;
   if ((item.koreanName || "").toLowerCase().includes(lowerQuery)) return true;
   if ((item.name_ko || "").toLowerCase().includes(lowerQuery)) return true;
+  if ((item.name_en || "").toLowerCase().includes(lowerQuery)) return true;
 
   const displayName = item.name_ko || item.koreanName || item.symbol;
   const chosung = getChosung(displayName);
@@ -540,11 +541,15 @@ export default function PremiumTable({
     return result;
   }, [data, searchQuery, sortKey, sortOrder, limit]);
 
-  // 코인 표시명 생성: name_ko ?? name_en ?? base_symbol (Supabase 메타데이터 기반)
+  // 코인 표시명 생성: displayName ?? name_ko ?? name_en ?? koreanName ?? symbol
   const getDisplayName = (item: PremiumData): string => {
-    // name_ko (한글명) 우선
+    // 백엔드에서 생성한 displayName 우선
+    if (item.displayName && item.displayName.trim()) return item.displayName;
+    // name_ko (한글명) 차선
     if (item.name_ko && item.name_ko.trim()) return item.name_ko;
-    // name_en (영문명) 차선
+    // koreanName (레거시) 폴백
+    if (item.koreanName && item.koreanName.trim()) return item.koreanName;
+    // name_en (영문명)
     if (item.name_en && item.name_en.trim()) return item.name_en;
     // 마지막은 심볼
     return item.symbol;
@@ -918,6 +923,7 @@ export default function PremiumTable({
                               symbol={row.symbol}
                               size="sm"
                               className="md:w-6 md:h-6"
+                              iconUrl={row.icon_url}
                             />
 
                             <button

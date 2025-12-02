@@ -61,6 +61,7 @@ interface CoinMetadata {
   symbol: string;
   name_ko: string;
   name_en: string;
+  icon_url?: string;
   cmcSlug?: string;
 }
 
@@ -369,7 +370,7 @@ export default async function handler(
         cmcSlug: coinMeta?.cmcSlug,
         name_ko: coinMeta?.name_ko || symbol,
         name_en: coinMeta?.name_en || symbol,
-        icon_url: null,
+        icon_url: coinMeta?.icon_url,
       });
 
       if (!latestTimestamp || domesticRecord.created_at > latestTimestamp) {
