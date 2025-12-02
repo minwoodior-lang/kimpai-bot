@@ -1,10 +1,5 @@
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  { auth: { persistSession: false } }
-);
+import fs from "fs";
+import path from "path";
 
 async function fetchBithumbMarkets() {
   try {
@@ -32,12 +27,12 @@ async function fetchBithumbMarkets() {
     return markets;
   } catch (err) {
     console.error("❌ fetchBithumbMarkets error:", err);
-    throw err;
+    return [];
   }
 }
 
 async function syncBithumb() {
-  console.log("🔄 Starting Bithumb market sync...");
+  console.log("🔄 Starting Bithumb market sync to local JSON...");
 
   try {
     const markets = await fetchBithumbMarkets();
@@ -54,18 +49,23 @@ async function syncBithumb() {
 
     console.log(`📊 Found ${rows.length} Bithumb markets (KRW/BTC/USDT)`);
 
-    const { error } = await supabase
-      .from("exchange_markets")
-      .upsert(rows, { onConflict: "exchange,market" });
+    // 기존 파일 로드
+    const dataPath = path.join(process.cwd(), "data", "exchange_markets.json");
+    let allMarkets: any[] = [];
 
-    if (error) {
-      console.error("❌ syncBithumb error:", error);
-      throw error;
+    if (fs.existsSync(dataPath)) {
+      const existing = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
+      allMarkets = existing.filter((m: any) => m.exchange !== "BITHUMB");
     }
 
-    console.log(`✅ Successfully synced ${rows.length} Bithumb markets`);
+    // Bithumb 데이터 추가
+    allMarkets = [...allMarkets, ...rows];
+
+    // 파일 저장
+    fs.writeFileSync(dataPath, JSON.stringify(allMarkets, null, 2));
+    console.log(`✅ Successfully saved ${rows.length} Bithumb markets`);
   } catch (err) {
-    console.error("❌ Fatal error:", err);
+    console.error("❌ Error:", err);
     process.exit(1);
   }
 }

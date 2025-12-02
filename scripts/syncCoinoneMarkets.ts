@@ -1,22 +1,16 @@
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  { auth: { persistSession: false } }
-);
+import fs from "fs";
+import path from "path";
 
 async function fetchCoinoneMarkets() {
   try {
-    // Coinone API: 마켓 정보 조회
     const res = await fetch("https://api.coinone.co.kr/public/v2/markets/tickers/");
     const data = await res.json();
 
     if (!data.markets) {
-      throw new Error("Invalid Coinone API response");
+      console.log("⚠️ No Coinone market data available");
+      return [];
     }
 
-    // 코인원은 KRW만 지원
     const markets = data.markets
       .filter((m: any) => m.quote === "KRW")
       .map((m: any) => ({
@@ -28,13 +22,12 @@ async function fetchCoinoneMarkets() {
     return markets;
   } catch (err) {
     console.error("⚠️ fetchCoinoneMarkets error (fallback to empty):", err);
-    // Coinone API가 불안정할 수 있으니, 에러 시 빈 배열 반환
     return [];
   }
 }
 
 async function syncCoinone() {
-  console.log("🔄 Starting Coinone market sync...");
+  console.log("🔄 Starting Coinone market sync to local JSON...");
 
   try {
     const markets = await fetchCoinoneMarkets();
@@ -51,23 +44,25 @@ async function syncCoinone() {
 
     console.log(`📊 Found ${rows.length} Coinone markets (KRW)`);
 
-    if (rows.length === 0) {
-      console.log("⚠️ No Coinone markets found (API may be unavailable)");
-      return;
+    // 기존 파일 로드
+    const dataPath = path.join(process.cwd(), "data", "exchange_markets.json");
+    let allMarkets: any[] = [];
+
+    if (fs.existsSync(dataPath)) {
+      const existing = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
+      allMarkets = existing.filter((m: any) => m.exchange !== "COINONE");
     }
 
-    const { error } = await supabase
-      .from("exchange_markets")
-      .upsert(rows, { onConflict: "exchange,market" });
-
-    if (error) {
-      console.error("❌ syncCoinone error:", error);
-      throw error;
+    // Coinone 데이터 추가
+    if (rows.length > 0) {
+      allMarkets = [...allMarkets, ...rows];
     }
 
-    console.log(`✅ Successfully synced ${rows.length} Coinone markets`);
+    // 파일 저장
+    fs.writeFileSync(dataPath, JSON.stringify(allMarkets, null, 2));
+    console.log(`✅ Successfully saved Coinone markets (or skipped if unavailable)`);
   } catch (err) {
-    console.error("❌ Fatal error:", err);
+    console.error("❌ Error:", err);
     process.exit(1);
   }
 }

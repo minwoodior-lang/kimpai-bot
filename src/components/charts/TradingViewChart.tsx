@@ -76,7 +76,13 @@ function TradingViewChart({
       // 1. 설정을 script 요소로 정확히 생성
       const script = document.createElement("script");
       script.type = "text/tradingview-widget";
-      script.textContent = JSON.stringify(config);
+      const configStr = JSON.stringify(config);
+      if (!configStr || configStr === '{}') {
+        console.warn('[TradingViewChart] Invalid config, skipping widget');
+        setIsLoading(false);
+        return;
+      }
+      script.textContent = configStr;
       
       container.appendChild(script);
 
