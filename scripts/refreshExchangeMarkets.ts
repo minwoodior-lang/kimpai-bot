@@ -25,6 +25,58 @@ type ExchangeMarketRow = {
   name_en: string | null;
 };
 
+// 빗썸 수동 매핑 (fallback용)
+const BITHUMB_NAMES: Record<string, string> = {
+  // 주요 코인들
+  BTC: "비트코인",
+  ETH: "이더리움",
+  XRP: "리플",
+  LTC: "라이트코인",
+  BCH: "비트코인캐시",
+  EOS: "이오스",
+  TRX: "트론",
+  ZEC: "지캐시",
+  XLM: "스텔라루멘",
+  ADA: "에이다",
+  QTUM: "퀀텀",
+  NEO: "네오",
+  ELF: "엘프",
+  WAVES: "웨이브스",
+  IOT: "아이오타",
+  VET: "비체인",
+  THETA: "세타토큰",
+  TFUEL: "세타퓨엘",
+  IOST: "아이오에스티",
+  CRO: "크로노스",
+  CELO: "셀로",
+  FLOW: "플로우",
+  SAND: "더샌드박스",
+  MANA: "디센트럴랜드",
+  ENJ: "엔진코인",
+  CHZ: "칠리즈",
+  HBAR: "헤데라",
+  SXP: "솔라르엑스체인지",
+  UNI: "유니스왑",
+  SUSHI: "스시",
+  "1INCH": "1인치",
+  AAVE: "에이브",
+  SNX: "신세틱스",
+  YFI: "예일드파밍",
+  COMP: "컴파운드",
+  LINK: "체인링크",
+  MKR: "메이커",
+  DAI: "다이",
+  USDC: "USDC",
+  USDT: "테더",
+  BUSD: "비유에스디",
+  TUSD: "트루USD",
+  PAX: "팍스",
+  TRUE: "트루",
+  PAXG: "팍스골드",
+  AAPL: "애플",
+  TSLA: "테슬라",
+};
+
 /**
  * 업비트: KRW/BTC/USDT 마켓 - API 직접 호출
  */
@@ -107,7 +159,9 @@ async function fetchBithumbMarkets(): Promise<ExchangeMarketRow[]> {
     const markets: ExchangeMarketRow[] = [];
     for (const symbol of symbols) {
       const upperSymbol = symbol.toUpperCase();
-      const nameKo = htmlMap[upperSymbol] || null;
+      
+      // 우선순위: HTML 크롤링 > BITHUMB_NAMES fallback > null
+      const nameKo = htmlMap[upperSymbol] ?? BITHUMB_NAMES[upperSymbol] ?? null;
       
       // KRW 마켓
       markets.push({
@@ -139,13 +193,16 @@ async function fetchBithumbMarkets(): Promise<ExchangeMarketRow[]> {
 }
 
 /**
- * 빗썸 HTML에서 한글명 크롤링
+ * 빗썸 HTML에서 한글명 크롤링 (코인 리스트 페이지)
  */
 async function fetchBithumbKoreanNames(): Promise<Record<string, string>> {
   const nameMap: Record<string, string> = {};
   try {
-    const response = await fetch("https://www.bithumb.com/trade/detail/BTC", {
-      headers: { "User-Agent": "Mozilla/5.0" }
+    // 빗썸 트레이딩 페이지에서 코인 리스트 크롤링
+    const response = await fetch("https://www.bithumb.com/trade/spot/krw", {
+      headers: { 
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+      }
     });
     
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -153,24 +210,48 @@ async function fetchBithumbKoreanNames(): Promise<Record<string, string>> {
     const html = await response.text();
     const $ = cheerio.load(html);
     
-    // 빗썸 마켓 리스트에서 symbol-name 패턴 찾기
-    // 예: data-symbol="BTC", 한글명 텍스트
-    $("[data-symbol]").each((_, el) => {
-      const symbol = $(el).attr("data-symbol")?.toUpperCase();
-      const text = $(el).text().trim();
+    // 여러 셀렉터 시도 - 빗썸 DOM 구조에 맞게
+    // 1. 테이블 행에서 심볼과 한글명 찾기
+    $("tr").each((_, el) => {
+      const row = $(el);
       
-      if (symbol && text) {
-        // 간단한 한글 검증 (유니코드 범위)
-        const koreanMatch = text.match(/[\uAC00-\uD7AF]+/);
-        if (koreanMatch) {
-          nameMap[symbol] = koreanMatch[0];
+      // 각 셀 텍스트 추출
+      const cells = row.find("td, th").map((_, cell) => $(cell).text().trim()).get();
+      
+      if (cells.length >= 2) {
+        // 첫 번째 셀이 심볼 (대문자), 두 번째가 한글명인 경우
+        const possibleSymbol = cells[0].toUpperCase();
+        const possibleName = cells[1];
+        
+        // 심볼 검증: 2-10자 영문+숫자
+        if (/^[A-Z0-9]{2,10}$/.test(possibleSymbol)) {
+          // 한글 검증
+          const koreanChars = possibleName.match(/[\uAC00-\uD7AF]+/g);
+          if (koreanChars && koreanChars.length > 0) {
+            const koreanName = koreanChars.join("");
+            if (koreanName.length > 0) {
+              nameMap[possibleSymbol] = koreanName;
+            }
+          }
         }
       }
     });
     
+    // 2. 다른 방식: 임의의 요소에서 "심볼 + 한글명" 텍스트 찾기
+    if (Object.keys(nameMap).length < 50) {
+      $("*").each((_, el) => {
+        const text = $(el).text().trim();
+        // "BTC 비트코인" 같은 패턴 찾기
+        const match = text.match(/^([A-Z0-9]{2,10})\s+([\uAC00-\uD7AF]+)$/);
+        if (match && !nameMap[match[1]]) {
+          nameMap[match[1]] = match[2];
+        }
+      });
+    }
+    
     console.log(`[Bithumb HTML] 한글명 ${Object.keys(nameMap).length}개 추출`);
   } catch (err) {
-    console.log(`[Bithumb HTML] 크롤링 스킵 (안전 경고):`, err instanceof Error ? err.message : String(err));
+    console.log(`[Bithumb HTML] 크롤링 실패:`, err instanceof Error ? err.message : String(err));
   }
   
   return nameMap;
