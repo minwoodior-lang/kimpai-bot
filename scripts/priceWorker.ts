@@ -30,154 +30,154 @@ function loadExchangeMarkets(): ExchangeMarket[] {
   return json as ExchangeMarket[];
 }
 
-async function fetchWithRetry(url: string, maxRetries = 2): Promise<any> {
-  for (let i = 0; i < maxRetries; i++) {
-    try {
-      const { data } = await axios.get(url, { timeout: 8000 });
-      return data;
-    } catch (e) {
-      console.log(`[Retry ${i + 1}/${maxRetries}] ${url.substring(0, 60)}...`);
-      if (i === maxRetries - 1) throw e;
-      await new Promise((r) => setTimeout(r, 1000 * (i + 1)));
-    }
-  }
-}
-
-async function fetchUpbitTickers(markets: string[]): Promise<Record<string, any>> {
+async function fetchUpbitMarkets(): Promise<Record<string, any>> {
   try {
-    if (!markets.length) return {};
-    console.log(`[Upbit] Fetching ${markets.length} markets: ${markets.slice(0, 3).join(", ")}...`);
-    const data = await fetchWithRetry(
-      `https://api.upbit.com/v1/ticker?markets=${markets.join(",")}`
-    );
+    const upbitMarkets = [
+      "KRW-BTC",
+      "KRW-ETH",
+      "KRW-XRP",
+      "KRW-ADA",
+      "KRW-DOGE",
+      "KRW-SOL",
+    ];
+    const url = `https://api.upbit.com/v1/ticker?markets=${upbitMarkets.join(",")}`;
+    console.log(`[Upbit] Requesting: ${url}`);
+
+    const { data } = await axios.get(url, { timeout: 8000 });
     const result: Record<string, any> = {};
+
     if (Array.isArray(data)) {
       for (const row of data) {
         result[row.market] = row;
-        console.log(`  ✓ ${row.market}: ${row.trade_price}`);
+        const [quote, base] = row.market.split("-");
+        console.log(`  ✓ ${row.market} → symbol: ${base}, price: ${row.trade_price}`);
       }
     }
-    console.log(`[Upbit] Retrieved ${Object.keys(result).length} tickers`);
+
+    console.log(`[Upbit] Success: ${Object.keys(result).length} tickers received\n`);
     return result;
   } catch (e) {
-    console.error(`[Upbit] Error: ${(e as any).message}`);
+    console.error(`[Upbit] Error: ${(e as any).message || e}\n`);
     return {};
   }
 }
 
-async function fetchOkxTicker(instId: string): Promise<any | null> {
+async function fetchOkxMarkets(): Promise<Record<string, any>> {
   try {
-    const data = await fetchWithRetry(
-      `https://www.okx.com/api/v5/market/ticker?instId=${instId}`
-    );
-    return data?.data?.[0] || null;
-  } catch {
-    return null;
+    const okxMarkets = ["BTC-USDT", "ETH-USDT", "XRP-USDT"];
+    const result: Record<string, any> = {};
+
+    for (const market of okxMarkets) {
+      const url = `https://www.okx.com/api/v5/market/ticker?instId=${market}`;
+      const { data } = await axios.get(url, { timeout: 8000 });
+      const ticker = data?.data?.[0];
+      if (ticker) {
+        result[market] = ticker;
+        const [base] = market.split("-");
+        console.log(`  ✓ ${market} → symbol: ${base}, price: $${ticker.last}`);
+      }
+    }
+
+    console.log(`[OKX] Success: ${Object.keys(result).length} tickers received\n`);
+    return result;
+  } catch (e) {
+    console.error(`[OKX] Error: ${(e as any).message}\n`);
+    return {};
   }
 }
 
-function extractPrice(data: any, exchange: string): number | null {
-  if (!data) return null;
+function extractUpbitPrice(ticker: any): number | null {
+  if (!ticker) return null;
+  const price = ticker.trade_price;
+  return price ? Number(price) : null;
+}
 
-  switch (exchange) {
-    case "UPBIT":
-      const price = data.trade_price;
-      return price ? Number(price) : null;
-    case "OKX":
-      return Number(data.last) || null;
-    default:
-      return null;
-  }
+function extractOkxPrice(ticker: any): number | null {
+  if (!ticker) return null;
+  const price = ticker.last;
+  return price ? Number(price) : null;
 }
 
 async function main() {
   console.log("[priceWorker] 시작\n");
 
   try {
-    const markets = loadExchangeMarkets().filter((m) => m.is_active ?? true);
+    // ===== Fetch Data =====
+    console.log("=== Fetching Data ===\n");
 
-    // 거래소별 마켓 분류
-    const upbitMarkets = markets.filter((m) => m.exchange === "UPBIT");
-    const okxMarkets = markets.filter((m) => m.exchange === "OKX");
+    console.log("[Step 1] Upbit KRW Markets");
+    const upbitTickers = await fetchUpbitMarkets();
 
-    console.log(`📊 Markets loaded: ${upbitMarkets.length} Upbit, ${okxMarkets.length} OKX\n`);
+    console.log("[Step 2] OKX USDT Markets");
+    const okxTickers = await fetchOkxMarkets();
 
+    // ===== Build Price Map =====
+    console.log("=== Building Price Map ===\n");
     const priceMap: Record<string, Record<string, number>> = {};
 
-    // ===== Step 1: Upbit 배치 처리 =====
-    console.log("=== Step 1: Upbit Tickers ===");
-    const upbitSymbols = upbitMarkets.map((m) => m.market_symbol);
-    const upbitTickers = await fetchUpbitTickers(upbitSymbols);
-    
-    console.log(`\n[Processing] ${upbitMarkets.length} Upbit markets`);
-    for (const m of upbitMarkets) {
-      const ticker = upbitTickers[m.market_symbol];
-      if (ticker) {
-        const price = extractPrice(ticker, "UPBIT");
-        if (price) {
-          const key = `UPBIT_${m.quote_symbol}`;
-          if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
-          priceMap[m.base_symbol][key] = price;
-          console.log(`  ✓ ${m.base_symbol} (${m.market_symbol}): ${price}`);
-        }
-      } else {
-        console.log(`  ✗ ${m.base_symbol} (${m.market_symbol}): NO TICKER`);
+    // Process Upbit
+    for (const market in upbitTickers) {
+      const ticker = upbitTickers[market];
+      const [quote, base] = market.split("-");
+      const price = extractUpbitPrice(ticker);
+
+      if (base && price) {
+        if (!priceMap[base]) priceMap[base] = {};
+        priceMap[base][`UPBIT_${quote}`] = price;
+        console.log(`  ${base}: ₩${price.toLocaleString()} (${market})`);
       }
     }
 
-    // ===== Step 2: OKX 처리 =====
-    console.log(`\n=== Step 2: OKX Tickers ===`);
-    for (const m of okxMarkets) {
-      const ticker = await fetchOkxTicker(m.market_symbol);
-      if (ticker) {
-        const price = extractPrice(ticker, "OKX");
-        if (price) {
-          const key = `OKX_${m.quote_symbol}`;
-          if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
-          priceMap[m.base_symbol][key] = price;
-          console.log(`  ✓ ${m.base_symbol} (${m.market_symbol}): $${price}`);
-        }
+    // Process OKX
+    for (const market in okxTickers) {
+      const ticker = okxTickers[market];
+      const [base] = market.split("-");
+      const price = extractOkxPrice(ticker);
+
+      if (base && price) {
+        if (!priceMap[base]) priceMap[base] = {};
+        priceMap[base][`OKX_USDT`] = price;
+        console.log(`  ${base}: $${price.toFixed(2)} (${market})`);
       }
     }
 
-    // ===== Step 3: 프리미엄 계산 =====
-    console.log(`\n=== Step 3: Premium Calculation ===`);
+    // ===== Calculate Premium =====
+    console.log("\n=== Premium Calculation ===\n");
     const rows: PremiumRow[] = [];
 
     for (const symbol in priceMap) {
       const prices = priceMap[symbol];
-      const upbitKrw = prices.UPBIT_KRW || null;
-      const okxUsdt = prices.OKX_USDT || null;
+      const koreanPrice = prices.UPBIT_KRW || null;
+      const globalPrice = prices.OKX_USDT || null;
+      const globalPriceKrw = globalPrice ? globalPrice * FX_DEFAULT : null;
 
-      let globalPriceKrw = okxUsdt ? okxUsdt * FX_DEFAULT : null;
-      let premium = null;
-
-      if (upbitKrw && globalPriceKrw) {
-        premium = ((upbitKrw - globalPriceKrw) / globalPriceKrw) * 100;
-        console.log(
-          `  ${symbol}: ₩${upbitKrw.toLocaleString()} vs $${okxUsdt?.toFixed(2)} → ${premium.toFixed(2)}%`
-        );
-      } else {
-        console.log(
-          `  ${symbol}: 업비트=${upbitKrw?.toLocaleString() || "N/A"}, OKX=$${okxUsdt?.toFixed(2) || "N/A"}`
-        );
+      let premium: number | null = null;
+      if (koreanPrice && globalPriceKrw) {
+        premium = ((koreanPrice - globalPriceKrw) / globalPriceKrw) * 100;
       }
 
       rows.push({
         symbol,
-        koreanPrice: upbitKrw,
-        globalPrice: okxUsdt,
+        koreanPrice,
+        globalPrice,
         globalPriceKrw,
         premium,
         domesticExchange: "UPBIT",
         foreignExchange: "OKX",
       });
+
+      const status =
+        koreanPrice && globalPrice
+          ? `✓ 김프: ${premium?.toFixed(2)}%`
+          : `⚠ 불완전 (한: ${koreanPrice ? "O" : "X"}, 글: ${globalPrice ? "O" : "X"})`;
+      console.log(`  ${symbol}: ${status}`);
     }
 
+    // ===== Save =====
     const outPath = path.join(process.cwd(), "data", "premiumTable.json");
     fs.writeFileSync(outPath, JSON.stringify(rows, null, 2));
 
-    console.log(`\n✅ [priceWorker] 완료: ${rows.length}개 코인 저장됨`);
+    console.log(`\n✅ [priceWorker] 완료: ${rows.length}개 코인\n`);
   } catch (error) {
     console.error("[priceWorker] 치명적 오류:", error);
     process.exit(1);

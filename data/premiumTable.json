@@ -1,27 +1,54 @@
 [
   {
     "symbol": "BTC",
-    "koreanPrice": null,
-    "globalPrice": 91238.1,
-    "globalPriceKrw": 123171435.00000001,
-    "premium": null,
+    "koreanPrice": 135386000,
+    "globalPrice": 90989,
+    "globalPriceKrw": 122835150,
+    "premium": 10.217637215406176,
     "domesticExchange": "UPBIT",
     "foreignExchange": "OKX"
   },
   {
     "symbol": "ETH",
-    "koreanPrice": null,
-    "globalPrice": 2992.72,
-    "globalPriceKrw": 4040171.9999999995,
-    "premium": null,
+    "koreanPrice": 4441000,
+    "globalPrice": 2984.12,
+    "globalPriceKrw": 4028562,
+    "premium": 10.237846655953167,
     "domesticExchange": "UPBIT",
     "foreignExchange": "OKX"
   },
   {
     "symbol": "XRP",
-    "koreanPrice": null,
-    "globalPrice": 2.1588,
-    "globalPriceKrw": 2914.3799999999997,
+    "koreanPrice": 3202,
+    "globalPrice": 2.1541,
+    "globalPriceKrw": 2908.0350000000003,
+    "premium": 10.108716023018967,
+    "domesticExchange": "UPBIT",
+    "foreignExchange": "OKX"
+  },
+  {
+    "symbol": "ADA",
+    "koreanPrice": 648,
+    "globalPrice": null,
+    "globalPriceKrw": null,
+    "premium": null,
+    "domesticExchange": "UPBIT",
+    "foreignExchange": "OKX"
+  },
+  {
+    "symbol": "DOGE",
+    "koreanPrice": 216,
+    "globalPrice": null,
+    "globalPriceKrw": null,
+    "premium": null,
+    "domesticExchange": "UPBIT",
+    "foreignExchange": "OKX"
+  },
+  {
+    "symbol": "SOL",
+    "koreanPrice": 205800,
+    "globalPrice": null,
+    "globalPriceKrw": null,
     "premium": null,
     "domesticExchange": "UPBIT",
     "foreignExchange": "OKX"
