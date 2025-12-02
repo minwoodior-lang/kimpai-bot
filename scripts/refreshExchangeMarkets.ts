@@ -98,20 +98,24 @@ async function fetchUpbitMarkets(): Promise<ExchangeMarketRow[]> {
       console.log(`[Upbit DEBUG] 첫 샘플:`, JSON.stringify(markets[0]).substring(0, 150));
     }
     
+    // Upbit 필터링: KRW/BTC/USDT 마켓만 선택
     const result = markets
       .filter((m: any) => {
         const market = m.market || "";
-        // 마지막 "-" 이후가 quote_symbol (KRW, BTC, USDT)
-        const lastDashIndex = market.lastIndexOf("-");
-        if (lastDashIndex === -1) return false;
-        const quote = market.substring(lastDashIndex + 1);
+        // 형식: "BTC-KRW", "BTC-BTC", "ETH-USDT" 등
+        // 마지막 "-" 기준으로 quote 심볼 추출
+        const lastDashIdx = market.lastIndexOf("-");
+        if (lastDashIdx === -1) return false;
+        const quote = market.substring(lastDashIdx + 1);
         return quote === "KRW" || quote === "BTC" || quote === "USDT";
       })
       .map((m: any) => {
         const market = m.market || "";
-        const lastDashIndex = market.lastIndexOf("-");
-        const baseSymbol = market.substring(0, lastDashIndex) || "";
-        const quoteSymbol = market.substring(lastDashIndex + 1) || "KRW";
+        // "BTC-KRW" → base="BTC", quote="KRW"
+        // "BTC-BERA" → base="BTC-BERA", quote=""는 필터링됨
+        const lastDashIdx = market.lastIndexOf("-");
+        const baseSymbol = market.substring(0, lastDashIdx) || "";
+        const quoteSymbol = market.substring(lastDashIdx + 1) || "KRW";
         
         return {
           exchange: "UPBIT",
@@ -132,59 +136,58 @@ async function fetchUpbitMarkets(): Promise<ExchangeMarketRow[]> {
 }
 
 /**
- * 빗썸: API + HTML 크롤링으로 한글명 자동 추출
+ * 빗썸: v1/market/all API로 마켓 + 한글명 수집
  */
+type BithumbMarketApiRow = {
+  market: string;
+  korean_name: string;
+  english_name: string;
+  market_warning?: string;
+};
+
 async function fetchBithumbMarkets(): Promise<ExchangeMarketRow[]> {
   try {
     console.log("[Bithumb] 마켓 + 한글명 수집 중...");
     
-    // 1단계: API에서 심볼 목록
-    const apiResponse = await fetch("https://api.bithumb.com/public/ticker/all", {
-      headers: { "Accept": "application/json" }
-    });
+    const response = await fetch("https://api.bithumb.com/v1/market/all");
+    if (!response.ok) throw new Error(`API error: ${response.status}`);
     
-    if (!apiResponse.ok) throw new Error(`API error: ${apiResponse.status}`);
+    const json = await response.json();
     
-    const data = await apiResponse.json();
-    if (data.status !== "0000" || !data.data) {
-      console.warn("[Bithumb] API 응답 오류");
+    // 응답 구조: { data: [...] } 또는 { ... } 형식
+    const data = (json.data || json) as BithumbMarketApiRow[];
+    
+    if (!Array.isArray(data)) {
+      console.warn("[Bithumb] API 응답이 배열이 아님");
       return [];
     }
     
-    const symbols = Object.keys(data.data).filter(s => s.toUpperCase() !== "DATE");
-    
-    // 2단계: HTML 크롤링으로 한글명 수집
-    const htmlMap = await fetchBithumbKoreanNames();
-    
     const markets: ExchangeMarketRow[] = [];
-    for (const symbol of symbols) {
-      const upperSymbol = symbol.toUpperCase();
+    
+    for (const m of data) {
+      // KRW/BTC/USDT 마켓만 필터링
+      if (!m.market.includes("-")) continue;
       
-      // 우선순위: HTML 크롤링 > BITHUMB_NAMES fallback > null
-      const nameKo = htmlMap[upperSymbol] ?? BITHUMB_NAMES[upperSymbol] ?? null;
+      const parts = m.market.split("-");
+      const quote = parts[0]; // "KRW", "BTC", "USDT"
+      const base = parts.slice(1).join("-"); // 대시 포함 심볼 처리 (예: "BERA")
       
-      // KRW 마켓
+      if (quote !== "KRW" && quote !== "BTC" && quote !== "USDT") continue;
+      
+      // 우선순위: API 한글명 > BITHUMB_NAMES fallback > null
+      const nameKo = m.korean_name ?? BITHUMB_NAMES[base] ?? null;
+      
       markets.push({
         exchange: "BITHUMB",
-        market_code: `${upperSymbol}_KRW`,
-        base_symbol: upperSymbol,
-        quote_symbol: "KRW",
+        market_code: m.market,
+        base_symbol: base,
+        quote_symbol: quote,
         name_ko: nameKo,
-        name_en: null,
-      });
-      
-      // BTC 마켓
-      markets.push({
-        exchange: "BITHUMB",
-        market_code: `${upperSymbol}_BTC`,
-        base_symbol: upperSymbol,
-        quote_symbol: "BTC",
-        name_ko: nameKo,
-        name_en: null,
+        name_en: m.english_name || null,
       });
     }
     
-    console.log(`[Bithumb] ✅ ${markets.length}개 마켓 (${symbols.length} 심볼 × 2 페어)`);
+    console.log(`[Bithumb] ✅ ${markets.length}개 마켓`);
     return markets;
   } catch (err) {
     console.error("[Bithumb] 수집 실패:", err instanceof Error ? err.message : String(err));
@@ -192,74 +195,6 @@ async function fetchBithumbMarkets(): Promise<ExchangeMarketRow[]> {
   }
 }
 
-/**
- * 빗썸 API에서 한글명 가져오기 (CSR 페이지 대신 내부 API 사용)
- */
-async function fetchBithumbKoreanNames(): Promise<Record<string, string>> {
-  const nameMap: Record<string, string> = {};
-  try {
-    // 방법 1: assetsstatus API 시도 (심볼과 한글명 포함 가능)
-    let apiEndpoint = "https://api.bithumb.com/public/assetsstatus/ticker/ALL_KRW";
-    let response = await fetch(apiEndpoint, {
-      headers: { "Accept": "application/json" }
-    });
-    
-    if (response.status === 404) {
-      // 방법 2: ticker API 시도
-      apiEndpoint = "https://api.bithumb.com/public/ticker/ALL_KRW";
-      response = await fetch(apiEndpoint, {
-        headers: { "Accept": "application/json" }
-      });
-    }
-    
-    if (response.status === 404) {
-      // 방법 3: 소문자 시도
-      apiEndpoint = "https://api.bithumb.com/public/ticker/all_krw";
-      response = await fetch(apiEndpoint, {
-        headers: { "Accept": "application/json" }
-      });
-    }
-    
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    
-    const data = await response.json();
-    
-    // API 응답 포맷에 따라 처리
-    if (data && typeof data === "object") {
-      // 응답이 { symbol: { name_ko, ... }, ... } 형식인 경우
-      for (const [symbol, coinData] of Object.entries(data)) {
-        if (symbol.toUpperCase() === "DATE") continue;
-        
-        const coin = coinData as any;
-        
-        // 한글명이 있는지 확인
-        let koreanName = null;
-        if (coin.name_ko) {
-          koreanName = coin.name_ko;
-        } else if (coin.korean_name) {
-          koreanName = coin.korean_name;
-        } else if (coin.name && typeof coin.name === "string") {
-          // name 필드에서 한글 추출
-          const match = coin.name.match(/[\uAC00-\uD7AF]+/);
-          if (match) {
-            koreanName = match[0];
-          }
-        }
-        
-        if (koreanName) {
-          nameMap[symbol.toUpperCase()] = koreanName;
-        }
-      }
-    }
-    
-    console.log(`[Bithumb API] 한글명 ${Object.keys(nameMap).length}개 수집 (from ${apiEndpoint})`);
-  } catch (err) {
-    console.log(`[Bithumb API] 수집 실패:`, err instanceof Error ? err.message : String(err));
-    console.log(`[Bithumb API] HTML 크롤링 방식은 CSR 페이지라 사용 불가능 - BITHUMB_NAMES fallback으로만 진행`);
-  }
-  
-  return nameMap;
-}
 
 /**
  * 코인원: API + HTML 크롤링으로 한글명 자동 추출
