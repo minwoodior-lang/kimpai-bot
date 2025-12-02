@@ -243,6 +243,7 @@ export const COIN_ID_MAP: Record<string, string> = {
   'HMSTR': 'hamster-kombat',
   'EIGEN': 'eigenlayer',
   'SIGN': 'sign',
+  'H': 'humanity-protocol',
   
   // 스테이블코인
   'USDT': 'tether',
@@ -551,6 +552,7 @@ const GRADIENT_COLORS: Record<string, string> = {
   'BOUNTY': 'from-red-500 to-pink-600',
   '2Z': 'from-purple-600 to-pink-700',
   'STG': 'from-blue-500 to-purple-600',
+  'H': 'from-indigo-600 to-purple-700',
 };
 
 interface CoinIconProps {

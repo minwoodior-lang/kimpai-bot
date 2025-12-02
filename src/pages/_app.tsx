@@ -5,30 +5,14 @@ import { useEffect } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    // Global error handler for unhandled exceptions - silently catch all
-    const handleError = (event: ErrorEvent | Event) => {
-      try {
-        event.preventDefault();
-      } catch (e) {
-        // Ignore any errors
-      }
-    };
+    // Global error handler - suppress all unhandled errors
+    window.addEventListener('error', (e) => {
+      try { e.preventDefault(); } catch { }
+    }, true);
 
-    const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
-      try {
-        event.preventDefault();
-      } catch (e) {
-        // Ignore any errors
-      }
-    };
-
-    window.addEventListener('error', handleError, true);
-    window.addEventListener('unhandledrejection', handleUnhandledRejection, true);
-
-    return () => {
-      window.removeEventListener('error', handleError, true);
-      window.removeEventListener('unhandledrejection', handleUnhandledRejection, true);
-    };
+    window.addEventListener('unhandledrejection', (e) => {
+      try { e.preventDefault(); } catch { }
+    }, true);
   }, []);
 
   return (
