@@ -1,0 +1,20 @@
+[
+  {
+    "symbol": "BTC",
+    "koreanPrice": 0,
+    "globalPriceKrw": 0,
+    "premium": 0,
+    "domesticExchange": "UPBIT",
+    "foreignExchange": "OKX",
+    "timestamp": "2025-12-02T00:00:00.000Z"
+  },
+  {
+    "symbol": "ETH",
+    "koreanPrice": 0,
+    "globalPriceKrw": 0,
+    "premium": 0,
+    "domesticExchange": "UPBIT",
+    "foreignExchange": "OKX",
+    "timestamp": "2025-12-02T00:00:00.000Z"
+  }
+]
