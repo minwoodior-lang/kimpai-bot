@@ -376,7 +376,7 @@ async function upsertMarkets(markets: ExchangeMarketRow[]): Promise<number> {
   }
 }
 
-async function main() {
+export async function refreshExchangeMarkets() {
   console.log("\n========== 국내 KRW 마켓 자동 동기화 시작 ==========\n");
 
   const [upbitMarkets, bithumbMarkets, coinoneMarkets] = await Promise.all([
@@ -396,20 +396,24 @@ async function main() {
 
   if (allMarkets.length === 0) {
     console.error("[Error] 수집된 마켓이 없습니다.");
-    process.exit(1);
+    return 0;
   }
 
   const totalInserted = await upsertMarkets(allMarkets);
 
   if (totalInserted === 0) {
     console.error("\n❌ [Fatal] DB 저장 실패 - 0개 행만 저장됨");
-    process.exit(1);
+    return 0;
   }
 
   console.log(`\n========== 완료: 총 ${totalInserted}개 마켓이 exchange_markets에 저장됨 ==========\n`);
+  return totalInserted;
 }
 
-main().catch((err) => {
-  console.error("Fatal error:", err instanceof Error ? err.message : String(err));
-  process.exit(1);
-});
+// CLI 직접 실행용
+if (process.argv[1]?.includes("refreshExchangeMarkets.ts")) {
+  refreshExchangeMarkets().catch((err) => {
+    console.error("Fatal error:", err instanceof Error ? err.message : String(err));
+    process.exit(1);
+  });
+}
