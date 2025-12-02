@@ -2,8 +2,8 @@
   {
     "symbol": "BTC",
     "koreanPrice": null,
-    "globalPrice": 91374.9,
-    "globalPriceKrw": 123356114.99999999,
+    "globalPrice": 91238.1,
+    "globalPriceKrw": 123171435.00000001,
     "premium": null,
     "domesticExchange": "UPBIT",
     "foreignExchange": "OKX"
@@ -11,8 +11,8 @@
   {
     "symbol": "ETH",
     "koreanPrice": null,
-    "globalPrice": 2997.61,
-    "globalPriceKrw": 4046773.5,
+    "globalPrice": 2992.72,
+    "globalPriceKrw": 4040171.9999999995,
     "premium": null,
     "domesticExchange": "UPBIT",
     "foreignExchange": "OKX"
@@ -20,17 +20,8 @@
   {
     "symbol": "XRP",
     "koreanPrice": null,
-    "globalPrice": 2.1646,
-    "globalPriceKrw": 2922.21,
-    "premium": null,
-    "domesticExchange": "UPBIT",
-    "foreignExchange": "OKX"
-  },
-  {
-    "symbol": "ADA",
-    "koreanPrice": null,
-    "globalPrice": null,
-    "globalPriceKrw": null,
+    "globalPrice": 2.1588,
+    "globalPriceKrw": 2914.3799999999997,
     "premium": null,
     "domesticExchange": "UPBIT",
     "foreignExchange": "OKX"
