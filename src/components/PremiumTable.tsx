@@ -268,8 +268,22 @@ export default function PremiumTable({
       prevDataRef.current = newPrevData;
 
       if (Object.keys(newFlashStates).length > 0) {
-        setFlashStates(newFlashStates);
-        setTimeout(() => setFlashStates({}), 600);
+        try {
+          setFlashStates(newFlashStates);
+          setTimeout(() => {
+            try {
+              setFlashStates({});
+            } catch (e) {
+              if (process.env.NODE_ENV === 'development') {
+                console.error('[PremiumTable] setFlashStates cleanup error:', e);
+              }
+            }
+          }, 600);
+        } catch (e) {
+          if (process.env.NODE_ENV === 'development') {
+            console.error('[PremiumTable] setFlashStates error:', e);
+          }
+        }
       }
     } catch (err) {
       if (process.env.NODE_ENV === 'development') {
@@ -301,8 +315,14 @@ export default function PremiumTable({
         
         setRateLimitRetryAfter(delayMs / 1000);
         setTimeout(() => {
-          setRateLimitRetryAfter(0);
-          setConsecutiveRateLimits(0);
+          try {
+            setRateLimitRetryAfter(0);
+            setConsecutiveRateLimits(0);
+          } catch (e) {
+            if (process.env.NODE_ENV === 'development') {
+              console.error('[PremiumTable] rate limit reset error:', e);
+            }
+          }
         }, delayMs);
         return;
       }
