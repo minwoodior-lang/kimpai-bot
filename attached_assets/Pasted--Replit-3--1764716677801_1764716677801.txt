@@ -1,0 +1,205 @@
+📢 [Replit 전달용] 남은 작업 최종 정리
+
+국내 3거래소 마켓/이름/아이콘까지는 전부 완료된 상태입니다.
+이제 아래 두 가지만 추가로 구현해서 메타데이터 파이프라인을 완전히 마무리해 주세요.
+
+1️⃣ master_symbols.json 생성 스크립트
+
+목표:
+거래소별 마켓이 아니라, 심볼(symbol) 기준 단일 메타 파일을 만들어서
+검색/자동완성/상세 페이지에서 공통으로 쓰게 하려 합니다.
+
+요구사항
+
+새 스크립트 파일 추가:
+
+scripts/buildMasterSymbols.ts
+
+이 스크립트의 역할:
+
+data/exchange_markets.json + data/exchangeIcons.json 로드
+
+base_symbol 기준으로 dedupe 해서 심볼 단위 배열 생성
+
+각 심볼에 대해 다음 정보 구성:
+
+[
+  {
+    "symbol": "BTC",
+    "name_ko": "비트코인",
+    "name_en": "Bitcoin",
+    "icon_path": "/icons/UPBIT/BTC.png"
+  },
+  {
+    "symbol": "ETH",
+    "name_ko": "이더리움",
+    "name_en": "Ethereum",
+    "icon_path": "/icons/UPBIT/ETH.png"
+  }
+]
+
+
+필드 선택 규칙:
+
+symbol
+
+base_symbol.toUpperCase() 기준으로 Set dedupe
+
+name_ko / name_en
+
+우선순위: UPBIT → BITHUMB → COINONE
+
+같은 심볼이 여러 거래소에 있을 때, 위 순서대로 첫 번째로 발견한 값을 사용
+
+icon_path
+
+data/exchangeIcons.json 에서
+
+가능한 경우 UPBIT:{symbol} 키를 우선 사용
+
+없으면 BITHUMB:{symbol} → COINONE:{symbol} 순으로 fallback
+
+없으면 icon_path 필드를 아예 넣지 않기 (null 금지)
+
+출력:
+
+data/master_symbols.json 파일로 저장
+
+JSON pretty print 형식 유지 (JSON.stringify(..., null, 2))
+
+npm script 추가:
+
+"scripts": {
+  ...
+  "build:master-symbols": "ts-node scripts/buildMasterSymbols.ts"
+}
+
+2️⃣ premiumTable.json 생성 스크립트
+
+목표:
+exchange_markets.json을 기반으로,
+국내–해외 시세를 묶어서 김프/프리미엄 테이블(premiumTable.json) 을 정기적으로 생성하고 싶습니다.
+
+이미 priceWorker / TradingView 연동에 사용 중인 가격 fetch 로직이 있으니,
+가능하면 그 로직을 재사용해서 스크립트만 하나로 정리해 주세요.
+
+요구사항
+
+새 스크립트 파일 추가:
+
+scripts/buildPremiumTable.ts
+
+이 스크립트의 역할:
+
+data/exchange_markets.json 로드
+
+각 심볼/마켓 기준으로:
+
+국내 기준가(업비트/빗썸/코인원 중 대표값)
+
+해외 기준가(OKX 또는 Binance 기준 USDT 마켓)
+
+김프/프리미엄 계산
+
+24h 거래대금, 변동률 등 부가 정보 포함
+
+가격 소스 (가능한 한 기존 로직 재사용):
+
+국내:
+
+UPBIT, BITHUMB, COINONE 현재가 (KRW 기준)
+
+해외:
+
+우선 OKX USDT 마켓 (없으면 Binance 등 fallback)
+
+프리미엄 계산 공식:
+
+premium = (koreanPrice - globalPriceKrw) / globalPriceKrw * 100;
+
+
+globalPriceKrw = 해외 USDT 가격 × 환율 (기존 worker에서 사용 중인 로직 그대로 사용)
+
+출력 구조 예시:
+
+[
+  {
+    "symbol": "BTC",
+    "name_ko": "비트코인",
+    "name_en": "Bitcoin",
+    "koreanPrice": 135638000,
+    "globalPrice": 90916.1,
+    "globalPriceKrw": 133502110,
+    "premium": 1.6,
+    "volume24hKrw": 358508765923,
+    "volume24hUsdt": 703945979.87,
+    "volume24hForeignKrw": 1033681316301,
+    "change24h": 7.47,
+    "domesticExchange": "UPBIT",
+    "foreignExchange": "OKX"
+  }
+]
+
+
+필수 필드:
+
+symbol, name_ko, name_en
+
+koreanPrice, globalPrice, globalPriceKrw, premium
+
+domesticExchange, foreignExchange
+
+선택 필드(데이터 있는 경우만):
+
+volume24hKrw, volume24hUsdt, volume24hForeignKrw, change24h 등
+
+값이 없으면 필드를 넣지 말 것(null 금지)
+
+출력:
+
+data/premiumTable.json 로 저장
+
+JSON pretty print (JSON.stringify(..., null, 2))
+
+npm script 추가:
+
+"scripts": {
+  ...
+  "build:premium": "ts-node scripts/buildPremiumTable.ts"
+}
+
+3️⃣ 전체 파이프라인 정리
+
+마지막으로, package.json 에서 전체 빌드 파이프라인을 한 번에 돌릴 수 있도록 정리해 주세요.
+
+"scripts": {
+  "fetch:upbit": "ts-node scripts/fetchUpbitMarkets.ts",
+  "fetch:bithumb": "ts-node scripts/fetchBithumbMarkets.ts",
+  "fetch:coinone": "ts-node scripts/fetchCoinoneMarkets.ts",
+  "build:markets": "ts-node scripts/buildExchangeMarkets.ts",
+  "build:exchange-icons": "ts-node scripts/buildExchangeIcons.ts",
+  "build:master-symbols": "ts-node scripts/buildMasterSymbols.ts",
+  "build:premium": "ts-node scripts/buildPremiumTable.ts",
+
+  "build:all": "npm run fetch:upbit && npm run fetch:bithumb && npm run fetch:coinone && npm run build:markets && npm run build:exchange-icons && npm run build:master-symbols && npm run build:premium"
+}
+
+
+이렇게 구성해 주시면,
+
+npm run build:all
+
+
+한 번으로:
+
+국내 3거래소 마켓 최신화
+
+통합 exchange_markets.json 생성
+
+아이콘 인덱스 생성
+
+master_symbols.json 생성
+
+premiumTable.json 생성
+
+까지 모두 자동으로 갱신되도록 만들고 싶습니다.
