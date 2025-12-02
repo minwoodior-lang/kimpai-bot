@@ -1,0 +1,116 @@
+📌 [요청] /api/premium/table.ts에 exchange_markets 조인 추가
+
+프론트에서 getDisplayName(row) 로직이 완성되었지만
+API에서 exchange_markets 값을 내려주지 않아서
+row.name_ko / row.name_en / row.icon_url이 전부 null입니다.
+
+276개 마켓 데이터는 Supabase에 정상 삽입 완료됐습니다.
+이제 아래 조인만 구현하면 한글명/아이콘이 바로 표시됩니다.
+
+🔧 API 수정 사항
+
+현재 코드(예상):
+
+const { data, error } = await supabase
+  .from("exchange_prices")
+  .select("*")
+  .eq("exchange", exchange)
+  .eq("quote", "KRW");
+
+🔁 아래로 수정 (JOIN exchange_markets)
+const { data, error } = await supabase
+  .from("exchange_prices")
+  .select(`
+    id,
+    exchange,
+    base,
+    quote,
+    price,
+    change,
+    volume,
+    timestamp,
+    exchange_markets (
+      name_ko,
+      name_en,
+      icon_url
+    )
+  `)
+  .eq("exchange", exchange)      // upbit/bithumb/coinone
+  .eq("quote", "KRW");
+
+
+Supabase에서는
+exchange_prices.base = exchange_markets.base_symbol
+exchange_prices.quote = exchange_markets.quote_symbol
+exchange_prices.exchange = exchange_markets.exchange
+을 자동으로 매칭해준다.
+
+필요하다면 명시적 JOIN도 가능:
+
+.from("exchange_prices")
+.select(`
+  *,
+  exchange_markets!inner (
+    name_ko,
+    name_en,
+    icon_url
+  )
+`)
+
+🔄 응답 타입(PremiumRow) 업데이트
+export type PremiumRow = {
+  symbol: string;
+  price: number;
+  exchange: string;
+  quote: string;
+  change: number;
+  volume: number;
+  timestamp: string;
+
+  // 새 필드
+  name_ko?: string;
+  name_en?: string;
+  icon_url?: string;
+};
+
+
+그리고 API 응답에서:
+
+rows = data.map(row => ({
+  symbol: row.base,
+  price: row.price,
+  exchange: row.exchange,
+  quote: row.quote,
+  change: row.change,
+  volume: row.volume,
+  timestamp: row.timestamp,
+
+  name_ko: row.exchange_markets?.name_ko || null,
+  name_en: row.exchange_markets?.name_en || null,
+  icon_url: row.exchange_markets?.icon_url || null
+}));
+
+🎨 프론트에서는 이미 getDisplayName 적용됨
+
+이제 row.name_ko 값만 들어오면:
+
+리플  
+비트코인  
+오르카  
+폴리곤  
+솔라나  
+…
+
+
+이렇게 전부 자동으로 한글명으로 표시됨.
+아이콘도 icon_url 그대로 출력 가능.
+
+🚀 최종 목표 요약
+
+exchange_markets → 276개 마켓 준비됨 (완료)
+
+PremiumTable.tsx → getDisplayName 적용 완료 (완료)
+
+❗ API에서 exchange_markets 조인 → 지금 이거 하면 끝
+
+Dev server 재시작 후 → 홈/프리미엄 테이블에 한글명 + 아이콘 표시

@@ -25,6 +25,9 @@ interface PremiumTableRow {
   foreignExchange?: string;
   isListed: boolean;
   cmcSlug?: string;
+  name_ko?: string;
+  name_en?: string;
+  icon_url?: string;
 }
 
 interface PremiumTableResponse {
@@ -171,30 +174,30 @@ export default async function handler(
     const [domesticResult, foreignResult, krwResult, usdtResult] = await Promise.all([
       supabase
         .from("exchange_prices")
-        .select("*")
+        .select(`*, exchange_markets!inner (name_ko, name_en, icon_url)`)
         .eq("exchange", domestic.exchange)
         .eq("quote", domestic.quote)
         .order("created_at", { ascending: false })
-        .limit(1000),
+        .limit(1000) as any,
       supabase
         .from("exchange_prices")
-        .select("*")
+        .select(`*, exchange_markets!inner (name_ko, name_en, icon_url)`)
         .eq("exchange", foreign.exchange)
         .eq("quote", foreign.quote)
         .order("created_at", { ascending: false })
-        .limit(1000),
+        .limit(1000) as any,
       supabase
         .from("exchange_prices")
-        .select("*")
+        .select(`*, exchange_markets!inner (name_ko, name_en, icon_url)`)
         .eq("quote", "KRW")
         .order("created_at", { ascending: false })
-        .limit(1000),
+        .limit(1000) as any,
       supabase
         .from("exchange_prices")
-        .select("*")
+        .select(`*, exchange_markets!inner (name_ko, name_en, icon_url)`)
         .eq("quote", "USDT")
         .order("created_at", { ascending: false })
-        .limit(1000),
+        .limit(1000) as any,
     ]);
 
     if (domesticResult.error) {
@@ -365,6 +368,9 @@ export default async function handler(
           : foreign.exchange.toUpperCase(),
         isListed,
         cmcSlug: coinMeta?.cmcSlug,
+        name_ko: (domesticRecord as any)?.exchange_markets?.name_ko || null,
+        name_en: (domesticRecord as any)?.exchange_markets?.name_en || null,
+        icon_url: (domesticRecord as any)?.exchange_markets?.icon_url || null,
       });
 
       if (!latestTimestamp || domesticRecord.created_at > latestTimestamp) {
