@@ -60,10 +60,19 @@ interface CoinMetadata {
 
 const VOLUME_ANOMALY_THRESHOLD = 50;
 
+// =======================
+//  메타데이터 캐시
+// =======================
 let cachedMetadata: Map<string, CoinMetadata> = new Map();
 let lastMetadataFetch = 0;
-const METADATA_CACHE_TTL = 5 * 60 * 1000;
+const METADATA_CACHE_TTL = 5 * 60 * 1000; // 5분
 
+/**
+ * master_symbols 기준 자동 메타데이터
+ * - symbol
+ * - ko_name_primary
+ * - en_name
+ */
 async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
   const now = Date.now();
   if (cachedMetadata.size > 0 && now - lastMetadataFetch < METADATA_CACHE_TTL) {
@@ -73,66 +82,34 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
   const metadata = new Map<string, CoinMetadata>();
 
   try {
-    // 1️⃣ master_symbols 최우선 적용 (공식 한글명 정답)
-    const { data: masterSymbols } = await supabase
+    const { data, error } = await supabase
       .from("master_symbols")
-      .select("base_symbol, ko_name, coingecko_id, coinmarketcap_slug")
-      .eq("is_active", true);
+      .select("symbol, ko_name_primary, en_name");
 
-    if (masterSymbols) {
-      for (const record of masterSymbols) {
-        metadata.set(record.base_symbol, {
-          symbol: record.base_symbol,
-          koreanName: record.ko_name || record.base_symbol,
-          englishName: record.base_symbol,
-          cmcSlug:
-            record.coinmarketcap_slug ||
-            record.base_symbol.toLowerCase(),
-        });
-      }
+    if (error) {
+      console.error("[premium/table] master_symbols fetch error:", error);
     }
 
-    // 2️⃣ Upbit 메타데이터 병합 (master_symbols.ko_name 유지)
-    const response = await fetch(
-      "https://api.upbit.com/v1/market/all?isDetails=true"
-    );
-    const data = await response.json();
+    if (data) {
+      for (const row of data as any[]) {
+        const symbol: string = (row.symbol || "").toUpperCase();
+        if (!symbol) continue;
 
-    if (Array.isArray(data)) {
-      for (const market of data) {
-        const [quote, base] = market.market.split("-");
-        if (quote !== "KRW") continue;
+        const koName: string | null = row.ko_name_primary ?? null;
+        const enName: string | null = row.en_name ?? null;
 
-        const existing = metadata.get(base);
-
-        // 우선순위:
-        // 1순위: master_symbols.ko_name (있으면 무조건 사용)
-        // 2순위: Upbit API의 korean_name
-        // 3순위: base_symbol
-        const koreanName =
-          existing?.koreanName ||
-          market.korean_name ||
-          base;
-
-        const englishName =
-          existing?.englishName ||
-          market.english_name ||
-          base;
-
+        const baseForSlug = (enName || symbol).toString();
         const autoSlug =
-          market.english_name
-            ?.toLowerCase()
+          baseForSlug
+            .toLowerCase()
             .replace(/\s+/g, "-")
             .replace(/[^a-z0-9-]/g, "") || undefined;
 
-        metadata.set(base, {
-          symbol: base,
-          koreanName,
-          englishName,
-          cmcSlug:
-            existing?.cmcSlug ||
-            autoSlug ||
-            base.toLowerCase(),
+        metadata.set(symbol, {
+          symbol,
+          koreanName: koName || symbol,
+          englishName: enName || symbol,
+          cmcSlug: autoSlug,
         });
       }
     }
@@ -156,7 +133,7 @@ function parseExchangeParam(param: string): { exchange: string; quote: string } 
 
 async function fetchExchangeRate(): Promise<number> {
   try {
-    const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+    const response = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
     const data = await response.json();
     return data.rates.KRW || 1400;
   } catch {
@@ -274,16 +251,16 @@ export default async function handler(
     let listedCount = 0;
 
     const allDomesticSymbols = Array.from(domesticMap.keys());
-    
+
     const sortedSymbols = allDomesticSymbols.sort((a, b) => {
-      const priorityOrder = ['BTC', 'ETH', 'XRP', 'SOL', 'ADA', 'DOGE', 'AVAX'];
+      const priorityOrder = ["BTC", "ETH", "XRP", "SOL", "ADA", "DOGE", "AVAX"];
       const aIdx = priorityOrder.indexOf(a);
       const bIdx = priorityOrder.indexOf(b);
-      
+
       if (aIdx !== -1 && bIdx !== -1) return aIdx - bIdx;
       if (aIdx !== -1) return -1;
       if (bIdx !== -1) return 1;
-      
+
       const aRecord = domesticMap.get(a);
       const bRecord = domesticMap.get(b);
       const aVolume = Number(aRecord?.volume_24h) || 0;
@@ -296,10 +273,10 @@ export default async function handler(
       if (!domesticRecord) continue;
 
       const foreignRecord = foreignMap.get(symbol);
-      const coinMeta = metadata.get(symbol);
-      
+      const coinMeta = metadata.get(symbol.toUpperCase());
+
       let domesticPriceKrw = Number(domesticRecord.price);
-      
+
       if (domestic.quote === "USDT") {
         domesticPriceKrw = Number(domesticRecord.price) * fxRate;
       } else if (domestic.quote === "BTC") {
@@ -311,20 +288,20 @@ export default async function handler(
           domesticPriceKrw = Number(domesticRecord.price) * btcUsdtPrice * fxRate;
         }
       }
-      
+
       const domesticVolumeKrw = Number(domesticRecord.volume_24h) || 0;
-      
+
       let globalPriceUsd: number | null = null;
       let globalPriceKrw: number | null = null;
       let foreignVolumeUsdt: number | null = null;
       let foreignVolumeKrw: number | null = null;
       let premium: number | null = null;
       let isListed = false;
-      
+
       if (foreignRecord) {
         isListed = true;
         listedCount++;
-        
+
         if (foreign.quote === "KRW") {
           globalPriceKrw = Number(foreignRecord.price);
           globalPriceUsd = globalPriceKrw / fxRate;
@@ -340,7 +317,7 @@ export default async function handler(
             globalPriceKrw = globalPriceUsd * fxRate;
           }
         }
-        
+
         const foreignVolumeRaw = Number(foreignRecord.volume_24h) || 0;
         if (foreign.quote === "KRW") {
           foreignVolumeUsdt = foreignVolumeRaw / fxRate;
@@ -348,13 +325,18 @@ export default async function handler(
           foreignVolumeUsdt = foreignVolumeRaw;
         }
         foreignVolumeKrw = foreignVolumeUsdt * fxRate;
-        
-        if (domesticVolumeKrw > 0 && foreignVolumeKrw > domesticVolumeKrw * VOLUME_ANOMALY_THRESHOLD) {
-          console.warn(`[Volume Anomaly] ${symbol}: Foreign volume ${foreignVolumeKrw} > Domestic ${domesticVolumeKrw} * ${VOLUME_ANOMALY_THRESHOLD}`);
+
+        if (
+          domesticVolumeKrw > 0 &&
+          foreignVolumeKrw > domesticVolumeKrw * VOLUME_ANOMALY_THRESHOLD
+        ) {
+          console.warn(
+            `[Volume Anomaly] ${symbol}: Foreign volume ${foreignVolumeKrw} > Domestic ${domesticVolumeKrw} * ${VOLUME_ANOMALY_THRESHOLD}`
+          );
           foreignVolumeUsdt = null;
           foreignVolumeKrw = null;
         }
-        
+
         if (globalPriceKrw && globalPriceKrw > 0) {
           premium = ((domesticPriceKrw - globalPriceKrw) / globalPriceKrw) * 100;
           premium = Math.round(premium * 100) / 100;
@@ -372,11 +354,15 @@ export default async function handler(
         volume24hKrw: Math.round(domesticVolumeKrw),
         volume24hUsdt: foreignVolumeUsdt,
         volume24hForeignKrw: foreignVolumeKrw ? Math.round(foreignVolumeKrw) : null,
-        change24h: foreignRecord ? Math.round((Number(foreignRecord.change_24h) || 0) * 100) / 100 : null,
+        change24h: foreignRecord
+          ? Math.round((Number(foreignRecord.change_24h) || 0) * 100) / 100
+          : null,
         high24h: Math.round(domesticPriceKrw * 1.01),
         low24h: Math.round(domesticPriceKrw * 0.99),
         domesticExchange: domestic.exchange.toUpperCase(),
-        foreignExchange: foreignRecord ? foreignRecord.exchange.toUpperCase() : foreign.exchange.toUpperCase(),
+        foreignExchange: foreignRecord
+          ? foreignRecord.exchange.toUpperCase()
+          : foreign.exchange.toUpperCase(),
         isListed,
         cmcSlug: coinMeta?.cmcSlug,
       });
@@ -386,10 +372,12 @@ export default async function handler(
       }
     }
 
-    const listedData = tableData.filter(row => row.isListed && row.premium !== null);
-    const averagePremium = listedData.length > 0
-      ? listedData.reduce((acc, row) => acc + (row.premium || 0), 0) / listedData.length
-      : 0;
+    const listedData = tableData.filter((row) => row.isListed && row.premium !== null);
+    const averagePremium =
+      listedData.length > 0
+        ? listedData.reduce((acc, row) => acc + (row.premium || 0), 0) /
+          listedData.length
+        : 0;
 
     res.status(200).json({
       success: true,

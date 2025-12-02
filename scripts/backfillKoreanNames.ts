@@ -51,7 +51,7 @@ async function fetchUpbitNames(): Promise<NameMap> {
 
   try {
     const res = await fetch(
-      "https://api.upbit.com/v1/market/all?isDetails=true"
+      "https://api.upbit.com/v1/market/all?isDetails=true",
     );
     if (!res.ok) {
       console.error("[BackfillKoreanNames] Upbit HTTP error:", res.status);
@@ -72,7 +72,7 @@ async function fetchUpbitNames(): Promise<NameMap> {
     }
 
     console.log(
-      `[BackfillKoreanNames] Upbit map size: ${Object.keys(map).length}`
+      `[BackfillKoreanNames] Upbit map size: ${Object.keys(map).length}`,
     );
   } catch (err) {
     console.error("[BackfillKoreanNames] Upbit fetch failed:", err);
@@ -110,7 +110,7 @@ async function fetchBithumbNames(): Promise<NameMap> {
     }
 
     console.log(
-      `[BackfillKoreanNames] Bithumb map size: ${Object.keys(map).length}`
+      `[BackfillKoreanNames] Bithumb map size: ${Object.keys(map).length}`,
     );
   } catch (err) {
     console.error("[BackfillKoreanNames] Bithumb fetch failed:", err);
@@ -151,7 +151,7 @@ async function fetchCoinoneNames(): Promise<NameMap> {
     }
 
     console.log(
-      `[BackfillKoreanNames] Coinone map size: ${Object.keys(map).length}`
+      `[BackfillKoreanNames] Coinone map size: ${Object.keys(map).length}`,
     );
   } catch (err) {
     console.error("[BackfillKoreanNames] Coinone fetch failed:", err);
@@ -162,7 +162,7 @@ async function fetchCoinoneNames(): Promise<NameMap> {
 
 async function buildKoreanNameMap(): Promise<NameMap> {
   console.log(
-    "[BackfillKoreanNames] Loading exchange names for Korean backfill..."
+    "[BackfillKoreanNames] Loading exchange names for Korean backfill...",
   );
 
   // 업비트 + 빗썸 + (코인원 영문 fallback) 병렬로 가져오기
@@ -180,7 +180,7 @@ async function buildKoreanNameMap(): Promise<NameMap> {
   for (const [s, n] of Object.entries(upbit)) merged[s] = n;
 
   console.log(
-    `[BackfillKoreanNames] Combined map size: ${Object.keys(merged).length}`
+    `[BackfillKoreanNames] Combined map size: ${Object.keys(merged).length}`,
   );
 
   return merged;
@@ -194,7 +194,7 @@ async function main() {
 
   if (!supabaseUrl || !serviceKey) {
     console.error(
-      "❌ Supabase env missing (NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY)"
+      "❌ Supabase env missing (NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY)",
     );
     process.exit(1);
   }
@@ -203,9 +203,7 @@ async function main() {
 
   const nameMap = await buildKoreanNameMap();
 
-  console.log(
-    "[BackfillKoreanNames] Fetching master_symbols from Supabase..."
-  );
+  console.log("[BackfillKoreanNames] Fetching master_symbols from Supabase...");
   const { data, error } = await supabase
     .from("master_symbols")
     .select("id, symbol, ko_name");
@@ -217,7 +215,7 @@ async function main() {
 
   const rows = (data ?? []) as MasterSymbolRow[];
   console.log(
-    `[BackfillKoreanNames] Found ${rows.length} total rows in master_symbols`
+    `[BackfillKoreanNames] Found ${rows.length} total rows in master_symbols`,
   );
 
   const updates: UpdateRow[] = [];
@@ -243,9 +241,7 @@ async function main() {
     });
   }
 
-  console.log(
-    `[BackfillKoreanNames] Prepared updates: ${updates.length}`
-  );
+  console.log(`[BackfillKoreanNames] Prepared updates: ${updates.length}`);
 
   if (updates.length === 0) {
     console.log("No rows to update. ✅ Nothing to do.");
@@ -266,7 +262,7 @@ async function main() {
     }
 
     console.log(
-      `[BackfillKoreanNames] Updated ${i + chunk.length}/${updates.length}`
+      `[BackfillKoreanNames] Updated ${i + chunk.length}/${updates.length}`,
     );
   }
 

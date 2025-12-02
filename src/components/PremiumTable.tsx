@@ -1,6 +1,15 @@
-import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useRef,
+  useCallback,
+} from "react";
 import dynamic from "next/dynamic";
-import { FOREIGN_EXCHANGES as CONTEXT_FOREIGN_EXCHANGES, EXCHANGE_LOGOS } from "@/contexts/ExchangeSelectionContext";
+import {
+  FOREIGN_EXCHANGES as CONTEXT_FOREIGN_EXCHANGES,
+  EXCHANGE_LOGOS,
+} from "@/contexts/ExchangeSelectionContext";
 import CoinIcon from "@/components/CoinIcon";
 import { openCmcPage } from "@/lib/coinMarketCapUtils";
 
@@ -11,55 +20,76 @@ interface DropdownOption {
   logo: string;
 }
 
-function MiniDropdown({ 
-  value, 
-  options, 
-  onChange, 
-  showShortName = false 
-}: { 
-  value: string; 
-  options: DropdownOption[]; 
+function MiniDropdown({
+  value,
+  options,
+  onChange,
+  showShortName = false,
+}: {
+  value: string;
+  options: DropdownOption[];
   onChange: (value: string) => void;
   showShortName?: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  
-  const selectedOption = options.find(o => o.id === value);
-  
+
+  const selectedOption = options.find((o) => o.id === value);
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     }
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const renderLabel = (option?: DropdownOption) => {
+    if (!option) return "";
+    if (showShortName && option.shortName) return option.shortName;
+    return option.name.replace("🇰🇷 ", "");
+  };
 
   return (
     <div ref={dropdownRef} className="relative">
       <button
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen((prev) => !prev)}
         className="flex items-center gap-1 bg-slate-700 rounded-lg px-2 py-1.5 border border-slate-600 hover:border-slate-500 transition-colors"
       >
         {selectedOption && (
-          <img src={selectedOption.logo} alt="" className="w-4 h-4 rounded" />
+          <img
+            src={selectedOption.logo}
+            alt=""
+            className="w-4 h-4 rounded flex-shrink-0"
+          />
         )}
         <span className="text-white text-sm whitespace-nowrap">
-          {selectedOption?.name?.replace('🇰🇷 ', '')}
+          {renderLabel(selectedOption)}
         </span>
-        <svg 
-          className={`w-3 h-3 text-slate-400 transition-transform flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} 
-          fill="none" 
-          stroke="currentColor" 
+        <svg
+          className={`w-3 h-3 text-slate-400 transition-transform flex-shrink-0 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+          fill="none"
+          stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
         </svg>
       </button>
-      
+
       {isOpen && (
         <div className="absolute z-50 mt-1 min-w-[180px] bg-slate-800 border border-slate-600 rounded-lg shadow-xl overflow-hidden">
           <div>
@@ -72,12 +102,16 @@ function MiniDropdown({
                   setIsOpen(false);
                 }}
                 className={`w-full flex items-center gap-2 px-2 py-1.5 hover:bg-slate-700 transition-colors text-left ${
-                  value === option.id ? 'bg-slate-700/50' : ''
+                  value === option.id ? "bg-slate-700/50" : ""
                 }`}
               >
-                <img src={option.logo} alt="" className="w-4 h-4 rounded flex-shrink-0" />
+                <img
+                  src={option.logo}
+                  alt=""
+                  className="w-4 h-4 rounded flex-shrink-0"
+                />
                 <span className="text-white text-sm whitespace-nowrap">
-                  {option.name?.replace('🇰🇷 ', '')}
+                  {renderLabel(option)}
                 </span>
               </button>
             ))}
@@ -88,10 +122,12 @@ function MiniDropdown({
   );
 }
 
-const TradingViewChart = dynamic(
-  () => import("./charts/TradingViewChart"),
-  { ssr: false, loading: () => <div className="h-[360px] bg-slate-900/50 animate-pulse rounded-xl" /> }
-);
+const TradingViewChart = dynamic(() => import("./charts/TradingViewChart"), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[360px] bg-slate-900/50 animate-pulse rounded-xl" />
+  ),
+});
 
 interface PremiumData {
   symbol: string;
@@ -124,7 +160,15 @@ interface ApiResponse {
   listedCoins: number;
 }
 
-type SortKey = "symbol" | "premium" | "volume24hKrw" | "change24h" | "koreanPrice" | "high24h" | "low24h";
+type SortKey =
+  | "symbol"
+  | "premium"
+  | "volume24hKrw"
+  | "change24h"
+  | "koreanPrice"
+  | "high24h"
+  | "low24h";
+
 type SortOrder = "asc" | "desc";
 
 interface FlashState {
@@ -134,51 +178,103 @@ interface FlashState {
   };
 }
 
-const DOMESTIC_EXCHANGES = [
-  { id: "UPBIT_KRW", name: "🇰🇷 업비트 KRW", exchange: "Upbit", logo: EXCHANGE_LOGOS.UPBIT },
-  { id: "UPBIT_BTC", name: "🇰🇷 업비트 BTC", exchange: "Upbit", logo: EXCHANGE_LOGOS.UPBIT },
-  { id: "UPBIT_USDT", name: "🇰🇷 업비트 USDT", exchange: "Upbit", logo: EXCHANGE_LOGOS.UPBIT },
-  { id: "BITHUMB_KRW", name: "🇰🇷 빗썸 KRW", exchange: "Bithumb", logo: EXCHANGE_LOGOS.BITHUMB },
-  { id: "BITHUMB_BTC", name: "🇰🇷 빗썸 BTC", exchange: "Bithumb", logo: EXCHANGE_LOGOS.BITHUMB },
-  { id: "BITHUMB_USDT", name: "🇰🇷 빗썸 USDT", exchange: "Bithumb", logo: EXCHANGE_LOGOS.BITHUMB },
-  { id: "COINONE_KRW", name: "🇰🇷 코인원 KRW", exchange: "Coinone", logo: EXCHANGE_LOGOS.COINONE },
+const DOMESTIC_EXCHANGES: DropdownOption[] = [
+  {
+    id: "UPBIT_KRW",
+    name: "🇰🇷 업비트 KRW",
+    logo: EXCHANGE_LOGOS.UPBIT,
+  },
+  {
+    id: "UPBIT_BTC",
+    name: "🇰🇷 업비트 BTC",
+    logo: EXCHANGE_LOGOS.UPBIT,
+  },
+  {
+    id: "UPBIT_USDT",
+    name: "🇰🇷 업비트 USDT",
+    logo: EXCHANGE_LOGOS.UPBIT,
+  },
+  {
+    id: "BITHUMB_KRW",
+    name: "🇰🇷 빗썸 KRW",
+    logo: EXCHANGE_LOGOS.BITHUMB,
+  },
+  {
+    id: "BITHUMB_BTC",
+    name: "🇰🇷 빗썸 BTC",
+    logo: EXCHANGE_LOGOS.BITHUMB,
+  },
+  {
+    id: "BITHUMB_USDT",
+    name: "🇰🇷 빗썸 USDT",
+    logo: EXCHANGE_LOGOS.BITHUMB,
+  },
+  {
+    id: "COINONE_KRW",
+    name: "🇰🇷 코인원 KRW",
+    logo: EXCHANGE_LOGOS.COINONE,
+  },
 ];
 
-const FOREIGN_EXCHANGES = CONTEXT_FOREIGN_EXCHANGES.map(ex => ({
-  id: ex.value,
-  name: ex.label,
-  shortName: ex.shortName,
-  exchange: ex.exchange,
-  logo: ex.logo,
-}));
+const FOREIGN_EXCHANGES: DropdownOption[] = CONTEXT_FOREIGN_EXCHANGES.map(
+  (ex) => ({
+    id: ex.value,
+    name: ex.label,
+    shortName: ex.shortName ?? ex.label,
+    logo: ex.logo,
+  }),
+);
 
-const CHOSUNG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+const CHOSUNG = [
+  "ㄱ",
+  "ㄲ",
+  "ㄴ",
+  "ㄷ",
+  "ㄸ",
+  "ㄹ",
+  "ㅁ",
+  "ㅂ",
+  "ㅃ",
+  "ㅅ",
+  "ㅆ",
+  "ㅇ",
+  "ㅈ",
+  "ㅉ",
+  "ㅊ",
+  "ㅋ",
+  "ㅌ",
+  "ㅍ",
+  "ㅎ",
+];
 
 function getChosung(str: string): string {
-  let result = '';
+  let result = "";
+
   for (let i = 0; i < str.length; i++) {
     const code = str.charCodeAt(i);
-    if (code >= 0xAC00 && code <= 0xD7A3) {
-      const chosungIndex = Math.floor((code - 0xAC00) / 588);
+
+    if (code >= 0xac00 && code <= 0xd7a3) {
+      const chosungIndex = Math.floor((code - 0xac00) / 588);
       result += CHOSUNG[chosungIndex];
     } else {
       result += str[i];
     }
   }
+
   return result;
 }
 
 function matchSearch(item: PremiumData, query: string): boolean {
   const lowerQuery = query.toLowerCase().trim();
   if (!lowerQuery) return true;
-  
+
   if (item.symbol.toLowerCase().includes(lowerQuery)) return true;
   if (item.name.toLowerCase().includes(lowerQuery)) return true;
   if (item.koreanName.toLowerCase().includes(lowerQuery)) return true;
-  
+
   const chosung = getChosung(item.koreanName);
   if (chosung.toLowerCase().includes(lowerQuery)) return true;
-  
+
   return false;
 }
 
@@ -205,16 +301,21 @@ export default function PremiumTable({
   const [listedCoins, setListedCoins] = useState(0);
   const [rateLimitRetryAfter, setRateLimitRetryAfter] = useState(0);
   const [consecutiveRateLimits, setConsecutiveRateLimits] = useState(0);
-
-  const [domesticExchange, setDomesticExchange] = useState("UPBIT_KRW");
-  const [foreignExchange, setForeignExchange] = useState("OKX_USDT");
+  const [domesticExchange, setDomesticExchange] = useState<string>("UPBIT_KRW");
+  const [foreignExchange, setForeignExchange] = useState<string>("OKX_USDT");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("volume24hKrw");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [expandedSymbol, setExpandedSymbol] = useState<string | null>(null);
+  const [flashStates, setFlashStates] = useState<FlashState>({});
+
+  const prevDataRef = useRef<
+    Record<string, { price: number; premium: number | null }>
+  >({});
 
   const toggleFavorite = (symbol: string) => {
-    setFavorites(prev => {
+    setFavorites((prev) => {
       const newFavorites = new Set(prev);
       if (newFavorites.has(symbol)) {
         newFavorites.delete(symbol);
@@ -224,42 +325,55 @@ export default function PremiumTable({
       return newFavorites;
     });
   };
-  const [expandedSymbol, setExpandedSymbol] = useState<string | null>(null);
-  const [flashStates, setFlashStates] = useState<FlashState>({});
-  const prevDataRef = useRef<Record<string, { price: number; premium: number | null }>>({});
 
   const toggleChart = (symbol: string) => {
-    setExpandedSymbol(prev => prev === symbol ? null : symbol);
+    setExpandedSymbol((prev) => (prev === symbol ? null : symbol));
   };
 
   const detectChanges = useCallback((newData: PremiumData[]) => {
     try {
       if (!Array.isArray(newData)) return;
-      
-      const newFlashStates: FlashState = {};
-      const newPrevData: Record<string, { price: number; premium: number | null }> = {};
 
-      newData.forEach(item => {
-        if (!item || typeof item.symbol !== 'string' || typeof item.koreanPrice !== 'number') {
+      const newFlashStates: FlashState = {};
+      const newPrevData: Record<
+        string,
+        { price: number; premium: number | null }
+      > = {};
+
+      newData.forEach((item) => {
+        if (
+          !item ||
+          typeof item.symbol !== "string" ||
+          typeof item.koreanPrice !== "number"
+        ) {
           return;
         }
-        
+
         const prev = prevDataRef.current[item.symbol];
-        newPrevData[item.symbol] = { price: item.koreanPrice, premium: item.premium };
+        newPrevData[item.symbol] = {
+          price: item.koreanPrice,
+          premium: item.premium,
+        };
 
         if (prev) {
           const priceDiff = Math.abs(item.koreanPrice - prev.price);
           const priceThreshold = Math.max(prev.price * 0.0001, 0.00001);
+
           if (priceDiff > priceThreshold && priceDiff > 0) {
             newFlashStates[item.symbol] = {
               ...newFlashStates[item.symbol],
-              price: item.koreanPrice > prev.price ? "up" : "down"
+              price: item.koreanPrice > prev.price ? "up" : "down",
             };
           }
-          if (item.premium !== null && prev.premium !== null && Math.abs(item.premium - prev.premium) > 0.01) {
+
+          if (
+            item.premium !== null &&
+            prev.premium !== null &&
+            Math.abs(item.premium - prev.premium) > 0.01
+          ) {
             newFlashStates[item.symbol] = {
               ...newFlashStates[item.symbol],
-              premium: item.premium > prev.premium ? "up" : "down"
+              premium: item.premium > prev.premium ? "up" : "down",
             };
           }
         }
@@ -274,20 +388,26 @@ export default function PremiumTable({
             try {
               setFlashStates({});
             } catch (e) {
-              if (process.env.NODE_ENV === 'development') {
-                console.error('[PremiumTable] setFlashStates cleanup error:', e);
+              if (process.env.NODE_ENV === "development") {
+                // eslint-disable-next-line no-console
+                console.error(
+                  "[PremiumTable] setFlashStates cleanup error:",
+                  e,
+                );
               }
             }
           }, 600);
         } catch (e) {
-          if (process.env.NODE_ENV === 'development') {
-            console.error('[PremiumTable] setFlashStates error:', e);
+          if (process.env.NODE_ENV === "development") {
+            // eslint-disable-next-line no-console
+            console.error("[PremiumTable] setFlashStates error:", e);
           }
         }
       }
     } catch (err) {
-      if (process.env.NODE_ENV === 'development') {
-        console.error('[PremiumTable] detectChanges error:', err);
+      if (process.env.NODE_ENV === "development") {
+        // eslint-disable-next-line no-console
+        console.error("[PremiumTable] detectChanges error:", err);
       }
     }
   }, []);
@@ -298,32 +418,42 @@ export default function PremiumTable({
       if (rateLimitRetryAfter > 0) return;
 
       const response = await fetch(
-        `/api/premium/table?domestic=${domesticExchange}&foreign=${foreignExchange}`
+        `/api/premium/table?domestic=${domesticExchange}&foreign=${foreignExchange}`,
       );
 
       if (response.status === 429) {
-        const retryAfter = Math.max(parseInt(response.headers.get('retry-after') || '10'), 10);
+        const retryAfter = Math.max(
+          parseInt(response.headers.get("retry-after") || "10", 10),
+          10,
+        );
         const newCount = consecutiveRateLimits + 1;
+
         setConsecutiveRateLimits(newCount);
 
         // 5번 이상 연속 429 발생 시 1분 대기
         const delayMs = newCount >= 5 ? 60000 : retryAfter * 1000;
-        
-        if (process.env.NODE_ENV === 'development') {
-          console.warn(`[PremiumTable] 429 #${newCount}. Delaying ${delayMs / 1000}s...`);
+
+        if (process.env.NODE_ENV === "development") {
+          // eslint-disable-next-line no-console
+          console.warn(
+            `[PremiumTable] 429 #${newCount}. Delaying ${delayMs / 1000}s...`,
+          );
         }
-        
+
         setRateLimitRetryAfter(delayMs / 1000);
+
         setTimeout(() => {
           try {
             setRateLimitRetryAfter(0);
             setConsecutiveRateLimits(0);
           } catch (e) {
-            if (process.env.NODE_ENV === 'development') {
-              console.error('[PremiumTable] rate limit reset error:', e);
+            if (process.env.NODE_ENV === "development") {
+              // eslint-disable-next-line no-console
+              console.error("[PremiumTable] rate limit reset error:", e);
             }
           }
         }, delayMs);
+
         return;
       }
 
@@ -331,27 +461,47 @@ export default function PremiumTable({
 
       const json: ApiResponse = await response.json();
 
-      if (json && json.success && Array.isArray(json.data) && json.data.length > 0) {
+      if (
+        json &&
+        json.success &&
+        Array.isArray(json.data) &&
+        json.data.length > 0
+      ) {
         try {
           detectChanges(json.data);
         } catch (e) {
-          if (process.env.NODE_ENV === 'development') {
-            console.error('[PremiumTable] detectChanges failed:', e);
+          if (process.env.NODE_ENV === "development") {
+            // eslint-disable-next-line no-console
+            console.error("[PremiumTable] detectChanges failed:", e);
           }
         }
+
         setData(json.data);
-        setAveragePremium(typeof json.averagePremium === 'number' ? json.averagePremium : 0);
-        setFxRate(typeof json.fxRate === 'number' ? json.fxRate : 0);
-        setUpdatedAt(typeof json.updatedAt === 'string' ? json.updatedAt : new Date().toISOString());
-        setTotalCoins(typeof json.totalCoins === 'number' ? json.totalCoins : 0);
-        setListedCoins(typeof json.listedCoins === 'number' ? json.listedCoins : 0);
+        setAveragePremium(
+          typeof json.averagePremium === "number" ? json.averagePremium : 0,
+        );
+        setFxRate(typeof json.fxRate === "number" ? json.fxRate : 0);
+        setUpdatedAt(
+          typeof json.updatedAt === "string"
+            ? json.updatedAt
+            : new Date().toISOString(),
+        );
+        setTotalCoins(
+          typeof json.totalCoins === "number" ? json.totalCoins : 0,
+        );
+        setListedCoins(
+          typeof json.listedCoins === "number" ? json.listedCoins : 0,
+        );
         setError(null);
         setConsecutiveRateLimits(0); // 성공 시 카운트 리셋
       }
     } catch (err) {
-      // 에러 로깅만 하고 조용히 무시 (사용자 경험 유지)
-      if (process.env.NODE_ENV === 'development') {
-        console.error('[PremiumTable] Fetch error:', err instanceof Error ? err.message : String(err));
+      if (process.env.NODE_ENV === "development") {
+        // eslint-disable-next-line no-console
+        console.error(
+          "[PremiumTable] Fetch error:",
+          err instanceof Error ? err.message : String(err),
+        );
       }
     } finally {
       setLoading(false);
@@ -363,11 +513,12 @@ export default function PremiumTable({
     fetchData();
     const interval = setInterval(fetchData, refreshInterval);
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [domesticExchange, foreignExchange, refreshInterval]);
 
   const handleSort = (key: SortKey) => {
     if (sortKey === key) {
-      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+      setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
     } else {
       setSortKey(key);
       setSortOrder("desc");
@@ -385,8 +536,12 @@ export default function PremiumTable({
       let aVal: any = a[sortKey];
       let bVal: any = b[sortKey];
 
-      if (aVal === null) aVal = sortOrder === "asc" ? Infinity : -Infinity;
-      if (bVal === null) bVal = sortOrder === "asc" ? Infinity : -Infinity;
+      if (aVal === null || aVal === undefined) {
+        aVal = sortOrder === "asc" ? Infinity : -Infinity;
+      }
+      if (bVal === null || bVal === undefined) {
+        bVal = sortOrder === "asc" ? Infinity : -Infinity;
+      }
 
       if (typeof aVal === "string") {
         aVal = aVal.toLowerCase();
@@ -415,6 +570,7 @@ export default function PremiumTable({
 
   const formatKrwPrice = (value: number | null) => {
     if (value === null || value === undefined || isNaN(value)) return "-";
+
     if (value >= 1000) {
       return Math.round(value).toLocaleString("ko-KR");
     }
@@ -429,15 +585,20 @@ export default function PremiumTable({
 
   const formatUsdtPrice = (value: number | null) => {
     if (value === null || value === undefined || isNaN(value)) return "-";
+
     if (value >= 1000) {
-      return `$${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      return `$${value.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })}`;
     }
     return `$${value.toFixed(4)}`;
   };
 
   const formatVolumeKRW = (value: number | null) => {
-    if (value === null || value === undefined || isNaN(value) || value === 0) return "-";
-    
+    if (value === null || value === undefined || isNaN(value) || value === 0)
+      return "-";
+
     if (value >= 1e12) {
       const jo = Math.floor(value / 1e12);
       const eok = Math.floor((value % 1e12) / 1e8);
@@ -452,11 +613,13 @@ export default function PremiumTable({
     if (value >= 1e4) {
       return `${Math.floor(value / 1e4)}만`;
     }
-    return Math.round(value).toLocaleString();
+    return Math.round(value).toLocaleString("ko-KR");
   };
 
   const formatVolumeUsdt = (value: number | null) => {
-    if (value === null || value === undefined || isNaN(value) || value === 0) return "-";
+    if (value === null || value === undefined || isNaN(value) || value === 0)
+      return "-";
+
     if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
     if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
     if (value >= 1e3) return `$${(value / 1e3).toFixed(2)}K`;
@@ -482,14 +645,13 @@ export default function PremiumTable({
   const getFlashClass = (symbol: string, field: "price" | "premium") => {
     const flash = flashStates[symbol]?.[field];
     if (!flash) return "";
-    return flash === "up" 
-      ? "animate-flash-green" 
-      : "animate-flash-red";
+    return flash === "up" ? "animate-flash-green" : "animate-flash-red";
   };
 
   const SortIcon = ({ columnKey }: { columnKey: SortKey }) => {
-    if (sortKey !== columnKey)
+    if (sortKey !== columnKey) {
       return <span className="text-gray-600 ml-1 text-xs">↕</span>;
+    }
     return sortOrder === "asc" ? (
       <span className="text-blue-400 ml-1 text-xs">↑</span>
     ) : (
@@ -503,22 +665,24 @@ export default function PremiumTable({
   };
 
   const getForeignName = () => {
-    const exchange = FOREIGN_EXCHANGES.find((e) => e.id === foreignExchange);
-    return exchange ? exchange.shortName : "해외";
+    const exchange = CONTEXT_FOREIGN_EXCHANGES.find(
+      (e) => e.value === foreignExchange,
+    );
+    return exchange ? (exchange.shortName ?? exchange.label) : "해외";
   };
 
   const calcDiff = (current: number, base: number) => {
     if (!current || !base || isNaN(current) || isNaN(base) || base === 0) {
       return { percent: 0, diff: 0, valid: false };
     }
-    const percent = ((current - base) / base) * 100;
     const diff = current - base;
+    const percent = (diff / base) * 100;
     return { percent, diff, valid: true };
   };
 
   // TradingView 심볼 오버라이드 (특수 마켓용)
   const TV_SYMBOL_OVERRIDES: Record<string, string> = {
-    // 필요 시 하나씩 추가. 예: H: "OKX:HUSDT"
+    // 예시: H: "OKX:HUSDT",
   };
 
   const getTvSymbol = (symbol: string) => {
@@ -529,32 +693,41 @@ export default function PremiumTable({
     return `BINANCE:${base}USDT`;
   };
 
-  // CMC 링크는 coinMarketCapUtils의 openCmcPage 사용 (통일)
-
   return (
     <div>
       {showHeader && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
           <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
             <div className="text-gray-400 text-xs mb-1">평균 김프</div>
-            <div className={`text-xl font-bold ${getPremiumColor(averagePremium)}`}>
-              {averagePremium >= 0 ? "+" : ""}{averagePremium.toFixed(2)}%
+            <div
+              className={`text-xl font-bold ${getPremiumColor(averagePremium)}`}
+            >
+              {averagePremium >= 0 ? "+" : ""}
+              {averagePremium.toFixed(2)}%
             </div>
           </div>
+
           <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
             <div className="text-gray-400 text-xs mb-1">환율 (USDT/KRW)</div>
-            <div className="text-xl font-bold text-white">₩{fxRate.toLocaleString()}</div>
+            <div className="text-xl font-bold text-white">
+              ₩{fxRate.toLocaleString("ko-KR")}
+            </div>
           </div>
+
           <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
             <div className="text-gray-400 text-xs mb-1">코인 수</div>
             <div className="text-xl font-bold text-white">
-              {listedCoins}<span className="text-sm text-gray-400">/{totalCoins}개</span>
+              {listedCoins}
+              <span className="text-sm text-gray-400">/{totalCoins}개</span>
             </div>
           </div>
+
           <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
             <div className="text-gray-400 text-xs mb-1">업데이트</div>
             <div className="text-lg font-medium text-white">
-              {updatedAt ? new Date(updatedAt).toLocaleTimeString("ko-KR") : "--:--:--"}
+              {updatedAt
+                ? new Date(updatedAt).toLocaleTimeString("ko-KR")
+                : "--:--:--"}
             </div>
           </div>
         </div>
@@ -562,22 +735,31 @@ export default function PremiumTable({
 
       {showFilters && (
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4 text-sm bg-slate-800/30 border border-slate-700/50 rounded-xl p-3">
-          {/* Exchange selector section */}
+          {/* Exchange selector */}
           <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-3">
-            {/* Mobile: Labels on top row */}
+            {/* Mobile labels */}
             <div className="flex md:hidden justify-between w-full">
               <span className="text-gray-400 text-[10px] whitespace-nowrap flex items-center gap-1">
-                기준 거래소 <img src="https://flagcdn.com/w20/kr.png" alt="🇰🇷" className="w-4 h-3 object-cover rounded-sm" />
+                기준 거래소
+                <img
+                  src="https://flagcdn.com/w20/kr.png"
+                  alt="🇰🇷"
+                  className="w-4 h-3 object-cover rounded-sm"
+                />
               </span>
               <span className="text-gray-400 text-[10px] whitespace-nowrap flex items-center gap-1">
                 해외 거래소 <span className="text-sm">🌐</span>
               </span>
             </div>
 
-            {/* Dropdowns */}
             <div className="flex items-center gap-2 md:gap-3">
               <span className="hidden md:flex text-gray-400 text-xs whitespace-nowrap items-center gap-1">
-                기준 거래소 <img src="https://flagcdn.com/w20/kr.png" alt="🇰🇷" className="w-4 h-3 object-cover rounded-sm" />
+                기준 거래소
+                <img
+                  src="https://flagcdn.com/w20/kr.png"
+                  alt="🇰🇷"
+                  className="w-4 h-3 object-cover rounded-sm"
+                />
               </span>
               <MiniDropdown
                 value={domesticExchange}
@@ -589,7 +771,7 @@ export default function PremiumTable({
                 value={foreignExchange}
                 options={FOREIGN_EXCHANGES}
                 onChange={setForeignExchange}
-                showShortName={false}
+                showShortName={true}
               />
               <span className="hidden md:flex text-gray-400 text-xs whitespace-nowrap items-center gap-1">
                 해외 거래소 <span className="text-sm">🌐</span>
@@ -597,15 +779,26 @@ export default function PremiumTable({
             </div>
           </div>
 
-          {/* Coin count + Search */}
+          {/* Coin count + search */}
           <div className="flex items-center gap-2 md:gap-3">
             <span className="text-gray-400 text-[10px] md:text-xs whitespace-nowrap">
-              암호화폐 총 <span className="text-white font-medium">{totalCoins}</span>개
+              암호화폐 총{" "}
+              <span className="text-white font-medium">{totalCoins}</span>개
             </span>
             <div className="relative flex-1 md:flex-none">
               <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
                 </svg>
               </span>
               <input
@@ -622,7 +815,7 @@ export default function PremiumTable({
 
       {loading && data.length === 0 ? (
         <div className="flex items-center justify-center py-20">
-          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500" />
         </div>
       ) : error ? (
         <div className="bg-red-900/30 border border-red-700 rounded-lg p-4 text-red-400">
@@ -646,7 +839,9 @@ export default function PremiumTable({
                     className="px-1 md:px-3 py-1.5 md:py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("koreanPrice")}
                   >
-                    <span className="hidden md:inline">{getDomesticName()}</span>
+                    <span className="hidden md:inline">
+                      {getDomesticName()}
+                    </span>
                     <span className="md:hidden">현재가</span>
                     <SortIcon columnKey="koreanPrice" />
                   </th>
@@ -657,7 +852,8 @@ export default function PremiumTable({
                     className="px-1 md:px-3 py-1.5 md:py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("premium")}
                   >
-                    김프<SortIcon columnKey="premium" />
+                    김프
+                    <SortIcon columnKey="premium" />
                   </th>
                   <th
                     className="px-1 md:px-3 py-1.5 md:py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
@@ -671,13 +867,15 @@ export default function PremiumTable({
                     className="hidden lg:table-cell px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("high24h")}
                   >
-                    고가대비(24h)<SortIcon columnKey="high24h" />
+                    고가대비(24h)
+                    <SortIcon columnKey="high24h" />
                   </th>
                   <th
                     className="hidden lg:table-cell px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("low24h")}
                   >
-                    저가대비(24h)<SortIcon columnKey="low24h" />
+                    저가대비(24h)
+                    <SortIcon columnKey="low24h" />
                   </th>
                   <th
                     className="px-1 md:px-3 py-1.5 md:py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
@@ -691,167 +889,273 @@ export default function PremiumTable({
               </thead>
               <tbody>
                 {filteredAndSortedData.map((row, index) => {
-                  const prevClose = row.change24h !== null 
-                    ? row.koreanPrice / (1 + row.change24h / 100)
-                    : row.koreanPrice;
-                  const prevDiff = row.change24h !== null 
-                    ? calcDiff(row.koreanPrice, prevClose) 
-                    : { percent: 0, diff: 0, valid: false };
+                  const prevClose =
+                    row.change24h !== null
+                      ? row.koreanPrice / (1 + row.change24h / 100)
+                      : row.koreanPrice;
+
+                  const prevDiff =
+                    row.change24h !== null
+                      ? calcDiff(row.koreanPrice, prevClose)
+                      : { percent: 0, diff: 0, valid: false };
+
                   const highDiff = calcDiff(row.koreanPrice, row.high24h);
                   const lowDiff = calcDiff(row.koreanPrice, row.low24h);
-                  
+
                   return (
                     <React.Fragment key={row.symbol}>
-                    <tr
-                      className={`border-t border-slate-700/50 hover:bg-slate-700/30 transition-colors ${
-                        index % 2 === 0 ? "bg-slate-800/30" : ""
-                      }`}
-                    >
-                      <td className="px-1 md:px-3 py-1.5 md:py-2">
-                        <div className="flex items-center gap-1 md:gap-2">
-                          <button
-                            onClick={() => toggleFavorite(row.symbol)}
-                            className={`text-sm md:text-lg transition-colors flex-shrink-0 ${favorites.has(row.symbol) ? 'text-yellow-400' : 'text-gray-600 hover:text-yellow-400'}`}
-                            title={favorites.has(row.symbol) ? "즐겨찾기 해제" : "즐겨찾기 추가"}
-                          >
-                            {favorites.has(row.symbol) ? '★' : '☆'}
-                          </button>
-                          <CoinIcon symbol={row.symbol} size="sm" className="md:w-6 md:h-6" />
-                          <button
-                            onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
-                            className="flex flex-col hover:text-blue-400 transition-colors text-left min-w-0"
-                          >
-                            <div className="text-white font-medium text-xs md:text-sm truncate">
-                              {row.koreanName || row.name || row.symbol}
-                            </div>
-                            <div className="text-gray-500 text-[10px] md:text-xs">
-                              {row.koreanName && row.symbol ? `${row.koreanName} / ${row.symbol}` : row.symbol}
-                            </div>
-                          </button>
-                          <button
-                            onClick={() => toggleChart(row.symbol)}
-                            className={`p-0.5 md:p-1 transition-colors flex-shrink-0 ${expandedSymbol === row.symbol ? 'text-blue-400' : 'text-gray-500 hover:text-blue-400'}`}
-                            title={expandedSymbol === row.symbol ? "차트 닫기" : "차트 열기"}
-                          >
-                            <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
-                            </svg>
-                          </button>
-                          {!row.isListed && (
-                            <span className="text-[8px] md:text-xs text-orange-400 bg-orange-400/20 px-1 py-0.5 rounded flex-shrink-0">미상장</span>
-                          )}
-                        </div>
-                      </td>
-                      <td className={`px-1 md:px-3 py-2 text-right ${getFlashClass(row.symbol, "price")}`}>
-                        <div className="text-white font-medium text-xs md:text-sm">₩{formatKrwPrice(row.koreanPrice)}</div>
-                        <div className="md:hidden text-[10px] text-gray-500">
-                          {row.globalPriceKrw !== null && row.globalPrice !== null ? (
-                            <span>₩{formatKrwPrice(row.globalPriceKrw)} / ${formatUsdtPrice(row.globalPrice)}</span>
-                          ) : (
-                            <span className="text-gray-600">-</span>
-                          )}
-                        </div>
-                      </td>
-                      <td className="hidden md:table-cell px-3 py-2 text-right">
-                        {row.isListed && row.globalPriceKrw !== null ? (
-                          <>
-                            <div className="text-white font-medium">₩{formatKrwPrice(row.globalPriceKrw)}</div>
-                            <div className="text-xs text-gray-500">{formatUsdtPrice(row.globalPrice)} USDT</div>
-                          </>
-                        ) : (
-                          <div className="text-gray-500">-</div>
-                        )}
-                      </td>
-                      <td className={`px-1 md:px-3 py-1.5 md:py-2 text-right ${getFlashClass(row.symbol, "premium")}`}>
-                        {row.premium !== null ? (
-                          <div className={`font-bold text-xs md:text-sm ${getPremiumColor(row.premium)}`}>
-                            {row.premium >= 0 ? "+" : ""}{row.premium.toFixed(2)}%
+                      <tr
+                        className={`border-t border-slate-700/50 hover:bg-slate-700/30 transition-colors ${
+                          index % 2 === 0 ? "bg-slate-800/30" : ""
+                        }`}
+                      >
+                        <td className="px-1 md:px-3 py-1.5 md:py-2">
+                          <div className="flex items-center gap-1 md:gap-2">
+                            <button
+                              onClick={() => toggleFavorite(row.symbol)}
+                              className={`text-sm md:text-lg transition-colors flex-shrink-0 ${
+                                favorites.has(row.symbol)
+                                  ? "text-yellow-400"
+                                  : "text-gray-600 hover:text-yellow-400"
+                              }`}
+                              title={
+                                favorites.has(row.symbol)
+                                  ? "즐겨찾기 해제"
+                                  : "즐겨찾기 추가"
+                              }
+                            >
+                              {favorites.has(row.symbol) ? "★" : "☆"}
+                            </button>
+
+                            <CoinIcon
+                              symbol={row.symbol}
+                              size="sm"
+                              className="md:w-6 md:h-6"
+                            />
+
+                            <button
+                              onClick={() =>
+                                openCmcPage(row.symbol, row.cmcSlug)
+                              }
+                              className="flex flex-col hover:text-blue-400 transition-colors text-left min-w-0"
+                            >
+                              <div className="text-white font-medium text-xs md:text-sm truncate">
+                                {row.koreanName || row.name || row.symbol}
+                              </div>
+                              <div className="text-gray-500 text-[10px] md:text-xs">
+                                {row.koreanName && row.symbol
+                                  ? `${row.koreanName} / ${row.symbol}`
+                                  : row.symbol}
+                              </div>
+                            </button>
+
+                            <button
+                              onClick={() => toggleChart(row.symbol)}
+                              className={`p-0.5 md:p-1 transition-colors flex-shrink-0 ${
+                                expandedSymbol === row.symbol
+                                  ? "text-blue-400"
+                                  : "text-gray-500 hover:text-blue-400"
+                              }`}
+                              title={
+                                expandedSymbol === row.symbol
+                                  ? "차트 닫기"
+                                  : "차트 열기"
+                              }
+                            >
+                              <svg
+                                className="w-3 h-3 md:w-4 md:h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+                                />
+                              </svg>
+                            </button>
+
+                            {!row.isListed && (
+                              <span className="text-[8px] md:text-xs text-orange-400 bg-orange-400/20 px-1 py-0.5 rounded flex-shrink-0">
+                                미상장
+                              </span>
+                            )}
                           </div>
-                        ) : (
-                          <div className="text-gray-500 text-xs">-</div>
-                        )}
-                      </td>
-                      <td className="px-1 md:px-3 py-1.5 md:py-2 text-right">
-                        {row.change24h !== null ? (
-                          <>
-                            <div className={`text-xs md:text-sm ${getChangeColor(row.change24h)}`}>
-                              {row.change24h >= 0 ? "+" : ""}{row.change24h.toFixed(2)}%
+                        </td>
+
+                        <td
+                          className={`px-1 md:px-3 py-2 text-right ${getFlashClass(
+                            row.symbol,
+                            "price",
+                          )}`}
+                        >
+                          <div className="text-white font-medium text-xs md:text-sm">
+                            ₩{formatKrwPrice(row.koreanPrice)}
+                          </div>
+                          <div className="md:hidden text-[10px] text-gray-500">
+                            {row.globalPriceKrw !== null &&
+                            row.globalPrice !== null ? (
+                              <span>
+                                ₩{formatKrwPrice(row.globalPriceKrw)} /{" "}
+                                {formatUsdtPrice(row.globalPrice)}
+                              </span>
+                            ) : (
+                              <span className="text-gray-600">-</span>
+                            )}
+                          </div>
+                        </td>
+
+                        <td className="hidden md:table-cell px-3 py-2 text-right">
+                          {row.isListed && row.globalPriceKrw !== null ? (
+                            <>
+                              <div className="text-white font-medium">
+                                ₩{formatKrwPrice(row.globalPriceKrw)}
+                              </div>
+                              <div className="text-xs text-gray-500">
+                                {formatUsdtPrice(row.globalPrice)} USDT
+                              </div>
+                            </>
+                          ) : (
+                            <div className="text-gray-500">-</div>
+                          )}
+                        </td>
+
+                        <td
+                          className={`px-1 md:px-3 py-1.5 md:py-2 text-right ${getFlashClass(
+                            row.symbol,
+                            "premium",
+                          )}`}
+                        >
+                          {row.premium !== null ? (
+                            <div
+                              className={`font-bold text-xs md:text-sm ${getPremiumColor(
+                                row.premium,
+                              )}`}
+                            >
+                              {row.premium >= 0 ? "+" : ""}
+                              {row.premium.toFixed(2)}%
                             </div>
-                            <div className={`hidden md:block text-xs ${getChangeColor(prevDiff.diff)}`}>
-                              {prevDiff.valid && (
-                                <span>{prevDiff.diff >= 0 ? "+" : ""}₩{formatKRW(Math.round(prevDiff.diff))}</span>
-                              )}
-                            </div>
-                          </>
-                        ) : (
-                          <div className="text-gray-500 text-xs">-</div>
-                        )}
-                      </td>
-                      <td className="hidden lg:table-cell px-3 py-2 text-right">
-                        {highDiff.valid ? (
-                          <>
-                            <div className={getChangeColor(highDiff.percent)}>
-                              {highDiff.percent >= 0 ? "+" : ""}{highDiff.percent.toFixed(2)}%
-                            </div>
-                            <div className={`text-xs ${getChangeColor(highDiff.diff)}`}>
-                              {highDiff.diff >= 0 ? "+" : ""}₩{formatKRW(Math.round(highDiff.diff))}
-                            </div>
-                          </>
-                        ) : (
-                          <div className="text-gray-500">-</div>
-                        )}
-                      </td>
-                      <td className="hidden lg:table-cell px-3 py-2 text-right">
-                        {lowDiff.valid ? (
-                          <>
-                            <div className={getChangeColor(lowDiff.percent)}>
-                              {lowDiff.percent >= 0 ? "+" : ""}{lowDiff.percent.toFixed(2)}%
-                            </div>
-                            <div className={`text-xs ${getChangeColor(lowDiff.diff)}`}>
-                              {lowDiff.diff >= 0 ? "+" : ""}₩{formatKRW(Math.round(lowDiff.diff))}
-                            </div>
-                          </>
-                        ) : (
-                          <div className="text-gray-500">-</div>
-                        )}
-                      </td>
-                      <td className="px-1 md:px-3 py-1.5 md:py-2 text-right">
-                        <div className="flex flex-col items-end leading-tight">
-                          <span className="text-gray-300 text-[10px] md:text-sm">
-                            ₩{formatVolumeKRW(row.volume24hKrw)}
-                            <span className="hidden md:inline ml-1 text-xs text-gray-500">(국내)</span>
-                          </span>
-                          <span className="hidden md:inline">
-                            {row.isListed && row.volume24hForeignKrw !== null ? (
-                              <>
+                          ) : (
+                            <div className="text-gray-500 text-xs">-</div>
+                          )}
+                        </td>
+
+                        <td className="px-1 md:px-3 py-1.5 md:py-2 text-right">
+                          {row.change24h !== null ? (
+                            <>
+                              <div
+                                className={`text-xs md:text-sm ${getChangeColor(
+                                  row.change24h,
+                                )}`}
+                              >
+                                {row.change24h >= 0 ? "+" : ""}
+                                {row.change24h.toFixed(2)}%
+                              </div>
+                              <div
+                                className={`hidden md:block text-xs ${getChangeColor(
+                                  prevDiff.diff,
+                                )}`}
+                              >
+                                {prevDiff.valid && (
+                                  <span>
+                                    {prevDiff.diff >= 0 ? "+" : ""}₩
+                                    {formatKRW(Math.round(prevDiff.diff))}
+                                  </span>
+                                )}
+                              </div>
+                            </>
+                          ) : (
+                            <div className="text-gray-500 text-xs">-</div>
+                          )}
+                        </td>
+
+                        <td className="hidden lg:table-cell px-3 py-2 text-right">
+                          {highDiff.valid ? (
+                            <>
+                              <div className={getChangeColor(highDiff.percent)}>
+                                {highDiff.percent >= 0 ? "+" : ""}
+                                {highDiff.percent.toFixed(2)}%
+                              </div>
+                              <div
+                                className={`text-xs ${getChangeColor(
+                                  highDiff.diff,
+                                )}`}
+                              >
+                                {highDiff.diff >= 0 ? "+" : ""}₩
+                                {formatKRW(Math.round(highDiff.diff))}
+                              </div>
+                            </>
+                          ) : (
+                            <div className="text-gray-500">-</div>
+                          )}
+                        </td>
+
+                        <td className="hidden lg:table-cell px-3 py-2 text-right">
+                          {lowDiff.valid ? (
+                            <>
+                              <div className={getChangeColor(lowDiff.percent)}>
+                                {lowDiff.percent >= 0 ? "+" : ""}
+                                {lowDiff.percent.toFixed(2)}%
+                              </div>
+                              <div
+                                className={`text-xs ${getChangeColor(
+                                  lowDiff.diff,
+                                )}`}
+                              >
+                                {lowDiff.diff >= 0 ? "+" : ""}₩
+                                {formatKRW(Math.round(lowDiff.diff))}
+                              </div>
+                            </>
+                          ) : (
+                            <div className="text-gray-500">-</div>
+                          )}
+                        </td>
+
+                        <td className="px-1 md:px-3 py-1.5 md:py-2 text-right">
+                          <div className="flex flex-col items-end leading-tight">
+                            <span className="text-gray-300 text-[10px] md:text-sm">
+                              ₩{formatVolumeKRW(row.volume24hKrw)}
+                              <span className="hidden md:inline ml-1 text-xs text-gray-500">
+                                (국내)
+                              </span>
+                            </span>
+                            <span className="hidden md:inline">
+                              {row.isListed &&
+                              row.volume24hForeignKrw !== null ? (
                                 <span className="text-gray-300">
                                   ₩{formatVolumeKRW(row.volume24hForeignKrw)}
-                                  <span className="ml-1 text-xs text-gray-500">(해외)</span>
+                                  <span className="ml-1 text-xs text-gray-500">
+                                    (해외)
+                                  </span>
                                 </span>
-                              </>
-                            ) : (
-                              <span className="text-gray-500 text-xs">해외: -</span>
-                            )}
-                          </span>
-                        </div>
-                      </td>
-                    </tr>
-                    {expandedSymbol === row.symbol && (
-                      <tr key={`${row.symbol}-chart`}>
-                        <td colSpan={8} className="p-0 lg:table-cell">
-                          <div className="bg-[#0F111A] border-t border-b border-slate-700/50 py-3 px-3">
-                            <div className="h-[360px] rounded-xl overflow-hidden bg-slate-900/50">
-                              <TradingViewChart
-                                tvSymbol={getTvSymbol(row.symbol)}
-                                height={360}
-                                interval="60"
-                              />
-                            </div>
+                              ) : (
+                                <span className="text-gray-500 text-xs">
+                                  해외: -
+                                </span>
+                              )}
+                            </span>
                           </div>
                         </td>
                       </tr>
-                    )}
-                  </React.Fragment>
+
+                      {expandedSymbol === row.symbol && (
+                        <tr key={`${row.symbol}-chart`}>
+                          <td colSpan={8} className="p-0 lg:table-cell">
+                            <div className="bg-[#0F111A] border-t border-b border-slate-700/50 py-3 px-3">
+                              <div className="h-[360px] rounded-xl overflow-hidden bg-slate-900/50">
+                                <TradingViewChart
+                                  tvSymbol={getTvSymbol(row.symbol)}
+                                  height={360}
+                                  interval="60"
+                                />
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </React.Fragment>
                   );
                 })}
               </tbody>

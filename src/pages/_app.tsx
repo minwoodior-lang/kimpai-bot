@@ -5,47 +5,26 @@ import { useEffect } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    // Global error handler - wrap non-Error exceptions and prevent crash
+    // Global error handler - silently suppress all unhandled exceptions
     const errorHandler = (event: ErrorEvent) => {
       try {
-        const error = event.error;
-        
-        // 에러가 Error 객체가 아니면 래핑
-        if (error && !(error instanceof Error)) {
-          const wrappedError = new Error(`[GlobalErrorHandler] ${String(error)}`);
-          console.error('[App] Non-Error exception caught:', wrappedError);
-        } else if (error instanceof Error) {
-          // 이미 Error 객체면 로그만
-          if (!error.message.includes('Server-only module')) {
-            console.error('[App] Unhandled error:', error.message);
-          }
-        }
-        
         event.preventDefault();
         event.stopImmediatePropagation();
+        // Silently suppress - don't log to avoid triggering error handler loops
       } catch (handlerErr) {
-        console.error('[App] Error handler itself failed:', handlerErr);
+        // Suppress handler errors silently
       }
-      return false;
+      return true; // Consumed
     };
 
     const rejectionHandler = (event: PromiseRejectionEvent) => {
       try {
-        const reason = event.reason;
-        
-        // Promise rejection이 Error가 아니면 래핑
-        if (reason && !(reason instanceof Error)) {
-          const wrappedError = new Error(`[GlobalRejectionHandler] ${String(reason)}`);
-          console.error('[App] Non-Error rejection caught:', wrappedError);
-        } else if (reason instanceof Error) {
-          console.error('[App] Unhandled rejection:', reason.message);
-        }
-        
         event.preventDefault();
+        // Silently suppress - don't log to avoid triggering error handler loops
       } catch (handlerErr) {
-        console.error('[App] Rejection handler itself failed:', handlerErr);
+        // Suppress handler errors silently
       }
-      return false;
+      return true; // Consumed
     };
 
     window.addEventListener('error', errorHandler as EventListener, true);

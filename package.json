@@ -7,11 +7,15 @@
     "build": "next build",
     "start": "next start -p ${PORT:-5000} -H 0.0.0.0",
     "lint": "next lint",
+
     "update:prices": "tsx scripts/updatePrices.ts",
     "price:worker": "tsx scripts/priceWorker.ts",
     "update:notices": "tsx scripts/noticeUpdateWorker.ts",
     "backfill:korean-names": "tsx scripts/backfillKoreanNames.ts",
-    "update:icons": "node fetchIcons.js"
+    "sync:exchange-symbols": "tsx scripts/syncExchangeSymbols.ts",
+    "update:icons": "node fetchIcons.js",
+
+    "sync:symbols": "tsx scripts/syncSymbols.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.86.0",
