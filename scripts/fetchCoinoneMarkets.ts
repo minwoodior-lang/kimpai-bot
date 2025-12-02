@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 interface RawMarket {
-  exchange: "UPBIT" | "BITHUMB" | "COINONE";
+  exchange: "COINONE";
   market_code: string;
   base_symbol: string;
   quote_symbol: string;
@@ -10,37 +10,62 @@ interface RawMarket {
   name_en?: string;
 }
 
-async function fetchCoinoneMarkets() {
-  const res = await fetch("https://api.coinone.co.kr/public/v2/markets/KRW", {
-    timeout: 8000,
-  });
+type CoinoneNameMap = {
+  [symbol: string]: { name_ko?: string; name_en?: string };
+};
 
+async function fetchCoinoneMarkets() {
+  const namesPath = path.join("data", "raw", "coinone", "names.json");
+  const coinoneNameMap: CoinoneNameMap = fs.existsSync(namesPath)
+    ? JSON.parse(fs.readFileSync(namesPath, "utf-8"))
+    : {};
+
+  const res = await fetch("https://api.coinone.co.kr/public/v2/markets/KRW");
   if (!res.ok) {
-    throw new Error(`Coinone API error: ${res.status}`);
+    throw new Error(
+      `Coinone API error: ${res.status} ${res.statusText}`
+    );
   }
 
   const json = (await res.json()) as any;
+  const markets = json.markets ?? [];
 
-  if (!json?.markets || !Array.isArray(json.markets)) {
-    throw new Error("Invalid Coinone API response");
+  if (!Array.isArray(markets)) {
+    throw new Error("Coinone API returned invalid markets format");
   }
 
-  const markets: RawMarket[] = json.markets.map((m: any) => ({
-    exchange: "COINONE",
-    market_code: m.market,
-    base_symbol: (m.target_currency || "").toUpperCase(),
-    quote_symbol: m.base_currency || "KRW",
-  }));
+  const result: RawMarket[] = markets.map((m: any) => {
+    const base = (m.target_currency ?? "").toUpperCase();
+    const quote = (m.base_currency ?? "").toUpperCase();
+    const marketCode = m.market;
 
-  const marketPath = path.join("data", "raw", "coinone", "markets.json");
-  fs.mkdirSync(path.dirname(marketPath), { recursive: true });
-  fs.writeFileSync(marketPath, JSON.stringify(markets, null, 2), "utf-8");
+    const names = coinoneNameMap[base] ?? {};
 
-  // names.json은 비어있는 상태 (나중에 HTML 크롤링으로 채울 수 있음)
-  const namesPath = path.join("data", "raw", "coinone", "names.json");
-  fs.writeFileSync(namesPath, JSON.stringify({}, null, 2), "utf-8");
+    const name_ko = names.name_ko?.trim() || undefined;
+    const name_en = names.name_en?.trim() || undefined;
 
-  console.log(`✅ Coinone markets saved: ${markets.length} rows`);
+    const row: RawMarket = {
+      exchange: "COINONE",
+      market_code: marketCode,
+      base_symbol: base,
+      quote_symbol: quote,
+      ...(name_ko ? { name_ko } : {}),
+      ...(name_en ? { name_en } : {}),
+    };
+
+    return row;
+  });
+
+  const outPath = path.join("data", "raw", "coinone", "markets.json");
+  fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  fs.writeFileSync(outPath, JSON.stringify(result, null, 2), "utf-8");
+
+  const total = result.length;
+  const withName = result.filter((m) => m.name_ko || m.name_en).length;
+
+  console.log(
+    `✅ Coinone markets fetched: total=${total}, withName=${withName}, withoutName=${total - withName}`
+  );
 }
 
 fetchCoinoneMarkets().catch((err) => {

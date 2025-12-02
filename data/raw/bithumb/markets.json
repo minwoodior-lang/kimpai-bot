@@ -1,2928 +1,3650 @@
 [
   {
     "exchange": "BITHUMB",
-    "market_code": "BTC-KRW",
-    "base_symbol": "BTC",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-BTC",
+    "base_symbol": "KRW",
+    "quote_symbol": "BTC",
     "name_ko": "비트코인",
     "name_en": "Bitcoin"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ETH-KRW",
-    "base_symbol": "ETH",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-ETH",
+    "base_symbol": "KRW",
+    "quote_symbol": "ETH",
     "name_ko": "이더리움",
     "name_en": "Ethereum"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ETC-KRW",
-    "base_symbol": "ETC",
-    "quote_symbol": "KRW",
-    "name_ko": "이더리움클래식",
+    "market_code": "KRW-ETC",
+    "base_symbol": "KRW",
+    "quote_symbol": "ETC",
+    "name_ko": "이더리움 클래식",
     "name_en": "Ethereum Classic"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "XRP-KRW",
-    "base_symbol": "XRP",
-    "quote_symbol": "KRW",
-    "name_ko": "리플",
+    "market_code": "KRW-XRP",
+    "base_symbol": "KRW",
+    "quote_symbol": "XRP",
+    "name_ko": "엑스알피 [리플]",
     "name_en": "XRP"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BCH-KRW",
-    "base_symbol": "BCH",
-    "quote_symbol": "KRW",
-    "name_ko": "비트코인캐시",
+    "market_code": "KRW-BCH",
+    "base_symbol": "KRW",
+    "quote_symbol": "BCH",
+    "name_ko": "비트코인 캐시",
     "name_en": "Bitcoin Cash"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "QTUM-KRW",
-    "base_symbol": "QTUM",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-QTUM",
+    "base_symbol": "KRW",
+    "quote_symbol": "QTUM",
     "name_ko": "퀀텀",
     "name_en": "Qtum"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "A-KRW",
-    "base_symbol": "A",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-A",
+    "base_symbol": "KRW",
+    "quote_symbol": "A",
+    "name_ko": "볼타",
+    "name_en": "Vaulta"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ICX-KRW",
-    "base_symbol": "ICX",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-ICX",
+    "base_symbol": "KRW",
+    "quote_symbol": "ICX",
     "name_ko": "아이콘",
     "name_en": "ICON"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "TRX-KRW",
-    "base_symbol": "TRX",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-TRX",
+    "base_symbol": "KRW",
+    "quote_symbol": "TRX",
     "name_ko": "트론",
     "name_en": "TRON"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ELF-KRW",
-    "base_symbol": "ELF",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ELF",
+    "base_symbol": "KRW",
+    "quote_symbol": "ELF",
+    "name_ko": "엘프",
+    "name_en": "aelf"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "KNC-KRW",
-    "base_symbol": "KNC",
-    "quote_symbol": "KRW",
-    "name_ko": "카일로",
-    "name_en": "Kyber"
+    "market_code": "KRW-KNC",
+    "base_symbol": "KRW",
+    "quote_symbol": "KNC",
+    "name_ko": "카이버 네트워크",
+    "name_en": "Kyber Network"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "GLM-KRW",
-    "base_symbol": "GLM",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-GLM",
+    "base_symbol": "KRW",
+    "quote_symbol": "GLM",
+    "name_ko": "골렘",
+    "name_en": "Golem"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ZIL-KRW",
-    "base_symbol": "ZIL",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-ZIL",
+    "base_symbol": "KRW",
+    "quote_symbol": "ZIL",
     "name_ko": "질리카",
     "name_en": "Zilliqa"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "WAXP-KRW",
-    "base_symbol": "WAXP",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-WAXP",
+    "base_symbol": "KRW",
+    "quote_symbol": "WAXP",
+    "name_ko": "왁스",
+    "name_en": "WAXP"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "POWR-KRW",
-    "base_symbol": "POWR",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-POWR",
+    "base_symbol": "KRW",
+    "quote_symbol": "POWR",
+    "name_ko": "파워렛저",
+    "name_en": "Powerledger"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "LRC-KRW",
-    "base_symbol": "LRC",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-LRC",
+    "base_symbol": "KRW",
+    "quote_symbol": "LRC",
+    "name_ko": "루프링",
+    "name_en": "Loopring"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "STEEM-KRW",
-    "base_symbol": "STEEM",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-STEEM",
+    "base_symbol": "KRW",
+    "quote_symbol": "STEEM",
+    "name_ko": "스팀",
+    "name_en": "Steem"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ZRX-KRW",
-    "base_symbol": "ZRX",
-    "quote_symbol": "KRW",
-    "name_ko": "0x",
-    "name_en": "0x Protocol"
+    "market_code": "KRW-ZRX",
+    "base_symbol": "KRW",
+    "quote_symbol": "ZRX",
+    "name_ko": "제로엑스",
+    "name_en": "0x"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SNT-KRW",
-    "base_symbol": "SNT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-SNT",
+    "base_symbol": "KRW",
+    "quote_symbol": "SNT",
+    "name_ko": "스테이터스네트워크토큰",
+    "name_en": "Status Network"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ADA-KRW",
-    "base_symbol": "ADA",
-    "quote_symbol": "KRW",
-    "name_ko": "카르다노",
+    "market_code": "KRW-ADA",
+    "base_symbol": "KRW",
+    "quote_symbol": "ADA",
+    "name_ko": "에이다",
     "name_en": "Cardano"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CTXC-KRW",
-    "base_symbol": "CTXC",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CTXC",
+    "base_symbol": "KRW",
+    "quote_symbol": "CTXC",
+    "name_ko": "코르텍스",
+    "name_en": "Cortex"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BAT-KRW",
-    "base_symbol": "BAT",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-BAT",
+    "base_symbol": "KRW",
+    "quote_symbol": "BAT",
     "name_ko": "베이직어텐션토큰",
     "name_en": "Basic Attention Token"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "THETA-KRW",
-    "base_symbol": "THETA",
-    "quote_symbol": "KRW",
-    "name_ko": "세타",
-    "name_en": "Theta"
+    "market_code": "KRW-THETA",
+    "base_symbol": "KRW",
+    "quote_symbol": "THETA",
+    "name_ko": "쎄타토큰",
+    "name_en": "Theta Token"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CVC-KRW",
-    "base_symbol": "CVC",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CVC",
+    "base_symbol": "KRW",
+    "quote_symbol": "CVC",
+    "name_ko": "시빅",
+    "name_en": "Civic"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "WAVES-KRW",
-    "base_symbol": "WAVES",
-    "quote_symbol": "KRW",
-    "name_ko": "웨이브스",
+    "market_code": "KRW-WAVES",
+    "base_symbol": "KRW",
+    "quote_symbol": "WAVES",
+    "name_ko": "웨이브",
     "name_en": "Waves"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "LINK-KRW",
-    "base_symbol": "LINK",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-LINK",
+    "base_symbol": "KRW",
+    "quote_symbol": "LINK",
     "name_ko": "체인링크",
-    "name_en": "Chainlink"
+    "name_en": "ChainLink"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ENJ-KRW",
-    "base_symbol": "ENJ",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-ENJ",
+    "base_symbol": "KRW",
+    "quote_symbol": "ENJ",
     "name_ko": "엔진코인",
     "name_en": "Enjin Coin"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "VET-KRW",
-    "base_symbol": "VET",
-    "quote_symbol": "KRW",
-    "name_ko": "비챗",
+    "market_code": "KRW-VET",
+    "base_symbol": "KRW",
+    "quote_symbol": "VET",
+    "name_ko": "비체인",
     "name_en": "VeChain"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "MTL-KRW",
-    "base_symbol": "MTL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-MTL",
+    "base_symbol": "KRW",
+    "quote_symbol": "MTL",
+    "name_ko": "메탈",
+    "name_en": "Metal"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "IOST-KRW",
-    "base_symbol": "IOST",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-IOST",
+    "base_symbol": "KRW",
+    "quote_symbol": "IOST",
+    "name_ko": "이오스트",
+    "name_en": "IOST"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "AMO-KRW",
-    "base_symbol": "AMO",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-AMO",
+    "base_symbol": "KRW",
+    "quote_symbol": "AMO",
+    "name_ko": "아모코인",
+    "name_en": "AMO Coin"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BSV-KRW",
-    "base_symbol": "BSV",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BSV",
+    "base_symbol": "KRW",
+    "quote_symbol": "BSV",
+    "name_ko": "비트코인에스브이",
+    "name_en": "BITCOINSV"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ORBS-KRW",
-    "base_symbol": "ORBS",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ORBS",
+    "base_symbol": "KRW",
+    "quote_symbol": "ORBS",
+    "name_ko": "오브스",
+    "name_en": "Orbs"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "TFUEL-KRW",
-    "base_symbol": "TFUEL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-TFUEL",
+    "base_symbol": "KRW",
+    "quote_symbol": "TFUEL",
+    "name_ko": "쎄타퓨엘",
+    "name_en": "TFUEL"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ANKR-KRW",
-    "base_symbol": "ANKR",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ANKR",
+    "base_symbol": "KRW",
+    "quote_symbol": "ANKR",
+    "name_ko": "앵커",
+    "name_en": "Ankr Network"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CRO-KRW",
-    "base_symbol": "CRO",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CRO",
+    "base_symbol": "KRW",
+    "quote_symbol": "CRO",
+    "name_ko": "크로노스",
+    "name_en": "Cronos"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CHR-KRW",
-    "base_symbol": "CHR",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CHR",
+    "base_symbol": "KRW",
+    "quote_symbol": "CHR",
+    "name_ko": "크로미아",
+    "name_en": "Chromia"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "MBL-KRW",
-    "base_symbol": "MBL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-MBL",
+    "base_symbol": "KRW",
+    "quote_symbol": "MBL",
+    "name_ko": "무비블록",
+    "name_en": "MovieBloc"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "FCT2-KRW",
-    "base_symbol": "FCT2",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-FCT2",
+    "base_symbol": "KRW",
+    "quote_symbol": "FCT2",
+    "name_ko": "피르마체인",
+    "name_en": "Firmachain"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BOA-KRW",
-    "base_symbol": "BOA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BOA",
+    "base_symbol": "KRW",
+    "quote_symbol": "BOA",
+    "name_ko": "보아",
+    "name_en": "BOSagora"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "MEV-KRW",
-    "base_symbol": "MEV",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-MEV",
+    "base_symbol": "KRW",
+    "quote_symbol": "MEV",
+    "name_ko": "미버스",
+    "name_en": "MEVerse"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SXP-KRW",
-    "base_symbol": "SXP",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-SXP",
+    "base_symbol": "KRW",
+    "quote_symbol": "SXP",
+    "name_ko": "솔라",
+    "name_en": "Solar"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "COS-KRW",
-    "base_symbol": "COS",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-COS",
+    "base_symbol": "KRW",
+    "quote_symbol": "COS",
+    "name_ko": "콘텐토스",
+    "name_en": "Contentos"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "EL-KRW",
-    "base_symbol": "EL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-EL",
+    "base_symbol": "KRW",
+    "quote_symbol": "EL",
+    "name_ko": "엘리시아",
+    "name_en": "ELYSIA"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "HIVE-KRW",
-    "base_symbol": "HIVE",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-HIVE",
+    "base_symbol": "KRW",
+    "quote_symbol": "HIVE",
+    "name_ko": "하이브",
+    "name_en": "Hive"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "XPR-KRW",
-    "base_symbol": "XPR",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-XPR",
+    "base_symbol": "KRW",
+    "quote_symbol": "XPR",
+    "name_ko": "엑스피알 네트워크",
+    "name_en": "XPR Network"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "EGG-KRW",
-    "base_symbol": "EGG",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-EGG",
+    "base_symbol": "KRW",
+    "quote_symbol": "EGG",
+    "name_ko": "네스트리",
+    "name_en": "Nestree"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BORA-KRW",
-    "base_symbol": "BORA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BORA",
+    "base_symbol": "KRW",
+    "quote_symbol": "BORA",
+    "name_ko": "보라",
+    "name_en": "BORA"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ARPA-KRW",
-    "base_symbol": "ARPA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ARPA",
+    "base_symbol": "KRW",
+    "quote_symbol": "ARPA",
+    "name_ko": "알파",
+    "name_en": "ARPA"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CTC-KRW",
-    "base_symbol": "CTC",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CTC",
+    "base_symbol": "KRW",
+    "quote_symbol": "CTC",
+    "name_ko": "크레딧코인",
+    "name_en": "Creditcoin"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "APM-KRW",
-    "base_symbol": "APM",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-APM",
+    "base_symbol": "KRW",
+    "quote_symbol": "APM",
+    "name_ko": "에이피엠 코인",
+    "name_en": "apM Coin"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CKB-KRW",
-    "base_symbol": "CKB",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CKB",
+    "base_symbol": "KRW",
+    "quote_symbol": "CKB",
+    "name_ko": "너보스",
+    "name_en": "Nervos Network"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "AERGO-KRW",
-    "base_symbol": "AERGO",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-AERGO",
+    "base_symbol": "KRW",
+    "quote_symbol": "AERGO",
+    "name_ko": "아르고",
+    "name_en": "Aergo"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "EVZ-KRW",
-    "base_symbol": "EVZ",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-EVZ",
+    "base_symbol": "KRW",
+    "quote_symbol": "EVZ",
+    "name_ko": "이브이지",
+    "name_en": "Electronic Vehicle Zone"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "UNI-KRW",
-    "base_symbol": "UNI",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-UNI",
+    "base_symbol": "KRW",
+    "quote_symbol": "UNI",
     "name_ko": "유니스왑",
     "name_en": "Uniswap"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "YFI-KRW",
-    "base_symbol": "YFI",
-    "quote_symbol": "KRW",
-    "name_ko": "예피나인스",
-    "name_en": "Yearn Finance"
+    "market_code": "KRW-YFI",
+    "base_symbol": "KRW",
+    "quote_symbol": "YFI",
+    "name_ko": "연파이낸스",
+    "name_en": "yearn.finance"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "UMA-KRW",
-    "base_symbol": "UMA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-UMA",
+    "base_symbol": "KRW",
+    "quote_symbol": "UMA",
+    "name_ko": "우마",
+    "name_en": "UMA"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "AAVE-KRW",
-    "base_symbol": "AAVE",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-AAVE",
+    "base_symbol": "KRW",
+    "quote_symbol": "AAVE",
     "name_ko": "에이브",
     "name_en": "Aave"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "COMP-KRW",
-    "base_symbol": "COMP",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-COMP",
+    "base_symbol": "KRW",
+    "quote_symbol": "COMP",
     "name_ko": "컴파운드",
     "name_en": "Compound"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BAL-KRW",
-    "base_symbol": "BAL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BAL",
+    "base_symbol": "KRW",
+    "quote_symbol": "BAL",
+    "name_ko": "밸런서",
+    "name_en": "Balancer"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "RSR-KRW",
-    "base_symbol": "RSR",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-RSR",
+    "base_symbol": "KRW",
+    "quote_symbol": "RSR",
+    "name_ko": "리저브라이트",
+    "name_en": "Reserve Rights"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "NMR-KRW",
-    "base_symbol": "NMR",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-NMR",
+    "base_symbol": "KRW",
+    "quote_symbol": "NMR",
+    "name_ko": "뉴메레르",
+    "name_en": "Numeraire"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "RLC-KRW",
-    "base_symbol": "RLC",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-RLC",
+    "base_symbol": "KRW",
+    "quote_symbol": "RLC",
+    "name_ko": "아이젝",
+    "name_en": "iExec RLC"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "UOS-KRW",
-    "base_symbol": "UOS",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-UOS",
+    "base_symbol": "KRW",
+    "quote_symbol": "UOS",
+    "name_ko": "울트라",
+    "name_en": "Ultra"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SAND-KRW",
-    "base_symbol": "SAND",
-    "quote_symbol": "KRW",
-    "name_ko": "더샌드박스",
+    "market_code": "KRW-SAND",
+    "base_symbol": "KRW",
+    "quote_symbol": "SAND",
+    "name_ko": "샌드박스",
     "name_en": "The Sandbox"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "AWE-KRW",
-    "base_symbol": "AWE",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-AWE",
+    "base_symbol": "KRW",
+    "quote_symbol": "AWE",
+    "name_ko": "에이더블유이",
+    "name_en": "AWE Network"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BEL-KRW",
-    "base_symbol": "BEL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BEL",
+    "base_symbol": "KRW",
+    "quote_symbol": "BEL",
+    "name_ko": "벨라프로토콜",
+    "name_en": "Bella Protocol"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "OBSR-KRW",
-    "base_symbol": "OBSR",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-OBSR",
+    "base_symbol": "KRW",
+    "quote_symbol": "OBSR",
+    "name_ko": "옵저버",
+    "name_en": "Observer"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "POLA-KRW",
-    "base_symbol": "POLA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-POLA",
+    "base_symbol": "KRW",
+    "quote_symbol": "POLA",
+    "name_ko": "폴라리스 쉐어",
+    "name_en": "Polaris Share"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ADP-KRW",
-    "base_symbol": "ADP",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ADP",
+    "base_symbol": "KRW",
+    "quote_symbol": "ADP",
+    "name_ko": "어댑터 토큰",
+    "name_en": "Adappter Token"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "DVI-KRW",
-    "base_symbol": "DVI",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-DVI",
+    "base_symbol": "KRW",
+    "quote_symbol": "DVI",
+    "name_ko": "디비전",
+    "name_en": "Dvision Network"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "GHX-KRW",
-    "base_symbol": "GHX",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-GHX",
+    "base_symbol": "KRW",
+    "quote_symbol": "GHX",
+    "name_ko": "게이머코인",
+    "name_en": "Gamercoin"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CBK-KRW",
-    "base_symbol": "CBK",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CBK",
+    "base_symbol": "KRW",
+    "quote_symbol": "CBK",
+    "name_ko": "코박토큰",
+    "name_en": "Cobak Token"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "MVC-KRW",
-    "base_symbol": "MVC",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-MVC",
+    "base_symbol": "KRW",
+    "quote_symbol": "MVC",
+    "name_ko": "마일벌스",
+    "name_en": "MileVerse"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BLY-KRW",
-    "base_symbol": "BLY",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BLY",
+    "base_symbol": "KRW",
+    "quote_symbol": "BLY",
+    "name_ko": "블로서리",
+    "name_en": "Blocery"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "GRT-KRW",
-    "base_symbol": "GRT",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-GRT",
+    "base_symbol": "KRW",
+    "quote_symbol": "GRT",
     "name_ko": "더그래프",
     "name_en": "The Graph"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BIOT-KRW",
-    "base_symbol": "BIOT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BIOT",
+    "base_symbol": "KRW",
+    "quote_symbol": "BIOT",
+    "name_ko": "바이오패스포트",
+    "name_en": "BioPassport"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SNX-KRW",
-    "base_symbol": "SNX",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-SNX",
+    "base_symbol": "KRW",
+    "quote_symbol": "SNX",
     "name_ko": "신세틱스",
-    "name_en": "Synthetix"
+    "name_en": "Synthetix Network Token"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "GRACY-KRW",
-    "base_symbol": "GRACY",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-GRACY",
+    "base_symbol": "KRW",
+    "quote_symbol": "GRACY",
+    "name_ko": "그레이시",
+    "name_en": "Gracy"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "OXT-KRW",
-    "base_symbol": "OXT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-OXT",
+    "base_symbol": "KRW",
+    "quote_symbol": "OXT",
+    "name_ko": "오키드",
+    "name_en": "Orchid"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "MAPO-KRW",
-    "base_symbol": "MAPO",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-MAPO",
+    "base_symbol": "KRW",
+    "quote_symbol": "MAPO",
+    "name_ko": "맵프로토콜",
+    "name_en": "MAP Protocol"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "AQT-KRW",
-    "base_symbol": "AQT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-AQT",
+    "base_symbol": "KRW",
+    "quote_symbol": "AQT",
+    "name_ko": "알파쿼크",
+    "name_en": "Alpha Quark Token"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "WIKEN-KRW",
-    "base_symbol": "WIKEN",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-WIKEN",
+    "base_symbol": "KRW",
+    "quote_symbol": "WIKEN",
+    "name_ko": "위드",
+    "name_en": "Project WITH"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CTSI-KRW",
-    "base_symbol": "CTSI",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CTSI",
+    "base_symbol": "KRW",
+    "quote_symbol": "CTSI",
+    "name_ko": "카르테시",
+    "name_en": "Cartesi"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "MANA-KRW",
-    "base_symbol": "MANA",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-MANA",
+    "base_symbol": "KRW",
+    "quote_symbol": "MANA",
     "name_ko": "디센트럴랜드",
     "name_en": "Decentraland"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "LPT-KRW",
-    "base_symbol": "LPT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-LPT",
+    "base_symbol": "KRW",
+    "quote_symbol": "LPT",
+    "name_ko": "라이브피어",
+    "name_en": "Livepeer"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SUSHI-KRW",
-    "base_symbol": "SUSHI",
-    "quote_symbol": "KRW",
-    "name_ko": "스시",
-    "name_en": "Sushi"
+    "market_code": "KRW-SUSHI",
+    "base_symbol": "KRW",
+    "quote_symbol": "SUSHI",
+    "name_ko": "스시스왑",
+    "name_en": "Sushiswap"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "PUNDIX-KRW",
-    "base_symbol": "PUNDIX",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-PUNDIX",
+    "base_symbol": "KRW",
+    "quote_symbol": "PUNDIX",
+    "name_ko": "펀디엑스",
+    "name_en": "Pundi X"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CELR-KRW",
-    "base_symbol": "CELR",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CELR",
+    "base_symbol": "KRW",
+    "quote_symbol": "CELR",
+    "name_ko": "셀러네트워크",
+    "name_en": "Celer Network"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BFC-KRW",
-    "base_symbol": "BFC",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BFC",
+    "base_symbol": "KRW",
+    "quote_symbol": "BFC",
+    "name_ko": "바이프로스트",
+    "name_en": "Bifrost"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ALICE-KRW",
-    "base_symbol": "ALICE",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-ALICE",
+    "base_symbol": "KRW",
+    "quote_symbol": "ALICE",
     "name_ko": "마이네이버앨리스",
-    "name_en": "My Neighbor Alice"
+    "name_en": "MyNeighborAlice"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "OGN-KRW",
-    "base_symbol": "OGN",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-OGN",
+    "base_symbol": "KRW",
+    "quote_symbol": "OGN",
     "name_ko": "오리진프로토콜",
     "name_en": "Origin Protocol"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "COTI-KRW",
-    "base_symbol": "COTI",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-COTI",
+    "base_symbol": "KRW",
+    "quote_symbol": "COTI",
     "name_ko": "코티",
     "name_en": "COTI"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CAKE-KRW",
-    "base_symbol": "CAKE",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-CAKE",
+    "base_symbol": "KRW",
+    "quote_symbol": "CAKE",
     "name_ko": "팬케이크스왑",
     "name_en": "PancakeSwap"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BNT-KRW",
-    "base_symbol": "BNT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BNT",
+    "base_symbol": "KRW",
+    "quote_symbol": "BNT",
+    "name_ko": "뱅코르",
+    "name_en": "Bancor"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "XVS-KRW",
-    "base_symbol": "XVS",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-XVS",
+    "base_symbol": "KRW",
+    "quote_symbol": "XVS",
+    "name_ko": "비너스",
+    "name_en": "Venus"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SWAP-KRW",
-    "base_symbol": "SWAP",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-SWAP",
+    "base_symbol": "KRW",
+    "quote_symbol": "SWAP",
+    "name_ko": "트러스트스왑",
+    "name_en": "TrustSwap"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CHZ-KRW",
-    "base_symbol": "CHZ",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-CHZ",
+    "base_symbol": "KRW",
+    "quote_symbol": "CHZ",
     "name_ko": "칠리즈",
     "name_en": "Chiliz"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "AXS-KRW",
-    "base_symbol": "AXS",
-    "quote_symbol": "KRW",
-    "name_ko": "액시인피니티",
+    "market_code": "KRW-AXS",
+    "base_symbol": "KRW",
+    "quote_symbol": "AXS",
+    "name_ko": "엑시인피니티",
     "name_en": "Axie Infinity"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "DAO-KRW",
-    "base_symbol": "DAO",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-DAO",
+    "base_symbol": "KRW",
+    "quote_symbol": "DAO",
+    "name_ko": "다오메이커",
+    "name_en": "DAO Maker"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SIX-KRW",
-    "base_symbol": "SIX",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-SIX",
+    "base_symbol": "KRW",
+    "quote_symbol": "SIX",
+    "name_ko": "식스",
+    "name_en": "SIX"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "USDS-KRW",
-    "base_symbol": "USDS",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-USDS",
+    "base_symbol": "KRW",
+    "quote_symbol": "USDS",
+    "name_ko": "유에스디에스",
+    "name_en": "USDS"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SHIB-KRW",
-    "base_symbol": "SHIB",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-SHIB",
+    "base_symbol": "KRW",
+    "quote_symbol": "SHIB",
     "name_ko": "시바이누",
-    "name_en": "Shiba Inu"
+    "name_en": "SHIBA INU"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "POL-KRW",
-    "base_symbol": "POL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-POL",
+    "base_symbol": "KRW",
+    "quote_symbol": "POL",
+    "name_ko": "폴리곤 에코시스템 토큰",
+    "name_en": "Polygon Ecosystem Token"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "WOO-KRW",
-    "base_symbol": "WOO",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-WOO",
+    "base_symbol": "KRW",
+    "quote_symbol": "WOO",
+    "name_ko": "우",
+    "name_en": "WOO"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ACH-KRW",
-    "base_symbol": "ACH",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ACH",
+    "base_symbol": "KRW",
+    "quote_symbol": "ACH",
+    "name_ko": "알케미페이",
+    "name_en": "Alchemy Pay"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "XLM-KRW",
-    "base_symbol": "XLM",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-XLM",
+    "base_symbol": "KRW",
+    "quote_symbol": "XLM",
     "name_ko": "스텔라루멘",
-    "name_en": "Stellar"
+    "name_en": "Stellar Lumens"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ONT-KRW",
-    "base_symbol": "ONT",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-ONT",
+    "base_symbol": "KRW",
+    "quote_symbol": "ONT",
     "name_ko": "온톨로지",
     "name_en": "Ontology"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "META-KRW",
-    "base_symbol": "META",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-META",
+    "base_symbol": "KRW",
+    "quote_symbol": "META",
+    "name_ko": "메타디움",
+    "name_en": "Metadium"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "KAIA-KRW",
-    "base_symbol": "KAIA",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-KAIA",
+    "base_symbol": "KRW",
+    "quote_symbol": "KAIA",
     "name_ko": "카이아",
     "name_en": "Kaia"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ONG-KRW",
-    "base_symbol": "ONG",
-    "quote_symbol": "KRW",
-    "name_ko": "온토로지가스",
-    "name_en": "ONG"
+    "market_code": "KRW-ONG",
+    "base_symbol": "KRW",
+    "quote_symbol": "ONG",
+    "name_ko": "온톨로지가스",
+    "name_en": "Ontology Gas"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ALGO-KRW",
-    "base_symbol": "ALGO",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-ALGO",
+    "base_symbol": "KRW",
+    "quote_symbol": "ALGO",
     "name_ko": "알고랜드",
     "name_en": "Algorand"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "JST-KRW",
-    "base_symbol": "JST",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-JST",
+    "base_symbol": "KRW",
+    "quote_symbol": "JST",
     "name_ko": "저스트",
     "name_en": "JUST"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "XTZ-KRW",
-    "base_symbol": "XTZ",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-XTZ",
+    "base_symbol": "KRW",
+    "quote_symbol": "XTZ",
     "name_ko": "테조스",
     "name_en": "Tezos"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "MLK-KRW",
-    "base_symbol": "MLK",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-MLK",
+    "base_symbol": "KRW",
+    "quote_symbol": "MLK",
+    "name_ko": "밀크",
+    "name_en": "MiL.k"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "DOT-KRW",
-    "base_symbol": "DOT",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-DOT",
+    "base_symbol": "KRW",
+    "quote_symbol": "DOT",
     "name_ko": "폴카닷",
     "name_en": "Polkadot"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ATOM-KRW",
-    "base_symbol": "ATOM",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-ATOM",
+    "base_symbol": "KRW",
+    "quote_symbol": "ATOM",
     "name_ko": "코스모스",
     "name_en": "Cosmos"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "TEMCO-KRW",
-    "base_symbol": "TEMCO",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-TEMCO",
+    "base_symbol": "KRW",
+    "quote_symbol": "TEMCO",
+    "name_ko": "템코",
+    "name_en": "TEMCO"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "DOGE-KRW",
-    "base_symbol": "DOGE",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-DOGE",
+    "base_symbol": "KRW",
+    "quote_symbol": "DOGE",
     "name_ko": "도지코인",
     "name_en": "Dogecoin"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "KSM-KRW",
-    "base_symbol": "KSM",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-KSM",
+    "base_symbol": "KRW",
+    "quote_symbol": "KSM",
     "name_ko": "쿠사마",
     "name_en": "Kusama"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CTK-KRW",
-    "base_symbol": "CTK",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CTK",
+    "base_symbol": "KRW",
+    "quote_symbol": "CTK",
+    "name_ko": "셴투",
+    "name_en": "Shentu"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BNB-KRW",
-    "base_symbol": "BNB",
-    "quote_symbol": "KRW",
-    "name_ko": "바이낸스코인",
+    "market_code": "KRW-BNB",
+    "base_symbol": "KRW",
+    "quote_symbol": "BNB",
+    "name_ko": "비앤비",
     "name_en": "BNB"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "NFT-KRW",
-    "base_symbol": "NFT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-NFT",
+    "base_symbol": "KRW",
+    "quote_symbol": "NFT",
+    "name_ko": "에이피이앤에프티",
+    "name_en": "APENFT"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SUN-KRW",
-    "base_symbol": "SUN",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-SUN",
+    "base_symbol": "KRW",
+    "quote_symbol": "SUN",
+    "name_ko": "썬",
+    "name_en": "SUN"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "XEC-KRW",
-    "base_symbol": "XEC",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-XEC",
+    "base_symbol": "KRW",
+    "quote_symbol": "XEC",
+    "name_ko": "이캐시",
+    "name_en": "eCash"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SOL-KRW",
-    "base_symbol": "SOL",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-SOL",
+    "base_symbol": "KRW",
+    "quote_symbol": "SOL",
     "name_ko": "솔라나",
     "name_en": "Solana"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "EGLD-KRW",
-    "base_symbol": "EGLD",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-EGLD",
+    "base_symbol": "KRW",
+    "quote_symbol": "EGLD",
+    "name_ko": "멀티버스엑스",
+    "name_en": "MultiversX"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "MASK-KRW",
-    "base_symbol": "MASK",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-MASK",
+    "base_symbol": "KRW",
+    "quote_symbol": "MASK",
+    "name_ko": "마스크네트워크",
+    "name_en": "Mask Network"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "C98-KRW",
-    "base_symbol": "C98",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-C98",
+    "base_symbol": "KRW",
+    "quote_symbol": "C98",
+    "name_ko": "코인98",
+    "name_en": "Coin98"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "MED-KRW",
-    "base_symbol": "MED",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-MED",
+    "base_symbol": "KRW",
+    "quote_symbol": "MED",
+    "name_ko": "메디블록",
+    "name_en": "MediBloc"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "1INCH-KRW",
-    "base_symbol": "1INCH",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-1INCH",
+    "base_symbol": "KRW",
+    "quote_symbol": "1INCH",
+    "name_ko": "1인치",
+    "name_en": "1inch"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CRV-KRW",
-    "base_symbol": "CRV",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-CRV",
+    "base_symbol": "KRW",
+    "quote_symbol": "CRV",
     "name_ko": "커브",
-    "name_en": "Curve"
+    "name_en": "Curve DAO Token"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BOBA-KRW",
-    "base_symbol": "BOBA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BOBA",
+    "base_symbol": "KRW",
+    "quote_symbol": "BOBA",
+    "name_ko": "보바토큰",
+    "name_en": "Boba Network"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "DYDX-KRW",
-    "base_symbol": "DYDX",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-DYDX",
+    "base_symbol": "KRW",
+    "quote_symbol": "DYDX",
+    "name_ko": "디와이디엑스",
+    "name_en": "dYdX"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "MINA-KRW",
-    "base_symbol": "MINA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-MINA",
+    "base_symbol": "KRW",
+    "quote_symbol": "MINA",
+    "name_ko": "미나",
+    "name_en": "Mina"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "FLOW-KRW",
-    "base_symbol": "FLOW",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-FLOW",
+    "base_symbol": "KRW",
+    "quote_symbol": "FLOW",
+    "name_ko": "플로우",
+    "name_en": "Flow"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "JOE-KRW",
-    "base_symbol": "JOE",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-JOE",
+    "base_symbol": "KRW",
+    "quote_symbol": "JOE",
+    "name_ko": "트레이더 조",
+    "name_en": "JOE"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "GALA-KRW",
-    "base_symbol": "GALA",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-GALA",
+    "base_symbol": "KRW",
+    "quote_symbol": "GALA",
     "name_ko": "갈라",
     "name_en": "Gala"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ENS-KRW",
-    "base_symbol": "ENS",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-ENS",
+    "base_symbol": "KRW",
+    "quote_symbol": "ENS",
     "name_ko": "이더리움네임서비스",
     "name_en": "Ethereum Name Service"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BTT-KRW",
-    "base_symbol": "BTT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BTT",
+    "base_symbol": "KRW",
+    "quote_symbol": "BTT",
+    "name_ko": "비트토렌트",
+    "name_en": "BitTorrent"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "JASMY-KRW",
-    "base_symbol": "JASMY",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-JASMY",
+    "base_symbol": "KRW",
+    "quote_symbol": "JASMY",
+    "name_ko": "재스미코인",
+    "name_en": "JasmyCoin"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "REQ-KRW",
-    "base_symbol": "REQ",
-    "quote_symbol": "KRW",
-    "name_ko": "리퀘스트네트워크",
-    "name_en": "Request Network"
+    "market_code": "KRW-REQ",
+    "base_symbol": "KRW",
+    "quote_symbol": "REQ",
+    "name_ko": "리퀘스트",
+    "name_en": "Request"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CSPR-KRW",
-    "base_symbol": "CSPR",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CSPR",
+    "base_symbol": "KRW",
+    "quote_symbol": "CSPR",
+    "name_ko": "캐스퍼",
+    "name_en": "Casper"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "AVAX-KRW",
-    "base_symbol": "AVAX",
-    "quote_symbol": "KRW",
-    "name_ko": "아발란시",
+    "market_code": "KRW-AVAX",
+    "base_symbol": "KRW",
+    "quote_symbol": "AVAX",
+    "name_ko": "아발란체",
     "name_en": "Avalanche"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "TDROP-KRW",
-    "base_symbol": "TDROP",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-TDROP",
+    "base_symbol": "KRW",
+    "quote_symbol": "TDROP",
+    "name_ko": "티드랍",
+    "name_en": "ThetaDrop"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "HBAR-KRW",
-    "base_symbol": "HBAR",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-HBAR",
+    "base_symbol": "KRW",
+    "quote_symbol": "HBAR",
     "name_ko": "헤데라",
     "name_en": "Hedera"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "FANC-KRW",
-    "base_symbol": "FANC",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-FANC",
+    "base_symbol": "KRW",
+    "quote_symbol": "FANC",
+    "name_ko": "팬시",
+    "name_en": "fanC"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "MAY-KRW",
-    "base_symbol": "MAY",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-MAY",
+    "base_symbol": "KRW",
+    "quote_symbol": "MAY",
+    "name_ko": "메이플라워",
+    "name_en": "Mayflower"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "REI-KRW",
-    "base_symbol": "REI",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-REI",
+    "base_symbol": "KRW",
+    "quote_symbol": "REI",
+    "name_ko": "레이",
+    "name_en": "REI"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "T-KRW",
-    "base_symbol": "T",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-T",
+    "base_symbol": "KRW",
+    "quote_symbol": "T",
+    "name_ko": "쓰레스홀드",
+    "name_en": "Threshold"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "MBX-KRW",
-    "base_symbol": "MBX",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-MBX",
+    "base_symbol": "KRW",
+    "quote_symbol": "MBX",
+    "name_ko": "마브렉스",
+    "name_en": "Marblex"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "GMT-KRW",
-    "base_symbol": "GMT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-GMT",
+    "base_symbol": "KRW",
+    "quote_symbol": "GMT",
+    "name_ko": "스테픈",
+    "name_en": "STEPN"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "TAVA-KRW",
-    "base_symbol": "TAVA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-TAVA",
+    "base_symbol": "KRW",
+    "quote_symbol": "TAVA",
+    "name_ko": "알타바",
+    "name_en": "ALTAVA"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "D-KRW",
-    "base_symbol": "D",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-D",
+    "base_symbol": "KRW",
+    "quote_symbol": "D",
+    "name_ko": "달 오픈 네트워크",
+    "name_en": "DAR Open Network"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "APE-KRW",
-    "base_symbol": "APE",
-    "quote_symbol": "KRW",
-    "name_ko": "에이피씨",
+    "market_code": "KRW-APE",
+    "base_symbol": "KRW",
+    "quote_symbol": "APE",
+    "name_ko": "에이프코인",
     "name_en": "ApeCoin"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "WNCG-KRW",
-    "base_symbol": "WNCG",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-WNCG",
+    "base_symbol": "KRW",
+    "quote_symbol": "WNCG",
+    "name_ko": "랩트 나인 크로니클 골드",
+    "name_en": "Wrapped NCG"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "AL-KRW",
-    "base_symbol": "AL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-AL",
+    "base_symbol": "KRW",
+    "quote_symbol": "AL",
+    "name_ko": "아치루트",
+    "name_en": "ArchLoot"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "XCN-KRW",
-    "base_symbol": "XCN",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-XCN",
+    "base_symbol": "KRW",
+    "quote_symbol": "XCN",
+    "name_ko": "오닉스코인",
+    "name_en": "Onyxcoin"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "AZIT-KRW",
-    "base_symbol": "AZIT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-AZIT",
+    "base_symbol": "KRW",
+    "quote_symbol": "AZIT",
+    "name_ko": "아지트",
+    "name_en": "Azit"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "FLR-KRW",
-    "base_symbol": "FLR",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-FLR",
+    "base_symbol": "KRW",
+    "quote_symbol": "FLR",
     "name_ko": "플레어",
     "name_en": "Flare"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SFP-KRW",
-    "base_symbol": "SFP",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-SFP",
+    "base_symbol": "KRW",
+    "quote_symbol": "SFP",
+    "name_ko": "세이프팔",
+    "name_en": "Safepal"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "FITFI-KRW",
-    "base_symbol": "FITFI",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-FITFI",
+    "base_symbol": "KRW",
+    "quote_symbol": "FITFI",
+    "name_ko": "스텝앱",
+    "name_en": "Step App"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "STAT-KRW",
-    "base_symbol": "STAT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-STAT",
+    "base_symbol": "KRW",
+    "quote_symbol": "STAT",
+    "name_ko": "스탯",
+    "name_en": "STAT"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CRTS-KRW",
-    "base_symbol": "CRTS",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CRTS",
+    "base_symbol": "KRW",
+    "quote_symbol": "CRTS",
+    "name_ko": "크라토스",
+    "name_en": "Cratos"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "LM-KRW",
-    "base_symbol": "LM",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-LM",
+    "base_symbol": "KRW",
+    "quote_symbol": "LM",
+    "name_ko": "레저메타",
+    "name_en": "LeisureMeta"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "GRND-KRW",
-    "base_symbol": "GRND",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-GRND",
+    "base_symbol": "KRW",
+    "quote_symbol": "GRND",
+    "name_ko": "슈퍼워크",
+    "name_en": "Superwalk"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "APT-KRW",
-    "base_symbol": "APT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-APT",
+    "base_symbol": "KRW",
+    "quote_symbol": "APT",
+    "name_ko": "앱토스",
+    "name_en": "Aptos"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BLUR-KRW",
-    "base_symbol": "BLUR",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-BLUR",
+    "base_symbol": "KRW",
+    "quote_symbol": "BLUR",
     "name_ko": "블러",
     "name_en": "Blur"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "OAS-KRW",
-    "base_symbol": "OAS",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-OAS",
+    "base_symbol": "KRW",
+    "quote_symbol": "OAS",
+    "name_ko": "오아시스",
+    "name_en": "Oasys"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "HOOK-KRW",
-    "base_symbol": "HOOK",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-HOOK",
+    "base_symbol": "KRW",
+    "quote_symbol": "HOOK",
+    "name_ko": "훅트 프로토콜",
+    "name_en": "Hooked Protocol"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "LWA-KRW",
-    "base_symbol": "LWA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-LWA",
+    "base_symbol": "KRW",
+    "quote_symbol": "LWA",
+    "name_ko": "루미웨이브",
+    "name_en": "Lumiwave"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "OP-KRW",
-    "base_symbol": "OP",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-OP",
+    "base_symbol": "KRW",
+    "quote_symbol": "OP",
     "name_ko": "옵티미즘",
     "name_en": "Optimism"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ROA-KRW",
-    "base_symbol": "ROA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ROA",
+    "base_symbol": "KRW",
+    "quote_symbol": "ROA",
+    "name_ko": "로아코어",
+    "name_en": "ROA CORE"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "GMX-KRW",
-    "base_symbol": "GMX",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-GMX",
+    "base_symbol": "KRW",
+    "quote_symbol": "GMX",
+    "name_ko": "지엠엑스",
+    "name_en": "GMX"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "STX-KRW",
-    "base_symbol": "STX",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-STX",
+    "base_symbol": "KRW",
+    "quote_symbol": "STX",
+    "name_ko": "스택스",
+    "name_en": "Stacks"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "XPLA-KRW",
-    "base_symbol": "XPLA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-XPLA",
+    "base_symbol": "KRW",
+    "quote_symbol": "XPLA",
+    "name_ko": "엑스플라",
+    "name_en": "XPLA"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "AHT-KRW",
-    "base_symbol": "AHT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-AHT",
+    "base_symbol": "KRW",
+    "quote_symbol": "AHT",
+    "name_ko": "아하토큰",
+    "name_en": "AhaToken"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ARB-KRW",
-    "base_symbol": "ARB",
-    "quote_symbol": "KRW",
-    "name_ko": "아르비트럼",
+    "market_code": "KRW-ARB",
+    "base_symbol": "KRW",
+    "quote_symbol": "ARB",
+    "name_ko": "아비트럼",
     "name_en": "Arbitrum"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "INJ-KRW",
-    "base_symbol": "INJ",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-INJ",
+    "base_symbol": "KRW",
+    "quote_symbol": "INJ",
+    "name_ko": "인젝티브",
+    "name_en": "Injective"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "HFT-KRW",
-    "base_symbol": "HFT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-HFT",
+    "base_symbol": "KRW",
+    "quote_symbol": "HFT",
+    "name_ko": "해시플로우",
+    "name_en": "Hashflow"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "RPL-KRW",
-    "base_symbol": "RPL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-RPL",
+    "base_symbol": "KRW",
+    "quote_symbol": "RPL",
+    "name_ko": "로켓풀",
+    "name_en": "Rocket Pool"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "IMX-KRW",
-    "base_symbol": "IMX",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-IMX",
+    "base_symbol": "KRW",
+    "quote_symbol": "IMX",
+    "name_ko": "이뮤터블엑스",
+    "name_en": "Immutable X"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CFX-KRW",
-    "base_symbol": "CFX",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CFX",
+    "base_symbol": "KRW",
+    "quote_symbol": "CFX",
+    "name_ko": "콘플럭스",
+    "name_en": "Conflux Network"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ACS-KRW",
-    "base_symbol": "ACS",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ACS",
+    "base_symbol": "KRW",
+    "quote_symbol": "ACS",
+    "name_ko": "액세스프로토콜",
+    "name_en": "Access Protocol"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "FXS-KRW",
-    "base_symbol": "FXS",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-FXS",
+    "base_symbol": "KRW",
+    "quote_symbol": "FXS",
+    "name_ko": "프랙스 셰어",
+    "name_en": "Frax Share"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CELO-KRW",
-    "base_symbol": "CELO",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CELO",
+    "base_symbol": "KRW",
+    "quote_symbol": "CELO",
+    "name_ko": "셀로",
+    "name_en": "Celo"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "LDO-KRW",
-    "base_symbol": "LDO",
-    "quote_symbol": "KRW",
-    "name_ko": "리도",
-    "name_en": "Lido"
+    "market_code": "KRW-LDO",
+    "base_symbol": "KRW",
+    "quote_symbol": "LDO",
+    "name_ko": "리도다오",
+    "name_en": "Lido DAO"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "S-KRW",
-    "base_symbol": "S",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "FET-KRW",
-    "base_symbol": "FET",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "SUI-KRW",
-    "base_symbol": "SUI",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "NCT-KRW",
-    "base_symbol": "NCT",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "FLOKI-KRW",
-    "base_symbol": "FLOKI",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ID-KRW",
-    "base_symbol": "ID",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "RENDER-KRW",
-    "base_symbol": "RENDER",
-    "quote_symbol": "KRW",
-    "name_ko": "렌더네트워크",
-    "name_en": "Render"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "STG-KRW",
-    "base_symbol": "STG",
-    "quote_symbol": "KRW",
-    "name_ko": "스타게이트",
-    "name_en": "Stargate"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "OSMO-KRW",
-    "base_symbol": "OSMO",
-    "quote_symbol": "KRW",
-    "name_ko": "오스모",
-    "name_en": "Osmosis"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "FIL-KRW",
-    "base_symbol": "FIL",
-    "quote_symbol": "KRW",
-    "name_ko": "파일코인",
-    "name_en": "Filecoin"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ILV-KRW",
-    "base_symbol": "ILV",
-    "quote_symbol": "KRW",
-    "name_ko": "일루비움",
-    "name_en": "Illuvium"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "MAV-KRW",
-    "base_symbol": "MAV",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "RSS3-KRW",
-    "base_symbol": "RSS3",
-    "quote_symbol": "KRW",
-    "name_ko": "알에스에스쓰리",
-    "name_en": "RSS3"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "AUDIO-KRW",
-    "base_symbol": "AUDIO",
-    "quote_symbol": "KRW",
-    "name_ko": "오디우스",
-    "name_en": "Audius"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "AGI-KRW",
-    "base_symbol": "AGI",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ASTR-KRW",
-    "base_symbol": "ASTR",
-    "quote_symbol": "KRW",
-    "name_ko": "아스터",
-    "name_en": "Astar"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "WLD-KRW",
-    "base_symbol": "WLD",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "FLUX-KRW",
-    "base_symbol": "FLUX",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "AGLD-KRW",
-    "base_symbol": "AGLD",
-    "quote_symbol": "KRW",
-    "name_ko": "어드벤처골드",
-    "name_en": "Adventure Gold"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "AR-KRW",
-    "base_symbol": "AR",
-    "quote_symbol": "KRW",
-    "name_ko": "아르",
-    "name_en": "Arweave"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "RVN-KRW",
-    "base_symbol": "RVN",
-    "quote_symbol": "KRW",
-    "name_ko": "레이븐",
-    "name_en": "Ravencoin"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "EDU-KRW",
-    "base_symbol": "EDU",
-    "quote_symbol": "KRW",
-    "name_ko": "이듀",
-    "name_en": "EduCoin"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "SEI-KRW",
-    "base_symbol": "SEI",
-    "quote_symbol": "KRW",
-    "name_ko": "세이",
-    "name_en": "Sei"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "WAXL-KRW",
-    "base_symbol": "WAXL",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "MOC-KRW",
-    "base_symbol": "MOC",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "PEPE-KRW",
-    "base_symbol": "PEPE",
-    "quote_symbol": "KRW",
-    "name_ko": "페페",
-    "name_en": "Pepe"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "CYBER-KRW",
-    "base_symbol": "CYBER",
-    "quote_symbol": "KRW",
-    "name_ko": "사이버",
-    "name_en": "Cyber"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ARKM-KRW",
-    "base_symbol": "ARKM",
-    "quote_symbol": "KRW",
-    "name_ko": "아크럼",
-    "name_en": "Arkham"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "PYR-KRW",
-    "base_symbol": "PYR",
-    "quote_symbol": "KRW",
-    "name_ko": "피로",
-    "name_en": "Pyro"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "IOTX-KRW",
-    "base_symbol": "IOTX",
-    "quote_symbol": "KRW",
-    "name_ko": "아이오텍스",
-    "name_en": "IoTeX"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "HIGH-KRW",
-    "base_symbol": "HIGH",
-    "quote_symbol": "KRW",
-    "name_ko": "하이",
-    "name_en": "High Street"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "PENDLE-KRW",
-    "base_symbol": "PENDLE",
-    "quote_symbol": "KRW",
-    "name_ko": "펜들",
-    "name_en": "Pendle"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "BICO-KRW",
-    "base_symbol": "BICO",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "STORJ-KRW",
-    "base_symbol": "STORJ",
-    "quote_symbol": "KRW",
-    "name_ko": "스토리지",
-    "name_en": "Storj"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "API3-KRW",
-    "base_symbol": "API3",
-    "quote_symbol": "KRW",
-    "name_ko": "에이피아이쓰리",
-    "name_en": "API3"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ZTX-KRW",
-    "base_symbol": "ZTX",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "MNT-KRW",
-    "base_symbol": "MNT",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "GTC-KRW",
-    "base_symbol": "GTC",
-    "quote_symbol": "KRW",
-    "name_ko": "깉크란트",
-    "name_en": "Gitcoin"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "METIS-KRW",
-    "base_symbol": "METIS",
-    "quote_symbol": "KRW",
-    "name_ko": "메티스",
-    "name_en": "Metis"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "TIA-KRW",
-    "base_symbol": "TIA",
-    "quote_symbol": "KRW",
-    "name_ko": "셀레스티아",
-    "name_en": "Celestia"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ICP-KRW",
-    "base_symbol": "ICP",
-    "quote_symbol": "KRW",
-    "name_ko": "인터넷컴퓨터",
-    "name_en": "Internet Computer"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "SPURS-KRW",
-    "base_symbol": "SPURS",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "NEO-KRW",
-    "base_symbol": "NEO",
-    "quote_symbol": "KRW",
-    "name_ko": "네오",
-    "name_en": "NEO"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "GAS-KRW",
-    "base_symbol": "GAS",
-    "quote_symbol": "KRW",
-    "name_ko": "가스",
-    "name_en": "Gas"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "BIGTIME-KRW",
-    "base_symbol": "BIGTIME",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ZETA-KRW",
-    "base_symbol": "ZETA",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "GRS-KRW",
-    "base_symbol": "GRS",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ARK-KRW",
-    "base_symbol": "ARK",
-    "quote_symbol": "KRW",
-    "name_ko": "아크",
-    "name_en": "Ark"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "YGG-KRW",
-    "base_symbol": "YGG",
-    "quote_symbol": "KRW",
-    "name_ko": "일드길드",
-    "name_en": "Yield Guild Games"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "HUNT-KRW",
-    "base_symbol": "HUNT",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "KAVA-KRW",
-    "base_symbol": "KAVA",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "MAGIC-KRW",
-    "base_symbol": "MAGIC",
-    "quote_symbol": "KRW",
-    "name_ko": "매직",
-    "name_en": "Magic"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "AUCTION-KRW",
-    "base_symbol": "AUCTION",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "USDT-KRW",
-    "base_symbol": "USDT",
-    "quote_symbol": "KRW",
-    "name_ko": "테더",
-    "name_en": "Tether"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "USDC-KRW",
-    "base_symbol": "USDC",
-    "quote_symbol": "KRW",
-    "name_ko": "유에스디",
-    "name_en": "USDC"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "RAD-KRW",
-    "base_symbol": "RAD",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "LSK-KRW",
-    "base_symbol": "LSK",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "TT-KRW",
-    "base_symbol": "TT",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ACE-KRW",
-    "base_symbol": "ACE",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "SKL-KRW",
-    "base_symbol": "SKL",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "IQ-KRW",
-    "base_symbol": "IQ",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "PYTH-KRW",
-    "base_symbol": "PYTH",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "MANTA-KRW",
-    "base_symbol": "MANTA",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "AKT-KRW",
-    "base_symbol": "AKT",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "BEAM-KRW",
-    "base_symbol": "BEAM",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "JTO-KRW",
-    "base_symbol": "JTO",
-    "quote_symbol": "KRW",
-    "name_ko": "주토",
-    "name_en": "Jito"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "JUP-KRW",
-    "base_symbol": "JUP",
-    "quote_symbol": "KRW",
-    "name_ko": "주피터",
-    "name_en": "Jupiter"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "STRK-KRW",
-    "base_symbol": "STRK",
-    "quote_symbol": "KRW",
-    "name_ko": "스타크",
-    "name_en": "Starknet"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "SC-KRW",
-    "base_symbol": "SC",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "BONK-KRW",
-    "base_symbol": "BONK",
-    "quote_symbol": "KRW",
-    "name_ko": "봉크",
-    "name_en": "Bonk"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "TOKAMAK-KRW",
-    "base_symbol": "TOKAMAK",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "AIOZ-KRW",
-    "base_symbol": "AIOZ",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ZK-KRW",
-    "base_symbol": "ZK",
-    "quote_symbol": "KRW",
-    "name_ko": "지커브",
-    "name_en": "ZKsync"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ONDO-KRW",
-    "base_symbol": "ONDO",
-    "quote_symbol": "KRW",
-    "name_ko": "온도",
-    "name_en": "Ondo"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ALT-KRW",
-    "base_symbol": "ALT",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "TAO-KRW",
-    "base_symbol": "TAO",
-    "quote_symbol": "KRW",
-    "name_ko": "타오",
-    "name_en": "Bittensor"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "NEAR-KRW",
-    "base_symbol": "NEAR",
-    "quote_symbol": "KRW",
-    "name_ko": "니어",
-    "name_en": "NEAR"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "RON-KRW",
-    "base_symbol": "RON",
-    "quote_symbol": "KRW",
-    "name_ko": "로닌",
-    "name_en": "Ronin"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "FIDA-KRW",
-    "base_symbol": "FIDA",
-    "quote_symbol": "KRW",
-    "name_ko": "피다",
-    "name_en": "Bonfida"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "STRAX-KRW",
-    "base_symbol": "STRAX",
-    "quote_symbol": "KRW",
-    "name_ko": "스트랙스",
-    "name_en": "Straxe"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "XAI-KRW",
-    "base_symbol": "XAI",
-    "quote_symbol": "KRW",
-    "name_ko": "자이",
-    "name_en": "Xai"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "W-KRW",
-    "base_symbol": "W",
-    "quote_symbol": "KRW",
-    "name_ko": "더블유",
-    "name_en": "Wonderland"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "POLYX-KRW",
-    "base_symbol": "POLYX",
-    "quote_symbol": "KRW",
-    "name_ko": "폴리매시",
-    "name_en": "Polymesh"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "CORE-KRW",
-    "base_symbol": "CORE",
-    "quote_symbol": "KRW",
-    "name_ko": "코어",
-    "name_en": "Core"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "BB-KRW",
-    "base_symbol": "BB",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "POKT-KRW",
-    "base_symbol": "POKT",
-    "quote_symbol": "KRW",
-    "name_ko": "포켓네트워크",
-    "name_en": "Pocket Network"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "REZ-KRW",
-    "base_symbol": "REZ",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ENA-KRW",
-    "base_symbol": "ENA",
-    "quote_symbol": "KRW",
-    "name_ko": "에나",
-    "name_en": "Ethena"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "MOCA-KRW",
-    "base_symbol": "MOCA",
-    "quote_symbol": "KRW",
-    "name_ko": "모카",
-    "name_en": "Moca"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ETHFI-KRW",
-    "base_symbol": "ETHFI",
-    "quote_symbol": "KRW",
-    "name_ko": "이더파이",
-    "name_en": "Ether.fi"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "MEW-KRW",
-    "base_symbol": "MEW",
-    "quote_symbol": "KRW",
-    "name_ko": "뮤",
-    "name_en": "MEW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ZRO-KRW",
-    "base_symbol": "ZRO",
-    "quote_symbol": "KRW",
-    "name_ko": "제로",
-    "name_en": "LayerZero"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "IO-KRW",
-    "base_symbol": "IO",
-    "quote_symbol": "KRW",
-    "name_ko": "아이오",
-    "name_en": "io"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "BLAST-KRW",
-    "base_symbol": "BLAST",
-    "quote_symbol": "KRW",
-    "name_ko": "블래스트",
-    "name_en": "Blast"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "TAIKO-KRW",
-    "base_symbol": "TAIKO",
-    "quote_symbol": "KRW",
-    "name_ko": "타이코",
-    "name_en": "Taiko"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "BRETT-KRW",
-    "base_symbol": "BRETT",
-    "quote_symbol": "KRW",
-    "name_ko": "브렛",
-    "name_en": "Brett"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ATH-KRW",
-    "base_symbol": "ATH",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "PCI-KRW",
-    "base_symbol": "PCI",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "AVAIL-KRW",
-    "base_symbol": "AVAIL",
-    "quote_symbol": "KRW",
-    "name_ko": "어베일",
-    "name_en": "Avail"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "TON-KRW",
-    "base_symbol": "TON",
-    "quote_symbol": "KRW",
-    "name_ko": "톤",
-    "name_en": "Toncoin"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "G-KRW",
-    "base_symbol": "G",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "LISTA-KRW",
-    "base_symbol": "LISTA",
-    "quote_symbol": "KRW",
-    "name_ko": "리스타",
-    "name_en": "Lista"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "PEAQ-KRW",
-    "base_symbol": "PEAQ",
-    "quote_symbol": "KRW",
-    "name_ko": "피크",
-    "name_en": "Peaq"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "EIGEN-KRW",
-    "base_symbol": "EIGEN",
-    "quote_symbol": "KRW",
-    "name_ko": "에이겐",
-    "name_en": "EigenLayer"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "XION-KRW",
-    "base_symbol": "XION",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ORDER-KRW",
-    "base_symbol": "ORDER",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "MERL-KRW",
-    "base_symbol": "MERL",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "SCR-KRW",
-    "base_symbol": "SCR",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "SWELL-KRW",
-    "base_symbol": "SWELL",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "SKY-KRW",
-    "base_symbol": "SKY",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "PONKE-KRW",
-    "base_symbol": "PONKE",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "MVL-KRW",
-    "base_symbol": "MVL",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "CARV-KRW",
-    "base_symbol": "CARV",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "PUFFER-KRW",
-    "base_symbol": "PUFFER",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "SUNDOG-KRW",
-    "base_symbol": "SUNDOG",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "TURBO-KRW",
-    "base_symbol": "TURBO",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "RAY-KRW",
-    "base_symbol": "RAY",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "SAFE-KRW",
-    "base_symbol": "SAFE",
-    "quote_symbol": "KRW",
-    "name_ko": "세이프",
-    "name_en": "Safe"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "VIRTUAL-KRW",
-    "base_symbol": "VIRTUAL",
-    "quote_symbol": "KRW",
-    "name_ko": "버추얼",
-    "name_en": "Virtual"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "DRIFT-KRW",
-    "base_symbol": "DRIFT",
-    "quote_symbol": "KRW",
-    "name_ko": "드리프트",
-    "name_en": "Drift"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "MOVE-KRW",
-    "base_symbol": "MOVE",
-    "quote_symbol": "KRW",
-    "name_ko": "무브",
-    "name_en": "Movement"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "F-KRW",
-    "base_symbol": "F",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "DEEP-KRW",
-    "base_symbol": "DEEP",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "MORPHO-KRW",
-    "base_symbol": "MORPHO",
-    "quote_symbol": "KRW",
-    "name_ko": "모르포",
-    "name_en": "Morpho"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "NEIRO-KRW",
-    "base_symbol": "NEIRO",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "MOODENG-KRW",
-    "base_symbol": "MOODENG",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "DBR-KRW",
-    "base_symbol": "DBR",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "GOAT-KRW",
-    "base_symbol": "GOAT",
-    "quote_symbol": "KRW",
-    "name_ko": "고트",
-    "name_en": "GOAT"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "NIL-KRW",
-    "base_symbol": "NIL",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ME-KRW",
-    "base_symbol": "ME",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "INIT-KRW",
-    "base_symbol": "INIT",
-    "quote_symbol": "KRW",
-    "name_ko": "이니셜",
-    "name_en": "Initiative"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ZRC-KRW",
-    "base_symbol": "ZRC",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "IOTA-KRW",
-    "base_symbol": "IOTA",
-    "quote_symbol": "KRW",
-    "name_ko": "아이오타",
-    "name_en": "IOTA"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "PENGU-KRW",
-    "base_symbol": "PENGU",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "ACX-KRW",
-    "base_symbol": "ACX",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "AERO-KRW",
-    "base_symbol": "AERO",
-    "quote_symbol": "KRW",
-    "name_ko": "에어로",
-    "name_en": "Aerodrome"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "THE-KRW",
-    "base_symbol": "THE",
-    "quote_symbol": "KRW",
-    "name_ko": "더",
-    "name_en": "The"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "AMP-KRW",
-    "base_symbol": "AMP",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "VANA-KRW",
-    "base_symbol": "VANA",
-    "quote_symbol": "KRW",
-    "name_ko": "바나",
-    "name_en": "Vana"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "XYO-KRW",
-    "base_symbol": "XYO",
-    "quote_symbol": "KRW",
-    "name_ko": "엑시오",
-    "name_en": "XY Oracle"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "A8-KRW",
-    "base_symbol": "A8",
-    "quote_symbol": "KRW"
-  },
-  {
-    "exchange": "BITHUMB",
-    "market_code": "SONIC-KRW",
-    "base_symbol": "SONIC",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-S",
+    "base_symbol": "KRW",
+    "quote_symbol": "S",
     "name_ko": "소닉",
     "name_en": "Sonic"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "WIF-KRW",
-    "base_symbol": "WIF",
-    "quote_symbol": "KRW",
-    "name_ko": "와이프",
+    "market_code": "KRW-FET",
+    "base_symbol": "KRW",
+    "quote_symbol": "FET",
+    "name_ko": "페치",
+    "name_en": "Fetch.ai"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-SUI",
+    "base_symbol": "KRW",
+    "quote_symbol": "SUI",
+    "name_ko": "수이",
+    "name_en": "SUI"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-NCT",
+    "base_symbol": "KRW",
+    "quote_symbol": "NCT",
+    "name_ko": "폴리스웜",
+    "name_en": "Polyswarm"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-FLOKI",
+    "base_symbol": "KRW",
+    "quote_symbol": "FLOKI",
+    "name_ko": "플로키",
+    "name_en": "FLOKI"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ID",
+    "base_symbol": "KRW",
+    "quote_symbol": "ID",
+    "name_ko": "스페이스 아이디",
+    "name_en": "SPACE ID"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-RENDER",
+    "base_symbol": "KRW",
+    "quote_symbol": "RENDER",
+    "name_ko": "렌더토큰",
+    "name_en": "Render Token"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-STG",
+    "base_symbol": "KRW",
+    "quote_symbol": "STG",
+    "name_ko": "스타게이트 파이낸스",
+    "name_en": "Stargate Finance"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-OSMO",
+    "base_symbol": "KRW",
+    "quote_symbol": "OSMO",
+    "name_ko": "오스모시스",
+    "name_en": "Osmosis"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-FIL",
+    "base_symbol": "KRW",
+    "quote_symbol": "FIL",
+    "name_ko": "파일코인",
+    "name_en": "Filecoin"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ILV",
+    "base_symbol": "KRW",
+    "quote_symbol": "ILV",
+    "name_ko": "일루비움",
+    "name_en": "Illuvium"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-MAV",
+    "base_symbol": "KRW",
+    "quote_symbol": "MAV",
+    "name_ko": "매버릭 프로토콜",
+    "name_en": "Maverick Protocol"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-RSS3",
+    "base_symbol": "KRW",
+    "quote_symbol": "RSS3",
+    "name_ko": "알에스에스쓰리",
+    "name_en": "RSS3"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-AUDIO",
+    "base_symbol": "KRW",
+    "quote_symbol": "AUDIO",
+    "name_ko": "오디우스",
+    "name_en": "Audius"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-AGI",
+    "base_symbol": "KRW",
+    "quote_symbol": "AGI",
+    "name_ko": "델리시움",
+    "name_en": "Delysium"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ASTR",
+    "base_symbol": "KRW",
+    "quote_symbol": "ASTR",
+    "name_ko": "아스타",
+    "name_en": "Astar"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-WLD",
+    "base_symbol": "KRW",
+    "quote_symbol": "WLD",
+    "name_ko": "월드코인",
+    "name_en": "Worldcoin"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-FLUX",
+    "base_symbol": "KRW",
+    "quote_symbol": "FLUX",
+    "name_ko": "플럭스",
+    "name_en": "Flux"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-AGLD",
+    "base_symbol": "KRW",
+    "quote_symbol": "AGLD",
+    "name_ko": "어드벤처골드",
+    "name_en": "Adventure Gold"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-AR",
+    "base_symbol": "KRW",
+    "quote_symbol": "AR",
+    "name_ko": "알위브",
+    "name_en": "Arweave"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-RVN",
+    "base_symbol": "KRW",
+    "quote_symbol": "RVN",
+    "name_ko": "레이븐코인",
+    "name_en": "Ravencoin"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-EDU",
+    "base_symbol": "KRW",
+    "quote_symbol": "EDU",
+    "name_ko": "오픈 캠퍼스",
+    "name_en": "Open Campus"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-SEI",
+    "base_symbol": "KRW",
+    "quote_symbol": "SEI",
+    "name_ko": "세이",
+    "name_en": "Sei"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-WAXL",
+    "base_symbol": "KRW",
+    "quote_symbol": "WAXL",
+    "name_ko": "엑셀라",
+    "name_en": "Axelar"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-MOC",
+    "base_symbol": "KRW",
+    "quote_symbol": "MOC",
+    "name_ko": "모스코인",
+    "name_en": "Moss Coin"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-PEPE",
+    "base_symbol": "KRW",
+    "quote_symbol": "PEPE",
+    "name_ko": "페페",
+    "name_en": "PEPE"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-CYBER",
+    "base_symbol": "KRW",
+    "quote_symbol": "CYBER",
+    "name_ko": "사이버",
+    "name_en": "Cyber"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ARKM",
+    "base_symbol": "KRW",
+    "quote_symbol": "ARKM",
+    "name_ko": "아캄",
+    "name_en": "Arkham"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-PYR",
+    "base_symbol": "KRW",
+    "quote_symbol": "PYR",
+    "name_ko": "불칸 포지드",
+    "name_en": "Vulcan Forged"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-IOTX",
+    "base_symbol": "KRW",
+    "quote_symbol": "IOTX",
+    "name_ko": "아이오텍스",
+    "name_en": "IoTeX"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-HIGH",
+    "base_symbol": "KRW",
+    "quote_symbol": "HIGH",
+    "name_ko": "하이스트리트",
+    "name_en": "Highstreet"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-PENDLE",
+    "base_symbol": "KRW",
+    "quote_symbol": "PENDLE",
+    "name_ko": "펜들",
+    "name_en": "Pendle"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-BICO",
+    "base_symbol": "KRW",
+    "quote_symbol": "BICO",
+    "name_ko": "바이코노미",
+    "name_en": "Biconomy"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-STORJ",
+    "base_symbol": "KRW",
+    "quote_symbol": "STORJ",
+    "name_ko": "스토리지",
+    "name_en": "Storj"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-API3",
+    "base_symbol": "KRW",
+    "quote_symbol": "API3",
+    "name_ko": "에이피아이쓰리",
+    "name_en": "API3"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ZTX",
+    "base_symbol": "KRW",
+    "quote_symbol": "ZTX",
+    "name_ko": "지티엑스",
+    "name_en": "ZTX"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-MNT",
+    "base_symbol": "KRW",
+    "quote_symbol": "MNT",
+    "name_ko": "맨틀",
+    "name_en": "Mantle"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-GTC",
+    "base_symbol": "KRW",
+    "quote_symbol": "GTC",
+    "name_ko": "깃코인",
+    "name_en": "Gitcoin"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-METIS",
+    "base_symbol": "KRW",
+    "quote_symbol": "METIS",
+    "name_ko": "메티스다오",
+    "name_en": "MetisDAO"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-TIA",
+    "base_symbol": "KRW",
+    "quote_symbol": "TIA",
+    "name_ko": "셀레스티아",
+    "name_en": "Celestia"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ICP",
+    "base_symbol": "KRW",
+    "quote_symbol": "ICP",
+    "name_ko": "인터넷 컴퓨터",
+    "name_en": "Internet Computer"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-SPURS",
+    "base_symbol": "KRW",
+    "quote_symbol": "SPURS",
+    "name_ko": "토트넘 홋스퍼",
+    "name_en": "Tottenham Hotspur Fan Token"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-NEO",
+    "base_symbol": "KRW",
+    "quote_symbol": "NEO",
+    "name_ko": "네오",
+    "name_en": "Neo"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-GAS",
+    "base_symbol": "KRW",
+    "quote_symbol": "GAS",
+    "name_ko": "가스",
+    "name_en": "Gas"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-BIGTIME",
+    "base_symbol": "KRW",
+    "quote_symbol": "BIGTIME",
+    "name_ko": "빅타임",
+    "name_en": "Big Time"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ZETA",
+    "base_symbol": "KRW",
+    "quote_symbol": "ZETA",
+    "name_ko": "제타체인",
+    "name_en": "ZetaChain"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-GRS",
+    "base_symbol": "KRW",
+    "quote_symbol": "GRS",
+    "name_ko": "그로스톨코인",
+    "name_en": "Groestlcoin"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ARK",
+    "base_symbol": "KRW",
+    "quote_symbol": "ARK",
+    "name_ko": "아크",
+    "name_en": "Ark"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-YGG",
+    "base_symbol": "KRW",
+    "quote_symbol": "YGG",
+    "name_ko": "일드길드게임즈",
+    "name_en": "Yield Guild Games"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-HUNT",
+    "base_symbol": "KRW",
+    "quote_symbol": "HUNT",
+    "name_ko": "헌트",
+    "name_en": "Hunt Town"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-KAVA",
+    "base_symbol": "KRW",
+    "quote_symbol": "KAVA",
+    "name_ko": "카바",
+    "name_en": "Kava"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-MAGIC",
+    "base_symbol": "KRW",
+    "quote_symbol": "MAGIC",
+    "name_ko": "매직",
+    "name_en": "Magic"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-AUCTION",
+    "base_symbol": "KRW",
+    "quote_symbol": "AUCTION",
+    "name_ko": "바운스토큰",
+    "name_en": "Bounce Token"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-USDT",
+    "base_symbol": "KRW",
+    "quote_symbol": "USDT",
+    "name_ko": "테더",
+    "name_en": "Tether USDt"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-USDC",
+    "base_symbol": "KRW",
+    "quote_symbol": "USDC",
+    "name_ko": "유에스디코인",
+    "name_en": "USD Coin"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-RAD",
+    "base_symbol": "KRW",
+    "quote_symbol": "RAD",
+    "name_ko": "래드웍스",
+    "name_en": "Radworks"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-LSK",
+    "base_symbol": "KRW",
+    "quote_symbol": "LSK",
+    "name_ko": "리스크",
+    "name_en": "Lisk"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-TT",
+    "base_symbol": "KRW",
+    "quote_symbol": "TT",
+    "name_ko": "썬더코어",
+    "name_en": "ThunderCore"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ACE",
+    "base_symbol": "KRW",
+    "quote_symbol": "ACE",
+    "name_ko": "퓨저니스트",
+    "name_en": "Fusionist"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-SKL",
+    "base_symbol": "KRW",
+    "quote_symbol": "SKL",
+    "name_ko": "스케일",
+    "name_en": "SKALE"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-IQ",
+    "base_symbol": "KRW",
+    "quote_symbol": "IQ",
+    "name_ko": "아이큐",
+    "name_en": "IQ"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-PYTH",
+    "base_symbol": "KRW",
+    "quote_symbol": "PYTH",
+    "name_ko": "피스 네트워크",
+    "name_en": "Pyth Network"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-MANTA",
+    "base_symbol": "KRW",
+    "quote_symbol": "MANTA",
+    "name_ko": "만타 네트워크",
+    "name_en": "Manta Network"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-AKT",
+    "base_symbol": "KRW",
+    "quote_symbol": "AKT",
+    "name_ko": "아카시 네트워크",
+    "name_en": "Akash Network"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-BEAM",
+    "base_symbol": "KRW",
+    "quote_symbol": "BEAM",
+    "name_ko": "빔",
+    "name_en": "Beam"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-JTO",
+    "base_symbol": "KRW",
+    "quote_symbol": "JTO",
+    "name_ko": "지토",
+    "name_en": "Jito"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-JUP",
+    "base_symbol": "KRW",
+    "quote_symbol": "JUP",
+    "name_ko": "주피터",
+    "name_en": "Jupiter"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-STRK",
+    "base_symbol": "KRW",
+    "quote_symbol": "STRK",
+    "name_ko": "스타크넷",
+    "name_en": "Starknet"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-SC",
+    "base_symbol": "KRW",
+    "quote_symbol": "SC",
+    "name_ko": "시아코인",
+    "name_en": "Siacoin"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-BONK",
+    "base_symbol": "KRW",
+    "quote_symbol": "BONK",
+    "name_ko": "봉크",
+    "name_en": "Bonk"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-TOKAMAK",
+    "base_symbol": "KRW",
+    "quote_symbol": "TOKAMAK",
+    "name_ko": "토카막 네트워크",
+    "name_en": "Tokamak Network"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-AIOZ",
+    "base_symbol": "KRW",
+    "quote_symbol": "AIOZ",
+    "name_ko": "아이오즈 네트워크",
+    "name_en": "AIOZ Network"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ZK",
+    "base_symbol": "KRW",
+    "quote_symbol": "ZK",
+    "name_ko": "지케이싱크",
+    "name_en": "zkSync"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ONDO",
+    "base_symbol": "KRW",
+    "quote_symbol": "ONDO",
+    "name_ko": "온도 파이낸스",
+    "name_en": "Ondo Finance"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ALT",
+    "base_symbol": "KRW",
+    "quote_symbol": "ALT",
+    "name_ko": "알트레이어",
+    "name_en": "AltLayer"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-TAO",
+    "base_symbol": "KRW",
+    "quote_symbol": "TAO",
+    "name_ko": "비트텐서",
+    "name_en": "Bittensor"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-NEAR",
+    "base_symbol": "KRW",
+    "quote_symbol": "NEAR",
+    "name_ko": "니어프로토콜",
+    "name_en": "NEAR Protocol"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-RON",
+    "base_symbol": "KRW",
+    "quote_symbol": "RON",
+    "name_ko": "로닌",
+    "name_en": "Ronin"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-FIDA",
+    "base_symbol": "KRW",
+    "quote_symbol": "FIDA",
+    "name_ko": "본피다",
+    "name_en": "Bonfida"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-STRAX",
+    "base_symbol": "KRW",
+    "quote_symbol": "STRAX",
+    "name_ko": "스트라티스",
+    "name_en": "Stratis"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-XAI",
+    "base_symbol": "KRW",
+    "quote_symbol": "XAI",
+    "name_ko": "자이",
+    "name_en": "Xai"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-W",
+    "base_symbol": "KRW",
+    "quote_symbol": "W",
+    "name_ko": "웜홀",
+    "name_en": "Wormhole"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-POLYX",
+    "base_symbol": "KRW",
+    "quote_symbol": "POLYX",
+    "name_ko": "폴리매쉬",
+    "name_en": "Polymesh"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-CORE",
+    "base_symbol": "KRW",
+    "quote_symbol": "CORE",
+    "name_ko": "코어",
+    "name_en": "Core"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-BB",
+    "base_symbol": "KRW",
+    "quote_symbol": "BB",
+    "name_ko": "바운스빗",
+    "name_en": "BounceBit"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-POKT",
+    "base_symbol": "KRW",
+    "quote_symbol": "POKT",
+    "name_ko": "포켓네트워크",
+    "name_en": "Pocket Network"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-REZ",
+    "base_symbol": "KRW",
+    "quote_symbol": "REZ",
+    "name_ko": "렌조",
+    "name_en": "Renzo"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ENA",
+    "base_symbol": "KRW",
+    "quote_symbol": "ENA",
+    "name_ko": "에테나",
+    "name_en": "Ethena"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-MOCA",
+    "base_symbol": "KRW",
+    "quote_symbol": "MOCA",
+    "name_ko": "모카네트워크",
+    "name_en": "Moca Network"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ETHFI",
+    "base_symbol": "KRW",
+    "quote_symbol": "ETHFI",
+    "name_ko": "이더파이",
+    "name_en": "ether.fi"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-MEW",
+    "base_symbol": "KRW",
+    "quote_symbol": "MEW",
+    "name_ko": "캣인어독스월드",
+    "name_en": "cat in a dogs world"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ZRO",
+    "base_symbol": "KRW",
+    "quote_symbol": "ZRO",
+    "name_ko": "레이어제로",
+    "name_en": "LayerZero"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-IO",
+    "base_symbol": "KRW",
+    "quote_symbol": "IO",
+    "name_ko": "아이오넷",
+    "name_en": "io.net"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-BLAST",
+    "base_symbol": "KRW",
+    "quote_symbol": "BLAST",
+    "name_ko": "블라스트",
+    "name_en": "Blast"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-TAIKO",
+    "base_symbol": "KRW",
+    "quote_symbol": "TAIKO",
+    "name_ko": "타이코",
+    "name_en": "Taiko"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-BRETT",
+    "base_symbol": "KRW",
+    "quote_symbol": "BRETT",
+    "name_ko": "브렛",
+    "name_en": "Brett"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ATH",
+    "base_symbol": "KRW",
+    "quote_symbol": "ATH",
+    "name_ko": "에이셔",
+    "name_en": "Aethir"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-PCI",
+    "base_symbol": "KRW",
+    "quote_symbol": "PCI",
+    "name_ko": "페이코인",
+    "name_en": "Paycoin"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-AVAIL",
+    "base_symbol": "KRW",
+    "quote_symbol": "AVAIL",
+    "name_ko": "어베일",
+    "name_en": "Avail"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-TON",
+    "base_symbol": "KRW",
+    "quote_symbol": "TON",
+    "name_ko": "톤코인",
+    "name_en": "Toncoin"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-G",
+    "base_symbol": "KRW",
+    "quote_symbol": "G",
+    "name_ko": "그래비티",
+    "name_en": "Gravity"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-LISTA",
+    "base_symbol": "KRW",
+    "quote_symbol": "LISTA",
+    "name_ko": "리스타 다오",
+    "name_en": "Lista DAO"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-PEAQ",
+    "base_symbol": "KRW",
+    "quote_symbol": "PEAQ",
+    "name_ko": "피크",
+    "name_en": "peaq"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-EIGEN",
+    "base_symbol": "KRW",
+    "quote_symbol": "EIGEN",
+    "name_ko": "아이겐레이어",
+    "name_en": "EigenLayer"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-XION",
+    "base_symbol": "KRW",
+    "quote_symbol": "XION",
+    "name_ko": "자이온",
+    "name_en": "XION"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ORDER",
+    "base_symbol": "KRW",
+    "quote_symbol": "ORDER",
+    "name_ko": "오덜리 네트워크",
+    "name_en": "Orderly Network"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-MERL",
+    "base_symbol": "KRW",
+    "quote_symbol": "MERL",
+    "name_ko": "멀린 체인",
+    "name_en": "Merlin Chain"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-SCR",
+    "base_symbol": "KRW",
+    "quote_symbol": "SCR",
+    "name_ko": "스크롤",
+    "name_en": "Scroll"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-SWELL",
+    "base_symbol": "KRW",
+    "quote_symbol": "SWELL",
+    "name_ko": "스웰 네트워크",
+    "name_en": "Swell Network"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-SKY",
+    "base_symbol": "KRW",
+    "quote_symbol": "SKY",
+    "name_ko": "스카이 프로토콜",
+    "name_en": "Sky Protocol"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-PONKE",
+    "base_symbol": "KRW",
+    "quote_symbol": "PONKE",
+    "name_ko": "폰케",
+    "name_en": "Ponke"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-MVL",
+    "base_symbol": "KRW",
+    "quote_symbol": "MVL",
+    "name_ko": "엠블",
+    "name_en": "MVL"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-CARV",
+    "base_symbol": "KRW",
+    "quote_symbol": "CARV",
+    "name_ko": "카브",
+    "name_en": "CARV"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-PUFFER",
+    "base_symbol": "KRW",
+    "quote_symbol": "PUFFER",
+    "name_ko": "퍼퍼",
+    "name_en": "Puffer"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-SUNDOG",
+    "base_symbol": "KRW",
+    "quote_symbol": "SUNDOG",
+    "name_ko": "썬도그",
+    "name_en": "Sundog"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-TURBO",
+    "base_symbol": "KRW",
+    "quote_symbol": "TURBO",
+    "name_ko": "터보",
+    "name_en": "Turbo"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-RAY",
+    "base_symbol": "KRW",
+    "quote_symbol": "RAY",
+    "name_ko": "레이디움",
+    "name_en": "Raydium"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-SAFE",
+    "base_symbol": "KRW",
+    "quote_symbol": "SAFE",
+    "name_ko": "세이프",
+    "name_en": "Safe"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-VIRTUAL",
+    "base_symbol": "KRW",
+    "quote_symbol": "VIRTUAL",
+    "name_ko": "버추얼 프로토콜",
+    "name_en": "Virtuals Protocol"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-DRIFT",
+    "base_symbol": "KRW",
+    "quote_symbol": "DRIFT",
+    "name_ko": "드리프트",
+    "name_en": "Drift"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-MOVE",
+    "base_symbol": "KRW",
+    "quote_symbol": "MOVE",
+    "name_ko": "무브먼트",
+    "name_en": "Movement"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-F",
+    "base_symbol": "KRW",
+    "quote_symbol": "F",
+    "name_ko": "신퓨처스",
+    "name_en": "Synfutures"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-DEEP",
+    "base_symbol": "KRW",
+    "quote_symbol": "DEEP",
+    "name_ko": "딥북",
+    "name_en": "DeepBook"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-MORPHO",
+    "base_symbol": "KRW",
+    "quote_symbol": "MORPHO",
+    "name_ko": "모포",
+    "name_en": "Morpho"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-NEIRO",
+    "base_symbol": "KRW",
+    "quote_symbol": "NEIRO",
+    "name_ko": "네이로",
+    "name_en": "Neiro"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-MOODENG",
+    "base_symbol": "KRW",
+    "quote_symbol": "MOODENG",
+    "name_ko": "무뎅",
+    "name_en": "Moo Deng"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-DBR",
+    "base_symbol": "KRW",
+    "quote_symbol": "DBR",
+    "name_ko": "디브릿지",
+    "name_en": "deBridge"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-GOAT",
+    "base_symbol": "KRW",
+    "quote_symbol": "GOAT",
+    "name_ko": "고트세우스 막시무스",
+    "name_en": "Goatseus Maximus"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-NIL",
+    "base_symbol": "KRW",
+    "quote_symbol": "NIL",
+    "name_ko": "닐리온",
+    "name_en": "Nillion"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ME",
+    "base_symbol": "KRW",
+    "quote_symbol": "ME",
+    "name_ko": "매직 에덴",
+    "name_en": "Magic Eden"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-INIT",
+    "base_symbol": "KRW",
+    "quote_symbol": "INIT",
+    "name_ko": "이니시아",
+    "name_en": "Initia"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ZRC",
+    "base_symbol": "KRW",
+    "quote_symbol": "ZRC",
+    "name_ko": "저킷",
+    "name_en": "Zircuit"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-IOTA",
+    "base_symbol": "KRW",
+    "quote_symbol": "IOTA",
+    "name_ko": "아이오타",
+    "name_en": "IOTA"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-PENGU",
+    "base_symbol": "KRW",
+    "quote_symbol": "PENGU",
+    "name_ko": "펏지 펭귄",
+    "name_en": "Pudgy Penguins"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ACX",
+    "base_symbol": "KRW",
+    "quote_symbol": "ACX",
+    "name_ko": "어크로스 프로토콜",
+    "name_en": "Across Protocol"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-AERO",
+    "base_symbol": "KRW",
+    "quote_symbol": "AERO",
+    "name_ko": "에어로드롬 파이낸스",
+    "name_en": "Aerodrome Finance"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-THE",
+    "base_symbol": "KRW",
+    "quote_symbol": "THE",
+    "name_ko": "테나",
+    "name_en": "THENA"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-AMP",
+    "base_symbol": "KRW",
+    "quote_symbol": "AMP",
+    "name_ko": "앰프",
+    "name_en": "Amp"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-VANA",
+    "base_symbol": "KRW",
+    "quote_symbol": "VANA",
+    "name_ko": "바나",
+    "name_en": "Vana"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-XYO",
+    "base_symbol": "KRW",
+    "quote_symbol": "XYO",
+    "name_ko": "엑스와이오",
+    "name_en": "XYO"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-A8",
+    "base_symbol": "KRW",
+    "quote_symbol": "A8",
+    "name_ko": "에인션트8",
+    "name_en": "Ancient8"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-SONIC",
+    "base_symbol": "KRW",
+    "quote_symbol": "SONIC",
+    "name_ko": "소닉 에스브이엠",
+    "name_en": "Sonic SVM"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-WIF",
+    "base_symbol": "KRW",
+    "quote_symbol": "WIF",
+    "name_ko": "도그위프햇",
     "name_en": "dogwifhat"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CPOOL-KRW",
-    "base_symbol": "CPOOL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CPOOL",
+    "base_symbol": "KRW",
+    "quote_symbol": "CPOOL",
+    "name_ko": "클리어풀",
+    "name_en": "Clearpool"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "IP-KRW",
-    "base_symbol": "IP",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-IP",
+    "base_symbol": "KRW",
+    "quote_symbol": "IP",
+    "name_ko": "스토리",
+    "name_en": "Story"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "DKA-KRW",
-    "base_symbol": "DKA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-DKA",
+    "base_symbol": "KRW",
+    "quote_symbol": "DKA",
+    "name_ko": "디카르고",
+    "name_en": "dKargo"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SOLV-KRW",
-    "base_symbol": "SOLV",
-    "quote_symbol": "KRW",
-    "name_ko": "솔브",
+    "market_code": "KRW-SOLV",
+    "base_symbol": "KRW",
+    "quote_symbol": "SOLV",
+    "name_ko": "솔브 프로토콜",
     "name_en": "Solv Protocol"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BLUE-KRW",
-    "base_symbol": "BLUE",
-    "quote_symbol": "KRW",
-    "name_ko": "블루",
-    "name_en": "Blue"
+    "market_code": "KRW-BLUE",
+    "base_symbol": "KRW",
+    "quote_symbol": "BLUE",
+    "name_ko": "블루핀",
+    "name_en": "Bluefin"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "QKC-KRW",
-    "base_symbol": "QKC",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-QKC",
+    "base_symbol": "KRW",
+    "quote_symbol": "QKC",
     "name_ko": "쿼크체인",
     "name_en": "QuarkChain"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "HP-KRW",
-    "base_symbol": "HP",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-HP",
+    "base_symbol": "KRW",
+    "quote_symbol": "HP",
+    "name_ko": "히포 프로토콜",
+    "name_en": "Hippo Protocol"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "GAME2-KRW",
-    "base_symbol": "GAME2",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-GAME2",
+    "base_symbol": "KRW",
+    "quote_symbol": "GAME2",
+    "name_ko": "게임빌드",
+    "name_en": "GameBuild"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ERA-KRW",
-    "base_symbol": "ERA",
-    "quote_symbol": "KRW",
-    "name_ko": "이라",
-    "name_en": "Era"
+    "market_code": "KRW-ERA",
+    "base_symbol": "KRW",
+    "quote_symbol": "ERA",
+    "name_ko": "칼데라",
+    "name_en": "Caldera"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ARDR-KRW",
-    "base_symbol": "ARDR",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-ARDR",
+    "base_symbol": "KRW",
+    "quote_symbol": "ARDR",
     "name_ko": "아더",
     "name_en": "Ardor"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BOUNTY-KRW",
-    "base_symbol": "BOUNTY",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BOUNTY",
+    "base_symbol": "KRW",
+    "quote_symbol": "BOUNTY",
+    "name_ko": "체인바운티",
+    "name_en": "Chainbounty"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SHELL-KRW",
-    "base_symbol": "SHELL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-SHELL",
+    "base_symbol": "KRW",
+    "quote_symbol": "SHELL",
+    "name_ko": "마이쉘",
+    "name_en": "MyShell"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BERA-KRW",
-    "base_symbol": "BERA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BERA",
+    "base_symbol": "KRW",
+    "quote_symbol": "BERA",
+    "name_ko": "베라체인",
+    "name_en": "Berachain"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BIO-KRW",
-    "base_symbol": "BIO",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BIO",
+    "base_symbol": "KRW",
+    "quote_symbol": "BIO",
+    "name_ko": "바이오 프로토콜",
+    "name_en": "Bio Protocol"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "PLUME-KRW",
-    "base_symbol": "PLUME",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-PLUME",
+    "base_symbol": "KRW",
+    "quote_symbol": "PLUME",
+    "name_ko": "플룸",
+    "name_en": "Plume"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "OBT-KRW",
-    "base_symbol": "OBT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-OBT",
+    "base_symbol": "KRW",
+    "quote_symbol": "OBT",
+    "name_ko": "오비터 파이낸스",
+    "name_en": "Orbiter Finance"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "TRUMP-KRW",
-    "base_symbol": "TRUMP",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-TRUMP",
+    "base_symbol": "KRW",
+    "quote_symbol": "TRUMP",
+    "name_ko": "오피셜 트럼프",
+    "name_en": "OFFICIAL TRUMP"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "KERNEL-KRW",
-    "base_symbol": "KERNEL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-KERNEL",
+    "base_symbol": "KRW",
+    "quote_symbol": "KERNEL",
+    "name_ko": "커널 다오",
+    "name_en": "Kernel DAO"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "COOKIE-KRW",
-    "base_symbol": "COOKIE",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-COOKIE",
+    "base_symbol": "KRW",
+    "quote_symbol": "COOKIE",
+    "name_ko": "쿠키 다오",
+    "name_en": "Cookie DAO"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "GNO-KRW",
-    "base_symbol": "GNO",
-    "quote_symbol": "KRW",
-    "name_ko": "그노시스",
+    "market_code": "KRW-GNO",
+    "base_symbol": "KRW",
+    "quote_symbol": "GNO",
+    "name_ko": "노시스",
     "name_en": "Gnosis"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "VTHO-KRW",
-    "base_symbol": "VTHO",
-    "quote_symbol": "KRW",
-    "name_ko": "브이토르",
-    "name_en": "VeThor"
+    "market_code": "KRW-VTHO",
+    "base_symbol": "KRW",
+    "quote_symbol": "VTHO",
+    "name_ko": "비토르 토큰",
+    "name_en": "VeThor Token"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ANIME-KRW",
-    "base_symbol": "ANIME",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ANIME",
+    "base_symbol": "KRW",
+    "quote_symbol": "ANIME",
+    "name_ko": "애니메코인",
+    "name_en": "Animecoin"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "RED-KRW",
-    "base_symbol": "RED",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-RED",
+    "base_symbol": "KRW",
+    "quote_symbol": "RED",
+    "name_ko": "레드스톤",
+    "name_en": "RedStone"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "LAYER-KRW",
-    "base_symbol": "LAYER",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-LAYER",
+    "base_symbol": "KRW",
+    "quote_symbol": "LAYER",
+    "name_ko": "솔레이어",
+    "name_en": "Solayer"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "WCT-KRW",
-    "base_symbol": "WCT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-WCT",
+    "base_symbol": "KRW",
+    "quote_symbol": "WCT",
+    "name_ko": "월렛커넥트",
+    "name_en": "WalletConnect"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "FLOCK-KRW",
-    "base_symbol": "FLOCK",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-FLOCK",
+    "base_symbol": "KRW",
+    "quote_symbol": "FLOCK",
+    "name_ko": "플록",
+    "name_en": "FLock.io"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "KAITO-KRW",
-    "base_symbol": "KAITO",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-KAITO",
+    "base_symbol": "KRW",
+    "quote_symbol": "KAITO",
+    "name_ko": "카이토",
+    "name_en": "Kaito"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BMT-KRW",
-    "base_symbol": "BMT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BMT",
+    "base_symbol": "KRW",
+    "quote_symbol": "BMT",
+    "name_ko": "버블맵스",
+    "name_en": "Bubblemaps"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "C-KRW",
-    "base_symbol": "C",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-C",
+    "base_symbol": "KRW",
+    "quote_symbol": "C",
+    "name_ko": "체인베이스 토큰",
+    "name_en": "Chainbase Token"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SOON-KRW",
-    "base_symbol": "SOON",
-    "quote_symbol": "KRW",
-    "name_ko": "순",
-    "name_en": "Solanium"
+    "market_code": "KRW-SOON",
+    "base_symbol": "KRW",
+    "quote_symbol": "SOON",
+    "name_ko": "쑨",
+    "name_en": "SOON"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "PAXG-KRW",
-    "base_symbol": "PAXG",
-    "quote_symbol": "KRW",
+    "market_code": "KRW-PAXG",
+    "base_symbol": "KRW",
+    "quote_symbol": "PAXG",
     "name_ko": "팍스골드",
-    "name_en": "Paxos Gold"
+    "name_en": "PAX Gold"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "AVL-KRW",
-    "base_symbol": "AVL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-AVL",
+    "base_symbol": "KRW",
+    "quote_symbol": "AVL",
+    "name_ko": "아발론",
+    "name_en": "Avalon"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "B3-KRW",
-    "base_symbol": "B3",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-B3",
+    "base_symbol": "KRW",
+    "quote_symbol": "B3",
+    "name_ko": "비쓰리",
+    "name_en": "B3"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ELX-KRW",
-    "base_symbol": "ELX",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ELX",
+    "base_symbol": "KRW",
+    "quote_symbol": "ELX",
+    "name_ko": "엘릭서",
+    "name_en": "Elixir"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "COW-KRW",
-    "base_symbol": "COW",
-    "quote_symbol": "KRW",
-    "name_ko": "카우스왑",
-    "name_en": "CoW Swap"
+    "market_code": "KRW-COW",
+    "base_symbol": "KRW",
+    "quote_symbol": "COW",
+    "name_ko": "카우 프로토콜",
+    "name_en": "CoW Protocol"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "WAL-KRW",
-    "base_symbol": "WAL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-WAL",
+    "base_symbol": "KRW",
+    "quote_symbol": "WAL",
+    "name_ko": "월러스",
+    "name_en": "Walrus"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BABY-KRW",
-    "base_symbol": "BABY",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BABY",
+    "base_symbol": "KRW",
+    "quote_symbol": "BABY",
+    "name_ko": "바빌론",
+    "name_en": "Babylon"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ES-KRW",
-    "base_symbol": "ES",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ES",
+    "base_symbol": "KRW",
+    "quote_symbol": "ES",
+    "name_ko": "이클립스",
+    "name_en": "Eclipse"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "XTER-KRW",
-    "base_symbol": "XTER",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-XTER",
+    "base_symbol": "KRW",
+    "quote_symbol": "XTER",
+    "name_ko": "엑스테리오",
+    "name_en": "Xterio"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "NXPC-KRW",
-    "base_symbol": "NXPC",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-NXPC",
+    "base_symbol": "KRW",
+    "quote_symbol": "NXPC",
+    "name_ko": "넥스페이스",
+    "name_en": "NEXPACE"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "0G-KRW",
-    "base_symbol": "0G",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-0G",
+    "base_symbol": "KRW",
+    "quote_symbol": "0G",
+    "name_ko": "제로지",
+    "name_en": "0G"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "GRASS-KRW",
-    "base_symbol": "GRASS",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-GRASS",
+    "base_symbol": "KRW",
+    "quote_symbol": "GRASS",
+    "name_ko": "그래스",
+    "name_en": "Grass"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ORCA-KRW",
-    "base_symbol": "ORCA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ORCA",
+    "base_symbol": "KRW",
+    "quote_symbol": "ORCA",
+    "name_ko": "오르카",
+    "name_en": "Orca"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "KMNO-KRW",
-    "base_symbol": "KMNO",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-KMNO",
+    "base_symbol": "KRW",
+    "quote_symbol": "KMNO",
+    "name_ko": "카미노 파이낸스",
+    "name_en": "Kamino Finance"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "PUMPBTC-KRW",
-    "base_symbol": "PUMPBTC",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-PUMPBTC",
+    "base_symbol": "KRW",
+    "quote_symbol": "PUMPBTC",
+    "name_ko": "펌프",
+    "name_en": "PUMP"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "EPT-KRW",
-    "base_symbol": "EPT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-EPT",
+    "base_symbol": "KRW",
+    "quote_symbol": "EPT",
+    "name_ko": "밸런스",
+    "name_en": "Balance"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "HAEDAL-KRW",
-    "base_symbol": "HAEDAL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-HAEDAL",
+    "base_symbol": "KRW",
+    "quote_symbol": "HAEDAL",
+    "name_ko": "해달 프로토콜",
+    "name_en": "Haedal Protocol"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "AI16Z-KRW",
-    "base_symbol": "AI16Z",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-AI16Z",
+    "base_symbol": "KRW",
+    "quote_symbol": "AI16Z",
+    "name_ko": "에이아이식스틴즈",
+    "name_en": "ai16z"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "PARTI-KRW",
-    "base_symbol": "PARTI",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-PARTI",
+    "base_symbol": "KRW",
+    "quote_symbol": "PARTI",
+    "name_ko": "파티클 네트워크",
+    "name_en": "Particle Network"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SXT-KRW",
-    "base_symbol": "SXT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-SXT",
+    "base_symbol": "KRW",
+    "quote_symbol": "SXT",
+    "name_ko": "스페이스 앤드 타임",
+    "name_en": "Space and Time"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "PROMPT-KRW",
-    "base_symbol": "PROMPT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-PROMPT",
+    "base_symbol": "KRW",
+    "quote_symbol": "PROMPT",
+    "name_ko": "웨이파인더",
+    "name_en": "Wayfinder"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SIGN-KRW",
-    "base_symbol": "SIGN",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-SIGN",
+    "base_symbol": "KRW",
+    "quote_symbol": "SIGN",
+    "name_ko": "사인",
+    "name_en": "Sign"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BTR-KRW",
-    "base_symbol": "BTR",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BTR",
+    "base_symbol": "KRW",
+    "quote_symbol": "BTR",
+    "name_ko": "비트레이어",
+    "name_en": "Bitlayer"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SAHARA-KRW",
-    "base_symbol": "SAHARA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-SAHARA",
+    "base_symbol": "KRW",
+    "quote_symbol": "SAHARA",
+    "name_ko": "사하라에이아이",
+    "name_en": "Sahara AI"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "HEMI-KRW",
-    "base_symbol": "HEMI",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-HEMI",
+    "base_symbol": "KRW",
+    "quote_symbol": "HEMI",
+    "name_ko": "헤미",
+    "name_en": "Hemi"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "H-KRW",
-    "base_symbol": "H",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-H",
+    "base_symbol": "KRW",
+    "quote_symbol": "H",
+    "name_ko": "휴머니티 프로토콜",
+    "name_en": "Humanity Protocol"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "HOME-KRW",
-    "base_symbol": "HOME",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-HOME",
+    "base_symbol": "KRW",
+    "quote_symbol": "HOME",
+    "name_ko": "디파이 앱",
+    "name_en": "Defi App"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "OM-KRW",
-    "base_symbol": "OM",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-OM",
+    "base_symbol": "KRW",
+    "quote_symbol": "OM",
+    "name_ko": "만트라",
+    "name_en": "MANTRA"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "LA-KRW",
-    "base_symbol": "LA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-LA",
+    "base_symbol": "KRW",
+    "quote_symbol": "LA",
+    "name_ko": "라그랑주",
+    "name_en": "Lagrange"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SOPH-KRW",
-    "base_symbol": "SOPH",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-SOPH",
+    "base_symbol": "KRW",
+    "quote_symbol": "SOPH",
+    "name_ko": "소폰",
+    "name_en": "Sophon"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "HYPER-KRW",
-    "base_symbol": "HYPER",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-HYPER",
+    "base_symbol": "KRW",
+    "quote_symbol": "HYPER",
+    "name_ko": "하이퍼레인",
+    "name_en": "Hyperlane"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "PROVE-KRW",
-    "base_symbol": "PROVE",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-PROVE",
+    "base_symbol": "KRW",
+    "quote_symbol": "PROVE",
+    "name_ko": "석싱트",
+    "name_en": "Succinct"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CUDIS-KRW",
-    "base_symbol": "CUDIS",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CUDIS",
+    "base_symbol": "KRW",
+    "quote_symbol": "CUDIS",
+    "name_ko": "쿠디스",
+    "name_en": "CUDIS"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "FORT-KRW",
-    "base_symbol": "FORT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-FORT",
+    "base_symbol": "KRW",
+    "quote_symbol": "FORT",
+    "name_ko": "포르타",
+    "name_en": "Forta"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "TOSHI-KRW",
-    "base_symbol": "TOSHI",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-TOSHI",
+    "base_symbol": "KRW",
+    "quote_symbol": "TOSHI",
+    "name_ko": "토시",
+    "name_en": "Toshi"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "HUMA-KRW",
-    "base_symbol": "HUMA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-HUMA",
+    "base_symbol": "KRW",
+    "quote_symbol": "HUMA",
+    "name_ko": "후마 파이낸스",
+    "name_en": "Huma Finance"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SPK-KRW",
-    "base_symbol": "SPK",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-SPK",
+    "base_symbol": "KRW",
+    "quote_symbol": "SPK",
+    "name_ko": "스파크",
+    "name_en": "Spark"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "USD1-KRW",
-    "base_symbol": "USD1",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-USD1",
+    "base_symbol": "KRW",
+    "quote_symbol": "USD1",
+    "name_ko": "월드 리버티 파이낸셜 유에스디",
+    "name_en": "World Liberty Financial USD"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SYRUP-KRW",
-    "base_symbol": "SYRUP",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-SYRUP",
+    "base_symbol": "KRW",
+    "quote_symbol": "SYRUP",
+    "name_ko": "메이플 파이낸스",
+    "name_en": "Maple Finance"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "NEWT-KRW",
-    "base_symbol": "NEWT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-NEWT",
+    "base_symbol": "KRW",
+    "quote_symbol": "NEWT",
+    "name_ko": "뉴턴 프로토콜",
+    "name_en": "Newton Protocol"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "RESOLV-KRW",
-    "base_symbol": "RESOLV",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-RESOLV",
+    "base_symbol": "KRW",
+    "quote_symbol": "RESOLV",
+    "name_ko": "리졸브",
+    "name_en": "Resolv"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "DOOD-KRW",
-    "base_symbol": "DOOD",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-DOOD",
+    "base_symbol": "KRW",
+    "quote_symbol": "DOOD",
+    "name_ko": "두들즈",
+    "name_en": "Doodles"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "TREE-KRW",
-    "base_symbol": "TREE",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-TREE",
+    "base_symbol": "KRW",
+    "quote_symbol": "TREE",
+    "name_ko": "트리하우스",
+    "name_en": "Treehouse"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "EUL-KRW",
-    "base_symbol": "EUL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-EUL",
+    "base_symbol": "KRW",
+    "quote_symbol": "EUL",
+    "name_ko": "오일러",
+    "name_en": "Euler"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "AVNT-KRW",
-    "base_symbol": "AVNT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-AVNT",
+    "base_symbol": "KRW",
+    "quote_symbol": "AVNT",
+    "name_ko": "아반티스",
+    "name_en": "Avantis"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "OPEN-KRW",
-    "base_symbol": "OPEN",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-OPEN",
+    "base_symbol": "KRW",
+    "quote_symbol": "OPEN",
+    "name_ko": "오픈렛저",
+    "name_en": "OpenLedger"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "PUMP-KRW",
-    "base_symbol": "PUMP",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-PUMP",
+    "base_symbol": "KRW",
+    "quote_symbol": "PUMP",
+    "name_ko": "펌프닷펀",
+    "name_en": "pump.fun"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "IRYS-KRW",
-    "base_symbol": "IRYS",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-IRYS",
+    "base_symbol": "KRW",
+    "quote_symbol": "IRYS",
+    "name_ko": "아이리스",
+    "name_en": "Irys"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SD-KRW",
-    "base_symbol": "SD",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-SD",
+    "base_symbol": "KRW",
+    "quote_symbol": "SD",
+    "name_ko": "스테이더",
+    "name_en": "Stader"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "BARD-KRW",
-    "base_symbol": "BARD",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-BARD",
+    "base_symbol": "KRW",
+    "quote_symbol": "BARD",
+    "name_ko": "롬바드",
+    "name_en": "Lombard"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "TOWNS-KRW",
-    "base_symbol": "TOWNS",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-TOWNS",
+    "base_symbol": "KRW",
+    "quote_symbol": "TOWNS",
+    "name_ko": "타운즈",
+    "name_en": "Towns"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "MIRA-KRW",
-    "base_symbol": "MIRA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-MIRA",
+    "base_symbol": "KRW",
+    "quote_symbol": "MIRA",
+    "name_ko": "미라",
+    "name_en": "Mira"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "CAMP-KRW",
-    "base_symbol": "CAMP",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-CAMP",
+    "base_symbol": "KRW",
+    "quote_symbol": "CAMP",
+    "name_ko": "캠프 네트워크",
+    "name_en": "Camp Network"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "XAN-KRW",
-    "base_symbol": "XAN",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-XAN",
+    "base_symbol": "KRW",
+    "quote_symbol": "XAN",
+    "name_ko": "아노마",
+    "name_en": "Anoma"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "POPCAT-KRW",
-    "base_symbol": "POPCAT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-POPCAT",
+    "base_symbol": "KRW",
+    "quote_symbol": "POPCAT",
+    "name_ko": "팝캣",
+    "name_en": "Popcat"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "WLFI-KRW",
-    "base_symbol": "WLFI",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-WLFI",
+    "base_symbol": "KRW",
+    "quote_symbol": "WLFI",
+    "name_ko": "월드 리버티 파이낸셜",
+    "name_en": "World Liberty Financial"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "2Z-KRW",
-    "base_symbol": "2Z",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-2Z",
+    "base_symbol": "KRW",
+    "quote_symbol": "2Z",
+    "name_ko": "더블제로",
+    "name_en": "DoubleZero"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "LINEA-KRW",
-    "base_symbol": "LINEA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-LINEA",
+    "base_symbol": "KRW",
+    "quote_symbol": "LINEA",
+    "name_ko": "리네아",
+    "name_en": "Linea"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "HOLO-KRW",
-    "base_symbol": "HOLO",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-HOLO",
+    "base_symbol": "KRW",
+    "quote_symbol": "HOLO",
+    "name_ko": "홀로월드 에이아이",
+    "name_en": "Holoworld AI"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ZKC-KRW",
-    "base_symbol": "ZKC",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ZKC",
+    "base_symbol": "KRW",
+    "quote_symbol": "ZKC",
+    "name_ko": "바운드리스",
+    "name_en": "Boundless"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ASTER-KRW",
-    "base_symbol": "ASTER",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ASTER",
+    "base_symbol": "KRW",
+    "quote_symbol": "ASTER",
+    "name_ko": "아스터",
+    "name_en": "Aster"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "XPL-KRW",
-    "base_symbol": "XPL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-XPL",
+    "base_symbol": "KRW",
+    "quote_symbol": "XPL",
+    "name_ko": "플라즈마",
+    "name_en": "Plasma"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "FF-KRW",
-    "base_symbol": "FF",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-FF",
+    "base_symbol": "KRW",
+    "quote_symbol": "FF",
+    "name_ko": "팔콘 파이낸스",
+    "name_en": "Falcon Finance"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SOMI-KRW",
-    "base_symbol": "SOMI",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-SOMI",
+    "base_symbol": "KRW",
+    "quote_symbol": "SOMI",
+    "name_ko": "솜니아",
+    "name_en": "Somnia"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "MON-KRW",
-    "base_symbol": "MON",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-MON",
+    "base_symbol": "KRW",
+    "quote_symbol": "MON",
+    "name_ko": "모나드",
+    "name_en": "Monad"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "FLUID-KRW",
-    "base_symbol": "FLUID",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-FLUID",
+    "base_symbol": "KRW",
+    "quote_symbol": "FLUID",
+    "name_ko": "플루이드",
+    "name_en": "Fluid"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "SUPER-KRW",
-    "base_symbol": "SUPER",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-SUPER",
+    "base_symbol": "KRW",
+    "quote_symbol": "SUPER",
+    "name_ko": "슈퍼버스",
+    "name_en": "SuperVerse"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "IN-KRW",
-    "base_symbol": "IN",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-IN",
+    "base_symbol": "KRW",
+    "quote_symbol": "IN",
+    "name_ko": "인피닛",
+    "name_en": "Infinit"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "RECALL-KRW",
-    "base_symbol": "RECALL",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-RECALL",
+    "base_symbol": "KRW",
+    "quote_symbol": "RECALL",
+    "name_ko": "리콜",
+    "name_en": "Recall"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ENSO-KRW",
-    "base_symbol": "ENSO",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ENSO",
+    "base_symbol": "KRW",
+    "quote_symbol": "ENSO",
+    "name_ko": "엔소",
+    "name_en": "Enso"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "YB-KRW",
-    "base_symbol": "YB",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-YB",
+    "base_symbol": "KRW",
+    "quote_symbol": "YB",
+    "name_ko": "일드베이시스",
+    "name_en": "YieldBasis"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ZBT-KRW",
-    "base_symbol": "ZBT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ZBT",
+    "base_symbol": "KRW",
+    "quote_symbol": "ZBT",
+    "name_ko": "제로베이스",
+    "name_en": "ZEROBASE"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "NOM-KRW",
-    "base_symbol": "NOM",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-NOM",
+    "base_symbol": "KRW",
+    "quote_symbol": "NOM",
+    "name_ko": "노미나",
+    "name_en": "노미나"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "ZORA-KRW",
-    "base_symbol": "ZORA",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-ZORA",
+    "base_symbol": "KRW",
+    "quote_symbol": "ZORA",
+    "name_ko": "조라",
+    "name_en": "Zora"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "MMT-KRW",
-    "base_symbol": "MMT",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-MMT",
+    "base_symbol": "KRW",
+    "quote_symbol": "MMT",
+    "name_ko": "모멘텀",
+    "name_en": "Momentum"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "MET-KRW",
-    "base_symbol": "MET",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-MET",
+    "base_symbol": "KRW",
+    "quote_symbol": "MET",
+    "name_ko": "메테오라",
+    "name_en": "Meteora"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "KITE-KRW",
-    "base_symbol": "KITE",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-KITE",
+    "base_symbol": "KRW",
+    "quote_symbol": "KITE",
+    "name_ko": "카이트",
+    "name_en": "Kite"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "TRUST-KRW",
-    "base_symbol": "TRUST",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-TRUST",
+    "base_symbol": "KRW",
+    "quote_symbol": "TRUST",
+    "name_ko": "인튜이션",
+    "name_en": "Intuition"
   },
   {
     "exchange": "BITHUMB",
-    "market_code": "PIEVERSE-KRW",
-    "base_symbol": "PIEVERSE",
-    "quote_symbol": "KRW"
+    "market_code": "KRW-PIEVERSE",
+    "base_symbol": "KRW",
+    "quote_symbol": "PIEVERSE",
+    "name_ko": "파이버스",
+    "name_en": "Pieverse"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-ETH",
+    "base_symbol": "BTC",
+    "quote_symbol": "ETH",
+    "name_ko": "이더리움",
+    "name_en": "Ethereum"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-XRP",
+    "base_symbol": "BTC",
+    "quote_symbol": "XRP",
+    "name_ko": "엑스알피 [리플]",
+    "name_en": "XRP"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-TRX",
+    "base_symbol": "BTC",
+    "quote_symbol": "TRX",
+    "name_ko": "트론",
+    "name_en": "TRON"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-KAIA",
+    "base_symbol": "BTC",
+    "quote_symbol": "KAIA",
+    "name_ko": "카이아",
+    "name_en": "Kaia"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-DOGE",
+    "base_symbol": "BTC",
+    "quote_symbol": "DOGE",
+    "name_ko": "도지코인",
+    "name_en": "Dogecoin"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-BNB",
+    "base_symbol": "BTC",
+    "quote_symbol": "BNB",
+    "name_ko": "비앤비",
+    "name_en": "BNB"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-SOL",
+    "base_symbol": "BTC",
+    "quote_symbol": "SOL",
+    "name_ko": "솔라나",
+    "name_en": "Solana"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-ENS",
+    "base_symbol": "BTC",
+    "quote_symbol": "ENS",
+    "name_ko": "이더리움네임서비스",
+    "name_en": "Ethereum Name Service"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-CSPR",
+    "base_symbol": "BTC",
+    "quote_symbol": "CSPR",
+    "name_ko": "캐스퍼",
+    "name_en": "Casper"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-WITCH",
+    "base_symbol": "BTC",
+    "quote_symbol": "WITCH",
+    "name_ko": "위치 토큰",
+    "name_en": "Witch Token"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-TALK",
+    "base_symbol": "BTC",
+    "quote_symbol": "TALK",
+    "name_ko": "톡큰",
+    "name_en": "Talken"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-DICE",
+    "base_symbol": "BTC",
+    "quote_symbol": "DICE",
+    "name_ko": "클레이다이스",
+    "name_en": "KLAYDICE"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-AHT",
+    "base_symbol": "BTC",
+    "quote_symbol": "AHT",
+    "name_ko": "아하토큰",
+    "name_en": "AhaToken"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-SUI",
+    "base_symbol": "BTC",
+    "quote_symbol": "SUI",
+    "name_ko": "수이",
+    "name_en": "SUI"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-HVH",
+    "base_symbol": "BTC",
+    "quote_symbol": "HVH",
+    "name_ko": "하바",
+    "name_en": "HAVAH"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-WLD",
+    "base_symbol": "BTC",
+    "quote_symbol": "WLD",
+    "name_ko": "월드코인",
+    "name_en": "Worldcoin"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "BTC-USDC",
+    "base_symbol": "BTC",
+    "quote_symbol": "USDC",
+    "name_ko": "유에스디코인",
+    "name_en": "USD Coin"
   }
 ]

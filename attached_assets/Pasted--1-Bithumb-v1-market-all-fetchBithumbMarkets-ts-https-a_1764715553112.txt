@@ -1,0 +1,228 @@
+📢 1. Bithumb용 지시문 – /v1/market/all 기반으로 완전 교체
+🎯 목표
+
+fetchBithumbMarkets.ts를
+https://api.bithumb.com/v1/market/all + korean_name / english_name 기반으로
+439개 전 마켓에 한글명/영문명이 최대한 다 들어가게 리팩토링 해주세요.
+
+1) 사용할 API
+
+엔드포인트:
+https://api.bithumb.com/v1/market/all
+
+여기서 가져올 필드 예시:
+
+market → "USDC-KRW" 이런 형식
+
+korean_name → "유에스디"
+
+english_name → "USDC"
+
+(이미 refreshExchangeMarkets.ts에서 잘 쓰고 있던 그 로직 그대로 가져오면 됩니다.)
+
+2) fetchBithumbMarkets.ts 내부 로직 구조
+
+기존 내용은 정리하고, 아래 구조로 재작성해주세요:
+
+// scripts/fetchBithumbMarkets.ts
+import fs from "fs";
+import path from "path";
+
+interface BithumbApiMarket {
+  market: string;        // "USDC-KRW"
+  korean_name?: string;  // "유에스디"
+  english_name?: string; // "USDC"
+}
+
+interface RawMarket {
+  exchange: "BITHUMB";
+  market_code: string;
+  base_symbol: string;
+  quote_symbol: string;
+  name_ko?: string;
+  name_en?: string;
+}
+
+// (선택) fallback DB – 이미 있으면 그대로 사용
+const BITHUMB_FALLBACK: Record<string, { name_ko?: string; name_en?: string }> = {
+  USDT: { name_ko: "테더", name_en: "Tether" },
+  USDC: { name_ko: "유에스디", name_en: "USDC" },
+  // 나머지 수동 정의가 있으면 그대로 유지
+};
+
+async function fetchBithumbMarkets() {
+  const url = "https://api.bithumb.com/v1/market/all";
+
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`Bithumb API error: ${res.status} ${res.statusText}`);
+  }
+
+  const data = (await res.json()) as BithumbApiMarket[] | any;
+
+  const apiMarkets: BithumbApiMarket[] = Array.isArray(data) ? data : data?.data ?? [];
+
+  const result: RawMarket[] = apiMarkets.map((m) => {
+    const [base, quote] = m.market.split("-"); // "USDC-KRW" → ["USDC","KRW"]
+    const symbol = base.toUpperCase();
+
+    const fromApiKo = m.korean_name?.trim();
+    const fromApiEn = m.english_name?.trim();
+
+    const fromFallback = BITHUMB_FALLBACK[symbol] ?? {};
+
+    const name_ko = fromApiKo || fromFallback.name_ko || undefined;
+    const name_en = fromApiEn || fromFallback.name_en || undefined;
+
+    const market: RawMarket = {
+      exchange: "BITHUMB",
+      market_code: m.market,
+      base_symbol: symbol,
+      quote_symbol: quote.toUpperCase(),
+      ...(name_ko ? { name_ko } : {}),
+      ...(name_en ? { name_en } : {}),
+    };
+
+    return market;
+  });
+
+  const outPath = path.join("data", "raw", "bithumb", "markets.json");
+  fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  fs.writeFileSync(outPath, JSON.stringify(result, null, 2), "utf-8");
+
+  const total = result.length;
+  const withName = result.filter((m) => m.name_ko || m.name_en).length;
+
+  console.log(
+    `✅ Bithumb markets fetched: total=${total}, withName=${withName}, withoutName=${total - withName}`
+  );
+}
+
+fetchBithumbMarkets().catch((err) => {
+  console.error("❌ fetchBithumbMarkets failed:", err);
+  process.exit(1);
+});
+
+
+중요 규칙:
+
+name_ko / name_en 값이 없으면 → 필드 자체를 넣지 말 것(null 금지)
+
+이름 우선순위:
+
+Bithumb API korean_name / english_name
+
+(있다면) fallback DB (BITHUMB_FALLBACK)
+
+출력 파일:
+
+data/raw/bithumb/markets.json (지금 mergeMarkets.ts가 읽는 형식 그대로 유지)
+
+3) 실행 순서
+npm run fetch:bithumb
+npm run build:markets   # mergeMarkets.ts
+
+
+실행 후 data/exchange_markets.json 에서 "exchange": "BITHUMB" 항목들이
+대부분 name_ko를 가진 상태인지 로그/파일로 확인 부탁드립니다.
+
+📢 2. Coinone용 지시문 – 이름 병합 활성화
+🎯 목표
+
+fetchCoinoneMarkets.ts에서
+Coinone 마켓 API + 이름 DB(names.json)를 합쳐서
+390개 마켓에 name_ko / name_en을 최대한 채워주세요.
+
+지금 구조:
+
+data/raw/coinone/markets.json
+→ /public/v2/markets/KRW 기반 (base/quote/market 정보만 있음)
+
+data/raw/coinone/names.json
+→ “지원 중인 가상자산 종류 및 네트워크 유형” 테이블 크롤링 결과 (심볼별 국문명/영문명)
+
+1) names.json 로딩
+
+fetchCoinoneMarkets.ts 안에서:
+
+import fs from "fs";
+import path from "path";
+
+type CoinoneNameMap = {
+  [symbol: string]: { name_ko?: string; name_en?: string };
+};
+
+const namesPath = path.join("data", "raw", "coinone", "names.json");
+const coinoneNameMap: CoinoneNameMap =
+  fs.existsSync(namesPath)
+    ? JSON.parse(fs.readFileSync(namesPath, "utf-8"))
+    : {};
+
+2) Coinone API + 이름 merge
+
+기본 마켓 수집은 그대로 두고, map 하는 부분만 이렇게 정리:
+
+interface RawMarket {
+  exchange: "COINONE";
+  market_code: string;
+  base_symbol: string;
+  quote_symbol: string;
+  name_ko?: string;
+  name_en?: string;
+}
+
+async function fetchCoinoneMarkets() {
+  const res = await fetch("https://api.coinone.co.kr/public/v2/markets/KRW");
+  if (!res.ok) throw new Error(`Coinone API error: ${res.status} ${res.statusText}`);
+
+  const json = await res.json();
+  const markets = json.markets ?? [];
+
+  const result: RawMarket[] = markets.map((m: any) => {
+    const base = (m.target_currency ?? "").toUpperCase(); // 예: BTC
+    const quote = (m.base_currency ?? "").toUpperCase();  // KRW
+    const marketCode = m.market;                          // "BTC-KRW"
+
+    const names = coinoneNameMap[base] ?? {};
+
+    const name_ko = names.name_ko?.trim() || undefined;
+    const name_en = names.name_en?.trim() || undefined;
+
+    const row: RawMarket = {
+      exchange: "COINONE",
+      market_code: marketCode,
+      base_symbol: base,
+      quote_symbol: quote,
+      ...(name_ko ? { name_ko } : {}),
+      ...(name_en ? { name_en } : {}),
+    };
+
+    return row;
+  });
+
+  const outPath = path.join("data", "raw", "coinone", "markets.json");
+  fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  fs.writeFileSync(outPath, JSON.stringify(result, null, 2), "utf-8");
+
+  const total = result.length;
+  const withName = result.filter((m) => m.name_ko || m.name_en).length;
+
+  console.log(
+    `✅ Coinone markets fetched: total=${total}, withName=${withName}, withoutName=${total - withName}`
+  );
+}
+
+fetchCoinoneMarkets().catch((err) => {
+  console.error("❌ fetchCoinoneMarkets failed:", err);
+  process.exit(1);
+});
+
+3) 실행 순서
+npm run fetch:coinone
+npm run build:markets
+
+
+실행 후:
+
+exchange_markets.json 기준으로
+"exchange": "COINONE" 항목들에 name_ko가 어느 정도 채워졌는지 확인.

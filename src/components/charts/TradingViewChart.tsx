@@ -37,7 +37,7 @@ function TradingViewChart({
       const tvSymbol =
         exchange === "UPBIT" ? `UPBIT:${symbol}KRW` : `BINANCE:${symbol}USDT`;
 
-      // 설정 객체 (JSON 직렬화 없이 그대로 사용)
+      // 설정 객체
       const config: any = {
         autosize: true,
         symbol: tvSymbol,
@@ -60,27 +60,31 @@ function TradingViewChart({
       
       try {
         script.textContent = JSON.stringify(config);
+        script.async = true;
       } catch (e) {
         console.warn("[TradingViewChart] JSON stringify failed, using fallback");
-        script.textContent = '{}';
+        script.textContent = JSON.stringify({ autosize: true, symbol: tvSymbol });
+        script.async = true;
       }
 
       container.appendChild(script);
 
-      // TradingView 로더 스크립트 추가
-      const loaderScript = document.createElement("script");
-      loaderScript.src =
-        "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
-      loaderScript.async = true;
-      loaderScript.onload = () => {
-        setTimeout(() => setIsLoading(false), 500);
-      };
-      loaderScript.onerror = () => {
-        console.warn("[TradingViewChart] Widget loader failed");
-        setIsLoading(false);
-      };
+      // TradingView 로더 스크립트 추가 (약간 지연)
+      setTimeout(() => {
+        const loaderScript = document.createElement("script");
+        loaderScript.src =
+          "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+        loaderScript.async = true;
+        loaderScript.onload = () => {
+          setTimeout(() => setIsLoading(false), 800);
+        };
+        loaderScript.onerror = () => {
+          console.warn("[TradingViewChart] Widget loader failed");
+          setIsLoading(false);
+        };
 
-      container.appendChild(loaderScript);
+        container.appendChild(loaderScript);
+      }, 100);
     } catch (err) {
       console.error("[TradingViewChart] Error:", err);
       setIsLoading(false);
