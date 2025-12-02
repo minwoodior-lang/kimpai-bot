@@ -217,7 +217,6 @@ async function fetchCoinoneSupportNameMap(): Promise<Record<string, { ko: string
     const $ = cheerio.load(html);
     
     const map: Record<string, { ko: string | null; en: string | null }> = {};
-    let debugCount = 0;
     
     // 테이블 tbody의 각 행 순회
     $("table tbody tr").each((_, el) => {
@@ -231,10 +230,6 @@ async function fetchCoinoneSupportNameMap(): Promise<Record<string, { ko: string
         
         if (symbol) {
           map[symbol] = { ko, en };
-          if (debugCount < 3) {
-            console.log(`[Coinone Support DEBUG] ${symbol}: ${ko} / ${en}`);
-            debugCount++;
-          }
         }
       }
     });
@@ -272,8 +267,6 @@ async function fetchCoinoneMarkets(): Promise<ExchangeMarketRow[]> {
       return [];
     }
     
-    console.log("[Coinone DEBUG] 첫 마켓 샘플:", JSON.stringify(data[0]));
-    
     // data는 { symbol, target_currency, ... } 배열 - Support nameMap에서 한글명/영문명 추가
     const markets: ExchangeMarketRow[] = data
       .filter((m: any) => {
@@ -281,13 +274,9 @@ async function fetchCoinoneMarkets(): Promise<ExchangeMarketRow[]> {
         const sym = m.symbol || m.target_currency || m.currency || m.code;
         return sym && String(sym).trim();
       })
-      .map((m: any, idx: number) => {
+      .map((m: any) => {
         const symbol = (m.symbol || m.target_currency || m.currency || m.code || "").toUpperCase().trim();
         const names = nameMap[symbol] ?? { ko: null, en: null };
-        
-        if (idx < 3) {
-          console.log(`[Coinone MAP DEBUG] ${symbol}: nameMap result = ${JSON.stringify(names)}`);
-        }
         
         return {
           exchange: "COINONE",
@@ -299,8 +288,7 @@ async function fetchCoinoneMarkets(): Promise<ExchangeMarketRow[]> {
         };
       });
     
-    const withKo = markets.filter(m => m.name_ko).length;
-    console.log(`[Coinone] ✅ ${markets.length}개 마켓 (${withKo}개 한글명 포함)`);
+    console.log(`[Coinone] ✅ ${markets.length}개 마켓`);
     return markets;
   } catch (err) {
     console.error("[Coinone] 수집 실패:", err instanceof Error ? err.message : String(err));
