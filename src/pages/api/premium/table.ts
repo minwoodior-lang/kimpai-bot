@@ -74,7 +74,7 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
     // Try to fetch from master_symbols table first
     const { data: masterSymbols, error } = await supabase
       .from('master_symbols')
-      .select('base_symbol, ko_name, coingecko_id')
+      .select('base_symbol, ko_name, coingecko_id, coinmarketcap_slug')
       .eq('is_active', true);
 
     if (!error && masterSymbols && masterSymbols.length > 0) {
@@ -84,7 +84,7 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
           symbol: record.base_symbol,
           koreanName: record.ko_name || record.base_symbol,
           englishName: record.base_symbol,
-          cmcSlug: record.base_symbol.toLowerCase(),
+          cmcSlug: record.coinmarketcap_slug || record.base_symbol.toLowerCase(),
         });
       }
       cachedMetadata = metadata;

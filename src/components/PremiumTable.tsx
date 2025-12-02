@@ -518,8 +518,14 @@ export default function PremiumTable({
   };
 
   const openCoinMarketCap = (symbol: string, cmcSlug?: string) => {
-    const slug = cmcSlug || symbol.toLowerCase();
-    const cmcUrl = `https://coinmarketcap.com/currencies/${slug}/`;
+    let cmcUrl = '';
+    if (cmcSlug) {
+      // slug이 있으면 직접 사용
+      cmcUrl = `https://coinmarketcap.com/currencies/${cmcSlug}/`;
+    } else {
+      // slug가 없으면 검색창 링크
+      cmcUrl = `https://coinmarketcap.com/search/?q=${symbol}`;
+    }
     window.open(cmcUrl, '_blank', 'noopener,noreferrer');
   };
 
