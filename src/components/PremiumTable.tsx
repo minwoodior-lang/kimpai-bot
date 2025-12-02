@@ -724,8 +724,8 @@ export default function PremiumTable({
             <div
               className={`text-xl font-bold ${getPremiumColor(averagePremium)}`}
             >
-              {averagePremium >= 0 ? "+" : ""}
-              {averagePremium.toFixed(2)}%
+              {(averagePremium ?? 0) >= 0 ? "+" : ""}
+              {(averagePremium ?? 0).toFixed(2)}%
             </div>
           </div>
 
