@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createClient } from "@supabase/supabase-js";
 import { checkRateLimit, getClientIp } from "@/lib/rateLimit";
+import * as fs from "fs";
+import * as path from "path";
 
 // 캐시 무효화: 항상 최신 데이터 반환
 export const dynamic = "force-dynamic";
