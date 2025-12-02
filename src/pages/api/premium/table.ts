@@ -59,8 +59,8 @@ interface ExchangePriceRecord {
 
 interface CoinMetadata {
   symbol: string;
-  koreanName: string;
-  englishName: string;
+  name_ko: string;
+  name_en: string;
   cmcSlug?: string;
 }
 
@@ -108,8 +108,8 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
 
           metadata.set(symbol, {
             symbol,
-            koreanName: row.name_ko || symbol,
-            englishName: row.name_en || symbol,
+            name_ko: row.name_ko || symbol,
+            name_en: row.name_en || symbol,
             cmcSlug: autoSlug,
           });
         }
@@ -347,8 +347,8 @@ export default async function handler(
 
       tableData.push({
         symbol,
-        name: coinMeta?.englishName || symbol,
-        koreanName: coinMeta?.koreanName || symbol,
+        name: coinMeta?.name_en || symbol,
+        koreanName: coinMeta?.name_ko || symbol,
         koreanPrice: Math.round(domesticPriceKrw),
         globalPrice: globalPriceUsd,
         globalPriceKrw: globalPriceKrw ? Math.round(globalPriceKrw) : null,
@@ -367,9 +367,9 @@ export default async function handler(
           : foreign.exchange.toUpperCase(),
         isListed,
         cmcSlug: coinMeta?.cmcSlug,
-        name_ko: coinMeta?.koreanName ?? undefined,
-        name_en: coinMeta?.englishName ?? undefined,
-        icon_url: undefined,
+        name_ko: coinMeta?.name_ko || symbol,
+        name_en: coinMeta?.name_en || symbol,
+        icon_url: null,
       });
 
       if (!latestTimestamp || domesticRecord.created_at > latestTimestamp) {
