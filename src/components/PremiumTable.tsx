@@ -233,36 +233,48 @@ export default function PremiumTable({
   const getTvSymbol = (symbol: string) => `BINANCE:${symbol}USDT`;
 
   const detectChanges = useCallback((newData: PremiumData[]) => {
-    const newFlashStates: FlashState = {};
-    const newPrevData: Record<string, { price: number; premium: number | null }> = {};
+    try {
+      if (!Array.isArray(newData)) return;
+      
+      const newFlashStates: FlashState = {};
+      const newPrevData: Record<string, { price: number; premium: number | null }> = {};
 
-    newData.forEach(item => {
-      const prev = prevDataRef.current[item.symbol];
-      newPrevData[item.symbol] = { price: item.koreanPrice, premium: item.premium };
+      newData.forEach(item => {
+        if (!item || typeof item.symbol !== 'string' || typeof item.koreanPrice !== 'number') {
+          return;
+        }
+        
+        const prev = prevDataRef.current[item.symbol];
+        newPrevData[item.symbol] = { price: item.koreanPrice, premium: item.premium };
 
-      if (prev) {
-        const priceDiff = Math.abs(item.koreanPrice - prev.price);
-        const priceThreshold = prev.price * 0.0001;
-        if (priceDiff > priceThreshold && priceDiff > 0) {
-          newFlashStates[item.symbol] = {
-            ...newFlashStates[item.symbol],
-            price: item.koreanPrice > prev.price ? "up" : "down"
-          };
+        if (prev) {
+          const priceDiff = Math.abs(item.koreanPrice - prev.price);
+          const priceThreshold = Math.max(prev.price * 0.0001, 0.00001);
+          if (priceDiff > priceThreshold && priceDiff > 0) {
+            newFlashStates[item.symbol] = {
+              ...newFlashStates[item.symbol],
+              price: item.koreanPrice > prev.price ? "up" : "down"
+            };
+          }
+          if (item.premium !== null && prev.premium !== null && Math.abs(item.premium - prev.premium) > 0.01) {
+            newFlashStates[item.symbol] = {
+              ...newFlashStates[item.symbol],
+              premium: item.premium > prev.premium ? "up" : "down"
+            };
+          }
         }
-        if (item.premium !== null && prev.premium !== null && Math.abs(item.premium - prev.premium) > 0.01) {
-          newFlashStates[item.symbol] = {
-            ...newFlashStates[item.symbol],
-            premium: item.premium > prev.premium ? "up" : "down"
-          };
-        }
+      });
+
+      prevDataRef.current = newPrevData;
+
+      if (Object.keys(newFlashStates).length > 0) {
+        setFlashStates(newFlashStates);
+        setTimeout(() => setFlashStates({}), 600);
       }
-    });
-
-    prevDataRef.current = newPrevData;
-
-    if (Object.keys(newFlashStates).length > 0) {
-      setFlashStates(newFlashStates);
-      setTimeout(() => setFlashStates({}), 600);
+    } catch (err) {
+      if (process.env.NODE_ENV === 'development') {
+        console.error('[PremiumTable] detectChanges error:', err);
+      }
     }
   }, []);
 
@@ -299,18 +311,28 @@ export default function PremiumTable({
 
       const json: ApiResponse = await response.json();
 
-      if (json.success) {
-        detectChanges(json.data);
+      if (json && json.success && Array.isArray(json.data) && json.data.length > 0) {
+        try {
+          detectChanges(json.data);
+        } catch (e) {
+          if (process.env.NODE_ENV === 'development') {
+            console.error('[PremiumTable] detectChanges failed:', e);
+          }
+        }
         setData(json.data);
-        setAveragePremium(json.averagePremium);
-        setFxRate(json.fxRate);
-        setUpdatedAt(json.updatedAt);
-        setTotalCoins(json.totalCoins);
-        setListedCoins(json.listedCoins);
+        setAveragePremium(typeof json.averagePremium === 'number' ? json.averagePremium : 0);
+        setFxRate(typeof json.fxRate === 'number' ? json.fxRate : 0);
+        setUpdatedAt(typeof json.updatedAt === 'string' ? json.updatedAt : new Date().toISOString());
+        setTotalCoins(typeof json.totalCoins === 'number' ? json.totalCoins : 0);
+        setListedCoins(typeof json.listedCoins === 'number' ? json.listedCoins : 0);
         setError(null);
         setConsecutiveRateLimits(0); // 성공 시 카운트 리셋
       }
-    } catch {
+    } catch (err) {
+      // 에러 로깅만 하고 조용히 무시 (사용자 경험 유지)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('[PremiumTable] Fetch error:', err instanceof Error ? err.message : String(err));
+      }
     } finally {
       setLoading(false);
     }
