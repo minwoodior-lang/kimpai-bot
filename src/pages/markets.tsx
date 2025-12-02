@@ -1,11 +1,11 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout/Layout";
 import { useState, useEffect } from "react";
 import { useMarkets } from "@/hooks/useMarkets";
 import { useExchangeSelection, DOMESTIC_EXCHANGES, FOREIGN_EXCHANGES } from "@/contexts/ExchangeSelectionContext";
-import ExchangeSelector from "@/components/ExchangeSelector";
-import CoinIcon from "@/components/CoinIcon";
+import ExchangeSelector from "@/components/market/ExchangeSelector";
+import CoinIcon from "@/components/common/CoinIcon";
 
 function formatVolumeKRW(value: number | null): string {
   if (value === null || value === undefined || isNaN(value) || value === 0) return "-";

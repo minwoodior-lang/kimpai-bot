@@ -1,9 +1,9 @@
 import Head from "next/head";
-import Layout from "@/components/Layout";
-import PremiumTicker from "@/components/PremiumTicker";
-import AIInsightBox from "@/components/AIInsightBox";
-import PremiumTable from "@/components/PremiumTable";
-import AlertSummary from "@/components/AlertSummary";
+import Layout from "@/components/layout/Layout";
+import PremiumTicker from "@/components/premium/PremiumTicker";
+import AIInsightBox from "@/components/premium/AIInsightBox";
+import PremiumTable from "@/components/premium/PremiumTable";
+import AlertSummary from "@/components/premium/AlertSummary";
 import dynamic from "next/dynamic";
 
 const ChartWithControls = dynamic(

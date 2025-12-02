@@ -2,10 +2,10 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout/Layout";
 import { useMarkets } from "@/hooks/useMarkets";
 import { useExchangeSelection, DOMESTIC_EXCHANGES, FOREIGN_EXCHANGES } from "@/contexts/ExchangeSelectionContext";
-import ExchangeSelector from "@/components/ExchangeSelector";
+import ExchangeSelector from "@/components/market/ExchangeSelector";
 import dynamic from "next/dynamic";
 
 const TradingViewChart = dynamic(() => import("@/components/charts/TradingViewChart"), {

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
-import Layout from "@/components/Layout";
-import PremiumTable from "@/components/PremiumTable";
+import Layout from "@/components/layout/Layout";
+import PremiumTable from "@/components/premium/PremiumTable";
 
 export default function PremiumPage() {
   return (

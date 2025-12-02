@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout/Layout";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "@/lib/supabaseClient";
