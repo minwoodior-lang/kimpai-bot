@@ -11,72 +11,57 @@ interface ExchangeMarket {
   is_active: boolean;
 }
 
-interface MasterSymbol {
-  base_symbol: string;
-  name_ko: string | null;
-  name_en: string | null;
-  icon_url: string;
-  cmcSlug?: string;
-  isListed?: boolean;
+// 심볼 정규화: KRW-BTC → BTC, USDT_ETH → ETH
+function normalizeSymbol(symbol: string): string {
+  return symbol
+    .replace(/^(KRW|USDT|BTC)[-_]/, "") // 앞의 quote 제거
+    .replace(/[-_].*$/, "") // 뒤의 quote 제거
+    .toUpperCase();
 }
 
 const markets: ExchangeMarket[] = [];
-const metadataMap: Record<string, Partial<MasterSymbol>> = {};
+const seenMarkets = new Set<string>();
+
+function addMarket(
+  exchange: string,
+  market_symbol: string,
+  base_symbol: string,
+  quote_symbol: string
+) {
+  const key = `${exchange}_${base_symbol}_${quote_symbol}`;
+  if (!seenMarkets.has(key)) {
+    seenMarkets.add(key);
+    markets.push({
+      exchange,
+      market_symbol,
+      base_symbol,
+      quote_symbol,
+      market_type: "spot",
+      is_active: true,
+    });
+  }
+}
 
 // ========== Upbit ==========
 async function syncUpbit() {
   try {
-    console.log("[Upbit] Syncing markets & metadata...");
+    console.log("[Upbit] Syncing...");
     const resp = await axios.get("https://api.upbit.com/v1/market/all?isDetails=true", {
       timeout: 10000,
     });
 
-    const seen = new Set<string>();
     let count = 0;
-
     for (const m of resp.data) {
       const market: string = m.market;
-      const korean_name: string = m.korean_name || "";
-      const english_name: string = m.english_name || "";
-
       if (!market) continue;
 
       const [quote, base] = market.split("-");
       if (!base || !quote) continue;
 
-      const key = `UPBIT_${quote}_${base}`;
-      if (!seen.has(key)) {
-        seen.add(key);
-        markets.push({
-          exchange: "UPBIT",
-          market_symbol: market,
-          base_symbol: base,
-          quote_symbol: quote,
-          market_type: "spot",
-          is_active: true,
-        });
-
-        // 메타데이터 수집
-        if (!metadataMap[base]) {
-          metadataMap[base] = {
-            base_symbol: base,
-            name_ko: korean_name || null,
-            name_en: english_name || null,
-            icon_url: `/coins/${base}.png`,
-          };
-        } else {
-          if (!metadataMap[base].name_ko && korean_name) {
-            metadataMap[base].name_ko = korean_name;
-          }
-          if (!metadataMap[base].name_en && english_name) {
-            metadataMap[base].name_en = english_name;
-          }
-        }
-        count++;
-      }
+      addMarket("UPBIT", market, base, quote);
+      count++;
     }
-
-    console.log(`  ✓ Upbit: ${count} markets & metadata`);
+    console.log(`  ✓ Upbit: ${count} markets`);
   } catch (e) {
     console.error(`[Upbit] Error: ${(e as any).message}`);
   }
@@ -85,7 +70,7 @@ async function syncUpbit() {
 // ========== Bithumb ==========
 async function syncBithumb() {
   try {
-    console.log("[Bithumb] Syncing KRW/BTC/USDT markets...");
+    console.log("[Bithumb] Syncing KRW/BTC/USDT...");
     const quotes = ["KRW", "BTC", "USDT"];
     let count = 0;
 
@@ -94,35 +79,15 @@ async function syncBithumb() {
         const endpoint = quote === "KRW" ? "ALL_KRW" : `ALL_${quote}`;
         const resp = await axios.get(
           `https://api.bithumb.com/public/ticker/${endpoint}`,
-          { timeout: 8000 },
+          { timeout: 8000 }
         );
 
         if (resp.data?.data) {
           for (const base in resp.data.data) {
             if (base === "date") continue;
-
-            const key = `BITHUMB_${quote}_${base}`;
-            const market_symbol = `${base}_${quote}`;
-
-            markets.push({
-              exchange: "BITHUMB",
-              market_symbol,
-              base_symbol: base.toUpperCase(),
-              quote_symbol: quote,
-              market_type: "spot",
-              is_active: true,
-            });
-
-            // 빗썸에서 메타데이터 추출
-            const ticker = resp.data.data[base];
-            if (!metadataMap[base.toUpperCase()]) {
-              metadataMap[base.toUpperCase()] = {
-                base_symbol: base.toUpperCase(),
-                name_ko: null,
-                name_en: null,
-                icon_url: `/coins/${base.toUpperCase()}.png`,
-              };
-            }
+            const baseNorm = normalizeSymbol(base);
+            const marketSymbol = `${baseNorm}_${quote}`;
+            addMarket("BITHUMB", marketSymbol, baseNorm, quote);
             count++;
           }
         }
@@ -130,7 +95,6 @@ async function syncBithumb() {
         console.log(`  ⚠ Bithumb ${quote}: ${(e as any).message}`);
       }
     }
-
     console.log(`  ✓ Bithumb: ${count} markets`);
   } catch (e) {
     console.error(`[Bithumb] Error: ${(e as any).message}`);
@@ -140,57 +104,25 @@ async function syncBithumb() {
 // ========== Coinone ==========
 async function syncCoinone() {
   try {
-    console.log("[Coinone] Syncing markets...");
+    console.log("[Coinone] Syncing...");
     const resp = await axios.get("https://api.coinone.co.kr/ticker?currency=all", {
       timeout: 8000,
     });
 
     let count = 0;
-
     if (resp.data?.result === 1) {
       for (const base in resp.data) {
         if (!base || base.startsWith("timestamp") || base === "result") continue;
-
-        const marketSymbol = `KRW-${base}`;
-        markets.push({
-          exchange: "COINONE",
-          market_symbol: marketSymbol,
-          base_symbol: base.toUpperCase(),
-          quote_symbol: "KRW",
-          market_type: "spot",
-          is_active: true,
-        });
-
-        if (!metadataMap[base.toUpperCase()]) {
-          metadataMap[base.toUpperCase()] = {
-            base_symbol: base.toUpperCase(),
-            name_ko: null,
-            name_en: null,
-            icon_url: `/coins/${base.toUpperCase()}.png`,
-          };
-        }
+        const baseNorm = normalizeSymbol(base);
+        const marketSymbol = `${baseNorm}-KRW`;
+        addMarket("COINONE", marketSymbol, baseNorm, "KRW");
         count++;
       }
     }
-
     console.log(`  ✓ Coinone: ${count} markets`);
   } catch (e) {
     console.error(`[Coinone] Error: ${(e as any).message}`);
   }
-}
-
-// Remove duplicates
-function deduplicateMarkets(markets: ExchangeMarket[]): ExchangeMarket[] {
-  const seen = new Map<string, ExchangeMarket>();
-
-  for (const m of markets) {
-    const key = `${m.exchange}_${m.base_symbol}_${m.quote_symbol}`;
-    if (!seen.has(key)) {
-      seen.set(key, m);
-    }
-  }
-
-  return Array.from(seen.values());
 }
 
 async function main() {
@@ -198,15 +130,10 @@ async function main() {
 
   await Promise.all([syncUpbit(), syncBithumb(), syncCoinone()]);
 
-  const deduped = deduplicateMarkets(markets);
+  const outPath = path.join(process.cwd(), "data", "exchange_markets.json");
+  fs.writeFileSync(outPath, JSON.stringify(markets, null, 2));
 
-  // Save exchange_markets.json
-  const marketsPath = path.join(process.cwd(), "data", "exchange_markets.json");
-  fs.writeFileSync(marketsPath, JSON.stringify(deduped, null, 2));
-
-  console.log(`\n✅ [syncDomesticMarkets] 완료:`);
-  console.log(`   - exchange_markets.json: ${deduped.length}개 마켓`);
-  console.log(`   - 메타데이터: ${Object.keys(metadataMap).length}개 심볼\n`);
+  console.log(`\n✅ [syncDomesticMarkets] 완료: ${markets.length}개 마켓 (정규화됨)\n`);
 }
 
 main().catch((e) => {

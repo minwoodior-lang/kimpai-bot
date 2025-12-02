@@ -7,8 +7,6 @@ interface MasterSymbol {
   name_ko: string | null;
   name_en: string | null;
   icon_url: string;
-  cmcSlug?: string;
-  isListed?: boolean;
 }
 
 interface ExchangeMarket {
@@ -28,14 +26,14 @@ async function main() {
     const marketsPath = path.join(process.cwd(), "data", "exchange_markets.json");
     const markets: ExchangeMarket[] = JSON.parse(fs.readFileSync(marketsPath, "utf8"));
 
-    const masterSymbols = new Set(master.map((m) => m.base_symbol));
-    const exchangeSymbols = new Set(markets.map((m) => m.base_symbol));
+    const masterMap = new Map(master.map((m) => [m.base_symbol, m]));
+    const exchangeSymbols = Array.from(new Set(markets.map((m) => m.base_symbol)));
 
-    console.log(`[Metadata] master: ${masterSymbols.size}, exchange: ${exchangeSymbols.size}`);
+    console.log(`[Metadata] master: ${masterMap.size}, exchange: ${exchangeSymbols.length}`);
 
     const missing: string[] = [];
     for (const sym of exchangeSymbols) {
-      if (!masterSymbols.has(sym)) {
+      if (!masterMap.has(sym)) {
         missing.push(sym);
       }
     }
@@ -43,9 +41,9 @@ async function main() {
     console.log(`[Metadata] Missing: ${missing.length}\n`);
 
     if (missing.length > 0) {
-      console.log(`[Metadata] Fetching ${Math.min(missing.length, 10)} from CoinGecko...`);
+      console.log(`[Metadata] Fetching ${Math.min(missing.length, 20)} from CoinGecko...`);
 
-      for (let i = 0; i < Math.min(missing.length, 10); i++) {
+      for (let i = 0; i < Math.min(missing.length, 20); i++) {
         const symbol = missing[i];
         try {
           const resp = await axios.get(`https://api.coingecko.com/api/v3/search?query=${symbol}`, {
@@ -54,16 +52,15 @@ async function main() {
 
           if (resp.data?.coins?.[0]) {
             const coin = resp.data.coins[0];
-            master.push({
+            masterMap.set(symbol, {
               base_symbol: symbol,
               name_ko: null,
               name_en: coin.name || symbol,
               icon_url: `/coins/${symbol}.png`,
-              cmcSlug: coin.id,
             });
             console.log(`  ✓ ${symbol}: ${coin.name}`);
           } else {
-            master.push({
+            masterMap.set(symbol, {
               base_symbol: symbol,
               name_ko: null,
               name_en: symbol,
@@ -71,7 +68,7 @@ async function main() {
             });
           }
         } catch (e) {
-          master.push({
+          masterMap.set(symbol, {
             base_symbol: symbol,
             name_ko: null,
             name_en: symbol,
@@ -81,10 +78,13 @@ async function main() {
       }
     }
 
-    master.sort((a, b) => a.base_symbol.localeCompare(b.base_symbol));
-    fs.writeFileSync(masterPath, JSON.stringify(master, null, 2));
+    const result = Array.from(masterMap.values()).sort((a, b) =>
+      a.base_symbol.localeCompare(b.base_symbol)
+    );
 
-    console.log(`\n✅ [syncMetadata] 완료: ${master.length}개 심볼`);
+    fs.writeFileSync(masterPath, JSON.stringify(result, null, 2));
+
+    console.log(`\n✅ [syncMetadata] 완료: ${result.length}개 심볼\n`);
   } catch (e) {
     console.error("[syncMetadata] 오류:", e);
     process.exit(1);
