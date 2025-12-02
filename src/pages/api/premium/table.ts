@@ -11,16 +11,7 @@ function loadPremium() {
 
 function loadMeta() {
   const file = path.join(process.cwd(), "data/master_symbols.json");
-  const data = JSON.parse(fs.readFileSync(file, "utf8"));
-  // master_symbols.json은 배열이므로 객체로 변환
-  if (Array.isArray(data)) {
-    const map: Record<string, any> = {};
-    for (const item of data) {
-      map[item.base_symbol] = item;
-    }
-    return map;
-  }
-  return data;
+  return JSON.parse(fs.readFileSync(file, "utf8"));
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -30,32 +21,53 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     const result = premium
       .map((row: any) => {
-        try {
-          return attachMetadata(row, meta);
-        } catch (err) {
-          console.error("[attachMetadata] error:", row, err);
-          return {
-            ...row,
-            nameKo: null,
-            nameEn: null,
-            iconUrl: null,
-            displayName: row.symbol || "Unknown",
-            koreanPrice: row.koreanPrice || 0,
-            globalPriceKrw: row.globalPriceKrw || 0,
-            premium: row.premium ?? 0,
-          };
-        }
+        const mapped = attachMetadata(row, meta);
+        return {
+          symbol: mapped.symbol,
+          name_ko: mapped.name_ko,
+          name_en: mapped.name_en,
+          icon_url: mapped.icon_url,
+          koreanPrice: mapped.koreanPrice,
+          globalPrice: mapped.globalPrice,
+          globalPriceKrw: mapped.globalPriceKrw,
+          premium: mapped.premium,
+          domesticExchange: mapped.domesticExchange,
+          foreignExchange: mapped.foreignExchange,
+          // 컴포넌트 호환성 필드
+          change24h: null,
+          high24h: mapped.koreanPrice,
+          low24h: mapped.koreanPrice,
+          volume24hKrw: 0,
+          volume24hForeignKrw: null,
+          isListed: true,
+          cmcSlug: undefined,
+          koreanName: mapped.name_ko,
+          displayName: mapped.name_ko || mapped.name_en || mapped.symbol,
+        };
       })
-      .filter(
-        (row: any) =>
-          row.koreanPrice !== null &&
-          row.globalPriceKrw !== null &&
-          row.premium !== null
-      );
+      .filter((row: any) => row.koreanPrice !== null);
 
-    return res.status(200).json({ data: result });
+    return res.status(200).json({
+      success: true,
+      data: result,
+      averagePremium: result.length > 0 
+        ? result.reduce((sum: number, r: any) => sum + (r.premium || 0), 0) / result.length
+        : 0,
+      fxRate: 1350,
+      updatedAt: new Date().toISOString(),
+      totalCoins: result.length,
+      listedCoins: result.filter((r: any) => r.isListed).length,
+    });
   } catch (err) {
     console.error("[API] /premium/table error:", err);
-    return res.status(500).json({ data: [] });
+    return res.status(500).json({
+      success: false,
+      data: [],
+      averagePremium: 0,
+      fxRate: 0,
+      updatedAt: new Date().toISOString(),
+      totalCoins: 0,
+      listedCoins: 0,
+    });
   }
 }
