@@ -10,11 +10,18 @@
 
 import { createClient } from "@supabase/supabase-js";
 import * as cheerio from "cheerio";
+import pg from "pg";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 
+// Supabase 연결 시도 (클라우드) 또는 로컬 PostgreSQL로 fallback
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// 로컬 PostgreSQL 연결 (fallback)
+const localPool = process.env.DATABASE_URL 
+  ? new pg.Pool({ connectionString: process.env.DATABASE_URL })
+  : null;
 
 type ExchangeMarketRow = {
   exchange: string;
@@ -312,30 +319,46 @@ async function fetchCoinoneKoreanNames(): Promise<Record<string, string>> {
 async function upsertMarkets(markets: ExchangeMarketRow[]): Promise<number> {
   if (markets.length === 0) return 0;
   
-  console.log("[DB] 기존 마켓 삭제 중...");
+  // 로컬 PostgreSQL 사용
+  if (!localPool) {
+    console.error("❌ DATABASE_URL 환경변수 없음");
+    return 0;
+  }
+  
+  const client = await localPool.connect();
   try {
-    await supabase
-      .from("exchange_markets")
-      .delete()
-      .gte("id", 0);
-  } catch (delError) {
-    console.log("[DB] DELETE 스킵:", delError instanceof Error ? delError.message : String(delError));
+    console.log("[DB] 기존 마켓 삭제 중...");
+    await client.query("DELETE FROM public.exchange_markets");
+    
+    console.log(`[DB] ${markets.length}개 마켓 삽입 중...`);
+    
+    const query = `
+      INSERT INTO public.exchange_markets 
+      (exchange, market_code, base_symbol, quote_symbol, name_ko, name_en)
+      VALUES ($1, $2, $3, $4, $5, $6)
+    `;
+    
+    let inserted = 0;
+    for (const market of markets) {
+      await client.query(query, [
+        market.exchange,
+        market.market_code,
+        market.base_symbol,
+        market.quote_symbol,
+        market.name_ko,
+        market.name_en,
+      ]);
+      inserted++;
+    }
+    
+    console.log(`[DB] ✅ ${inserted}개 행 저장됨`);
+    return inserted;
+  } catch (err) {
+    console.error("❌ DB 작업 실패:", err instanceof Error ? err.message : String(err));
+    throw err;
+  } finally {
+    client.release();
   }
-  
-  console.log(`[DB] ${markets.length}개 마켓 삽입 중...`);
-  const { data, error: insertError } = await supabase
-    .from("exchange_markets")
-    .insert(markets as any)
-    .select("id");
-  
-  if (insertError) {
-    console.error("❌ INSERT 실패:", insertError.message);
-    throw insertError;
-  }
-  
-  const actualCount = (data as any[])?.length || 0;
-  console.log(`[DB] ✅ ${actualCount}개 행 저장됨`);
-  return actualCount;
 }
 
 export async function refreshExchangeMarkets() {
