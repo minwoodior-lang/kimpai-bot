@@ -1,0 +1,137 @@
+레플릿 전달문 (그대로 복붙해서 보내면 됨)
+
+제목: master_symbols 한글명 백필 스크립트 구현 요청 (영문/영문 → 한글/영문 자동 정리)
+
+레플릿님,
+
+지금 KimpAI는 master_symbols + PremiumTable까지 기본 인프라는 잘 동작하고 있는데,
+초기 데이터가 들어올 때 ko_name이 비어 있어서,
+국내 거래소(업비트/빗썸/코인원) 기준으로 여전히 영문 / 영문 표기가 많이 남아 있습니다.
+
+목표는 다음과 같습니다:
+
+Supabase master_symbols 테이블에서
+ko_name IS NULL 이거나 ko_name = symbol 인 행들에 대해
+업비트/빗썸/코인원에서 가져온 한글명을 활용해
+한 번에 ko_name을 채워 넣어,
+프론트에서 한글 / 영문으로 자연스럽게 보이도록 하는 백필 스크립트를 만들어 주세요.
+
+1. Supabase 백필 스크립트 추가
+
+프로젝트에 scripts/backfillKoreanNames.ts 파일을 하나 만들어 주시고,
+다음 조건을 만족하도록 구현해 주세요.
+
+1-1. Supabase 클라이언트 설정
+
+NEXT_PUBLIC_SUPABASE_URL
+
+SUPABASE_SERVICE_ROLE_KEY (이미 priceWorker 등에서 쓰는 서비스 키)
+
+를 사용해서 service role 권한으로 접속합니다.
+
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+const supabase = createClient(supabaseUrl, serviceKey);
+
+1-2. 국내 거래소에서 한글명 맵 구성
+
+이미 사용 중인 업비트/빗썸/코인원 마켓 리스트 fetch 로직
+(예: exchangeFetchers나 price worker에서 쓰는 함수들)을 재사용해서,
+
+type KoreanNameMap = Record<string, string>; // symbol -> koreanName
+const koreanNameBySymbol: KoreanNameMap = {};
+
+
+형태의 맵을 만들어 주세요.
+
+key: 심볼(symbol) (master_symbols.symbol과 join 가능하도록)
+
+value: 해당 심볼의 한글 이름
+
+업비트/빗썸/코인원 데이터를 모두 합쳐서,
+먼저 업비트 → 빗썸 → 코인원 순으로 덮어쓰는 등,
+적당한 우선순위를 정해도 괜찮습니다.
+
+1-3. master_symbols 조회 + 업데이트 대상 선별
+type MasterSymbolRow = {
+  id: string;
+  symbol: string;
+  ko_name: string | null;
+};
+
+const { data, error } = await supabase
+  .from("master_symbols")
+  .select("id, symbol, ko_name");
+
+const rows = (data ?? []) as MasterSymbolRow[];
+
+const updates: { id: string; ko_name: string }[] = [];
+
+for (const row of rows) {
+  // 이미 ko_name이 있고 symbol과 다르면 (즉, 이미 한글명 세팅된 경우) 스킵
+  if (row.ko_name && row.ko_name !== row.symbol) continue;
+
+  const symbol = row.symbol;
+  const koreanName = koreanNameBySymbol[symbol];
+
+  if (!koreanName) continue; // 맵에 없는 심볼은 나중에 수동 검토
+
+  updates.push({ id: row.id, ko_name: koreanName });
+}
+
+1-4. Supabase upsert로 일괄 반영 (chunk 처리)
+const chunkSize = 100;
+for (let i = 0; i < updates.length; i += chunkSize) {
+  const chunk = updates.slice(i, i + chunkSize);
+  const { error: upErr } = await supabase
+    .from("master_symbols")
+    .upsert(chunk, { onConflict: "id" });
+
+  if (upErr) {
+    console.error("Upsert error:", upErr);
+    process.exit(1);
+  }
+
+  console.log(`Updated ${i + chunk.length}/${updates.length}`);
+}
+
+console.log("✅ Backfill complete!");
+
+
+에러는 console.error로만 로깅하고,
+치명적인 경우에만 process.exit(1)로 종료하면 됩니다.
+
+2. package.json에 실행 스크립트 추가
+
+package.json의 scripts에 아래 한 줄 추가 부탁드립니다.
+
+"backfill:korean-names": "tsx scripts/backfillKoreanNames.ts"
+
+3. 실행 및 결과
+
+Replit(또는 로컬) Shell에서:
+
+npm run backfill:korean-names
+
+
+실행 후:
+
+Prepared updates: N
+
+Updated ...
+
+✅ Backfill complete!
+로그를 남겨주시고,
+
+Supabase master_symbols에서:
+
+기존에 ko_name IS NULL 또는 ko_name = symbol 이던 국내 거래소 심볼들이
+실제 한글명으로 채워졌는지 한 번 확인해 주세요.
+
+이 작업이 끝나면,
+이미 PremiumTable 쪽에서 koreanName ?? symbol을 사용하도록 되어 있기 때문에,
+업비트/빗썸/코인원 기준 영문 / 영문 표기는 대부분
+자동으로 한글 / 영문으로 바뀌게 됩니다.
