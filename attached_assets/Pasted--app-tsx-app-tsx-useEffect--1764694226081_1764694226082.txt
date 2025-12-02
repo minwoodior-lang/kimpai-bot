@@ -1,0 +1,88 @@
+🔧 _app.tsx 전역 에러 핸들러에 “필터”를 하나 더 달기
+
+지금 대충 이런 식으로 돼 있을 거야 (내가 예측):
+
+// _app.tsx 예시
+useEffect(() => {
+  const handleError = (event: ErrorEvent) => {
+    console.log("[GLOBAL ERROR]", {
+      message: event.message,
+      error: event.error,
+      errorType: typeof event.error,
+      errorConstructor: event.error?.constructor?.name,
+      stack: event.error?.stack,
+    });
+  };
+
+  window.addEventListener("error", handleError);
+
+  return () => {
+    window.removeEventListener("error", handleError);
+  };
+}, []);
+
+
+여기에 “Script error.” + error=null 인 경우는 그냥 무시하는 조건만 넣으면 됨.
+
+✅ 수정본 (이대로 Replit AI한테 주면 됨)
+// _app.tsx 안 useEffect 쪽
+
+useEffect(() => {
+  const handleError = (event: ErrorEvent) => {
+    // 1) 외부 스크립트 공통 에러("Script error.")는 그냥 무시
+    if (event.message === "Script error." && !event.error) {
+      return;
+    }
+
+    console.log("[GLOBAL ERROR]", {
+      message: event.message,
+      error: event.error,
+      errorType: typeof event.error,
+      errorConstructor: event.error?.constructor?.name,
+      stack: (event.error as any)?.stack,
+    });
+  };
+
+  const handleRejection = (event: PromiseRejectionEvent) => {
+    // value가 단순 문자열/숫자일 수도 있으니 안전하게 로깅
+    const err: any = event.reason;
+    console.log("[UNHANDLED REJECTION]", {
+      reason: err,
+      type: typeof err,
+      ctor: err?.constructor?.name,
+      stack: err?.stack,
+    });
+  };
+
+  window.addEventListener("error", handleError);
+  window.addEventListener("unhandledrejection", handleRejection);
+
+  return () => {
+    window.removeEventListener("error", handleError);
+    window.removeEventListener("unhandledrejection", handleRejection);
+  };
+}, []);
+
+
+이렇게 하면:
+
+외부 스크립트 때문에 발생하는 Script error. 는 그냥 무시 → [GLOBAL ERROR] 로그 안 뜸.
+
+진짜 우리 코드에서 터지는 에러만 로깅 유지.
+
+3. Replit AI한테 보낼 문구 (복붙용)
+
+_app.tsx의 전역 에러 핸들러에서 브라우저의 공통 "Script error." 메시지를 필터링해서 무시하도록 수정해줘.
+현재 window.addEventListener("error", ...)로 [GLOBAL ERROR] 로그를 찍고 있는데,
+message가 "Script error."이고 event.error가 null인 경우는 외부 스크립트(CDN, TradingView, webpack 등)에서 발생한 cross-origin 에러라서 우리 코드와 직접적인 관련이 없으니까 바로 return 해서 무시하도록 조건문을 추가해줘.
+위 조건 이외의 에러에 대해서만 기존처럼 [GLOBAL ERROR] 로그를 남기게 유지해줘.
+
+요약하면:
+
+아이콘/한글명 쪽 로직은 이미 정상으로 돌아가고 있고,
+
+지금 콘솔에 보이는 건 외부 스크립트/개발용 HMR에서 나는 잡음이야.
+
+위처럼 필터 한 줄만 달면 너 콘솔엔 더 이상 Script error. 관련 로그 안 보일 거야.
+
+그 다음에 혹시 또 진짜 우리 코드 쪽 에러가 보이면, 그때 다시 캡처해서 알려줘.
