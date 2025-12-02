@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Layout from "@/components/layout/Layout";
+import Layout from "@/components/Layout";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
