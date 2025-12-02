@@ -9,6 +9,8 @@ export interface ExchangePrice {
   priceKrw: number;
   volume24h: number | null;
   change24h: number | null;
+  nameKo?: string;
+  nameEn?: string;
 }
 
 let domesticMarkets: DomesticMarkets | null = null;
@@ -51,6 +53,7 @@ export async function fetchUpbitKRW(fxRate: number): Promise<ExchangePrice[]> {
     
     return data.map((ticker: any) => {
       const symbol = ticker.market.replace('KRW-', '');
+      const metadata = coinMetadata.get(symbol);
       return {
         exchange: 'UPBIT',
         symbol,
@@ -60,6 +63,8 @@ export async function fetchUpbitKRW(fxRate: number): Promise<ExchangePrice[]> {
         priceKrw: ticker.trade_price,
         volume24h: ticker.acc_trade_price_24h,
         change24h: ticker.signed_change_rate * 100,
+        nameKo: metadata?.koreanName || symbol,
+        nameEn: metadata?.englishName || symbol,
       };
     });
   } catch (error) {
@@ -86,6 +91,7 @@ export async function fetchUpbitUSDT(fxRate: number): Promise<ExchangePrice[]> {
     return data.map((ticker: any) => {
       const symbol = ticker.market.replace('USDT-', '');
       const priceUsdt = ticker.trade_price;
+      const metadata = coinMetadata.get(symbol);
       return {
         exchange: 'UPBIT',
         symbol,
@@ -95,6 +101,8 @@ export async function fetchUpbitUSDT(fxRate: number): Promise<ExchangePrice[]> {
         priceKrw: priceUsdt * fxRate,
         volume24h: ticker.acc_trade_price_24h,
         change24h: ticker.signed_change_rate * 100,
+        nameKo: metadata?.koreanName || symbol,
+        nameEn: metadata?.englishName || symbol,
       };
     });
   } catch (error) {
@@ -125,6 +133,7 @@ export async function fetchUpbitBTC(fxRate: number): Promise<ExchangePrice[]> {
     return data.map((ticker: any) => {
       const symbol = ticker.market.replace('BTC-', '');
       const priceInBtc = ticker.trade_price;
+      const metadata = coinMetadata.get(symbol);
       return {
         exchange: 'UPBIT',
         symbol,
@@ -134,6 +143,8 @@ export async function fetchUpbitBTC(fxRate: number): Promise<ExchangePrice[]> {
         priceKrw: priceInBtc * btcKrwPrice,
         volume24h: ticker.acc_trade_price_24h,
         change24h: ticker.signed_change_rate * 100,
+        nameKo: metadata?.koreanName || symbol,
+        nameEn: metadata?.englishName || symbol,
       };
     });
   } catch (error) {
@@ -159,6 +170,7 @@ export async function fetchBithumbKRW(fxRate: number): Promise<ExchangePrice[]> 
     for (const symbol of symbols) {
       const ticker = data.data[symbol];
       if (ticker) {
+        const metadata = coinMetadata.get(symbol);
         results.push({
           exchange: 'BITHUMB',
           symbol,
@@ -168,6 +180,8 @@ export async function fetchBithumbKRW(fxRate: number): Promise<ExchangePrice[]> 
           priceKrw: Number(ticker.closing_price),
           volume24h: Number(ticker.acc_trade_value_24H) || null,
           change24h: Number(ticker.fluctate_rate_24H) || null,
+          nameKo: metadata?.koreanName || symbol,
+          nameEn: metadata?.englishName || symbol,
         });
       }
     }
@@ -200,6 +214,7 @@ export async function fetchBithumbBTC(fxRate: number): Promise<ExchangePrice[]> 
       const ticker = data.data[symbol];
       if (ticker) {
         const priceInBtc = Number(ticker.closing_price);
+        const metadata = coinMetadata.get(symbol);
         results.push({
           exchange: 'BITHUMB',
           symbol,
@@ -209,6 +224,8 @@ export async function fetchBithumbBTC(fxRate: number): Promise<ExchangePrice[]> 
           priceKrw: priceInBtc * btcKrwPrice,
           volume24h: Number(ticker.acc_trade_value_24H) || null,
           change24h: Number(ticker.fluctate_rate_24H) || null,
+          nameKo: metadata?.koreanName || symbol,
+          nameEn: metadata?.englishName || symbol,
         });
       }
     }
@@ -239,6 +256,7 @@ export async function fetchCoinoneKRW(fxRate: number): Promise<ExchangePrice[]> 
         const price = Number(ticker.last);
         const openPrice = Number(ticker.first);
         const change24h = openPrice > 0 ? ((price - openPrice) / openPrice) * 100 : null;
+        const metadata = coinMetadata.get(symbol);
         
         results.push({
           exchange: 'COINONE',
@@ -249,6 +267,8 @@ export async function fetchCoinoneKRW(fxRate: number): Promise<ExchangePrice[]> 
           priceKrw: price,
           volume24h: Number(ticker.quote_volume) || null,
           change24h,
+          nameKo: metadata?.koreanName || ticker.korean_name || symbol,
+          nameEn: metadata?.englishName || ticker.english_name || symbol,
         });
       }
     }
