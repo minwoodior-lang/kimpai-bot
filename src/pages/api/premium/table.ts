@@ -148,6 +148,18 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
       }
     }
 
+    console.log(
+      `[fetchCoinMetadata] Loaded ${metadata.size} symbols. Sample: ${
+        Array.from(metadata.entries())
+          .slice(0, 3)
+          .map(
+            ([k, v]) =>
+              `${k}=${v.name_ko}(icon:${v.icon_url ? "yes" : "no"})`,
+          )
+          .join(", ") || "No data"
+      }`
+    );
+
     cachedMetadata = metadata;
     lastMetadataFetch = now;
   } catch (error) {

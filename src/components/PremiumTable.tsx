@@ -456,16 +456,21 @@ export default function PremiumTable({
       try {
         json = await response.json();
       } catch (err) {
-        // JSON parse error - silently ignore (don't log, could trigger error handler)
+        // JSON parse error - silently ignore
         return;
       }
 
-      if (json && json.success && Array.isArray(json.data) && json.data.length > 0) {
-        try {
-          detectChanges(json.data);
-        } catch {
-          // Silently ignore
-        }
+      if (!json || !json.success) {
+        return;
+      }
+
+      if (!Array.isArray(json.data) || json.data.length === 0) {
+        setData([]);
+        return;
+      }
+
+      try {
+        detectChanges(json.data);
         setData(json.data);
         setAveragePremium(typeof json.averagePremium === "number" ? json.averagePremium : 0);
         setFxRate(typeof json.fxRate === "number" ? json.fxRate : 0);
