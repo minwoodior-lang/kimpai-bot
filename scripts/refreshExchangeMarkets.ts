@@ -294,46 +294,44 @@ async function fetchCoinoneKoreanNames(): Promise<Record<string, string>> {
 async function upsertMarkets(markets: ExchangeMarketRow[]): Promise<number> {
   if (markets.length === 0) return 0;
   
-  // 로컬 PostgreSQL 사용
-  if (!localPool) {
-    console.error("❌ DATABASE_URL 환경변수 없음");
+  if (!supabase) {
+    console.error("❌ Supabase 클라이언트 없음");
     return 0;
   }
   
-  const client = await localPool.connect();
+  console.log("[Supabase] 기존 마켓 삭제 중...");
   try {
-    console.log("[DB] 기존 마켓 삭제 중...");
-    await client.query("DELETE FROM public.exchange_markets");
+    await supabase
+      .from("exchange_markets")
+      .delete()
+      .gte("id", 0);
+  } catch (delErr) {
+    console.log("[Supabase] DELETE 스킵:", delErr instanceof Error ? delErr.message : String(delErr));
+  }
+  
+  console.log(`[Supabase] ${markets.length}개 마켓 삽입 중...`);
+  
+  // 배치 INSERT (500개씩)
+  let inserted = 0;
+  for (let i = 0; i < markets.length; i += 500) {
+    const batch = markets.slice(i, i + 500);
+    const { data, error: insertError } = await supabase
+      .from("exchange_markets")
+      .insert(batch as any)
+      .select("id");
     
-    console.log(`[DB] ${markets.length}개 마켓 삽입 중...`);
-    
-    const query = `
-      INSERT INTO public.exchange_markets 
-      (exchange, market_code, base_symbol, quote_symbol, name_ko, name_en)
-      VALUES ($1, $2, $3, $4, $5, $6)
-    `;
-    
-    let inserted = 0;
-    for (const market of markets) {
-      await client.query(query, [
-        market.exchange,
-        market.market_code,
-        market.base_symbol,
-        market.quote_symbol,
-        market.name_ko,
-        market.name_en,
-      ]);
-      inserted++;
+    if (insertError) {
+      console.error("❌ INSERT 실패:", insertError.message);
+      throw insertError;
     }
     
-    console.log(`[DB] ✅ ${inserted}개 행 저장됨`);
-    return inserted;
-  } catch (err) {
-    console.error("❌ DB 작업 실패:", err instanceof Error ? err.message : String(err));
-    throw err;
-  } finally {
-    client.release();
+    const batchCount = (data as any[])?.length || 0;
+    inserted += batchCount;
+    console.log(`[Supabase] ✅ 배치 ${Math.floor(i/500) + 1}: ${batchCount}개 저장됨`);
   }
+  
+  console.log(`[Supabase] ✅ 총 ${inserted}개 행 저장됨`);
+  return inserted;
 }
 
 export async function refreshExchangeMarkets() {
