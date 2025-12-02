@@ -3,62 +3,33 @@ import path from "path";
 import axios from "axios";
 
 interface ExchangeMarket {
+  exchange: string;
+  market_symbol: string;
   base_symbol: string;
   quote_symbol: string;
-  exchange: string;
   name_ko: string | null;
   name_en: string | null;
+  icon_url?: string;
 }
 
 interface PremiumRow {
+  exchange: string;
+  market_symbol: string;
   symbol: string;
   koreanPrice: number | null;
   globalPrice: number | null;
   globalPriceKrw: number | null;
   premium: number | null;
-  domesticExchange: string | null;
-  foreignExchange: string | null;
+  name_ko: string | null;
+  name_en: string | null;
+  icon_url?: string;
 }
 
 const FX_DEFAULT = 1350;
-const DOMESTIC_EXCHANGES = ["UPBIT", "BITHUMB", "COINONE"] as const;
-const DOMESTIC_PRIORITY = ["UPBIT", "BITHUMB", "COINONE"] as const;
 
 function loadExchangeMarkets(): ExchangeMarket[] {
   const filePath = path.join(process.cwd(), "data", "exchange_markets.json");
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
-}
-
-function pickDomesticMarket(
-  marketsForSymbol: ExchangeMarket[]
-): ExchangeMarket | null {
-  const domestic = marketsForSymbol.filter((m) =>
-    DOMESTIC_EXCHANGES.includes(m.exchange as any)
-  );
-
-  // 우선순위: 업비트 > 빗썸 > 코인원
-  for (const ex of DOMESTIC_PRIORITY) {
-    const found = domestic.find((m) => m.exchange === ex);
-    if (found) return found;
-  }
-
-  return null;
-}
-
-function pickForeignMarket(
-  marketsForSymbol: ExchangeMarket[]
-): ExchangeMarket | null {
-  // 해외: OKX > Gate.io 우선순위
-  const foreign = marketsForSymbol.filter(
-    (m) => !DOMESTIC_EXCHANGES.includes(m.exchange as any)
-  );
-
-  for (const ex of ["OKX", "GATE", "BINANCE"]) {
-    const found = foreign.find((m) => m.exchange.includes(ex));
-    if (found) return found;
-  }
-
-  return foreign[0] || null;
 }
 
 async function fetchAllPrices() {
@@ -73,7 +44,6 @@ async function fetchAllPrices() {
     for (const m of resp.data) {
       const market: string = m.market;
       if (!market || !market.startsWith("KRW-")) continue;
-
       const [, base] = market.split("-");
       if (!priceMap[base]) priceMap[base] = {};
       priceMap[base]["UPBIT_KRW"] = Number(m.trade_price || 0);
@@ -189,25 +159,16 @@ async function main() {
     const markets = loadExchangeMarkets();
     const priceMap = await fetchAllPrices();
 
-    // 심볼별로 마켓 그룹화
-    const marketsBySymbol = new Map<string, ExchangeMarket[]>();
-    for (const market of markets) {
-      if (!marketsBySymbol.has(market.base_symbol)) {
-        marketsBySymbol.set(market.base_symbol, []);
-      }
-      marketsBySymbol.get(market.base_symbol)!.push(market);
-    }
-
     const rows: PremiumRow[] = [];
-    const seen = new Set<string>();
 
-    for (const symbol in priceMap) {
-      if (!symbol || symbol.length === 0 || seen.has(symbol)) continue;
-      seen.add(symbol);
-
+    // ✅ exchange_markets의 각 마켓별로 프리미엘 계산 (심볼 축약 절대 금지!)
+    for (const market of markets) {
+      const symbol = market.base_symbol;
       const prices = priceMap[symbol];
 
-      // 국내 시세 계산
+      if (!prices) continue;
+
+      // 국내 시세
       const krwPrices = Object.entries(prices)
         .filter(([k]) => k.includes("KRW"))
         .map(([, v]) => v);
@@ -216,7 +177,7 @@ async function main() {
           ? krwPrices.reduce((a, b) => a + b) / krwPrices.length
           : null;
 
-      // 해외 시세 계산
+      // 해외 시세
       const usdtPrices = Object.entries(prices)
         .filter(([k]) => k.includes("USDT"))
         .map(([, v]) => v);
@@ -232,19 +193,19 @@ async function main() {
         premium = ((koreanPrice - globalPriceKrw) / globalPriceKrw) * 100;
       }
 
+      // 국내 시세가 있을 때만 저장 (exchange_markets의 마켓별로!)
       if (koreanPrice && globalPrice) {
-        // 어느 국내 거래소 기준인지 선택
-        const marketsForSymbol = marketsBySymbol.get(symbol) || [];
-        const domesticMarket = pickDomesticMarket(marketsForSymbol);
-
         rows.push({
+          exchange: market.exchange,
+          market_symbol: market.market_symbol,
           symbol,
           koreanPrice,
           globalPrice,
           globalPriceKrw,
           premium,
-          domesticExchange: domesticMarket?.exchange || null,
-          foreignExchange: "FOREIGN",
+          name_ko: market.name_ko,
+          name_en: market.name_en,
+          icon_url: market.icon_url,
         });
       }
     }
@@ -254,7 +215,16 @@ async function main() {
     const outPath = path.join(process.cwd(), "data", "premiumTable.json");
     fs.writeFileSync(outPath, JSON.stringify(rows, null, 2));
 
-    console.log(`✅ [priceWorker] 완료: ${rows.length}개 코인\n`);
+    console.log(`✅ [priceWorker] 완료: ${rows.length}개 마켓\n`);
+    console.log(`[priceWorker] 거래소별 마켓:`);
+
+    const byEx: Record<string, number> = {};
+    for (const row of rows) {
+      byEx[row.exchange] = (byEx[row.exchange] || 0) + 1;
+    }
+    for (const [ex, count] of Object.entries(byEx)) {
+      console.log(`  ${ex}: ${count}`);
+    }
   } catch (error) {
     console.error("[priceWorker] 오류:", error);
     process.exit(1);

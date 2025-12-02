@@ -131,6 +131,8 @@ const TradingViewChart = dynamic(() => import("./charts/TradingViewChart"), {
 
 interface PremiumData {
   symbol: string;
+  exchange: string;
+  market_symbol: string;
   name: string;
   koreanName: string;
   koreanPrice: number;
@@ -243,6 +245,11 @@ const EXCHANGE_LABEL_KO: Record<string, string> = {
   FOREIGN: "해외 거래소",
   DOMESTIC: "국내 거래소",
 };
+
+function getExchangeLabel(exchange: string | undefined): string {
+  if (!exchange) return "거래소";
+  return EXCHANGE_LABEL_KO[exchange] || exchange;
+}
 
 const CHOSUNG = [
   "ㄱ",
