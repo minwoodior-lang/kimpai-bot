@@ -202,74 +202,67 @@ async function fetchBithumbMarkets(): Promise<ExchangeMarketRow[]> {
 
 
 /**
- * Coinone 공식 currencies API에서 한글명/영문명 매핑
+ * 코인원 Support 페이지에서 HTML 파싱으로 한글명/영문명 추출
+ * https://support.coinone.co.kr/support/solutions/articles/31000163237
  */
-async function fetchCoinoneNameMap(): Promise<Record<string, { ko: string | null; en: string | null }>> {
+async function fetchCoinoneSupportNameMap(): Promise<Record<string, { ko: string | null; en: string | null }>> {
   try {
-    const response = await fetch("https://api.coinone.co.kr/public/v2/currencies/");
+    const response = await fetch("https://support.coinone.co.kr/support/solutions/articles/31000163237", {
+      headers: { "User-Agent": "Mozilla/5.0" }
+    });
     
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     
-    const json = await response.json();
-    
-    // 응답 구조 확인: currencies 또는 바로 배열 또는 다른 구조
-    let currencies: any[] = [];
-    if (Array.isArray(json)) {
-      currencies = json;
-    } else if (json.currencies && Array.isArray(json.currencies)) {
-      currencies = json.currencies;
-    } else if (json.data && Array.isArray(json.data)) {
-      currencies = json.data;
-    } else {
-      // 응답 구조 디버깅
-      const keys = Object.keys(json || {});
-      console.log(`[Coinone NameMap] 응답 구조: ${keys.slice(0, 5).join(", ")} (${keys.length}개 키)`);
-      
-      // 배열을 찾기 위해 모든 키 순회
-      for (const key of keys) {
-        if (Array.isArray(json[key])) {
-          currencies = json[key];
-          console.log(`[Coinone NameMap] 배열 발견: ${key} (${currencies.length}개)`);
-          break;
-        }
-      }
-    }
+    const html = await response.text();
+    const $ = cheerio.load(html);
     
     const map: Record<string, { ko: string | null; en: string | null }> = {};
-    for (const c of currencies) {
-      if (c.currency) {
-        const symbol = c.currency.toUpperCase();
-        map[symbol] = {
-          ko: c.display_name ?? null,
-          en: c.display_name_en ?? null,
-        };
-      }
-    }
+    let debugCount = 0;
     
-    console.log(`[Coinone NameMap] ✅ ${Object.keys(map).length}개 심볼 매핑됨`);
+    // 테이블 tbody의 각 행 순회
+    $("table tbody tr").each((_, el) => {
+      const cells = $(el).find("td");
+      
+      if (cells.length >= 3) {
+        // td[0] = 심볼, td[1] = 국문명, td[2] = 영문명
+        const symbol = $(cells[0]).text().trim().toUpperCase();
+        const ko = $(cells[1]).text().trim() || null;
+        const en = $(cells[2]).text().trim() || null;
+        
+        if (symbol) {
+          map[symbol] = { ko, en };
+          if (debugCount < 3) {
+            console.log(`[Coinone Support DEBUG] ${symbol}: ${ko} / ${en}`);
+            debugCount++;
+          }
+        }
+      }
+    });
+    
+    console.log(`[Coinone Support] ✅ ${Object.keys(map).length}개 심볼 매핑됨`);
     return map;
   } catch (err) {
-    console.log("[Coinone NameMap] 수집 실패:", err instanceof Error ? err.message : String(err));
+    console.log("[Coinone Support] 파싱 실패:", err instanceof Error ? err.message : String(err));
     return {};
   }
 }
 
 /**
- * 코인원: v2/markets/KRW + currencies 정식 API
+ * 코인원: v2/markets/KRW + Support 페이지 HTML 파싱
  */
 async function fetchCoinoneMarkets(): Promise<ExchangeMarketRow[]> {
   try {
     console.log("[Coinone] 마켓 + 한글명 수집 중...");
     
-    // 1단계: nameMap 먼저 가져오기
-    const nameMap = await fetchCoinoneNameMap();
+    // Promise.all로 두 소스 동시 요청
+    const [marketsResponse, nameMap] = await Promise.all([
+      fetch("https://api.coinone.co.kr/public/v2/markets/KRW"),
+      fetchCoinoneSupportNameMap()
+    ]);
     
-    // 2단계: Coinone v2/markets/KRW API 사용
-    const response = await fetch("https://api.coinone.co.kr/public/v2/markets/KRW");
+    if (!marketsResponse.ok) throw new Error(`HTTP ${marketsResponse.status}`);
     
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    
-    const json = await response.json();
+    const json = await marketsResponse.json();
     
     // 응답이 { markets: [...] } 또는 { data: [...] } 또는 [...] 형식
     let data = Array.isArray(json) ? json : (Array.isArray(json.markets) ? json.markets : (Array.isArray(json.data) ? json.data : []));
@@ -279,28 +272,35 @@ async function fetchCoinoneMarkets(): Promise<ExchangeMarketRow[]> {
       return [];
     }
     
-    // data는 { symbol, ... } 배열 - nameMap에서 한글명/영문명 추가
+    console.log("[Coinone DEBUG] 첫 마켓 샘플:", JSON.stringify(data[0]));
+    
+    // data는 { symbol, target_currency, ... } 배열 - Support nameMap에서 한글명/영문명 추가
     const markets: ExchangeMarketRow[] = data
       .filter((m: any) => {
         // symbol이 없으면 이전 필드명 확인
         const sym = m.symbol || m.target_currency || m.currency || m.code;
         return sym && String(sym).trim();
       })
-      .map((m: any) => {
+      .map((m: any, idx: number) => {
         const symbol = (m.symbol || m.target_currency || m.currency || m.code || "").toUpperCase().trim();
-        const nameInfo = nameMap[symbol] || { ko: null, en: null };
+        const names = nameMap[symbol] ?? { ko: null, en: null };
+        
+        if (idx < 3) {
+          console.log(`[Coinone MAP DEBUG] ${symbol}: nameMap result = ${JSON.stringify(names)}`);
+        }
         
         return {
           exchange: "COINONE",
           market_code: `${symbol}/KRW`,
           base_symbol: symbol,
           quote_symbol: "KRW",
-          name_ko: nameInfo.ko || m.name_ko || null,
-          name_en: nameInfo.en || m.name_en || null,
+          name_ko: names.ko,
+          name_en: names.en,
         };
       });
     
-    console.log(`[Coinone] ✅ ${markets.length}개 마켓`);
+    const withKo = markets.filter(m => m.name_ko).length;
+    console.log(`[Coinone] ✅ ${markets.length}개 마켓 (${withKo}개 한글명 포함)`);
     return markets;
   } catch (err) {
     console.error("[Coinone] 수집 실패:", err instanceof Error ? err.message : String(err));
