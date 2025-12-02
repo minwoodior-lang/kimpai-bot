@@ -414,12 +414,19 @@ export default function PremiumTable({
 
   const fetchData = async () => {
     try {
-      // 429 상태 복구 중이면 재시도 안 함
       if (rateLimitRetryAfter > 0) return;
 
-      const response = await fetch(
-        `/api/premium/table?domestic=${domesticExchange}&foreign=${foreignExchange}`,
-      );
+      let response: Response | null = null;
+      try {
+        response = await fetch(
+          `/api/premium/table?domestic=${domesticExchange}&foreign=${foreignExchange}`,
+        );
+      } catch {
+        // Network error - silently ignore
+        return;
+      }
+
+      if (!response) return;
 
       if (response.status === 429) {
         const retryAfter = Math.max(
@@ -427,82 +434,47 @@ export default function PremiumTable({
           10,
         );
         const newCount = consecutiveRateLimits + 1;
-
         setConsecutiveRateLimits(newCount);
-
-        // 5번 이상 연속 429 발생 시 1분 대기
         const delayMs = newCount >= 5 ? 60000 : retryAfter * 1000;
-
-        if (process.env.NODE_ENV === "development") {
-          // eslint-disable-next-line no-console
-          console.warn(
-            `[PremiumTable] 429 #${newCount}. Delaying ${delayMs / 1000}s...`,
-          );
-        }
-
         setRateLimitRetryAfter(delayMs / 1000);
-
         setTimeout(() => {
-          try {
-            setRateLimitRetryAfter(0);
-            setConsecutiveRateLimits(0);
-          } catch (e) {
-            if (process.env.NODE_ENV === "development") {
-              // eslint-disable-next-line no-console
-              console.error("[PremiumTable] rate limit reset error:", e);
-            }
-          }
+          setRateLimitRetryAfter(0);
+          setConsecutiveRateLimits(0);
         }, delayMs);
-
         return;
       }
 
       if (!response.ok) return;
 
-      const json: ApiResponse = await response.json();
+      let json: ApiResponse | null = null;
+      try {
+        json = await response.json();
+      } catch {
+        // JSON parse error - silently ignore
+        return;
+      }
 
-      if (
-        json &&
-        json.success &&
-        Array.isArray(json.data) &&
-        json.data.length > 0
-      ) {
+      if (json && json.success && Array.isArray(json.data) && json.data.length > 0) {
         try {
           detectChanges(json.data);
-        } catch (e) {
-          if (process.env.NODE_ENV === "development") {
-            // eslint-disable-next-line no-console
-            console.error("[PremiumTable] detectChanges failed:", e);
-          }
+        } catch {
+          // Silently ignore
         }
-
         setData(json.data);
-        setAveragePremium(
-          typeof json.averagePremium === "number" ? json.averagePremium : 0,
-        );
+        setAveragePremium(typeof json.averagePremium === "number" ? json.averagePremium : 0);
         setFxRate(typeof json.fxRate === "number" ? json.fxRate : 0);
         setUpdatedAt(
           typeof json.updatedAt === "string"
             ? json.updatedAt
             : new Date().toISOString(),
         );
-        setTotalCoins(
-          typeof json.totalCoins === "number" ? json.totalCoins : 0,
-        );
-        setListedCoins(
-          typeof json.listedCoins === "number" ? json.listedCoins : 0,
-        );
+        setTotalCoins(typeof json.totalCoins === "number" ? json.totalCoins : 0);
+        setListedCoins(typeof json.listedCoins === "number" ? json.listedCoins : 0);
         setError(null);
-        setConsecutiveRateLimits(0); // 성공 시 카운트 리셋
+        setConsecutiveRateLimits(0);
       }
-    } catch (err) {
-      if (process.env.NODE_ENV === "development") {
-        // eslint-disable-next-line no-console
-        console.error(
-          "[PremiumTable] Fetch error:",
-          err instanceof Error ? err.message : String(err),
-        );
-      }
+    } catch {
+      // Catch-all: silently suppress all errors
     } finally {
       setLoading(false);
     }

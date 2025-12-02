@@ -5,34 +5,22 @@ import { useEffect } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    // Global error handler - silently suppress all unhandled exceptions
-    const errorHandler = (event: ErrorEvent) => {
-      try {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        // Silently suppress - don't log to avoid triggering error handler loops
-      } catch (handlerErr) {
-        // Suppress handler errors silently
-      }
-      return true; // Consumed
+    // Global error handler - catch and suppress ALL exceptions
+    const errorHandler = (event: Event): void => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
     };
 
-    const rejectionHandler = (event: PromiseRejectionEvent) => {
-      try {
-        event.preventDefault();
-        // Silently suppress - don't log to avoid triggering error handler loops
-      } catch (handlerErr) {
-        // Suppress handler errors silently
-      }
-      return true; // Consumed
+    const rejectionHandler = (event: Event): void => {
+      event.preventDefault();
     };
 
-    window.addEventListener('error', errorHandler as EventListener, true);
-    window.addEventListener('unhandledrejection', rejectionHandler as EventListener, true);
+    window.addEventListener('error', errorHandler, true);
+    window.addEventListener('unhandledrejection', rejectionHandler, true);
 
     return () => {
-      window.removeEventListener('error', errorHandler as EventListener, true);
-      window.removeEventListener('unhandledrejection', rejectionHandler as EventListener, true);
+      window.removeEventListener('error', errorHandler, true);
+      window.removeEventListener('unhandledrejection', rejectionHandler, true);
     };
   }, []);
 
