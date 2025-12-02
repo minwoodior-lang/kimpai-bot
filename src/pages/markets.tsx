@@ -8,18 +8,6 @@ import ExchangeSelector from "@/components/ExchangeSelector";
 import CoinIcon from "@/components/CoinIcon";
 import Image from "next/image";
 
-interface ExchangeMarket {
-  id: string;
-  exchange: string;
-  market: string;
-  base: string;
-  quote: string;
-  name_ko?: string;
-  name_en?: string;
-  isDomestic: boolean;
-}
-
-type IconMap = Record<string, string>;
 
 function formatVolumeKRW(value: number | null): string {
   if (value === null || value === undefined || isNaN(value) || value === 0) return "-";
@@ -65,24 +53,16 @@ export default function Markets() {
   });
   const [lastUpdated, setLastUpdated] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [allMarkets, setAllMarkets] = useState<ExchangeMarket[]>([]);
-  const [iconMap, setIconMap] = useState<IconMap>({});
-  const [selectedExchange, setSelectedExchange] = useState<string>("UPBIT");
+  const [allMarkets, setAllMarkets] = useState<any[]>([]);
   const [marketsLoading, setMarketsLoading] = useState(true);
 
   useEffect(() => {
     const loadAllMarkets = async () => {
       try {
-        const [marketsRes, iconsRes] = await Promise.all([
-          fetch("/api/markets-list"),
-          fetch("/api/icons-map"),
-        ]);
-        
-        if (marketsRes.ok && iconsRes.ok) {
-          const markets = await marketsRes.json();
-          const icons = await iconsRes.json();
+        const res = await fetch("/api/master-symbols");
+        if (res.ok) {
+          const markets = await res.json();
           setAllMarkets(markets);
-          setIconMap(icons);
         }
       } catch (err) {
         console.error("Failed to load markets:", err);
@@ -287,73 +267,64 @@ export default function Markets() {
           30초마다 자동 갱신 {lastUpdated && `• 마지막 업데이트: ${lastUpdated}`}
         </div>
 
-        {/* 전체 거래소 마켓 목록 */}
+        {/* 전체 마켓 심볼 목록 */}
         <div className="mt-12 pt-8 border-t border-slate-700/50">
-          <h2 className="text-2xl font-bold text-white mb-6">거래소별 마켓 목록</h2>
+          <h2 className="text-2xl font-bold text-white mb-6">모든 거래 심볼</h2>
 
-          {/* 거래소 필터 */}
-          <div className="flex gap-2 mb-6">
-            {["UPBIT", "BITHUMB", "COINONE"].map((exchange) => (
-              <button
-                key={exchange}
-                onClick={() => setSelectedExchange(exchange)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  selectedExchange === exchange
-                    ? "bg-blue-600 text-white"
-                    : "bg-slate-800 text-slate-300 hover:bg-slate-700"
-                }`}
-              >
-                {exchange}
-              </button>
-            ))}
-          </div>
-
-          {/* 마켓 그리드 */}
           {marketsLoading ? (
-            <div className="text-center text-slate-400 py-8">마켓 데이터를 불러오는 중...</div>
+            <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-8 text-center text-slate-300">
+              마켓 데이터를 불러오는 중입니다…
+            </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {allMarkets
-                .filter((m) => m.exchange === selectedExchange)
-                .map((market) => (
-                  <div
-                    key={market.id}
-                    className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-4 hover:bg-slate-700/50 transition-colors cursor-pointer"
-                    onClick={() => router.push(`/markets/${market.base.toLowerCase()}`)}
-                  >
-                    <div className="flex items-center gap-3 mb-2">
-                      {iconMap[`${market.exchange}:${market.base}`] ? (
-                        <Image
-                          src={iconMap[`${market.exchange}:${market.base}`]}
-                          alt={market.base}
-                          width={32}
-                          height={32}
-                          className="rounded-full"
-                        />
-                      ) : (
-                        <div className="w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center text-xs font-bold text-slate-300">
-                          {market.base.charAt(0)}
-                        </div>
-                      )}
-                      <div className="flex-1 min-w-0">
-                        <div className="font-semibold text-white truncate">{market.base}</div>
-                        <div className="text-xs text-slate-400 truncate">
-                          {market.quote}
-                        </div>
-                      </div>
-                    </div>
-                    {(market.name_ko || market.name_en) && (
-                      <div className="text-xs text-slate-400 truncate">
-                        {market.name_ko && (
-                          <div className="text-slate-300 truncate">{market.name_ko}</div>
-                        )}
-                        {market.name_en && (
-                          <div className="text-slate-500 truncate">{market.name_en}</div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                ))}
+            <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-slate-700/50">
+                      <th className="text-left text-slate-400 font-medium px-6 py-4">심볼</th>
+                      <th className="text-left text-slate-400 font-medium px-6 py-4">한글명</th>
+                      <th className="text-left text-slate-400 font-medium px-6 py-4">영문명</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {allMarkets.map((market) => (
+                      <tr
+                        key={market.symbol}
+                        className="border-b border-slate-700/30 hover:bg-slate-700/40 transition-colors cursor-pointer"
+                        onClick={() => router.push(`/markets/${market.symbol.toLowerCase()}`)}
+                      >
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-3">
+                            {market.icon_path ? (
+                              <Image
+                                src={market.icon_path}
+                                alt={market.symbol}
+                                width={32}
+                                height={32}
+                                className="rounded-full"
+                                onError={(e) => {
+                                  (e.target as HTMLImageElement).style.display = 'none';
+                                }}
+                              />
+                            ) : (
+                              <div className="w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center text-xs font-bold text-slate-300">
+                                {market.symbol.charAt(0)}
+                              </div>
+                            )}
+                            <span className="text-white font-medium">{market.symbol}</span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-slate-300">
+                          {market.name_ko || "-"}
+                        </td>
+                        <td className="px-6 py-4 text-slate-400">
+                          {market.name_en || "-"}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
         </div>
