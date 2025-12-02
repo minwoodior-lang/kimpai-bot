@@ -9,12 +9,12 @@
  * Usage: npm run update:master-symbols
  */
 
-import { createClient } from "@supabase/supabase-js";
+import pg from "pg";
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+// 로컬 PostgreSQL 연결
+const pool = process.env.DATABASE_URL 
+  ? new pg.Pool({ connectionString: process.env.DATABASE_URL })
+  : null;
 
 type MasterSymbolRow = {
   base_symbol: string;
@@ -27,12 +27,15 @@ type MasterSymbolRow = {
  * exchange_markets에서 모든 데이터 읽기
  */
 async function fetchExchangeMarkets(): Promise<any[]> {
-  const { data, error } = await supabase
-    .from("exchange_markets")
-    .select("*");
+  if (!pool) throw new Error("DATABASE_URL 환경변수 없음");
   
-  if (error) throw error;
-  return data || [];
+  const client = await pool.connect();
+  try {
+    const result = await client.query("SELECT * FROM public.exchange_markets");
+    return result.rows;
+  } finally {
+    client.release();
+  }
 }
 
 /**
@@ -106,44 +109,36 @@ function buildMasterSymbols(markets: any[]): MasterSymbolRow[] {
 async function upsertMasterSymbols(symbols: MasterSymbolRow[]): Promise<number> {
   if (symbols.length === 0) return 0;
   
-  console.log("[Master Symbols] 기존 데이터 삭제 중...");
+  if (!pool) throw new Error("DATABASE_URL 환경변수 없음");
+  
+  const client = await pool.connect();
   try {
-    await supabase
-      .from("master_symbols")
-      .delete()
-      .gte("id", 0);
-  } catch (delError) {
-    console.log("[Master Symbols] DELETE 스킵:", delError instanceof Error ? delError.message : String(delError));
-  }
-  
-  // 스키마 캐시 동기화 대기
-  console.log("[Master Symbols] 스키마 동기화 대기 중...");
-  await new Promise(r => setTimeout(r, 1000));
-  
-  console.log(`[Master Symbols] ${symbols.length}개 심볼 삽입 중...`);
-  
-  // 배치 INSERT (500개씩)
-  for (let i = 0; i < symbols.length; i += 500) {
-    const batch = symbols.slice(i, i + 500);
-    const { data, error: insertError } = await supabase
-      .from("master_symbols")
-      .insert(batch as any)
-      .select("id");
+    console.log("[Master Symbols] 기존 데이터 삭제 중...");
+    await client.query("DELETE FROM public.master_symbols");
     
-    if (insertError) {
-      console.error("❌ INSERT 실패:", insertError.message);
-      // 상세 에러 로깅
-      console.error("Error code:", (insertError as any).code);
-      console.error("Error details:", JSON.stringify(insertError, null, 2));
-      throw insertError;
+    console.log(`[Master Symbols] ${symbols.length}개 심볼 삽입 중...`);
+    
+    const query = `
+      INSERT INTO public.master_symbols (base_symbol, name_ko, name_en, exchanges)
+      VALUES ($1, $2, $3, $4)
+    `;
+    
+    let inserted = 0;
+    for (const symbol of symbols) {
+      await client.query(query, [
+        symbol.base_symbol,
+        symbol.name_ko,
+        symbol.name_en,
+        symbol.exchanges,
+      ]);
+      inserted++;
     }
     
-    const count = (data as any[])?.length || 0;
-    console.log(`[Master Symbols] ✅ 배치 ${i/500 + 1}: ${count}개 저장됨`);
+    console.log(`[Master Symbols] ✅ ${inserted}개 심볼 저장됨`);
+    return inserted;
+  } finally {
+    client.release();
   }
-  
-  console.log(`[Master Symbols] ✅ 총 ${symbols.length}개 심볼 저장됨`);
-  return symbols.length;
 }
 
 export async function updateMasterSymbols() {
