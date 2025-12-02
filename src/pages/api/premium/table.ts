@@ -1,61 +1,79 @@
 import fs from "fs";
 import path from "path";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { attachMetadata } from "@/utils/metadataMapper";
 
-function loadPremium() {
+interface PremiumRow {
+  symbol: string;
+  koreanPrice: number | null;
+  globalPrice: number | null;
+  globalPriceKrw: number | null;
+  premium: number | null;
+  domesticExchange: string | null;
+  foreignExchange: string | null;
+}
+
+interface MasterSymbol {
+  base_symbol: string;
+  name_ko: string | null;
+  name_en: string | null;
+  icon_url: string;
+}
+
+function loadPremium(): PremiumRow[] {
   const file = path.join(process.cwd(), "data/premiumTable.json");
   if (!fs.existsSync(file)) return [];
   return JSON.parse(fs.readFileSync(file, "utf8"));
 }
 
-function loadMeta() {
+function loadMaster(): Record<string, MasterSymbol> {
   const file = path.join(process.cwd(), "data/master_symbols.json");
-  return JSON.parse(fs.readFileSync(file, "utf8"));
+  if (!fs.existsSync(file)) return {};
+
+  const data: MasterSymbol[] = JSON.parse(fs.readFileSync(file, "utf8"));
+  const map: Record<string, MasterSymbol> = {};
+  for (const m of data) {
+    map[m.base_symbol] = m;
+  }
+  return map;
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const premium = loadPremium();
-    const meta = loadMeta();
+    const masterMap = loadMaster();
 
     const result = premium
-      .map((row: any) => {
+      .map((row: PremiumRow) => {
         try {
-          const mapped = attachMetadata(row, meta);
+          const master = masterMap[row.symbol];
           return {
-            symbol: mapped.symbol,
-            name_ko: mapped.name_ko,
-            name_en: mapped.name_en,
-            icon_url: mapped.icon_url,
-            koreanPrice: mapped.koreanPrice,
-            globalPrice: mapped.globalPrice,
-            globalPriceKrw: mapped.globalPriceKrw,
-            premium: mapped.premium,
-            domesticExchange: mapped.domesticExchange,
-            foreignExchange: mapped.foreignExchange,
+            symbol: row.symbol,
+            name_ko: master?.name_ko || null,
+            name_en: master?.name_en || null,
+            icon_url: master?.icon_url || `/coins/${row.symbol}.png`,
+            koreanPrice: row.koreanPrice,
+            globalPrice: row.globalPrice,
+            globalPriceKrw: row.globalPriceKrw,
+            premium: row.premium,
+            domesticExchange: row.domesticExchange,
+            foreignExchange: row.foreignExchange,
             change24h: null,
-            high24h: mapped.koreanPrice || 0,
-            low24h: mapped.koreanPrice || 0,
+            high24h: row.koreanPrice || 0,
+            low24h: row.koreanPrice || 0,
             volume24hKrw: 0,
             volume24hForeignKrw: null,
             isListed: true,
             cmcSlug: undefined,
-            koreanName: mapped.name_ko,
-            displayName: mapped.name_ko || mapped.name_en || mapped.symbol,
+            koreanName: master?.name_ko,
+            displayName:
+              master?.name_ko || master?.name_en || row.symbol,
           };
         } catch (e) {
           console.error(`[API] Error mapping ${row.symbol}:`, e);
           return null;
         }
       })
-      .filter(
-        (row: any) =>
-          row !== null &&
-          row.koreanPrice !== null &&
-          row.globalPrice !== null &&
-          row.globalPriceKrw !== null
-      );
+      .filter((row: any) => row !== null);
 
     return res.status(200).json({
       success: true,

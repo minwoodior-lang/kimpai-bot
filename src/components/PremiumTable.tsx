@@ -888,6 +888,7 @@ export default function PremiumTable({
               </thead>
               <tbody>
                 {filteredAndSortedData.map((row, index) => {
+                  const uniqueKey = `${row.symbol}_${index}`;
                   const prevClose =
                     row.change24h !== null
                       ? row.koreanPrice / (1 + row.change24h / 100)
@@ -902,7 +903,7 @@ export default function PremiumTable({
                   const lowDiff = calcDiff(row.koreanPrice, row.low24h);
 
                   return (
-                    <React.Fragment key={row.symbol}>
+                    <React.Fragment key={uniqueKey}>
                       <tr
                         className={`border-t border-slate-700/50 hover:bg-slate-700/30 transition-colors ${
                           index % 2 === 0 ? "bg-slate-800/30" : ""
