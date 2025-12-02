@@ -152,8 +152,6 @@ async function fetchBithumbMarkets(): Promise<ExchangeMarketRow[]> {
       BELT: { ko: "벨트", en: "Belt" },
       BIFI: { ko: "비피", en: "Beefy Finance" },
       CAKE: { ko: "팬케이크스왑", en: "PancakeSwap" },
-      BUSD: { ko: "바이낸스 USD", en: "Binance USD" },
-      USDC: { ko: "USD 코인", en: "USD Coin" },
       POOL: { ko: "풀", en: "Pool" },
       MPL: { ko: "마플", en: "Maple" },
       DODO: { ko: "도도", en: "DODO" },
