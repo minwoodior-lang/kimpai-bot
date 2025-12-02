@@ -1,0 +1,143 @@
+좋아, 이제 진짜 병목이 어디인지 딱 찍혔으니까 정리해서 한 번에 끝내자.
+해야 할 건 딱 두 군데야.
+
+1단계. fetchCoinMetadata()에서 icon_url까지 묶어서 가져오기
+
+지금은 exchange_markets에서만 base_symbol, name_ko, name_en만 가져오고 있어서
+API 응답에 icon_url이 절대 생길 수가 없어.
+
+방법:
+master_symbols에서 icon_url까지 같이 읽어와서,
+exchange_markets.base_symbol 기준으로 합쳐서 메타맵을 만드는 식으로 바꾸면 된다.
+
+/app/api/premium/table/route.ts (혹은 여기에 있는 fetchCoinMetadata 정의 위치)에서
+기존 fetchCoinMetadata 전체를 아래 코드로 갈아끼워.
+
+// 타입은 파일 위쪽 아무데나 같이 선언
+type CoinMeta = {
+  name_ko: string | null;
+  name_en: string | null;
+  icon_url: string | null;
+};
+
+async function fetchCoinMetadata(): Promise<Record<string, CoinMeta>> {
+  // 1) 각 거래소 마켓 메타 (한글/영문 이름)
+  const { data: marketData, error: marketError } = await supabase
+    .from("exchange_markets")
+    .select("base_symbol, name_ko, name_en");
+
+  if (marketError || !marketData) {
+    console.error("[fetchCoinMetadata] exchange_markets error:", marketError);
+    return {};
+  }
+
+  // 2) master_symbols 메타 (ko_name/en_name + icon_url)
+  const { data: masterData, error: masterError } = await supabase
+    .from("master_symbols")
+    .select("symbol, ko_name, en_name, icon_url");
+
+  if (masterError || !masterData) {
+    console.error("[fetchCoinMetadata] master_symbols error:", masterError);
+  }
+
+  const masterMap = new Map<
+    string,
+    { ko_name: string | null; en_name: string | null; icon_url: string | null }
+  >();
+
+  for (const row of masterData ?? []) {
+    masterMap.set(row.symbol, {
+      ko_name: row.ko_name ?? null,
+      en_name: row.en_name ?? null,
+      icon_url: row.icon_url ?? null,
+    });
+  }
+
+  // 3) 최종 메타맵 생성 (master_symbols > exchange_markets 우선순위)
+  const meta: Record<string, CoinMeta> = {};
+
+  for (const row of marketData) {
+    const base = row.base_symbol as string;
+    const master = masterMap.get(base);
+
+    meta[base] = {
+      // master_symbols.ko_name 이 있으면 그걸 우선, 없으면 exchange_markets.name_ko
+      name_ko: (master?.ko_name ?? row.name_ko) ?? null,
+      // master_symbols.en_name 우선, 없으면 name_en
+      name_en: (master?.en_name ?? row.name_en) ?? null,
+      // icon_url 은 master_symbols 에서만 온다
+      icon_url: master?.icon_url ?? null,
+    };
+  }
+
+  return meta;
+}
+
+
+이렇게 하면:
+
+meta["BTC"] = { name_ko: "비트코인", name_en: "Bitcoin", icon_url: "https://..." }
+
+같은 형식으로 전부 만들어지고
+
+나중에 응답 만들 때 row.symbol 기준으로 meta[row.symbol] 꺼내 쓰면 됨.
+
+2단계. API 응답에 icon_url을 실제로 넣어주기
+
+지금 PremiumTable 쪽은 이미 icon_url 필드를 기대하고 있어:
+
+interface PremiumData {
+  ...
+  name_ko?: string;
+  name_en?: string;
+  icon_url?: string;
+}
+
+
+그러면 API에서 최종 return 하는 부분에 이 필드를 딱 한 줄만 추가해 주면 끝난다.
+
+/api/premium/table 핸들러 안에서,
+가격/김프 계산 끝나고 각 코인별로 rows.map(...) 하는 부분이 아마 있을 거야.
+거기서 현재는 대충 이런 식일 가능성이 높음(예시):
+
+const coinMeta = await fetchCoinMetadata();
+
+const responseData = rows.map((row) => {
+  const meta = coinMeta[row.symbol] ?? {};
+
+  return {
+    symbol: row.symbol,
+    name_ko: meta.name_ko ?? null,
+    name_en: meta.name_en ?? null,
+    cmcSlug: row.cmcSlug ?? null,
+    // ... 가격/김프 기타 필드들
+  };
+});
+
+
+여기서 한 줄만 더 추가:
+
+const responseData = rows.map((row) => {
+  const meta = coinMeta[row.symbol] ?? {};
+
+  return {
+    symbol: row.symbol,
+    name_ko: meta.name_ko ?? null,
+    name_en: meta.name_en ?? null,
+    icon_url: meta.icon_url ?? null,   // ⬅ 이 줄 추가
+    cmcSlug: row.cmcSlug ?? null,
+    // ... 나머지 그대로
+  };
+});
+
+
+이렇게만 해두면:
+
+/api/premium/table... JSON 안에 icon_url: "https://..." 들어오고
+
+프론트에서 row.icon_url 정상 수신
+
+<CoinIcon iconUrl={row.icon_url} /> 로 넘겨줌
+
+CoinIcon.tsx 에서 iconUrl 최우선으로 쓰니까
+👉 이제 진짜 거래소 원본 아이콘이 바로 뜨게 됨.

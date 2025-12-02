@@ -30,7 +30,7 @@ interface PremiumTableRow {
   cmcSlug?: string;
   name_ko?: string;
   name_en?: string;
-  icon_url?: string;
+  icon_url?: string | null;
 }
 
 interface PremiumTableResponse {
@@ -61,7 +61,7 @@ interface CoinMetadata {
   symbol: string;
   name_ko: string;
   name_en: string;
-  icon_url?: string;
+  icon_url: string | null;
   cmcSlug?: string;
 }
 
@@ -75,10 +75,9 @@ let lastMetadataFetch = 0;
 const METADATA_CACHE_TTL = 5 * 60 * 1000; // 5분
 
 /**
- * exchange_markets 테이블에서 메타데이터 수집
- * - base_symbol
- * - name_ko
- * - name_en
+ * exchange_markets + master_symbols 메타데이터 수집
+ * - base_symbol, name_ko, name_en (exchange_markets)
+ * - icon_url (master_symbols)
  */
 async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
   const now = Date.now();
@@ -89,31 +88,63 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
   const metadata = new Map<string, CoinMetadata>();
 
   try {
-    // exchange_markets 테이블에서 직접 수집
-    const { data: marketData } = await supabase
+    // 1) exchange_markets: base_symbol, name_ko, name_en
+    const { data: marketData, error: marketError } = await supabase
       .from("exchange_markets")
       .select("base_symbol, name_ko, name_en")
       .limit(2000);
 
-    if (marketData && Array.isArray(marketData)) {
-      const processed = new Set<string>();
-      for (const row of marketData as any[]) {
-        const symbol = (row.base_symbol || "").toUpperCase();
-        if (symbol && !processed.has(symbol)) {
-          processed.add(symbol);
-          const autoSlug =
-            symbol
-              .toLowerCase()
-              .replace(/\s+/g, "-")
-              .replace(/[^a-z0-9-]/g, "") || undefined;
+    if (marketError || !marketData) {
+      console.error("[fetchCoinMetadata] exchange_markets error:", marketError);
+      return metadata;
+    }
 
-          metadata.set(symbol, {
-            symbol,
-            name_ko: row.name_ko || symbol,
-            name_en: row.name_en || symbol,
-            cmcSlug: autoSlug,
-          });
-        }
+    // 2) master_symbols: icon_url + ko_name + en_name
+    const { data: masterData, error: masterError } = await supabase
+      .from("master_symbols")
+      .select("symbol, ko_name, en_name, icon_url");
+
+    if (masterError) {
+      console.warn("[fetchCoinMetadata] master_symbols error:", masterError);
+    }
+
+    // master_symbols 맵 생성 (symbol 기준)
+    const masterMap = new Map<
+      string,
+      { ko_name: string | null; en_name: string | null; icon_url: string | null }
+    >();
+
+    for (const row of masterData ?? []) {
+      masterMap.set(row.symbol, {
+        ko_name: row.ko_name ?? null,
+        en_name: row.en_name ?? null,
+        icon_url: row.icon_url ?? null,
+      });
+    }
+
+    // 3) 최종 메타맵: exchange_markets 기준으로 master_symbols 합쳐서 구성
+    const processed = new Set<string>();
+    for (const row of marketData) {
+      const base = (row.base_symbol || "").toUpperCase();
+      if (base && !processed.has(base)) {
+        processed.add(base);
+        const master = masterMap.get(base);
+        const autoSlug =
+          base
+            .toLowerCase()
+            .replace(/\s+/g, "-")
+            .replace(/[^a-z0-9-]/g, "") || undefined;
+
+        metadata.set(base, {
+          symbol: base,
+          // master_symbols.ko_name 우선, 없으면 exchange_markets.name_ko
+          name_ko: (master?.ko_name ?? row.name_ko) || base,
+          // master_symbols.en_name 우선, 없으면 exchange_markets.name_en
+          name_en: (master?.en_name ?? row.name_en) || base,
+          // icon_url은 master_symbols에서만 (null 허용)
+          icon_url: master?.icon_url || null,
+          cmcSlug: autoSlug,
+        });
       }
     }
 
@@ -278,10 +309,6 @@ export default async function handler(
       const foreignRecord = foreignMap.get(symbol);
       const coinMeta = metadata.get(symbol.toUpperCase());
       
-      // 🔍 1단계 진단: 첫 1개 심볼의 메타데이터 로그
-      if (symbol === "BTC") {
-        console.log("[API DEBUG] BTC metadata:", JSON.stringify(coinMeta, null, 2));
-      }
 
       let domesticPriceKrw = Number(domesticRecord.price);
 
@@ -377,12 +404,7 @@ export default async function handler(
         name_en: coinMeta?.name_en || symbol,
         icon_url: coinMeta?.icon_url,
       };
-      
-      // 🔍 API 응답 첫 row 로그
-      if (symbol === "BTC") {
-        console.log("[API RESPONSE SAMPLE]", JSON.stringify(rowData, null, 2));
-      }
-      
+
       tableData.push(rowData);
 
       if (!latestTimestamp || domesticRecord.created_at > latestTimestamp) {

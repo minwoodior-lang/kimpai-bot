@@ -566,12 +566,6 @@ interface CoinIconProps {
 const loggedMissingIcons = new Set<string>();
 
 export default function CoinIcon({ symbol, size = 'md', className = '', iconUrl }: CoinIconProps) {
-  // 🔍 3단계 진단: iconUrl 값 확인
-  if (symbol === 'BTC') {
-    console.log('[CoinIcon Props] symbol:', symbol, 'iconUrl:', iconUrl);
-  }
-  
-  // base_symbol 기준으로만 아이콘 불러오기 (iconUrl 파라미터는 무시)
   // 심볼 정규화 적용
   const normalizedSymbol = normalizeSymbol(symbol);
   const lowerSymbol = normalizedSymbol.toLowerCase();
