@@ -5,45 +5,29 @@ import { useEffect } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    // Global error handler for unhandled exceptions
+    // Global error handler for unhandled exceptions - silently catch all
     const handleError = (event: ErrorEvent | Event) => {
       try {
-        const errorEvent = event as ErrorEvent;
-        if (errorEvent.error) {
-          if (process.env.NODE_ENV === 'development') {
-            console.error('[Global Error]', errorEvent.error instanceof Error ? errorEvent.error.message : String(errorEvent.error));
-          }
-          event.preventDefault();
-        } else if (!errorEvent.error) {
-          // Silently ignore errors where error is null/undefined
-          event.preventDefault();
-        }
+        event.preventDefault();
       } catch (e) {
-        // Catch any errors in error handler itself
+        // Ignore any errors
       }
     };
 
     const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
       try {
-        if (event.reason) {
-          if (process.env.NODE_ENV === 'development') {
-            console.error('[Unhandled Rejection]', event.reason instanceof Error ? event.reason.message : String(event.reason));
-          }
-          event.preventDefault();
-        } else {
-          event.preventDefault();
-        }
+        event.preventDefault();
       } catch (e) {
-        // Catch any errors in rejection handler itself
+        // Ignore any errors
       }
     };
 
-    window.addEventListener('error', handleError);
-    window.addEventListener('unhandledrejection', handleUnhandledRejection);
+    window.addEventListener('error', handleError, true);
+    window.addEventListener('unhandledrejection', handleUnhandledRejection, true);
 
     return () => {
-      window.removeEventListener('error', handleError);
-      window.removeEventListener('unhandledrejection', handleUnhandledRejection);
+      window.removeEventListener('error', handleError, true);
+      window.removeEventListener('unhandledrejection', handleUnhandledRejection, true);
     };
   }, []);
 
