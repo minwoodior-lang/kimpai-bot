@@ -1,0 +1,8 @@
+[
+  {"base_symbol":"BTC","name_ko":"비트코인","name_en":"Bitcoin","exchange":"UPBIT","quote_symbol":"KRW"},
+  {"base_symbol":"ETH","name_ko":"이더리움","name_en":"Ethereum","exchange":"UPBIT","quote_symbol":"KRW"},
+  {"base_symbol":"BTC","name_ko":"비트코인","name_en":"Bitcoin","exchange":"BITHUMB","quote_symbol":"KRW"},
+  {"base_symbol":"ETH","name_ko":"이더리움","name_en":"Ethereum","exchange":"BITHUMB","quote_symbol":"KRW"},
+  {"base_symbol":"BTC","name_ko":"비트코인","name_en":"Bitcoin","exchange":"COINONE","quote_symbol":"KRW"},
+  {"base_symbol":"ETH","name_ko":"이더리움","name_en":"Ethereum","exchange":"COINONE","quote_symbol":"KRW"}
+]

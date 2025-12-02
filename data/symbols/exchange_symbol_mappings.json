@@ -1,0 +1,8 @@
+[
+  {"base_symbol":"BTC","exchange_name":"upbit","exchange_symbol":"KRW-BTC","exchange_market":"KRW"},
+  {"base_symbol":"ETH","exchange_name":"upbit","exchange_symbol":"KRW-ETH","exchange_market":"KRW"},
+  {"base_symbol":"BTC","exchange_name":"bithumb","exchange_symbol":"BTC/KRW","exchange_market":"KRW"},
+  {"base_symbol":"ETH","exchange_name":"bithumb","exchange_symbol":"ETH/KRW","exchange_market":"KRW"},
+  {"base_symbol":"BTC","exchange_name":"coinone","exchange_symbol":"BTC-KRW","exchange_market":"KRW"},
+  {"base_symbol":"ETH","exchange_name":"coinone","exchange_symbol":"ETH-KRW","exchange_market":"KRW"}
+]

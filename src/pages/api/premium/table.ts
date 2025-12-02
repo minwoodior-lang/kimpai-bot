@@ -84,9 +84,9 @@ function hasHangul(text?: string | null) {
 }
 
 /**
- * exchange_markets + master_symbols 메타데이터 수집
- * - base_symbol, name_ko, name_en (exchange_markets)
- * - icon_url (master_symbols)
+ * 로컬 JSON에서 메타데이터 로드 (Supabase 의존성 제거)
+ * - master_symbols.json: 코인 메타데이터 (심볼, 한글명, 영문명, 아이콘)
+ * - exchange_markets.json: 거래소별 마켓 정보
  */
 async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
   const now = Date.now();
@@ -97,48 +97,42 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
   const metadata = new Map<string, CoinMetadata>();
 
   try {
-    // 1) exchange_markets: base_symbol, name_ko, name_en, exchange, quote_symbol
-    const { data: marketData, error: marketError } = await supabase
-      .from("exchange_markets")
-      .select("base_symbol, name_ko, name_en, exchange, quote_symbol")
-      .limit(5000);
-
-    if (marketError) {
-      console.error("[fetchCoinMetadata] exchange_markets error detail:", {
-        message: marketError.message,
-        details: (marketError as any).details,
-        hint: (marketError as any).hint,
-        code: (marketError as any).code,
-      });
-      throw marketError;
-    }
-
-    if (!marketData) {
-      console.error("[fetchCoinMetadata] exchange_markets returned no data");
-      return metadata;
-    }
-
-    // 2) master_symbols: icon_url + ko_name + en_name
-    const { data: masterData, error: masterError } = await supabase
-      .from("master_symbols")
-      .select("symbol, ko_name, en_name, icon_url");
-
-    if (masterError) {
-      console.warn("[fetchCoinMetadata] master_symbols error:", masterError);
-    }
+    // 로컬 JSON 파일 로드
+    const dataDir = path.join(process.cwd(), "data", "symbols");
+    
+    // 1) master_symbols.json 로드
+    const masterSymbolsPath = path.join(dataDir, "master_symbols.json");
+    const masterSymbolsData = fs.readFileSync(masterSymbolsPath, "utf-8");
+    const masterSymbols = JSON.parse(masterSymbolsData) as Array<{
+      base_symbol: string;
+      name_ko: string | null;
+      name_en: string | null;
+      icon_url: string | null;
+    }>;
 
     const masterMap = new Map<
       string,
       { ko_name: string | null; en_name: string | null; icon_url: string | null }
     >();
 
-    for (const row of masterData ?? []) {
-      masterMap.set(row.symbol.toUpperCase(), {
-        ko_name: row.ko_name ?? null,
-        en_name: row.en_name ?? null,
+    for (const row of masterSymbols) {
+      masterMap.set((row.base_symbol || "").toUpperCase(), {
+        ko_name: row.name_ko ?? null,
+        en_name: row.name_en ?? null,
         icon_url: row.icon_url ?? null,
       });
     }
+
+    // 2) exchange_markets.json 로드
+    const exchangeMarketsPath = path.join(dataDir, "exchange_markets.json");
+    const exchangeMarketsData = fs.readFileSync(exchangeMarketsPath, "utf-8");
+    const marketData = JSON.parse(exchangeMarketsData) as Array<{
+      base_symbol?: string;
+      name_ko?: string | null;
+      name_en?: string | null;
+      exchange?: string;
+      quote_symbol?: string;
+    }>;
 
     // ✅ 국내 + KRW + 한글 있는 행이 먼저 오도록 정렬
     const sortedMarkets = [...marketData].sort((a, b) => {
@@ -187,10 +181,12 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
       });
     }
 
+    console.log(`[fetchCoinMetadata] 로컬 JSON 로드 완료: ${metadata.size}개 코인`);
     cachedMetadata = metadata;
     lastMetadataFetch = now;
   } catch (error) {
-    console.error("Failed to fetch coin metadata:", error);
+    console.error("[fetchCoinMetadata] 로컬 JSON 로드 실패:", error);
+    // 폴백: 최소 메타데이터라도 반환
   }
 
   return metadata;

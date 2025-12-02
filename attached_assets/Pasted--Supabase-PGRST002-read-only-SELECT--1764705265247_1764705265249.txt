@@ -1,0 +1,131 @@
+안녕하세요.
+현재 Supabase에서 지속적으로 스키마 캐시 오류(PGRST002), read-only 모드 전환, SELECT 실패 등이 발생하여 프리미엄 테이블·심볼 로딩·마켓 메타데이터 등 핵심 기능이 모두 중단되고 있습니다.
+
+이 문제는 Supabase 인프라가 자동 복구될 때까지 해결할 수 없으며, 서비스 핵심 기능이 Supabase에 과도하게 의존되어 있기 때문에 장애가 반복될 가능성이 있습니다.
+
+따라서 Supabase를 완전히 제거하고, 시세·프리미엄·심볼·메타데이터는 Replit 로컬 기반으로 전환해야 합니다.
+
+아래 3개의 파일을 새로 생성 또는 교체해 주세요.
+
+🔧 1) scripts/priceWorker.ts (새 파일로 교체)
+
+역할:
+
+업비트·빗썸·OKX API에서 시세 가져오기
+
+프리미엄 계산
+
+Supabase 저장 로직 삭제
+
+결과를 /data/premiumTable.json 파일로 저장
+
+// scripts/priceWorker.ts
+import fs from "fs";
+import path from "path";
+import axios from "axios";
+
+async function fetchPrices() {
+  const [upbit, bithumb, okx] = await Promise.all([
+    axios.get("https://api.upbit.com/v1/ticker?markets=KRW-BTC"),
+    axios.get("https://api.bithumb.com/public/ticker/BTC_KRW"),
+    axios.get("https://www.okx.com/api/v5/market/ticker?instId=BTC-USDT")
+  ]);
+
+  const upbitPrice = upbit.data[0].trade_price;
+  const bithumbPrice = Number(bithumb.data.data.closing_price);
+  const okxPrice = Number(okx.data.data[0].last) * 1340;
+
+  const premium = ((upbitPrice - okxPrice) / okxPrice) * 100;
+
+  const result = [{
+    symbol: "BTC",
+    koreanPrice: upbitPrice,
+    globalPriceKrw: okxPrice,
+    premium,
+    domesticExchange: "UPBIT",
+    foreignExchange: "OKX"
+  }];
+
+  const filePath = path.join(process.cwd(), "data/premiumTable.json");
+  fs.writeFileSync(filePath, JSON.stringify(result, null, 2));
+}
+
+fetchPrices();
+
+🔧 2) pages/api/premium/table.ts (Supabase 완전 제거 후 파일 기반 API로 전환)
+
+역할:
+
+premiumTable.json 읽기
+
+symbolMetadata.json과 매핑
+
+Supabase 쿼리 전부 삭제
+
+// pages/api/premium/table.ts
+import fs from "fs";
+import path from "path";
+import { NextApiRequest, NextApiResponse } from "next";
+
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  const premiumPath = path.join(process.cwd(), "data/premiumTable.json");
+  const metaPath = path.join(process.cwd(), "data/symbolMetadata.json");
+
+  const premiumData = JSON.parse(fs.readFileSync(premiumPath, "utf8"));
+  const meta = JSON.parse(fs.readFileSync(metaPath, "utf8"));
+
+  const mapped = premiumData.map((item: any) => {
+    const m = meta[item.symbol] || {};
+    return {
+      ...item,
+      name_ko: m.name_ko || item.symbol,
+      name_en: m.name_en || item.symbol,
+      icon_url: m.icon_url || null
+    };
+  });
+
+  res.status(200).json({ data: mapped });
+}
+
+🔧 3) utils/metadataMapper.ts (심볼/이름/아이콘 통일 매퍼)
+
+역할:
+
+AMP/AMP, MANTA/MANTA 같은 중복 심볼을 정규화
+
+한글명/영문명/아이콘 매칭
+
+// utils/metadataMapper.ts
+export function normalizeSymbol(symbol: string) {
+  return symbol.replace(/[^A-Za-z0-9]/g, "").toUpperCase();
+}
+
+export function attachMetadata(item: any, meta: any) {
+  const s = normalizeSymbol(item.symbol);
+  const m = meta[s] || {};
+
+  return {
+    ...item,
+    name_ko: m.name_ko || s,
+    name_en: m.name_en || s,
+    icon_url: m.icon_url || null
+  };
+}
+
+🚨 레플릿이 반드시 해야 하는 작업 요약
+✔ Supabase 의존 코드 전체 삭제
+✔ priceWorker.ts를 로컬 JSON 저장 구조로 교체
+✔ 프리미엄 API는 JSON 파일 읽는 방식으로 변경
+✔ master_symbols / exchange_markets / 매핑 테이블 SELECT 전부 제거
+✔ 홈 프리미엄 테이블은 Supabase 없이 정상 동작해야 함
+💡 작업 완료되면 결과는 이렇게 됨
+
+Supabase 죽어도 김프 표 정상 뜸
+
+심볼/이름/아이콘 정상
+
+PGRST002, read-only, 캐시 오류 → 0%
+
+레플릿 로컬 파일 기반이라 속도 빨라짐
+
+장애 원인 완전 제거
