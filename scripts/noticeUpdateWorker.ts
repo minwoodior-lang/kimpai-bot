@@ -1,6 +1,10 @@
 /**
  * 빗썸/코인원 상장 공지 자동 크롤러
  * 1시간마다 실행되어 master_symbols 최신화
+ * 
+ * ⚠️ 환경 변수:
+ * - NOTICE_CRAWLER_ENABLED=true (기본값) → 크롤링 수행
+ * - NOTICE_CRAWLER_ENABLED=false → no-op (Replit 같은 제한 환경용)
  */
 
 import { crawlAllNotices } from '../src/lib/noticeParser';
@@ -8,6 +12,14 @@ import { batchUpsertKoreanNames, countMasterSymbolsWithKoName } from '../src/lib
 
 async function runNoticeUpdateWorker() {
   console.log('[NoticeUpdateWorker] Starting...');
+
+  // 환경 변수 기반 크롤러 활성화 여부 (기본: true)
+  const crawlerEnabled = process.env.NOTICE_CRAWLER_ENABLED !== 'false';
+  
+  if (!crawlerEnabled) {
+    console.log('[NoticeUpdateWorker] Disabled (NOTICE_CRAWLER_ENABLED=false). Skipping.');
+    return;
+  }
 
   try {
     // 초기 카운트
@@ -39,13 +51,19 @@ async function runNoticeUpdateWorker() {
     );
     console.log(`[NoticeUpdateWorker] Final ko_name count: ${finalCount}`);
   } catch (error) {
-    console.error('[NoticeUpdateWorker] Error:', error);
-    process.exit(1);
+    // 크롤러 실패 시 조용히 로깅하고 프로세스는 계속 진행
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    console.error('[NoticeUpdateWorker] Error (non-fatal):', errorMsg);
+    // process.exit(1) 제거 - 실패해도 프로세스 유지
   }
 }
 
 // 메인 실행
 runNoticeUpdateWorker().then(() => {
   console.log('[NoticeUpdateWorker] Finished');
+  process.exit(0);
+}).catch((err) => {
+  console.error('[NoticeUpdateWorker] Unexpected error:', err);
+  // 실패해도 graceful exit
   process.exit(0);
 });

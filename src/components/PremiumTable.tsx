@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef, useCallback } from "react"
 import dynamic from "next/dynamic";
 import { FOREIGN_EXCHANGES as CONTEXT_FOREIGN_EXCHANGES, EXCHANGE_LOGOS } from "@/contexts/ExchangeSelectionContext";
 import CoinIcon from "@/components/CoinIcon";
+import { openCmcPage } from "@/lib/coinMarketCapUtils";
 
 interface DropdownOption {
   id: string;
@@ -528,18 +529,7 @@ export default function PremiumTable({
     return `BINANCE:${base}USDT`;
   };
 
-  const openCoinMarketCap = (symbol: string, cmcSlug?: string) => {
-    const base = symbol.split("/")[0].toLowerCase();
-
-    let cmcUrl: string;
-    if (cmcSlug && cmcSlug.trim().length > 0) {
-      cmcUrl = `https://coinmarketcap.com/currencies/${cmcSlug}/`;
-    } else {
-      cmcUrl = `https://coinmarketcap.com/search/?q=${base}`;
-    }
-
-    window.open(cmcUrl, "_blank", "noopener,noreferrer");
-  };
+  // CMC 링크는 coinMarketCapUtils의 openCmcPage 사용 (통일)
 
   return (
     <div>
@@ -728,7 +718,7 @@ export default function PremiumTable({
                           </button>
                           <CoinIcon symbol={row.symbol} size="sm" className="md:w-6 md:h-6" />
                           <button
-                            onClick={() => openCoinMarketCap(row.symbol, row.cmcSlug)}
+                            onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
                             className="flex flex-col hover:text-blue-400 transition-colors text-left min-w-0"
                           >
                             <div className="text-white font-medium text-xs md:text-sm truncate">

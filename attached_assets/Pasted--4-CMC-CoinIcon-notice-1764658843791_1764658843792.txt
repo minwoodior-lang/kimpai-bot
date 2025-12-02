@@ -1,0 +1,164 @@
+[4단계 작업 요청 — CMC 링크 실제 적용 + CoinIcon 확장 + 브라우저 에러 추적 + 크롤러 운용 전략]
+
+현재 상태 잘 확인했습니다.
+한글명 자동화/noticeParser/updateMasterSymbols/fetchCoinMetadata/CoinMarketCap 유틸까지 인프라는 정말 잘 만들어주셨습니다. 이제 남은 20%를 마무리해서 실사용에 딱 맞게 정리하고 싶습니다.
+
+==================================================
+1) PremiumTable에서 CMC 링크 실제 적용
+
+현재 coinMarketCapUtils.ts에 getCmcUrl(), openCmcPage()가 구현되어 있고,
+PremiumTable 쪽에는 아직 예전 search 기반 CMC 링크 로직이 남아있다고 하셨습니다.
+
+👉 목표:
+- 프리미엄 테이블(및 다른 코인 리스트)에서 코인명/로우 클릭 시
+  항상 openCmcPage(symbol, cmcSlug)를 사용하도록 통일하고 싶습니다.
+
+요청사항:
+
+1. PremiumTable에서 fetchCoinMetadata 결과에 cmcSlug가 포함되어 있을 텐데,
+   각 row 렌더링 시 아래 형태로 연결해 주세요.
+
+   예시 (의사코드):
+
+   import { openCmcPage } from "@/lib/coinMarketCapUtils";
+
+   // row: { symbol, koreanName, englishName, cmcSlug, ... }
+
+   <tr
+     key={row.symbol}
+     onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
+     ...
+   >
+     <td>{row.koreanName} / {row.symbol}</td>
+     ...
+   </tr>
+
+2. 다른 곳에서 CMC 링크를 열 때도 기존 search URL(`/search/?q=...`) 방식이 있다면,
+   모두 openCmcPage(symbol, cmcSlug)로 통일 부탁드립니다.
+
+3. cmcSlug가 undefined/null인 극소수 케이스에서는
+   openCmcPage 내부에서 fallback으로 base symbol 소문자를 사용하도록
+   이미 구현된 대로 유지해 주세요.
+
+이렇게 하면 "표기에 쓰는 한글명"과 "연결되는 CMC 페이지"가 서로 깨지지 않고,
+향후 slug만 보정해도 CMC 페이지 정합성을 유지할 수 있을 것 같습니다.
+
+==================================================
+2) CoinIcon에 iconUrl props 추가 (확장성만 확보)
+
+아이콘은 지금 단계에서 100% 정확하게 맞추는 것보다,
+나중에 master_symbols.icon_url이 준비되었을 때 바로 연결할 수 있도록
+"진입점만 만들어두는 것"이 목표입니다.
+
+요청사항:
+
+1. CoinIcon.tsx에서 props 인터페이스를 다음과 같이 확장해 주세요.
+
+   interface CoinIconProps {
+     symbol: string;
+     iconUrl?: string; // 선택 필드
+     // 기존에 사용 중인 다른 props가 있다면 그대로 두고, 여기에만 하나 추가
+   }
+
+2. CoinIcon 구현 내부에서, iconUrl이 있을 때 최우선으로 사용하도록 분기만 추가해 주세요.
+
+   예시 (의사코드):
+
+   export function CoinIcon({ symbol, iconUrl, ...rest }: CoinIconProps) {
+     if (iconUrl) {
+       return (
+         <img
+           src={iconUrl}
+           alt={symbol}
+           // 필요 시 className/style은 기존 것 재사용
+           {...rest}
+         />
+       );
+     }
+
+     // iconUrl이 없으면 기존 COIN_ID_MAP / GRADIENT_COLORS 로직 그대로
+     // (현재 복구해주신 안정 버전 로직 유지)
+     return <ExistingGradientOrIcon symbol={symbol} {...rest} />;
+   }
+
+3. PremiumTable나 다른 리스트에서 CoinIcon을 사용할 때,
+   지금은 iconUrl을 아직 넘기지 않아도 괜찮습니다.
+   나중에 master_symbols.icon_url을 API에서 내려주게 되면,
+   그때 `<CoinIcon symbol={row.symbol} iconUrl={row.iconUrl} />` 형태로만 연결하면 되도록,
+   지금은 props 레벨의 후킹 포인트만 만들어두는 게 목적입니다.
+
+==================================================
+3) 브라우저 uncaught exception 근본 원인 추적
+
+지금 보고서에 "An uncaught exception"이 여전히 남아있다고 되어 있는데,
+noticeParser/updateMasterSymbols에는 server-only 가드를 잘 넣어주셨으니,
+다른 쪽에서 throw가 발생하는 것 같습니다.
+
+요청사항:
+
+1. 브라우저 콘솔의 에러 스택을 기반으로,
+   어느 파일/어느 함수에서 throw가 발생하는지 한 번만 정확히 확인해 주셨으면 합니다.
+   (예: PremiumTable 데이터 패칭, ChartModal, WebSocket, etc.)
+
+2. 해당 지점에서 다음 두 가지를 보장해 주세요.
+   - 어떤 경우에도 `throw "문자열"` 같은 패턴은 사용하지 않고,
+     항상 `throw new Error("메시지")` 형태로만 던지기
+   - 가능하면 throw 대신 try/catch + console.error 정도로만 처리하고,
+     UI는 깨지지 않도록 방어적 코드를 추가
+
+3. 전역 error handler에서 이미 Error 객체가 아닌 값에 대해 감싸는 처리를 했다면,
+   이중으로 suppress하지 말고,
+   - 최소한 콘솔에는 origin/stack을 남기되
+   - 렌더가 중단되지는 않도록 조정해 주시면 좋겠습니다.
+
+목표:
+- 콘솔에 "어디서 어떤 상황에서 에러가 나는지" 정도만 명확하면 됩니다.
+- 사용자 입장에서 페이지가 하얗게 날아가거나, 핵심 기능이 멈추지만 않으면 됩니다.
+
+==================================================
+4) 크롤러 초기 실행 실패(네트워크) 관련 운용 전략
+
+현재 `npm run update:notices`가 빗썸/코인원 방화벽 문제로
+Replit 환경에서는 네트워크 오류로 실행되지 않았다고 하셨는데,
+이건 인프라 환경 문제라 코드 수정으로는 해결이 어려운 부분인 것 이해했습니다.
+
+이걸 감안해서, 아래처럼 운용 전략을 잡고 싶습니다:
+
+1. noticeUpdateWorker.ts / update:notices 스크립트는
+   - "로컬 개발 환경" 혹은
+   - "외부 서버(VPS, Vercel, Supabase Edge Functions 등)"
+   에서 주기적으로 돌리는 것을 전제로 설계해 주세요.
+
+2. Replit 환경에서는:
+   - update:notices 실행 실패 시에도 앱이 크래시되지 않고,
+   - 단순히 "크롤링 실패 → master_symbols 미갱신" 상태로만 남도록,
+   - 에러를 조용히 로깅하고 프로세스는 계속 돌게 해 주세요.
+
+3. 가능하다면 .env 기반으로 환경 분기:
+
+   예)
+   - NOTICE_CRAWLER_ENABLED=true → 실제 크롤링 수행
+   - NOTICE_CRAWLER_ENABLED=false → 함수 호출 시 바로 return (no-op)
+
+   이런 식으로, Replit 같은 제한 환경에서는 false로 설정하고,
+   향후 운영 환경에서는 true로 두고 크롤러가 주기적으로 동작하게 만들 수 있으면 좋겠습니다.
+
+이렇게 하면:
+- 현재 Replit Dev 환경에서는 네트워크 에러 없이 개발 가능
+- 향후 운영 서버/로컬에서 update:notices를 돌리면,
+  master_symbols에 한글명이 자동 반영되는 구조를 그대로 살릴 수 있습니다.
+
+==================================================
+정리
+
+- 한글명 자동화 인프라는 그대로 두고,
+- 이번 요청에서는:
+
+  1) PremiumTable에서 openCmcPage(symbol, cmcSlug)로 실제 CMC 링크 통일 적용
+  2) CoinIcon에 iconUrl props만 추가해서 향후 master_symbols.icon_url과 연결 가능한 구조로 확장
+  3) 브라우저에서 남은 uncaught exception의 근본 원인 한 번만 추적 후, UI가 깨지지 않도록 방어 코드 보강
+  4) noticeUpdateWorker는 Replit 제한 환경을 감안해서, 크롤러 실행 실패 시에도 안전하게 동작하도록 운용 플래그/에러 처리 정리
+
+이 4가지가 마무리되면,
+심볼/한글명/CMC 링크/아이콘 확장성/안정성이 모두 확보된 상태로
+KimpAI 1차 베이스가 완성될 것 같습니다.

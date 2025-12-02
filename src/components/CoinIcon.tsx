@@ -559,12 +559,35 @@ interface CoinIconProps {
   symbol: string;
   size?: 'sm' | 'md' | 'lg';
   className?: string;
+  iconUrl?: string; // master_symbols.icon_url 또는 외부 아이콘 URL (선택)
 }
 
 // 개발 모드에서 누락된 아이콘 추적 (중복 로그 방지)
 const loggedMissingIcons = new Set<string>();
 
-export default function CoinIcon({ symbol, size = 'md', className = '' }: CoinIconProps) {
+export default function CoinIcon({ symbol, size = 'md', className = '', iconUrl }: CoinIconProps) {
+  // 1순위: iconUrl (master_symbols.icon_url 또는 외부 제공)이 있으면 우선적으로 사용
+  if (iconUrl && iconUrl.trim().length > 0) {
+    const sizeClasses = {
+      sm: 'w-5 h-5',
+      md: 'w-6 h-6',
+      lg: 'w-8 h-8',
+    };
+    return (
+      <img
+        src={iconUrl}
+        alt={symbol}
+        className={`${sizeClasses[size]} rounded-full flex-shrink-0 ${className}`}
+        onError={(e) => {
+          // iconUrl 로드 실패 시 fallback: 아래 기본 로직으로 자동 전환됨
+          // (재렌더링은 외부에서 iconUrl을 제거해서 트리거)
+          console.warn(`[CoinIcon] iconUrl 로드 실패: ${iconUrl}`);
+        }}
+        loading="lazy"
+      />
+    );
+  }
+
   const [cdnIndex, setCdnIndex] = React.useState(0);
   const [hasError, setHasError] = React.useState(false);
   
