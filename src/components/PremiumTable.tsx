@@ -228,6 +228,22 @@ const FOREIGN_EXCHANGES: DropdownOption[] = CONTEXT_FOREIGN_EXCHANGES.map(
   }),
 );
 
+// 거래소 한글 라벨 맵
+const EXCHANGE_LABEL_KO: Record<string, string> = {
+  UPBIT: "업비트",
+  BITHUMB: "빗썸",
+  COINONE: "코인원",
+  OKX: "OKX",
+  GATE: "Gate.io",
+  BINANCE: "바이낸스",
+  BYBIT: "바이비트",
+  BITGET: "Bitget",
+  HTX: "HTX",
+  MEXC: "MEXC",
+  FOREIGN: "해외 거래소",
+  DOMESTIC: "국내 거래소",
+};
+
 const CHOSUNG = [
   "ㄱ",
   "ㄲ",

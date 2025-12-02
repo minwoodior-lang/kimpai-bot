@@ -81,11 +81,12 @@ export default function ChartModal({ symbol, onClose }: ChartModalProps) {
         support_host: "https://www.tradingview.com",
       };
 
-      // 1. 설정 스크립트 생성
-      const configScript = document.createElement("script");
-      configScript.type = "text/tradingview-widget";
-      configScript.innerHTML = JSON.stringify(config);
-      container.appendChild(configScript);
+      // 1. 설정을 script 요소로 정확히 생성
+      const script = document.createElement("script");
+      script.type = "text/tradingview-widget";
+      script.textContent = JSON.stringify(config);
+      
+      container.appendChild(script);
 
       // 2. 로더 스크립트 생성 및 로드
       const loaderScript = document.createElement("script");
