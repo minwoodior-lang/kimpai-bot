@@ -12,7 +12,6 @@
     "price:worker": "tsx scripts/priceWorker.ts",
     "update:notices": "tsx scripts/noticeUpdateWorker.ts",
     "backfill:korean-names": "tsx scripts/backfillKoreanNames.ts",
-    "sync:exchange-symbols": "tsx scripts/syncExchangeSymbols.ts",
     "update:icons": "node fetchIcons.js",
 
     "sync:symbols": "tsx scripts/syncSymbols.ts"

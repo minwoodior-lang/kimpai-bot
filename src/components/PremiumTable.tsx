@@ -421,8 +421,8 @@ export default function PremiumTable({
         response = await fetch(
           `/api/premium/table?domestic=${domesticExchange}&foreign=${foreignExchange}`,
         );
-      } catch {
-        // Network error - silently ignore
+      } catch (err) {
+        // Network error - silently ignore (don't log, could trigger error handler)
         return;
       }
 
@@ -449,8 +449,8 @@ export default function PremiumTable({
       let json: ApiResponse | null = null;
       try {
         json = await response.json();
-      } catch {
-        // JSON parse error - silently ignore
+      } catch (err) {
+        // JSON parse error - silently ignore (don't log, could trigger error handler)
         return;
       }
 

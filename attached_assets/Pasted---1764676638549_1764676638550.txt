@@ -1,0 +1,140 @@
+🧨 레플릿 개발팀 작업 요청 문구 (복붙용)
+
+제목: 기존 심볼/마켓 매핑 로직 및 관련 코드 전체 삭제 요청
+
+안녕하세요.
+현재 프로젝트에서 거래소 심볼/마켓 관련 로직이 너무 복잡하게 꼬여서,
+기존 구조를 전부 버리고 새로 설계하려고 합니다.
+
+그래서 지금까지 만들어 둔 “원본 심볼 저장/매핑/동기화 관련 코드”를 전부 삭제해 주세요.
+안전하게 지우기 어려운 부분은 전부 주석 처리 + TODO 코멘트만 남겨주시면 됩니다.
+
+1️⃣ DB 레벨 작업 (Supabase)
+
+다음 테이블/객체를 전부 삭제해 주세요.
+
+exchange_symbol_mappings 테이블 완전 삭제
+
+drop table if exists public.exchange_symbol_mappings cascade;
+
+
+위 테이블과 관련된 것들(있다면 전부 제거)
+
+RLS 정책
+
+인덱스 / 뷰 / 함수 / 트리거
+
+exchange_symbol_mappings를 참조하는 FK 제약조건
+
+중요:
+혹시 다른 테이블에서 exchange_symbol_mappings FK 걸려 있다면,
+우선 FK 제거 후 exchange_symbol_mappings 드롭해 주세요.
+
+2️⃣ 스크립트 & npm 스크립트 제거
+(1) Node 스크립트 삭제
+
+아래 파일이 존재하면 전부 삭제해 주세요:
+
+scripts/syncExchangeSymbols.ts
+
+그 외 exchange_symbol_mappings 기반으로 동작하는 스크립트 전부
+
+# 참고용 grep (직접 실행해서 확인해 주세요)
+grep -R "exchange_symbol_mappings" -n scripts src || true
+grep -R "syncExchangeSymbols" -n scripts src || true
+
+
+위 grep 결과에 나오는 “순수 동기화용/매핑용 스크립트”는 전부 삭제 대상입니다.
+다만, 전혀 관계없는 코드까지 지우지는 말고, exchange_symbol_mappings를 전제로 하는 로직만 정리해 주세요.
+
+(2) package.json의 npm 스크립트 제거
+
+package.json에서 다음 스크립트를 찾아 삭제해 주세요:
+
+"sync:exchange-symbols": "tsx scripts/syncExchangeSymbols.ts"
+
+그 외 exchange-symbol 관련 스크립트가 있다면 전부 삭제
+
+# 참고용
+grep -n "sync:exchange-symbols" package.json || true
+grep -n "exchange-symbol" package.json || true
+
+3️⃣ 코드 레벨에서 “심볼 매핑/조합 로직” 제거
+
+이 부분이 제일 중요한데,
+아래 패턴들을 전부 검색해서, 관련 로직을 삭제 또는 주석 처리해 주세요.
+
+(1) exchange_symbol_mappings 직접 사용하는 코드
+grep -R "exchange_symbol_mappings" -n src || true
+grep -R "raw_symbol" -n src || true
+grep -R "master_symbol_id" -n src || true
+
+
+위에서 나온 코드 중:
+
+Supabase 쿼리에서 .from("exchange_symbol_mappings") 사용하는 부분
+
+raw_symbol, exchange, master_symbol_id 등을 기준으로 심볼/마켓 매핑/조회하는 부분
+
+👉 전부 삭제 또는 주석 처리해 주세요.
+(위 테이블을 완전히 버릴 예정이라 남겨두면 안 됩니다.)
+
+(2) 문자열로 마켓 조합하는 로직 제거
+
+지금은 여러 군데에서 이런 패턴으로 마켓을 직접 만들어 쓰고 있을 수 있습니다:
+
+const upbitMarket = `KRW-${symbol}`;
+
+const bithumbMarket = `${symbol}_KRW`;
+
+
+"-KRW", "_KRW" 등 하드코딩해서 market/symbol 붙이는 패턴
+
+다음처럼 검색해서:
+
+grep -R "KRW-${" -n src || true
+grep -R "_KRW" -n src || true
+grep -R "KRW-" -n src || true
+
+
+거래소용 마켓/심볼을 문자열로 조합하는 로직은 전부 삭제 또는 주석 처리해 주세요.
+
+⚠️ 단, UI에서 그냥 텍스트로 “KRW”를 보여주는 부분까지 지우지는 마시고,
+API 호출용/마켓코드 조합용 로직만 지워 주세요.
+
+4️⃣ 정리 방식
+
+바로 삭제해도 안전한 부분
+
+exchange_symbol_mappings 테이블/스크립트/전용 서비스 로직
+
+위 테이블 기준으로만 동작하는 헬퍼/유틸
+
+삭제가 애매하거나 리스크 있어 보이는 부분
+
+코드 블록 전체를 주석 처리하고, 다음처럼 남겨 주세요:
+
+// TODO(jay): 기존 exchange_symbol_mappings 기반 심볼/마켓 매핑 로직.
+// 새 심볼 구조 설계 후, 필요 시 이 부분을 참고해서 다시 구현해야 함.
+
+
+이렇게 남겨주시면, 나중에 제가 하나씩 보고 새 구조 기준으로 다시 짜겠습니다.
+
+5️⃣ 최종적으로 제가 원하는 상태
+
+프로젝트 안에서
+
+exchange_symbol_mappings 관련 코드/쿼리/스크립트가 아예 없거나, 전부 주석 처리된 상태
+
+KRW-${symbol}, ${symbol}_KRW 같은 마켓 문자열 조합 로직도 최대한 제거
+
+심볼/마켓 관련해서 애매한 부분은 전부 TODO 코멘트만 남기고 건드리지 않으셔도 됩니다.
+
+그 뒤 제가 master_symbols 기준으로 완전히 새 심볼 구조를 설계해서 다시 구현할 예정입니다.
+
+여기까지만 먼저 “싹 정리” 해주시면,
+이후의 새 구조는 제가 ChatGPT랑 맞춰서 차근차근 다시 짜겠습니다.
+
+정리 중에 애매하거나 삭제하기 위험해 보이는 부분은,
+주석 처리만 해두고 “어디가 애매했는지” 코멘트만 남겨주세요.
+그 부분은 제가 직접 확인할게요. 감사합니다. 🙏

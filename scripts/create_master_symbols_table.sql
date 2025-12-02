@@ -13,29 +13,34 @@ CREATE TABLE IF NOT EXISTS public.master_symbols (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- TODO(jay): 기존 exchange_symbol_mappings 기반 심볼/마켓 매핑 로직.
+-- 새 심볼 구조 설계 후, 필요 시 이 부분을 참고해서 다시 구현해야 함.
+--
 -- 거래소별 심볼 매핑 테이블 (base_symbol -> 거래소별 원본 심볼)
-CREATE TABLE IF NOT EXISTS public.exchange_symbol_mappings (
-  id BIGSERIAL PRIMARY KEY,
-  base_symbol VARCHAR(20) NOT NULL,
-  exchange_name VARCHAR(50) NOT NULL,
-  exchange_symbol VARCHAR(50) NOT NULL,
-  exchange_market VARCHAR(50),
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  updated_at TIMESTAMPTZ DEFAULT NOW(),
-  FOREIGN KEY (base_symbol) REFERENCES public.master_symbols(base_symbol) ON DELETE CASCADE,
-  UNIQUE(base_symbol, exchange_name, exchange_market)
-);
+-- CREATE TABLE IF NOT EXISTS public.exchange_symbol_mappings (
+--   id BIGSERIAL PRIMARY KEY,
+--   base_symbol VARCHAR(20) NOT NULL,
+--   exchange_name VARCHAR(50) NOT NULL,
+--   exchange_symbol VARCHAR(50) NOT NULL,
+--   exchange_market VARCHAR(50),
+--   created_at TIMESTAMPTZ DEFAULT NOW(),
+--   updated_at TIMESTAMPTZ DEFAULT NOW(),
+--   FOREIGN KEY (base_symbol) REFERENCES public.master_symbols(base_symbol) ON DELETE CASCADE,
+--   UNIQUE(base_symbol, exchange_name, exchange_market)
+-- );
 
 -- 인덱스 생성 (성능 최적화)
 CREATE INDEX IF NOT EXISTS idx_master_symbols_base_symbol ON public.master_symbols(base_symbol);
 CREATE INDEX IF NOT EXISTS idx_master_symbols_coingecko_id ON public.master_symbols(coingecko_id);
 CREATE INDEX IF NOT EXISTS idx_master_symbols_is_active ON public.master_symbols(is_active);
-CREATE INDEX IF NOT EXISTS idx_exchange_symbol_mappings_base_symbol ON public.exchange_symbol_mappings(base_symbol);
-CREATE INDEX IF NOT EXISTS idx_exchange_symbol_mappings_exchange ON public.exchange_symbol_mappings(exchange_name);
+-- TODO(jay): exchange_symbol_mappings 테이블 제거 시 아래 인덱스도 삭제 필요
+-- CREATE INDEX IF NOT EXISTS idx_exchange_symbol_mappings_base_symbol ON public.exchange_symbol_mappings(base_symbol);
+-- CREATE INDEX IF NOT EXISTS idx_exchange_symbol_mappings_exchange ON public.exchange_symbol_mappings(exchange_name);
 
 -- RLS 정책
 ALTER TABLE public.master_symbols ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.exchange_symbol_mappings ENABLE ROW LEVEL SECURITY;
+-- TODO(jay): exchange_symbol_mappings 테이블 제거 시 아래도 삭제
+-- ALTER TABLE public.exchange_symbol_mappings ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY "Allow public read master_symbols" ON public.master_symbols
   FOR SELECT USING (true);
@@ -43,15 +48,16 @@ CREATE POLICY "Allow public read master_symbols" ON public.master_symbols
 CREATE POLICY "Allow service role manage master_symbols" ON public.master_symbols
   FOR ALL USING (true);
 
-CREATE POLICY "Allow public read exchange_symbol_mappings" ON public.exchange_symbol_mappings
-  FOR SELECT USING (true);
-
-CREATE POLICY "Allow service role manage exchange_symbol_mappings" ON public.exchange_symbol_mappings
-  FOR ALL USING (true);
+-- TODO(jay): exchange_symbol_mappings 테이블 제거 시 아래 정책들도 삭제
+-- CREATE POLICY "Allow public read exchange_symbol_mappings" ON public.exchange_symbol_mappings
+--   FOR SELECT USING (true);
+--
+-- CREATE POLICY "Allow service role manage exchange_symbol_mappings" ON public.exchange_symbol_mappings
+--   FOR ALL USING (true);
 
 -- 테이블 설명
 COMMENT ON TABLE public.master_symbols IS 'Centralized cryptocurrency symbol management with bilingual names and icons';
-COMMENT ON TABLE public.exchange_symbol_mappings IS 'Mapping between master_symbols and exchange-specific symbol representations';
+-- COMMENT ON TABLE public.exchange_symbol_mappings IS 'Mapping between master_symbols and exchange-specific symbol representations';
 COMMENT ON COLUMN public.master_symbols.base_symbol IS 'Primary symbol (BTC, ETH, XRP, etc.)';
 COMMENT ON COLUMN public.master_symbols.ko_name IS 'Korean name (비트코인, 이더리움, etc.)';
 COMMENT ON COLUMN public.master_symbols.icon_url IS 'Cached icon URL for this symbol';
