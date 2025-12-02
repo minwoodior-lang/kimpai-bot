@@ -10,6 +10,8 @@
  */
 
 import { createClient } from "@supabase/supabase-js";
+import * as fs from "fs";
+import * as path from "path";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
@@ -21,7 +23,22 @@ type MasterSymbolRow = {
   name_ko: string | null;
   name_en: string | null;
   exchanges: string;
+  icon_url?: string | null;
 };
+
+// symbolIcons.json에서 icon URL 로드
+function loadSymbolIcons(): Record<string, string> {
+  try {
+    const iconPath = path.join(process.cwd(), "data", "symbolIcons.json");
+    if (fs.existsSync(iconPath)) {
+      const content = fs.readFileSync(iconPath, "utf-8");
+      return JSON.parse(content);
+    }
+  } catch (err) {
+    console.warn("[Icon URLs] 로드 실패:", err instanceof Error ? err.message : String(err));
+  }
+  return {};
+}
 
 /**
  * exchange_markets에서 모든 데이터 읽기
@@ -36,9 +53,9 @@ async function fetchExchangeMarkets(): Promise<any[]> {
 }
 
 /**
- * base_symbol별로 그룹핑하고 master_symbols 생성
+ * base_symbol별로 그룹핑하고 master_symbols 생성 (icon_url 포함)
  */
-function buildMasterSymbols(markets: any[]): MasterSymbolRow[] {
+function buildMasterSymbols(markets: any[], symbolIcons: Record<string, string>): MasterSymbolRow[] {
   const symbolMap = new Map<string, any>();
   
   for (const market of markets) {
@@ -61,7 +78,7 @@ function buildMasterSymbols(markets: any[]): MasterSymbolRow[] {
     entry.names_by_exchange[market.exchange].en = market.name_en;
   }
   
-  // 우선순위에 따라 name_ko/name_en 선택
+  // 우선순위에 따라 name_ko/name_en 선택 + icon_url 추가
   const result: MasterSymbolRow[] = [];
   const entries = Array.from(symbolMap.entries());
   for (const [symbol, entry] of entries) {
@@ -89,11 +106,15 @@ function buildMasterSymbols(markets: any[]): MasterSymbolRow[] {
       }
     }
     
+    // icon_url: symbolIcons.json에서 조회
+    const iconUrl = symbolIcons[symbol] || null;
+    
     result.push({
       base_symbol: symbol,
       name_ko: nameKo,
       name_en: nameEn,
       exchanges: Array.from(entry.exchanges).sort().join(","),
+      icon_url: iconUrl,
     });
   }
   
@@ -145,12 +166,16 @@ export async function updateMasterSymbols() {
   console.log("\n========== Master Symbols 재생성 시작 ==========\n");
   
   try {
+    console.log("[Icon URLs] symbolIcons.json 로드 중...");
+    const symbolIcons = loadSymbolIcons();
+    console.log(`[Icon URLs] ✅ ${Object.keys(symbolIcons).length}개 심볼 아이콘 로드됨`);
+    
     console.log("[Exchange Markets] 데이터 로드 중...");
     const markets = await fetchExchangeMarkets();
     console.log(`[Exchange Markets] ✅ ${markets.length}개 마켓 로드됨`);
     
     console.log("[Master Symbols] 데이터 구성 중...");
-    const symbols = buildMasterSymbols(markets);
+    const symbols = buildMasterSymbols(markets, symbolIcons);
     console.log(`[Master Symbols] ✅ ${symbols.length}개 심볼 준비됨`);
     
     const totalInserted = await upsertMasterSymbols(symbols);
