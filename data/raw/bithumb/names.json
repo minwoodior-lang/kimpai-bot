@@ -68,7 +68,7 @@
     "name_en": "Shiba Inu"
   },
   "USDC": {
-    "name_ko": "유에스디씨",
+    "name_ko": "유에스디",
     "name_en": "USDC"
   },
   "USDT": {
@@ -95,8 +95,516 @@
     "name_ko": "예피나인스",
     "name_en": "Yearn Finance"
   },
-  "UNISWAP": {
-    "name_ko": "유니스왑",
-    "name_en": "Uniswap"
+  "SUSHI": {
+    "name_ko": "스시",
+    "name_en": "Sushi"
+  },
+  "COMP": {
+    "name_ko": "컴파운드",
+    "name_en": "Compound"
+  },
+  "MKR": {
+    "name_ko": "메이커",
+    "name_en": "Maker"
+  },
+  "GRT": {
+    "name_ko": "더그래프",
+    "name_en": "The Graph"
+  },
+  "ENS": {
+    "name_ko": "이더리움네임서비스",
+    "name_en": "Ethereum Name Service"
+  },
+  "BNB": {
+    "name_ko": "바이낸스코인",
+    "name_en": "BNB"
+  },
+  "OP": {
+    "name_ko": "옵티미즘",
+    "name_en": "Optimism"
+  },
+  "ARB": {
+    "name_ko": "아르비트럼",
+    "name_en": "Arbitrum"
+  },
+  "LDO": {
+    "name_ko": "리도",
+    "name_en": "Lido"
+  },
+  "ALGO": {
+    "name_ko": "알고랜드",
+    "name_en": "Algorand"
+  },
+  "ATOM": {
+    "name_ko": "코스모스",
+    "name_en": "Cosmos"
+  },
+  "NEAR": {
+    "name_ko": "니어",
+    "name_en": "NEAR"
+  },
+  "FIL": {
+    "name_ko": "파일코인",
+    "name_en": "Filecoin"
+  },
+  "XTZ": {
+    "name_ko": "테조스",
+    "name_en": "Tezos"
+  },
+  "ONT": {
+    "name_ko": "온톨로지",
+    "name_en": "Ontology"
+  },
+  "KSM": {
+    "name_ko": "쿠사마",
+    "name_en": "Kusama"
+  },
+  "KAIA": {
+    "name_ko": "카이아",
+    "name_en": "Kaia"
+  },
+  "ONG": {
+    "name_ko": "온토로지가스",
+    "name_en": "ONG"
+  },
+  "JST": {
+    "name_ko": "저스트",
+    "name_en": "JUST"
+  },
+  "TRX": {
+    "name_ko": "트론",
+    "name_en": "TRON"
+  },
+  "ICX": {
+    "name_ko": "아이콘",
+    "name_en": "ICON"
+  },
+  "ETC": {
+    "name_ko": "이더리움클래식",
+    "name_en": "Ethereum Classic"
+  },
+  "QTUM": {
+    "name_ko": "퀀텀",
+    "name_en": "Qtum"
+  },
+  "VET": {
+    "name_ko": "비챗",
+    "name_en": "VeChain"
+  },
+  "KNC": {
+    "name_ko": "카일로",
+    "name_en": "Kyber"
+  },
+  "ZIL": {
+    "name_ko": "질리카",
+    "name_en": "Zilliqa"
+  },
+  "BAT": {
+    "name_ko": "베이직어텐션토큰",
+    "name_en": "Basic Attention Token"
+  },
+  "THETA": {
+    "name_ko": "세타",
+    "name_en": "Theta"
+  },
+  "ZRX": {
+    "name_ko": "0x",
+    "name_en": "0x Protocol"
+  },
+  "WAVES": {
+    "name_ko": "웨이브스",
+    "name_en": "Waves"
+  },
+  "ENJ": {
+    "name_ko": "엔진코인",
+    "name_en": "Enjin Coin"
+  },
+  "NEO": {
+    "name_ko": "네오",
+    "name_en": "NEO"
+  },
+  "GAS": {
+    "name_ko": "가스",
+    "name_en": "Gas"
+  },
+  "MANA": {
+    "name_ko": "디센트럴랜드",
+    "name_en": "Decentraland"
+  },
+  "SAND": {
+    "name_ko": "더샌드박스",
+    "name_en": "The Sandbox"
+  },
+  "GALA": {
+    "name_ko": "갈라",
+    "name_en": "Gala"
+  },
+  "AXS": {
+    "name_ko": "액시인피니티",
+    "name_en": "Axie Infinity"
+  },
+  "CHZ": {
+    "name_ko": "칠리즈",
+    "name_en": "Chiliz"
+  },
+  "CAKE": {
+    "name_ko": "팬케이크스왑",
+    "name_en": "PancakeSwap"
+  },
+  "COTI": {
+    "name_ko": "코티",
+    "name_en": "COTI"
+  },
+  "ALICE": {
+    "name_ko": "마이네이버앨리스",
+    "name_en": "My Neighbor Alice"
+  },
+  "OGN": {
+    "name_ko": "오리진프로토콜",
+    "name_en": "Origin Protocol"
+  },
+  "REQ": {
+    "name_ko": "리퀘스트네트워크",
+    "name_en": "Request Network"
+  },
+  "HBAR": {
+    "name_ko": "헤데라",
+    "name_en": "Hedera"
+  },
+  "APE": {
+    "name_ko": "에이피씨",
+    "name_en": "ApeCoin"
+  },
+  "BLUR": {
+    "name_ko": "블러",
+    "name_en": "Blur"
+  },
+  "ARK": {
+    "name_ko": "아크",
+    "name_en": "Ark"
+  },
+  "YGG": {
+    "name_ko": "일드길드",
+    "name_en": "Yield Guild Games"
+  },
+  "MAGIC": {
+    "name_ko": "매직",
+    "name_en": "Magic"
+  },
+  "BONK": {
+    "name_ko": "봉크",
+    "name_en": "Bonk"
+  },
+  "JUP": {
+    "name_ko": "주피터",
+    "name_en": "Jupiter"
+  },
+  "JTO": {
+    "name_ko": "주토",
+    "name_en": "Jito"
+  },
+  "DRIFT": {
+    "name_ko": "드리프트",
+    "name_en": "Drift"
+  },
+  "VIRTUAL": {
+    "name_ko": "버추얼",
+    "name_en": "Virtual"
+  },
+  "STRK": {
+    "name_ko": "스타크",
+    "name_en": "Starknet"
+  },
+  "SEI": {
+    "name_ko": "세이",
+    "name_en": "Sei"
+  },
+  "RENDER": {
+    "name_ko": "렌더네트워크",
+    "name_en": "Render"
+  },
+  "STG": {
+    "name_ko": "스타게이트",
+    "name_en": "Stargate"
+  },
+  "OSMO": {
+    "name_ko": "오스모",
+    "name_en": "Osmosis"
+  },
+  "ILV": {
+    "name_ko": "일루비움",
+    "name_en": "Illuvium"
+  },
+  "RSS3": {
+    "name_ko": "알에스에스쓰리",
+    "name_en": "RSS3"
+  },
+  "AUDIO": {
+    "name_ko": "오디우스",
+    "name_en": "Audius"
+  },
+  "ASTR": {
+    "name_ko": "아스터",
+    "name_en": "Astar"
+  },
+  "AGLD": {
+    "name_ko": "어드벤처골드",
+    "name_en": "Adventure Gold"
+  },
+  "AR": {
+    "name_ko": "아르",
+    "name_en": "Arweave"
+  },
+  "RVN": {
+    "name_ko": "레이븐",
+    "name_en": "Ravencoin"
+  },
+  "EDU": {
+    "name_ko": "이듀",
+    "name_en": "EduCoin"
+  },
+  "PEPE": {
+    "name_ko": "페페",
+    "name_en": "Pepe"
+  },
+  "CYBER": {
+    "name_ko": "사이버",
+    "name_en": "Cyber"
+  },
+  "ARKM": {
+    "name_ko": "아크럼",
+    "name_en": "Arkham"
+  },
+  "PYR": {
+    "name_ko": "피로",
+    "name_en": "Pyro"
+  },
+  "IOTX": {
+    "name_ko": "아이오텍스",
+    "name_en": "IoTeX"
+  },
+  "HIGH": {
+    "name_ko": "하이",
+    "name_en": "High Street"
+  },
+  "PENDLE": {
+    "name_ko": "펜들",
+    "name_en": "Pendle"
+  },
+  "STORJ": {
+    "name_ko": "스토리지",
+    "name_en": "Storj"
+  },
+  "API3": {
+    "name_ko": "에이피아이쓰리",
+    "name_en": "API3"
+  },
+  "GTC": {
+    "name_ko": "깉크란트",
+    "name_en": "Gitcoin"
+  },
+  "METIS": {
+    "name_ko": "메티스",
+    "name_en": "Metis"
+  },
+  "TIA": {
+    "name_ko": "셀레스티아",
+    "name_en": "Celestia"
+  },
+  "ICP": {
+    "name_ko": "인터넷컴퓨터",
+    "name_en": "Internet Computer"
+  },
+  "ZK": {
+    "name_ko": "지커브",
+    "name_en": "ZKsync"
+  },
+  "ONDO": {
+    "name_ko": "온도",
+    "name_en": "Ondo"
+  },
+  "TAO": {
+    "name_ko": "타오",
+    "name_en": "Bittensor"
+  },
+  "RON": {
+    "name_ko": "로닌",
+    "name_en": "Ronin"
+  },
+  "FIDA": {
+    "name_ko": "피다",
+    "name_en": "Bonfida"
+  },
+  "STRAX": {
+    "name_ko": "스트랙스",
+    "name_en": "Straxe"
+  },
+  "XAI": {
+    "name_ko": "자이",
+    "name_en": "Xai"
+  },
+  "POLYX": {
+    "name_ko": "폴리매시",
+    "name_en": "Polymesh"
+  },
+  "CORE": {
+    "name_ko": "코어",
+    "name_en": "Core"
+  },
+  "POKT": {
+    "name_ko": "포켓네트워크",
+    "name_en": "Pocket Network"
+  },
+  "ENA": {
+    "name_ko": "에나",
+    "name_en": "Ethena"
+  },
+  "ETHFI": {
+    "name_ko": "이더파이",
+    "name_en": "Ether.fi"
+  },
+  "MEW": {
+    "name_ko": "뮤",
+    "name_en": "MEW"
+  },
+  "ZRO": {
+    "name_ko": "제로",
+    "name_en": "LayerZero"
+  },
+  "IO": {
+    "name_ko": "아이오",
+    "name_en": "io"
+  },
+  "BLAST": {
+    "name_ko": "블래스트",
+    "name_en": "Blast"
+  },
+  "TAIKO": {
+    "name_ko": "타이코",
+    "name_en": "Taiko"
+  },
+  "BRETT": {
+    "name_ko": "브렛",
+    "name_en": "Brett"
+  },
+  "AVAIL": {
+    "name_ko": "어베일",
+    "name_en": "Avail"
+  },
+  "TON": {
+    "name_ko": "톤",
+    "name_en": "Toncoin"
+  },
+  "LISTA": {
+    "name_ko": "리스타",
+    "name_en": "Lista"
+  },
+  "PEAQ": {
+    "name_ko": "피크",
+    "name_en": "Peaq"
+  },
+  "EIGEN": {
+    "name_ko": "에이겐",
+    "name_en": "EigenLayer"
+  },
+  "SAFE": {
+    "name_ko": "세이프",
+    "name_en": "Safe"
+  },
+  "MOVE": {
+    "name_ko": "무브",
+    "name_en": "Movement"
+  },
+  "MORPHO": {
+    "name_ko": "모르포",
+    "name_en": "Morpho"
+  },
+  "GOAT": {
+    "name_ko": "고트",
+    "name_en": "GOAT"
+  },
+  "INIT": {
+    "name_ko": "이니셜",
+    "name_en": "Initiative"
+  },
+  "IOTA": {
+    "name_ko": "아이오타",
+    "name_en": "IOTA"
+  },
+  "AERO": {
+    "name_ko": "에어로",
+    "name_en": "Aerodrome"
+  },
+  "THE": {
+    "name_ko": "더",
+    "name_en": "The"
+  },
+  "VANA": {
+    "name_ko": "바나",
+    "name_en": "Vana"
+  },
+  "XYO": {
+    "name_ko": "엑시오",
+    "name_en": "XY Oracle"
+  },
+  "SONIC": {
+    "name_ko": "소닉",
+    "name_en": "Sonic"
+  },
+  "WIF": {
+    "name_ko": "와이프",
+    "name_en": "dogwifhat"
+  },
+  "SOLV": {
+    "name_ko": "솔브",
+    "name_en": "Solv Protocol"
+  },
+  "BLUE": {
+    "name_ko": "블루",
+    "name_en": "Blue"
+  },
+  "QKC": {
+    "name_ko": "쿼크체인",
+    "name_en": "QuarkChain"
+  },
+  "ERA": {
+    "name_ko": "이라",
+    "name_en": "Era"
+  },
+  "ARDR": {
+    "name_ko": "아더",
+    "name_en": "Ardor"
+  },
+  "GNO": {
+    "name_ko": "그노시스",
+    "name_en": "Gnosis"
+  },
+  "VTHO": {
+    "name_ko": "브이토르",
+    "name_en": "VeThor"
+  },
+  "COW": {
+    "name_ko": "카우스왑",
+    "name_en": "CoW Swap"
+  },
+  "W": {
+    "name_ko": "더블유",
+    "name_en": "Wonderland"
+  },
+  "SOON": {
+    "name_ko": "순",
+    "name_en": "Solanium"
+  },
+  "PAXG": {
+    "name_ko": "팍스골드",
+    "name_en": "Paxos Gold"
+  },
+  "FLR": {
+    "name_ko": "플레어",
+    "name_en": "Flare"
+  },
+  "MOCA": {
+    "name_ko": "모카",
+    "name_en": "Moca"
   }
 }

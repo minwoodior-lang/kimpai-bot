@@ -113,6 +113,8 @@
     "market": "AERO-KRW",
     "base": "AERO",
     "quote": "KRW",
+    "name_ko": "에어로",
+    "name_en": "Aerodrome",
     "isDomestic": true
   },
   {
@@ -129,6 +131,8 @@
     "market": "AGLD-KRW",
     "base": "AGLD",
     "quote": "KRW",
+    "name_ko": "어드벤처골드",
+    "name_en": "Adventure Gold",
     "isDomestic": true
   },
   {
@@ -177,6 +181,8 @@
     "market": "ALGO-KRW",
     "base": "ALGO",
     "quote": "KRW",
+    "name_ko": "알고랜드",
+    "name_en": "Algorand",
     "isDomestic": true
   },
   {
@@ -185,6 +191,8 @@
     "market": "ALICE-KRW",
     "base": "ALICE",
     "quote": "KRW",
+    "name_ko": "마이네이버앨리스",
+    "name_en": "My Neighbor Alice",
     "isDomestic": true
   },
   {
@@ -233,6 +241,8 @@
     "market": "APE-KRW",
     "base": "APE",
     "quote": "KRW",
+    "name_ko": "에이피씨",
+    "name_en": "ApeCoin",
     "isDomestic": true
   },
   {
@@ -241,6 +251,8 @@
     "market": "API3-KRW",
     "base": "API3",
     "quote": "KRW",
+    "name_ko": "에이피아이쓰리",
+    "name_en": "API3",
     "isDomestic": true
   },
   {
@@ -273,6 +285,8 @@
     "market": "AR-KRW",
     "base": "AR",
     "quote": "KRW",
+    "name_ko": "아르",
+    "name_en": "Arweave",
     "isDomestic": true
   },
   {
@@ -281,6 +295,8 @@
     "market": "ARB-KRW",
     "base": "ARB",
     "quote": "KRW",
+    "name_ko": "아르비트럼",
+    "name_en": "Arbitrum",
     "isDomestic": true
   },
   {
@@ -289,6 +305,8 @@
     "market": "ARDR-KRW",
     "base": "ARDR",
     "quote": "KRW",
+    "name_ko": "아더",
+    "name_en": "Ardor",
     "isDomestic": true
   },
   {
@@ -297,6 +315,8 @@
     "market": "ARK-KRW",
     "base": "ARK",
     "quote": "KRW",
+    "name_ko": "아크",
+    "name_en": "Ark",
     "isDomestic": true
   },
   {
@@ -305,6 +325,8 @@
     "market": "ARKM-KRW",
     "base": "ARKM",
     "quote": "KRW",
+    "name_ko": "아크럼",
+    "name_en": "Arkham",
     "isDomestic": true
   },
   {
@@ -329,6 +351,8 @@
     "market": "ASTR-KRW",
     "base": "ASTR",
     "quote": "KRW",
+    "name_ko": "아스터",
+    "name_en": "Astar",
     "isDomestic": true
   },
   {
@@ -345,6 +369,8 @@
     "market": "ATOM-KRW",
     "base": "ATOM",
     "quote": "KRW",
+    "name_ko": "코스모스",
+    "name_en": "Cosmos",
     "isDomestic": true
   },
   {
@@ -361,6 +387,8 @@
     "market": "AUDIO-KRW",
     "base": "AUDIO",
     "quote": "KRW",
+    "name_ko": "오디우스",
+    "name_en": "Audius",
     "isDomestic": true
   },
   {
@@ -369,6 +397,8 @@
     "market": "AVAIL-KRW",
     "base": "AVAIL",
     "quote": "KRW",
+    "name_ko": "어베일",
+    "name_en": "Avail",
     "isDomestic": true
   },
   {
@@ -411,6 +441,8 @@
     "market": "AXS-KRW",
     "base": "AXS",
     "quote": "KRW",
+    "name_ko": "액시인피니티",
+    "name_en": "Axie Infinity",
     "isDomestic": true
   },
   {
@@ -459,6 +491,8 @@
     "market": "BAT-KRW",
     "base": "BAT",
     "quote": "KRW",
+    "name_ko": "베이직어텐션토큰",
+    "name_en": "Basic Attention Token",
     "isDomestic": true
   },
   {
@@ -549,6 +583,8 @@
     "market": "BLAST-KRW",
     "base": "BLAST",
     "quote": "KRW",
+    "name_ko": "블래스트",
+    "name_en": "Blast",
     "isDomestic": true
   },
   {
@@ -557,6 +593,8 @@
     "market": "BLUE-KRW",
     "base": "BLUE",
     "quote": "KRW",
+    "name_ko": "블루",
+    "name_en": "Blue",
     "isDomestic": true
   },
   {
@@ -565,6 +603,8 @@
     "market": "BLUR-KRW",
     "base": "BLUR",
     "quote": "KRW",
+    "name_ko": "블러",
+    "name_en": "Blur",
     "isDomestic": true
   },
   {
@@ -589,6 +629,8 @@
     "market": "BNB-KRW",
     "base": "BNB",
     "quote": "KRW",
+    "name_ko": "바이낸스코인",
+    "name_en": "BNB",
     "isDomestic": true
   },
   {
@@ -621,6 +663,8 @@
     "market": "BONK-KRW",
     "base": "BONK",
     "quote": "KRW",
+    "name_ko": "봉크",
+    "name_en": "Bonk",
     "isDomestic": true
   },
   {
@@ -645,6 +689,8 @@
     "market": "BRETT-KRW",
     "base": "BRETT",
     "quote": "KRW",
+    "name_ko": "브렛",
+    "name_en": "Brett",
     "isDomestic": true
   },
   {
@@ -703,6 +749,8 @@
     "market": "CAKE-KRW",
     "base": "CAKE",
     "quote": "KRW",
+    "name_ko": "팬케이크스왑",
+    "name_en": "PancakeSwap",
     "isDomestic": true
   },
   {
@@ -767,6 +815,8 @@
     "market": "CHZ-KRW",
     "base": "CHZ",
     "quote": "KRW",
+    "name_ko": "칠리즈",
+    "name_en": "Chiliz",
     "isDomestic": true
   },
   {
@@ -801,6 +851,8 @@
     "market": "CORE-KRW",
     "base": "CORE",
     "quote": "KRW",
+    "name_ko": "코어",
+    "name_en": "Core",
     "isDomestic": true
   },
   {
@@ -817,6 +869,8 @@
     "market": "COTI-KRW",
     "base": "COTI",
     "quote": "KRW",
+    "name_ko": "코티",
+    "name_en": "COTI",
     "isDomestic": true
   },
   {
@@ -825,6 +879,8 @@
     "market": "COW-KRW",
     "base": "COW",
     "quote": "KRW",
+    "name_ko": "카우스왑",
+    "name_en": "CoW Swap",
     "isDomestic": true
   },
   {
@@ -923,6 +979,8 @@
     "market": "CYBER-KRW",
     "base": "CYBER",
     "quote": "KRW",
+    "name_ko": "사이버",
+    "name_en": "Cyber",
     "isDomestic": true
   },
   {
@@ -999,6 +1057,8 @@
     "market": "DRIFT-KRW",
     "base": "DRIFT",
     "quote": "KRW",
+    "name_ko": "드리프트",
+    "name_en": "Drift",
     "isDomestic": true
   },
   {
@@ -1023,6 +1083,8 @@
     "market": "EDU-KRW",
     "base": "EDU",
     "quote": "KRW",
+    "name_ko": "이듀",
+    "name_en": "EduCoin",
     "isDomestic": true
   },
   {
@@ -1047,6 +1109,8 @@
     "market": "EIGEN-KRW",
     "base": "EIGEN",
     "quote": "KRW",
+    "name_ko": "에이겐",
+    "name_en": "EigenLayer",
     "isDomestic": true
   },
   {
@@ -1079,6 +1143,8 @@
     "market": "ENA-KRW",
     "base": "ENA",
     "quote": "KRW",
+    "name_ko": "에나",
+    "name_en": "Ethena",
     "isDomestic": true
   },
   {
@@ -1087,6 +1153,8 @@
     "market": "ENJ-KRW",
     "base": "ENJ",
     "quote": "KRW",
+    "name_ko": "엔진코인",
+    "name_en": "Enjin Coin",
     "isDomestic": true
   },
   {
@@ -1121,6 +1189,8 @@
     "market": "ERA-KRW",
     "base": "ERA",
     "quote": "KRW",
+    "name_ko": "이라",
+    "name_en": "Era",
     "isDomestic": true
   },
   {
@@ -1137,6 +1207,8 @@
     "market": "ETC-KRW",
     "base": "ETC",
     "quote": "KRW",
+    "name_ko": "이더리움클래식",
+    "name_en": "Ethereum Classic",
     "isDomestic": true
   },
   {
@@ -1155,6 +1227,8 @@
     "market": "ETHFI-KRW",
     "base": "ETHFI",
     "quote": "KRW",
+    "name_ko": "이더파이",
+    "name_en": "Ether.fi",
     "isDomestic": true
   },
   {
@@ -1219,6 +1293,8 @@
     "market": "FIDA-KRW",
     "base": "FIDA",
     "quote": "KRW",
+    "name_ko": "피다",
+    "name_en": "Bonfida",
     "isDomestic": true
   },
   {
@@ -1227,6 +1303,8 @@
     "market": "FIL-KRW",
     "base": "FIL",
     "quote": "KRW",
+    "name_ko": "파일코인",
+    "name_en": "Filecoin",
     "isDomestic": true
   },
   {
@@ -1267,6 +1345,8 @@
     "market": "FLR-KRW",
     "base": "FLR",
     "quote": "KRW",
+    "name_ko": "플레어",
+    "name_en": "Flare",
     "isDomestic": true
   },
   {
@@ -1315,6 +1395,8 @@
     "market": "GALA-KRW",
     "base": "GALA",
     "quote": "KRW",
+    "name_ko": "갈라",
+    "name_en": "Gala",
     "isDomestic": true
   },
   {
@@ -1331,6 +1413,8 @@
     "market": "GAS-KRW",
     "base": "GAS",
     "quote": "KRW",
+    "name_ko": "가스",
+    "name_en": "Gas",
     "isDomestic": true
   },
   {
@@ -1371,6 +1455,8 @@
     "market": "GNO-KRW",
     "base": "GNO",
     "quote": "KRW",
+    "name_ko": "그노시스",
+    "name_en": "Gnosis",
     "isDomestic": true
   },
   {
@@ -1379,6 +1465,8 @@
     "market": "GOAT-KRW",
     "base": "GOAT",
     "quote": "KRW",
+    "name_ko": "고트",
+    "name_en": "GOAT",
     "isDomestic": true
   },
   {
@@ -1429,6 +1517,8 @@
     "market": "GTC-KRW",
     "base": "GTC",
     "quote": "KRW",
+    "name_ko": "깉크란트",
+    "name_en": "Gitcoin",
     "isDomestic": true
   },
   {
@@ -1453,6 +1543,8 @@
     "market": "HBAR-KRW",
     "base": "HBAR",
     "quote": "KRW",
+    "name_ko": "헤데라",
+    "name_en": "Hedera",
     "isDomestic": true
   },
   {
@@ -1477,6 +1569,8 @@
     "market": "HIGH-KRW",
     "base": "HIGH",
     "quote": "KRW",
+    "name_ko": "하이",
+    "name_en": "High Street",
     "isDomestic": true
   },
   {
@@ -1549,6 +1643,8 @@
     "market": "ICP-KRW",
     "base": "ICP",
     "quote": "KRW",
+    "name_ko": "인터넷컴퓨터",
+    "name_en": "Internet Computer",
     "isDomestic": true
   },
   {
@@ -1557,6 +1653,8 @@
     "market": "ICX-KRW",
     "base": "ICX",
     "quote": "KRW",
+    "name_ko": "아이콘",
+    "name_en": "ICON",
     "isDomestic": true
   },
   {
@@ -1573,6 +1671,8 @@
     "market": "ILV-KRW",
     "base": "ILV",
     "quote": "KRW",
+    "name_ko": "일루비움",
+    "name_en": "Illuvium",
     "isDomestic": true
   },
   {
@@ -1597,6 +1697,8 @@
     "market": "INIT-KRW",
     "base": "INIT",
     "quote": "KRW",
+    "name_ko": "이니셜",
+    "name_en": "Initiative",
     "isDomestic": true
   },
   {
@@ -1613,6 +1715,8 @@
     "market": "IO-KRW",
     "base": "IO",
     "quote": "KRW",
+    "name_ko": "아이오",
+    "name_en": "io",
     "isDomestic": true
   },
   {
@@ -1629,6 +1733,8 @@
     "market": "IOTA-KRW",
     "base": "IOTA",
     "quote": "KRW",
+    "name_ko": "아이오타",
+    "name_en": "IOTA",
     "isDomestic": true
   },
   {
@@ -1637,6 +1743,8 @@
     "market": "IOTX-KRW",
     "base": "IOTX",
     "quote": "KRW",
+    "name_ko": "아이오텍스",
+    "name_en": "IoTeX",
     "isDomestic": true
   },
   {
@@ -1685,6 +1793,8 @@
     "market": "JST-KRW",
     "base": "JST",
     "quote": "KRW",
+    "name_ko": "저스트",
+    "name_en": "JUST",
     "isDomestic": true
   },
   {
@@ -1693,6 +1803,8 @@
     "market": "JTO-KRW",
     "base": "JTO",
     "quote": "KRW",
+    "name_ko": "주토",
+    "name_en": "Jito",
     "isDomestic": true
   },
   {
@@ -1701,6 +1813,8 @@
     "market": "JUP-KRW",
     "base": "JUP",
     "quote": "KRW",
+    "name_ko": "주피터",
+    "name_en": "Jupiter",
     "isDomestic": true
   },
   {
@@ -1709,6 +1823,8 @@
     "market": "KAIA-KRW",
     "base": "KAIA",
     "quote": "KRW",
+    "name_ko": "카이아",
+    "name_en": "Kaia",
     "isDomestic": true
   },
   {
@@ -1757,6 +1873,8 @@
     "market": "KNC-KRW",
     "base": "KNC",
     "quote": "KRW",
+    "name_ko": "카일로",
+    "name_en": "Kyber",
     "isDomestic": true
   },
   {
@@ -1765,6 +1883,8 @@
     "market": "KSM-KRW",
     "base": "KSM",
     "quote": "KRW",
+    "name_ko": "쿠사마",
+    "name_en": "Kusama",
     "isDomestic": true
   },
   {
@@ -1789,6 +1909,8 @@
     "market": "LDO-KRW",
     "base": "LDO",
     "quote": "KRW",
+    "name_ko": "리도",
+    "name_en": "Lido",
     "isDomestic": true
   },
   {
@@ -1815,6 +1937,8 @@
     "market": "LISTA-KRW",
     "base": "LISTA",
     "quote": "KRW",
+    "name_ko": "리스타",
+    "name_en": "Lista",
     "isDomestic": true
   },
   {
@@ -1863,6 +1987,8 @@
     "market": "MAGIC-KRW",
     "base": "MAGIC",
     "quote": "KRW",
+    "name_ko": "매직",
+    "name_en": "Magic",
     "isDomestic": true
   },
   {
@@ -1871,6 +1997,8 @@
     "market": "MANA-KRW",
     "base": "MANA",
     "quote": "KRW",
+    "name_ko": "디센트럴랜드",
+    "name_en": "Decentraland",
     "isDomestic": true
   },
   {
@@ -1975,6 +2103,8 @@
     "market": "METIS-KRW",
     "base": "METIS",
     "quote": "KRW",
+    "name_ko": "메티스",
+    "name_en": "Metis",
     "isDomestic": true
   },
   {
@@ -1991,6 +2121,8 @@
     "market": "MEW-KRW",
     "base": "MEW",
     "quote": "KRW",
+    "name_ko": "뮤",
+    "name_en": "MEW",
     "isDomestic": true
   },
   {
@@ -2047,6 +2179,8 @@
     "market": "MOCA-KRW",
     "base": "MOCA",
     "quote": "KRW",
+    "name_ko": "모카",
+    "name_en": "Moca",
     "isDomestic": true
   },
   {
@@ -2071,6 +2205,8 @@
     "market": "MORPHO-KRW",
     "base": "MORPHO",
     "quote": "KRW",
+    "name_ko": "모르포",
+    "name_en": "Morpho",
     "isDomestic": true
   },
   {
@@ -2079,6 +2215,8 @@
     "market": "MOVE-KRW",
     "base": "MOVE",
     "quote": "KRW",
+    "name_ko": "무브",
+    "name_en": "Movement",
     "isDomestic": true
   },
   {
@@ -2119,6 +2257,8 @@
     "market": "NEAR-KRW",
     "base": "NEAR",
     "quote": "KRW",
+    "name_ko": "니어",
+    "name_en": "NEAR",
     "isDomestic": true
   },
   {
@@ -2135,6 +2275,8 @@
     "market": "NEO-KRW",
     "base": "NEO",
     "quote": "KRW",
+    "name_ko": "네오",
+    "name_en": "NEO",
     "isDomestic": true
   },
   {
@@ -2215,6 +2357,8 @@
     "market": "OGN-KRW",
     "base": "OGN",
     "quote": "KRW",
+    "name_ko": "오리진프로토콜",
+    "name_en": "Origin Protocol",
     "isDomestic": true
   },
   {
@@ -2231,6 +2375,8 @@
     "market": "ONDO-KRW",
     "base": "ONDO",
     "quote": "KRW",
+    "name_ko": "온도",
+    "name_en": "Ondo",
     "isDomestic": true
   },
   {
@@ -2239,6 +2385,8 @@
     "market": "ONG-KRW",
     "base": "ONG",
     "quote": "KRW",
+    "name_ko": "온토로지가스",
+    "name_en": "ONG",
     "isDomestic": true
   },
   {
@@ -2247,6 +2395,8 @@
     "market": "ONT-KRW",
     "base": "ONT",
     "quote": "KRW",
+    "name_ko": "온톨로지",
+    "name_en": "Ontology",
     "isDomestic": true
   },
   {
@@ -2255,6 +2405,8 @@
     "market": "OP-KRW",
     "base": "OP",
     "quote": "KRW",
+    "name_ko": "옵티미즘",
+    "name_en": "Optimism",
     "isDomestic": true
   },
   {
@@ -2295,6 +2447,8 @@
     "market": "OSMO-KRW",
     "base": "OSMO",
     "quote": "KRW",
+    "name_ko": "오스모",
+    "name_en": "Osmosis",
     "isDomestic": true
   },
   {
@@ -2319,6 +2473,8 @@
     "market": "PAXG-KRW",
     "base": "PAXG",
     "quote": "KRW",
+    "name_ko": "팍스골드",
+    "name_en": "Paxos Gold",
     "isDomestic": true
   },
   {
@@ -2335,6 +2491,8 @@
     "market": "PEAQ-KRW",
     "base": "PEAQ",
     "quote": "KRW",
+    "name_ko": "피크",
+    "name_en": "Peaq",
     "isDomestic": true
   },
   {
@@ -2343,6 +2501,8 @@
     "market": "PENDLE-KRW",
     "base": "PENDLE",
     "quote": "KRW",
+    "name_ko": "펜들",
+    "name_en": "Pendle",
     "isDomestic": true
   },
   {
@@ -2359,6 +2519,8 @@
     "market": "PEPE-KRW",
     "base": "PEPE",
     "quote": "KRW",
+    "name_ko": "페페",
+    "name_en": "Pepe",
     "isDomestic": true
   },
   {
@@ -2383,6 +2545,8 @@
     "market": "POKT-KRW",
     "base": "POKT",
     "quote": "KRW",
+    "name_ko": "포켓네트워크",
+    "name_en": "Pocket Network",
     "isDomestic": true
   },
   {
@@ -2407,6 +2571,8 @@
     "market": "POLYX-KRW",
     "base": "POLYX",
     "quote": "KRW",
+    "name_ko": "폴리매시",
+    "name_en": "Polymesh",
     "isDomestic": true
   },
   {
@@ -2487,6 +2653,8 @@
     "market": "PYR-KRW",
     "base": "PYR",
     "quote": "KRW",
+    "name_ko": "피로",
+    "name_en": "Pyro",
     "isDomestic": true
   },
   {
@@ -2503,6 +2671,8 @@
     "market": "QKC-KRW",
     "base": "QKC",
     "quote": "KRW",
+    "name_ko": "쿼크체인",
+    "name_en": "QuarkChain",
     "isDomestic": true
   },
   {
@@ -2511,6 +2681,8 @@
     "market": "QTUM-KRW",
     "base": "QTUM",
     "quote": "KRW",
+    "name_ko": "퀀텀",
+    "name_en": "Qtum",
     "isDomestic": true
   },
   {
@@ -2559,6 +2731,8 @@
     "market": "RENDER-KRW",
     "base": "RENDER",
     "quote": "KRW",
+    "name_ko": "렌더네트워크",
+    "name_en": "Render",
     "isDomestic": true
   },
   {
@@ -2567,6 +2741,8 @@
     "market": "REQ-KRW",
     "base": "REQ",
     "quote": "KRW",
+    "name_ko": "리퀘스트네트워크",
+    "name_en": "Request Network",
     "isDomestic": true
   },
   {
@@ -2607,6 +2783,8 @@
     "market": "RON-KRW",
     "base": "RON",
     "quote": "KRW",
+    "name_ko": "로닌",
+    "name_en": "Ronin",
     "isDomestic": true
   },
   {
@@ -2631,6 +2809,8 @@
     "market": "RSS3-KRW",
     "base": "RSS3",
     "quote": "KRW",
+    "name_ko": "알에스에스쓰리",
+    "name_en": "RSS3",
     "isDomestic": true
   },
   {
@@ -2639,6 +2819,8 @@
     "market": "RVN-KRW",
     "base": "RVN",
     "quote": "KRW",
+    "name_ko": "레이븐",
+    "name_en": "Ravencoin",
     "isDomestic": true
   },
   {
@@ -2655,6 +2837,8 @@
     "market": "SAFE-KRW",
     "base": "SAFE",
     "quote": "KRW",
+    "name_ko": "세이프",
+    "name_en": "Safe",
     "isDomestic": true
   },
   {
@@ -2671,6 +2855,8 @@
     "market": "SAND-KRW",
     "base": "SAND",
     "quote": "KRW",
+    "name_ko": "더샌드박스",
+    "name_en": "The Sandbox",
     "isDomestic": true
   },
   {
@@ -2703,6 +2889,8 @@
     "market": "SEI-KRW",
     "base": "SEI",
     "quote": "KRW",
+    "name_ko": "세이",
+    "name_en": "Sei",
     "isDomestic": true
   },
   {
@@ -2797,6 +2985,8 @@
     "market": "SOLV-KRW",
     "base": "SOLV",
     "quote": "KRW",
+    "name_ko": "솔브",
+    "name_en": "Solv Protocol",
     "isDomestic": true
   },
   {
@@ -2813,6 +3003,8 @@
     "market": "SONIC-KRW",
     "base": "SONIC",
     "quote": "KRW",
+    "name_ko": "소닉",
+    "name_en": "Sonic",
     "isDomestic": true
   },
   {
@@ -2821,6 +3013,8 @@
     "market": "SOON-KRW",
     "base": "SOON",
     "quote": "KRW",
+    "name_ko": "순",
+    "name_en": "Solanium",
     "isDomestic": true
   },
   {
@@ -2869,6 +3063,8 @@
     "market": "STG-KRW",
     "base": "STG",
     "quote": "KRW",
+    "name_ko": "스타게이트",
+    "name_en": "Stargate",
     "isDomestic": true
   },
   {
@@ -2877,6 +3073,8 @@
     "market": "STORJ-KRW",
     "base": "STORJ",
     "quote": "KRW",
+    "name_ko": "스토리지",
+    "name_en": "Storj",
     "isDomestic": true
   },
   {
@@ -2885,6 +3083,8 @@
     "market": "STRAX-KRW",
     "base": "STRAX",
     "quote": "KRW",
+    "name_ko": "스트랙스",
+    "name_en": "Straxe",
     "isDomestic": true
   },
   {
@@ -2893,6 +3093,8 @@
     "market": "STRK-KRW",
     "base": "STRK",
     "quote": "KRW",
+    "name_ko": "스타크",
+    "name_en": "Starknet",
     "isDomestic": true
   },
   {
@@ -2999,6 +3201,8 @@
     "market": "TAIKO-KRW",
     "base": "TAIKO",
     "quote": "KRW",
+    "name_ko": "타이코",
+    "name_en": "Taiko",
     "isDomestic": true
   },
   {
@@ -3007,6 +3211,8 @@
     "market": "TAO-KRW",
     "base": "TAO",
     "quote": "KRW",
+    "name_ko": "타오",
+    "name_en": "Bittensor",
     "isDomestic": true
   },
   {
@@ -3047,6 +3253,8 @@
     "market": "THE-KRW",
     "base": "THE",
     "quote": "KRW",
+    "name_ko": "더",
+    "name_en": "The",
     "isDomestic": true
   },
   {
@@ -3055,6 +3263,8 @@
     "market": "THETA-KRW",
     "base": "THETA",
     "quote": "KRW",
+    "name_ko": "세타",
+    "name_en": "Theta",
     "isDomestic": true
   },
   {
@@ -3063,6 +3273,8 @@
     "market": "TIA-KRW",
     "base": "TIA",
     "quote": "KRW",
+    "name_ko": "셀레스티아",
+    "name_en": "Celestia",
     "isDomestic": true
   },
   {
@@ -3079,6 +3291,8 @@
     "market": "TON-KRW",
     "base": "TON",
     "quote": "KRW",
+    "name_ko": "톤",
+    "name_en": "Toncoin",
     "isDomestic": true
   },
   {
@@ -3127,6 +3341,8 @@
     "market": "TRX-KRW",
     "base": "TRX",
     "quote": "KRW",
+    "name_ko": "트론",
+    "name_en": "TRON",
     "isDomestic": true
   },
   {
@@ -3185,7 +3401,7 @@
     "market": "USDC-KRW",
     "base": "USDC",
     "quote": "KRW",
-    "name_ko": "유에스디씨",
+    "name_ko": "유에스디",
     "name_en": "USDC",
     "isDomestic": true
   },
@@ -3213,6 +3429,8 @@
     "market": "VANA-KRW",
     "base": "VANA",
     "quote": "KRW",
+    "name_ko": "바나",
+    "name_en": "Vana",
     "isDomestic": true
   },
   {
@@ -3221,6 +3439,8 @@
     "market": "VET-KRW",
     "base": "VET",
     "quote": "KRW",
+    "name_ko": "비챗",
+    "name_en": "VeChain",
     "isDomestic": true
   },
   {
@@ -3229,6 +3449,8 @@
     "market": "VIRTUAL-KRW",
     "base": "VIRTUAL",
     "quote": "KRW",
+    "name_ko": "버추얼",
+    "name_en": "Virtual",
     "isDomestic": true
   },
   {
@@ -3237,6 +3459,8 @@
     "market": "VTHO-KRW",
     "base": "VTHO",
     "quote": "KRW",
+    "name_ko": "브이토르",
+    "name_en": "VeThor",
     "isDomestic": true
   },
   {
@@ -3245,6 +3469,8 @@
     "market": "W-KRW",
     "base": "W",
     "quote": "KRW",
+    "name_ko": "더블유",
+    "name_en": "Wonderland",
     "isDomestic": true
   },
   {
@@ -3261,6 +3487,8 @@
     "market": "WAVES-KRW",
     "base": "WAVES",
     "quote": "KRW",
+    "name_ko": "웨이브스",
+    "name_en": "Waves",
     "isDomestic": true
   },
   {
@@ -3293,6 +3521,8 @@
     "market": "WIF-KRW",
     "base": "WIF",
     "quote": "KRW",
+    "name_ko": "와이프",
+    "name_en": "dogwifhat",
     "isDomestic": true
   },
   {
@@ -3341,6 +3571,8 @@
     "market": "XAI-KRW",
     "base": "XAI",
     "quote": "KRW",
+    "name_ko": "자이",
+    "name_en": "Xai",
     "isDomestic": true
   },
   {
@@ -3433,6 +3665,8 @@
     "market": "XTZ-KRW",
     "base": "XTZ",
     "quote": "KRW",
+    "name_ko": "테조스",
+    "name_en": "Tezos",
     "isDomestic": true
   },
   {
@@ -3449,6 +3683,8 @@
     "market": "XYO-KRW",
     "base": "XYO",
     "quote": "KRW",
+    "name_ko": "엑시오",
+    "name_en": "XY Oracle",
     "isDomestic": true
   },
   {
@@ -3475,6 +3711,8 @@
     "market": "YGG-KRW",
     "base": "YGG",
     "quote": "KRW",
+    "name_ko": "일드길드",
+    "name_en": "Yield Guild Games",
     "isDomestic": true
   },
   {
@@ -3499,6 +3737,8 @@
     "market": "ZIL-KRW",
     "base": "ZIL",
     "quote": "KRW",
+    "name_ko": "질리카",
+    "name_en": "Zilliqa",
     "isDomestic": true
   },
   {
@@ -3507,6 +3747,8 @@
     "market": "ZK-KRW",
     "base": "ZK",
     "quote": "KRW",
+    "name_ko": "지커브",
+    "name_en": "ZKsync",
     "isDomestic": true
   },
   {
@@ -3539,6 +3781,8 @@
     "market": "ZRO-KRW",
     "base": "ZRO",
     "quote": "KRW",
+    "name_ko": "제로",
+    "name_en": "LayerZero",
     "isDomestic": true
   },
   {
@@ -3547,6 +3791,8 @@
     "market": "ZRX-KRW",
     "base": "ZRX",
     "quote": "KRW",
+    "name_ko": "0x",
+    "name_en": "0x Protocol",
     "isDomestic": true
   },
   {
