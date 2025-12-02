@@ -1,0 +1,199 @@
+[요청 1] 기존 코인/심볼/아이콘 데이터 전부 초기화
+
+김프 AI 쪽에서 사용하는 “코인/심볼/아이콘/마켓” 관련 테이블은
+앞으로 새 구조만 쓸 예정이라,
+지금까지 쓰던 데이터는 전부 삭제해도 됩니다.
+
+만약 아래와 같은 테이블이 있다면 전부 데이터 삭제(필드/테이블은 지워도 됨):
+
+master_symbols
+
+exchange_symbols
+
+기타 코인 심볼/아이콘용 임시 테이블들
+
+앞으로는 아래 테이블 하나를 “정식 원본”으로 쓰고 싶습니다.
+
+-- 거래소 마켓 화면 그대로 저장하는 메인 테이블
+create table if not exists exchange_markets (
+  id            bigserial primary key,
+  exchange      text not null,    -- 'upbit' | 'bithumb' | 'coinone' 등
+  market_code   text not null,    -- KRW-BTC, BTC_KRW, BTC/USDT ...
+  base_symbol   text not null,    -- BTC
+  quote_symbol  text not null,    -- KRW, USDT ...
+  name_ko       text,             -- 비트코인 (마켓 화면에 보이는 한글)
+  name_en       text,             -- Bitcoin (있으면)
+  icon_url      text,             -- 마켓 화면에서 쓰는 코인 아이콘 URL
+  is_active     boolean default true,
+  created_at    timestamptz default now(),
+  updated_at    timestamptz default now()
+);
+
+create unique index if not exists exchange_markets_unique_market
+on exchange_markets (exchange, market_code);
+
+
+기존에 들어가 있는 데이터는 전부 버려도 되니,
+
+truncate table exchange_markets restart identity cascade;
+
+
+한 번 실행해서 완전 초기화 부탁드립니다.
+(테이블이 없다면 create 먼저, 이후부터는 주기적으로 truncate 안 하고 upsert로만 관리)
+
+🤖 2. 거래소별 마켓 크롤러/워커 설계
+
+컨셉은 단순합니다.
+
+“사람이 웹에서 보는 거래소 마켓 리스트 화면 = 데이터 원본”
+→ 그 화면에서 아이콘 + 한글명 + 영문명 + 심볼 + 마켓코드를 긁어서 DB에 넣기
+
+[요청 2] refreshExchangeMarkets 워커 구현
+
+scripts/refreshExchangeMarkets.ts 와 같이,
+
+실행 시 다음 작업을 합니다:
+
+type RawMarket = {
+  exchange: "upbit" | "bithumb" | "coinone";
+  marketCode: string;   // KRW-BTC, BTC_KRW, BTC/USDT
+  baseSymbol: string;   // BTC
+  quoteSymbol: string;  // KRW, USDT
+  nameKo?: string;      // 비트코인
+  nameEn?: string;      // Bitcoin
+  iconUrl?: string;     // 마켓 리스트에서 쓰는 <img src="...">
+};
+
+async function refreshExchangeMarkets() {
+  const upbit = await scrapeUpbitMarkets();
+  const bithumb = await scrapeBithumbMarkets();
+  const coinone = await scrapeCoinoneMarkets();
+
+  const all: RawMarket[] = [...upbit, ...bithumb, ...coinone];
+
+  // Supabase upsert
+  // exchange + market_code 기준으로 upsert
+  for (const m of all) {
+    await supabase
+      .from("exchange_markets")
+      .upsert(
+        {
+          exchange: m.exchange,
+          market_code: m.marketCode,
+          base_symbol: m.baseSymbol,
+          quote_symbol: m.quoteSymbol,
+          name_ko: m.nameKo,
+          name_en: m.nameEn,
+          icon_url: m.iconUrl,
+          is_active: true,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "exchange,market_code" }
+      );
+  }
+
+  // 기존에 DB에는 있는데 최근 크롤링 결과에는 없는 마켓은 is_active=false 처리(선택)
+}
+
+▸ scrapeUpbitMarkets()
+
+업비트 KRW/BTC/USDT 마켓 리스트 페이지(웹) 기준으로
+
+각 row에서:
+
+마켓코드
+
+심볼
+
+한글명 / 영문명
+
+아이콘 <img src="...">
+
+위 4가지 정보를 파싱해서 RawMarket[] 반환
+
+※ 구현 방법은 자유입니다.
+
+가능하면 정적 리소스(JS/JSON) 파싱
+
+필요하면 puppeteer/Playwright로 DOM 크롤링
+
+▸ scrapeBithumbMarkets(), scrapeCoinoneMarkets()
+
+빗썸/코인원도 마찬가지로:
+
+마켓 리스트(전체 코인 리스트가 보이는 페이지)를 기준
+
+한글 이름, 심볼, 아이콘을 그대로 파싱
+
+코인원에서 이름 포맷이 특이한 경우(예: AMP/암프, APT.APT 등)는:
+
+base_symbol: 영문 심볼
+
+name_ko: 한글명 (있으면)
+
+name_en: 첫 번째 영문 이름
+
+쓸데없는 /, ., 괄호 등은 정규식으로 제거
+
+⏰ 3. 자동화(스케줄러)
+
+[요청 3] 마켓 동기화 스케줄러 등록
+
+npm run refresh:markets 같은 스크립트로
+위 refreshExchangeMarkets 실행되도록 설정해 주세요.
+
+그리고 이 스크립트를
+
+최소 1시간에 한 번,
+
+가능하면 10~15분 간격으로 크론 등록해서
+
+거래소 마켓 리스트가 바뀌면 우리 DB도 자동 반영되도록 설정
+
+이렇게 되면:
+
+거래소에 새 코인 상장 → 마켓 리스트에 노출
+
+다음 크론 실행 시 → exchange_markets에 자동 insert/upsert
+
+Kimp AI 프론트도 곧바로 새 코인 반영
+
+🎨 4. 프론트엔드 수정 방향
+
+[요청 4] 코인/마켓 리스트는 전부 exchange_markets 기준으로 렌더링
+
+현재 프론트에서 코인 목록 / 프리미엄 테이블 등에
+심볼/이름/아이콘을 가져오는 로직이 여러 군데 섞여 있을 텐데,
+
+앞으로는 무조건 exchange_markets 테이블을 기준으로만 사용하게 정리하고 싶습니다.
+
+예시:
+
+// 예: 업비트 KRW 마켓만
+const { data } = await supabase
+  .from("exchange_markets")
+  .select("*")
+  .eq("exchange", "upbit")
+  .eq("quote_symbol", "KRW")
+  .eq("is_active", true);
+
+
+렌더링 시:
+
+const name =
+  row.name_ko ||
+  row.name_en ||
+  row.base_symbol;
+
+<CoinRow
+  iconUrl={row.icon_url}
+  name={name}
+  symbol={row.base_symbol}
+  marketCode={row.market_code}
+/>
+
+
+기존에 수동으로 넣어둔 심볼/아이콘/한글명은 전부 무시해도 됨
+
+“거래소 마켓 화면에 어떻게 보이냐”가 항상 정답이므로,
+프론트도 그걸 그대로 반영하는 구조로 바꿔달라는 요청입니다.

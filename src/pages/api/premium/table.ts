@@ -68,10 +68,10 @@ let lastMetadataFetch = 0;
 const METADATA_CACHE_TTL = 5 * 60 * 1000; // 5분
 
 /**
- * master_symbols 기준 자동 메타데이터
- * - symbol
- * - ko_name_primary
- * - en_name
+ * TODO(jay): exchange_markets 기반으로 메타데이터 구성
+ * - base_symbol
+ * - name_ko
+ * - name_en
  */
 async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
   const now = Date.now();
@@ -82,23 +82,23 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
   const metadata = new Map<string, CoinMetadata>();
 
   try {
-    const { data, error } = await supabase
-      .from("master_symbols")
-      .select("symbol, ko_name_primary, en_name");
+    // TODO(jay): exchange_markets 테이블에서 고유한 base_symbol들을 수집
+    // 임시: 가격 데이터 테이블에서 직접 추출 (즉시 동작 필요)
+    const { data: priceData } = await supabase
+      .from("exchange_prices")
+      .select("symbol")
+      .limit(1000);
 
-    if (error) {
-      console.error("[premium/table] master_symbols fetch error:", error);
-    }
+    if (priceData && Array.isArray(priceData)) {
+      const uniqueSymbols = new Set<string>();
+      for (const row of priceData as any[]) {
+        const symbol = (row.symbol || "").toUpperCase();
+        if (symbol) uniqueSymbols.add(symbol);
+      }
 
-    if (data) {
-      for (const row of data as any[]) {
-        const symbol: string = (row.symbol || "").toUpperCase();
-        if (!symbol) continue;
-
-        const koName: string | null = row.ko_name_primary ?? null;
-        const enName: string | null = row.en_name ?? null;
-
-        const baseForSlug = (enName || symbol).toString();
+      // 각 symbol에 대해 기본 메타데이터 생성
+      for (const symbol of uniqueSymbols) {
+        const baseForSlug = symbol.toString();
         const autoSlug =
           baseForSlug
             .toLowerCase()
