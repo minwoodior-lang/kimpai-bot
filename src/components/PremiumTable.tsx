@@ -146,6 +146,9 @@ interface PremiumData {
   isListed: boolean;
   cmcSlug?: string;
   displayName?: string;
+  name_ko?: string;
+  name_en?: string;
+  icon_url?: string;
 }
 
 interface ApiResponse {
@@ -271,8 +274,10 @@ function matchSearch(item: PremiumData, query: string): boolean {
   if (item.symbol.toLowerCase().includes(lowerQuery)) return true;
   if (item.name.toLowerCase().includes(lowerQuery)) return true;
   if (item.koreanName.toLowerCase().includes(lowerQuery)) return true;
+  // name_ko 검색 추가 (Supabase 메타데이터)
+  if (item.name_ko && item.name_ko.toLowerCase().includes(lowerQuery)) return true;
 
-  const chosung = getChosung(item.koreanName);
+  const chosung = getChosung(item.koreanName || item.name_ko || item.symbol);
   if (chosung.toLowerCase().includes(lowerQuery)) return true;
 
   return false;
@@ -535,11 +540,14 @@ export default function PremiumTable({
     return result;
   }, [data, searchQuery, sortKey, sortOrder, limit]);
 
-  // 코인 표시명 생성: name_ko가 있으면 우선, 없으면 name_en, 마지막은 symbol
+  // 코인 표시명 생성: name_ko ?? name_en ?? base_symbol (Supabase 메타데이터 기반)
   const getDisplayName = (item: PremiumData): string => {
-    if (item.displayName) return item.displayName;
-    if (item.koreanName && item.koreanName !== item.symbol) return item.koreanName;
-    return item.name || item.symbol;
+    // name_ko (한글명) 우선
+    if (item.name_ko) return item.name_ko;
+    // name_en (영문명) 차선
+    if (item.name_en) return item.name_en;
+    // 마지막은 심볼
+    return item.symbol;
   };
 
   const formatKRW = (value: number | null) => {
