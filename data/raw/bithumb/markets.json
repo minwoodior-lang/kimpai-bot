@@ -369,7 +369,9 @@
     "exchange": "BITHUMB",
     "market_code": "COMP-KRW",
     "base_symbol": "COMP",
-    "quote_symbol": "KRW"
+    "quote_symbol": "KRW",
+    "name_ko": "컴파운드",
+    "name_en": "Compound"
   },
   {
     "exchange": "BITHUMB",
@@ -471,7 +473,9 @@
     "exchange": "BITHUMB",
     "market_code": "GRT-KRW",
     "base_symbol": "GRT",
-    "quote_symbol": "KRW"
+    "quote_symbol": "KRW",
+    "name_ko": "더그래프",
+    "name_en": "The Graph"
   },
   {
     "exchange": "BITHUMB",
@@ -539,7 +543,9 @@
     "exchange": "BITHUMB",
     "market_code": "SUSHI-KRW",
     "base_symbol": "SUSHI",
-    "quote_symbol": "KRW"
+    "quote_symbol": "KRW",
+    "name_ko": "스시",
+    "name_en": "Sushi"
   },
   {
     "exchange": "BITHUMB",
@@ -863,7 +869,9 @@
     "exchange": "BITHUMB",
     "market_code": "ENS-KRW",
     "base_symbol": "ENS",
-    "quote_symbol": "KRW"
+    "quote_symbol": "KRW",
+    "name_ko": "이더리움네임서비스",
+    "name_en": "Ethereum Name Service"
   },
   {
     "exchange": "BITHUMB",

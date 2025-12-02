@@ -1,6 +1,5 @@
 import fs from "fs";
 import path from "path";
-import cheerio from "cheerio";
 
 interface RawMarket {
   exchange: "UPBIT" | "BITHUMB" | "COINONE";
@@ -11,89 +10,64 @@ interface RawMarket {
   name_en?: string;
 }
 
-interface BithumbNameMap {
+interface HtmlNameMap {
   [symbol: string]: { name_ko?: string; name_en?: string };
 }
 
-// Bithumb 공지사항 크롤링으로 한글명 가져오기
-async function fetchBithumbNames(): Promise<BithumbNameMap> {
-  const nameMap: BithumbNameMap = {};
+// Fallback 매핑 (HTML에서 못 가져올 때)
+const BITHUMB_NAMES: { [symbol: string]: { name_ko?: string; name_en?: string } } = {
+  BTC: { name_ko: "비트코인", name_en: "Bitcoin" },
+  ETH: { name_ko: "이더리움", name_en: "Ethereum" },
+  XRP: { name_ko: "리플", name_en: "XRP" },
+  LTC: { name_ko: "라이트코인", name_en: "Litecoin" },
+  BCH: { name_ko: "비트코인캐시", name_en: "Bitcoin Cash" },
+  EOS: { name_ko: "이오스", name_en: "EOS" },
+  XLM: { name_ko: "스텔라루멘", name_en: "Stellar" },
+  LINK: { name_ko: "체인링크", name_en: "Chainlink" },
+  DOGE: { name_ko: "도지코인", name_en: "Dogecoin" },
+  DOT: { name_ko: "폴카닷", name_en: "Polkadot" },
+  SOL: { name_ko: "솔라나", name_en: "Solana" },
+  AVAX: { name_ko: "아발란시", name_en: "Avalanche" },
+  MATIC: { name_ko: "폴리곤", name_en: "Polygon" },
+  ADA: { name_ko: "카르다노", name_en: "Cardano" },
+  UNI: { name_ko: "유니스왑", name_en: "Uniswap" },
+  AAVE: { name_ko: "에이브", name_en: "Aave" },
+  SHIB: { name_ko: "시바이누", name_en: "Shiba Inu" },
+  USDC: { name_ko: "유에스디", name_en: "USDC" },
+  USDT: { name_ko: "테더", name_en: "Tether" },
+  DAI: { name_ko: "다이", name_en: "Dai" },
+  WBTC: { name_ko: "래핑된비트코인", name_en: "Wrapped Bitcoin" },
+  SNX: { name_ko: "신세틱스", name_en: "Synthetix" },
+  CRV: { name_ko: "커브", name_en: "Curve" },
+  YFI: { name_ko: "예피나인스", name_en: "Yearn Finance" },
+  SUSHI: { name_ko: "스시", name_en: "Sushi" },
+  COMP: { name_ko: "컴파운드", name_en: "Compound" },
+  MKR: { name_ko: "메이커", name_en: "Maker" },
+  GRT: { name_ko: "더그래프", name_en: "The Graph" },
+  ENS: { name_ko: "이더리움네임서비스", name_en: "Ethereum Name Service" },
+};
+
+function loadHtmlNames(): HtmlNameMap {
+  const namesPath = path.join("data", "raw", "bithumb", "names.json");
+  
+  if (!fs.existsSync(namesPath)) {
+    console.warn("⚠ HTML names file not found, using fallback only");
+    return {};
+  }
+
+  const text = fs.readFileSync(namesPath, "utf-8");
+  if (!text.trim()) return {};
 
   try {
-    // Bithumb 거래 정보 페이지에서 크롤링
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
-    
-    const res = await fetch("https://bithumb.com/information/trade", {
-      signal: controller.signal,
-    });
-    
-    clearTimeout(timeout);
-
-    if (!res.ok) {
-      console.warn("⚠ Bithumb 공지사항 크롤링 실패, 기본값 사용");
-      return getDefaultBithumbNames();
+    const parsed = JSON.parse(text);
+    if (typeof parsed === "object" && parsed !== null) {
+      return parsed as HtmlNameMap;
     }
-
-    const html = await res.text();
-    const $ = cheerio.load(html);
-
-    // Bithumb 페이지에서 코인 정보 추출 (예: data-coin-name 속성 등)
-    $("[data-coin-symbol]").each((_, el) => {
-      const symbol = $(el).attr("data-coin-symbol")?.toUpperCase();
-      const koName = $(el).attr("data-coin-ko-name");
-      const enName = $(el).attr("data-coin-en-name");
-
-      if (symbol) {
-        nameMap[symbol] = {
-          ...(koName && { name_ko: koName }),
-          ...(enName && { name_en: enName }),
-        };
-      }
-    });
-
-    // 크롤링 결과가 없으면 기본값 사용
-    if (Object.keys(nameMap).length === 0) {
-      console.warn("⚠ 크롤링 결과 없음, 기본값 사용");
-      return getDefaultBithumbNames();
-    }
-
-    console.log(`✅ Bithumb 공지사항에서 ${Object.keys(nameMap).length}개 코인 이름 추출`);
-    return nameMap;
-  } catch (err) {
-    console.warn("⚠ Bithumb 크롤링 오류:", err);
-    return getDefaultBithumbNames();
+    return {};
+  } catch (e) {
+    console.warn("⚠ Failed to parse HTML names file:", e);
+    return {};
   }
-}
-
-function getDefaultBithumbNames(): BithumbNameMap {
-  return {
-    BTC: { name_ko: "비트코인", name_en: "Bitcoin" },
-    ETH: { name_ko: "이더리움", name_en: "Ethereum" },
-    XRP: { name_ko: "리플", name_en: "XRP" },
-    LTC: { name_ko: "라이트코인", name_en: "Litecoin" },
-    BCH: { name_ko: "비트코인캐시", name_en: "Bitcoin Cash" },
-    EOS: { name_ko: "이오스", name_en: "EOS" },
-    XLM: { name_ko: "스텔라루멘", name_en: "Stellar" },
-    LINK: { name_ko: "체인링크", name_en: "Chainlink" },
-    DOGE: { name_ko: "도지코인", name_en: "Dogecoin" },
-    DOT: { name_ko: "폴카닷", name_en: "Polkadot" },
-    SOL: { name_ko: "솔라나", name_en: "Solana" },
-    AVAX: { name_ko: "아발란시", name_en: "Avalanche" },
-    MATIC: { name_ko: "폴리곤", name_en: "Polygon" },
-    ADA: { name_ko: "카르다노", name_en: "Cardano" },
-    UNI: { name_ko: "유니스왑", name_en: "Uniswap" },
-    AAVE: { name_ko: "에이브", name_en: "Aave" },
-    SHIB: { name_ko: "시바이누", name_en: "Shiba Inu" },
-    USDC: { name_ko: "유에스디씨", name_en: "USDC" },
-    USDT: { name_ko: "테더", name_en: "Tether" },
-    DAI: { name_ko: "다이", name_en: "Dai" },
-    WBTC: { name_ko: "래핑된비트코인", name_en: "Wrapped Bitcoin" },
-    SNX: { name_ko: "신세틱스", name_en: "Synthetix" },
-    CRV: { name_ko: "커브", name_en: "Curve" },
-    YFI: { name_ko: "예피나인스", name_en: "Yearn Finance" },
-    UNISWAP: { name_ko: "유니스왑", name_en: "Uniswap" },
-  };
 }
 
 async function fetchBithumbMarkets() {
@@ -116,35 +90,69 @@ async function fetchBithumbMarkets() {
     throw new Error("Invalid Bithumb API response");
   }
 
-  // 공지사항에서 한글명 가져오기
-  const nameMap = await fetchBithumbNames();
+  // HTML에서 크롤링한 이름 맵 로드
+  const htmlNameMap = loadHtmlNames();
 
   const markets: RawMarket[] = [];
 
   for (const symbol in json.data) {
     if (symbol === "date") continue;
 
-    const baseSymbol = symbol.toUpperCase();
-    const names = nameMap[baseSymbol] || {};
+    const base = symbol.toUpperCase();
+    const marketCode = `${base}-KRW`;
 
-    markets.push({
+    // HTML에서 가져온 이름
+    const nameFromHtml = htmlNameMap[base] ?? null;
+    
+    // Fallback 매핑에서 가져온 이름
+    const nameFromFallback = BITHUMB_NAMES[base] ?? null;
+
+    // 우선순위: HTML > Fallback
+    const name_ko =
+      nameFromHtml?.name_ko?.trim() ||
+      nameFromFallback?.name_ko?.trim() ||
+      undefined;
+
+    const name_en =
+      nameFromHtml?.name_en?.trim() ||
+      nameFromFallback?.name_en?.trim() ||
+      undefined;
+
+    // 값이 없으면 필드 제외
+    const market: RawMarket = {
       exchange: "BITHUMB",
-      market_code: `${baseSymbol}-KRW`,
-      base_symbol: baseSymbol,
+      market_code: marketCode,
+      base_symbol: base,
       quote_symbol: "KRW",
-      name_ko: names.name_ko,
-      name_en: names.name_en,
-    });
+      ...(name_ko ? { name_ko } : {}),
+      ...(name_en ? { name_en } : {}),
+    };
+
+    markets.push(market);
   }
 
   const marketPath = path.join("data", "raw", "bithumb", "markets.json");
   fs.mkdirSync(path.dirname(marketPath), { recursive: true });
   fs.writeFileSync(marketPath, JSON.stringify(markets, null, 2), "utf-8");
 
-  const namesPath = path.join("data", "raw", "bithumb", "names.json");
-  fs.writeFileSync(namesPath, JSON.stringify(nameMap, null, 2), "utf-8");
+  // 검증 로그
+  const total = markets.length;
+  const withName = markets.filter((m) => m.name_ko || m.name_en).length;
+  const withoutName = total - withName;
 
-  console.log(`✅ Bithumb markets saved: ${markets.length} rows`);
+  console.log(
+    `✅ Bithumb markets saved: total=${total}, withName=${withName}, withoutName=${withoutName}`
+  );
+
+  if (withoutName > 0) {
+    console.log(
+      `📝 Coins without names:`,
+      markets
+        .filter((m) => !m.name_ko && !m.name_en)
+        .map((m) => m.base_symbol)
+        .join(", ")
+    );
+  }
 }
 
 fetchBithumbMarkets().catch((err) => {

@@ -7,6 +7,12 @@ interface TradingViewChartProps {
   theme?: "dark" | "light";
 }
 
+declare global {
+  interface Window {
+    TradingView?: any;
+  }
+}
+
 function TradingViewChart({
   symbol = "BTC",
   exchange = "BINANCE",
@@ -31,17 +37,8 @@ function TradingViewChart({
       const tvSymbol =
         exchange === "UPBIT" ? `UPBIT:${symbol}KRW` : `BINANCE:${symbol}USDT`;
 
-      // 1. 위젯 컨테이너 div 생성
-      const widgetDiv = document.createElement("div");
-      widgetDiv.className = "tradingview-widget-container__widget";
-      container.appendChild(widgetDiv);
-
-      // 2. 설정을 script 태그로 생성 (TradingView 공식 방식)
-      const script = document.createElement("script");
-      script.type = "text/tradingview-widget";
-      
-      // TradingView 설정을 JSON 문자열로 직접 작성 (stringify 사용 금지)
-      script.textContent = JSON.stringify({
+      // 설정 객체 (JSON 직렬화 없이 그대로 사용)
+      const config: any = {
         autosize: true,
         symbol: tvSymbol,
         interval: "60",
@@ -55,17 +52,28 @@ function TradingViewChart({
         hide_top_toolbar: false,
         hide_legend: false,
         save_image: false,
-      }, null, 2);
+      };
+
+      // script 태그 생성 및 설정 저장
+      const script = document.createElement("script");
+      script.type = "text/tradingview-widget";
       
+      try {
+        script.textContent = JSON.stringify(config);
+      } catch (e) {
+        console.warn("[TradingViewChart] JSON stringify failed, using fallback");
+        script.textContent = '{}';
+      }
+
       container.appendChild(script);
 
-      // 3. TradingView 로더 스크립트 추가
+      // TradingView 로더 스크립트 추가
       const loaderScript = document.createElement("script");
       loaderScript.src =
         "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
       loaderScript.async = true;
       loaderScript.onload = () => {
-        setIsLoading(false);
+        setTimeout(() => setIsLoading(false), 500);
       };
       loaderScript.onerror = () => {
         console.warn("[TradingViewChart] Widget loader failed");
@@ -101,7 +109,7 @@ function TradingViewChart({
       />
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-slate-800/30 rounded">
-          <div className="text-slate-400 text-sm">Loading chart...</div>
+          <div className="text-slate-400 text-sm">차트 로드 중...</div>
         </div>
       )}
     </div>

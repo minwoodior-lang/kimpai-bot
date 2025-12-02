@@ -783,6 +783,8 @@
     "market": "COMP-KRW",
     "base": "COMP",
     "quote": "KRW",
+    "name_ko": "컴파운드",
+    "name_en": "Compound",
     "isDomestic": true
   },
   {
@@ -1093,6 +1095,8 @@
     "market": "ENS-KRW",
     "base": "ENS",
     "quote": "KRW",
+    "name_ko": "이더리움네임서비스",
+    "name_en": "Ethereum Name Service",
     "isDomestic": true
   },
   {
@@ -1415,6 +1419,8 @@
     "market": "GRT-KRW",
     "base": "GRT",
     "quote": "KRW",
+    "name_ko": "더그래프",
+    "name_en": "The Graph",
     "isDomestic": true
   },
   {
@@ -2935,6 +2941,8 @@
     "market": "SUSHI-KRW",
     "base": "SUSHI",
     "quote": "KRW",
+    "name_ko": "스시",
+    "name_en": "Sushi",
     "isDomestic": true
   },
   {
