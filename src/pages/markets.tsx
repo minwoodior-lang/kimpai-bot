@@ -184,7 +184,9 @@ export default function Markets() {
                         <div className="flex items-center gap-2">
                           <CoinIcon symbol={item.symbol.replace('/KRW', '')} size="lg" />
                           <div>
-                            <span className="text-white font-medium">{item.koreanName || item.name}</span>
+                            <span className="text-white font-medium">
+                              {item.koreanName || item.name} / {item.name}
+                            </span>
                             <span className="text-slate-500 text-sm ml-2">{item.symbol.replace('/KRW', '')}</span>
                           </div>
                           {!item.isListed && (
