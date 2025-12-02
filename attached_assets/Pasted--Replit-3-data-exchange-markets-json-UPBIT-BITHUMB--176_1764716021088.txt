@@ -1,0 +1,143 @@
+📢 [Replit 전달용] 국내 3거래소 공식 아이콘 수집 + 매핑 스크립트
+🎯 목표
+
+data/exchange_markets.json을 읽어서
+UPBIT / BITHUMB / COINONE 의 base_symbol 목록을 수집하고,
+
+각 거래소별 공식 아이콘 URL에서 이미지를 다운로드,
+
+/public/icons/{exchange}/{symbol}.png 로 저장,
+
+최종적으로 data/exchangeIcons.json 에
+
+{
+  "UPBIT:BTC": "/icons/UPBIT/BTC.png",
+  "BITHUMB:BTC": "/icons/BITHUMB/BTC.png",
+  "COINONE:BTC": "/icons/COINONE/BTC.png"
+}
+
+
+형태로 매핑 생성.
+
+1) 스크립트 파일 생성: scripts/fetchDomesticIcons.ts
+import fs from "fs";
+import path from "path";
+import fetch from "node-fetch";
+
+type ExchangeId = "UPBIT" | "BITHUMB" | "COINONE";
+
+interface ExchangeMarket {
+  exchange: ExchangeId;
+  base: string;   // ex) "BTC"
+  // ... 나머지는 무시
+}
+
+interface IconMap {
+  [key: string]: string; // "UPBIT:BTC" → "/icons/UPBIT/BTC.png"
+}
+
+const EXCHANGE_ICON_BASE: Record<ExchangeId, (symbol: string) => string> = {
+  UPBIT: (symbol) =>
+    // 실제 사용하는 업비트 아이콘 URL 패턴으로 교체 필요
+    // (지금 refreshExchangeMarkets.ts 나 기존 아이콘 스크립트에 패턴 있으면 그대로 재사용)
+    `<<UPBIT_ICON_URL_FOR_${symbol}>>`,
+
+  BITHUMB: (symbol) =>
+    `<<BITHUMB_ICON_URL_FOR_${symbol}>>`,
+
+  COINONE: (symbol) =>
+    `<<COINONE_ICON_URL_FOR_${symbol}>>`,
+};
+
+const EXCHANGE_DIR_NAME: Record<ExchangeId, string> = {
+  UPBIT: "UPBIT",
+  BITHUMB: "BITHUMB",
+  COINONE: "COINONE",
+};
+
+async function downloadIcon(
+  exchange: ExchangeId,
+  symbol: string
+): Promise<string | null> {
+  const upper = symbol.toUpperCase();
+  const urlBuilder = EXCHANGE_ICON_BASE[exchange];
+  const url = urlBuilder(upper);
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) {
+      console.warn(`⚠️ [${exchange}] ${upper} icon fetch failed: ${res.status}`);
+      return null;
+    }
+    const buf = await res.buffer();
+
+    const dir = path.join("public", "icons", EXCHANGE_DIR_NAME[exchange]);
+    fs.mkdirSync(dir, { recursive: true });
+
+    const filePath = path.join(dir, `${upper}.png`);
+    fs.writeFileSync(filePath, buf);
+
+    // 프론트에서 쓸 상대 경로
+    const publicPath = `/icons/${EXCHANGE_DIR_NAME[exchange]}/${upper}.png`;
+    console.log(`✅ [${exchange}] ${upper} icon saved → ${publicPath}`);
+    return publicPath;
+  } catch (e) {
+    console.error(`❌ [${exchange}] ${upper} icon error:`, e);
+    return null;
+  }
+}
+
+function loadExchangeMarkets(): ExchangeMarket[] {
+  const file = path.join("data", "exchange_markets.json");
+  const text = fs.readFileSync(file, "utf-8");
+  const json = JSON.parse(text) as any[];
+
+  // 국내 거래소만 필터
+  return json
+    .filter((m) =>
+      ["UPBIT", "BITHUMB", "COINONE"].includes(m.exchange)
+    )
+    .map((m) => ({
+      exchange: m.exchange,
+      base: m.base.toUpperCase(),
+    }));
+}
+
+async function main() {
+  const markets = loadExchangeMarkets();
+
+  // 거래소+심볼 유니크 셋
+  const pairs = new Set<string>();
+  for (const m of markets) {
+    pairs.add(`${m.exchange}:${m.base}`);
+  }
+
+  const iconMap: IconMap = {};
+
+  for (const pair of pairs) {
+    const [exchange, symbol] = pair.split(":") as [ExchangeId, string];
+
+    const publicPath = await downloadIcon(exchange, symbol);
+    if (publicPath) {
+      iconMap[pair] = publicPath;
+    }
+  }
+
+  const out = path.join("data", "exchangeIcons.json");
+  fs.mkdirSync(path.dirname(out), { recursive: true });
+  fs.writeFileSync(out, JSON.stringify(iconMap, null, 2), "utf-8");
+
+  console.log(
+    `🧾 exchangeIcons.json 생성 완료: ${Object.keys(iconMap).length} entries`
+  );
+}
+
+main().catch((e) => {
+  console.error("❌ fetchDomesticIcons failed:", e);
+  process.exit(1);
+});
+
+
+⚠ 여기서 <<UPBIT_ICON_URL_FOR_${symbol}>> / <<BITHUMB_ICON_URL_FOR_${symbol}>> / <<COINONE_ICON_URL_FOR_${symbol}>> 부분은
+지금 프로젝트에서 이미 쓰고 있는 “각 거래소 코인 아이콘 URL 패턴”으로 교체해달라고 해.
+(이미 국내 거래소에서 아이콘 보여주던 로직이 있을 거라 그거 그대로 가져오면 됨)
