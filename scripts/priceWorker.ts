@@ -30,21 +30,36 @@ function loadExchangeMarkets(): ExchangeMarket[] {
   return json as ExchangeMarket[];
 }
 
-async function fetchUpbitTicker(market: string): Promise<any | null> {
+async function fetchWithRetry(url: string, maxRetries = 3): Promise<any> {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const { data } = await axios.get(url, { timeout: 5000 });
+      return data;
+    } catch (e) {
+      if (i === maxRetries - 1) throw e;
+      await new Promise((r) => setTimeout(r, 500 * (i + 1)));
+    }
+  }
+}
+
+async function fetchUpbitTickers(markets: string[]): Promise<Record<string, any>> {
   try {
-    const { data } = await axios.get(
-      `https://api.upbit.com/v1/ticker?markets=${market}`
+    if (!markets.length) return {};
+    const data = await fetchWithRetry(
+      `https://api.upbit.com/v1/ticker?markets=${markets.join(",")}`
     );
-    return data?.[0] || null;
+    const result: Record<string, any> = {};
+    for (const row of data) result[row.market] = row;
+    return result;
   } catch {
-    return null;
+    return {};
   }
 }
 
 async function fetchBithumbTicker(market: string): Promise<any | null> {
   try {
     const [base, quote] = market.split("_");
-    const { data } = await axios.get(
+    const data = await fetchWithRetry(
       `https://api.bithumb.com/public/ticker/${base}_${quote}`
     );
     return data?.data || null;
@@ -56,7 +71,7 @@ async function fetchBithumbTicker(market: string): Promise<any | null> {
 async function fetchCoinoneTicker(market: string): Promise<any | null> {
   try {
     const [base, quote] = market.split("-");
-    const { data } = await axios.get(
+    const data = await fetchWithRetry(
       `https://api.coinone.co.kr/public/v2/ticker_utc0?currency=${base}&quote_currency=${quote}`
     );
     return data?.tickers?.[0] || null;
@@ -73,7 +88,7 @@ async function fetchBinanceTicker(
     const endpoint = isFutures
       ? `https://fapi.binance.com/fapi/v1/ticker/price?symbol=${symbol}`
       : `https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`;
-    const { data } = await axios.get(endpoint);
+    const data = await fetchWithRetry(endpoint);
     return data;
   } catch {
     return null;
@@ -82,7 +97,7 @@ async function fetchBinanceTicker(
 
 async function fetchOkxTicker(instId: string): Promise<any | null> {
   try {
-    const { data } = await axios.get(
+    const data = await fetchWithRetry(
       `https://www.okx.com/api/v5/market/ticker?instId=${instId}`
     );
     return data?.data?.[0] || null;
@@ -93,7 +108,7 @@ async function fetchOkxTicker(instId: string): Promise<any | null> {
 
 async function fetchBybitTicker(symbol: string): Promise<any | null> {
   try {
-    const { data } = await axios.get(
+    const data = await fetchWithRetry(
       `https://api.bybit.com/v5/market/tickers?category=spot&symbol=${symbol}`
     );
     return data?.result?.list?.[0] || null;
@@ -104,7 +119,7 @@ async function fetchBybitTicker(symbol: string): Promise<any | null> {
 
 async function fetchBitgetTicker(symbol: string): Promise<any | null> {
   try {
-    const { data } = await axios.get(
+    const data = await fetchWithRetry(
       `https://api.bitget.com/spot/v1/public/ticker?symbol=${symbol}`
     );
     return data?.data || null;
@@ -115,7 +130,7 @@ async function fetchBitgetTicker(symbol: string): Promise<any | null> {
 
 async function fetchGateTicker(symbol: string): Promise<any | null> {
   try {
-    const { data } = await axios.get(
+    const data = await fetchWithRetry(
       `https://api.gateio.ws/api/v4/spot/tickers?currency_pair=${symbol}`
     );
     return data?.[0] || null;
@@ -126,7 +141,7 @@ async function fetchGateTicker(symbol: string): Promise<any | null> {
 
 async function fetchHtxTicker(symbol: string): Promise<any | null> {
   try {
-    const { data } = await axios.get(
+    const data = await fetchWithRetry(
       `https://api.huobi.pro/market/detail/merged?symbol=${symbol}`
     );
     return data?.tick || null;
@@ -137,7 +152,7 @@ async function fetchHtxTicker(symbol: string): Promise<any | null> {
 
 async function fetchMexcTicker(symbol: string): Promise<any | null> {
   try {
-    const { data } = await axios.get(
+    const data = await fetchWithRetry(
       `https://api.mexc.com/api/v3/ticker/price?symbol=${symbol}`
     );
     return data;
@@ -181,16 +196,12 @@ async function main() {
   try {
     const markets = loadExchangeMarkets().filter((m) => m.is_active ?? true);
 
-    // 국내 거래소별 마켓 수집
+    // 거래소별 마켓 분류
     const upbitMarkets = markets.filter((m) => m.exchange === "UPBIT");
     const bithumbMarkets = markets.filter((m) => m.exchange === "BITHUMB");
     const coinoneMarkets = markets.filter((m) => m.exchange === "COINONE");
-
-    // 해외 거래소별 마켓 수집
     const binanceMarkets = markets.filter((m) => m.exchange === "BINANCE");
-    const binanceFuturesMarkets = markets.filter(
-      (m) => m.exchange === "BINANCE_FUTURES"
-    );
+    const binanceFuturesMarkets = markets.filter((m) => m.exchange === "BINANCE_FUTURES");
     const okxMarkets = markets.filter((m) => m.exchange === "OKX");
     const bybitMarkets = markets.filter((m) => m.exchange === "BYBIT");
     const bitgetMarkets = markets.filter((m) => m.exchange === "BITGET");
@@ -200,9 +211,11 @@ async function main() {
 
     const priceMap: Record<string, Record<string, number>> = {};
 
-    // 업비트 시세
+    // Upbit 배치 처리
+    const upbitSymbols = upbitMarkets.map((m) => m.market_symbol);
+    const upbitTickers = await fetchUpbitTickers(upbitSymbols);
     for (const m of upbitMarkets) {
-      const ticker = await fetchUpbitTicker(m.market_symbol);
+      const ticker = upbitTickers[m.market_symbol];
       if (ticker) {
         const key = `UPBIT_${m.quote_symbol}`;
         if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
@@ -210,117 +223,128 @@ async function main() {
       }
     }
 
-    // 빗썸 시세
+    // Bithumb 순차 처리
     for (const m of bithumbMarkets) {
       const ticker = await fetchBithumbTicker(m.market_symbol);
       if (ticker) {
         const key = `BITHUMB_${m.quote_symbol}`;
         if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
-        priceMap[m.base_symbol][key] =
-          extractPrice(ticker, "BITHUMB") || 0;
+        priceMap[m.base_symbol][key] = extractPrice(ticker, "BITHUMB") || 0;
       }
     }
 
-    // 코인원 시세
+    // Coinone 순차 처리
     for (const m of coinoneMarkets) {
       const ticker = await fetchCoinoneTicker(m.market_symbol);
       if (ticker) {
         const key = `COINONE_${m.quote_symbol}`;
         if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
-        priceMap[m.base_symbol][key] =
-          extractPrice(ticker, "COINONE") || 0;
+        priceMap[m.base_symbol][key] = extractPrice(ticker, "COINONE") || 0;
       }
     }
 
-    // 바이낸스 USDT 시세
+    // 해외 거래소 병렬 처리 (소수 심볼만)
+    const foreignPromises: Promise<void>[] = [];
+
     for (const m of binanceMarkets) {
-      const ticker = await fetchBinanceTicker(m.market_symbol);
-      if (ticker) {
-        const key = `BINANCE_${m.quote_symbol}`;
-        if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
-        priceMap[m.base_symbol][key] =
-          extractPrice(ticker, "BINANCE") || 0;
-      }
+      foreignPromises.push(
+        fetchBinanceTicker(m.market_symbol).then((ticker) => {
+          if (ticker) {
+            const key = `BINANCE_${m.quote_symbol}`;
+            if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
+            priceMap[m.base_symbol][key] = extractPrice(ticker, "BINANCE") || 0;
+          }
+        })
+      );
     }
 
-    // 바이낸스 선물 시세
     for (const m of binanceFuturesMarkets) {
-      const ticker = await fetchBinanceTicker(m.market_symbol, true);
-      if (ticker) {
-        const key = `BINANCE_FUTURES_${m.quote_symbol}`;
-        if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
-        priceMap[m.base_symbol][key] =
-          extractPrice(ticker, "BINANCE_FUTURES") || 0;
-      }
+      foreignPromises.push(
+        fetchBinanceTicker(m.market_symbol, true).then((ticker) => {
+          if (ticker) {
+            const key = `BINANCE_FUTURES_${m.quote_symbol}`;
+            if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
+            priceMap[m.base_symbol][key] = extractPrice(ticker, "BINANCE_FUTURES") || 0;
+          }
+        })
+      );
     }
 
-    // OKX 시세
     for (const m of okxMarkets) {
-      const ticker = await fetchOkxTicker(m.market_symbol);
-      if (ticker) {
-        const key = `OKX_${m.quote_symbol}`;
-        if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
-        priceMap[m.base_symbol][key] =
-          extractPrice(ticker, "OKX") || 0;
-      }
+      foreignPromises.push(
+        fetchOkxTicker(m.market_symbol).then((ticker) => {
+          if (ticker) {
+            const key = `OKX_${m.quote_symbol}`;
+            if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
+            priceMap[m.base_symbol][key] = extractPrice(ticker, "OKX") || 0;
+          }
+        })
+      );
     }
 
-    // Bybit 시세
     for (const m of bybitMarkets) {
-      const ticker = await fetchBybitTicker(m.market_symbol);
-      if (ticker) {
-        const key = `BYBIT_${m.quote_symbol}`;
-        if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
-        priceMap[m.base_symbol][key] =
-          extractPrice(ticker, "BYBIT") || 0;
-      }
+      foreignPromises.push(
+        fetchBybitTicker(m.market_symbol).then((ticker) => {
+          if (ticker) {
+            const key = `BYBIT_${m.quote_symbol}`;
+            if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
+            priceMap[m.base_symbol][key] = extractPrice(ticker, "BYBIT") || 0;
+          }
+        })
+      );
     }
 
-    // Bitget 시세
     for (const m of bitgetMarkets) {
-      const ticker = await fetchBitgetTicker(m.market_symbol);
-      if (ticker) {
-        const key = `BITGET_${m.quote_symbol}`;
-        if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
-        priceMap[m.base_symbol][key] =
-          extractPrice(ticker, "BITGET") || 0;
-      }
+      foreignPromises.push(
+        fetchBitgetTicker(m.market_symbol).then((ticker) => {
+          if (ticker) {
+            const key = `BITGET_${m.quote_symbol}`;
+            if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
+            priceMap[m.base_symbol][key] = extractPrice(ticker, "BITGET") || 0;
+          }
+        })
+      );
     }
 
-    // Gate.io 시세
     for (const m of gateMarkets) {
-      const ticker = await fetchGateTicker(m.market_symbol);
-      if (ticker) {
-        const key = `GATE_${m.quote_symbol}`;
-        if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
-        priceMap[m.base_symbol][key] =
-          extractPrice(ticker, "GATE") || 0;
-      }
+      foreignPromises.push(
+        fetchGateTicker(m.market_symbol).then((ticker) => {
+          if (ticker) {
+            const key = `GATE_${m.quote_symbol}`;
+            if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
+            priceMap[m.base_symbol][key] = extractPrice(ticker, "GATE") || 0;
+          }
+        })
+      );
     }
 
-    // HTX 시세
     for (const m of htxMarkets) {
-      const ticker = await fetchHtxTicker(m.market_symbol);
-      if (ticker) {
-        const key = `HTX_${m.quote_symbol}`;
-        if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
-        priceMap[m.base_symbol][key] =
-          extractPrice(ticker, "HTX") || 0;
-      }
+      foreignPromises.push(
+        fetchHtxTicker(m.market_symbol).then((ticker) => {
+          if (ticker) {
+            const key = `HTX_${m.quote_symbol}`;
+            if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
+            priceMap[m.base_symbol][key] = extractPrice(ticker, "HTX") || 0;
+          }
+        })
+      );
     }
 
-    // MEXC 시세
     for (const m of mexcMarkets) {
-      const ticker = await fetchMexcTicker(m.market_symbol);
-      if (ticker) {
-        const key = `MEXC_${m.quote_symbol}`;
-        if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
-        priceMap[m.base_symbol][key] =
-          extractPrice(ticker, "MEXC") || 0;
-      }
+      foreignPromises.push(
+        fetchMexcTicker(m.market_symbol).then((ticker) => {
+          if (ticker) {
+            const key = `MEXC_${m.quote_symbol}`;
+            if (!priceMap[m.base_symbol]) priceMap[m.base_symbol] = {};
+            priceMap[m.base_symbol][key] = extractPrice(ticker, "MEXC") || 0;
+          }
+        })
+      );
     }
 
-    // 프리미엄 계산 (기본값: 업비트 KRW vs OKX USDT)
+    await Promise.all(foreignPromises);
+
+    // 프리미엄 계산
     const rows: PremiumRow[] = [];
 
     for (const symbol in priceMap) {
@@ -344,10 +368,6 @@ async function main() {
         domesticExchange: "UPBIT",
         foreignExchange: "OKX",
       });
-
-      console.log(
-        `[${symbol}] 업비트 KRW: ${upbitKrw}, OKX USDT: ${okxUsdt}, 김프: ${premium?.toFixed(2) || "N/A"}%`
-      );
     }
 
     const outPath = path.join(process.cwd(), "data", "premiumTable.json");

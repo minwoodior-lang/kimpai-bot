@@ -17,6 +17,38 @@
   },
   {
     "exchange": "UPBIT",
+    "market_symbol": "KRW-XRP",
+    "base_symbol": "XRP",
+    "quote_symbol": "KRW",
+    "market_type": "spot",
+    "is_active": true
+  },
+  {
+    "exchange": "UPBIT",
+    "market_symbol": "KRW-ADA",
+    "base_symbol": "ADA",
+    "quote_symbol": "KRW",
+    "market_type": "spot",
+    "is_active": true
+  },
+  {
+    "exchange": "UPBIT",
+    "market_symbol": "KRW-DOGE",
+    "base_symbol": "DOGE",
+    "quote_symbol": "KRW",
+    "market_type": "spot",
+    "is_active": true
+  },
+  {
+    "exchange": "UPBIT",
+    "market_symbol": "KRW-SOL",
+    "base_symbol": "SOL",
+    "quote_symbol": "KRW",
+    "market_type": "spot",
+    "is_active": true
+  },
+  {
+    "exchange": "UPBIT",
     "market_symbol": "BTC-BTC",
     "base_symbol": "BTC",
     "quote_symbol": "BTC",
@@ -43,6 +75,22 @@
     "exchange": "BITHUMB",
     "market_symbol": "ETH_KRW",
     "base_symbol": "ETH",
+    "quote_symbol": "KRW",
+    "market_type": "spot",
+    "is_active": true
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_symbol": "XRP_KRW",
+    "base_symbol": "XRP",
+    "quote_symbol": "KRW",
+    "market_type": "spot",
+    "is_active": true
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_symbol": "ADA_KRW",
+    "base_symbol": "ADA",
     "quote_symbol": "KRW",
     "market_type": "spot",
     "is_active": true
@@ -80,6 +128,14 @@
     "is_active": true
   },
   {
+    "exchange": "COINONE",
+    "market_symbol": "XRP-KRW",
+    "base_symbol": "XRP",
+    "quote_symbol": "KRW",
+    "market_type": "spot",
+    "is_active": true
+  },
+  {
     "exchange": "BINANCE",
     "market_symbol": "BTCUSDT",
     "base_symbol": "BTC",
@@ -91,6 +147,14 @@
     "exchange": "BINANCE",
     "market_symbol": "ETHUSDT",
     "base_symbol": "ETH",
+    "quote_symbol": "USDT",
+    "market_type": "spot",
+    "is_active": true
+  },
+  {
+    "exchange": "BINANCE",
+    "market_symbol": "XRPUSDT",
+    "base_symbol": "XRP",
     "quote_symbol": "USDT",
     "market_type": "spot",
     "is_active": true
@@ -104,14 +168,6 @@
     "is_active": true
   },
   {
-    "exchange": "BINANCE",
-    "market_symbol": "XRPUSDT",
-    "base_symbol": "XRP",
-    "quote_symbol": "USDT",
-    "market_type": "spot",
-    "is_active": true
-  },
-  {
     "exchange": "BINANCE_FUTURES",
     "market_symbol": "BTCUSDT",
     "base_symbol": "BTC",
@@ -123,14 +179,6 @@
     "exchange": "BINANCE_FUTURES",
     "market_symbol": "ETHUSDT",
     "base_symbol": "ETH",
-    "quote_symbol": "USDT",
-    "market_type": "futures",
-    "is_active": true
-  },
-  {
-    "exchange": "BINANCE_FUTURES",
-    "market_symbol": "XRPUSDT",
-    "base_symbol": "XRP",
     "quote_symbol": "USDT",
     "market_type": "futures",
     "is_active": true
@@ -176,14 +224,6 @@
     "is_active": true
   },
   {
-    "exchange": "BYBIT",
-    "market_symbol": "XRPUSDT",
-    "base_symbol": "XRP",
-    "quote_symbol": "USDT",
-    "market_type": "spot",
-    "is_active": true
-  },
-  {
     "exchange": "BITGET",
     "market_symbol": "BTCUSDT",
     "base_symbol": "BTC",
@@ -200,14 +240,6 @@
     "is_active": true
   },
   {
-    "exchange": "BITGET",
-    "market_symbol": "XRPUSDT",
-    "base_symbol": "XRP",
-    "quote_symbol": "USDT",
-    "market_type": "spot",
-    "is_active": true
-  },
-  {
     "exchange": "GATE",
     "market_symbol": "BTC_USDT",
     "base_symbol": "BTC",
@@ -219,14 +251,6 @@
     "exchange": "GATE",
     "market_symbol": "ETH_USDT",
     "base_symbol": "ETH",
-    "quote_symbol": "USDT",
-    "market_type": "spot",
-    "is_active": true
-  },
-  {
-    "exchange": "GATE",
-    "market_symbol": "XRP_USDT",
-    "base_symbol": "XRP",
     "quote_symbol": "USDT",
     "market_type": "spot",
     "is_active": true
@@ -248,14 +272,6 @@
     "is_active": true
   },
   {
-    "exchange": "HTX",
-    "market_symbol": "xrpusdt",
-    "base_symbol": "XRP",
-    "quote_symbol": "USDT",
-    "market_type": "spot",
-    "is_active": true
-  },
-  {
     "exchange": "MEXC",
     "market_symbol": "BTC_USDT",
     "base_symbol": "BTC",
@@ -267,14 +283,6 @@
     "exchange": "MEXC",
     "market_symbol": "ETH_USDT",
     "base_symbol": "ETH",
-    "quote_symbol": "USDT",
-    "market_type": "spot",
-    "is_active": true
-  },
-  {
-    "exchange": "MEXC",
-    "market_symbol": "XRP_USDT",
-    "base_symbol": "XRP",
     "quote_symbol": "USDT",
     "market_type": "spot",
     "is_active": true
