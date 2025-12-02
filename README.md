@@ -1,40 +1,206 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# KimpAI - Kimchi Premium Analytics Dashboard
 
-## Getting Started
+A Next.js 14 SaaS platform for tracking and analyzing the Kimchi Premium (price difference between Korean and global cryptocurrency exchanges).
 
-First, run the development server:
+## Quick Start (Replit Environment)
 
+### 1. Install Dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Port Configuration
+- **Dev Server Port**: Defaults to `5000`
+- **Dynamic Port**: Set `PORT` environment variable if needed
+  ```bash
+  PORT=3000 npm run dev
+  ```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### 3. Run Development Server
+```bash
+npm run dev
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+If you get `EADDRINUSE: address already in use :::5000` error:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+**Option A: Kill existing process**
+```bash
+# Find process using port 5000
+ps aux | grep -E "next|node" | grep -v grep
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Kill the process (replace PID with actual process ID)
+kill -9 <PID>
 
-## Learn More
+# Then run again
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+**Option B: Use different port**
+```bash
+PORT=3001 npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Option C: Restart Replit workflows**
+- Click "Run" button in Replit to restart all workflows cleanly
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Development
+```bash
+npm run dev          # Start Next.js dev server (port 5000)
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Data Management
+```bash
+npm run update:prices     # Fetch and update cryptocurrency prices
+npm run price:worker      # Continuous price update worker (5-second interval)
+npm run update:notices    # Fetch Korean exchange listing notices
+npm run backfill:korean-names  # Backfill Korean names in master_symbols
+npm run update:icons      # Download coin icons
+```
+
+---
+
+## Korean Name Backfill Script
+
+### Purpose
+Automatically populates missing Korean coin names (`ko_name`) in the `master_symbols` table from Korean exchange APIs (Upbit, Bithumb, Coinone).
+
+### Prerequisites
+- Supabase environment variables must be set:
+  ```
+  NEXT_PUBLIC_SUPABASE_URL
+  SUPABASE_SERVICE_ROLE_KEY
+  ```
+- `master_symbols` table must exist in Supabase (id, symbol, ko_name columns)
+
+### Usage
+```bash
+npm run backfill:korean-names
+```
+
+### What It Does
+1. Fetches Korean coin names from:
+   - **Upbit API** (primary source, highest priority)
+   - **Bithumb API** (secondary source)
+   - **Coinone API** (fallback for English names only)
+
+2. Updates only rows where `ko_name` is:
+   - `NULL` (empty)
+   - Equal to `symbol` (placeholder value)
+
+3. Skips rows that already have proper Korean names set
+
+4. Processes updates in 100-row chunks for stability
+
+5. **Idempotent**: Safe to run multiple times - won't overwrite good data
+
+### Example Output
+```
+[BackfillKoreanNames] Starting Korean name backfill...
+[BackfillKoreanNames] Loading exchange names for Korean backfill...
+[BackfillKoreanNames] Upbit map size: 500
+[BackfillKoreanNames] Bithumb map size: 450
+[BackfillKoreanNames] Combined map size: 520
+[BackfillKoreanNames] Found 520 total rows in master_symbols
+[BackfillKoreanNames] Prepared updates: 35
+[BackfillKoreanNames] Updated 35/35
+✅ Backfill complete!
+```
+
+### Safety Notes
+- **No data loss**: Only updates NULL or placeholder values
+- **Priority-based**: Uses best available source (Upbit > Bithumb > Coinone)
+- **Reversible**: Can be run multiple times without side effects
+- **Chunked**: Large updates are split into 100-row batches
+
+---
+
+## Environment Variables
+
+### Required for Development
+```env
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+```
+
+### Optional
+```env
+PORT=5000  # Default port (if not set, uses 5000)
+```
+
+---
+
+## Troubleshooting
+
+### Port 5000 Already in Use
+```bash
+# Check what's using port 5000
+lsof -i :5000
+
+# Kill the process
+kill -9 <PID>
+
+# Or restart workflows from Replit UI
+```
+
+### Backfill Script Fails
+- Check environment variables are set
+- Verify Supabase connection
+- Check `master_symbols` table exists
+- Review error logs in terminal
+
+### Dev Server Won't Start
+- Clear Next.js cache: `rm -rf .next`
+- Reinstall dependencies: `npm install`
+- Check Node.js version: `node --version`
+
+---
+
+## Project Structure
+
+```
+├── src/
+│   ├── pages/          # Next.js pages & API routes
+│   ├── components/     # React components
+│   ├── contexts/       # React contexts
+│   ├── hooks/          # Custom React hooks
+│   └── lib/            # Utilities & helpers
+├── scripts/            # Standalone utility scripts
+│   ├── priceWorker.ts
+│   ├── backfillKoreanNames.ts
+│   └── ...
+├── public/             # Static assets
+└── package.json        # Dependencies & scripts
+```
+
+---
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (Pages Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **APIs**: Upbit, Bithumb, Coinone, Binance, OKX, and more
+
+---
+
+## Deployment
+
+For production deployment, use Replit's built-in deployment features or export to Vercel.
+
+---
+
+## Notes for Developers
+
+- Use `Fast Mode` for single-file edits
+- Request permission before multi-file refactors
+- Keep `replit.md` updated with architecture changes
+- Do not modify the `Z` folder or `Y` file without explicit permission
