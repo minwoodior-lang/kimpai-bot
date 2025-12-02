@@ -483,12 +483,11 @@ export default function PremiumTable({
         setListedCoins(typeof json.listedCoins === "number" ? json.listedCoins : 0);
         setError(null);
         setConsecutiveRateLimits(0);
+      } catch (err) {
+        // Catch-all: silently suppress all errors
+      } finally {
+        setLoading(false);
       }
-    } catch {
-      // Catch-all: silently suppress all errors
-    } finally {
-      setLoading(false);
-    }
   };
 
   useEffect(() => {
