@@ -31,7 +31,7 @@ type ExchangeMarketRow = {
 async function fetchUpbitMarkets(): Promise<ExchangeMarketRow[]> {
   try {
     console.log("[Upbit] 마켓 수집 중...");
-    const response = await fetch("https://api.upbit.com/v1/market/all?include_details=false");
+    const response = await fetch("https://api.upbit.com/v1/market/all");
     
     if (!response.ok) throw new Error(`API error: ${response.status}`);
     
@@ -41,16 +41,25 @@ async function fetchUpbitMarkets(): Promise<ExchangeMarketRow[]> {
       return [];
     }
     
+    console.log(`[Upbit DEBUG] 전체 응답 마켓 수: ${markets.length}`);
+    if (markets.length > 0) {
+      console.log(`[Upbit DEBUG] 첫 샘플:`, JSON.stringify(markets[0]).substring(0, 150));
+    }
+    
     const result = markets
       .filter((m: any) => {
         const market = m.market || "";
-        return market.endsWith("-KRW") || market.endsWith("-BTC") || market.endsWith("-USDT");
+        // 마지막 "-" 이후가 quote_symbol (KRW, BTC, USDT)
+        const lastDashIndex = market.lastIndexOf("-");
+        if (lastDashIndex === -1) return false;
+        const quote = market.substring(lastDashIndex + 1);
+        return quote === "KRW" || quote === "BTC" || quote === "USDT";
       })
       .map((m: any) => {
         const market = m.market || "";
-        const parts = market.split("-");
-        const baseSymbol = parts[0] || "";
-        const quoteSymbol = parts[1] || "KRW";
+        const lastDashIndex = market.lastIndexOf("-");
+        const baseSymbol = market.substring(0, lastDashIndex) || "";
+        const quoteSymbol = market.substring(lastDashIndex + 1) || "KRW";
         
         return {
           exchange: "UPBIT",
@@ -62,7 +71,7 @@ async function fetchUpbitMarkets(): Promise<ExchangeMarketRow[]> {
         };
       });
     
-    console.log(`[Upbit] ✅ ${result.length}개 마켓`);
+    console.log(`[Upbit] ✅ ${result.length}개 마켓 (KRW/BTC/USDT)`);
     return result;
   } catch (err) {
     console.error("[Upbit] 수집 실패:", err instanceof Error ? err.message : String(err));
@@ -174,16 +183,40 @@ async function fetchCoinoneMarkets(): Promise<ExchangeMarketRow[]> {
   try {
     console.log("[Coinone] 마켓 + 한글명 수집 중...");
     
-    // 1단계: API에서 심볼 목록
-    const apiResponse = await fetch("https://api.coinone.co.kr/public/v2/markets", {
-      headers: { "Accept": "application/json" }
-    });
+    let data: any[] = [];
     
-    if (!apiResponse.ok) throw new Error(`API error: ${apiResponse.status}`);
+    // Coinone 공식 ticker API 사용 (모든 KRW 마켓)
+    try {
+      const response = await fetch("https://api.coinone.co.kr/public/ticker/all", {
+        headers: { "Accept": "application/json" }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      
+      const jsonData = await response.json();
+      
+      // data 객체의 각 심볼을 markets로 변환
+      if (jsonData && jsonData.data && typeof jsonData.data === "object") {
+        data = Object.keys(jsonData.data)
+          .filter(symbol => symbol.toUpperCase() !== "RESULT_CODE" && symbol.toUpperCase() !== "RESULT_MSG")
+          .map(symbol => ({
+            target_currency: symbol.toUpperCase(),
+          }));
+        console.log(`[Coinone] ✅ API에서 ${data.length}개 심볼 수집`);
+      } else {
+        console.log("[Coinone] API 응답 형식 예상 벗어남");
+        data = [];
+      }
+    } catch (apiErr) {
+      console.log("[Coinone] API 수집 실패:", apiErr instanceof Error ? apiErr.message : String(apiErr));
+      // fallback: 공통 코인들만 반환
+      data = [];
+    }
     
-    const data = await apiResponse.json();
     if (!Array.isArray(data)) {
-      console.warn("[Coinone] API 응답 형식 오류");
+      console.warn("[Coinone] 최종 데이터 형식 오류");
       return [];
     }
     
@@ -294,6 +327,12 @@ export async function refreshExchangeMarkets() {
       fetchBithumbMarkets(),
       fetchCoinoneMarkets(),
     ]);
+    
+    console.log("counts", {
+      upbit: upbit.length,
+      bithumb: bithumb.length,
+      coinone: coinone.length,
+    });
     
     const allMarkets = [...upbit, ...bithumb, ...coinone];
     

@@ -1,0 +1,145 @@
+[피드백 / 추가 수정 요청]
+
+상세 구현/보고 감사합니다.
+다만, 지금 exchange_markets 상태를 보면 여전히 예전 구조(업비트 4 + 빗썸 878) 그대로라,
+우리가 합의했던 “3개 거래소 전체 마켓 자동 동기화”가 아직 반영되지 않은 상황입니다.
+
+1) 현재 DB 상태
+SELECT exchange, COUNT(*) 
+FROM public.exchange_markets
+GROUP BY exchange;
+
+
+실제 결과:
+
+UPBIT: 4
+
+BITHUMB: 878
+
+COINONE: 0
+
+합계: 882 row
+
+이건 예전에 쓰던 “업비트 대표 4마켓 + 빗썸 전체 878마켓” 방식 그대로입니다.
+
+하지만 그 전에 제가 직접 수집해둔 숫자는:
+
+업비트: KRW 229 / BTC 274 / USDT 161 → 총 664
+
+빗썸: KRW 439 / BTC 14 / USDT 0 → 총 453
+
+코인원: KRW 390 → 총 390
+
+→ 이렇게 하면 총 1507개 정도가 나와야 정상입니다.
+
+지금 882개만 들어가 있고, COINONE이 0개인 걸 보면:
+
+fetchUpbitMarkets / fetchCoinoneMarkets가 거의 비어 있거나 필터로 다 걸러지고 있거나
+
+allMarkets가 아니라 bithumbMarkets만 insert 되고 있거나
+
+둘 중 하나인 것 같습니다.
+
+2) refreshExchangeMarkets.ts 확인 요청
+
+scripts/refreshExchangeMarkets.ts 안에서 실제로 아래처럼 되어 있는지 확인 부탁드립니다:
+
+const upbitMarkets   = await fetchUpbitMarkets();
+const bithumbMarkets = await fetchBithumbMarkets();
+const coinoneMarkets = await fetchCoinoneMarkets();
+
+console.log("counts", {
+  upbit: upbitMarkets.length,
+  bithumb: bithumbMarkets.length,
+  coinone: coinoneMarkets.length,
+});
+
+const allMarkets = [
+  ...upbitMarkets,
+  ...bithumbMarkets,
+  ...coinoneMarkets,
+];
+
+// 여기서 exchange_markets 비우고 allMarkets 전체 insert
+await supabase
+  .from("exchange_markets")
+  .delete()
+  .gte("id", 0);
+
+const { error } = await supabase
+  .from("exchange_markets")
+  .insert(allMarkets);
+
+
+요청사항:
+
+위처럼 console.log("counts", ...)를 추가해 주시고
+
+npm run refresh:exchange-markets 실행 후, 터미널에 찍힌:
+
+counts { upbit: X, bithumb: Y, coinone: Z }
+
+
+실제 숫자가 어떻게 나오는지 알려주세요.
+
+정상이라면:
+
+upbit: 600대
+
+bithumb: 400대
+
+coinone: 300대
+
+처럼 나와야 합니다.
+
+만약 여기서부터:
+
+upbit: 4, bithumb: 878, coinone: 0 이 찍히면
+→ fetchUpbitMarkets / fetchCoinoneMarkets 로직이 아직 반영되지 않은 상태입니다.
+
+그리고 insert 부분에서:
+
+.insert(allMarkets)
+
+
+가 아니라,
+
+.insert(bithumbMarkets)
+
+
+만 사용되고 있지는 않은지도 한 번 확인 부탁드립니다.
+
+3) master_symbols / Supabase 캐시 이슈는 나중 문제
+
+지금은 exchange_markets에 데이터가 882개로 잘못 들어가 있어서,
+updateMasterSymbols.ts가 잘 돌아가도 코인원 심볼은 애초에 생성될 수 없는 상태입니다.
+
+먼저 refreshExchangeMarkets.ts에서
+UPBIT + BITHUMB + COINONE 전체 마켓이 들어오는지를 확인하고
+
+그 다음에 npm run sync:symbols를 다시 돌려보는 게 순서라고 생각합니다.
+
+목표 최종 상태
+
+SELECT exchange, COUNT(*) FROM exchange_markets GROUP BY exchange; 결과가
+
+UPBIT: 664 내외 (KRW + BTC + USDT 전체)
+
+BITHUMB: 453 내외 (KRW + BTC 전체)
+
+COINONE: 390 내외 (KRW 전체)
+
+가 나오도록 refreshExchangeMarkets.ts를 완성
+
+그 후:
+
+npm run sync:symbols
+
+
+실행 → master_symbols 400~500개 정도 생성
+
+프론트에서는 name_ko ?? name_en ?? symbol 로 코인명이 잘 나오는지를 제가 확인하겠습니다.
+
+이 부분만 정리되면,
+이제부터는 진짜로 npm run sync:symbols 한 번으로
+업비트/빗썸/코인원 전체 마켓 + 심볼/한글명이 자동 동기화되는 구조가 완성됩니다. 🙏
