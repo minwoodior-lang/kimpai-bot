@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 
 // 심볼 정규화 함수: 거래소별 다양한 형식 통일
 export function normalizeSymbol(raw: string): string {
-  let symbol = raw.replace(/[-_/]/g, '').toUpperCase();
+  let symbol = raw.replace(/[-_/]/g, '').toUpperCase(); // 구분자 제거 (BTC-KRW, BTC_KRW, BTC/USDT 등)
+  
+  // 마켓 접미사 제거 (단, 심볼 자체가 해당 토큰인 경우는 유지)
+  // 예: BTCKRW -> BTC, ETHUSDT -> ETH, XRPBTC -> XRP
+  // 예외: BTC -> BTC (유지), ETH -> ETH (유지), USDT -> USDT (유지)
   const marketSuffixes = ['KRW', 'USDT', 'BTC', 'ETH'];
   for (const suffix of marketSuffixes) {
     if (symbol.length > suffix.length && symbol.endsWith(suffix)) {
@@ -10,8 +14,14 @@ export function normalizeSymbol(raw: string): string {
       break;
     }
   }
+  
   return symbol;
 }
+
+// 업비트/빗썸/코인원 상장 코인 기준 심볼 → CoinGecko ID 매핑 (상위 200+)
+export const COIN_ID_MAP: Record<string, string> = {
+  // Top 50 by Market Cap
+  'BTC': 'bitcoin',
   'ETH': 'ethereum',
   'XRP': 'ripple',
   'SOL': 'solana',
@@ -400,7 +410,18 @@ export function normalizeSymbol(raw: string): string {
   'AHT': 'athena-token', // Athena
   'BOUNTY': 'bounty-token', // Bounty
   '2Z': '2zipperhead', // 2Zipperhead
+  'STG': 'stargate-finance', // Stargate Finance
 };
+
+// 심볼별 그라데이션 컬러 (폴백용)
+const GRADIENT_COLORS: Record<string, string> = {
+  'BTC': 'from-orange-500 to-yellow-500',
+  'ETH': 'from-indigo-500 to-purple-500',
+  'XRP': 'from-gray-400 to-blue-500',
+  'SOL': 'from-purple-500 to-green-400',
+  'DOGE': 'from-yellow-400 to-amber-500',
+  'ADA': 'from-blue-600 to-cyan-400',
+  'USDT': 'from-green-500 to-emerald-600',
   'USDC': 'from-blue-400 to-blue-600',
   'SHIB': 'from-red-500 to-orange-500',
   'AVAX': 'from-red-600 to-pink-500',
