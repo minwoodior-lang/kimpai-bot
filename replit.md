@@ -72,6 +72,11 @@ The application is built with Next.js 14 using the Pages Router, TypeScript, and
 - **API-driven**: All data interactions are handled via Next.js API routes.
 - **Graceful Shutdown**: SIGTERM/SIGINT handlers for robust operation of worker scripts.
 - **Master Symbol Pattern**: Centralized symbol management prevents inconsistent displays across exchanges
+- **Bilingual Display Strategy** (v3.0.6+):
+  - `fetchCoinMetadata()` loads master_symbols (priority) + Upbit API market/all (fallback)
+  - Upbit-listed coins: "한글명 / English" (both from master_symbols or Upbit API)
+  - Bithumb/Coinone-only coins: "English / English" (not in master_symbols or Upbit)
+  - **Coverage Expansion**: When "English/English" coins are found, manually add to master_symbols (base_symbol, ko_name, coinmarketcap_slug, is_active=true) to populate Korean names incrementally
 
 ## External Dependencies
 - **Supabase**: Database (PostgreSQL) and Authentication.
@@ -104,6 +109,8 @@ exchange_symbol_mappings:
 ```
 
 ## Current Known Issues
-- 7 coins cannot find icons from CoinGecko: FCT2, FNCY, GAME2, HPP, MET2, MONPRO, XPLA
-- These coins use gradient fallback colors in CoinIcon component
-- Master symbols initialization requires manual `npm run ts scripts/initializeMasterSymbols.ts` execution
+- **Icon Fallback (7 coins)**: FCT2, FNCY, GAME2, HPP, MET2, MONPRO, XPLA use gradient fallback colors in CoinIcon (CoinGecko no data)
+- **Bithumb/Coinone-Only Coins**: Display "English/English" format because they're not in master_symbols or Upbit market data
+  - Solution: Gradually expand master_symbols by adding new coins as they're discovered
+  - Process: Find "English/English" coin → Add to master_symbols with ko_name + coinmarketcap_slug + is_active=true
+- **Master Symbol Initialization**: Requires manual `npm run ts scripts/initializeMasterSymbols.ts` execution after DB schema creation
