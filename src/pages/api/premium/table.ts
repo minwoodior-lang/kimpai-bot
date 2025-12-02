@@ -72,7 +72,7 @@ const VOLUME_ANOMALY_THRESHOLD = 50;
 // =======================
 let cachedMetadata: Map<string, CoinMetadata> = new Map();
 let lastMetadataFetch = 0;
-const METADATA_CACHE_TTL = 5 * 60 * 1000; // 5분
+const METADATA_CACHE_TTL = 1 * 60 * 1000; // 1분 (빠른 업데이트 반영)
 
 /**
  * exchange_markets + master_symbols 메타데이터 수집
@@ -179,6 +179,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<PremiumTableResponse | { error: string; retryAfter?: number }>
 ) {
+  // 캐시 헤더: 항상 최신 데이터 반환
+  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
+
   const clientIp = getClientIp(req);
   const rateCheck = checkRateLimit(clientIp);
 

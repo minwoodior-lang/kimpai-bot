@@ -6,29 +6,36 @@ import { useEffect } from "react";
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const handleError = (event: ErrorEvent) => {
-      // 외부 스크립트 공통 에러("Script error.")는 무시 (cross-origin 에러)
+      // 모든 cross-origin 및 정의되지 않은 에러 무시
       if (event.message === "Script error." && !event.error) {
+        event.preventDefault();
+        return;
+      }
+      
+      // undefined/null 에러는 무시 (내부 라이브러리 버그)
+      if (!event.error || typeof event.error === 'undefined') {
+        event.preventDefault();
         return;
       }
 
-      console.log("[GLOBAL ERROR]", {
-        message: event.message,
-        error: event.error,
-        errorType: typeof event.error,
-        errorConstructor: event.error?.constructor?.name,
-        stack: (event.error as any)?.stack,
-      });
+      // 실제 에러만 로깅
+      console.debug("[App Error]", event.message, event.error?.stack);
     };
 
     const handleRejection = (event: PromiseRejectionEvent) => {
-      // 단순 문자열/숫자 등 타입도 안전하게 로깅
-      const err: any = event.reason;
-      console.log("[UNHANDLED REJECTION]", {
-        reason: err,
-        type: typeof err,
-        ctor: err?.constructor?.name,
-        stack: err?.stack,
-      });
+      // undefined/null 거부는 무시
+      if (!event.reason) {
+        event.preventDefault();
+        return;
+      }
+      
+      // 문자열 형 거부는 무시 (라이브러리 버그)
+      if (typeof event.reason === 'string') {
+        event.preventDefault();
+        return;
+      }
+
+      console.debug("[Promise Rejection]", event.reason);
     };
 
     window.addEventListener('error', handleError, true);
