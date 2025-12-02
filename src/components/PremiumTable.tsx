@@ -543,6 +543,17 @@ export default function PremiumTable({
 
   // 코인 표시명 생성: displayName ?? name_ko ?? name_en ?? koreanName ?? symbol
   const getDisplayName = (item: PremiumData): string => {
+    // 🔍 2단계 진단: BTC의 경우 로그 출력
+    if (item.symbol === "BTC") {
+      console.log("[FRONT ROW SAMPLE]", {
+        symbol: item.symbol,
+        name_ko: item.name_ko,
+        name_en: item.name_en,
+        icon_url: item.icon_url,
+        koreanName: item.koreanName,
+      });
+    }
+    
     // 백엔드에서 생성한 displayName 우선
     if (item.displayName && item.displayName.trim()) return item.displayName;
     // name_ko (한글명) 차선

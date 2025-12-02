@@ -277,6 +277,11 @@ export default async function handler(
 
       const foreignRecord = foreignMap.get(symbol);
       const coinMeta = metadata.get(symbol.toUpperCase());
+      
+      // 🔍 1단계 진단: 첫 1개 심볼의 메타데이터 로그
+      if (symbol === "BTC") {
+        console.log("[API DEBUG] BTC metadata:", JSON.stringify(coinMeta, null, 2));
+      }
 
       let domesticPriceKrw = Number(domesticRecord.price);
 
@@ -346,7 +351,7 @@ export default async function handler(
         }
       }
 
-      tableData.push({
+      const rowData = {
         symbol,
         name: coinMeta?.name_en || symbol,
         koreanName: coinMeta?.name_ko || symbol,
@@ -371,7 +376,14 @@ export default async function handler(
         name_ko: coinMeta?.name_ko || symbol,
         name_en: coinMeta?.name_en || symbol,
         icon_url: coinMeta?.icon_url,
-      });
+      };
+      
+      // 🔍 API 응답 첫 row 로그
+      if (symbol === "BTC") {
+        console.log("[API RESPONSE SAMPLE]", JSON.stringify(rowData, null, 2));
+      }
+      
+      tableData.push(rowData);
 
       if (!latestTimestamp || domesticRecord.created_at > latestTimestamp) {
         latestTimestamp = domesticRecord.created_at;
