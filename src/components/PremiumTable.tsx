@@ -671,9 +671,11 @@ export default function PremiumTable({
                             className="flex flex-col hover:text-blue-400 transition-colors text-left min-w-0"
                           >
                             <div className="text-white font-medium text-xs md:text-sm truncate">
-                              {row.name || row.koreanName || row.symbol}
+                              {row.koreanName || row.name || row.symbol}
                             </div>
-                            <div className="text-gray-500 text-[10px] md:text-xs">{row.symbol}</div>
+                            <div className="text-gray-500 text-[10px] md:text-xs">
+                              {row.koreanName && row.symbol ? `${row.koreanName} / ${row.symbol}` : row.symbol}
+                            </div>
                           </button>
                           <button
                             onClick={() => toggleChart(row.symbol)}

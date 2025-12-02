@@ -185,9 +185,11 @@ export default function Markets() {
                           <CoinIcon symbol={item.symbol.replace('/KRW', '')} size="lg" />
                           <div>
                             <span className="text-white font-medium">
-                              {item.name ? item.name : item.koreanName || item.symbol.replace('/KRW', '')}
+                              {item.koreanName || item.name || item.symbol.replace('/KRW', '')}
                             </span>
-                            <span className="text-slate-500 text-sm ml-2">{item.symbol.replace('/KRW', '')}</span>
+                            <span className="text-slate-500 text-sm ml-2">
+                              {item.koreanName && item.symbol ? `${item.koreanName} / ${item.symbol.replace('/KRW', '')}` : item.symbol.replace('/KRW', '')}
+                            </span>
                           </div>
                           {!item.isListed && (
                             <span className="text-xs text-slate-500 bg-slate-700/50 px-1.5 py-0.5 rounded">미상장</span>
