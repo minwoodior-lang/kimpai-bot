@@ -215,8 +215,8 @@ async function fetchCoinoneMarkets(): Promise<ExchangeMarketRow[]> {
     
     const json = await response.json();
     
-    // 응답이 { data: [...] } 또는 [...] 형식일 수 있음
-    let data = Array.isArray(json) ? json : (Array.isArray(json.data) ? json.data : []);
+    // 응답이 { markets: [...] } 또는 { data: [...] } 또는 [...] 형식
+    let data = Array.isArray(json) ? json : (Array.isArray(json.markets) ? json.markets : (Array.isArray(json.data) ? json.data : []));
     
     if (!Array.isArray(data) || data.length === 0) {
       console.log("[Coinone] 응답 데이터가 없음:", typeof json, Object.keys(json || {}).slice(0, 5));
@@ -224,14 +224,23 @@ async function fetchCoinoneMarkets(): Promise<ExchangeMarketRow[]> {
     }
     
     // data는 { symbol, name_ko, name_en, ... } 배열
-    const markets: ExchangeMarketRow[] = data.map((m: any) => ({
-      exchange: "COINONE",
-      market_code: `${m.symbol}/KRW`,
-      base_symbol: m.symbol,
-      quote_symbol: "KRW",
-      name_ko: m.name_ko || null,
-      name_en: m.name_en || null,
-    }));
+    const markets: ExchangeMarketRow[] = data
+      .filter((m: any) => {
+        // symbol이 없으면 이전 필드명 확인
+        const sym = m.symbol || m.target_currency || m.currency || m.code;
+        return sym && String(sym).trim();
+      })
+      .map((m: any) => {
+        const symbol = (m.symbol || m.target_currency || m.currency || m.code || "").toUpperCase().trim();
+        return {
+          exchange: "COINONE",
+          market_code: `${symbol}/KRW`,
+          base_symbol: symbol,
+          quote_symbol: "KRW",
+          name_ko: m.name_ko || null,
+          name_en: m.name_en || null,
+        };
+      });
     
     console.log(`[Coinone] ✅ ${markets.length}개 마켓`);
     return markets;
