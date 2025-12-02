@@ -19,9 +19,7 @@
     "exchange": "BITHUMB",
     "market_code": "ETC-KRW",
     "base_symbol": "ETC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
@@ -43,113 +41,85 @@
     "exchange": "BITHUMB",
     "market_code": "QTUM-KRW",
     "base_symbol": "QTUM",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "A-KRW",
     "base_symbol": "A",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ICX-KRW",
     "base_symbol": "ICX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "TRX-KRW",
     "base_symbol": "TRX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ELF-KRW",
     "base_symbol": "ELF",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "KNC-KRW",
     "base_symbol": "KNC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "GLM-KRW",
     "base_symbol": "GLM",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ZIL-KRW",
     "base_symbol": "ZIL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "WAXP-KRW",
     "base_symbol": "WAXP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "POWR-KRW",
     "base_symbol": "POWR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "LRC-KRW",
     "base_symbol": "LRC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "STEEM-KRW",
     "base_symbol": "STEEM",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ZRX-KRW",
     "base_symbol": "ZRX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SNT-KRW",
     "base_symbol": "SNT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
@@ -163,41 +133,31 @@
     "exchange": "BITHUMB",
     "market_code": "CTXC-KRW",
     "base_symbol": "CTXC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BAT-KRW",
     "base_symbol": "BAT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "THETA-KRW",
     "base_symbol": "THETA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CVC-KRW",
     "base_symbol": "CVC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "WAVES-KRW",
     "base_symbol": "WAVES",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
@@ -211,225 +171,169 @@
     "exchange": "BITHUMB",
     "market_code": "ENJ-KRW",
     "base_symbol": "ENJ",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "VET-KRW",
     "base_symbol": "VET",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MTL-KRW",
     "base_symbol": "MTL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "IOST-KRW",
     "base_symbol": "IOST",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AMO-KRW",
     "base_symbol": "AMO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BSV-KRW",
     "base_symbol": "BSV",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ORBS-KRW",
     "base_symbol": "ORBS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "TFUEL-KRW",
     "base_symbol": "TFUEL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ANKR-KRW",
     "base_symbol": "ANKR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CRO-KRW",
     "base_symbol": "CRO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CHR-KRW",
     "base_symbol": "CHR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MBL-KRW",
     "base_symbol": "MBL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "FCT2-KRW",
     "base_symbol": "FCT2",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BOA-KRW",
     "base_symbol": "BOA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MEV-KRW",
     "base_symbol": "MEV",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SXP-KRW",
     "base_symbol": "SXP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "COS-KRW",
     "base_symbol": "COS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "EL-KRW",
     "base_symbol": "EL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "HIVE-KRW",
     "base_symbol": "HIVE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "XPR-KRW",
     "base_symbol": "XPR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "EGG-KRW",
     "base_symbol": "EGG",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BORA-KRW",
     "base_symbol": "BORA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ARPA-KRW",
     "base_symbol": "ARPA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CTC-KRW",
     "base_symbol": "CTC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "APM-KRW",
     "base_symbol": "APM",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CKB-KRW",
     "base_symbol": "CKB",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AERGO-KRW",
     "base_symbol": "AERGO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "EVZ-KRW",
     "base_symbol": "EVZ",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
@@ -443,17 +347,13 @@
     "exchange": "BITHUMB",
     "market_code": "YFI-KRW",
     "base_symbol": "YFI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "UMA-KRW",
     "base_symbol": "UMA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
@@ -467,353 +367,265 @@
     "exchange": "BITHUMB",
     "market_code": "COMP-KRW",
     "base_symbol": "COMP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BAL-KRW",
     "base_symbol": "BAL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "RSR-KRW",
     "base_symbol": "RSR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "NMR-KRW",
     "base_symbol": "NMR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "RLC-KRW",
     "base_symbol": "RLC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "UOS-KRW",
     "base_symbol": "UOS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SAND-KRW",
     "base_symbol": "SAND",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AWE-KRW",
     "base_symbol": "AWE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BEL-KRW",
     "base_symbol": "BEL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "OBSR-KRW",
     "base_symbol": "OBSR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "POLA-KRW",
     "base_symbol": "POLA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ADP-KRW",
     "base_symbol": "ADP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "DVI-KRW",
     "base_symbol": "DVI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "GHX-KRW",
     "base_symbol": "GHX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CBK-KRW",
     "base_symbol": "CBK",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MVC-KRW",
     "base_symbol": "MVC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BLY-KRW",
     "base_symbol": "BLY",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "GRT-KRW",
     "base_symbol": "GRT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BIOT-KRW",
     "base_symbol": "BIOT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SNX-KRW",
     "base_symbol": "SNX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "GRACY-KRW",
     "base_symbol": "GRACY",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "OXT-KRW",
     "base_symbol": "OXT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MAPO-KRW",
     "base_symbol": "MAPO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AQT-KRW",
     "base_symbol": "AQT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "WIKEN-KRW",
     "base_symbol": "WIKEN",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CTSI-KRW",
     "base_symbol": "CTSI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MANA-KRW",
     "base_symbol": "MANA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "LPT-KRW",
     "base_symbol": "LPT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SUSHI-KRW",
     "base_symbol": "SUSHI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PUNDIX-KRW",
     "base_symbol": "PUNDIX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CELR-KRW",
     "base_symbol": "CELR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BFC-KRW",
     "base_symbol": "BFC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ALICE-KRW",
     "base_symbol": "ALICE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "OGN-KRW",
     "base_symbol": "OGN",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "COTI-KRW",
     "base_symbol": "COTI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CAKE-KRW",
     "base_symbol": "CAKE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BNT-KRW",
     "base_symbol": "BNT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "XVS-KRW",
     "base_symbol": "XVS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SWAP-KRW",
     "base_symbol": "SWAP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CHZ-KRW",
     "base_symbol": "CHZ",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AXS-KRW",
     "base_symbol": "AXS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "DAO-KRW",
     "base_symbol": "DAO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SIX-KRW",
     "base_symbol": "SIX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "USDS-KRW",
     "base_symbol": "USDS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
@@ -827,25 +639,19 @@
     "exchange": "BITHUMB",
     "market_code": "POL-KRW",
     "base_symbol": "POL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "WOO-KRW",
     "base_symbol": "WOO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ACH-KRW",
     "base_symbol": "ACH",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
@@ -859,65 +665,49 @@
     "exchange": "BITHUMB",
     "market_code": "ONT-KRW",
     "base_symbol": "ONT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "META-KRW",
     "base_symbol": "META",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "KAIA-KRW",
     "base_symbol": "KAIA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ONG-KRW",
     "base_symbol": "ONG",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ALGO-KRW",
     "base_symbol": "ALGO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "JST-KRW",
     "base_symbol": "JST",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "XTZ-KRW",
     "base_symbol": "XTZ",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MLK-KRW",
     "base_symbol": "MLK",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
@@ -931,17 +721,13 @@
     "exchange": "BITHUMB",
     "market_code": "ATOM-KRW",
     "base_symbol": "ATOM",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "TEMCO-KRW",
     "base_symbol": "TEMCO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
@@ -955,49 +741,37 @@
     "exchange": "BITHUMB",
     "market_code": "KSM-KRW",
     "base_symbol": "KSM",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CTK-KRW",
     "base_symbol": "CTK",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BNB-KRW",
     "base_symbol": "BNB",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "NFT-KRW",
     "base_symbol": "NFT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SUN-KRW",
     "base_symbol": "SUN",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "XEC-KRW",
     "base_symbol": "XEC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
@@ -1011,137 +785,103 @@
     "exchange": "BITHUMB",
     "market_code": "EGLD-KRW",
     "base_symbol": "EGLD",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MASK-KRW",
     "base_symbol": "MASK",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "C98-KRW",
     "base_symbol": "C98",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MED-KRW",
     "base_symbol": "MED",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "1INCH-KRW",
     "base_symbol": "1INCH",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CRV-KRW",
     "base_symbol": "CRV",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BOBA-KRW",
     "base_symbol": "BOBA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "DYDX-KRW",
     "base_symbol": "DYDX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MINA-KRW",
     "base_symbol": "MINA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "FLOW-KRW",
     "base_symbol": "FLOW",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "JOE-KRW",
     "base_symbol": "JOE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "GALA-KRW",
     "base_symbol": "GALA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ENS-KRW",
     "base_symbol": "ENS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BTT-KRW",
     "base_symbol": "BTT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "JASMY-KRW",
     "base_symbol": "JASMY",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "REQ-KRW",
     "base_symbol": "REQ",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CSPR-KRW",
     "base_symbol": "CSPR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
@@ -1155,769 +895,577 @@
     "exchange": "BITHUMB",
     "market_code": "TDROP-KRW",
     "base_symbol": "TDROP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "HBAR-KRW",
     "base_symbol": "HBAR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "FANC-KRW",
     "base_symbol": "FANC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MAY-KRW",
     "base_symbol": "MAY",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "REI-KRW",
     "base_symbol": "REI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "T-KRW",
     "base_symbol": "T",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MBX-KRW",
     "base_symbol": "MBX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "GMT-KRW",
     "base_symbol": "GMT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "TAVA-KRW",
     "base_symbol": "TAVA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "D-KRW",
     "base_symbol": "D",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "APE-KRW",
     "base_symbol": "APE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "WNCG-KRW",
     "base_symbol": "WNCG",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AL-KRW",
     "base_symbol": "AL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "XCN-KRW",
     "base_symbol": "XCN",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AZIT-KRW",
     "base_symbol": "AZIT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "FLR-KRW",
     "base_symbol": "FLR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SFP-KRW",
     "base_symbol": "SFP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "FITFI-KRW",
     "base_symbol": "FITFI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "STAT-KRW",
     "base_symbol": "STAT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CRTS-KRW",
     "base_symbol": "CRTS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "LM-KRW",
     "base_symbol": "LM",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "GRND-KRW",
     "base_symbol": "GRND",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "APT-KRW",
     "base_symbol": "APT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BLUR-KRW",
     "base_symbol": "BLUR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "OAS-KRW",
     "base_symbol": "OAS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "HOOK-KRW",
     "base_symbol": "HOOK",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "LWA-KRW",
     "base_symbol": "LWA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "OP-KRW",
     "base_symbol": "OP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ROA-KRW",
     "base_symbol": "ROA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "GMX-KRW",
     "base_symbol": "GMX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "STX-KRW",
     "base_symbol": "STX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "XPLA-KRW",
     "base_symbol": "XPLA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AHT-KRW",
     "base_symbol": "AHT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ARB-KRW",
     "base_symbol": "ARB",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "INJ-KRW",
     "base_symbol": "INJ",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "HFT-KRW",
     "base_symbol": "HFT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "RPL-KRW",
     "base_symbol": "RPL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "IMX-KRW",
     "base_symbol": "IMX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CFX-KRW",
     "base_symbol": "CFX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ACS-KRW",
     "base_symbol": "ACS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "FXS-KRW",
     "base_symbol": "FXS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CELO-KRW",
     "base_symbol": "CELO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "LDO-KRW",
     "base_symbol": "LDO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "S-KRW",
     "base_symbol": "S",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "FET-KRW",
     "base_symbol": "FET",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SUI-KRW",
     "base_symbol": "SUI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "NCT-KRW",
     "base_symbol": "NCT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "FLOKI-KRW",
     "base_symbol": "FLOKI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ID-KRW",
     "base_symbol": "ID",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "RENDER-KRW",
     "base_symbol": "RENDER",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "STG-KRW",
     "base_symbol": "STG",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "OSMO-KRW",
     "base_symbol": "OSMO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "FIL-KRW",
     "base_symbol": "FIL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ILV-KRW",
     "base_symbol": "ILV",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MAV-KRW",
     "base_symbol": "MAV",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "RSS3-KRW",
     "base_symbol": "RSS3",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AUDIO-KRW",
     "base_symbol": "AUDIO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AGI-KRW",
     "base_symbol": "AGI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ASTR-KRW",
     "base_symbol": "ASTR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "WLD-KRW",
     "base_symbol": "WLD",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "FLUX-KRW",
     "base_symbol": "FLUX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AGLD-KRW",
     "base_symbol": "AGLD",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AR-KRW",
     "base_symbol": "AR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "RVN-KRW",
     "base_symbol": "RVN",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "EDU-KRW",
     "base_symbol": "EDU",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SEI-KRW",
     "base_symbol": "SEI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "WAXL-KRW",
     "base_symbol": "WAXL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MOC-KRW",
     "base_symbol": "MOC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PEPE-KRW",
     "base_symbol": "PEPE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CYBER-KRW",
     "base_symbol": "CYBER",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ARKM-KRW",
     "base_symbol": "ARKM",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PYR-KRW",
     "base_symbol": "PYR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "IOTX-KRW",
     "base_symbol": "IOTX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "HIGH-KRW",
     "base_symbol": "HIGH",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PENDLE-KRW",
     "base_symbol": "PENDLE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BICO-KRW",
     "base_symbol": "BICO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "STORJ-KRW",
     "base_symbol": "STORJ",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "API3-KRW",
     "base_symbol": "API3",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ZTX-KRW",
     "base_symbol": "ZTX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MNT-KRW",
     "base_symbol": "MNT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "GTC-KRW",
     "base_symbol": "GTC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "METIS-KRW",
     "base_symbol": "METIS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "TIA-KRW",
     "base_symbol": "TIA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ICP-KRW",
     "base_symbol": "ICP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SPURS-KRW",
     "base_symbol": "SPURS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "NEO-KRW",
     "base_symbol": "NEO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "GAS-KRW",
     "base_symbol": "GAS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BIGTIME-KRW",
     "base_symbol": "BIGTIME",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ZETA-KRW",
     "base_symbol": "ZETA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "GRS-KRW",
     "base_symbol": "GRS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ARK-KRW",
     "base_symbol": "ARK",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "YGG-KRW",
     "base_symbol": "YGG",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "HUNT-KRW",
     "base_symbol": "HUNT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "KAVA-KRW",
     "base_symbol": "KAVA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MAGIC-KRW",
     "base_symbol": "MAGIC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AUCTION-KRW",
     "base_symbol": "AUCTION",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
@@ -1939,1576 +1487,1182 @@
     "exchange": "BITHUMB",
     "market_code": "RAD-KRW",
     "base_symbol": "RAD",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "LSK-KRW",
     "base_symbol": "LSK",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "TT-KRW",
     "base_symbol": "TT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ACE-KRW",
     "base_symbol": "ACE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SKL-KRW",
     "base_symbol": "SKL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "IQ-KRW",
     "base_symbol": "IQ",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PYTH-KRW",
     "base_symbol": "PYTH",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MANTA-KRW",
     "base_symbol": "MANTA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AKT-KRW",
     "base_symbol": "AKT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BEAM-KRW",
     "base_symbol": "BEAM",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "JTO-KRW",
     "base_symbol": "JTO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "JUP-KRW",
     "base_symbol": "JUP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "STRK-KRW",
     "base_symbol": "STRK",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SC-KRW",
     "base_symbol": "SC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BONK-KRW",
     "base_symbol": "BONK",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "TOKAMAK-KRW",
     "base_symbol": "TOKAMAK",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AIOZ-KRW",
     "base_symbol": "AIOZ",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ZK-KRW",
     "base_symbol": "ZK",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ONDO-KRW",
     "base_symbol": "ONDO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ALT-KRW",
     "base_symbol": "ALT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "TAO-KRW",
     "base_symbol": "TAO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "NEAR-KRW",
     "base_symbol": "NEAR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "RON-KRW",
     "base_symbol": "RON",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "FIDA-KRW",
     "base_symbol": "FIDA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "STRAX-KRW",
     "base_symbol": "STRAX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "XAI-KRW",
     "base_symbol": "XAI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "W-KRW",
     "base_symbol": "W",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "POLYX-KRW",
     "base_symbol": "POLYX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CORE-KRW",
     "base_symbol": "CORE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BB-KRW",
     "base_symbol": "BB",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "POKT-KRW",
     "base_symbol": "POKT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "REZ-KRW",
     "base_symbol": "REZ",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ENA-KRW",
     "base_symbol": "ENA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MOCA-KRW",
     "base_symbol": "MOCA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ETHFI-KRW",
     "base_symbol": "ETHFI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MEW-KRW",
     "base_symbol": "MEW",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ZRO-KRW",
     "base_symbol": "ZRO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "IO-KRW",
     "base_symbol": "IO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BLAST-KRW",
     "base_symbol": "BLAST",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "TAIKO-KRW",
     "base_symbol": "TAIKO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BRETT-KRW",
     "base_symbol": "BRETT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ATH-KRW",
     "base_symbol": "ATH",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PCI-KRW",
     "base_symbol": "PCI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AVAIL-KRW",
     "base_symbol": "AVAIL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "TON-KRW",
     "base_symbol": "TON",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "G-KRW",
     "base_symbol": "G",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "LISTA-KRW",
     "base_symbol": "LISTA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PEAQ-KRW",
     "base_symbol": "PEAQ",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "EIGEN-KRW",
     "base_symbol": "EIGEN",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "XION-KRW",
     "base_symbol": "XION",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ORDER-KRW",
     "base_symbol": "ORDER",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MERL-KRW",
     "base_symbol": "MERL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SCR-KRW",
     "base_symbol": "SCR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SWELL-KRW",
     "base_symbol": "SWELL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SKY-KRW",
     "base_symbol": "SKY",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PONKE-KRW",
     "base_symbol": "PONKE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MVL-KRW",
     "base_symbol": "MVL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CARV-KRW",
     "base_symbol": "CARV",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PUFFER-KRW",
     "base_symbol": "PUFFER",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SUNDOG-KRW",
     "base_symbol": "SUNDOG",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "TURBO-KRW",
     "base_symbol": "TURBO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "RAY-KRW",
     "base_symbol": "RAY",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SAFE-KRW",
     "base_symbol": "SAFE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "VIRTUAL-KRW",
     "base_symbol": "VIRTUAL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "DRIFT-KRW",
     "base_symbol": "DRIFT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MOVE-KRW",
     "base_symbol": "MOVE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "F-KRW",
     "base_symbol": "F",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "DEEP-KRW",
     "base_symbol": "DEEP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MORPHO-KRW",
     "base_symbol": "MORPHO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "NEIRO-KRW",
     "base_symbol": "NEIRO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MOODENG-KRW",
     "base_symbol": "MOODENG",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "DBR-KRW",
     "base_symbol": "DBR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "GOAT-KRW",
     "base_symbol": "GOAT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "NIL-KRW",
     "base_symbol": "NIL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ME-KRW",
     "base_symbol": "ME",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "INIT-KRW",
     "base_symbol": "INIT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ZRC-KRW",
     "base_symbol": "ZRC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "IOTA-KRW",
     "base_symbol": "IOTA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PENGU-KRW",
     "base_symbol": "PENGU",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ACX-KRW",
     "base_symbol": "ACX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AERO-KRW",
     "base_symbol": "AERO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "THE-KRW",
     "base_symbol": "THE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AMP-KRW",
     "base_symbol": "AMP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "VANA-KRW",
     "base_symbol": "VANA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "XYO-KRW",
     "base_symbol": "XYO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "A8-KRW",
     "base_symbol": "A8",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SONIC-KRW",
     "base_symbol": "SONIC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "WIF-KRW",
     "base_symbol": "WIF",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CPOOL-KRW",
     "base_symbol": "CPOOL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "IP-KRW",
     "base_symbol": "IP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "DKA-KRW",
     "base_symbol": "DKA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SOLV-KRW",
     "base_symbol": "SOLV",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BLUE-KRW",
     "base_symbol": "BLUE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "QKC-KRW",
     "base_symbol": "QKC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "HP-KRW",
     "base_symbol": "HP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "GAME2-KRW",
     "base_symbol": "GAME2",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ERA-KRW",
     "base_symbol": "ERA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ARDR-KRW",
     "base_symbol": "ARDR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BOUNTY-KRW",
     "base_symbol": "BOUNTY",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SHELL-KRW",
     "base_symbol": "SHELL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BERA-KRW",
     "base_symbol": "BERA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BIO-KRW",
     "base_symbol": "BIO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PLUME-KRW",
     "base_symbol": "PLUME",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "OBT-KRW",
     "base_symbol": "OBT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "TRUMP-KRW",
     "base_symbol": "TRUMP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "KERNEL-KRW",
     "base_symbol": "KERNEL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "COOKIE-KRW",
     "base_symbol": "COOKIE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "GNO-KRW",
     "base_symbol": "GNO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "VTHO-KRW",
     "base_symbol": "VTHO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ANIME-KRW",
     "base_symbol": "ANIME",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "RED-KRW",
     "base_symbol": "RED",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "LAYER-KRW",
     "base_symbol": "LAYER",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "WCT-KRW",
     "base_symbol": "WCT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "FLOCK-KRW",
     "base_symbol": "FLOCK",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "KAITO-KRW",
     "base_symbol": "KAITO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BMT-KRW",
     "base_symbol": "BMT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "C-KRW",
     "base_symbol": "C",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SOON-KRW",
     "base_symbol": "SOON",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PAXG-KRW",
     "base_symbol": "PAXG",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AVL-KRW",
     "base_symbol": "AVL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "B3-KRW",
     "base_symbol": "B3",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ELX-KRW",
     "base_symbol": "ELX",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "COW-KRW",
     "base_symbol": "COW",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "WAL-KRW",
     "base_symbol": "WAL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BABY-KRW",
     "base_symbol": "BABY",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ES-KRW",
     "base_symbol": "ES",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "XTER-KRW",
     "base_symbol": "XTER",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "NXPC-KRW",
     "base_symbol": "NXPC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "0G-KRW",
     "base_symbol": "0G",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "GRASS-KRW",
     "base_symbol": "GRASS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ORCA-KRW",
     "base_symbol": "ORCA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "KMNO-KRW",
     "base_symbol": "KMNO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PUMPBTC-KRW",
     "base_symbol": "PUMPBTC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "EPT-KRW",
     "base_symbol": "EPT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "HAEDAL-KRW",
     "base_symbol": "HAEDAL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AI16Z-KRW",
     "base_symbol": "AI16Z",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PARTI-KRW",
     "base_symbol": "PARTI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SXT-KRW",
     "base_symbol": "SXT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PROMPT-KRW",
     "base_symbol": "PROMPT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SIGN-KRW",
     "base_symbol": "SIGN",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BTR-KRW",
     "base_symbol": "BTR",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SAHARA-KRW",
     "base_symbol": "SAHARA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "HEMI-KRW",
     "base_symbol": "HEMI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "H-KRW",
     "base_symbol": "H",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "HOME-KRW",
     "base_symbol": "HOME",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "OM-KRW",
     "base_symbol": "OM",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "LA-KRW",
     "base_symbol": "LA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SOPH-KRW",
     "base_symbol": "SOPH",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "HYPER-KRW",
     "base_symbol": "HYPER",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PROVE-KRW",
     "base_symbol": "PROVE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CUDIS-KRW",
     "base_symbol": "CUDIS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "FORT-KRW",
     "base_symbol": "FORT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "TOSHI-KRW",
     "base_symbol": "TOSHI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "HUMA-KRW",
     "base_symbol": "HUMA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SPK-KRW",
     "base_symbol": "SPK",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "USD1-KRW",
     "base_symbol": "USD1",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SYRUP-KRW",
     "base_symbol": "SYRUP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "NEWT-KRW",
     "base_symbol": "NEWT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "RESOLV-KRW",
     "base_symbol": "RESOLV",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "DOOD-KRW",
     "base_symbol": "DOOD",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "TREE-KRW",
     "base_symbol": "TREE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "EUL-KRW",
     "base_symbol": "EUL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "AVNT-KRW",
     "base_symbol": "AVNT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "OPEN-KRW",
     "base_symbol": "OPEN",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PUMP-KRW",
     "base_symbol": "PUMP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "IRYS-KRW",
     "base_symbol": "IRYS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SD-KRW",
     "base_symbol": "SD",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "BARD-KRW",
     "base_symbol": "BARD",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "TOWNS-KRW",
     "base_symbol": "TOWNS",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MIRA-KRW",
     "base_symbol": "MIRA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "CAMP-KRW",
     "base_symbol": "CAMP",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "XAN-KRW",
     "base_symbol": "XAN",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "POPCAT-KRW",
     "base_symbol": "POPCAT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "WLFI-KRW",
     "base_symbol": "WLFI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "2Z-KRW",
     "base_symbol": "2Z",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "LINEA-KRW",
     "base_symbol": "LINEA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "HOLO-KRW",
     "base_symbol": "HOLO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ZKC-KRW",
     "base_symbol": "ZKC",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ASTER-KRW",
     "base_symbol": "ASTER",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "XPL-KRW",
     "base_symbol": "XPL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "FF-KRW",
     "base_symbol": "FF",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SOMI-KRW",
     "base_symbol": "SOMI",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MON-KRW",
     "base_symbol": "MON",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "FLUID-KRW",
     "base_symbol": "FLUID",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "SUPER-KRW",
     "base_symbol": "SUPER",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "IN-KRW",
     "base_symbol": "IN",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "RECALL-KRW",
     "base_symbol": "RECALL",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ENSO-KRW",
     "base_symbol": "ENSO",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "YB-KRW",
     "base_symbol": "YB",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ZBT-KRW",
     "base_symbol": "ZBT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "NOM-KRW",
     "base_symbol": "NOM",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "ZORA-KRW",
     "base_symbol": "ZORA",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MMT-KRW",
     "base_symbol": "MMT",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "MET-KRW",
     "base_symbol": "MET",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "KITE-KRW",
     "base_symbol": "KITE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "TRUST-KRW",
     "base_symbol": "TRUST",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   },
   {
     "exchange": "BITHUMB",
     "market_code": "PIEVERSE-KRW",
     "base_symbol": "PIEVERSE",
-    "quote_symbol": "KRW",
-    "name_ko": null,
-    "name_en": null
+    "quote_symbol": "KRW"
   }
 ]

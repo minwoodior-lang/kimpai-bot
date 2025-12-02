@@ -1,1 +1,5314 @@
-[]
+[
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-BERA",
+    "base_symbol": "BERA",
+    "quote_symbol": "BTC",
+    "name_ko": "베라체인",
+    "name_en": "Berachain"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-FIL",
+    "base_symbol": "FIL",
+    "quote_symbol": "BTC",
+    "name_ko": "파일코인",
+    "name_en": "Filecoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SIGN",
+    "base_symbol": "SIGN",
+    "quote_symbol": "BTC",
+    "name_ko": "사인",
+    "name_en": "Sign"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-VIRTUAL",
+    "base_symbol": "VIRTUAL",
+    "quote_symbol": "BTC",
+    "name_ko": "버추얼프로토콜",
+    "name_en": "Virtuals Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-BAT",
+    "base_symbol": "BAT",
+    "quote_symbol": "BTC",
+    "name_ko": "베이직어텐션토큰",
+    "name_en": "Basic Attention Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-WAXP",
+    "base_symbol": "WAXP",
+    "quote_symbol": "KRW",
+    "name_ko": "왁스",
+    "name_en": "WAX"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-PEPE",
+    "base_symbol": "PEPE",
+    "quote_symbol": "USDT",
+    "name_ko": "페페",
+    "name_en": "Pepe"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-BAR",
+    "base_symbol": "BAR",
+    "quote_symbol": "BTC",
+    "name_ko": "FC바르셀로나",
+    "name_en": "FC Barcelona Fan Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-WCT",
+    "base_symbol": "WCT",
+    "quote_symbol": "USDT",
+    "name_ko": "월렛커넥트",
+    "name_en": "WalletConnect"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-CARV",
+    "base_symbol": "CARV",
+    "quote_symbol": "KRW",
+    "name_ko": "카브",
+    "name_en": "CARV"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-LSK",
+    "base_symbol": "LSK",
+    "quote_symbol": "KRW",
+    "name_ko": "리스크",
+    "name_en": "Lisk"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-DOGE",
+    "base_symbol": "DOGE",
+    "quote_symbol": "USDT",
+    "name_ko": "도지코인",
+    "name_en": "Dogecoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-0G",
+    "base_symbol": "0G",
+    "quote_symbol": "KRW",
+    "name_ko": "제로지",
+    "name_en": "0G"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-AXL",
+    "base_symbol": "AXL",
+    "quote_symbol": "USDT",
+    "name_ko": "엑셀라",
+    "name_en": "Axelar"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-YGG",
+    "base_symbol": "YGG",
+    "quote_symbol": "USDT",
+    "name_ko": "일드길드게임즈",
+    "name_en": "Yield Guild Games"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SCR",
+    "base_symbol": "SCR",
+    "quote_symbol": "BTC",
+    "name_ko": "스크롤",
+    "name_en": "Scroll"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-JASMY",
+    "base_symbol": "JASMY",
+    "quote_symbol": "USDT",
+    "name_ko": "재스미코인",
+    "name_en": "JasmyCoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-WLD",
+    "base_symbol": "WLD",
+    "quote_symbol": "BTC",
+    "name_ko": "월드코인",
+    "name_en": "Worldcoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-VANA",
+    "base_symbol": "VANA",
+    "quote_symbol": "BTC",
+    "name_ko": "바나",
+    "name_en": "Vana"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-LWA",
+    "base_symbol": "LWA",
+    "quote_symbol": "BTC",
+    "name_ko": "루미웨이브",
+    "name_en": "LumiWave"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-DGB",
+    "base_symbol": "DGB",
+    "quote_symbol": "BTC",
+    "name_ko": "디지바이트",
+    "name_en": "DigiByte"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-BONK",
+    "base_symbol": "BONK",
+    "quote_symbol": "USDT",
+    "name_ko": "봉크",
+    "name_en": "Bonk"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-BCH",
+    "base_symbol": "BCH",
+    "quote_symbol": "BTC",
+    "name_ko": "비트코인캐시",
+    "name_en": "Bitcoin Cash"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-JASMY",
+    "base_symbol": "JASMY",
+    "quote_symbol": "BTC",
+    "name_ko": "재스미코인",
+    "name_en": "JasmyCoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-BORA",
+    "base_symbol": "BORA",
+    "quote_symbol": "KRW",
+    "name_ko": "보라",
+    "name_en": "BORA"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-PUNDIX",
+    "base_symbol": "PUNDIX",
+    "quote_symbol": "KRW",
+    "name_ko": "펀디엑스",
+    "name_en": "Pundi X"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ORBS",
+    "base_symbol": "ORBS",
+    "quote_symbol": "BTC",
+    "name_ko": "오브스",
+    "name_en": "Orbs"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-WAL",
+    "base_symbol": "WAL",
+    "quote_symbol": "USDT",
+    "name_ko": "월러스",
+    "name_en": "Walrus"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-USD1",
+    "base_symbol": "USD1",
+    "quote_symbol": "KRW",
+    "name_ko": "월드리버티파이낸셜유에스디",
+    "name_en": "World Liberty Financial USD"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-WLFI",
+    "base_symbol": "WLFI",
+    "quote_symbol": "USDT",
+    "name_ko": "월드리버티파이낸셜",
+    "name_en": "World Liberty Financial"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-BAT",
+    "base_symbol": "BAT",
+    "quote_symbol": "KRW",
+    "name_ko": "베이직어텐션토큰",
+    "name_en": "Basic Attention Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-NOM",
+    "base_symbol": "NOM",
+    "quote_symbol": "USDT",
+    "name_ko": "노미나",
+    "name_en": "Nomina"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-HUNT",
+    "base_symbol": "HUNT",
+    "quote_symbol": "KRW",
+    "name_ko": "헌트",
+    "name_en": "HUNT"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-PENGU",
+    "base_symbol": "PENGU",
+    "quote_symbol": "KRW",
+    "name_ko": "펏지펭귄",
+    "name_en": "Pudgy Penguins"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-FIL",
+    "base_symbol": "FIL",
+    "quote_symbol": "KRW",
+    "name_ko": "파일코인",
+    "name_en": "Filecoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ANIME",
+    "base_symbol": "ANIME",
+    "quote_symbol": "BTC",
+    "name_ko": "애니메코인",
+    "name_en": "Animecoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ORCA",
+    "base_symbol": "ORCA",
+    "quote_symbol": "BTC",
+    "name_ko": "오르카",
+    "name_en": "Orca"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-BEAM",
+    "base_symbol": "BEAM",
+    "quote_symbol": "KRW",
+    "name_ko": "빔",
+    "name_en": "Beam"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SOON",
+    "base_symbol": "SOON",
+    "quote_symbol": "BTC",
+    "name_ko": "쑨",
+    "name_en": "SOON"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-LRC",
+    "base_symbol": "LRC",
+    "quote_symbol": "BTC",
+    "name_ko": "루프링",
+    "name_en": "Loopring"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-DOOD",
+    "base_symbol": "DOOD",
+    "quote_symbol": "KRW",
+    "name_ko": "두들즈",
+    "name_en": "Doodles"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-TOKAMAK",
+    "base_symbol": "TOKAMAK",
+    "quote_symbol": "BTC",
+    "name_ko": "토카막네트워크",
+    "name_en": "Tokamak Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SOPH",
+    "base_symbol": "SOPH",
+    "quote_symbol": "BTC",
+    "name_ko": "소폰",
+    "name_en": "Sophon"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-STRAX",
+    "base_symbol": "STRAX",
+    "quote_symbol": "BTC",
+    "name_ko": "스트라티스",
+    "name_en": "Stratis"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-WAVES",
+    "base_symbol": "WAVES",
+    "quote_symbol": "KRW",
+    "name_ko": "웨이브",
+    "name_en": "Waves"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-USDC",
+    "base_symbol": "USDC",
+    "quote_symbol": "KRW",
+    "name_ko": "유에스디코인",
+    "name_en": "USD Coin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MOVE",
+    "base_symbol": "MOVE",
+    "quote_symbol": "KRW",
+    "name_ko": "무브먼트",
+    "name_en": "Movement"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-TREE",
+    "base_symbol": "TREE",
+    "quote_symbol": "KRW",
+    "name_ko": "트리하우스",
+    "name_en": "Treehouse"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-GLMR",
+    "base_symbol": "GLMR",
+    "quote_symbol": "BTC",
+    "name_ko": "문빔",
+    "name_en": "Moonbeam"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-AERGO",
+    "base_symbol": "AERGO",
+    "quote_symbol": "KRW",
+    "name_ko": "아르고",
+    "name_en": "Aergo"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-USDT",
+    "base_symbol": "USDT",
+    "quote_symbol": "KRW",
+    "name_ko": "테더",
+    "name_en": "Tether"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-LSK",
+    "base_symbol": "LSK",
+    "quote_symbol": "BTC",
+    "name_ko": "리스크",
+    "name_en": "Lisk"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-RENDER",
+    "base_symbol": "RENDER",
+    "quote_symbol": "USDT",
+    "name_ko": "렌더토큰",
+    "name_en": "Render Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SOMI",
+    "base_symbol": "SOMI",
+    "quote_symbol": "BTC",
+    "name_ko": "솜니아",
+    "name_en": "Somnia"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-RESOLV",
+    "base_symbol": "RESOLV",
+    "quote_symbol": "USDT",
+    "name_ko": "리졸브",
+    "name_en": "Resolv"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-2Z",
+    "base_symbol": "2Z",
+    "quote_symbol": "KRW",
+    "name_ko": "더블제로",
+    "name_en": "DoubleZero"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-STEEM",
+    "base_symbol": "STEEM",
+    "quote_symbol": "BTC",
+    "name_ko": "스팀",
+    "name_en": "Steem"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-LPT",
+    "base_symbol": "LPT",
+    "quote_symbol": "USDT",
+    "name_ko": "라이브피어",
+    "name_en": "Livepeer"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-BOUNTY",
+    "base_symbol": "BOUNTY",
+    "quote_symbol": "KRW",
+    "name_ko": "체인바운티",
+    "name_en": "Chainbounty"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-KAITO",
+    "base_symbol": "KAITO",
+    "quote_symbol": "KRW",
+    "name_ko": "카이토",
+    "name_en": "KAITO"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-LPT",
+    "base_symbol": "LPT",
+    "quote_symbol": "KRW",
+    "name_ko": "라이브피어",
+    "name_en": "Livepeer"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-PROVE",
+    "base_symbol": "PROVE",
+    "quote_symbol": "BTC",
+    "name_ko": "서싱트",
+    "name_en": "Succinct"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-DEEP",
+    "base_symbol": "DEEP",
+    "quote_symbol": "BTC",
+    "name_ko": "딥북",
+    "name_en": "DeepBook"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ARPA",
+    "base_symbol": "ARPA",
+    "quote_symbol": "USDT",
+    "name_ko": "알파",
+    "name_en": "ARPA"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-INIT",
+    "base_symbol": "INIT",
+    "quote_symbol": "BTC",
+    "name_ko": "이니시아",
+    "name_en": "Initia"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-LPT",
+    "base_symbol": "LPT",
+    "quote_symbol": "BTC",
+    "name_ko": "라이브피어",
+    "name_en": "Livepeer"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-POLYX",
+    "base_symbol": "POLYX",
+    "quote_symbol": "BTC",
+    "name_ko": "폴리매쉬",
+    "name_en": "Polymesh"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-BLAST",
+    "base_symbol": "BLAST",
+    "quote_symbol": "KRW",
+    "name_ko": "블라스트",
+    "name_en": "Blast"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ANIME",
+    "base_symbol": "ANIME",
+    "quote_symbol": "USDT",
+    "name_ko": "애니메코인",
+    "name_en": "Animecoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-USDC",
+    "base_symbol": "USDC",
+    "quote_symbol": "USDT",
+    "name_ko": "유에스디코인",
+    "name_en": "USD Coin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-TREE",
+    "base_symbol": "TREE",
+    "quote_symbol": "USDT",
+    "name_ko": "트리하우스",
+    "name_en": "Treehouse"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-BIO",
+    "base_symbol": "BIO",
+    "quote_symbol": "BTC",
+    "name_ko": "바이오프로토콜",
+    "name_en": "Bio Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-WLD",
+    "base_symbol": "WLD",
+    "quote_symbol": "USDT",
+    "name_ko": "월드코인",
+    "name_en": "Worldcoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-DRIFT",
+    "base_symbol": "DRIFT",
+    "quote_symbol": "BTC",
+    "name_ko": "드리프트",
+    "name_en": "Drift"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-FLUID",
+    "base_symbol": "FLUID",
+    "quote_symbol": "USDT",
+    "name_ko": "플루이드",
+    "name_en": "Fluid"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-W",
+    "base_symbol": "W",
+    "quote_symbol": "BTC",
+    "name_ko": "웜홀",
+    "name_en": "Wormhole"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-SCR",
+    "base_symbol": "SCR",
+    "quote_symbol": "USDT",
+    "name_ko": "스크롤",
+    "name_en": "Scroll"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-T",
+    "base_symbol": "T",
+    "quote_symbol": "BTC",
+    "name_ko": "쓰레스홀드",
+    "name_en": "Threshold"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-BAT",
+    "base_symbol": "BAT",
+    "quote_symbol": "USDT",
+    "name_ko": "베이직어텐션토큰",
+    "name_en": "Basic Attention Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-DOOD",
+    "base_symbol": "DOOD",
+    "quote_symbol": "USDT",
+    "name_ko": "두들즈",
+    "name_en": "Doodles"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SKY",
+    "base_symbol": "SKY",
+    "quote_symbol": "BTC",
+    "name_ko": "스카이프로토콜",
+    "name_en": "Sky Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-DKA",
+    "base_symbol": "DKA",
+    "quote_symbol": "KRW",
+    "name_ko": "디카르고",
+    "name_en": "dKargo"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-A",
+    "base_symbol": "A",
+    "quote_symbol": "BTC",
+    "name_ko": "볼타",
+    "name_en": "Vaulta"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-G",
+    "base_symbol": "G",
+    "quote_symbol": "BTC",
+    "name_ko": "그래비티",
+    "name_en": "Gravity"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-DNT",
+    "base_symbol": "DNT",
+    "quote_symbol": "BTC",
+    "name_ko": "디스트릭트0x",
+    "name_en": "district0x"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-BABY",
+    "base_symbol": "BABY",
+    "quote_symbol": "BTC",
+    "name_ko": "바빌론",
+    "name_en": "Babylon"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-BEAM",
+    "base_symbol": "BEAM",
+    "quote_symbol": "USDT",
+    "name_ko": "빔",
+    "name_en": "Beam"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-FORT",
+    "base_symbol": "FORT",
+    "quote_symbol": "BTC",
+    "name_ko": "포르타",
+    "name_en": "Forta"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ANKR",
+    "base_symbol": "ANKR",
+    "quote_symbol": "KRW",
+    "name_ko": "앵커",
+    "name_en": "Ankr"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ALGO",
+    "base_symbol": "ALGO",
+    "quote_symbol": "KRW",
+    "name_ko": "알고랜드",
+    "name_en": "Algorand"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-FIL",
+    "base_symbol": "FIL",
+    "quote_symbol": "USDT",
+    "name_ko": "파일코인",
+    "name_en": "Filecoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MIRA",
+    "base_symbol": "MIRA",
+    "quote_symbol": "BTC",
+    "name_ko": "미라네트워크",
+    "name_en": "Mira Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-HOLO",
+    "base_symbol": "HOLO",
+    "quote_symbol": "BTC",
+    "name_ko": "홀로월드에이아이",
+    "name_en": "Holoworld AI"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SHIB",
+    "base_symbol": "SHIB",
+    "quote_symbol": "KRW",
+    "name_ko": "시바이누",
+    "name_en": "Shiba Inu"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ENSO",
+    "base_symbol": "ENSO",
+    "quote_symbol": "BTC",
+    "name_ko": "엔소",
+    "name_en": "Enso"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-UNI",
+    "base_symbol": "UNI",
+    "quote_symbol": "KRW",
+    "name_ko": "유니스왑",
+    "name_en": "Uniswap"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-BIO",
+    "base_symbol": "BIO",
+    "quote_symbol": "KRW",
+    "name_ko": "바이오프로토콜",
+    "name_en": "Bio Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SYRUP",
+    "base_symbol": "SYRUP",
+    "quote_symbol": "BTC",
+    "name_ko": "메이플파이낸스",
+    "name_en": "Maple Finance"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-HUMA",
+    "base_symbol": "HUMA",
+    "quote_symbol": "USDT",
+    "name_ko": "후마파이낸스",
+    "name_en": "Huma Finance"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-OAS",
+    "base_symbol": "OAS",
+    "quote_symbol": "BTC",
+    "name_ko": "오아시스",
+    "name_en": "Oasys"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-WLFI",
+    "base_symbol": "WLFI",
+    "quote_symbol": "KRW",
+    "name_ko": "월드리버티파이낸셜",
+    "name_en": "World Liberty Financial"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-TOKAMAK",
+    "base_symbol": "TOKAMAK",
+    "quote_symbol": "KRW",
+    "name_ko": "토카막네트워크",
+    "name_en": "Tokamak Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-UNI",
+    "base_symbol": "UNI",
+    "quote_symbol": "BTC",
+    "name_ko": "유니스왑",
+    "name_en": "Uniswap"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-USD1",
+    "base_symbol": "USD1",
+    "quote_symbol": "USDT",
+    "name_ko": "월드리버티파이낸셜유에스디",
+    "name_en": "World Liberty Financial USD"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-OBSR",
+    "base_symbol": "OBSR",
+    "quote_symbol": "USDT",
+    "name_ko": "옵저버",
+    "name_en": "Observer"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-CYBER",
+    "base_symbol": "CYBER",
+    "quote_symbol": "KRW",
+    "name_ko": "사이버",
+    "name_en": "Cyber"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-JUV",
+    "base_symbol": "JUV",
+    "quote_symbol": "BTC",
+    "name_ko": "유벤투스",
+    "name_en": "Juventus Fan Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-DOGE",
+    "base_symbol": "DOGE",
+    "quote_symbol": "KRW",
+    "name_ko": "도지코인",
+    "name_en": "Dogecoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-WLD",
+    "base_symbol": "WLD",
+    "quote_symbol": "KRW",
+    "name_ko": "월드코인",
+    "name_en": "Worldcoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-PEPE",
+    "base_symbol": "PEPE",
+    "quote_symbol": "KRW",
+    "name_ko": "페페",
+    "name_en": "Pepe"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-HBAR",
+    "base_symbol": "HBAR",
+    "quote_symbol": "KRW",
+    "name_ko": "헤데라",
+    "name_en": "Hedera"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-BCH",
+    "base_symbol": "BCH",
+    "quote_symbol": "KRW",
+    "name_ko": "비트코인캐시",
+    "name_en": "Bitcoin Cash"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-BFC",
+    "base_symbol": "BFC",
+    "quote_symbol": "BTC",
+    "name_ko": "바이프로스트",
+    "name_en": "Bifrost"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-CARV",
+    "base_symbol": "CARV",
+    "quote_symbol": "USDT",
+    "name_ko": "카브",
+    "name_en": "CARV"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-NEWT",
+    "base_symbol": "NEWT",
+    "quote_symbol": "KRW",
+    "name_ko": "뉴턴프로토콜",
+    "name_en": "Newton Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SEI",
+    "base_symbol": "SEI",
+    "quote_symbol": "KRW",
+    "name_ko": "세이",
+    "name_en": "Sei"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-JUP",
+    "base_symbol": "JUP",
+    "quote_symbol": "USDT",
+    "name_ko": "주피터",
+    "name_en": "Jupiter"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ZORA",
+    "base_symbol": "ZORA",
+    "quote_symbol": "BTC",
+    "name_ko": "조라",
+    "name_en": "Zora"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MINA",
+    "base_symbol": "MINA",
+    "quote_symbol": "BTC",
+    "name_ko": "미나",
+    "name_en": "Mina"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-KITE",
+    "base_symbol": "KITE",
+    "quote_symbol": "BTC",
+    "name_ko": "카이트",
+    "name_en": "Kite"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-BONK",
+    "base_symbol": "BONK",
+    "quote_symbol": "KRW",
+    "name_ko": "봉크",
+    "name_en": "Bonk"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-JST",
+    "base_symbol": "JST",
+    "quote_symbol": "KRW",
+    "name_ko": "저스트",
+    "name_en": "JUST"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-AAVE",
+    "base_symbol": "AAVE",
+    "quote_symbol": "KRW",
+    "name_ko": "에이브",
+    "name_en": "Aave"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-JTO",
+    "base_symbol": "JTO",
+    "quote_symbol": "KRW",
+    "name_ko": "지토",
+    "name_en": "Jito"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-DKA",
+    "base_symbol": "DKA",
+    "quote_symbol": "BTC",
+    "name_ko": "디카르고",
+    "name_en": "dKargo"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-BIGTIME",
+    "base_symbol": "BIGTIME",
+    "quote_symbol": "USDT",
+    "name_ko": "빅타임",
+    "name_en": "Big Time"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-HAEDAL",
+    "base_symbol": "HAEDAL",
+    "quote_symbol": "BTC",
+    "name_ko": "해달프로토콜",
+    "name_en": "Haedal Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-JST",
+    "base_symbol": "JST",
+    "quote_symbol": "BTC",
+    "name_ko": "저스트",
+    "name_en": "JUST"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-JTO",
+    "base_symbol": "JTO",
+    "quote_symbol": "USDT",
+    "name_ko": "지토",
+    "name_en": "Jito"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SEI",
+    "base_symbol": "SEI",
+    "quote_symbol": "BTC",
+    "name_ko": "세이",
+    "name_en": "Sei"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-JUP",
+    "base_symbol": "JUP",
+    "quote_symbol": "KRW",
+    "name_ko": "주피터",
+    "name_en": "Jupiter"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-NEWT",
+    "base_symbol": "NEWT",
+    "quote_symbol": "USDT",
+    "name_ko": "뉴턴프로토콜",
+    "name_en": "Newton Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-JTO",
+    "base_symbol": "JTO",
+    "quote_symbol": "BTC",
+    "name_ko": "지토",
+    "name_en": "Jito"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-TOSHI",
+    "base_symbol": "TOSHI",
+    "quote_symbol": "USDT",
+    "name_ko": "토시",
+    "name_en": "Toshi"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-BCH",
+    "base_symbol": "BCH",
+    "quote_symbol": "USDT",
+    "name_ko": "비트코인캐시",
+    "name_en": "Bitcoin Cash"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-DGB",
+    "base_symbol": "DGB",
+    "quote_symbol": "USDT",
+    "name_ko": "디지바이트",
+    "name_en": "DigiByte"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-JUP",
+    "base_symbol": "JUP",
+    "quote_symbol": "BTC",
+    "name_ko": "주피터",
+    "name_en": "Jupiter"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-LWA",
+    "base_symbol": "LWA",
+    "quote_symbol": "USDT",
+    "name_ko": "루미웨이브",
+    "name_en": "LumiWave"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-FLOW",
+    "base_symbol": "FLOW",
+    "quote_symbol": "KRW",
+    "name_ko": "플로우",
+    "name_en": "Flow"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ALT",
+    "base_symbol": "ALT",
+    "quote_symbol": "KRW",
+    "name_ko": "알트레이어",
+    "name_en": "Altlayer"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-BEAM",
+    "base_symbol": "BEAM",
+    "quote_symbol": "BTC",
+    "name_ko": "빔",
+    "name_en": "Beam"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-LAYER",
+    "base_symbol": "LAYER",
+    "quote_symbol": "KRW",
+    "name_ko": "솔레이어",
+    "name_en": "Solayer"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-TUSD",
+    "base_symbol": "TUSD",
+    "quote_symbol": "USDT",
+    "name_ko": "트루USD",
+    "name_en": "TrueUSD"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-STG",
+    "base_symbol": "STG",
+    "quote_symbol": "BTC",
+    "name_ko": "스타게이트파이낸스",
+    "name_en": "Stargate Finance"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-TRX",
+    "base_symbol": "TRX",
+    "quote_symbol": "KRW",
+    "name_ko": "트론",
+    "name_en": "TRON"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-POWR",
+    "base_symbol": "POWR",
+    "quote_symbol": "KRW",
+    "name_ko": "파워렛저",
+    "name_en": "Power ledger"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ORDER",
+    "base_symbol": "ORDER",
+    "quote_symbol": "USDT",
+    "name_ko": "오덜리",
+    "name_en": "Orderly"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ATOM",
+    "base_symbol": "ATOM",
+    "quote_symbol": "KRW",
+    "name_ko": "코스모스",
+    "name_en": "Cosmos"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-AVNT",
+    "base_symbol": "AVNT",
+    "quote_symbol": "USDT",
+    "name_ko": "아반티스",
+    "name_en": "Avantis"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-USDC",
+    "base_symbol": "USDC",
+    "quote_symbol": "BTC",
+    "name_ko": "유에스디코인",
+    "name_en": "USD Coin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MOVE",
+    "base_symbol": "MOVE",
+    "quote_symbol": "BTC",
+    "name_ko": "무브먼트",
+    "name_en": "Movement"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-TREE",
+    "base_symbol": "TREE",
+    "quote_symbol": "BTC",
+    "name_ko": "트리하우스",
+    "name_en": "Treehouse"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-BOUNTY",
+    "base_symbol": "BOUNTY",
+    "quote_symbol": "BTC",
+    "name_ko": "체인바운티",
+    "name_en": "Chainbounty"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-STX",
+    "base_symbol": "STX",
+    "quote_symbol": "BTC",
+    "name_ko": "스택스",
+    "name_en": "Stacks"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ARKM",
+    "base_symbol": "ARKM",
+    "quote_symbol": "KRW",
+    "name_ko": "아캄",
+    "name_en": "Arkham"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-BIO",
+    "base_symbol": "BIO",
+    "quote_symbol": "USDT",
+    "name_ko": "바이오프로토콜",
+    "name_en": "Bio Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-USDP",
+    "base_symbol": "USDP",
+    "quote_symbol": "BTC",
+    "name_ko": "팍스달러",
+    "name_en": "Pax Dollar"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-USDT",
+    "base_symbol": "USDT",
+    "quote_symbol": "BTC",
+    "name_ko": "테더",
+    "name_en": "Tether"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-USDS",
+    "base_symbol": "USDS",
+    "quote_symbol": "BTC",
+    "name_ko": "유에스디에스",
+    "name_en": "USDS"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-BSV",
+    "base_symbol": "BSV",
+    "quote_symbol": "BTC",
+    "name_ko": "비트코인에스브이",
+    "name_en": "Bitcoin SV"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-CRO",
+    "base_symbol": "CRO",
+    "quote_symbol": "KRW",
+    "name_ko": "크로노스",
+    "name_en": "Cronos"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SUI",
+    "base_symbol": "SUI",
+    "quote_symbol": "BTC",
+    "name_ko": "수이",
+    "name_en": "Sui"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-NXPC",
+    "base_symbol": "NXPC",
+    "quote_symbol": "KRW",
+    "name_ko": "넥스페이스",
+    "name_en": "Nexpace"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-PUNDIX",
+    "base_symbol": "PUNDIX",
+    "quote_symbol": "BTC",
+    "name_ko": "펀디엑스",
+    "name_en": "Pundi X"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-A",
+    "base_symbol": "A",
+    "quote_symbol": "KRW",
+    "name_ko": "볼타",
+    "name_en": "Vaulta"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MED",
+    "base_symbol": "MED",
+    "quote_symbol": "BTC",
+    "name_ko": "메디블록",
+    "name_en": "MediBloc"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-TRUMP",
+    "base_symbol": "TRUMP",
+    "quote_symbol": "KRW",
+    "name_ko": "오피셜트럼프",
+    "name_en": "Official Trump"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-OBSR",
+    "base_symbol": "OBSR",
+    "quote_symbol": "BTC",
+    "name_ko": "옵저버",
+    "name_en": "Observer"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-F",
+    "base_symbol": "F",
+    "quote_symbol": "KRW",
+    "name_ko": "신퓨처스",
+    "name_en": "SynFutures"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-G",
+    "base_symbol": "G",
+    "quote_symbol": "KRW",
+    "name_ko": "그래비티",
+    "name_en": "Gravity"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-UNI",
+    "base_symbol": "UNI",
+    "quote_symbol": "USDT",
+    "name_ko": "유니스왑",
+    "name_en": "Uniswap"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-USD1",
+    "base_symbol": "USD1",
+    "quote_symbol": "BTC",
+    "name_ko": "월드리버티파이낸셜유에스디",
+    "name_en": "World Liberty Financial USD"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MEW",
+    "base_symbol": "MEW",
+    "quote_symbol": "BTC",
+    "name_ko": "캣인어독스월드",
+    "name_en": "cat in a dogs world"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-OAS",
+    "base_symbol": "OAS",
+    "quote_symbol": "USDT",
+    "name_ko": "오아시스",
+    "name_en": "Oasys"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-HUMA",
+    "base_symbol": "HUMA",
+    "quote_symbol": "BTC",
+    "name_ko": "후마파이낸스",
+    "name_en": "Huma Finance"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-CELO",
+    "base_symbol": "CELO",
+    "quote_symbol": "KRW",
+    "name_ko": "셀로",
+    "name_en": "Celo"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-PROM",
+    "base_symbol": "PROM",
+    "quote_symbol": "BTC",
+    "name_ko": "프롬",
+    "name_en": "Prom"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-AERO",
+    "base_symbol": "AERO",
+    "quote_symbol": "KRW",
+    "name_ko": "에어로드롬파이낸스",
+    "name_en": "Aerodrome Finance"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-CTC",
+    "base_symbol": "CTC",
+    "quote_symbol": "KRW",
+    "name_ko": "크레딧코인",
+    "name_en": "Creditcoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-HUNT",
+    "base_symbol": "HUNT",
+    "quote_symbol": "BTC",
+    "name_ko": "헌트",
+    "name_en": "HUNT"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-PENGU",
+    "base_symbol": "PENGU",
+    "quote_symbol": "BTC",
+    "name_ko": "펏지펭귄",
+    "name_en": "Pudgy Penguins"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ANIME",
+    "base_symbol": "ANIME",
+    "quote_symbol": "KRW",
+    "name_ko": "애니메코인",
+    "name_en": "Animecoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-APT",
+    "base_symbol": "APT",
+    "quote_symbol": "KRW",
+    "name_ko": "앱토스",
+    "name_en": "Aptos"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-AUCTION",
+    "base_symbol": "AUCTION",
+    "quote_symbol": "BTC",
+    "name_ko": "바운스토큰",
+    "name_en": "Bounce"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MOCA",
+    "base_symbol": "MOCA",
+    "quote_symbol": "KRW",
+    "name_ko": "모카네트워크",
+    "name_en": "Moca Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-API3",
+    "base_symbol": "API3",
+    "quote_symbol": "KRW",
+    "name_ko": "에이피아이쓰리",
+    "name_en": "API3"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-LINEA",
+    "base_symbol": "LINEA",
+    "quote_symbol": "BTC",
+    "name_ko": "리네아",
+    "name_en": "Linea"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-SPK",
+    "base_symbol": "SPK",
+    "quote_symbol": "USDT",
+    "name_ko": "스파크",
+    "name_en": "Spark"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-WAXP",
+    "base_symbol": "WAXP",
+    "quote_symbol": "BTC",
+    "name_ko": "왁스",
+    "name_en": "WAX"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MOODENG",
+    "base_symbol": "MOODENG",
+    "quote_symbol": "BTC",
+    "name_ko": "무뎅",
+    "name_en": "Moo Deng"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-AHT",
+    "base_symbol": "AHT",
+    "quote_symbol": "KRW",
+    "name_ko": "아하토큰",
+    "name_en": "AhaToken"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-OGN",
+    "base_symbol": "OGN",
+    "quote_symbol": "BTC",
+    "name_ko": "오리진프로토콜",
+    "name_en": "Origin Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-NEAR",
+    "base_symbol": "NEAR",
+    "quote_symbol": "USDT",
+    "name_ko": "니어프로토콜",
+    "name_en": "NEAR Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SOL",
+    "base_symbol": "SOL",
+    "quote_symbol": "BTC",
+    "name_ko": "솔라나",
+    "name_en": "Solana"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-BNT",
+    "base_symbol": "BNT",
+    "quote_symbol": "USDT",
+    "name_ko": "뱅코르",
+    "name_en": "Bancor"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-HYPER",
+    "base_symbol": "HYPER",
+    "quote_symbol": "BTC",
+    "name_ko": "하이퍼레인",
+    "name_en": "Hyperlane"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-CARV",
+    "base_symbol": "CARV",
+    "quote_symbol": "BTC",
+    "name_ko": "카브",
+    "name_en": "CARV"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-EGLD",
+    "base_symbol": "EGLD",
+    "quote_symbol": "KRW",
+    "name_ko": "멀티버스엑스",
+    "name_en": "MultiversX"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-AGLD",
+    "base_symbol": "AGLD",
+    "quote_symbol": "USDT",
+    "name_ko": "어드벤처골드",
+    "name_en": "Adventure Gold"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-HYPER",
+    "base_symbol": "HYPER",
+    "quote_symbol": "USDT",
+    "name_ko": "하이퍼레인",
+    "name_en": "Hyperlane"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SPK",
+    "base_symbol": "SPK",
+    "quote_symbol": "BTC",
+    "name_ko": "스파크",
+    "name_en": "Spark"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-BNT",
+    "base_symbol": "BNT",
+    "quote_symbol": "BTC",
+    "name_ko": "뱅코르",
+    "name_en": "Bancor"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ERA",
+    "base_symbol": "ERA",
+    "quote_symbol": "KRW",
+    "name_ko": "칼데라",
+    "name_en": "Caldera"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-SOL",
+    "base_symbol": "SOL",
+    "quote_symbol": "USDT",
+    "name_ko": "솔라나",
+    "name_en": "Solana"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-SWELL",
+    "base_symbol": "SWELL",
+    "quote_symbol": "USDT",
+    "name_ko": "스웰네트워크",
+    "name_en": "Swell Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-MOODENG",
+    "base_symbol": "MOODENG",
+    "quote_symbol": "USDT",
+    "name_ko": "무뎅",
+    "name_en": "Moo Deng"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-BORA",
+    "base_symbol": "BORA",
+    "quote_symbol": "BTC",
+    "name_ko": "보라",
+    "name_en": "BORA"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-FF",
+    "base_symbol": "FF",
+    "quote_symbol": "KRW",
+    "name_ko": "팔콘파이낸스",
+    "name_en": "Falcon Finance"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-DOT",
+    "base_symbol": "DOT",
+    "quote_symbol": "BTC",
+    "name_ko": "폴카닷",
+    "name_en": "Polkadot"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-PLUME",
+    "base_symbol": "PLUME",
+    "quote_symbol": "KRW",
+    "name_ko": "플룸",
+    "name_en": "Plume"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-CPOOL",
+    "base_symbol": "CPOOL",
+    "quote_symbol": "BTC",
+    "name_ko": "클리어풀",
+    "name_en": "Clearpool"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-NEO",
+    "base_symbol": "NEO",
+    "quote_symbol": "KRW",
+    "name_ko": "네오",
+    "name_en": "NEO"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ETC",
+    "base_symbol": "ETC",
+    "quote_symbol": "KRW",
+    "name_ko": "이더리움클래식",
+    "name_en": "Ethereum Classic"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-IOTA",
+    "base_symbol": "IOTA",
+    "quote_symbol": "KRW",
+    "name_ko": "아이오타",
+    "name_en": "IOTA"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-IOST",
+    "base_symbol": "IOST",
+    "quote_symbol": "KRW",
+    "name_ko": "아이오에스티",
+    "name_en": "IOST"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-AKT",
+    "base_symbol": "AKT",
+    "quote_symbol": "KRW",
+    "name_ko": "아카시네트워크",
+    "name_en": "Akash Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-COW",
+    "base_symbol": "COW",
+    "quote_symbol": "KRW",
+    "name_ko": "카우프로토콜",
+    "name_en": "CoW Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SNX",
+    "base_symbol": "SNX",
+    "quote_symbol": "BTC",
+    "name_ko": "신세틱스",
+    "name_en": "Synthetix"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SNT",
+    "base_symbol": "SNT",
+    "quote_symbol": "BTC",
+    "name_ko": "스테이터스네트워크토큰",
+    "name_en": "Status Network Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-VIRTUAL",
+    "base_symbol": "VIRTUAL",
+    "quote_symbol": "KRW",
+    "name_ko": "버추얼프로토콜",
+    "name_en": "Virtuals Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-SUPER",
+    "base_symbol": "SUPER",
+    "quote_symbol": "USDT",
+    "name_ko": "슈퍼버스",
+    "name_en": "SuperVerse"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ETH",
+    "base_symbol": "ETH",
+    "quote_symbol": "KRW",
+    "name_ko": "이더리움",
+    "name_en": "Ethereum"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-PENDLE",
+    "base_symbol": "PENDLE",
+    "quote_symbol": "BTC",
+    "name_ko": "펜들",
+    "name_en": "Pendle"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MON",
+    "base_symbol": "MON",
+    "quote_symbol": "BTC",
+    "name_ko": "모나드",
+    "name_en": "Monad"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-IQ",
+    "base_symbol": "IQ",
+    "quote_symbol": "KRW",
+    "name_ko": "아이큐",
+    "name_en": "IQ.wiki"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-EGLD",
+    "base_symbol": "EGLD",
+    "quote_symbol": "USDT",
+    "name_ko": "멀티버스엑스",
+    "name_en": "MultiversX"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-IP",
+    "base_symbol": "IP",
+    "quote_symbol": "KRW",
+    "name_ko": "스토리",
+    "name_en": "Story"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-DOGE",
+    "base_symbol": "DOGE",
+    "quote_symbol": "BTC",
+    "name_ko": "도지코인",
+    "name_en": "Dogecoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-NEAR",
+    "base_symbol": "NEAR",
+    "quote_symbol": "KRW",
+    "name_ko": "니어프로토콜",
+    "name_en": "NEAR Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-RVN",
+    "base_symbol": "RVN",
+    "quote_symbol": "KRW",
+    "name_ko": "레이븐코인",
+    "name_en": "Ravencoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ZIL",
+    "base_symbol": "ZIL",
+    "quote_symbol": "BTC",
+    "name_ko": "질리카",
+    "name_en": "Zilliqa"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-AGLD",
+    "base_symbol": "AGLD",
+    "quote_symbol": "KRW",
+    "name_ko": "어드벤처골드",
+    "name_en": "Adventure Gold"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ID",
+    "base_symbol": "ID",
+    "quote_symbol": "KRW",
+    "name_ko": "스페이스아이디",
+    "name_en": "SPACE ID"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-IN",
+    "base_symbol": "IN",
+    "quote_symbol": "KRW",
+    "name_ko": "인피닛",
+    "name_en": "Infinit"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-VAL",
+    "base_symbol": "VAL",
+    "quote_symbol": "BTC",
+    "name_ko": "밸리디티",
+    "name_en": "Validity"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-DRIFT",
+    "base_symbol": "DRIFT",
+    "quote_symbol": "USDT",
+    "name_ko": "드리프트",
+    "name_en": "Drift"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-2Z",
+    "base_symbol": "2Z",
+    "quote_symbol": "USDT",
+    "name_ko": "더블제로",
+    "name_en": "DoubleZero"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-WAVES",
+    "base_symbol": "WAVES",
+    "quote_symbol": "BTC",
+    "name_ko": "웨이브",
+    "name_en": "Waves"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-NEWT",
+    "base_symbol": "NEWT",
+    "quote_symbol": "BTC",
+    "name_ko": "뉴턴프로토콜",
+    "name_en": "Newton Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-NOM",
+    "base_symbol": "NOM",
+    "quote_symbol": "KRW",
+    "name_ko": "노미나",
+    "name_en": "Nomina"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-AAVE",
+    "base_symbol": "AAVE",
+    "quote_symbol": "BTC",
+    "name_ko": "에이브",
+    "name_en": "Aave"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-0G",
+    "base_symbol": "0G",
+    "quote_symbol": "BTC",
+    "name_ko": "제로지",
+    "name_en": "0G"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-WAL",
+    "base_symbol": "WAL",
+    "quote_symbol": "KRW",
+    "name_ko": "월러스",
+    "name_en": "Walrus"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-PENDLE",
+    "base_symbol": "PENDLE",
+    "quote_symbol": "KRW",
+    "name_ko": "펜들",
+    "name_en": "Pendle"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-SONIC",
+    "base_symbol": "SONIC",
+    "quote_symbol": "USDT",
+    "name_ko": "소닉SVM",
+    "name_en": "Sonic SVM"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-SHELL",
+    "base_symbol": "SHELL",
+    "quote_symbol": "USDT",
+    "name_ko": "마이쉘",
+    "name_en": "MyShell"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-BLUR",
+    "base_symbol": "BLUR",
+    "quote_symbol": "KRW",
+    "name_ko": "블러",
+    "name_en": "Blur"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MMT",
+    "base_symbol": "MMT",
+    "quote_symbol": "BTC",
+    "name_ko": "모멘텀",
+    "name_en": "Momentum"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-AWE",
+    "base_symbol": "AWE",
+    "quote_symbol": "KRW",
+    "name_ko": "에이더블유이",
+    "name_en": "AWE Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ARKM",
+    "base_symbol": "ARKM",
+    "quote_symbol": "USDT",
+    "name_ko": "아캄",
+    "name_en": "Arkham"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-0G",
+    "base_symbol": "0G",
+    "quote_symbol": "USDT",
+    "name_ko": "제로지",
+    "name_en": "0G"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-GAS",
+    "base_symbol": "GAS",
+    "quote_symbol": "BTC",
+    "name_ko": "가스",
+    "name_en": "GAS"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-MEW",
+    "base_symbol": "MEW",
+    "quote_symbol": "USDT",
+    "name_ko": "캣인어독스월드",
+    "name_en": "cat in a dogs world"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-PUFFER",
+    "base_symbol": "PUFFER",
+    "quote_symbol": "USDT",
+    "name_ko": "퍼퍼",
+    "name_en": "Puffer"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-THETA",
+    "base_symbol": "THETA",
+    "quote_symbol": "KRW",
+    "name_ko": "쎄타토큰",
+    "name_en": "Theta Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-AERO",
+    "base_symbol": "AERO",
+    "quote_symbol": "USDT",
+    "name_ko": "에어로드롬파이낸스",
+    "name_en": "Aerodrome Finance"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-AXL",
+    "base_symbol": "AXL",
+    "quote_symbol": "KRW",
+    "name_ko": "엑셀라",
+    "name_en": "Axelar"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-WLFI",
+    "base_symbol": "WLFI",
+    "quote_symbol": "BTC",
+    "name_ko": "월드리버티파이낸셜",
+    "name_en": "World Liberty Financial"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-HP",
+    "base_symbol": "HP",
+    "quote_symbol": "KRW",
+    "name_ko": "히포프로토콜",
+    "name_en": "Hippo Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-API3",
+    "base_symbol": "API3",
+    "quote_symbol": "USDT",
+    "name_ko": "에이피아이쓰리",
+    "name_en": "API3"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MNT",
+    "base_symbol": "MNT",
+    "quote_symbol": "BTC",
+    "name_ko": "맨틀",
+    "name_en": "Mantle"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SAND",
+    "base_symbol": "SAND",
+    "quote_symbol": "KRW",
+    "name_ko": "샌드박스",
+    "name_en": "The Sandbox"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-WCT",
+    "base_symbol": "WCT",
+    "quote_symbol": "KRW",
+    "name_ko": "월렛커넥트",
+    "name_en": "WalletConnect"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-CTSI",
+    "base_symbol": "CTSI",
+    "quote_symbol": "BTC",
+    "name_ko": "카르테시",
+    "name_en": "Cartesi"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MOC",
+    "base_symbol": "MOC",
+    "quote_symbol": "BTC",
+    "name_ko": "모스코인",
+    "name_en": "Moss Coin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-MOCA",
+    "base_symbol": "MOCA",
+    "quote_symbol": "USDT",
+    "name_ko": "모카네트워크",
+    "name_en": "Moca Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-YGG",
+    "base_symbol": "YGG",
+    "quote_symbol": "KRW",
+    "name_ko": "일드길드게임즈",
+    "name_en": "Yield Guild Games"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-AXS",
+    "base_symbol": "AXS",
+    "quote_symbol": "KRW",
+    "name_ko": "엑시인피니티",
+    "name_en": "Axie Infinity"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ARDR",
+    "base_symbol": "ARDR",
+    "quote_symbol": "KRW",
+    "name_ko": "아더",
+    "name_en": "Ardor"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-IOTX",
+    "base_symbol": "IOTX",
+    "quote_symbol": "BTC",
+    "name_ko": "아이오텍스",
+    "name_en": "IoTeX"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-TAIKO",
+    "base_symbol": "TAIKO",
+    "quote_symbol": "USDT",
+    "name_ko": "타이코",
+    "name_en": "Taiko"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-AQT",
+    "base_symbol": "AQT",
+    "quote_symbol": "KRW",
+    "name_ko": "알파쿼크",
+    "name_en": "Alpha Quark Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ME",
+    "base_symbol": "ME",
+    "quote_symbol": "KRW",
+    "name_ko": "매직에덴",
+    "name_en": "Magic Eden"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-CPOOL",
+    "base_symbol": "CPOOL",
+    "quote_symbol": "USDT",
+    "name_ko": "클리어풀",
+    "name_en": "Clearpool"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-TRUST",
+    "base_symbol": "TRUST",
+    "quote_symbol": "KRW",
+    "name_ko": "인튜이션",
+    "name_en": "Intuition"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-2Z",
+    "base_symbol": "2Z",
+    "quote_symbol": "BTC",
+    "name_ko": "더블제로",
+    "name_en": "DoubleZero"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SONIC",
+    "base_symbol": "SONIC",
+    "quote_symbol": "KRW",
+    "name_ko": "소닉SVM",
+    "name_en": "Sonic SVM"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-NXPC",
+    "base_symbol": "NXPC",
+    "quote_symbol": "USDT",
+    "name_ko": "넥스페이스",
+    "name_en": "Nexpace"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MLK",
+    "base_symbol": "MLK",
+    "quote_symbol": "BTC",
+    "name_ko": "밀크",
+    "name_en": "MiL.k"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ALGO",
+    "base_symbol": "ALGO",
+    "quote_symbol": "BTC",
+    "name_ko": "알고랜드",
+    "name_en": "Algorand"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ANKR",
+    "base_symbol": "ANKR",
+    "quote_symbol": "BTC",
+    "name_ko": "앵커",
+    "name_en": "Ankr"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ARB",
+    "base_symbol": "ARB",
+    "quote_symbol": "KRW",
+    "name_ko": "아비트럼",
+    "name_en": "Arbitrum"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SXP",
+    "base_symbol": "SXP",
+    "quote_symbol": "BTC",
+    "name_ko": "솔라",
+    "name_en": "SXP"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-POL",
+    "base_symbol": "POL",
+    "quote_symbol": "KRW",
+    "name_ko": "폴리곤에코시스템토큰",
+    "name_en": "Polygon Ecosystem Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-CVC",
+    "base_symbol": "CVC",
+    "quote_symbol": "KRW",
+    "name_ko": "시빅",
+    "name_en": "Civic"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-T",
+    "base_symbol": "T",
+    "quote_symbol": "KRW",
+    "name_ko": "쓰레스홀드",
+    "name_en": "Threshold"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-W",
+    "base_symbol": "W",
+    "quote_symbol": "KRW",
+    "name_ko": "웜홀",
+    "name_en": "Wormhole"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ARK",
+    "base_symbol": "ARK",
+    "quote_symbol": "KRW",
+    "name_ko": "아크",
+    "name_en": "Ark"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-AVNT",
+    "base_symbol": "AVNT",
+    "quote_symbol": "KRW",
+    "name_ko": "아반티스",
+    "name_en": "Avantis"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SUN",
+    "base_symbol": "SUN",
+    "quote_symbol": "BTC",
+    "name_ko": "썬",
+    "name_en": "SUN"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ZBT",
+    "base_symbol": "ZBT",
+    "quote_symbol": "BTC",
+    "name_ko": "제로베이스",
+    "name_en": "ZEROBASE"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-LA",
+    "base_symbol": "LA",
+    "quote_symbol": "KRW",
+    "name_ko": "라그랑주",
+    "name_en": "Lagrange"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-HYPER",
+    "base_symbol": "HYPER",
+    "quote_symbol": "KRW",
+    "name_ko": "하이퍼레인",
+    "name_en": "Hyperlane"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-LAYER",
+    "base_symbol": "LAYER",
+    "quote_symbol": "BTC",
+    "name_ko": "솔레이어",
+    "name_en": "Solayer"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ARPA",
+    "base_symbol": "ARPA",
+    "quote_symbol": "BTC",
+    "name_ko": "알파",
+    "name_en": "ARPA"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ATH",
+    "base_symbol": "ATH",
+    "quote_symbol": "KRW",
+    "name_ko": "에이셔",
+    "name_en": "Aethir"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-SUN",
+    "base_symbol": "SUN",
+    "quote_symbol": "USDT",
+    "name_ko": "썬",
+    "name_en": "SUN"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ZBT",
+    "base_symbol": "ZBT",
+    "quote_symbol": "USDT",
+    "name_ko": "제로베이스",
+    "name_en": "ZEROBASE"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-BTC",
+    "base_symbol": "BTC",
+    "quote_symbol": "USDT",
+    "name_ko": "비트코인",
+    "name_en": "Bitcoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-LINEA",
+    "base_symbol": "LINEA",
+    "quote_symbol": "USDT",
+    "name_ko": "리네아",
+    "name_en": "Linea"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-TRUST",
+    "base_symbol": "TRUST",
+    "quote_symbol": "USDT",
+    "name_ko": "인튜이션",
+    "name_en": "Intuition"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-IOST",
+    "base_symbol": "IOST",
+    "quote_symbol": "BTC",
+    "name_ko": "아이오에스티",
+    "name_en": "IOST"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-TAIKO",
+    "base_symbol": "TAIKO",
+    "quote_symbol": "KRW",
+    "name_ko": "타이코",
+    "name_en": "Taiko"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-TRUMP",
+    "base_symbol": "TRUMP",
+    "quote_symbol": "BTC",
+    "name_ko": "오피셜트럼프",
+    "name_en": "Official Trump"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-RENDER",
+    "base_symbol": "RENDER",
+    "quote_symbol": "BTC",
+    "name_ko": "렌더토큰",
+    "name_en": "Render Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-RAD",
+    "base_symbol": "RAD",
+    "quote_symbol": "BTC",
+    "name_ko": "래드웍스",
+    "name_en": "Radworks"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-AVAX",
+    "base_symbol": "AVAX",
+    "quote_symbol": "KRW",
+    "name_ko": "아발란체",
+    "name_en": "Avalanche"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ONDO",
+    "base_symbol": "ONDO",
+    "quote_symbol": "USDT",
+    "name_ko": "온도파이낸스",
+    "name_en": "Ondo Finance"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-PLUME",
+    "base_symbol": "PLUME",
+    "quote_symbol": "USDT",
+    "name_ko": "플룸",
+    "name_en": "Plume"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-CPOOL",
+    "base_symbol": "CPOOL",
+    "quote_symbol": "KRW",
+    "name_ko": "클리어풀",
+    "name_en": "Clearpool"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-EGLD",
+    "base_symbol": "EGLD",
+    "quote_symbol": "BTC",
+    "name_ko": "멀티버스엑스",
+    "name_en": "MultiversX"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-GO",
+    "base_symbol": "GO",
+    "quote_symbol": "BTC",
+    "name_ko": "고체인",
+    "name_en": "GoChain"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-PLUME",
+    "base_symbol": "PLUME",
+    "quote_symbol": "BTC",
+    "name_ko": "플룸",
+    "name_en": "Plume"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-INTER",
+    "base_symbol": "INTER",
+    "quote_symbol": "BTC",
+    "name_ko": "인터밀란",
+    "name_en": "Inter Milan Fan Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-MON",
+    "base_symbol": "MON",
+    "quote_symbol": "USDT",
+    "name_ko": "모나드",
+    "name_en": "Monad"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-GLM",
+    "base_symbol": "GLM",
+    "quote_symbol": "BTC",
+    "name_ko": "골렘",
+    "name_en": "Golem"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-IMX",
+    "base_symbol": "IMX",
+    "quote_symbol": "KRW",
+    "name_ko": "이뮤터블엑스",
+    "name_en": "Immutable X"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-RAY",
+    "base_symbol": "RAY",
+    "quote_symbol": "BTC",
+    "name_ko": "레이디움",
+    "name_en": "Raydium"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ZRO",
+    "base_symbol": "ZRO",
+    "quote_symbol": "BTC",
+    "name_ko": "레이어제로",
+    "name_en": "LayerZero"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-VIRTUAL",
+    "base_symbol": "VIRTUAL",
+    "quote_symbol": "USDT",
+    "name_ko": "버추얼프로토콜",
+    "name_en": "Virtuals Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-TRUMP",
+    "base_symbol": "TRUMP",
+    "quote_symbol": "USDT",
+    "name_ko": "오피셜트럼프",
+    "name_en": "Official Trump"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SC",
+    "base_symbol": "SC",
+    "quote_symbol": "KRW",
+    "name_ko": "시아코인",
+    "name_en": "Siacoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-BARD",
+    "base_symbol": "BARD",
+    "quote_symbol": "USDT",
+    "name_ko": "롬바드",
+    "name_en": "Lombard"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-INJ",
+    "base_symbol": "INJ",
+    "quote_symbol": "KRW",
+    "name_ko": "인젝티브",
+    "name_en": "Injective"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MVL",
+    "base_symbol": "MVL",
+    "quote_symbol": "KRW",
+    "name_ko": "엠블",
+    "name_en": "MVL"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-MNT",
+    "base_symbol": "MNT",
+    "quote_symbol": "USDT",
+    "name_ko": "맨틀",
+    "name_en": "Mantle"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ZRX",
+    "base_symbol": "ZRX",
+    "quote_symbol": "BTC",
+    "name_ko": "제로엑스",
+    "name_en": "0x Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-HP",
+    "base_symbol": "HP",
+    "quote_symbol": "BTC",
+    "name_ko": "히포프로토콜",
+    "name_en": "Hippo Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-IO",
+    "base_symbol": "IO",
+    "quote_symbol": "BTC",
+    "name_ko": "아이오넷",
+    "name_en": "io.net"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-IP",
+    "base_symbol": "IP",
+    "quote_symbol": "BTC",
+    "name_ko": "스토리",
+    "name_en": "Story"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-HIVE",
+    "base_symbol": "HIVE",
+    "quote_symbol": "KRW",
+    "name_ko": "하이브",
+    "name_en": "Hive"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-IN",
+    "base_symbol": "IN",
+    "quote_symbol": "BTC",
+    "name_ko": "인피닛",
+    "name_en": "Infinit"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-IMX",
+    "base_symbol": "IMX",
+    "quote_symbol": "BTC",
+    "name_ko": "이뮤터블엑스",
+    "name_en": "Immutable X"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-CITY",
+    "base_symbol": "CITY",
+    "quote_symbol": "BTC",
+    "name_ko": "맨체스터시티",
+    "name_en": "Manchester City Fan Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-PUMP",
+    "base_symbol": "PUMP",
+    "quote_symbol": "USDT",
+    "name_ko": "펌프펀",
+    "name_en": "Pump.fun"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ID",
+    "base_symbol": "ID",
+    "quote_symbol": "BTC",
+    "name_ko": "스페이스아이디",
+    "name_en": "SPACE ID"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-LAYER",
+    "base_symbol": "LAYER",
+    "quote_symbol": "USDT",
+    "name_ko": "솔레이어",
+    "name_en": "Solayer"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-CBK",
+    "base_symbol": "CBK",
+    "quote_symbol": "KRW",
+    "name_ko": "코박토큰",
+    "name_en": "Cobak Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-OM",
+    "base_symbol": "OM",
+    "quote_symbol": "KRW",
+    "name_ko": "만트라",
+    "name_en": "MANTRA"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-AERO",
+    "base_symbol": "AERO",
+    "quote_symbol": "BTC",
+    "name_ko": "에어로드롬파이낸스",
+    "name_en": "Aerodrome Finance"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-CELO",
+    "base_symbol": "CELO",
+    "quote_symbol": "BTC",
+    "name_ko": "셀로",
+    "name_en": "Celo"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-INJ",
+    "base_symbol": "INJ",
+    "quote_symbol": "BTC",
+    "name_ko": "인젝티브",
+    "name_en": "Injective"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-MMT",
+    "base_symbol": "MMT",
+    "quote_symbol": "USDT",
+    "name_ko": "모멘텀",
+    "name_en": "Momentum"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-GAS",
+    "base_symbol": "GAS",
+    "quote_symbol": "USDT",
+    "name_ko": "가스",
+    "name_en": "GAS"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-XLM",
+    "base_symbol": "XLM",
+    "quote_symbol": "KRW",
+    "name_ko": "스텔라루멘",
+    "name_en": "Lumen"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-OP",
+    "base_symbol": "OP",
+    "quote_symbol": "KRW",
+    "name_ko": "옵티미즘",
+    "name_en": "Optimism"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MVL",
+    "base_symbol": "MVL",
+    "quote_symbol": "BTC",
+    "name_ko": "엠블",
+    "name_en": "MVL"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-IQ",
+    "base_symbol": "IQ",
+    "quote_symbol": "BTC",
+    "name_ko": "아이큐",
+    "name_en": "IQ.wiki"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-CBK",
+    "base_symbol": "CBK",
+    "quote_symbol": "BTC",
+    "name_ko": "코박토큰",
+    "name_en": "Cobak Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-W",
+    "base_symbol": "W",
+    "quote_symbol": "USDT",
+    "name_ko": "웜홀",
+    "name_en": "Wormhole"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SAFE",
+    "base_symbol": "SAFE",
+    "quote_symbol": "KRW",
+    "name_ko": "세이프",
+    "name_en": "Safe"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-GLM",
+    "base_symbol": "GLM",
+    "quote_symbol": "KRW",
+    "name_ko": "골렘",
+    "name_en": "Golem"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-XLM",
+    "base_symbol": "XLM",
+    "quote_symbol": "BTC",
+    "name_ko": "스텔라루멘",
+    "name_en": "Lumen"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SUPER",
+    "base_symbol": "SUPER",
+    "quote_symbol": "KRW",
+    "name_ko": "슈퍼버스",
+    "name_en": "SuperVerse"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-CYBER",
+    "base_symbol": "CYBER",
+    "quote_symbol": "BTC",
+    "name_ko": "사이버",
+    "name_en": "Cyber"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MOCA",
+    "base_symbol": "MOCA",
+    "quote_symbol": "BTC",
+    "name_ko": "모카네트워크",
+    "name_en": "Moca Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-API3",
+    "base_symbol": "API3",
+    "quote_symbol": "BTC",
+    "name_ko": "에이피아이쓰리",
+    "name_en": "API3"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-RESOLV",
+    "base_symbol": "RESOLV",
+    "quote_symbol": "BTC",
+    "name_ko": "리졸브",
+    "name_en": "Resolv"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-LINEA",
+    "base_symbol": "LINEA",
+    "quote_symbol": "KRW",
+    "name_ko": "리네아",
+    "name_en": "Linea"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-OXT",
+    "base_symbol": "OXT",
+    "quote_symbol": "USDT",
+    "name_ko": "오키드",
+    "name_en": "Orchid"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-1INCH",
+    "base_symbol": "1INCH",
+    "quote_symbol": "BTC",
+    "name_ko": "1인치네트워크",
+    "name_en": "1inch Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-KERNEL",
+    "base_symbol": "KERNEL",
+    "quote_symbol": "KRW",
+    "name_ko": "커널다오",
+    "name_en": "KernelDAO"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-FLOW",
+    "base_symbol": "FLOW",
+    "quote_symbol": "BTC",
+    "name_ko": "플로우",
+    "name_en": "Flow"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-HAEDAL",
+    "base_symbol": "HAEDAL",
+    "quote_symbol": "USDT",
+    "name_ko": "해달프로토콜",
+    "name_en": "Haedal Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-POKT",
+    "base_symbol": "POKT",
+    "quote_symbol": "KRW",
+    "name_ko": "포켓네트워크",
+    "name_en": "Pocket Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ETHFI",
+    "base_symbol": "ETHFI",
+    "quote_symbol": "USDT",
+    "name_ko": "이더파이",
+    "name_en": "Ether.fi"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-LA",
+    "base_symbol": "LA",
+    "quote_symbol": "BTC",
+    "name_ko": "라그랑주",
+    "name_en": "Lagrange"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MTL",
+    "base_symbol": "MTL",
+    "quote_symbol": "BTC",
+    "name_ko": "메탈",
+    "name_en": "Metal"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-VET",
+    "base_symbol": "VET",
+    "quote_symbol": "BTC",
+    "name_ko": "비체인",
+    "name_en": "VeChain"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-POWR",
+    "base_symbol": "POWR",
+    "quote_symbol": "BTC",
+    "name_ko": "파워렛저",
+    "name_en": "Power ledger"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ATOM",
+    "base_symbol": "ATOM",
+    "quote_symbol": "BTC",
+    "name_ko": "코스모스",
+    "name_en": "Cosmos"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ARKM",
+    "base_symbol": "ARKM",
+    "quote_symbol": "BTC",
+    "name_ko": "아캄",
+    "name_en": "Arkham"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ZKC",
+    "base_symbol": "ZKC",
+    "quote_symbol": "KRW",
+    "name_ko": "바운드리스",
+    "name_en": "Boundless"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SONIC",
+    "base_symbol": "SONIC",
+    "quote_symbol": "BTC",
+    "name_ko": "소닉SVM",
+    "name_en": "Sonic SVM"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-OXT",
+    "base_symbol": "OXT",
+    "quote_symbol": "BTC",
+    "name_ko": "오키드",
+    "name_en": "Orchid"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ASTR",
+    "base_symbol": "ASTR",
+    "quote_symbol": "USDT",
+    "name_ko": "아스타",
+    "name_en": "Astar"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-OPEN",
+    "base_symbol": "OPEN",
+    "quote_symbol": "USDT",
+    "name_ko": "오픈렛저",
+    "name_en": "OpenLedger"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-KNC",
+    "base_symbol": "KNC",
+    "quote_symbol": "KRW",
+    "name_ko": "카이버네트워크",
+    "name_en": "Kyber Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-NXPC",
+    "base_symbol": "NXPC",
+    "quote_symbol": "BTC",
+    "name_ko": "넥스페이스",
+    "name_en": "Nexpace"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-AUCTION",
+    "base_symbol": "AUCTION",
+    "quote_symbol": "KRW",
+    "name_ko": "바운스토큰",
+    "name_en": "Bounce"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ORDER",
+    "base_symbol": "ORDER",
+    "quote_symbol": "KRW",
+    "name_ko": "오덜리",
+    "name_en": "Orderly"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ME",
+    "base_symbol": "ME",
+    "quote_symbol": "BTC",
+    "name_ko": "매직에덴",
+    "name_en": "Magic Eden"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ZKC",
+    "base_symbol": "ZKC",
+    "quote_symbol": "BTC",
+    "name_ko": "바운드리스",
+    "name_en": "Boundless"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-DRIFT",
+    "base_symbol": "DRIFT",
+    "quote_symbol": "KRW",
+    "name_ko": "드리프트",
+    "name_en": "Drift"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SHELL",
+    "base_symbol": "SHELL",
+    "quote_symbol": "BTC",
+    "name_ko": "마이쉘",
+    "name_en": "MyShell"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-FCT2",
+    "base_symbol": "FCT2",
+    "quote_symbol": "KRW",
+    "name_ko": "피르마체인",
+    "name_en": "FirmaChain"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ZKC",
+    "base_symbol": "ZKC",
+    "quote_symbol": "USDT",
+    "name_ko": "바운드리스",
+    "name_en": "Boundless"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-MET2",
+    "base_symbol": "MET2",
+    "quote_symbol": "USDT",
+    "name_ko": "메테오라",
+    "name_en": "Meteora"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-SAHARA",
+    "base_symbol": "SAHARA",
+    "quote_symbol": "USDT",
+    "name_ko": "사하라에이아이",
+    "name_en": "Sahara AI"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MTL",
+    "base_symbol": "MTL",
+    "quote_symbol": "KRW",
+    "name_ko": "메탈",
+    "name_en": "Metal"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-VET",
+    "base_symbol": "VET",
+    "quote_symbol": "KRW",
+    "name_ko": "비체인",
+    "name_en": "VeChain"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-TAIKO",
+    "base_symbol": "TAIKO",
+    "quote_symbol": "BTC",
+    "name_ko": "타이코",
+    "name_en": "Taiko"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SPURS",
+    "base_symbol": "SPURS",
+    "quote_symbol": "BTC",
+    "name_ko": "토트넘홋스퍼",
+    "name_en": "Tottenham Hotspur"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-CYBER",
+    "base_symbol": "CYBER",
+    "quote_symbol": "USDT",
+    "name_ko": "사이버",
+    "name_en": "Cyber"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-QTUM",
+    "base_symbol": "QTUM",
+    "quote_symbol": "KRW",
+    "name_ko": "퀀텀",
+    "name_en": "Qtum"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-TT",
+    "base_symbol": "TT",
+    "quote_symbol": "KRW",
+    "name_ko": "썬더코어",
+    "name_en": "ThunderCore"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-LINK",
+    "base_symbol": "LINK",
+    "quote_symbol": "KRW",
+    "name_ko": "체인링크",
+    "name_en": "Chainlink"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-XRP",
+    "base_symbol": "XRP",
+    "quote_symbol": "KRW",
+    "name_ko": "엑스알피(리플)",
+    "name_en": "XRP"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-CHZ",
+    "base_symbol": "CHZ",
+    "quote_symbol": "KRW",
+    "name_ko": "칠리즈",
+    "name_en": "Chiliz"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ASTR",
+    "base_symbol": "ASTR",
+    "quote_symbol": "KRW",
+    "name_ko": "아스타",
+    "name_en": "Astar"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-POKT",
+    "base_symbol": "POKT",
+    "quote_symbol": "USDT",
+    "name_ko": "포켓네트워크",
+    "name_en": "Pocket Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-GTC",
+    "base_symbol": "GTC",
+    "quote_symbol": "BTC",
+    "name_ko": "깃코인",
+    "name_en": "Gitcoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-RAY",
+    "base_symbol": "RAY",
+    "quote_symbol": "USDT",
+    "name_ko": "레이디움",
+    "name_en": "Raydium"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-NAP",
+    "base_symbol": "NAP",
+    "quote_symbol": "BTC",
+    "name_ko": "나폴리",
+    "name_en": "Napoli Fan Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-SAFE",
+    "base_symbol": "SAFE",
+    "quote_symbol": "USDT",
+    "name_ko": "세이프",
+    "name_en": "Safe"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-RAD",
+    "base_symbol": "RAD",
+    "quote_symbol": "USDT",
+    "name_ko": "래드웍스",
+    "name_en": "Radworks"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-STORJ",
+    "base_symbol": "STORJ",
+    "quote_symbol": "KRW",
+    "name_ko": "스토리지",
+    "name_en": "Storj"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-AHT",
+    "base_symbol": "AHT",
+    "quote_symbol": "BTC",
+    "name_ko": "아하토큰",
+    "name_en": "AhaToken"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ENA",
+    "base_symbol": "ENA",
+    "quote_symbol": "KRW",
+    "name_ko": "에테나",
+    "name_en": "Ethena"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MANA",
+    "base_symbol": "MANA",
+    "quote_symbol": "KRW",
+    "name_ko": "디센트럴랜드",
+    "name_en": "Decentraland"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-OPEN",
+    "base_symbol": "OPEN",
+    "quote_symbol": "KRW",
+    "name_ko": "오픈렛저",
+    "name_en": "OpenLedger"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-GRS",
+    "base_symbol": "GRS",
+    "quote_symbol": "KRW",
+    "name_ko": "그로스톨코인",
+    "name_en": "Groestlcoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-PYTH",
+    "base_symbol": "PYTH",
+    "quote_symbol": "KRW",
+    "name_ko": "피스네트워크",
+    "name_en": "Pyth Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-AVNT",
+    "base_symbol": "AVNT",
+    "quote_symbol": "BTC",
+    "name_ko": "아반티스",
+    "name_en": "Avantis"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-XLM",
+    "base_symbol": "XLM",
+    "quote_symbol": "USDT",
+    "name_ko": "스텔라루멘",
+    "name_en": "Lumen"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-TRUST",
+    "base_symbol": "TRUST",
+    "quote_symbol": "BTC",
+    "name_ko": "인튜이션",
+    "name_en": "Intuition"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-INJ",
+    "base_symbol": "INJ",
+    "quote_symbol": "USDT",
+    "name_ko": "인젝티브",
+    "name_en": "Injective"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SAND",
+    "base_symbol": "SAND",
+    "quote_symbol": "BTC",
+    "name_ko": "샌드박스",
+    "name_en": "The Sandbox"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ENS",
+    "base_symbol": "ENS",
+    "quote_symbol": "KRW",
+    "name_ko": "이더리움네임서비스",
+    "name_en": "Ethereum Name Service"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-GRT",
+    "base_symbol": "GRT",
+    "quote_symbol": "KRW",
+    "name_ko": "더그래프",
+    "name_en": "The Graph"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-PUMP",
+    "base_symbol": "PUMP",
+    "quote_symbol": "KRW",
+    "name_ko": "펌프펀",
+    "name_en": "Pump.fun"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-AFC",
+    "base_symbol": "AFC",
+    "quote_symbol": "BTC",
+    "name_ko": "아스날",
+    "name_en": "Arsenal Fan Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ENA",
+    "base_symbol": "ENA",
+    "quote_symbol": "BTC",
+    "name_ko": "에테나",
+    "name_en": "Ethena"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-BLUR",
+    "base_symbol": "BLUR",
+    "quote_symbol": "BTC",
+    "name_ko": "블러",
+    "name_en": "Blur"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-XTZ",
+    "base_symbol": "XTZ",
+    "quote_symbol": "KRW",
+    "name_ko": "테조스",
+    "name_en": "Tezos"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-TUSD",
+    "base_symbol": "TUSD",
+    "quote_symbol": "BTC",
+    "name_ko": "트루USD",
+    "name_en": "TrueUSD"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-CKB",
+    "base_symbol": "CKB",
+    "quote_symbol": "KRW",
+    "name_ko": "너보스",
+    "name_en": "Nervos Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ENJ",
+    "base_symbol": "ENJ",
+    "quote_symbol": "BTC",
+    "name_ko": "엔진코인",
+    "name_en": "Enjin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-B3",
+    "base_symbol": "B3",
+    "quote_symbol": "USDT",
+    "name_ko": "비쓰리",
+    "name_en": "B3"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-GRT",
+    "base_symbol": "GRT",
+    "quote_symbol": "BTC",
+    "name_ko": "더그래프",
+    "name_en": "The Graph"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-GRS",
+    "base_symbol": "GRS",
+    "quote_symbol": "BTC",
+    "name_ko": "그로스톨코인",
+    "name_en": "Groestlcoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ENS",
+    "base_symbol": "ENS",
+    "quote_symbol": "BTC",
+    "name_ko": "이더리움네임서비스",
+    "name_en": "Ethereum Name Service"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-XTZ",
+    "base_symbol": "XTZ",
+    "quote_symbol": "BTC",
+    "name_ko": "테조스",
+    "name_en": "Tezos"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-KAVA",
+    "base_symbol": "KAVA",
+    "quote_symbol": "KRW",
+    "name_ko": "카바",
+    "name_en": "Kava"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-CKB",
+    "base_symbol": "CKB",
+    "quote_symbol": "BTC",
+    "name_ko": "너보스",
+    "name_en": "Nervos Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ARDR",
+    "base_symbol": "ARDR",
+    "quote_symbol": "BTC",
+    "name_ko": "아더",
+    "name_en": "Ardor"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-TIA",
+    "base_symbol": "TIA",
+    "quote_symbol": "BTC",
+    "name_ko": "셀레스티아",
+    "name_en": "Celestia"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-TOSHI",
+    "base_symbol": "TOSHI",
+    "quote_symbol": "KRW",
+    "name_ko": "토시",
+    "name_en": "Toshi"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-BARD",
+    "base_symbol": "BARD",
+    "quote_symbol": "KRW",
+    "name_ko": "롬바드",
+    "name_en": "Lombard"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ZRO",
+    "base_symbol": "ZRO",
+    "quote_symbol": "KRW",
+    "name_ko": "레이어제로",
+    "name_en": "LayerZero"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ACM",
+    "base_symbol": "ACM",
+    "quote_symbol": "BTC",
+    "name_ko": "AC밀란",
+    "name_en": "AC Milan Fan Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-REI",
+    "base_symbol": "REI",
+    "quote_symbol": "BTC",
+    "name_ko": "레이",
+    "name_en": "REI"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-KAITO",
+    "base_symbol": "KAITO",
+    "quote_symbol": "BTC",
+    "name_ko": "카이토",
+    "name_en": "KAITO"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-RED",
+    "base_symbol": "RED",
+    "quote_symbol": "BTC",
+    "name_ko": "레드스톤",
+    "name_en": "RedStone"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-RAY",
+    "base_symbol": "RAY",
+    "quote_symbol": "KRW",
+    "name_ko": "레이디움",
+    "name_en": "Raydium"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ACS",
+    "base_symbol": "ACS",
+    "quote_symbol": "BTC",
+    "name_ko": "액세스프로토콜",
+    "name_en": "Access Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ONDO",
+    "base_symbol": "ONDO",
+    "quote_symbol": "KRW",
+    "name_ko": "온도파이낸스",
+    "name_en": "Ondo Finance"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-NEAR",
+    "base_symbol": "NEAR",
+    "quote_symbol": "BTC",
+    "name_ko": "니어프로토콜",
+    "name_en": "NEAR Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ADA",
+    "base_symbol": "ADA",
+    "quote_symbol": "USDT",
+    "name_ko": "에이다",
+    "name_en": "Ada"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ADA",
+    "base_symbol": "ADA",
+    "quote_symbol": "BTC",
+    "name_ko": "에이다",
+    "name_en": "Ada"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ELF",
+    "base_symbol": "ELF",
+    "quote_symbol": "BTC",
+    "name_ko": "엘프",
+    "name_en": "aelf"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ZRX",
+    "base_symbol": "ZRX",
+    "quote_symbol": "KRW",
+    "name_ko": "제로엑스",
+    "name_en": "0x Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-GO",
+    "base_symbol": "GO",
+    "quote_symbol": "USDT",
+    "name_ko": "고체인",
+    "name_en": "GoChain"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-AGLD",
+    "base_symbol": "AGLD",
+    "quote_symbol": "BTC",
+    "name_ko": "어드벤처골드",
+    "name_en": "Adventure Gold"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-F",
+    "base_symbol": "F",
+    "quote_symbol": "USDT",
+    "name_ko": "신퓨처스",
+    "name_en": "SynFutures"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-CHR",
+    "base_symbol": "CHR",
+    "quote_symbol": "BTC",
+    "name_ko": "크로미아",
+    "name_en": "Chromia"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-TIA",
+    "base_symbol": "TIA",
+    "quote_symbol": "USDT",
+    "name_ko": "셀레스티아",
+    "name_en": "Celestia"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-KERNEL",
+    "base_symbol": "KERNEL",
+    "quote_symbol": "BTC",
+    "name_ko": "커널다오",
+    "name_en": "KernelDAO"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ACS",
+    "base_symbol": "ACS",
+    "quote_symbol": "USDT",
+    "name_ko": "액세스프로토콜",
+    "name_en": "Access Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-RED",
+    "base_symbol": "RED",
+    "quote_symbol": "USDT",
+    "name_ko": "레드스톤",
+    "name_en": "RedStone"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-GMT",
+    "base_symbol": "GMT",
+    "quote_symbol": "KRW",
+    "name_ko": "스테픈",
+    "name_en": "Stepn"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-CHZ",
+    "base_symbol": "CHZ",
+    "quote_symbol": "BTC",
+    "name_ko": "칠리즈",
+    "name_en": "Chiliz"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-BIGTIME",
+    "base_symbol": "BIGTIME",
+    "quote_symbol": "BTC",
+    "name_ko": "빅타임",
+    "name_en": "Big Time"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ETHFI",
+    "base_symbol": "ETHFI",
+    "quote_symbol": "BTC",
+    "name_ko": "이더파이",
+    "name_en": "Ether.fi"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-XRP",
+    "base_symbol": "XRP",
+    "quote_symbol": "BTC",
+    "name_ko": "엑스알피(리플)",
+    "name_en": "XRP"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-TFUEL",
+    "base_symbol": "TFUEL",
+    "quote_symbol": "KRW",
+    "name_ko": "쎄타퓨엘",
+    "name_en": "Theta Fuel"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-XPL",
+    "base_symbol": "XPL",
+    "quote_symbol": "USDT",
+    "name_ko": "플라즈마",
+    "name_en": "Plasma"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-QTUM",
+    "base_symbol": "QTUM",
+    "quote_symbol": "BTC",
+    "name_ko": "퀀텀",
+    "name_en": "Qtum"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-GMT",
+    "base_symbol": "GMT",
+    "quote_symbol": "BTC",
+    "name_ko": "스테픈",
+    "name_en": "Stepn"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-XPL",
+    "base_symbol": "XPL",
+    "quote_symbol": "KRW",
+    "name_ko": "플라즈마",
+    "name_en": "Plasma"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-AUDIO",
+    "base_symbol": "AUDIO",
+    "quote_symbol": "BTC",
+    "name_ko": "오디우스",
+    "name_en": "Audius"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MASK",
+    "base_symbol": "MASK",
+    "quote_symbol": "KRW",
+    "name_ko": "마스크네트워크",
+    "name_en": "Mask Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-FCT2",
+    "base_symbol": "FCT2",
+    "quote_symbol": "BTC",
+    "name_ko": "피르마체인",
+    "name_en": "FirmaChain"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ZETA",
+    "base_symbol": "ZETA",
+    "quote_symbol": "USDT",
+    "name_ko": "제타체인",
+    "name_en": "ZetaChain"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-COMP",
+    "base_symbol": "COMP",
+    "quote_symbol": "KRW",
+    "name_ko": "컴파운드",
+    "name_en": "Compound"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ZETA",
+    "base_symbol": "ZETA",
+    "quote_symbol": "KRW",
+    "name_ko": "제타체인",
+    "name_en": "ZetaChain"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-RED",
+    "base_symbol": "RED",
+    "quote_symbol": "KRW",
+    "name_ko": "레드스톤",
+    "name_en": "RedStone"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-XPL",
+    "base_symbol": "XPL",
+    "quote_symbol": "BTC",
+    "name_ko": "플라즈마",
+    "name_en": "Plasma"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-TIA",
+    "base_symbol": "TIA",
+    "quote_symbol": "KRW",
+    "name_ko": "셀레스티아",
+    "name_en": "Celestia"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-FF",
+    "base_symbol": "FF",
+    "quote_symbol": "USDT",
+    "name_ko": "팔콘파이낸스",
+    "name_en": "Falcon Finance"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ZRX",
+    "base_symbol": "ZRX",
+    "quote_symbol": "USDT",
+    "name_ko": "제로엑스",
+    "name_en": "0x Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ADA",
+    "base_symbol": "ADA",
+    "quote_symbol": "KRW",
+    "name_ko": "에이다",
+    "name_en": "Ada"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ELF",
+    "base_symbol": "ELF",
+    "quote_symbol": "KRW",
+    "name_ko": "엘프",
+    "name_en": "aelf"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ZRO",
+    "base_symbol": "ZRO",
+    "quote_symbol": "USDT",
+    "name_ko": "레이어제로",
+    "name_en": "LayerZero"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-LINK",
+    "base_symbol": "LINK",
+    "quote_symbol": "BTC",
+    "name_ko": "체인링크",
+    "name_en": "Chainlink"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-AHT",
+    "base_symbol": "AHT",
+    "quote_symbol": "USDT",
+    "name_ko": "아하토큰",
+    "name_en": "AhaToken"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-STEEM",
+    "base_symbol": "STEEM",
+    "quote_symbol": "KRW",
+    "name_ko": "스팀",
+    "name_en": "Steem"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-APE",
+    "base_symbol": "APE",
+    "quote_symbol": "BTC",
+    "name_ko": "에이프코인",
+    "name_en": "ApeCoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-EPT",
+    "base_symbol": "EPT",
+    "quote_symbol": "USDT",
+    "name_ko": "밸런스",
+    "name_en": "Balance"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ORDER",
+    "base_symbol": "ORDER",
+    "quote_symbol": "BTC",
+    "name_ko": "오덜리",
+    "name_en": "Orderly"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-CTC",
+    "base_symbol": "CTC",
+    "quote_symbol": "BTC",
+    "name_ko": "크레딧코인",
+    "name_en": "Creditcoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-POKT",
+    "base_symbol": "POKT",
+    "quote_symbol": "BTC",
+    "name_ko": "포켓네트워크",
+    "name_en": "Pocket Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-APT",
+    "base_symbol": "APT",
+    "quote_symbol": "BTC",
+    "name_ko": "앱토스",
+    "name_en": "Aptos"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SOPH",
+    "base_symbol": "SOPH",
+    "quote_symbol": "KRW",
+    "name_ko": "소폰",
+    "name_en": "Sophon"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MED",
+    "base_symbol": "MED",
+    "quote_symbol": "KRW",
+    "name_ko": "메디블록",
+    "name_en": "MediBloc"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-LA",
+    "base_symbol": "LA",
+    "quote_symbol": "USDT",
+    "name_ko": "라그랑주",
+    "name_en": "Lagrange"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-1INCH",
+    "base_symbol": "1INCH",
+    "quote_symbol": "KRW",
+    "name_ko": "1인치네트워크",
+    "name_en": "1inch Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-PUFFER",
+    "base_symbol": "PUFFER",
+    "quote_symbol": "BTC",
+    "name_ko": "퍼퍼",
+    "name_en": "Puffer"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-HOLO",
+    "base_symbol": "HOLO",
+    "quote_symbol": "USDT",
+    "name_ko": "홀로월드에이아이",
+    "name_en": "Holoworld AI"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-MIRA",
+    "base_symbol": "MIRA",
+    "quote_symbol": "USDT",
+    "name_ko": "미라네트워크",
+    "name_en": "Mira Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-FORT",
+    "base_symbol": "FORT",
+    "quote_symbol": "USDT",
+    "name_ko": "포르타",
+    "name_en": "Forta"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ENSO",
+    "base_symbol": "ENSO",
+    "quote_symbol": "USDT",
+    "name_ko": "엔소",
+    "name_en": "Enso"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-AQT",
+    "base_symbol": "AQT",
+    "quote_symbol": "BTC",
+    "name_ko": "알파쿼크",
+    "name_en": "Alpha Quark Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MEW",
+    "base_symbol": "MEW",
+    "quote_symbol": "KRW",
+    "name_ko": "캣인어독스월드",
+    "name_en": "cat in a dogs world"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SWELL",
+    "base_symbol": "SWELL",
+    "quote_symbol": "BTC",
+    "name_ko": "스웰네트워크",
+    "name_en": "Swell Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-CKB",
+    "base_symbol": "CKB",
+    "quote_symbol": "USDT",
+    "name_ko": "너보스",
+    "name_en": "Nervos Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ORBS",
+    "base_symbol": "ORBS",
+    "quote_symbol": "KRW",
+    "name_ko": "오브스",
+    "name_en": "Orbs"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-HIVE",
+    "base_symbol": "HIVE",
+    "quote_symbol": "BTC",
+    "name_ko": "하이브",
+    "name_en": "Hive"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-KITE",
+    "base_symbol": "KITE",
+    "quote_symbol": "USDT",
+    "name_ko": "카이트",
+    "name_en": "Kite"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SAFE",
+    "base_symbol": "SAFE",
+    "quote_symbol": "BTC",
+    "name_ko": "세이프",
+    "name_en": "Safe"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-CRV",
+    "base_symbol": "CRV",
+    "quote_symbol": "BTC",
+    "name_ko": "커브",
+    "name_en": "Curve"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-CRO",
+    "base_symbol": "CRO",
+    "quote_symbol": "BTC",
+    "name_ko": "크로노스",
+    "name_en": "Cronos"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-IP",
+    "base_symbol": "IP",
+    "quote_symbol": "USDT",
+    "name_ko": "스토리",
+    "name_en": "Story"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-FLOCK",
+    "base_symbol": "FLOCK",
+    "quote_symbol": "USDT",
+    "name_ko": "플록",
+    "name_en": "FLock.io"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-IN",
+    "base_symbol": "IN",
+    "quote_symbol": "USDT",
+    "name_ko": "인피닛",
+    "name_en": "Infinit"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-IO",
+    "base_symbol": "IO",
+    "quote_symbol": "USDT",
+    "name_ko": "아이오넷",
+    "name_en": "io.net"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ENA",
+    "base_symbol": "ENA",
+    "quote_symbol": "USDT",
+    "name_ko": "에테나",
+    "name_en": "Ethena"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-RENDER",
+    "base_symbol": "RENDER",
+    "quote_symbol": "KRW",
+    "name_ko": "렌더토큰",
+    "name_en": "Render Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-KERNEL",
+    "base_symbol": "KERNEL",
+    "quote_symbol": "USDT",
+    "name_ko": "커널다오",
+    "name_en": "KernelDAO"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-STG",
+    "base_symbol": "STG",
+    "quote_symbol": "KRW",
+    "name_ko": "스타게이트파이낸스",
+    "name_en": "Stargate Finance"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ORCA",
+    "base_symbol": "ORCA",
+    "quote_symbol": "KRW",
+    "name_ko": "오르카",
+    "name_en": "Orca"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SUPER",
+    "base_symbol": "SUPER",
+    "quote_symbol": "BTC",
+    "name_ko": "슈퍼버스",
+    "name_en": "SuperVerse"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-XRP",
+    "base_symbol": "XRP",
+    "quote_symbol": "USDT",
+    "name_ko": "엑스알피(리플)",
+    "name_en": "XRP"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ZORA",
+    "base_symbol": "ZORA",
+    "quote_symbol": "USDT",
+    "name_ko": "조라",
+    "name_en": "Zora"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-BERA",
+    "base_symbol": "BERA",
+    "quote_symbol": "KRW",
+    "name_ko": "베라체인",
+    "name_en": "Berachain"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-AKT",
+    "base_symbol": "AKT",
+    "quote_symbol": "BTC",
+    "name_ko": "아카시네트워크",
+    "name_en": "Akash Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SIGN",
+    "base_symbol": "SIGN",
+    "quote_symbol": "KRW",
+    "name_ko": "사인",
+    "name_en": "Sign"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-COW",
+    "base_symbol": "COW",
+    "quote_symbol": "BTC",
+    "name_ko": "카우프로토콜",
+    "name_en": "CoW Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ETC",
+    "base_symbol": "ETC",
+    "quote_symbol": "BTC",
+    "name_ko": "이더리움클래식",
+    "name_en": "Ethereum Classic"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ALT",
+    "base_symbol": "ALT",
+    "quote_symbol": "USDT",
+    "name_ko": "알트레이어",
+    "name_en": "Altlayer"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-AVAX",
+    "base_symbol": "AVAX",
+    "quote_symbol": "BTC",
+    "name_ko": "아발란체",
+    "name_en": "Avalanche"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-BLAST",
+    "base_symbol": "BLAST",
+    "quote_symbol": "USDT",
+    "name_ko": "블라스트",
+    "name_en": "Blast"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-OP",
+    "base_symbol": "OP",
+    "quote_symbol": "USDT",
+    "name_ko": "옵티미즘",
+    "name_en": "Optimism"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ETH",
+    "base_symbol": "ETH",
+    "quote_symbol": "BTC",
+    "name_ko": "이더리움",
+    "name_en": "Ethereum"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-NEO",
+    "base_symbol": "NEO",
+    "quote_symbol": "BTC",
+    "name_ko": "네오",
+    "name_en": "NEO"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-OM",
+    "base_symbol": "OM",
+    "quote_symbol": "USDT",
+    "name_ko": "만트라",
+    "name_en": "MANTRA"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-PENGU",
+    "base_symbol": "PENGU",
+    "quote_symbol": "USDT",
+    "name_ko": "펏지펭귄",
+    "name_en": "Pudgy Penguins"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ETC",
+    "base_symbol": "ETC",
+    "quote_symbol": "USDT",
+    "name_ko": "이더리움클래식",
+    "name_en": "Ethereum Classic"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ETH",
+    "base_symbol": "ETH",
+    "quote_symbol": "USDT",
+    "name_ko": "이더리움",
+    "name_en": "Ethereum"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-KAITO",
+    "base_symbol": "KAITO",
+    "quote_symbol": "USDT",
+    "name_ko": "카이토",
+    "name_en": "KAITO"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-NEO",
+    "base_symbol": "NEO",
+    "quote_symbol": "USDT",
+    "name_ko": "네오",
+    "name_en": "NEO"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-COW",
+    "base_symbol": "COW",
+    "quote_symbol": "USDT",
+    "name_ko": "카우프로토콜",
+    "name_en": "CoW Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ALT",
+    "base_symbol": "ALT",
+    "quote_symbol": "BTC",
+    "name_ko": "알트레이어",
+    "name_en": "Altlayer"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-VANA",
+    "base_symbol": "VANA",
+    "quote_symbol": "KRW",
+    "name_ko": "바나",
+    "name_en": "Vana"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-VTHO",
+    "base_symbol": "VTHO",
+    "quote_symbol": "USDT",
+    "name_ko": "비토르토큰",
+    "name_en": "VeThor Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-DOT",
+    "base_symbol": "DOT",
+    "quote_symbol": "KRW",
+    "name_ko": "폴카닷",
+    "name_en": "Polkadot"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-AKT",
+    "base_symbol": "AKT",
+    "quote_symbol": "USDT",
+    "name_ko": "아카시네트워크",
+    "name_en": "Akash Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-EUL",
+    "base_symbol": "EUL",
+    "quote_symbol": "BTC",
+    "name_ko": "오일러",
+    "name_en": "Euler"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-RLY",
+    "base_symbol": "RLY",
+    "quote_symbol": "USDT",
+    "name_ko": "랠리",
+    "name_en": "Rally"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-TRX",
+    "base_symbol": "TRX",
+    "quote_symbol": "BTC",
+    "name_ko": "트론",
+    "name_en": "TRON"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-FLOCK",
+    "base_symbol": "FLOCK",
+    "quote_symbol": "BTC",
+    "name_ko": "플록",
+    "name_en": "FLock.io"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MET2",
+    "base_symbol": "MET2",
+    "quote_symbol": "KRW",
+    "name_ko": "메테오라",
+    "name_en": "Meteora"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MBL",
+    "base_symbol": "MBL",
+    "quote_symbol": "KRW",
+    "name_ko": "무비블록",
+    "name_en": "MovieBloc"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ERA",
+    "base_symbol": "ERA",
+    "quote_symbol": "BTC",
+    "name_ko": "칼데라",
+    "name_en": "Caldera"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MASK",
+    "base_symbol": "MASK",
+    "quote_symbol": "BTC",
+    "name_ko": "마스크네트워크",
+    "name_en": "Mask Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-GAME2",
+    "base_symbol": "GAME2",
+    "quote_symbol": "BTC",
+    "name_ko": "게임빌드",
+    "name_en": "GameBuild"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-FLUID",
+    "base_symbol": "FLUID",
+    "quote_symbol": "KRW",
+    "name_ko": "플루이드",
+    "name_en": "Fluid"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-MOVE",
+    "base_symbol": "MOVE",
+    "quote_symbol": "USDT",
+    "name_ko": "무브먼트",
+    "name_en": "Movement"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ME",
+    "base_symbol": "ME",
+    "quote_symbol": "USDT",
+    "name_ko": "매직에덴",
+    "name_en": "Magic Eden"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-NCT",
+    "base_symbol": "NCT",
+    "quote_symbol": "BTC",
+    "name_ko": "폴리스웜",
+    "name_en": "Polyswarm"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-NCT",
+    "base_symbol": "NCT",
+    "quote_symbol": "USDT",
+    "name_ko": "폴리스웜",
+    "name_en": "Polyswarm"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-BIGTIME",
+    "base_symbol": "BIGTIME",
+    "quote_symbol": "KRW",
+    "name_ko": "빅타임",
+    "name_en": "Big Time"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ERA",
+    "base_symbol": "ERA",
+    "quote_symbol": "USDT",
+    "name_ko": "칼데라",
+    "name_en": "Caldera"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SNT",
+    "base_symbol": "SNT",
+    "quote_symbol": "KRW",
+    "name_ko": "스테이터스네트워크토큰",
+    "name_en": "Status Network Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-RLC",
+    "base_symbol": "RLC",
+    "quote_symbol": "BTC",
+    "name_ko": "아이젝",
+    "name_en": "iEx.ec"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ZETA",
+    "base_symbol": "ZETA",
+    "quote_symbol": "BTC",
+    "name_ko": "제타체인",
+    "name_en": "ZetaChain"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SOL",
+    "base_symbol": "SOL",
+    "quote_symbol": "KRW",
+    "name_ko": "솔라나",
+    "name_en": "Solana"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-QKC",
+    "base_symbol": "QKC",
+    "quote_symbol": "KRW",
+    "name_ko": "쿼크체인",
+    "name_en": "QuarkChain"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-COMP",
+    "base_symbol": "COMP",
+    "quote_symbol": "BTC",
+    "name_ko": "컴파운드",
+    "name_en": "Compound"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-RLY",
+    "base_symbol": "RLY",
+    "quote_symbol": "BTC",
+    "name_ko": "랠리",
+    "name_en": "Rally"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-META",
+    "base_symbol": "META",
+    "quote_symbol": "KRW",
+    "name_ko": "메타디움",
+    "name_en": "Metadium"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-BARD",
+    "base_symbol": "BARD",
+    "quote_symbol": "BTC",
+    "name_ko": "롬바드",
+    "name_en": "Lombard"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-VANA",
+    "base_symbol": "VANA",
+    "quote_symbol": "USDT",
+    "name_ko": "바나",
+    "name_en": "Vana"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-SC",
+    "base_symbol": "SC",
+    "quote_symbol": "USDT",
+    "name_ko": "시아코인",
+    "name_en": "Siacoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-OP",
+    "base_symbol": "OP",
+    "quote_symbol": "BTC",
+    "name_ko": "옵티미즘",
+    "name_en": "Optimism"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-OM",
+    "base_symbol": "OM",
+    "quote_symbol": "BTC",
+    "name_ko": "만트라",
+    "name_en": "MANTRA"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-AXL",
+    "base_symbol": "AXL",
+    "quote_symbol": "BTC",
+    "name_ko": "엑셀라",
+    "name_en": "Axelar"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-FLUID",
+    "base_symbol": "FLUID",
+    "quote_symbol": "BTC",
+    "name_ko": "플루이드",
+    "name_en": "Fluid"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SAHARA",
+    "base_symbol": "SAHARA",
+    "quote_symbol": "KRW",
+    "name_ko": "사하라에이아이",
+    "name_en": "Sahara AI"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ONDO",
+    "base_symbol": "ONDO",
+    "quote_symbol": "BTC",
+    "name_ko": "온도파이낸스",
+    "name_en": "Ondo Finance"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MLK",
+    "base_symbol": "MLK",
+    "quote_symbol": "KRW",
+    "name_ko": "밀크",
+    "name_en": "MiL.k"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SXP",
+    "base_symbol": "SXP",
+    "quote_symbol": "KRW",
+    "name_ko": "솔라",
+    "name_en": "SXP"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-VTHO",
+    "base_symbol": "VTHO",
+    "quote_symbol": "KRW",
+    "name_ko": "비토르토큰",
+    "name_en": "VeThor Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-AXS",
+    "base_symbol": "AXS",
+    "quote_symbol": "BTC",
+    "name_ko": "엑시인피니티",
+    "name_en": "Axie Infinity"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-YGG",
+    "base_symbol": "YGG",
+    "quote_symbol": "BTC",
+    "name_ko": "일드길드게임즈",
+    "name_en": "Yield Guild Games"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-SIGN",
+    "base_symbol": "SIGN",
+    "quote_symbol": "USDT",
+    "name_ko": "사인",
+    "name_en": "Sign"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-KITE",
+    "base_symbol": "KITE",
+    "quote_symbol": "KRW",
+    "name_ko": "카이트",
+    "name_en": "Kite"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MINA",
+    "base_symbol": "MINA",
+    "quote_symbol": "KRW",
+    "name_ko": "미나",
+    "name_en": "Mina"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-WCT",
+    "base_symbol": "WCT",
+    "quote_symbol": "BTC",
+    "name_ko": "월렛커넥트",
+    "name_en": "WalletConnect"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MMT",
+    "base_symbol": "MMT",
+    "quote_symbol": "KRW",
+    "name_ko": "모멘텀",
+    "name_en": "Momentum"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ZORA",
+    "base_symbol": "ZORA",
+    "quote_symbol": "KRW",
+    "name_ko": "조라",
+    "name_en": "Zora"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-BERA",
+    "base_symbol": "BERA",
+    "quote_symbol": "USDT",
+    "name_ko": "베라체인",
+    "name_en": "Berachain"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-GAS",
+    "base_symbol": "GAS",
+    "quote_symbol": "KRW",
+    "name_ko": "가스",
+    "name_en": "GAS"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-NOM",
+    "base_symbol": "NOM",
+    "quote_symbol": "BTC",
+    "name_ko": "노미나",
+    "name_en": "Nomina"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MNT",
+    "base_symbol": "MNT",
+    "quote_symbol": "KRW",
+    "name_ko": "맨틀",
+    "name_en": "Mantle"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MOC",
+    "base_symbol": "MOC",
+    "quote_symbol": "KRW",
+    "name_ko": "모스코인",
+    "name_en": "Moss Coin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-SOPH",
+    "base_symbol": "SOPH",
+    "quote_symbol": "USDT",
+    "name_ko": "소폰",
+    "name_en": "Sophon"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MOODENG",
+    "base_symbol": "MOODENG",
+    "quote_symbol": "KRW",
+    "name_ko": "무뎅",
+    "name_en": "Moo Deng"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-WAL",
+    "base_symbol": "WAL",
+    "quote_symbol": "BTC",
+    "name_ko": "월러스",
+    "name_en": "Walrus"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-XEC",
+    "base_symbol": "XEC",
+    "quote_symbol": "KRW",
+    "name_ko": "이캐시",
+    "name_en": "eCash"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-AWE",
+    "base_symbol": "AWE",
+    "quote_symbol": "BTC",
+    "name_ko": "에이더블유이",
+    "name_en": "AWE Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-ORCA",
+    "base_symbol": "ORCA",
+    "quote_symbol": "USDT",
+    "name_ko": "오르카",
+    "name_en": "Orca"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SAHARA",
+    "base_symbol": "SAHARA",
+    "quote_symbol": "BTC",
+    "name_ko": "사하라에이아이",
+    "name_en": "Sahara AI"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MON",
+    "base_symbol": "MON",
+    "quote_symbol": "KRW",
+    "name_ko": "모나드",
+    "name_en": "Monad"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-EUL",
+    "base_symbol": "EUL",
+    "quote_symbol": "USDT",
+    "name_ko": "오일러",
+    "name_en": "Euler"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-KAVA",
+    "base_symbol": "KAVA",
+    "quote_symbol": "BTC",
+    "name_ko": "카바",
+    "name_en": "Kava"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-SC",
+    "base_symbol": "SC",
+    "quote_symbol": "BTC",
+    "name_ko": "시아코인",
+    "name_en": "Siacoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ZIL",
+    "base_symbol": "ZIL",
+    "quote_symbol": "KRW",
+    "name_ko": "질리카",
+    "name_en": "Zilliqa"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-PROVE",
+    "base_symbol": "PROVE",
+    "quote_symbol": "USDT",
+    "name_ko": "서싱트",
+    "name_en": "Succinct"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-TRX",
+    "base_symbol": "TRX",
+    "quote_symbol": "USDT",
+    "name_ko": "트론",
+    "name_en": "TRON"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ASTR",
+    "base_symbol": "ASTR",
+    "quote_symbol": "BTC",
+    "name_ko": "아스타",
+    "name_en": "Astar"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-GAME2",
+    "base_symbol": "GAME2",
+    "quote_symbol": "KRW",
+    "name_ko": "게임빌드",
+    "name_en": "GameBuild"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-STX",
+    "base_symbol": "STX",
+    "quote_symbol": "KRW",
+    "name_ko": "스택스",
+    "name_en": "Stacks"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MAGIC",
+    "base_symbol": "MAGIC",
+    "quote_symbol": "BTC",
+    "name_ko": "매직",
+    "name_en": "MAGIC"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-FLOCK",
+    "base_symbol": "FLOCK",
+    "quote_symbol": "KRW",
+    "name_ko": "플록",
+    "name_en": "FLock.io"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-PROVE",
+    "base_symbol": "PROVE",
+    "quote_symbol": "KRW",
+    "name_ko": "서싱트",
+    "name_en": "Succinct"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ATH",
+    "base_symbol": "ATH",
+    "quote_symbol": "BTC",
+    "name_ko": "에이셔",
+    "name_en": "Aethir"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-RVN",
+    "base_symbol": "RVN",
+    "quote_symbol": "USDT",
+    "name_ko": "레이븐코인",
+    "name_en": "Ravencoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-NMR",
+    "base_symbol": "NMR",
+    "quote_symbol": "BTC",
+    "name_ko": "뉴메레르",
+    "name_en": "Numeraire"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-INIT",
+    "base_symbol": "INIT",
+    "quote_symbol": "USDT",
+    "name_ko": "이니시아",
+    "name_en": "Initia"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-BSV",
+    "base_symbol": "BSV",
+    "quote_symbol": "KRW",
+    "name_ko": "비트코인에스브이",
+    "name_en": "Bitcoin SV"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SUI",
+    "base_symbol": "SUI",
+    "quote_symbol": "KRW",
+    "name_ko": "수이",
+    "name_en": "Sui"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ATM",
+    "base_symbol": "ATM",
+    "quote_symbol": "BTC",
+    "name_ko": "아틀레티코마드리드",
+    "name_en": "Atletico De Madrid Fan Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SYRUP",
+    "base_symbol": "SYRUP",
+    "quote_symbol": "KRW",
+    "name_ko": "메이플파이낸스",
+    "name_en": "Maple Finance"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-BTC",
+    "base_symbol": "BTC",
+    "quote_symbol": "KRW",
+    "name_ko": "비트코인",
+    "name_en": "Bitcoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-TT",
+    "base_symbol": "TT",
+    "quote_symbol": "BTC",
+    "name_ko": "썬더코어",
+    "name_en": "ThunderCore"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-RVN",
+    "base_symbol": "RVN",
+    "quote_symbol": "BTC",
+    "name_ko": "레이븐코인",
+    "name_en": "Ravencoin"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-HBD",
+    "base_symbol": "HBD",
+    "quote_symbol": "BTC",
+    "name_ko": "하이브달러",
+    "name_en": "Hive Dollar"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-HOLO",
+    "base_symbol": "HOLO",
+    "quote_symbol": "KRW",
+    "name_ko": "홀로월드에이아이",
+    "name_en": "Holoworld AI"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-MIRA",
+    "base_symbol": "MIRA",
+    "quote_symbol": "KRW",
+    "name_ko": "미라네트워크",
+    "name_en": "Mira Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-OPEN",
+    "base_symbol": "OPEN",
+    "quote_symbol": "BTC",
+    "name_ko": "오픈렛저",
+    "name_en": "OpenLedger"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SUN",
+    "base_symbol": "SUN",
+    "quote_symbol": "KRW",
+    "name_ko": "썬",
+    "name_en": "SUN"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ZBT",
+    "base_symbol": "ZBT",
+    "quote_symbol": "KRW",
+    "name_ko": "제로베이스",
+    "name_en": "ZEROBASE"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MANA",
+    "base_symbol": "MANA",
+    "quote_symbol": "BTC",
+    "name_ko": "디센트럴랜드",
+    "name_en": "Decentraland"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ONG",
+    "base_symbol": "ONG",
+    "quote_symbol": "KRW",
+    "name_ko": "온톨로지가스",
+    "name_en": "ONG"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-BTT",
+    "base_symbol": "BTT",
+    "quote_symbol": "KRW",
+    "name_ko": "비트토렌트",
+    "name_en": "BitTorrent"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-OCEAN",
+    "base_symbol": "OCEAN",
+    "quote_symbol": "BTC",
+    "name_ko": "오션프로토콜",
+    "name_en": "Ocean Protocol"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ENSO",
+    "base_symbol": "ENSO",
+    "quote_symbol": "KRW",
+    "name_ko": "엔소",
+    "name_en": "Enso"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-PSG",
+    "base_symbol": "PSG",
+    "quote_symbol": "BTC",
+    "name_ko": "파리생제르맹",
+    "name_en": "Paris Saint-Germain Fan Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-PYTH",
+    "base_symbol": "PYTH",
+    "quote_symbol": "BTC",
+    "name_ko": "피스네트워크",
+    "name_en": "Pyth Network"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-SOON",
+    "base_symbol": "SOON",
+    "quote_symbol": "USDT",
+    "name_ko": "쑨",
+    "name_en": "SOON"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-POL",
+    "base_symbol": "POL",
+    "quote_symbol": "BTC",
+    "name_ko": "폴리곤에코시스템토큰",
+    "name_en": "Polygon Ecosystem Token"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-MET2",
+    "base_symbol": "MET2",
+    "quote_symbol": "BTC",
+    "name_ko": "메테오라",
+    "name_en": "Meteora"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ONT",
+    "base_symbol": "ONT",
+    "quote_symbol": "KRW",
+    "name_ko": "온톨로지",
+    "name_en": "Ontology"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-SOMI",
+    "base_symbol": "SOMI",
+    "quote_symbol": "KRW",
+    "name_ko": "솜니아",
+    "name_en": "Somnia"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-BABY",
+    "base_symbol": "BABY",
+    "quote_symbol": "USDT",
+    "name_ko": "바빌론",
+    "name_en": "Babylon"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-CVC",
+    "base_symbol": "CVC",
+    "quote_symbol": "BTC",
+    "name_ko": "시빅",
+    "name_en": "Civic"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-NKN",
+    "base_symbol": "NKN",
+    "quote_symbol": "BTC",
+    "name_ko": "엔케이엔",
+    "name_en": "NKN"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-RSR",
+    "base_symbol": "RSR",
+    "quote_symbol": "BTC",
+    "name_ko": "리저브라이트",
+    "name_en": "Reserve Rights"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-DEEP",
+    "base_symbol": "DEEP",
+    "quote_symbol": "KRW",
+    "name_ko": "딥북",
+    "name_en": "DeepBook"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ARB",
+    "base_symbol": "ARB",
+    "quote_symbol": "BTC",
+    "name_ko": "아비트럼",
+    "name_en": "Arbitrum"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-AERGO",
+    "base_symbol": "AERGO",
+    "quote_symbol": "BTC",
+    "name_ko": "아르고",
+    "name_en": "Aergo"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-DEEP",
+    "base_symbol": "DEEP",
+    "quote_symbol": "USDT",
+    "name_ko": "딥북",
+    "name_en": "DeepBook"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-ARK",
+    "base_symbol": "ARK",
+    "quote_symbol": "BTC",
+    "name_ko": "아크",
+    "name_en": "Ark"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-STRAX",
+    "base_symbol": "STRAX",
+    "quote_symbol": "KRW",
+    "name_ko": "스트라티스",
+    "name_en": "Stratis"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-STORJ",
+    "base_symbol": "STORJ",
+    "quote_symbol": "BTC",
+    "name_ko": "스토리지",
+    "name_en": "Storj"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-BLAST",
+    "base_symbol": "BLAST",
+    "quote_symbol": "BTC",
+    "name_ko": "블라스트",
+    "name_en": "Blast"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-BRETT",
+    "base_symbol": "BRETT",
+    "quote_symbol": "USDT",
+    "name_ko": "브렛",
+    "name_en": "Brett"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-META",
+    "base_symbol": "META",
+    "quote_symbol": "BTC",
+    "name_ko": "메타디움",
+    "name_en": "Metadium"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-SYRUP",
+    "base_symbol": "SYRUP",
+    "quote_symbol": "USDT",
+    "name_ko": "메이플파이낸스",
+    "name_en": "Maple Finance"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "BTC-DENT",
+    "base_symbol": "DENT",
+    "quote_symbol": "BTC",
+    "name_ko": "덴트",
+    "name_en": "Dent"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-ICX",
+    "base_symbol": "ICX",
+    "quote_symbol": "KRW",
+    "name_ko": "아이콘",
+    "name_en": "Icon"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "USDT-SOMI",
+    "base_symbol": "SOMI",
+    "quote_symbol": "USDT",
+    "name_ko": "솜니아",
+    "name_en": "Somnia"
+  },
+  {
+    "exchange": "UPBIT",
+    "market_code": "KRW-POLYX",
+    "base_symbol": "POLYX",
+    "quote_symbol": "KRW",
+    "name_ko": "폴리매쉬",
+    "name_en": "Polymesh"
+  }
+]
