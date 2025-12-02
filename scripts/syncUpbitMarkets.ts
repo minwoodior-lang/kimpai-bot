@@ -35,21 +35,10 @@ async function syncUpbitMarkets() {
 
     console.log(`📊 [syncUpbitMarkets] Found ${rows.length} Upbit markets`);
 
-    // 파일 저장 (새로 생성 또는 기존 로드)
+    // 파일 저장 (항상 새로 생성 - 업비트가 기준!)
     const dataPath = path.join(process.cwd(), "data", "exchange_markets.json");
-    let allMarkets: any[] = [];
-
-    // 기존 파일이 있으면 로드해서 UPBIT이 아닌 것 유지
-    if (fs.existsSync(dataPath)) {
-      const existing = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
-      allMarkets = Array.isArray(existing) ? existing.filter((m: any) => m.exchange !== "UPBIT") : [];
-    }
-
-    // UPBIT 추가
-    allMarkets = [...allMarkets, ...rows];
-
-    fs.writeFileSync(dataPath, JSON.stringify(allMarkets, null, 2));
-    console.log(`✅ [syncUpbitMarkets] Saved ${rows.length} Upbit markets`);
+    fs.writeFileSync(dataPath, JSON.stringify(rows, null, 2));
+    console.log(`✅ [syncUpbitMarkets] Saved ${rows.length} Upbit markets (완전 리셋)`);
   } catch (err) {
     console.error("❌ [syncUpbitMarkets] Error:", err);
     process.exit(1);

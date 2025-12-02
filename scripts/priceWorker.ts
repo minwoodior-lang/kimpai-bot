@@ -213,16 +213,31 @@ async function main() {
       }
     }
 
-    rows.sort((a, b) => (b.premium || 0) - (a.premium || 0));
+    // ✅ 중복 제거 (같은 exchange:symbol 조합 1번만 남기기)
+    const seen = new Set<string>();
+    const deduped: PremiumRow[] = [];
 
+    for (const row of rows) {
+      const key = `${row.exchange}:${row.symbol}`;
+      if (seen.has(key)) {
+        console.warn(`⚠️ [priceWorker] 중복 제거: ${key}`);
+        continue;
+      }
+      seen.add(key);
+      deduped.push(row);
+    }
+
+    deduped.sort((a, b) => (b.premium || 0) - (a.premium || 0));
+
+    // ✅ 매번 새로 생성 (append하지 않기!)
     const outPath = path.join(process.cwd(), "data", "premiumTable.json");
-    fs.writeFileSync(outPath, JSON.stringify(rows, null, 2));
+    fs.writeFileSync(outPath, JSON.stringify(deduped, null, 2));
 
-    console.log(`✅ [priceWorker] 완료: ${rows.length}개 마켓\n`);
+    console.log(`✅ [priceWorker] 완료: ${deduped.length}개 마켓 (중복 ${rows.length - deduped.length}개 제거)\n`);
     console.log(`[priceWorker] 거래소별 마켓:`);
 
     const byEx: Record<string, number> = {};
-    for (const row of rows) {
+    for (const row of deduped) {
       byEx[row.exchange] = (byEx[row.exchange] || 0) + 1;
     }
     for (const [ex, count] of Object.entries(byEx)) {

@@ -1,0 +1,136 @@
+📮 Replit한테 그대로 보내는 전달문
+🚨 문제 요약
+
+프론트에서 동일 코인(예: SXP, 멀티버스엑스)이 여러 줄로 중복 표시되고 있습니다.
+
+이는 /api/premium/table에서 내려주는 premiumTable.json 안에
+동일한 (exchange, market, symbol) 조합의 row가 여러 번 들어가 있기 때문입니다.
+
+지금까지 “새 파이프라인(664+390=1,054마켓)”이라고 하셨지만,
+실제로는 기존 데이터가 안 지워졌거나, 워커가 계속 append하면서 누적 중복이 생기고 있는 상태입니다.
+
+아래 네 가지를 반드시 적용해 주세요.
+
+1️⃣ data/exchange_markets.json, data/premiumTable.json 둘 다 직접 삭제
+
+Replit 콘솔에서 프로젝트 열고
+
+data/exchange_markets.json
+data/premiumTable.json
+이 두 파일 그냥 파일 자체를 삭제해 주세요.
+
+Git에 커밋된 예전 JSON이 있으면 그것도 삭제/초기화해 주세요.
+
+💡 이걸 안 하면, 스크립트가 이전 내용 불러와서 거기에 계속 .push() 하고 있을 가능성이 큽니다.
+
+2️⃣ syncUpbitMarkets.ts는 “항상 새 배열에서 시작”하게 수정
+
+지금 혹시 이런 식으로 되어 있으면:
+
+const existing = JSON.parse(fs.readFileSync("data/exchange_markets.json", "utf-8"));
+const all = [...existing, ...upbitRows];
+fs.writeFileSync("data/exchange_markets.json", JSON.stringify(all));
+
+
+이거 전체 삭제하고, 아래처럼 무조건 업비트 기준으로 새로 만드는 방식으로 바꿔 주세요.
+
+const upbitRows = ... // 업비트 마켓에서 만든 rows 배열
+
+fs.writeFileSync(
+  "data/exchange_markets.json",
+  JSON.stringify(upbitRows, null, 2),
+  "utf-8"
+);
+
+
+✅ syncUpbitMarkets.ts 실행 시점 = exchange_markets.json 완전 리셋.
+
+3️⃣ syncBithumbMarkets.ts, syncCoinoneMarkets.ts는 “자기 거래소 것만 교체”
+
+두 스크립트는 이렇게 동작해야 합니다:
+
+const raw = fs.existsSync("data/exchange_markets.json")
+  ? JSON.parse(fs.readFileSync("data/exchange_markets.json", "utf-8"))
+  : [];
+
+// 1) 기존 중에서 자기 거래소 것만 제거
+const filtered = raw.filter((row: any) => row.exchange !== "BITHUMB"); // 또는 COINONE
+
+// 2) 새로 만든 rows 추가
+const all = [...filtered, ...bithumbRows];
+
+fs.writeFileSync(
+  "data/exchange_markets.json",
+  JSON.stringify(all, null, 2),
+  "utf-8"
+);
+
+
+✅ 이렇게 해야 npx tsx scripts/syncBithumbMarkets.ts를
+여러 번 돌려도 중복이 절대 생기지 않습니다.
+
+4️⃣ priceWorker.ts는 premiumTable.json을 절대 append 하지 말고 매번 새로 만들 것
+
+지금 버그의 진짜 핵심은 여기일 가능성이 높습니다.
+
+금지 패턴 예시 (이렇게 되어 있으면 무조건 바꿔야 함):
+
+const old = JSON.parse(fs.readFileSync("data/premiumTable.json", "utf-8"));
+const result = [...old, ...newPremiumRows];
+fs.writeFileSync("data/premiumTable.json", JSON.stringify(result));
+
+
+정상 패턴 (항상 새로 계산해서 덮어쓰기):
+
+const markets = JSON.parse(
+  fs.readFileSync("data/exchange_markets.json", "utf-8")
+);
+
+// 여기서 markets 기준으로 premiumRows 새로 계산
+const premiumRows = calculatePremiums(markets);
+
+fs.writeFileSync(
+  "data/premiumTable.json",
+  JSON.stringify(premiumRows, null, 2),
+  "utf-8"
+);
+
+
+그리고 안전하게 한 번 더, premiumRows 만들 때 중복 키 방지도 넣어 주세요:
+
+const seen = new Set<string>();
+const deduped: any[] = [];
+
+for (const row of premiumRows) {
+  const key = `${row.domesticExchange}:${row.symbol}:${row.quoteSymbol ?? "KRW"}`;
+  if (seen.has(key)) continue;
+  seen.add(key);
+  deduped.push(row);
+}
+
+fs.writeFileSync(
+  "data/premiumTable.json",
+  JSON.stringify(deduped, null, 2),
+  "utf-8"
+);
+
+
+✅ 이렇게 하면 priceWorker를 여러 번 돌려도
+동일 코인/거래소/마켓 조합이 1번만 남습니다.
+
+5️⃣ 최종 체크 방법 (개발자용)
+
+priceWorker.ts 실행 후, Node REPL이나 작은 스크립트로:
+
+const data = JSON.parse(fs.readFileSync("data/premiumTable.json", "utf-8"));
+const sxp = data.filter(
+  (r: any) => r.symbol === "SXP" && r.domesticExchange === "UPBIT"
+);
+console.log(sxp.length); // 👉 1이 나와야 정상
+
+
+멀티버스엑스(EGLD)도 동일하게 확인
+
+1 이상이면 OK
+
+2 이상이면 여전히 중복 처리 제대로 안 된 것임.
