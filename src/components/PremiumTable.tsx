@@ -535,6 +535,13 @@ export default function PremiumTable({
     return result;
   }, [data, searchQuery, sortKey, sortOrder, limit]);
 
+  // 코인 표시명 생성: name_ko가 있으면 우선, 없으면 name_en, 마지막은 symbol
+  const getDisplayName = (item: PremiumData): string => {
+    if (item.displayName) return item.displayName;
+    if (item.koreanName && item.koreanName !== item.symbol) return item.koreanName;
+    return item.name || item.symbol;
+  };
+
   const formatKRW = (value: number | null) => {
     if (value === null || value === undefined || isNaN(value)) return "-";
     return value.toLocaleString("ko-KR");
