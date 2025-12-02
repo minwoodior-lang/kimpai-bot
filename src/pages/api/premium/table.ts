@@ -70,53 +70,76 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
     return cachedMetadata;
   }
 
-  try {
-    // Try to fetch from master_symbols table first
-    const { data: masterSymbols, error } = await supabase
-      .from('master_symbols')
-      .select('base_symbol, ko_name, coingecko_id, coinmarketcap_slug')
-      .eq('is_active', true);
+  const metadata = new Map<string, CoinMetadata>();
 
-    if (!error && masterSymbols && masterSymbols.length > 0) {
-      const metadata = new Map<string, CoinMetadata>();
+  try {
+    // 1) master_symbols 우선 적용
+    const { data: masterSymbols } = await supabase
+      .from("master_symbols")
+      .select("base_symbol, ko_name, coingecko_id, coinmarketcap_slug")
+      .eq("is_active", true);
+
+    if (masterSymbols) {
       for (const record of masterSymbols) {
         metadata.set(record.base_symbol, {
           symbol: record.base_symbol,
           koreanName: record.ko_name || record.base_symbol,
           englishName: record.base_symbol,
-          cmcSlug: record.coinmarketcap_slug || record.base_symbol.toLowerCase(),
+          cmcSlug:
+            record.coinmarketcap_slug ||
+            record.base_symbol.toLowerCase(),
         });
       }
-      cachedMetadata = metadata;
-      lastMetadataFetch = now;
-      return metadata;
     }
 
-    // Fallback: fetch from Upbit API if master_symbols unavailable
-    const response = await fetch('https://api.upbit.com/v1/market/all?isDetails=true');
+    // 2) Upbit 메타데이터 병합 (master_symbols 값 우선)
+    const response = await fetch(
+      "https://api.upbit.com/v1/market/all?isDetails=true"
+    );
     const data = await response.json();
-    
+
     if (Array.isArray(data)) {
-      const metadata = new Map<string, CoinMetadata>();
       for (const market of data) {
-        const [quote, base] = market.market.split('-');
-        if (!metadata.has(base)) {
-          metadata.set(base, {
-            symbol: base,
-            koreanName: market.korean_name || base,
-            englishName: market.english_name || base,
-            cmcSlug: market.english_name?.toLowerCase().replace(/\s+/g, '-'),
-          });
-        }
+        const [quote, base] = market.market.split("-");
+        if (quote !== "KRW") continue;
+
+        const existing = metadata.get(base);
+
+        const englishName =
+          existing?.englishName ||
+          market.english_name ||
+          base;
+
+        const koreanName =
+          existing?.koreanName ||
+          market.korean_name ||
+          base;
+
+        const autoSlug =
+          market.english_name
+            ?.toLowerCase()
+            .replace(/\s+/g, "-")
+            .replace(/[^a-z0-9-]/g, "") || undefined;
+
+        metadata.set(base, {
+          symbol: base,
+          koreanName,
+          englishName,
+          cmcSlug:
+            existing?.cmcSlug ||
+            autoSlug ||
+            base.toLowerCase(),
+        });
       }
-      cachedMetadata = metadata;
-      lastMetadataFetch = now;
     }
+
+    cachedMetadata = metadata;
+    lastMetadataFetch = now;
   } catch (error) {
-    console.error('Failed to fetch coin metadata:', error);
+    console.error("Failed to fetch coin metadata:", error);
   }
-  
-  return cachedMetadata;
+
+  return metadata;
 }
 
 function parseExchangeParam(param: string): { exchange: string; quote: string } {

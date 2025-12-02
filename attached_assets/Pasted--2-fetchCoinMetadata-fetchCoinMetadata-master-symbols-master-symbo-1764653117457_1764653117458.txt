@@ -1,0 +1,98 @@
+[요청 2: fetchCoinMetadata 병합 구조로 개선]
+
+현재 fetchCoinMetadata는 master_symbols 데이터만 사용하고,
+master_symbols에 없는 코인은 이름/slug가 비어 있어
+아이콘/CMC 링크/차트 기능이 함께 약해지는 문제가 있습니다.
+
+해결 목표:
+- master_symbols(수동 값 우선) + Upbit market/all 자동 데이터 병합
+- 대부분의 코인에 한글명, 영문명, CMC slug 자동 채워지도록 개선
+- master_symbols에 있는 코인은 해당 값이 항상 우선 적용
+
+아래 코드로 교체 요청드립니다.
+(METADATA_CACHE_TTL, try/catch 구문은 기존 유지)
+
+-------------------------------------
+async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
+  const now = Date.now();
+  if (cachedMetadata.size > 0 && now - lastMetadataFetch < METADATA_CACHE_TTL) {
+    return cachedMetadata;
+  }
+
+  const metadata = new Map<string, CoinMetadata>();
+
+  try {
+    // 1) master_symbols 우선 적용
+    const { data: masterSymbols } = await supabase
+      .from("master_symbols")
+      .select("base_symbol, ko_name, coingecko_id, coinmarketcap_slug")
+      .eq("is_active", true);
+
+    if (masterSymbols) {
+      for (const record of masterSymbols) {
+        metadata.set(record.base_symbol, {
+          symbol: record.base_symbol,
+          koreanName: record.ko_name || record.base_symbol,
+          englishName: record.base_symbol,
+          cmcSlug:
+            record.coinmarketcap_slug ||
+            record.base_symbol.toLowerCase(),
+        });
+      }
+    }
+
+    // 2) Upbit 메타데이터 병합 (master_symbols 값 우선)
+    const response = await fetch(
+      "https://api.upbit.com/v1/market/all?isDetails=true"
+    );
+    const data = await response.json();
+
+    if (Array.isArray(data)) {
+      for (const market of data) {
+        const [quote, base] = market.market.split("-");
+        if (quote !== "KRW") continue;
+
+        const existing = metadata.get(base);
+
+        const englishName =
+          existing?.englishName ||
+          market.english_name ||
+          base;
+
+        const koreanName =
+          existing?.koreanName ||
+          market.korean_name ||
+          base;
+
+        const autoSlug =
+          market.english_name
+            ?.toLowerCase()
+            .replace(/\s+/g, "-")
+            .replace(/[^a-z0-9-]/g, "") || undefined;
+
+        metadata.set(base, {
+          symbol: base,
+          koreanName,
+          englishName,
+          cmcSlug:
+            existing?.cmcSlug ||
+            autoSlug ||
+            base.toLowerCase(),
+        });
+      }
+    }
+
+    cachedMetadata = metadata;
+    lastMetadataFetch = now;
+  } catch (error) {
+    console.error("Failed to fetch coin metadata:", error);
+  }
+
+  return metadata;
+}
+-------------------------------------
+
+적용 효과:
+- master_symbols 코인은 ko_name, slug 모두 100% 적용
+- 나머지 코인도 Upbit 기반으로 자동 채워져
+  아이콘/CMC 링크/차트 불안정 문제가 대폭 감소
