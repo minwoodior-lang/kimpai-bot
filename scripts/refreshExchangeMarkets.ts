@@ -24,7 +24,7 @@ type ExchangeMarketRow = {
 };
 
 /**
- * 업비트 KRW 마켓 (API 직접 호출)
+ * 업비트 KRW 마켓 (API 직접 호출 + 공식 아이콘 URL)
  */
 async function fetchUpbitMarkets(): Promise<ExchangeMarketRow[]> {
   try {
@@ -64,14 +64,31 @@ async function fetchUpbitMarkets(): Promise<ExchangeMarketRow[]> {
 }
 
 /**
- * 빗썸 KRW 마켓 (확장 리스트 - 실제 거래 가능한 코인)
+ * 빗썸 KRW 마켓 - 웹 크롤링으로 실제 마켓 화면 데이터 수집
  */
 async function fetchBithumbMarkets(): Promise<ExchangeMarketRow[]> {
   try {
-    console.log("[Bithumb] 전체 KRW 마켓 수집...");
+    console.log("[Bithumb] 마켓 데이터 수집 중...");
 
-    // Bithumb 실제 거래 가능한 모든 코인
-    const BITHUMB_COINS: Record<string, { ko: string; en: string }> = {
+    // Bithumb API에서 거래 가능한 모든 코인 정보 조회
+    const response = await fetch("https://api.bithumb.com/public/ticker/all", {
+      headers: { "Accept": "application/json" }
+    });
+    
+    if (!response.ok) {
+      console.warn("[Bithumb] API 응답 실패:", response.status);
+      return [];
+    }
+
+    const data = await response.json();
+
+    if (data.status !== "0000" || !data.data) {
+      console.warn("[Bithumb] API 응답 실패:", data.message);
+      return [];
+    }
+
+    // 기본 한글명 매핑 (Bithumb 마켓 화면 기준)
+    const BITHUMB_NAMES: Record<string, { ko: string; en: string }> = {
       BTC: { ko: "비트코인", en: "Bitcoin" },
       ETH: { ko: "이더리움", en: "Ethereum" },
       LTC: { ko: "라이트코인", en: "Litecoin" },
@@ -206,15 +223,20 @@ async function fetchBithumbMarkets(): Promise<ExchangeMarketRow[]> {
     };
 
     const markets: ExchangeMarketRow[] = [];
-    for (const [symbol, names] of Object.entries(BITHUMB_COINS)) {
+    for (const symbol of Object.keys(data.data)) {
+      if (symbol.toUpperCase() === "DATE") continue;
+      const names = BITHUMB_NAMES[symbol.toUpperCase()] || {
+        ko: symbol.toUpperCase(),
+        en: symbol.toUpperCase(),
+      };
       markets.push({
         exchange: "bithumb",
-        market_code: `${symbol}_KRW`,
-        base_symbol: symbol,
+        market_code: `${symbol.toUpperCase()}_KRW`,
+        base_symbol: symbol.toUpperCase(),
         quote_symbol: "KRW",
         name_ko: names.ko,
         name_en: names.en,
-        icon_url: `https://static.bithumb.com/images/currency/logo/${symbol.toLowerCase()}_logo.png`,
+        icon_url: `https://static.bithumb.com/images/currency/logo/${symbol.toUpperCase().toLowerCase()}_logo.png`,
         is_active: true,
       });
     }
@@ -228,13 +250,31 @@ async function fetchBithumbMarkets(): Promise<ExchangeMarketRow[]> {
 }
 
 /**
- * 코인원 KRW 마켓 (확장 리스트)
+ * 코인원 KRW 마켓 - 웹 크롤링 기반
  */
 async function fetchCoinoneMarkets(): Promise<ExchangeMarketRow[]> {
   try {
-    console.log("[Coinone] 전체 KRW 마켓 수집...");
+    console.log("[Coinone] 마켓 데이터 수집 중...");
 
-    const COINONE_COINS: Record<string, { ko: string; en: string }> = {
+    // 코인원 공개 API - 실거래 가능한 마켓 조회
+    const response = await fetch("https://api.coinone.co.kr/public/v2/markets", {
+      headers: { "Accept": "application/json" }
+    });
+    
+    if (!response.ok) {
+      console.warn("[Coinone] API 응답 실패:", response.status);
+      return [];
+    }
+
+    const data = await response.json();
+
+    if (!Array.isArray(data)) {
+      console.warn("[Coinone] 응답 형식 오류");
+      return [];
+    }
+
+    // 기본 한글명 매핑 (코인원 마켓 화면 기준)
+    const COINONE_NAMES: Record<string, { ko: string; en: string }> = {
       BTC: { ko: "비트코인", en: "Bitcoin" },
       ETH: { ko: "이더리움", en: "Ethereum" },
       LTC: { ko: "라이트코인", en: "Litecoin" },
@@ -257,7 +297,15 @@ async function fetchCoinoneMarkets(): Promise<ExchangeMarketRow[]> {
     };
 
     const markets: ExchangeMarketRow[] = [];
-    for (const [symbol, names] of Object.entries(COINONE_COINS)) {
+    for (const market of data) {
+      const symbol = market.target_currency?.toUpperCase() || "";
+      if (!symbol) continue;
+
+      const names = COINONE_NAMES[symbol] || {
+        ko: symbol,
+        en: symbol,
+      };
+
       markets.push({
         exchange: "coinone",
         market_code: symbol,
@@ -265,7 +313,7 @@ async function fetchCoinoneMarkets(): Promise<ExchangeMarketRow[]> {
         quote_symbol: "KRW",
         name_ko: names.ko,
         name_en: names.en,
-        icon_url: "",
+        icon_url: `https://static.coinone.co.kr/images/coin/${symbol.toLowerCase()}.png`,
         is_active: true,
       });
     }
@@ -279,24 +327,49 @@ async function fetchCoinoneMarkets(): Promise<ExchangeMarketRow[]> {
 }
 
 /**
- * exchange_markets에 UPSERT
+ * exchange_markets에 DELETE + INSERT (폴 리프레시 방식)
+ * - 기존 모든 KRW 마켓 삭제
+ * - 새로 크롤링한 데이터 일괄 삽입
+ * - 실제 저장된 행 수 반환 (false positive 방지)
  */
 async function upsertMarkets(markets: ExchangeMarketRow[]): Promise<number> {
   if (markets.length === 0) return 0;
 
   try {
-    const { data, error } = await (supabase
-      .from("exchange_markets" as any)
-      .upsert(markets, {
-        onConflict: "exchange,market_code",
-      }) as any);
+    // 1단계: 기존 KRW 마켓 전체 삭제
+    console.log("[DB] 기존 KRW 마켓 삭제 중...");
+    const { error: delError } = await supabase
+      .from("exchange_markets")
+      .delete()
+      .eq("quote_symbol", "KRW");
 
-    if (error) {
-      console.error("[DB Error]:", error.message || JSON.stringify(error));
+    if (delError) {
+      console.error("[DB Delete Error]:", delError.message || JSON.stringify(delError));
+      throw delError;
+    }
+
+    // 2단계: 새 데이터 일괄 삽입
+    console.log(`[DB] ${markets.length}개 마켓 삽입 중...`);
+    const { data, error: insertError } = await supabase
+      .from("exchange_markets")
+      .insert(markets as any)
+      .select("id");
+
+    if (insertError) {
+      console.error("[DB Insert Error]:", insertError.message || JSON.stringify(insertError));
+      throw insertError;
+    }
+
+    // 실제 삽입된 행 수 반환
+    const savedCount = (data as any[])?.length || 0;
+    
+    if (savedCount === 0) {
+      console.error("[DB Error] Insert 실패: 0개 행이 저장됨");
       return 0;
     }
 
-    return (data as any[])?.length || markets.length;
+    console.log(`[DB] ✅ ${savedCount}개 행 정상 저장됨`);
+    return savedCount;
   } catch (err) {
     console.error("[Upsert Error]:", err instanceof Error ? err.message : String(err));
     return 0;
@@ -326,19 +399,14 @@ async function main() {
     process.exit(1);
   }
 
-  let totalInserted = 0;
+  const totalInserted = await upsertMarkets(allMarkets);
 
-  // 배치 처리 (500개씩)
-  for (let i = 0; i < allMarkets.length; i += 500) {
-    const batch = allMarkets.slice(i, i + 500);
-    const count = await upsertMarkets(batch);
-    totalInserted += count;
-    const batchNum = Math.floor(i / 500) + 1;
-    const totalBatches = Math.ceil(allMarkets.length / 500);
-    console.log(`[Batch ${batchNum}/${totalBatches}] ${count}개 행 upsert 완료\n`);
+  if (totalInserted === 0) {
+    console.error("\n❌ [Fatal] DB 저장 실패 - 0개 행만 저장됨");
+    process.exit(1);
   }
 
-  console.log(`========== 완료: 총 ${totalInserted}개 마켓이 exchange_markets에 저장됨 ==========\n`);
+  console.log(`\n========== 완료: 총 ${totalInserted}개 마켓이 exchange_markets에 저장됨 ==========\n`);
 }
 
 main().catch((err) => {
