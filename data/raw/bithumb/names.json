@@ -1,1 +1,82 @@
-{}
+{
+  "BTC": {
+    "name_ko": "비트코인",
+    "name_en": "Bitcoin"
+  },
+  "ETH": {
+    "name_ko": "이더리움",
+    "name_en": "Ethereum"
+  },
+  "XRP": {
+    "name_ko": "리플",
+    "name_en": "XRP"
+  },
+  "LTC": {
+    "name_ko": "라이트코인",
+    "name_en": "Litecoin"
+  },
+  "BCH": {
+    "name_ko": "비트코인캐시",
+    "name_en": "Bitcoin Cash"
+  },
+  "EOS": {
+    "name_ko": "이오스",
+    "name_en": "EOS"
+  },
+  "XLM": {
+    "name_ko": "스텔라루멘",
+    "name_en": "Stellar"
+  },
+  "LINK": {
+    "name_ko": "체인링크",
+    "name_en": "Chainlink"
+  },
+  "DOGE": {
+    "name_ko": "도지코인",
+    "name_en": "Dogecoin"
+  },
+  "DOT": {
+    "name_ko": "폴카닷",
+    "name_en": "Polkadot"
+  },
+  "SOL": {
+    "name_ko": "솔라나",
+    "name_en": "Solana"
+  },
+  "AVAX": {
+    "name_ko": "아발란시",
+    "name_en": "Avalanche"
+  },
+  "MATIC": {
+    "name_ko": "폴리곤",
+    "name_en": "Polygon"
+  },
+  "ADA": {
+    "name_ko": "카르다노",
+    "name_en": "Cardano"
+  },
+  "UNI": {
+    "name_ko": "유니스왑",
+    "name_en": "Uniswap"
+  },
+  "AAVE": {
+    "name_ko": "에이브",
+    "name_en": "Aave"
+  },
+  "SHIB": {
+    "name_ko": "시바이누",
+    "name_en": "Shiba Inu"
+  },
+  "USDC": {
+    "name_ko": "USDC",
+    "name_en": "USDC"
+  },
+  "USDT": {
+    "name_ko": "테더",
+    "name_en": "Tether"
+  },
+  "DAI": {
+    "name_ko": "다이",
+    "name_en": "Dai"
+  }
+}
