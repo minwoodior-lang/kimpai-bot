@@ -1,0 +1,128 @@
+🔧 작업 요청: CoinIcon.tsx 아이콘 우선순위 수정 + iconUrl 실제 적용
+
+현재 CoinIcon.tsx가 API에서 전달되는 iconUrl 값을 사용하지 않고, 
+무조건 /coins/SYMBOL.png 또는 외부 CDN 아이콘만 시도하고 있습니다.
+이로 인해 master_symbols.icon_url 필드가 업데이트되어도 화면에 반영되지 않습니다.
+
+아래는 완성된 CoinIcon.tsx 전체 코드입니다.
+이 코드로 파일 전체를 교체해주세요.
+
+우선순위는 다음과 같아야 합니다:
+
+1) iconUrl (DB에서 받은 실제 아이콘 URL)
+2) /coins/SYMBOL.png (로컬 아이콘)
+3) jsdelivr CDN
+4) github CDN
+5) coincap CDN
+6) coingecko CDN
+7) cryptocompare CDN
+8) 마지막 fallback → 알파벳 첫 글자 ICON
+
+📌 아래 코드로 CoinIcon.tsx 내용을 "전체 교체" 해주세요.
+-------------------------------------------------------------------------------
+
+import React, { useEffect, useState } from "react";
+
+interface CoinIconProps {
+  symbol: string;
+  size?: "sm" | "md" | "lg";
+  className?: string;
+  iconUrl?: string | null; // master_symbols.icon_url
+}
+
+const COIN_ID_MAP: Record<string, string> = {};
+const GRADIENT_COLORS: Record<string, string> = {};
+
+const loggedMissingIcons = new Set<string>();
+
+function normalizeSymbol(symbol: string) {
+  return symbol.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+}
+
+export default function CoinIcon({
+  symbol,
+  size = "md",
+  className = "",
+  iconUrl,
+}: CoinIconProps) {
+  const normalized = normalizeSymbol(symbol);
+  const lower = normalized.toLowerCase();
+  const upper = normalized.toUpperCase();
+
+  const [cdnIndex, setCdnIndex] = useState(0);
+  const [hasError, setHasError] = useState(false);
+
+  const sizeClasses = {
+    sm: "w-5 h-5",
+    md: "w-6 h-6",
+    lg: "w-8 h-8",
+  };
+
+  const textSizes = {
+    sm: "text-[8px]",
+    md: "text-[10px]",
+    lg: "text-xs",
+  };
+
+  // 2) 로컬 기본 경로
+  const localIcon = `/coins/${upper}.png`;
+
+  // 3) 아이콘 시도 우선순위
+  const iconSources = [
+    iconUrl && iconUrl.trim() ? iconUrl : null, // 1순위: DB
+    localIcon, // 2순위: /public/coins/SYMBOL.png
+    `https://cdn.jsdelivr.net/npm/cryptocurrency-icons@0.18.1/32/color/${lower}.png`,
+    `https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/${lower}.png`,
+    `https://static.coincap.io/assets/icons/${lower}@2x.png`,
+    COIN_ID_MAP[upper]
+      ? `https://assets.coingecko.com/coins/images/1/small/${COIN_ID_MAP[upper]}.png`
+      : null,
+    `https://www.cryptocompare.com/media/37746251/${lower}.png`,
+  ].filter(Boolean) as string[];
+
+  const handleError = () => {
+    if (cdnIndex < iconSources.length - 1) {
+      setCdnIndex((prev) => prev + 1);
+    } else {
+      setHasError(true);
+    }
+  };
+
+  useEffect(() => {
+    if (hasError && process.env.NODE_ENV === "development") {
+      if (!loggedMissingIcons.has(upper)) {
+        loggedMissingIcons.add(upper);
+        console.warn("[CoinIcon] Missing icon for:", upper);
+      }
+    }
+  }, [hasError, upper]);
+
+  if (hasError) {
+    return (
+      <div
+        className={`${sizeClasses[size]} rounded-full bg-slate-600 flex items-center justify-center text-white font-bold ${textSizes[size]} ${className}`}
+      >
+        {upper.charAt(0)}
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={iconSources[cdnIndex]}
+      alt={upper}
+      className={`${sizeClasses[size]} rounded-full ${className}`}
+      onError={handleError}
+      loading="lazy"
+    />
+  );
+}
+
+-------------------------------------------------------------------------------
+
+작업 완료 후 반드시 확인해야 할 것:
+1) /api/premium/table 응답에 icon_url이 나오면 → 실제 로고가 표시되어야 합니다.
+2) icon_url이 없는 코인은 자동으로 /coins/SYMBOL.png 또는 CDN 폴백이 사용되어야 합니다.
+3) 기본 원형 fallback(첫 글자)도 정상 작동해야 합니다.
+
+위 코드로 교체 후 저장하고 Dev 서버 재시작까지 완료해주세요.
