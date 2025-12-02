@@ -12,11 +12,11 @@ interface PremiumRow {
   foreignExchange: string | null;
 }
 
-interface MasterSymbol {
+interface ExchangeMarket {
   base_symbol: string;
   name_ko: string | null;
   name_en: string | null;
-  icon_url: string;
+  icon_url?: string;
 }
 
 function loadPremium(): PremiumRow[] {
@@ -25,14 +25,16 @@ function loadPremium(): PremiumRow[] {
   return JSON.parse(fs.readFileSync(file, "utf8"));
 }
 
-function loadMaster(): Record<string, MasterSymbol> {
-  const file = path.join(process.cwd(), "data/master_symbols.json");
+function loadExchangeMetadata(): Record<string, ExchangeMarket> {
+  const file = path.join(process.cwd(), "data/exchange_markets.json");
   if (!fs.existsSync(file)) return {};
 
-  const data: MasterSymbol[] = JSON.parse(fs.readFileSync(file, "utf8"));
-  const map: Record<string, MasterSymbol> = {};
+  const data: ExchangeMarket[] = JSON.parse(fs.readFileSync(file, "utf8"));
+  const map: Record<string, ExchangeMarket> = {};
   for (const m of data) {
-    map[m.base_symbol] = m;
+    if (!map[m.base_symbol]) {
+      map[m.base_symbol] = m;
+    }
   }
   return map;
 }
@@ -40,17 +42,17 @@ function loadMaster(): Record<string, MasterSymbol> {
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const premium = loadPremium();
-    const masterMap = loadMaster();
+    const exchangeMetaMap = loadExchangeMetadata();
 
     const result = premium
       .map((row: PremiumRow) => {
         try {
-          const master = masterMap[row.symbol];
+          const meta = exchangeMetaMap[row.symbol];
           return {
             symbol: row.symbol,
-            name_ko: master?.name_ko || null,
-            name_en: master?.name_en || null,
-            icon_url: master?.icon_url || `/coins/${row.symbol}.png`,
+            name_ko: meta?.name_ko || null,
+            name_en: meta?.name_en || null,
+            icon_url: meta?.icon_url || `/coins/${row.symbol}.png`,
             koreanPrice: row.koreanPrice,
             globalPrice: row.globalPrice,
             globalPriceKrw: row.globalPriceKrw,
@@ -63,10 +65,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             volume24hKrw: 0,
             volume24hForeignKrw: null,
             isListed: true,
-            cmcSlug: undefined,
-            koreanName: master?.name_ko,
             displayName:
-              master?.name_ko || master?.name_en || row.symbol,
+              meta?.name_ko || meta?.name_en || row.symbol,
           };
         } catch (e) {
           console.error(`[API] Error mapping ${row.symbol}:`, e);

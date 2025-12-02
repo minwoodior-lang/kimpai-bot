@@ -2,12 +2,6 @@ import fs from "fs";
 import path from "path";
 import axios from "axios";
 
-interface ExchangeMarket {
-  base_symbol: string;
-  quote_symbol: string;
-  exchange: string;
-}
-
 interface PremiumRow {
   symbol: string;
   koreanPrice: number | null;
@@ -20,15 +14,9 @@ interface PremiumRow {
 
 const FX_DEFAULT = 1350;
 
-function loadExchangeMarkets(): ExchangeMarket[] {
-  const filePath = path.join(process.cwd(), "data", "exchange_markets.json");
-  return JSON.parse(fs.readFileSync(filePath, "utf8"));
-}
-
 async function fetchAllPrices() {
   const priceMap: Record<string, Record<string, number>> = {};
 
-  // ===== Upbit KRW =====
   try {
     const resp = await axios.get("https://api.upbit.com/v1/market/all?isDetails=true", {
       timeout: 10000,
@@ -36,17 +24,16 @@ async function fetchAllPrices() {
 
     for (const m of resp.data) {
       const market: string = m.market;
-      if (!market.startsWith("KRW-")) continue;
+      if (!market || !market.startsWith("KRW-")) continue;
 
       const [, base] = market.split("-");
       if (!priceMap[base]) priceMap[base] = {};
-      priceMap[base]["UPBIT_KRW"] = Number(m.trade_price);
+      priceMap[base]["UPBIT_KRW"] = Number(m.trade_price || 0);
     }
   } catch (e) {
-    console.error(`[Upbit] Error: ${(e as any).message}`);
+    console.error(`[Upbit detail] Error: ${(e as any).message}`);
   }
 
-  // 실제로는 따로 ticker 호출 필요
   try {
     const upbitSymbols = Object.keys(priceMap).map((s) => `KRW-${s}`);
     if (upbitSymbols.length > 0) {
@@ -71,7 +58,6 @@ async function fetchAllPrices() {
     console.error(`[Upbit ticker] Error: ${(e as any).message}`);
   }
 
-  // ===== Bithumb KRW =====
   try {
     const resp = await axios.get("https://api.bithumb.com/public/ticker/ALL_KRW", {
       timeout: 8000,
@@ -79,16 +65,15 @@ async function fetchAllPrices() {
     if (resp.data?.data) {
       for (const base in resp.data.data) {
         if (base === "date") continue;
-        const baseNorm = base.toUpperCase();
-        if (!priceMap[baseNorm]) priceMap[baseNorm] = {};
-        priceMap[baseNorm]["BITHUMB_KRW"] = Number(resp.data.data[base].closing_price);
+        const sym = base.toUpperCase();
+        if (!priceMap[sym]) priceMap[sym] = {};
+        priceMap[sym]["BITHUMB_KRW"] = Number(resp.data.data[base].closing_price);
       }
     }
   } catch (e) {
     console.error(`[Bithumb] Error: ${(e as any).message}`);
   }
 
-  // ===== Coinone KRW =====
   try {
     const resp = await axios.get("https://api.coinone.co.kr/ticker?currency=all", {
       timeout: 8000,
@@ -96,16 +81,15 @@ async function fetchAllPrices() {
     if (resp.data?.result === 1) {
       for (const base in resp.data) {
         if (!base || base.startsWith("timestamp") || base === "result") continue;
-        const baseNorm = base.toUpperCase();
-        if (!priceMap[baseNorm]) priceMap[baseNorm] = {};
-        priceMap[baseNorm]["COINONE_KRW"] = Number(resp.data[base].last);
+        const sym = base.toUpperCase();
+        if (!priceMap[sym]) priceMap[sym] = {};
+        priceMap[sym]["COINONE_KRW"] = Number(resp.data[base].last || 0);
       }
     }
   } catch (e) {
     console.error(`[Coinone] Error: ${(e as any).message}`);
   }
 
-  // ===== OKX USDT =====
   try {
     const resp = await axios.get(
       "https://www.okx.com/api/v5/market/tickers?instType=SPOT",
@@ -124,7 +108,6 @@ async function fetchAllPrices() {
     console.error(`[OKX] Error: ${(e as any).message}`);
   }
 
-  // ===== Gate.io USDT =====
   try {
     const resp = await axios.get("https://api.gateio.ws/api/v4/spot/tickers", {
       timeout: 10000,
@@ -149,7 +132,6 @@ async function main() {
   console.log("[priceWorker] 시작\n");
 
   try {
-    const markets = loadExchangeMarkets();
     const priceMap = await fetchAllPrices();
 
     const rows: PremiumRow[] = [];
