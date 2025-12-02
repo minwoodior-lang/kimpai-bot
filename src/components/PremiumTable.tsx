@@ -231,8 +231,6 @@ export default function PremiumTable({
     setExpandedSymbol(prev => prev === symbol ? null : symbol);
   };
 
-  const getTvSymbol = (symbol: string) => `BINANCE:${symbol}USDT`;
-
   const detectChanges = useCallback((newData: PremiumData[]) => {
     try {
       if (!Array.isArray(newData)) return;
@@ -515,6 +513,19 @@ export default function PremiumTable({
     const percent = ((current - base) / base) * 100;
     const diff = current - base;
     return { percent, diff, valid: true };
+  };
+
+  // TradingView 심볼 오버라이드 (특수 마켓용)
+  const TV_SYMBOL_OVERRIDES: Record<string, string> = {
+    // 필요 시 하나씩 추가. 예: H: "OKX:HUSDT"
+  };
+
+  const getTvSymbol = (symbol: string) => {
+    const base = symbol.split("/")[0].toUpperCase();
+    if (TV_SYMBOL_OVERRIDES[base]) {
+      return TV_SYMBOL_OVERRIDES[base];
+    }
+    return `BINANCE:${base}USDT`;
   };
 
   const openCoinMarketCap = (symbol: string, cmcSlug?: string) => {

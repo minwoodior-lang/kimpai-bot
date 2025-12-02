@@ -1,5 +1,18 @@
 import { useEffect, useRef, useCallback } from "react";
 
+// TradingView 심볼 오버라이드 (특수 마켓용)
+const TV_SYMBOL_OVERRIDES: Record<string, string> = {
+  // 필요 시 하나씩 추가. 예: H: "OKX:HUSDT"
+};
+
+const getTvSymbol = (symbol: string): string => {
+  const base = symbol.split("/")[0].toUpperCase();
+  if (TV_SYMBOL_OVERRIDES[base]) {
+    return TV_SYMBOL_OVERRIDES[base];
+  }
+  return `BINANCE:${base}USDT`;
+};
+
 interface ChartModalProps {
   symbol: string | null;
   onClose: () => void;
@@ -52,7 +65,7 @@ export default function ChartModal({ symbol, onClose }: ChartModalProps) {
     script.async = true;
     script.innerHTML = JSON.stringify({
       autosize: true,
-      symbol: `BINANCE:${symbol}USDT`,
+      symbol: getTvSymbol(symbol),
       interval: "60",
       timezone: "Asia/Seoul",
       theme: "dark",

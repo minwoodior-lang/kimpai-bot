@@ -1,5 +1,21 @@
 import { useEffect, useRef, memo, useCallback } from "react";
 
+// TradingView 심볼 오버라이드 (특수 마켓용)
+const TV_SYMBOL_OVERRIDES: Record<string, string> = {
+  // 필요 시 하나씩 추가. 예: H: "OKX:HUSDT"
+};
+
+const getTvSymbol = (symbol: string, exchange: "UPBIT" | "BINANCE" = "BINANCE"): string => {
+  const base = symbol.split("/")[0].toUpperCase();
+  if (TV_SYMBOL_OVERRIDES[base]) {
+    return TV_SYMBOL_OVERRIDES[base];
+  }
+  if (exchange === "UPBIT") {
+    return `UPBIT:${base}KRW`;
+  }
+  return `BINANCE:${base}USDT`;
+};
+
 interface TradingViewChartProps {
   symbol?: string;
   exchange?: "UPBIT" | "BINANCE";
@@ -23,10 +39,7 @@ function TradingViewChart({
     if (tvSymbol) {
       return tvSymbol;
     }
-    if (exchange === "UPBIT") {
-      return `UPBIT:${symbol}KRW`;
-    }
-    return `BINANCE:${symbol}USDT`;
+    return getTvSymbol(symbol, exchange);
   }, [exchange, symbol, tvSymbol]);
 
   useEffect(() => {
