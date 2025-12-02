@@ -6,18 +6,36 @@ import { useEffect } from "react";
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     // Global error handler for unhandled exceptions
-    const handleError = (event: ErrorEvent) => {
-      if (process.env.NODE_ENV === 'development') {
-        console.error('[Global Error]', event.error);
+    const handleError = (event: ErrorEvent | Event) => {
+      try {
+        const errorEvent = event as ErrorEvent;
+        if (errorEvent.error) {
+          if (process.env.NODE_ENV === 'development') {
+            console.error('[Global Error]', errorEvent.error instanceof Error ? errorEvent.error.message : String(errorEvent.error));
+          }
+          event.preventDefault();
+        } else if (!errorEvent.error) {
+          // Silently ignore errors where error is null/undefined
+          event.preventDefault();
+        }
+      } catch (e) {
+        // Catch any errors in error handler itself
       }
-      event.preventDefault();
     };
 
     const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
-      if (process.env.NODE_ENV === 'development') {
-        console.error('[Unhandled Rejection]', event.reason);
+      try {
+        if (event.reason) {
+          if (process.env.NODE_ENV === 'development') {
+            console.error('[Unhandled Rejection]', event.reason instanceof Error ? event.reason.message : String(event.reason));
+          }
+          event.preventDefault();
+        } else {
+          event.preventDefault();
+        }
+      } catch (e) {
+        // Catch any errors in rejection handler itself
       }
-      event.preventDefault();
     };
 
     window.addEventListener('error', handleError);

@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { getCoinMetadata } from "./coinMetadata";
+import { fetchUpbitMarkets } from "./coinMetadata";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
@@ -17,35 +17,20 @@ async function initializeMasterSymbols() {
   console.log('[MasterSymbols] Initializing...');
 
   try {
-    const coinMetadataObj = getCoinMetadata();
-    if (!coinMetadataObj || typeof coinMetadataObj !== 'object') {
-      throw new Error('Invalid coin metadata');
-    }
-    
-    // Get Korean names from Upbit
-    const upbitResponse = await fetch('https://api.upbit.com/v1/market/all?isDetails=true');
-    const upbitMarkets: Array<{ market: string; korean_name?: string }> = await upbitResponse.json();
-    
-    const koNameMap = new Map<string, string>();
-    for (const market of upbitMarkets) {
-      const parts = market.market.split('-');
-      const symbol = parts.length === 2 ? parts[1] : market.market;
-      if (market.korean_name) {
-        koNameMap.set(symbol, market.korean_name);
-      }
+    const { metadata } = await fetchUpbitMarkets();
+    if (!metadata || metadata.size === 0) {
+      throw new Error('Failed to fetch Upbit markets');
     }
 
     // Prepare master symbols data
     const masterSymbols: MasterSymbol[] = [];
+    const metadataArray = Array.from(metadata.entries());
     
-    const entries = Object.entries(coinMetadataObj);
-    for (const [symbol, metadata] of entries) {
-      const koName = koNameMap.get(symbol) || null;
-      const metaObj = metadata as any;
+    for (const [symbol, coinMeta] of metadataArray) {
       masterSymbols.push({
         base_symbol: symbol,
-        ko_name: koName,
-        coingecko_id: metaObj?.coingeckoId || null,
+        ko_name: coinMeta.koreanName || null,
+        coingecko_id: null,
         icon_url: `/coins/${symbol}.png`,
       });
     }
