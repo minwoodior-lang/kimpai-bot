@@ -101,8 +101,18 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
       .select("base_symbol, name_ko, name_en, exchange, quote_symbol")
       .limit(5000);
 
-    if (marketError || !marketData) {
-      console.error("[fetchCoinMetadata] exchange_markets error:", marketError);
+    if (marketError) {
+      console.error("[fetchCoinMetadata] exchange_markets error detail:", {
+        message: marketError.message,
+        details: (marketError as any).details,
+        hint: (marketError as any).hint,
+        code: (marketError as any).code,
+      });
+      throw marketError;
+    }
+
+    if (!marketData) {
+      console.error("[fetchCoinMetadata] exchange_markets returned no data");
       return metadata;
     }
 
