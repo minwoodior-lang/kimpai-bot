@@ -107,29 +107,43 @@ async function upsertMasterSymbols(symbols: MasterSymbolRow[]): Promise<number> 
   if (symbols.length === 0) return 0;
   
   console.log("[Master Symbols] 기존 데이터 삭제 중...");
-  const { error: delError } = await supabase
-    .from("master_symbols")
-    .delete()
-    .gt("id", "0");
-  
-  if (delError) {
-    console.log("[Master Symbols] DELETE 스킵 (테이블 없을 수 있음):", delError.message);
+  try {
+    await supabase
+      .from("master_symbols")
+      .delete()
+      .gte("id", 0);
+  } catch (delError) {
+    console.log("[Master Symbols] DELETE 스킵:", delError instanceof Error ? delError.message : String(delError));
   }
+  
+  // 스키마 캐시 동기화 대기
+  console.log("[Master Symbols] 스키마 동기화 대기 중...");
+  await new Promise(r => setTimeout(r, 1000));
   
   console.log(`[Master Symbols] ${symbols.length}개 심볼 삽입 중...`);
-  const { data, error: insertError } = await supabase
-    .from("master_symbols")
-    .insert(symbols as any)
-    .select("id");
   
-  if (insertError) {
-    console.error("❌ INSERT 실패:", insertError.message);
-    throw insertError;
+  // 배치 INSERT (500개씩)
+  for (let i = 0; i < symbols.length; i += 500) {
+    const batch = symbols.slice(i, i + 500);
+    const { data, error: insertError } = await supabase
+      .from("master_symbols")
+      .insert(batch as any)
+      .select("id");
+    
+    if (insertError) {
+      console.error("❌ INSERT 실패:", insertError.message);
+      // 상세 에러 로깅
+      console.error("Error code:", (insertError as any).code);
+      console.error("Error details:", JSON.stringify(insertError, null, 2));
+      throw insertError;
+    }
+    
+    const count = (data as any[])?.length || 0;
+    console.log(`[Master Symbols] ✅ 배치 ${i/500 + 1}: ${count}개 저장됨`);
   }
   
-  const actualCount = (data as any[])?.length || 0;
-  console.log(`[Master Symbols] ✅ ${actualCount}개 심볼 저장됨`);
-  return actualCount;
+  console.log(`[Master Symbols] ✅ 총 ${symbols.length}개 심볼 저장됨`);
+  return symbols.length;
 }
 
 export async function updateMasterSymbols() {

@@ -260,13 +260,13 @@ async function upsertMarkets(markets: ExchangeMarketRow[]): Promise<number> {
   if (markets.length === 0) return 0;
   
   console.log("[DB] 기존 마켓 삭제 중...");
-  const { error: delError } = await supabase
-    .from("exchange_markets")
-    .delete()
-    .gt("id", "0");
-  
-  if (delError) {
-    console.log("[DB] DELETE 스킵:", delError.message);
+  try {
+    await supabase
+      .from("exchange_markets")
+      .delete()
+      .gte("id", 0);
+  } catch (delError) {
+    console.log("[DB] DELETE 스킵:", delError instanceof Error ? delError.message : String(delError));
   }
   
   console.log(`[DB] ${markets.length}개 마켓 삽입 중...`);
