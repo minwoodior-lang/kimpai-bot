@@ -328,86 +328,123 @@ async function fetchCoinoneMarkets(): Promise<ExchangeMarketRow[]> {
 
 /**
  * exchange_markets에 DELETE + INSERT (폴 리프레시 방식)
- * - 기존 모든 KRW 마켓 삭제
+ * - 기존 모든 KRW 마켓 전체 삭제
  * - 새로 크롤링한 데이터 일괄 삽입
- * - 실제 저장된 행 수 반환 (false positive 방지)
+ * - 실제 저장된 행 수 반환
+ * - 모든 에러는 반드시 throw
  */
 async function upsertMarkets(markets: ExchangeMarketRow[]): Promise<number> {
   if (markets.length === 0) return 0;
 
-  try {
-    // 1단계: 기존 KRW 마켓 전체 삭제
-    console.log("[DB] 기존 KRW 마켓 삭제 중...");
-    const { error: delError } = await supabase
-      .from("exchange_markets")
-      .delete()
-      .eq("quote_symbol", "KRW");
+  // 1단계: 기존 KRW 마켓 전체 삭제
+  console.log("[DB] 기존 KRW 마켓 삭제 중...");
+  const { error: delError, count: deletedCount } = await supabase
+    .from("exchange_markets")
+    .delete()
+    .eq("quote_symbol", "KRW");
 
-    if (delError) {
-      console.error("[DB Delete Error]:", delError.message || JSON.stringify(delError));
-      throw delError;
-    }
-
-    // 2단계: 새 데이터 일괄 삽입
-    console.log(`[DB] ${markets.length}개 마켓 삽입 중...`);
-    const { data, error: insertError } = await supabase
-      .from("exchange_markets")
-      .insert(markets as any)
-      .select("id");
-
-    if (insertError) {
-      console.error("[DB Insert Error]:", insertError.message || JSON.stringify(insertError));
-      throw insertError;
-    }
-
-    // 실제 삽입된 행 수 반환
-    const savedCount = (data as any[])?.length || 0;
-    
-    if (savedCount === 0) {
-      console.error("[DB Error] Insert 실패: 0개 행이 저장됨");
-      return 0;
-    }
-
-    console.log(`[DB] ✅ ${savedCount}개 행 정상 저장됨`);
-    return savedCount;
-  } catch (err) {
-    console.error("[Upsert Error]:", err instanceof Error ? err.message : String(err));
-    return 0;
+  if (delError) {
+    console.error("\n❌ [CRITICAL DB DELETE ERROR]");
+    console.error("Error message:", delError.message);
+    console.error("Error details:", JSON.stringify(delError, null, 2));
+    throw new Error(`Supabase DELETE failed: ${delError.message}`);
   }
+
+  console.log(`[DB] ✅ 기존 ${deletedCount || 0}개 행 삭제됨`);
+
+  // 2단계: 새 데이터 일괄 삽입
+  console.log(`[DB] ${markets.length}개 마켓 삽입 중...`);
+  const { data, error: insertError, count: insertedCount } = await supabase
+    .from("exchange_markets")
+    .insert(markets as any)
+    .select("id");
+
+  if (insertError) {
+    console.error("\n❌ [CRITICAL DB INSERT ERROR]");
+    console.error("Error message:", insertError.message);
+    console.error("Error details:", JSON.stringify(insertError, null, 2));
+    console.error("Attempted to insert:", markets.length, "markets");
+    throw new Error(`Supabase INSERT failed: ${insertError.message}`);
+  }
+
+  // 실제 저장된 행 수 확인
+  const actualCount = (data as any[])?.length || insertedCount || 0;
+  
+  console.log(`[DB] Insert 응답: data.length=${(data as any[])?.length}, count=${insertedCount}`);
+  console.log(`[DB] 첫 3개 data sample:`, JSON.stringify((data as any[])?.slice(0, 3)));
+
+  if (actualCount === 0) {
+    console.error("\n❌ [CRITICAL DB INSERT RESULT ERROR]");
+    console.error("Insertion reported success but returned 0 rows!");
+    console.error("Data:", data);
+    console.error("Count:", insertedCount);
+    throw new Error(`Database insert returned 0 rows (expected ${markets.length})`);
+  }
+
+  // 3단계: 검증 - 실제로 DB에 저장되었는지 확인
+  console.log("[DB] 저장 검증 중 - SELECT COUNT 실행...");
+  const { data: countData, error: countError } = await supabase
+    .from("exchange_markets")
+    .select("id", { count: "exact", head: true });
+
+  if (countError) {
+    console.error("[DB Verify Error]:", countError.message);
+  } else {
+    console.log(`[DB] 검증 결과: 실제 DB에 저장된 총 행 수 = ???`);
+  }
+
+  // 4단계: KRW 마켓만 다시 카운트
+  const { data: krwData, error: krwError } = await supabase
+    .from("exchange_markets")
+    .select("id", { count: "exact", head: true })
+    .eq("quote_symbol", "KRW");
+
+  if (krwError) {
+    console.error("[DB KRW Verify Error]:", krwError.message);
+  } else {
+    console.log(`[DB] KRW 마켓 검증: 실제 저장된 KRW 행 수 = ???`);
+  }
+
+  console.log(`[DB] ✅ ${actualCount}개 행 정상 저장됨 (응답 기준)`);
+  return actualCount;
 }
 
 export async function refreshExchangeMarkets() {
   console.log("\n========== 국내 KRW 마켓 자동 동기화 시작 ==========\n");
 
-  const [upbitMarkets, bithumbMarkets, coinoneMarkets] = await Promise.all([
-    fetchUpbitMarkets(),
-    fetchBithumbMarkets(),
-    fetchCoinoneMarkets(),
-  ]);
+  try {
+    const [upbitMarkets, bithumbMarkets, coinoneMarkets] = await Promise.all([
+      fetchUpbitMarkets(),
+      fetchBithumbMarkets(),
+      fetchCoinoneMarkets(),
+    ]);
 
-  const allMarkets = [
-    ...upbitMarkets,
-    ...bithumbMarkets,
-    ...coinoneMarkets,
-  ];
+    const allMarkets = [
+      ...upbitMarkets,
+      ...bithumbMarkets,
+      ...coinoneMarkets,
+    ];
 
-  console.log(`\n[집계] Upbit: ${upbitMarkets.length}, Bithumb: ${bithumbMarkets.length}, Coinone: ${coinoneMarkets.length}`);
-  console.log(`[총계] ${allMarkets.length}개 마켓 준비\n`);
+    console.log(`\n[집계] Upbit: ${upbitMarkets.length}, Bithumb: ${bithumbMarkets.length}, Coinone: ${coinoneMarkets.length}`);
+    console.log(`[총계] ${allMarkets.length}개 마켓 준비\n`);
 
-  if (allMarkets.length === 0) {
-    console.error("[Error] 수집된 마켓이 없습니다.");
-    return 0;
+    if (allMarkets.length === 0) {
+      throw new Error("수집된 마켓이 없습니다");
+    }
+
+    // upsertMarkets에서 에러가 발생하면 여기서 catch됨
+    const totalInserted = await upsertMarkets(allMarkets);
+
+    console.log(`\n========== 완료: 총 ${totalInserted}개 마켓이 exchange_markets에 저장됨 ==========\n`);
+    return totalInserted;
+  } catch (err) {
+    console.error("\n❌ [FATAL ERROR] 마켓 동기화 실패:");
+    console.error("Error:", err instanceof Error ? err.message : String(err));
+    if (err instanceof Error) {
+      console.error("Stack:", err.stack);
+    }
+    throw err; // 상위에서 처리하도록 재전파
   }
-
-  const totalInserted = await upsertMarkets(allMarkets);
-
-  if (totalInserted === 0) {
-    console.error("\n❌ [Fatal] DB 저장 실패 - 0개 행만 저장됨");
-    return 0;
-  }
-
-  console.log(`\n========== 완료: 총 ${totalInserted}개 마켓이 exchange_markets에 저장됨 ==========\n`);
-  return totalInserted;
 }
 
 // CLI 직접 실행용
