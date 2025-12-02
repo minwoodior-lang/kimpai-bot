@@ -71,7 +71,7 @@ let lastMetadataFetch = 0;
 const METADATA_CACHE_TTL = 5 * 60 * 1000; // 5분
 
 /**
- * TODO(jay): exchange_markets 기반으로 메타데이터 구성
+ * exchange_markets 테이블에서 메타데이터 수집
  * - base_symbol
  * - name_ko
  * - name_en
@@ -85,35 +85,31 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
   const metadata = new Map<string, CoinMetadata>();
 
   try {
-    // TODO(jay): exchange_markets 테이블에서 고유한 base_symbol들을 수집
-    // 임시: 가격 데이터 테이블에서 직접 추출 (즉시 동작 필요)
-    const { data: priceData } = await supabase
-      .from("exchange_prices")
-      .select("symbol")
-      .limit(1000);
+    // exchange_markets 테이블에서 직접 수집
+    const { data: marketData } = await supabase
+      .from("exchange_markets")
+      .select("base_symbol, name_ko, name_en")
+      .limit(2000);
 
-    if (priceData && Array.isArray(priceData)) {
-      const uniqueSymbols = new Set<string>();
-      for (const row of priceData as any[]) {
-        const symbol = (row.symbol || "").toUpperCase();
-        if (symbol) uniqueSymbols.add(symbol);
-      }
+    if (marketData && Array.isArray(marketData)) {
+      const processed = new Set<string>();
+      for (const row of marketData as any[]) {
+        const symbol = (row.base_symbol || "").toUpperCase();
+        if (symbol && !processed.has(symbol)) {
+          processed.add(symbol);
+          const autoSlug =
+            symbol
+              .toLowerCase()
+              .replace(/\s+/g, "-")
+              .replace(/[^a-z0-9-]/g, "") || undefined;
 
-      // 각 symbol에 대해 기본 메타데이터 생성
-      const symbolsArray = Array.from(uniqueSymbols);
-      for (const symbol of symbolsArray) {
-        const autoSlug =
-          symbol
-            .toLowerCase()
-            .replace(/\s+/g, "-")
-            .replace(/[^a-z0-9-]/g, "") || undefined;
-
-        metadata.set(symbol, {
-          symbol,
-          koreanName: symbol,
-          englishName: symbol,
-          cmcSlug: autoSlug,
-        });
+          metadata.set(symbol, {
+            symbol,
+            koreanName: row.name_ko || symbol,
+            englishName: row.name_en || symbol,
+            cmcSlug: autoSlug,
+          });
+        }
       }
     }
 
@@ -174,27 +170,27 @@ export default async function handler(
     const [domesticResult, foreignResult, krwResult, usdtResult] = await Promise.all([
       supabase
         .from("exchange_prices")
-        .select(`*, exchange_markets!inner (name_ko, name_en, icon_url)`)
+        .select("*")
         .eq("exchange", domestic.exchange)
         .eq("quote", domestic.quote)
         .order("created_at", { ascending: false })
         .limit(1000) as any,
       supabase
         .from("exchange_prices")
-        .select(`*, exchange_markets!inner (name_ko, name_en, icon_url)`)
+        .select("*")
         .eq("exchange", foreign.exchange)
         .eq("quote", foreign.quote)
         .order("created_at", { ascending: false })
         .limit(1000) as any,
       supabase
         .from("exchange_prices")
-        .select(`*, exchange_markets!inner (name_ko, name_en, icon_url)`)
+        .select("*")
         .eq("quote", "KRW")
         .order("created_at", { ascending: false })
         .limit(1000) as any,
       supabase
         .from("exchange_prices")
-        .select(`*, exchange_markets!inner (name_ko, name_en, icon_url)`)
+        .select("*")
         .eq("quote", "USDT")
         .order("created_at", { ascending: false })
         .limit(1000) as any,
@@ -368,9 +364,9 @@ export default async function handler(
           : foreign.exchange.toUpperCase(),
         isListed,
         cmcSlug: coinMeta?.cmcSlug,
-        name_ko: (domesticRecord as any)?.exchange_markets?.name_ko || null,
-        name_en: (domesticRecord as any)?.exchange_markets?.name_en || null,
-        icon_url: (domesticRecord as any)?.exchange_markets?.icon_url || null,
+        name_ko: coinMeta?.koreanName ?? undefined,
+        name_en: coinMeta?.englishName ?? undefined,
+        icon_url: undefined,
       });
 
       if (!latestTimestamp || domesticRecord.created_at > latestTimestamp) {
