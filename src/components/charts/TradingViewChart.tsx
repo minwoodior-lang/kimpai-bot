@@ -1,4 +1,4 @@
-import { useEffect, useRef, memo, useCallback } from "react";
+import { useEffect, useRef, memo, useCallback, useState } from "react";
 
 // TradingView 심볼 오버라이드 (특수 마켓용)
 const TV_SYMBOL_OVERRIDES: Record<string, string> = {
@@ -34,6 +34,7 @@ function TradingViewChart({
   theme = "dark",
 }: TradingViewChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getFullSymbol = useCallback(() => {
     if (tvSymbol) {
@@ -48,14 +49,13 @@ function TradingViewChart({
     const container = containerRef.current;
     if (!container) return;
 
+    setIsLoading(true);
+
     try {
       container.innerHTML = "";
 
-      const script = document.createElement("script");
-      script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
-      script.type = "text/javascript";
-      script.async = true;
-      script.innerHTML = JSON.stringify({
+      // TradingView 위젯 설정
+      const config = {
         autosize: true,
         symbol: getFullSymbol(),
         interval: interval,
@@ -71,25 +71,53 @@ function TradingViewChart({
         save_image: false,
         hide_volume: false,
         support_host: "https://www.tradingview.com",
-      });
+      };
 
-      container.appendChild(script);
+      // 1. 설정 스크립트 생성
+      const configScript = document.createElement("script");
+      configScript.type = "text/tradingview-widget";
+      configScript.innerHTML = JSON.stringify(config);
+      container.appendChild(configScript);
+
+      // 2. 로더 스크립트 생성 및 로드
+      const loaderScript = document.createElement("script");
+      loaderScript.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+      loaderScript.async = true;
+      loaderScript.onload = () => setIsLoading(false);
+      loaderScript.onerror = () => {
+        console.warn('[TradingViewChart] Widget loader failed to load');
+        setIsLoading(false);
+      };
+
+      container.appendChild(loaderScript);
     } catch (err) {
-      if (process.env.NODE_ENV === 'development') {
-        console.error('[TradingViewChart] Failed to load widget:', err);
-      }
+      console.error('[TradingViewChart] Error:', err);
+      setIsLoading(false);
     }
 
     return () => {
       if (container) {
-        container.innerHTML = "";
+        try {
+          container.innerHTML = "";
+        } catch (e) {
+          // Ignore cleanup errors
+        }
       }
     };
   }, [getFullSymbol, interval, theme]);
 
   return (
     <div className="tradingview-widget-container" style={{ height: `${height}px`, width: "100%" }}>
-      <div ref={containerRef} style={{ height: "100%", width: "100%" }} />
+      <div 
+        ref={containerRef} 
+        style={{ height: "100%", width: "100%" }}
+        className="bg-slate-800/50 rounded"
+      />
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-slate-800/30 rounded">
+          <div className="text-slate-400 text-sm">Loading chart...</div>
+        </div>
+      )}
     </div>
   );
 }

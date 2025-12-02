@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 
 // TradingView 심볼 오버라이드 (특수 마켓용)
 const TV_SYMBOL_OVERRIDES: Record<string, string> = {
@@ -21,6 +21,7 @@ interface ChartModalProps {
 export default function ChartModal({ symbol, onClose }: ChartModalProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -56,35 +57,61 @@ export default function ChartModal({ symbol, onClose }: ChartModalProps) {
     if (!symbol || !containerRef.current) return;
 
     const container = containerRef.current;
-    container.innerHTML = "";
+    
+    try {
+      setIsLoading(true);
+      container.innerHTML = "";
 
-    const script = document.createElement("script");
-    script.src =
-      "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
-    script.type = "text/javascript";
-    script.async = true;
-    script.innerHTML = JSON.stringify({
-      autosize: true,
-      symbol: getTvSymbol(symbol),
-      interval: "60",
-      timezone: "Asia/Seoul",
-      theme: "dark",
-      style: "1",
-      locale: "kr",
-      enable_publishing: false,
-      allow_symbol_change: true,
-      calendar: false,
-      hide_top_toolbar: false,
-      hide_legend: false,
-      save_image: false,
-      hide_volume: false,
-      support_host: "https://www.tradingview.com",
-    });
+      // TradingView 위젯 설정
+      const config = {
+        autosize: true,
+        symbol: getTvSymbol(symbol),
+        interval: "60",
+        timezone: "Asia/Seoul",
+        theme: "dark",
+        style: "1",
+        locale: "kr",
+        enable_publishing: false,
+        allow_symbol_change: true,
+        calendar: false,
+        hide_top_toolbar: false,
+        hide_legend: false,
+        save_image: false,
+        hide_volume: false,
+        support_host: "https://www.tradingview.com",
+      };
 
-    container.appendChild(script);
+      // 1. 설정 스크립트 생성
+      const configScript = document.createElement("script");
+      configScript.type = "text/tradingview-widget";
+      configScript.innerHTML = JSON.stringify(config);
+      container.appendChild(configScript);
+
+      // 2. 로더 스크립트 생성 및 로드
+      const loaderScript = document.createElement("script");
+      loaderScript.src =
+        "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+      loaderScript.async = true;
+      loaderScript.onload = () => setIsLoading(false);
+      loaderScript.onerror = () => {
+        console.warn('[ChartModal] Widget loader failed');
+        setIsLoading(false);
+      };
+
+      container.appendChild(loaderScript);
+    } catch (err) {
+      console.error('[ChartModal] Error:', err);
+      setIsLoading(false);
+    }
 
     return () => {
-      container.innerHTML = "";
+      if (container) {
+        try {
+          container.innerHTML = "";
+        } catch (e) {
+          // Ignore cleanup errors
+        }
+      }
     };
   }, [symbol]);
 
