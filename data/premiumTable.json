@@ -1,56 +1,3674 @@
 [
   {
-    "symbol": "BTC",
-    "koreanPrice": 135386000,
-    "globalPrice": 90989,
-    "globalPriceKrw": 122835150,
-    "premium": 10.217637215406176,
-    "domesticExchange": "UPBIT",
-    "foreignExchange": "OKX"
+    "symbol": "GTC",
+    "koreanPrice": 213,
+    "globalPrice": 0.00006666,
+    "globalPriceKrw": 0.089991,
+    "premium": 236590.3357002367,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
   },
   {
-    "symbol": "ETH",
-    "koreanPrice": 4441000,
-    "globalPrice": 2984.12,
-    "globalPriceKrw": 4028562,
-    "premium": 10.237846655953167,
-    "domesticExchange": "UPBIT",
-    "foreignExchange": "OKX"
+    "symbol": "ELX",
+    "koreanPrice": 57,
+    "globalPrice": 0.01228,
+    "globalPriceKrw": 16.578,
+    "premium": 243.82917119073468,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
   },
   {
-    "symbol": "XRP",
-    "koreanPrice": 3202,
-    "globalPrice": 2.1541,
-    "globalPriceKrw": 2908.0350000000003,
-    "premium": 10.108716023018967,
-    "domesticExchange": "UPBIT",
-    "foreignExchange": "OKX"
+    "symbol": "SXP",
+    "koreanPrice": 82.725,
+    "globalPrice": 0.04992,
+    "globalPriceKrw": 67.392,
+    "premium": 22.751958689458686,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "EGLD",
+    "koreanPrice": 11945,
+    "globalPrice": 7.4825,
+    "globalPriceKrw": 10101.375,
+    "premium": 18.2512281743822,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "NFT",
+    "koreanPrice": 0.0006,
+    "globalPrice": 3.768e-7,
+    "globalPriceKrw": 0.00050868,
+    "premium": 17.952347251710307,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ORCA",
+    "koreanPrice": 2088.5,
+    "globalPrice": 1.3228,
+    "globalPriceKrw": 1785.78,
+    "premium": 16.951696177580665,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CKB",
+    "koreanPrice": 3.9675000000000002,
+    "globalPrice": 0.002569,
+    "globalPriceKrw": 3.46815,
+    "premium": 14.398166169283341,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "LM",
+    "koreanPrice": 1.644,
+    "globalPrice": 0.001068,
+    "globalPriceKrw": 1.4418,
+    "premium": 14.024136496046605,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ADP",
+    "koreanPrice": 1.297,
+    "globalPrice": 0.0008442,
+    "globalPriceKrw": 1.13967,
+    "premium": 13.804873340528395,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BFC",
+    "koreanPrice": 31.98,
+    "globalPrice": 0.02092,
+    "globalPriceKrw": 28.242,
+    "premium": 13.235606543445929,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BLY",
+    "koreanPrice": 3.007,
+    "globalPrice": 0.001968,
+    "globalPriceKrw": 2.6568,
+    "premium": 13.181270701595906,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "IOTA",
+    "koreanPrice": 159,
+    "globalPrice": 0.1041,
+    "globalPriceKrw": 140.535,
+    "premium": 13.139075675098733,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MOODENG",
+    "koreanPrice": 116.5,
+    "globalPrice": 0.07632,
+    "globalPriceKrw": 103.032,
+    "premium": 13.071667054895569,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CHR",
+    "koreanPrice": 82.3,
+    "globalPrice": 0.05404,
+    "globalPriceKrw": 72.954,
+    "premium": 12.810812292677584,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "DAO",
+    "koreanPrice": 91.99,
+    "globalPrice": 0.060454999999999995,
+    "globalPriceKrw": 81.61425,
+    "premium": 12.713159772956311,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "LAYER",
+    "koreanPrice": 300,
+    "globalPrice": 0.1977,
+    "globalPriceKrw": 266.895,
+    "premium": 12.40375428539314,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ELF",
+    "koreanPrice": 146,
+    "globalPrice": 0.09656,
+    "globalPriceKrw": 130.35600000000002,
+    "premium": 12.00098192641687,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "XTZ",
+    "koreanPrice": 725.5,
+    "globalPrice": 0.48015,
+    "globalPriceKrw": 648.2025,
+    "premium": 11.924900011956142,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "TT",
+    "koreanPrice": 1.7915,
+    "globalPrice": 0.001186,
+    "globalPriceKrw": 1.6011,
+    "premium": 11.89182437074512,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "A",
+    "koreanPrice": 288.5,
+    "globalPrice": 0.191,
+    "globalPriceKrw": 257.85,
+    "premium": 11.886755865813448,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "DYDX",
+    "koreanPrice": 343,
+    "globalPrice": 0.22710000000000002,
+    "globalPriceKrw": 306.58500000000004,
+    "premium": 11.87761958347602,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SONIC",
+    "koreanPrice": 127.5,
+    "globalPrice": 0.08445,
+    "globalPriceKrw": 114.0075,
+    "premium": 11.834747713966193,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "REQ",
+    "koreanPrice": 164,
+    "globalPrice": 0.10874,
+    "globalPriceKrw": 146.799,
+    "premium": 11.717382270996392,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "TDROP",
+    "koreanPrice": 1.107,
+    "globalPrice": 0.000734,
+    "globalPriceKrw": 0.9908999999999999,
+    "premium": 11.716621253406005,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PYTH",
+    "koreanPrice": 108.5,
+    "globalPrice": 0.07205500000000001,
+    "globalPriceKrw": 97.27425000000001,
+    "premium": 11.540309999820085,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "JTO",
+    "koreanPrice": 696,
+    "globalPrice": 0.46225,
+    "globalPriceKrw": 624.0375,
+    "premium": 11.531758908719423,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ONG",
+    "koreanPrice": 142.5,
+    "globalPrice": 0.09465,
+    "globalPriceKrw": 127.7775,
+    "premium": 11.521981569525149,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "DRIFT",
+    "koreanPrice": 341,
+    "globalPrice": 0.2265,
+    "globalPriceKrw": 305.77500000000003,
+    "premium": 11.51990842940069,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MANTA",
+    "koreanPrice": 146,
+    "globalPrice": 0.09698,
+    "globalPriceKrw": 130.923,
+    "premium": 11.515929210299182,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ZRC",
+    "koreanPrice": 11.72,
+    "globalPrice": 0.007787,
+    "globalPriceKrw": 10.51245,
+    "premium": 11.486856061146558,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ME",
+    "koreanPrice": 499.5,
+    "globalPrice": 0.33205,
+    "globalPriceKrw": 448.26750000000004,
+    "premium": 11.429001656377041,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "RAY",
+    "koreanPrice": 1683,
+    "globalPrice": 1.1191,
+    "globalPriceKrw": 1510.785,
+    "premium": 11.399040895958056,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "HOLO",
+    "koreanPrice": 121,
+    "globalPrice": 0.08046,
+    "globalPriceKrw": 108.62100000000001,
+    "premium": 11.396507121090755,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "UOS",
+    "koreanPrice": 15.5,
+    "globalPrice": 0.01031,
+    "globalPriceKrw": 13.9185,
+    "premium": 11.362574990121063,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "REZ",
+    "koreanPrice": 9.566,
+    "globalPrice": 0.006363,
+    "globalPriceKrw": 8.59005,
+    "premium": 11.361400690333594,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "KMNO",
+    "koreanPrice": 92.4,
+    "globalPrice": 0.061475,
+    "globalPriceKrw": 82.99125000000001,
+    "premium": 11.337038543219915,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "2Z",
+    "koreanPrice": 177,
+    "globalPrice": 0.11784,
+    "globalPriceKrw": 159.084,
+    "premium": 11.261974805762991,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CTK",
+    "koreanPrice": 374,
+    "globalPrice": 0.249,
+    "globalPriceKrw": 336.15,
+    "premium": 11.25985423174179,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ACS",
+    "koreanPrice": 0.6005,
+    "globalPrice": 0.0003998,
+    "globalPriceKrw": 0.53973,
+    "premium": 11.259333370388894,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "DBR",
+    "koreanPrice": 31.6,
+    "globalPrice": 0.02104,
+    "globalPriceKrw": 28.404,
+    "premium": 11.251936346993388,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "OGN",
+    "koreanPrice": 53.57,
+    "globalPrice": 0.03567,
+    "globalPriceKrw": 48.1545,
+    "premium": 11.24609330384492,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "FIL",
+    "koreanPrice": 2291,
+    "globalPrice": 1.5255,
+    "globalPriceKrw": 2059.425,
+    "premium": 11.244643529140404,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "RPL",
+    "koreanPrice": 3743,
+    "globalPrice": 2.4925,
+    "globalPriceKrw": 3364.875,
+    "premium": 11.23741595155838,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "WNCG",
+    "koreanPrice": 12.11,
+    "globalPrice": 0.008066,
+    "globalPriceKrw": 10.889100000000001,
+    "premium": 11.212129560753398,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "POWR",
+    "koreanPrice": 139.5,
+    "globalPrice": 0.09297,
+    "globalPriceKrw": 125.5095,
+    "premium": 11.146964970779102,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "W",
+    "koreanPrice": 64.405,
+    "globalPrice": 0.04293,
+    "globalPriceKrw": 57.9555,
+    "premium": 11.128365728878192,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "IOTX",
+    "koreanPrice": 12.36,
+    "globalPrice": 0.008239,
+    "globalPriceKrw": 11.12265,
+    "premium": 11.124597105905512,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "RON",
+    "koreanPrice": 247,
+    "globalPrice": 0.16465000000000002,
+    "globalPriceKrw": 222.27750000000003,
+    "premium": 11.122358313369533,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "EL",
+    "koreanPrice": 3.339,
+    "globalPrice": 0.002227,
+    "globalPriceKrw": 3.0064499999999996,
+    "premium": 11.061218380481977,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "WAXP",
+    "koreanPrice": 13.59,
+    "globalPrice": 0.0090645,
+    "globalPriceKrw": 12.237074999999999,
+    "premium": 11.05595087061247,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "DKA",
+    "koreanPrice": 9.975999999999999,
+    "globalPrice": 0.006654,
+    "globalPriceKrw": 8.9829,
+    "premium": 11.055449799062645,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "FIDA",
+    "koreanPrice": 68.92,
+    "globalPrice": 0.04597,
+    "globalPriceKrw": 62.05949999999999,
+    "premium": 11.054713621605087,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CFX",
+    "koreanPrice": 111,
+    "globalPrice": 0.07404,
+    "globalPriceKrw": 99.954,
+    "premium": 11.051083498409275,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "DOOD",
+    "koreanPrice": 6.302,
+    "globalPrice": 0.004203999999999999,
+    "globalPriceKrw": 5.675399999999999,
+    "premium": 11.04063149733941,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "GRND",
+    "koreanPrice": 39.02,
+    "globalPrice": 0.02603,
+    "globalPriceKrw": 35.1405,
+    "premium": 11.03996812794354,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "OSMO",
+    "koreanPrice": 112,
+    "globalPrice": 0.07472,
+    "globalPriceKrw": 100.872,
+    "premium": 11.031802680624951,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BEL",
+    "koreanPrice": 217,
+    "globalPrice": 0.1448,
+    "globalPriceKrw": 195.48000000000002,
+    "premium": 11.00879885410271,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "GMX",
+    "koreanPrice": 12870,
+    "globalPrice": 8.5885,
+    "globalPriceKrw": 11594.475,
+    "premium": 11.001144941879641,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "POLYX",
+    "koreanPrice": 97.22,
+    "globalPrice": 0.06488,
+    "globalPriceKrw": 87.588,
+    "premium": 10.996940220121484,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "THETA",
+    "koreanPrice": 504,
+    "globalPrice": 0.33635,
+    "globalPriceKrw": 454.0725,
+    "premium": 10.995490808185918,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AMP",
+    "koreanPrice": 3.217,
+    "globalPrice": 0.002147,
+    "globalPriceKrw": 2.89845,
+    "premium": 10.990356914902796,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "EDU",
+    "koreanPrice": 247,
+    "globalPrice": 0.16486,
+    "globalPriceKrw": 222.561,
+    "premium": 10.980809755527694,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CSPR",
+    "koreanPrice": 8.611,
+    "globalPrice": 0.0057485,
+    "globalPriceKrw": 7.7604750000000005,
+    "premium": 10.9597028532403,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PIEVERSE",
+    "koreanPrice": 791,
+    "globalPrice": 0.52811,
+    "globalPriceKrw": 712.9485,
+    "premium": 10.947705198902872,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SWELL",
+    "koreanPrice": 3.728,
+    "globalPrice": 0.002489,
+    "globalPriceKrw": 3.36015,
+    "premium": 10.947427942204968,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SIX",
+    "koreanPrice": 19.71,
+    "globalPrice": 0.01316,
+    "globalPriceKrw": 17.766,
+    "premium": 10.942249240121596,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AVAIL",
+    "koreanPrice": 9.833,
+    "globalPrice": 0.006566,
+    "globalPriceKrw": 8.8641,
+    "premium": 10.930607732313485,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SNX",
+    "koreanPrice": 812,
+    "globalPrice": 0.54225,
+    "globalPriceKrw": 732.0375,
+    "premium": 10.92327920359271,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SNT",
+    "koreanPrice": 23.67,
+    "globalPrice": 0.015809999999999998,
+    "globalPriceKrw": 21.343499999999995,
+    "premium": 10.900274088129908,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AIOZ",
+    "koreanPrice": 181,
+    "globalPrice": 0.1209,
+    "globalPriceKrw": 163.215,
+    "premium": 10.896670036454982,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BLUE",
+    "koreanPrice": 67.1,
+    "globalPrice": 0.04482,
+    "globalPriceKrw": 60.507,
+    "premium": 10.896259936866803,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "VET",
+    "koreanPrice": 19.685000000000002,
+    "globalPrice": 0.01315,
+    "globalPriceKrw": 17.7525,
+    "premium": 10.885790733699483,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "TAIKO",
+    "koreanPrice": 291,
+    "globalPrice": 0.1944,
+    "globalPriceKrw": 262.44,
+    "premium": 10.882487425697303,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ZBT",
+    "koreanPrice": 167.5,
+    "globalPrice": 0.1119,
+    "globalPriceKrw": 151.065,
+    "premium": 10.87942276503492,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "KERNEL",
+    "koreanPrice": 125.5,
+    "globalPrice": 0.08386,
+    "globalPriceKrw": 113.211,
+    "premium": 10.854952257289488,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "COS",
+    "koreanPrice": 2.152,
+    "globalPrice": 0.001438,
+    "globalPriceKrw": 1.9413,
+    "premium": 10.853551743676922,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BTR",
+    "koreanPrice": 46.59,
+    "globalPrice": 0.03114,
+    "globalPriceKrw": 42.039,
+    "premium": 10.82566188539214,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BAT",
+    "koreanPrice": 367.5,
+    "globalPrice": 0.24565,
+    "globalPriceKrw": 331.6275,
+    "premium": 10.817106542732434,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CYBER",
+    "koreanPrice": 1334,
+    "globalPrice": 0.8918,
+    "globalPriceKrw": 1203.93,
+    "premium": 10.803784273172022,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ALGO",
+    "koreanPrice": 206,
+    "globalPrice": 0.13772,
+    "globalPriceKrw": 185.92200000000003,
+    "premium": 10.799152332698643,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CRO",
+    "koreanPrice": 161.5,
+    "globalPrice": 0.10797000000000001,
+    "globalPriceKrw": 145.7595,
+    "premium": 10.79895306995427,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "XTER",
+    "koreanPrice": 63.74,
+    "globalPrice": 0.04262,
+    "globalPriceKrw": 57.537,
+    "premium": 10.780888819368412,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MAGIC",
+    "koreanPrice": 149,
+    "globalPrice": 0.09963,
+    "globalPriceKrw": 134.5005,
+    "premium": 10.780257322463495,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "TFUEL",
+    "koreanPrice": 31.405,
+    "globalPrice": 0.021,
+    "globalPriceKrw": 28.35,
+    "premium": 10.776014109347441,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "T",
+    "koreanPrice": 16.585,
+    "globalPrice": 0.011091,
+    "globalPriceKrw": 14.972850000000001,
+    "premium": 10.76715521761054,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "VTHO",
+    "koreanPrice": 1.47,
+    "globalPrice": 0.0009831,
+    "globalPriceKrw": 1.327185,
+    "premium": 10.760745487629826,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "KAVA",
+    "koreanPrice": 180.5,
+    "globalPrice": 0.12072,
+    "globalPriceKrw": 162.97199999999998,
+    "premium": 10.75522175588446,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "HEMI",
+    "koreanPrice": 21.11,
+    "globalPrice": 0.01412,
+    "globalPriceKrw": 19.062,
+    "premium": 10.743888364284954,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ILV",
+    "koreanPrice": 10840,
+    "globalPrice": 7.251,
+    "globalPriceKrw": 9788.85,
+    "premium": 10.738237893113078,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "OXT",
+    "koreanPrice": 42.61,
+    "globalPrice": 0.02851,
+    "globalPriceKrw": 38.4885,
+    "premium": 10.708393416215225,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "FLOCK",
+    "koreanPrice": 191,
+    "globalPrice": 0.12781,
+    "globalPriceKrw": 172.54350000000002,
+    "premium": 10.69672285539587,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "XVS",
+    "koreanPrice": 6920,
+    "globalPrice": 4.631,
+    "globalPriceKrw": 6251.85,
+    "premium": 10.687236577972914,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "RENDER",
+    "koreanPrice": 2532,
+    "globalPrice": 1.6945000000000001,
+    "globalPriceKrw": 2287.5750000000003,
+    "premium": 10.684895577194178,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "RECALL",
+    "koreanPrice": 131,
+    "globalPrice": 0.08768,
+    "globalPriceKrw": 118.368,
+    "premium": 10.671803190051369,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "OM",
+    "koreanPrice": 112,
+    "globalPrice": 0.074965,
+    "globalPriceKrw": 101.20275000000001,
+    "premium": 10.668929451027754,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "COW",
+    "koreanPrice": 284,
+    "globalPrice": 0.1901,
+    "globalPriceKrw": 256.635,
+    "premium": 10.663003877101724,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "STEEM",
+    "koreanPrice": 113,
+    "globalPrice": 0.07564,
+    "globalPriceKrw": 102.114,
+    "premium": 10.660634193156664,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "S",
+    "koreanPrice": 152,
+    "globalPrice": 0.10175000000000001,
+    "globalPriceKrw": 137.3625,
+    "premium": 10.656110656110647,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "NEAR",
+    "koreanPrice": 2674,
+    "globalPrice": 1.79,
+    "globalPriceKrw": 2416.5,
+    "premium": 10.655907303951997,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "XEC",
+    "koreanPrice": 0.0177,
+    "globalPrice": 0.00001185,
+    "globalPriceKrw": 0.0159975,
+    "premium": 10.642287857477726,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SD",
+    "koreanPrice": 392,
+    "globalPrice": 0.26244999999999996,
+    "globalPriceKrw": 354.30749999999995,
+    "premium": 10.638357923555121,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MEW",
+    "koreanPrice": 1.755,
+    "globalPrice": 0.001175,
+    "globalPriceKrw": 1.5862500000000002,
+    "premium": 10.638297872340408,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SHIB",
+    "koreanPrice": 0.01255,
+    "globalPrice": 0.0000084025,
+    "globalPriceKrw": 0.011343375,
+    "premium": 10.637266245716122,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "POPCAT",
+    "koreanPrice": 153,
+    "globalPrice": 0.10244,
+    "globalPriceKrw": 138.294,
+    "premium": 10.633866979044635,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "XION",
+    "koreanPrice": 565,
+    "globalPrice": 0.3783,
+    "globalPriceKrw": 510.70500000000004,
+    "premium": 10.63138210904533,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "HIVE",
+    "koreanPrice": 158,
+    "globalPrice": 0.1058,
+    "globalPriceKrw": 142.83,
+    "premium": 10.62101799341874,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PYR",
+    "koreanPrice": 856,
+    "globalPrice": 0.5732,
+    "globalPriceKrw": 773.82,
+    "premium": 10.620040836370208,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ICX",
+    "koreanPrice": 101,
+    "globalPrice": 0.06764,
+    "globalPriceKrw": 91.31400000000001,
+    "premium": 10.607354841535791,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ID",
+    "koreanPrice": 114,
+    "globalPrice": 0.076355,
+    "globalPriceKrw": 103.07925,
+    "premium": 10.594518295389225,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "TREE",
+    "koreanPrice": 188.5,
+    "globalPrice": 0.12626,
+    "globalPriceKrw": 170.45100000000002,
+    "premium": 10.58896691717853,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CRTS",
+    "koreanPrice": 0.141,
+    "globalPrice": 0.00009445,
+    "globalPriceKrw": 0.1275075,
+    "premium": 10.581730486441968,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ES",
+    "koreanPrice": 143,
+    "globalPrice": 0.09579,
+    "globalPriceKrw": 129.3165,
+    "premium": 10.58140299188426,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "USD1",
+    "koreanPrice": 1491.5,
+    "globalPrice": 0.99915,
+    "globalPriceKrw": 1348.8525,
+    "premium": 10.575470631518275,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "FXS",
+    "koreanPrice": 1230,
+    "globalPrice": 0.824,
+    "globalPriceKrw": 1112.3999999999999,
+    "premium": 10.571736785329032,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "YGG",
+    "koreanPrice": 113,
+    "globalPrice": 0.075705,
+    "globalPriceKrw": 102.20174999999999,
+    "premium": 10.565621430161432,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "H",
+    "koreanPrice": 173,
+    "globalPrice": 0.11591,
+    "globalPriceKrw": 156.4785,
+    "premium": 10.558319513543395,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MASK",
+    "koreanPrice": 998.5,
+    "globalPrice": 0.669,
+    "globalPriceKrw": 903.1500000000001,
+    "premium": 10.5574932181808,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "USDC",
+    "koreanPrice": 1492,
+    "globalPrice": 0.99965,
+    "globalPriceKrw": 1349.5275000000001,
+    "premium": 10.557213543258648,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "JASMY",
+    "koreanPrice": 10.71,
+    "globalPrice": 0.007176,
+    "globalPriceKrw": 9.6876,
+    "premium": 10.55369751021926,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "COTI",
+    "koreanPrice": 39.64,
+    "globalPrice": 0.02656,
+    "globalPriceKrw": 35.856,
+    "premium": 10.553324408746093,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "KAIA",
+    "koreanPrice": 119,
+    "globalPrice": 0.079735,
+    "globalPriceKrw": 107.64225,
+    "premium": 10.551386653474816,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AWE",
+    "koreanPrice": 86.71000000000001,
+    "globalPrice": 0.0581,
+    "globalPriceKrw": 78.435,
+    "premium": 10.55013705616116,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "OP",
+    "koreanPrice": 466,
+    "globalPrice": 0.31225,
+    "globalPriceKrw": 421.5375,
+    "premium": 10.547697417193008,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "GAS",
+    "koreanPrice": 3237.5,
+    "globalPrice": 2.1695,
+    "globalPriceKrw": 2928.8250000000003,
+    "premium": 10.539209409916936,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "INIT",
+    "koreanPrice": 154,
+    "globalPrice": 0.1032,
+    "globalPriceKrw": 139.32,
+    "premium": 10.536893482629923,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "RVN",
+    "koreanPrice": 11.870000000000001,
+    "globalPrice": 0.0079545,
+    "globalPriceKrw": 10.738574999999999,
+    "premium": 10.53608137020044,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ARK",
+    "koreanPrice": 429,
+    "globalPrice": 0.2875,
+    "globalPriceKrw": 388.12499999999994,
+    "premium": 10.53140096618359,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CARV",
+    "koreanPrice": 209.5,
+    "globalPrice": 0.1404,
+    "globalPriceKrw": 189.54,
+    "premium": 10.530758678906832,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ONT",
+    "koreanPrice": 109,
+    "globalPrice": 0.07305,
+    "globalPriceKrw": 98.6175,
+    "premium": 10.52805029533297,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CHZ",
+    "koreanPrice": 44.77,
+    "globalPrice": 0.030005,
+    "globalPriceKrw": 40.506750000000004,
+    "premium": 10.52478907836348,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CELO",
+    "koreanPrice": 247,
+    "globalPrice": 0.16554999999999997,
+    "globalPriceKrw": 223.49249999999998,
+    "premium": 10.518250053133785,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SXT",
+    "koreanPrice": 47.83,
+    "globalPrice": 0.03206,
+    "globalPriceKrw": 43.281,
+    "premium": 10.510385619555924,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "XPR",
+    "koreanPrice": 5.45,
+    "globalPrice": 0.0036531,
+    "globalPriceKrw": 4.931685,
+    "premium": 10.509896718869927,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "JUP",
+    "koreanPrice": 368,
+    "globalPrice": 0.2467,
+    "globalPriceKrw": 333.045,
+    "premium": 10.49557867555435,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "GNO",
+    "koreanPrice": 187800,
+    "globalPrice": 125.9,
+    "globalPriceKrw": 169965,
+    "premium": 10.493336863471892,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "G",
+    "koreanPrice": 7.5915,
+    "globalPrice": 0.0050895,
+    "globalPriceKrw": 6.870825,
+    "premium": 10.488915086616235,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "GRT",
+    "koreanPrice": 73.05,
+    "globalPrice": 0.048975000000000005,
+    "globalPriceKrw": 66.11625000000001,
+    "premium": 10.487210027791939,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MVL",
+    "koreanPrice": 2.564,
+    "globalPrice": 0.001719,
+    "globalPriceKrw": 2.32065,
+    "premium": 10.486286169823106,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AVL",
+    "koreanPrice": 216,
+    "globalPrice": 0.14482,
+    "globalPriceKrw": 195.507,
+    "premium": 10.481977627399527,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "IO",
+    "koreanPrice": 315,
+    "globalPrice": 0.2112,
+    "globalPriceKrw": 285.12,
+    "premium": 10.479797979797977,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "XYO",
+    "koreanPrice": 7.684,
+    "globalPrice": 0.005152,
+    "globalPriceKrw": 6.9552000000000005,
+    "premium": 10.478490913273516,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "FITFI",
+    "koreanPrice": 0.7818,
+    "globalPrice": 0.0005242,
+    "globalPriceKrw": 0.7076699999999999,
+    "premium": 10.475221501547352,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MAPO",
+    "koreanPrice": 5.721,
+    "globalPrice": 0.003836,
+    "globalPriceKrw": 5.1786,
+    "premium": 10.47387324759587,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "TAO",
+    "koreanPrice": 414600,
+    "globalPrice": 278,
+    "globalPriceKrw": 375300,
+    "premium": 10.471622701838529,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BLAST",
+    "koreanPrice": 1.3385,
+    "globalPrice": 0.0008975,
+    "globalPriceKrw": 1.211625,
+    "premium": 10.471474259775102,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "NOM",
+    "koreanPrice": 15.495000000000001,
+    "globalPrice": 0.01039,
+    "globalPriceKrw": 14.0265,
+    "premium": 10.469468506042139,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ZTX",
+    "koreanPrice": 0.7695,
+    "globalPrice": 0.000516,
+    "globalPriceKrw": 0.6966,
+    "premium": 10.465116279069763,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "STX",
+    "koreanPrice": 455.5,
+    "globalPrice": 0.30545,
+    "globalPriceKrw": 412.3575,
+    "premium": 10.462402163171515,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SKL",
+    "koreanPrice": 19.58,
+    "globalPrice": 0.01313,
+    "globalPriceKrw": 17.7255,
+    "premium": 10.462328284110452,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "IQ",
+    "koreanPrice": 2.7125,
+    "globalPrice": 0.001819,
+    "globalPriceKrw": 2.4556500000000003,
+    "premium": 10.459552460651947,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "REI",
+    "koreanPrice": 12.59,
+    "globalPrice": 0.008444,
+    "globalPriceKrw": 11.3994,
+    "premium": 10.444409354878326,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MINA",
+    "koreanPrice": 154,
+    "globalPrice": 0.10328999999999999,
+    "globalPriceKrw": 139.4415,
+    "premium": 10.440579024178605,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "IP",
+    "koreanPrice": 3413,
+    "globalPrice": 2.2895,
+    "globalPriceKrw": 3090.825,
+    "premium": 10.423592406558125,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AVNT",
+    "koreanPrice": 500.5,
+    "globalPrice": 0.33575,
+    "globalPriceKrw": 453.2625,
+    "premium": 10.421665149885555,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ERA",
+    "koreanPrice": 360,
+    "globalPrice": 0.2415,
+    "globalPriceKrw": 326.025,
+    "premium": 10.420979986197384,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SUN",
+    "koreanPrice": 30.395,
+    "globalPrice": 0.02039,
+    "globalPriceKrw": 27.5265,
+    "premium": 10.420867164368886,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "C98",
+    "koreanPrice": 39.74,
+    "globalPrice": 0.02666,
+    "globalPriceKrw": 35.991,
+    "premium": 10.416493012141931,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CRV",
+    "koreanPrice": 577,
+    "globalPrice": 0.3871,
+    "globalPriceKrw": 522.585,
+    "premium": 10.412660141412394,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "WLFI",
+    "koreanPrice": 237,
+    "globalPrice": 0.159,
+    "globalPriceKrw": 214.65,
+    "premium": 10.412299091544371,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "THE",
+    "koreanPrice": 220,
+    "globalPrice": 0.1476,
+    "globalPriceKrw": 199.26000000000002,
+    "premium": 10.408511492522322,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "YB",
+    "koreanPrice": 631,
+    "globalPrice": 0.42335,
+    "globalPriceKrw": 571.5225,
+    "premium": 10.40685187372325,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ENSO",
+    "koreanPrice": 1095,
+    "globalPrice": 0.7347,
+    "globalPriceKrw": 991.845,
+    "premium": 10.400314565279855,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ZRX",
+    "koreanPrice": 226,
+    "globalPrice": 0.15165,
+    "globalPriceKrw": 204.72750000000002,
+    "premium": 10.390641218204676,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SCR",
+    "koreanPrice": 137,
+    "globalPrice": 0.09193,
+    "globalPriceKrw": 124.10549999999999,
+    "premium": 10.3899504856755,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "NEIRO",
+    "koreanPrice": 0.1982,
+    "globalPrice": 0.000133,
+    "globalPriceKrw": 0.17955000000000002,
+    "premium": 10.387078808131424,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "EIGEN",
+    "koreanPrice": 808,
+    "globalPrice": 0.5422,
+    "globalPriceKrw": 731.97,
+    "premium": 10.387037720125138,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "LRC",
+    "koreanPrice": 76.11,
+    "globalPrice": 0.051074999999999995,
+    "globalPriceKrw": 68.95124999999999,
+    "premium": 10.382335345624645,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MIRA",
+    "koreanPrice": 226.5,
+    "globalPrice": 0.152,
+    "globalPriceKrw": 205.2,
+    "premium": 10.380116959064335,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ARKM",
+    "koreanPrice": 341.5,
+    "globalPrice": 0.22920000000000001,
+    "globalPriceKrw": 309.42,
+    "premium": 10.36778488785469,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "POL",
+    "koreanPrice": 192.5,
+    "globalPrice": 0.1292,
+    "globalPriceKrw": 174.42000000000002,
+    "premium": 10.365783740396733,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BMT",
+    "koreanPrice": 39.78,
+    "globalPrice": 0.0267,
+    "globalPriceKrw": 36.045,
+    "premium": 10.362047440699124,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "HP",
+    "koreanPrice": 39.6,
+    "globalPrice": 0.02658,
+    "globalPriceKrw": 35.883,
+    "premium": 10.358665663406065,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "KNC",
+    "koreanPrice": 413.5,
+    "globalPrice": 0.27754999999999996,
+    "globalPriceKrw": 374.69249999999994,
+    "premium": 10.357159537487425,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PUNDIX",
+    "koreanPrice": 372,
+    "globalPrice": 0.2497,
+    "globalPriceKrw": 337.095,
+    "premium": 10.354647799581711,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "GMT",
+    "koreanPrice": 25.4,
+    "globalPrice": 0.01705,
+    "globalPriceKrw": 23.0175,
+    "premium": 10.350820028239385,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "KITE",
+    "koreanPrice": 144,
+    "globalPrice": 0.096665,
+    "globalPriceKrw": 130.49775,
+    "premium": 10.346730116036486,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "GALA",
+    "koreanPrice": 10.87,
+    "globalPrice": 0.007297,
+    "globalPriceKrw": 9.85095,
+    "premium": 10.344687568204083,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CTC",
+    "koreanPrice": 422,
+    "globalPrice": 0.2833,
+    "globalPriceKrw": 382.455,
+    "premium": 10.339778536036924,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "LPT",
+    "koreanPrice": 5860,
+    "globalPrice": 3.934,
+    "globalPriceKrw": 5310.900000000001,
+    "premium": 10.339113897832748,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "APE",
+    "koreanPrice": 368,
+    "globalPrice": 0.24705,
+    "globalPriceKrw": 333.5175,
+    "premium": 10.339037681680876,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "FLR",
+    "koreanPrice": 20.72,
+    "globalPrice": 0.01391,
+    "globalPriceKrw": 18.7785,
+    "premium": 10.338951460446776,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PUFFER",
+    "koreanPrice": 98.74,
+    "globalPrice": 0.06629,
+    "globalPriceKrw": 89.4915,
+    "premium": 10.334501041998394,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ANKR",
+    "koreanPrice": 11.615,
+    "globalPrice": 0.007798,
+    "globalPriceKrw": 10.5273,
+    "premium": 10.332183940801535,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "LISTA",
+    "koreanPrice": 276,
+    "globalPrice": 0.1853,
+    "globalPriceKrw": 250.155,
+    "premium": 10.331594411464891,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ACH",
+    "koreanPrice": 13.96,
+    "globalPrice": 0.009372499999999999,
+    "globalPriceKrw": 12.652874999999998,
+    "premium": 10.330656076188241,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ARPA",
+    "koreanPrice": 21.18,
+    "globalPrice": 0.01422,
+    "globalPriceKrw": 19.197,
+    "premium": 10.329739021722148,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SHELL",
+    "koreanPrice": 81.89,
+    "globalPrice": 0.05498,
+    "globalPriceKrw": 74.223,
+    "premium": 10.329682173989196,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ACX",
+    "koreanPrice": 87.37,
+    "globalPrice": 0.05866,
+    "globalPriceKrw": 79.191,
+    "premium": 10.328193860413434,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AGLD",
+    "koreanPrice": 434,
+    "globalPrice": 0.2914,
+    "globalPriceKrw": 393.39,
+    "premium": 10.323089046493305,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "GOAT",
+    "koreanPrice": 59.34,
+    "globalPrice": 0.039845,
+    "globalPriceKrw": 53.790749999999996,
+    "premium": 10.316364802498585,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "COOKIE",
+    "koreanPrice": 80.42,
+    "globalPrice": 0.054,
+    "globalPriceKrw": 72.9,
+    "premium": 10.31550068587105,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "METIS",
+    "koreanPrice": 10430,
+    "globalPrice": 7.0035,
+    "globalPriceKrw": 9454.725,
+    "premium": 10.315212763988372,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "GAME2",
+    "koreanPrice": 2.7699999999999996,
+    "globalPrice": 0.00186,
+    "globalPriceKrw": 2.511,
+    "premium": 10.314615690959755,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "XPL",
+    "koreanPrice": 273.5,
+    "globalPrice": 0.18365,
+    "globalPriceKrw": 247.9275,
+    "premium": 10.314507265228743,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "HOME",
+    "koreanPrice": 36.65,
+    "globalPrice": 0.02461,
+    "globalPriceKrw": 33.2235,
+    "premium": 10.313482926241958,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "FLOW",
+    "koreanPrice": 335,
+    "globalPrice": 0.22494999999999998,
+    "globalPriceKrw": 303.6825,
+    "premium": 10.31257975023256,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ENJ",
+    "koreanPrice": 46.91,
+    "globalPrice": 0.0315,
+    "globalPriceKrw": 42.525,
+    "premium": 10.31158142269253,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SPK",
+    "koreanPrice": 42.42,
+    "globalPrice": 0.028485,
+    "globalPriceKrw": 38.45475,
+    "premium": 10.311469974450503,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AGI",
+    "koreanPrice": 27.58,
+    "globalPrice": 0.01852,
+    "globalPriceKrw": 25.002,
+    "premium": 10.311175105991518,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BIGTIME",
+    "koreanPrice": 35.375,
+    "globalPrice": 0.023755,
+    "globalPriceKrw": 32.06925,
+    "premium": 10.308161244806174,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "INJ",
+    "koreanPrice": 8515,
+    "globalPrice": 5.718,
+    "globalPriceKrw": 7719.3,
+    "premium": 10.307929475470571,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "RSR",
+    "koreanPrice": 4.932,
+    "globalPrice": 0.003312,
+    "globalPriceKrw": 4.4712,
+    "premium": 10.305958132045106,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "OBT",
+    "koreanPrice": 3.696,
+    "globalPrice": 0.002482,
+    "globalPriceKrw": 3.3507,
+    "premium": 10.305309338347222,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ZIL",
+    "koreanPrice": 8.167,
+    "globalPrice": 0.0054845,
+    "globalPriceKrw": 7.404075,
+    "premium": 10.304123067364932,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ZK",
+    "koreanPrice": 52.52,
+    "globalPrice": 0.03527,
+    "globalPriceKrw": 47.61450000000001,
+    "premium": 10.302533891986677,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ALICE",
+    "koreanPrice": 334,
+    "globalPrice": 0.2243,
+    "globalPriceKrw": 302.805,
+    "premium": 10.302009544096032,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "STRK",
+    "koreanPrice": 185,
+    "globalPrice": 0.12423999999999999,
+    "globalPriceKrw": 167.724,
+    "premium": 10.300255181130913,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "0G",
+    "koreanPrice": 1771.5,
+    "globalPrice": 1.1897,
+    "globalPriceKrw": 1606.095,
+    "premium": 10.298581341701455,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "FF",
+    "koreanPrice": 167.5,
+    "globalPrice": 0.11249,
+    "globalPriceKrw": 151.8615,
+    "premium": 10.297870098741283,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "HYPER",
+    "koreanPrice": 194,
+    "globalPrice": 0.13029,
+    "globalPriceKrw": 175.89149999999998,
+    "premium": 10.295267252823487,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CVC",
+    "koreanPrice": 68.99000000000001,
+    "globalPrice": 0.046335,
+    "globalPriceKrw": 62.55225,
+    "premium": 10.291796058495112,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ZETA",
+    "koreanPrice": 131,
+    "globalPrice": 0.08798500000000001,
+    "globalPriceKrw": 118.77975,
+    "premium": 10.288159387437668,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "FORT",
+    "koreanPrice": 35.94,
+    "globalPrice": 0.02414,
+    "globalPriceKrw": 32.589000000000006,
+    "premium": 10.282610696860878,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CAMP",
+    "koreanPrice": 11.37,
+    "globalPrice": 0.007637,
+    "globalPriceKrw": 10.309949999999999,
+    "premium": 10.281815139743651,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SYRUP",
+    "koreanPrice": 379,
+    "globalPrice": 0.25457,
+    "globalPriceKrw": 343.6695,
+    "premium": 10.280371112362305,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "EPT",
+    "koreanPrice": 3.317,
+    "globalPrice": 0.002228,
+    "globalPriceKrw": 3.0078,
+    "premium": 10.2799388257198,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "HOOK",
+    "koreanPrice": 64.27,
+    "globalPrice": 0.04317,
+    "globalPriceKrw": 58.2795,
+    "premium": 10.27891454113367,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "RLC",
+    "koreanPrice": 1046,
+    "globalPrice": 0.7026,
+    "globalPriceKrw": 948.51,
+    "premium": 10.278225848963112,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CAKE",
+    "koreanPrice": 3538,
+    "globalPrice": 2.3765,
+    "globalPriceKrw": 3208.275,
+    "premium": 10.277329717683175,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ATH",
+    "koreanPrice": 21.475,
+    "globalPrice": 0.014425,
+    "globalPriceKrw": 19.47375,
+    "premium": 10.276654470761937,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "FLOKI",
+    "koreanPrice": 0.0707,
+    "globalPrice": 0.00004749,
+    "globalPriceKrw": 0.0641115,
+    "premium": 10.276627438135119,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PENDLE",
+    "koreanPrice": 3850.5,
+    "globalPrice": 2.5865,
+    "globalPriceKrw": 3491.775,
+    "premium": 10.273428270721908,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SUSHI",
+    "koreanPrice": 537,
+    "globalPrice": 0.36075,
+    "globalPriceKrw": 487.01250000000005,
+    "premium": 10.264110264110254,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "WAL",
+    "koreanPrice": 234,
+    "globalPrice": 0.1572,
+    "globalPriceKrw": 212.22,
+    "premium": 10.262934690415607,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
   },
   {
     "symbol": "ADA",
-    "koreanPrice": 648,
-    "globalPrice": null,
-    "globalPriceKrw": null,
-    "premium": null,
-    "domesticExchange": "UPBIT",
-    "foreignExchange": "OKX"
+    "koreanPrice": 645.5,
+    "globalPrice": 0.43365,
+    "globalPriceKrw": 585.4275,
+    "premium": 10.261304773007758,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "UMA",
+    "koreanPrice": 1194,
+    "globalPrice": 0.80215,
+    "globalPriceKrw": 1082.9025000000001,
+    "premium": 10.259233864544576,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "FLUX",
+    "koreanPrice": 166,
+    "globalPrice": 0.11153,
+    "globalPriceKrw": 150.56550000000001,
+    "premium": 10.251020320060029,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "FET",
+    "koreanPrice": 377,
+    "globalPrice": 0.2533,
+    "globalPriceKrw": 341.95500000000004,
+    "premium": 10.248424500299734,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SUNDOG",
+    "koreanPrice": 17.22,
+    "globalPrice": 0.01157,
+    "globalPriceKrw": 15.6195,
+    "premium": 10.246806876020349,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BABY",
+    "koreanPrice": 28.21,
+    "globalPrice": 0.018955,
+    "globalPriceKrw": 25.58925,
+    "premium": 10.241605361626469,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SFP",
+    "koreanPrice": 488,
+    "globalPrice": 0.3279,
+    "globalPriceKrw": 442.665,
+    "premium": 10.241378920854366,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
   },
   {
     "symbol": "DOGE",
-    "koreanPrice": 216,
-    "globalPrice": null,
-    "globalPriceKrw": null,
-    "premium": null,
-    "domesticExchange": "UPBIT",
-    "foreignExchange": "OKX"
+    "koreanPrice": 215.5,
+    "globalPrice": 0.14480500000000002,
+    "globalPriceKrw": 195.48675000000003,
+    "premium": 10.23765037783889,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ONDO",
+    "koreanPrice": 740.5,
+    "globalPrice": 0.4976,
+    "globalPriceKrw": 671.76,
+    "premium": 10.232821245682985,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "YFI",
+    "koreanPrice": 5451000,
+    "globalPrice": 3663.05,
+    "globalPriceKrw": 4945117.5,
+    "premium": 10.229938924605937,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ALT",
+    "koreanPrice": 20,
+    "globalPrice": 0.01344,
+    "globalPriceKrw": 18.144000000000002,
+    "premium": 10.229276895943551,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AR",
+    "koreanPrice": 6130,
+    "globalPrice": 4.1195,
+    "globalPriceKrw": 5561.325000000001,
+    "premium": 10.225530786278435,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SAND",
+    "koreanPrice": 223.5,
+    "globalPrice": 0.1502,
+    "globalPriceKrw": 202.77,
+    "premium": 10.223405829264678,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "LA",
+    "koreanPrice": 583,
+    "globalPrice": 0.3918,
+    "globalPriceKrw": 528.93,
+    "premium": 10.222524719717176,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AVAX",
+    "koreanPrice": 20205,
+    "globalPrice": 13.5795,
+    "globalPriceKrw": 18332.325,
+    "premium": 10.21515274249174,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "1INCH",
+    "koreanPrice": 297.5,
+    "globalPrice": 0.19995000000000002,
+    "globalPriceKrw": 269.9325,
+    "premium": 10.212738369777629,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ANIME",
+    "koreanPrice": 9.439,
+    "globalPrice": 0.006344,
+    "globalPriceKrw": 8.5644,
+    "premium": 10.212040539909404,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "QTUM",
+    "koreanPrice": 2253,
+    "globalPrice": 1.5143,
+    "globalPriceKrw": 2044.305,
+    "premium": 10.208603902059622,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "IMX",
+    "koreanPrice": 450.5,
+    "globalPrice": 0.3028,
+    "globalPriceKrw": 408.78000000000003,
+    "premium": 10.205978766084439,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "WIF",
+    "koreanPrice": 587,
+    "globalPrice": 0.39455,
+    "globalPriceKrw": 532.6425,
+    "premium": 10.20525023819916,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MOVE",
+    "koreanPrice": 71.74000000000001,
+    "globalPrice": 0.04822,
+    "globalPriceKrw": 65.097,
+    "premium": 10.204771341229266,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ETC",
+    "koreanPrice": 20115,
+    "globalPrice": 13.521,
+    "globalPriceKrw": 18253.350000000002,
+    "premium": 10.198949781820858,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "UNI",
+    "koreanPrice": 8740,
+    "globalPrice": 5.875,
+    "globalPriceKrw": 7931.25,
+    "premium": 10.197005516154451,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "RED",
+    "koreanPrice": 390.5,
+    "globalPrice": 0.2625,
+    "globalPriceKrw": 354.375,
+    "premium": 10.19400352733686,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ICP",
+    "koreanPrice": 5635,
+    "globalPrice": 3.7880000000000003,
+    "globalPriceKrw": 5113.8,
+    "premium": 10.192029410614412,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SUPER",
+    "koreanPrice": 389,
+    "globalPrice": 0.2615,
+    "globalPriceKrw": 353.02500000000003,
+    "premium": 10.190496423766012,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ZORA",
+    "koreanPrice": 72.765,
+    "globalPrice": 0.0489155,
+    "globalPriceKrw": 66.035925,
+    "premium": 10.190021567805696,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "STG",
+    "koreanPrice": 191,
+    "globalPrice": 0.1284,
+    "globalPriceKrw": 173.33999999999997,
+    "premium": 10.188069689627339,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "XAN",
+    "koreanPrice": 32.13,
+    "globalPrice": 0.0216,
+    "globalPriceKrw": 29.16,
+    "premium": 10.185185185185192,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AAVE",
+    "koreanPrice": 275750,
+    "globalPrice": 185.38,
+    "globalPriceKrw": 250263,
+    "premium": 10.18408634116909,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "TIA",
+    "koreanPrice": 907.5,
+    "globalPrice": 0.6101,
+    "globalPriceKrw": 823.635,
+    "premium": 10.182301626327197,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BTC",
+    "koreanPrice": 135019500,
+    "globalPrice": 90772.79999999999,
+    "globalPriceKrw": 122543279.99999999,
+    "premium": 10.181072352559859,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AUDIO",
+    "koreanPrice": 50.2,
+    "globalPrice": 0.03375,
+    "globalPriceKrw": 45.5625,
+    "premium": 10.178326474622777,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SPURS",
+    "koreanPrice": 309,
+    "globalPrice": 0.20775,
+    "globalPriceKrw": 280.4625,
+    "premium": 10.175157106565058,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BCH",
+    "koreanPrice": 821500,
+    "globalPrice": 552.325,
+    "globalPriceKrw": 745638.7500000001,
+    "premium": 10.173995114926615,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ARB",
+    "koreanPrice": 313,
+    "globalPrice": 0.21045,
+    "globalPriceKrw": 284.1075,
+    "premium": 10.169566097339908,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "NEO",
+    "koreanPrice": 6307.5,
+    "globalPrice": 4.241,
+    "globalPriceKrw": 5725.349999999999,
+    "premium": 10.167937331342198,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "STRAX",
+    "koreanPrice": 36.185,
+    "globalPrice": 0.02433,
+    "globalPriceKrw": 32.8455,
+    "premium": 10.167298412263479,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AUCTION",
+    "koreanPrice": 8412.5,
+    "globalPrice": 5.656499999999999,
+    "globalPriceKrw": 7636.275,
+    "premium": 10.164969176725569,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "XRP",
+    "koreanPrice": 3197.5,
+    "globalPrice": 2.15,
+    "globalPriceKrw": 2902.5,
+    "premium": 10.163652024117141,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CUDIS",
+    "koreanPrice": 40.11,
+    "globalPrice": 0.02697,
+    "globalPriceKrw": 36.4095,
+    "premium": 10.163556214724172,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MNT",
+    "koreanPrice": 1517.5,
+    "globalPrice": 1.0204,
+    "globalPriceKrw": 1377.54,
+    "premium": 10.160140540383585,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ENA",
+    "koreanPrice": 388,
+    "globalPrice": 0.2609,
+    "globalPriceKrw": 352.21500000000003,
+    "premium": 10.159987507630271,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MLK",
+    "koreanPrice": 121.5,
+    "globalPrice": 0.0817,
+    "globalPriceKrw": 110.29499999999999,
+    "premium": 10.159118727050197,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AKT",
+    "koreanPrice": 708,
+    "globalPrice": 0.4761,
+    "globalPriceKrw": 642.735,
+    "premium": 10.154262643235546,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ENS",
+    "koreanPrice": 17055,
+    "globalPrice": 11.469,
+    "globalPriceKrw": 15483.15,
+    "premium": 10.15200395268405,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BLUR",
+    "koreanPrice": 53.965,
+    "globalPrice": 0.03629,
+    "globalPriceKrw": 48.9915,
+    "premium": 10.151761019768738,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "TRUMP",
+    "koreanPrice": 8862.5,
+    "globalPrice": 5.96,
+    "globalPriceKrw": 8046,
+    "premium": 10.147899577429778,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SC",
+    "koreanPrice": 2.5145,
+    "globalPrice": 0.001691,
+    "globalPriceKrw": 2.28285,
+    "premium": 10.147403464967043,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "RESOLV",
+    "koreanPrice": 110,
+    "globalPrice": 0.073975,
+    "globalPriceKrw": 99.86625,
+    "premium": 10.147322043232831,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PARTI",
+    "koreanPrice": 212,
+    "globalPrice": 0.142575,
+    "globalPriceKrw": 192.47625000000002,
+    "premium": 10.143459257960386,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "B3",
+    "koreanPrice": 1.54,
+    "globalPrice": 0.0010357,
+    "globalPriceKrw": 1.398195,
+    "premium": 10.14200451296135,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CPOOL",
+    "koreanPrice": 59.519999999999996,
+    "globalPrice": 0.04003,
+    "globalPriceKrw": 54.0405,
+    "premium": 10.139617509090394,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "TRX",
+    "koreanPrice": 418,
+    "globalPrice": 0.281125,
+    "globalPriceKrw": 379.51875,
+    "premium": 10.139485862029211,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BNB",
+    "koreanPrice": 1299000,
+    "globalPrice": 873.65,
+    "globalPriceKrw": 1179427.5,
+    "premium": 10.138181448202625,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "RAD",
+    "koreanPrice": 452,
+    "globalPrice": 0.304,
+    "globalPriceKrw": 410.4,
+    "premium": 10.136452241715405,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "NXPC",
+    "koreanPrice": 678,
+    "globalPrice": 0.456,
+    "globalPriceKrw": 615.6,
+    "premium": 10.136452241715395,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ATOM",
+    "koreanPrice": 3523,
+    "globalPrice": 2.3695000000000004,
+    "globalPriceKrw": 3198.8250000000007,
+    "premium": 10.134189897853092,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "APT",
+    "koreanPrice": 2900,
+    "globalPrice": 1.9505,
+    "globalPriceKrw": 2633.1749999999997,
+    "premium": 10.133204211645648,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "OAS",
+    "koreanPrice": 3.256,
+    "globalPrice": 0.00219,
+    "globalPriceKrw": 2.9565,
+    "premium": 10.130221545746648,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ASTR",
+    "koreanPrice": 19.595,
+    "globalPrice": 0.01318,
+    "globalPriceKrw": 17.793,
+    "premium": 10.12757826111392,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SOLV",
+    "koreanPrice": 26.85,
+    "globalPrice": 0.01806,
+    "globalPriceKrw": 24.381,
+    "premium": 10.126738033714783,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "TON",
+    "koreanPrice": 2343,
+    "globalPrice": 1.576,
+    "globalPriceKrw": 2127.6,
+    "premium": 10.124083474337287,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "DOT",
+    "koreanPrice": 3310,
+    "globalPrice": 2.2264999999999997,
+    "globalPriceKrw": 3005.7749999999996,
+    "premium": 10.121349735093291,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PLUME",
+    "koreanPrice": 30,
+    "globalPrice": 0.02018,
+    "globalPriceKrw": 27.243,
+    "premium": 10.12003083360864,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SEI",
+    "koreanPrice": 205,
+    "globalPrice": 0.1379,
+    "globalPriceKrw": 186.165,
+    "premium": 10.117369000617735,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "VIRTUAL",
+    "koreanPrice": 1349,
+    "globalPrice": 0.90745,
+    "globalPriceKrw": 1225.0575,
+    "premium": 10.11728020929631,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BB",
+    "koreanPrice": 122,
+    "globalPrice": 0.08207,
+    "globalPriceKrw": 110.7945,
+    "premium": 10.113769185293494,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "HIGH",
+    "koreanPrice": 374,
+    "globalPrice": 0.2516,
+    "globalPriceKrw": 339.65999999999997,
+    "premium": 10.11011011011012,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ORBS",
+    "koreanPrice": 16.18,
+    "globalPrice": 0.010885,
+    "globalPriceKrw": 14.69475,
+    "premium": 10.107351264907527,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "GHX",
+    "koreanPrice": 16.99,
+    "globalPrice": 0.01143,
+    "globalPriceKrw": 15.430499999999999,
+    "premium": 10.10660704448981,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PUMP",
+    "koreanPrice": 4.798,
+    "globalPrice": 0.003228,
+    "globalPriceKrw": 4.3578,
+    "premium": 10.101427325714809,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PROVE",
+    "koreanPrice": 691,
+    "globalPrice": 0.4649,
+    "globalPriceKrw": 627.615,
+    "premium": 10.099344343267767,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PONKE",
+    "koreanPrice": 52.75,
+    "globalPrice": 0.03549,
+    "globalPriceKrw": 47.911500000000004,
+    "premium": 10.098828047545988,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ASTER",
+    "koreanPrice": 1487,
+    "globalPrice": 1.0004499999999998,
+    "globalPriceKrw": 1350.6074999999998,
+    "premium": 10.098603776448758,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "LINEA",
+    "koreanPrice": 13.75,
+    "globalPrice": 0.009250999999999999,
+    "globalPriceKrw": 12.488849999999998,
+    "premium": 10.098207601180274,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SOMI",
+    "koreanPrice": 375,
+    "globalPrice": 0.2523,
+    "globalPriceKrw": 340.605,
+    "premium": 10.098207601180247,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ETH",
+    "koreanPrice": 4423500,
+    "globalPrice": 2976.165,
+    "globalPriceKrw": 4017822.75,
+    "premium": 10.0969424298272,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "NMR",
+    "koreanPrice": 16090,
+    "globalPrice": 10.8255,
+    "globalPriceKrw": 14614.425,
+    "premium": 10.096702401907711,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ZKC",
+    "koreanPrice": 211.5,
+    "globalPrice": 0.1423,
+    "globalPriceKrw": 192.10500000000002,
+    "premium": 10.096041227453725,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "API3",
+    "koreanPrice": 791,
+    "globalPrice": 0.5322,
+    "globalPriceKrw": 718.47,
+    "premium": 10.09506312024162,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "XAI",
+    "koreanPrice": 26.41,
+    "globalPrice": 0.01777,
+    "globalPriceKrw": 23.989500000000003,
+    "premium": 10.089830967715029,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "HFT",
+    "koreanPrice": 49,
+    "globalPrice": 0.03297,
+    "globalPriceKrw": 44.509499999999996,
+    "premium": 10.088857434929633,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SAFE",
+    "koreanPrice": 228.5,
+    "globalPrice": 0.15375,
+    "globalPriceKrw": 207.5625,
+    "premium": 10.087323095453177,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AXS",
+    "koreanPrice": 1612.5,
+    "globalPrice": 1.085,
+    "globalPriceKrw": 1464.75,
+    "premium": 10.087045570916539,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ZRO",
+    "koreanPrice": 2176.5,
+    "globalPrice": 1.4645000000000001,
+    "globalPriceKrw": 1977.0750000000003,
+    "premium": 10.086870756041106,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "LINK",
+    "koreanPrice": 19740,
+    "globalPrice": 13.283000000000001,
+    "globalPriceKrw": 17932.050000000003,
+    "premium": 10.082227073870511,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ETHFI",
+    "koreanPrice": 1216,
+    "globalPrice": 0.8182499999999999,
+    "globalPriceKrw": 1104.6374999999998,
+    "premium": 10.0813615326295,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "TRUST",
+    "koreanPrice": 218.5,
+    "globalPrice": 0.14703,
+    "globalPriceKrw": 198.4905,
+    "premium": 10.080835102939437,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PAXG",
+    "koreanPrice": 6253000,
+    "globalPrice": 4207.71,
+    "globalPriceKrw": 5680408.5,
+    "premium": 10.08011131593793,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "LDO",
+    "koreanPrice": 901,
+    "globalPrice": 0.6063000000000001,
+    "globalPriceKrw": 818.5050000000001,
+    "premium": 10.078741119480013,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "LWA",
+    "koreanPrice": 8.5,
+    "globalPrice": 0.00572,
+    "globalPriceKrw": 7.722,
+    "premium": 10.07511007511007,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "WAVES",
+    "koreanPrice": 1136.5,
+    "globalPrice": 0.7648,
+    "globalPriceKrw": 1032.48,
+    "premium": 10.074771424143806,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BARD",
+    "koreanPrice": 1113,
+    "globalPrice": 0.749,
+    "globalPriceKrw": 1011.15,
+    "premium": 10.072689511941851,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MMT",
+    "koreanPrice": 357,
+    "globalPrice": 0.24025000000000002,
+    "globalPriceKrw": 324.33750000000003,
+    "premium": 10.070528384784357,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "HUMA",
+    "koreanPrice": 40.67,
+    "globalPrice": 0.02737,
+    "globalPriceKrw": 36.9495,
+    "premium": 10.06914843231979,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "COMP",
+    "koreanPrice": 51850,
+    "globalPrice": 34.894999999999996,
+    "globalPriceKrw": 47108.24999999999,
+    "premium": 10.06564667547618,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SUI",
+    "koreanPrice": 2380.5,
+    "globalPrice": 1.6021,
+    "globalPriceKrw": 2162.835,
+    "premium": 10.063874498054636,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BOA",
+    "koreanPrice": 4.621,
+    "globalPrice": 0.00311,
+    "globalPriceKrw": 4.1985,
+    "premium": 10.063117780159587,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "TOWNS",
+    "koreanPrice": 11.46,
+    "globalPrice": 0.007713,
+    "globalPriceKrw": 10.41255,
+    "premium": 10.059495512626603,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AERO",
+    "koreanPrice": 968,
+    "globalPrice": 0.6515,
+    "globalPriceKrw": 879.525,
+    "premium": 10.059407066314206,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "WLD",
+    "koreanPrice": 939,
+    "globalPrice": 0.63205,
+    "globalPriceKrw": 853.2675,
+    "premium": 10.047552496725816,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "STORJ",
+    "koreanPrice": 225,
+    "globalPrice": 0.15145,
+    "globalPriceKrw": 204.4575,
+    "premium": 10.047320347749526,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ACE",
+    "koreanPrice": 331,
+    "globalPrice": 0.2228,
+    "globalPriceKrw": 300.78,
+    "premium": 10.047210585810237,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BONK",
+    "koreanPrice": 0.0143,
+    "globalPrice": 0.000009625500000000001,
+    "globalPriceKrw": 0.012994425000000002,
+    "premium": 10.04719331559494,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "XCN",
+    "koreanPrice": 7.639,
+    "globalPrice": 0.005142,
+    "globalPriceKrw": 6.9417,
+    "premium": 10.045089819496669,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "TURBO",
+    "koreanPrice": 3.699,
+    "globalPrice": 0.00249,
+    "globalPriceKrw": 3.3615,
+    "premium": 10.040160642570278,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BICO",
+    "koreanPrice": 81.11,
+    "globalPrice": 0.054605,
+    "globalPriceKrw": 73.71675,
+    "premium": 10.029267432435633,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
   },
   {
     "symbol": "SOL",
-    "koreanPrice": 205800,
-    "globalPrice": null,
-    "globalPriceKrw": null,
-    "premium": null,
-    "domesticExchange": "UPBIT",
-    "foreignExchange": "OKX"
+    "koreanPrice": 205600,
+    "globalPrice": 138.41500000000002,
+    "globalPriceKrw": 186860.25000000003,
+    "premium": 10.028751433223475,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BIO",
+    "koreanPrice": 78.225,
+    "globalPrice": 0.052665000000000003,
+    "globalPriceKrw": 71.09775,
+    "premium": 10.024578836883007,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "JST",
+    "koreanPrice": 63.2,
+    "globalPrice": 0.04255,
+    "globalPriceKrw": 57.442499999999995,
+    "premium": 10.023066544805689,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CTSI",
+    "koreanPrice": 58.64,
+    "globalPrice": 0.03948,
+    "globalPriceKrw": 53.298,
+    "premium": 10.022890164734134,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MORPHO",
+    "koreanPrice": 2145,
+    "globalPrice": 1.44415,
+    "globalPriceKrw": 1949.6025,
+    "premium": 10.022427648713009,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "OPEN",
+    "koreanPrice": 327.5,
+    "globalPrice": 0.2205,
+    "globalPriceKrw": 297.675,
+    "premium": 10.019316368522714,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "XLM",
+    "koreanPrice": 378.5,
+    "globalPrice": 0.25485,
+    "globalPriceKrw": 344.0475,
+    "premium": 10.013878897535946,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "WAXL",
+    "koreanPrice": 180,
+    "globalPrice": 0.1212,
+    "globalPriceKrw": 163.62,
+    "premium": 10.011001100110008,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "FLUID",
+    "koreanPrice": 4483.5,
+    "globalPrice": 3.019,
+    "globalPriceKrw": 4075.65,
+    "premium": 10.006992749622757,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "HAEDAL",
+    "koreanPrice": 80.67,
+    "globalPrice": 0.05432,
+    "globalPriceKrw": 73.332,
+    "premium": 10.006545573555895,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AQT",
+    "koreanPrice": 917,
+    "globalPrice": 0.6175,
+    "globalPriceKrw": 833.6250000000001,
+    "premium": 10.001499475183671,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PENGU",
+    "koreanPrice": 17.509999999999998,
+    "globalPrice": 0.0117915,
+    "globalPriceKrw": 15.918525,
+    "premium": 9.997628549127494,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "IN",
+    "koreanPrice": 137,
+    "globalPrice": 0.09226,
+    "globalPriceKrw": 124.55099999999999,
+    "premium": 9.995102407849005,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MANA",
+    "koreanPrice": 236,
+    "globalPrice": 0.15894999999999998,
+    "globalPriceKrw": 214.58249999999998,
+    "premium": 9.981009634988883,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BOBA",
+    "koreanPrice": 61.6,
+    "globalPrice": 0.04149,
+    "globalPriceKrw": 56.0115,
+    "premium": 9.977415352204465,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "VANA",
+    "koreanPrice": 4412.5,
+    "globalPrice": 2.972,
+    "globalPriceKrw": 4012.2,
+    "premium": 9.977069936693091,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "KSM",
+    "koreanPrice": 12630,
+    "globalPrice": 8.507000000000001,
+    "globalPriceKrw": 11484.450000000003,
+    "premium": 9.974792001358335,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SOON",
+    "koreanPrice": 677,
+    "globalPrice": 0.456,
+    "globalPriceKrw": 615.6,
+    "premium": 9.97400909681611,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BERA",
+    "koreanPrice": 1339,
+    "globalPrice": 0.9019,
+    "globalPriceKrw": 1217.565,
+    "premium": 9.973594838879233,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "JOE",
+    "koreanPrice": 108,
+    "globalPrice": 0.07275000000000001,
+    "globalPriceKrw": 98.2125,
+    "premium": 9.965635738831608,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MON",
+    "koreanPrice": 45.84,
+    "globalPrice": 0.03088,
+    "globalPriceKrw": 41.688,
+    "premium": 9.959700633275764,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PEAQ",
+    "koreanPrice": 54.58,
+    "globalPrice": 0.03677,
+    "globalPriceKrw": 49.6395,
+    "premium": 9.952759395239678,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CELR",
+    "koreanPrice": 6.346,
+    "globalPrice": 0.0042755,
+    "globalPriceKrw": 5.7719249999999995,
+    "premium": 9.945988556677374,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "DEEP",
+    "koreanPrice": 66.10499999999999,
+    "globalPrice": 0.04454,
+    "globalPriceKrw": 60.129000000000005,
+    "premium": 9.938631941326124,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SAHARA",
+    "koreanPrice": 57.86,
+    "globalPrice": 0.038985,
+    "globalPriceKrw": 52.62975,
+    "premium": 9.937820339256785,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "POKT",
+    "koreanPrice": 21.445,
+    "globalPrice": 0.01445,
+    "globalPriceKrw": 19.5075,
+    "premium": 9.932077406125849,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ORDER",
+    "koreanPrice": 164,
+    "globalPrice": 0.11051,
+    "globalPriceKrw": 149.1885,
+    "premium": 9.92804405165277,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SOPH",
+    "koreanPrice": 24.345,
+    "globalPrice": 0.016405000000000003,
+    "globalPriceKrw": 22.146750000000004,
+    "premium": 9.925835619221756,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "D",
+    "koreanPrice": 23.18,
+    "globalPrice": 0.01562,
+    "globalPriceKrw": 21.087,
+    "premium": 9.925546545264854,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MOCA",
+    "koreanPrice": 34.71,
+    "globalPrice": 0.02339,
+    "globalPriceKrw": 31.576500000000003,
+    "premium": 9.92351907272813,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "XPLA",
+    "koreanPrice": 23.89,
+    "globalPrice": 0.0161,
+    "globalPriceKrw": 21.735,
+    "premium": 9.914883827927312,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "GLM",
+    "koreanPrice": 342,
+    "globalPrice": 0.23049999999999998,
+    "globalPriceKrw": 311.17499999999995,
+    "premium": 9.906001446131613,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "F",
+    "koreanPrice": 12.015,
+    "globalPrice": 0.008099,
+    "globalPriceKrw": 10.93365,
+    "premium": 9.890109890109894,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BRETT",
+    "koreanPrice": 28.78,
+    "globalPrice": 0.0194,
+    "globalPriceKrw": 26.19,
+    "premium": 9.88927071401298,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SKY",
+    "koreanPrice": 84.17,
+    "globalPrice": 0.05674,
+    "globalPriceKrw": 76.599,
+    "premium": 9.883941043616755,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "WOO",
+    "koreanPrice": 39.17,
+    "globalPrice": 0.026404999999999998,
+    "globalPriceKrw": 35.64675,
+    "premium": 9.883790247357767,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "LSK",
+    "koreanPrice": 335,
+    "globalPrice": 0.22585,
+    "globalPriceKrw": 304.8975,
+    "premium": 9.872990103231421,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "NEWT",
+    "koreanPrice": 168.5,
+    "globalPrice": 0.1136,
+    "globalPriceKrw": 153.36,
+    "premium": 9.872196139801764,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "WCT",
+    "koreanPrice": 138.5,
+    "globalPrice": 0.09337999999999999,
+    "globalPriceKrw": 126.06299999999999,
+    "premium": 9.86570206960013,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MED",
+    "koreanPrice": 4.099,
+    "globalPrice": 0.002764,
+    "globalPriceKrw": 3.7314,
+    "premium": 9.851530256740109,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "NIL",
+    "koreanPrice": 111,
+    "globalPrice": 0.07485,
+    "globalPriceKrw": 101.0475,
+    "premium": 9.849328286202034,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "NCT",
+    "koreanPrice": 15.63,
+    "globalPrice": 0.01054,
+    "globalPriceKrw": 14.229000000000001,
+    "premium": 9.846088973223695,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MERL",
+    "koreanPrice": 478,
+    "globalPrice": 0.32233999999999996,
+    "globalPriceKrw": 435.15899999999993,
+    "premium": 9.84490726378176,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "AERGO",
+    "koreanPrice": 85.84,
+    "globalPrice": 0.05789,
+    "globalPriceKrw": 78.1515,
+    "premium": 9.837942969744669,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "RSS3",
+    "koreanPrice": 21.3,
+    "globalPrice": 0.014365,
+    "globalPriceKrw": 19.39275,
+    "premium": 9.834860966082692,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "KAITO",
+    "koreanPrice": 979,
+    "globalPrice": 0.6603000000000001,
+    "globalPriceKrw": 891.4050000000002,
+    "premium": 9.826622018050132,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "EUL",
+    "koreanPrice": 6365,
+    "globalPrice": 4.293,
+    "globalPriceKrw": 5795.55,
+    "premium": 9.825642087463654,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "HBAR",
+    "koreanPrice": 214,
+    "globalPrice": 0.144345,
+    "globalPriceKrw": 194.86575,
+    "premium": 9.819196036245472,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BTT",
+    "koreanPrice": 0.0006025,
+    "globalPrice": 4.064e-7,
+    "globalPriceKrw": 0.00054864,
+    "premium": 9.817002041411486,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BSV",
+    "koreanPrice": 30595,
+    "globalPrice": 20.64,
+    "globalPriceKrw": 27864,
+    "premium": 9.801177146138386,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PEPE",
+    "koreanPrice": 0.0066300000000000005,
+    "globalPrice": 0.0000044735000000000005,
+    "globalPriceKrw": 0.0060392250000000005,
+    "premium": 9.782298225351761,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "TOSHI",
+    "koreanPrice": 0.60705,
+    "globalPrice": 0.0004096,
+    "globalPriceKrw": 0.55296,
+    "premium": 9.78190104166666,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "GRASS",
+    "koreanPrice": 469,
+    "globalPrice": 0.3165,
+    "globalPriceKrw": 427.275,
+    "premium": 9.765373588438365,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PROMPT",
+    "koreanPrice": 82.61,
+    "globalPrice": 0.055775000000000005,
+    "globalPriceKrw": 75.29625,
+    "premium": 9.713299135083087,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MAV",
+    "koreanPrice": 46.3,
+    "globalPrice": 0.03126,
+    "globalPriceKrw": 42.20100000000001,
+    "premium": 9.713039975356008,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "C",
+    "koreanPrice": 114,
+    "globalPrice": 0.07698,
+    "globalPriceKrw": 103.92300000000002,
+    "premium": 9.69660229208162,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BNT",
+    "koreanPrice": 682,
+    "globalPrice": 0.46065,
+    "globalPriceKrw": 621.8775,
+    "premium": 9.667900832559457,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "ROA",
+    "koreanPrice": 10.02,
+    "globalPrice": 0.00677,
+    "globalPriceKrw": 9.1395,
+    "premium": 9.634006236665021,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MTL",
+    "koreanPrice": 622,
+    "globalPrice": 0.4203,
+    "globalPriceKrw": 567.405,
+    "premium": 9.621875027537655,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CBK",
+    "koreanPrice": 558,
+    "globalPrice": 0.3771,
+    "globalPriceKrw": 509.085,
+    "premium": 9.608415097675245,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "PUMPBTC",
+    "koreanPrice": 39.12,
+    "globalPrice": 0.02644,
+    "globalPriceKrw": 35.694,
+    "premium": 9.598251807026376,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "CORE",
+    "koreanPrice": 155,
+    "globalPrice": 0.1048,
+    "globalPriceKrw": 141.48000000000002,
+    "premium": 9.556121006502671,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MET",
+    "koreanPrice": 480,
+    "globalPrice": 0.3246,
+    "globalPriceKrw": 438.21,
+    "premium": 9.53652358458274,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "QKC",
+    "koreanPrice": 6.395,
+    "globalPrice": 0.004327,
+    "globalPriceKrw": 5.84145,
+    "premium": 9.476243056090517,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MBX",
+    "koreanPrice": 115,
+    "globalPrice": 0.0779,
+    "globalPriceKrw": 105.16499999999999,
+    "premium": 9.351970712689592,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SIGN",
+    "koreanPrice": 58.225,
+    "globalPrice": 0.03949,
+    "globalPriceKrw": 53.311499999999995,
+    "premium": 9.21658553970533,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MAY",
+    "koreanPrice": 28.05,
+    "globalPrice": 0.01903,
+    "globalPriceKrw": 25.690499999999997,
+    "premium": 9.184328837508046,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BORA",
+    "koreanPrice": 71.995,
+    "globalPrice": 0.04888,
+    "globalPriceKrw": 65.988,
+    "premium": 9.103170273383048,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BAL",
+    "koreanPrice": 974,
+    "globalPrice": 0.6616,
+    "globalPriceKrw": 893.16,
+    "premium": 9.05100989744279,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "IOST",
+    "koreanPrice": 3.638,
+    "globalPrice": 0.002473,
+    "globalPriceKrw": 3.33855,
+    "premium": 8.969462790732496,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "MBL",
+    "koreanPrice": 2.061,
+    "globalPrice": 0.001432,
+    "globalPriceKrw": 1.9331999999999998,
+    "premium": 6.610800744878966,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "SWAP",
+    "koreanPrice": 60,
+    "globalPrice": 0.042,
+    "globalPriceKrw": 56.7,
+    "premium": 5.820105820105815,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "DVI",
+    "koreanPrice": 1.965,
+    "globalPrice": 0.001456,
+    "globalPriceKrw": 1.9656,
+    "premium": -0.030525030525027162,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "A8",
+    "koreanPrice": 104,
+    "globalPrice": 0.07848,
+    "globalPriceKrw": 105.948,
+    "premium": -1.8386378223279283,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "EGG",
+    "koreanPrice": 1.626,
+    "globalPrice": 0.006175,
+    "globalPriceKrw": 8.33625,
+    "premium": -80.49482681061629,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
+  },
+  {
+    "symbol": "BEAM",
+    "koreanPrice": 4.959,
+    "globalPrice": 0.03248,
+    "globalPriceKrw": 43.848000000000006,
+    "premium": -88.6904761904762,
+    "domesticExchange": "DOMESTIC",
+    "foreignExchange": "FOREIGN"
   }
 ]

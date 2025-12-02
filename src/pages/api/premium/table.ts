@@ -21,38 +21,50 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     const result = premium
       .map((row: any) => {
-        const mapped = attachMetadata(row, meta);
-        return {
-          symbol: mapped.symbol,
-          name_ko: mapped.name_ko,
-          name_en: mapped.name_en,
-          icon_url: mapped.icon_url,
-          koreanPrice: mapped.koreanPrice,
-          globalPrice: mapped.globalPrice,
-          globalPriceKrw: mapped.globalPriceKrw,
-          premium: mapped.premium,
-          domesticExchange: mapped.domesticExchange,
-          foreignExchange: mapped.foreignExchange,
-          // 컴포넌트 호환성 필드
-          change24h: null,
-          high24h: mapped.koreanPrice,
-          low24h: mapped.koreanPrice,
-          volume24hKrw: 0,
-          volume24hForeignKrw: null,
-          isListed: true,
-          cmcSlug: undefined,
-          koreanName: mapped.name_ko,
-          displayName: mapped.name_ko || mapped.name_en || mapped.symbol,
-        };
+        try {
+          const mapped = attachMetadata(row, meta);
+          return {
+            symbol: mapped.symbol,
+            name_ko: mapped.name_ko,
+            name_en: mapped.name_en,
+            icon_url: mapped.icon_url,
+            koreanPrice: mapped.koreanPrice,
+            globalPrice: mapped.globalPrice,
+            globalPriceKrw: mapped.globalPriceKrw,
+            premium: mapped.premium,
+            domesticExchange: mapped.domesticExchange,
+            foreignExchange: mapped.foreignExchange,
+            change24h: null,
+            high24h: mapped.koreanPrice || 0,
+            low24h: mapped.koreanPrice || 0,
+            volume24hKrw: 0,
+            volume24hForeignKrw: null,
+            isListed: true,
+            cmcSlug: undefined,
+            koreanName: mapped.name_ko,
+            displayName: mapped.name_ko || mapped.name_en || mapped.symbol,
+          };
+        } catch (e) {
+          console.error(`[API] Error mapping ${row.symbol}:`, e);
+          return null;
+        }
       })
-      .filter((row: any) => row.koreanPrice !== null);
+      .filter(
+        (row: any) =>
+          row !== null &&
+          row.koreanPrice !== null &&
+          row.globalPrice !== null &&
+          row.globalPriceKrw !== null
+      );
 
     return res.status(200).json({
       success: true,
       data: result,
-      averagePremium: result.length > 0 
-        ? result.reduce((sum: number, r: any) => sum + (r.premium || 0), 0) / result.length
-        : 0,
+      averagePremium:
+        result.length > 0
+          ? result.reduce((sum: number, r: any) => sum + (r.premium || 0), 0) /
+            result.length
+          : 0,
       fxRate: 1350,
       updatedAt: new Date().toISOString(),
       totalCoins: result.length,
