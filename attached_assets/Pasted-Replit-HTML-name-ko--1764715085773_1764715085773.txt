@@ -1,0 +1,151 @@
+Replit 전달용 — “예전 빗썸 HTML 크롤링 로직 복구해서 name_ko 전부 채우기”
+
+지금 빗썸 코인 이름이 부분적으로만 들어가 있어서,
+예전에 구현했던 “빗썸 공식 페이지 HTML 크롤링으로 한글/영문명 전부 수집하는 로직”을 그대로 복구해 주세요.
+
+Git 기록 기준:
+
+커밋: 9ad316a
+
+메시지: "Improve Bithumb Korean name mapping and fallback"
+
+내용: Bithumb 공식 페이지 HTML 크롤링으로 한글명 수집
+
+1️⃣ 예전 크롤링 로직 확인 & 복구
+
+Git에서 커밋 9ad316a 체크아웃 or diff 확인:
+
+scripts 아래에 빗썸 이름 크롤링 관련 파일/함수가 있었을 겁니다.
+(예: fetchBithumbNames.ts, buildBithumbNameMap.ts 같은 이름)
+
+그 커밋에서 사용하던 빗썸 공식 코인 리스트 페이지 URL / 셀렉터 구조를 확인해 주세요.
+
+예전에 사용했던 건 대략 이런 스타일:
+
+빗썸 고객센터 또는 공지에 있는
+“거래 지원 디지털 자산 목록” / “암호화폐 리스트”
+→ <table> 안에
+심볼 / 한글명 / 영문명 / 비고 형태로 들어 있는 페이지
+
+페이지 구조가 바뀌었다면,
+현재 빗썸 사이트에서 동일한 “지원 코인 리스트” 페이지를 다시 찾아서
+URL과 셀렉터만 업데이트해 주세요.
+
+크롤러 결과를 지금 구조에 맞게 저장:
+
+출력 파일: data/raw/bithumb/names.json
+
+형식(심볼 키 기준):
+
+{
+  "BTC": { "name_ko": "비트코인", "name_en": "Bitcoin" },
+  "ETH": { "name_ko": "이더리움", "name_en": "Ethereum" },
+  "XRP": { "name_ko": "리플", "name_en": "XRP" }
+}
+
+
+크롤링 시 규칙:
+
+symbol: .toUpperCase().trim()
+
+name_ko, name_en: .trim(), 빈 문자열이면 아예 필드 빼기
+
+가능하면 테이블 전체를 다 읽어서 400개 이상 심볼이 나오도록 설정
+
+2️⃣ fetchBithumbMarkets.ts 에 크롤링 결과를 반드시 merge
+
+fetchBithumbMarkets.ts 내부에서:
+
+names.json 로드:
+
+const namesPath = path.join("data", "raw", "bithumb", "names.json");
+
+type BithumbNameMap = {
+  [symbol: string]: { name_ko?: string; name_en?: string };
+};
+
+const nameMap: BithumbNameMap =
+  fs.existsSync(namesPath)
+    ? JSON.parse(fs.readFileSync(namesPath, "utf-8"))
+    : {};
+
+
+마켓 루프에서 base_symbol 기준으로 이름 주입:
+
+const base = baseSymbol.toUpperCase();
+
+const fromHtml = nameMap[base] ?? {};
+const fromFallback = BITHUMB_NAMES[base] ?? {};
+
+const name_ko =
+  fromHtml.name_ko?.trim() ||
+  fromFallback.name_ko?.trim() ||
+  undefined;
+
+const name_en =
+  fromHtml.name_en?.trim() ||
+  fromFallback.name_en?.trim() ||
+  undefined;
+
+const market: RawMarket = {
+  exchange: "BITHUMB",
+  market_code,
+  base_symbol: base,
+  quote_symbol: quote,
+  ...(name_ko ? { name_ko } : {}),
+  ...(name_en ? { name_en } : {}),
+};
+
+
+⚠ null 쓰지 말고, 값 없으면 필드 자체를 빼 주세요.
+
+3️⃣ USDT / USDC 등 일부 코인은 빗썸 표기 override
+
+HTML에 있든 없든, 아래 몇 개는 강제 오버라이드 해 주세요 (빗썸 표기 기준):
+
+const BITHUMB_NAMES: Record<string, { name_ko: string; name_en: string }> = {
+  USDT: { name_ko: "테더", name_en: "Tether" },
+  USDC: { name_ko: "유에스디", name_en: "USDC" },
+  // 기타 주요 코인들 필요시 추가
+};
+
+
+merge 순서는:
+
+HTML names.json
+
+없으면 BITHUMB_NAMES fallback
+
+4️⃣ 검증용 로그 찍기
+
+fetchBithumbMarkets.ts 마지막에:
+
+const total = markets.length;
+const withName = markets.filter(m => m.name_ko || m.name_en).length;
+
+console.log(
+  `Bithumb markets: total=${total}, withName=${withName}, withoutName=${total - withName}`
+);
+
+
+목표:
+
+withName 값이 최대한 total(439)에 근접해야 합니다.
+(HTML 페이지가 제대로 크롤링되면, 신규/특수 토큰 몇 개 빼고 대부분 이름이 있어야 정상)
+
+5️⃣ 실행 순서
+
+빗썸 이름 크롤러 먼저 실행:
+
+ts-node scripts/fetchBithumbNamesFromHtml.ts   # 예전에 쓰던 파일명 / 또는 새로 만든 파일
+
+
+빗썸 마켓 재수집 + 병합:
+
+npm run fetch:bithumb
+npm run build:markets
+
+
+data/exchange_markets.json 에서 "exchange": "BITHUMB" 항목들 확인:
+
+대부분의 마켓에 name_ko가 들어가 있어야 합니다.
