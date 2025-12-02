@@ -17,8 +17,8 @@ type ExchangeMarketRow = {
   market_code: string;
   base_symbol: string;
   quote_symbol: string;
-  name_ko: string;
-  name_en: string;
+  name_ko: string | null;
+  name_en: string | null;
   icon_url: string;
   is_active: boolean;
 };
@@ -95,8 +95,8 @@ async function fetchBithumbMarkets(): Promise<ExchangeMarketRow[]> {
       return [];
     }
 
-    // 빗썸 공식 한글명 매핑 (Bithumb 웹 UI 기준)
-    const BITHUMB_NAMES: Record<string, { ko: string; en: string }> = {
+    // 빗썸 공식 한글명 매핑 (Bithumb 웹 UI 기준) + 누락된 코인들
+    const BITHUMB_NAMES: Record<string, { ko: string | null; en: string | null }> = {
       BTC: { ko: "비트코인", en: "Bitcoin" },
       ETH: { ko: "이더리움", en: "Ethereum" },
       LTC: { ko: "라이트코인", en: "Litecoin" },
@@ -228,6 +228,17 @@ async function fetchBithumbMarkets(): Promise<ExchangeMarketRow[]> {
       OKB: { ko: "오케이비", en: "OKB" },
       XCH: { ko: "차이아", en: "Chia" },
       MXC: { ko: "매틱스", en: "MXC" },
+      // 누락된 코인들 추가 (한글명이 없는 경우 null)
+      IMX: { ko: null, en: "Immutable X" },
+      CFX: { ko: null, en: "Conflux" },
+      HFT: { ko: null, en: "HashFlow" },
+      FET: { ko: null, en: "Fetch.ai" },
+      ARKM: { ko: null, en: "Arkham" },
+      ETHW: { ko: null, en: "EthereumPoW" },
+      WEMIX: { ko: null, en: "Wemix" },
+      ID: { ko: null, en: "Cosmos" },
+      RDNT: { ko: null, en: "Radiant Capital" },
+      STRK: { ko: null, en: "Starknet" },
     };
 
     const markets: ExchangeMarketRow[] = [];
@@ -236,8 +247,8 @@ async function fetchBithumbMarkets(): Promise<ExchangeMarketRow[]> {
       
       const upperSymbol = symbol.toUpperCase();
       const names = BITHUMB_NAMES[upperSymbol] || {
-        ko: upperSymbol,
-        en: upperSymbol,
+        ko: null,
+        en: null,
       };
       
       // KRW 마켓
