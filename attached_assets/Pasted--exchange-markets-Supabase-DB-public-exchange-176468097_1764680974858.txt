@@ -1,0 +1,144 @@
+[중요] exchange_markets 테이블 생성 완료 – 이제 여기에 실제 마켓 데이터 채워주세요
+
+Supabase **프로덕션 DB(public 스키마)**에
+exchange_markets 테이블을 제가 직접 생성해 두었습니다.
+
+아래 스키마 그대로 존재합니다:
+
+create table if not exists public.exchange_markets (
+  id           bigserial primary key,
+  exchange     text not null,     -- upbit / bithumb / coinone
+  market_code  text not null,     -- KRW-BTC, BTC_KRW, BTC-KRW 등 거래소 원본 마켓코드
+  base_symbol  text not null,     -- BTC
+  quote_symbol text not null,     -- KRW, USDT
+  name_ko      text,              -- 비트코인
+  name_en      text,              -- Bitcoin
+  icon_url     text,              -- 아이콘 URL
+  is_active    boolean default true,
+  created_at   timestamptz default now(),
+  updated_at   timestamptz default now()
+);
+
+create unique index if not exists exchange_markets_unique_market
+on public.exchange_markets (exchange, market_code);
+
+📌 테이블 안에 반드시 들어 있어야 하는 실제 데이터 구조
+
+각 거래소의 **모든 KRW 마켓(전체)**이 아래 형태로 들어가야 합니다.
+
+예시 (업비트):
+
+exchange	market_code	base_symbol	quote_symbol	name_ko	name_en	icon_url
+upbit	KRW-BTC	BTC	KRW	비트코인	Bitcoin	https://.../btc.png
+
+upbit	KRW-XRP	XRP	KRW	리플	XRP	https://.../xrp.png
+
+upbit	KRW-ETH	ETH	KRW	이더리움	Ethereum	https://.../eth.png
+
+...	...	...	...	...	...	...
+
+예시 (빗썸):
+
+exchange	market_code	base_symbol	quote_symbol	name_ko	name_en	icon_url
+bithumb	BTC_KRW	BTC	KRW	비트코인	Bitcoin	...
+
+예시 (코인원):
+
+exchange	market_code	base_symbol	quote_symbol	name_ko	name_en	icon_url
+coinone	BTC	BTC	KRW	비트코인	Bitcoin	...
+📌 프론트에서 사용하는 최종 필드 규칙
+
+PremiumTable, Home 리스트 등 모든 화면에서 코인명/아이콘은 아래 우선순위로 표시됩니다:
+
+👉 이름
+name_ko → name_en → base_symbol
+
+👉 아이콘
+icon_url
+
+
+즉, 이 필드들이 Supabase에서 정상적으로 채워져 있어야
+화면에 한글명/아이콘이 제대로 나옵니다.
+
+📌 요청 작업
+① refreshExchangeMarkets 스크립트를 “전체 마켓 자동 수집”으로 수정해 주세요
+
+현재는 빗썸/코인원 12개 등 샘플 35개만 INSERT 되어 있는데,
+이제 실제 운영 기준으로 전체 KRW 마켓을 넣어야 합니다.
+
+필수 포함 영역:
+
+업비트: 전체 KRW 마켓 (약 180개 이상)
+
+빗썸: 전체 KRW 마켓
+
+코인원: 전체 KRW 마켓
+
+② 스크립트에서 실제 값 INSERT/UPSERT
+
+각 마켓마다 아래 필드가 정확히 채워져야 합니다:
+
+exchange
+
+market_code
+
+base_symbol
+
+quote_symbol
+
+name_ko ← 국내 표시명
+
+name_en ← 영어 표시명
+
+icon_url ← 거래소 또는 자체 매핑 아이콘 URL
+
+특히 KRW/USDT 같은 quote_symbol 설정이 중요합니다.
+
+③ PremiumTable.tsx, Home 화면에서 getDisplayName() 적용
+
+현재 코인명이 여전히 영문 심볼만 뜨는 것은:
+
+exchange_markets 값이 없음
+
+getDisplayName()을 실제 column 렌더링에서 호출하지 않음
+
+두 가지 이유이므로,
+name_ko / name_en / icon_url 필드를 PremiumRow로 전달하고
+914~920줄의 기존 텍스트 렌더링 부분을:
+
+getDisplayName(row.original)
+
+
+으로 교체해 주세요.
+
+④ refresh:markets 오류 처리
+
+현재 error:
+
+Could not find the table 'public.exchange_markets' in the schema cache
+
+
+이건 Supabase 타입 정의가 갱신되지 않아서 생기는 문제입니다.
+
+방법:
+
+Supabase 타입 재생성(npx supabase gen types...)
+
+또는 supabase.from("exchange_markets" as any) 사용
+
+또는 Database 타입을 부분 확장
+
+어떤 방식이든 상관 없으니 런타임에서 upsert가 정상 작동하도록 수정 부탁드립니다.
+
+📌 최종 목표
+
+홈 화면 + 프리미엄 테이블에서 모든 코인 이름이 거래소 한글명으로 나오고
+아이콘까지 전부 정상 표시되도록 하는 것.
+
+이를 위해 필요한 건:
+
+exchange_markets 테이블에 전체 마켓 데이터가 채워져 있어야 함
+
+프론트가 그 데이터를 실제로 읽어야 함
+
+이 두 가지입니다.

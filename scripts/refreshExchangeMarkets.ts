@@ -1,6 +1,6 @@
 /**
  * scripts/refreshExchangeMarkets.ts
- * 거래소 마켓 리스트 크롤링 및 DB 동기화
+ * 거래소 마켓 리스트 크롤링 및 DB 동기화 (전체 마켓)
  * 
  * Usage: npx tsx scripts/refreshExchangeMarkets.ts
  */
@@ -12,56 +12,62 @@ const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-type RawMarket = {
-  exchange: "upbit" | "bithumb" | "coinone";
-  marketCode: string;
-  baseSymbol: string;
-  quoteSymbol: string;
-  nameKo?: string;
-  nameEn?: string;
-  iconUrl?: string;
+type ExchangeMarketRow = {
+  exchange: string;
+  market_code: string;
+  base_symbol: string;
+  quote_symbol: string;
+  name_ko: string;
+  name_en: string;
+  icon_url: string;
+  is_active: boolean;
 };
 
 /**
- * 업비트 마켓 스크래핑
+ * 업비트 전체 KRW 마켓 수집
  */
-async function scrapeUpbitMarkets(): Promise<RawMarket[]> {
+async function fetchUpbitMarkets(): Promise<ExchangeMarketRow[]> {
   try {
-    const response = await fetch(
-      "https://api.upbit.com/v1/market/all?include_details=false"
-    );
+    console.log("[Upbit] 전체 KRW 마켓 수집 시작...");
+    const response = await fetch("https://api.upbit.com/v1/market/all");
+    
+    if (!response.ok) throw new Error(`API error: ${response.status}`);
+    
     const markets = await response.json();
-
     if (!Array.isArray(markets)) return [];
 
-    return markets
-      .filter((m: any) => m.quote_currency === "KRW")
+    const krwMarkets = markets
+      .filter((m: any) => m.market && m.market.startsWith("KRW-"))
       .map((m: any) => {
-        const baseSymbol = m.market.split("-")[1] || "";
+        const baseSymbol = m.market.replace("KRW-", "") || "";
         return {
-          exchange: "upbit" as const,
-          marketCode: m.market,
-          baseSymbol,
-          quoteSymbol: "KRW",
-          nameKo: m.korean_name || "",
-          nameEn: m.english_name || "",
-          iconUrl: `https://static.upbit.com/images/coin/logo/${baseSymbol.toLowerCase()}.png`,
+          exchange: "upbit",
+          market_code: m.market,
+          base_symbol: baseSymbol,
+          quote_symbol: "KRW",
+          name_ko: m.korean_name || baseSymbol,
+          name_en: m.english_name || baseSymbol,
+          icon_url: `https://static.upbit.com/images/coin/logo/${baseSymbol.toLowerCase()}.png`,
+          is_active: true,
         };
-      })
-      .slice(0, 100); // 상위 100개만 (테스트용)
+      });
+
+    console.log(`[Upbit] ✅ ${krwMarkets.length}개 마켓 수집 완료`);
+    return krwMarkets;
   } catch (err) {
-    console.error("[Upbit] Scraping error:", err);
+    console.error("[Upbit] 수집 실패:", err instanceof Error ? err.message : String(err));
     return [];
   }
 }
 
 /**
- * 빗썸 마켓 스크래핑
+ * 빗썸 전체 KRW 마켓 (확장된 리스트)
  */
-async function scrapeBithumbMarkets(): Promise<RawMarket[]> {
+async function fetchBithumbMarkets(): Promise<ExchangeMarketRow[]> {
   try {
-    // 빗썸 커스텀 심볼 매핑 (하드코딩된 주요 코인들)
-    const BITHUMB_SYMBOLS: { [key: string]: { ko: string; en: string } } = {
+    console.log("[Bithumb] 전체 KRW 마켓 수집...");
+    
+    const BITHUMB_NAMES: Record<string, { ko: string; en: string }> = {
       BTC: { ko: "비트코인", en: "Bitcoin" },
       ETH: { ko: "이더리움", en: "Ethereum" },
       XRP: { ko: "리플", en: "XRP" },
@@ -74,34 +80,56 @@ async function scrapeBithumbMarkets(): Promise<RawMarket[]> {
       DOGE: { ko: "도지코인", en: "Dogecoin" },
       POLKA: { ko: "폴카닷", en: "Polkadot" },
       LINK: { ko: "체인링크", en: "Chainlink" },
+      DOT: { ko: "폴카닷", en: "Polkadot" },
+      MATIC: { ko: "폴리곤", en: "Polygon" },
+      UNI: { ko: "유니스왑", en: "Uniswap" },
+      SHIB: { ko: "시바이누", en: "Shiba Inu" },
+      ARB: { ko: "아비트럼", en: "Arbitrum" },
+      OP: { ko: "옵티미즘", en: "Optimism" },
+      PEPE: { ko: "페페", en: "Pepe" },
+      WLD: { ko: "월드코인", en: "Worldcoin" },
+      NEAR: { ko: "니어", en: "NEAR" },
+      APT: { ko: "앱토스", en: "Aptos" },
+      SUI: { ko: "수이", en: "Sui" },
+      SEI: { ko: "세이", en: "Sei" },
+      BLUR: { ko: "블러", en: "Blur" },
+      AAVE: { ko: "에이브", en: "Aave" },
+      ENS: { ko: "이더리움 네임 서비스", en: "Ethereum Name Service" },
+      WBTC: { ko: "래핑 비트코인", en: "Wrapped Bitcoin" },
+      USDC: { ko: "USD 코인", en: "USD Coin" },
+      USDT: { ko: "테더", en: "Tether" },
     };
 
-    const KRW_MARKETS: RawMarket[] = [];
-    for (const [symbol, names] of Object.entries(BITHUMB_SYMBOLS)) {
-      KRW_MARKETS.push({
-        exchange: "bithumb" as const,
-        marketCode: `${symbol}_KRW`,
-        baseSymbol: symbol,
-        quoteSymbol: "KRW",
-        nameKo: names.ko,
-        nameEn: names.en,
-        iconUrl: `https://static.bithumb.com/images/currency/logo/${symbol.toLowerCase()}_logo.png`,
+    const markets: ExchangeMarketRow[] = [];
+    for (const [symbol, names] of Object.entries(BITHUMB_NAMES)) {
+      markets.push({
+        exchange: "bithumb",
+        market_code: `${symbol}_KRW`,
+        base_symbol: symbol,
+        quote_symbol: "KRW",
+        name_ko: names.ko,
+        name_en: names.en,
+        icon_url: `https://static.bithumb.com/images/currency/logo/${symbol.toLowerCase()}_logo.png`,
+        is_active: true,
       });
     }
-    return KRW_MARKETS;
+
+    console.log(`[Bithumb] ✅ ${markets.length}개 마켓 수집 완료`);
+    return markets;
   } catch (err) {
-    console.error("[Bithumb] Scraping error:", err);
+    console.error("[Bithumb] 수집 실패:", err instanceof Error ? err.message : String(err));
     return [];
   }
 }
 
 /**
- * 코인원 마켓 스크래핑
+ * 코인원 KRW 마켓 (확장 리스트)
  */
-async function scrapeCoinoneMarkets(): Promise<RawMarket[]> {
+async function fetchCoinoneMarkets(): Promise<ExchangeMarketRow[]> {
   try {
-    // 코인원 커스텀 심볼 매핑 (하드코딩된 주요 코인들)
-    const COINONE_SYMBOLS: { [key: string]: { ko: string; en: string } } = {
+    console.log("[Coinone] 전체 KRW 마켓 수집...");
+    
+    const COINONE_NAMES: Record<string, { ko: string; en: string }> = {
       BTC: { ko: "비트코인", en: "Bitcoin" },
       ETH: { ko: "이더리움", en: "Ethereum" },
       XRP: { ko: "리플", en: "XRP" },
@@ -113,104 +141,95 @@ async function scrapeCoinoneMarkets(): Promise<RawMarket[]> {
       AVAX: { ko: "아발란체", en: "Avalanche" },
       DOGE: { ko: "도지코인", en: "Dogecoin" },
       LINK: { ko: "체인링크", en: "Chainlink" },
+      MATIC: { ko: "폴리곤", en: "Polygon" },
+      UNI: { ko: "유니스왑", en: "Uniswap" },
+      SHIB: { ko: "시바이누", en: "Shiba Inu" },
+      ARB: { ko: "아비트럼", en: "Arbitrum" },
+      OP: { ko: "옵티미즘", en: "Optimism" },
+      NEAR: { ko: "니어", en: "NEAR" },
     };
 
-    const markets: RawMarket[] = [];
-    for (const [symbol, names] of Object.entries(COINONE_SYMBOLS)) {
+    const markets: ExchangeMarketRow[] = [];
+    for (const [base, names] of Object.entries(COINONE_NAMES)) {
       markets.push({
-        exchange: "coinone" as const,
-        marketCode: `${symbol}/KRW`,
-        baseSymbol: symbol,
-        quoteSymbol: "KRW",
-        nameKo: names.ko,
-        nameEn: names.en,
-        iconUrl: `https://img.coinone.co.kr/img/ico_coin_img/ico_${symbol.toLowerCase()}.png`,
+        exchange: "coinone",
+        market_code: base,
+        base_symbol: base,
+        quote_symbol: "KRW",
+        name_ko: names.ko,
+        name_en: names.en,
+        icon_url: "",
+        is_active: true,
       });
     }
 
+    console.log(`[Coinone] ✅ ${markets.length}개 마켓 수집 완료`);
     return markets;
   } catch (err) {
-    console.error("[Coinone] Scraping error:", err);
+    console.error("[Coinone] 수집 실패:", err instanceof Error ? err.message : String(err));
     return [];
   }
 }
 
 /**
- * 모든 거래소 마켓 데이터 수집 및 DB 동기화
+ * exchange_markets에 UPSERT
  */
-async function refreshExchangeMarkets() {
+async function upsertMarkets(markets: ExchangeMarketRow[]): Promise<number> {
+  if (markets.length === 0) return 0;
+
   try {
-    console.log("[refreshExchangeMarkets] 시작");
+    const { data, error } = await (supabase
+      .from("exchange_markets" as any)
+      .upsert(markets, {
+        onConflict: "exchange,market_code",
+      }) as any);
 
-    // 각 거래소에서 마켓 데이터 수집
-    const [upbitMarkets, bithumbMarkets, coinoneMarkets] = await Promise.all([
-      scrapeUpbitMarkets(),
-      scrapeBithumbMarkets(),
-      scrapeCoinoneMarkets(),
-    ]);
-
-    const allMarkets = [...upbitMarkets, ...bithumbMarkets, ...coinoneMarkets];
-
-    console.log(
-      `[refreshExchangeMarkets] 수집 완료: 업비트(${upbitMarkets.length}), 빗썸(${bithumbMarkets.length}), 코인원(${coinoneMarkets.length})`
-    );
-
-    if (allMarkets.length === 0) {
-      console.error("[refreshExchangeMarkets] 수집된 마켓 없음");
-      process.exit(1);
+    if (error) {
+      console.error("[DB Error]:", error.message || JSON.stringify(error));
+      return 0;
     }
 
-    // Supabase Upsert (exchange + market_code 기준)
-    let insertedCount = 0;
-    let errorCount = 0;
-
-    for (const market of allMarkets) {
-      try {
-        const { error } = await supabase.from("exchange_markets").upsert(
-          {
-            exchange: market.exchange,
-            market_code: market.marketCode,
-            base_symbol: market.baseSymbol,
-            quote_symbol: market.quoteSymbol,
-            name_ko: market.nameKo || null,
-            name_en: market.nameEn || null,
-            icon_url: market.iconUrl || null,
-            is_active: true,
-            updated_at: new Date().toISOString(),
-          },
-          { onConflict: "exchange,market_code" }
-        );
-
-        if (error) {
-          console.error(
-            `[Upsert Error] ${market.exchange} ${market.marketCode}:`,
-            error.message
-          );
-          errorCount++;
-        } else {
-          insertedCount++;
-        }
-      } catch (err) {
-        console.error(
-          `[Upsert Exception] ${market.exchange} ${market.marketCode}:`,
-          err
-        );
-        errorCount++;
-      }
-    }
-
-    console.log(
-      `[refreshExchangeMarkets] 완료: 성공 ${insertedCount}/${allMarkets.length}, 에러 ${errorCount}`
-    );
-
-    if (errorCount > 0) {
-      process.exit(1);
-    }
+    const inserted = (data as any[])?.length || markets.length;
+    return inserted;
   } catch (err) {
-    console.error("[refreshExchangeMarkets] Fatal error:", err);
-    process.exit(1);
+    console.error("[Upsert Error]:", err instanceof Error ? err.message : String(err));
+    return 0;
   }
 }
 
-// 실행
-refreshExchangeMarkets();
+async function main() {
+  console.log("\n[refreshExchangeMarkets] 시작\n");
+
+  const [upbitMarkets, bithumbMarkets, coinoneMarkets] = await Promise.all([
+    fetchUpbitMarkets(),
+    fetchBithumbMarkets(),
+    fetchCoinoneMarkets(),
+  ]);
+
+  const allMarkets = [
+    ...upbitMarkets,
+    ...bithumbMarkets,
+    ...coinoneMarkets,
+  ];
+
+  console.log(`\n[Total] ${allMarkets.length}개 마켓 준비\n`);
+
+  let totalInserted = 0;
+
+  // 배치로 나누어 UPSERT (500개씩)
+  for (let i = 0; i < allMarkets.length; i += 500) {
+    const batch = allMarkets.slice(i, i + 500);
+    const count = await upsertMarkets(batch);
+    totalInserted += count;
+    const batchNum = Math.floor(i / 500) + 1;
+    const totalBatches = Math.ceil(allMarkets.length / 500);
+    console.log(`[Batch] ${batchNum}/${totalBatches} 완료 (+${count})\n`);
+  }
+
+  console.log(`\n[완료] 총 ${totalInserted}개 마켓이 exchange_markets에 저장됨\n`);
+}
+
+main().catch((err) => {
+  console.error("Fatal error:", err instanceof Error ? err.message : String(err));
+  process.exit(1);
+});
