@@ -73,7 +73,7 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
   const metadata = new Map<string, CoinMetadata>();
 
   try {
-    // 1) master_symbols 우선 적용
+    // 1️⃣ master_symbols 최우선 적용 (공식 한글명 정답)
     const { data: masterSymbols } = await supabase
       .from("master_symbols")
       .select("base_symbol, ko_name, coingecko_id, coinmarketcap_slug")
@@ -92,7 +92,7 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
       }
     }
 
-    // 2) Upbit 메타데이터 병합 (master_symbols 값 우선)
+    // 2️⃣ Upbit 메타데이터 병합 (master_symbols.ko_name 유지)
     const response = await fetch(
       "https://api.upbit.com/v1/market/all?isDetails=true"
     );
@@ -105,14 +105,18 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
 
         const existing = metadata.get(base);
 
-        const englishName =
-          existing?.englishName ||
-          market.english_name ||
-          base;
-
+        // 우선순위:
+        // 1순위: master_symbols.ko_name (있으면 무조건 사용)
+        // 2순위: Upbit API의 korean_name
+        // 3순위: base_symbol
         const koreanName =
           existing?.koreanName ||
           market.korean_name ||
+          base;
+
+        const englishName =
+          existing?.englishName ||
+          market.english_name ||
           base;
 
         const autoSlug =

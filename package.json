@@ -9,6 +9,7 @@
     "lint": "next lint",
     "update:prices": "tsx scripts/updatePrices.ts",
     "price:worker": "tsx scripts/priceWorker.ts",
+    "update:notices": "tsx scripts/noticeUpdateWorker.ts",
     "update:icons": "node fetchIcons.js"
   },
   "dependencies": {
