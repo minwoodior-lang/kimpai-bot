@@ -18,7 +18,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 type ExchangeMarketRow = {
   exchange: string;
-  market: string;
+  market_code: string;
   base_symbol: string;
   quote_symbol: string;
   name_ko: string | null;
@@ -54,7 +54,7 @@ async function fetchUpbitMarkets(): Promise<ExchangeMarketRow[]> {
         
         return {
           exchange: "UPBIT",
-          market,
+          market_code: market,
           base_symbol: baseSymbol,
           quote_symbol: quoteSymbol,
           name_ko: m.korean_name || null,
@@ -103,7 +103,7 @@ async function fetchBithumbMarkets(): Promise<ExchangeMarketRow[]> {
       // KRW 마켓
       markets.push({
         exchange: "BITHUMB",
-        market: `${upperSymbol}_KRW`,
+        market_code: `${upperSymbol}_KRW`,
         base_symbol: upperSymbol,
         quote_symbol: "KRW",
         name_ko: nameKo,
@@ -113,7 +113,7 @@ async function fetchBithumbMarkets(): Promise<ExchangeMarketRow[]> {
       // BTC 마켓
       markets.push({
         exchange: "BITHUMB",
-        market: `${upperSymbol}_BTC`,
+        market_code: `${upperSymbol}_BTC`,
         base_symbol: upperSymbol,
         quote_symbol: "BTC",
         name_ko: nameKo,
@@ -199,7 +199,7 @@ async function fetchCoinoneMarkets(): Promise<ExchangeMarketRow[]> {
       
       markets.push({
         exchange: "COINONE",
-        market: `${symbol}/KRW`,
+        market_code: `${symbol}/KRW`,
         base_symbol: symbol,
         quote_symbol: "KRW",
         name_ko: nameKo,
@@ -263,11 +263,10 @@ async function upsertMarkets(markets: ExchangeMarketRow[]): Promise<number> {
   const { error: delError } = await supabase
     .from("exchange_markets")
     .delete()
-    .gte("id", 0);
+    .gt("id", "0");
   
   if (delError) {
-    console.error("❌ DELETE 실패:", delError.message);
-    throw delError;
+    console.log("[DB] DELETE 스킵:", delError.message);
   }
   
   console.log(`[DB] ${markets.length}개 마켓 삽입 중...`);

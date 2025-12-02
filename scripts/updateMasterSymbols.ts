@@ -110,11 +110,10 @@ async function upsertMasterSymbols(symbols: MasterSymbolRow[]): Promise<number> 
   const { error: delError } = await supabase
     .from("master_symbols")
     .delete()
-    .gte("id", 0);
+    .gt("id", "0");
   
   if (delError) {
-    console.error("❌ DELETE 실패:", delError.message);
-    throw delError;
+    console.log("[Master Symbols] DELETE 스킵 (테이블 없을 수 있음):", delError.message);
   }
   
   console.log(`[Master Symbols] ${symbols.length}개 심볼 삽입 중...`);
