@@ -10,6 +10,7 @@
     "update:prices": "tsx scripts/updatePrices.ts",
     "price:worker": "tsx scripts/priceWorker.ts",
     "update:notices": "tsx scripts/noticeUpdateWorker.ts",
+    "backfill:korean-names": "tsx scripts/backfillKoreanNames.ts",
     "update:icons": "node fetchIcons.js"
   },
   "dependencies": {
