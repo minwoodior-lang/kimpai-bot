@@ -566,10 +566,19 @@ interface CoinIconProps {
 const loggedMissingIcons = new Set<string>();
 
 export default function CoinIcon({ symbol, size = 'md', className = '', iconUrl }: CoinIconProps) {
-  // 심볼 정규화 적용
-  const normalizedSymbol = normalizeSymbol(symbol);
-  const lowerSymbol = normalizedSymbol.toLowerCase();
-  const upperSymbol = normalizedSymbol.toUpperCase();
+  const upperSymbol = symbol.toUpperCase();
+  const lowerSymbol = symbol.toLowerCase();
+
+  const mainIcon = iconUrl && iconUrl.trim() ? iconUrl : null;
+  const localIconPath = `/coins/${upperSymbol}.png`;
+
+  const cdnUrls = [
+    mainIcon,
+    localIconPath,
+    `https://cdn.jsdelivr.net/npm/cryptocurrency-icons@0.18.1/32/color/${lowerSymbol}.png`,
+    `https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/${lowerSymbol}.png`,
+    `https://static.coincap.io/assets/icons/${lowerSymbol}@2x.png`,
+  ].filter(Boolean) as string[];
   
   const [cdnIndex, setCdnIndex] = React.useState(0);
   const [hasError, setHasError] = React.useState(false);
@@ -587,30 +596,6 @@ export default function CoinIcon({ symbol, size = 'md', className = '', iconUrl 
   };
   
   const gradient = GRADIENT_COLORS[upperSymbol] || 'from-slate-500 to-slate-600';
-  const coingeckoId = COIN_ID_MAP[upperSymbol];
-  
-  // 우선순위 기반 아이콘 URL 목록
-  // 1순위: 로컬 아이콘 (/public/coins/{SYMBOL}.png)
-  // 2순위: 외부 CDN (cryptocurrency-icons, spothq, CoinCap 등)
-  // 3순위: 그라데이션 폴백 (hasError=true)
-  const localIconPath = `/coins/${upperSymbol}.png`;
-  // ✅ iconUrl을 1순위로 사용 (master_symbols.icon_url)
-  const cdnUrls = [
-    // 1순위: master_symbols.icon_url (Supabase)
-    iconUrl || null,
-    // 2순위: 로컬 아이콘 (public/coins 폴더)
-    localIconPath,
-    // 3순위: cryptocurrency-icons (가장 안정적)
-    `https://cdn.jsdelivr.net/npm/cryptocurrency-icons@0.18.1/32/color/${lowerSymbol}.png`,
-    // 4순위: spothq GitHub (백업)
-    `https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/${lowerSymbol}.png`,
-    // 5순위: CoinCap (대부분 커버)
-    `https://static.coincap.io/assets/icons/${lowerSymbol}@2x.png`,
-    // 6순위: CoinGecko ID 기반 (매핑된 코인만)
-    coingeckoId ? `https://assets.coingecko.com/coins/images/1/small/${coingeckoId}.png` : null,
-    // 7순위: CryptoCompare
-    `https://www.cryptocompare.com/media/37746251/${lowerSymbol}.png`,
-  ].filter(Boolean) as string[];
 
   const handleError = () => {
     if (cdnIndex < cdnUrls.length - 1) {
