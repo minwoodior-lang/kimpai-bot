@@ -1,70 +1,97 @@
 import fs from "fs";
 import path from "path";
+import * as cheerio from "cheerio";
 
-async function fetchCoinoneMarkets() {
+type CoinoneNameMap = Record<string, { ko: string | null; en: string | null }>;
+
+/**
+ * 코인원 고객센터에서 지원 중인 가상자산 종류 테이블을 크롤링
+ * (형님 제공 로직 기준)
+ */
+async function fetchCoinoneSupportNameMap(): Promise<CoinoneNameMap> {
   try {
-    const res = await fetch("https://api.coinone.co.kr/public/v2/markets/tickers/");
-    const data = await res.json();
+    console.log("🔍 [Coinone] Fetching support name map from customer center...");
 
-    if (!data.markets) {
-      console.log("⚠️ No Coinone market data available");
-      return [];
-    }
+    // 고객센터 페이지
+    const url = "https://guide.coinone.co.kr/guide/faq/537";
+    const res = await fetch(url);
+    const html = await res.text();
 
-    const markets = data.markets
-      .filter((m: any) => m.quote === "KRW")
-      .map((m: any) => ({
-        market: `KRW-${m.base}`,
-        base_symbol: m.base.toUpperCase(),
-        quote_symbol: "KRW",
-      }));
+    const $ = cheerio.load(html);
+    const nameMap: CoinoneNameMap = {};
 
-    return markets;
+    // 테이블 tbody tr 순회
+    const rows = $("table tbody tr");
+
+    rows.each((_, row) => {
+      const cells = $(row).find("td");
+      if (cells.length < 3) return;
+
+      const symbol = $(cells[0]).text().trim().toUpperCase();
+      const ko = $(cells[1]).text().trim() || null;
+      const en = $(cells[2]).text().trim() || null;
+
+      if (symbol) {
+        nameMap[symbol] = { ko, en };
+      }
+    });
+
+    console.log(`📊 [Coinone] Fetched ${Object.keys(nameMap).length} coin names`);
+    return nameMap;
   } catch (err) {
-    console.error("⚠️ fetchCoinoneMarkets error (fallback to empty):", err);
-    return [];
+    console.error("⚠️ [Coinone] Failed to fetch name map (fallback to empty):", err);
+    return {};
   }
 }
 
-async function syncCoinone() {
-  console.log("🔄 Starting Coinone market sync to local JSON...");
+async function syncCoinoneMarkets() {
+  console.log("🔄 [syncCoinoneMarkets] Starting Coinone market sync...");
 
   try {
-    const markets = await fetchCoinoneMarkets();
+    // 병렬로 마켓과 이름맵 수집
+    const [marketsRes, nameMap] = await Promise.all([
+      fetch("https://api.coinone.co.kr/public/v2/markets/KRW"),
+      fetchCoinoneSupportNameMap(),
+    ]);
 
-    const rows = markets.map((m) => ({
-      exchange: "COINONE",
-      market: m.market,
-      base_symbol: m.base_symbol,
-      quote_symbol: m.quote_symbol,
-      name_ko: null,
-      name_en: null,
-      icon_url: null,
-    }));
+    const json = await marketsRes.json();
+    const markets = (json.markets ?? []) as any[];
 
-    console.log(`📊 Found ${rows.length} Coinone markets (KRW)`);
+    const rows = markets.map((m) => {
+      const base = (m.target_currency ?? "").toUpperCase();
+      const names = nameMap[base] ?? { ko: null, en: null };
 
-    // 기존 파일 로드
+      return {
+        exchange: "COINONE",
+        market: m.market,
+        base_symbol: base,
+        quote_symbol: m.base_currency,
+        name_ko: names.ko,
+        name_en: names.en,
+        icon_url: null,
+      };
+    });
+
+    console.log(`📊 [syncCoinoneMarkets] Found ${rows.length} Coinone markets`);
+
+    // exchange_markets.json 로드 & merge
     const dataPath = path.join(process.cwd(), "data", "exchange_markets.json");
     let allMarkets: any[] = [];
 
     if (fs.existsSync(dataPath)) {
       const existing = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
-      allMarkets = existing.filter((m: any) => m.exchange !== "COINONE");
+      allMarkets = Array.isArray(existing) ? existing.filter((m: any) => m.exchange !== "COINONE") : [];
     }
 
-    // Coinone 데이터 추가
-    if (rows.length > 0) {
-      allMarkets = [...allMarkets, ...rows];
-    }
+    // COINONE 추가
+    allMarkets = [...allMarkets, ...rows];
 
-    // 파일 저장
     fs.writeFileSync(dataPath, JSON.stringify(allMarkets, null, 2));
-    console.log(`✅ Successfully saved Coinone markets (or skipped if unavailable)`);
+    console.log(`✅ [syncCoinoneMarkets] Saved ${rows.length} Coinone markets`);
   } catch (err) {
-    console.error("❌ Error:", err);
+    console.error("❌ [syncCoinoneMarkets] Error:", err);
     process.exit(1);
   }
 }
 
-syncCoinone();
+syncCoinoneMarkets();

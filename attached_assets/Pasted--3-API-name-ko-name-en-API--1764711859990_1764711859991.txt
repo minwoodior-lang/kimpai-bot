@@ -1,0 +1,302 @@
+📁 코인 데이터 수집 파일 (새 구조)
+
+핵심 원칙:
+
+기준은 국내 3거래소 상장 코인만
+
+마켓 리스트는 공식 API
+
+이름(name_ko/name_en)은
+
+업비트: API
+
+코인원: 고객센터 테이블 크롤링
+
+빗썸: 기존 syncBithumbNames.ts 이름맵
+
+해외 거래소는 “가격만 가져오는 용도”
+
+🔥 Stage 0: 기존 파이프라인 전부 폐기
+
+삭제/무시할 것:
+
+scripts/syncUpbitMarkets.ts (현재 버전 로직)
+
+scripts/syncBithumbMarkets.ts (현재 버전 로직)
+
+scripts/syncCoinoneMarkets.ts (현재 버전 로직)
+
+data/exchange_markets.json (지금 파일)
+
+scripts/priceWorker.ts (국내 664개만 기준으로 도는 현재 버전 설명)
+
+이 문서에 적힌 “Stage 1~3 (664개 기준)” 설계는 전부 폐기하고,
+아래 새 구조로 갈아타야 함.
+
+✅ 새 구조 요약
+📌 최종 목표 파일 2개만 유지
+
+data/exchange_markets.json
+
+국내 3거래소 전체 마켓
+
+각 마켓에 name_ko / name_en / icon_url까지 포함
+
+data/premiumTable.json
+
+위 exchange_markets.json 기준으로
+
+해외 시세 붙여서 프리미엄 계산한 최종 테이블
+
+API는 그대로 /api/premium/table가 premiumTable.json만 읽으면 됨.
+
+Stage 1: 국내 거래소 마켓 + 이름 수집 (완전 새로 정의)
+1-1. 업비트 – scripts/syncUpbitMarkets.ts
+
+소스
+
+GET https://api.upbit.com/v1/market/all?isDetails=true
+
+
+수집 범위
+
+KRW / BTC / USDT 마켓 전체
+
+로직 (요약)
+
+// 1) Upbit API 호출
+// 2) KRW/BTC/USDT만 필터
+// 3) 아래 형태로 매핑
+{
+  exchange: "UPBIT",
+  market: "KRW-BTC",
+  base_symbol: "BTC",
+  quote_symbol: "KRW",
+  name_ko: korean_name,   // 업비트 공식 한글명
+  name_en: english_name,  // 업비트 공식 영문명
+  icon_url: null          // 아이콘은 나중에 symbolIcons.json에서 붙이거나 별도 처리
+}
+
+
+저장 방식
+
+기존 data/exchange_markets.json는 삭제
+
+새로 만들 때:
+
+첫 실행: 업비트 데이터로 파일 생성
+
+이후 빗썸/코인원 스크립트가 append (merge) 형식으로 추가
+
+1-2. 코인원 – scripts/syncCoinoneMarkets.ts (형님이 붙여준 그 로직 기준)
+(A) 이름맵 크롤러 – fetchCoinoneSupportNameMap()
+
+소스 (고객센터 문서)
+
+“코인원에서 지원 중인 가상자산 종류 및 네트워크 유형”
+
+여기서:
+
+심볼
+
+국문명
+
+영문명
+
+을 전부 테이블에서 파싱.
+
+역할
+
+type CoinoneNameMap = Record<string, { ko: string | null; en: string | null }>;
+
+async function fetchCoinoneSupportNameMap(): Promise<CoinoneNameMap> {
+  // 1) HTML GET
+  // 2) cheerio로 table tbody tr 순회
+  // 3) td[0] = 심볼, td[1] = 국문명, td[2] = 영문명
+  // 4) symbol.toUpperCase() 기준으로 map[symbol] = { ko, en }
+}
+
+(B) 마켓 + 이름 merge – syncCoinoneMarkets.ts
+
+소스
+
+GET https://api.coinone.co.kr/public/v2/markets/KRW
+
+
+로직
+
+async function syncCoinoneMarkets() {
+  const [marketsRes, nameMap] = await Promise.all([
+    fetch("https://api.coinone.co.kr/public/v2/markets/KRW"),
+    fetchCoinoneSupportNameMap(),
+  ]);
+
+  const json = await marketsRes.json();
+  const markets = json.markets ?? [];
+
+  const rows = markets.map((m) => {
+    const base = (m.target_currency ?? "").toUpperCase();
+    const names = nameMap[base] ?? { ko: null, en: null };
+
+    return {
+      exchange: "COINONE",
+      market: m.market,          // ex: "BTC-KRW"
+      base_symbol: base,         // "BTC"
+      quote_symbol: m.base_currency, // "KRW"
+      name_ko: names.ko,         // 고객센터 국문명
+      name_en: names.en,         // 고객센터 영문명
+      icon_url: null,
+    };
+  });
+
+  // data/exchange_markets.json에 append / merge
+}
+
+
+저장
+
+기존 exchange_markets.json 로딩 → COINONE 아닌 row 유지
+
+Coinone rows merge → 같은 {exchange, market}는 upsert
+
+1-3. 빗썸 – scripts/syncBithumbMarkets.ts
+
+전제
+
+빗썸 공식 API에는 한글명이 없음
+
+예전에 이미 syncBithumbNames.ts로
+
+400개+ 심볼에 대해
+
+name_ko / name_en 맵을 완성해둔 상태였음
+(이 맵을 그대로 신뢰해서 사용)
+
+(A) 이름맵 – syncBithumbNames.ts 결과 재사용
+
+형태 예:
+
+const bithumbNames: Record<string, { name_ko: string; name_en: string }> = {
+  BTC: { name_ko: "비트코인", name_en: "Bitcoin" },
+  ETH: { name_ko: "이더리움", name_en: "Ethereum" },
+  // ...
+};
+
+(B) 마켓 + 이름 merge – syncBithumbMarkets.ts
+
+소스
+
+https://api.bithumb.com/public/ticker/ALL 또는
+
+마켓 리스트용 API (KRW/BTC/USDT 전체)
+
+로직
+
+async function syncBithumbMarkets() {
+  const markets = await fetchBithumbMarkets(); // KRW/BTC/USDT 마켓 리스트
+  const rows = markets.map((m) => {
+    const symbol = m.target_currency.toUpperCase();
+    const names = bithumbNames[symbol] ?? { name_ko: null, name_en: null };
+
+    return {
+      exchange: "BITHUMB",
+      market: `${m.base_currency}-${symbol}`, // ex: "KRW-BTC"
+      base_symbol: symbol,
+      quote_symbol: m.base_currency,          // KRW/BTC/USDT
+      name_ko: names.name_ko,
+      name_en: names.name_en,
+      icon_url: null,
+    };
+  });
+
+  // data/exchange_markets.json에 append / merge
+}
+
+
+저장
+
+기존 exchange_markets.json 로딩 → BITHUMB 아닌 row 유지
+
+빗썸 rows merge (on {exchange, market})
+
+Stage 2: 실시간 시세 + 프리미엄 계산 – scripts/priceWorker.ts
+
+입력
+data/exchange_markets.json
+→ 이제는 Upbit + Bithumb + Coinone 모두 포함
+
+역할
+
+각 row(국내 마켓)에 대해:
+
+국내 거래소 현재가 (koreanPrice)
+
+해외 거래소(OKX, Binance, …) 글로벌 가격 (globalPrice) 조회
+
+김프 계산: premium = (koreanPrice / globalPriceKrw - 1) * 100
+
+필요한 부가 정보도 함께 계산 (volume, high/low diff 등)
+
+출력: data/premiumTable.json
+
+필드 예:
+
+{
+  symbol: "BTC",
+  exchange: "UPBIT",           // 국내 기준 거래소
+  koreanPrice: 135638000,
+  globalPrice: 90916.1,
+  globalPriceKrw: 133502110,
+  premium: 1.6,
+  volume24hKrw: ...,
+  volume24hUsdt: ...,
+  change24h: ...,
+  name_ko: "비트코인",
+  name_en: "Bitcoin",
+  icon_url: "..." | null,
+}
+
+
+핵심:
+premiumTable.json은 무조건 exchange_markets.json 기준으로 만들고,
+더 이상 중간에 심볼 기준 groupBy/축약하지 말 것.
+
+Stage 3: API 제공 – src/pages/api/premium/table.ts
+
+입력
+
+data/premiumTable.json
+
+역할
+
+그대로 JSON 응답 반환
+
+프론트에서 쓰는 필드는 기존과 동일 (exchange, symbol, koreanPrice, globalPrice, premium, name_ko, name_en, icon_url 등)
+
+주의
+
+백엔드에서 이미 이름/아이콘까지 채워서 오기 때문에
+프론트에서는 추가 머지/lookup 하지 말고 그대로 쓰기.
+
+🔄 새 전체 데이터 흐름
+업비트 API        빗썸 API        코인원 API + 고객센터 HTML
+   ↓                 ↓                      ↓
+syncUpbitMarkets   syncBithumbMarkets   syncCoinoneMarkets
+   ↓                 ↓                      ↓
+         data/exchange_markets.json  (국내 3거래소 전체 마켓 + 이름)
+                          ↓
+               scripts/priceWorker.ts
+      (국내 마켓별 시세 + 해외 시세 + 프리미엄 계산)
+                          ↓
+              data/premiumTable.json
+                          ↓
+             /api/premium/table (프론트)
+
+🚀 새 실행 명령어 (순서)
+# 1. 국내 3거래소 마켓 + 이름 수집
+npx tsx scripts/syncUpbitMarkets.ts
+npx tsx scripts/syncBithumbMarkets.ts
+npx tsx scripts/syncCoinoneMarkets.ts
+
+# 2. 프리미엄 계산
+npx tsx scripts/priceWorker.ts

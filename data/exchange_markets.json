@@ -5974,5 +5974,2735 @@
     "name_ko": "폴리매쉬",
     "name_en": "Polymesh",
     "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "TNSR",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "STG",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "WLFI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ALGO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ANKR",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "APT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "DODO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "STO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CTC",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "DVI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "NIL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "APE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PUMP",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ASTR",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BAND",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CAKE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PYTH",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MANA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "LDO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "OPEN",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "IOTA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BTT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BTR",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CVX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "WAVES",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "STORJ",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ONG",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "DRIFT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BTC",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ARB",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "POPCAT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "TWT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SHIB",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "IOTX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "FRAG",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SUI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BSV",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SUN",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "POL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SAROS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "STX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "IOST",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "AAVE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "NEWT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ZETA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MLK",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "REKT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SXP",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ICP",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ATH",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MASA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CHILLGUY",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MASK",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "TOSHI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BARD",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "HAEDAL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BRETT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "2Z",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ONT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "TOKAMAK",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BONK",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BIGTIME",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "LQTY",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SYND",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MAPO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "WAL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "AWE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MMT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "EVERY",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "AVL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BOME",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "HBAR",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "DOGE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "GAS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PTB",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PEPE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ONDO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "WBTC",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CLBK",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SKLAY",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "YALA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "AUCTION",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "NTRN",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "KAVA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CTSI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "TOWNS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ASTER",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CATI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "WCT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "FORTH",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "XEC",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "HUMA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "USD1",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PROM",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ZIL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "1INCH",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "YGG",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "AXS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MOG",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MOC",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "APEPE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "WAXL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MON",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "YB",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "FNCY",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BORA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "RUNE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "FAI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "HEI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "XAUT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "LAYER",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "XDC",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MANTA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MNT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "KNC",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "WEN",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CETUS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ZKC",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "GHUB",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "AVAX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ZKJ",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ZKL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "TRUMP",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "KGEN",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ZEUS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ZK",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "HFT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MOODENG",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "COMP",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MTL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "VET",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SODA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MOVE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CLEAR",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "DAO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "GRND",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "FET",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "DYDX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CLOUD",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SKYAI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "NAVX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "FANC",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "LPT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "GALA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "HUNT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BLAST",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "HIPPO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "USDC",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "INJ",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "USDE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CORE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CBK",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "WIF",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "DOOD",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "VINE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "USDS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "GRASS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "IMX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "USDT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "DATA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MVC",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BEAM",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PLUME",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ILV",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SEND",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SAFE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "EDU",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "DBR",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "STRK",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SCR",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "AIXBT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "AL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "AI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BLUE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "GLM",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "WLD",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "DELABS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ZRC",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "FIS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "B3",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "VIC",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SCA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BAT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BLUR",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PIXEL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PRIME",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "KSM",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "EGG",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PENDLE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "FIL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BAL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ARIAIP",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MINA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "XLM",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "C",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "A",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "G",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "JTO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CFG",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "K",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "LION",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "H",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "HPP",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "AGLD",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MILK",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SEI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "HYPER",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "NEAR",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ZORA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BCH",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ZRX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "AI16Z",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "JST",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MYX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MAVIA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "QTUM",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PARTI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "GMT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "HOT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "LINK",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "LWA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ZRO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "REZ",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "STRAX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BABY",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SONIC",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "HOME",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ES",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PEAQ",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SUNDOG",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "WOO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "RED",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ACX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "KAIA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "LZM",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "GAME2",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MYRO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "DEEP",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ADA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SOLV",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BAAS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ISK",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "WIKEN",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "FLOCK",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ACH",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "JUP",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "LINEA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "TIA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BEL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "AVNT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "S",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SPURS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MONPRO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "W",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CFX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "T",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ZTX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PROVE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MIRA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "DIA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "KERNEL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "GM",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "OAS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SIX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SYRUP",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ENS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "GRT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ALPHA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "TAIKO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PCI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PAXG",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ENA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "VIRTUAL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "FF",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "UMA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "XRP",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PUFFER",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MORPHO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CHZ",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SHELL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SAND",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "TAKE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ATOM",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ARKM",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "IO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "IP",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SKY",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "COOKIE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "IN",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "IQ",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CLV",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PUNDIX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SKL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CELO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "EGL1",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "HVH",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "UOS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SOON",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MEME",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "OBT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "HP",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "NXPC",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BIO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "AERO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "NEIRO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "UNI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ANIME",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CKB",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "XTZ",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MAY",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "INIT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MAV",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PNUT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "EVER",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PHA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MAK",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "TON",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PENGU",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "FLOW",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "L3",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "DOT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PORT3",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BOUNTY",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SPA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "NEON",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MERL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CROSS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SPK",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ALT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BNT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ARPA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "OGN",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "GXA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SOL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "FLOKI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BNB",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ETC",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ETH",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ME",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "FLUX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "NEO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PRCL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SUSHI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BERA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "COS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SIGN",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MBX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "COW",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "BMT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "EDGE",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "PIB",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SAHARA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "AEVO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MBL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CYBER",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "LA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SNX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "SNT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "FXS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "OP",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CRO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CRV",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "CRU",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "LISTA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "RPL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "DMAIL",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "EIGEN",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "HIGH",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "RON",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MET",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MEV",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ETHFI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "RENDER",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MEW",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "OM",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "KAITO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ORDER",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "KAS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ROA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "AMO",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "WNCG",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ORBS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "NS",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "AMP",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "MOCA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "ORCA",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "HIFI",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "NFT",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "EDEN",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
+  },
+  {
+    "exchange": "COINONE",
+    "base_symbol": "TRX",
+    "name_ko": null,
+    "name_en": null,
+    "icon_url": null
   }
 ]

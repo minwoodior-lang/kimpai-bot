@@ -4,25 +4,28 @@ import axios from "axios";
 
 interface ExchangeMarket {
   exchange: string;
-  market_symbol: string;
+  market: string;
   base_symbol: string;
   quote_symbol: string;
   name_ko: string | null;
   name_en: string | null;
-  icon_url?: string;
+  icon_url: string | null;
 }
 
 interface PremiumRow {
-  exchange: string;
-  market_symbol: string;
   symbol: string;
+  exchange: string;
+  market: string;
   koreanPrice: number | null;
   globalPrice: number | null;
   globalPriceKrw: number | null;
   premium: number | null;
+  volume24hKrw: number | null;
+  volume24hUsdt: number | null;
+  change24h: number | null;
   name_ko: string | null;
   name_en: string | null;
-  icon_url?: string;
+  icon_url: string | null;
 }
 
 const FX_DEFAULT = 1350;

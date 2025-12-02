@@ -3,16 +3,19 @@ import path from "path";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 interface PremiumRow {
-  exchange: string;
-  market_symbol: string;
   symbol: string;
+  exchange: string;
+  market: string;
   koreanPrice: number | null;
   globalPrice: number | null;
   globalPriceKrw: number | null;
   premium: number | null;
+  volume24hKrw: number | null;
+  volume24hUsdt: number | null;
+  change24h: number | null;
   name_ko: string | null;
   name_en: string | null;
-  icon_url?: string;
+  icon_url: string | null;
 }
 
 function loadPremium(): PremiumRow[] {
@@ -27,7 +30,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     const result = premium.map((row: PremiumRow) => ({
       exchange: row.exchange,
-      market_symbol: row.market_symbol,
+      market: row.market,
       symbol: row.symbol,
       name_ko: row.name_ko,
       name_en: row.name_en,
@@ -38,11 +41,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       premium: row.premium,
       isListed: true,
       displayName: row.name_ko || row.name_en || row.symbol,
-      change24h: null,
+      change24h: row.change24h ?? null,
       high24h: 0,
       low24h: 0,
-      volume24hKrw: 0,
-      volume24hUsdt: null,
+      volume24hKrw: row.volume24hKrw ?? 0,
+      volume24hUsdt: row.volume24hUsdt ?? null,
       volume24hForeignKrw: null,
     }));
 
