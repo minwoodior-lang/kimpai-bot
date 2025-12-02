@@ -72,7 +72,7 @@ const VOLUME_ANOMALY_THRESHOLD = 50;
 // =======================
 let cachedMetadata: Map<string, CoinMetadata> = new Map();
 let lastMetadataFetch = 0;
-const METADATA_CACHE_TTL = 5 * 60 * 1000; // 5분
+const METADATA_CACHE_TTL = 30 * 1000; // 30초 (빠른 테스트)
 
 const DOMESTIC_EXCHANGES = ["UPBIT", "BITHUMB", "COINONE"];
 
@@ -162,14 +162,9 @@ async function fetchCoinMetadata(): Promise<Map<string, CoinMetadata>> {
           .replace(/\s+/g, "-")
           .replace(/[^a-z0-9-]/g, "") || undefined;
 
-      const koName =
-        (master?.ko_name ??
-          row.name_ko ??
-          row.name_en ??
-          base) || base;
-
-      const enName =
-        (master?.en_name ?? row.name_en ?? row.name_ko ?? base) || base;
+      // exchange_markets에서 우선 한글명 가져오기
+      const koName = row.name_ko || master?.ko_name || row.name_en || base;
+      const enName = row.name_en || master?.en_name || row.name_ko || base;
 
       metadata.set(base, {
         symbol: base,
