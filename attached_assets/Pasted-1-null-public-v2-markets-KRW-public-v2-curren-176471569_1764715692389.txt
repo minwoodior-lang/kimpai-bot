@@ -1,0 +1,206 @@
+1️⃣ 현실 체크 (왜 지금까지 null이냐)
+
+public/v2/markets/KRW → 마켓/심볼 정보만, 이름 없음 코인원 개발자 센터
+
+public/v2/currencies → 심볼 + 영문명(name) 만, 한글 없음 코인원 개발자 센터
+
+👉 코인원 Public API에서는 한글명이란 필드 자체가 없다.
+
+그래서 “API만으로 name_ko까지”는 구조적으로 안 나와.
+
+근데…
+
+2️⃣ 진짜 쓸만한 공식 한글명 소스가 따로 있다
+
+코인원 고객센터에 있는 이 문서:
+
+
+
+“코인원에서 지원 중인 가상자산 종류 및 네트워크 유형” Coinone
+
+여기에 테이블로:
+
+
+
+심 볼 | 국문명 | 영문명 | 네트워크 명칭 | 메모 여부
+
+이렇게 심볼 + 한글명 + 영문명이 전부 다 정리돼 있다.
+
+
+
+(1INCH, AAVE, IMX, INJ… 전부 다 나옴)
+
+즉:
+
+
+
+심볼 기준으로 한글/영문 이름 전체 리스트가 고정 테이블로 존재
+
+이걸 HTML로 크롤링해서 map 만들어 두면 됨
+
+
+
+→ “빗썸 HTML 크롤링 버전”의 코인원 버전
+
+이건 네가 싫어한 “임시 꼼수”가 아니라,
+
+코인원이 공식으로 관리하는 자산 리스트를 크롤링해서 name_ko를 채우는 완전 자동 파이프라인이야.
+
+3️⃣ 구현 구조 (요약)
+
+(1) Coinone 이름맵 크롤러 추가
+
+
+
+import cheerio from "cheerio";const COINONE_ASSET_URL =
+
+"https://support.coinone.co.kr/support/solutions/articles/31000163237";async function fetchCoinoneSupportNameMap() {
+
+const res = await fetch(COINONE_ASSET_URL);
+
+const html = await res.text();
+
+const $ = cheerio.load(html);
+
+
+
+const map: Record<string, { ko: string | null; en: string | null }> = {};
+
+
+
+// 테이블 행 순회
+
+$("table tbody tr").each((_, row) => {
+
+const tds = $(row).find("td");
+
+if (tds.length < 3) return;
+
+
+
+const symbol = $(tds[0]).text().trim().toUpperCase(); // 심 볼
+
+const koName = $(tds[1]).text().trim() || null; // 국문명
+
+const enName = $(tds[2]).text().trim() || null; // 영문명
+
+
+
+if (!symbol) return;
+
+
+
+map[symbol] = { ko: koName, en: enName };
+
+});
+
+
+
+return map;
+
+}
+
+실제 셀 구조는
+
+심 볼 / 국문명 / 영문명 / 네트워크 / 메모 여부 순서로 들어 있음. Coinone
+
+(2) 기존 Coinone 마켓 수집 로직에 merge
+
+지금 fetchCoinoneMarkets()가 아마 이렇게 생겼을 거야:
+
+
+
+
+
+async function fetchCoinoneMarkets() {
+
+const res = await fetch("https://api.coinone.co.kr/public/v2/markets/KRW");
+
+const json = await res.json();
+
+const markets = json.markets ?? [];
+
+
+
+return markets.map((m) => ({
+
+exchange: "COINONE",
+
+market_code: m.market,
+
+base_symbol: m.target_currency,
+
+quote_symbol: m.base_currency,
+
+name_ko: null,
+
+name_en: null,
+
+}));
+
+}
+
+이걸 이렇게 바꾸면 된다:
+
+
+
+
+
+async function fetchCoinoneMarkets() {
+
+const [marketsRes, nameMap] = await Promise.all([
+
+fetch("https://api.coinone.co.kr/public/v2/markets/KRW"),
+
+fetchCoinoneSupportNameMap(),
+
+]);
+
+
+
+const json = await marketsRes.json();
+
+const markets = json.markets ?? [];
+
+
+
+return markets.map((m) => {
+
+const base = (m.target_currency ?? "").toUpperCase();
+
+const names = nameMap[base] ?? { ko: null, en: null };
+
+
+
+return {
+
+exchange: "COINONE",
+
+market_code: m.market, // 예: BTC-KRW
+
+base_symbol: base,
+
+quote_symbol: m.base_currency, // KRW
+
+name_ko: names.ko, // 고객센터 테이블에서 가져온 한글명
+
+name_en: names.en, // 고객센터 테이블에서 가져온 영문명
+
+};
+
+});
+
+}
+
+👉 이렇게 하면:
+
+
+
+코인원 390개 전부 name_ko / name_en 자동 채움
+
+심볼만 공통 키로 사용하니까, 추가 수동 매핑 X
+
+나중에 코인원에서 문서 업데이트해도, 크롤러 다시 돌리면 자동 반영
+
+이게 네가 말한 **“최선 말고 진짜 완전 자동화”**에 제일 가까운 구조다.
+

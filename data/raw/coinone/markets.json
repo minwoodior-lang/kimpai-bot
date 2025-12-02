@@ -2,1951 +2,2731 @@
   {
     "exchange": "COINONE",
     "base_symbol": "TNSR",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "텐서",
+    "name_en": "Tensor"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "STG",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스타게이트 파이낸스",
+    "name_en": "Stargate Finance"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "WLFI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "월드 리버티 파이낸셜",
+    "name_en": "World Liberty Financial"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ALGO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "알고랜드",
+    "name_en": "Algorand"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ANKR",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "앵커",
+    "name_en": "Ankr"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "APT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "앱토스",
+    "name_en": "Aptos"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "DODO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "도도",
+    "name_en": "DODO"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "STO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스테이크스톤",
+    "name_en": "StakeStone"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CTC",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "크레딧코인",
+    "name_en": "Creditcoin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "DVI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "디비전",
+    "name_en": "Dvision Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "NIL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "닐리온",
+    "name_en": "Nillion"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "APE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에이프코인",
+    "name_en": "ApeCoin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PUMP",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "펌프닷펀",
+    "name_en": "pump.fun"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ASTR",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "아스타",
+    "name_en": "Astar"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BAND",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "밴드",
+    "name_en": "Band"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CAKE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "팬케이크스왑",
+    "name_en": "PancakeSwap"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PYTH",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "피스 네트워크",
+    "name_en": "Pyth Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MANA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "디센트럴랜드",
+    "name_en": "Decentraland"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "LDO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "리도다오",
+    "name_en": "Lido DAO"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "OPEN",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "오픈렛저",
+    "name_en": "OpenLedger"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "IOTA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "아이오타",
+    "name_en": "Iota"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BTT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "비트토렌트",
+    "name_en": "BitTorrent"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BTR",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "비트레이어",
+    "name_en": "Bitlayer"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CVX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "컨벡스 파이낸스",
+    "name_en": "Convex Finance"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "WAVES",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "웨이브",
+    "name_en": "Waves"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "STORJ",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스토리지",
+    "name_en": "Storj"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ONG",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "온톨로지가스",
+    "name_en": "Ontology Gas"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "DRIFT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "드리프트",
+    "name_en": "Drift"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BTC",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "비트코인",
+    "name_en": "Bitcoin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ARB",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "아비트럼",
+    "name_en": "Arbitrum"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "POPCAT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "팝캣",
+    "name_en": "Popcat"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "TWT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "트러스트 월렛 토큰",
+    "name_en": "Trust Wallet Token"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SHIB",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "시바이누",
+    "name_en": "Shiba Inu"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "IOTX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "아이오텍스",
+    "name_en": "IoTeX"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "FRAG",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "프래그메트릭",
+    "name_en": "Fragmetric"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SUI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "수이",
+    "name_en": "Sui"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BSV",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "비트코인에스브이",
+    "name_en": "Bitcoin SV"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SUN",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "썬",
+    "name_en": "SUN"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "POL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "폴리곤 에코시스템 토큰",
+    "name_en": "Polygon Ecosystem Token"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SAROS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "사로스",
+    "name_en": "Saros"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "STX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스택스",
+    "name_en": "Stacks"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "IOST",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "아이오에스티",
+    "name_en": "IOST"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "AAVE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에이브",
+    "name_en": "Aave"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "NEWT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "뉴턴 프로토콜",
+    "name_en": "Newton Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ZETA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "제타체인",
+    "name_en": "ZetaChain"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MLK",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "밀크",
+    "name_en": "MiL.K"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "REKT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "렉트",
+    "name_en": "Rekt"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SXP",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "솔라",
+    "name_en": "Solar"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ICP",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "인터넷 컴퓨터",
+    "name_en": "Internet Computer"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ATH",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에이셔",
+    "name_en": "Aethir"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MASA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "마사",
+    "name_en": "Masa"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CHILLGUY",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "칠가이",
+    "name_en": "Just a chill guy"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MASK",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "마스크네트워크",
+    "name_en": "Mask Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "TOSHI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "토시",
+    "name_en": "Toshi"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BARD",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "롬바드",
+    "name_en": "Lombard"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "HAEDAL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "해달 프로토콜",
+    "name_en": "Haedal Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BRETT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "브렛",
+    "name_en": "Brett"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "2Z",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "더블제로",
+    "name_en": "DoubleZero"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ONT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "온톨로지",
+    "name_en": "Ontology"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "TOKAMAK",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "토카막 네트워크",
+    "name_en": "Tokamak Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BONK",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "봉크",
+    "name_en": "Bonk"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BIGTIME",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "빅타임",
+    "name_en": "Big Time"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "LQTY",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "리퀴티",
+    "name_en": "Liquity"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SYND",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "신디케이트",
+    "name_en": "Syndicate"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MAPO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "맵 프로토콜",
+    "name_en": "MAP Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "WAL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "월러스",
+    "name_en": "Walrus"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "AWE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에이더블유이",
+    "name_en": "AWE Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MMT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "모멘텀",
+    "name_en": "Momentum"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "EVERY",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에브리월드",
+    "name_en": "Everyworld"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "AVL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "아발론",
+    "name_en": "Avalon"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BOME",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "북오브밈",
+    "name_en": "Book of Meme"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "HBAR",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "헤데라",
+    "name_en": "Hedera"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "DOGE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "도지코인",
+    "name_en": "Dogecoin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "GAS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "가스",
+    "name_en": "GAS"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PTB",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "포털투비트코인",
+    "name_en": "Portal To Bitcoin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PEPE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "페페",
+    "name_en": "Pepe"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ONDO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "온도 파이낸스",
+    "name_en": "Ondo Finance"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "WBTC",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "랩트비트코인",
+    "name_en": "Wrapped Bitcoin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CLBK",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "클라우드브릭",
+    "name_en": "Cloudbric"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SKLAY",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에스클레이",
+    "name_en": "sKLAY"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "YALA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "얄라",
+    "name_en": "Yala"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "AUCTION",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "바운스 토큰",
+    "name_en": "Bounce Token"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "NTRN",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "뉴트론",
+    "name_en": "Neutron"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "KAVA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "카바",
+    "name_en": "Kava"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CTSI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "카르테시",
+    "name_en": "Cartesi"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "TOWNS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "타운즈",
+    "name_en": "Towns"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ASTER",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "아스터",
+    "name_en": "Aster"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CATI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "캣티즌",
+    "name_en": "Catizen"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "WCT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "월렛커넥트",
+    "name_en": "WalletConnect"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "FORTH",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "앰플포스 거버넌스 토큰",
+    "name_en": "Ampleforth Governance Token"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "XEC",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "이캐시",
+    "name_en": "eCash"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "HUMA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "후마 파이낸스",
+    "name_en": "Huma Finance"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "USD1",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "월드 리버티 파이낸셜 유에스디",
+    "name_en": "World Liberty Financial USD"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PROM",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "프롬",
+    "name_en": "Prom"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ZIL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "질리카",
+    "name_en": "Zilliqa"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "1INCH",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "1인치",
+    "name_en": "1inch"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "YGG",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "일드길드게임즈",
+    "name_en": "Yield Guild Games"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "AXS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "엑시 인피니티",
+    "name_en": "Axie Infinity"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MOG",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "모그",
+    "name_en": "Mog"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MOC",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "모스코인",
+    "name_en": "Moss Coin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "APEPE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에이프앤페페",
+    "name_en": "Ape and Pepe"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "WAXL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "엑셀라",
+    "name_en": "Axelar"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MON",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "모나드",
+    "name_en": "Monad"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "YB",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "일드베이시스",
+    "name_en": "YieldBasis"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "FNCY",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "팬시(FNCY)",
+    "name_en": "FNCY"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BORA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "보라",
+    "name_en": "BORA"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "RUNE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "토르체인",
+    "name_en": "THORChain"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "FAI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "프레이사",
+    "name_en": "Freysa"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "HEI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "헤이마",
+    "name_en": "Heima"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "XAUT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "테더 골드",
+    "name_en": "Tether Gold"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "LAYER",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "솔레이어",
+    "name_en": "Solayer"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "XDC",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "엑스디씨 네트워크",
+    "name_en": "XDC Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MANTA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "만타 네트워크",
+    "name_en": "Manta Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MNT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "맨틀",
+    "name_en": "Mantle"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "KNC",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "카이버 네트워크",
+    "name_en": "Kyber Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "WEN",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "웬",
+    "name_en": "Wen"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CETUS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "세터스",
+    "name_en": "Cetus"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ZKC",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "바운드리스",
+    "name_en": "Boundless"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "GHUB",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "젬허브",
+    "name_en": "GemHUB"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "AVAX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "아발란체",
+    "name_en": "Avalanche"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ZKJ",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "폴리헤데라 네트워크",
+    "name_en": "Polyhedra Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ZKL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "지케이링크",
+    "name_en": "zkLink"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "TRUMP",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "오피셜 트럼프",
+    "name_en": "Official Trump"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "KGEN",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "케이젠",
+    "name_en": "KGeN"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ZEUS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "제우스 네트워크",
+    "name_en": "Zeus Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ZK",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "지케이싱크",
+    "name_en": "zkSync"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "HFT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "해시플로우",
+    "name_en": "Hashflow"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MOODENG",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "무뎅",
+    "name_en": "Moo Deng"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "COMP",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "컴파운드",
+    "name_en": "Compound"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MTL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "메탈",
+    "name_en": "Metal DAO"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "VET",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "비체인",
+    "name_en": "VeChain"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SODA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "소다엑스",
+    "name_en": "SODAX"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MOVE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "무브먼트",
+    "name_en": "Movement"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CLEAR",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에버클리어",
+    "name_en": "Everclear"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "DAO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "다오 메이커",
+    "name_en": "DAO Maker"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "GRND",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "슈퍼워크",
+    "name_en": "Superwalk"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "FET",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "페치",
+    "name_en": "Fetch.AI"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "DYDX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "디와이디엑스",
+    "name_en": "dYdX"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CLOUD",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "생텀",
+    "name_en": "Sanctum"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SKYAI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스카이에이아이",
+    "name_en": "SkyAI"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "NAVX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "나비 프로토콜",
+    "name_en": "Navi Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "FANC",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "팬시(fanC)",
+    "name_en": "fanC"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "LPT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "라이브피어",
+    "name_en": "Livepeer"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "GALA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "갈라",
+    "name_en": "Gala"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "HUNT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "헌트",
+    "name_en": "Hunt"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BLAST",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "블라스트",
+    "name_en": "Blast"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "HIPPO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "수뎅",
+    "name_en": "Sudeng"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "USDC",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "유에스디코인",
+    "name_en": "USD Coin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "INJ",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "인젝티브",
+    "name_en": "Injective"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "USDE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "유에스디이",
+    "name_en": "Ethena USDe"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CORE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "코어",
+    "name_en": "Core"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CBK",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "코박 토큰",
+    "name_en": "Cobak Token"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "WIF",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "도그위프햇",
+    "name_en": "Dogwifhat"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "DOOD",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "두들즈",
+    "name_en": "Doodles"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "VINE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "바인 코인",
+    "name_en": "Vine Coin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "USDS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "유에스디에스",
+    "name_en": "USDS"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "GRASS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "그래스",
+    "name_en": "Grass"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "IMX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "이뮤터블엑스",
+    "name_en": "Immutable X"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "USDT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "테더",
+    "name_en": "Tether"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "DATA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스트리머",
+    "name_en": "Streamr"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MVC",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "마일벌스",
+    "name_en": "MileVerse"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BEAM",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "빔",
+    "name_en": "Beam"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PLUME",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "플룸",
+    "name_en": "Plume"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ILV",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "일루비움",
+    "name_en": "Illuvium"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SEND",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "수이렌드",
+    "name_en": "SuiLend"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SAFE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "세이프",
+    "name_en": "Safe"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "EDU",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "오픈 캠퍼스",
+    "name_en": "Open Campus"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "DBR",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "디브릿지",
+    "name_en": "deBridge"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "STRK",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스타크넷",
+    "name_en": "StarkNet"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SCR",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스크롤",
+    "name_en": "Scroll"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "AIXBT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에이아이엑스비티",
+    "name_en": "aixbt"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "AL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "아치루트",
+    "name_en": "Archloot"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "AI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "슬립리스 에이아이",
+    "name_en": "Sleepless AI"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BLUE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "블루핀",
+    "name_en": "Bluefin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "GLM",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "골렘",
+    "name_en": "Golem"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "WLD",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "월드코인",
+    "name_en": "WorldCoin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "DELABS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "디랩스게임즈",
+    "name_en": "Delabs Games"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ZRC",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "저킷",
+    "name_en": "Zircuit"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "FIS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스타파이",
+    "name_en": "Stafi"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "B3",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "비쓰리",
+    "name_en": "B3"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "VIC",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "빅션",
+    "name_en": "Viction"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SCA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스캘럽",
+    "name_en": "Scallop"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BAT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "베이직어텐션토큰",
+    "name_en": "Basic Attention Token"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BLUR",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "블러",
+    "name_en": "Blur"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PIXEL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "픽셀즈",
+    "name_en": "Pixels"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PRIME",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에셜론 프라임",
+    "name_en": "Echelon Prime"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "KSM",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "쿠사마",
+    "name_en": "Kusama"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "EGG",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "네스트리",
+    "name_en": "Nestree"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PENDLE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "펜들",
+    "name_en": "Pendle"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "FIL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "파일코인",
+    "name_en": "Filecoin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BAL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "밸런서",
+    "name_en": "Balancer"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ARIAIP",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "아리아 프로토콜",
+    "name_en": "Aria Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MINA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "미나",
+    "name_en": "Mina"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "XLM",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스텔라루멘",
+    "name_en": "Stellar Lumens"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "C",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "체인베이스",
+    "name_en": "Chainbase"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "A",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "볼타",
+    "name_en": "Vaulta"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "G",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "그래비티",
+    "name_en": "Gravity"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "JTO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "지토",
+    "name_en": "Jito"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CFG",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "센트리퓨즈",
+    "name_en": "Centrifuge"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "K",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "사이드킥",
+    "name_en": "Sidekick"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "LION",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "로디드라이언즈",
+    "name_en": "Loaded Lions"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "H",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "휴머니티 프로토콜",
+    "name_en": "Humanity Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "HPP",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "하우스 파티 프로토콜",
+    "name_en": "House Party Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "AGLD",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "어드벤처골드",
+    "name_en": "Adventure Gold"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MILK",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "밀키웨이",
+    "name_en": "MilkyWay"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SEI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "세이",
+    "name_en": "Sei"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "HYPER",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "하이퍼레인",
+    "name_en": "Hyperlane"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "NEAR",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "니어프로토콜",
+    "name_en": "NEAR Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ZORA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "조라",
+    "name_en": "Zora"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BCH",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "비트코인 캐시",
+    "name_en": "Bitcoin Cash"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ZRX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "제로엑스",
+    "name_en": "0x"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "AI16Z",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에이아이식스틴즈",
+    "name_en": "ai16z"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "JST",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "저스트",
+    "name_en": "JUST"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MYX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "엠와이엑스 파이낸스",
+    "name_en": "MYX Finance"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MAVIA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "히어로즈오브마비아",
+    "name_en": "Heroes of Mavia"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "QTUM",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "퀀텀",
+    "name_en": "Qtum"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PARTI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "파티클 네트워크",
+    "name_en": "Particle Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "GMT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스테픈",
+    "name_en": "Stepn"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "HOT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "홀로",
+    "name_en": "Holo"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "LINK",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "체인링크",
+    "name_en": "Chainlink"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "LWA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "루미웨이브",
+    "name_en": "Lumiwave"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ZRO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "레이어제로",
+    "name_en": "LayerZero"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "REZ",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "렌조",
+    "name_en": "Renzo"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "STRAX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스트라티스",
+    "name_en": "Stratis"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BABY",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "바빌론",
+    "name_en": "Babylon"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SONIC",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "소닉SVM",
+    "name_en": "Sonic SVM"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "HOME",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "디파이 앱",
+    "name_en": "Defi App"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ES",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "이클립스",
+    "name_en": "Eclipse"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PEAQ",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "피크",
+    "name_en": "Peaq"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SUNDOG",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "썬도그",
+    "name_en": "Sundog"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "WOO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "우",
+    "name_en": "Woo"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "RED",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "레드스톤",
+    "name_en": "RedStone"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ACX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "어크로스 프로토콜",
+    "name_en": "Across Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "KAIA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "카이아",
+    "name_en": "Kaia"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "LZM",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "라운지엠",
+    "name_en": "LoungeM"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "GAME2",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "게임빌드",
+    "name_en": "GameBuild"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MYRO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "마이로",
+    "name_en": "Myro"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "DEEP",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "딥북",
+    "name_en": "DeepBook"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ADA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에이다",
+    "name_en": "Cardano"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SOLV",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "솔브 프로토콜",
+    "name_en": "Solv Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BAAS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "바스아이디",
+    "name_en": "BaaSid"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ISK",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "이스크라",
+    "name_en": "Iskra"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "WIKEN",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "위드",
+    "name_en": "WITH"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "FLOCK",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "플록",
+    "name_en": "FLock.io"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ACH",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "알케미 페이",
+    "name_en": "Alchemy Pay"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "JUP",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "주피터",
+    "name_en": "Jupiter"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "LINEA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "리네아",
+    "name_en": "Linea"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "TIA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "셀레스티아",
+    "name_en": "Celestia"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BEL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "벨라 프로토콜",
+    "name_en": "Bella Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "AVNT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "아반티스",
+    "name_en": "Avantis"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "S",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "소닉",
+    "name_en": "Sonic"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SPURS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "토트넘 홋스퍼",
+    "name_en": "Tottenham Hotspur"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MONPRO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "몬 프로토콜",
+    "name_en": "Mon Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "W",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "웜홀",
+    "name_en": "Wormhole"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CFX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "콘플럭스",
+    "name_en": "Conflux"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "T",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "쓰레스홀드",
+    "name_en": "Threshold"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ZTX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "지티엑스",
+    "name_en": "ZTX"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PROVE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "석싱트",
+    "name_en": "Succinct"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MIRA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "미라 네트워크",
+    "name_en": "Mira Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "DIA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "디아",
+    "name_en": "DIA"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "KERNEL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "커널 다오",
+    "name_en": "Kernel DAO"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "GM",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "곰블",
+    "name_en": "Gomble"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "OAS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "오아시스",
+    "name_en": "Oasys"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SIX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "식스",
+    "name_en": "SIX"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SYRUP",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "메이플 파이낸스",
+    "name_en": "Maple Finance"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ENS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "이더리움네임서비스",
+    "name_en": "Ethereum Name Service"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "GRT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "더그래프",
+    "name_en": "The Graph"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ALPHA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스텔라",
+    "name_en": "Stella"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "TAIKO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "타이코",
+    "name_en": "Taiko"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PCI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "페이코인",
+    "name_en": "Paycoin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PAXG",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "팍스골드",
+    "name_en": "PAX Gold"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ENA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에테나",
+    "name_en": "Ethena"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "VIRTUAL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "버추얼 프로토콜",
+    "name_en": "Virtuals Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "FF",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "팔콘 파이낸스",
+    "name_en": "Falcon Finance"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "UMA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "우마",
+    "name_en": "UMA"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "XRP",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "엑스알피(리플)",
+    "name_en": "XRP"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PUFFER",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "퍼퍼",
+    "name_en": "Puffer"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MORPHO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "모포",
+    "name_en": "Morpho"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CHZ",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "칠리즈",
+    "name_en": "Chiliz"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SHELL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "마이쉘",
+    "name_en": "MyShell"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SAND",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "샌드박스",
+    "name_en": "The Sandbox"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "TAKE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "오버테이크",
+    "name_en": "Overtake"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ATOM",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "코스모스",
+    "name_en": "Cosmos"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ARKM",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "아캄",
+    "name_en": "Arkham"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "IO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "아이오넷",
+    "name_en": "io.net"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "IP",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스토리",
+    "name_en": "Story"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SKY",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스카이 프로토콜",
+    "name_en": "Sky Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "COOKIE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "쿠키 다오",
+    "name_en": "Cookie DAO"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "IN",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "인피니트",
+    "name_en": "Infinit"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "IQ",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "아이큐",
+    "name_en": "IQ"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CLV",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "씨엘브이",
+    "name_en": "CLV"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PUNDIX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "펀디엑스",
+    "name_en": "Pundi X"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SKL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스케일",
+    "name_en": "Skale"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CELO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "셀로",
+    "name_en": "Celo"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "EGL1",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "이글스랜딩",
+    "name_en": "Eagles Landing"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "HVH",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "하바",
+    "name_en": "Havah"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "UOS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "울트라",
+    "name_en": "Ultra"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SOON",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "쑨",
+    "name_en": "Soon"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MEME",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "밈코인",
+    "name_en": "Memecoin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "OBT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "오비터 파이낸스",
+    "name_en": "Orbiter Finance"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "HP",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "히포 프로토콜",
+    "name_en": "Hippo Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "NXPC",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "넥스페이스",
+    "name_en": "Nexpace"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BIO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "바이오 프로토콜",
+    "name_en": "BIO Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "AERO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에어로드롬 파이낸스",
+    "name_en": "Aerodrome Finance"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "NEIRO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "네이로",
+    "name_en": "Neiro"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "UNI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "유니스왑",
+    "name_en": "Uniswap"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ANIME",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "애니메코인",
+    "name_en": "Animecoin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CKB",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "너보스",
+    "name_en": "Nervos Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "XTZ",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "테조스",
+    "name_en": "Tezos"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MAY",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "메이플라워",
+    "name_en": "Mayflower"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "INIT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "이니시아",
+    "name_en": "Initia"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MAV",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "매버릭 프로토콜",
+    "name_en": "Maverick Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PNUT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "피넛",
+    "name_en": "Peanut the Squirrel"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "EVER",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에버스케일",
+    "name_en": "Everscale"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PHA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "팔라 네트워크",
+    "name_en": "Phala Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MAK",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "메타씬",
+    "name_en": "MetaCene"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "TON",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "톤코인",
+    "name_en": "Toncoin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PENGU",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "펏지 펭귄",
+    "name_en": "Pudgy Penguins"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "FLOW",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "플로우",
+    "name_en": "Flow"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "L3",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "레이어쓰리",
+    "name_en": "Layer3"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "DOT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "폴카닷",
+    "name_en": "Polkadot"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PORT3",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "포트쓰리",
+    "name_en": "Port3 Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BOUNTY",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "체인바운티",
+    "name_en": "Chainbounty"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SPA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스페라엑스",
+    "name_en": "Sperax"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "NEON",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "네온 EVM",
+    "name_en": "NeonEVM"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MERL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "멀린체인",
+    "name_en": "Merlin Chain"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CROSS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "크로쓰",
+    "name_en": "CROSS"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SPK",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스파크",
+    "name_en": "Spark"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ALT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "알트레이어",
+    "name_en": "AltLayer"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BNT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "뱅코르",
+    "name_en": "Bancor"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ARPA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "알파",
+    "name_en": "ARPA"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "OGN",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "오리진 프로토콜",
+    "name_en": "Origin Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "GXA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "갤럭시아",
+    "name_en": "Galaxia"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SOL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "솔라나",
+    "name_en": "Solana"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "FLOKI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "플로키",
+    "name_en": "Floki"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BNB",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "비앤비",
+    "name_en": "BNB"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ETC",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "이더리움 클래식",
+    "name_en": "Ethereum Classic"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ETH",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "이더리움",
+    "name_en": "Ethereum"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ME",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "매직에덴",
+    "name_en": "Magic Eden"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "FLUX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "플럭스",
+    "name_en": "Flux"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "NEO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "네오",
+    "name_en": "Neo"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PRCL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "파클",
+    "name_en": "Parcl"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SUSHI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스시스왑",
+    "name_en": "Sushiswap"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BERA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "베라체인",
+    "name_en": "Berachain"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "COS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "콘텐토스",
+    "name_en": "Contentos"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SIGN",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "사인",
+    "name_en": "Sign"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MBX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "마브렉스",
+    "name_en": "Marblex"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "COW",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "카우 프로토콜",
+    "name_en": "Cow Protocol"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "BMT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "버블맵스",
+    "name_en": "Bubblemaps"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "EDGE",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "디피니티브",
+    "name_en": "Definitive"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "PIB",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "피블",
+    "name_en": "PIBBLE"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SAHARA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "사하라에이아이",
+    "name_en": "Sahara AI"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "AEVO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에이보",
+    "name_en": "Aevo"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MBL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "무비블록",
+    "name_en": "MovieBloc"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CYBER",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "사이버",
+    "name_en": "Cyber"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "LA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "라그랑주",
+    "name_en": "Lagrange"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SNX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "신세틱스",
+    "name_en": "Synthetix"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "SNT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "스테이터스네트워크토큰",
+    "name_en": "Status Network Token"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "FXS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "프랙스 쉐어",
+    "name_en": "Frax Share"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "OP",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "옵티미즘",
+    "name_en": "Optimism"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CRO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "크로노스",
+    "name_en": "Cronos"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CRV",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "커브",
+    "name_en": "Curve"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "CRU",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "크러스트 네트워크",
+    "name_en": "Crust Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "LISTA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "리스타다오",
+    "name_en": "Lista DAO"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "RPL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "로켓풀",
+    "name_en": "Rocket Pool"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "DMAIL",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "디메일",
+    "name_en": "Dmail"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "EIGEN",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "아이겐레이어",
+    "name_en": "EigenLayer"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "HIGH",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "하이스트리트",
+    "name_en": "Highstreet"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "RON",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "로닌",
+    "name_en": "Ronin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MET",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "메테오라",
+    "name_en": "Meteora"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MEV",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "미버스",
+    "name_en": "MEVerse"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ETHFI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "이더파이",
+    "name_en": "Ether.Fi"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "RENDER",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "렌더토큰",
+    "name_en": "Render Token"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MEW",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "캣인어독스월드",
+    "name_en": "Cat in a dogs world"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "OM",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "만트라",
+    "name_en": "Mantra"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "KAITO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "카이토",
+    "name_en": "Kaito"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ORDER",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "오덜리 네트워크",
+    "name_en": "Orderly Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "KAS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "카스파",
+    "name_en": "Kaspa"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ROA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "로아코어",
+    "name_en": "ROACORE"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "AMO",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "아모코인",
+    "name_en": "AMO Coin"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "WNCG",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "랩트 나인 크로니클 골드",
+    "name_en": "Wrapped NCG"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ORBS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "오브스",
+    "name_en": "Orbs"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "NS",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "수이 네임 서비스",
+    "name_en": "Sui Name Service"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "AMP",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "앰프",
+    "name_en": "Amp"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "MOCA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "모카네트워크",
+    "name_en": "Moca Network"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "ORCA",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "오르카",
+    "name_en": "Orca"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "HIFI",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "하이파이",
+    "name_en": "Hifi Finance"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "NFT",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "에이피이앤에프티",
+    "name_en": "APENFT"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "EDEN",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "오픈에덴",
+    "name_en": "OpenEden"
   },
   {
     "exchange": "COINONE",
     "base_symbol": "TRX",
-    "quote_symbol": ""
+    "quote_symbol": "",
+    "name_ko": "트론",
+    "name_en": "Tron"
   }
 ]

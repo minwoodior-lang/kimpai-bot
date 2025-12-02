@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+const cheerio = require("cheerio");
 
 interface RawMarket {
   exchange: "COINONE";
@@ -10,24 +11,67 @@ interface RawMarket {
   name_en?: string;
 }
 
-type CoinoneNameMap = {
-  [symbol: string]: { name_ko?: string; name_en?: string };
-};
+const COINONE_ASSET_URL =
+  "https://support.coinone.co.kr/support/solutions/articles/31000163237";
+
+async function fetchCoinoneSupportNameMap(): Promise<
+  Record<string, { ko: string | null; en: string | null }>
+> {
+  try {
+    console.log("🔄 Fetching Coinone support page...");
+
+    const res = await fetch(COINONE_ASSET_URL, {
+      headers: { "User-Agent": "Mozilla/5.0" },
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+
+    const html = await res.text();
+    const $ = cheerio.load(html);
+
+    const map: Record<string, { ko: string | null; en: string | null }> = {};
+
+    // 테이블 행 순회 (심볼 / 국문명 / 영문명 / 네트워크 / 메모)
+    $("table tbody tr").each((_, row: any) => {
+      const tds = $(row).find("td");
+
+      if (tds.length < 3) return;
+
+      const symbol = $(tds[0]).text().trim().toUpperCase();
+      const koName = $(tds[1]).text().trim() || null;
+      const enName = $(tds[2]).text().trim() || null;
+
+      if (!symbol) return;
+
+      map[symbol] = { ko: koName, en: enName };
+    });
+
+    console.log(`✅ Coinone support: ${Object.keys(map).length}개 심볼 크롤링됨`);
+    return map;
+  } catch (err) {
+    console.warn(
+      "⚠ Coinone support page crawl failed:",
+      err instanceof Error ? err.message : String(err)
+    );
+    return {};
+  }
+}
 
 async function fetchCoinoneMarkets() {
-  const namesPath = path.join("data", "raw", "coinone", "names.json");
-  const coinoneNameMap: CoinoneNameMap = fs.existsSync(namesPath)
-    ? JSON.parse(fs.readFileSync(namesPath, "utf-8"))
-    : {};
+  const [marketsRes, nameMap] = await Promise.all([
+    fetch("https://api.coinone.co.kr/public/v2/markets/KRW"),
+    fetchCoinoneSupportNameMap(),
+  ]);
 
-  const res = await fetch("https://api.coinone.co.kr/public/v2/markets/KRW");
-  if (!res.ok) {
+  if (!marketsRes.ok) {
     throw new Error(
-      `Coinone API error: ${res.status} ${res.statusText}`
+      `Coinone API error: ${marketsRes.status} ${marketsRes.statusText}`
     );
   }
 
-  const json = (await res.json()) as any;
+  const json = (await marketsRes.json()) as any;
   const markets = json.markets ?? [];
 
   if (!Array.isArray(markets)) {
@@ -39,10 +83,10 @@ async function fetchCoinoneMarkets() {
     const quote = (m.base_currency ?? "").toUpperCase();
     const marketCode = m.market;
 
-    const names = coinoneNameMap[base] ?? {};
+    const names = nameMap[base] ?? { ko: null, en: null };
 
-    const name_ko = names.name_ko?.trim() || undefined;
-    const name_en = names.name_en?.trim() || undefined;
+    const name_ko = names.ko?.trim() || undefined;
+    const name_en = names.en?.trim() || undefined;
 
     const row: RawMarket = {
       exchange: "COINONE",
