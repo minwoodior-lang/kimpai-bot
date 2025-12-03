@@ -1,0 +1,123 @@
+📄 KimpAI – 코인 리스트 & 라이트 모드 관련 최종 수정 요청
+1) 라이트 모드 완전 제거 + 토글 버튼 삭제
+
+지금도 우측 상단에 라이트/다크 토글이 남아 있고,
+실제로 라이트 모드가 일부 노출됩니다.
+
+👉 요청
+
+헤더 컴포넌트에서 테마 토글 버튼 자체를 JSX에서 완전히 제거해 주세요.
+
+예: ThemeToggle, ModeToggle, ColorModeSwitch 같은 컴포넌트 전부 삭제
+
+메뉴/헤더에 들어간 아이콘 버튼까지 같이 제거
+
+_app.tsx 또는 ThemeProvider 설정에서:
+
+enableSystem={false}
+
+defaultTheme="dark"
+
+forcedTheme="dark"
+이렇게 설정하고, light 관련 옵션은 더 이상 쓰지 않게 해 주세요.
+
+className 에 남아 있는 light: 프리픽스 전부 제거:
+
+light:bg-..., light:text-... 등 남아있는 것 있으면 모두 삭제
+
+목표:
+
+토글 버튼이 UI에서 아예 안 보이고
+
+강제로 다크 모드만 동작하도록.
+
+2) 코인명 헤더 아래 라인(빨간 박스 부분) 완전히 삭제
+
+현재 “코인명” 헤더 아래에 짧은 라인이 여전히 남아 있습니다.
+(스크린샷 빨간 네모 부분)
+
+이 라인은 지금은 아예 필요 없는 요소이므로 완전히 없애 주세요.
+
+👉 수정 포인트
+
+PremiumTable 또는 코인 리스트 헤더 부분 코드에서:
+
+코인명이 들어 있는 <th> 또는 <div>에 걸려 있는
+
+border-b, border-b-[1px], border-white/10, border-[#303848] 등 모든 하단 border 스타일 제거
+
+::after 나 ::before 로 그어둔 라인이 있다면 해당 CSS도 삭제
+
+예시 (전/후):
+
+// 현재 (추정)
+<th className="border-b border-[#303848] ...">코인명</th>
+
+// 변경
+<th className="...">코인명</th>
+
+
+요약: 코인명 헤더 아래에만 보이는 그 라인이 다시는 안 보이게,
+관련 border/underline 스타일을 전부 찾아서 삭제해 주세요.
+
+3) 코인명 ...(ellipsis) 다시 복구 + 폰트 크기 정리 (모바일 기준)
+
+지금은
+
+코인명이 길어져도 ...가 다시 안 나오고
+
+코인명 폰트가 오른쪽 컬럼(현재가/김프/전일대비/거래액)보다 눈에 띄게 큼
+
+이라서 모바일에서 특히 답답합니다.
+
+3-1. 코인명/심볼 ... 처리 복구
+
+코인명/심볼 쪽 레이아웃을 아래처럼 고정해 주세요.
+
+// 왼쪽 이름 영역 전체
+<div className="flex flex-col flex-1 min-w-0">
+  <span className="truncate text-[11px] md:text-sm font-medium">
+    {koName}
+  </span>
+  <span className="truncate text-[9px] md:text-xs text-gray-400">
+    {symbol}
+  </span>
+</div>
+
+
+필수 조건
+
+래퍼 div: flex-1 min-w-0
+
+두 줄 모두: truncate
+
+whitespace-nowrap 가 다른 데 걸려 있다면 제거 (truncate랑 충돌)
+
+이 세 가지가 동시에 있어야
+→ 모바일에서 코인명이 길어질 때 자동으로 ... 처리됩니다.
+
+지금 “5글자 초과 …” 이런 커스텀 조건이 들어갔다면,
+그 로직은 빼고 CSS truncate 기반으로만 처리해 주세요.
+
+3-2. 코인명 폰트 크기를 오른쪽 컬럼과 맞추기
+
+숫자 컬럼(현재가/김프/전일대비/거래액)과 동일하거나 조금 더 작게 맞춰야 합니다.
+
+예를 들어,
+
+// 숫자 컬럼이
+<td className="text-[11px] md:text-sm ...">...</td>
+
+// 라면 코인명은:
+<span className="truncate text-[11px] md:text-sm font-medium">...</span>
+// 또는
+<span className="truncate text-[10px] md:text-sm font-medium">...</span>
+
+
+모바일 기준: 코인명은 text-[10~11px]
+
+심볼(영문)은 항상 그보다 한 단계 작은 text-[9px]
+
+목표:
+코인명이 숫자 컬럼보다 눈에 띄게 크지 않게 하고,
+오른쪽 값들이 들어와도 겹치지 않고 딱 떨어지게.

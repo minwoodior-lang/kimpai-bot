@@ -5,7 +5,7 @@ import { ExchangeSelectionProvider } from "@/contexts/ExchangeSelectionContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
+    <ThemeProvider attribute="class" enableSystem={false} defaultTheme="dark" forcedTheme="dark">
       <ExchangeSelectionProvider>
         <Component {...pageProps} />
       </ExchangeSelectionProvider>

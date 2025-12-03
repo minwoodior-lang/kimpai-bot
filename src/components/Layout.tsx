@@ -104,13 +104,6 @@ export default function Layout({ children }: LayoutProps) {
               </div>
 
               <div className="hidden md:flex items-center gap-3">
-                <button
-                  onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
-                  title="다크 모드"
-                >
-                  ☀️
-                </button>
                 <Link
                   href="/login"
                   className="text-slate-300 hover:text-white transition-colors text-sm"
