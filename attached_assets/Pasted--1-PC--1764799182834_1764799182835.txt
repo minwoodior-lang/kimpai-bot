@@ -1,0 +1,128 @@
+📌 홈 – 프리미엄 차트 헤더 영역 정렬/디자인 수정 지시서
+1. 공통 목표
+
+PC / 모바일 모두 동일한 구조로:
+
+왼쪽: 프리미엄 차트 라벨 텍스트
+
+오른쪽:
+[⚙ 개인화 설정] 버튼 + [BTC Binance ▼] 드롭다운
+→ 두 버튼 높이/스타일을 맞추고 가로로 나란히 배치
+
+지금은 개인화 설정 버튼이 위/아래로 어정쩡하게 떨어져 보이니,
+“1줄 헤더 라인”으로 정리해 달라는 요청입니다.
+
+2. 레이아웃 구조 변경 (PC & 모바일 공통)
+
+현재(대략):
+
+<div className="mt-8">
+  <div className="mb-2 text-sm text-slate-200">프리미엄 차트</div>
+
+  <div className="flex items-center justify-end gap-2 mb-2">
+    <UserPrefsButton />   // ⚙ 개인화 설정
+  </div>
+
+  <div className="flex justify-end mb-2">
+    <ExchangeDropdown />  // BTC Binance ▼
+  </div>
+
+  <PremiumChart ... />
+</div>
+
+
+변경 후:
+
+<div className="mt-8">
+  {/* 헤더 1줄로 정리 */}
+  <div className="mb-2 flex items-center justify-between gap-3">
+    {/* 왼쪽: 프리미엄 차트 라벨 */}
+    <div className="text-sm font-medium text-slate-200">
+      프리미엄 차트
+    </div>
+
+    {/* 오른쪽: 개인화 설정 + 드롭다운 나란히 */}
+    <div className="flex items-center gap-2">
+      <UserPrefsButton />   {/* ⚙ 개인화 설정 */}
+      <ExchangeDropdown />  {/* BTC Binance ▼ */}
+    </div>
+  </div>
+
+  <PremiumChart ... />
+</div>
+
+
+✅ 중요: PC/모바일 모두 동일한 flex 구조 사용.
+justify-between + gap-2/3 로 여백만 조정.
+
+3. 버튼/드롭다운 크기 통일
+
+오른쪽 두 컴포넌트의 높이와 폰트 사이즈, 좌우 패딩을 최대한 동일하게 맞춰 주세요.
+
+기준: 드롭다운 스타일 기준으로 통일
+
+예시:
+
+// 기존 드롭다운 스타일 예시
+<button
+  className="inline-flex items-center rounded-md bg-slate-800 px-3 py-2 text-sm text-slate-100"
+>
+  BTC Binance
+  <ChevronDownIcon className="ml-1 h-4 w-4" />
+</button>
+
+
+⚙ 개인화 설정 버튼도 동일하게:
+
+<button
+  className="inline-flex items-center rounded-md bg-slate-800 px-3 py-2 text-sm text-slate-100"
+>
+  <Cog6ToothIcon className="mr-1 h-4 w-4" />
+  개인화 설정
+</button>
+
+
+요청사항:
+
+높이 통일
+
+px, py, text-sm 등 동일하게 적용.
+
+폰트 사이즈 통일
+
+두 버튼 모두 text-sm 사용.
+
+아이콘 크기 통일
+
+h-4 w-4 정도로 맞춰서 균형 있게.
+
+4. 반응형(모바일) 처리
+
+모바일에서도 같은 구조로 보이되, 공간이 좁을 경우를 고려해서:
+
+<div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+  <div className="text-sm font-medium text-slate-200">
+    프리미엄 차트
+  </div>
+  <div className="flex items-center gap-2">
+    <UserPrefsButton />
+    <ExchangeDropdown />
+  </div>
+</div>
+
+
+flex-wrap 또는 sm:flex-nowrap 등을 활용해서,
+너무 좁으면 오른쪽 묶음이 다음 줄로 자연스럽게 떨어지도록만 처리해 주세요.
+
+기본 컨셉은 “라벨 + 두 버튼이 하나의 헤더 줄에 붙어 있는 느낌”입니다.
+
+5. 정리
+
+헤더 라인에 “프리미엄 차트” 텍스트 추가 (좌측 정렬).
+
+개인화 설정 버튼과 거래소 드롭다운을 같은 줄 오른쪽에 배치,
+같은 높이 / 같은 스타일로 통일.
+
+PC/모바일 모두 같은 구조 사용, 모바일에선 flex-wrap로 자연스럽게 줄바꿈만 허용.
+
+이대로 반영해 주시면 됩니다.

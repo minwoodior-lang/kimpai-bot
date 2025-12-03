@@ -9,6 +9,7 @@ import ChatPanel from "@/components/chat/ChatPanel";
 import ChatUI from "@/components/ChatUI";
 import { AiSummaryMobileContent, ProForecastMobileContent, MyAlertsMobileContent } from "@/components/mobile/MobileCardContents";
 import UserPrefsPanel from "@/components/settings/UserPrefsPanel";
+import IndicatorSelector from "@/components/IndicatorSelector";
 import { useUserPrefs } from "@/hooks/useUserPrefs";
 import dynamic from "next/dynamic";
 import { useState } from "react";
@@ -222,24 +223,39 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 차트 제목 + 개인화 설정 버튼 */}
-          <div className="mt-2 flex items-center justify-between mb-2">
-            <h3 className="text-sm font-semibold dark:text-slate-200 light:text-slate-800">프리미엄 차트</h3>
-            <button
-              onClick={() => setIsPrefsPanelOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg dark:bg-slate-800 light:bg-slate-200 dark:hover:bg-slate-700 light:hover:bg-slate-300 transition-colors text-sm dark:text-slate-300 light:text-slate-700 font-medium"
-            >
-              <span>⚙</span>
-              <span>개인화 설정</span>
-            </button>
+          {/* 차트 헤더: 프리미엄 차트 라벨 + 개인화 설정 + 지표 선택 */}
+          <div className="mt-3 mb-3 flex flex-wrap items-center justify-between gap-3">
+            {/* 왼쪽: 라벨 */}
+            <h3 className="text-sm font-medium dark:text-slate-200 light:text-slate-800">
+              프리미엄 차트
+            </h3>
+
+            {/* 오른쪽: 버튼 그룹 */}
+            <div className="flex items-center gap-2">
+              {/* 개인화 설정 버튼 */}
+              <button
+                onClick={() => setIsPrefsPanelOpen(true)}
+                className="inline-flex items-center rounded-md dark:bg-slate-800 light:bg-slate-200 dark:border dark:border-slate-700 light:border light:border-slate-300 px-3 py-2 text-sm dark:text-white light:text-slate-900 hover:dark:border-slate-600 hover:light:border-slate-400 transition-colors"
+              >
+                <span className="text-base mr-1.5">⚙</span>
+                <span>개인화 설정</span>
+              </button>
+
+              {/* 지표 선택 드롭다운 */}
+              <IndicatorSelector
+                selectedIndicator={selectedIndicator}
+                onIndicatorChange={setSelectedIndicator}
+              />
+            </div>
           </div>
 
           {/* 차트 섹션 */}
           {(!isLoaded || !prefs.hideChart) && (
-            <div className="mt-1 h-[240px] md:h-auto">
+            <div className="h-[240px] md:h-auto">
               <ChartSectionEnhanced
                 selectedIndicator={selectedIndicator}
                 onIndicatorChange={setSelectedIndicator}
+                hideDropdown={true}
               />
             </div>
           )}

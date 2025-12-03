@@ -45,6 +45,7 @@ const INDICATOR_GROUPS = {
 interface ChartSectionEnhancedProps {
   selectedIndicator?: string;
   onIndicatorChange?: (indicator: string) => void;
+  hideDropdown?: boolean;
 }
 
 /**
@@ -55,6 +56,7 @@ interface ChartSectionEnhancedProps {
 export default function ChartSectionEnhanced({
   selectedIndicator = "BINANCE_BTC",
   onIndicatorChange,
+  hideDropdown = false,
 }: ChartSectionEnhancedProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -106,50 +108,52 @@ export default function ChartSectionEnhanced({
 
   return (
     <section className="mb-3">
-      {/* 드롭다운 - 우측 정렬 */}
-      <div className="flex justify-end mb-2">
-        <div className="relative">
-        <button
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          className="flex items-center gap-2 bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-white text-sm hover:border-slate-600 transition-colors"
-        >
-          <span>{currentLabel}</span>
-          <svg
-            className={`w-4 h-4 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+      {/* 드롭다운 - hideDropdown이 false일 때만 우측 정렬 표시 */}
+      {!hideDropdown && (
+        <div className="flex justify-end mb-2">
+          <div className="relative">
+          <button
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            className="flex items-center gap-2 bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-white text-sm hover:border-slate-600 transition-colors"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
+            <span>{currentLabel}</span>
+            <svg
+              className={`w-4 h-4 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
 
-        {isDropdownOpen && (
-          <div className="absolute top-full left-0 mt-2 w-72 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl z-50 overflow-y-auto max-h-[400px]">
-            {Object.entries(INDICATOR_GROUPS).map(([groupName, items]) => (
-              <div key={groupName}>
-                <div className="sticky top-0 px-4 py-2.5 bg-slate-900/80 backdrop-blur text-slate-300 text-xs font-bold uppercase tracking-wider border-b border-slate-700">
-                  {groupName}
+          {isDropdownOpen && (
+            <div className="absolute top-full left-0 mt-2 w-72 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl z-50 overflow-y-auto max-h-[400px]">
+              {Object.entries(INDICATOR_GROUPS).map(([groupName, items]) => (
+                <div key={groupName}>
+                  <div className="sticky top-0 px-4 py-2.5 bg-slate-900/80 backdrop-blur text-slate-300 text-xs font-bold uppercase tracking-wider border-b border-slate-700">
+                    {groupName}
+                  </div>
+                  {items.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => handleSelect(item.id)}
+                      className={`w-full text-left px-4 py-2 text-sm transition-colors ${
+                        selectedIndicator === item.id
+                          ? "bg-blue-500/25 text-blue-300 border-l-2 border-blue-400"
+                          : "hover:bg-slate-700/40 text-slate-300 border-l-2 border-transparent"
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
                 </div>
-                {items.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => handleSelect(item.id)}
-                    className={`w-full text-left px-4 py-2 text-sm transition-colors ${
-                      selectedIndicator === item.id
-                        ? "bg-blue-500/25 text-blue-300 border-l-2 border-blue-400"
-                        : "hover:bg-slate-700/40 text-slate-300 border-l-2 border-transparent"
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            ))}
+              ))}
+            </div>
+          )}
           </div>
-        )}
         </div>
-      </div>
+      )}
 
       {/* 차트 박스 */}
       <div className="w-full rounded-2xl dark:border dark:border-slate-700/60 light:border light:border-slate-300/40 dark:bg-slate-900/20 light:bg-slate-100/20 p-4 overflow-hidden">
