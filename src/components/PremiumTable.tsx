@@ -756,71 +756,36 @@ export default function PremiumTable({
       )}
 
       {showFilters && (
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6 pt-4 text-sm bg-slate-800/30 border border-slate-700/50 rounded-xl p-3">
-          {/* Exchange selector */}
-          <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-3">
-            {/* Mobile labels */}
-            <div className="flex md:hidden justify-between w-full">
-              <span className="text-gray-400 text-[10px] whitespace-nowrap flex items-center gap-1">
-                기준 거래소
-                <img
-                  src="https://flagcdn.com/w20/kr.png"
-                  alt="🇰🇷"
-                  className="w-4 h-3 object-cover rounded-sm"
-                />
-              </span>
-              <span className="text-gray-400 text-[10px] whitespace-nowrap flex items-center gap-1">
-                해외 거래소 <span className="text-sm">🌐</span>
-              </span>
-            </div>
-
-            <div className="flex items-center gap-2 md:gap-3">
-              <span className="hidden md:flex text-gray-400 text-xs whitespace-nowrap items-center gap-1">
-                기준 거래소
-                <img
-                  src="https://flagcdn.com/w20/kr.png"
-                  alt="🇰🇷"
-                  className="w-4 h-3 object-cover rounded-sm"
-                />
-              </span>
-              <MiniDropdown
-                value={domesticExchange}
-                options={DOMESTIC_EXCHANGES}
-                onChange={setDomesticExchange}
-              />
-              <span className="text-gray-500">⇄</span>
-              <MiniDropdown
-                value={foreignExchange}
-                options={FOREIGN_EXCHANGES}
-                onChange={setForeignExchange}
-                showShortName={true}
-              />
-              <span className="hidden md:flex text-gray-400 text-xs whitespace-nowrap items-center gap-1">
-                해외 거래소 <span className="text-sm">🌐</span>
-              </span>
-            </div>
+        <div className="mb-6 pt-4 space-y-3">
+          {/* Row 1: Exchange selectors */}
+          <div className="flex items-center gap-2 md:gap-3 text-sm">
+            <span className="text-gray-400 text-xs whitespace-nowrap items-center gap-1 hidden md:flex">
+              기준 거래소
+              <img src="https://flagcdn.com/w20/kr.png" alt="🇰🇷" className="w-4 h-3 object-cover rounded-sm" />
+            </span>
+            <MiniDropdown
+              value={domesticExchange}
+              options={DOMESTIC_EXCHANGES}
+              onChange={setDomesticExchange}
+            />
+            <span className="text-gray-500">⇄</span>
+            <MiniDropdown
+              value={foreignExchange}
+              options={FOREIGN_EXCHANGES}
+              onChange={setForeignExchange}
+              showShortName={true}
+            />
+            <span className="text-gray-400 text-xs whitespace-nowrap items-center gap-1 hidden md:flex ml-auto">
+              해외 거래소 <span className="text-sm">🌐</span>
+            </span>
           </div>
 
-          {/* Coin count + search */}
-          <div className="flex items-center gap-2 md:gap-3">
-            <span className="text-gray-400 text-[10px] md:text-xs whitespace-nowrap">
-              암호화폐 총{" "}
-              <span className="text-white font-medium">{totalCoins}</span>개
-            </span>
-            <div className="relative flex-1 md:flex-none">
+          {/* Row 2: Coin count + search (responsive order) */}
+          <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-3">
+            <div className="relative flex-1 sm:flex-none order-2 sm:order-2">
               <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </span>
               <input
@@ -828,9 +793,12 @@ export default function PremiumTable({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="BTC, 비트코인, ㅂㅌ"
-                className="w-full md:w-[180px] bg-slate-700 text-white rounded-lg pl-8 pr-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs md:text-sm"
+                className="w-full sm:w-[180px] bg-slate-700 text-white rounded-lg pl-8 pr-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs md:text-sm"
               />
             </div>
+            <span className="text-gray-400 text-[10px] md:text-xs whitespace-nowrap order-1 sm:order-1">
+              암호화폐 총 <span className="text-white font-medium">{totalCoins}</span>개
+            </span>
           </div>
         </div>
       )}
@@ -844,11 +812,11 @@ export default function PremiumTable({
           {error}
         </div>
       ) : (
-        <div className="bg-slate-800/50 rounded-lg border border-slate-700/50 overflow-hidden">
+        <div className="overflow-hidden">
           <div className="overflow-x-auto w-full">
-            <table className="w-full text-sm min-w-full">
+            <table className="w-full table-auto border-separate border-spacing-y-0">
               <thead>
-                <tr className="bg-slate-900/80 text-slate-400 text-[11px]">
+                <tr className="bg-slate-900/60 text-slate-400 text-[11px]">
                   <th className="px-2 py-1 text-left font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("symbol")}>
                     코인명
                     <SortIcon columnKey="symbol" />
@@ -864,6 +832,14 @@ export default function PremiumTable({
                   <th className="px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("change24h")}>
                     전일대비
                     <SortIcon columnKey="change24h" />
+                  </th>
+                  <th className="hidden sm:table-cell px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("high24h")}>
+                    고가대비(전일)
+                    <SortIcon columnKey="high24h" />
+                  </th>
+                  <th className="hidden sm:table-cell px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("low24h")}>
+                    저가대비(전일)
+                    <SortIcon columnKey="low24h" />
                   </th>
                   <th className="px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("volume24hKrw")}>
                     거래액(일)
@@ -944,6 +920,26 @@ export default function PremiumTable({
                           )}
                         </td>
 
+                        <td className="hidden sm:table-cell px-2 py-2 text-right text-[12px] whitespace-nowrap">
+                          {highDiff.valid && highDiff.percent !== null && highDiff.percent !== undefined ? (
+                            <span className={getChangeColor(highDiff.percent)}>
+                              {highDiff.percent >= 0 ? "+" : ""}{Number(highDiff.percent).toFixed(2)}%
+                            </span>
+                          ) : (
+                            <span className="text-gray-500">-</span>
+                          )}
+                        </td>
+
+                        <td className="hidden sm:table-cell px-2 py-2 text-right text-[12px] whitespace-nowrap">
+                          {lowDiff.valid && lowDiff.percent !== null && lowDiff.percent !== undefined ? (
+                            <span className={getChangeColor(lowDiff.percent)}>
+                              {lowDiff.percent >= 0 ? "+" : ""}{Number(lowDiff.percent).toFixed(2)}%
+                            </span>
+                          ) : (
+                            <span className="text-gray-500">-</span>
+                          )}
+                        </td>
+
                         <td className="px-2 py-2 text-right text-[12px] whitespace-nowrap">
                           {row.volume24hKrw !== null && row.volume24hKrw !== undefined ? (
                             <span className="text-slate-100">{formatVolumeKRW(row.volume24hKrw)}</span>
@@ -955,7 +951,7 @@ export default function PremiumTable({
 
                       {expandedSymbol === row.symbol && (
                         <tr key={`${row.symbol}-chart`}>
-                          <td colSpan={5} className="p-0 lg:table-cell">
+                          <td colSpan={7} className="p-0 lg:table-cell">
                             <div className="bg-[#0F111A] border-t border-b border-slate-700/50 py-3 px-3">
                               <div className="h-[360px] rounded-xl overflow-hidden bg-slate-900/50">
                                 <TradingViewChart
