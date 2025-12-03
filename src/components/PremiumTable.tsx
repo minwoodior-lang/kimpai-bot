@@ -863,8 +863,8 @@ export default function PremiumTable({
           <div className="overflow-x-auto w-full">
             <table className="w-full table-auto border-separate border-spacing-y-0">
               <thead>
-                <tr className="bg-slate-900/60 text-slate-400 text-[10px] sm:text-[11px]">
-                  <th className="px-1.5 sm:px-2 py-1 text-left font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("symbol")}>
+                <tr className="dark:bg-slate-900/60 light:bg-slate-200 dark:text-slate-400 light:text-slate-700 text-[10px] sm:text-[11px] border-b dark:border-slate-800 light:border-slate-300">
+                  <th className="px-1.5 sm:px-2 py-1 text-left font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("symbol")}>
                     코인명
                     <SortIcon columnKey="symbol" />
                   </th>
@@ -913,32 +913,34 @@ export default function PremiumTable({
                   return (
                     <React.Fragment key={uniqueKey}>
                       <tr
-                        className="border-t border-slate-700/50 hover:bg-slate-700/30 transition-colors"
+                        className="border-b dark:border-slate-800/80 light:border-slate-200 dark:hover:bg-slate-800/60 light:hover:bg-slate-100 transition-colors"
                       >
                         <td className="px-2 py-2">
                           <div className="flex items-center gap-3">
                             {/* 아이콘 + 별 (세로) */}
-                            <div className="flex flex-col items-center justify-center gap-1 min-w-[32px]">
+                            <div className="flex flex-col items-center justify-center gap-1 min-w-[36px]">
                               <CoinIcon symbol={row.symbol} className="h-7 w-7" iconUrl={row.icon_url} />
                               <button
                                 type="button"
-                                className="text-[13px] leading-none text-slate-500 hover:text-yellow-400 transition-colors"
+                                className="text-[11px] leading-none dark:text-slate-500 light:text-slate-400 dark:hover:text-yellow-400 light:hover:text-yellow-500 transition-colors"
                                 onClick={() => toggleFavorite(row.symbol)}
                               >
                                 {favorites.has(row.symbol) ? "★" : "☆"}
                               </button>
                             </div>
-                            <button
-                              onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
-                              className="flex flex-col hover:text-blue-400 transition-colors text-left min-w-0"
-                            >
-                              <span className="text-[12px] text-slate-50 truncate max-w-[90px]">
-                                {getDisplayName(row)}
-                              </span>
-                              <span className="text-[11px] text-slate-400 truncate max-w-[90px]">
+                            <div className="flex flex-col justify-center leading-tight min-w-0">
+                              <button
+                                onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
+                                className="dark:hover:text-blue-400 light:hover:text-blue-600 transition-colors text-left truncate"
+                              >
+                                <span className="text-[12px] dark:text-slate-100 light:text-slate-900 font-medium truncate max-w-[90px]">
+                                  {getDisplayName(row)}
+                                </span>
+                              </button>
+                              <span className="text-[11px] dark:text-slate-500 light:text-slate-600 truncate max-w-[90px]">
                                 {row.symbol}
                               </span>
-                            </button>
+                            </div>
                           </div>
                         </td>
 

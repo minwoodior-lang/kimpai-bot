@@ -1,0 +1,352 @@
+🧾 KimpAI 홈 리뉴얼 – 남은 수정 사항 전달문 (정리본)
+
+⚠️ 아래 항목들은 현재 배포 화면 기준 아직 반영되지 않은 부분입니다.
+코드 / CSS 위치는 예시이니, 실제 컴포넌트 구조에 맞게 적용해주세요.
+
+1. 전체 배경색 & 레이아웃 폭
+
+메인 배경색 복원
+
+지금은 bg-slate-950 같은 완전 먹색 단색으로 통일돼 있음.
+
+예전처럼 사용하던 기존 메인 배경색(그라디언트 혹은 짙은 남색 톤) 으로 되돌려 주세요.
+
+다만, 차트·테이블을 감싸는 내부 검은 박스(전부 bg-slate-900 카드처럼 둘러싼 것)는 제거하고,
+섹션만 살짝 어둡게(예: bg-slate-900/70 정도) 처리하는 정도로만 사용해 주세요.
+
+요약:
+
+body / main 쪽: 예전 다크 테마 컬러로 복원
+
+불필요한 “큰 검은 카드 컨테이너” 삭제
+
+헤더 폭(main content 폭과 정렬)
+
+현재 로고 ~ 로그인/회원가입 있는 헤더는 화면 전체 폭(w-full)을 쓰고 있고,
+차트/코인 그리드 컨텐츠는 max-w-[1200px]로 안쪽에 들어와 있어서 둘이 폭이 안 맞음.
+
+요구사항:
+
+헤더 내부도 같은 max width 컨테이너를 써야 함.
+
+예시:
+
+// Layout.tsx
+<header className="sticky top-0 z-50 bg-...">
+  <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-5 flex items-center justify-between">
+    {/* 로고 / 네비 / 테마 토글 / 로그인 · 회원가입 */}
+  </div>
+</header>
+
+<main>
+  <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-5">
+    {/* 차트, 오늘의 김프 요약, 코인 테이블 */}
+  </div>
+</main>
+
+
+즉, 로고와 메인 컨텐츠 시작점이 정확히 세로로 맞도록 정렬 필요.
+
+2. 다크/라이트 모드 동작 방식
+
+라이트 모드 실제 적용 안 됨
+
+next-themes 설치 및 ThemeProvider 감싸기는 했다고 나오지만,
+현재 라이트 모드 토글(☀️/🌙) 눌러도 배경이 흰색 테마로 바뀌지 않음.
+
+요구사항:
+
+tailwind.config 에 darkMode: "class" 설정 여부 확인.
+
+_app.tsx 또는 layout.tsx 에서:
+
+import { ThemeProvider } from "next-themes";
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <ThemeProvider attribute="class" defaultTheme="dark">
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
+}
+
+
+상위 html 혹은 body 에 theme class 가 제대로 붙는지 확인 (class="dark"/class="light").
+
+다크/라이트 각각에서 사용할 배경/텍스트 색상을 명시:
+
+<body className="bg-[#050816] text-slate-100 dark:bg-[#050816] dark:text-slate-100 light:bg-white light:text-slate-900">
+
+
+혹은 Tailwind 유틸:
+
+<main className="min-h-screen bg-slate-950 text-slate-100 dark:bg-slate-950 dark:text-slate-100 light:bg-white light:text-slate-900">
+
+
+요약: 토글을 눌렀을 때 완전히 흰 배경 라이트 테마로 전환되도록 실제 스타일 바인딩 필요.
+
+3. 오늘의 AI 김프 요약 섹션 레이아웃
+
+현재 상태:
+
+PC: 텍스트(평균/최대/최소/환율)만 왼쪽에, 오른쪽에 KR Premium Score 카드 + PRO 버튼이 크고 허공 떠 있는 느낌.
+
+모바일: 전체적으로 여백이 넓고, 텍스트 길이(“최근 30일 기준…”)가 잘려서 안 나옴.
+
+목표 레이아웃 (PC)
+👉 첨부했던 김프AI 구버전/김프가 오른쪽 카드 구조 그대로 “컴팩트하게” 만들기
+
+좌/우 2단 구조 정리
+
+컴포넌트 예시 이름: TodayPremiumSection.tsx
+
+PC에서:
+
+<section className="mt-4 mb-4 w-full">
+  <div className="mx-auto max-w-[1200px] px-4 lg:px-5">
+    <div className="flex flex-col gap-3 md:flex-row md:items-stretch">
+      {/* LEFT: 텍스트 요약 */}
+      <div className="flex-1 text-sm leading-relaxed space-y-0.5">
+        <p className="font-semibold">오늘의 AI 김프 요약</p>
+        <p>• 평균 김프: <span className="text-emerald-400">+0.0%</span></p>
+        <p>• 최대 김프: -</p>
+        <p>• 최소 김프: -</p>
+        <p>• 환율: ₩1,350/USDT</p>
+      </div>
+
+      {/* RIGHT: Score + PRO 버튼 + 잠금 문구 카드 */}
+      <div className="flex-[1.1] flex flex-col gap-2">
+        <div className="flex gap-2">
+          <div className="flex-1 rounded-xl bg-indigo-900/60 px-4 py-3 text-sm">
+            <p className="text-xs mb-1">KR Premium Score</p>
+            <p className="text-2xl font-semibold text-emerald-400">2/10</p>
+          </div>
+          <button className="flex-1 rounded-xl bg-indigo-500 px-4 py-3 text-sm font-semibold text-white">
+            PRO 분석 전체 보기
+          </button>
+        </div>
+
+        <div className="rounded-xl bg-slate-900/70 px-4 py-3 text-xs text-slate-300">
+          <p className="mb-1">
+            🔒 PRO 전용 48시간 김프 예측
+          </p>
+          <p>
+            최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
+            <span className="text-slate-400"> (PRO 구독 시 전체 내용 확인 가능)</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+모바일 레이아웃
+
+flex-col 로 세로로 쌓고, 각 카드의 padding 줄여서 세로 높이 최소화.
+
+텍스트 잘리지 않도록 text-xs + leading-snug 로 조정.
+
+동일한 “🔒 PRO 전용 48시간 김프 예측” + “최근 30일 기준…” 문구가
+한 줄도 안 잘리고 전부 표시되도록 폭/폰트/여백 튜닝.
+
+4. 헤더 상단 바 & 모바일 오버플로우
+
+TopMarketInfoBar flex-wrap 확인
+
+현재 “환율, 테더, BTC 점유율, 시가총액, 동시접속자” 텍스트 줄이
+모바일에서 오른쪽으로 튀어나가는 문제가 있었음.
+
+내부 래퍼에 꼭 다음 스타일이 필요:
+
+<div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px]">
+
+
+모바일에서 두 줄로 자연스럽게 떨어지도록 확인 필요.
+
+모바일 상단 바 sticky 해제
+
+현재 모바일에서 최상단 환율 바가 고정됐다가, 스크롤 시 layout 깨짐/옆으로 밀려나는 이슈가 있었음.
+
+요구사항:
+
+sticky top-0 는 PC 전용(sm 이상) 으로만 적용:
+
+<header className="sticky top-0 z-50 hidden sm:block"> ... </header>
+
+
+또는
+
+<div className="sm:sticky sm:top-0 ...">
+
+
+모바일(최소 폭)에서는 일반 static 으로 자연스럽게 스크롤되도록 처리.
+
+5. 코인 테이블 레이아웃 세부
+
+헤더 행 분리
+
+“코인명 / 현재가 / 김프 / 전일 / 고가대비 / 저가대비 / 거래액” 행이
+코인 첫 행과 한 덩어리처럼 보이지 않게 해야 함.
+
+이미 <thead> / <tbody> 나눴다고 했지만, 디자인 상으로도
+thead 에 배경/테두리를 살짝 다르게 해서 독립된 헤더 줄로 인지되도록 조정 부탁.
+
+예:
+
+<thead className="text-[11px] text-slate-400 border-b border-slate-800 bg-slate-900/60">
+
+
+코인 아이콘·별표·이름 정렬
+
+목표: 김프가처럼
+아이콘 – 코인명(한글) – 심볼(영문) – 즐겨찾기 별이 수직·수평 정렬이 깔끔하게 맞아야 함.
+
+구조 예:
+
+<td className="px-3 py-2">
+  <div className="flex items-center gap-3">
+    <div className="flex flex-col items-center gap-1">
+      <CoinIcon ... className="h-7 w-7" />
+      <button className="text-xs text-slate-500 hover:text-yellow-400">
+        ★
+      </button>
+    </div>
+    <div className="flex flex-col">
+      <span className="text-sm font-medium text-slate-100 truncate">
+        제로지
+      </span>
+      <span className="text-[11px] text-slate-500">
+        0G
+      </span>
+    </div>
+  </div>
+</td>
+
+
+PC/모바일 공통으로 이 정렬 유지.
+
+행 배경 단색 + 얕은 구분선
+
+지금은 스트라이프 제거했다고 하지만,
+각 행마다 짙은/연한 배경이 번갈아 나오는 부분이 더 있는지 확인 필요.
+
+요구사항:
+
+모든 row: 같은 배경 (bg-slate-900/40 정도)
+
+행 구분은 border-b border-slate-800/80 정도의 얕은 선으로만 처리.
+
+hover 시에만 bg-slate-800/60 같은 컬러 변경.
+
+6. 기타 (이미 어느 정도 된 것 같지만 다시 한 번 체크)
+
+상단 로고 ~ 메뉴 ~ 로그인/회원가입 모두 max-w-[1200px] 컨테이너 안으로 들어왔는지 다시 확인.
+
+라이트 모드에서:
+
+표, 카드, 버튼 컬러가 흰 배경 기준으로도 자연스러운지(문자색 대비).
+
+스크롤 상단 이동 버튼:
+
+PC/모바일 모두 스크롤 발생 시에만 우측 하단에 나타나는지 확인.
+
+7. 코인 셀 레이아웃 정렬 (아이콘 / 이름 / 심볼 / 즐겨찾기 별)
+
+현재 문제:
+아이콘 옆의 한글 이름 / 영문 심볼 / 별 모양이 수직·수평으로 들쭉날쭉하고,
+김프가처럼 “한 덩어리”로 깔끔하게 정렬되지 않음.
+
+요구사항
+
+구조 통일 (PC/모바일 공통)
+
+<td className="px-3 py-2">
+  <div className="flex items-center gap-3">
+    {/* 왼쪽: 아이콘 + 별 */}
+    <div className="flex flex-col items-center justify-center gap-1">
+      <CoinIcon className="h-7 w-7" ... />
+      <button
+        type="button"
+        className="text-[11px] leading-none text-slate-500 hover:text-yellow-400"
+      >
+        ★
+      </button>
+    </div>
+
+    {/* 오른쪽: 코인명(한글) + 심볼(영문) */}
+    <div className="flex flex-col justify-center leading-tight">
+      <span className="text-sm font-medium text-slate-100 truncate">
+        제로지
+      </span>
+      <span className="text-[11px] text-slate-500">0G</span>
+    </div>
+  </div>
+</td>
+
+
+flex items-center 로 아이콘 그룹 + 텍스트 그룹의 세로 중앙 정렬.
+
+아이콘/별 그룹은 flex-col items-center 로 세로 정렬.
+
+텍스트 그룹은 flex-col justify-center + leading-tight 로
+한글 이름과 영문 심볼 사이 간격 최소화.
+
+폰트 사이즈/라인하이트 통일
+
+한글 이름: text-sm (14px 정도), leading-tight
+
+영문 심볼: text-[11px], leading-tight
+
+별: text-[11px], leading-none
+
+이 조합으로 아이콘 중심선과 텍스트 블록의 중심선이 같이 맞도록 조정.
+
+모바일에서도 동일 정렬 유지
+
+모바일 뷰에서 아이콘, 별, 이름, 심볼이 깨지지 않도록
+같은 구조와 클래스 사용.
+
+필요하다면 min-w-[120px] 정도를 텍스트 영역에 주어서
+이름이 너무 짧게 꺾이지 않게 조정.
+
+라이트 모드 색상 걱정되는 부분 (설명 + 전달용)
+
+네 말이 맞아.
+그냥 바탕만 하얀색으로 바꾸고 텍스트는 계속 text-white / text-slate-100 쓰면
+라이트 모드에서는 글자가 거의 안 보이거나 완전히 안 보일 수 있어.
+
+레플릿/지미한테는 이렇게 얘기해 줘:
+
+색상 토큰을 라이트/다크 둘 다 정의해달라고 하기
+
+// 예시
+<main className="min-h-screen bg-slate-950 text-slate-100 dark:bg-slate-950 dark:text-slate-100 light:bg-white light:text-slate-900">
+
+
+또는 Tailwind 방식으로:
+
+<div className="bg-slate-950 text-slate-100 dark:bg-slate-950 dark:text-slate-100 light:bg-white light:text-slate-900">
+
+
+중요한 텍스트는 전부 dark: / light: 같이 지정
+
+<span className="text-sm font-medium text-slate-100 dark:text-slate-100 light:text-slate-900">
+  제로지
+</span>
+
+<span className="text-xs text-slate-500 dark:text-slate-500 light:text-slate-500">
+  0G
+</span>
+
+
+절대 text-white 같은 단일 색만 쓰지 말 것
+
+다크 전용이면 dark:text-slate-100 light:text-slate-900 이런 식으로
+두 모드 모두에 대해 색을 지정해야 한다고 꼭 말해줘.
+
+요약해서 전달해도 됨:
+
+“라이트 모드가 진짜로 쓰이려면, 배경만 흰색으로 바꾸는 게 아니라
+주요 텍스트/아이콘/버튼 색을 전부 dark:/light: 기준으로 분리해서 지정해줘야 한다.
+text-white 하나만 박아두면 라이트 모드에서는 글자가 안 보인다.”
