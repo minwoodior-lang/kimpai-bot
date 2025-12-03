@@ -877,7 +877,7 @@ export default function PremiumTable({
             </colgroup>
             <thead>
                 <tr className="dark:bg-slate-900/60 light:bg-slate-200 dark:text-slate-400 light:text-slate-700 text-[9px] sm:text-[11px] border-b dark:border-slate-800 light:border-slate-300">
-                  <th className="px-4 py-2 text-left text-[12px] font-medium text-[#A7B3C6]/60 tracking-wide border-b border-[#1d2433] cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("symbol")}>
+                  <th className="px-4 py-1.5 text-left text-[12px] font-medium text-[#A7B3C6]/60 tracking-wide border-b border-[#1d2433] cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("symbol")}>
                     코인명
                     <SortIcon columnKey="symbol" />
                   </th>
@@ -890,7 +890,7 @@ export default function PremiumTable({
                     <SortIcon columnKey="premium" />
                   </th>
                   <th className="px-0.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("change24h")}>
-                    전일
+                    전일대비
                     <SortIcon columnKey="change24h" />
                   </th>
                   <th className="hidden md:table-cell px-0.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("high24h")}>
@@ -902,7 +902,7 @@ export default function PremiumTable({
                     <SortIcon columnKey="low24h" />
                   </th>
                   <th className="px-0.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("volume24hKrw")}>
-                    거래액
+                    거래액(일)
                     <SortIcon columnKey="volume24hKrw" />
                   </th>
                 </tr>
@@ -931,23 +931,8 @@ export default function PremiumTable({
                       >
                         <td className="px-4 py-2">
                           <div className="flex items-center gap-2 min-w-[160px]">
-                            {/* 왼쪽: 아이콘 + 별 */}
-                            <div className="flex flex-col items-center justify-center gap-0 min-w-[40px] sm:min-w-[44px] flex-shrink-0">
-                              <CoinIcon symbol={row.symbol} className="h-5 w-5 sm:h-4 sm:w-4" iconUrl={row.icon_url} />
-                              <button
-                                type="button"
-                                className={`text-xl sm:text-lg leading-none transition-colors ${
-                                  favorites.has(row.symbol)
-                                    ? "dark:text-yellow-400 light:text-yellow-500"
-                                    : "dark:text-slate-500 light:text-slate-400 dark:hover:text-yellow-400 light:hover:text-yellow-500"
-                                }`}
-                                onClick={() => toggleFavorite(row.symbol)}
-                              >
-                                ★
-                              </button>
-                            </div>
-                            {/* 오른쪽: 코인명 + 심볼 */}
-                            <div className="flex flex-col justify-center leading-tight min-w-0">
+                            <CoinIcon symbol={row.symbol} className="h-5 w-5 sm:h-4 sm:w-4 flex-shrink-0" iconUrl={row.icon_url} />
+                            <div className="flex flex-col justify-center leading-[13px] min-w-0">
                               <button
                                 onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
                                 className="dark:hover:text-blue-400 light:hover:text-blue-600 transition-colors text-left truncate"
@@ -956,10 +941,21 @@ export default function PremiumTable({
                                   {getDisplayName(row)}
                                 </span>
                               </button>
-                              <span className="text-[12px] sm:text-xs dark:text-[#A7B3C6] light:text-[#A7B3C6] truncate uppercase tracking-tight leading-tight">
+                              <span className="text-[12px] sm:text-xs dark:text-[#A7B3C6] light:text-[#A7B3C6] truncate uppercase tracking-tight">
                                 {row.symbol}
                               </span>
                             </div>
+                            <button
+                              type="button"
+                              className={`ml-auto text-lg leading-none transition-colors flex-shrink-0 ${
+                                favorites.has(row.symbol)
+                                  ? "dark:text-yellow-400 light:text-yellow-500"
+                                  : "dark:text-slate-500 light:text-slate-400 dark:hover:text-yellow-400 light:hover:text-yellow-500"
+                              }`}
+                              onClick={() => toggleFavorite(row.symbol)}
+                            >
+                              ★
+                            </button>
                           </div>
                         </td>
 
