@@ -9,8 +9,7 @@ interface LayoutProps {
   isChatOpen?: boolean;
 }
 
-function ScrollToTopButton({ hidden }: { hidden?: boolean }) {
-  if (hidden) return null;
+function ScrollToTopButton() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -26,7 +25,7 @@ function ScrollToTopButton({ hidden }: { hidden?: boolean }) {
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className="fixed bottom-6 right-5 z-40 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-500 text-white shadow-lg shadow-indigo-900/40 hover:bg-indigo-600 transition-colors"
+      className="fixed bottom-24 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-500 text-white shadow-lg shadow-indigo-900/40 hover:bg-indigo-600 transition-colors"
       aria-label="맨 위로"
     >
       ↑
@@ -34,7 +33,7 @@ function ScrollToTopButton({ hidden }: { hidden?: boolean }) {
   );
 }
 
-export default function Layout({ children, isChatOpen }: LayoutProps) {
+export default function Layout({ children }: LayoutProps) {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -211,7 +210,7 @@ export default function Layout({ children, isChatOpen }: LayoutProps) {
         </div>
       </footer>
 
-      <ScrollToTopButton hidden={isChatOpen} />
+      <ScrollToTopButton />
     </div>
   );
 }

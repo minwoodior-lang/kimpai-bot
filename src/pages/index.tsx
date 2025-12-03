@@ -68,7 +68,7 @@ export default function Home() {
   const safeAvgPremium = averagePremium || 0;
 
   return (
-    <Layout isChatOpen={isChatOpen}>
+    <Layout>
       <Head>
         <title>KimpAI - 실시간 김프 & AI 분석</title>
         <meta
@@ -86,7 +86,9 @@ export default function Home() {
         isOpen={isChatOpen} 
         onClose={() => setIsChatOpen(false)}
       >
-        <ChatUI />
+        {({ showNicknameEdit, onToggleNicknameEdit }: { showNicknameEdit: boolean; onToggleNicknameEdit: () => void }) => (
+          <ChatUI showNicknameEdit={showNicknameEdit} onToggleNicknameEdit={onToggleNicknameEdit} />
+        )}
       </ChatPanel>
 
       {/* 메인 콘텐츠 */}
