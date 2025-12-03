@@ -21,7 +21,7 @@ export function AiSummaryMobileContent({
   return (
     <div className="flex flex-col h-full">
       {/* 제목 */}
-      <h2 className="text-xs font-bold dark:text-slate-100 light:text-slate-900 mb-1.5 flex items-center gap-2">
+      <h2 className="text-[14px] font-semibold dark:text-slate-100 light:text-slate-900 mb-2 flex items-center gap-2">
         <span>📊</span>
         <span>AI 요약</span>
       </h2>
@@ -29,28 +29,28 @@ export function AiSummaryMobileContent({
       {/* 정보 그리드 */}
       <div className="space-y-0.5 flex-1">
         <div className="flex justify-between">
-          <span className="text-[9px] dark:text-slate-400 light:text-slate-600">평균 김프</span>
-          <span className="text-[9px] font-semibold dark:text-slate-100 light:text-slate-900">{avgPremium}</span>
+          <span className="text-[11px] dark:text-slate-300 light:text-slate-500">평균 김프</span>
+          <span className="text-[13px] font-semibold dark:text-slate-50 light:text-slate-900">{avgPremium}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-[9px] dark:text-slate-400 light:text-slate-600">최소 김프</span>
-          <span className="text-[9px] font-semibold dark:text-slate-100 light:text-slate-900">{minPremium}</span>
+          <span className="text-[11px] dark:text-slate-300 light:text-slate-500">최소 김프</span>
+          <span className="text-[13px] font-semibold dark:text-slate-50 light:text-slate-900">{minPremium}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-[9px] dark:text-slate-400 light:text-slate-600">최대 김프</span>
-          <span className="text-[9px] font-semibold dark:text-slate-100 light:text-slate-900">{maxPremium}</span>
+          <span className="text-[11px] dark:text-slate-300 light:text-slate-500">최대 김프</span>
+          <span className="text-[13px] font-semibold dark:text-slate-50 light:text-slate-900">{maxPremium}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-[9px] dark:text-slate-400 light:text-slate-600">환율</span>
-          <span className="text-[9px] font-semibold dark:text-slate-100 light:text-slate-900">{fxRate}</span>
+          <span className="text-[11px] dark:text-slate-300 light:text-slate-500">환율</span>
+          <span className="text-[13px] font-semibold dark:text-slate-50 light:text-slate-900">{fxRate}</span>
         </div>
       </div>
 
       {/* Score 카드 */}
-      <div className="mt-1 py-0.5 rounded-lg dark:bg-indigo-900/60 light:bg-indigo-100/60 px-2 flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-[8px] dark:text-slate-300 light:text-indigo-700 mb-0.5">KR Premium Score</div>
-          <div className="text-sm font-bold dark:text-emerald-400 light:text-emerald-600">{score}/10</div>
+      <div className="mt-1 py-1 rounded-lg dark:bg-indigo-900/60 light:bg-indigo-100/60 px-2 flex items-center justify-center">
+        <div className="text-center w-full">
+          <div className="text-[11px] dark:text-slate-300 light:text-indigo-700 mb-1">KR Premium Score</div>
+          <div className="text-[16px] font-semibold dark:text-emerald-400 light:text-emerald-600">{score}/10</div>
         </div>
       </div>
     </div>
@@ -99,7 +99,7 @@ export function MyAlertsMobileContent() {
   return (
     <div className="flex flex-col h-full">
       {/* 제목 */}
-      <h3 className="text-xs font-bold dark:text-slate-100 light:text-slate-900 mb-1 flex items-center gap-2">
+      <h3 className="text-[14px] font-semibold dark:text-slate-100 light:text-slate-900 mb-2 flex items-center gap-2">
         <span>🔔</span>
         <span>내 알림</span>
       </h3>
@@ -107,9 +107,9 @@ export function MyAlertsMobileContent() {
       {/* 콘텐츠 */}
       <div className="flex-1 flex items-center justify-center">
         {isLoggedIn ? (
-          <div className="space-y-0.5 w-full">
-            <div className="text-[8px] dark:text-slate-300 light:text-slate-700">
-              <div className="mb-0.5">
+          <div className="space-y-1 w-full">
+            <div className="text-[11px] dark:text-slate-300 light:text-slate-700">
+              <div className="mb-1">
                 <span className="text-emerald-400">✓</span>
                 <span className="ml-1">김프 3% 이상 상승 시 알림</span>
               </div>
@@ -118,16 +118,16 @@ export function MyAlertsMobileContent() {
                 <span className="ml-1">김프 급락 구간 경보 예측</span>
               </div>
             </div>
-            <button className="w-full mt-0.5 text-[8px] text-indigo-400 hover:text-indigo-300 transition-colors">
+            <button className="w-full mt-1 text-[11px] text-indigo-400 hover:text-indigo-300 transition-colors">
               + 알림 설정 수정
             </button>
           </div>
         ) : (
-          <div className="text-center">
-            <p className="text-[8px] dark:text-slate-400 light:text-slate-600 mb-1.5">
+          <div className="text-center w-full">
+            <p className="text-[13px] dark:text-slate-300 light:text-slate-600 mb-3 text-center">
               로그인하고 알림 설정하기
             </p>
-            <button className="w-full rounded-lg dark:bg-indigo-600 light:bg-indigo-600 dark:hover:bg-indigo-700 light:hover:bg-indigo-700 transition-colors px-2 py-0.5 text-[8px] font-semibold text-white">
+            <button className="w-full rounded-lg dark:bg-indigo-600 light:bg-indigo-600 dark:hover:bg-indigo-700 light:hover:bg-indigo-700 transition-colors px-5 py-1.5 text-[13px] font-semibold text-white">
               로그인
             </button>
           </div>
