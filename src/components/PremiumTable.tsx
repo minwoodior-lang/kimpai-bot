@@ -877,7 +877,7 @@ export default function PremiumTable({
             </colgroup>
             <thead>
                 <tr className="dark:bg-slate-900/60 light:bg-slate-200 dark:text-slate-400 light:text-slate-700 text-[9px] sm:text-[11px] border-b dark:border-slate-800 light:border-slate-300">
-                  <th className="px-1 sm:px-2 py-1 text-left font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("symbol")}>
+                  <th className="px-4 py-2 text-left text-[12px] font-medium text-[#A7B3C6]/60 tracking-wide border-b border-[#1d2433] cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("symbol")}>
                     코인명
                     <SortIcon columnKey="symbol" />
                   </th>
@@ -929,8 +929,8 @@ export default function PremiumTable({
                         className="border-b dark:border-slate-800/80 light:border-slate-200 dark:hover:bg-slate-800/60 light:hover:bg-slate-100 transition-colors"
                         data-symbol={row.symbol}
                       >
-                        <td className="px-1 sm:px-2 py-1">
-                          <div className="flex items-center gap-1.5">
+                        <td className="px-4 py-2">
+                          <div className="flex items-center gap-2 min-w-[160px]">
                             {/* 왼쪽: 아이콘 + 별 */}
                             <div className="flex flex-col items-center justify-center gap-0 min-w-[40px] sm:min-w-[44px] flex-shrink-0">
                               <CoinIcon symbol={row.symbol} className="h-5 w-5 sm:h-4 sm:w-4" iconUrl={row.icon_url} />
@@ -952,11 +952,11 @@ export default function PremiumTable({
                                 onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
                                 className="dark:hover:text-blue-400 light:hover:text-blue-600 transition-colors text-left truncate"
                               >
-                                <span className="text-[11px] sm:text-base dark:text-slate-100 light:text-slate-900 font-semibold truncate">
+                                <span className="text-[13px] sm:text-base dark:text-white light:text-slate-900 font-semibold truncate">
                                   {getDisplayName(row)}
                                 </span>
                               </button>
-                              <span className="text-[8px] sm:text-xs dark:text-slate-400 light:text-slate-600 truncate uppercase tracking-tight leading-tight">
+                              <span className="text-[12px] sm:text-xs dark:text-[#A7B3C6] light:text-[#A7B3C6] truncate uppercase tracking-tight leading-tight">
                                 {row.symbol}
                               </span>
                             </div>
