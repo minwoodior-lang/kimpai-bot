@@ -19,10 +19,10 @@ const PRIORITY_ORDER = ["UPBIT", "BITHUMB", "COINONE"];
 
 export async function buildMasterSymbols() {
   const exchangeMarketsPath = path.join(process.cwd(), "data", "exchange_markets.json");
-  const exchangeIconsPath = path.join(process.cwd(), "data", "exchangeIcons.json");
+  const symbolIconsPath = path.join(process.cwd(), "data", "symbolIcons.json");
 
   const markets = JSON.parse(fs.readFileSync(exchangeMarketsPath, "utf-8")) as Market[];
-  const iconMap = JSON.parse(fs.readFileSync(exchangeIconsPath, "utf-8")) as Record<string, string>;
+  const symbolIcons = JSON.parse(fs.readFileSync(symbolIconsPath, "utf-8")) as Record<string, string>;
 
   const symbolMap = new Map<string, MasterSymbol>();
 
@@ -41,14 +41,9 @@ export async function buildMasterSymbols() {
       entry.name_en = market.name_en;
     }
 
-    if (!entry.icon_path) {
-      for (const exchange of PRIORITY_ORDER) {
-        const iconKey = `${exchange}:${symbol}`;
-        if (iconMap[iconKey]) {
-          entry.icon_path = iconMap[iconKey];
-          break;
-        }
-      }
+    // symbolIcons.json 기준으로 아이콘 설정 (심볼 단위 통합)
+    if (!entry.icon_path && symbolIcons[symbol]) {
+      entry.icon_path = symbolIcons[symbol];
     }
   }
 

@@ -42,9 +42,9 @@ function loadMasterSymbols(): any[] {
   }
 }
 
-function loadExchangeIcons(): Record<string, string> {
+function loadSymbolIcons(): Record<string, string> {
   try {
-    const file = path.join(process.cwd(), "data", "exchangeIcons.json");
+    const file = path.join(process.cwd(), "data", "symbolIcons.json");
     return JSON.parse(fs.readFileSync(file, "utf-8"));
   } catch {
     return {};
@@ -67,7 +67,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     const allMarkets = loadExchangeMarkets();
     const masterSymbols = loadMasterSymbols();
-    const exchangeIcons = loadExchangeIcons();
+    const symbolIcons = loadSymbolIcons();
 
     console.log(
       `[API] Filtering: domestic=${domesticExchange}_${domesticQuote}, foreign=${foreignExchange}_${foreignQuote}`
@@ -84,9 +84,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         const symbol = market.base.toUpperCase();
         const master = masterSymbols.find((s) => s.symbol === symbol);
         
-        // 거래소:심볼 기준으로 정확한 아이콘 경로 조회
-        const exchangeIconKey = `${market.exchange}:${symbol}`;
-        const baseIconUrl = exchangeIcons[exchangeIconKey] || null;
+        // master_symbols.icon_path 사용 (심볼 단위 통합 아이콘)
+        const baseIconUrl = master?.icon_path || null;
         
         // BAD_ICON_SYMBOLS 에 포함된 심볼은 강제로 icon_url = null 처리
         const shouldForcePlaceholder = BAD_ICON_SYMBOLS.includes(symbol);

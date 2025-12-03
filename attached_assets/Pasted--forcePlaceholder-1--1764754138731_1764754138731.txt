@@ -1,0 +1,108 @@
+[최종 전달문 – 아이콘 전체 파이프라인 통합 + forcePlaceholder 즉시 처리]
+
+아이콘 관련해서 다음 두 가지 작업을 동시에 처리하고 싶습니다.
+
+✅ 1) 심볼 단위 아이콘 통합 (거래소별 아이콘 분리 방식 → 심볼 기준 하나로 통합)
+
+현재 구조는:
+
+exchangeIcons[${exchange}:${symbol}] 를 기준으로
+거래소별로 다른 아이콘을 참조하고 있습니다.
+
+업비트/빗썸/코인원 간 아이콘 불일치 발생
+
+COINONE은 아이콘 부족 → null 많음
+
+잘못된 아이콘 매칭(A, H 등) 계속 발생
+
+👉 원하는 최종 구조는 다음과 같습니다.
+
+📌 “심볼 1개 = 아이콘 1개” 로 통일
+
+국내 3거래소 어디서 보든 동일한 아이콘 표시.
+
+작업 요청:
+(A) symbolIcons.json 자동 생성
+
+exchangeIcons.json 전체를 순회하여:
+
+// pseudo
+const symbolIconMap = {};
+
+for (const [key, path] of Object.entries(exchangeIcons)) {
+  const [, symbol] = key.split(":");
+  const s = symbol.toUpperCase();
+
+  if (!symbolIconMap[s]) {
+    symbolIconMap[s] = path; // 최초 발견 아이콘을 대표 아이콘으로 설정
+  }
+}
+
+fs.writeFileSync("symbolIcons.json", JSON.stringify(symbolIconMap));
+
+(B) buildMasterSymbols.ts 에서 icon_path는 symbolIcons.json 기준으로 설정
+
+이제 거래소는 신경 쓰지 않고 심볼 기준으로만 icon_path를 고정.
+
+icon_path = symbolIcons[symbol] ?? null;
+
+(C) API에서는 master_symbols.icon_path만 사용
+
+/api/premium/table-filtered 에서 더 이상 exchange:symbol 기반 아이콘을 사용하지 말고,
+
+icon_url = master_symbol.icon_path
+
+
+로 통일.
+
+📌 이렇게 하면 업비트/빗썸/코인원 모두 동일한 아이콘 정책이 적용됩니다.
+
+✅ 2) forcePlaceholder(true)일 때 → 즉시 placeholder 렌더링
+
+디버깅 결과:
+
+CoinIcon 로직에서 forcePlaceholder = true 인데도
+CDN 이미지 시도를 모두 한 뒤 로고가 뜨는 문제가 존재.
+
+BAD_ICON_SYMBOLS(H/A)의 핵심 의도와 다르게 동작.
+
+👉 수정 요청:
+
+CoinIcon.tsx 최상단에 다음 조건 추가
+// forcePlaceholder가 true면 어떤 이미지도 렌더링하지 않고
+// 즉시 회색 placeholder + 이니셜로 표시
+if (forcePlaceholder) {
+  return (
+    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-neutral-700 text-white font-bold text-xs">
+      {upper.charAt(0)}
+    </div>
+  );
+}
+
+
+📌 이렇게 하면 H, A 등 문제 있는 코인은
+절대 외부 아이콘을 참조하지 않고 항상 placeholder로 고정됨.
+
+🎯 요약
+반드시 이번에 적용해줬으면 하는 핵심 두 가지
+1) 국내 3거래소 → 심볼 단위 글로벌 아이콘 통합
+
+exchangeIcons 기반이 아니라 symbolIcons.json 기반
+
+master_symbols.icon_path = symbolIcons[symbol]
+
+API도 icon_path만 사용
+
+2) CoinIcon forcePlaceholder 즉시 적용
+
+CDN/로컬 이미지 시도 전 무조건 placeholder 렌더링
+
+🚀 적용 후 기대 효과
+
+잘못된 아이콘 표시 문제 완전 해결
+
+업비트/빗썸/코인원 모든 화면에서 동일한 아이콘 표시
+
+신규 상장 코인도 심볼 기준으로 자동 반영
+
+문제 있는 심볼(H/A 등)은 항상 회색 이니셜 placeholder로 표시

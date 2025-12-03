@@ -30,21 +30,8 @@ export default function CoinIcon({
   const [cdnIndex, setCdnIndex] = useState(0);
   const [hasError, setHasError] = useState(false);
   
-  // BAD_ICON_SYMBOLS 에 포함된 심볼은 항상 Placeholder 사용
+  // BAD_ICON_SYMBOLS 에 포함된 심볼은 항상 Placeholder 사용 (즉시 반환)
   const forcePlaceholder = BAD_ICON_SYMBOLS.includes(upper);
-  const finalIconUrl = forcePlaceholder ? null : iconUrl;
-  
-  // DEBUG: H/A 코인 디버깅
-  if (upper === "H" || upper === "A") {
-    console.log("[CoinIcon DEBUG] H/A Coin:", {
-      raw_symbol: symbol,
-      normalized: upper,
-      iconUrl,
-      forcePlaceholder,
-      BAD_ICON_SYMBOLS,
-      finalIconUrl,
-    });
-  }
 
   const sizeClasses = {
     sm: "w-5 h-5",
@@ -58,12 +45,23 @@ export default function CoinIcon({
     lg: "text-xs",
   };
 
+  // forcePlaceholder=true 면 즉시 placeholder 렌더링 (CDN 시도 없음)
+  if (forcePlaceholder) {
+    return (
+      <div
+        className={`${sizeClasses[size]} rounded-full bg-slate-600 flex items-center justify-center text-white font-bold ${textSizes[size]} ${className}`}
+      >
+        {upper.charAt(0)}
+      </div>
+    );
+  }
+
   // 2) 로컬 기본 경로
   const localIcon = `/coins/${upper}.png`;
 
   // 3) 아이콘 시도 우선순위
   const iconSources = [
-    finalIconUrl && finalIconUrl.trim() ? finalIconUrl : null, // 1순위: DB
+    iconUrl && iconUrl.trim() ? iconUrl : null, // 1순위: DB (master_symbols.icon_path)
     localIcon, // 2순위: /public/coins/SYMBOL.png
     `https://cdn.jsdelivr.net/npm/cryptocurrency-icons@0.18.1/32/color/${lower}.png`,
     `https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/${lower}.png`,
