@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { BAD_ICON_SYMBOLS } from "@/config/badIconSymbols";
 
 interface CoinIconProps {
   symbol: string;
@@ -28,6 +29,10 @@ export default function CoinIcon({
 
   const [cdnIndex, setCdnIndex] = useState(0);
   const [hasError, setHasError] = useState(false);
+  
+  // BAD_ICON_SYMBOLS 에 포함된 심볼은 항상 Placeholder 사용
+  const forcePlaceholder = BAD_ICON_SYMBOLS.includes(upper);
+  const finalIconUrl = forcePlaceholder ? null : iconUrl;
 
   const sizeClasses = {
     sm: "w-5 h-5",
@@ -46,7 +51,7 @@ export default function CoinIcon({
 
   // 3) 아이콘 시도 우선순위
   const iconSources = [
-    iconUrl && iconUrl.trim() ? iconUrl : null, // 1순위: DB
+    finalIconUrl && finalIconUrl.trim() ? finalIconUrl : null, // 1순위: DB
     localIcon, // 2순위: /public/coins/SYMBOL.png
     `https://cdn.jsdelivr.net/npm/cryptocurrency-icons@0.18.1/32/color/${lower}.png`,
     `https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/32/color/${lower}.png`,

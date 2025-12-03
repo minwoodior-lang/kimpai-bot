@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { BAD_ICON_SYMBOLS } from "@/config/badIconSymbols";
 
 interface PremiumRow {
   symbol: string;
@@ -85,7 +86,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         
         // 거래소:심볼 기준으로 정확한 아이콘 경로 조회
         const exchangeIconKey = `${market.exchange}:${symbol}`;
-        const iconUrl = exchangeIcons[exchangeIconKey] || null;
+        const baseIconUrl = exchangeIcons[exchangeIconKey] || null;
+        
+        // BAD_ICON_SYMBOLS 에 포함된 심볼은 강제로 icon_url = null 처리
+        const shouldForcePlaceholder = BAD_ICON_SYMBOLS.includes(symbol);
+        const iconUrl = shouldForcePlaceholder ? null : baseIconUrl;
 
         return {
           symbol,
