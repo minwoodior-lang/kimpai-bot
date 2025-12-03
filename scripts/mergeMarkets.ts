@@ -64,6 +64,21 @@ function main() {
   const map = new Map<string, ExchangeMarket>();
 
   for (const m of allRaw) {
+    // 1) COINONE – quote 비어 있으면 KRW로 고정 + market_code 생성
+    if (m.exchange === "COINONE") {
+      if (!m.quote_symbol) {
+        m.quote_symbol = "KRW";
+      }
+      if (!m.market_code) {
+        m.market_code = `${m.base_symbol}-${m.quote_symbol}`;
+      }
+    }
+
+    // 2) BITHUMB – base/quote 업비트와 동일하게 맞추기
+    if (m.exchange === "BITHUMB") {
+      [m.base_symbol, m.quote_symbol] = [m.quote_symbol, m.base_symbol];
+    }
+
     if (!m.exchange || !m.market_code || !m.base_symbol || !m.quote_symbol) {
       continue;
     }
