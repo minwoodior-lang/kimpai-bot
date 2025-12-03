@@ -83,22 +83,8 @@ export default function TopInfoBar() {
     <div className="w-full bg-[#050816] border-b border-[#0b1120]">
       <div className="mx-auto max-w-[1200px] px-4 lg:px-5 h-7 flex items-center justify-between gap-4">
         {/* 좌측: 글로벌 지표 */}
-        <div className="flex items-center gap-3 text-[11px] text-[#A7B3C6] overflow-x-auto whitespace-nowrap scrollbar-hide flex-1">
+        <div className="flex items-center gap-4 text-[11px] text-[#A7B3C6] overflow-x-auto whitespace-nowrap scrollbar-hide flex-1">
           
-          {/* 환율 (USD/KRW) */}
-          <div className="flex items-center gap-1 flex-shrink-0">
-            <div className="w-4 h-4 rounded-sm bg-gradient-to-br from-[#4A90E2] to-[#357ABD] flex items-center justify-center flex-shrink-0">
-              <span className="text-[10px] text-white font-bold">$</span>
-            </div>
-            <span className="font-medium text-white">₩{formatNumber(metrics.fx.usdKrw, 0)}</span>
-            <span className="text-[#A7B3C6]">/ $1</span>
-            <span className={`font-medium ${getChangeColor(metrics.fx.change24h)}`}>
-              {metrics.fx.change24h > 0 ? "+" : ""}{formatNumber(metrics.fx.change24h, 2)}%
-            </span>
-          </div>
-
-          <span className="text-[#30364a] px-0.5">|</span>
-
           {/* 테더 (USDT/KRW) */}
           <div className="flex items-center gap-1 flex-shrink-0">
             <div className="w-4 h-4 rounded-full bg-[#26A17B] flex items-center justify-center flex-shrink-0">
