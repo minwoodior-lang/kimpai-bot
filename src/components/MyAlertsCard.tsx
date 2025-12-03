@@ -6,9 +6,9 @@ export function MyAlertsCard() {
   const isLoggedIn = false; // TODO: Connect to auth
 
   return (
-    <div className="rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 p-4 sm:p-5 h-full flex flex-col min-h-[250px]">
+    <div className="rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 p-3 sm:p-4 h-full flex flex-col min-h-[200px]">
       {/* 제목 */}
-      <h3 className="text-sm sm:text-base font-bold dark:text-slate-100 light:text-slate-900 mb-4 flex items-center gap-2">
+      <h3 className="text-sm sm:text-base font-bold dark:text-slate-100 light:text-slate-900 mb-2 flex items-center gap-2">
         <span>🔔</span>
         <span>내 알림</span>
       </h3>
@@ -36,7 +36,7 @@ export function MyAlertsCard() {
             <p className="text-[10px] sm:text-xs dark:text-slate-400 light:text-slate-600 mb-3">
               로그인하고 알림 설정하기
             </p>
-            <button className="w-full rounded-lg dark:bg-indigo-600 light:bg-indigo-600 dark:hover:bg-indigo-700 light:hover:bg-indigo-700 transition-colors px-3 py-2 text-[10px] sm:text-xs font-semibold text-white">
+            <button className="w-full rounded-lg dark:bg-indigo-600 light:bg-indigo-600 dark:hover:bg-indigo-700 light:hover:bg-indigo-700 transition-colors px-3 py-1.5 text-[10px] sm:text-xs font-semibold text-white">
               로그인
             </button>
           </div>

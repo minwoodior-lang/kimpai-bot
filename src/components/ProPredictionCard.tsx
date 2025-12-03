@@ -5,15 +5,15 @@
 
 export function ProPredictionCard() {
   return (
-    <div className="rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 p-4 sm:p-5 h-full flex flex-col">
+    <div className="rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 p-3 sm:p-4 h-full flex flex-col">
       {/* 타이틀 */}
-      <div className="text-sm sm:text-base font-bold dark:text-slate-100 light:text-slate-900 mb-4 flex items-center gap-2">
+      <div className="text-sm sm:text-base font-bold dark:text-slate-100 light:text-slate-900 mb-2 flex items-center gap-2">
         <span>🔒</span>
         <span>PRO 전용 48시간 김프 예측</span>
       </div>
 
       {/* 블러 처리된 상단 박스 - 텍스트 가려질 정도 블러 */}
-      <div className="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-[18px] py-[20px] text-[13px] leading-[1.6] text-white/60 mb-3 flex-1">
+      <div className="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-[14px] py-[12px] text-[13px] leading-[1.6] text-white/60 mb-2 flex-1">
         <p className="opacity-20 blur-md">
           대시보드를 과산으로 움침니다.<br />
           내 자산의 리밸런싱 추천과 수익화 전략을 받을 수 있습니다.
@@ -21,12 +21,12 @@ export function ProPredictionCard() {
       </div>
 
       {/* 안내 텍스트 - 보임 */}
-      <p className="text-white/40 text-[12px] mb-3">
+      <p className="text-white/40 text-[11px] mb-2">
         * 전체 예측 데이터는 PRO 구독 시 이용할 수 있습니다.
       </p>
 
       {/* 설명 텍스트 */}
-      <p className="text-[10px] sm:text-xs dark:text-slate-400 light:text-slate-600 mb-3 leading-relaxed">
+      <p className="text-[10px] sm:text-xs dark:text-slate-400 light:text-slate-600 mb-2 leading-relaxed">
         최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
       </p>
 
