@@ -842,7 +842,7 @@ export default function PremiumTable({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="BTC, 비트코인, ㅂㅌ"
-                  className="w-full bg-slate-700 text-white rounded-lg pl-8 pr-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs"
+                  className="w-full dark:bg-slate-700 light:bg-slate-100 dark:text-white light:text-slate-900 rounded-lg pl-8 pr-3 py-1.5 border dark:border-slate-600 light:border-slate-300 dark:focus:border-blue-500 light:focus:border-blue-400 focus:outline-none text-xs"
                 />
               </div>
             </div>
@@ -868,27 +868,27 @@ export default function PremiumTable({
                     코인명
                     <SortIcon columnKey="symbol" />
                   </th>
-                  <th className="px-1.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("koreanPrice")}>
+                  <th className="px-1.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("koreanPrice")}>
                     현재가
                     <SortIcon columnKey="koreanPrice" />
                   </th>
-                  <th className="px-1.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("premium")}>
+                  <th className="px-1.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("premium")}>
                     김프
                     <SortIcon columnKey="premium" />
                   </th>
-                  <th className="px-1.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("change24h")}>
+                  <th className="px-1.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("change24h")}>
                     전일
                     <SortIcon columnKey="change24h" />
                   </th>
-                  <th className="hidden sm:table-cell px-1.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("high24h")}>
+                  <th className="hidden sm:table-cell px-1.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("high24h")}>
                     고가대비
                     <SortIcon columnKey="high24h" />
                   </th>
-                  <th className="hidden sm:table-cell px-1.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("low24h")}>
+                  <th className="hidden sm:table-cell px-1.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("low24h")}>
                     저가대비
                     <SortIcon columnKey="low24h" />
                   </th>
-                  <th className="px-1.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("volume24hKrw")}>
+                  <th className="px-1.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("volume24hKrw")}>
                     거래액
                     <SortIcon columnKey="volume24hKrw" />
                   </th>
@@ -944,11 +944,11 @@ export default function PremiumTable({
                           </div>
                         </td>
 
-                        <td className={`px-1.5 sm:px-2 py-1.5 text-right text-[11px] sm:text-[12px] whitespace-nowrap ${getFlashClass(row.symbol, "price")}`}>
+                        <td className={`px-1 sm:px-2 py-1.5 text-right text-[10px] sm:text-[12px] whitespace-nowrap ${getFlashClass(row.symbol, "price")}`}>
                           ₩{formatKrwPrice(row.koreanPrice)}
                         </td>
 
-                        <td className={`px-1.5 sm:px-2 py-1.5 text-right text-[11px] sm:text-[12px] whitespace-nowrap ${getFlashClass(row.symbol, "premium")}`}>
+                        <td className={`px-1 sm:px-2 py-1.5 text-right text-[10px] sm:text-[12px] whitespace-nowrap ${getFlashClass(row.symbol, "premium")}`}>
                           {row.premium !== null && row.premium !== undefined ? (
                             <span className={getPremiumColor(row.premium)}>
                               {row.premium >= 0 ? "+" : ""}{Number(row.premium).toFixed(2)}%
@@ -958,7 +958,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="px-1.5 sm:px-2 py-1.5 text-right text-[11px] sm:text-[12px] whitespace-nowrap">
+                        <td className="px-1 sm:px-2 py-1.5 text-right text-[10px] sm:text-[12px] whitespace-nowrap">
                           {row.change24h !== null && row.change24h !== undefined ? (
                             <span className={getChangeColor(row.change24h)}>
                               {row.change24h >= 0 ? "+" : ""}{Number(row.change24h).toFixed(2)}%
@@ -968,7 +968,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="hidden sm:table-cell px-1.5 sm:px-2 py-1.5 text-right text-[11px] sm:text-[12px] whitespace-nowrap">
+                        <td className="hidden sm:table-cell px-1 sm:px-2 py-1.5 text-right text-[10px] sm:text-[12px] whitespace-nowrap">
                           {highDiff.valid && highDiff.percent !== null && highDiff.percent !== undefined ? (
                             <span className={getChangeColor(highDiff.percent)}>
                               {highDiff.percent >= 0 ? "+" : ""}{Number(highDiff.percent).toFixed(2)}%
@@ -978,7 +978,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="hidden sm:table-cell px-1.5 sm:px-2 py-1.5 text-right text-[11px] sm:text-[12px] whitespace-nowrap">
+                        <td className="hidden sm:table-cell px-1 sm:px-2 py-1.5 text-right text-[10px] sm:text-[12px] whitespace-nowrap">
                           {lowDiff.valid && lowDiff.percent !== null && lowDiff.percent !== undefined ? (
                             <span className={getChangeColor(lowDiff.percent)}>
                               {lowDiff.percent >= 0 ? "+" : ""}{Number(lowDiff.percent).toFixed(2)}%
@@ -988,9 +988,9 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="px-1.5 sm:px-2 py-1.5 text-right text-[11px] sm:text-[12px] whitespace-nowrap">
+                        <td className="px-1 sm:px-2 py-1.5 text-right text-[10px] sm:text-[12px] whitespace-nowrap">
                           {row.volume24hKrw !== null && row.volume24hKrw !== undefined ? (
-                            <span className="text-slate-100">{formatVolumeKRW(row.volume24hKrw)}</span>
+                            <span className="dark:text-slate-100 light:text-slate-900">{formatVolumeKRW(row.volume24hKrw)}</span>
                           ) : (
                             <span className="text-gray-500">-</span>
                           )}

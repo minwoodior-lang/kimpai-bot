@@ -44,7 +44,7 @@ export function TodayPremiumSection({
               </div>
 
               <button className="flex-1 rounded-lg dark:bg-indigo-500 light:bg-indigo-600 px-3 py-2 text-[11px] lg:text-[12px] font-semibold dark:text-white light:text-white hover:dark:bg-indigo-600 hover:light:bg-indigo-700 transition-colors flex items-center justify-center">
-                PRO 분석
+                PRO 분석 전체 보기
               </button>
             </div>
 

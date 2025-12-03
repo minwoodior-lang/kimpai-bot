@@ -166,22 +166,22 @@ export default function Layout({ children }: LayoutProps) {
                 </div>
               </div>
             )}
-          </div>
-        </nav>
+          </nav>
+        </div>
       </header>
 
       <main className="flex-grow">{children}</main>
 
-      <footer className="border-t border-slate-800 mt-10">
-        <div className="max-w-[1200px] mx-auto px-4 lg:px-5 py-8">
-          <div className="space-y-3 text-slate-400 text-[12px]">
+      <footer className="border-t dark:border-slate-800 light:border-slate-200 mt-10 dark:bg-gradient-to-b dark:from-[#0a0d1a]/50 light:bg-white">
+        <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-5 py-8">
+          <div className="space-y-3 dark:text-slate-400 light:text-slate-600 text-[12px]">
             <p className="leading-relaxed">
               데이터 출처: 업비트, 빗썸, 코인원, 바이낸스 등 주요 국내·글로벌 거래소의 공개 API를 사용합니다.
             </p>
             <p className="leading-relaxed">
               AI 분석: 과거 김프 패턴과 거래량, 시장 심리를 기반으로 한 예측 모델을 활용합니다.
             </p>
-            <p className="text-slate-500 text-[11px] mt-4">
+            <p className="dark:text-slate-500 light:text-slate-500 text-[11px] mt-4">
               © 2024 KimpAI. 모든 권리 보유.
             </p>
           </div>
