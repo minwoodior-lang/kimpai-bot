@@ -931,7 +931,7 @@ export default function PremiumTable({
                         className="border-b dark:border-slate-800/80 light:border-slate-200 dark:hover:bg-slate-800/60 light:hover:bg-slate-100 transition-colors"
                         data-symbol={row.symbol}
                       >
-                        <td className="px-1 sm:px-2 py-2">
+                        <td className="px-1 sm:px-2 py-1">
                           <div className="flex items-center gap-1.5">
                             {/* 왼쪽: 아이콘 + 별 */}
                             <div className="flex flex-col items-center justify-center gap-0 min-w-[40px] sm:min-w-[44px] flex-shrink-0">
@@ -958,18 +958,18 @@ export default function PremiumTable({
                                   {getDisplayName(row)}
                                 </span>
                               </button>
-                              <span className="text-[9px] sm:text-xs dark:text-slate-400 light:text-slate-600 truncate uppercase tracking-tight">
+                              <span className="text-[8px] sm:text-xs dark:text-slate-400 light:text-slate-600 truncate uppercase tracking-tight leading-tight">
                                 {row.symbol}
                               </span>
                             </div>
                           </div>
                         </td>
 
-                        <td className={`px-0.5 sm:px-2 py-1.5 text-right text-[9px] sm:text-sm whitespace-nowrap ${getFlashClass(row.symbol, "price")}`}>
+                        <td className={`px-0.5 sm:px-2 py-1 text-right text-[9px] sm:text-sm whitespace-nowrap ${getFlashClass(row.symbol, "price")}`}>
                           ₩{formatKrwPrice(row.koreanPrice)}
                         </td>
 
-                        <td className={`px-0.5 sm:px-2 py-1.5 text-right text-[9px] sm:text-sm whitespace-nowrap ${getFlashClass(row.symbol, "premium")}`}>
+                        <td className={`px-0.5 sm:px-2 py-1 text-right text-[9px] sm:text-sm whitespace-nowrap ${getFlashClass(row.symbol, "premium")}`}>
                           {row.premium !== null && row.premium !== undefined ? (
                             <span className={getPremiumColor(row.premium)}>
                               {row.premium >= 0 ? "+" : ""}{Number(row.premium).toFixed(2)}%
@@ -979,7 +979,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="px-0.5 sm:px-2 py-1.5 text-right text-[9px] sm:text-sm whitespace-nowrap">
+                        <td className="px-0.5 sm:px-2 py-1 text-right text-[9px] sm:text-sm whitespace-nowrap">
                           {row.change24h !== null && row.change24h !== undefined ? (
                             <span className={getChangeColor(row.change24h)}>
                               {row.change24h >= 0 ? "+" : ""}{Number(row.change24h).toFixed(2)}%
@@ -989,7 +989,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="hidden md:table-cell px-0.5 sm:px-2 py-1.5 text-right text-[8px] sm:text-xs whitespace-nowrap">
+                        <td className="hidden md:table-cell px-0.5 sm:px-2 py-1 text-right text-[8px] sm:text-xs whitespace-nowrap">
                           {highDiff.valid && highDiff.percent !== null && highDiff.percent !== undefined ? (
                             <span className={getChangeColor(highDiff.percent)}>
                               {highDiff.percent >= 0 ? "+" : ""}{Number(highDiff.percent).toFixed(2)}%
@@ -999,7 +999,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="hidden md:table-cell px-0.5 sm:px-2 py-1.5 text-right text-[8px] sm:text-xs whitespace-nowrap">
+                        <td className="hidden md:table-cell px-0.5 sm:px-2 py-1 text-right text-[8px] sm:text-xs whitespace-nowrap">
                           {lowDiff.valid && lowDiff.percent !== null && lowDiff.percent !== undefined ? (
                             <span className={getChangeColor(lowDiff.percent)}>
                               {lowDiff.percent >= 0 ? "+" : ""}{Number(lowDiff.percent).toFixed(2)}%
@@ -1009,7 +1009,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="px-0.5 sm:px-2 py-1.5 text-right text-[9px] sm:text-sm whitespace-nowrap">
+                        <td className="px-0.5 sm:px-2 py-1 text-right text-[9px] sm:text-sm whitespace-nowrap">
                           {row.volume24hKrw !== null && row.volume24hKrw !== undefined ? (
                             <span className="dark:text-slate-100 light:text-slate-900">{formatVolumeKRW(row.volume24hKrw)}</span>
                           ) : (

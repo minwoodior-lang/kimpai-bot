@@ -115,14 +115,14 @@ export default function Home() {
           </div>
 
           {/* 차트 섹션 */}
-          <div className="mt-5">
+          <div className="mt-4">
             <ChartSectionEnhanced
               selectedIndicator={selectedIndicator}
               onIndicatorChange={setSelectedIndicator}
             />
           </div>
 
-          <div className="mt-5 space-y-4">
+          <div className="mt-4 space-y-3">
 
             {/* 프리미엄 테이블 */}
             <PremiumTable showHeader={false} showFilters={true} limit={0} refreshInterval={2000} />
