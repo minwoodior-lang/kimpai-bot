@@ -884,46 +884,46 @@ export default function PremiumTable({
           {error}
         </div>
       ) : (
-        <div className="w-full overflow-x-auto px-2 md:px-4">
-          <table className="w-full border-separate border-spacing-y-0 min-w-full">
+        <div className="w-full overflow-hidden px-4">
+          <table className="w-full table-fixed border-separate border-spacing-y-0">
             <colgroup>
-              <col className="w-6 md:w-[30px]" /> {/* 즐겨찾기 */}
-              <col className="w-[40%] md:w-[35%]" /> {/* 코인명 */}
-              <col className="w-[13%] md:w-[16%]" /> {/* 현재가 */}
-              <col className="w-[13%] md:w-[16%]" /> {/* 김프 */}
-              <col className="w-[13%] md:w-[17%]" /> {/* 전일대비 */}
-              <col className="hidden md:table-column md:w-[8%]" /> {/* 고가대비 */}
-              <col className="hidden md:table-column md:w-[8%]" /> {/* 저가대비 */}
-              <col className="w-[21%] md:w-[16%]" /> {/* 거래액(일) */}
+              <col className="w-[30px]" /> {/* 즐겨찾기 */}
+              <col className="w-[35%]" /> {/* 코인명 */}
+              <col className="w-[16%]" /> {/* 현재가 */}
+              <col className="w-[16%]" /> {/* 김프 */}
+              <col className="w-[17%]" /> {/* 전일대비 */}
+              <col className="hidden md:table-column w-[8%]" /> {/* 고가대비 */}
+              <col className="hidden md:table-column w-[8%]" /> {/* 저가대비 */}
+              <col className="w-[16%]" /> {/* 거래액(일) */}
             </colgroup>
             <thead>
-                <tr className="dark:bg-slate-900/60 light:bg-slate-200 dark:text-slate-400 light:text-slate-700 text-[9px] md:text-[11px] border-b dark:border-slate-800 light:border-slate-300">
-                  <th className="text-center text-[10px] md:text-[11px] text-[#A7B3C6]/50 border-b border-[#1d2433] py-1">★</th>
-                  <th className="pl-1 pr-0 md:px-1 py-1 text-left text-[10px] md:text-[12px] font-medium text-[#A7B3C6]/60 tracking-wide border-b border-[#1d2433] cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("symbol")}>
+                <tr className="dark:bg-slate-900/60 light:bg-slate-200 dark:text-slate-400 light:text-slate-700 text-[9px] sm:text-[11px] border-b dark:border-white/10 light:border-white/10">
+                  <th className="w-[30px] text-center text-[11px] text-[#A7B3C6]/50 border-b dark:border-white/10 light:border-white/10">★</th>
+                  <th className="px-4 py-1.5 text-left text-[12px] font-medium text-[#A7B3C6]/60 tracking-wide border-b dark:border-white/10 light:border-white/10 cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("symbol")}>
                     코인명
                     <SortIcon columnKey="symbol" />
                   </th>
-                  <th className="px-0.5 md:px-2 py-1 text-right text-[9px] md:text-sm font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("koreanPrice")}>
+                  <th className="px-0.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("koreanPrice")}>
                     현재가
                     <SortIcon columnKey="koreanPrice" />
                   </th>
-                  <th className="px-0.5 md:px-2 py-1 text-right text-[9px] md:text-sm font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("premium")}>
+                  <th className="px-0.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("premium")}>
                     김프
                     <SortIcon columnKey="premium" />
                   </th>
-                  <th className="px-0.5 md:px-2 py-1 text-right text-[9px] md:text-sm font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("change24h")}>
+                  <th className="px-0.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("change24h")}>
                     전일대비
                     <SortIcon columnKey="change24h" />
                   </th>
-                  <th className="hidden md:table-cell px-0.5 md:px-2 py-1 text-right text-[8px] md:text-xs font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("high24h")}>
+                  <th className="hidden md:table-cell px-0.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("high24h")}>
                     고가대비
                     <SortIcon columnKey="high24h" />
                   </th>
-                  <th className="hidden md:table-cell px-0.5 md:px-2 py-1 text-right text-[8px] md:text-xs font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("low24h")}>
+                  <th className="hidden md:table-cell px-0.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("low24h")}>
                     저가대비
                     <SortIcon columnKey="low24h" />
                   </th>
-                  <th className="pl-0.5 pr-1 md:px-2 py-1 text-right text-[9px] md:text-sm font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("volume24hKrw")}>
+                  <th className="px-0.5 sm:px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("volume24hKrw")}>
                     거래액(일)
                     <SortIcon columnKey="volume24hKrw" />
                   </th>
@@ -951,10 +951,10 @@ export default function PremiumTable({
                         className="border-b border-white/5 dark:hover:bg-slate-800/60 light:hover:bg-slate-100 transition-colors"
                         data-symbol={row.symbol}
                       >
-                        <td className="text-center py-1.5 md:py-2">
+                        <td className="w-[30px] text-center py-1.5 md:py-2">
                           <button
                             type="button"
-                            className={`p-1 leading-none transition-colors text-xs md:text-sm ${
+                            className={`p-0.5 leading-none transition-colors text-[10px] md:text-sm ${
                               favorites.has(row.symbol)
                                 ? "text-[#FDCB52]"
                                 : "text-[#A7B3C6]/40 hover:text-[#FDCB52]"
@@ -967,19 +967,19 @@ export default function PremiumTable({
                             ★
                           </button>
                         </td>
-                        <td className="pl-1 pr-0 md:px-1 py-1.5 md:py-2">
+                        <td className="px-1 py-1.5 md:py-2">
                           <div className="flex items-center gap-1.5 md:gap-3 min-w-0">
-                            <CoinIcon symbol={row.symbol} className="w-5 h-5 md:w-8 md:h-8 flex-shrink-0" iconUrl={row.icon_url} />
+                            <CoinIcon symbol={row.symbol} className="w-4 h-4 md:w-8 md:h-8 flex-shrink-0" iconUrl={row.icon_url} />
                             <div className="flex flex-col justify-center leading-tight flex-1 min-w-0">
                               <button
                                 onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
                                 className="dark:hover:text-blue-400 light:hover:text-blue-600 transition-colors text-left truncate"
                               >
-                                <span className="text-[12px] md:text-base dark:text-white light:text-slate-900 font-semibold truncate">
+                                <span className="text-[11px] md:text-base dark:text-white light:text-slate-900 font-semibold truncate">
                                   {getDisplayName(row)}
                                 </span>
                               </button>
-                              <span className="text-[10px] md:text-xs dark:text-[#A7B3C6] light:text-[#A7B3C6] truncate uppercase tracking-tight">
+                              <span className="text-[9px] md:text-xs dark:text-[#A7B3C6] light:text-[#A7B3C6] truncate uppercase tracking-tight">
                                 {row.symbol}
                               </span>
                             </div>
@@ -1030,7 +1030,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="pl-0.5 pr-1 md:px-2 py-1 text-right text-[8px] md:text-sm whitespace-nowrap">
+                        <td className="px-0.5 sm:px-2 py-1 text-right text-[9px] sm:text-sm whitespace-nowrap">
                           {row.volume24hKrw !== null && row.volume24hKrw !== undefined ? (
                             <span className="dark:text-slate-100 light:text-slate-900">{formatVolumeKRW(row.volume24hKrw)}</span>
                           ) : (
