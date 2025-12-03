@@ -1,0 +1,160 @@
+1. 상단 티커바에 표시할 항목 & 순서
+
+왼쪽 → 오른쪽 순서:
+
+환율 (USD/KRW)
+
+아이콘: 커스텀 파란 그라디언트 $ 아이콘
+
+텍스트 예시:
+₩1,365 / $1 +0.15%
+
+테더 (USDT/KRW)
+
+아이콘: 테더 초록 T 로고 (/icons/tether-usdt.svg)
+
+텍스트 예시:
+₩1,486 / USDT -0.07%
+
+BTC 점유율
+
+라벨: BTC 점유율:
+
+텍스트 예시: 42.3%
+
+시가총액
+
+라벨: 시가총액:
+
+텍스트 예시: ₩4,741조 +1.16%
+
+24시간 거래량
+
+라벨: 24시간 거래량:
+
+텍스트 예시: ₩247조 +5.12%
+
+(동시접속자 수는 이 바에 넣을지 말지 선택 사항. 넣는다면 맨 오른쪽에 현재 접속: 37명 정도로 추가.)
+
+2. 데이터 소스 & API 설계
+✅ 공통 엔드포인트: /api/global-metrics
+
+프론트의 TopInfoBar는 무조건 이 한 곳만 호출:
+
+GET /api/global-metrics
+
+
+예상 응답 구조(예시):
+
+{
+  "fx": {
+    "usdKrw": 1365.23,
+    "change24h": 0.15
+  },
+  "usdt": {
+    "krw": 1486.0,
+    "change24h": -0.07
+  },
+  "global": {
+    "btcDominance": 42.3,
+    "marketCapKrw": 4741000000000000,
+    "marketCapChange24h": 1.16,
+    "volume24hKrw": 247000000000000,
+    "volume24hChange24h": 5.12
+  }
+}
+
+🔧 백엔드 내부 처리
+
+CoinGecko 글로벌 메트릭 (한 번에 수집)
+
+엔드포인트: CoinGecko /global
+
+여기서 가져오는 것:
+
+BTC dominance
+
+전체 시가총액 (USD 또는 KRW)
+
+24h volume
+
+USD/KRW 환율 (가능하면 같은 응답에서 파생)
+
+Bithumb USDT/KRW 별도 호출
+
+엔드포인트: https://api.bithumb.com/public/ticker/USDT_KRW
+
+closing_price, prev_closing_price로 가격/변동률 계산.
+
+캐싱 전략
+
+서버 메모리 or Supabase에 5분 캐싱
+
+캐싱 키: "global-metrics-cache"
+
+5분 이내 재요청 → 캐시 반환
+
+실패 시:
+
+이전 캐시가 있으면 그 값 사용
+
+캐시도 없으면 각 항목 null 또는 "-" 로 표시 (UI에서 처리)
+
+3. TopInfoBar 프론트 동작 규칙
+
+마운트 시 한 번 페치
+
+useEffect에서 /api/global-metrics 호출
+
+응답 오면 상태에 저장 후 렌더링
+
+값 표시 포맷
+
+금액: ₩ + 한국식 천단위 콤마 + 조/억 단위 축약
+
+예) 4,741,000,000,000,000 → ₩4,741조
+
+변동률:
+
+양수 → +1.16% (녹색)
+
+음수 → -0.87% (빨간색)
+
+점유율: 소수점 1자리 또는 2자리 (예: 42.3%)
+
+에러/로딩 처리
+
+로딩 중: ... 또는 회색 텍스트
+
+특정 값만 실패한 경우:
+
+해당 구간만 - 또는 N/A 표시
+
+전체 바가 깨지지 않게.
+
+4. 아이콘 규칙 (저작권/브랜드)
+
+환율 아이콘
+
+Google G 사용 ❌
+
+커스텀 파란 그라디언트 $ 아이콘 사용 ✅
+
+경로 예: /icons/fx-dollar.svg
+
+USDT 아이콘
+
+테더 초록 T 로고 사용
+
+경로 예: /icons/tether-usdt.svg
+
+아이콘은 모두 public/icons/에 두고,
+next/image 또는 <img>로 렌더링.
+
+5. Replit에게 줄 수 있는 한 줄 요약
+
+상단 TopInfoBar는 /api/global-metrics에서 가져온
+USD/KRW 환율, Bithumb USDT/KRW, BTC 점유율, 시가총액, 24시간 거래량을
+각각 커스텀 FX 아이콘 + 테더 아이콘과 함께 표시합니다.
+CoinGecko의 /global + Bithumb ticker를 사용하고,
+결과는 서버에서 5분 캐싱 후 프론트는 이 API만 호출해서 렌더링합니다.
