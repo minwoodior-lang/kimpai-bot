@@ -1,0 +1,105 @@
+[코인 테이블 즐겨찾기(★) 기능 최종 수정 요청]
+
+현재 테이블 구조와 색상/폰트는 유지하고, 즐겨찾기 버튼 UX만 아래처럼 변경하고 싶습니다.
+
+────────────────────────
+1) 즐겨찾기 전용 컬럼 추가 (제일 왼쪽)
+────────────────────────
+- 첫 번째 컬럼을 "즐겨찾기 전용"으로 분리해주세요.
+
+<th> 예시:
+
+  <th
+    className="w-[40px] text-center border-b border-[#1d2433] text-[#A7B3C6]/60"
+  >
+    ★
+  </th>
+
+<td> 예시:
+
+  <td className="w-[40px] text-center">
+    <FavoriteStarButton
+      isActive={row.isFavorite}
+      onClick={() => toggleFavorite(row.symbol)}
+    />
+  </td>
+
+- 기존 코인명 컬럼에는 ★ 버튼을 제거하고,
+  현 구조 그대로 "아이콘 + 한글명 + 영문심볼"만 남겨주세요.
+
+  <td>
+    <div className="flex items-center gap-2 min-w-[170px]">
+      <CoinIcon className="w-6 h-6" />
+      <div className="flex flex-col leading-[13px]">
+        <span className="text-[13px] font-semibold text-white">
+          {row.koreanName}
+        </span>
+        <span className="text-[12px] text-[#A7B3C6]">
+          {row.symbol}
+        </span>
+      </div>
+    </div>
+  </td>
+
+
+────────────────────────
+2) 즐겨찾기 클릭 시 "맨 위로 핀 고정" 동작
+────────────────────────
+현재는 버튼을 누르면 상태만 바뀌고 스크롤이 이동하는 것 같은데,
+원하는 동작은 아래와 같습니다.
+
+- ★ 클릭 시:
+  1) 해당 코인의 isFavorite 값을 토글
+  2) "즐겨찾기 코인"들을 리스트 최상단으로 정렬
+  3) 스크롤 이동은 하지 않음 (scrollIntoView 같은 로직 제거)
+
+예시 코드 (PremiumTable.tsx 기준):
+
+  const [rows, setRows] = useState<PremiumRow[]>(initialRows);
+
+  const toggleFavorite = (symbol: string) => {
+    setRows(prev => {
+      const updated = prev.map(row =>
+        row.symbol === symbol
+          ? { ...row, isFavorite: !row.isFavorite }
+          : row
+      );
+
+      // 즐겨찾기 우선 정렬 (즐겨찾기 true → 위로)
+      return [...updated].sort((a, b) => {
+        if (a.isFavorite === b.isFavorite) return 0;
+        return a.isFavorite ? -1 : 1;
+      });
+    });
+  };
+
+- 위 정렬은 "즐겨찾기 여부만" 기준으로 하되,
+  그 외 순서는 기존 순서를 그대로 유지해도 됩니다
+  (필요시 index 보존해서 stable sort 처리).
+
+- 기존에 즐겨찾기 클릭 시 특정 row로 스크롤시키는 로직이 있다면
+  (scrollIntoView, window.scrollTo 등) 모두 제거해주세요.
+
+
+────────────────────────
+3) (옵션) 컬럼명 텍스트 수정
+────────────────────────
+컬럼명 텍스트도 같이 바꿔주세요.
+
+- "전일"   → "전일대비"
+- "거래액" → "거래액(일)"
+
+헤더 예시:
+
+  <th>전일대비</th>
+  <th>거래액(일)</th>
+
+────────────────────────
+
+요약:
+- 즐겨찾기(★)는 테이블 제일 왼쪽에 독립 컬럼으로 배치
+- ★ 클릭 시 해당 코인 row를 리스트 최상단으로 올리는 "핀 고정" 기능
+- 스크롤 이동은 하지 않고, 단순히 정렬만 변경
+- 컬럼명은 전일대비 / 거래액(일)로 텍스트 교체
+
+이 사양대로 수정 부탁드립니다.

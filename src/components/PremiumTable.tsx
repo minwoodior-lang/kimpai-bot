@@ -350,13 +350,6 @@ export default function PremiumTable({
         newFavorites.delete(symbol);
       } else {
         newFavorites.add(symbol);
-        // 즉시 코인셀을 맨 위로 끌어올리기
-        const favoriteRow = document.querySelector(`[data-symbol="${symbol}"]`);
-        if (favoriteRow) {
-          setTimeout(() => {
-            favoriteRow.scrollIntoView({ behavior: "smooth", block: "start" });
-          }, 0);
-        }
       }
       return newFavorites;
     });
@@ -548,6 +541,13 @@ export default function PremiumTable({
     }
 
     result.sort((a, b) => {
+      const aIsFavorite = favorites.has(a.symbol);
+      const bIsFavorite = favorites.has(b.symbol);
+
+      if (aIsFavorite !== bIsFavorite) {
+        return aIsFavorite ? -1 : 1;
+      }
+
       let aVal: any = a[sortKey];
       let bVal: any = b[sortKey];
 
@@ -576,7 +576,7 @@ export default function PremiumTable({
     }
 
     return result;
-  }, [data, searchQuery, sortKey, sortOrder, limit]);
+  }, [data, searchQuery, sortKey, sortOrder, limit, favorites]);
 
   // 코인 표시명 생성: displayName ?? name_ko ?? name_en ?? koreanName ?? symbol
   const getDisplayName = (item: PremiumData): string => {
@@ -867,16 +867,18 @@ export default function PremiumTable({
         <div className="w-full overflow-hidden px-3 sm:px-0">
           <table className="w-full table-fixed border-separate border-spacing-y-0">
             <colgroup>
+              <col className="w-[40px]" /> {/* 즐겨찾기 */}
               <col className="w-[35%]" /> {/* 코인명 */}
               <col className="w-[16%]" /> {/* 현재가 */}
               <col className="w-[16%]" /> {/* 김프 */}
-              <col className="w-[17%]" /> {/* 전일 */}
+              <col className="w-[17%]" /> {/* 전일대비 */}
               <col className="hidden md:table-column w-[8%]" /> {/* 고가대비 */}
               <col className="hidden md:table-column w-[8%]" /> {/* 저가대비 */}
-              <col className="w-[16%]" /> {/* 거래액 */}
+              <col className="w-[16%]" /> {/* 거래액(일) */}
             </colgroup>
             <thead>
                 <tr className="dark:bg-slate-900/60 light:bg-slate-200 dark:text-slate-400 light:text-slate-700 text-[9px] sm:text-[11px] border-b dark:border-slate-800 light:border-slate-300">
+                  <th className="w-[40px] text-center text-[12px] font-medium text-[#A7B3C6]/60 border-b border-[#1d2433]">★</th>
                   <th className="px-4 py-1.5 text-left text-[12px] font-medium text-[#A7B3C6]/60 tracking-wide border-b border-[#1d2433] cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("symbol")}>
                     코인명
                     <SortIcon columnKey="symbol" />
@@ -929,8 +931,21 @@ export default function PremiumTable({
                         className="border-b dark:border-slate-800/80 light:border-slate-200 dark:hover:bg-slate-800/60 light:hover:bg-slate-100 transition-colors"
                         data-symbol={row.symbol}
                       >
+                        <td className="w-[40px] text-center py-2">
+                          <button
+                            type="button"
+                            className={`text-lg leading-none transition-colors ${
+                              favorites.has(row.symbol)
+                                ? "dark:text-yellow-400 light:text-yellow-500"
+                                : "dark:text-slate-500 light:text-slate-400 dark:hover:text-yellow-400 light:hover:text-yellow-500"
+                            }`}
+                            onClick={() => toggleFavorite(row.symbol)}
+                          >
+                            ★
+                          </button>
+                        </td>
                         <td className="px-4 py-2">
-                          <div className="flex items-center gap-2 min-w-[160px]">
+                          <div className="flex items-center gap-2 min-w-[170px]">
                             <CoinIcon symbol={row.symbol} className="h-5 w-5 sm:h-4 sm:w-4 flex-shrink-0" iconUrl={row.icon_url} />
                             <div className="flex flex-col justify-center leading-[13px] min-w-0">
                               <button
@@ -945,17 +960,6 @@ export default function PremiumTable({
                                 {row.symbol}
                               </span>
                             </div>
-                            <button
-                              type="button"
-                              className={`ml-auto text-lg leading-none transition-colors flex-shrink-0 ${
-                                favorites.has(row.symbol)
-                                  ? "dark:text-yellow-400 light:text-yellow-500"
-                                  : "dark:text-slate-500 light:text-slate-400 dark:hover:text-yellow-400 light:hover:text-yellow-500"
-                              }`}
-                              onClick={() => toggleFavorite(row.symbol)}
-                            >
-                              ★
-                            </button>
                           </div>
                         </td>
 
@@ -1014,7 +1018,7 @@ export default function PremiumTable({
 
                       {expandedSymbol === row.symbol && (
                         <tr key={`${row.symbol}-chart`}>
-                          <td colSpan={5} className="p-0 md:col-span-7">
+                          <td colSpan={6} className="p-0 md:col-span-8">
                             <div className="bg-[#0F111A] border-t border-b border-slate-700/50 py-3 px-3">
                               <div className="h-[360px] rounded-xl overflow-hidden bg-slate-900/50">
                                 <TradingViewChart
