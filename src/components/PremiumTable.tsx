@@ -758,11 +758,11 @@ export default function PremiumTable({
       {showFilters && (
         <div className="mb-6 pt-4 space-y-3">
           {/* PC 레이아웃: 한 줄 */}
-          <div className="hidden sm:flex flex-wrap items-center justify-between gap-3">
-            {/* 왼쪽: 기준/해외 거래소 + 총 개수 */}
+          <div className="hidden sm:flex items-center justify-between gap-3">
+            {/* 왼쪽: 기준/해외 거래소 */}
             <div className="flex flex-wrap items-center gap-3">
               <div className="flex items-center gap-2">
-                <span className="text-gray-400 text-[12px] whitespace-nowrap">기준 거래소</span>
+                <span className="text-gray-400 text-[12px] whitespace-nowrap">🇰🇷 기준 거래소</span>
                 <MiniDropdown
                   value={domesticExchange}
                   options={DOMESTIC_EXCHANGES}
@@ -773,7 +773,7 @@ export default function PremiumTable({
               <span className="text-gray-500">↔</span>
 
               <div className="flex items-center gap-2">
-                <span className="text-gray-400 text-[12px] whitespace-nowrap">해외 거래소</span>
+                <span className="text-gray-400 text-[12px] whitespace-nowrap">🌐 해외 거래소</span>
                 <MiniDropdown
                   value={foreignExchange}
                   options={FOREIGN_EXCHANGES}
@@ -781,26 +781,27 @@ export default function PremiumTable({
                   showShortName={true}
                 />
               </div>
+            </div>
 
+            {/* 오른쪽: 총 개수 + 검색 */}
+            <div className="flex items-center gap-3">
               <span className="text-gray-400 text-[12px] whitespace-nowrap">
                 암호화폐 총 <span className="text-white font-medium">{totalCoins}</span>개
               </span>
-            </div>
-
-            {/* 오른쪽: 검색창 */}
-            <div className="w-[260px] relative">
-              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </span>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="BTC, 비트코인, ㅂㅌ"
-                className="w-full bg-slate-700 text-white rounded-lg pl-8 pr-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs md:text-sm"
-              />
+              <div className="w-[240px] relative">
+                <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="BTC, 비트코인, ㅂㅌ"
+                  className="w-full bg-slate-700 text-white rounded-lg pl-8 pr-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs md:text-sm"
+                />
+              </div>
             </div>
           </div>
 
@@ -808,7 +809,7 @@ export default function PremiumTable({
           <div className="sm:hidden space-y-2">
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
-                <span className="text-gray-400 text-[11px] whitespace-nowrap">기준 거래소</span>
+                <span className="text-gray-400 text-[11px] whitespace-nowrap">🇰🇷 기준 거래소</span>
                 <MiniDropdown
                   value={domesticExchange}
                   options={DOMESTIC_EXCHANGES}
@@ -816,7 +817,7 @@ export default function PremiumTable({
                 />
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-gray-400 text-[11px] whitespace-nowrap">해외 거래소</span>
+                <span className="text-gray-400 text-[11px] whitespace-nowrap">🌐 해외 거래소</span>
                 <MiniDropdown
                   value={foreignExchange}
                   options={FOREIGN_EXCHANGES}
@@ -917,12 +918,13 @@ export default function PremiumTable({
                         }`}
                       >
                         <td className="px-2 py-2">
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-3">
+                            {/* 아이콘 + 별 (세로) */}
                             <div className="flex flex-col items-center justify-center gap-1 min-w-[32px]">
-                              <CoinIcon symbol={row.symbol} className="h-6 w-6" iconUrl={row.icon_url} />
+                              <CoinIcon symbol={row.symbol} className="h-7 w-7" iconUrl={row.icon_url} />
                               <button
                                 type="button"
-                                className="text-[10px] text-slate-500 hover:text-yellow-400 transition-colors"
+                                className="text-[13px] leading-none text-slate-500 hover:text-yellow-400 transition-colors"
                                 onClick={() => toggleFavorite(row.symbol)}
                               >
                                 {favorites.has(row.symbol) ? "★" : "☆"}

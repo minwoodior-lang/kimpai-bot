@@ -113,21 +113,13 @@ export default function Layout({ children }: LayoutProps) {
                     {link.label}
                   </Link>
                 ))}
-                <div className="flex flex-col gap-2 pt-4 border-t border-slate-700/50">
-                  <Link
-                    href="/login"
-                    className="text-slate-300 hover:text-white transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Sign In
-                  </Link>
-                  <Link
-                    href="/signup"
-                    className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg font-medium text-center"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Get Started
-                  </Link>
+                <div className="mt-4 flex gap-2 pt-4 border-t border-slate-700/50">
+                  <button className="flex-1 rounded-lg border border-slate-600 py-2 text-sm text-slate-300 hover:text-white transition-colors">
+                    로그인
+                  </button>
+                  <button className="flex-1 rounded-lg bg-indigo-500 hover:bg-indigo-600 py-2 text-sm font-semibold text-white transition-colors">
+                    회원가입
+                  </button>
                 </div>
               </div>
             </div>
@@ -137,38 +129,17 @@ export default function Layout({ children }: LayoutProps) {
 
       <main className="flex-grow">{children}</main>
 
-      <footer className="border-t border-slate-700/50 bg-slate-900/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
-            <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-white mb-3">Data Sources</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                KimpAI aggregates real-time data from major Korean exchanges (Upbit, Bithumb, Korbit) 
-                and global exchanges (Binance, Coinbase, Kraken). We also integrate live USD/KRW 
-                foreign exchange rates to calculate accurate Kimchi Premium percentages across 
-                multiple trading pairs.
-              </p>
-            </div>
-            <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-white mb-3">AI Analysis Methodology</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                Our AI models analyze historical premium patterns, trading volumes, market sentiment, 
-                and cross-exchange arbitrage opportunities. Using machine learning algorithms trained 
-                on years of market data, we provide predictive insights and actionable trading signals 
-                for the Korean crypto market.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-slate-700/50">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">K</span>
-              </div>
-              <span className="text-xl font-bold text-white">KimpAI</span>
-            </div>
-            <p className="text-slate-400 text-sm">
-              © 2024 KimpAI. All rights reserved.
+      <footer className="border-t border-slate-800 mt-10">
+        <div className="max-w-[1200px] mx-auto px-4 lg:px-5 py-8">
+          <div className="space-y-3 text-slate-400 text-[12px]">
+            <p className="leading-relaxed">
+              데이터 출처: 업비트, 빗썸, 코인원, 바이낸스 등 주요 국내·글로벌 거래소의 공개 API를 사용합니다.
+            </p>
+            <p className="leading-relaxed">
+              AI 분석: 과거 김프 패턴과 거래량, 시장 심리를 기반으로 한 예측 모델을 활용합니다.
+            </p>
+            <p className="text-slate-500 text-[11px] mt-4">
+              © 2024 KimpAI. 모든 권리 보유.
             </p>
           </div>
         </div>

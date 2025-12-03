@@ -12,7 +12,7 @@ interface HomeLayoutProps {
 export default function HomeLayout({ children }: HomeLayoutProps) {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50">
-      <main className="mx-auto w-full max-w-[1440px] px-4 lg:px-6 py-6 overflow-x-hidden">
+      <main className="mx-auto w-full max-w-[1200px] px-4 lg:px-5 py-6 overflow-x-hidden">
         {/* 메인 영역: 전체 폭 차트 + 프리미엄 테이블 */}
         {children}
       </main>
