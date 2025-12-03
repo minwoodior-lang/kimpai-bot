@@ -74,17 +74,17 @@ export default function Layout({ children }: LayoutProps) {
   const isActive = (path: string) => router.pathname === path;
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-900 dark:bg-slate-900 light:bg-white text-slate-100 dark:text-slate-100 light:text-slate-900">
+    <div className="min-h-screen flex flex-col bg-slate-900 text-slate-100">
       <TopInfoBar />
-      <header className="sm:sticky sm:top-0 z-50 bg-slate-900/95 dark:bg-slate-900/95 light:bg-white/95 backdrop-blur border-b border-slate-800 dark:border-slate-800 light:border-slate-200">
+      <header className="sm:sticky sm:top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-800">
         <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-5">
-          <nav className="border-b border-slate-800 dark:border-slate-800 light:border-slate-200">
+          <nav className="border-b border-slate-800">
             <div className="flex justify-between items-center h-14">
               <Link href="/" className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                  <span className="font-bold text-sm dark:text-white light:text-white">K</span>
+                  <span className="font-bold text-sm text-white">K</span>
                 </div>
-                <span className="text-xl font-bold dark:text-white light:text-slate-900">KimpAI</span>
+                <span className="text-xl font-bold text-white">KimpAI</span>
               </Link>
 
               <div className="hidden md:flex items-center gap-6">
@@ -94,8 +94,8 @@ export default function Layout({ children }: LayoutProps) {
                     href={link.href}
                     className={`transition-colors ${
                       isActive(link.href)
-                        ? "dark:text-white light:text-slate-900 font-medium"
-                        : "dark:text-slate-300 light:text-slate-700 dark:hover:text-white light:hover:text-slate-900"
+                        ? "text-white font-medium"
+                        : "text-slate-300 hover:text-white"
                     }`}
                   >
                     {link.label}
@@ -106,27 +106,27 @@ export default function Layout({ children }: LayoutProps) {
               <div className="hidden md:flex items-center gap-3">
                 <button
                   onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                  className="dark:text-slate-300 light:text-slate-700 dark:hover:text-white light:hover:text-slate-900 transition-colors text-sm"
-                  title={`${theme === "light" ? "다크" : "라이트"} 모드`}
+                  className="text-slate-300 hover:text-white transition-colors text-sm"
+                  title="다크 모드"
                 >
-                  {theme === "light" ? "🌙" : "☀️"}
+                  ☀️
                 </button>
                 <Link
                   href="/login"
-                  className="dark:text-slate-300 light:text-slate-700 dark:hover:text-white light:hover:text-slate-900 transition-colors text-sm"
+                  className="text-slate-300 hover:text-white transition-colors text-sm"
                 >
                   로그인
                 </Link>
                 <Link
                   href="/signup"
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 dark:text-white light:text-white px-4 py-2 rounded-lg font-medium transition-all text-sm"
+                  className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg font-medium transition-all text-sm"
                 >
                   회원가입
                 </Link>
               </div>
 
               <button
-                className="md:hidden dark:text-white light:text-slate-900 p-2"
+                className="md:hidden text-white p-2"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
                 <svg
@@ -155,7 +155,7 @@ export default function Layout({ children }: LayoutProps) {
             </div>
 
             {mobileMenuOpen && (
-              <div className="md:hidden py-4 border-t dark:border-slate-700/50 light:border-slate-200">
+              <div className="md:hidden py-4 border-t border-slate-700/50">
                 <div className="flex flex-col gap-4">
                   {navLinks.map((link) => (
                     <Link

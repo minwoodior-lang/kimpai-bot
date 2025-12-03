@@ -156,7 +156,7 @@ export default function ChartSectionEnhanced({
       )}
 
       {/* 차트 박스 */}
-      <div className="w-full rounded-2xl dark:border dark:border-slate-700/60 light:border light:border-slate-300/40 dark:bg-slate-900/20 light:bg-slate-100/20 pt-4 pb-2 px-4 overflow-hidden">
+      <div className="w-full rounded-2xl border border-slate-700/60 bg-slate-900/20 pt-4 pb-2 px-4 overflow-hidden">
         <div
           id="kimpai-main-chart"
           ref={containerRef}

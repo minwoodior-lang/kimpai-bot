@@ -5,8 +5,8 @@
  */
 export function TopMarketInfoBar() {
   return (
-    <div className="border-b dark:border-slate-900 light:border-slate-200">
-      <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-5 py-1.5 flex items-center gap-4 text-[11px] dark:text-slate-300 light:text-slate-600 overflow-x-auto flex-wrap">
+    <div className="border-b border-slate-900">
+      <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-5 py-1.5 flex items-center gap-4 text-[11px] text-slate-300 overflow-x-auto flex-wrap">
         <span>환율: ₩1,350/USDT</span>
         <span>테더: $1.00</span>
         <span>BTC 점유율: 52.3%</span>

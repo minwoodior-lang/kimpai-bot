@@ -159,8 +159,8 @@ export default function Home() {
                 onClick={() => setMobileCardTab("ai")}
                 className={`flex-1 py-2 px-3 rounded-lg font-semibold text-xs transition-colors ${
                   mobileCardTab === "ai"
-                    ? "dark:bg-indigo-600 light:bg-indigo-600 text-white"
-                    : "dark:bg-slate-800 light:bg-slate-200 dark:text-slate-300 light:text-slate-700 hover:dark:bg-slate-700 hover:light:bg-slate-300"
+                    ? "bg-indigo-600 text-white"
+                    : "bg-slate-800 text-slate-300 hover:bg-slate-700"
                 }`}
               >
                 📊 AI 요약
@@ -169,8 +169,8 @@ export default function Home() {
                 onClick={() => setMobileCardTab("pro")}
                 className={`flex-1 py-2 px-3 rounded-lg font-semibold text-xs transition-colors ${
                   mobileCardTab === "pro"
-                    ? "dark:bg-indigo-600 light:bg-indigo-600 text-white"
-                    : "dark:bg-slate-800 light:bg-slate-200 dark:text-slate-300 light:text-slate-700 hover:dark:bg-slate-700 hover:light:bg-slate-300"
+                    ? "bg-indigo-600 text-white"
+                    : "bg-slate-800 text-slate-300 hover:bg-slate-700"
                 }`}
               >
                 🔒 PRO 예측
@@ -179,8 +179,8 @@ export default function Home() {
                 onClick={() => setMobileCardTab("alerts")}
                 className={`flex-1 py-2 px-3 rounded-lg font-semibold text-xs transition-colors ${
                   mobileCardTab === "alerts"
-                    ? "dark:bg-indigo-600 light:bg-indigo-600 text-white"
-                    : "dark:bg-slate-800 light:bg-slate-200 dark:text-slate-300 light:text-slate-700 hover:dark:bg-slate-700 hover:light:bg-slate-300"
+                    ? "bg-indigo-600 text-white"
+                    : "bg-slate-800 text-slate-300 hover:bg-slate-700"
                 }`}
               >
                 🔔 내 알림
@@ -188,7 +188,7 @@ export default function Home() {
             </div>
 
             {/* 공통 카드 껍데기 - 고정 높이 */}
-            <div className="rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 p-2 h-[180px] flex flex-col">
+            <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 p-2 h-[180px] flex flex-col">
               {mobileCardTab === "ai" && (
                 <AiSummaryMobileContent
                   avgPremium={
@@ -226,7 +226,7 @@ export default function Home() {
           {/* 차트 헤더: 프리미엄 차트 라벨 + 개인화 설정 + 지표 선택 */}
           <div className="mt-3 mb-3 flex flex-wrap items-center justify-between gap-3">
             {/* 왼쪽: 라벨 */}
-            <h3 className="text-sm font-medium dark:text-slate-200 light:text-slate-800">
+            <h3 className="text-sm font-medium text-slate-200">
               프리미엄 차트
             </h3>
 
