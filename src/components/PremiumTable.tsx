@@ -939,7 +939,7 @@ export default function PremiumTable({
                   return (
                     <React.Fragment key={uniqueKey}>
                       <tr
-                        className="border-b border-[#303848] dark:hover:bg-slate-800/60 light:hover:bg-slate-100 transition-colors"
+                        className="dark:hover:bg-slate-800/60 light:hover:bg-slate-100 transition-colors"
                         data-symbol={row.symbol}
                       >
                         <td className="w-[30px] text-center py-1.5 md:py-2">
@@ -961,16 +961,16 @@ export default function PremiumTable({
                         <td className="px-1 py-1.5 md:py-2">
                           <div className="flex items-center gap-1.5 md:gap-3 min-w-0">
                             <CoinIcon symbol={row.symbol} className="w-3.5 h-3.5 md:w-8 md:h-8 flex-shrink-0" iconUrl={row.icon_url} />
-                            <div className="flex flex-col justify-center leading-tight flex-1 min-w-0">
+                            <div className="flex flex-col flex-1 min-w-0">
                               <button
                                 onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
                                 className="dark:hover:text-blue-400 light:hover:text-blue-600 transition-colors text-left"
                               >
-                                <span className="text-[10px] md:text-base dark:text-white light:text-slate-900 font-semibold truncate">
+                                <span className="truncate text-[11px] md:text-sm dark:text-white light:text-slate-900 font-medium">
                                   {getDisplayName(row)}
                                 </span>
                               </button>
-                              <span className="text-[8px] md:text-xs dark:text-[#A7B3C6] light:text-[#A7B3C6] truncate uppercase tracking-tight">
+                              <span className="truncate text-[9px] md:text-xs dark:text-[#A7B3C6] light:text-gray-500 uppercase tracking-tight">
                                 {row.symbol}
                               </span>
                             </div>
