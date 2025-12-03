@@ -756,7 +756,7 @@ export default function PremiumTable({
       )}
 
       {showFilters && (
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4 text-sm bg-slate-800/30 border border-slate-700/50 rounded-xl p-3">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6 text-sm bg-slate-800/30 border border-slate-700/50 rounded-xl p-3">
           {/* Exchange selector */}
           <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-3">
             {/* Mobile labels */}
