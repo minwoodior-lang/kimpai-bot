@@ -884,7 +884,7 @@ export default function PremiumTable({
           {error}
         </div>
       ) : (
-        <div className="w-full overflow-hidden px-3 sm:px-0">
+        <div className="w-full overflow-hidden px-4">
           <table className="w-full table-fixed border-separate border-spacing-y-0">
             <colgroup>
               <col className="w-[30px]" /> {/* 즐겨찾기 */}
@@ -955,24 +955,27 @@ export default function PremiumTable({
                           <button
                             type="button"
                             className="text-lg leading-none transition-colors text-[#A7B3C6]/40 hover:text-[#FDCB52]"
-                            onClick={() => toggleFavorite(row.symbol)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleFavorite(row.symbol);
+                            }}
                           >
                             ★
                           </button>
                         </td>
                         <td className="px-1 py-2">
                           <div className="flex items-center gap-2 min-w-[170px]">
-                            <CoinIcon symbol={row.symbol} className="h-5 w-5 sm:h-4 sm:w-4 flex-shrink-0" iconUrl={row.icon_url} />
+                            <CoinIcon symbol={row.symbol} className="h-7 w-7 md:h-8 md:w-8 flex-shrink-0" iconUrl={row.icon_url} />
                             <div className="flex flex-col justify-center leading-[13px] min-w-0">
                               <button
                                 onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
                                 className="dark:hover:text-blue-400 light:hover:text-blue-600 transition-colors text-left truncate"
                               >
-                                <span className="text-[13px] sm:text-base dark:text-white light:text-slate-900 font-semibold truncate">
+                                <span className="text-sm md:text-base dark:text-white light:text-slate-900 font-semibold truncate">
                                   {getDisplayName(row)}
                                 </span>
                               </button>
-                              <span className="text-[12px] sm:text-xs dark:text-[#A7B3C6] light:text-[#A7B3C6] truncate uppercase tracking-tight">
+                              <span className="text-[11px] md:text-xs dark:text-[#A7B3C6] light:text-[#A7B3C6] truncate uppercase tracking-tight">
                                 {row.symbol}
                               </span>
                             </div>
