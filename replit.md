@@ -1,12 +1,35 @@
-# KimpAI - Kimchi Premium Analytics Dashboard
+# KimpAI v3.3.0 - Kimchi Premium Analytics Dashboard
 
-## 📋 상태: 국내 3거래소 마켓 + 이름 매핑 완성 (Phase 2 ✅)
+## 📋 상태: 코인 테이블 UI 최종 완성 + 상단 환율바 구현 (Phase 3 ✅)
 
-### 최종 완성 (2025-12-02)
+### 최종 완성 (2025-12-03)
 
-**✅ 완료된 것:**
+**✅ Phase 3 - 완료된 것:**
 
-#### 1️⃣ 마켓 데이터 수집 (3개 국내 거래소)
+#### 1️⃣ 코인 테이블 UI 최종 완성
+- ✅ 즐겨찾기(★) 컬럼 분리 (제일 왼쪽, 30px 고정)
+  - 클릭 시 해당 코인을 리스트 최상단으로 핀 고정 (정렬 기반)
+  - 기본 색상 #A7B3C6/40 + hover 시 #FDCB52 강조
+- ✅ 코인명 헤더 높이 조정 (py-2 → py-1.5)
+- ✅ 한글/영문명 줄간격 최적화 (leading-[13px])
+- ✅ 컬럼명 수정: 전일 → 전일대비, 거래액 → 거래액(일)
+- ✅ 아이콘-코인명-별버튼 완벽 정렬 (수평 라인)
+
+#### 2️⃣ 상단 환율바(TopInfoBar) 구현
+- ✅ Layout.tsx 헤더 위에 얇은 환율/지표 바 추가
+- ✅ 환율(₩/$ 형식) · USDT/KRW · BTC 점유율 · 시가총액 · 24시간 거래량 · 동시접속자
+- ✅ 라벨 최종 정정: "BTC:" → "BTC 점유율", "거래량:" → "24시간 거래량"
+- ✅ 아이콘: Google 그라디언트 + Bithumb USDT(₮ 기호)
+- ✅ 변화율 색상: 양수 #50e3a4, 음수 #ff6b6b, 중립 #A7B3C6
+
+#### 3️⃣ 글로벌 메트릭 API 구현
+- ✅ `/api/global-metrics` 엔드포인트 (5분 캐시)
+- ✅ FX API(exchangerate.host)에서 USD/KRW 환율 수집
+- ✅ Bithumb API에서 USDT/KRW 시세 + 변화율 수집
+- ✅ Supabase active_sessions 테이블로 동시접속자 카운팅
+- ✅ `/api/heartbeat` 엔드포인트 (30초마다 세션 갱신)
+
+#### 4️⃣ 마켓 데이터 수집 (3개 국내 거래소)
 - **Upbit**: 664개 마켓 + 한글/영문명 ✅
   - API 직접 호출로 `korean_name`, `english_name` 자동 수집
 - **Bithumb**: 456개 마켓 + 한글/영문명 ✅
@@ -100,10 +123,11 @@ npm run dev                                # 개발 서버 실행
 
 ## 🔄 다음 단계 (선택사항)
 
-1. **글로벌 거래소 마켓 추가** (Binance, OKX, Bybit 등)
-2. **아이콘 CDN 최적화** (lazy loading, WebP 변환)
-3. **프리미엄 자동 계산 워커** 활성화
-4. **배포** (Replit Publish)
+1. **BTC Dominance + 시총/거래량 실시간 수집** (CoinGecko API 통합)
+2. **글로벌 거래소 마켓 추가** (Binance, OKX, Bybit 등)
+3. **아이콘 CDN 최적화** (lazy loading, WebP 변환)
+4. **프리미엄 자동 계산 워커** 활성화
+5. **배포** (Replit Publish)
 
 ---
 

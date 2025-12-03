@@ -66,10 +66,11 @@ export default function TopInfoBar() {
       <div className="mx-auto max-w-[1200px] px-4 lg:px-5 h-7 flex items-center justify-between">
         {/* 좌측: 글로벌 지표 */}
         <div className="flex items-center gap-0 text-[11px] text-[#A7B3C6] overflow-x-auto whitespace-nowrap scrollbar-hide">
-          {/* USD/KRW */}
+          {/* 환율 */}
           <div className="flex items-center gap-1 pr-2">
-            <div className="h-3.5 w-3.5 rounded-full bg-gradient-to-br from-[#4285F4] via-[#34A853] to-[#FBBC05] flex-shrink-0" />
-            <span className="font-medium text-white">${formatNumber(metrics.usdKrw, 0)}</span>
+            <div className="h-4 w-4 rounded-full bg-gradient-to-br from-[#4285F4] via-[#34A853] to-[#FBBC05] flex-shrink-0" />
+            <span className="font-medium text-white">₩{formatNumber(metrics.usdKrw, 0)}</span>
+            <span className="text-[#A7B3C6]">/ $1</span>
             <span className={`font-medium ${getChangeColor(metrics.usdKrwChange)}`}>
               {metrics.usdKrwChange > 0 ? "+" : ""}{formatNumber(metrics.usdKrwChange, 2)}%
             </span>
@@ -79,10 +80,11 @@ export default function TopInfoBar() {
 
           {/* USDT */}
           <div className="flex items-center gap-1 pr-2">
-            <div className="h-3.5 w-3.5 rounded-full bg-[#26a17b] flex-shrink-0 flex items-center justify-center">
-              <span className="text-[8px] text-white font-bold">T</span>
+            <div className="h-4 w-4 rounded-full bg-[#26a17b] flex-shrink-0 flex items-center justify-center">
+              <span className="text-[7px] text-white font-bold">₮</span>
             </div>
             <span className="font-medium text-white">₩{formatNumber(metrics.tetherKrw, 0)}</span>
+            <span className="text-[#A7B3C6]">/ USDT</span>
             <span className={`font-medium ${getChangeColor(metrics.tetherChange)}`}>
               {metrics.tetherChange > 0 ? "+" : ""}{formatNumber(metrics.tetherChange, 2)}%
             </span>
@@ -92,7 +94,7 @@ export default function TopInfoBar() {
 
           {/* BTC 점유율 */}
           <div className="flex items-center gap-1 pr-2">
-            <span className="text-[#A7B3C6]">BTC:</span>
+            <span className="text-[#A7B3C6]">BTC 점유율:</span>
             <span className="font-medium text-white">{formatNumber(metrics.btcDominance, 1)}%</span>
           </div>
 
@@ -111,7 +113,7 @@ export default function TopInfoBar() {
 
           {/* 24시간 거래량 */}
           <div className="hidden md:flex items-center gap-1 pr-2">
-            <span className="text-[#A7B3C6]">거래량:</span>
+            <span className="text-[#A7B3C6]">24시간 거래량:</span>
             <span className="font-medium text-white">₩{formatNumber(metrics.volume24hKrw / 1e12, 1)}조</span>
             <span className={`font-medium ${getChangeColor(metrics.volume24hChange)}`}>
               {metrics.volume24hChange > 0 ? "+" : ""}{formatNumber(metrics.volume24hChange, 2)}%

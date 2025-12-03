@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createClient } from "@supabase/supabase-js";
+import axios from "axios";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL || "",
@@ -19,13 +20,20 @@ interface GlobalMetrics {
   concurrentUsers: number;
 }
 
+let cachedMetrics: GlobalMetrics | null = null;
+let cacheTime = 0;
+const CACHE_DURATION = 5 * 60 * 1000; // 5분
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<GlobalMetrics>
 ) {
   try {
-    // 데이터는 기존 수집 시스템에서 활용 (기본값 반환)
-    // 실제 운영 환경에서는 priceWorker나 글로벌 API에서 실시간 데이터 취득
+    // 캐시 확인
+    if (cachedMetrics && Date.now() - cacheTime < CACHE_DURATION) {
+      return res.status(200).json(cachedMetrics);
+    }
+
     const metricsData: GlobalMetrics = {
       usdKrw: 1285,
       usdKrwChange: 0.15,
@@ -39,7 +47,34 @@ export default async function handler(
       concurrentUsers: 380,
     };
 
-    // 동시접속자 카운트 (Supabase)
+    // 1. USD/KRW 환율 가져오기 (FX API)
+    try {
+      const fxRes = await axios.get("https://api.exchangerate.host/latest?base=USD&symbols=KRW", {
+        timeout: 3000,
+      });
+      if (fxRes.data?.rates?.KRW) {
+        metricsData.usdKrw = Math.round(fxRes.data.rates.KRW);
+      }
+    } catch (err) {
+      // Fallback 사용
+    }
+
+    // 2. Bithumb USDT/KRW 시세
+    try {
+      const bithumbRes = await axios.get("https://api.bithumb.com/public/ticker/USDT_KRW", {
+        timeout: 3000,
+      });
+      if (bithumbRes.data?.data?.closing_price) {
+        const price = parseFloat(bithumbRes.data.data.closing_price);
+        const change = parseFloat(bithumbRes.data.data.fluctate_rate_24h) || 0;
+        metricsData.tetherKrw = Math.round(price);
+        metricsData.tetherChange = change;
+      }
+    } catch (err) {
+      // Fallback 사용
+    }
+
+    // 3. 동시접속자 카운트 (Supabase)
     try {
       const { count } = await supabase
         .from("active_sessions")
@@ -51,8 +86,12 @@ export default async function handler(
         metricsData.concurrentUsers = count;
       }
     } catch (err) {
-      // Fallback 기본값 유지
+      // Fallback 사용
     }
+
+    // 캐시 업데이트
+    cachedMetrics = metricsData;
+    cacheTime = Date.now();
 
     res.setHeader("Cache-Control", "no-cache, max-age=0");
     res.status(200).json(metricsData);
