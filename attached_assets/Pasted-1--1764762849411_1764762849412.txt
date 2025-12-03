@@ -1,0 +1,225 @@
+1. 우측 내 알림 카드 삭제 + 메인 컨텐츠 전체폭
+요구사항
+
+현재 오른쪽에 남아있는 내 알림 카드 완전 삭제.
+
+그 자리를 없애고, 차트 + 코인 그리드가 페이지 폭 전체를 쓰도록 확장.
+
+구현 가이드
+// 이전 (예시)
+<section className="grid gap-6 lg:grid-cols-[3fr_1.2fr]">
+  <div> {/* 차트 + 테이블 */} </div>
+  <aside>
+    <AlertSummaryCard />  {/* ← 내 알림 카드 */}
+  </aside>
+</section>
+
+// 이후
+<section className="max-w-[1440px] mx-auto px-4 lg:px-6 py-4">
+  {/* 차트 + 테이블만 단일 컬럼으로 */}
+  <div className="space-y-4">
+    <ChartSection />
+    <ExchangeControls />
+    <PremiumTableSection />
+  </div>
+</section>
+
+
+AlertSummaryCard(내 알림) 컴포넌트는 렌더링 하지 않기.
+
+그리드는 grid → 그냥 단일 컬럼 div 로 바꾸거나 lg:grid-cols-1 로 통일.
+
+2. 상단 “오늘의 AI 김프 요약” → 기존 카드 스타일 이식
+요구사항
+
+지금 상단 미니버전은 그냥 한 줄 텍스트인데,
+원래 우측 카드 디자인(제목 + 불릿 + KR Score 박스 + PRO 버튼) 을
+Navbar 바로 아래 배너 형태로 재사용.
+
+우측에 있던 AI 요약 카드는 이미 삭제됐으니, 레이아웃/스타일만 그대로 가져오면 됨.
+
+구현 예시
+// components/TodayPremiumSummaryBar.tsx
+export function TodayPremiumSummaryBar(props: TodayPremiumSummaryProps) {
+  const { avgPremium, maxPremium, minPremium, rate, score } = props;
+
+  return (
+    <section className="w-full border-b border-slate-800/60 bg-slate-950/70">
+      <div className="max-w-[1440px] mx-auto px-4 lg:px-6 py-3 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+        {/* 왼쪽: 기존 카드의 불릿 영역 그대로 */}
+        <div className="space-y-1 text-[12px] leading-relaxed text-slate-200">
+          <p className="font-semibold text-[13px]">오늘의 AI 김프 요약</p>
+          <p>• 평균 김프: {avgPremium}</p>
+          <p>• 최대 김프: {maxPremium}</p>
+          <p>• 최소 김프: {minPremium}</p>
+          <p>• 환율: {rate}</p>
+        </div>
+
+        {/* 오른쪽: KR Premium Score + PRO 버튼 (기존 카드 스타일 축소 버전) */}
+        <div className="flex items-center gap-3 self-stretch lg:self-auto">
+          <div className="rounded-xl bg-indigo-600/20 px-3 py-2">
+            <div className="text-[11px] text-slate-300">KR Premium Score</div>
+            <div className="text-lg font-semibold text-indigo-300">
+              {score}/10
+            </div>
+          </div>
+          <button className="flex-1 lg:flex-none rounded-lg bg-indigo-500 px-3 py-2 text-[12px] font-semibold text-white text-center">
+            PRO 분석 전체 보기
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+즉, 우측 카드 레이아웃을 그대로 가져오되 가로로 눕혀서 상단에 배치.
+
+3. PC 기준: 기준/해외 거래소 + 총 개수 + 검색창 같은 열에 배치
+요구사항
+
+PC 레이아웃 한 줄에:
+
+기준 거래소 라벨 + 드롭다운
+
+↔ 아이콘
+
+해외 거래소 라벨 + 드롭다운
+
+(좌측 정렬 끝나는 지점 뒤에) 암호화폐 총 XXX개
+
+우측 끝에 검색창
+
+모바일은 지금처럼 2줄 구조 유지해도 됨.
+
+구현 예시 (PC 기준)
+// ExchangeControls 내부, sm 이상에서만 이 구조 사용
+<div className="hidden sm:flex flex-wrap items-center justify-between gap-3">
+  {/* 왼쪽: 기준/해외 거래소 + 총 개수 */}
+  <div className="flex flex-wrap items-center gap-3">
+    <div className="flex items-center gap-2">
+      <span className="text-[12px] text-slate-400">기준 거래소</span>
+      <BaseExchangeSelect />
+    </div>
+
+    <span className="text-slate-500">↔</span>
+
+    <div className="flex items-center gap-2">
+      <span className="text-[12px] text-slate-400">해외 거래소</span>
+      <ForeignExchangeSelect />
+    </div>
+
+    <span className="text-[12px] text-slate-400">
+      암호화폐 총 {totalCount}개
+    </span>
+  </div>
+
+  {/* 오른쪽: 검색창 */}
+  <div className="w-full sm:w-[260px]">
+    <SearchInput />
+  </div>
+</div>
+
+// 모바일용은 아래에 별도 flex-col 구조 유지
+
+
+요약: PC에서는 1행에 전부, 모바일은 기존처럼 2행이지만 order 조절.
+
+4. 최상단 “KR Korean Market Data…” 영역에 마켓 인포바 넣기
+요구사항
+
+현재 텍스트 하나만 있는 상단 바(KR Korean Market Data - Real-time Kimchi Premium Tracking)를
+김프가처럼 지표 인포바로 사용할 예정.
+
+우선 구조만 만들어두고, 데이터는 나중에 연동.
+
+구현 예시
+// TopMarketInfoBar.tsx
+export function TopMarketInfoBar() {
+  return (
+    <div className="w-full border-b border-slate-900 bg-slate-950/90 text-[11px] text-slate-300">
+      <div className="max-w-[1440px] mx-auto px-4 lg:px-6 py-1.5 flex flex-wrap items-center gap-4">
+        <span className="font-semibold text-[11px] text-slate-200">
+          KR Korean Market Data · Real-time Kimchi Premium Tracking
+        </span>
+
+        {/* 오른쪽 지표들 (placeholder) */}
+        <div className="flex flex-wrap items-center gap-4 ml-auto">
+          <span>환율: ₩1,350</span>
+          <span>테더: $1.00</span>
+          <span>BTC 점유율: 52.3%</span>
+          <span>시가총액: $1.28T</span>
+          <span>24h 거래량: $85.0B</span>
+          <span>동시접속자: 12,543</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 레이아웃
+<TopMarketInfoBar />
+<Navbar />
+<TodayPremiumSummaryBar ... />
+
+
+지금은 레이아웃만 잡고, 값은 나중에 API 붙일 때 교체.
+
+5. 모바일 차트 영역 높이 축소
+요구사항
+
+모바일에서 차트 컨테이너 높이가 너무 큼.
+→ 모바일에서는 높이를 낮추고, PC에서만 크게.
+
+구현 예시
+// ChartSection 컨테이너
+<div className="w-full rounded-2xl bg-slate-900/70">
+  <div className="h-[260px] sm:h-[320px] lg:h-[380px]">
+    {/* TradingView embed */}
+  </div>
+</div>
+
+
+기존에 h-[360px] 같은 고정값이 있다면 위처럼 breakpoint 별로 다르게:
+
+모바일: h-[240~260px]
+
+태블릿: h-[320px]
+
+PC: h-[380px] 등으로 조절.
+
+6. 헤더 오른쪽 USDT/KRW 값 삭제
+요구사항
+
+PC 헤더 우측 USDT/KRW ₩1,350 텍스트 제거.
+
+우측엔 로그인 / 회원가입 버튼만 남도록.
+
+구현 예시
+// Navbar 오른쪽 영역 예시
+
+// 이전
+<div className="flex items-center gap-4">
+  <span className="text-[12px] text-slate-300">USDT/KRW ₩1,350</span>  // ← 삭제
+  <LoginButton />
+  <SignupButton />
+</div>
+
+// 이후
+<div className="flex items-center gap-3">
+  <LoginButton />
+  <SignupButton />
+</div>
+
+
+USDT/KRW 표시는 추후 TopMarketInfoBar 쪽에 넣으면 됨.
+
+이 6가지 적용하면:
+
+상단: TopMarketInfoBar → Navbar → AI 김프 요약 배너
+
+본문: 풀폭 차트 + 기준/해외 드롭다운 + 총 개수 + 검색 + 테이블
+
+우측 사이드 카드 전부 제거 (내 알림 포함)
+
+PC/모바일 둘 다 김프가 느낌으로 훨씬 단단하게 정리될 거야.

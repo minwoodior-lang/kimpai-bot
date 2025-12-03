@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { TopMarketInfoBar } from "@/components/top/TopMarketInfoBar";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -22,16 +23,8 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* TopInfoBar - COMPLETELY SEPARATE */}
-      <div className="border-b border-slate-700/50 bg-slate-900/95">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="py-1 text-xs text-slate-400">
-            <div className="flex justify-between items-center">
-              <span>🇰🇷 Korean Market Data - Real-time Kimchi Premium Tracking</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Market Info Bar */}
+      <TopMarketInfoBar />
 
       <nav className="border-b border-slate-700/50 backdrop-blur-sm bg-slate-900/50 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -59,8 +52,7 @@ export default function Layout({ children }: LayoutProps) {
               ))}
             </div>
 
-            <div className="hidden md:flex items-center gap-4">
-              <span className="text-slate-400 text-sm">USDT/KRW ₩1,350</span>
+            <div className="hidden md:flex items-center gap-3">
               <Link
                 href="/login"
                 className="text-slate-300 hover:text-white transition-colors text-sm"

@@ -757,37 +757,38 @@ export default function PremiumTable({
 
       {showFilters && (
         <div className="mb-6 pt-4 space-y-3">
-          {/* Row 1: Exchange selectors - responsive layout */}
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
-            {/* Mobile: 기준 거래소 라벨 + 드롭다운 */}
-            <div className="flex items-center gap-2">
-              <span className="text-gray-400 text-[11px] whitespace-nowrap">기준 거래소</span>
-              <MiniDropdown
-                value={domesticExchange}
-                options={DOMESTIC_EXCHANGES}
-                onChange={setDomesticExchange}
-              />
-            </div>
-            {/* 화살표 - PC/모바일 공통 */}
-            <span className="text-gray-500 hidden sm:inline">↔</span>
-            {/* Mobile: 해외 거래소 라벨 + 드롭다운 */}
-            <div className="flex items-center gap-2">
-              <span className="text-gray-400 text-[11px] whitespace-nowrap">해외 거래소</span>
-              <MiniDropdown
-                value={foreignExchange}
-                options={FOREIGN_EXCHANGES}
-                onChange={setForeignExchange}
-                showShortName={true}
-              />
-            </div>
-          </div>
+          {/* PC 레이아웃: 한 줄 */}
+          <div className="hidden sm:flex flex-wrap items-center justify-between gap-3">
+            {/* 왼쪽: 기준/해외 거래소 + 총 개수 */}
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="flex items-center gap-2">
+                <span className="text-gray-400 text-[12px] whitespace-nowrap">기준 거래소</span>
+                <MiniDropdown
+                  value={domesticExchange}
+                  options={DOMESTIC_EXCHANGES}
+                  onChange={setDomesticExchange}
+                />
+              </div>
 
-          {/* Row 2: Coin count + search (responsive order) */}
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <span className="order-2 sm:order-1 text-gray-400 text-[10px] md:text-xs whitespace-nowrap">
-              암호화폐 총 <span className="text-white font-medium">{totalCoins}</span>개
-            </span>
-            <div className="order-1 sm:order-2 w-full sm:max-w-xs relative">
+              <span className="text-gray-500">↔</span>
+
+              <div className="flex items-center gap-2">
+                <span className="text-gray-400 text-[12px] whitespace-nowrap">해외 거래소</span>
+                <MiniDropdown
+                  value={foreignExchange}
+                  options={FOREIGN_EXCHANGES}
+                  onChange={setForeignExchange}
+                  showShortName={true}
+                />
+              </div>
+
+              <span className="text-gray-400 text-[12px] whitespace-nowrap">
+                암호화폐 총 <span className="text-white font-medium">{totalCoins}</span>개
+              </span>
+            </div>
+
+            {/* 오른쪽: 검색창 */}
+            <div className="w-[260px] relative">
               <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -800,6 +801,49 @@ export default function PremiumTable({
                 placeholder="BTC, 비트코인, ㅂㅌ"
                 className="w-full bg-slate-700 text-white rounded-lg pl-8 pr-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs md:text-sm"
               />
+            </div>
+          </div>
+
+          {/* 모바일 레이아웃: 여러 줄 */}
+          <div className="sm:hidden space-y-2">
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <span className="text-gray-400 text-[11px] whitespace-nowrap">기준 거래소</span>
+                <MiniDropdown
+                  value={domesticExchange}
+                  options={DOMESTIC_EXCHANGES}
+                  onChange={setDomesticExchange}
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-gray-400 text-[11px] whitespace-nowrap">해외 거래소</span>
+                <MiniDropdown
+                  value={foreignExchange}
+                  options={FOREIGN_EXCHANGES}
+                  onChange={setForeignExchange}
+                  showShortName={true}
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <span className="text-gray-400 text-[10px] whitespace-nowrap">
+                암호화폐 총 <span className="text-white font-medium">{totalCoins}</span>개
+              </span>
+              <div className="w-full relative">
+                <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="BTC, 비트코인, ㅂㅌ"
+                  className="w-full bg-slate-700 text-white rounded-lg pl-8 pr-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs"
+                />
+              </div>
             </div>
           </div>
         </div>

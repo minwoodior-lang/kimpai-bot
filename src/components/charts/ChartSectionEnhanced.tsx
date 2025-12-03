@@ -154,7 +154,7 @@ export default function ChartSectionEnhanced({
         <div
           id="kimpai-main-chart"
           ref={containerRef}
-          className="w-full h-[360px] rounded-lg overflow-hidden bg-slate-900"
+          className="w-full h-[260px] sm:h-[320px] lg:h-[380px] rounded-lg overflow-hidden bg-slate-900"
         >
           <div className="w-full h-full flex items-center justify-center text-slate-400 text-sm">
             차트 로딩 중...
