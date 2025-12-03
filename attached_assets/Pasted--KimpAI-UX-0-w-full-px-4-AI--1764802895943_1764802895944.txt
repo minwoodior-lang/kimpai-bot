@@ -1,0 +1,121 @@
+📄 KimpAI – 모바일 코인셀 최종 UX 수정 요청
+0) 코인셀 폭 관련 (확인용)
+
+현재 코인 리스트 컨테이너가 w-full px-4 로 잡혀 있고,
+상단 AI 카드·프리미엄 차트·거래소 드롭다운과 같은 레이아웃 그리드 안에 있다면
+이게 모바일에서 가능한 최대 폭 맞습니다.
+
+혹시라도 코인 리스트만 따로 max-w 가 걸려 있으면 제거 부탁드립니다.
+(없다면 그대로 두셔도 됩니다.)
+
+1) 모바일에서 텍스트/아이콘 한 단계 더 축소 (PC는 건드리지 말 것)
+
+조건: md 미만에서만 적용. md: 이상(PC·태블릿)은 현재 스타일 그대로 유지.
+
+1-1. 즐겨찾기(핀) 아이콘 크기
+<button
+  ...
+  className="p-1 text-xs md:text-sm"
+>
+  ...
+</button>
+
+
+모바일: text-xs 수준 (현재보다 한 단계 더 작게)
+
+PC: md:text-sm 유지
+
+1-2. 코인 아이콘 크기
+<CoinIcon className="w-5 h-5 md:w-8 md:h-8" />
+
+
+모바일: 20px 정도 (w-5 h-5)
+
+PC: 기존 32px (md:w-8 md:h-8) 유지
+
+1-3. 코인명 / 심볼 폰트 사이즈
+<div className="flex flex-col">
+  <span className="text-[12px] md:text-base font-medium">
+    {koName}
+  </span>
+  <span className="text-[10px] md:text-xs text-gray-400">
+    {symbol}
+  </span>
+</div>
+
+
+모바일 코인명: text-[12px] (지금 13px → 한단계 더 다운)
+
+모바일 심볼: text-[10px]
+
+PC에서는 기존 text-base / text-xs 그대로
+
+1-4. 행 간격(높이)
+<li className="flex items-center gap-2 md:gap-3 py-1.5 md:py-2">
+  ...
+</li>
+
+
+모바일: py-1.5로 살짝 더 압축
+
+PC: md:py-2 그대로
+
+2) 모바일에서 코인명 길어질 때 … 처리 (텍스트 겹침 방지)
+
+현재 구조처럼 왼쪽: 즐겨찾기 + 아이콘 + 이름 / 오른쪽: 현재가/김프 인 상태를 유지하되,
+모바일에서 코인명이 너무 길면 옆 컬럼과 겹치지 않도록 …(ellipsis) 처리해 주세요.
+
+// 이름/심볼 래퍼
+<div className="flex flex-col flex-1 min-w-0">
+  <span className="text-[12px] md:text-base font-medium truncate">
+    {koName}
+  </span>
+  <span className="text-[10px] md:text-xs text-gray-400 truncate">
+    {symbol}
+  </span>
+</div>
+
+
+핵심 포인트
+
+이름/심볼을 감싸는 div에 flex-1 min-w-0
+
+두 span에 truncate 적용
+
+이렇게 하면 모바일에서 현재가/김프 컬럼이 들어와도
+→ 이름은 일정 폭까지만 보이고 자동으로 … 처리됨
+
+PC에서는 md: 폭이 넉넉해서 거의 영향 없이 그대로 표시 가능
+
+3) 각 코인셀에 행 구분용 밑줄(풀폭) 추가
+
+지금은 코인명 아래 일부만 옅은 밑줄이 살짝 들어가 있는데,
+**행 전체(왼쪽 끝 ~ 오른쪽 끝)**를 관통하는 구분선으로 바꾸고 싶습니다.
+
+⬇️ 수정 방법
+
+밑줄을 코인명 아래가 아니라 행 전체 컨테이너(li 또는 tr) 에 적용해 주세요.
+
+<li className="flex items-center px-0 py-1.5 md:py-2 border-b border-white/5">
+  ...
+</li>
+
+
+border-b border-white/5 정도의 아주 옅은 선
+
+모바일/PC 공통으로 써도 무방하지만,
+너무 진하다고 느껴지면 border-white/3 → border-white/5 수준으로 조절
+
+기존에 코인명 부분에만 들어간 어떤 border-b 또는 underline 스타일이 있다면 제거하고,
+행 컨테이너의 border-b만 남겨 주세요.
+
+요약하면:
+
+모바일 전용으로 아이콘/텍스트 한 단계 더 축소
+
+모바일에서 코인명/심볼은 truncate+flex-1 min-w-0로 … 처리
+
+코인셀 전체 행에 옅은 border-b로 구분선
+
+PC 레이아웃/사이즈는 그대로 두고,
+md: 이하에서만 위 변경 적용 부탁드립니다.

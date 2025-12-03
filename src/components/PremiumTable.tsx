@@ -948,13 +948,13 @@ export default function PremiumTable({
                   return (
                     <React.Fragment key={uniqueKey}>
                       <tr
-                        className="border-b dark:border-slate-800/80 light:border-slate-200 dark:hover:bg-slate-800/60 light:hover:bg-slate-100 transition-colors"
+                        className="border-b border-white/5 dark:hover:bg-slate-800/60 light:hover:bg-slate-100 transition-colors"
                         data-symbol={row.symbol}
                       >
-                        <td className="w-[30px] text-center py-2">
+                        <td className="w-[30px] text-center py-1.5 md:py-2">
                           <button
                             type="button"
-                            className={`leading-none transition-colors text-sm md:text-lg ${
+                            className={`p-1 leading-none transition-colors text-xs md:text-sm ${
                               favorites.has(row.symbol)
                                 ? "text-[#FDCB52]"
                                 : "text-[#A7B3C6]/40 hover:text-[#FDCB52]"
@@ -967,19 +967,19 @@ export default function PremiumTable({
                             ★
                           </button>
                         </td>
-                        <td className="px-1 py-2">
-                          <div className="flex items-center gap-2 md:gap-3 min-w-[170px]">
-                            <CoinIcon symbol={row.symbol} className="h-6 w-6 md:h-8 md:w-8 flex-shrink-0" iconUrl={row.icon_url} />
-                            <div className="flex flex-col justify-center leading-[13px] min-w-0">
+                        <td className="px-1 py-1.5 md:py-2">
+                          <div className="flex items-center gap-2 md:gap-3 min-w-0">
+                            <CoinIcon symbol={row.symbol} className="w-5 h-5 md:w-8 md:h-8 flex-shrink-0" iconUrl={row.icon_url} />
+                            <div className="flex flex-col justify-center leading-[13px] flex-1 min-w-0">
                               <button
                                 onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
                                 className="dark:hover:text-blue-400 light:hover:text-blue-600 transition-colors text-left truncate"
                               >
-                                <span className="text-[13px] md:text-base dark:text-white light:text-slate-900 font-semibold truncate">
+                                <span className="text-[12px] md:text-base dark:text-white light:text-slate-900 font-semibold truncate">
                                   {getDisplayName(row)}
                                 </span>
                               </button>
-                              <span className="text-[11px] md:text-xs dark:text-[#A7B3C6] light:text-[#A7B3C6] truncate uppercase tracking-tight">
+                              <span className="text-[10px] md:text-xs dark:text-[#A7B3C6] light:text-[#A7B3C6] truncate uppercase tracking-tight">
                                 {row.symbol}
                               </span>
                             </div>
