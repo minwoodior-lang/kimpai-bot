@@ -170,7 +170,7 @@ export default function Home() {
             </div>
 
             {/* 카드 콘텐츠 */}
-            <div>
+            <div className="min-h-[200px]">
               {mobileCardTab === "ai" && (
                 <TodayPremiumSection
                   compact={true}
