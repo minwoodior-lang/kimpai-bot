@@ -48,14 +48,11 @@ export default function Layout({ children }: LayoutProps) {
   const isActive = (path: string) => router.pathname === path;
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#0a0d1a] via-[#0a0d1a] to-[#050814] dark:bg-gradient-to-b dark:from-[#0a0d1a] dark:via-[#0a0d1a] dark:to-[#050814] light:bg-white text-slate-100 dark:text-slate-100 light:text-slate-900">
-      {/* Sticky Header */}
-      <header className="sm:sticky sm:top-0 z-50 bg-gradient-to-b from-[#0a0d1a] to-[#0a0d1a]/95 dark:bg-gradient-to-b dark:from-[#0a0d1a] dark:to-[#0a0d1a]/95 light:bg-white/95 backdrop-blur border-b border-slate-800 dark:border-slate-800 light:border-slate-200">
+    <div className="min-h-screen flex flex-col bg-slate-950 dark:bg-slate-950 light:bg-white text-slate-100 dark:text-slate-100 light:text-slate-900">
+      <header className="sm:sticky sm:top-0 z-50 bg-slate-950/95 dark:bg-slate-950/95 light:bg-white/95 backdrop-blur border-b border-slate-800 dark:border-slate-800 light:border-slate-200">
         <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-5">
-          {/* Market Info Bar */}
           <TopMarketInfoBar />
 
-          {/* Navigation */}
           <nav className="border-b border-slate-800 dark:border-slate-800 light:border-slate-200">
             <div className="flex justify-between items-center h-14">
               <Link href="/" className="flex items-center gap-2">
@@ -172,7 +169,7 @@ export default function Layout({ children }: LayoutProps) {
 
       <main className="flex-grow">{children}</main>
 
-      <footer className="border-t dark:border-slate-800 light:border-slate-200 mt-10 dark:bg-gradient-to-b dark:from-[#0a0d1a]/50 light:bg-white">
+      <footer className="border-t dark:border-slate-800 light:border-slate-200 mt-10">
         <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-5 py-8">
           <div className="space-y-3 dark:text-slate-400 light:text-slate-600 text-[12px]">
             <p className="leading-relaxed">
