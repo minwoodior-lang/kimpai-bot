@@ -115,7 +115,7 @@ export default function Home() {
           </div>
 
           {/* 차트 섹션 */}
-          <div className="mt-4 w-full rounded-2xl dark:border dark:border-slate-700/60 light:border light:border-slate-300/40 dark:bg-slate-900/20 light:bg-slate-100/20 min-h-[260px] overflow-hidden">
+          <div className="mt-6">
             <ChartSectionEnhanced
               selectedIndicator={selectedIndicator}
               onIndicatorChange={setSelectedIndicator}

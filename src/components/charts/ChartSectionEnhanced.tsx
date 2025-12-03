@@ -105,9 +105,14 @@ export default function ChartSectionEnhanced({
   };
 
   return (
-    <section className="mb-6">
+    <section className="mb-6 space-y-3">
+      {/* 섹션 헤더 라벨 */}
+      <div className="text-sm font-semibold dark:text-slate-100 light:text-slate-900">
+        BTC / 김프 차트
+      </div>
+
       {/* 드롭다운 */}
-      <div className="mb-4 relative">
+      <div className="relative w-fit">
         <button
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           className="flex items-center gap-2 bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-white text-sm hover:border-slate-600 transition-colors"
@@ -149,8 +154,8 @@ export default function ChartSectionEnhanced({
         )}
       </div>
 
-      {/* 차트 */}
-      <div className="rounded-xl bg-slate-900/80 p-3 border border-slate-800">
+      {/* 차트 박스 */}
+      <div className="w-full rounded-2xl dark:border dark:border-slate-700/60 light:border light:border-slate-300/40 dark:bg-slate-900/20 light:bg-slate-100/20 p-4 overflow-hidden">
         <div
           id="kimpai-main-chart"
           ref={containerRef}
