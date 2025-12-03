@@ -25,14 +25,14 @@ export function TodayPremiumSection({
         <div className="flex flex-col gap-3 lg:gap-4 lg:flex-row lg:items-stretch">
           {/* 왼쪽: 요약 텍스트 + 미러 배경 */}
           <div className="flex-1 relative">
-            {/* 미러 배경 텍스트 */}
+            {/* 미러 배경 텍스트 - 정적 플레이스홀더 */}
             <div className="absolute inset-0 overflow-hidden rounded-lg pointer-events-none opacity-10">
               <div className="space-y-0.5 text-[11px] lg:text-[12px] leading-snug dark:text-slate-400 light:text-slate-400 blur-sm transform scale-x-[-1]">
                 <p className="font-semibold text-[12px] lg:text-[13px]">오늘의 AI 김프 요약</p>
-                <p>• 평균 김프: {avgPremium}</p>
-                <p>• 최대 김프: {maxPremium}</p>
-                <p>• 최소 김프: {minPremium}</p>
-                <p>• 환율: {fxRate}</p>
+                <p>• 평균 김프: +0.00%</p>
+                <p>• 최대 김프: +0.00%</p>
+                <p>• 최소 김프: -0.00%</p>
+                <p>• 환율: ₩0,000/USDT</p>
               </div>
             </div>
             {/* 앞의 텍스트 */}
