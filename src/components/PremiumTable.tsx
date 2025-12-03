@@ -954,7 +954,11 @@ export default function PremiumTable({
                         <td className="w-[30px] text-center py-2">
                           <button
                             type="button"
-                            className="text-lg leading-none transition-colors text-[#A7B3C6]/40 hover:text-[#FDCB52]"
+                            className={`leading-none transition-colors text-sm md:text-lg ${
+                              favorites.has(row.symbol)
+                                ? "text-[#FDCB52]"
+                                : "text-[#A7B3C6]/40 hover:text-[#FDCB52]"
+                            }`}
                             onClick={(e) => {
                               e.stopPropagation();
                               toggleFavorite(row.symbol);
@@ -964,14 +968,14 @@ export default function PremiumTable({
                           </button>
                         </td>
                         <td className="px-1 py-2">
-                          <div className="flex items-center gap-2 min-w-[170px]">
-                            <CoinIcon symbol={row.symbol} className="h-7 w-7 md:h-8 md:w-8 flex-shrink-0" iconUrl={row.icon_url} />
+                          <div className="flex items-center gap-2 md:gap-3 min-w-[170px]">
+                            <CoinIcon symbol={row.symbol} className="h-6 w-6 md:h-8 md:w-8 flex-shrink-0" iconUrl={row.icon_url} />
                             <div className="flex flex-col justify-center leading-[13px] min-w-0">
                               <button
                                 onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
                                 className="dark:hover:text-blue-400 light:hover:text-blue-600 transition-colors text-left truncate"
                               >
-                                <span className="text-sm md:text-base dark:text-white light:text-slate-900 font-semibold truncate">
+                                <span className="text-[13px] md:text-base dark:text-white light:text-slate-900 font-semibold truncate">
                                   {getDisplayName(row)}
                                 </span>
                               </button>
