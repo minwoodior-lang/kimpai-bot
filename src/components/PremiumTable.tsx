@@ -867,7 +867,7 @@ export default function PremiumTable({
         <div className="w-full overflow-hidden px-3 sm:px-0">
           <table className="w-full table-fixed border-separate border-spacing-y-0">
             <colgroup>
-              <col className="w-[40px]" /> {/* 즐겨찾기 */}
+              <col className="w-[30px]" /> {/* 즐겨찾기 */}
               <col className="w-[35%]" /> {/* 코인명 */}
               <col className="w-[16%]" /> {/* 현재가 */}
               <col className="w-[16%]" /> {/* 김프 */}
@@ -878,7 +878,7 @@ export default function PremiumTable({
             </colgroup>
             <thead>
                 <tr className="dark:bg-slate-900/60 light:bg-slate-200 dark:text-slate-400 light:text-slate-700 text-[9px] sm:text-[11px] border-b dark:border-slate-800 light:border-slate-300">
-                  <th className="w-[40px] text-center text-[12px] font-medium text-[#A7B3C6]/60 border-b border-[#1d2433]">★</th>
+                  <th className="w-[30px] text-center text-[11px] text-[#A7B3C6]/50 border-b border-[#1d2433]">★</th>
                   <th className="px-4 py-1.5 text-left text-[12px] font-medium text-[#A7B3C6]/60 tracking-wide border-b border-[#1d2433] cursor-pointer dark:hover:text-white light:hover:text-slate-900 transition-colors" onClick={() => handleSort("symbol")}>
                     코인명
                     <SortIcon columnKey="symbol" />
@@ -931,20 +931,16 @@ export default function PremiumTable({
                         className="border-b dark:border-slate-800/80 light:border-slate-200 dark:hover:bg-slate-800/60 light:hover:bg-slate-100 transition-colors"
                         data-symbol={row.symbol}
                       >
-                        <td className="w-[40px] text-center py-2">
+                        <td className="w-[30px] text-center py-2">
                           <button
                             type="button"
-                            className={`text-lg leading-none transition-colors ${
-                              favorites.has(row.symbol)
-                                ? "dark:text-yellow-400 light:text-yellow-500"
-                                : "dark:text-slate-500 light:text-slate-400 dark:hover:text-yellow-400 light:hover:text-yellow-500"
-                            }`}
+                            className="text-lg leading-none transition-colors text-[#A7B3C6]/40 hover:text-[#FDCB52]"
                             onClick={() => toggleFavorite(row.symbol)}
                           >
                             ★
                           </button>
                         </td>
-                        <td className="px-4 py-2">
+                        <td className="px-1 py-2">
                           <div className="flex items-center gap-2 min-w-[170px]">
                             <CoinIcon symbol={row.symbol} className="h-5 w-5 sm:h-4 sm:w-4 flex-shrink-0" iconUrl={row.icon_url} />
                             <div className="flex flex-col justify-center leading-[13px] min-w-0">
