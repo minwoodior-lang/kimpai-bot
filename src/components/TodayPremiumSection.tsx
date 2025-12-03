@@ -23,13 +23,26 @@ export function TodayPremiumSection({
     <section className="mt-3 mb-4 lg:mt-4 lg:mb-6">
       <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-5">
         <div className="flex flex-col gap-3 lg:gap-4 lg:flex-row lg:items-stretch">
-          {/* 왼쪽: 요약 텍스트 */}
-          <div className="flex-1 space-y-0.5 text-[11px] lg:text-[12px] leading-snug dark:text-slate-200 light:text-slate-700">
-            <p className="font-semibold text-[12px] lg:text-[13px] dark:text-slate-100 light:text-slate-900">오늘의 AI 김프 요약</p>
-            <p>• 평균 김프: {avgPremium}</p>
-            <p>• 최대 김프: {maxPremium}</p>
-            <p>• 최소 김프: {minPremium}</p>
-            <p>• 환율: {fxRate}</p>
+          {/* 왼쪽: 요약 텍스트 + 미러 배경 */}
+          <div className="flex-1 relative">
+            {/* 미러 배경 텍스트 */}
+            <div className="absolute inset-0 overflow-hidden rounded-lg pointer-events-none opacity-10">
+              <div className="space-y-0.5 text-[11px] lg:text-[12px] leading-snug dark:text-slate-400 light:text-slate-400 blur-sm transform scale-x-[-1]">
+                <p className="font-semibold text-[12px] lg:text-[13px]">오늘의 AI 김프 요약</p>
+                <p>• 평균 김프: {avgPremium}</p>
+                <p>• 최대 김프: {maxPremium}</p>
+                <p>• 최소 김프: {minPremium}</p>
+                <p>• 환율: {fxRate}</p>
+              </div>
+            </div>
+            {/* 앞의 텍스트 */}
+            <div className="relative space-y-0.5 text-[11px] lg:text-[12px] leading-snug dark:text-slate-200 light:text-slate-700">
+              <p className="font-semibold text-[12px] lg:text-[13px] dark:text-slate-100 light:text-slate-900">오늘의 AI 김프 요약</p>
+              <p>• 평균 김프: {avgPremium}</p>
+              <p>• 최대 김프: {maxPremium}</p>
+              <p>• 최소 김프: {minPremium}</p>
+              <p>• 환율: {fxRate}</p>
+            </div>
           </div>
 
           {/* 오른쪽: Score + 버튼 + 자물쇠 카드 */}
