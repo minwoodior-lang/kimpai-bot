@@ -1,0 +1,147 @@
+📌 🔥 PRO 전용 48시간 김프 예측 카드 — 최종 명세서 (초창기 버전 1:1 복제)
+
+(이 명세 그대로 만들면 AI 분석 페이지 우측과 100% 동일한 카드가 나옴)
+형이 원하는 것이 바로 이거임.
+
+🔷 0. 카드 전체 레이아웃 스펙
+width: 100%
+max-width: 360px;
+background: rgba(255, 255, 255, 0.03);
+border: 1px solid rgba(255, 255, 255, 0.06);
+border-radius: 16px;
+padding: 20px 22px;
+display: flex;
+flex-direction: column;
+gap: 16px;
+
+
+밝은 border
+
+얇은 반투명 배경
+
+가벼운 그림자 없이 flat
+
+내부 spacing 넉넉함
+
+이 전체 UI는 반드시 AI 분석 페이지의 PRO 카드와 동일해야 한다
+
+🔷 1. 카드 상단 타이틀 스펙
+🔒 PRO 전용 48시간 김프 예측
+
+
+타이틀 스타일은:
+
+font-size: 14px;
+font-weight: 600;
+color: #EDEDED;
+display: flex;
+align-items: center;
+gap: 6px;
+
+🔷 2. "흐릿하게 블러 처리된 설명 텍스트 박스" 스펙
+
+🔥 이 부분이 지금 개발자가 매번 틀리는 핵심이다.
+
+명확히 아래 형태여야 한다:
+
+<div
+  style="
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    padding: 16px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  "
+>
+  (여기 안의 텍스트는 밝게 안 보이고 흐릿하게 살짝 투명)
+</div>
+
+
+텍스트 예시:
+
+최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의
+90% 이상을 사전에 포착했습니다.
+
+* 전체 예측 데이터는 PRO 구독 시 이용할 수 있습니다.
+
+
+텍스트 스타일은:
+
+font-size: 13px;
+line-height: 1.4;
+color: rgba(255, 255, 255, 0.55);
+
+🔷 3. 아래 버튼 스펙 ("PRO 분석 전체 보기")
+
+버튼은 완전히 아래와 동일:
+
+width: 100%;
+background: linear-gradient(90deg, #8155FF, #5D3DFF);
+height: 40px;
+border-radius: 10px;
+font-size: 14px;
+font-weight: 600;
+color: white;
+text-align: center;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+
+
+텍스트:
+
+🔒 PRO 분석 전체 보기
+
+🔷 4. 카드 내부 구성 요약 (텍스트 와이어프레임)
+┌─────────────────────────────────────────────┐
+│ 🔒 PRO 전용 48시간 김프 예측                │
+│                                             │
+│  ┌───────────────────────────────────────┐  │
+│  │ (반투명 + 블러처리된 예측 텍스트 박스) │  │
+│  │ 최근 30일 기준… 90% 이상 사전 포착…    │  │
+│  │ * PRO 구독 시 전체 예측 확인 가능       │  │
+│  └───────────────────────────────────────┘  │
+│                                             │
+│  🔒 PRO 분석 전체 보기 (보라색 버튼)       │
+└─────────────────────────────────────────────┘
+
+
+이게 원래 AI 분석 페이지에서 형이 좋아했던 정확한 PRO 카드 구조다.
+지금 개발자는 블러 배경 / 반투명 / 우측 그림자 / 라운딩 / 내부 여백 / 텍스트 컬러 / 버튼 위치를 전부 틀림.
+
+📌 개발자에게 그대로 보내는 최종 지시문
+
+형이 이 문단을 그대로 복붙하면 개발자는 절대 오해 못 한다.
+
+[개발자 전달용 — PRO 카드 1:1 복제 명세]
+홈에 들어가는 “PRO 전용 48시간 김프 예측” 카드는
+반드시 AI 분석 페이지 우측에 있는 PRO 카드와 100% 동일하게 구현해주세요.
+
+필수 요소:
+
+1) 카드 전체 박스
+- background: rgba(255,255,255,0.03)
+- border: 1px solid rgba(255,255,255,0.06)
+- border-radius: 16px
+- padding: 20px 22px
+
+2) 타이틀
+- "🔒 PRO 전용 48시간 김프 예측"
+- font-size: 14px, font-weight: 600
+
+3) 블러 처리된 설명 텍스트 박스 (가장 중요한 요소)
+- background: rgba(255,255,255,0.04)
+- backdrop-filter: blur(6px)
+- border: 1px solid rgba(255,255,255,0.08)
+- padding: 16px 18px
+- border-radius: 12px
+- 내부 텍스트는 rgba(255,255,255,0.55)
+
+4) 버튼
+- 보라색 그라디언트 버튼
+- “🔒 PRO 분석 전체 보기”
+- width: 100%, height: 40px, border-radius: 10px
+
+지금 구현된 내용은 구조가 다르므로,
+위 명세대로 다시 구현해야 합니다.
