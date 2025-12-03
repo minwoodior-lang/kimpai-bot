@@ -4,6 +4,8 @@ import HomeLayout from "@/components/layout/HomeLayout";
 import TodayPremiumSection from "@/components/TodayPremiumSection";
 import ProPredictionCard from "@/components/ProPredictionCard";
 import MyAlertsCard from "@/components/MyAlertsCard";
+import ChatFloatingButton from "@/components/chat/ChatFloatingButton";
+import ChatPanel from "@/components/chat/ChatPanel";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useMarkets } from "@/hooks/useMarkets";
@@ -34,6 +36,7 @@ const PremiumTable = dynamic(
 
 export default function Home() {
   const [selectedIndicator, setSelectedIndicator] = useState("BINANCE_BTC");
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const { data, averagePremium, fxRate } = useMarkets();
 
   const listedData = data.filter(item => item.premium !== null);
@@ -72,6 +75,16 @@ export default function Home() {
           content="코인 김프 실시간 확인, AI 시장 분석, 자동 가격/김프 알림 서비스. 무료로 BTC·ETH·XRP·SOL 실시간 김치프리미엄 데이터를 확인하세요."
         />
       </Head>
+
+      {/* 채팅 버튼과 패널 */}
+      <ChatFloatingButton 
+        isOpen={isChatOpen} 
+        onClick={() => setIsChatOpen(true)} 
+      />
+      <ChatPanel 
+        isOpen={isChatOpen} 
+        onClose={() => setIsChatOpen(false)}
+      />
 
       {/* 메인 콘텐츠 */}
       <HomeLayout>
