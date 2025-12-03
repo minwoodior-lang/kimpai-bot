@@ -12,11 +12,9 @@ export default function Layout({ children }: LayoutProps) {
 
   const navLinks = [
     { href: "/", label: "홈" },
-    { href: "/markets", label: "통계·지표" },
+    { href: "/markets", label: "시장 지표" },
     { href: "/analysis", label: "AI 분석" },
-    { href: "/news", label: "뉴스" },
     { href: "/alerts", label: "알림" },
-    { href: "/events", label: "이벤트" },
   ];
 
   const isActive = (path: string) => router.pathname === path;

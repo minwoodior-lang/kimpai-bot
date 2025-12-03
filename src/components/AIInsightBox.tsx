@@ -1,14 +1,15 @@
 import Link from "next/link";
 import { useMarkets } from "@/hooks/useMarkets";
-import { useExchangeSelection } from "@/contexts/ExchangeSelectionContext";
 import { useUserPlan } from "@/hooks/useUserPlan";
+import dynamic from "next/dynamic";
 
+/**
+ * P-1 AI Insight Box - 정보 밀도 높은 AI 분석 + PRO 업셀링
+ * - FREE: 오늘의 AI 김프 요약
+ * - PRO: 48시간 김프 예측 (업셀링)
+ */
 const AIInsightBox = () => {
-  const { domesticExchange, foreignExchange } = useExchangeSelection();
-  const { data, loading, averagePremium, fxRate, updatedAt } = useMarkets({
-    domestic: domesticExchange,
-    foreign: foreignExchange,
-  });
+  const { data, loading, averagePremium, fxRate } = useMarkets();
   const { plan, isAuthenticated } = useUserPlan();
   const isPro = plan === "pro";
 
@@ -18,21 +19,6 @@ const AIInsightBox = () => {
     ? listedData.reduce((max, item) => 
         (item.premium || 0) > (max.premium || 0) ? item : max, listedData[0])
     : null;
-  
-  const minPremium = listedData.length > 0
-    ? listedData.reduce((min, item) => 
-        (item.premium || 0) < (min.premium || 0) ? item : min, listedData[0])
-    : null;
-
-  const formatTime = (isoString: string) => {
-    if (!isoString) return "";
-    const date = new Date(isoString);
-    return date.toLocaleTimeString("ko-KR", { 
-      hour: "2-digit", 
-      minute: "2-digit",
-      second: "2-digit"
-    });
-  };
 
   const formatPremium = (value: number | null | undefined): string => {
     if (value === null || value === undefined) return "-";
@@ -40,7 +26,6 @@ const AIInsightBox = () => {
   };
 
   const calculateRiskScore = () => {
-    if (!maxPremium || maxPremium.premium === null) return 5;
     const absAvg = Math.abs(averagePremium || 0);
     if (absAvg >= 8) return 10;
     if (absAvg >= 6) return 8;
@@ -49,26 +34,14 @@ const AIInsightBox = () => {
     return 2;
   };
 
-  const generateAIComment = () => {
-    if (!maxPremium || maxPremium.premium === null) return "데이터를 불러오는 중입니다...";
-    
-    const avgPremium = averagePremium || 0;
-    const trend = avgPremium >= 4 ? "상승세" : avgPremium >= 2 ? "보합세" : "하락세";
-    const topCoin = maxPremium.symbol.replace("/KRW", "");
-    
-    return `${topCoin} 프리미엄이 ${formatPremium(maxPremium.premium)}로 가장 높습니다. 전체 시장은 ${trend}를 보이고 있으며, 평균 김프 ${formatPremium(avgPremium)} 수준입니다. 급격한 김프 변동 시 구간별 대응이 중요합니다.`;
-  };
-
   const riskScore = calculateRiskScore();
   const safeAvgPremium = averagePremium || 0;
 
   if (loading) {
     return (
-      <div className="bg-slate-800/80 border border-slate-700 rounded-xl p-6 shadow-lg">
-        <h2 className="text-xl font-bold text-white mb-4">
-          📊 오늘의 AI 김프 요약
-        </h2>
-        <div className="text-slate-400 text-sm">데이터를 불러오는 중입니다...</div>
+      <div className="space-y-4 animate-pulse">
+        <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-5 h-48"></div>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-5 h-40"></div>
       </div>
     );
   }

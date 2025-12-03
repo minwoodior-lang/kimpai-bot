@@ -25,28 +25,28 @@ export default function TopInfoBar() {
   const formatPrice = (price: number) => price.toLocaleString("en-US", { maximumFractionDigits: 0 });
 
   return (
-    <div className="bg-slate-900/90 border-b border-slate-700/50 py-3 px-4">
+    <div className="bg-slate-900/95 border-b border-slate-700/50 py-2 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 text-xs">
           {/* USDT/KRW */}
           <div>
-            <div className="text-slate-400 text-[10px] uppercase tracking-wide">
+            <div className="text-slate-500 text-[9px] uppercase tracking-wider font-semibold">
               USDT/KRW
             </div>
-            <div className="text-white font-bold mt-0.5">
+            <div className="text-white font-bold text-sm mt-0.5">
               ₩{(fxRate || 1330).toLocaleString()}
             </div>
           </div>
 
           {/* BTC 가격 */}
           <div>
-            <div className="text-slate-400 text-[10px] uppercase tracking-wide">
+            <div className="text-slate-500 text-[9px] uppercase tracking-wider font-semibold">
               BTC
             </div>
-            <div className="text-white font-bold mt-0.5">
+            <div className="text-white font-bold text-sm mt-0.5">
               ${formatPrice(marketData.btcPrice)}
             </div>
-            <div className={`text-[10px] font-medium ${getPriceColor(marketData.btcPriceChange24h)}`}>
+            <div className={`text-[9px] font-semibold ${getPriceColor(marketData.btcPriceChange24h)}`}>
               {marketData.btcPriceChange24h >= 0 ? "+" : ""}
               {marketData.btcPriceChange24h.toFixed(2)}%
             </div>
@@ -54,13 +54,13 @@ export default function TopInfoBar() {
 
           {/* USDT 가격 */}
           <div>
-            <div className="text-slate-400 text-[10px] uppercase tracking-wide">
+            <div className="text-slate-500 text-[9px] uppercase tracking-wider font-semibold">
               USDT
             </div>
-            <div className="text-white font-bold mt-0.5">
+            <div className="text-white font-bold text-sm mt-0.5">
               ${marketData.usdtPrice.toFixed(3)}
             </div>
-            <div className={`text-[10px] font-medium ${getPriceColor(marketData.usdtPriceChange24h)}`}>
+            <div className={`text-[9px] font-semibold ${getPriceColor(marketData.usdtPriceChange24h)}`}>
               {marketData.usdtPriceChange24h >= 0 ? "+" : ""}
               {marketData.usdtPriceChange24h.toFixed(2)}%
             </div>
@@ -68,40 +68,40 @@ export default function TopInfoBar() {
 
           {/* BTC Dominance */}
           <div>
-            <div className="text-slate-400 text-[10px] uppercase tracking-wide">
-              BTC Dominance
+            <div className="text-slate-500 text-[9px] uppercase tracking-wider font-semibold">
+              BTC DOM
             </div>
-            <div className="text-white font-bold mt-0.5">
+            <div className="text-white font-bold text-sm mt-0.5">
               {marketData.btcDominance.toFixed(1)}%
             </div>
           </div>
 
           {/* Market Cap */}
           <div>
-            <div className="text-slate-400 text-[10px] uppercase tracking-wide">
+            <div className="text-slate-500 text-[9px] uppercase tracking-wider font-semibold">
               Market Cap
             </div>
-            <div className="text-white font-bold mt-0.5">
+            <div className="text-white font-bold text-sm mt-0.5">
               ${(marketData.marketCap / 1000000000000).toFixed(2)}T
             </div>
           </div>
 
           {/* 24h Volume */}
           <div>
-            <div className="text-slate-400 text-[10px] uppercase tracking-wide">
+            <div className="text-slate-500 text-[9px] uppercase tracking-wider font-semibold">
               24h Volume
             </div>
-            <div className="text-white font-bold mt-0.5">
+            <div className="text-white font-bold text-sm mt-0.5">
               ${(marketData.volume24h / 1000000000).toFixed(1)}B
             </div>
           </div>
 
           {/* Active Users */}
           <div>
-            <div className="text-slate-400 text-[10px] uppercase tracking-wide">
+            <div className="text-slate-500 text-[9px] uppercase tracking-wider font-semibold">
               Active Users
             </div>
-            <div className="text-white font-bold mt-0.5">
+            <div className="text-white font-bold text-sm mt-0.5">
               {marketData.activeUsers.toLocaleString()}
             </div>
           </div>

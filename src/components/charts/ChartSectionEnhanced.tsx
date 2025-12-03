@@ -124,20 +124,20 @@ export default function ChartSectionEnhanced({
         </button>
 
         {isDropdownOpen && (
-          <div className="absolute top-full left-0 mt-2 w-64 bg-slate-800 border border-slate-700 rounded-lg shadow-xl z-50 overflow-hidden">
+          <div className="absolute top-full left-0 mt-2 w-72 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl z-50 overflow-y-auto max-h-[400px]">
             {Object.entries(INDICATOR_GROUPS).map(([groupName, items]) => (
               <div key={groupName}>
-                <div className="px-4 py-2 bg-slate-900/50 text-slate-400 text-xs font-semibold uppercase tracking-wider border-b border-slate-700/50">
+                <div className="sticky top-0 px-4 py-2.5 bg-slate-900/80 backdrop-blur text-slate-300 text-xs font-bold uppercase tracking-wider border-b border-slate-700">
                   {groupName}
                 </div>
                 {items.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => handleSelect(item.id)}
-                    className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
+                    className={`w-full text-left px-4 py-2 text-sm transition-colors ${
                       selectedIndicator === item.id
-                        ? "bg-blue-500/20 text-blue-400"
-                        : "hover:bg-slate-700/50 text-slate-300"
+                        ? "bg-blue-500/25 text-blue-300 border-l-2 border-blue-400"
+                        : "hover:bg-slate-700/40 text-slate-300 border-l-2 border-transparent"
                     }`}
                   >
                     {item.label}
