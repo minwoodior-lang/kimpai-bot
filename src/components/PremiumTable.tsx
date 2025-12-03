@@ -761,7 +761,7 @@ export default function PremiumTable({
       )}
 
       {showFilters && (
-        <div className="mb-6 pt-4 space-y-3">
+        <div className="mb-6 pt-3 md:pt-4 space-y-3">
           {/* PC 레이아웃: 한 줄 */}
           <div className="hidden sm:flex items-center justify-between gap-3">
             {/* 왼쪽: 기준/해외 거래소 */}

@@ -60,7 +60,7 @@ export default function IndicatorSelector({
     <div className="relative">
       <button
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-        className="inline-flex items-center rounded-md dark:bg-slate-800 light:bg-slate-200 dark:border dark:border-slate-700 light:border light:border-slate-300 px-3 py-2 text-sm dark:text-white light:text-slate-900 hover:dark:border-slate-600 hover:light:border-slate-400 transition-colors"
+        className="inline-flex items-center rounded-md bg-slate-800 px-3 py-2 text-sm text-slate-100 hover:bg-slate-700 transition"
       >
         <span>{currentLabel}</span>
         <svg
