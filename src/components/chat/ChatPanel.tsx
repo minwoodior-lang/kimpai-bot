@@ -1,9 +1,9 @@
-import { FC, ReactNode, useState } from "react";
+import { FC, useState } from "react";
 
 interface ChatPanelProps {
   isOpen: boolean;
   onClose: () => void;
-  children?: ReactNode;
+  children?: ((props: { showNicknameEdit: boolean; onToggleNicknameEdit: () => void }) => React.ReactNode) | React.ReactNode;
 }
 
 const ChatPanel: FC<ChatPanelProps> = ({ isOpen, onClose, children }) => {
@@ -37,14 +37,16 @@ const ChatPanel: FC<ChatPanelProps> = ({ isOpen, onClose, children }) => {
 
       {/* 채팅 컨텐츠 영역 */}
       <div className="flex-1 overflow-hidden">
-        {typeof children === "function" ? children({ showNicknameEdit, onToggleNicknameEdit: () => setShowNicknameEdit(false) }) : children || (
-          <div className="h-full flex items-center justify-center text-slate-400 text-sm">
-            <div className="text-center">
-              <div className="text-3xl mb-2">💬</div>
-              <p>채팅 준비 중...</p>
-            </div>
-          </div>
-        )}
+        {typeof children === "function" 
+          ? children({ showNicknameEdit, onToggleNicknameEdit: () => setShowNicknameEdit(false) }) 
+          : children || (
+              <div className="h-full flex items-center justify-center text-slate-400 text-sm">
+                <div className="text-center">
+                  <div className="text-3xl mb-2">💬</div>
+                  <p>채팅 준비 중...</p>
+                </div>
+              </div>
+            )}
       </div>
     </div>
   );

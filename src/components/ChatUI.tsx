@@ -18,14 +18,18 @@ export default function ChatUI({ showNicknameEdit, onToggleNicknameEdit }: { sho
   }, [messages]);
 
   const handleSend = () => {
-    if (!inputValue.trim() || isSending) return;
+    if (!inputValue.trim()) return;
+    if (isSending) return; // 이미 전송 중이면 중복 전송 방지
 
-    setIsSending(true);
-    sendMessage(inputValue.trim());
+    const messageText = inputValue.trim();
     setInputValue("");
+    setIsSending(true);
     
-    // isSending 복구
-    setTimeout(() => setIsSending(false), 100);
+    // sendMessage만 호출 (서버 브로드캐스트를 통해 메시지 수신)
+    sendMessage(messageText);
+    
+    // 500ms 후 isSending 복구
+    setTimeout(() => setIsSending(false), 500);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

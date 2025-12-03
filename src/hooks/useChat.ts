@@ -20,8 +20,14 @@ export function useChat() {
   const [currentNickname, setCurrentNickname] = useState<string>("");
   const wsRef = useRef<WebSocket | null>(null);
   const guestIdRef = useRef<string>("");
+  const connectedRef = useRef(false);
 
   useEffect(() => {
+    // 이미 연결되어 있으면 중복 연결 방지
+    if (connectedRef.current && wsRef.current) {
+      return;
+    }
+
     const guestId = getOrCreateGuestId();
     const nickname = getOrCreateNickname();
     guestIdRef.current = guestId;
@@ -35,19 +41,22 @@ export function useChat() {
 
     const ws = new WebSocket(wsUrl);
     wsRef.current = ws;
+    connectedRef.current = true;
 
     ws.onopen = () => {
       console.log("[useChat] Connected");
       setIsConnected(true);
 
       // hello 메시지 전송
-      ws.send(
-        JSON.stringify({
-          type: "hello",
-          guestId,
-          nickname,
-        })
-      );
+      if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+        wsRef.current.send(
+          JSON.stringify({
+            type: "hello",
+            guestId,
+            nickname,
+          })
+        );
+      }
     };
 
     ws.onmessage = (event) => {
@@ -81,17 +90,20 @@ export function useChat() {
     ws.onclose = () => {
       console.log("[useChat] Disconnected");
       setIsConnected(false);
+      connectedRef.current = false;
     };
 
     ws.onerror = (err) => {
       console.error("[useChat] WebSocket error:", err);
       setIsConnected(false);
+      connectedRef.current = false;
     };
 
     return () => {
       if (ws.readyState === WebSocket.OPEN) {
         ws.close();
       }
+      connectedRef.current = false;
     };
   }, []);
 
