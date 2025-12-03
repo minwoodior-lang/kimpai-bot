@@ -762,36 +762,34 @@ export default function PremiumTable({
 
       {showFilters && (
         <div className="mb-6 pt-3 md:pt-4 space-y-3">
-          {/* PC 레이아웃: 1줄 구조 (드롭다운 + gap + 드롭다운 | 텍스트 + 검색) */}
-          <div className="hidden sm:flex items-center justify-between gap-4">
-            {/* 왼쪽: 드롭다운들 대칭 배치 */}
-            <div className="flex items-center gap-4">
-              {/* 드롭다운 (KR) */}
-              <div className="flex flex-col items-start gap-1">
-                <span className="text-gray-400 text-[11px] whitespace-nowrap">🇰🇷 기준 거래소</span>
-                <MiniDropdown
-                  value={domesticExchange}
-                  options={DOMESTIC_EXCHANGES}
-                  onChange={setDomesticExchange}
-                />
-              </div>
-
-              <span className="text-gray-500 text-sm">↔</span>
-
-              {/* 드롭다운 (해외) */}
-              <div className="flex flex-col items-start gap-1">
-                <span className="text-gray-400 text-[11px] whitespace-nowrap">🌐 해외 거래소</span>
-                <MiniDropdown
-                  value={foreignExchange}
-                  options={FOREIGN_EXCHANGES}
-                  onChange={setForeignExchange}
-                  showShortName={true}
-                />
-              </div>
+          {/* PC 레이아웃: 1줄 전체 */}
+          <div className="hidden sm:flex items-center gap-4">
+            {/* 왼쪽: 기준거래소 텍스트 + 드롭다운 */}
+            <div className="flex items-center gap-2">
+              <span className="text-gray-400 text-[11px] whitespace-nowrap">🇰🇷 기준 거래소</span>
+              <MiniDropdown
+                value={domesticExchange}
+                options={DOMESTIC_EXCHANGES}
+                onChange={setDomesticExchange}
+              />
             </div>
 
-            {/* 오른쪽: 총 개수 + 검색 (1열) */}
-            <div className="flex flex-col items-end gap-2">
+            {/* 중앙: 화살표 */}
+            <span className="text-gray-500 text-sm">↔</span>
+
+            {/* 가운데-우: 드롭다운 + 해외거래소 텍스트 */}
+            <div className="flex items-center gap-2">
+              <MiniDropdown
+                value={foreignExchange}
+                options={FOREIGN_EXCHANGES}
+                onChange={setForeignExchange}
+                showShortName={true}
+              />
+              <span className="text-gray-400 text-[11px] whitespace-nowrap">🌐 해외 거래소</span>
+            </div>
+
+            {/* 오른쪽: 총 개수 + 검색 */}
+            <div className="ml-auto flex items-center gap-3">
               <span className="text-gray-400 text-[12px] whitespace-nowrap">
                 암호화폐 총 <span className="text-white font-medium">{totalCoins}</span>개
               </span>
@@ -812,11 +810,11 @@ export default function PremiumTable({
             </div>
           </div>
 
-          {/* 모바일 레이아웃: 라벨/드롭다운 분리 + 1열 정렬 */}
+          {/* 모바일 레이아웃: 드롭다운 2열 + 텍스트+검색 1열 */}
           <div className="sm:hidden flex flex-col gap-3">
-            {/* 드롭다운 그룹 */}
-            <div className="flex flex-col gap-3">
-              {/* KR 거래소 */}
+            {/* 드롭다운 2열 */}
+            <div className="grid grid-cols-2 gap-3">
+              {/* 왼쪽: KR 거래소 */}
               <div className="flex flex-col gap-1">
                 <span className="text-gray-400 text-xs">🇰🇷 기준 거래소</span>
                 <MiniDropdown
@@ -826,7 +824,7 @@ export default function PremiumTable({
                 />
               </div>
 
-              {/* 해외 거래소 */}
+              {/* 오른쪽: 해외 거래소 */}
               <div className="flex flex-col gap-1">
                 <span className="text-gray-400 text-xs">🌐 해외 거래소</span>
                 <MiniDropdown
@@ -838,12 +836,12 @@ export default function PremiumTable({
               </div>
             </div>
 
-            {/* 텍스트 + 검색 (1열) */}
-            <div className="flex flex-col gap-2">
-              <span className="text-gray-400 text-xs">
+            {/* 텍스트 + 검색 (1행) */}
+            <div className="flex items-center gap-3">
+              <span className="text-gray-400 text-xs whitespace-nowrap">
                 암호화폐 총 <span className="text-white font-medium">{totalCoins}</span>개
               </span>
-              <div className="w-full relative">
+              <div className="flex-1 relative">
                 <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -1027,7 +1025,6 @@ export default function PremiumTable({
                                 <TradingViewChart
                                   symbol={getTvSymbol(row.symbol)}
                                   height={360}
-                                  interval="60"
                                 />
                               </div>
                             </div>
