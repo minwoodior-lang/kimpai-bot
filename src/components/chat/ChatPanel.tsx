@@ -24,7 +24,7 @@ const ChatPanel: FC<ChatPanelProps> = ({ isOpen, onClose, children }) => {
       </div>
 
       {/* 채팅 컨텐츠 영역 */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-hidden">
         {children || (
           <div className="h-full flex items-center justify-center text-slate-400 text-sm">
             <div className="text-center">

@@ -6,6 +6,7 @@ import ProPredictionCard from "@/components/ProPredictionCard";
 import MyAlertsCard from "@/components/MyAlertsCard";
 import ChatFloatingButton from "@/components/chat/ChatFloatingButton";
 import ChatPanel from "@/components/chat/ChatPanel";
+import ChatUI from "@/components/ChatUI";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useMarkets } from "@/hooks/useMarkets";
@@ -84,7 +85,9 @@ export default function Home() {
       <ChatPanel 
         isOpen={isChatOpen} 
         onClose={() => setIsChatOpen(false)}
-      />
+      >
+        <ChatUI />
+      </ChatPanel>
 
       {/* 메인 콘텐츠 */}
       <HomeLayout>

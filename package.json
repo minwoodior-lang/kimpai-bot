@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p ${PORT:-5000} -H 0.0.0.0",
+    "dev": "tsx server.ts",
     "build": "next build",
-    "start": "next start -p ${PORT:-5000} -H 0.0.0.0",
+    "start": "tsx server.ts",
     "lint": "next lint",
     "fetch:upbit": "tsx scripts/fetchUpbitMarkets.ts",
     "fetch:bithumb": "tsx scripts/fetchBithumbMarkets.ts",
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.86.0",
+    "@types/ws": "^8.18.1",
     "axios": "^1.13.2",
     "cheerio": "^1.1.2",
     "next": "14.2.33",
