@@ -1,11 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
 interface PremiumHistoryResponse {
   success: boolean;
   data: { time: string; premium: number }[];
@@ -20,6 +15,18 @@ export default async function handler(
   const hoursNum = parseInt(hours as string, 10) || 24;
 
   try {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      return res.status(200).json({
+        success: true,
+        data: [],
+        symbol: symbol as string,
+      });
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
     const startTime = new Date(Date.now() - hoursNum * 60 * 60 * 1000).toISOString();
 
     const { data: snapshots, error } = await supabase
