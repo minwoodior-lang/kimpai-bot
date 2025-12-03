@@ -1,12 +1,23 @@
 import Head from "next/head";
 import Layout from "@/components/Layout";
-import PremiumTicker from "@/components/PremiumTicker";
 import HomeLayout from "@/components/layout/HomeLayout";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 
-const ChartSection = dynamic(
-  () => import("@/components/charts/ChartSection"),
+const TopInfoBar = dynamic(
+  () => import("@/components/top/TopInfoBar"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="bg-slate-900/90 border-b border-slate-700/50 py-3 px-4 h-24">
+        <div className="max-w-7xl mx-auto text-slate-400">로딩 중...</div>
+      </div>
+    ),
+  }
+);
+
+const ChartSectionEnhanced = dynamic(
+  () => import("@/components/charts/ChartSectionEnhanced"),
   {
     ssr: false,
     loading: () => (
@@ -29,19 +40,8 @@ const PremiumTable = dynamic(
   }
 );
 
-interface MarketOption {
-  id: string;
-  name: string;
-  logo: string;
-}
-
-const MARKET_OPTIONS: MarketOption[] = [
-  { id: "BINANCE_BTC", name: "🌍 BTC Binance", logo: "/logo-binance.png" },
-  { id: "BINANCE_ETH", name: "🌍 ETH Binance", logo: "/logo-binance.png" },
-];
-
 export default function Home() {
-  const [selectedMarket, setSelectedMarket] = useState("BINANCE_BTC");
+  const [selectedIndicator, setSelectedIndicator] = useState("BINANCE_BTC");
 
   return (
     <Layout>
@@ -53,29 +53,21 @@ export default function Home() {
         />
       </Head>
 
-      <PremiumTicker />
+      {/* P-1 최상단 정보바 */}
+      <TopInfoBar />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 mb-4">
-        {/* 마켓 선택 드롭다운 */}
-        <div className="flex items-center gap-3 mb-4">
-          <select
-            value={selectedMarket}
-            onChange={(e) => setSelectedMarket(e.target.value)}
-            className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-500 transition-colors"
-          >
-            {MARKET_OPTIONS.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.name}
-              </option>
-            ))}
-          </select>
-        </div>
+      {/* 메인 콘텐츠 */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <HomeLayout>
+          {/* 향상된 차트 (드롭다운 포함) */}
+          <ChartSectionEnhanced
+            selectedIndicator={selectedIndicator}
+            onIndicatorChange={setSelectedIndicator}
+          />
+          {/* 프리미엄 테이블 */}
+          <PremiumTable showHeader={false} showFilters={true} limit={0} refreshInterval={2000} />
+        </HomeLayout>
       </div>
-
-      <HomeLayout>
-        <ChartSection selectedMarket={selectedMarket} />
-        <PremiumTable showHeader={false} showFilters={true} limit={0} refreshInterval={2000} />
-      </HomeLayout>
     </Layout>
   );
 }

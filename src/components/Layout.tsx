@@ -11,11 +11,12 @@ export default function Layout({ children }: LayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/markets", label: "Markets" },
-    { href: "/analysis", label: "Analysis" },
-    { href: "/alerts", label: "Alerts" },
-    { href: "/pricing", label: "Pricing" },
+    { href: "/", label: "홈" },
+    { href: "/markets", label: "통계·지표" },
+    { href: "/analysis", label: "AI 분석" },
+    { href: "/news", label: "뉴스" },
+    { href: "/alerts", label: "알림" },
+    { href: "/events", label: "이벤트" },
   ];
 
   const isActive = (path: string) => router.pathname === path;
@@ -49,17 +50,18 @@ export default function Layout({ children }: LayoutProps) {
             </div>
 
             <div className="hidden md:flex items-center gap-4">
+              <span className="text-slate-400 text-sm">USDT/KRW ₩1,350</span>
               <Link
                 href="/login"
-                className="text-slate-300 hover:text-white transition-colors"
+                className="text-slate-300 hover:text-white transition-colors text-sm"
               >
-                Sign In
+                로그인
               </Link>
               <Link
                 href="/signup"
-                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg font-medium transition-all"
+                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg font-medium transition-all text-sm"
               >
-                Get Started
+                회원가입
               </Link>
             </div>
 
