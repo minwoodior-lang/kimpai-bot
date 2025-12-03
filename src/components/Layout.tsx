@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { TopMarketInfoBar } from "@/components/top/TopMarketInfoBar";
+import TopInfoBar from "@/components/top/TopInfoBar";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -37,6 +38,31 @@ export default function Layout({ children }: LayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
 
+  // 세션 ID 초기화 및 하트비트
+  useEffect(() => {
+    let sessionId = localStorage.getItem("kimpai_session_id");
+    if (!sessionId) {
+      sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      localStorage.setItem("kimpai_session_id", sessionId);
+    }
+
+    const sendHeartbeat = async () => {
+      try {
+        await fetch("/api/heartbeat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionId }),
+        });
+      } catch (err) {
+        // Silent
+      }
+    };
+
+    sendHeartbeat();
+    const interval = setInterval(sendHeartbeat, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
   const navLinks = [
     { href: "/", label: "홈" },
     { href: "/markets", label: "시장 지표" },
@@ -49,6 +75,7 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-900 dark:bg-slate-900 light:bg-white text-slate-100 dark:text-slate-100 light:text-slate-900">
+      <TopInfoBar />
       <header className="sm:sticky sm:top-0 z-50 bg-slate-900/95 dark:bg-slate-900/95 light:bg-white/95 backdrop-blur border-b border-slate-800 dark:border-slate-800 light:border-slate-200">
         <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-5">
           <TopMarketInfoBar />

@@ -1,0 +1,57 @@
+[PC 상단 환율바 & 동시접속자 표시 구현 요청]
+
+1) 위치
+- 현재 KimpAI 로고/메뉴가 들어있는 헤더 바로 위에, 높이 낮은 얇은 바를 하나 추가해주세요.
+- Layout.tsx 기준으로, <header> 위쪽에 <TopInfoBar /> 같은 컴포넌트로 분리해서 넣으면 좋겠습니다.
+
+2) 스타일
+- 전체 컨테이너: w-full bg-[#050816] border-b border-[#0b1120]
+- 내부: mx-auto max-w-[1200px] px-4 lg:px-5 h-7 flex items-center justify-between
+- 폰트: text-[11px] text-[#A7B3C6] leading-none
+
+3) 좌측 메트릭들 (김프가 스타일)
+- 순서: 환율(USD/KRW) · 테더(USDT) · BTC 점유율 · 시가총액 · 24시간 거래량
+- 각 아이템은 flex items-center gap-1로 구성하고, 아이템 사이에는 “|” (text-[#30364a])로 구분해주세요.
+- 색상 규칙:
+  - 숫자 본문: text-white font-medium
+  - 변동률: 양수 #50e3a4, 음수 #ff6b6b, 0 #A7B3C6
+- 아이콘:
+  - 환율: 작은 원형 그라디언트 아이콘 (구글 느낌) - h-3.5 w-3.5 rounded-full bg-gradient-to-br from-[#4285F4] via-[#34A853] to-[#FBBC05]
+  - 테더: 빗썸 테더 스타일 - h-3.5 w-3.5 rounded-full bg-[#26a17b], 중앙에 $ 또는 T 글자 (text-[8px] text-white)
+- 모바일에서는 시가총액/24시간 거래량은 숨기고(md 이상에서만 보이게) overflow-x-auto/whitespace-nowrap로 가로 스크롤만 허용해주세요.
+
+4) 우측 동시접속자
+- 구조: flex items-center gap-2
+- 아이콘: h-4 w-4 rounded-full bg-[#111827], 안에 👥 아이콘 또는 사람 실루엣 (text-[9px] text-[#A7B3C6])
+- 텍스트: “동시접속자” (text-[#A7B3C6]/80) + 숫자 (“380명” 같은 형식, text-white font-semibold)
+
+5) 데이터 연동 (API 설계)
+- /api/global-metrics 엔드포인트 하나 만들어서 아래 값을 내려주세요.
+  {
+    usdKrw: number,
+    usdKrwChange: number,
+    tetherKrw: number,
+    tetherChange: number,
+    btcDominance: number,
+    marketCapKrw: number,
+    marketCapChange: number,
+    volume24hKrw: number,
+    volume24hChange: number,
+    concurrentUsers: number
+  }
+- 환율/테더/시장 데이터는 지금 사용 중인 글로벌 메트릭 소스 또는 기존 priceWorker에서 집계한 값을 활용하면 됩니다. (구글 환율 직접 크롤링이 아니라, 동일 값만 맞춰주면 됩니다)
+
+6) 동시접속자 구현 (Supabase 추천)
+- Supabase에 active_sessions 테이블 생성:
+  - id uuid primary key
+  - last_seen timestamptz
+- 클라이언트에서 홈 진입 시 sessionId를 localStorage에 저장하고, 30초마다 /api/heartbeat 호출:
+  - insert into active_sessions (id, last_seen)
+    values ($sessionId, now())
+    on conflict (id) do update set last_seen = now();
+- /api/global-metrics에서는
+  - select count(*) from active_sessions where last_seen > now() - interval '2 minutes';
+    를 concurrentUsers로 내려주세요.
+- 환율바에서는 API 데이터 로딩 완료 시 숫자만 바인딩하면 됩니다.
+
+위 내용대로 구현해주시면, 현재 김프가 상단 바와 UX는 동일하면서 KimpAI 스타일로 통일된 얇은 환율/지표 바를 만들 수 있습니다.
