@@ -913,9 +913,7 @@ export default function PremiumTable({
                   return (
                     <React.Fragment key={uniqueKey}>
                       <tr
-                        className={`border-t border-slate-700/50 hover:bg-slate-700/30 transition-colors ${
-                          index % 2 === 0 ? "bg-slate-800/30" : ""
-                        }`}
+                        className="border-t border-slate-700/50 hover:bg-slate-700/30 transition-colors"
                       >
                         <td className="px-2 py-2">
                           <div className="flex items-center gap-3">

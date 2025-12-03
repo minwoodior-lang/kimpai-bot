@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import { TopMarketInfoBar } from "@/components/top/TopMarketInfoBar";
 
 interface LayoutProps {
@@ -34,6 +35,7 @@ function ScrollToTopButton() {
 export default function Layout({ children }: LayoutProps) {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   const navLinks = [
     { href: "/", label: "홈" },
@@ -80,6 +82,13 @@ export default function Layout({ children }: LayoutProps) {
               </div>
 
               <div className="hidden md:flex items-center gap-3">
+                <button
+                  onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                  className="text-slate-300 hover:text-white transition-colors text-sm"
+                  title={`${theme === "light" ? "다크" : "라이트"} 모드`}
+                >
+                  {theme === "light" ? "🌙" : "☀️"}
+                </button>
                 <Link
                   href="/login"
                   className="text-slate-300 hover:text-white transition-colors text-sm"
@@ -140,6 +149,12 @@ export default function Layout({ children }: LayoutProps) {
                       {link.label}
                     </Link>
                   ))}
+                  <button
+                    onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                    className="text-slate-300 hover:text-white transition-colors text-sm py-2"
+                  >
+                    {theme === "light" ? "🌙 다크 모드" : "☀️ 라이트 모드"}
+                  </button>
                   <div className="mt-4 flex gap-2 pt-4 border-t border-slate-700/50">
                     <button className="flex-1 rounded-lg border border-slate-600 py-2 text-sm text-slate-300 hover:text-white transition-colors">
                       로그인
