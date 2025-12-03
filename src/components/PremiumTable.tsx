@@ -761,14 +761,62 @@ export default function PremiumTable({
       )}
 
       {showFilters && (
-        <div className="mb-3 md:mb-4 pt-3 md:pt-4">
-          {/* 통합 대칭 레이아웃 (모바일/PC 동일 구조) */}
-          <div className="flex flex-col gap-2">
+        <div className="mb-2 pt-2 md:pt-3">
+          {/* PC 레이아웃: 1줄 가로 배치 */}
+          <div className="hidden sm:flex items-center gap-3 md:gap-4">
+            {/* 왼쪽: 기준거래소 텍스트 + 드롭다운 */}
+            <div className="flex items-center gap-2">
+              <span className="text-gray-400 text-[11px] whitespace-nowrap">🇰🇷 기준 거래소</span>
+              <MiniDropdown
+                value={domesticExchange}
+                options={DOMESTIC_EXCHANGES}
+                onChange={setDomesticExchange}
+              />
+            </div>
+
+            {/* 중앙: 화살표 */}
+            <span className="text-gray-500 text-sm">↔</span>
+
+            {/* 가운데-우: 드롭다운 + 해외거래소 텍스트 */}
+            <div className="flex items-center gap-2">
+              <MiniDropdown
+                value={foreignExchange}
+                options={FOREIGN_EXCHANGES}
+                onChange={setForeignExchange}
+                showShortName={true}
+              />
+              <span className="text-gray-400 text-[11px] whitespace-nowrap">🌐 해외 거래소</span>
+            </div>
+
+            {/* 오른쪽: 총 개수 + 검색 */}
+            <div className="ml-auto flex items-center gap-3">
+              <span className="text-gray-400 text-[12px] whitespace-nowrap">
+                암호화폐 총 <span className="text-white font-medium">{totalCoins}</span>개
+              </span>
+              <div className="w-[240px] relative">
+                <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="BTC, 비트코인, ㅂㅌ"
+                  className="w-full bg-slate-700 text-white rounded-lg pl-8 pr-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs md:text-sm"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* 모바일 레이아웃: 대칭 구조 */}
+          <div className="sm:hidden flex flex-col gap-2">
             {/* 1줄째: 거래소 선택 */}
-            <div className="flex items-center justify-center gap-2 md:gap-4">
+            <div className="flex items-center justify-center gap-2">
               {/* 왼쪽 영역 */}
               <div className="flex-1 flex flex-col items-center gap-1">
-                <span className="text-gray-400 text-[11px] md:text-xs">🇰🇷 기준 거래소</span>
+                <span className="text-gray-400 text-[11px]">🇰🇷 기준 거래소</span>
                 <MiniDropdown
                   value={domesticExchange}
                   options={DOMESTIC_EXCHANGES}
@@ -783,7 +831,7 @@ export default function PremiumTable({
 
               {/* 오른쪽 영역 */}
               <div className="flex-1 flex flex-col items-center gap-1">
-                <span className="text-gray-400 text-[11px] md:text-xs">🌐 해외 거래소</span>
+                <span className="text-gray-400 text-[11px]">🌐 해외 거래소</span>
                 <MiniDropdown
                   value={foreignExchange}
                   options={FOREIGN_EXCHANGES}
@@ -794,10 +842,10 @@ export default function PremiumTable({
             </div>
 
             {/* 2줄째: 암호화폐 개수 + 검색창 */}
-            <div className="flex items-center justify-center gap-2 md:gap-4">
+            <div className="flex items-center justify-center gap-2">
               {/* 왼쪽: 암호화폐 총 개수 */}
               <div className="flex-1 flex justify-center">
-                <span className="text-gray-400 text-[11px] md:text-xs whitespace-nowrap">
+                <span className="text-gray-400 text-[11px] whitespace-nowrap">
                   암호화폐 총 <span className="text-white font-medium">{totalCoins}</span>개
                 </span>
               </div>
@@ -807,7 +855,7 @@ export default function PremiumTable({
 
               {/* 오른쪽: 검색창 */}
               <div className="flex-1 flex justify-center">
-                <div className="w-full max-w-[200px] md:max-w-[240px] relative">
+                <div className="w-full max-w-[200px] relative">
                   <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -818,7 +866,7 @@ export default function PremiumTable({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="BTC, 비트코인, ㅂㅌ"
-                    className="w-full bg-slate-700 text-white rounded-lg pl-8 pr-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs md:text-sm"
+                    className="w-full dark:bg-slate-700 light:bg-slate-100 dark:text-white light:text-slate-900 rounded-lg pl-8 pr-3 py-1.5 border dark:border-slate-600 light:border-slate-300 dark:focus:border-blue-500 light:focus:border-blue-400 focus:outline-none text-xs"
                   />
                 </div>
               </div>
