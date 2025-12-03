@@ -762,12 +762,13 @@ export default function PremiumTable({
 
       {showFilters && (
         <div className="mb-6 pt-3 md:pt-4 space-y-3">
-          {/* PC 레이아웃: 한 줄 */}
-          <div className="hidden sm:flex items-center justify-between gap-3">
-            {/* 왼쪽: 기준/해외 거래소 */}
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-2">
-                <span className="text-gray-400 text-[12px] whitespace-nowrap">🇰🇷 기준 거래소</span>
+          {/* PC 레이아웃: 1줄 구조 (드롭다운 + gap + 드롭다운 | 텍스트 + 검색) */}
+          <div className="hidden sm:flex items-center justify-between gap-4">
+            {/* 왼쪽: 드롭다운들 대칭 배치 */}
+            <div className="flex items-center gap-4">
+              {/* 드롭다운 (KR) */}
+              <div className="flex flex-col items-start gap-1">
+                <span className="text-gray-400 text-[11px] whitespace-nowrap">🇰🇷 기준 거래소</span>
                 <MiniDropdown
                   value={domesticExchange}
                   options={DOMESTIC_EXCHANGES}
@@ -775,10 +776,11 @@ export default function PremiumTable({
                 />
               </div>
 
-              <span className="text-gray-500">↔</span>
+              <span className="text-gray-500 text-sm">↔</span>
 
-              <div className="flex items-center gap-2">
-                <span className="text-gray-400 text-[12px] whitespace-nowrap">🌐 해외 거래소</span>
+              {/* 드롭다운 (해외) */}
+              <div className="flex flex-col items-start gap-1">
+                <span className="text-gray-400 text-[11px] whitespace-nowrap">🌐 해외 거래소</span>
                 <MiniDropdown
                   value={foreignExchange}
                   options={FOREIGN_EXCHANGES}
@@ -788,8 +790,8 @@ export default function PremiumTable({
               </div>
             </div>
 
-            {/* 오른쪽: 총 개수 + 검색 */}
-            <div className="flex items-center gap-3">
+            {/* 오른쪽: 총 개수 + 검색 (1열) */}
+            <div className="flex flex-col items-end gap-2">
               <span className="text-gray-400 text-[12px] whitespace-nowrap">
                 암호화폐 총 <span className="text-white font-medium">{totalCoins}</span>개
               </span>
@@ -810,19 +812,23 @@ export default function PremiumTable({
             </div>
           </div>
 
-          {/* 모바일 레이아웃: 여러 줄 */}
-          <div className="sm:hidden space-y-2">
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <span className="text-gray-400 text-[11px] whitespace-nowrap">🇰🇷 기준 거래소</span>
+          {/* 모바일 레이아웃: 라벨/드롭다운 분리 + 1열 정렬 */}
+          <div className="sm:hidden flex flex-col gap-3">
+            {/* 드롭다운 그룹 */}
+            <div className="flex flex-col gap-3">
+              {/* KR 거래소 */}
+              <div className="flex flex-col gap-1">
+                <span className="text-gray-400 text-xs">🇰🇷 기준 거래소</span>
                 <MiniDropdown
                   value={domesticExchange}
                   options={DOMESTIC_EXCHANGES}
                   onChange={setDomesticExchange}
                 />
               </div>
-              <div className="flex items-center gap-2">
-                <span className="text-gray-400 text-[11px] whitespace-nowrap">🌐 해외 거래소</span>
+
+              {/* 해외 거래소 */}
+              <div className="flex flex-col gap-1">
+                <span className="text-gray-400 text-xs">🌐 해외 거래소</span>
                 <MiniDropdown
                   value={foreignExchange}
                   options={FOREIGN_EXCHANGES}
@@ -832,8 +838,9 @@ export default function PremiumTable({
               </div>
             </div>
 
+            {/* 텍스트 + 검색 (1열) */}
             <div className="flex flex-col gap-2">
-              <span className="text-gray-400 text-[10px] whitespace-nowrap">
+              <span className="text-gray-400 text-xs">
                 암호화폐 총 <span className="text-white font-medium">{totalCoins}</span>개
               </span>
               <div className="w-full relative">
@@ -1018,7 +1025,7 @@ export default function PremiumTable({
                             <div className="bg-[#0F111A] border-t border-b border-slate-700/50 py-3 px-3">
                               <div className="h-[360px] rounded-xl overflow-hidden bg-slate-900/50">
                                 <TradingViewChart
-                                  tvSymbol={getTvSymbol(row.symbol)}
+                                  symbol={getTvSymbol(row.symbol)}
                                   height={360}
                                   interval="60"
                                 />
