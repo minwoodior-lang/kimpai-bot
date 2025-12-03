@@ -1,11 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 import { useChat, type ChatMessage } from "@/hooks/useChat";
+import { generateAndSetRandomNickname } from "@/lib/guestChat";
 
 export default function ChatUI() {
-  const { messages, systemMessage, isConnected, sendMessage } = useChat();
+  const { messages, systemMessage, isConnected, currentNickname, sendMessage, updateNickname } = useChat();
   const [inputValue, setInputValue] = useState("");
+  const [nicknameInput, setNicknameInput] = useState("");
   const [isSending, setIsSending] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setNicknameInput(currentNickname);
+  }, [currentNickname]);
 
   // 자동 스크롤
   useEffect(() => {
@@ -28,8 +34,48 @@ export default function ChatUI() {
     }
   };
 
+  const handleSaveNickname = () => {
+    updateNickname(nicknameInput);
+  };
+
+  const handleRandomNickname = () => {
+    const newNickname = generateAndSetRandomNickname();
+    setNicknameInput(newNickname);
+    updateNickname(newNickname);
+  };
+
   return (
     <div className="flex flex-col h-full bg-slate-800">
+      {/* 닉네임 입력 영역 */}
+      <div className="border-b border-slate-700 px-4 py-3 bg-slate-750 space-y-2">
+        <div className="flex gap-2 items-end">
+          <div className="flex-1">
+            <label className="text-xs text-slate-400 block mb-1">닉네임</label>
+            <input
+              type="text"
+              value={nicknameInput}
+              onChange={(e) => setNicknameInput(e.target.value)}
+              placeholder="닉네임 입력"
+              maxLength={50}
+              className="w-full bg-slate-700 border border-slate-600 rounded px-2 py-1.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500"
+            />
+          </div>
+          <button
+            onClick={handleSaveNickname}
+            className="bg-green-600 hover:bg-green-700 px-2.5 py-1.5 rounded text-white text-xs font-medium transition-colors"
+          >
+            저장
+          </button>
+          <button
+            onClick={handleRandomNickname}
+            className="bg-slate-600 hover:bg-slate-500 px-2.5 py-1.5 rounded text-white text-xs font-medium transition-colors"
+            title="랜덤 닉네임"
+          >
+            🎲
+          </button>
+        </div>
+      </div>
+
       {/* 메시지 리스트 */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3 text-sm">
         {messages.length === 0 ? (

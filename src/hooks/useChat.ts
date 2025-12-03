@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { getOrCreateGuestId, getOrCreateNickname } from "@/lib/guestChat";
+import { getOrCreateGuestId, getOrCreateNickname, setNickname } from "@/lib/guestChat";
 
 export interface ChatMessage {
   id: string;
@@ -17,11 +17,15 @@ export function useChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [systemMessage, setSystemMessage] = useState<string | null>(null);
   const [isConnected, setIsConnected] = useState(false);
+  const [currentNickname, setCurrentNickname] = useState<string>("");
   const wsRef = useRef<WebSocket | null>(null);
+  const guestIdRef = useRef<string>("");
 
   useEffect(() => {
     const guestId = getOrCreateGuestId();
     const nickname = getOrCreateNickname();
+    guestIdRef.current = guestId;
+    setCurrentNickname(nickname);
 
     // WebSocket URL 결정 (wss:// or ws://)
     const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
@@ -105,10 +109,30 @@ export function useChat() {
     );
   }, []);
 
+  const updateNickname = useCallback((newNickname: string) => {
+    const trimmed = newNickname.trim().substring(0, 50);
+    if (!trimmed) return;
+
+    setNickname(trimmed);
+    setCurrentNickname(trimmed);
+
+    if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+      wsRef.current.send(
+        JSON.stringify({
+          type: "hello",
+          guestId: guestIdRef.current,
+          nickname: trimmed,
+        })
+      );
+    }
+  }, []);
+
   return {
     messages,
     systemMessage,
     isConnected,
+    currentNickname,
     sendMessage,
+    updateNickname,
   };
 }

@@ -17,10 +17,23 @@ export function getOrCreateNickname(): string {
 
   let nickname = localStorage.getItem(GUEST_NICKNAME_KEY);
   if (!nickname) {
-    const randomNum = Math.floor(Math.random() * 10000);
-    nickname = `사용자${randomNum}`;
+    nickname = generateRandomNickname();
     localStorage.setItem(GUEST_NICKNAME_KEY, nickname);
   }
+  return nickname;
+}
+
+function generateRandomNickname(): string {
+  const randomNum = Math.floor(Math.random() * 10000)
+    .toString()
+    .padStart(4, "0");
+  return `사용자${randomNum}`;
+}
+
+export function generateAndSetRandomNickname(): string {
+  if (typeof window === "undefined") return "익명";
+  const nickname = generateRandomNickname();
+  localStorage.setItem(GUEST_NICKNAME_KEY, nickname);
   return nickname;
 }
 

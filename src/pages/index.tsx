@@ -68,7 +68,7 @@ export default function Home() {
   const safeAvgPremium = averagePremium || 0;
 
   return (
-    <Layout>
+    <Layout isChatOpen={isChatOpen}>
       <Head>
         <title>KimpAI - 실시간 김프 & AI 분석</title>
         <meta

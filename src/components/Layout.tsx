@@ -6,9 +6,11 @@ import TopInfoBar from "@/components/top/TopInfoBar";
 
 interface LayoutProps {
   children: React.ReactNode;
+  isChatOpen?: boolean;
 }
 
-function ScrollToTopButton() {
+function ScrollToTopButton({ hidden }: { hidden?: boolean }) {
+  if (hidden) return null;
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ function ScrollToTopButton() {
   );
 }
 
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ children, isChatOpen }: LayoutProps) {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -209,7 +211,7 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </footer>
 
-      <ScrollToTopButton />
+      <ScrollToTopButton hidden={isChatOpen} />
     </div>
   );
 }

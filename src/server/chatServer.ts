@@ -74,9 +74,9 @@ export function createChatServer(server: Server): void {
             items: messageHistory,
           });
 
-          // 이후 메시지는 일반 메시지 핸들러로
+          // 이후 메시지 처리 (hello 재전송 포함)
           ws.on("message", (data: Buffer) => {
-            handleClientMessage(ws, data);
+            handleClientMessage(ws, clientData, data);
           });
         } else {
           ws.close(1002, "Invalid hello message");
@@ -105,12 +105,16 @@ export function createChatServer(server: Server): void {
   console.log("[ChatServer] WebSocket server created on /ws/chat");
 }
 
-function handleClientMessage(ws: WebSocket, data: Buffer): void {
-  const clientData = clients.get(ws);
-  if (!clientData) return;
-
+function handleClientMessage(ws: WebSocket, clientData: ClientData, data: Buffer): void {
   try {
     const msg = JSON.parse(data.toString());
+
+    // hello 메시지로 닉네임 업데이트
+    if (msg.type === "hello" && msg.nickname) {
+      clientData.nickname = msg.nickname.substring(0, 50);
+      console.log(`[ChatServer] Nickname updated: ${clientData.nickname}`);
+      return;
+    }
 
     if (msg.type === "chat" && typeof msg.text === "string") {
       const now = Date.now();
