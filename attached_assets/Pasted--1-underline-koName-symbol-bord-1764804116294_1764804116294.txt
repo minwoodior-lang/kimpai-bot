@@ -1,0 +1,119 @@
+[정확 지시문] 코인셀 행 전체 밑줄(구분선) 강제 적용
+1) 코인명 아래에 보이는 기존 underline 제거
+
+코인명(koName) 또는 심볼(symbol)에 적용된
+
+border-b
+
+underline
+
+decoration-*
+
+after:border-b
+
+또는 row 내부 특정 div에 걸린 border-b
+
+이런 스타일 전부 삭제해야 합니다.
+
+→ 코인명 아래에만 보이는 밑줄은 완전히 제거해주세요.
+
+2) 행 전체에 full-width 구분선 추가
+
+코인셀 row를 감싸는 <tr> 또는 <li> 컨테이너에 다음 스타일을 넣어주세요:
+
+<li className="flex items-center py-2 border-b border-gray-700/40">
+
+
+또는 Tailwind 기준:
+
+border-b
+
+border-gray-700/40 (진하지 않은 회색)
+
+📌 색상 가이드 (보여야 함):
+
+border-white/5 는 너무 연해서 모바일에서는 보이지 않을 수 있음
+→ 색을 조금 더 보이는 회색으로 변경해야 함
+
+추천:
+
+border-[#303848] (김프AI 다크테마와 가장 자연스럽게 맞음)
+
+예시:
+
+<li className="border-b border-[#303848] py-2">
+
+3) 헤더와 로우 간 정렬이 맞도록 여백 고정
+
+row 왼쪽 패딩이 상단 헤더와 동일해야 함:
+
+px-0 md:px-2
+
+✅ (2) 모바일에서 코인명/심볼/아이콘 크기 더 줄여서 겹침 방지
+
+현재 아직 모바일에서 정보가 현재가·김프 컬럼과 겹칠 위험 있음.
+→ 한 단계 더 축소할 필요 있음.
+
+🔧 정확 size 가이드
+코인 아이콘
+
+현재 w-4 h-4 이지만 더 작아질 수 있음
+→ w-3.5 h-3.5 (14px) 추천
+
+<CoinIcon className="w-3.5 h-3.5 md:w-8 md:h-8" />
+
+코인명
+
+현재 text-[11px] → text-[10px] 로 조정
+
+<span className="text-[10px] md:text-base truncate">{koName}</span>
+
+심볼
+
+현재 text-[9px] → text-[8px]
+
+<span className="text-[8px] md:text-xs text-gray-400 truncate">{symbol}</span>
+
+레이아웃 / 겹침 방지 핵심 포인트
+
+코인명·심볼을 감싸는 div에 반드시 적용해야 하는 것:
+
+<div className="flex flex-col flex-1 min-w-0">
+
+
+flex-1 : 왼쪽 영역이 가변 폭으로 확장됨
+
+min-w-0 : truncate 기능이 정상적으로 작동
+
+truncate : 오른쪽 컬럼과 겹칠 가능성 0%
+
+📄 레플릿 전달용 최종 버전 (그대로 복붙)
+[모바일 코인셀 UX 최종 수정 요청]
+
+1) 코인명 아래 남아있는 밑줄 제거
+- koName, symbol 또는 해당 div에 걸린 underline/border-bottom 스타일 전체 삭제.
+- 코인명 아래만 짧게 보이는 선은 완전히 제거 필요.
+
+2) 행 전체를 가로지르는 구분선 적용
+- 각 코인셀 row 컨테이너(li 또는 tr)에 다음 스타일 적용:
+  class="border-b border-[#303848] py-2"
+- 기존 border-white/5 는 너무 연해서 모바일에서 안보임 → 위 색상으로 변경.
+
+3) 모바일에서 코인명/아이콘 더 축소 (PC는 유지)
+- 코인 아이콘: w-3.5 h-3.5 (md: w-8 h-8)
+- 코인명: text-[10px] (md: text-base)
+- 심볼: text-[8px] (md: text-xs)
+- row 내부 레이아웃:
+  <div class="flex flex-col flex-1 min-w-0">
+    <span class="truncate">{koName}</span>
+    <span class="truncate">{symbol}</span>
+  </div>
+
+4) truncate 적용
+- 이름/심볼 모두 truncate 되도록 설정 (현재가/김프 컬럼과 겹치지 않음)
+
+이대로 적용하면
+- 코인명 아래 잔여 밑줄 문제 해결
+- 행 전체에 회색 구분선 표시
+- 모바일에서 텍스트/아이콘 충돌 없이 정렬
+- PC 레이아웃에는 영향 없음
