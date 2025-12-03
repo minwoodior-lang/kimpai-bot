@@ -22,14 +22,13 @@ interface GlobalMetrics {
 
 let cachedMetrics: GlobalMetrics | null = null;
 let cacheTime = 0;
-const CACHE_DURATION = 5 * 60 * 1000; // 5분
+const CACHE_DURATION = 5 * 60 * 1000;
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<GlobalMetrics>
 ) {
   try {
-    // 캐시 확인
     if (cachedMetrics && Date.now() - cacheTime < CACHE_DURATION) {
       return res.status(200).json(cachedMetrics);
     }
@@ -44,58 +43,88 @@ export default async function handler(
       marketCapChange: 2.34,
       volume24hKrw: 185e12,
       volume24hChange: 5.12,
-      concurrentUsers: 380,
+      concurrentUsers: 0,
     };
 
-    // 1. USD/KRW 환율 가져오기 (FX API)
+    // 1. USD/KRW 환율
     try {
       const fxRes = await axios.get("https://api.exchangerate.host/latest?base=USD&symbols=KRW", {
         timeout: 3000,
       });
       if (fxRes.data?.rates?.KRW) {
         metricsData.usdKrw = Math.round(fxRes.data.rates.KRW);
+        console.log("[FX API] USD/KRW:", metricsData.usdKrw);
       }
     } catch (err) {
-      // Fallback 사용
+      console.error("[FX API Error]:", err instanceof Error ? err.message : String(err));
     }
 
-    // 2. Bithumb USDT/KRW 시세
+    // 2. Bithumb USDT/KRW
     try {
-      const bithumbRes = await axios.get("https://api.bithumb.com/public/ticker/USDT_KRW", {
-        timeout: 3000,
-      });
-      if (bithumbRes.data?.data?.closing_price) {
-        const price = parseFloat(bithumbRes.data.data.closing_price);
-        const change = parseFloat(bithumbRes.data.data.fluctate_rate_24h) || 0;
-        metricsData.tetherKrw = Math.round(price);
-        metricsData.tetherChange = change;
+      const bithumbRes = await axios.get(
+        "https://api.bithumb.com/public/ticker/USDT_KRW",
+        { timeout: 3000 }
+      );
+      if (bithumbRes.data?.data) {
+        const data = bithumbRes.data.data;
+        const price = parseFloat(data.closing_price);
+        const change = parseFloat(data.fluctate_rate_24h) || 0;
+        if (!isNaN(price)) {
+          metricsData.tetherKrw = Math.round(price);
+          metricsData.tetherChange = Number((change).toFixed(2));
+          console.log("[Bithumb] USDT/KRW:", metricsData.tetherKrw, "change:", metricsData.tetherChange);
+        }
       }
     } catch (err) {
-      // Fallback 사용
+      console.error("[Bithumb Error]:", err instanceof Error ? err.message : String(err));
     }
 
-    // 3. 동시접속자 카운트 (Supabase)
+    // 3. 글로벌 메트릭 (CoinGecko)
+    try {
+      const geckoRes = await axios.get(
+        "https://api.coingecko.com/api/v3/global?vs_currency=krw",
+        { timeout: 3000 }
+      );
+      if (geckoRes.data?.data) {
+        const data = geckoRes.data.data;
+        
+        if (data.btc_market_cap_percentage) {
+          metricsData.btcDominance = parseFloat(data.btc_market_cap_percentage.btc) || 42.3;
+        }
+        if (data.total_market_cap?.krw) {
+          metricsData.marketCapKrw = data.total_market_cap.krw;
+        }
+        if (data.total_volume?.krw) {
+          metricsData.volume24hKrw = data.total_volume.krw;
+        }
+        console.log("[CoinGecko] BTC Dom:", metricsData.btcDominance, "MarketCap:", metricsData.marketCapKrw);
+      }
+    } catch (err) {
+      console.error("[CoinGecko Error]:", err instanceof Error ? err.message : String(err));
+    }
+
+    // 4. 동시접속자
     try {
       const { count } = await supabase
         .from("active_sessions")
         .select("*", { count: "exact" })
-        .gt("last_seen", new Date(Date.now() - 2 * 60 * 1000).toISOString())
-        .throwOnError();
+        .gt("last_seen", new Date(Date.now() - 2 * 60 * 1000).toISOString());
 
       if (count !== null) {
         metricsData.concurrentUsers = count;
+        console.log("[Supabase] Active Sessions:", count);
       }
     } catch (err) {
-      // Fallback 사용
+      console.error("[Supabase Error]:", err instanceof Error ? err.message : String(err));
     }
 
-    // 캐시 업데이트
     cachedMetrics = metricsData;
     cacheTime = Date.now();
 
     res.setHeader("Cache-Control", "no-cache, max-age=0");
     res.status(200).json(metricsData);
   } catch (err) {
+    console.error("[API Error]:", err);
     res.status(500).json({
       usdKrw: 1285,
       usdKrwChange: 0,
