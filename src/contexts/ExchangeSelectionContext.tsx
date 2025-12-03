@@ -35,15 +35,15 @@ export const DOMESTIC_EXCHANGES: { value: string; label: string; exchange: Domes
 ];
 
 export const FOREIGN_EXCHANGES: { value: string; label: string; shortName: string; exchange: ForeignExchange["exchange"]; quote: ForeignExchange["quote"]; logo: string }[] = [
-  { value: "BINANCE_USDT", label: "바이낸스 USDT 마켓", shortName: "바이낸스", exchange: "BINANCE", quote: "USDT", logo: EXCHANGE_LOGOS.BINANCE },
-  { value: "BINANCE_BTC", label: "바이낸스 BTC 마켓", shortName: "바이낸스", exchange: "BINANCE", quote: "BTC", logo: EXCHANGE_LOGOS.BINANCE },
-  { value: "BINANCE_FUTURES", label: "바이낸스 선물 USDS-M 마켓", shortName: "바이낸스 선물", exchange: "BINANCE_FUTURES", quote: "USD", logo: EXCHANGE_LOGOS.BINANCE_FUTURES },
-  { value: "OKX_USDT", label: "OKX USDT 마켓", shortName: "OKX", exchange: "OKX", quote: "USDT", logo: EXCHANGE_LOGOS.OKX },
-  { value: "BYBIT_USDT", label: "Bybit USDT 마켓", shortName: "Bybit", exchange: "BYBIT", quote: "USDT", logo: EXCHANGE_LOGOS.BYBIT },
-  { value: "BITGET_USDT", label: "Bitget USDT 마켓", shortName: "Bitget", exchange: "BITGET", quote: "USDT", logo: EXCHANGE_LOGOS.BITGET },
-  { value: "GATE_USDT", label: "Gate.io USDT 마켓", shortName: "Gate.io", exchange: "GATE", quote: "USDT", logo: EXCHANGE_LOGOS.GATE },
-  { value: "HTX_USDT", label: "HTX USDT 마켓", shortName: "HTX", exchange: "HTX", quote: "USDT", logo: EXCHANGE_LOGOS.HTX },
-  { value: "MEXC_USDT", label: "MEXC USDT 마켓", shortName: "MEXC", exchange: "MEXC", quote: "USDT", logo: EXCHANGE_LOGOS.MEXC },
+  { value: "BINANCE_BTC", label: "바이낸스 BTC 마켓", shortName: "바이낸스 BTC", exchange: "BINANCE", quote: "BTC", logo: EXCHANGE_LOGOS.BINANCE },
+  { value: "BINANCE_USDT", label: "바이낸스 USDT 마켓", shortName: "바이낸스 USDT", exchange: "BINANCE", quote: "USDT", logo: EXCHANGE_LOGOS.BINANCE },
+  { value: "BINANCE_FUTURES", label: "바이낸스 선물 (USDⓈ-M)", shortName: "바이낸스 선물", exchange: "BINANCE_FUTURES", quote: "USD", logo: EXCHANGE_LOGOS.BINANCE_FUTURES },
+  { value: "OKX_USDT", label: "OKX USDT 마켓", shortName: "OKX USDT", exchange: "OKX", quote: "USDT", logo: EXCHANGE_LOGOS.OKX },
+  { value: "BYBIT_USDT", label: "Bybit USDT 마켓", shortName: "Bybit USDT", exchange: "BYBIT", quote: "USDT", logo: EXCHANGE_LOGOS.BYBIT },
+  { value: "BITGET_USDT", label: "Bitget USDT 마켓", shortName: "Bitget USDT", exchange: "BITGET", quote: "USDT", logo: EXCHANGE_LOGOS.BITGET },
+  { value: "GATE_USDT", label: "Gate USDT 마켓", shortName: "Gate USDT", exchange: "GATE", quote: "USDT", logo: EXCHANGE_LOGOS.GATE },
+  { value: "HTX_USDT", label: "HTX USDT 마켓", shortName: "HTX USDT", exchange: "HTX", quote: "USDT", logo: EXCHANGE_LOGOS.HTX },
+  { value: "MEXC_USDT", label: "MEXC USDT 마켓", shortName: "MEXC USDT", exchange: "MEXC", quote: "USDT", logo: EXCHANGE_LOGOS.MEXC },
 ];
 
 interface ExchangeSelectionContextType {
@@ -61,7 +61,7 @@ const ExchangeSelectionContext = createContext<ExchangeSelectionContextType | un
 
 export function ExchangeSelectionProvider({ children }: { children: ReactNode }) {
   const [domesticExchange, setDomesticExchange] = useState("UPBIT_KRW");
-  const [foreignExchange, setForeignExchange] = useState("OKX_USDT");
+  const [foreignExchange, setForeignExchange] = useState("BINANCE_BTC");
 
   const getDomesticExchangeInfo = (): DomesticExchange => {
     const found = DOMESTIC_EXCHANGES.find((e) => e.value === domesticExchange);

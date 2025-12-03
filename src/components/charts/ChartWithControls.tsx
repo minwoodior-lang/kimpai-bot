@@ -120,7 +120,8 @@ export default function ChartWithControls({
   height = 400,
 }: ChartWithControlsProps) {
   const isHomePage = typeof window !== 'undefined' && window.location.pathname === '/';
-  const [chartPreset, setChartPreset] = useState<ChartPreset>(CHART_PRESETS[0]);
+  const defaultPreset = isHomePage ? CHART_PRESETS[0] : CHART_PRESETS[0];
+  const [chartPreset, setChartPreset] = useState<ChartPreset>(defaultPreset);
   const [timeframe, setTimeframe] = useState<TimeframeOption>(TIMEFRAMES[6]);
 
   return (
@@ -135,8 +136,7 @@ export default function ChartWithControls({
                 setChartPreset(preset);
               }
             }}
-            disabled={isHomePage}
-            className={`bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 focus:outline-none focus:border-blue-500 text-sm min-w-[180px] ${isHomePage ? 'opacity-60 cursor-not-allowed' : ''}`}
+            className="bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 focus:outline-none focus:border-blue-500 text-sm min-w-[180px]"
           >
             <optgroup label="BTC / 프리미엄 지표">
               {CHART_PRESETS.slice(0, 7).map((preset) => (
@@ -170,8 +170,7 @@ export default function ChartWithControls({
                   setTimeframe(tf);
                 }
               }}
-              disabled={isHomePage && chartPreset.id === 'btc_binance'}
-              className={`bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 focus:outline-none focus:border-blue-500 text-sm min-w-[80px] ${isHomePage && chartPreset.id === 'btc_binance' ? 'opacity-60 cursor-not-allowed' : ''}`}
+              className="bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 focus:outline-none focus:border-blue-500 text-sm min-w-[80px]"
             >
               {TIMEFRAMES.map((tf) => (
                 <option key={tf.id} value={tf.id}>

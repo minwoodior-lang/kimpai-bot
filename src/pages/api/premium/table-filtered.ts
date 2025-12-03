@@ -45,10 +45,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { domestic = "UPBIT_KRW", foreign = "BINANCE_BTC" } = req.query;
 
+    // Parse domestic exchange
     const domesticParts = (domestic as string).split("_");
     const domesticExchange = domesticParts[0];
     const domesticQuote = domesticParts.slice(1).join("_");
 
+    // Parse foreign exchange
     const foreignParts = (foreign as string).split("_");
     const foreignExchange = foreignParts[0];
     const foreignQuote = foreignParts.slice(1).join("_");
@@ -56,11 +58,17 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const allMarkets = loadExchangeMarkets();
     const masterSymbols = loadMasterSymbols();
 
+    console.log(
+      `[API] Filtering: domestic=${domesticExchange}_${domesticQuote}, foreign=${foreignExchange}_${foreignQuote}`
+    );
+
+    // Filter markets by exchange and quote
     const filtered = allMarkets
-      .filter(
-        (m) =>
-          m.exchange === domesticExchange && m.quote === domesticQuote
-      )
+      .filter((m) => {
+        const matchExchange = m.exchange === domesticExchange;
+        const matchQuote = m.quote === domesticQuote;
+        return matchExchange && matchQuote;
+      })
       .map((market) => {
         const master = masterSymbols.find(
           (s) => s.symbol === market.base.toUpperCase()
@@ -68,8 +76,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
         return {
           symbol: market.base.toUpperCase(),
-          name_ko: market.name_ko || master?.name_ko,
-          name_en: market.name_en || master?.name_en,
+          name_ko: market.name_ko || master?.name_ko || market.base,
+          name_en: market.name_en || master?.name_en || market.base,
           market: market.market,
           exchange: market.exchange,
           quote: market.quote,
@@ -86,12 +94,18 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           isListed: true,
           icon_url: master?.icon_path || null,
         };
-      });
+      })
+      .sort((a, b) => (b.volume24hKrw || 0) - (a.volume24hKrw || 0));
+
+    console.log(`[API] Filtered result: ${filtered.length} items`);
 
     return res.status(200).json({
       success: true,
       data: filtered,
-      averagePremium: 0,
+      averagePremium: filtered.length
+        ? filtered.reduce((sum, r) => sum + (r.premium || 0), 0) /
+          filtered.length
+        : 0,
       fxRate: 1330,
       updatedAt: new Date().toISOString(),
       domesticExchange,
