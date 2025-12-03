@@ -77,7 +77,7 @@ export default function Home() {
       <div className="max-w-[1200px] mx-auto px-4 lg:px-5 py-6">
         <HomeLayout>
           {/* 상단 3컬럼 레이아웃 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             {/* 좌측: 오늘의 AI 김프 요약 */}
             <TodayPremiumSection
               avgPremium={

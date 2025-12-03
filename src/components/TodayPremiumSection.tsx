@@ -18,7 +18,7 @@ export function TodayPremiumSection({
   score,
 }: TodayPremiumSectionProps) {
   return (
-    <div className="rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 p-4 sm:p-5 h-full flex flex-col">
+    <div className="rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 p-4 sm:p-5 pt-4 h-full flex flex-col">
       {/* 제목 */}
       <h2 className="text-sm sm:text-base font-bold dark:text-slate-100 light:text-slate-900 mb-4 flex items-center gap-2">
         <span>📊</span>
