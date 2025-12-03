@@ -69,14 +69,9 @@ export default function TopInfoBar() {
         <div className="flex items-center gap-0 text-[11px] text-[#A7B3C6] overflow-x-auto whitespace-nowrap scrollbar-hide">
           {/* 환율 */}
           <div className="flex items-center gap-1 pr-2">
-            <Image
-              src="/icons/google-favicon.png"
-              alt="USD/KRW"
-              width={16}
-              height={16}
-              className="rounded-sm flex-shrink-0"
-              unoptimized
-            />
+            <div className="flex-shrink-0 w-4 h-4 rounded-sm bg-gradient-to-br from-[#4A90E2] to-[#357ABD] flex items-center justify-center">
+              <span className="text-[10px] text-white font-bold">$</span>
+            </div>
             <span className="font-medium text-white">₩{formatNumber(metrics.usdKrw, 0)}</span>
             <span className="text-[#A7B3C6]">/ $1</span>
             <span className={`font-medium ${getChangeColor(metrics.usdKrwChange)}`}>

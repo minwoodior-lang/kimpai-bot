@@ -46,64 +46,74 @@ export default async function handler(
       concurrentUsers: 0,
     };
 
-    // 1. USD/KRW 환율
+    // 모든 글로벌 데이터를 CoinGecko 한 곳에서 가져오기
+    // USD/KRW, BTC Dominance, 시총, 거래량 모두 포함
     try {
-      const fxRes = await axios.get("https://api.exchangerate.host/latest?base=USD&symbols=KRW", {
-        timeout: 3000,
-      });
-      if (fxRes.data?.rates?.KRW) {
-        metricsData.usdKrw = Math.round(fxRes.data.rates.KRW);
-        console.log("[FX API] USD/KRW:", metricsData.usdKrw);
+      const geckoRes = await axios.get(
+        "https://api.coingecko.com/api/v3/global?vs_currency=krw",
+        { timeout: 5000 }
+      );
+
+      if (geckoRes.data?.data) {
+        const data = geckoRes.data.data;
+
+        // USD/KRW (CoinGecko의 KRW가 기준이므로 역산)
+        if (data.btc_market_cap?.usd && data.btc_market_cap?.krw) {
+          const usdKrwRate = Math.round(data.btc_market_cap.krw / data.btc_market_cap.usd);
+          metricsData.usdKrw = usdKrwRate;
+          console.log("[CoinGecko] USD/KRW:", usdKrwRate);
+        }
+
+        // BTC Dominance
+        if (data.btc_market_cap_percentage?.btc) {
+          metricsData.btcDominance = Number(data.btc_market_cap_percentage.btc.toFixed(1));
+          console.log("[CoinGecko] BTC Dominance:", metricsData.btcDominance);
+        }
+
+        // 시가총액
+        if (data.total_market_cap?.krw) {
+          metricsData.marketCapKrw = data.total_market_cap.krw;
+          console.log("[CoinGecko] Market Cap:", metricsData.marketCapKrw);
+        }
+
+        // 24시간 거래량
+        if (data.total_volume?.krw) {
+          metricsData.volume24hKrw = data.total_volume.krw;
+          console.log("[CoinGecko] 24h Volume:", metricsData.volume24hKrw);
+        }
+
+        // 변화율 (시총, 거래량 24h 변화율)
+        if (data.market_cap_change_percentage_24h_usd) {
+          metricsData.marketCapChange = Number(data.market_cap_change_percentage_24h_usd.toFixed(2));
+        }
       }
     } catch (err) {
-      console.error("[FX API Error]:", err instanceof Error ? err.message : String(err));
+      console.error("[CoinGecko Error]:", err instanceof Error ? err.message : String(err));
     }
 
-    // 2. Bithumb USDT/KRW
+    // Bithumb USDT/KRW
     try {
       const bithumbRes = await axios.get(
         "https://api.bithumb.com/public/ticker/USDT_KRW",
         { timeout: 3000 }
       );
+
       if (bithumbRes.data?.data) {
         const data = bithumbRes.data.data;
         const price = parseFloat(data.closing_price);
         const change = parseFloat(data.fluctate_rate_24h) || 0;
+
         if (!isNaN(price)) {
           metricsData.tetherKrw = Math.round(price);
-          metricsData.tetherChange = Number((change).toFixed(2));
-          console.log("[Bithumb] USDT/KRW:", metricsData.tetherKrw, "change:", metricsData.tetherChange);
+          metricsData.tetherChange = Number(change.toFixed(2));
+          console.log("[Bithumb] USDT/KRW:", metricsData.tetherKrw, "Change:", metricsData.tetherChange);
         }
       }
     } catch (err) {
       console.error("[Bithumb Error]:", err instanceof Error ? err.message : String(err));
     }
 
-    // 3. 글로벌 메트릭 (CoinGecko)
-    try {
-      const geckoRes = await axios.get(
-        "https://api.coingecko.com/api/v3/global?vs_currency=krw",
-        { timeout: 3000 }
-      );
-      if (geckoRes.data?.data) {
-        const data = geckoRes.data.data;
-        
-        if (data.btc_market_cap_percentage) {
-          metricsData.btcDominance = parseFloat(data.btc_market_cap_percentage.btc) || 42.3;
-        }
-        if (data.total_market_cap?.krw) {
-          metricsData.marketCapKrw = data.total_market_cap.krw;
-        }
-        if (data.total_volume?.krw) {
-          metricsData.volume24hKrw = data.total_volume.krw;
-        }
-        console.log("[CoinGecko] BTC Dom:", metricsData.btcDominance, "MarketCap:", metricsData.marketCapKrw);
-      }
-    } catch (err) {
-      console.error("[CoinGecko Error]:", err instanceof Error ? err.message : String(err));
-    }
-
-    // 4. 동시접속자
+    // 동시접속자 (Supabase active_sessions)
     try {
       const { count } = await supabase
         .from("active_sessions")
