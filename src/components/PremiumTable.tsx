@@ -916,13 +916,13 @@ export default function PremiumTable({
                         className="border-b dark:border-slate-800/80 light:border-slate-200 dark:hover:bg-slate-800/60 light:hover:bg-slate-100 transition-colors"
                       >
                         <td className="px-2 py-2">
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-2.5">
                             {/* 아이콘 + 별 (세로 중앙정렬) */}
-                            <div className="flex flex-col items-center justify-center gap-0.5 min-w-[36px]">
-                              <CoinIcon symbol={row.symbol} className="h-6 w-6" iconUrl={row.icon_url} />
+                            <div className="flex flex-col items-center justify-center gap-0 min-w-[40px] flex-shrink-0">
+                              <CoinIcon symbol={row.symbol} className="h-6 w-6 mb-0.5" iconUrl={row.icon_url} />
                               <button
                                 type="button"
-                                className="text-xs leading-none dark:text-slate-500 light:text-slate-400 dark:hover:text-yellow-400 light:hover:text-yellow-500 transition-colors"
+                                className="text-sm leading-none dark:text-slate-500 light:text-slate-400 dark:hover:text-yellow-400 light:hover:text-yellow-500 transition-colors"
                                 onClick={() => toggleFavorite(row.symbol)}
                               >
                                 {favorites.has(row.symbol) ? "★" : "☆"}
@@ -945,11 +945,11 @@ export default function PremiumTable({
                           </div>
                         </td>
 
-                        <td className={`px-1 sm:px-2 py-1.5 text-right text-[10px] sm:text-[12px] whitespace-nowrap ${getFlashClass(row.symbol, "price")}`}>
+                        <td className={`px-1 sm:px-2 py-1.5 text-right text-[9px] sm:text-[11px] whitespace-nowrap ${getFlashClass(row.symbol, "price")}`}>
                           ₩{formatKrwPrice(row.koreanPrice)}
                         </td>
 
-                        <td className={`px-1 sm:px-2 py-1.5 text-right text-[10px] sm:text-[12px] whitespace-nowrap ${getFlashClass(row.symbol, "premium")}`}>
+                        <td className={`px-1 sm:px-2 py-1.5 text-right text-[9px] sm:text-[11px] whitespace-nowrap ${getFlashClass(row.symbol, "premium")}`}>
                           {row.premium !== null && row.premium !== undefined ? (
                             <span className={getPremiumColor(row.premium)}>
                               {row.premium >= 0 ? "+" : ""}{Number(row.premium).toFixed(2)}%
@@ -959,7 +959,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="px-1 sm:px-2 py-1.5 text-right text-[10px] sm:text-[12px] whitespace-nowrap">
+                        <td className="px-1 sm:px-2 py-1.5 text-right text-[9px] sm:text-[11px] whitespace-nowrap">
                           {row.change24h !== null && row.change24h !== undefined ? (
                             <span className={getChangeColor(row.change24h)}>
                               {row.change24h >= 0 ? "+" : ""}{Number(row.change24h).toFixed(2)}%
@@ -969,7 +969,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="hidden sm:table-cell px-1 sm:px-2 py-1.5 text-right text-[10px] sm:text-[12px] whitespace-nowrap">
+                        <td className="px-1 sm:px-2 py-1.5 text-right text-[9px] sm:text-[11px] whitespace-nowrap">
                           {highDiff.valid && highDiff.percent !== null && highDiff.percent !== undefined ? (
                             <span className={getChangeColor(highDiff.percent)}>
                               {highDiff.percent >= 0 ? "+" : ""}{Number(highDiff.percent).toFixed(2)}%
