@@ -74,7 +74,7 @@ export default function Home() {
       </Head>
 
       {/* 메인 콘텐츠 */}
-      <div className="max-w-[1200px] mx-auto px-4 lg:px-5 py-6">
+      <div className="w-full mx-auto max-w-[1200px] px-4 lg:px-5 py-6">
         <HomeLayout>
           {/* 상단 3컬럼 레이아웃 */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
