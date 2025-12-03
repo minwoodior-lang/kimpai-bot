@@ -1,6 +1,6 @@
 /**
  * 오늘의 AI 김프 요약 - 통합 카드 (최종 레이아웃)
- * 좌측: 정보 그리드 / 우측: PRO 예측 설명 + 미러 처리 + 내 알림
+ * 좌측: 정보 그리드 / 우측: 미러 처리 + PRO 예측 설명 + 내 알림
  */
 
 interface TodayPremiumSectionProps {
@@ -77,23 +77,23 @@ export function TodayPremiumSection({
               🔒 PRO 전용 48시간 김프 예측
             </div>
 
-            {/* 명확한 설명 텍스트 */}
-            <p className="text-[9px] sm:text-[10px] dark:text-slate-400 light:text-slate-600 leading-relaxed mb-2">
-              최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
-              <span className="block dark:text-slate-500 light:text-slate-500 text-[8px] sm:text-[9px] mt-1">
-                (PRO 구독 시 전체 내용 확인 가능)
-              </span>
-            </p>
-
-            {/* 미러 처리된 텍스트 (흐릿함 - 궁금하게 하는 용도) */}
-            <div className="p-2.5 rounded-lg dark:bg-slate-800/20 light:bg-slate-200/10 backdrop-blur-sm flex-1">
-              <p className="text-[8px] sm:text-[9px] dark:text-slate-600 light:text-slate-600 leading-relaxed opacity-50 font-medium">
+            {/* 미러 처리된 텍스트 (흐릿함 - 위에 배치) */}
+            <div className="p-2.5 rounded-lg dark:bg-slate-800/15 light:bg-slate-200/10 backdrop-blur-sm mb-2">
+              <p className="text-[8px] sm:text-[9px] dark:text-slate-700 light:text-slate-700 leading-relaxed opacity-20 font-medium blur-xs">
                 대시보드를 과산으로 움침니다. 내 자산의 리밸런싱 추천과 수익화 전략을 받을 수 있습니다.
                 <span className="block mt-1">
                   최근 30일 기준, 이 예측은 김프 2% 이상...
                 </span>
               </p>
             </div>
+
+            {/* 명확한 설명 텍스트 */}
+            <p className="text-[9px] sm:text-[10px] dark:text-slate-400 light:text-slate-600 leading-relaxed">
+              최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
+              <span className="block dark:text-slate-500 light:text-slate-500 text-[8px] sm:text-[9px] mt-1">
+                (PRO 구독 시 전체 내용 확인 가능)
+              </span>
+            </p>
           </div>
         </div>
 
