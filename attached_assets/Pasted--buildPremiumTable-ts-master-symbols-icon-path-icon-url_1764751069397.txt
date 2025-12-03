@@ -1,0 +1,128 @@
+아이콘 관련 전체 구조는 지금 방향 잘 잡힌 상태입니다.
+
+- buildPremiumTable.ts: master_symbols.icon_path → icon_url 매핑 완료 ✅
+- /api/premium/table-filtered: icon_url 필드 포함 ✅
+- CoinIcon: icon_url → 로컬 → CDN → 회색 동그라미 순, fallback 정상 ✅
+
+지금 남은 문제는 “아이콘 없음(null → 회색)” 문제가 아니라,
+
+👉 국내 3거래소(업비트/빗썸/코인원) 공통으로  
+   **잘못된 코인 로고가 붙어 있는 문제**입니다.
+
+예를 들어:
+
+1) 휴머니티 프로토콜 (symbol: H)
+   - 업비트/코인원 등에서 모두 “H” 심볼인데,
+   - 실제로는 이더리움(ETH) 로고로 보입니다.
+   - 만약 master_symbols.icon_path가 null 이면 회색 아이콘이 나와야 하는데,
+     실제로는 특정 코인(ETH) 로고를 보여주고 있습니다.
+
+2) 볼타 (symbol: A)
+   - 국내 거래소 전체(업비트, 코인원, 빗썸) 어디서 보든,
+   - 이 코인이 솔라나(SOL) 아이콘으로 노출됩니다.
+
+즉, 코인원만의 수집 부족 문제가 아니라,  
+**국내 전체 거래소 공통 아이콘 매핑 로직(아이콘 수집/매핑 스크립트)에서  
+잘못된 icon_path가 심볼에 붙는 구조적인 이슈**로 보입니다.
+
+그래서 다음을 “국내 거래소 공통 관점”에서 한 번에 점검 부탁드립니다.
+
+========================================
+1) API 응답 기준 H / A 두 코인 확인
+========================================
+`/api/premium/table-filtered` 에서
+
+- domestic = UPBIT_KRW, foreign = BINANCE_BTC
+- domestic = BITHUMB_KRW, foreign = BINANCE_BTC
+- domestic = COINONE_KRW, foreign = BINANCE_BTC
+
+각각에 대해 symbol = "H", symbol = "A"에 해당하는 row 전체를 보여주세요.
+
+보고 싶은 필드:
+- symbol
+- name_ko / name_en
+- icon_url
+- cmcSlug 또는 coingeckoId (있다면)
+- exchange, market 등
+
+=> 여기서부터 icon_url 이 ETH/SOL 아이콘 경로를 가리키고 있다면,  
+   master_symbols 또는 아이콘 매핑 스크립트에서 이미 잘못 묶인 상태입니다.
+
+========================================
+2) master_symbols.json 에서 H / A row 확인
+========================================
+master_symbols.json 에서
+
+- symbol = "H"
+- symbol = "A"
+
+에 해당하는 row를 각각 보여주세요.
+
+보고 싶은 필드:
+- symbol
+- name_ko / name_en
+- icon_path
+- cmcSlug / coingeckoId (쓰고 있다면)
+
+특히 icon_path 가 어떤 파일을 가리키는지 중요합니다.
+- 예: "/icons/UPBIT/SOL.png" 같은 경로가 들어가 있다면,
+  아이콘 수집/매핑 단계에서 잘못된 파일이 붙은 것입니다.
+
+========================================
+3) 아이콘 맵 / 수집 스크립트 확인 (국내 거래소 공통)
+========================================
+현재 아이콘은 대략 다음 경로로 매핑되는 것으로 이해하고 있습니다.
+
+- fetchDomesticIcons.ts (또는 유사 스크립트) 
+  → 각 거래소(UPBIT/BITHUMB/COINONE)에서 아이콘 다운로드
+  → exchangeIcons.json (예: "UPBIT:BTC" → "/icons/UPBIT/BTC.png")
+  → buildMasterSymbols.ts 에서 exchangeIcons 기반으로 각 symbol 의 icon_path 설정
+  → buildPremiumTable.ts 에서 icon_url 세팅
+
+여기서 다음 두 가지를 확인하고 싶습니다.
+
+1) 아이콘 매핑 기준
+   - 아이콘을 심볼 기준으로 정확히 매핑하고 있는지
+   - 혹시 name_ko / name_en 텍스트 검색으로 유명 코인(ETH, SOL)을 우선 매칭하는 로직이 있는지
+   - “비슷한 이름 / 첫 결과” 기반으로 아이콘을 가져오는 부분이 있는지
+
+2) fallback 매핑
+   - icon_path 가 비어 있을 때 (특히 COINONE),
+     다른 거래소(예: 업비트)의 아이콘을 그냥 복사해서 붙이는 로직이 있는지
+   - 특정 심볼 그룹에 대해 ETH/SOL 등의 아이콘을 기본으로 주입하는 코드가 있는지
+
+현재 현상(볼타=A → 솔라나, H → 이더리움)을 보면,
+- master_symbols.icon_path 가 아예 null 인 상태가 아니라,
+- 잘못된 아이콘 파일 경로(SOL/ETH)가 이미 symbol 에 붙어 있거나,
+- buildMasterSymbols 아이콘 선택 로직에서
+  “일치하지 않아도 비슷한 코인 아이콘을 붙여주는” 과정이 있는 것으로 추정됩니다.
+
+========================================
+4) 아이콘 매핑 원칙 (국내 3거래소 공통)
+========================================
+아이콘 매핑에 대한 전체 원칙을 다음처럼 정리하고 싶습니다.
+
+1️⃣ icon_path / icon_url 은 **심볼 기준 exact match** 로만 설정
+   - exchange + symbol 기준으로만 매핑
+   - name_ko/name_en 텍스트 검색 기반 fuzzy 매칭은 사용하지 않음
+
+2️⃣ icon_path 를 찾을 수 없으면:
+   - icon_path 필드를 만들지 않음 (null)
+   - API 응답에서 icon_url = null
+   - CoinIcon 에서 회색 동그라미(기본 아이콘) 사용
+   → 다른 코인(ETH/SOL 등) 로고를 fallback 으로 사용하지 않음
+
+3️⃣ 나중에 COINONE 아이콘 수집이 강화되면:
+   - fetchDomesticIcons.ts 또는 관련 스크립트에서
+     심볼 기준으로 CoinGecko/CMC 아이콘을 안전하게 채우고,
+   - master_symbols → icon_path → icon_url 로 자연스럽게 전달되도록 유지
+
+지금 구조를 보면:
+
+- PremiumTable / CoinIcon / icon_url 전달 구조는 이미 안정적으로 설계되어 있고,
+- 남은 이슈는 “exchangeIcons/master_symbols 생성 단계에서  
+  국내 여러 거래소 공통으로 일부 심볼에 잘못된 icon_path가 붙는 문제”입니다.
+
+위 1)~3) 데이터를 H/A 두 코인 기준으로 한 번만 공유해 주시면,
+그에 맞춰 fetchDomesticIcons/buildMasterSymbols 쪽 아이콘 매핑 로직을
+국내 3거래소 공통 기준으로 한 번에 정리해서 다시 제안 드리겠습니다.

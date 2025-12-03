@@ -41,6 +41,15 @@ function loadMasterSymbols(): any[] {
   }
 }
 
+function loadExchangeIcons(): Record<string, string> {
+  try {
+    const file = path.join(process.cwd(), "data", "exchangeIcons.json");
+    return JSON.parse(fs.readFileSync(file, "utf-8"));
+  } catch {
+    return {};
+  }
+}
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { domestic = "UPBIT_KRW", foreign = "BINANCE_BTC" } = req.query;
@@ -57,6 +66,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     const allMarkets = loadExchangeMarkets();
     const masterSymbols = loadMasterSymbols();
+    const exchangeIcons = loadExchangeIcons();
 
     console.log(
       `[API] Filtering: domestic=${domesticExchange}_${domesticQuote}, foreign=${foreignExchange}_${foreignQuote}`
@@ -70,12 +80,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         return matchExchange && matchQuote;
       })
       .map((market) => {
-        const master = masterSymbols.find(
-          (s) => s.symbol === market.base.toUpperCase()
-        );
+        const symbol = market.base.toUpperCase();
+        const master = masterSymbols.find((s) => s.symbol === symbol);
+        
+        // 거래소:심볼 기준으로 정확한 아이콘 경로 조회
+        const exchangeIconKey = `${market.exchange}:${symbol}`;
+        const iconUrl = exchangeIcons[exchangeIconKey] || null;
 
         return {
-          symbol: market.base.toUpperCase(),
+          symbol,
           name_ko: market.name_ko || master?.name_ko || market.base,
           name_en: market.name_en || master?.name_en || market.base,
           market: market.market,
@@ -92,7 +105,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           volume24hForeignKrw: market.volume24hForeignKrw || 0,
           change24h: market.change24h || 0,
           isListed: true,
-          icon_url: master?.icon_path || null,
+          icon_url: iconUrl,
         };
       })
       .sort((a, b) => (b.volume24hKrw || 0) - (a.volume24hKrw || 0));
