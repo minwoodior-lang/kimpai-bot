@@ -12,13 +12,13 @@ export function ProPredictionCard() {
         <span>PRO 전용 48시간 김프 예측</span>
       </div>
 
-      {/* 블러 처리된 설명 텍스트 박스 - 전체 설명 포함 */}
+      {/* 블러 처리된 설명 텍스트 박스 - 텍스트는 보임 */}
       <div className="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-[18px] py-[14px] space-y-2 text-[13px] leading-[1.45] text-white/60 flex-1 mb-1">
-        <p className="opacity-10 blur-sm">
+        <p>
           최근 30일 기준, 이 예측은 김프 2% 이상 급변<br />
           구간의 90% 이상을 사전에 포착했습니다.
         </p>
-        <p className="text-white/40 text-[12px] opacity-10 blur-sm">
+        <p className="text-white/40 text-[12px]">
           * 전체 예측 데이터는 PRO 구독 시 이용할 수 있습니다.
         </p>
       </div>
