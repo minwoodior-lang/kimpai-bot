@@ -756,7 +756,7 @@ export default function PremiumTable({
       )}
 
       {showFilters && (
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6 text-sm bg-slate-800/30 border border-slate-700/50 rounded-xl p-3">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6 pt-4 text-sm bg-slate-800/30 border border-slate-700/50 rounded-xl p-3">
           {/* Exchange selector */}
           <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-3">
             {/* Mobile labels */}
@@ -845,8 +845,8 @@ export default function PremiumTable({
         </div>
       ) : (
         <div className="bg-slate-800/50 rounded-lg border border-slate-700/50 overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+          <div className="overflow-x-auto w-full">
+            <table className="w-full text-sm min-w-full">
               <thead>
                 <tr className="bg-slate-900/80 text-gray-400 text-[10px] md:text-xs">
                   <th

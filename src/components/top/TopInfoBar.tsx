@@ -25,9 +25,9 @@ export default function TopInfoBar() {
   const formatPrice = (price: number) => price.toLocaleString("en-US", { maximumFractionDigits: 0 });
 
   return (
-    <div className="bg-slate-900/95 border-b border-slate-700/50 py-1.5 px-4">
+    <div className="bg-slate-900/95 border-b border-slate-700/50 py-0.5 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-1 text-xs">
           {/* USDT/KRW */}
           <div>
             <div className="text-slate-500 text-[9px] uppercase tracking-wider font-semibold">
