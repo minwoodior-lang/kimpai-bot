@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useMarkets } from "@/hooks/useMarkets";
 import { useUserPlan } from "@/hooks/useUserPlan";
-import dynamic from "next/dynamic";
 
 /**
  * P-1 AI Insight Box - 정보 밀도 높은 AI 분석 + PRO 업셀링
@@ -18,6 +17,11 @@ const AIInsightBox = () => {
   const maxPremium = listedData.length > 0 
     ? listedData.reduce((max, item) => 
         (item.premium || 0) > (max.premium || 0) ? item : max, listedData[0])
+    : null;
+
+  const minPremium = listedData.length > 0
+    ? listedData.reduce((min, item) => 
+        (item.premium || 0) < (min.premium || 0) ? item : min, listedData[0])
     : null;
 
   const formatPremium = (value: number | null | undefined): string => {
@@ -48,37 +52,26 @@ const AIInsightBox = () => {
 
   return (
     <div className="bg-slate-800/80 border border-slate-700 rounded-xl shadow-lg">
-      <div className="p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-white">
-            📊 오늘의 AI 김프 요약
-          </h2>
-          {updatedAt && (
-            <span className="text-xs text-slate-500">
-              {formatTime(updatedAt)} 기준
-            </span>
-          )}
-        </div>
+      <div className="p-5">
+        <h2 className="text-lg font-bold text-white mb-4">
+          📊 오늘의 AI 김프 요약
+        </h2>
 
-        <div className="grid sm:grid-cols-2 gap-4 text-slate-300 text-sm">
-          <p>• 평균 김프: <span className={safeAvgPremium >= 0 ? "text-green-400" : "text-red-400"}>
+        <div className="space-y-3 text-slate-300 text-sm">
+          <p>• 평균 김프: <span className={safeAvgPremium >= 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}>
             {formatPremium(safeAvgPremium)}
           </span></p>
-          <p>• 최대 김프: <span className="text-green-400">
+          <p>• 최대 김프: <span className="text-green-400 font-bold">
             {maxPremium && maxPremium.premium !== null 
               ? `${formatPremium(maxPremium.premium)} (${maxPremium.symbol.replace("/KRW", "")})`
               : "-"}
           </span></p>
-          <p>• 최소 김프: <span className={minPremium && (minPremium.premium || 0) < 0 ? "text-red-400" : "text-green-400"}>
+          <p>• 최소 김프: <span className={minPremium && (minPremium.premium || 0) < 0 ? "text-red-400 font-bold" : "text-slate-300 font-bold"}>
             {minPremium && minPremium.premium !== null 
               ? `${formatPremium(minPremium.premium)} (${minPremium.symbol.replace("/KRW", "")})`
               : "-"}
           </span></p>
-          <p>• 환율: <span className="text-white">₩{(fxRate || 0).toLocaleString()}/USDT</span></p>
-        </div>
-
-        <div className="mt-4 text-slate-200 text-sm bg-slate-700/40 p-3 rounded-lg">
-          {generateAIComment()}
+          <p>• 환율: <span className="text-white font-bold">₩{(fxRate || 0).toLocaleString()}/USDT</span></p>
         </div>
 
         <div className="mt-4 flex items-center justify-between bg-gradient-to-r from-blue-900/30 to-purple-900/30 p-3 rounded-lg border border-blue-700/30">
