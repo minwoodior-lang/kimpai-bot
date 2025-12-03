@@ -33,6 +33,18 @@ export default function CoinIcon({
   // BAD_ICON_SYMBOLS 에 포함된 심볼은 항상 Placeholder 사용
   const forcePlaceholder = BAD_ICON_SYMBOLS.includes(upper);
   const finalIconUrl = forcePlaceholder ? null : iconUrl;
+  
+  // DEBUG: H/A 코인 디버깅
+  if (upper === "H" || upper === "A") {
+    console.log("[CoinIcon DEBUG] H/A Coin:", {
+      raw_symbol: symbol,
+      normalized: upper,
+      iconUrl,
+      forcePlaceholder,
+      BAD_ICON_SYMBOLS,
+      finalIconUrl,
+    });
+  }
 
   const sizeClasses = {
     sm: "w-5 h-5",
