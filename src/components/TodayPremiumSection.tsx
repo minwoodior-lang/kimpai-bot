@@ -1,6 +1,6 @@
 /**
- * 오늘의 AI 김프 요약 - 통합 카드
- * 모든 정보, 드롭다운, 버튼을 한 카드에 통합
+ * 오늘의 AI 김프 요약 - 통합 카드 (최종 레이아웃)
+ * 좌측: 정보 그리드 / 우측: PRO 예측 설명
  */
 
 interface TodayPremiumSectionProps {
@@ -9,8 +9,6 @@ interface TodayPremiumSectionProps {
   minPremium: React.ReactNode;
   fxRate: React.ReactNode;
   score: number;
-  selectedIndicator: string;
-  onIndicatorChange: (indicator: string) => void;
 }
 
 export function TodayPremiumSection({
@@ -19,41 +17,72 @@ export function TodayPremiumSection({
   minPremium,
   fxRate,
   score,
-  selectedIndicator,
-  onIndicatorChange,
 }: TodayPremiumSectionProps) {
+  // 현재시간 (오전/오후 HH:MM)
+  const getCurrentTime = () => {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const ampm = now.getHours() < 12 ? "오전" : "오후";
+    const displayHours = String(now.getHours() % 12 || 12).padStart(2, "0");
+    return `${ampm} ${displayHours}:${minutes}`;
+  };
+
   return (
     <section className="w-full max-w-[1200px] mx-auto mt-6">
       {/* 통합 카드 컨테이너 */}
       <div className="rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 p-4 sm:p-5">
-        {/* 제목 */}
-        <h2 className="text-sm sm:text-base font-bold dark:text-slate-100 light:text-slate-900 mb-4 flex items-center gap-2">
-          <span>📊</span>
-          <span>오늘의 AI 김프 요약</span>
-        </h2>
-
-        {/* 상단: 정보 그리드 + Score 버튼 (반응형) */}
-        <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4">
-          <div className="flex flex-col">
-            <span className="text-[10px] sm:text-xs dark:text-slate-400 light:text-slate-600">평균 김프</span>
-            <span className="text-xs sm:text-sm font-semibold dark:text-slate-100 light:text-slate-900">{avgPremium}</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[10px] sm:text-xs dark:text-slate-400 light:text-slate-600">최대 김프</span>
-            <span className="text-xs sm:text-sm font-semibold dark:text-slate-100 light:text-slate-900">{maxPremium}</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[10px] sm:text-xs dark:text-slate-400 light:text-slate-600">최소 김프</span>
-            <span className="text-xs sm:text-sm font-semibold dark:text-slate-100 light:text-slate-900">{minPremium}</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[10px] sm:text-xs dark:text-slate-400 light:text-slate-600">환율</span>
-            <span className="text-xs sm:text-sm font-semibold dark:text-slate-100 light:text-slate-900">{fxRate}</span>
+        {/* 헤더: 제목 + 현재시간 */}
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-sm sm:text-base font-bold dark:text-slate-100 light:text-slate-900 flex items-center gap-2">
+            <span>📊</span>
+            <span>오늘의 AI 김프 요약</span>
+          </h2>
+          <div className="text-[10px] sm:text-xs dark:text-slate-400 light:text-slate-600 font-medium">
+            {getCurrentTime()} 기준
           </div>
         </div>
 
-        {/* 중간: Score + PRO 버튼 (가로 배치) */}
-        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mb-4 items-stretch">
+        {/* 메인 콘텐츠: 좌측 정보 + 우측 설명 */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-4">
+          {/* 좌측: 정보 그리드 */}
+          <div className="md:col-span-1 space-y-2.5">
+            <div className="flex justify-between">
+              <span className="text-[10px] sm:text-xs dark:text-slate-400 light:text-slate-600">평균 김프</span>
+              <span className="text-xs sm:text-sm font-semibold dark:text-slate-100 light:text-slate-900">{avgPremium}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-[10px] sm:text-xs dark:text-slate-400 light:text-slate-600">최소 김프</span>
+              <span className="text-xs sm:text-sm font-semibold dark:text-slate-100 light:text-slate-900">{minPremium}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-[10px] sm:text-xs dark:text-slate-400 light:text-slate-600">최대 김프</span>
+              <span className="text-xs sm:text-sm font-semibold dark:text-slate-100 light:text-slate-900">{maxPremium}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-[10px] sm:text-xs dark:text-slate-400 light:text-slate-600">환율</span>
+              <span className="text-xs sm:text-sm font-semibold dark:text-slate-100 light:text-slate-900">{fxRate}</span>
+            </div>
+          </div>
+
+          {/* 우측: PRO 예측 설명 */}
+          <div className="md:col-span-2 border-l dark:border-slate-700/40 light:border-slate-300/30 pl-4">
+            <div className="flex items-start gap-2 mb-2">
+              <span className="text-[11px] sm:text-xs font-semibold dark:text-slate-100 light:text-slate-900 flex-shrink-0">
+                🔒 PRO 전용 48시간 김프 예측
+              </span>
+            </div>
+            <p className="text-[9px] sm:text-[10px] dark:text-slate-400 light:text-slate-600 leading-relaxed">
+              최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
+              <span className="block dark:text-slate-500 light:text-slate-500 text-[8px] sm:text-[9px] mt-1">
+                (PRO 구독 시 전체 내용 확인 가능)
+              </span>
+            </p>
+          </div>
+        </div>
+
+        {/* 하단: Score 카드 + PRO 버튼 */}
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch pt-3 border-t dark:border-slate-700/40 light:border-slate-300/30">
           {/* Score 카드 */}
           <div className="flex-1 rounded-lg dark:bg-indigo-900/60 light:bg-indigo-100/60 px-3 py-2 flex items-center justify-center">
             <div className="text-center">
@@ -65,33 +94,8 @@ export function TodayPremiumSection({
           {/* PRO 버튼 */}
           <button className="flex-1 rounded-lg dark:bg-indigo-600 light:bg-indigo-600 dark:hover:bg-indigo-700 light:hover:bg-indigo-700 transition-colors px-3 py-2 text-[10px] sm:text-xs font-semibold text-white flex items-center justify-center gap-1.5 whitespace-nowrap">
             <span>🔒</span>
-            <span>PRO 전용 48시간</span>
+            <span>PRO 분석 전체 보기</span>
           </button>
-        </div>
-
-        {/* 하단: 설명 + 드롭다운 */}
-        <div className="border-t dark:border-slate-700/40 light:border-slate-300/30 pt-3">
-          <p className="text-[9px] sm:text-[10px] dark:text-slate-400 light:text-slate-600 mb-2 leading-relaxed">
-            최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
-            <span className="ml-1 dark:text-slate-500 light:text-slate-500">(PRO 구독 시 전체 내용 확인 가능)</span>
-          </p>
-
-          {/* 차트 지표 선택 드롭다운 */}
-          <select
-            value={selectedIndicator}
-            onChange={(e) => onIndicatorChange(e.target.value)}
-            className="w-full rounded-lg dark:bg-slate-700 light:bg-slate-200 dark:text-white light:text-slate-900 px-3 py-2 text-[10px] sm:text-xs border dark:border-slate-600 light:border-slate-300 dark:focus:border-blue-500 light:focus:border-blue-400 focus:outline-none"
-          >
-            <optgroup label="BTC / Premium">
-              <option value="BINANCE_BTC">BTC Binance</option>
-              <option value="UPBIT_BTC_KRW_PREMIUM">BTC 김치프리미엄 (Upbit)</option>
-              <option value="BITHUMB_BTC_KRW_PREMIUM">BTC 김치프리미엄 (Bithumb)</option>
-            </optgroup>
-            <optgroup label="Market Index">
-              <option value="TOTAL_MARKET_CAP">TOTAL Market Cap</option>
-              <option value="TOTAL2_INDEX">TOTAL2</option>
-            </optgroup>
-          </select>
         </div>
       </div>
     </section>

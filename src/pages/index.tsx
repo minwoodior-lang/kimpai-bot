@@ -101,9 +101,15 @@ export default function Home() {
             }
             fxRate={<span className="text-white font-bold">₩{(fxRate || 0).toLocaleString()}/USDT</span>}
             score={riskScore}
-            selectedIndicator={selectedIndicator}
-            onIndicatorChange={setSelectedIndicator}
           />
+
+          {/* 차트 섹션 */}
+          <div className="mt-4 w-full rounded-2xl dark:border dark:border-slate-700/60 light:border light:border-slate-300/40 dark:bg-slate-900/20 light:bg-slate-100/20 min-h-[260px] overflow-hidden">
+            <ChartSectionEnhanced
+              selectedIndicator={selectedIndicator}
+              onIndicatorChange={setSelectedIndicator}
+            />
+          </div>
 
           <div className="space-y-4">
 
