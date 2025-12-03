@@ -1,0 +1,207 @@
+🛑 KimpAI 모바일 UX P-1 최종 수정 지시 (가로 스크롤 완전 제거)
+
+다음 내용은 KimpAI **모바일 뷰포트(lg 미만)**에서 발생하는 가로 스크롤 문제를 해결하기 위한 P-1 최종 작업 지시입니다.
+아래 ① AIInsightBox 레이아웃 수정, ② PremiumTable 컬럼 압축을 모두 적용해 주세요.
+
+1. AIInsightBox 레이아웃 수정 (모바일에서 완전 숨김)
+1-1. 요구사항
+
+PC(lg 이상): 현재처럼
+
+좌측 75%: 차트 + 프리미엄 테이블
+
+우측 25%: AIInsightBox
+
+모바일(lg 미만):
+
+AIInsightBox 완전히 비표시
+
+차트 + 프리미엄 테이블이 화면 가로폭 100% 사용
+
+즉, 모바일에서는 AIInsightBox가 레이아웃에 전혀 관여하지 않도록 해 주세요.
+(나중에 별도 탭/모달로 재설계 예정이므로, 현재는 완전 숨김이 목표입니다.)
+
+1-2. 구현 가이드
+
+홈 메인 레이아웃에서 AIInsightBox를 감싸는 컨테이너에 다음 형태로 Tailwind 클래스를 적용해 주세요.
+
+// 예시: Home 페이지 레이아웃 일부
+
+<div className="grid lg:grid-cols-[3fr_1fr] gap-6">
+  {/* 좌측: 차트 + 테이블 (모바일/PC 공통 노출) */}
+  <section>
+    {/* Chart + PremiumTable ... */}
+  </section>
+
+  {/* 우측: AI Insight (PC에서만 노출) */}
+  <aside className="hidden lg:block">
+    <AIInsightBox />
+  </aside>
+</div>
+
+
+핵심 포인트:
+
+aside 쪽에 hidden lg:block 혹은 동일 동작을 하는 클래스를 적용
+
+모바일 기본은 1열 레이아웃 (grid → 기본 1열, lg:grid-cols-[3fr_1fr]에서만 2열)
+
+이렇게 하면 모바일에서는 AIInsightBox가 아예 렌더링되지 않아, 테이블이 항상 전체 가로폭을 확보할 수 있습니다.
+
+2. PremiumTable 컬럼 압축 (모바일 가로 스크롤 제거)
+2-1. 요구사항
+
+모바일(sm 미만)에서는 핵심 4개 컬럼만 노출하고 나머지는 숨깁니다.
+
+모바일에서 표시해야 할 컬럼:
+
+코인명
+
+현재가
+
+김프 %
+
+전일대비 (24h 변화율)
+
+모바일에서 숨길 컬럼:
+
+고가대비 / 저가대비
+
+거래액(24h 거래대금)
+
+그 외 부가 컬럼 전체
+
+PC(lg 이상)에서는 기존처럼 모든 컬럼 노출해도 됩니다.
+
+2-2. 구현 가이드 (Tailwind 클래스 예시)
+
+헤더(th)와 데이터(td)에 다음 규칙을 적용해 주세요.
+
+2-2-1. 테이블 기본 스타일
+<table className="min-w-full table-auto border-separate border-spacing-y-1">
+
+
+min-w-full 유지
+
+가능하면 상위 래퍼에 overflow-x-hidden 또는 overflow-x-auto 제거:
+
+모바일에서 가로 스크롤을 의도적으로 막기 위해
+
+전체 레이아웃 상위 컨테이너에는 w-full overflow-x-hidden 권장
+
+2-2-2. 컬럼별 클래스 적용 예시
+<thead>
+  <tr>
+    {/* 코인명 - 항상 표시 */}
+    <th className="px-3 py-2 text-left text-xs font-medium text-gray-400">
+      코인
+    </th>
+
+    {/* 현재가 - 항상 표시 */}
+    <th className="px-3 py-2 text-right text-xs font-medium text-gray-400">
+      현재가
+    </th>
+
+    {/* 김프 % - 항상 표시 */}
+    <th className="px-3 py-2 text-right text-xs font-medium text-gray-400">
+      김프
+    </th>
+
+    {/* 전일대비 - 항상 표시 */}
+    <th className="px-3 py-2 text-right text-xs font-medium text-gray-400">
+      24h
+    </th>
+
+    {/* 고가대비 - 모바일에서 숨김 */}
+    <th className="hidden sm:table-cell px-3 py-2 text-right text-xs font-medium text-gray-400">
+      고가대비
+    </th>
+
+    {/* 저가대비 - 모바일에서 숨김 */}
+    <th className="hidden sm:table-cell px-3 py-2 text-right text-xs font-medium text-gray-400">
+      저가대비
+    </th>
+
+    {/* 거래액 - 모바일에서 숨김 */}
+    <th className="hidden sm:table-cell px-3 py-2 text-right text-xs font-medium text-gray-400">
+      거래액
+    </th>
+  </tr>
+</thead>
+
+<tbody>
+  {rows.map((row) => (
+    <tr key={row.symbol}>
+      {/* 코인명 */}
+      <td className="px-3 py-2 text-left text-sm">
+        {/* CoinIcon + name ... */}
+      </td>
+
+      {/* 현재가 */}
+      <td className="px-3 py-2 text-right text-sm">
+        {row.priceFormatted}
+      </td>
+
+      {/* 김프 */}
+      <td className="px-3 py-2 text-right text-sm">
+        {row.premiumFormatted}
+      </td>
+
+      {/* 24h 변화율 */}
+      <td className="px-3 py-2 text-right text-sm">
+        {row.change24hFormatted}
+      </td>
+
+      {/* 고가대비 - 모바일에서 숨김 */}
+      <td className="hidden sm:table-cell px-3 py-2 text-right text-sm">
+        {row.highDiffFormatted}
+      </td>
+
+      {/* 저가대비 - 모바일에서 숨김 */}
+      <td className="hidden sm:table-cell px-3 py-2 text-right text-sm">
+        {row.lowDiffFormatted}
+      </td>
+
+      {/* 거래액 - 모바일에서 숨김 */}
+      <td className="hidden sm:table-cell px-3 py-2 text-right text-sm">
+        {row.volumeFormatted}
+      </td>
+    </tr>
+  ))}
+</tbody>
+
+
+핵심 포인트:
+
+숨길 컬럼의 th, td 모두에 className="hidden sm:table-cell ..." 적용
+
+기본값: hidden (모바일에서 안 보임)
+
+sm: 이상에서만 table-cell로 복구
+
+표시 유지할 4개 컬럼에는 hidden 관련 클래스를 넣지 말 것
+
+테이블 부모 컨테이너:
+
+<div className="w-full overflow-x-hidden">
+  <PremiumTable ... />
+</div>
+
+3. 완료 기준 (Acceptance Criteria)
+
+**모바일(가로 360~430px 영역)**에서:
+
+AIInsightBox가 보이지 않아야 합니다.
+
+프리미엄 테이블이 화면 가로폭 100%를 사용하며, 어떤 종목을 선택해도 가로 스크롤이 전혀 없어야 합니다.
+
+코인명 / 현재가 / 김프 / 24h 4개 컬럼만 표시됩니다.
+
+태블릿 및 PC 뷰에서는:
+
+기존처럼 AIInsightBox가 우측 25% 영역에 표시되고,
+
+모든 컬럼(고가대비, 저가대비, 거래액 등)이 정상적으로 표시됩니다.
+
+위 ① AIInsightBox 모바일 숨김, ② PremiumTable 컬럼 압축을 P-1 최종 작업으로 우선 적용해 주세요.
+P-1이 안정적으로 반영되면, 이후 P-2(테이블 기능/정렬/필터링 등 상세 UX)를 별도 티켓으로 진행하겠습니다.

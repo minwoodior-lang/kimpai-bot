@@ -867,7 +867,7 @@ export default function PremiumTable({
                     <span className="md:hidden">현재가</span>
                     <SortIcon columnKey="koreanPrice" />
                   </th>
-                  <th className="hidden md:table-cell px-3 py-2 text-right whitespace-nowrap">
+                  <th className="hidden sm:table-cell px-3 py-2 text-right whitespace-nowrap">
                     {getForeignName()}
                   </th>
                   <th
@@ -886,21 +886,21 @@ export default function PremiumTable({
                     <SortIcon columnKey="change24h" />
                   </th>
                   <th
-                    className="hidden lg:table-cell px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    className="hidden sm:table-cell px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("high24h")}
                   >
                     고가대비(24h)
                     <SortIcon columnKey="high24h" />
                   </th>
                   <th
-                    className="hidden lg:table-cell px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    className="hidden sm:table-cell px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("low24h")}
                   >
                     저가대비(24h)
                     <SortIcon columnKey="low24h" />
                   </th>
                   <th
-                    className="px-1 md:px-3 py-1.5 md:py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
+                    className="hidden sm:table-cell px-1 md:px-3 py-1.5 md:py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
                     onClick={() => handleSort("volume24hKrw")}
                   >
                     <span className="hidden md:inline">거래액(일)</span>
@@ -1029,7 +1029,7 @@ export default function PremiumTable({
                           </div>
                         </td>
 
-                        <td className="hidden md:table-cell px-3 py-2 text-right">
+                        <td className="hidden sm:table-cell px-3 py-2 text-right">
                           {row.isListed && row.globalPriceKrw !== null ? (
                             <>
                               <div className="text-white font-medium">
@@ -1093,7 +1093,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="hidden lg:table-cell px-3 py-2 text-right">
+                        <td className="hidden sm:table-cell px-3 py-2 text-right">
                           {highDiff.valid && highDiff.percent !== null && highDiff.percent !== undefined ? (
                             <>
                               <div className={getChangeColor(highDiff.percent)}>
@@ -1114,7 +1114,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="hidden lg:table-cell px-3 py-2 text-right">
+                        <td className="hidden sm:table-cell px-3 py-2 text-right">
                           {lowDiff.valid && lowDiff.percent !== null && lowDiff.percent !== undefined ? (
                             <>
                               <div className={getChangeColor(lowDiff.percent)}>
@@ -1135,7 +1135,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="px-1 md:px-3 py-1.5 md:py-2 text-right">
+                        <td className="hidden sm:table-cell px-1 md:px-3 py-1.5 md:py-2 text-right">
                           <div className="flex flex-col items-end leading-tight">
                             <span className="text-gray-300 text-[10px] md:text-sm">
                               ₩{formatVolumeKRW(row.volume24hKrw)}
