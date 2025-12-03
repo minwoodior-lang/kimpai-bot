@@ -2,6 +2,8 @@ import Head from "next/head";
 import Layout from "@/components/Layout";
 import HomeLayout from "@/components/layout/HomeLayout";
 import TodayPremiumSection from "@/components/TodayPremiumSection";
+import ProPredictionCard from "@/components/ProPredictionCard";
+import MyAlertsCard from "@/components/MyAlertsCard";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useMarkets } from "@/hooks/useMarkets";
@@ -74,34 +76,43 @@ export default function Home() {
       {/* 메인 콘텐츠 */}
       <div className="max-w-[1200px] mx-auto px-4 lg:px-5 py-6">
         <HomeLayout>
-          {/* 오늘의 AI 김프 요약 */}
-          <TodayPremiumSection
-            avgPremium={
-              <span className={safeAvgPremium >= 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}>
-                {formatPremium(safeAvgPremium)}
-              </span>
-            }
-            maxPremium={
-              maxPremium ? (
-                <span className="text-green-400 font-bold">
-                  {formatPremium(maxPremium.premium)} ({maxPremium.symbol.replace("/KRW", "")})
+          {/* 상단 3컬럼 레이아웃 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-6">
+            {/* 좌측: 오늘의 AI 김프 요약 */}
+            <TodayPremiumSection
+              avgPremium={
+                <span className={safeAvgPremium >= 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}>
+                  {formatPremium(safeAvgPremium)}
                 </span>
-              ) : (
-                "-"
-              )
-            }
-            minPremium={
-              minPremium ? (
-                <span className={minPremium.premium && minPremium.premium < 0 ? "text-red-400 font-bold" : "text-slate-300 font-bold"}>
-                  {formatPremium(minPremium.premium)} ({minPremium.symbol.replace("/KRW", "")})
-                </span>
-              ) : (
-                "-"
-              )
-            }
-            fxRate={<span className="text-white font-bold">₩{(fxRate || 0).toLocaleString()}/USDT</span>}
-            score={riskScore}
-          />
+              }
+              maxPremium={
+                maxPremium ? (
+                  <span className="text-green-400 font-bold">
+                    {formatPremium(maxPremium.premium)} ({maxPremium.symbol.replace("/KRW", "")})
+                  </span>
+                ) : (
+                  "-"
+                )
+              }
+              minPremium={
+                minPremium ? (
+                  <span className={minPremium.premium && minPremium.premium < 0 ? "text-red-400 font-bold" : "text-slate-300 font-bold"}>
+                    {formatPremium(minPremium.premium)} ({minPremium.symbol.replace("/KRW", "")})
+                  </span>
+                ) : (
+                  "-"
+                )
+              }
+              fxRate={<span className="text-white font-bold">₩{(fxRate || 0).toLocaleString()}/USDT</span>}
+              score={riskScore}
+            />
+
+            {/* 중앙: PRO 예측 카드 */}
+            <ProPredictionCard />
+
+            {/* 우측: 내 알림 카드 */}
+            <MyAlertsCard />
+          </div>
 
           {/* 차트 섹션 */}
           <div className="mt-4 w-full rounded-2xl dark:border dark:border-slate-700/60 light:border light:border-slate-300/40 dark:bg-slate-900/20 light:bg-slate-100/20 min-h-[260px] overflow-hidden">
