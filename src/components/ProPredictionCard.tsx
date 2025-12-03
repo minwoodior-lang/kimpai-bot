@@ -12,30 +12,20 @@ export function ProPredictionCard() {
         <span>PRO 전용 48시간 김프 예측</span>
       </div>
 
-      {/* 블러 처리된 설명 텍스트 박스 - 텍스트 완전히 안 보이게 */}
-      <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-[18px] py-[14px] space-y-2 text-[13px] leading-[1.45] text-white/60 flex-1 mb-4">
+      {/* 블러 처리된 설명 텍스트 박스 - 전체 설명 포함 */}
+      <div className="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-[18px] py-[14px] space-y-2 text-[13px] leading-[1.45] text-white/60 flex-1 mb-1">
         <p className="opacity-10 blur-sm">
-          대시보드를 과산으로 움침니다.<br />
-          내 자산의 리밸런싱 추천과 수익화 전략을 받을 수 있습니다.
+          최근 30일 기준, 이 예측은 김프 2% 이상 급변<br />
+          구간의 90% 이상을 사전에 포착했습니다.
         </p>
         <p className="text-white/40 text-[12px] opacity-10 blur-sm">
           * 전체 예측 데이터는 PRO 구독 시 이용할 수 있습니다.
         </p>
       </div>
 
-      {/* 설명 텍스트 */}
-      <p className="text-[10px] sm:text-xs dark:text-slate-400 light:text-slate-600 mb-2 leading-relaxed">
-        최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
-      </p>
-
-      {/* 추가 텍스트 */}
-      <p className="text-[10px] sm:text-xs dark:text-slate-500 light:text-slate-600 mb-3">
-        * 전체 예측 데이터는 PRO 구독 시 이용할 수 있습니다.
-      </p>
-
       {/* PRO 버튼 */}
       <button
-        className="w-full bg-gradient-to-r from-[#8155FF] to-[#5D3DFF] dark:hover:from-[#7043FF] dark:hover:to-[#4C2FFF] light:hover:from-[#7043FF] light:hover:to-[#4C2FFF] transition-all h-10 rounded-lg font-semibold text-white text-xs sm:text-sm flex items-center justify-center gap-1.5"
+        className="w-full bg-gradient-to-r from-[#8155FF] to-[#5D3DFF] dark:hover:from-[#7043FF] dark:hover:to-[#4C2FFF] light:hover:from-[#7043FF] light:hover:to-[#4C2FFF] transition-all h-10 rounded-lg font-semibold text-white text-xs sm:text-sm flex items-center justify-center gap-1.5 mt-4"
       >
         <span>🔒</span>
         <span>PRO 분석 전체 보기</span>
