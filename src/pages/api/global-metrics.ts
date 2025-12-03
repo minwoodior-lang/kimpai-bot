@@ -1,11 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { createClient } from "@supabase/supabase-js";
 import axios from "axios";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || "",
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ""
-);
+import { getConcurrentUsers } from "@/lib/sessionCache";
 
 interface GlobalMetricsResponse {
   fx: {
@@ -50,6 +45,7 @@ export default async function handler(
   try {
     // 캐시 확인
     if (cachedMetrics && Date.now() - cacheTime < CACHE_DURATION) {
+      cachedMetrics.concurrentUsers = getConcurrentUsers();
       return res.status(200).json(cachedMetrics);
     }
 
@@ -129,20 +125,9 @@ export default async function handler(
       console.error("[Bithumb Error]:", err instanceof Error ? err.message : String(err));
     }
 
-    // 3. 동시접속자 (Supabase active_sessions)
-    try {
-      const { count } = await supabase
-        .from("active_sessions")
-        .select("*", { count: "exact" })
-        .gt("last_seen", new Date(Date.now() - 2 * 60 * 1000).toISOString());
-
-      if (count !== null) {
-        metricsData.concurrentUsers = count;
-        console.log("[Supabase] Active Sessions:", count);
-      }
-    } catch (err) {
-      console.error("[Supabase Error]:", err instanceof Error ? err.message : String(err));
-    }
+    // 3. 메모리 기반 동시접속자 (Supabase 제거)
+    metricsData.concurrentUsers = getConcurrentUsers();
+    console.log("[SessionCache] Active Users:", metricsData.concurrentUsers);
 
     // 캐시 업데이트
     cachedMetrics = metricsData;

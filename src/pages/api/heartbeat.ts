@@ -1,10 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || "",
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ""
-);
+import { recordSession } from "@/lib/sessionCache";
 
 export default async function handler(
   req: NextApiRequest,
@@ -21,16 +16,13 @@ export default async function handler(
       return res.status(400).json({ error: "Invalid sessionId" });
     }
 
-    await supabase
-      .from("active_sessions")
-      .upsert({
-        id: sessionId,
-        last_seen: new Date().toISOString(),
-      })
-      .throwOnError();
+    // 메모리 캐시에 세션 기록
+    recordSession(sessionId);
+    console.log("[Heartbeat] Session recorded:", sessionId);
 
     return res.status(200).json({ ok: true });
   } catch (err) {
+    console.error("[Heartbeat Error]:", err);
     return res.status(500).json({ error: "Server error" });
   }
 }
