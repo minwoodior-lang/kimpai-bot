@@ -7,6 +7,7 @@ import MyAlertsCard from "@/components/MyAlertsCard";
 import ChatFloatingButton from "@/components/chat/ChatFloatingButton";
 import ChatPanel from "@/components/chat/ChatPanel";
 import ChatUI from "@/components/ChatUI";
+import { AiSummaryMobileContent, ProForecastMobileContent, MyAlertsMobileContent } from "@/components/mobile/MobileCardContents";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useMarkets } from "@/hooks/useMarkets";
@@ -169,11 +170,10 @@ export default function Home() {
               </button>
             </div>
 
-            {/* 카드 콘텐츠 */}
-            <div className="min-h-[200px]">
+            {/* 공통 카드 껍데기 - 고정 높이 */}
+            <div className="rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 p-2.5 h-[220px] flex flex-col">
               {mobileCardTab === "ai" && (
-                <TodayPremiumSection
-                  compact={true}
+                <AiSummaryMobileContent
                   avgPremium={
                     <span className={safeAvgPremium >= 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}>
                       {formatPremium(safeAvgPremium)}
@@ -201,8 +201,8 @@ export default function Home() {
                   score={riskScore}
                 />
               )}
-              {mobileCardTab === "pro" && <ProPredictionCard compact={true} />}
-              {mobileCardTab === "alerts" && <MyAlertsCard compact={true} />}
+              {mobileCardTab === "pro" && <ProForecastMobileContent />}
+              {mobileCardTab === "alerts" && <MyAlertsMobileContent />}
             </div>
           </div>
 
