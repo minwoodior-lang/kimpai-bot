@@ -1,0 +1,100 @@
+2. 개발자에게 전달할 “구현 지시문” (복붙용)
+
+그냥 아래 걸 통째로 보내면 돼.
+
+✉️ 개발자 전달 텍스트
+
+지금 홈 상단의 오늘의 AI 김프 요약 영역을 완전 새로 구성해 주세요.
+현재 보라색 카드 아래에 있는 긴 바/카드 형태는 전부 제거하고, 아래 구조 그대로 맞춰주시면 됩니다.
+
+1) 전체 레이아웃
+
+컨테이너는 다음과 같이 구성해 주세요.
+
+<section className="w-full max-w-[1200px] mx-auto mt-6 space-y-2">
+  {/* 상단 한 줄 */}
+  <div className="flex items-start justify-between gap-6">
+    {/* 1. 왼쪽: 요약 bullet 영역 */}
+    <div className="flex-1 text-xs sm:text-sm text-slate-200 space-y-0.5">
+      <div className="font-semibold text-slate-100">오늘의 AI 김프 요약</div>
+      <div>• 평균 김프: <span className="text-emerald-400">{avgPremium}%</span></div>
+      <div>• 최대 김프: {maxPremiumText}</div>
+      <div>• 최소 김프: {minPremiumText}</div>
+      <div>• 환율: ₩{fxRate}/USDT</div>
+    </div>
+
+    {/* 2. 가운데: PRO 전용 제목 한 줄 */}
+    <div className="hidden md:flex flex-[0.9] items-center justify-center text-xs text-slate-300">
+      <span className="truncate">
+        🔒 <span className="font-medium">PRO 전용 48시간 김프 예측</span>
+      </span>
+    </div>
+
+    {/* 3. 오른쪽: Score 카드 + 버튼 */}
+    <div className="flex flex-[0.9] flex-col sm:flex-row items-stretch gap-3">
+      {/* KR Premium Score 카드 */}
+      <div className="flex-1 rounded-xl bg-indigo-900/60 px-4 py-3 text-xs text-slate-100 flex flex-col justify-between">
+        <div className="text-[11px] text-slate-300 mb-1">KR Premium Score</div>
+        <div className="text-lg font-semibold text-emerald-400">{score}/10</div>
+      </div>
+
+      {/* PRO 분석 버튼 카드 */}
+      <button
+        className="flex-1 rounded-xl bg-[#6C63FF] hover:bg-[#7b72ff] transition-colors px-4 py-3 text-xs sm:text-sm font-semibold text-white flex items-center justify-center"
+      >
+        PRO 분석 전체 보기
+      </button>
+    </div>
+  </div>
+
+  {/* 4. 하단 설명 텍스트 (전체 폭 사용) */}
+  <p className="text-[11px] sm:text-xs text-slate-400 leading-relaxed">
+    최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
+    <span className="hidden sm:inline"> </span>
+    <span className="block sm:inline">(PRO 구독 시 전체 내용 확인 가능)</span>
+  </p>
+</section>
+
+2) 꼭 지켜야 할 포인트
+
+기존에 있던 보라색 “PRO 전용 48시간 김프 예측” 카드 + 블러 박스 + 하단 바
+→ 전부 삭제하고 위 JSX 구조로 교체해 주세요.
+
+🔒 PRO 전용 48시간 김프 예측 텍스트는
+
+카드/박스가 아니라 한 줄 텍스트
+
+가운데 열(왼쪽 요약과 오른쪽 카드 사이)에 위치
+
+md 이상에서만 보이고, 모바일에서는 아래처럼 배치해 주세요.
+
+모바일 레이아웃 (width < md)
+
+flex-col 구조로 자동 줄바꿈 되도록:
+
+맨 위: 요약 bullet
+
+그 아래: 🔒 PRO 전용 48시간 김프 예측 텍스트 (가운데 정렬)
+
+그 아래: Score 카드 + 버튼 2개
+
+위 JSX 예시에서 hidden md:flex 부분을
+모바일에서는 md:hidden 버전으로 한 줄 추가해서 처리해 주시면 됩니다.
+
+예:
+
+{/* 모바일에서만 보이는 PRO 제목 */}
+<div className="md:hidden text-[11px] text-center text-slate-300 mt-2">
+  🔒 <span className="font-medium">PRO 전용 48시간 김프 예측</span>
+</div>
+
+
+하단 설명 문구
+
+아래 문장은 지금처럼 가장 아래 한 줄(또는 두 줄)로 전체 폭을 사용해서 보여주세요:
+
+최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
+(PRO 구독 시 전체 내용 확인 가능)
+
+
+→ 이 문장은 위 JSX 예시의 <p> 부분 그대로 쓰면 됩니다.
