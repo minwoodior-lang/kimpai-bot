@@ -48,8 +48,8 @@ export default function Layout({ children }: LayoutProps) {
   const isActive = (path: string) => router.pathname === path;
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 dark:bg-slate-950 light:bg-white text-slate-100 dark:text-slate-100 light:text-slate-900">
-      <header className="sm:sticky sm:top-0 z-50 bg-slate-950/95 dark:bg-slate-950/95 light:bg-white/95 backdrop-blur border-b border-slate-800 dark:border-slate-800 light:border-slate-200">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-purple-950 via-slate-950 to-slate-900 dark:bg-gradient-to-br dark:from-purple-950 dark:via-slate-950 dark:to-slate-900 light:bg-white text-slate-100 dark:text-slate-100 light:text-slate-900">
+      <header className="sm:sticky sm:top-0 z-50 bg-gradient-to-r from-purple-950/95 to-slate-950/95 dark:bg-gradient-to-r dark:from-purple-950/95 dark:to-slate-950/95 light:bg-white/95 backdrop-blur border-b border-slate-800 dark:border-slate-800 light:border-slate-200">
         <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-5">
           <TopMarketInfoBar />
 
