@@ -77,7 +77,7 @@ export default function Home() {
       <HomeLayout>
         <div className="w-full mx-auto max-w-[1200px] px-4 lg:px-5 py-6">
           {/* 상단 3컬럼 레이아웃 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
             {/* 좌측: 오늘의 AI 김프 요약 */}
             <TodayPremiumSection
               avgPremium={
@@ -115,14 +115,14 @@ export default function Home() {
           </div>
 
           {/* 차트 섹션 */}
-          <div className="mt-6">
+          <div className="mt-5">
             <ChartSectionEnhanced
               selectedIndicator={selectedIndicator}
               onIndicatorChange={setSelectedIndicator}
             />
           </div>
 
-          <div className="space-y-4">
+          <div className="mt-5 space-y-4">
 
             {/* 프리미엄 테이블 */}
             <PremiumTable showHeader={false} showFilters={true} limit={0} refreshInterval={2000} />
