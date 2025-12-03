@@ -107,7 +107,7 @@ export default function ChartSectionEnhanced({
   };
 
   return (
-    <section className="mb-4 md:mb-10">
+    <section className="mb-2 md:mb-4">
       {/* 드롭다운 - hideDropdown이 false일 때만 우측 정렬 표시 */}
       {!hideDropdown && (
         <div className="flex justify-end mb-2">
@@ -156,7 +156,7 @@ export default function ChartSectionEnhanced({
       )}
 
       {/* 차트 박스 */}
-      <div className="w-full rounded-2xl dark:border dark:border-slate-700/60 light:border light:border-slate-300/40 dark:bg-slate-900/20 light:bg-slate-100/20 p-4 overflow-hidden">
+      <div className="w-full rounded-2xl dark:border dark:border-slate-700/60 light:border light:border-slate-300/40 dark:bg-slate-900/20 light:bg-slate-100/20 pt-4 pb-2 px-4 overflow-hidden">
         <div
           id="kimpai-main-chart"
           ref={containerRef}
