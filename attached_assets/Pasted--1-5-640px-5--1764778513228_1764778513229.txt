@@ -1,0 +1,135 @@
+📌 1. 모바일 코인 그리드 5컬럼 전부 보이게 하는 수정 지시
+
+요구사항 재정리
+
+모바일 기준(≤ 640px):
+
+한 줄에 테이블 형태로 아래 5컬럼이 모두 보여야 함
+코인명 / 현재가 / 김프 / 전일대비 / 거래액(일)
+
+가로 스크롤 없이, 화면 안에 다 들어오도록 폰트·패딩 압축해서 맞추기
+
+PC는 지금처럼 7컬럼 유지해도 됨.
+
+1-1. PremiumTable 컴포넌트에서 hidden 처리 제거
+
+현재 코드 안에 이런 식으로 되어 있을 가능성이 큼:
+
+<th className="hidden sm:table-cell ...">전일</th>
+<th className="hidden sm:table-cell ...">거래액</th>
+
+
+혹은
+
+<td className="hidden sm:table-cell ...">{row.dayChange}</td>
+<td className="hidden sm:table-cell ...">{row.volume}</td>
+
+
+👉 지시사항
+
+전일, 거래액 헤더와 데이터 셀에 걸려 있는
+hidden, sm:table-cell, md:table-cell 같은 클래스 전부 제거.
+
+대신 기본이 보이게 하고, PC에서만 스타일 키우고 싶으면 sm:text-[11px] 같은 식으로 breakpoints만 사용.
+
+예시:
+
+// ✅ 모바일 포함 전 구간에서 보이도록 수정
+<th className="text-[10px] sm:text-[11px] px-1 py-2 text-right">전일</th>
+<th className="text-[10px] sm:text-[11px] px-1 py-2 text-right">거래액</th>
+
+<td className="text-[10px] sm:text-[12px] px-1 py-3 text-right whitespace-nowrap">
+  {row.change24h}%
+</td>
+<td className="text-[10px] sm:text-[12px] px-1 py-3 text-right whitespace-nowrap">
+  {row.volume24hKrw}
+</td>
+
+1-2. 모바일 전용 스타일로 폭·폰트 강제 압축
+
+각 숫자 칸이 너무 넓어서 줄바꿈이 나면 컬럼이 잘려 보이니까,
+폭과 폰트를 강제로 줄여서 360px 화면에서도 5컬럼이 들어오게 만들어야 함.
+
+지시 예시:
+
+<table className="min-w-full table-fixed">
+  <colgroup>
+    <col className="w-[34%]" /> {/* 코인명 */}
+    <col className="w-[16%]" /> {/* 현재가 */}
+    <col className="w-[16%]" /> {/* 김프 */}
+    <col className="w-[17%]" /> {/* 전일 */}
+    <col className="w-[17%]" /> {/* 거래액 */}
+  </colgroup>
+  ...
+</table>
+
+
+table-fixed + colgroup 으로 강제 폭 지정
+
+모바일 기준 폰트/패딩은 아주 타이트하게:
+
+<th className="text-[10px] sm:text-[11px] px-1 py-2 ...">...</th>
+<td className="text-[10px] sm:text-[12px] px-1 py-2 ...">...</td>
+
+
+숫자 칸에는 꼭 whitespace-nowrap 넣어서 두 줄로 안 갈리게.
+
+1-3. 테이블 래퍼의 overflow-x 확인
+
+지금 래퍼에 overflow-x-auto 같은 게 들어가 있으면,
+가로 스크롤 생기면서 일부 컬럼이 눈에서 잘려 보일 수 있음.
+
+지시:
+
+<div className="w-full overflow-x-visible">  {/* or 그냥 overflow-hidden */}
+  <table ...>...</table>
+</div>
+
+
+모바일에서 가로 스크롤 안 쓰고 안에서 해결하도록.
+
+1-4. 코인 셀 정렬(아이콘 / 별 / 코인명 두 줄)
+
+같이 고치라고 한 부분도 정확히 적어줄게.
+
+지금 모습:
+아이콘 / 별 / 제로지, 0G 높이가 안 맞음 →
+김프가처럼 아이콘 + 별은 왼쪽 세로축, 이름 + 심볼은 오른쪽 세로축으로 정렬해야 함.
+
+지시 예시:
+
+<td className="px-2 py-3">
+  <div className="flex items-center gap-2">
+    {/* 왼쪽: 아이콘 + 별 */}
+    <div className="flex flex-col items-center justify-center gap-1">
+      <CoinIcon ... className="h-7 w-7" />
+      <button className="text-[10px] leading-none text-slate-500">
+        ☆
+      </button>
+    </div>
+
+    {/* 오른쪽: 코인명 + 심볼 */}
+    <div className="flex flex-col justify-center">
+      <span className="text-[13px] leading-tight font-medium truncate">
+        {row.nameKo}
+      </span>
+      <span className="text-[11px] leading-tight text-slate-400">
+        {row.symbol}
+      </span>
+    </div>
+  </div>
+</td>
+
+
+이렇게 하면 아이콘 중심선, 별, 코인 이름 두 줄이 세로 방향으로 딱 맞음.
+
+PC·모바일 공통 적용.
+
+1-5. 최종 체크 포인트 (레플릿한테 강조)
+
+모바일 실제 기기에서 360px 기준으로 확인해서
+코인명 / 현재가 / 김프 / 전일 / 거래액 5개 숫자가 한 화면에 한 줄로 모두 보이는지 확인.
+
+숨김 클래스(hidden, sm:table-cell, md:table-cell)가 남아있지 않은지 다시 점검.
+
+필요하면 폰트/패딩 더 줄여도 좋으니, 가로 스크롤 없이 5컬럼 전부 노출이 목표.
