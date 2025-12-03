@@ -81,55 +81,111 @@ export default function TopInfoBar() {
 
   return (
     <div className="w-full bg-[#050816] border-b border-[#0b1120]">
-      <div className="mx-auto max-w-[1200px] px-4 lg:px-5 h-7 flex items-center justify-between gap-4">
-        {/* 좌측: 글로벌 지표 */}
-        <div className="flex items-center gap-4 text-[11px] text-[#A7B3C6] overflow-x-auto whitespace-nowrap scrollbar-hide flex-1">
-          
-          {/* 테더 (USDT/KRW) */}
-          <div className="flex items-center gap-1 flex-shrink-0">
-            <div className="w-4 h-4 rounded-full bg-[#26A17B] flex items-center justify-center flex-shrink-0">
-              <span className="text-[8px] text-white font-bold">₮</span>
+      <div className="mx-auto max-w-[1200px] px-4 lg:px-5 py-1 sm:py-0">
+        {/* PC: 한 줄 레이아웃 */}
+        <div className="hidden sm:flex items-center justify-between gap-4 h-7">
+          {/* 좌측: 글로벌 지표 */}
+          <div className="flex items-center gap-4 text-[11px] text-[#A7B3C6] overflow-x-auto whitespace-nowrap scrollbar-hide flex-1">
+            
+            {/* 테더 (USDT/KRW) */}
+            <div className="flex items-center gap-1 flex-shrink-0">
+              <div className="w-4 h-4 rounded-full bg-[#26A17B] flex items-center justify-center flex-shrink-0">
+                <span className="text-[8px] text-white font-bold">₮</span>
+              </div>
+              <span className="font-medium text-white">₩{formatNumber(metrics.usdt.krw, 0)}</span>
+              <span className="text-[#A7B3C6]">/ USDT</span>
+              <span className={`font-medium ${getChangeColor(metrics.usdt.change24h)}`}>
+                {metrics.usdt.change24h > 0 ? "+" : ""}{formatNumber(metrics.usdt.change24h, 2)}%
+              </span>
             </div>
-            <span className="font-medium text-white">₩{formatNumber(metrics.usdt.krw, 0)}</span>
-            <span className="text-[#A7B3C6]">/ USDT</span>
-            <span className={`font-medium ${getChangeColor(metrics.usdt.change24h)}`}>
-              {metrics.usdt.change24h > 0 ? "+" : ""}{formatNumber(metrics.usdt.change24h, 2)}%
-            </span>
+
+            <span className="text-[#30364a] px-0.5">|</span>
+
+            {/* BTC 점유율 */}
+            <div className="flex items-center gap-1 flex-shrink-0">
+              <span className="text-[#A7B3C6]">BTC 점유율:</span>
+              <span className="font-medium text-white">{formatNumber(metrics.global.btcDominance, 1)}%</span>
+            </div>
+
+            <span className="text-[#30364a] px-0.5">|</span>
+
+            {/* 시가총액 */}
+            <div className="flex items-center gap-1 flex-shrink-0">
+              <span className="text-[#A7B3C6]">시가총액:</span>
+              <span className="font-medium text-white">{formatCurrency(metrics.global.marketCapKrw)}</span>
+              <span className={`font-medium ${getChangeColor(metrics.global.marketCapChange24h)}`}>
+                {metrics.global.marketCapChange24h > 0 ? "+" : ""}{formatNumber(metrics.global.marketCapChange24h, 2)}%
+              </span>
+            </div>
+
+            <span className="text-[#30364a] px-0.5">|</span>
+
+            {/* 24시간 거래량 */}
+            <div className="flex items-center gap-1 flex-shrink-0">
+              <span className="text-[#A7B3C6]">24시간 거래량:</span>
+              <span className="font-medium text-white">{formatCurrency(metrics.global.volume24hKrw)}</span>
+              <span className={`font-medium ${getChangeColor(metrics.global.volume24hChange24h)}`}>
+                {metrics.global.volume24hChange24h > 0 ? "+" : ""}{formatNumber(metrics.global.volume24hChange24h, 2)}%
+              </span>
+            </div>
           </div>
 
-          <span className="text-[#30364a] px-0.5">|</span>
-
-          {/* BTC 점유율 */}
-          <div className="flex items-center gap-1 flex-shrink-0">
-            <span className="text-[#A7B3C6]">BTC 점유율:</span>
-            <span className="font-medium text-white">{formatNumber(metrics.global.btcDominance, 1)}%</span>
-          </div>
-
-          {/* 시가총액 (md 이상에서만 표시) */}
-          <span className="hidden md:inline text-[#30364a] px-0.5">|</span>
-          <div className="hidden md:flex items-center gap-1 flex-shrink-0">
-            <span className="text-[#A7B3C6]">시가총액:</span>
-            <span className="font-medium text-white">{formatCurrency(metrics.global.marketCapKrw)}</span>
-            <span className={`font-medium ${getChangeColor(metrics.global.marketCapChange24h)}`}>
-              {metrics.global.marketCapChange24h > 0 ? "+" : ""}{formatNumber(metrics.global.marketCapChange24h, 2)}%
-            </span>
-          </div>
-
-          {/* 24시간 거래량 (md 이상에서만 표시) */}
-          <span className="hidden md:inline text-[#30364a] px-0.5">|</span>
-          <div className="hidden md:flex items-center gap-1 flex-shrink-0">
-            <span className="text-[#A7B3C6]">24시간 거래량:</span>
-            <span className="font-medium text-white">{formatCurrency(metrics.global.volume24hKrw)}</span>
-            <span className={`font-medium ${getChangeColor(metrics.global.volume24hChange24h)}`}>
-              {metrics.global.volume24hChange24h > 0 ? "+" : ""}{formatNumber(metrics.global.volume24hChange24h, 2)}%
-            </span>
+          {/* 우측: 동시접속자 */}
+          <div className="flex items-center gap-1.5 flex-shrink-0 text-[11px]">
+            <span className="text-[#A7B3C6]">현재 접속:</span>
+            <span className="font-medium text-white">{metrics.concurrentUsers.toLocaleString()}명</span>
           </div>
         </div>
 
-        {/* 우측: 동시접속자 */}
-        <div className="flex items-center gap-1.5 flex-shrink-0 text-[11px]">
-          <span className="text-[#A7B3C6]">현재 접속:</span>
-          <span className="font-medium text-white">{metrics.concurrentUsers.toLocaleString()}명</span>
+        {/* 모바일: 2줄 레이아웃 */}
+        <div className="sm:hidden flex flex-col gap-2">
+          {/* 1줄: 환율, BTC 점유율 */}
+          <div className="flex items-center justify-between gap-3 text-[10px] text-[#A7B3C6]">
+            <div className="flex items-center gap-1 flex-shrink-0 min-w-0">
+              <div className="w-3 h-3 rounded-full bg-[#26A17B] flex items-center justify-center flex-shrink-0">
+                <span className="text-[7px] text-white font-bold">₮</span>
+              </div>
+              <span className="font-medium text-white truncate">₩{formatNumber(metrics.usdt.krw, 0)}</span>
+              <span className={`font-medium ${getChangeColor(metrics.usdt.change24h)}`}>
+                {metrics.usdt.change24h > 0 ? "+" : ""}{formatNumber(metrics.usdt.change24h, 2)}%
+              </span>
+            </div>
+
+            <span className="text-[#30364a]">|</span>
+
+            <div className="flex items-center gap-1 flex-shrink-0">
+              <span className="text-[#A7B3C6]">BTC:</span>
+              <span className="font-medium text-white">{formatNumber(metrics.global.btcDominance, 1)}%</span>
+            </div>
+
+            <span className="text-[#30364a]">|</span>
+
+            <div className="flex items-center gap-1 flex-shrink-0">
+              <span className="text-[#A7B3C6]">현재:</span>
+              <span className="font-medium text-white">{metrics.concurrentUsers.toLocaleString()}명</span>
+            </div>
+          </div>
+
+          {/* 2줄: 시가총액, 24h 거래량 */}
+          <div className="flex items-center justify-between gap-3 text-[10px] text-[#A7B3C6]">
+            <div className="flex items-center gap-1 flex-shrink-0 min-w-0">
+              <span className="text-[#A7B3C6]">시총:</span>
+              <span className="font-medium text-white truncate">{formatCurrency(metrics.global.marketCapKrw)}</span>
+              <span className={`font-medium ${getChangeColor(metrics.global.marketCapChange24h)}`}>
+                {metrics.global.marketCapChange24h > 0 ? "+" : ""}{formatNumber(metrics.global.marketCapChange24h, 2)}%
+              </span>
+            </div>
+
+            <span className="text-[#30364a]">|</span>
+
+            <div className="flex items-center gap-1 flex-shrink-0 min-w-0">
+              <span className="text-[#A7B3C6]">거래:</span>
+              <span className="font-medium text-white truncate">{formatCurrency(metrics.global.volume24hKrw)}</span>
+              <span className={`font-medium ${getChangeColor(metrics.global.volume24hChange24h)}`}>
+                {metrics.global.volume24hChange24h > 0 ? "+" : ""}{formatNumber(metrics.global.volume24hChange24h, 2)}%
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

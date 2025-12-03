@@ -38,6 +38,7 @@ const PremiumTable = dynamic(
 export default function Home() {
   const [selectedIndicator, setSelectedIndicator] = useState("BINANCE_BTC");
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [mobileCardTab, setMobileCardTab] = useState<"ai" | "pro" | "alerts">("ai");
   const { data, averagePremium, fxRate } = useMarkets();
 
   const listedData = data.filter(item => item.premium !== null);
@@ -94,8 +95,8 @@ export default function Home() {
       {/* 메인 콘텐츠 */}
       <HomeLayout>
         <div className="w-full mx-auto max-w-[1200px] px-4 lg:px-5 py-6">
-          {/* 상단 3컬럼 레이아웃 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+          {/* PC: 상단 3컬럼 레이아웃 */}
+          <div className="hidden md:grid grid-cols-3 gap-4 mb-5">
             {/* 좌측: 오늘의 AI 김프 요약 */}
             <TodayPremiumSection
               avgPremium={
@@ -130,6 +131,79 @@ export default function Home() {
 
             {/* 우측: 내 알림 카드 */}
             <MyAlertsCard />
+          </div>
+
+          {/* 모바일: 탭 구조 */}
+          <div className="md:hidden mb-5">
+            {/* 탭 버튼 */}
+            <div className="flex gap-2 mb-3">
+              <button
+                onClick={() => setMobileCardTab("ai")}
+                className={`flex-1 py-2 px-3 rounded-lg font-semibold text-xs transition-colors ${
+                  mobileCardTab === "ai"
+                    ? "dark:bg-indigo-600 light:bg-indigo-600 text-white"
+                    : "dark:bg-slate-800 light:bg-slate-200 dark:text-slate-300 light:text-slate-700 hover:dark:bg-slate-700 hover:light:bg-slate-300"
+                }`}
+              >
+                📊 AI 요약
+              </button>
+              <button
+                onClick={() => setMobileCardTab("pro")}
+                className={`flex-1 py-2 px-3 rounded-lg font-semibold text-xs transition-colors ${
+                  mobileCardTab === "pro"
+                    ? "dark:bg-indigo-600 light:bg-indigo-600 text-white"
+                    : "dark:bg-slate-800 light:bg-slate-200 dark:text-slate-300 light:text-slate-700 hover:dark:bg-slate-700 hover:light:bg-slate-300"
+                }`}
+              >
+                🔒 PRO 예측
+              </button>
+              <button
+                onClick={() => setMobileCardTab("alerts")}
+                className={`flex-1 py-2 px-3 rounded-lg font-semibold text-xs transition-colors ${
+                  mobileCardTab === "alerts"
+                    ? "dark:bg-indigo-600 light:bg-indigo-600 text-white"
+                    : "dark:bg-slate-800 light:bg-slate-200 dark:text-slate-300 light:text-slate-700 hover:dark:bg-slate-700 hover:light:bg-slate-300"
+                }`}
+              >
+                🔔 내 알림
+              </button>
+            </div>
+
+            {/* 카드 콘텐츠 */}
+            <div>
+              {mobileCardTab === "ai" && (
+                <TodayPremiumSection
+                  compact={true}
+                  avgPremium={
+                    <span className={safeAvgPremium >= 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}>
+                      {formatPremium(safeAvgPremium)}
+                    </span>
+                  }
+                  maxPremium={
+                    maxPremium ? (
+                      <span className="text-green-400 font-bold">
+                        {formatPremium(maxPremium.premium)} ({maxPremium.symbol.replace("/KRW", "")})
+                      </span>
+                    ) : (
+                      "-"
+                    )
+                  }
+                  minPremium={
+                    minPremium ? (
+                      <span className={minPremium.premium && minPremium.premium < 0 ? "text-red-400 font-bold" : "text-slate-300 font-bold"}>
+                        {formatPremium(minPremium.premium)} ({minPremium.symbol.replace("/KRW", "")})
+                      </span>
+                    ) : (
+                      "-"
+                    )
+                  }
+                  fxRate={<span className="text-white font-bold">₩{(fxRate || 0).toLocaleString()}/USDT</span>}
+                  score={riskScore}
+                />
+              )}
+              {mobileCardTab === "pro" && <ProPredictionCard compact={true} />}
+              {mobileCardTab === "alerts" && <MyAlertsCard compact={true} />}
+            </div>
           </div>
 
           {/* 차트 섹션 */}
