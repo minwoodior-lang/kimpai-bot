@@ -1,0 +1,160 @@
+1. 오늘의 AI 김프 요약 카드 위치/형태
+
+우측에 있는 큰 카드
+
+현재 오른쪽에 있는 오늘의 AI 김프 요약 카드(평균·최대·최소·환율 + KR Premium Score + PRO 버튼) 전체를 삭제합니다.
+
+이 컴포넌트는 더 이상 사이드바에 렌더링되지 않게 해 주세요.
+
+상단 미니버전으로 이식
+
+지금 상단에 있는 “오늘의 AI 김프 요약” 텍스트만 있는 미니버전은 삭제하고,
+
+대신 우측 카드에서 쓰던 레이아웃을 축소한 버전을 Navbar 바로 아래에 배치합니다.
+
+형태는:
+
+왼쪽:
+
+제목: 오늘의 AI 김프 요약
+
+불릿: 평균 김프 / 최대 / 최소 / 환율
+
+오른쪽:
+
+작은 KR Premium Score 박스
+
+PRO 분석 전체 보기 버튼
+
+폭은 전체 폭(w-full), 높이는 py-3 정도의 얇은 배너 느낌으로.
+
+// Navbar 아래에서만 사용
+<TodayPremiumSummaryBar
+  avgPremium={...}
+  maxPremium={...}
+  minPremium={...}
+  rate={...}
+  score={...}
+/>
+
+// 오른쪽 aside 에서는 더 이상 TodayPremiumSummaryCard 렌더링 X
+
+2. 상단 USDT/BTC/시총 행 제거
+
+상단에 현재 보이는:
+
+USDT/KRW, BTC, USDT, BTC DOM, MARKET CAP, 24H VOLUME, ACTIVE USERS
+
+이 한 줄 전체를 완전히 삭제합니다.
+
+구조 예시:
+
+<Navbar />
+{/* <TopMarketStatsBar />  // 이 컴포넌트 통째로 제거 */}
+<TodayPremiumSummaryBar ... />
+
+3. 코인 그리드 – 모바일 한 페이지에 다 보이도록
+
+현재 모바일에서 여전히 가로 스크롤 없이 5컬럼이 다 안 보이므로 폰트/패딩을 한 단계 더 압축합니다.
+
+3-1. 헤더
+<thead>
+  <tr>
+    <th className="px-1.5 py-1 text-left text-[10px] text-slate-400">코인명</th>
+    <th className="px-1.5 py-1 text-right text-[10px] text-slate-400">현재가</th>
+    <th className="px-1.5 py-1 text-right text-[10px] text-slate-400">김프</th>
+    <th className="px-1.5 py-1 text-right text-[10px] text-slate-400">전일</th>
+    <th className="px-1.5 py-1 text-right text-[10px] text-slate-400">거래액</th>
+  </tr>
+</thead>
+
+
+모바일 기준 (sm 미만)에서 text-[10px], px-1.5로 줄이고,
+
+PC에서는 sm:text-[11px] sm:px-2 등으로 다시 키우면 됨.
+
+3-2. 데이터 셀
+<td className="px-1.5 py-1.5 text-right text-[11px] whitespace-nowrap">
+  {row.priceFormatted}
+</td>
+// ... 나머지 4개도 동일하게
+
+
+whitespace-nowrap 유지,
+
+거래액은 단위 축약(예: 231.2억, 1.3조) 문자열만 내려서 길이 줄이기.
+
+목표: 390px 안드로이드 화면 기준으로도 5컬럼 모두 한 번에 보이도록.
+
+4. 기준거래소 / 해외거래소 라벨 정렬 (PC)
+
+현재 “해외 거래소” 텍스트가 오른쪽으로 튀어나가 있으니,
+라벨 + 드롭다운이 묶여서 보이도록 수정합니다.
+
+<div className="flex flex-wrap items-center gap-4">
+  {/* 기준 거래소 */}
+  <div className="flex items-center gap-2">
+    <span className="text-[12px] text-slate-400">기준 거래소</span>
+    <BaseExchangeSelect />
+  </div>
+
+  {/* 화살표 */}
+  <span className="text-slate-500">↔</span>
+
+  {/* 해외 거래소 */}
+  <div className="flex items-center gap-2">
+    <span className="text-[12px] text-slate-400">해외 거래소</span>
+    <ForeignExchangeSelect />
+  </div>
+</div>
+
+
+이렇게 하면 라벨이 드롭다운 바로 옆에 붙어있음.
+
+5. 암호화폐 총 N개 + 검색창 라인 (PC & 모바일)
+
+PC
+
+왼쪽: 암호화폐 총 XXX개
+
+오른쪽: 검색창
+
+모바일
+
+첫 줄: 검색창
+
+그 아래: 암호화폐 총 XXX개
+
+<div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+  <span className="order-2 text-[11px] text-slate-400 sm:order-1">
+    암호화폐 총 {totalCount}개
+  </span>
+  <div className="order-1 w-full sm:order-2 sm:max-w-xs">
+    <SearchInput />
+  </div>
+</div>
+
+
+order-* 로 모바일/PC에서 순서만 바꿔줌.
+
+이 두 요소는 같은 열(2열) 안에서 정렬되도록 한다.
+
+6. 모바일에서 기준/해외 거래소 문구 다시 표기
+
+모바일에서 라벨이 사라졌으니, 같은 구조 그대로 숨기지 말고 항상 보이게.
+
+<div className="flex flex-col gap-2">
+  <div className="flex items-center gap-2">
+    <span className="text-[11px] text-slate-400">기준 거래소</span>
+    <BaseExchangeSelect className="flex-1" />
+  </div>
+  <div className="flex items-center gap-2">
+    <span className="text-[11px] text-slate-400">해외 거래소</span>
+    <ForeignExchangeSelect className="flex-1" />
+  </div>
+</div>
+
+
+PC/모바일 공통으로 이 구조를 쓰되,
+PC에서는 위 4번 예시처럼 가로 배치,
+모바일에서는 flex-col 배치가 되도록 브레이크포인트로 조정해도 OK.

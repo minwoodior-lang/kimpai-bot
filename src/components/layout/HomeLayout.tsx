@@ -20,9 +20,8 @@ export default function HomeLayout({ children }: HomeLayoutProps) {
           {children}
         </section>
 
-        {/* 사이드바: AI Insight + Alert Summary (약 25% - PC only, completely hidden on mobile) */}
+        {/* 사이드바: Alert Summary only (약 25% - PC only, completely hidden on mobile) */}
         <aside className="hidden lg:flex lg:w-[320px] shrink-0 flex-col space-y-4">
-          <AIInsightBox />
           <AlertSummary />
         </aside>
       </main>
