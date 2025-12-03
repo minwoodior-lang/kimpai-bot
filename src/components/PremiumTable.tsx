@@ -331,7 +331,7 @@ export default function PremiumTable({
   const [rateLimitRetryAfter, setRateLimitRetryAfter] = useState(0);
   const [consecutiveRateLimits, setConsecutiveRateLimits] = useState(0);
   const [domesticExchange, setDomesticExchange] = useState<string>("UPBIT_KRW");
-  const [foreignExchange, setForeignExchange] = useState<string>("OKX_USDT");
+  const [foreignExchange, setForeignExchange] = useState<string>("BINANCE_BTC");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("volume24hKrw");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
@@ -448,7 +448,7 @@ export default function PremiumTable({
       let response: Response | null = null;
       try {
         response = await fetch(
-          `/api/premium/table?domestic=${domesticExchange}&foreign=${foreignExchange}`,
+          `/api/premium/table-filtered?domestic=${domesticExchange}&foreign=${foreignExchange}`,
         );
       } catch (err) {
         // Network error - silently ignore (don't log, could trigger error handler)
