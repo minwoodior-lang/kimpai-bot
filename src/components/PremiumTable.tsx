@@ -656,19 +656,17 @@ export default function PremiumTable({
   };
 
   const getPremiumColor = (premium: number | null) => {
-    if (premium === null) return "text-gray-500";
-    if (premium >= 5) return "text-red-400";
-    if (premium >= 3) return "text-orange-400";
-    if (premium >= 1) return "text-yellow-400";
-    if (premium >= 0) return "text-green-400";
-    return "text-blue-400";
+    if (premium === null) return "text-[#A7B3C6]";
+    if (premium > 0) return "text-[#50e3a4]";
+    if (premium < 0) return "text-[#ff6b6b]";
+    return "text-[#A7B3C6]";
   };
 
   const getChangeColor = (change: number | null) => {
-    if (change === null) return "text-gray-500";
-    if (change > 0) return "text-green-400";
-    if (change < 0) return "text-red-400";
-    return "text-gray-400";
+    if (change === null) return "text-[#A7B3C6]";
+    if (change > 0) return "text-[#50e3a4]";
+    if (change < 0) return "text-[#ff6b6b]";
+    return "text-[#A7B3C6]";
   };
 
   const getFlashClass = (symbol: string, field: "price" | "premium") => {
