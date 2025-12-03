@@ -103,8 +103,8 @@ export default function Home() {
             score={riskScore}
           />
 
-          {/* PRO 카드 */}
-          <div className="mt-4 w-full max-w-[960px] mx-auto rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 px-5 py-4">
+          {/* ① PRO 전용 예측 카드 */}
+          <div className="mt-4 w-full max-w-[900px] mx-auto rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 px-5 py-4">
             <div className="flex flex-col gap-2">
               {/* 타이틀 라인 */}
               <div className="flex items-center gap-2">
@@ -115,7 +115,7 @@ export default function Home() {
               </div>
 
               {/* 설명 텍스트 */}
-              <p className="text-xs dark:text-slate-400 light:text-slate-600 leading-relaxed">
+              <p className="text-xs dark:text-slate-400 light:text-slate-600 leading-relaxed break-words">
                 최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
                 <span className="ml-1 text-xs dark:text-slate-500 light:text-slate-500">
                   (PRO 구독 시 전체 내용 확인 가능)
@@ -124,7 +124,6 @@ export default function Home() {
 
               {/* 마켓 선택 드롭다운 */}
               <div className="mt-3 w-full max-w-[220px]">
-                {/* 차트 지표 선택 드롭다운 (ChartSectionEnhanced 동일 로직) */}
                 <select
                   value={selectedIndicator}
                   onChange={(e) => setSelectedIndicator(e.target.value)}
@@ -144,15 +143,15 @@ export default function Home() {
             </div>
           </div>
 
+          {/* ② PRO 예측 차트 박스 */}
+          <div className="mt-4 w-full max-w-[900px] mx-auto rounded-2xl dark:border dark:border-slate-700/60 light:border light:border-slate-300/40 dark:bg-slate-900/20 light:bg-slate-100/20 min-h-[260px]">
+            <ChartSectionEnhanced
+              selectedIndicator={selectedIndicator}
+              onIndicatorChange={setSelectedIndicator}
+            />
+          </div>
+
           <div className="space-y-4">
-            {/* 차트 영역 */}
-            <div className="mt-4 rounded-2xl dark:border dark:border-slate-700/60 light:border light:border-slate-300/40 dark:bg-slate-900/20 light:bg-slate-100/20 min-h-[260px]">
-              {/* 향상된 차트 (드롭다운 포함) */}
-              <ChartSectionEnhanced
-                selectedIndicator={selectedIndicator}
-                onIndicatorChange={setSelectedIndicator}
-              />
-            </div>
 
             {/* 프리미엄 테이블 */}
             <PremiumTable showHeader={false} showFilters={true} limit={0} refreshInterval={2000} />
