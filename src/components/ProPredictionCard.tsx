@@ -1,68 +1,36 @@
 /**
  * PRO 전용 48시간 김프 예측 - 중앙 카드
- * AI 분석 페이지와 100% 동일한 스타일
+ * 좌/우 카드와 동일한 색상
  */
 
 export function ProPredictionCard() {
   return (
-    <div
-      style={{
-        background: "rgba(255, 255, 255, 0.03)",
-        border: "1px solid rgba(255, 255, 255, 0.06)",
-        borderRadius: "16px",
-        padding: "20px 22px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "16px",
-        height: "100%",
-      }}
-    >
+    <div className="rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 p-4 sm:p-5 h-full flex flex-col">
       {/* 타이틀 */}
-      <div
-        style={{
-          fontSize: "14px",
-          fontWeight: 600,
-          color: "#EDEDED",
-          display: "flex",
-          alignItems: "center",
-          gap: "6px",
-        }}
-      >
+      <div className="text-sm sm:text-base font-bold dark:text-slate-100 light:text-slate-900 mb-4 flex items-center gap-2">
         <span>🔒</span>
         <span>PRO 전용 48시간 김프 예측</span>
       </div>
 
-      {/* 블러 처리된 설명 텍스트 박스 - Tailwind */}
-      <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-[18px] py-[14px] space-y-2 text-[13px] leading-[1.45] text-white/60">
+      {/* 블러 처리된 설명 텍스트 박스 - 미러 효과 */}
+      <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-[18px] py-[14px] space-y-2 text-[13px] leading-[1.45] text-white/60 flex-1 mb-4">
         <p>
-          최근 30일 기준, 이 예측은 김프 2% 이상 급변<br />
-          구간의 90% 이상을 사전에 포착했습니다.
+          대시보드를 과산으로 움침니다.<br />
+          내 자산의 리밸런싱 추천과 수익화 전략을 받을 수 있습니다.
         </p>
         <p className="text-white/40 text-[12px]">
           * 전체 예측 데이터는 PRO 구독 시 이용할 수 있습니다.
         </p>
       </div>
 
+      {/* 설명 텍스트 */}
+      <p className="text-[10px] sm:text-xs dark:text-slate-400 light:text-slate-600 mb-3 leading-relaxed">
+        최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
+      </p>
+
       {/* PRO 버튼 */}
       <button
-        style={{
-          width: "100%",
-          background: "linear-gradient(90deg, #8155FF, #5D3DFF)",
-          height: "40px",
-          borderRadius: "10px",
-          fontSize: "14px",
-          fontWeight: 600,
-          color: "white",
-          border: "none",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "6px",
-          transition: "opacity 0.2s ease",
-        }}
-        onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.9")}
-        onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+        className="w-full bg-gradient-to-r from-[#8155FF] to-[#5D3DFF] dark:hover:from-[#7043FF] dark:hover:to-[#4C2FFF] light:hover:from-[#7043FF] light:hover:to-[#4C2FFF] transition-all h-10 rounded-lg font-semibold text-white text-xs sm:text-sm flex items-center justify-center gap-1.5"
       >
         <span>🔒</span>
         <span>PRO 분석 전체 보기</span>
