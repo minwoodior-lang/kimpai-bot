@@ -1,0 +1,272 @@
+1. 로고 / 메뉴바도 메인 내용 폭에 맞추기
+
+지시
+
+최상단 헤더 내부도 코인 그리드와 같은 max-w 컨테이너로 감싸기.
+
+// Layout.tsx 혹은 Header 영역
+<header className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur border-b border-slate-900">
+  <div className="max-w-[1200px] mx-auto px-4 lg:px-5">
+    {/* 환율/테더 바 + 로고/메뉴 전체 */}
+  </div>
+</header>
+
+
+지금 환율 바, 로고, 로그인/회원가입이 화면 끝까지 퍼져있으면
+모두 이 max-w 안으로 이동.
+
+2. PC – “오늘의 AI 김프 요약” + PRO 48시간 예측 카드 (자물쇠 스타일)
+요구사항 요약
+
+좌측: 지금처럼 텍스트 요약.
+
+그 오른쪽 빈 공간에:
+
+KR Premium Score 카드
+
+PRO 분석 전체 보기 버튼
+
+그 아래 자물쇠 카드:
+
+제목: 🔒 PRO 전용 48시간 김프 예측
+
+본문은 블러 효과 텍스트 + 아래 설명 문구
+
+요약 아래에 있던 긴 문장은 카드 안으로 이동:
+
+카드 아래쪽 작은 글씨:
+
+최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다. (PRO 구독 시 전체 내용 확인 가능)
+
+코드 구조 예시
+<section className="mt-4 mb-6">
+  <div className="max-w-[1200px] mx-auto px-4 lg:px-5">
+    <div className="flex flex-col gap-4 lg:flex-row lg:items-stretch lg:justify-between">
+      {/* 왼쪽: 요약 불릿 */}
+      <div className="flex-1 space-y-1 text-[12px] leading-relaxed text-slate-200">
+        <p className="font-semibold text-[13px]">오늘의 AI 김프 요약</p>
+        <p>• 평균 김프: {avg}</p>
+        <p>• 최대 김프: {max}</p>
+        <p>• 최소 김프: {min}</p>
+        <p>• 환율: {rate}</p>
+      </div>
+
+      {/* 오른쪽: Score + PRO 버튼 + 자물쇠 카드 */}
+      <div className="flex-[1.1] flex flex-col gap-3">
+        {/* 위: Score + 버튼 */}
+        <div className="flex gap-3">
+          <div className="flex flex-col justify-between rounded-xl bg-indigo-600/20 px-4 py-3 min-w-[140px]">
+            <span className="text-[11px] text-slate-300">KR Premium Score</span>
+            <span className="text-xl font-semibold text-indigo-300">
+              {score}/10
+            </span>
+          </div>
+
+          <button className="flex-1 rounded-xl bg-indigo-500 px-4 py-3 text-[13px] font-semibold text-white flex items-center justify-center">
+            PRO 분석 전체 보기
+          </button>
+        </div>
+
+        {/* 아래: 자물쇠 카드 */}
+        <div className="rounded-xl bg-slate-900/90 border border-slate-800 px-4 py-3">
+          <p className="mb-1 text-[12px] font-semibold text-slate-200 flex items-center gap-1">
+            <span>🔒</span>
+            <span>PRO 전용 48시간 김프 예측</span>
+          </p>
+          <p className="mb-2 text-[11px] text-slate-500 line-clamp-2 blur-[1px]">
+            (여기에는 실제 PRO 예측 텍스트가 들어가며,
+            비로그인/무료 사용자는 블러 처리)
+          </p>
+          <p className="text-[10px] text-slate-500">
+            최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을
+            사전에 포착했습니다. (PRO 구독 시 전체 내용 확인 가능)
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+핵심: 위 붉은 박스(요약 오른쪽 영역)를 이 구조가 꽉 채우게.
+
+3. 모바일 – 요약 + PRO 영역 밸런스 & 설명 텍스트 모두 노출
+
+지시
+
+모바일에서는 세로 스택:
+
+<section className="mt-3 mb-4 px-3">
+  {/* 요약 */}
+  <div className="space-y-1 text-[11px] text-slate-200">
+    ...
+  </div>
+
+  {/* Score + 버튼 */}
+  <div className="mt-3 flex gap-2">
+    <div className="flex-1 rounded-lg bg-indigo-600/20 px-3 py-2">...</div>
+    <button className="flex-1 rounded-lg bg-indigo-500 px-3 py-2 text-[11px]">
+      PRO 분석 전체 보기
+    </button>
+  </div>
+
+  {/* 자물쇠 카드 */}
+  <div className="mt-3 rounded-lg bg-slate-900/90 border border-slate-800 px-3 py-2">
+    <p className="mb-1 text-[11px] font-semibold text-slate-200">
+      🔒 PRO 전용 48시간 김프 예측
+    </p>
+    <p className="mb-1 text-[10px] text-slate-500">
+      (PRO 콘텐츠 미리보기 텍스트 블러 처리 영역)
+    </p>
+    <p className="text-[9px] leading-snug text-slate-500">
+      최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을
+      사전에 포착했습니다. (PRO 구독 시 전체 내용 확인 가능)
+    </p>
+  </div>
+</section>
+
+
+폰트/패딩 줄여서 마지막 문장까지 두 줄~세 줄로 완전히 보이게.
+
+4. 모바일 – 상단 환율/테더 바 고정 해제
+
+지시
+
+TopMarketInfoBar 쪽에서 sticky / fixed 클래스는
+sm: 이상에서만 적용.
+
+// 상단 바 루트
+<div className="bg-slate-950/95 backdrop-blur border-b border-slate-900 sm:sticky sm:top-0 sm:z-40">
+  ...
+</div>
+
+
+모바일(기본)에서는 스크롤 시 같이 올라가고,
+PC(sm+)에서만 sticky.
+
+5. PC (가능하면 모바일도) – 환율 바 + 로고/메뉴 세트로 고정
+
+지시
+
+상단 전체를 하나의 header로 감싸 sticky.
+
+<header className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur">
+  {/* 환율바 */}
+  <TopMarketInfoBar />  
+
+  {/* 로고/메뉴 */}
+  <nav className="border-b border-slate-900">
+    <div className="max-w-[1200px] mx-auto px-4 lg:px-5 flex items-center justify-between h-14">
+      {/* 로고, 메뉴, 로그인/회원가입 */}
+    </div>
+  </nav>
+</header>
+
+
+이렇게 하면 PC에서 스크롤 시 환율바 + 로고/메뉴 한 세트로 고정.
+
+모바일도 sticky 유지해도 되면 header 그대로 사용 (이미 z-40).
+
+6. 기준/해외 거래소 라벨 이모지 수정
+
+지시
+
+<div className="flex items-center gap-2">
+  <span className="text-[12px] text-slate-400">
+    🇰🇷 기준 거래소
+  </span>
+  <BaseExchangeSelect ... />
+</div>
+
+<div className="flex items-center gap-2">
+  <span className="text-[12px] text-slate-400">
+    🌐 해외 거래소
+  </span>
+  <ForeignExchangeSelect ... />
+</div>
+
+
+현재 KR 기준 거래소 처럼 문자 KR만 보이면 제거하고
+위처럼 이모지 + 한글 텍스트만 노출.
+
+7. 배경 색상 통일 (V자 체크 부분 제거)
+
+지시
+
+메인 배경 클래스는 한 번만 사용:
+
+<body className="bg-slate-950 text-slate-50">
+  <div className="min-h-screen bg-slate-950">
+    {/* header + main + footer */}
+  </div>
+</body>
+
+
+차트/테이블 래퍼에 들어간 bg-slate-900/bg-slate-950
+중복 박스 배경 제거:
+
+현재 빨간 V 표시된 중간 패널(차트 감싸는 큰 카드)에
+bg-slate-950/rounded-3xl 같은 게 있으면:
+
+바깥 래퍼는 bg-slate-950 그대로
+
+중첩된 배경은 제거하고 border만 남기거나 완전히 제거.
+
+예:
+
+<section className="max-w-[1200px] mx-auto px-4 lg:px-5 mt-4">
+  {/* 불필요한 배경 카드 제거 */}
+  {/* 그냥 안쪽에 차트 박스만 살짝 진한 색으로 */}
+  <div className="rounded-2xl bg-slate-900/70 px-4 py-3">
+    <Chart ... />
+  </div>
+</section>
+
+
+최상단 환율 바만 bg-slate-950+보더로 강조,
+나머지는 전부 동일 톤.
+
+8. 스크롤 시 우측 하단 “위로가기” 버튼 (PC/모바일 공통)
+
+지시
+
+공통 레이아웃에 한 번만 추가:
+
+// AppLayout.tsx
+function ScrollToTopButton() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setVisible(window.scrollY > 300); // 300px 이상 스크롤 시 표시
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      className="fixed bottom-6 right-5 z-40 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-500 text-white shadow-lg shadow-indigo-900/40"
+      aria-label="맨 위로"
+    >
+      ↑
+    </button>
+  );
+}
+
+export default function AppLayout({ children }: Props) {
+  return (
+    <>
+      <Header />
+      <main>{children}</main>
+      <Footer />
+      <ScrollToTopButton />
+    </>
+  );
+}
+
+
+스크롤 있을 때만 보이고, PC/모바일 공통 동그란 버튼.

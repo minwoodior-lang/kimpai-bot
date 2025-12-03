@@ -1,10 +1,34 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TopMarketInfoBar } from "@/components/top/TopMarketInfoBar";
 
 interface LayoutProps {
   children: React.ReactNode;
+}
+
+function ScrollToTopButton() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setVisible(window.scrollY > 300);
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      className="fixed bottom-6 right-5 z-40 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-500 text-white shadow-lg shadow-indigo-900/40 hover:bg-indigo-600 transition-colors"
+      aria-label="맨 위로"
+    >
+      ↑
+    </button>
+  );
 }
 
 export default function Layout({ children }: LayoutProps) {
@@ -22,13 +46,16 @@ export default function Layout({ children }: LayoutProps) {
   const isActive = (path: string) => router.pathname === path;
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Market Info Bar */}
-      <TopMarketInfoBar />
+    <div className="min-h-screen flex flex-col bg-slate-950">
+      {/* Sticky Header */}
+      <header className="sticky top-0 z-50 bg-slate-950/95 backdrop-blur border-b border-slate-900">
+        {/* Market Info Bar */}
+        <TopMarketInfoBar />
 
-      <nav className="border-b border-slate-700/50 backdrop-blur-sm bg-slate-900/50 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+        {/* Navigation */}
+        <nav className="border-b border-slate-800">
+          <div className="max-w-[1200px] mx-auto px-4 lg:px-5">
+            <div className="flex justify-between items-center h-14">
             <Link href="/" className="flex items-center gap-2">
               <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">K</span>
