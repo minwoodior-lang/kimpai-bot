@@ -12,9 +12,9 @@ export function ProPredictionCard() {
         <span>PRO 전용 48시간 김프 예측</span>
       </div>
 
-      {/* 블러 처리된 상단 박스 - 텍스트 안 보이게 */}
+      {/* 블러 처리된 상단 박스 - 텍스트 가려질 정도 블러 */}
       <div className="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-[18px] py-[20px] text-[13px] leading-[1.6] text-white/60 mb-3 flex-1">
-        <p className="opacity-5 blur-lg">
+        <p className="opacity-20 blur-md">
           대시보드를 과산으로 움침니다.<br />
           내 자산의 리밸런싱 추천과 수익화 전략을 받을 수 있습니다.
         </p>
