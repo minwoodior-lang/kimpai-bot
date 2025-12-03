@@ -1,0 +1,254 @@
+A. Layout.tsx – <header> 구조 정리 + sticky 완성 (현재 이게 제일 급함)
+1) 목표 구조
+// Layout.tsx (요약 구조)
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="ko">
+      <body className="bg-slate-950 text-slate-50">
+        <header className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur">
+          {/* 1. 환율/테더 바 */}
+          <TopMarketInfoBar />
+
+          {/* 2. 로고 + 메뉴 + 로그인/회원가입 */}
+          <NavBar />
+        </header>
+
+        {/* 3. 메인 컨텐츠 */}
+        <main>{children}</main>
+
+        <Footer />
+        <ScrollToTopButton />
+      </body>
+    </html>
+  );
+}
+
+2) NavBar / TopMarketInfoBar 내부 컨테이너
+// TopMarketInfoBar.tsx
+export function TopMarketInfoBar() {
+  return (
+    <div className="border-b border-slate-900">
+      <div className="max-w-[1200px] mx-auto px-4 lg:px-5 py-1.5 flex items-center gap-4 text-[11px] text-slate-300 overflow-x-auto whitespace-nowrap sm:justify-end">
+        {/* PC/모바일 공통 지표 텍스트 */}
+        <span>환율: ₩1,350/USDT</span>
+        <span>테더: $1.00</span>
+        <span>BTC 점유율: 52.3%</span>
+        <span>시가총액: $1.28T</span>
+        <span>동시접속자: 1,546</span>
+      </div>
+    </div>
+  );
+}
+
+// NavBar.tsx
+export function NavBar() {
+  return (
+    <nav className="border-b border-slate-900">
+      <div className="max-w-[1200px] mx-auto px-4 lg:px-5 h-14 flex items-center justify-between">
+        {/* 왼쪽 로고 */}
+        {/* 중앙 메뉴 */}
+        {/* 오른쪽 로그인/회원가입 */}
+      </div>
+    </nav>
+  );
+}
+
+3) TopMarketInfoBar sticky 동작
+
+sticky는 header 전체에만 걸리므로,
+별도의 sticky 클래스는 TopMarketInfoBar에 두지 말 것.
+
+모바일에서 고정 해제, PC에서 로고와 함께 고정 → 지금 구조로 자동 해결.
+
+B. PC용 “오늘의 AI 김프 요약” 영역 완성 레이아웃
+
+아래 컴포넌트 하나 새로 만들고, Home 페이지 상단에서 불러오면 됨.
+
+// TodayPremiumSection.tsx
+export function TodayPremiumSection(props: {
+  avgPremium: string;
+  maxPremium: string;
+  minPremium: string;
+  fxRate: string;
+  score: number;
+}) {
+  const { avgPremium, maxPremium, minPremium, fxRate, score } = props;
+
+  return (
+    <section className="mt-4 mb-6">
+      <div className="max-w-[1200px] mx-auto px-4 lg:px-5">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-stretch lg:justify-between">
+          {/* 왼쪽: 요약 텍스트 */}
+          <div className="flex-1 space-y-1 text-[12px] leading-relaxed text-slate-200">
+            <p className="font-semibold text-[13px]">오늘의 AI 김프 요약</p>
+            <p>• 평균 김프: {avgPremium}</p>
+            <p>• 최대 김프: {maxPremium}</p>
+            <p>• 최소 김프: {minPremium}</p>
+            <p>• 환율: {fxRate}</p>
+          </div>
+
+          {/* 오른쪽: Score + 버튼 + 자물쇠 카드 */}
+          <div className="flex-[1.1] flex flex-col gap-3">
+            {/* 상단: Score + 버튼 나란히 */}
+            <div className="flex gap-3">
+              <div className="flex flex-col justify-between rounded-xl bg-indigo-600/20 px-4 py-3 min-w-[140px]">
+                <span className="text-[11px] text-slate-300">KR Premium Score</span>
+                <span className="text-xl font-semibold text-indigo-300">
+                  {score}/10
+                </span>
+              </div>
+
+              <button className="flex-1 rounded-xl bg-indigo-500 px-4 py-3 text-[13px] font-semibold text-white flex items-center justify-center">
+                PRO 분석 전체 보기
+              </button>
+            </div>
+
+            {/* 하단: 자물쇠 카드 */}
+            <div className="rounded-xl bg-slate-900/90 border border-slate-800 px-4 py-3">
+              <p className="mb-1 text-[12px] font-semibold text-slate-200 flex items-center gap-1">
+                <span>🔒</span>
+                <span>PRO 전용 48시간 김프 예측</span>
+              </p>
+              <p className="mb-2 text-[11px] text-slate-500 line-clamp-2 blur-[1px]">
+                (PRO 전용 예측 문구가 여기에 들어갑니다. 비로그인 사용자는
+                블러 처리 상태로 노출됩니다.)
+              </p>
+              <p className="text-[10px] text-slate-500">
+                최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을
+                사전에 포착했습니다. (PRO 구독 시 전체 내용 확인 가능)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+이 컴포넌트를 HomePage에서 요약 위치에 삽입:
+
+<TodayPremiumSection
+  avgPremium="+0.0%"
+  maxPremium="-"
+  minPremium="-"
+  fxRate="₩1,350/USDT"
+  score={2}
+/>
+
+C. 모바일용 요약 + PRO 영역 밸런스
+
+위 TodayPremiumSection 안에서 반응형으로 처리하는 게 제일 깔끔함.
+폰트/패딩만 모바일에서 줄이면 됨:
+
+// TodayPremiumSection 내부 상단 div에 추가
+<div className="flex flex-col gap-4 lg:flex-row ...">
+
+
+모바일에서는 이미 세로 방향이므로 레이아웃 OK.
+
+텍스트 잘림만 해결하면 됨 → 자물쇠 카드 하단 문장 폰트 축소:
+
+<p className="text-[9px] leading-snug text-slate-500">
+  최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을
+  사전에 포착했습니다. (PRO 구독 시 전체 내용 확인 가능)
+</p>
+
+
+그리고 모바일에서는 여백 줄이기:
+
+<section className="mt-3 mb-4 lg:mt-4 lg:mb-6">
+  <div className="max-w-[1200px] mx-auto px-3 lg:px-5">
+    ...
+  </div>
+</section>
+
+D. TopMarketInfoBar sticky 동작 (모바일 비고정, PC 고정)
+
+현재 header 전체를 sticky로 만들었으니,
+TopMarketInfoBar 자체에는 sticky/fixed 클래스가 있으면 제거해야 한다.
+
+TopMarketInfoBar의 최상단 div 클래스:
+
+<div className="border-b border-slate-900">
+  ...
+</div>
+
+
+sticky 관련 클래스 (sticky, top-0, sm:sticky 같은 것) 있으면 전부 삭제.
+이제 sticky는 Layout.tsx의 <header>에서만 관리.
+
+E. Chart/HomeLayout 배경 중첩 제거
+1) 목표
+
+전체 배경: bg-slate-950 (이미 완료)
+
+중간에 V자로 보이던 다른 색 레이어 제거:
+
+차트를 감싸는 바깥 카드의 배경 색/그라데이션 제거.
+
+필요하면 border 정도만 남기기.
+
+2) 예시
+// Before (예시)
+<section className="w-full bg-gradient-to-b from-slate-950 to-slate-900">
+  <div className="max-w-[1200px] mx-auto bg-slate-900 rounded-3xl ...">
+    <Chart ... />
+  </div>
+</section>
+
+// After
+<section className="w-full">
+  <div className="max-w-[1200px] mx-auto px-4 lg:px-5 mt-4">
+    <div className="rounded-2xl bg-slate-900/80 px-4 py-3">
+      <Chart ... />
+    </div>
+  </div>
+</section>
+
+
+즉, section에는 배경 X,
+chart 박스 하나만 살짝 진한 bg-slate-900/80 사용.
+
+F. TopMarketInfoBar – 모바일 sticky 해제, PC 유지 (이미 header sticky인 상태)
+
+만약 현재 TopMarketInfoBar에 이런 코드가 남아있다면:
+
+<div className="sticky top-0 z-30 sm:...">
+
+
+→ 아래처럼 수정:
+
+<div className="border-b border-slate-900">
+  ...
+</div>
+
+
+sticky 동작은 이미 header에 있으니 중복 금지.
+
+G. 기준/해외 거래소 라벨 이모지 확인
+
+현재가 이렇게 되어 있으면 OK:
+
+<span className="text-[12px] text-slate-400">
+  🇰🇷 기준 거래소
+</span>
+...
+<span className="text-[12px] text-slate-400">
+  🌐 해외 거래소
+</span>
+
+
+만약 KR 기준 거래소처럼 문자열이 들어간다면 그건 제거.
+
+H. 정리해서 개발자/레플릿에게 이렇게 요청하면 됨
+
+Layout.tsx에서 <header>를 sticky 컨테이너로 묶고, 그 안에 TopMarketInfoBar + NavBar만 포함되게 닫는 태그 위치를 정리해주세요. 메인 <main>과 <Footer>는 header 밖으로 나가야 합니다.
+
+TodayPremiumSection 컴포넌트를 위 코드 예시처럼 새로 만들어서, Home 페이지 상단 요약 영역에 적용해주세요. PC에서는 좌측 요약 + 우측 Score/PRO/자물쇠 카드 구조, 모바일에서는 세로 스택으로 동작해야 합니다.
+
+TopMarketInfoBar 내부에서 sticky 관련 클래스는 모두 제거하고, header 전체만 sticky로 유지해주세요.
+
+차트와 홈 레이아웃에서 중첩된 배경을 제거하고, 전체 배경은 bg-slate-950, 차트 박스만 bg-slate-900/80를 사용하도록 정리해주세요.
+
+기준/해외 거래소 라벨에는 🇰🇷 기준 거래소, 🌐 해외 거래소 이모지를 쓰고, KR 텍스트는 제거해주세요.
