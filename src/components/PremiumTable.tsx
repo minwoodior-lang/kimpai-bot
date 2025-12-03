@@ -926,14 +926,21 @@ export default function PremiumTable({
                         <td className="px-1 sm:px-2 py-2">
                           <div className="flex items-center gap-1.5">
                             {/* 왼쪽: 아이콘 + 별 */}
-                            <div className="flex flex-col items-center justify-center gap-0.5 min-w-[32px] flex-shrink-0">
-                              <CoinIcon symbol={row.symbol} className="h-5 w-5" iconUrl={row.icon_url} />
+                            <div className="flex flex-col items-center justify-center gap-0 min-w-[36px] flex-shrink-0">
+                              <CoinIcon symbol={row.symbol} className="h-4 w-4" iconUrl={row.icon_url} />
                               <button
                                 type="button"
-                                className="text-[9px] leading-none dark:text-slate-500 light:text-slate-400 dark:hover:text-yellow-400 light:hover:text-yellow-500 transition-colors"
-                                onClick={() => toggleFavorite(row.symbol)}
+                                className={`text-lg leading-none transition-colors ${
+                                  favorites.has(row.symbol)
+                                    ? "dark:text-yellow-400 light:text-yellow-500"
+                                    : "dark:text-slate-500 light:text-slate-400 dark:hover:text-yellow-400 light:hover:text-yellow-500"
+                                }`}
+                                onClick={() => {
+                                  toggleFavorite(row.symbol);
+                                  window.scrollTo({ top: 0, behavior: "smooth" });
+                                }}
                               >
-                                {favorites.has(row.symbol) ? "★" : "☆"}
+                                ★
                               </button>
                             </div>
                             {/* 오른쪽: 코인명 + 심볼 */}
