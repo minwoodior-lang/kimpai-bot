@@ -1,0 +1,156 @@
+[요청] 상단 환율바(TopInfoBar) 최종 수정 사항
+
+현재 상태를 보니:
+
+예전에 적어놨던 상단 텍스트 설명 줄이 그대로 남아 있고
+
+환율/테더/BTC/시총/거래량 값이 실제 API 연동이 아니라 하드코딩 값으로 표시되고 있으며
+
+테더 아이콘이 빗썸 USDT 아이콘이 아니라 그냥 텍스트로만 나오는 상태입니다.
+
+아래 내용으로 한 번에 정리해서 수정 부탁드립니다.
+
+1. 기존 상단 텍스트 줄 완전 제거
+
+헤더 위에 예전 테스트용으로 올려두었던
+환율: ~ / 테더: ~ / BTC 점유율: ~ 같은 텍스트만 있는 줄이 아직 남아 있습니다.
+
+지금 남겨둘 것은 얇은 TopInfoBar 한 줄만입니다.
+
+👉 Layout / Home 상단 쪽에서
+기존 텍스트로만 구성된 바(예전 설명용 컴포넌트)는 완전히 삭제해 주세요.
+
+2. TopInfoBar 아이콘 리소스 교체
+(1) 환율 – Google 아이콘
+
+왼쪽 첫 번째 환율 아이템에 Google 아이콘을 넣어 주세요.
+
+아이콘 스펙:
+
+Google 파비콘(G 아이콘) 사용
+
+크기: w-4 h-4 (16px)
+
+좌측에 mr-1 정도 여백
+
+예시:
+
+<div className="flex items-center gap-1 text-[11px] text-[#A7B3C6]">
+  <Image
+    src="/icons/google-favicon.png"
+    alt="Google FX"
+    width={16}
+    height={16}
+    className="rounded-sm"
+  />
+  <span>₩{formatNumber(usdKrw)} / $1</span>
+  <span className={getChangeColorClass(usdKrwChange)}>
+    {formatChange(usdKrwChange)}
+  </span>
+</div>
+
+
+google-favicon.png 는 public/icons 아래에 넣어두고 사용해 주세요.
+
+(2) 테더 – Bithumb USDT 아이콘
+
+두 번째 테더(USDT) 아이템은 빗썸 USDT 아이콘으로 표시해 주세요.
+
+이미 exchangeIcons 또는 symbols에 빗썸 아이콘 리소스가 있다면 그걸 재사용하면 됩니다.
+
+예시:
+
+<div className="flex items-center gap-1 text-[11px] text-[#A7B3C6]">
+  <Image
+    src="/icons/bithumb-usdt.png" // 빗썸 USDT 아이콘 경로
+    alt="Bithumb USDT"
+    width={16}
+    height={16}
+    className="rounded-full"
+  />
+  <span>₩{formatNumber(tetherKrw)} / USDT</span>
+  <span className={getChangeColorClass(tetherChange)}>
+    {formatChange(tetherChange)}
+  </span>
+</div>
+
+3. 라벨 및 데이터 매핑 다시 확인
+
+TopInfoBar 항목은 아래 순서 + 라벨로 맞춰 주세요.
+
+좌 → 우
+
+환율 : Google 아이콘 + ₩usdKrw / $1 + 변화율
+
+테더 : 빗썸 USDT 아이콘 + ₩tetherKrw / USDT + 변화율
+
+BTC 점유율 : btcDominance%
+
+시가총액 : marketCapKrw + marketCapChange
+
+24시간 거래량 : volume24hKrw + volume24hChange
+
+우측 끝 동시접속자: concurrentUsers명
+
+라벨 텍스트도 아래처럼 수정되어야 합니다.
+
+BTC → BTC 점유율
+
+거래량 → 24시간 거래량
+
+4. /api/global-metrics 실제 연동 (하드코딩 제거)
+
+지금 상단 숫자들은 더미 값 / 하드코딩으로 보입니다.
+TopInfoBar는 반드시 /api/global-metrics 응답을 사용해서 렌더링되게 해 주세요.
+
+4-1. API 응답 예시
+// pages/api/global-metrics.ts
+export type GlobalMetricsResponse = {
+  usdKrw: number;
+  usdKrwChange: number;
+  tetherKrw: number;
+  tetherChange: number;
+  btcDominance: number;
+  marketCapKrw: number;
+  marketCapChange: number;
+  volume24hKrw: number;
+  volume24hChange: number;
+  concurrentUsers: number;
+};
+
+
+TopInfoBar 컴포넌트에서는 다음처럼 실제 값을 받아서 사용해야 합니다.
+
+const { data } = useSWR<GlobalMetricsResponse>("/api/global-metrics", fetcher);
+
+if (!data) return null;
+
+const {
+  usdKrw,
+  usdKrwChange,
+  tetherKrw,
+  tetherChange,
+  btcDominance,
+  marketCapKrw,
+  marketCapChange,
+  volume24hKrw,
+  volume24hChange,
+  concurrentUsers,
+} = data;
+
+4-2. 서버 쪽 구현 체크
+
+/api/global-metrics 내부에서는:
+
+FX API(exchangerate.host 등)로 USD/KRW 수집
+
+Bithumb public API로 USDT/KRW + 변화율 수집
+
+글로벌 시총/24h 거래량/BTC Dominance는 기존에 쓰는 소스와 동일하게 연동
+
+동시접속자는 Supabase active_sessions 또는 현재 구현된 카운터 값 사용
+
+5분 캐시(메모리 or Supabase) 적용해서 과도한 호출 방지
+
+중요한 건 TopInfoBar에서 직접 외부 API를 때리지 않고,
+/api/global-metrics 한 군데만 의존하도록 만드는 것입니다.

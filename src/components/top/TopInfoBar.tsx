@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface GlobalMetrics {
   usdKrw: number;
@@ -68,7 +69,14 @@ export default function TopInfoBar() {
         <div className="flex items-center gap-0 text-[11px] text-[#A7B3C6] overflow-x-auto whitespace-nowrap scrollbar-hide">
           {/* 환율 */}
           <div className="flex items-center gap-1 pr-2">
-            <div className="h-4 w-4 rounded-full bg-gradient-to-br from-[#4285F4] via-[#34A853] to-[#FBBC05] flex-shrink-0" />
+            <Image
+              src="/icons/google-favicon.png"
+              alt="USD/KRW"
+              width={16}
+              height={16}
+              className="rounded-sm flex-shrink-0"
+              unoptimized
+            />
             <span className="font-medium text-white">₩{formatNumber(metrics.usdKrw, 0)}</span>
             <span className="text-[#A7B3C6]">/ $1</span>
             <span className={`font-medium ${getChangeColor(metrics.usdKrwChange)}`}>
@@ -80,9 +88,14 @@ export default function TopInfoBar() {
 
           {/* USDT */}
           <div className="flex items-center gap-1 pr-2">
-            <div className="h-4 w-4 rounded-full bg-[#26a17b] flex-shrink-0 flex items-center justify-center">
-              <span className="text-[7px] text-white font-bold">₮</span>
-            </div>
+            <Image
+              src="/icons/bithumb-usdt.png"
+              alt="Bithumb USDT"
+              width={16}
+              height={16}
+              className="rounded-full flex-shrink-0"
+              unoptimized
+            />
             <span className="font-medium text-white">₩{formatNumber(metrics.tetherKrw, 0)}</span>
             <span className="text-[#A7B3C6]">/ USDT</span>
             <span className={`font-medium ${getChangeColor(metrics.tetherChange)}`}>

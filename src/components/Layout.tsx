@@ -2,7 +2,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { TopMarketInfoBar } from "@/components/top/TopMarketInfoBar";
 import TopInfoBar from "@/components/top/TopInfoBar";
 
 interface LayoutProps {
@@ -78,8 +77,6 @@ export default function Layout({ children }: LayoutProps) {
       <TopInfoBar />
       <header className="sm:sticky sm:top-0 z-50 bg-slate-900/95 dark:bg-slate-900/95 light:bg-white/95 backdrop-blur border-b border-slate-800 dark:border-slate-800 light:border-slate-200">
         <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-5">
-          <TopMarketInfoBar />
-
           <nav className="border-b border-slate-800 dark:border-slate-800 light:border-slate-200">
             <div className="flex justify-between items-center h-14">
               <Link href="/" className="flex items-center gap-2">
