@@ -1,0 +1,172 @@
+🛠️ [개발팀 전달문 – P-1 홈 상단 레이아웃 재작업 지침]
+
+P-1(홈 레이아웃 복제) 감리 결과를 반영하여,
+홈 상단 차트 영역을 김프가와 동일한 UX/비율로 재구현해 주세요.
+
+1. 레이아웃 비율 (메인 75% / 사이드 25%)
+
+HomeLayout.tsx 기준으로 아래 구조를 보장해 주세요.
+
+// src/components/layout/HomeLayout.tsx (예시)
+
+export function HomeLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-50">
+      <main className="mx-auto flex w-full max-w-6xl flex-col lg:flex-row gap-6 px-4 py-6">
+        {/* 메인 영역: 차트 + 프리미엄 테이블 (약 75%) */}
+        <section className="flex-1 min-w-0">
+          {children /* index.tsx에서 Main 컬럼 내용 전달 */}
+        </section>
+
+        {/* 사이드바: AI Insight (약 25%) */}
+        <aside className="w-full lg:w-[320px] shrink-0">
+          <AIInsightPlaceholder />
+        </aside>
+      </main>
+    </div>
+  );
+}
+
+
+요구사항:
+
+PC 기준: flex-1 메인 + lg:w-[320px] 사이드 → 김프가와 유사한 75/25 비율
+
+모바일 기준: flex-col로 위아래 스택
+
+min-h-screen 으로 PremiumTable 스크롤 길어져도 하단 여백 끊기지 않게 유지
+
+index.tsx에서는:
+
+// src/pages/index.tsx
+
+export default function HomePage() {
+  return (
+    <HomeLayout>
+      <ChartSection />        {/* 최상단 TradingView 차트 */}
+      <PremiumTableSection /> {/* 그 아래 프리미엄 테이블 */}
+    </HomeLayout>
+  );
+}
+
+2. 차트 구조 – 단일 TradingView 위젯으로 전면 교체
+
+현재의 “이상하게 2개 뜨는 차트 + 외부 타임프레임 드롭다운” 구조는 전부 제거하고,
+아래처럼 단일 TradingView Advanced Chart 위젯으로 통일해 주세요.
+
+// src/components/charts/ChartSection.tsx (예시)
+
+import { useEffect, useRef } from "react";
+
+const SYMBOL_MAP: Record<string, string> = {
+  "BINANCE_BTC": "BINANCE:BTCUSDT",
+  "BINANCE_ETH": "BINANCE:ETHUSDT",
+  // 필요시 추가
+};
+
+interface ChartSectionProps {
+  selectedMarket?: string; // 예: "BINANCE_BTC"
+}
+
+export function ChartSection({ selectedMarket = "BINANCE_BTC" }: ChartSectionProps) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    // 기존 위젯 제거
+    containerRef.current.innerHTML = "";
+
+    const symbol = SYMBOL_MAP[selectedMarket] ?? "BINANCE:BTCUSDT";
+
+    // TradingView 글로벌 스크립트 사용
+    // tv.js가 _document 또는 _app 쪽에서 한 번 로드되어 있다는 전제
+    // @ts-ignore
+    new TradingView.widget({
+      width: "100%",
+      height: 360,
+      symbol,
+      interval: "60",
+      timezone: "Asia/Seoul",
+      theme: "dark",
+      style: "1",
+      locale: "kr",
+      toolbar_bg: "#020617",
+      hide_side_toolbar: false,
+      hide_top_toolbar: false,
+      container_id: "kimpai-main-chart",
+    });
+  }, [selectedMarket]);
+
+  return (
+    <section className="mb-6 rounded-xl bg-slate-900/60 p-3">
+      <div
+        id="kimpai-main-chart"
+        ref={containerRef}
+        className="w-full h-[360px] rounded-lg overflow-hidden"
+      />
+    </section>
+  );
+}
+
+
+✅ 필수 조건
+
+차트는 항상 하나만 렌더링 (중복 금지)
+
+selectedMarket 변경 시 위젯 리생성으로 심볼만 교체
+
+높이는 h-[360px] 수준 (김프가와 비슷한 비율)
+
+3. 타임프레임 드롭다운 제거
+
+지금 상단에 있는 “1시간” 외부 드롭다운은 완전히 삭제해 주세요.
+
+타임프레임 변경은 TradingView 위젯 내부의 기본 버튼으로 처리합니다.
+
+외부에서 interval을 제어할 계획이 있다면, 나중에 별도 UX 논의 후 P-2 또는 F-1에서 재도입.
+
+4. BTC Binance 드롭다운 ↔ 차트 심볼 연동
+
+현재 상단에 있는 “BTC Binance” 드롭다운은 유지하되,
+선택값이 ChartSection에 selectedMarket으로 내려가도록 연결이 필요합니다.
+
+// 예시 컨테이너
+
+const [selectedMarket, setSelectedMarket] = useState("BINANCE_BTC");
+
+return (
+  <>
+    <MarketDropdown value={selectedMarket} onChange={setSelectedMarket} />
+    <ChartSection selectedMarket={selectedMarket} />
+  </>
+);
+
+
+요구사항:
+
+“BTC Binance” → BINANCE_BTC
+
+나중에 다른 마켓(ETH, SOL 등) 추가 시 SYMBOL_MAP만 확장하면 됨
+
+드롭다운 변경 시 차트 즉시 교체 (에러 없이 로딩)
+
+✅ 5. 완료 후 제출 항목
+
+HomeLayout.tsx 코드
+
+index.tsx 코드
+
+ChartSection.tsx 코드
+
+PC/모바일 스크린샷 각 1장
+(김프가와 레이아웃 비율 비교 가능하게)
+
+🧾 체크리스트 메모
+
+P-1: “홈 레이아웃 복제” 항목은
+차트 중복 제거 + 정석 위젯 교체 + 75/25 레이아웃이 모두 반영되었을 때에만 완료로 표시 가능합니다.
+
+이상입니다.
+P-1 차트 영역 재작업이 완료되면 코드와 스크린샷을 공유해 주시면,
+감리(Gemini)와 함께 다시 검토하겠습니다.
