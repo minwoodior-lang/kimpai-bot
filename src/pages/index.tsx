@@ -8,6 +8,8 @@ import ChatFloatingButton from "@/components/chat/ChatFloatingButton";
 import ChatPanel from "@/components/chat/ChatPanel";
 import ChatUI from "@/components/ChatUI";
 import { AiSummaryMobileContent, ProForecastMobileContent, MyAlertsMobileContent } from "@/components/mobile/MobileCardContents";
+import UserPrefsPanel from "@/components/settings/UserPrefsPanel";
+import { useUserPrefs } from "@/hooks/useUserPrefs";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useMarkets } from "@/hooks/useMarkets";
@@ -40,16 +42,30 @@ export default function Home() {
   const [selectedIndicator, setSelectedIndicator] = useState("BINANCE_BTC");
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [mobileCardTab, setMobileCardTab] = useState<"ai" | "pro" | "alerts">("ai");
+  const [isPrefsPanelOpen, setIsPrefsPanelOpen] = useState(false);
+  const { prefs, setPrefs, isLoaded } = useUserPrefs();
   const { data, averagePremium, fxRate } = useMarkets();
 
   const listedData = data.filter(item => item.premium !== null);
-  const maxPremium = listedData.length > 0 
-    ? listedData.reduce((max, item) => 
-        (item.premium || 0) > (max.premium || 0) ? item : max, listedData[0])
+  
+  // 필터링 적용 (리스트 필터)
+  let filteredData = [...listedData];
+  if (isLoaded && prefs.filterMode === "foreign") {
+    // 해외 거래소 보유 자산: BTC, ETH, BNB 등 주요 글로벌 코인만
+    const globalCoins = ["BTC", "ETH", "BNB", "XRP", "SOL", "ADA", "DOGE", "AVAX", "LINK", "MATIC"];
+    filteredData = filteredData.filter(item => 
+      globalCoins.some(coin => item.symbol.includes(coin))
+    );
+  }
+  // TODO: favorites 필터 - localStorage 기반 즐겨찾기 추가 필요
+  
+  const maxPremium = filteredData.length > 0 
+    ? filteredData.reduce((max, item) => 
+        (item.premium || 0) > (max.premium || 0) ? item : max, filteredData[0])
     : null;
-  const minPremium = listedData.length > 0
-    ? listedData.reduce((min, item) => 
-        (item.premium || 0) < (min.premium || 0) ? item : min, listedData[0])
+  const minPremium = filteredData.length > 0
+    ? filteredData.reduce((min, item) => 
+        (item.premium || 0) < (min.premium || 0) ? item : min, filteredData[0])
     : null;
 
   const formatPremium = (value: number | null | undefined): string => {
@@ -206,21 +222,43 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 차트 섹션 */}
-          <div className="mt-2 h-[240px] md:h-auto">
-            <ChartSectionEnhanced
-              selectedIndicator={selectedIndicator}
-              onIndicatorChange={setSelectedIndicator}
-            />
+          {/* 차트 제목 + 개인화 설정 버튼 */}
+          <div className="mt-2 flex items-center justify-between mb-2">
+            <h3 className="text-sm font-semibold dark:text-slate-200 light:text-slate-800">프리미엄 차트</h3>
+            <button
+              onClick={() => setIsPrefsPanelOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg dark:bg-slate-800 light:bg-slate-200 dark:hover:bg-slate-700 light:hover:bg-slate-300 transition-colors text-sm dark:text-slate-300 light:text-slate-700 font-medium"
+            >
+              <span>⚙</span>
+              <span>개인화 설정</span>
+            </button>
           </div>
 
-          <div className="mt-2 space-y-3">
+          {/* 차트 섹션 */}
+          {(!isLoaded || !prefs.hideChart) && (
+            <div className="mt-1 h-[240px] md:h-auto">
+              <ChartSectionEnhanced
+                selectedIndicator={selectedIndicator}
+                onIndicatorChange={setSelectedIndicator}
+              />
+            </div>
+          )}
 
+          <div className="mt-2 space-y-3">
             {/* 프리미엄 테이블 */}
             <PremiumTable showHeader={false} showFilters={true} limit={0} refreshInterval={2000} />
           </div>
         </div>
       </HomeLayout>
+
+      {/* 개인화 설정 패널 */}
+      {isPrefsPanelOpen && (
+        <UserPrefsPanel
+          prefs={prefs}
+          onPrefsChange={setPrefs}
+          onClose={() => setIsPrefsPanelOpen(false)}
+        />
+      )}
     </Layout>
   );
 }

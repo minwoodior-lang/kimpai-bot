@@ -47,10 +47,10 @@ export function AiSummaryMobileContent({
       </div>
 
       {/* Score 카드 */}
-      <div className="mt-1 py-1 rounded-lg dark:bg-indigo-900/60 light:bg-indigo-100/60 px-2 flex items-center justify-center">
+      <div className="mt-2 md:mt-3 py-1.5 md:py-2 rounded-lg dark:bg-indigo-900/60 light:bg-indigo-100/60 px-2 flex items-center justify-center">
         <div className="text-center w-full">
-          <div className="text-[11px] dark:text-slate-300 light:text-indigo-700 mb-1">KR Premium Score</div>
-          <div className="text-[16px] font-semibold dark:text-emerald-400 light:text-emerald-600">{score}/10</div>
+          <div className="text-[11px] md:text-[10px] dark:text-slate-300 light:text-indigo-700 mb-0.5 md:mb-1">KR Premium Score</div>
+          <div className="text-[14px] md:text-[16px] font-semibold dark:text-emerald-400 light:text-emerald-600">{score}/10</div>
         </div>
       </div>
     </div>

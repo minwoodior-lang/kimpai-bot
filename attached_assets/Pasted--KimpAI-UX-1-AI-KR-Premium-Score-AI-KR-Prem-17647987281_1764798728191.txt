@@ -1,0 +1,255 @@
+📌 KimpAI 홈 모바일 UX + 개인화 설정 통합 지시서
+1. AI 요약 카드 하단 KR Premium Score 영역 축소
+
+모바일에서 AI 요약 카드 아래쪽 KR Premium Score 바가 세로로 너무 커 보입니다.
+바 영역 전체 높이와 여백을 줄여서 더 컴팩트하게 만들어 주세요.
+
+요청사항:
+
+현재 구조(예시):
+
+<div className="mt-4">
+  <div className="text-[11px] text-slate-300 mb-1">KR Premium Score</div>
+  <div className="rounded-xl bg-indigo-700 py-2 text-center text-[16px] font-semibold">
+    2/10
+  </div>
+</div>
+
+
+모바일(sm 이하)에서만 다음과 같이 줄여 주세요.
+
+바 상단 여백: mt-4 → mt-2
+
+바 안 패딩: py-2 → py-1.5 또는 py-1
+
+폰트 사이즈: text-[16px] → text-[14px]
+
+예시:
+
+<div className="mt-2">
+  <div className="text-[11px] text-slate-300 mb-0.5">KR Premium Score</div>
+  <div className="rounded-xl bg-indigo-700 py-1.5 text-center text-[14px] font-semibold">
+    2/10
+  </div>
+</div>
+
+
+⚠️ PC(md 이상)는 기존 스타일 그대로 두고, sm 이하에서만 패딩/폰트/여백을 줄여 주세요.
+
+2. 홈 화면 “개인화 설정” 기능 (PC/모바일 공통)
+
+김프가의 개인화 설정과 비슷한 기능을 KimpAI에 추가하고 싶습니다.
+PC/모바일 공통으로 동일한 설정을 사용하고, 로컬 스토리지에 저장하는 형태로 만들어 주세요.
+
+2-1. 위치
+
+홈 화면 프리미엄 차트 상단에 있는 거래소 드롭다운 오른쪽에 버튼 추가:
+
+현재:
+
+[ BTC Binance ▼ ]
+
+
+변경:
+
+[ BTC Binance ▼ ] [ ⚙ 개인화 설정 ]
+
+
+⚙ 개인화 설정 클릭 시 작은 패널(드롭다운 / 우측 슬라이드 / 하단 시트 중 편한 방식) 열리도록 구현.
+
+2-2. 설정 항목 (1차 버전 – 실제 동작까지)
+(1) 차트 숨기기
+
+체크박스:
+
+[ ] 홈 차트 숨기기
+
+설명:
+
+“홈 화면 상단 프리미엄 차트를 숨깁니다.”
+
+동작:
+
+체크 시 홈 화면의 프리미엄 차트 영역만 숨김 처리
+(다른 페이지 차트, 코인셀 개별 차트 등에는 영향 없음)
+
+예시:
+
+const [prefs, setPrefs] = useUserPrefs();
+// prefs.hideChart: boolean
+
+{!prefs.hideChart && (
+  <HomePremiumChart ... />
+)}
+
+(2) 가격 단위 – 현재가 USDT로 보기
+
+옵션:
+
+(●) KRW 기준 (기본값)
+
+( ) USDT 기준
+
+동작:
+
+priceUnit === "KRW" → 현재와 동일, 국내 기준 KRW 가격 표기
+
+priceUnit === "USDT" → 코인 리스트의 “현재가”를 USDT 기준으로 표기
+
+구현 방법:
+
+가능하면 이미 있는 USDT 가격 필드 사용
+
+없으면 koreanPrice / usdKrw 로 계산
+
+예시:
+
+const displayPrice =
+  prefs.priceUnit === "USDT"
+    ? koreanPrice / usdKrw
+    : koreanPrice;
+
+
+표시 형식:
+
+KRW: ₩1,350,000
+
+USDT: $1,234.56 또는 1,234.56 USDT (팀에서 통일)
+
+(3) 리스트 필터
+
+1차 버전에서는 아래 세 가지 필터만 사용합니다.
+
+라디오 버튼:
+
+(●) 모든 코인 → 기본값
+
+( ) 해외 거래소 보유 자산만
+
+( ) 내 관심 자산만
+
+각 모드 설명 및 동작:
+
+all – 모든 코인
+
+현재와 동일하게 전체 리스트 표시.
+
+foreign – 해외 거래소 보유 자산만
+
+우선은 해외 거래소(바이낸스/OKX/Bybit 등)에 시세가 존재하는 코인만 필터링하는 방식으로 구현해 주세요.
+
+나중에 “사용자 실제 보유 자산” 기능이 붙으면, 그때 포지션 연동으로 바꿀 수 있도록 이름만 “보유 자산”으로 두고 구현은 “해외 거래소 시세 존재 여부” 기준으로 진행.
+
+favorites – 내 관심 자산만
+
+기존 즐겨찾기(★) 기능이 있다면, 해당 플래그가 true인 코인만 리스트에 남기기.
+
+없다면:
+
+코인셀에 ★ 토글 추가
+
+localStorage 또는 Supabase에 favoriteSymbols 형태로 저장하는 구조로 만들어 두면 좋습니다.
+
+예시 필터 코드:
+
+let filtered = allRows;
+
+if (prefs.filterMode === "foreign") {
+  filtered = filtered.filter(row => row.hasForeignMarket);
+}
+
+if (prefs.filterMode === "favorites") {
+  filtered = filtered.filter(row => row.isFavorite);
+}
+
+(4) 기본 차트 시간 간격
+
+기본 차트 타임프레임을 사용자가 직접 고정할 수 있도록 합니다.
+
+선택 가능한 옵션:
+
+1분, 3분, 5분, 15분, 30분, 1시간, 2시간, 3시간, 4시간, 1일, 1주
+
+내부 값 예시:
+
+"1m", "3m", "5m", "15m", "30m", "1h", "2h", "3h", "4h", "1d", "1w"
+
+동작:
+
+홈 프리미엄 차트 컴포넌트가 마운트될 때 prefs.defaultTimeframe를 읽어서 초기 타임프레임으로 사용.
+
+사용자가 차트 내에서 타임프레임 변경 시, 그 값을 다시 prefs.defaultTimeframe로 덮어써도 좋습니다. (선택)
+
+예시:
+
+const { prefs, setPrefs } = useUserPrefs();
+
+<TimeframeSelector
+  value={prefs.defaultTimeframe}
+  onChange={(tf) => setPrefs(prev => ({ ...prev, defaultTimeframe: tf }))}
+/>
+
+<PremiumChart timeframe={prefs.defaultTimeframe} ... />
+
+2-3. 상태 저장 방식 (로컬 스토리지)
+
+로그인 여부와 상관 없이 현재는 로컬 스토리지 기반으로만 저장하면 됩니다.
+
+key 예시: "kimpai_user_prefs"
+
+구조 예:
+
+{
+  "hideChart": false,
+  "priceUnit": "KRW",
+  "filterMode": "all",
+  "defaultTimeframe": "5m"
+}
+
+
+React 훅 예시:
+
+function useUserPrefs() {
+  const [prefs, setPrefs] = useState<Prefs>(() => {
+    if (typeof window === "undefined") return defaultPrefs;
+    try {
+      const raw = window.localStorage.getItem("kimpai_user_prefs");
+      return raw ? { ...defaultPrefs, ...JSON.parse(raw) } : defaultPrefs;
+    } catch {
+      return defaultPrefs;
+    }
+  });
+
+  const updatePrefs = (next: Partial<Prefs>) => {
+    setPrefs(prev => {
+      const merged = { ...prev, ...next };
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem("kimpai_user_prefs", JSON.stringify(merged));
+      }
+      return merged;
+    });
+  };
+
+  return { prefs, setPrefs: updatePrefs };
+}
+
+
+이후에 필요하면, 이 구조 그대로 Supabase user_settings 테이블로 옮겨서 서버 저장으로 확장할 예정입니다. 지금은 프론트 로컬 저장만 해 주세요.
+
+요약
+
+모바일 AI 요약 카드의 KR Premium Score 영역 높이/패딩/폰트 줄이기
+
+PC/모바일 공통 “개인화 설정” 버튼 추가
+
+홈 차트 숨기기 (홈 프리미엄 차트만 대상)
+
+가격 단위: KRW / USDT
+
+리스트 필터: 모든 코인 / 해외 거래소 보유 자산만 / 내 관심 자산만
+
+기본 차트 시간간격: 1m~1w까지 선택
+
+설정은 모두 localStorage(kimpai_user_prefs)에 저장
+
+이대로 구현 부탁드립니다.
