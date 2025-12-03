@@ -11,10 +11,18 @@ interface Market {
   market?: string;
 }
 
+interface MasterSymbol {
+  symbol: string;
+  name_ko?: string;
+  name_en?: string;
+  icon_path?: string;
+}
+
 interface PremiumEntry {
   symbol: string;
   name_ko?: string;
   name_en?: string;
+  icon_url?: string | null;
   koreanPrice?: number;
   globalPrice?: number;
   globalPriceKrw?: number;
@@ -52,7 +60,25 @@ async function fetchOKXPrice(symbol: string): Promise<{ price: number; volume: n
 
 async function buildPremiumTable() {
   const exchangeMarketsPath = path.join(process.cwd(), "data", "exchange_markets.json");
+  const masterSymbolsPath = path.join(process.cwd(), "data", "master_symbols.json");
+  
   const markets = JSON.parse(fs.readFileSync(exchangeMarketsPath, "utf-8")) as Market[];
+  
+  // 1) master_symbols 불러오기
+  let masterSymbolsList: MasterSymbol[] = [];
+  try {
+    masterSymbolsList = JSON.parse(fs.readFileSync(masterSymbolsPath, "utf-8")) as MasterSymbol[];
+  } catch (e) {
+    console.warn("⚠ master_symbols.json not found, proceeding without icons");
+  }
+  
+  // 2) 심볼 → 아이콘 맵 생성
+  const iconMap = new Map<string, string>();
+  for (const ms of masterSymbolsList) {
+    if (ms.symbol && ms.icon_path) {
+      iconMap.set(ms.symbol.toUpperCase(), ms.icon_path);
+    }
+  }
 
   const symbolMap = new Map<string, Map<string, Market>>();
 
@@ -87,10 +113,14 @@ async function buildPremiumTable() {
       const globalPriceKrw = globalPrice * FX_RATE;
       const premium = ((1330 - globalPriceKrw) / globalPriceKrw) * 100;
 
+      // 3) master_symbols에서 icon_url 가져오기
+      const iconUrl = iconMap.get(symbol) ?? null;
+
       const entry: PremiumEntry = {
         symbol,
         domesticExchange,
         foreignExchange: "OKX",
+        icon_url: iconUrl,
       };
 
       if (nameKo) entry.name_ko = nameKo;
