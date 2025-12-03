@@ -1,6 +1,6 @@
 /**
  * 오늘의 AI 김프 요약 - 통합 카드 (최종 레이아웃)
- * 좌측: 정보 그리드 / 우측: PRO 예측 설명
+ * 좌측: 정보 그리드 / 우측: PRO 예측 설명 (미러 효과)
  */
 
 interface TodayPremiumSectionProps {
@@ -65,19 +65,28 @@ export function TodayPremiumSection({
             </div>
           </div>
 
-          {/* 우측: PRO 예측 설명 */}
-          <div className="md:col-span-2 border-l dark:border-slate-700/40 light:border-slate-300/30 pl-4">
-            <div className="flex items-start gap-2 mb-2">
-              <span className="text-[11px] sm:text-xs font-semibold dark:text-slate-100 light:text-slate-900 flex-shrink-0">
+          {/* 우측: PRO 예측 설명 (미러 효과) */}
+          <div className="md:col-span-2 border-l dark:border-slate-700/40 light:border-slate-300/30 pl-4 flex flex-col">
+            {/* PRO 예측 설명 (미러/반투명 처리) */}
+            <div className="flex-1">
+              <div className="text-[11px] sm:text-xs font-semibold dark:text-slate-100 light:text-slate-900 mb-2">
                 🔒 PRO 전용 48시간 김프 예측
-              </span>
+              </div>
+              {/* 미러 효과 텍스트 - 반투명하고 흐릿하게 */}
+              <div className="p-2.5 rounded-lg dark:bg-slate-800/30 light:bg-slate-200/20 mb-2 backdrop-blur-sm">
+                <p className="text-[8px] sm:text-[9px] dark:text-slate-500 light:text-slate-500 leading-relaxed opacity-70 font-medium">
+                  최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
+                  <span className="block dark:text-slate-600 light:text-slate-600 text-[7px] sm:text-[8px] mt-1">
+                    (PRO 구독 시 전체 내용 확인 가능)
+                  </span>
+                </p>
+              </div>
             </div>
-            <p className="text-[9px] sm:text-[10px] dark:text-slate-400 light:text-slate-600 leading-relaxed">
-              최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
-              <span className="block dark:text-slate-500 light:text-slate-500 text-[8px] sm:text-[9px] mt-1">
-                (PRO 구독 시 전체 내용 확인 가능)
-              </span>
-            </p>
+
+            {/* 내 알림 */}
+            <div className="text-[9px] sm:text-[10px] dark:text-slate-500 light:text-slate-500 mt-1">
+              내 알림
+            </div>
           </div>
         </div>
 
