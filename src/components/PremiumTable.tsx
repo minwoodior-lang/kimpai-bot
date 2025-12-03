@@ -848,63 +848,25 @@ export default function PremiumTable({
           <div className="overflow-x-auto w-full">
             <table className="w-full text-sm min-w-full">
               <thead>
-                <tr className="bg-slate-900/80 text-gray-400 text-[10px] md:text-xs">
-                  <th
-                    className="px-1 md:px-3 py-1.5 md:py-2 text-left cursor-pointer hover:text-white transition-colors whitespace-nowrap"
-                    onClick={() => handleSort("symbol")}
-                  >
-                    <span className="hidden md:inline">코인명</span>
-                    <span className="md:hidden">코인</span>
+                <tr className="bg-slate-900/80 text-slate-400 text-[11px]">
+                  <th className="px-2 py-1 text-left font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("symbol")}>
+                    코인명
                     <SortIcon columnKey="symbol" />
                   </th>
-                  <th
-                    className="px-1 md:px-3 py-1.5 md:py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
-                    onClick={() => handleSort("koreanPrice")}
-                  >
-                    <span className="hidden md:inline">
-                      {getDomesticName()}
-                    </span>
-                    <span className="md:hidden">현재가</span>
+                  <th className="px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("koreanPrice")}>
+                    현재가
                     <SortIcon columnKey="koreanPrice" />
                   </th>
-                  <th className="hidden sm:table-cell px-3 py-2 text-right whitespace-nowrap">
-                    {getForeignName()}
-                  </th>
-                  <th
-                    className="px-1 md:px-3 py-1.5 md:py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
-                    onClick={() => handleSort("premium")}
-                  >
+                  <th className="px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("premium")}>
                     김프
                     <SortIcon columnKey="premium" />
                   </th>
-                  <th
-                    className="px-1 md:px-3 py-1.5 md:py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
-                    onClick={() => handleSort("change24h")}
-                  >
-                    <span className="hidden md:inline">전일대비</span>
-                    <span className="md:hidden">24h</span>
+                  <th className="px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("change24h")}>
+                    전일대비
                     <SortIcon columnKey="change24h" />
                   </th>
-                  <th
-                    className="hidden sm:table-cell px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
-                    onClick={() => handleSort("high24h")}
-                  >
-                    고가대비(24h)
-                    <SortIcon columnKey="high24h" />
-                  </th>
-                  <th
-                    className="hidden sm:table-cell px-3 py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
-                    onClick={() => handleSort("low24h")}
-                  >
-                    저가대비(24h)
-                    <SortIcon columnKey="low24h" />
-                  </th>
-                  <th
-                    className="hidden sm:table-cell px-1 md:px-3 py-1.5 md:py-2 text-right cursor-pointer hover:text-white transition-colors whitespace-nowrap"
-                    onClick={() => handleSort("volume24hKrw")}
-                  >
-                    <span className="hidden md:inline">거래액(일)</span>
-                    <span className="md:hidden">거래액</span>
+                  <th className="px-2 py-1 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("volume24hKrw")}>
+                    거래액(일)
                     <SortIcon columnKey="volume24hKrw" />
                   </th>
                 </tr>
@@ -932,239 +894,68 @@ export default function PremiumTable({
                           index % 2 === 0 ? "bg-slate-800/30" : ""
                         }`}
                       >
-                        <td className="px-1 md:px-3 py-1.5 md:py-2">
-                          <div className="flex items-center gap-1 md:gap-2">
+                        <td className="px-2 py-2">
+                          <div className="flex items-center gap-2">
+                            <div className="flex flex-col items-center justify-center gap-1 min-w-[32px]">
+                              <CoinIcon symbol={row.symbol} className="h-6 w-6" iconUrl={row.icon_url} />
+                              <button
+                                type="button"
+                                className="text-[10px] text-slate-500 hover:text-yellow-400 transition-colors"
+                                onClick={() => toggleFavorite(row.symbol)}
+                              >
+                                {favorites.has(row.symbol) ? "★" : "☆"}
+                              </button>
+                            </div>
                             <button
-                              onClick={() => toggleFavorite(row.symbol)}
-                              className={`text-sm md:text-lg transition-colors flex-shrink-0 ${
-                                favorites.has(row.symbol)
-                                  ? "text-yellow-400"
-                                  : "text-gray-600 hover:text-yellow-400"
-                              }`}
-                              title={
-                                favorites.has(row.symbol)
-                                  ? "즐겨찾기 해제"
-                                  : "즐겨찾기 추가"
-                              }
-                            >
-                              {favorites.has(row.symbol) ? "★" : "☆"}
-                            </button>
-
-                            <CoinIcon
-                              symbol={row.symbol}
-                              size="sm"
-                              className="md:w-6 md:h-6"
-                              iconUrl={row.icon_url}
-                            />
-
-                            <button
-                              onClick={() =>
-                                openCmcPage(row.symbol, row.cmcSlug)
-                              }
+                              onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
                               className="flex flex-col hover:text-blue-400 transition-colors text-left min-w-0"
                             >
-                              <div className="text-white font-medium text-xs md:text-sm truncate">
+                              <span className="text-[12px] text-slate-50 truncate max-w-[90px]">
                                 {getDisplayName(row)}
-                              </div>
-                              <div className="text-gray-500 text-[10px] md:text-xs">
+                              </span>
+                              <span className="text-[11px] text-slate-400 truncate max-w-[90px]">
                                 {row.symbol}
-                              </div>
-                            </button>
-
-                            <button
-                              onClick={() => toggleChart(row.symbol)}
-                              className={`p-0.5 md:p-1 transition-colors flex-shrink-0 ${
-                                expandedSymbol === row.symbol
-                                  ? "text-blue-400"
-                                  : "text-gray-500 hover:text-blue-400"
-                              }`}
-                              title={
-                                expandedSymbol === row.symbol
-                                  ? "차트 닫기"
-                                  : "차트 열기"
-                              }
-                            >
-                              <svg
-                                className="w-3 h-3 md:w-4 md:h-4"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
-                                />
-                              </svg>
-                            </button>
-
-                            {!row.isListed && (
-                              <span className="text-[8px] md:text-xs text-orange-400 bg-orange-400/20 px-1 py-0.5 rounded flex-shrink-0">
-                                미상장
                               </span>
-                            )}
+                            </button>
                           </div>
                         </td>
 
-                        <td
-                          className={`px-1 md:px-3 py-2 text-right ${getFlashClass(
-                            row.symbol,
-                            "price",
-                          )}`}
-                        >
-                          <div className="text-white font-medium text-xs md:text-sm">
-                            ₩{formatKrwPrice(row.koreanPrice)}
-                          </div>
-                          <div className="md:hidden text-[10px] text-gray-500">
-                            {row.globalPriceKrw !== null &&
-                            row.globalPrice !== null ? (
-                              <span>
-                                ₩{formatKrwPrice(row.globalPriceKrw)} /{" "}
-                                {formatUsdtPrice(row.globalPrice)}
-                              </span>
-                            ) : (
-                              <span className="text-gray-600">-</span>
-                            )}
-                          </div>
+                        <td className={`px-2 py-2 text-right text-[12px] whitespace-nowrap ${getFlashClass(row.symbol, "price")}`}>
+                          ₩{formatKrwPrice(row.koreanPrice)}
                         </td>
 
-                        <td className="hidden sm:table-cell px-3 py-2 text-right">
-                          {row.isListed && row.globalPriceKrw !== null ? (
-                            <>
-                              <div className="text-white font-medium">
-                                ₩{formatKrwPrice(row.globalPriceKrw)}
-                              </div>
-                              <div className="text-xs text-gray-500">
-                                {formatUsdtPrice(row.globalPrice)} USDT
-                              </div>
-                            </>
-                          ) : (
-                            <div className="text-gray-500">-</div>
-                          )}
-                        </td>
-
-                        <td
-                          className={`px-1 md:px-3 py-1.5 md:py-2 text-right ${getFlashClass(
-                            row.symbol,
-                            "premium",
-                          )}`}
-                        >
+                        <td className={`px-2 py-2 text-right text-[12px] whitespace-nowrap ${getFlashClass(row.symbol, "premium")}`}>
                           {row.premium !== null && row.premium !== undefined ? (
-                            <div
-                              className={`font-bold text-xs md:text-sm ${getPremiumColor(
-                                row.premium,
-                              )}`}
-                            >
-                              {row.premium >= 0 ? "+" : ""}
-                              {Number(row.premium).toFixed(2)}%
-                            </div>
+                            <span className={getPremiumColor(row.premium)}>
+                              {row.premium >= 0 ? "+" : ""}{Number(row.premium).toFixed(2)}%
+                            </span>
                           ) : (
-                            <div className="text-gray-500 text-xs">-</div>
+                            <span className="text-gray-500">-</span>
                           )}
                         </td>
 
-                        <td className="px-1 md:px-3 py-1.5 md:py-2 text-right">
+                        <td className="px-2 py-2 text-right text-[12px] whitespace-nowrap">
                           {row.change24h !== null && row.change24h !== undefined ? (
-                            <>
-                              <div
-                                className={`text-xs md:text-sm ${getChangeColor(
-                                  row.change24h,
-                                )}`}
-                              >
-                                {row.change24h >= 0 ? "+" : ""}
-                                {Number(row.change24h).toFixed(2)}%
-                              </div>
-                              <div
-                                className={`hidden md:block text-xs ${getChangeColor(
-                                  prevDiff.diff,
-                                )}`}
-                              >
-                                {prevDiff.valid && (
-                                  <span>
-                                    {prevDiff.diff >= 0 ? "+" : ""}₩
-                                    {formatKRW(Math.round(prevDiff.diff))}
-                                  </span>
-                                )}
-                              </div>
-                            </>
-                          ) : (
-                            <div className="text-gray-500 text-xs">-</div>
-                          )}
-                        </td>
-
-                        <td className="hidden sm:table-cell px-3 py-2 text-right">
-                          {highDiff.valid && highDiff.percent !== null && highDiff.percent !== undefined ? (
-                            <>
-                              <div className={getChangeColor(highDiff.percent)}>
-                                {highDiff.percent >= 0 ? "+" : ""}
-                                {Number(highDiff.percent).toFixed(2)}%
-                              </div>
-                              <div
-                                className={`text-xs ${getChangeColor(
-                                  highDiff.diff,
-                                )}`}
-                              >
-                                {highDiff.diff >= 0 ? "+" : ""}₩
-                                {formatKRW(Math.round(highDiff.diff))}
-                              </div>
-                            </>
-                          ) : (
-                            <div className="text-gray-500">-</div>
-                          )}
-                        </td>
-
-                        <td className="hidden sm:table-cell px-3 py-2 text-right">
-                          {lowDiff.valid && lowDiff.percent !== null && lowDiff.percent !== undefined ? (
-                            <>
-                              <div className={getChangeColor(lowDiff.percent)}>
-                                {lowDiff.percent >= 0 ? "+" : ""}
-                                {Number(lowDiff.percent).toFixed(2)}%
-                              </div>
-                              <div
-                                className={`text-xs ${getChangeColor(
-                                  lowDiff.diff,
-                                )}`}
-                              >
-                                {lowDiff.diff >= 0 ? "+" : ""}₩
-                                {formatKRW(Math.round(lowDiff.diff))}
-                              </div>
-                            </>
-                          ) : (
-                            <div className="text-gray-500">-</div>
-                          )}
-                        </td>
-
-                        <td className="hidden sm:table-cell px-1 md:px-3 py-1.5 md:py-2 text-right">
-                          <div className="flex flex-col items-end leading-tight">
-                            <span className="text-gray-300 text-[10px] md:text-sm">
-                              ₩{formatVolumeKRW(row.volume24hKrw)}
-                              <span className="hidden md:inline ml-1 text-xs text-gray-500">
-                                (국내)
-                              </span>
+                            <span className={getChangeColor(row.change24h)}>
+                              {row.change24h >= 0 ? "+" : ""}{Number(row.change24h).toFixed(2)}%
                             </span>
-                            <span className="hidden md:inline">
-                              {row.isListed &&
-                              row.volume24hForeignKrw !== null ? (
-                                <span className="text-gray-300">
-                                  ₩{formatVolumeKRW(row.volume24hForeignKrw)}
-                                  <span className="ml-1 text-xs text-gray-500">
-                                    (해외)
-                                  </span>
-                                </span>
-                              ) : (
-                                <span className="text-gray-500 text-xs">
-                                  해외: -
-                                </span>
-                              )}
-                            </span>
-                          </div>
+                          ) : (
+                            <span className="text-gray-500">-</span>
+                          )}
+                        </td>
+
+                        <td className="px-2 py-2 text-right text-[12px] whitespace-nowrap">
+                          {row.volume24hKrw !== null && row.volume24hKrw !== undefined ? (
+                            <span className="text-slate-100">{formatVolumeKRW(row.volume24hKrw)}</span>
+                          ) : (
+                            <span className="text-gray-500">-</span>
+                          )}
                         </td>
                       </tr>
 
                       {expandedSymbol === row.symbol && (
                         <tr key={`${row.symbol}-chart`}>
-                          <td colSpan={8} className="p-0 lg:table-cell">
+                          <td colSpan={5} className="p-0 lg:table-cell">
                             <div className="bg-[#0F111A] border-t border-b border-slate-700/50 py-3 px-3">
                               <div className="h-[360px] rounded-xl overflow-hidden bg-slate-900/50">
                                 <TradingViewChart

@@ -1,0 +1,182 @@
+1. PremiumTable 컬럼/레이아웃 최종 지시 (모바일·PC 공통)
+
+⛔ 이전에 말했던 “모바일에서 거래액 숨기기(hidden sm:table-cell)” 규칙 폐기.
+👉 김프가처럼 코인명 / 현재가 / 김프 / 전일대비 / 거래액 5개 컬럼을 모바일에서도 전부 보이게 가는 걸로 확정.
+
+1-1. 컬럼 이름 & 순서 고정
+
+PremiumTable 헤더를 아래 순서와 라벨로 통일:
+
+<thead>
+  <tr>
+    <th className="px-2 py-1 text-left text-[11px] font-medium text-slate-400">코인명</th>
+    <th className="px-2 py-1 text-right text-[11px] font-medium text-slate-400">현재가</th>
+    <th className="px-2 py-1 text-right text-[11px] font-medium text-slate-400">김프</th>
+    <th className="px-2 py-1 text-right text-[11px] font-medium text-slate-400">전일대비</th>
+    <th className="px-2 py-1 text-right text-[11px] font-medium text-slate-400">거래액(일)</th>
+  </tr>
+</thead>
+
+
+폰트: text-[11px]
+
+패딩: px-2 py-1 (지금보다 줄이기)
+
+1-2. 코인 셀 구조 (아이콘 + 이름 + 별 위치)
+
+김프가처럼 한 칸 안에서 정리:
+
+왼쪽: 아이콘 + 별(즐겨찾기) (세로로 배치)
+
+오른쪽: 코인 한글명 / 영문심볼 (두 줄)
+
+<td className="px-2 py-2">
+  <div className="flex items-center gap-2">
+    {/* 아이콘 + 즐겨찾기(별) */}
+    <div className="flex flex-col items-center justify-center gap-1 min-w-[32px]">
+      <CoinIcon symbol={row.symbol} className="h-6 w-6" />
+      <button
+        type="button"
+        className="text-[10px] text-slate-500 hover:text-yellow-400"
+        onClick={() => toggleFavorite(row.symbol)}
+      >
+        ★
+      </button>
+    </div>
+
+    {/* 코인 한글/영문 이름 */}
+    <div className="flex flex-col">
+      <span className="text-[12px] text-slate-50 truncate max-w-[90px]">
+        {row.nameKo}
+      </span>
+      <span className="text-[11px] text-slate-400 truncate max-w-[90px]">
+        {row.symbol}
+      </span>
+    </div>
+  </div>
+</td>
+
+
+포인트:
+
+별 아이콘을 아이콘 아래로 내림 (flex-col)
+
+이름 영역은 max-w-[90px] + truncate로 한 줄에서 잘리게 해서 전체 폭 확보
+
+1-3. 숫자 컬럼 공통 스타일 (현재가 / 김프 / 전일대비 / 거래액)
+<td className="px-2 py-2 text-right text-[12px] whitespace-nowrap">
+  {row.priceFormatted}
+</td>
+<td className="px-2 py-2 text-right text-[12px] whitespace-nowrap">
+  {row.premiumFormatted}
+</td>
+<td className="px-2 py-2 text-right text-[12px] whitespace-nowrap">
+  {row.change24hFormatted}
+</td>
+<td className="px-2 py-2 text-right text-[12px] whitespace-nowrap">
+  {row.volumeFormattedShort} {/* 예: 231.2억 처럼 축약 */}
+</td>
+
+
+숫자 컬럼은 전부 text-[12px], px-2, whitespace-nowrap
+
+거래액은 길게 쓰지 말고 축약 포맷(억/만 단위) 문자열로 내려달라고 요청 (volumeFormattedShort 같은 필드)
+
+1-4. 테이블 컨테이너
+<div className="w-full overflow-x-hidden">
+  <table className="w-full table-auto border-separate border-spacing-y-1">
+    {/* ... */}
+  </table>
+</div>
+
+
+w-full + overflow-x-hidden으로 가로 스크롤 강제 제거
+
+내부 컨텐츠 자체를 줄여서 5컬럼이 한 화면에 들어오게 만드는 게 핵심
+
+2. PC 레이아웃: 좌우폭 넓히기 (김프가 느낌으로)
+
+지금 PC에서 차트 + 테이블 그리드가 너무 좁게 가운데 박혀있어서 한 화면에 정보가 잘 안 들어옴.
+김프가처럼 컨텐츠 최대 폭을 넓게 가져가야 함.
+
+2-1. 홈 메인 컨테이너 조정
+// 기존 예시 (추정)
+// <main className="max-w-6xl mx-auto px-4">
+
+// 수정 지시
+<main className="max-w-[1440px] mx-auto px-4 lg:px-6">
+
+
+max-w-6xl → max-w-[1440px] 또는 최소 max-w-7xl 로 상향
+
+좌우 패딩은 px-4 lg:px-6 정도로 얇게
+
+2-2. 차트 + 테이블 그리드 폭
+<section className="mt-4 grid gap-6 lg:grid-cols-[3fr_1.2fr]">
+  {/* 왼쪽: 차트 + 테이블 (넓게) */}
+  <div className="space-y-4">
+    <ChartSection />
+    <PremiumTableSection />
+  </div>
+
+  {/* 오른쪽: AI 요약/PRO 영역 */}
+  <aside className="space-y-4">
+    <TodayPremiumSummary />   // 이건 3번에서 위치 조정
+    <ProBox />
+  </aside>
+</section>
+
+
+왼쪽 비중을 확실히 키워서(3fr) 테이블이 넓게 보이도록
+
+테이블 카드 자체도 px-0 쪽으로 패딩 줄여서 그리드 영역 최대 활용
+
+3. “오늘의 AI 김프 요약” 위치 조정
+
+요청: “모바일처럼 위로 옮기던지, 메뉴바 바로 아래로 옮겨서 넣자. 높이도 낮게.”
+
+3-1. 위치 전략
+
+공통: 네비게이션/TopInfoBar 바로 아래, 홈의 가장 윗부분에 얇은 요약 섹션으로 배치
+
+PC에서는 넓게 펼쳐진 얇은 카드, 모바일에서는 한 장짜리 카드 느낌
+
+3-2. 구현 예시
+// Navbar 아래, main 위쪽에 추가
+<section className="w-full border-b border-slate-800/60 bg-slate-950/40">
+  <div className="max-w-[1440px] mx-auto px-4 lg:px-6 py-3 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+    {/* 왼쪽: 요약 텍스트 (불릿 3~4줄) */}
+    <div className="text-[12px] leading-relaxed text-slate-200 space-y-1">
+      <p className="font-semibold text-[13px]">오늘의 AI 김프 요약</p>
+      <p>• 평균 김프: {summary.avgPremium}</p>
+      <p>• 최대 김프: {summary.maxPremium}</p>
+      <p>• 최소 김프: {summary.minPremium}</p>
+    </div>
+
+    {/* 오른쪽: KR Premium Score + 버튼 (컴팩트) */}
+    <div className="flex items-center gap-3">
+      <div className="rounded-xl bg-indigo-600/20 px-3 py-2 text-[12px]">
+        <div className="text-xs text-slate-300">KR Premium Score</div>
+        <div className="text-lg font-semibold text-indigo-300">{summary.score}/10</div>
+      </div>
+      <button className="rounded-lg bg-indigo-500 px-3 py-2 text-[12px] font-semibold text-white">
+        PRO 분석 보기
+      </button>
+    </div>
+  </div>
+</section>
+
+
+py-3 정도로 높이를 얇게 해서 “띠 배너처럼” 보이게
+
+기존 오른쪽에 있던 큰 카드 대신 이 컴팩트 버전으로 교체
+
+PC/모바일 둘 다 이 섹션만 쓰고, 오른쪽 사이드에 있던 “오늘의 AI 김프 요약 카드”는 제거하거나 축소해서 PRO 영역으로만 활용
+
+한 줄 요약해서 레플릿/Gemini한테 전달할 문장
+
+PremiumTable은 김프가와 동일하게 코인명 / 현재가 / 김프 / 전일대비 / 거래액(일) 5개 컬럼을 모바일 포함 한 화면에 전부 보이게 해 주세요. 헤더/셀 폰트를 줄이고(text-[11px]~[12px]), 패딩을 px-2 수준으로 줄여서 가로 스크롤 없이 들어가게 조정하고, 즐겨찾기 별은 코인 아이콘 아래쪽으로 세로 배치해 주세요.
+
+PC 레이아웃은 메인 컨테이너를 max-w-[1440px] 수준으로 넓히고, 차트+테이블이 있는 왼쪽 그리드 폭을 3fr 이상으로 키워 테이블이 김프가처럼 넓게 보이게 해 주세요.
+
+오늘의 AI 김프 요약은 현재 오른쪽 카드 위치에서 제거하고, 네비게이션/상단 인포바 바로 아래에 얇은 요약 섹션(배너)으로 공통 배치해서, 한 눈에 오늘 상황이 들어오도록 바꿔 주세요.
