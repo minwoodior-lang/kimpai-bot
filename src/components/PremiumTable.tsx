@@ -918,11 +918,11 @@ export default function PremiumTable({
                         <td className="px-2 py-2">
                           <div className="flex items-center gap-2">
                             {/* 아이콘 + 별 (세로 중앙정렬) */}
-                            <div className="flex flex-col items-center justify-center gap-0.5 min-w-[44px]">
-                              <CoinIcon symbol={row.symbol} className="h-8 w-8" iconUrl={row.icon_url} />
+                            <div className="flex flex-col items-center justify-center gap-0.5 min-w-[36px]">
+                              <CoinIcon symbol={row.symbol} className="h-6 w-6" iconUrl={row.icon_url} />
                               <button
                                 type="button"
-                                className="text-sm leading-none dark:text-slate-500 light:text-slate-400 dark:hover:text-yellow-400 light:hover:text-yellow-500 transition-colors"
+                                className="text-xs leading-none dark:text-slate-500 light:text-slate-400 dark:hover:text-yellow-400 light:hover:text-yellow-500 transition-colors"
                                 onClick={() => toggleFavorite(row.symbol)}
                               >
                                 {favorites.has(row.symbol) ? "★" : "☆"}
@@ -934,11 +934,11 @@ export default function PremiumTable({
                                 onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
                                 className="dark:hover:text-blue-400 light:hover:text-blue-600 transition-colors text-left truncate"
                               >
-                                <span className="text-sm dark:text-slate-100 light:text-slate-900 font-semibold truncate">
+                                <span className="text-xs dark:text-slate-100 light:text-slate-900 font-semibold truncate">
                                   {getDisplayName(row)}
                                 </span>
                               </button>
-                              <span className="text-xs dark:text-slate-400 light:text-slate-600 truncate uppercase tracking-wide">
+                              <span className="text-xs dark:text-slate-400 light:text-slate-600 truncate uppercase tracking-wide text-[10px]">
                                 {row.symbol}
                               </span>
                             </div>

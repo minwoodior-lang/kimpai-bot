@@ -48,8 +48,8 @@ export default function Layout({ children }: LayoutProps) {
   const isActive = (path: string) => router.pathname === path;
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-purple-950 via-slate-950 to-slate-900 dark:bg-gradient-to-br dark:from-purple-950 dark:via-slate-950 dark:to-slate-900 light:bg-white text-slate-100 dark:text-slate-100 light:text-slate-900">
-      <header className="sm:sticky sm:top-0 z-50 bg-gradient-to-r from-purple-950/95 to-slate-950/95 dark:bg-gradient-to-r dark:from-purple-950/95 dark:to-slate-950/95 light:bg-white/95 backdrop-blur border-b border-slate-800 dark:border-slate-800 light:border-slate-200">
+    <div className="min-h-screen flex flex-col bg-slate-900 dark:bg-slate-900 light:bg-white text-slate-100 dark:text-slate-100 light:text-slate-900">
+      <header className="sm:sticky sm:top-0 z-50 bg-slate-900/95 dark:bg-slate-900/95 light:bg-white/95 backdrop-blur border-b border-slate-800 dark:border-slate-800 light:border-slate-200">
         <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-5">
           <TopMarketInfoBar />
 
@@ -70,7 +70,7 @@ export default function Layout({ children }: LayoutProps) {
                     className={`transition-colors ${
                       isActive(link.href)
                         ? "dark:text-white light:text-slate-900 font-medium"
-                        : "dark:text-slate-300 light:text-slate-600 dark:hover:text-white light:hover:text-slate-900"
+                        : "dark:text-slate-300 light:text-slate-700 dark:hover:text-white light:hover:text-slate-900"
                     }`}
                   >
                     {link.label}
@@ -81,14 +81,14 @@ export default function Layout({ children }: LayoutProps) {
               <div className="hidden md:flex items-center gap-3">
                 <button
                   onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                  className="dark:text-slate-300 light:text-slate-600 dark:hover:text-white light:hover:text-slate-900 transition-colors text-sm"
+                  className="dark:text-slate-300 light:text-slate-700 dark:hover:text-white light:hover:text-slate-900 transition-colors text-sm"
                   title={`${theme === "light" ? "다크" : "라이트"} 모드`}
                 >
                   {theme === "light" ? "🌙" : "☀️"}
                 </button>
                 <Link
                   href="/login"
-                  className="dark:text-slate-300 light:text-slate-600 dark:hover:text-white light:hover:text-slate-900 transition-colors text-sm"
+                  className="dark:text-slate-300 light:text-slate-700 dark:hover:text-white light:hover:text-slate-900 transition-colors text-sm"
                 >
                   로그인
                 </Link>
@@ -139,7 +139,7 @@ export default function Layout({ children }: LayoutProps) {
                       className={`transition-colors ${
                         isActive(link.href)
                           ? "dark:text-white light:text-slate-900 font-medium"
-                          : "dark:text-slate-300 light:text-slate-600 dark:hover:text-white light:hover:text-slate-900"
+                          : "dark:text-slate-300 light:text-slate-700 dark:hover:text-white light:hover:text-slate-900"
                       }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -148,12 +148,12 @@ export default function Layout({ children }: LayoutProps) {
                   ))}
                   <button
                     onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                    className="dark:text-slate-300 light:text-slate-600 dark:hover:text-white light:hover:text-slate-900 transition-colors text-sm py-2"
+                    className="dark:text-slate-300 light:text-slate-700 dark:hover:text-white light:hover:text-slate-900 transition-colors text-sm py-2"
                   >
                     {theme === "light" ? "🌙 다크 모드" : "☀️ 라이트 모드"}
                   </button>
                   <div className="mt-4 flex gap-2 pt-4 border-t dark:border-slate-700/50 light:border-slate-200">
-                    <button className="flex-1 rounded-lg border dark:border-slate-600 light:border-slate-300 py-2 text-sm dark:text-slate-300 light:text-slate-600 dark:hover:text-white light:hover:text-slate-900 transition-colors">
+                    <button className="flex-1 rounded-lg border dark:border-slate-600 light:border-slate-300 py-2 text-sm dark:text-slate-300 light:text-slate-700 dark:hover:text-white light:hover:text-slate-900 transition-colors">
                       로그인
                     </button>
                     <button className="flex-1 rounded-lg bg-indigo-500 hover:bg-indigo-600 py-2 text-sm font-semibold dark:text-white light:text-white transition-colors">
