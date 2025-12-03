@@ -154,7 +154,7 @@ export default function TopInfoBar() {
             <span className="text-[#30364a]">|</span>
 
             <div className="flex items-center gap-1 flex-shrink-0">
-              <span className="text-[#A7B3C6]">BTC:</span>
+              <span className="text-[#A7B3C6]">BTC 점유율:</span>
               <span className="font-medium text-white">{formatNumber(metrics.global.btcDominance, 1)}%</span>
             </div>
 

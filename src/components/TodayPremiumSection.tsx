@@ -48,10 +48,10 @@ export function TodayPremiumSection({
       </div>
 
       {/* Score 카드 */}
-      <div className={`${compact ? 'mt-1.5 py-0.5' : 'mt-2 py-1'} rounded-lg dark:bg-indigo-900/60 light:bg-indigo-100/60 px-2 flex items-center justify-center`}>
+      <div className={`${compact ? 'mt-1 py-0.5' : 'mt-2 py-1'} rounded-lg dark:bg-indigo-900/60 light:bg-indigo-100/60 px-2 flex items-center justify-center`}>
         <div className="text-center">
-          <div className={`${compact ? 'text-[9px] sm:text-[10px] mb-0.5' : 'text-[10px] sm:text-xs mb-1'} dark:text-slate-300 light:text-indigo-700`}>KR Premium Score</div>
-          <div className={`${compact ? 'text-base sm:text-lg' : 'text-lg sm:text-xl'} font-bold dark:text-emerald-400 light:text-emerald-600`}>{score}/10</div>
+          <div className={`${compact ? 'text-[8px] sm:text-[9px] mb-0.5' : 'text-[10px] sm:text-xs mb-1'} dark:text-slate-300 light:text-indigo-700`}>KR Premium Score</div>
+          <div className={`${compact ? 'text-sm sm:text-base' : 'text-lg sm:text-xl'} font-bold dark:text-emerald-400 light:text-emerald-600`}>{score}/10</div>
         </div>
       </div>
     </div>

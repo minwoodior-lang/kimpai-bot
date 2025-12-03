@@ -171,7 +171,7 @@ export default function Home() {
             </div>
 
             {/* 공통 카드 껍데기 - 고정 높이 */}
-            <div className="rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 p-2.5 h-[220px] flex flex-col">
+            <div className="rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 p-2 h-[180px] flex flex-col">
               {mobileCardTab === "ai" && (
                 <AiSummaryMobileContent
                   avgPremium={
@@ -207,7 +207,7 @@ export default function Home() {
           </div>
 
           {/* 차트 섹션 */}
-          <div className="mt-2">
+          <div className="mt-2 h-[240px] md:h-auto">
             <ChartSectionEnhanced
               selectedIndicator={selectedIndicator}
               onIndicatorChange={setSelectedIndicator}
