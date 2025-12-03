@@ -350,6 +350,13 @@ export default function PremiumTable({
         newFavorites.delete(symbol);
       } else {
         newFavorites.add(symbol);
+        // 즉시 코인셀을 맨 위로 끌어올리기
+        const favoriteRow = document.querySelector(`[data-symbol="${symbol}"]`);
+        if (favoriteRow) {
+          setTimeout(() => {
+            favoriteRow.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 0);
+        }
       }
       return newFavorites;
     });
@@ -859,7 +866,7 @@ export default function PremiumTable({
           {error}
         </div>
       ) : (
-        <div className="w-full overflow-hidden">
+        <div className="w-full overflow-hidden px-3 sm:px-0">
           <table className="w-full table-fixed border-separate border-spacing-y-0">
             <colgroup>
               <col className="w-[35%]" /> {/* 코인명 */}
@@ -922,23 +929,21 @@ export default function PremiumTable({
                     <React.Fragment key={uniqueKey}>
                       <tr
                         className="border-b dark:border-slate-800/80 light:border-slate-200 dark:hover:bg-slate-800/60 light:hover:bg-slate-100 transition-colors"
+                        data-symbol={row.symbol}
                       >
                         <td className="px-1 sm:px-2 py-2">
                           <div className="flex items-center gap-1.5">
                             {/* 왼쪽: 아이콘 + 별 */}
-                            <div className="flex flex-col items-center justify-center gap-0 min-w-[36px] flex-shrink-0">
-                              <CoinIcon symbol={row.symbol} className="h-4 w-4" iconUrl={row.icon_url} />
+                            <div className="flex flex-col items-center justify-center gap-0 min-w-[40px] sm:min-w-[44px] flex-shrink-0">
+                              <CoinIcon symbol={row.symbol} className="h-5 w-5 sm:h-4 sm:w-4" iconUrl={row.icon_url} />
                               <button
                                 type="button"
-                                className={`text-lg leading-none transition-colors ${
+                                className={`text-xl sm:text-lg leading-none transition-colors ${
                                   favorites.has(row.symbol)
                                     ? "dark:text-yellow-400 light:text-yellow-500"
                                     : "dark:text-slate-500 light:text-slate-400 dark:hover:text-yellow-400 light:hover:text-yellow-500"
                                 }`}
-                                onClick={() => {
-                                  toggleFavorite(row.symbol);
-                                  window.scrollTo({ top: 0, behavior: "smooth" });
-                                }}
+                                onClick={() => toggleFavorite(row.symbol)}
                               >
                                 ★
                               </button>
@@ -949,11 +954,11 @@ export default function PremiumTable({
                                 onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
                                 className="dark:hover:text-blue-400 light:hover:text-blue-600 transition-colors text-left truncate"
                               >
-                                <span className="text-[10px] sm:text-sm dark:text-slate-100 light:text-slate-900 font-semibold truncate">
+                                <span className="text-[11px] sm:text-base dark:text-slate-100 light:text-slate-900 font-semibold truncate">
                                   {getDisplayName(row)}
                                 </span>
                               </button>
-                              <span className="text-[8px] sm:text-xs dark:text-slate-400 light:text-slate-600 truncate uppercase tracking-tight">
+                              <span className="text-[9px] sm:text-xs dark:text-slate-400 light:text-slate-600 truncate uppercase tracking-tight">
                                 {row.symbol}
                               </span>
                             </div>
