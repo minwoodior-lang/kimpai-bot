@@ -1,6 +1,6 @@
 /**
  * 오늘의 AI 김프 요약 - 통합 카드 (최종 레이아웃)
- * 좌측: 정보 그리드 / 우측: PRO 예측 설명 (미러 효과)
+ * 좌측: 정보 그리드 / 우측: PRO 예측 설명 + 미러 처리 + 내 알림
  */
 
 interface TodayPremiumSectionProps {
@@ -32,14 +32,19 @@ export function TodayPremiumSection({
     <section className="w-full max-w-[1200px] mx-auto mt-6">
       {/* 통합 카드 컨테이너 */}
       <div className="rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 p-4 sm:p-5">
-        {/* 헤더: 제목 + 현재시간 */}
-        <div className="flex items-center justify-between mb-4">
+        {/* 헤더: 제목 + 현재시간 + 내 알림 */}
+        <div className="flex items-start justify-between mb-4">
           <h2 className="text-sm sm:text-base font-bold dark:text-slate-100 light:text-slate-900 flex items-center gap-2">
             <span>📊</span>
             <span>오늘의 AI 김프 요약</span>
           </h2>
-          <div className="text-[10px] sm:text-xs dark:text-slate-400 light:text-slate-600 font-medium">
-            {getCurrentTime()} 기준
+          <div className="text-right flex flex-col gap-2">
+            <div className="text-[10px] sm:text-xs dark:text-slate-400 light:text-slate-600 font-medium">
+              {getCurrentTime()} 기준
+            </div>
+            <div className="text-[9px] sm:text-[10px] dark:text-slate-500 light:text-slate-500">
+              내 알림
+            </div>
           </div>
         </div>
 
@@ -65,27 +70,29 @@ export function TodayPremiumSection({
             </div>
           </div>
 
-          {/* 우측: PRO 예측 설명 (미러 효과) */}
+          {/* 우측: PRO 예측 섹션 */}
           <div className="md:col-span-2 border-l dark:border-slate-700/40 light:border-slate-300/30 pl-4 flex flex-col">
-            {/* PRO 예측 설명 (미러/반투명 처리) */}
-            <div className="flex-1">
-              <div className="text-[11px] sm:text-xs font-semibold dark:text-slate-100 light:text-slate-900 mb-2">
-                🔒 PRO 전용 48시간 김프 예측
-              </div>
-              {/* 미러 효과 텍스트 - 반투명하고 흐릿하게 */}
-              <div className="p-2.5 rounded-lg dark:bg-slate-800/30 light:bg-slate-200/20 mb-2 backdrop-blur-sm">
-                <p className="text-[8px] sm:text-[9px] dark:text-slate-500 light:text-slate-500 leading-relaxed opacity-70 font-medium">
-                  최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
-                  <span className="block dark:text-slate-600 light:text-slate-600 text-[7px] sm:text-[8px] mt-1">
-                    (PRO 구독 시 전체 내용 확인 가능)
-                  </span>
-                </p>
-              </div>
+            {/* 타이틀 */}
+            <div className="text-[11px] sm:text-xs font-semibold dark:text-slate-100 light:text-slate-900 mb-2">
+              🔒 PRO 전용 48시간 김프 예측
             </div>
 
-            {/* 내 알림 */}
-            <div className="text-[9px] sm:text-[10px] dark:text-slate-500 light:text-slate-500 mt-1">
-              내 알림
+            {/* 명확한 설명 텍스트 */}
+            <p className="text-[9px] sm:text-[10px] dark:text-slate-400 light:text-slate-600 leading-relaxed mb-2">
+              최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
+              <span className="block dark:text-slate-500 light:text-slate-500 text-[8px] sm:text-[9px] mt-1">
+                (PRO 구독 시 전체 내용 확인 가능)
+              </span>
+            </p>
+
+            {/* 미러 처리된 텍스트 (흐릿함 - 궁금하게 하는 용도) */}
+            <div className="p-2.5 rounded-lg dark:bg-slate-800/20 light:bg-slate-200/10 backdrop-blur-sm flex-1">
+              <p className="text-[8px] sm:text-[9px] dark:text-slate-600 light:text-slate-600 leading-relaxed opacity-50 font-medium">
+                대시보드를 과산으로 움침니다. 내 자산의 리밸런싱 추천과 수익화 전략을 받을 수 있습니다.
+                <span className="block mt-1">
+                  최근 30일 기준, 이 예측은 김프 2% 이상...
+                </span>
+              </p>
             </div>
           </div>
         </div>
