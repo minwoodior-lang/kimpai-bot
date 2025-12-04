@@ -148,8 +148,18 @@ export default function UserPrefsPanel({
                 />
                 <span className="text-sm dark:text-slate-300 light:text-slate-700">
                   내 관심 자산만
+                  {prefs.favorites && prefs.favorites.length > 0 && (
+                    <span className="ml-1 text-xs text-indigo-400">
+                      ({prefs.favorites.length}개)
+                    </span>
+                  )}
                 </span>
               </label>
+              {prefs.filterMode === "favorites" && (!prefs.favorites || prefs.favorites.length === 0) && (
+                <p className="text-xs dark:text-amber-400/80 light:text-amber-600 mt-1 ml-7">
+                  아직 즐겨찾기한 코인이 없습니다. 코인 목록에서 ★ 버튼을 눌러 추가해주세요.
+                </p>
+              )}
             </div>
           </div>
 
