@@ -764,82 +764,30 @@ export default function PremiumTable({
     HTX: "HTX",
   };
 
-  // 거래소 ID에서 거래소명과 마켓 분리
-  const parseExchangeId = (
-    id: string
-  ): { exchange: string; market: string } => {
-    const parts = id.split("_");
-    if (parts.length === 2) {
-      return { exchange: parts[0], market: parts[1] };
-    }
-    return { exchange: id, market: "KRW" };
-  };
-
-  // 해외 거래소 ID에서 거래소명과 마켓 분리 (e.g., "BINANCE_BTC" -> BINANCE, BTC)
-  const parseForeignId = (
-    id: string
-  ): { exchange: string; market: string } => {
-    const parts = id.split("_");
-    if (parts.length === 2) {
-      return { exchange: parts[0], market: parts[1] };
-    }
-    return { exchange: id, market: "USDT" };
-  };
-
-  // TradingView 심볼 생성 (국내 거래소용)
-  const getTvSymbolForDomestic = (params: {
-    symbol: string;
-    exchange: string;
-    market: string;
-  }): string => {
-    const { symbol, exchange, market } = params;
-    const prefix = TV_DOMESTIC_PREFIX[exchange];
-    if (!prefix) return `BINANCE:${symbol}USDT`; // Fallback
-    return `${prefix}:${symbol}${market}`;
-  };
-
-  // TradingView 심볼 생성 (해외 거래소용)
-  const getTvSymbolForForeign = (params: {
-    symbol: string;
-    exchange: string;
-    market: string;
-  }): string => {
-    const { symbol, exchange, market } = params;
-    const prefix = TV_FOREIGN_PREFIX[exchange] ?? "BINANCE";
-    return `${prefix}:${symbol}${market}`;
-  };
-
   // 코인 row별 TV 심볼 생성 (조건부)
   const getTvSymbolForRow = (params: {
     symbol: string;
     domesticExchange: string;
+    domesticMarket: string;
     foreignExchange: string;
+    foreignMarket: string;
   }): string => {
-    const { symbol, domesticExchange, foreignExchange } = params;
+    const { symbol, domesticExchange, domesticMarket, foreignExchange, foreignMarket } = params;
 
-    // 국내 거래소 파싱
-    const domestic = parseExchangeId(domesticExchange);
-    const foreign = parseForeignId(foreignExchange);
-
-    // 업비트/빗썸 → 국내 거래소 차트
-    if (domestic.exchange === "UPBIT" || domestic.exchange === "BITHUMB") {
-      return getTvSymbolForDomestic({
-        symbol,
-        exchange: domestic.exchange,
-        market: domestic.market,
-      });
+    // 1) 업비트 / 빗썸
+    if (domesticExchange === "UPBIT" || domesticExchange === "BITHUMB") {
+      const prefix = TV_DOMESTIC_PREFIX[domesticExchange];
+      if (!prefix) return `BINANCE:${symbol}USDT`;
+      return `${prefix}:${symbol}${domesticMarket}`;
     }
 
-    // 코인원 → 해외 거래소 차트
-    if (domestic.exchange === "COINONE") {
-      return getTvSymbolForForeign({
-        symbol,
-        exchange: foreign.exchange,
-        market: foreign.market,
-      });
+    // 2) 코인원 → 해외 거래소 기준
+    if (domesticExchange === "COINONE") {
+      const prefix = TV_FOREIGN_PREFIX[foreignExchange] ?? "BINANCE";
+      return `${prefix}:${symbol}${foreignMarket}`;
     }
 
-    // Fallback
+    // 3) fallback
     return `BINANCE:${symbol}USDT`;
   };
 
@@ -1017,7 +965,7 @@ export default function PremiumTable({
       ) : (
         <div className="w-full overflow-hidden px-4">
           <table className="w-full table-fixed border-separate border-spacing-y-0">
-            <colgroup><col className="w-[30px]" /><col className="w-[35%]" /><col className="w-[16%]" /><col className="w-[16%]" /><col className="w-[17%]" /><col className="hidden md:table-column w-[8%]" /><col className="hidden md:table-column w-[8%]" /><col className="w-[16%]" /><col className="w-[30px]" /></colgroup>
+            <colgroup><col className="w-[30px]" /><col className="w-[35%]" /><col className="w-[16%]" /><col className="w-[16%]" /><col className="w-[17%]" /><col className="hidden md:table-column w-[8%]" /><col className="hidden md:table-column w-[8%]" /><col className="w-[16%]" /></colgroup>
             <thead>
                 <tr className="bg-slate-900/60 text-slate-400 text-[11px] md:text-sm">
                   <th className="w-[30px] text-center text-[11px] text-[#A7B3C6]/50">★</th>
@@ -1049,7 +997,6 @@ export default function PremiumTable({
                     거래액(일)
                     <SortIcon columnKey="volume24hKrw" />
                   </th>
-                  <th className="w-[30px] text-center text-[11px] text-[#A7B3C6]/50">차트</th>
                 </tr>
               </thead>
               <tbody>
@@ -1092,17 +1039,32 @@ export default function PremiumTable({
                         </td>
                         <td className="px-1 md:px-2 py-1.5 md:py-2">
                           <div className="flex items-center gap-1.5 md:gap-3 min-w-0">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const tvSymbol = getTvSymbolForRow({
+                                  symbol: row.symbol,
+                                  domesticExchange,
+                                  domesticMarket: domesticExchange.split('_')[1] || 'KRW',
+                                  foreignExchange,
+                                  foreignMarket: foreignExchange.split('_')[1] || 'USDT',
+                                });
+                                if (onTradingViewChartClick) {
+                                  onTradingViewChartClick(tvSymbol);
+                                }
+                              }}
+                              className="p-1 text-slate-400 hover:text-slate-200 transition-colors flex-shrink-0"
+                              title="차트 보기"
+                            >
+                              📈
+                            </button>
                             <CoinIcon symbol={row.symbol} className="w-3.5 h-3.5 md:w-8 md:h-8 flex-shrink-0" iconUrl={row.icon_url} />
-                            <div className="flex flex-col flex-1 min-w-0">
-                              <button
-                                onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
-                                className="hover:text-blue-400 transition-colors text-left no-underline"
-                              >
-                                <span className="truncate text-white font-medium">
-                                  {getDisplayName(row)}
-                                </span>
-                              </button>
-                              <span className="truncate text-[#A7B3C6] uppercase tracking-tight">
+                            <div className="flex flex-col flex-1 min-w-0 cursor-pointer"
+                              onClick={() => openCmcPage(row.symbol, row.cmcSlug)}>
+                              <span className="truncate text-white font-medium hover:text-blue-400 transition-colors">
+                                {getDisplayName(row)}
+                              </span>
+                              <span className="truncate text-[#A7B3C6] uppercase tracking-tight text-xs">
                                 {getDisplaySymbol(row.symbol)}
                               </span>
                             </div>
@@ -1160,41 +1122,20 @@ export default function PremiumTable({
                             <span className="text-gray-500">-</span>
                           )}
                         </td>
-
-                        <td className="px-1 md:px-2 py-1.5 md:py-2 text-center">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const tvSymbol = getTvSymbolForRow({
-                                symbol: row.symbol,
-                                domesticExchange,
-                                foreignExchange,
-                              });
-                              if (onTradingViewChartClick) {
-                                onTradingViewChartClick(tvSymbol);
-                              }
-                              toggleChart(row.symbol);
-                            }}
-                            className="inline-flex items-center justify-center w-6 h-6 rounded hover:bg-slate-700/60 transition-colors text-slate-400 hover:text-slate-200"
-                            title="차트 보기"
-                          >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                            </svg>
-                          </button>
-                        </td>
                       </tr>
 
                       {expandedSymbol === row.symbol && (
                         <tr key={`${row.symbol}-chart`}>
-                          <td colSpan={9} className="p-0">
+                          <td colSpan={8} className="p-0">
                             <div className="bg-[#0F111A] border-t border-b border-slate-700/50 py-3 px-3">
                               <div className="h-[360px] rounded-xl overflow-hidden bg-slate-900/50">
                                 <TradingViewChart
                                   tvSymbol={getTvSymbolForRow({
                                     symbol: row.symbol,
                                     domesticExchange,
+                                    domesticMarket: domesticExchange.split('_')[1] || 'KRW',
                                     foreignExchange,
+                                    foreignMarket: foreignExchange.split('_')[1] || 'USDT',
                                   })}
                                   height={360}
                                 />

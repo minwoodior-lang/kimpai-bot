@@ -13,7 +13,7 @@ export function getCmcUrl(symbol: string, cmcSlug?: string): string {
   let url: string;
 
   if (cmcSlug && cmcSlug.trim().length > 0) {
-    url = `https://coinmarketcap.com/ko/currencies/${cmcSlug}/`;
+    url = `https://coinmarketcap.com/ko/currencies/${cmcSlug}/?utm_source=apiswap&utm_medium=web&utm_campaign=kimpga`;
   } else {
     const query = encodeURIComponent(symbol.toLowerCase());
     url = `https://coinmarketcap.com/ko/search/?q=${query}`;

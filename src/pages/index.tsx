@@ -57,10 +57,11 @@ export default function Home() {
   const { prefs, setPrefs, isLoaded } = useUserPrefs();
   const { data, averagePremium, fxRate } = useMarkets();
 
-  const handleTradingViewChartClick = (tvSymbol: string) => {
+  const openTradingViewChart = (tvSymbol: string) => {
     setPremiumTvSymbol(tvSymbol);
-    // 스크롤 예정 (향후 구현)
   };
+
+  const handleTradingViewChartClick = openTradingViewChart;
 
   const listedData = data.filter(item => item.premium !== null);
   
