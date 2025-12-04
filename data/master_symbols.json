@@ -4,3682 +4,5443 @@
     "cmc_slug": null,
     "name_ko": "제로지",
     "name_en": "0G",
-    "icon_path": "/icons/UPBIT/0G.png"
+    "icon_path": "/icons/UPBIT/0G.png",
+    "tradingViewSymbol": "BINANCE:0GUSDT",
+    "iconUrl": "/icons/coins/0G.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "1INCH",
     "cmc_slug": "1inch",
     "name_ko": "1인치",
     "name_en": "1inch",
-    "icon_path": "/icons/UPBIT/1INCH.png"
+    "icon_path": "/icons/UPBIT/1INCH.png",
+    "cmcSlug": "1inch",
+    "tradingViewSymbol": "BINANCE:1INCHUSDT",
+    "iconUrl": "/icons/coins/1INCH.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "2Z",
     "cmc_slug": "doublezero",
     "name_ko": "더블제로",
     "name_en": "DoubleZero",
-    "icon_path": "/icons/UPBIT/2Z.png"
+    "icon_path": "/icons/UPBIT/2Z.png",
+    "tradingViewSymbol": "BINANCE:2ZUSDT",
+    "iconUrl": "/icons/coins/2Z.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "A",
     "cmc_slug": "vaulta",
     "name_ko": "볼타",
     "name_en": "Vaulta",
-    "icon_path": "/icons/UPBIT/A.png"
+    "icon_path": "/icons/UPBIT/A.png",
+    "tradingViewSymbol": "BINANCE:AUSDT",
+    "iconUrl": "/icons/coins/A.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "A8",
     "cmc_slug": "ancient8",
     "name_ko": "에인션트8",
-    "name_en": "Ancient8"
+    "name_en": "Ancient8",
+    "tradingViewSymbol": "BINANCE:A8USDT",
+    "iconUrl": "/icons/coins/A8.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "AAVE",
     "cmc_slug": "aave",
     "name_ko": "에이브",
     "name_en": "Aave",
-    "icon_path": "/icons/UPBIT/AAVE.png"
+    "icon_path": "/icons/UPBIT/AAVE.png",
+    "cmcSlug": "aave",
+    "tradingViewSymbol": "BINANCE:AAVEUSDT",
+    "iconUrl": "/icons/coins/AAVE.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "ACE",
     "cmc_slug": "fusionist",
     "name_ko": "퓨저니스트",
-    "name_en": "Fusionist"
+    "name_en": "Fusionist",
+    "tradingViewSymbol": "BINANCE:ACEUSDT",
+    "iconUrl": "/icons/coins/ACE.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "ACH",
     "cmc_slug": "alchemy-pay",
     "name_ko": "알케미페이",
-    "name_en": "Alchemy Pay"
+    "name_en": "Alchemy Pay",
+    "tradingViewSymbol": "BINANCE:ACHUSDT",
+    "iconUrl": "/icons/coins/ACH.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "ACM",
     "cmc_slug": null,
     "name_ko": "AC밀란",
     "name_en": "AC Milan Fan Token",
-    "icon_path": "/icons/UPBIT/ACM.png"
+    "icon_path": "/icons/UPBIT/ACM.png",
+    "tradingViewSymbol": "BINANCE:ACMUSDT",
+    "iconUrl": "/icons/coins/ACM.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ACS",
     "cmc_slug": "access-protocol",
     "name_ko": "액세스프로토콜",
     "name_en": "Access Protocol",
-    "icon_path": "/icons/UPBIT/ACS.png"
+    "icon_path": "/icons/UPBIT/ACS.png",
+    "tradingViewSymbol": "BINANCE:ACSUSDT",
+    "iconUrl": "/icons/coins/ACS.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "ACX",
     "cmc_slug": "across-protocol",
     "name_ko": "어크로스 프로토콜",
-    "name_en": "Across Protocol"
+    "name_en": "Across Protocol",
+    "tradingViewSymbol": "BINANCE:ACXUSDT",
+    "iconUrl": "/icons/coins/ACX.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "ADA",
     "cmc_slug": "cardano",
     "name_ko": "에이다",
     "name_en": "Cardano",
-    "icon_path": "/icons/UPBIT/ADA.png"
+    "icon_path": "/icons/UPBIT/ADA.png",
+    "cmcSlug": "cardano",
+    "tradingViewSymbol": "BINANCE:ADAUSDT",
+    "iconUrl": "/icons/coins/ADA.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "ADP",
     "cmc_slug": null,
     "name_ko": "어댑터 토큰",
-    "name_en": "Adappter Token"
+    "name_en": "Adappter Token",
+    "tradingViewSymbol": "BINANCE:ADPUSDT",
+    "iconUrl": "/icons/coins/ADP.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "AERGO",
     "cmc_slug": "aergo",
     "name_ko": "아르고",
     "name_en": "Aergo",
-    "icon_path": "/icons/UPBIT/AERGO.png"
+    "icon_path": "/icons/UPBIT/AERGO.png",
+    "tradingViewSymbol": "BINANCE:AERGOUSDT",
+    "iconUrl": "/icons/coins/AERGO.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "AERO",
     "cmc_slug": "aerodrome-finance",
     "name_ko": "에어로드롬 파이낸스",
     "name_en": "Aerodrome Finance",
-    "icon_path": "/icons/UPBIT/AERO.png"
+    "icon_path": "/icons/UPBIT/AERO.png",
+    "tradingViewSymbol": "BINANCE:AEROUSDT",
+    "iconUrl": "/icons/coins/AERO.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "AEVO",
     "cmc_slug": "aevo",
     "name_ko": "에이보",
-    "name_en": "Aevo"
+    "name_en": "Aevo",
+    "tradingViewSymbol": "BINANCE:AEVOUSDT",
+    "iconUrl": "/icons/coins/AEVO.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "AFC",
     "cmc_slug": null,
     "name_ko": "아스날",
     "name_en": "Arsenal Fan Token",
-    "icon_path": "/icons/UPBIT/AFC.png"
+    "icon_path": "/icons/UPBIT/AFC.png",
+    "tradingViewSymbol": "BINANCE:AFCUSDT",
+    "iconUrl": "/icons/coins/AFC.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "AGI",
     "cmc_slug": "delysium",
     "name_ko": "델리시움",
-    "name_en": "Delysium"
+    "name_en": "Delysium",
+    "tradingViewSymbol": "BINANCE:AGIUSDT",
+    "iconUrl": "/icons/coins/AGI.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "AGLD",
     "cmc_slug": "adventure-gold",
     "name_ko": "어드벤처골드",
     "name_en": "Adventure Gold",
-    "icon_path": "/icons/UPBIT/AGLD.png"
+    "icon_path": "/icons/UPBIT/AGLD.png",
+    "tradingViewSymbol": "BINANCE:AGLDUSDT",
+    "iconUrl": "/icons/coins/AGLD.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "AHT",
     "cmc_slug": null,
     "name_ko": "아하토큰",
     "name_en": "AhaToken",
-    "icon_path": "/icons/UPBIT/AHT.png"
+    "icon_path": "/icons/UPBIT/AHT.png",
+    "tradingViewSymbol": "BINANCE:AHTUSDT",
+    "iconUrl": "/icons/coins/AHT.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "AI",
     "cmc_slug": "sleepless-ai",
     "name_ko": "슬립리스 에이아이",
-    "name_en": "Sleepless AI"
+    "name_en": "Sleepless AI",
+    "tradingViewSymbol": "BINANCE:AIUSDT",
+    "iconUrl": "/icons/coins/AI.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "AI16Z",
     "cmc_slug": "ai16z",
     "name_ko": "에이아이식스틴즈",
-    "name_en": "ai16z"
+    "name_en": "ai16z",
+    "tradingViewSymbol": "BINANCE:AI16ZUSDT",
+    "iconUrl": "/icons/coins/AI16Z.png",
+    "updatedAt": 1764867747783
   },
   {
     "symbol": "AIOZ",
     "cmc_slug": "aioz-network",
     "name_ko": "아이오즈 네트워크",
-    "name_en": "AIOZ Network"
+    "name_en": "AIOZ Network",
+    "tradingViewSymbol": "BINANCE:AIOZUSDT",
+    "iconUrl": "/icons/coins/AIOZ.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "AIXBT",
     "cmc_slug": "aixbt",
     "name_ko": "에이아이엑스비티",
-    "name_en": "aixbt"
+    "name_en": "aixbt",
+    "tradingViewSymbol": "BINANCE:AIXBTUSDT",
+    "iconUrl": "/icons/coins/AIXBT.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "AKT",
     "cmc_slug": "akash-network",
     "name_ko": "아카시 네트워크",
     "name_en": "Akash Network",
-    "icon_path": "/icons/UPBIT/AKT.png"
+    "icon_path": "/icons/UPBIT/AKT.png",
+    "tradingViewSymbol": "BINANCE:AKTUSDT",
+    "iconUrl": "/icons/coins/AKT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "AL",
     "cmc_slug": "archloot",
     "name_ko": "아치루트",
-    "name_en": "ArchLoot"
+    "name_en": "ArchLoot",
+    "tradingViewSymbol": "BINANCE:ALUSDT",
+    "iconUrl": "/icons/coins/AL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ALGO",
     "cmc_slug": "algorand",
     "name_ko": "알고랜드",
     "name_en": "Algorand",
-    "icon_path": "/icons/UPBIT/ALGO.png"
+    "icon_path": "/icons/UPBIT/ALGO.png",
+    "tradingViewSymbol": "BINANCE:ALGOUSDT",
+    "iconUrl": "/icons/coins/ALGO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ALICE",
     "cmc_slug": "myneighboralice",
     "name_ko": "마이네이버앨리스",
-    "name_en": "MyNeighborAlice"
+    "name_en": "MyNeighborAlice",
+    "tradingViewSymbol": "BINANCE:ALICEUSDT",
+    "iconUrl": "/icons/coins/ALICE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ALPHA",
     "cmc_slug": "alpha",
     "name_ko": "스텔라",
-    "name_en": "Stella"
+    "name_en": "Stella",
+    "tradingViewSymbol": "BINANCE:ALPHAUSDT",
+    "iconUrl": "/icons/coins/ALPHA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ALT",
     "cmc_slug": "altlayer",
     "name_ko": "알트레이어",
     "name_en": "AltLayer",
-    "icon_path": "/icons/UPBIT/ALT.png"
+    "icon_path": "/icons/UPBIT/ALT.png",
+    "tradingViewSymbol": "BINANCE:ALTUSDT",
+    "iconUrl": "/icons/coins/ALT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "AMO",
     "cmc_slug": null,
     "name_ko": "아모코인",
-    "name_en": "AMO Coin"
+    "name_en": "AMO Coin",
+    "tradingViewSymbol": "BINANCE:AMOUSDT",
+    "iconUrl": "/icons/coins/AMO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "AMP",
     "cmc_slug": "amp",
     "name_ko": "앰프",
-    "name_en": "Amp"
+    "name_en": "Amp",
+    "tradingViewSymbol": "BINANCE:AMPUSDT",
+    "iconUrl": "/icons/coins/AMP.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ANIME",
     "cmc_slug": "anime",
     "name_ko": "애니메코인",
     "name_en": "Animecoin",
-    "icon_path": "/icons/UPBIT/ANIME.png"
+    "icon_path": "/icons/UPBIT/ANIME.png",
+    "tradingViewSymbol": "BINANCE:ANIMEUSDT",
+    "iconUrl": "/icons/coins/ANIME.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ANKR",
     "cmc_slug": "ankr-network",
     "name_ko": "앵커",
     "name_en": "Ankr Network",
-    "icon_path": "/icons/UPBIT/ANKR.png"
+    "icon_path": "/icons/UPBIT/ANKR.png",
+    "tradingViewSymbol": "BINANCE:ANKRUSDT",
+    "iconUrl": "/icons/coins/ANKR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "APE",
     "cmc_slug": "ape",
     "name_ko": "에이프코인",
     "name_en": "ApeCoin",
-    "icon_path": "/icons/UPBIT/APE.png"
+    "icon_path": "/icons/UPBIT/APE.png",
+    "tradingViewSymbol": "BINANCE:APEUSDT",
+    "iconUrl": "/icons/coins/APE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "APEPE",
     "cmc_slug": "ape-and-pepe",
     "name_ko": "에이프앤페페",
-    "name_en": "Ape and Pepe"
+    "name_en": "Ape and Pepe",
+    "tradingViewSymbol": "BINANCE:APEPEUSDT",
+    "iconUrl": "/icons/coins/APEPE.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "API3",
     "cmc_slug": "api3",
     "name_ko": "에이피아이쓰리",
     "name_en": "API3",
-    "icon_path": "/icons/UPBIT/API3.png"
+    "icon_path": "/icons/UPBIT/API3.png",
+    "tradingViewSymbol": "BINANCE:API3USDT",
+    "iconUrl": "/icons/coins/API3.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "APM",
     "cmc_slug": null,
     "name_ko": "에이피엠 코인",
-    "name_en": "apM Coin"
+    "name_en": "apM Coin",
+    "tradingViewSymbol": "BINANCE:APMUSDT",
+    "iconUrl": "/icons/coins/APM.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "APT",
     "cmc_slug": "aptos",
     "name_ko": "앱토스",
     "name_en": "Aptos",
-    "icon_path": "/icons/UPBIT/APT.png"
+    "icon_path": "/icons/UPBIT/APT.png",
+    "cmcSlug": "aptos",
+    "tradingViewSymbol": "BINANCE:APTUSDT",
+    "iconUrl": "/icons/coins/APT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "AQT",
     "cmc_slug": null,
     "name_ko": "알파쿼크",
     "name_en": "Alpha Quark Token",
-    "icon_path": "/icons/UPBIT/AQT.png"
+    "icon_path": "/icons/UPBIT/AQT.png",
+    "tradingViewSymbol": "BINANCE:AQTUSDT",
+    "iconUrl": "/icons/coins/AQT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "AR",
     "cmc_slug": "arweave",
     "name_ko": "알위브",
-    "name_en": "Arweave"
+    "name_en": "Arweave",
+    "tradingViewSymbol": "BINANCE:ARUSDT",
+    "iconUrl": "/icons/coins/AR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ARB",
     "cmc_slug": "arbitrum",
     "name_ko": "아비트럼",
     "name_en": "Arbitrum",
-    "icon_path": "/icons/UPBIT/ARB.png"
+    "icon_path": "/icons/UPBIT/ARB.png",
+    "cmcSlug": "arbitrum",
+    "tradingViewSymbol": "BINANCE:ARBUSDT",
+    "iconUrl": "/icons/coins/ARB.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ARDR",
     "cmc_slug": "ardor",
     "name_ko": "아더",
     "name_en": "Ardor",
-    "icon_path": "/icons/UPBIT/ARDR.png"
+    "icon_path": "/icons/UPBIT/ARDR.png",
+    "tradingViewSymbol": "BINANCE:ARDRUSDT",
+    "iconUrl": "/icons/coins/ARDR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ARIAIP",
     "cmc_slug": "aria-protocol",
     "name_ko": "아리아 프로토콜",
-    "name_en": "Aria Protocol"
+    "name_en": "Aria Protocol",
+    "tradingViewSymbol": "BINANCE:ARIAIPUSDT",
+    "iconUrl": "/icons/coins/ARIAIP.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ARK",
     "cmc_slug": "ark",
     "name_ko": "아크",
     "name_en": "Ark",
-    "icon_path": "/icons/UPBIT/ARK.png"
+    "icon_path": "/icons/UPBIT/ARK.png",
+    "tradingViewSymbol": "BINANCE:ARKUSDT",
+    "iconUrl": "/icons/coins/ARK.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ARKM",
     "cmc_slug": "arkham",
     "name_ko": "아캄",
     "name_en": "Arkham",
-    "icon_path": "/icons/UPBIT/ARKM.png"
+    "icon_path": "/icons/UPBIT/ARKM.png",
+    "tradingViewSymbol": "BINANCE:ARKMUSDT",
+    "iconUrl": "/icons/coins/ARKM.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ARPA",
     "cmc_slug": null,
     "name_ko": "알파",
     "name_en": "ARPA",
-    "icon_path": "/icons/UPBIT/ARPA.png"
+    "icon_path": "/icons/UPBIT/ARPA.png",
+    "tradingViewSymbol": "BINANCE:ARPAUSDT",
+    "iconUrl": "/icons/coins/ARPA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ASTER",
     "cmc_slug": "aster",
     "name_ko": "아스터",
-    "name_en": "Aster"
+    "name_en": "Aster",
+    "tradingViewSymbol": "BINANCE:ASTERUSDT",
+    "iconUrl": "/icons/coins/ASTER.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ASTR",
     "cmc_slug": "astar",
     "name_ko": "아스타",
     "name_en": "Astar",
-    "icon_path": "/icons/UPBIT/ASTR.png"
+    "icon_path": "/icons/UPBIT/ASTR.png",
+    "tradingViewSymbol": "BINANCE:ASTRUSDT",
+    "iconUrl": "/icons/coins/ASTR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ATH",
     "cmc_slug": "aethir",
     "name_ko": "에이셔",
     "name_en": "Aethir",
-    "icon_path": "/icons/UPBIT/ATH.png"
+    "icon_path": "/icons/UPBIT/ATH.png",
+    "tradingViewSymbol": "BINANCE:ATHUSDT",
+    "iconUrl": "/icons/coins/ATH.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ATM",
     "cmc_slug": null,
     "name_ko": "아틀레티코마드리드",
     "name_en": "Atletico De Madrid Fan Token",
-    "icon_path": "/icons/UPBIT/ATM.png"
+    "icon_path": "/icons/UPBIT/ATM.png",
+    "tradingViewSymbol": "BINANCE:ATMUSDT",
+    "iconUrl": "/icons/coins/ATM.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ATOM",
     "cmc_slug": "cosmos",
     "name_ko": "코스모스",
     "name_en": "Cosmos",
-    "icon_path": "/icons/UPBIT/ATOM.png"
+    "icon_path": "/icons/UPBIT/ATOM.png",
+    "cmcSlug": "cosmos",
+    "tradingViewSymbol": "BINANCE:ATOMUSDT",
+    "iconUrl": "/icons/coins/ATOM.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "AUCTION",
     "cmc_slug": "bounce",
     "name_ko": "바운스토큰",
     "name_en": "Bounce Token",
-    "icon_path": "/icons/UPBIT/AUCTION.png"
+    "icon_path": "/icons/UPBIT/AUCTION.png",
+    "tradingViewSymbol": "BINANCE:AUCTIONUSDT",
+    "iconUrl": "/icons/coins/AUCTION.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "AUDIO",
     "cmc_slug": "audius",
     "name_ko": "오디우스",
     "name_en": "Audius",
-    "icon_path": "/icons/UPBIT/AUDIO.png"
+    "icon_path": "/icons/UPBIT/AUDIO.png",
+    "tradingViewSymbol": "BINANCE:AUDIOUSDT",
+    "iconUrl": "/icons/coins/AUDIO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "AVAIL",
     "cmc_slug": "avail",
     "name_ko": "어베일",
-    "name_en": "Avail"
+    "name_en": "Avail",
+    "tradingViewSymbol": "BINANCE:AVAILUSDT",
+    "iconUrl": "/icons/coins/AVAIL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "AVAX",
     "cmc_slug": "avalanche",
     "name_ko": "아발란체",
     "name_en": "Avalanche",
-    "icon_path": "/icons/UPBIT/AVAX.png"
+    "icon_path": "/icons/UPBIT/AVAX.png",
+    "cmcSlug": "avalanche-2",
+    "tradingViewSymbol": "BINANCE:AVAXUSDT",
+    "iconUrl": "/icons/coins/AVAX.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "AVL",
     "cmc_slug": "avalon",
     "name_ko": "아발론",
-    "name_en": "Avalon"
+    "name_en": "Avalon",
+    "tradingViewSymbol": "BINANCE:AVLUSDT",
+    "iconUrl": "/icons/coins/AVL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "AVNT",
     "cmc_slug": "avantis",
     "name_ko": "아반티스",
     "name_en": "Avantis",
-    "icon_path": "/icons/UPBIT/AVNT.png"
+    "icon_path": "/icons/UPBIT/AVNT.png",
+    "tradingViewSymbol": "BINANCE:AVNTUSDT",
+    "iconUrl": "/icons/coins/AVNT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "AWE",
     "cmc_slug": "awe-network",
     "name_ko": "에이더블유이",
     "name_en": "AWE Network",
-    "icon_path": "/icons/UPBIT/AWE.png"
+    "icon_path": "/icons/UPBIT/AWE.png",
+    "tradingViewSymbol": "BINANCE:AWEUSDT",
+    "iconUrl": "/icons/coins/AWE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "AXL",
     "cmc_slug": "axelar",
     "name_ko": "엑셀라",
     "name_en": "Axelar",
-    "icon_path": "/icons/UPBIT/AXL.png"
+    "icon_path": "/icons/UPBIT/AXL.png",
+    "tradingViewSymbol": "BINANCE:AXLUSDT",
+    "iconUrl": "/icons/coins/AXL.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "AXS",
     "cmc_slug": "axie-infinity",
     "name_ko": "엑시인피니티",
     "name_en": "Axie Infinity",
-    "icon_path": "/icons/UPBIT/AXS.png"
+    "icon_path": "/icons/UPBIT/AXS.png",
+    "cmcSlug": "axie-infinity",
+    "tradingViewSymbol": "BINANCE:AXSUSDT",
+    "iconUrl": "/icons/coins/AXS.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "AZIT",
     "cmc_slug": "azit",
     "name_ko": "아지트",
-    "name_en": "Azit"
+    "name_en": "Azit",
+    "tradingViewSymbol": "BINANCE:AZITUSDT",
+    "iconUrl": "/icons/coins/AZIT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "B3",
     "cmc_slug": "b3",
     "name_ko": "비쓰리",
     "name_en": "B3",
-    "icon_path": "/icons/UPBIT/B3.png"
+    "icon_path": "/icons/UPBIT/B3.png",
+    "tradingViewSymbol": "BINANCE:B3USDT",
+    "iconUrl": "/icons/coins/B3.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BAAS",
     "cmc_slug": "baasid",
     "name_ko": "바스아이디",
-    "name_en": "BaaSid"
+    "name_en": "BaaSid",
+    "tradingViewSymbol": "BINANCE:BAASUSDT",
+    "iconUrl": "/icons/coins/BAAS.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "BABY",
     "cmc_slug": "babylon",
     "name_ko": "바빌론",
     "name_en": "Babylon",
-    "icon_path": "/icons/UPBIT/BABY.png"
+    "icon_path": "/icons/UPBIT/BABY.png",
+    "tradingViewSymbol": "BINANCE:BABYUSDT",
+    "iconUrl": "/icons/coins/BABY.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BAL",
     "cmc_slug": "balancer",
     "name_ko": "밸런서",
-    "name_en": "Balancer"
+    "name_en": "Balancer",
+    "tradingViewSymbol": "BINANCE:BALUSDT",
+    "iconUrl": "/icons/coins/BAL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BAND",
     "cmc_slug": null,
     "name_ko": "밴드",
-    "name_en": "Band"
+    "name_en": "Band",
+    "tradingViewSymbol": "BINANCE:BANDUSDT",
+    "iconUrl": "/icons/coins/BAND.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "BAR",
     "cmc_slug": null,
     "name_ko": "FC바르셀로나",
     "name_en": "FC Barcelona Fan Token",
-    "icon_path": "/icons/UPBIT/BAR.png"
+    "icon_path": "/icons/UPBIT/BAR.png",
+    "tradingViewSymbol": "BINANCE:BARUSDT",
+    "iconUrl": "/icons/coins/BAR.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "BARD",
     "cmc_slug": "lombard",
     "name_ko": "롬바드",
     "name_en": "Lombard",
-    "icon_path": "/icons/UPBIT/BARD.png"
+    "icon_path": "/icons/UPBIT/BARD.png",
+    "tradingViewSymbol": "BINANCE:BARDUSDT",
+    "iconUrl": "/icons/coins/BARD.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BAT",
     "cmc_slug": null,
     "name_ko": "베이직어텐션토큰",
     "name_en": "Basic Attention Token",
-    "icon_path": "/icons/UPBIT/BAT.png"
+    "icon_path": "/icons/UPBIT/BAT.png",
+    "tradingViewSymbol": "BINANCE:BATUSDT",
+    "iconUrl": "/icons/coins/BAT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BB",
     "cmc_slug": "bouncebit",
     "name_ko": "바운스빗",
-    "name_en": "BounceBit"
+    "name_en": "BounceBit",
+    "tradingViewSymbol": "BINANCE:BBUSDT",
+    "iconUrl": "/icons/coins/BB.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BCH",
     "cmc_slug": "bitcoin-cash",
     "name_ko": "비트코인 캐시",
     "name_en": "Bitcoin Cash",
-    "icon_path": "/icons/UPBIT/BCH.png"
+    "icon_path": "/icons/UPBIT/BCH.png",
+    "cmcSlug": "bitcoin-cash",
+    "tradingViewSymbol": "BINANCE:BCHUSDT",
+    "iconUrl": "/icons/coins/BCH.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BEAM",
     "cmc_slug": "beam",
     "name_ko": "빔",
     "name_en": "Beam",
-    "icon_path": "/icons/UPBIT/BEAM.png"
+    "icon_path": "/icons/UPBIT/BEAM.png",
+    "tradingViewSymbol": "BINANCE:BEAMUSDT",
+    "iconUrl": "/icons/coins/BEAM.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BEL",
     "cmc_slug": "bella-protocol",
     "name_ko": "벨라프로토콜",
-    "name_en": "Bella Protocol"
+    "name_en": "Bella Protocol",
+    "tradingViewSymbol": "BINANCE:BELUSDT",
+    "iconUrl": "/icons/coins/BEL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BERA",
     "cmc_slug": "berachain",
     "name_ko": "베라체인",
     "name_en": "Berachain",
-    "icon_path": "/icons/UPBIT/BERA.png"
+    "icon_path": "/icons/UPBIT/BERA.png",
+    "tradingViewSymbol": "BINANCE:BERAUSDT",
+    "iconUrl": "/icons/coins/BERA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BFC",
     "cmc_slug": "bifrost",
     "name_ko": "바이프로스트",
     "name_en": "Bifrost",
-    "icon_path": "/icons/UPBIT/BFC.png"
+    "icon_path": "/icons/UPBIT/BFC.png",
+    "tradingViewSymbol": "BINANCE:BFCUSDT",
+    "iconUrl": "/icons/coins/BFC.png",
+    "updatedAt": 1764867747784
+  },
+  {
+    "symbol": "BGB",
+    "name_ko": "비트겟토큰",
+    "name_en": "Bitget Token",
+    "tradingViewSymbol": "BINANCE:BGBUSDT",
+    "iconUrl": "/icons/coins/BGB.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "BICO",
     "cmc_slug": "biconomy",
     "name_ko": "바이코노미",
-    "name_en": "Biconomy"
+    "name_en": "Biconomy",
+    "tradingViewSymbol": "BINANCE:BICOUSDT",
+    "iconUrl": "/icons/coins/BICO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BIGTIME",
     "cmc_slug": "big-time",
     "name_ko": "빅타임",
     "name_en": "Big Time",
-    "icon_path": "/icons/UPBIT/BIGTIME.png"
+    "icon_path": "/icons/UPBIT/BIGTIME.png",
+    "tradingViewSymbol": "BINANCE:BIGTIMEUSDT",
+    "iconUrl": "/icons/coins/BIGTIME.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BIO",
     "cmc_slug": "bio",
     "name_ko": "바이오 프로토콜",
     "name_en": "Bio Protocol",
-    "icon_path": "/icons/UPBIT/BIO.png"
+    "icon_path": "/icons/UPBIT/BIO.png",
+    "tradingViewSymbol": "BINANCE:BIOUSDT",
+    "iconUrl": "/icons/coins/BIO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BIOT",
     "cmc_slug": null,
     "name_ko": "바이오패스포트",
-    "name_en": "BioPassport"
+    "name_en": "BioPassport",
+    "tradingViewSymbol": "BINANCE:BIOTUSDT",
+    "iconUrl": "/icons/coins/BIOT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BLAST",
     "cmc_slug": "blast",
     "name_ko": "블라스트",
     "name_en": "Blast",
-    "icon_path": "/icons/UPBIT/BLAST.png"
+    "icon_path": "/icons/UPBIT/BLAST.png",
+    "tradingViewSymbol": "BINANCE:BLASTUSDT",
+    "iconUrl": "/icons/coins/BLAST.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BLUE",
     "cmc_slug": "bluefin",
     "name_ko": "블루핀",
-    "name_en": "Bluefin"
+    "name_en": "Bluefin",
+    "tradingViewSymbol": "BINANCE:BLUEUSDT",
+    "iconUrl": "/icons/coins/BLUE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BLUR",
     "cmc_slug": "blur",
     "name_ko": "블러",
     "name_en": "Blur",
-    "icon_path": "/icons/UPBIT/BLUR.png"
+    "icon_path": "/icons/UPBIT/BLUR.png",
+    "tradingViewSymbol": "BINANCE:BLURUSDT",
+    "iconUrl": "/icons/coins/BLUR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BLY",
     "cmc_slug": "blocery",
     "name_ko": "블로서리",
-    "name_en": "Blocery"
+    "name_en": "Blocery",
+    "tradingViewSymbol": "BINANCE:BLYUSDT",
+    "iconUrl": "/icons/coins/BLY.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BMT",
     "cmc_slug": "bubblemaps",
     "name_ko": "버블맵스",
-    "name_en": "Bubblemaps"
+    "name_en": "Bubblemaps",
+    "tradingViewSymbol": "BINANCE:BMTUSDT",
+    "iconUrl": "/icons/coins/BMT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BNB",
     "cmc_slug": "binance-coin",
     "name_ko": "비앤비",
-    "name_en": "BNB"
+    "name_en": "BNB",
+    "tradingViewSymbol": "BINANCE:BNBUSDT",
+    "iconUrl": "/icons/coins/BNB.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BNT",
     "cmc_slug": "bancor",
     "name_ko": "뱅코르",
     "name_en": "Bancor",
-    "icon_path": "/icons/UPBIT/BNT.png"
+    "icon_path": "/icons/UPBIT/BNT.png",
+    "tradingViewSymbol": "BINANCE:BNTUSDT",
+    "iconUrl": "/icons/coins/BNT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BOA",
     "cmc_slug": "bosagora",
     "name_ko": "보아",
-    "name_en": "BOSagora"
+    "name_en": "BOSagora",
+    "tradingViewSymbol": "BINANCE:BOAUSDT",
+    "iconUrl": "/icons/coins/BOA.png",
+    "updatedAt": 1764867747784
+  },
+  {
+    "symbol": "BOB",
+    "name_ko": "비오비",
+    "name_en": "BOB",
+    "tradingViewSymbol": "BINANCE:BOBUSDT",
+    "iconUrl": "/icons/coins/BOB.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BOBA",
     "cmc_slug": "boba-network",
     "name_ko": "보바토큰",
-    "name_en": "Boba Network"
+    "name_en": "Boba Network",
+    "tradingViewSymbol": "BINANCE:BOBAUSDT",
+    "iconUrl": "/icons/coins/BOBA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BOME",
     "cmc_slug": "book-of-meme",
     "name_ko": "북오브밈",
-    "name_en": "Book of Meme"
+    "name_en": "Book of Meme",
+    "tradingViewSymbol": "BINANCE:BOMEUSDT",
+    "iconUrl": "/icons/coins/BOME.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "BONK",
     "cmc_slug": "bonk",
     "name_ko": "봉크",
     "name_en": "Bonk",
-    "icon_path": "/icons/UPBIT/BONK.png"
+    "icon_path": "/icons/UPBIT/BONK.png",
+    "cmcSlug": "bonk",
+    "tradingViewSymbol": "BINANCE:BONKUSDT",
+    "iconUrl": "/icons/coins/BONK.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BORA",
     "cmc_slug": "bora",
     "name_ko": "보라",
     "name_en": "BORA",
-    "icon_path": "/icons/UPBIT/BORA.png"
+    "icon_path": "/icons/UPBIT/BORA.png",
+    "tradingViewSymbol": "BINANCE:BORAUSDT",
+    "iconUrl": "/icons/coins/BORA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BOUNTY",
     "cmc_slug": "bounty",
     "name_ko": "체인바운티",
     "name_en": "Chainbounty",
-    "icon_path": "/icons/UPBIT/BOUNTY.png"
+    "icon_path": "/icons/UPBIT/BOUNTY.png",
+    "tradingViewSymbol": "BINANCE:BOUNTYUSDT",
+    "iconUrl": "/icons/coins/BOUNTY.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BRETT",
     "cmc_slug": "brett",
     "name_ko": "브렛",
     "name_en": "Brett",
-    "icon_path": "/icons/UPBIT/BRETT.png"
+    "icon_path": "/icons/UPBIT/BRETT.png",
+    "tradingViewSymbol": "BINANCE:BRETTUSDT",
+    "iconUrl": "/icons/coins/BRETT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BSV",
     "cmc_slug": null,
     "name_ko": "비트코인에스브이",
     "name_en": "BITCOINSV",
-    "icon_path": "/icons/UPBIT/BSV.png"
+    "icon_path": "/icons/UPBIT/BSV.png",
+    "tradingViewSymbol": "BINANCE:BSVUSDT",
+    "iconUrl": "/icons/coins/BSV.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BTC",
     "cmc_slug": "bitcoin",
     "name_ko": "비트코인",
     "name_en": "Bitcoin",
-    "icon_path": "/icons/BITHUMB/BTC.png"
+    "icon_path": "/icons/BITHUMB/BTC.png",
+    "cmcSlug": "bitcoin",
+    "tradingViewSymbol": "BINANCE:BTCUSDT",
+    "iconUrl": "/icons/coins/BTC.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BTR",
     "cmc_slug": "bitlayer",
     "name_ko": "비트레이어",
-    "name_en": "Bitlayer"
+    "name_en": "Bitlayer",
+    "tradingViewSymbol": "BINANCE:BTRUSDT",
+    "iconUrl": "/icons/coins/BTR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "BTT",
     "cmc_slug": "bittorrent",
     "name_ko": "비트토렌트",
     "name_en": "BitTorrent",
-    "icon_path": "/icons/UPBIT/BTT.png"
+    "icon_path": "/icons/UPBIT/BTT.png",
+    "tradingViewSymbol": "BINANCE:BTTUSDT",
+    "iconUrl": "/icons/coins/BTT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "C",
     "cmc_slug": "chainbase",
     "name_ko": "체인베이스 토큰",
-    "name_en": "Chainbase Token"
+    "name_en": "Chainbase Token",
+    "tradingViewSymbol": "BINANCE:CUSDT",
+    "iconUrl": "/icons/coins/C.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "C98",
     "cmc_slug": "coin98",
     "name_ko": "코인98",
-    "name_en": "Coin98"
+    "name_en": "Coin98",
+    "tradingViewSymbol": "BINANCE:C98USDT",
+    "iconUrl": "/icons/coins/C98.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CAKE",
     "cmc_slug": "pancakeswap",
     "name_ko": "팬케이크스왑",
-    "name_en": "PancakeSwap"
+    "name_en": "PancakeSwap",
+    "tradingViewSymbol": "BINANCE:CAKEUSDT",
+    "iconUrl": "/icons/coins/CAKE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CAMP",
     "cmc_slug": "camp-network",
     "name_ko": "캠프 네트워크",
-    "name_en": "Camp Network"
+    "name_en": "Camp Network",
+    "tradingViewSymbol": "BINANCE:CAMPUSDT",
+    "iconUrl": "/icons/coins/CAMP.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CARV",
     "cmc_slug": "carv",
     "name_ko": "카브",
     "name_en": "CARV",
-    "icon_path": "/icons/UPBIT/CARV.png"
+    "icon_path": "/icons/UPBIT/CARV.png",
+    "tradingViewSymbol": "BINANCE:CARVUSDT",
+    "iconUrl": "/icons/coins/CARV.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CATI",
     "cmc_slug": "catizen",
     "name_ko": "캣티즌",
-    "name_en": "Catizen"
+    "name_en": "Catizen",
+    "tradingViewSymbol": "BINANCE:CATIUSDT",
+    "iconUrl": "/icons/coins/CATI.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "CBK",
     "cmc_slug": null,
     "name_ko": "코박토큰",
     "name_en": "Cobak Token",
-    "icon_path": "/icons/UPBIT/CBK.png"
+    "icon_path": "/icons/UPBIT/CBK.png",
+    "tradingViewSymbol": "BINANCE:CBKUSDT",
+    "iconUrl": "/icons/coins/CBK.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CELO",
     "cmc_slug": "celo",
     "name_ko": "셀로",
     "name_en": "Celo",
-    "icon_path": "/icons/UPBIT/CELO.png"
+    "icon_path": "/icons/UPBIT/CELO.png",
+    "tradingViewSymbol": "BINANCE:CELOUSDT",
+    "iconUrl": "/icons/coins/CELO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CELR",
     "cmc_slug": "celer-network",
     "name_ko": "셀러네트워크",
-    "name_en": "Celer Network"
+    "name_en": "Celer Network",
+    "tradingViewSymbol": "BINANCE:CELRUSDT",
+    "iconUrl": "/icons/coins/CELR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CETUS",
     "cmc_slug": null,
     "name_ko": "세터스",
-    "name_en": "Cetus"
+    "name_en": "Cetus",
+    "tradingViewSymbol": "BINANCE:CETUSUSDT",
+    "iconUrl": "/icons/coins/CETUS.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "CFG",
     "cmc_slug": "centrifuge",
     "name_ko": "센트리퓨즈",
-    "name_en": "Centrifuge"
+    "name_en": "Centrifuge",
+    "tradingViewSymbol": "BINANCE:CFGUSDT",
+    "iconUrl": "/icons/coins/CFG.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "CFX",
     "cmc_slug": "conflux-network",
     "name_ko": "콘플럭스",
-    "name_en": "Conflux Network"
+    "name_en": "Conflux Network",
+    "tradingViewSymbol": "BINANCE:CFXUSDT",
+    "iconUrl": "/icons/coins/CFX.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CHILLGUY",
     "cmc_slug": "just-a-chill-guy",
     "name_ko": "칠가이",
-    "name_en": "Just a chill guy"
+    "name_en": "Just a chill guy",
+    "tradingViewSymbol": "BINANCE:CHILLGUYUSDT",
+    "iconUrl": "/icons/coins/CHILLGUY.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "CHR",
     "cmc_slug": "chromia",
     "name_ko": "크로미아",
     "name_en": "Chromia",
-    "icon_path": "/icons/UPBIT/CHR.png"
+    "icon_path": "/icons/UPBIT/CHR.png",
+    "tradingViewSymbol": "BINANCE:CHRUSDT",
+    "iconUrl": "/icons/coins/CHR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CHZ",
     "cmc_slug": "chiliz",
     "name_ko": "칠리즈",
     "name_en": "Chiliz",
-    "icon_path": "/icons/UPBIT/CHZ.png"
+    "icon_path": "/icons/UPBIT/CHZ.png",
+    "tradingViewSymbol": "BINANCE:CHZUSDT",
+    "iconUrl": "/icons/coins/CHZ.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CITY",
     "cmc_slug": null,
     "name_ko": "맨체스터시티",
     "name_en": "Manchester City Fan Token",
-    "icon_path": "/icons/UPBIT/CITY.png"
+    "icon_path": "/icons/UPBIT/CITY.png",
+    "tradingViewSymbol": "BINANCE:CITYUSDT",
+    "iconUrl": "/icons/coins/CITY.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "CKB",
     "cmc_slug": "nervos-network",
     "name_ko": "너보스",
     "name_en": "Nervos Network",
-    "icon_path": "/icons/UPBIT/CKB.png"
+    "icon_path": "/icons/UPBIT/CKB.png",
+    "tradingViewSymbol": "BINANCE:CKBUSDT",
+    "iconUrl": "/icons/coins/CKB.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CLBK",
     "cmc_slug": "cloudbric",
     "name_ko": "클라우드브릭",
-    "name_en": "Cloudbric"
+    "name_en": "Cloudbric",
+    "tradingViewSymbol": "BINANCE:CLBKUSDT",
+    "iconUrl": "/icons/coins/CLBK.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "CLEAR",
     "cmc_slug": "everclear",
     "name_ko": "에버클리어",
-    "name_en": "Everclear"
+    "name_en": "Everclear",
+    "tradingViewSymbol": "BINANCE:CLEARUSDT",
+    "iconUrl": "/icons/coins/CLEAR.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "CLOUD",
     "cmc_slug": "cloud",
     "name_ko": "생텀",
-    "name_en": "Sanctum"
+    "name_en": "Sanctum",
+    "tradingViewSymbol": "BINANCE:CLOUDUSDT",
+    "iconUrl": "/icons/coins/CLOUD.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "CLV",
     "cmc_slug": null,
     "name_ko": "씨엘브이",
-    "name_en": "CLV"
+    "name_en": "CLV",
+    "tradingViewSymbol": "BINANCE:CLVUSDT",
+    "iconUrl": "/icons/coins/CLV.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "COMP",
     "cmc_slug": "compound",
     "name_ko": "컴파운드",
     "name_en": "Compound",
-    "icon_path": "/icons/UPBIT/COMP.png"
+    "icon_path": "/icons/UPBIT/COMP.png",
+    "cmcSlug": "compound",
+    "tradingViewSymbol": "BINANCE:COMPUSDT",
+    "iconUrl": "/icons/coins/COMP.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "COOKIE",
     "cmc_slug": "cookie",
     "name_ko": "쿠키 다오",
-    "name_en": "Cookie DAO"
+    "name_en": "Cookie DAO",
+    "tradingViewSymbol": "BINANCE:COOKIEUSDT",
+    "iconUrl": "/icons/coins/COOKIE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CORE",
     "cmc_slug": "core",
     "name_ko": "코어",
-    "name_en": "Core"
+    "name_en": "Core",
+    "tradingViewSymbol": "BINANCE:COREUSDT",
+    "iconUrl": "/icons/coins/CORE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "COS",
     "cmc_slug": "contentos",
     "name_ko": "콘텐토스",
-    "name_en": "Contentos"
+    "name_en": "Contentos",
+    "tradingViewSymbol": "BINANCE:COSUSDT",
+    "iconUrl": "/icons/coins/COS.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "COTI",
     "cmc_slug": "coti",
     "name_ko": "코티",
-    "name_en": "COTI"
+    "name_en": "COTI",
+    "tradingViewSymbol": "BINANCE:COTIUSDT",
+    "iconUrl": "/icons/coins/COTI.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "COW",
     "cmc_slug": "cow-protocol",
     "name_ko": "카우 프로토콜",
     "name_en": "CoW Protocol",
-    "icon_path": "/icons/UPBIT/COW.png"
+    "icon_path": "/icons/UPBIT/COW.png",
+    "tradingViewSymbol": "BINANCE:COWUSDT",
+    "iconUrl": "/icons/coins/COW.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CPOOL",
     "cmc_slug": "clearpool",
     "name_ko": "클리어풀",
     "name_en": "Clearpool",
-    "icon_path": "/icons/UPBIT/CPOOL.png"
+    "icon_path": "/icons/UPBIT/CPOOL.png",
+    "tradingViewSymbol": "BINANCE:CPOOLUSDT",
+    "iconUrl": "/icons/coins/CPOOL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CRO",
     "cmc_slug": "cronos",
     "name_ko": "크로노스",
     "name_en": "Cronos",
-    "icon_path": "/icons/UPBIT/CRO.png"
+    "icon_path": "/icons/UPBIT/CRO.png",
+    "tradingViewSymbol": "BINANCE:CROUSDT",
+    "iconUrl": "/icons/coins/CRO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CROSS",
     "cmc_slug": "cross",
     "name_ko": "크로쓰",
-    "name_en": "CROSS"
+    "name_en": "CROSS",
+    "tradingViewSymbol": "BINANCE:CROSSUSDT",
+    "iconUrl": "/icons/coins/CROSS.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "CRTS",
     "cmc_slug": "cratos",
     "name_ko": "크라토스",
-    "name_en": "Cratos"
+    "name_en": "Cratos",
+    "tradingViewSymbol": "BINANCE:CRTSUSDT",
+    "iconUrl": "/icons/coins/CRTS.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CRU",
     "cmc_slug": "crust-network",
     "name_ko": "크러스트 네트워크",
-    "name_en": "Crust Network"
+    "name_en": "Crust Network",
+    "tradingViewSymbol": "BINANCE:CRUUSDT",
+    "iconUrl": "/icons/coins/CRU.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "CRV",
     "cmc_slug": "crv",
     "name_ko": "커브",
     "name_en": "Curve DAO Token",
-    "icon_path": "/icons/UPBIT/CRV.png"
+    "icon_path": "/icons/UPBIT/CRV.png",
+    "cmcSlug": "curve-dao-token",
+    "tradingViewSymbol": "BINANCE:CRVUSDT",
+    "iconUrl": "/icons/coins/CRV.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CSPR",
     "cmc_slug": "casper",
     "name_ko": "캐스퍼",
-    "name_en": "Casper"
+    "name_en": "Casper",
+    "tradingViewSymbol": "BINANCE:CSPRUSDT",
+    "iconUrl": "/icons/coins/CSPR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CTC",
     "cmc_slug": "credit",
     "name_ko": "크레딧코인",
     "name_en": "Creditcoin",
-    "icon_path": "/icons/UPBIT/CTC.png"
+    "icon_path": "/icons/UPBIT/CTC.png",
+    "tradingViewSymbol": "BINANCE:CTCUSDT",
+    "iconUrl": "/icons/coins/CTC.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CTK",
     "cmc_slug": "shentu",
     "name_ko": "셴투",
-    "name_en": "Shentu"
+    "name_en": "Shentu",
+    "tradingViewSymbol": "BINANCE:CTKUSDT",
+    "iconUrl": "/icons/coins/CTK.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CTSI",
     "cmc_slug": "cartesi",
     "name_ko": "카르테시",
     "name_en": "Cartesi",
-    "icon_path": "/icons/UPBIT/CTSI.png"
+    "icon_path": "/icons/UPBIT/CTSI.png",
+    "tradingViewSymbol": "BINANCE:CTSIUSDT",
+    "iconUrl": "/icons/coins/CTSI.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CTXC",
     "cmc_slug": "cortex",
     "name_ko": "코르텍스",
-    "name_en": "Cortex"
+    "name_en": "Cortex",
+    "tradingViewSymbol": "BINANCE:CTXCUSDT",
+    "iconUrl": "/icons/coins/CTXC.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CUDIS",
     "cmc_slug": "cudis",
     "name_ko": "쿠디스",
-    "name_en": "CUDIS"
+    "name_en": "CUDIS",
+    "tradingViewSymbol": "BINANCE:CUDISUSDT",
+    "iconUrl": "/icons/coins/CUDIS.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CVC",
     "cmc_slug": "civic",
     "name_ko": "시빅",
     "name_en": "Civic",
-    "icon_path": "/icons/UPBIT/CVC.png"
+    "icon_path": "/icons/UPBIT/CVC.png",
+    "tradingViewSymbol": "BINANCE:CVCUSDT",
+    "iconUrl": "/icons/coins/CVC.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "CVX",
     "cmc_slug": "convex-finance",
     "name_ko": "컨벡스 파이낸스",
-    "name_en": "Convex Finance"
+    "name_en": "Convex Finance",
+    "tradingViewSymbol": "BINANCE:CVXUSDT",
+    "iconUrl": "/icons/coins/CVX.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "CYBER",
     "cmc_slug": null,
     "name_ko": "사이버",
     "name_en": "Cyber",
-    "icon_path": "/icons/UPBIT/CYBER.png"
+    "icon_path": "/icons/UPBIT/CYBER.png",
+    "tradingViewSymbol": "BINANCE:CYBERUSDT",
+    "iconUrl": "/icons/coins/CYBER.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "D",
     "cmc_slug": "d",
     "name_ko": "달 오픈 네트워크",
-    "name_en": "DAR Open Network"
+    "name_en": "DAR Open Network",
+    "tradingViewSymbol": "BINANCE:DUSDT",
+    "iconUrl": "/icons/coins/D.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "DAO",
     "cmc_slug": "dao-maker",
     "name_ko": "다오메이커",
-    "name_en": "DAO Maker"
+    "name_en": "DAO Maker",
+    "tradingViewSymbol": "BINANCE:DAOUSDT",
+    "iconUrl": "/icons/coins/DAO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "DATA",
     "cmc_slug": "streamr",
     "name_ko": "스트리머",
-    "name_en": "Streamr"
+    "name_en": "Streamr",
+    "tradingViewSymbol": "BINANCE:DATAUSDT",
+    "iconUrl": "/icons/coins/DATA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "DBR",
     "cmc_slug": "debridge",
     "name_ko": "디브릿지",
-    "name_en": "deBridge"
+    "name_en": "deBridge",
+    "tradingViewSymbol": "BINANCE:DBRUSDT",
+    "iconUrl": "/icons/coins/DBR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "DEEP",
     "cmc_slug": null,
     "name_ko": "딥북",
     "name_en": "DeepBook",
-    "icon_path": "/icons/UPBIT/DEEP.png"
+    "icon_path": "/icons/UPBIT/DEEP.png",
+    "tradingViewSymbol": "BINANCE:DEEPUSDT",
+    "iconUrl": "/icons/coins/DEEP.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "DELABS",
     "cmc_slug": "delabs-games",
     "name_ko": "디랩스게임즈",
-    "name_en": "Delabs Games"
+    "name_en": "Delabs Games",
+    "tradingViewSymbol": "BINANCE:DELABSUSDT",
+    "iconUrl": "/icons/coins/DELABS.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "DENT",
     "cmc_slug": "dent",
     "name_ko": "덴트",
     "name_en": "Dent",
-    "icon_path": "/icons/UPBIT/DENT.png"
+    "icon_path": "/icons/UPBIT/DENT.png",
+    "tradingViewSymbol": "BINANCE:DENTUSDT",
+    "iconUrl": "/icons/coins/DENT.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "DGB",
     "cmc_slug": "digibyte",
     "name_ko": "디지바이트",
     "name_en": "DigiByte",
-    "icon_path": "/icons/UPBIT/DGB.png"
+    "icon_path": "/icons/UPBIT/DGB.png",
+    "tradingViewSymbol": "BINANCE:DGBUSDT",
+    "iconUrl": "/icons/coins/DGB.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "DIA",
     "cmc_slug": "dia",
     "name_ko": "디아",
-    "name_en": "DIA"
+    "name_en": "DIA",
+    "tradingViewSymbol": "BINANCE:DIAUSDT",
+    "iconUrl": "/icons/coins/DIA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "DICE",
     "cmc_slug": "klaydice",
     "name_ko": "클레이다이스",
-    "name_en": "KLAYDICE"
+    "name_en": "KLAYDICE",
+    "tradingViewSymbol": "BINANCE:DICEUSDT",
+    "iconUrl": "/icons/coins/DICE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "DKA",
     "cmc_slug": "dkargo",
     "name_ko": "디카르고",
     "name_en": "dKargo",
-    "icon_path": "/icons/UPBIT/DKA.png"
+    "icon_path": "/icons/UPBIT/DKA.png",
+    "tradingViewSymbol": "BINANCE:DKAUSDT",
+    "iconUrl": "/icons/coins/DKA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "DMAIL",
     "cmc_slug": null,
     "name_ko": "디메일",
-    "name_en": "Dmail"
+    "name_en": "Dmail",
+    "tradingViewSymbol": "BINANCE:DMAILUSDT",
+    "iconUrl": "/icons/coins/DMAIL.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "DNT",
     "cmc_slug": "district0x",
     "name_ko": "디스트릭트0x",
     "name_en": "district0x",
-    "icon_path": "/icons/UPBIT/DNT.png"
+    "icon_path": "/icons/UPBIT/DNT.png",
+    "tradingViewSymbol": "BINANCE:DNTUSDT",
+    "iconUrl": "/icons/coins/DNT.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "DODO",
     "cmc_slug": "dodo",
     "name_ko": "도도",
-    "name_en": "DODO"
+    "name_en": "DODO",
+    "tradingViewSymbol": "BINANCE:DODOUSDT",
+    "iconUrl": "/icons/coins/DODO.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "DOGE",
     "cmc_slug": "dogecoin",
     "name_ko": "도지코인",
     "name_en": "Dogecoin",
-    "icon_path": "/icons/UPBIT/DOGE.png"
+    "icon_path": "/icons/UPBIT/DOGE.png",
+    "cmcSlug": "dogecoin",
+    "tradingViewSymbol": "BINANCE:DOGEUSDT",
+    "iconUrl": "/icons/coins/DOGE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "DOOD",
     "cmc_slug": "doodles",
     "name_ko": "두들즈",
     "name_en": "Doodles",
-    "icon_path": "/icons/UPBIT/DOOD.png"
+    "icon_path": "/icons/UPBIT/DOOD.png",
+    "tradingViewSymbol": "BINANCE:DOODUSDT",
+    "iconUrl": "/icons/coins/DOOD.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "DOT",
     "cmc_slug": "polkadot",
     "name_ko": "폴카닷",
     "name_en": "Polkadot",
-    "icon_path": "/icons/UPBIT/DOT.png"
+    "icon_path": "/icons/UPBIT/DOT.png",
+    "cmcSlug": "polkadot",
+    "tradingViewSymbol": "BINANCE:DOTUSDT",
+    "iconUrl": "/icons/coins/DOT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "DRIFT",
     "cmc_slug": "drift",
     "name_ko": "드리프트",
     "name_en": "Drift",
-    "icon_path": "/icons/UPBIT/DRIFT.png"
+    "icon_path": "/icons/UPBIT/DRIFT.png",
+    "tradingViewSymbol": "BINANCE:DRIFTUSDT",
+    "iconUrl": "/icons/coins/DRIFT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "DVI",
     "cmc_slug": "dvision-network",
     "name_ko": "디비전",
-    "name_en": "Dvision Network"
+    "name_en": "Dvision Network",
+    "tradingViewSymbol": "BINANCE:DVIUSDT",
+    "iconUrl": "/icons/coins/DVI.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "DYDX",
     "cmc_slug": "dydx",
     "name_ko": "디와이디엑스",
-    "name_en": "dYdX"
+    "name_en": "dYdX",
+    "tradingViewSymbol": "BINANCE:DYDXUSDT",
+    "iconUrl": "/icons/coins/DYDX.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "EDEN",
     "cmc_slug": "openeden",
     "name_ko": "오픈에덴",
-    "name_en": "OpenEden"
+    "name_en": "OpenEden",
+    "tradingViewSymbol": "BINANCE:EDENUSDT",
+    "iconUrl": "/icons/coins/EDEN.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "EDGE",
     "cmc_slug": "definitive",
     "name_ko": "디피니티브",
-    "name_en": "Definitive"
+    "name_en": "Definitive",
+    "tradingViewSymbol": "BINANCE:EDGEUSDT",
+    "iconUrl": "/icons/coins/EDGE.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "EDU",
     "cmc_slug": "open-campus",
     "name_ko": "오픈 캠퍼스",
-    "name_en": "Open Campus"
+    "name_en": "Open Campus",
+    "tradingViewSymbol": "BINANCE:EDUUSDT",
+    "iconUrl": "/icons/coins/EDU.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "EGG",
     "cmc_slug": "nestree",
     "name_ko": "네스트리",
-    "name_en": "Nestree"
+    "name_en": "Nestree",
+    "tradingViewSymbol": "BINANCE:EGGUSDT",
+    "iconUrl": "/icons/coins/EGG.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "EGL1",
     "cmc_slug": "egl1",
     "name_ko": "이글스랜딩",
-    "name_en": "Eagles Landing"
+    "name_en": "Eagles Landing",
+    "tradingViewSymbol": "BINANCE:EGL1USDT",
+    "iconUrl": "/icons/coins/EGL1.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "EGLD",
     "cmc_slug": null,
     "name_ko": "멀티버스엑스",
     "name_en": "MultiversX",
-    "icon_path": "/icons/UPBIT/EGLD.png"
+    "icon_path": "/icons/UPBIT/EGLD.png",
+    "tradingViewSymbol": "BINANCE:EGLDUSDT",
+    "iconUrl": "/icons/coins/EGLD.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "EIGEN",
     "cmc_slug": "eigenlayer",
     "name_ko": "아이겐레이어",
-    "name_en": "EigenLayer"
+    "name_en": "EigenLayer",
+    "tradingViewSymbol": "BINANCE:EIGENUSDT",
+    "iconUrl": "/icons/coins/EIGEN.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "EL",
     "cmc_slug": "elysia",
     "name_ko": "엘리시아",
-    "name_en": "ELYSIA"
+    "name_en": "ELYSIA",
+    "tradingViewSymbol": "BINANCE:ELUSDT",
+    "iconUrl": "/icons/coins/EL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ELF",
     "cmc_slug": "aelf",
     "name_ko": "엘프",
     "name_en": "aelf",
-    "icon_path": "/icons/UPBIT/ELF.png"
+    "icon_path": "/icons/UPBIT/ELF.png",
+    "tradingViewSymbol": "BINANCE:ELFUSDT",
+    "iconUrl": "/icons/coins/ELF.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ELX",
     "cmc_slug": "elixir",
     "name_ko": "엘릭서",
-    "name_en": "Elixir"
+    "name_en": "Elixir",
+    "tradingViewSymbol": "BINANCE:ELXUSDT",
+    "iconUrl": "/icons/coins/ELX.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ENA",
     "cmc_slug": "ethena",
     "name_ko": "에테나",
     "name_en": "Ethena",
-    "icon_path": "/icons/UPBIT/ENA.png"
+    "icon_path": "/icons/UPBIT/ENA.png",
+    "tradingViewSymbol": "BINANCE:ENAUSDT",
+    "iconUrl": "/icons/coins/ENA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ENJ",
     "cmc_slug": null,
     "name_ko": "엔진코인",
     "name_en": "Enjin Coin",
-    "icon_path": "/icons/UPBIT/ENJ.png"
+    "icon_path": "/icons/UPBIT/ENJ.png",
+    "tradingViewSymbol": "BINANCE:ENJUSDT",
+    "iconUrl": "/icons/coins/ENJ.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ENS",
     "cmc_slug": "ethereum-name-service",
     "name_ko": "이더리움네임서비스",
     "name_en": "Ethereum Name Service",
-    "icon_path": "/icons/UPBIT/ENS.png"
+    "icon_path": "/icons/UPBIT/ENS.png",
+    "cmcSlug": "ethereum-name-service",
+    "tradingViewSymbol": "BINANCE:ENSUSDT",
+    "iconUrl": "/icons/coins/ENS.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ENSO",
     "cmc_slug": "enso",
     "name_ko": "엔소",
     "name_en": "Enso",
-    "icon_path": "/icons/UPBIT/ENSO.png"
+    "icon_path": "/icons/UPBIT/ENSO.png",
+    "tradingViewSymbol": "BINANCE:ENSOUSDT",
+    "iconUrl": "/icons/coins/ENSO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "EPT",
     "cmc_slug": "balance",
     "name_ko": "밸런스",
     "name_en": "Balance",
-    "icon_path": "/icons/UPBIT/EPT.png"
+    "icon_path": "/icons/UPBIT/EPT.png",
+    "tradingViewSymbol": "BINANCE:EPTUSDT",
+    "iconUrl": "/icons/coins/EPT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ERA",
     "cmc_slug": "caldera",
     "name_ko": "칼데라",
     "name_en": "Caldera",
-    "icon_path": "/icons/UPBIT/ERA.png"
+    "icon_path": "/icons/UPBIT/ERA.png",
+    "tradingViewSymbol": "BINANCE:ERAUSDT",
+    "iconUrl": "/icons/coins/ERA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ES",
     "cmc_slug": "eclipse",
     "name_ko": "이클립스",
-    "name_en": "Eclipse"
+    "name_en": "Eclipse",
+    "tradingViewSymbol": "BINANCE:ESUSDT",
+    "iconUrl": "/icons/coins/ES.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ETC",
     "cmc_slug": "ethereum-classic",
     "name_ko": "이더리움 클래식",
     "name_en": "Ethereum Classic",
-    "icon_path": "/icons/UPBIT/ETC.png"
+    "icon_path": "/icons/UPBIT/ETC.png",
+    "cmcSlug": "ethereum-classic",
+    "tradingViewSymbol": "BINANCE:ETCUSDT",
+    "iconUrl": "/icons/coins/ETC.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ETH",
     "cmc_slug": "ethereum",
     "name_ko": "이더리움",
     "name_en": "Ethereum",
-    "icon_path": "/icons/UPBIT/ETH.png"
+    "icon_path": "/icons/UPBIT/ETH.png",
+    "cmcSlug": "ethereum",
+    "tradingViewSymbol": "BINANCE:ETHUSDT",
+    "iconUrl": "/icons/coins/ETH.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ETHFI",
     "cmc_slug": "ether-fi",
     "name_ko": "이더파이",
     "name_en": "ether.fi",
-    "icon_path": "/icons/UPBIT/ETHFI.png"
+    "icon_path": "/icons/UPBIT/ETHFI.png",
+    "tradingViewSymbol": "BINANCE:ETHFIUSDT",
+    "iconUrl": "/icons/coins/ETHFI.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "EUL",
     "cmc_slug": null,
     "name_ko": "오일러",
     "name_en": "Euler",
-    "icon_path": "/icons/UPBIT/EUL.png"
+    "icon_path": "/icons/UPBIT/EUL.png",
+    "tradingViewSymbol": "BINANCE:EULUSDT",
+    "iconUrl": "/icons/coins/EUL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "EVER",
     "cmc_slug": "everscale",
     "name_ko": "에버스케일",
-    "name_en": "Everscale"
+    "name_en": "Everscale",
+    "tradingViewSymbol": "BINANCE:EVERUSDT",
+    "iconUrl": "/icons/coins/EVER.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "EVERY",
     "cmc_slug": "everyworld",
     "name_ko": "에브리월드",
-    "name_en": "Everyworld"
+    "name_en": "Everyworld",
+    "tradingViewSymbol": "BINANCE:EVERYUSDT",
+    "iconUrl": "/icons/coins/EVERY.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "EVZ",
     "cmc_slug": null,
     "name_ko": "이브이지",
-    "name_en": "Electronic Vehicle Zone"
+    "name_en": "Electronic Vehicle Zone",
+    "tradingViewSymbol": "BINANCE:EVZUSDT",
+    "iconUrl": "/icons/coins/EVZ.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "F",
     "cmc_slug": "synfutures",
     "name_ko": "신퓨처스",
     "name_en": "Synfutures",
-    "icon_path": "/icons/UPBIT/F.png"
+    "icon_path": "/icons/UPBIT/F.png",
+    "tradingViewSymbol": "BINANCE:FUSDT",
+    "iconUrl": "/icons/coins/F.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "FAI",
     "cmc_slug": null,
     "name_ko": "프레이사",
-    "name_en": "Freysa"
+    "name_en": "Freysa",
+    "tradingViewSymbol": "BINANCE:FAIUSDT",
+    "iconUrl": "/icons/coins/FAI.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "FANC",
     "cmc_slug": "fanc",
     "name_ko": "팬시",
-    "name_en": "fanC"
+    "name_en": "fanC",
+    "tradingViewSymbol": "BINANCE:FANCUSDT",
+    "iconUrl": "/icons/coins/FANC.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "FCT2",
     "cmc_slug": "firmachain",
     "name_ko": "피르마체인",
     "name_en": "Firmachain",
-    "icon_path": "/icons/UPBIT/FCT2.png"
+    "icon_path": "/icons/UPBIT/FCT2.png",
+    "tradingViewSymbol": "BINANCE:FCT2USDT",
+    "iconUrl": "/icons/coins/FCT2.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "FET",
     "cmc_slug": null,
     "name_ko": "페치",
-    "name_en": "Fetch.ai"
+    "name_en": "Fetch.ai",
+    "cmcSlug": "fetch-ai",
+    "tradingViewSymbol": "BINANCE:FETUSDT",
+    "iconUrl": "/icons/coins/FET.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "FF",
     "cmc_slug": "falcon-finance",
     "name_ko": "팔콘 파이낸스",
     "name_en": "Falcon Finance",
-    "icon_path": "/icons/UPBIT/FF.png"
+    "icon_path": "/icons/UPBIT/FF.png",
+    "tradingViewSymbol": "BINANCE:FFUSDT",
+    "iconUrl": "/icons/coins/FF.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "FIDA",
     "cmc_slug": "bonfida",
     "name_ko": "본피다",
-    "name_en": "Bonfida"
+    "name_en": "Bonfida",
+    "tradingViewSymbol": "BINANCE:FIDAUSDT",
+    "iconUrl": "/icons/coins/FIDA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "FIL",
     "cmc_slug": null,
     "name_ko": "파일코인",
     "name_en": "Filecoin",
-    "icon_path": "/icons/UPBIT/FIL.png"
+    "icon_path": "/icons/UPBIT/FIL.png",
+    "cmcSlug": "filecoin",
+    "tradingViewSymbol": "BINANCE:FILUSDT",
+    "iconUrl": "/icons/coins/FIL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "FIS",
     "cmc_slug": "stafi",
     "name_ko": "스타파이",
-    "name_en": "Stafi"
+    "name_en": "Stafi",
+    "tradingViewSymbol": "BINANCE:FISUSDT",
+    "iconUrl": "/icons/coins/FIS.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "FITFI",
     "cmc_slug": "step-app",
     "name_ko": "스텝앱",
-    "name_en": "Step App"
+    "name_en": "Step App",
+    "tradingViewSymbol": "BINANCE:FITFIUSDT",
+    "iconUrl": "/icons/coins/FITFI.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "FLOCK",
     "cmc_slug": "flock-io",
     "name_ko": "플록",
     "name_en": "FLock.io",
-    "icon_path": "/icons/UPBIT/FLOCK.png"
+    "icon_path": "/icons/UPBIT/FLOCK.png",
+    "tradingViewSymbol": "BINANCE:FLOCKUSDT",
+    "iconUrl": "/icons/coins/FLOCK.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "FLOKI",
     "cmc_slug": "floki",
     "name_ko": "플로키",
-    "name_en": "FLOKI"
+    "name_en": "FLOKI",
+    "cmcSlug": "floki-inu",
+    "tradingViewSymbol": "BINANCE:FLOKIUSDT",
+    "iconUrl": "/icons/coins/FLOKI.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "FLOW",
     "cmc_slug": "flow",
     "name_ko": "플로우",
     "name_en": "Flow",
-    "icon_path": "/icons/UPBIT/FLOW.png"
+    "icon_path": "/icons/UPBIT/FLOW.png",
+    "tradingViewSymbol": "BINANCE:FLOWUSDT",
+    "iconUrl": "/icons/coins/FLOW.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "FLR",
     "cmc_slug": "flare",
     "name_ko": "플레어",
-    "name_en": "Flare"
+    "name_en": "Flare",
+    "tradingViewSymbol": "BINANCE:FLRUSDT",
+    "iconUrl": "/icons/coins/FLR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "FLUID",
     "cmc_slug": null,
     "name_ko": "플루이드",
     "name_en": "Fluid",
-    "icon_path": "/icons/UPBIT/FLUID.png"
+    "icon_path": "/icons/UPBIT/FLUID.png",
+    "tradingViewSymbol": "BINANCE:FLUIDUSDT",
+    "iconUrl": "/icons/coins/FLUID.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "FLUX",
     "cmc_slug": "flux",
     "name_ko": "플럭스",
-    "name_en": "Flux"
+    "name_en": "Flux",
+    "tradingViewSymbol": "BINANCE:FLUXUSDT",
+    "iconUrl": "/icons/coins/FLUX.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "FNCY",
     "cmc_slug": "fncy",
     "name_ko": "팬시(FNCY)",
-    "name_en": "FNCY"
+    "name_en": "FNCY",
+    "tradingViewSymbol": "BINANCE:FNCYUSDT",
+    "iconUrl": "/icons/coins/FNCY.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "FORT",
     "cmc_slug": "forta",
     "name_ko": "포르타",
     "name_en": "Forta",
-    "icon_path": "/icons/UPBIT/FORT.png"
+    "icon_path": "/icons/UPBIT/FORT.png",
+    "tradingViewSymbol": "BINANCE:FORTUSDT",
+    "iconUrl": "/icons/coins/FORT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "FORTH",
     "cmc_slug": null,
     "name_ko": "앰플포스 거버넌스 토큰",
-    "name_en": "Ampleforth Governance Token"
+    "name_en": "Ampleforth Governance Token",
+    "tradingViewSymbol": "BINANCE:FORTHUSDT",
+    "iconUrl": "/icons/coins/FORTH.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "FRAG",
     "cmc_slug": "fragmetric",
     "name_ko": "프래그메트릭",
-    "name_en": "Fragmetric"
+    "name_en": "Fragmetric",
+    "tradingViewSymbol": "BINANCE:FRAGUSDT",
+    "iconUrl": "/icons/coins/FRAG.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "FXS",
     "cmc_slug": "frax-share",
     "name_ko": "프랙스 셰어",
-    "name_en": "Frax Share"
+    "name_en": "Frax Share",
+    "tradingViewSymbol": "BINANCE:FXSUSDT",
+    "iconUrl": "/icons/coins/FXS.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "G",
     "cmc_slug": "gravity",
     "name_ko": "그래비티",
     "name_en": "Gravity",
-    "icon_path": "/icons/UPBIT/G.png"
+    "icon_path": "/icons/UPBIT/G.png",
+    "tradingViewSymbol": "BINANCE:GUSDT",
+    "iconUrl": "/icons/coins/G.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "GALA",
     "cmc_slug": "gala",
     "name_ko": "갈라",
-    "name_en": "Gala"
+    "name_en": "Gala",
+    "cmcSlug": "gala",
+    "tradingViewSymbol": "BINANCE:GALAUSDT",
+    "iconUrl": "/icons/coins/GALA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "GAME2",
     "cmc_slug": "gamebuild",
     "name_ko": "게임빌드",
     "name_en": "GameBuild",
-    "icon_path": "/icons/UPBIT/GAME2.png"
+    "icon_path": "/icons/UPBIT/GAME2.png",
+    "tradingViewSymbol": "BINANCE:GAME2USDT",
+    "iconUrl": "/icons/coins/GAME2.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "GAS",
     "cmc_slug": "gas",
     "name_ko": "가스",
     "name_en": "Gas",
-    "icon_path": "/icons/UPBIT/GAS.png"
+    "icon_path": "/icons/UPBIT/GAS.png",
+    "tradingViewSymbol": "BINANCE:GASUSDT",
+    "iconUrl": "/icons/coins/GAS.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "GHUB",
     "cmc_slug": "gemhub",
     "name_ko": "젬허브",
-    "name_en": "GemHUB"
+    "name_en": "GemHUB",
+    "tradingViewSymbol": "BINANCE:GHUBUSDT",
+    "iconUrl": "/icons/coins/GHUB.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "GHX",
     "cmc_slug": "gamer",
     "name_ko": "게이머코인",
-    "name_en": "Gamercoin"
+    "name_en": "Gamercoin",
+    "tradingViewSymbol": "BINANCE:GHXUSDT",
+    "iconUrl": "/icons/coins/GHX.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "GLM",
     "cmc_slug": "golem",
     "name_ko": "골렘",
     "name_en": "Golem",
-    "icon_path": "/icons/UPBIT/GLM.png"
+    "icon_path": "/icons/UPBIT/GLM.png",
+    "tradingViewSymbol": "BINANCE:GLMUSDT",
+    "iconUrl": "/icons/coins/GLM.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "GLMR",
     "cmc_slug": "moonbeam",
     "name_ko": "문빔",
     "name_en": "Moonbeam",
-    "icon_path": "/icons/UPBIT/GLMR.png"
+    "icon_path": "/icons/UPBIT/GLMR.png",
+    "tradingViewSymbol": "BINANCE:GLMRUSDT",
+    "iconUrl": "/icons/coins/GLMR.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "GM",
     "cmc_slug": "gomble",
     "name_ko": "곰블",
-    "name_en": "Gomble"
+    "name_en": "Gomble",
+    "tradingViewSymbol": "BINANCE:GMUSDT",
+    "iconUrl": "/icons/coins/GM.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "GMT",
     "cmc_slug": null,
     "name_ko": "스테픈",
     "name_en": "STEPN",
-    "icon_path": "/icons/UPBIT/GMT.png"
+    "icon_path": "/icons/UPBIT/GMT.png",
+    "tradingViewSymbol": "BINANCE:GMTUSDT",
+    "iconUrl": "/icons/coins/GMT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "GMX",
     "cmc_slug": "gmx",
     "name_ko": "지엠엑스",
-    "name_en": "GMX"
+    "name_en": "GMX",
+    "tradingViewSymbol": "BINANCE:GMXUSDT",
+    "iconUrl": "/icons/coins/GMX.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "GNO",
     "cmc_slug": "gnosis",
     "name_ko": "노시스",
-    "name_en": "Gnosis"
+    "name_en": "Gnosis",
+    "tradingViewSymbol": "BINANCE:GNOUSDT",
+    "iconUrl": "/icons/coins/GNO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "GO",
     "cmc_slug": "gochain",
     "name_ko": "고체인",
     "name_en": "GoChain",
-    "icon_path": "/icons/UPBIT/GO.png"
+    "icon_path": "/icons/UPBIT/GO.png",
+    "tradingViewSymbol": "BINANCE:GOUSDT",
+    "iconUrl": "/icons/coins/GO.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "GOAT",
     "cmc_slug": "goatseus-maximus",
     "name_ko": "고트세우스 막시무스",
-    "name_en": "Goatseus Maximus"
+    "name_en": "Goatseus Maximus",
+    "tradingViewSymbol": "BINANCE:GOATUSDT",
+    "iconUrl": "/icons/coins/GOAT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "GRACY",
     "cmc_slug": null,
     "name_ko": "그레이시",
-    "name_en": "Gracy"
+    "name_en": "Gracy",
+    "tradingViewSymbol": "BINANCE:GRACYUSDT",
+    "iconUrl": "/icons/coins/GRACY.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "GRASS",
     "cmc_slug": "grass",
     "name_ko": "그래스",
-    "name_en": "Grass"
+    "name_en": "Grass",
+    "tradingViewSymbol": "BINANCE:GRASSUSDT",
+    "iconUrl": "/icons/coins/GRASS.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "GRND",
     "cmc_slug": "superwalk",
     "name_ko": "슈퍼워크",
-    "name_en": "Superwalk"
+    "name_en": "Superwalk",
+    "tradingViewSymbol": "BINANCE:GRNDUSDT",
+    "iconUrl": "/icons/coins/GRND.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "GRS",
     "cmc_slug": null,
     "name_ko": "그로스톨코인",
     "name_en": "Groestlcoin",
-    "icon_path": "/icons/UPBIT/GRS.png"
+    "icon_path": "/icons/UPBIT/GRS.png",
+    "tradingViewSymbol": "BINANCE:GRSUSDT",
+    "iconUrl": "/icons/coins/GRS.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "GRT",
     "cmc_slug": "the-graph",
     "name_ko": "더그래프",
     "name_en": "The Graph",
-    "icon_path": "/icons/UPBIT/GRT.png"
+    "icon_path": "/icons/UPBIT/GRT.png",
+    "tradingViewSymbol": "BINANCE:GRTUSDT",
+    "iconUrl": "/icons/coins/GRT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "GTC",
     "cmc_slug": null,
     "name_ko": "깃코인",
     "name_en": "Gitcoin",
-    "icon_path": "/icons/UPBIT/GTC.png"
+    "icon_path": "/icons/UPBIT/GTC.png",
+    "tradingViewSymbol": "BINANCE:GTCUSDT",
+    "iconUrl": "/icons/coins/GTC.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "GXA",
     "cmc_slug": "galaxia",
     "name_ko": "갤럭시아",
-    "name_en": "Galaxia"
+    "name_en": "Galaxia",
+    "tradingViewSymbol": "BINANCE:GXAUSDT",
+    "iconUrl": "/icons/coins/GXA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "H",
     "cmc_slug": "humanity-protocol",
     "name_ko": "휴머니티 프로토콜",
-    "name_en": "Humanity Protocol"
+    "name_en": "Humanity Protocol",
+    "tradingViewSymbol": "BINANCE:HUSDT",
+    "iconUrl": "/icons/coins/H.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "HAEDAL",
     "cmc_slug": "haedal-protocol",
     "name_ko": "해달 프로토콜",
     "name_en": "Haedal Protocol",
-    "icon_path": "/icons/UPBIT/HAEDAL.png"
+    "icon_path": "/icons/UPBIT/HAEDAL.png",
+    "tradingViewSymbol": "BINANCE:HAEDALUSDT",
+    "iconUrl": "/icons/coins/HAEDAL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "HBAR",
     "cmc_slug": "hedera",
     "name_ko": "헤데라",
     "name_en": "Hedera",
-    "icon_path": "/icons/UPBIT/HBAR.png"
+    "icon_path": "/icons/UPBIT/HBAR.png",
+    "tradingViewSymbol": "BINANCE:HBARUSDT",
+    "iconUrl": "/icons/coins/HBAR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "HBD",
     "cmc_slug": "hive-dollar",
     "name_ko": "하이브달러",
     "name_en": "Hive Dollar",
-    "icon_path": "/icons/UPBIT/HBD.png"
+    "icon_path": "/icons/UPBIT/HBD.png",
+    "tradingViewSymbol": "BINANCE:HBDUSDT",
+    "iconUrl": "/icons/coins/HBD.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "HEI",
     "cmc_slug": "heima",
     "name_ko": "헤이마",
-    "name_en": "Heima"
+    "name_en": "Heima",
+    "tradingViewSymbol": "BINANCE:HEIUSDT",
+    "iconUrl": "/icons/coins/HEI.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "HEMI",
     "cmc_slug": "hemi",
     "name_ko": "헤미",
-    "name_en": "Hemi"
+    "name_en": "Hemi",
+    "tradingViewSymbol": "BINANCE:HEMIUSDT",
+    "iconUrl": "/icons/coins/HEMI.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "HFT",
     "cmc_slug": "hashflow",
     "name_ko": "해시플로우",
-    "name_en": "Hashflow"
+    "name_en": "Hashflow",
+    "tradingViewSymbol": "BINANCE:HFTUSDT",
+    "iconUrl": "/icons/coins/HFT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "HIFI",
     "cmc_slug": "hifi-finance",
     "name_ko": "하이파이",
-    "name_en": "Hifi Finance"
+    "name_en": "Hifi Finance",
+    "tradingViewSymbol": "BINANCE:HIFIUSDT",
+    "iconUrl": "/icons/coins/HIFI.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "HIGH",
     "cmc_slug": "highstreet",
     "name_ko": "하이스트리트",
-    "name_en": "Highstreet"
+    "name_en": "Highstreet",
+    "tradingViewSymbol": "BINANCE:HIGHUSDT",
+    "iconUrl": "/icons/coins/HIGH.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "HIPPO",
     "cmc_slug": "sudeng",
     "name_ko": "수뎅",
-    "name_en": "Sudeng"
+    "name_en": "Sudeng",
+    "tradingViewSymbol": "BINANCE:HIPPOUSDT",
+    "iconUrl": "/icons/coins/HIPPO.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "HIVE",
     "cmc_slug": "hive",
     "name_ko": "하이브",
     "name_en": "Hive",
-    "icon_path": "/icons/UPBIT/HIVE.png"
+    "icon_path": "/icons/UPBIT/HIVE.png",
+    "tradingViewSymbol": "BINANCE:HIVEUSDT",
+    "iconUrl": "/icons/coins/HIVE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "HOLO",
     "cmc_slug": "holoworld-ai",
     "name_ko": "홀로월드 에이아이",
     "name_en": "Holoworld AI",
-    "icon_path": "/icons/UPBIT/HOLO.png"
+    "icon_path": "/icons/UPBIT/HOLO.png",
+    "tradingViewSymbol": "BINANCE:HOLOUSDT",
+    "iconUrl": "/icons/coins/HOLO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "HOME",
     "cmc_slug": "defi-app",
     "name_ko": "디파이 앱",
-    "name_en": "Defi App"
+    "name_en": "Defi App",
+    "tradingViewSymbol": "BINANCE:HOMEUSDT",
+    "iconUrl": "/icons/coins/HOME.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "HOOK",
     "cmc_slug": "hooked-protocol",
     "name_ko": "훅트 프로토콜",
-    "name_en": "Hooked Protocol"
+    "name_en": "Hooked Protocol",
+    "tradingViewSymbol": "BINANCE:HOOKUSDT",
+    "iconUrl": "/icons/coins/HOOK.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "HOT",
     "cmc_slug": "holo",
     "name_ko": "홀로",
-    "name_en": "Holo"
+    "name_en": "Holo",
+    "tradingViewSymbol": "BINANCE:HOTUSDT",
+    "iconUrl": "/icons/coins/HOT.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "HP",
     "cmc_slug": null,
     "name_ko": "히포 프로토콜",
     "name_en": "Hippo Protocol",
-    "icon_path": "/icons/UPBIT/HP.png"
+    "icon_path": "/icons/UPBIT/HP.png",
+    "tradingViewSymbol": "BINANCE:HPUSDT",
+    "iconUrl": "/icons/coins/HP.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "HPP",
     "cmc_slug": "house-party-protocol",
     "name_ko": "하우스 파티 프로토콜",
-    "name_en": "House Party Protocol"
+    "name_en": "House Party Protocol",
+    "tradingViewSymbol": "BINANCE:HPPUSDT",
+    "iconUrl": "/icons/coins/HPP.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "HUMA",
     "cmc_slug": "huma-finance",
     "name_ko": "후마 파이낸스",
     "name_en": "Huma Finance",
-    "icon_path": "/icons/UPBIT/HUMA.png"
+    "icon_path": "/icons/UPBIT/HUMA.png",
+    "tradingViewSymbol": "BINANCE:HUMAUSDT",
+    "iconUrl": "/icons/coins/HUMA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "HUNT",
     "cmc_slug": "hunt",
     "name_ko": "헌트",
     "name_en": "Hunt Town",
-    "icon_path": "/icons/UPBIT/HUNT.png"
+    "icon_path": "/icons/UPBIT/HUNT.png",
+    "tradingViewSymbol": "BINANCE:HUNTUSDT",
+    "iconUrl": "/icons/coins/HUNT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "HVH",
     "cmc_slug": "havah",
     "name_ko": "하바",
-    "name_en": "HAVAH"
+    "name_en": "HAVAH",
+    "tradingViewSymbol": "BINANCE:HVHUSDT",
+    "iconUrl": "/icons/coins/HVH.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "HYPER",
     "cmc_slug": "hyperlane",
     "name_ko": "하이퍼레인",
     "name_en": "Hyperlane",
-    "icon_path": "/icons/UPBIT/HYPER.png"
+    "icon_path": "/icons/UPBIT/HYPER.png",
+    "tradingViewSymbol": "BINANCE:HYPERUSDT",
+    "iconUrl": "/icons/coins/HYPER.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ICP",
     "cmc_slug": "internet-computer",
     "name_ko": "인터넷 컴퓨터",
-    "name_en": "Internet Computer"
+    "name_en": "Internet Computer",
+    "tradingViewSymbol": "BINANCE:ICPUSDT",
+    "iconUrl": "/icons/coins/ICP.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ICX",
     "cmc_slug": "icon",
     "name_ko": "아이콘",
     "name_en": "ICON",
-    "icon_path": "/icons/UPBIT/ICX.png"
+    "icon_path": "/icons/UPBIT/ICX.png",
+    "tradingViewSymbol": "BINANCE:ICXUSDT",
+    "iconUrl": "/icons/coins/ICX.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ID",
     "cmc_slug": "space-id",
     "name_ko": "스페이스 아이디",
     "name_en": "SPACE ID",
-    "icon_path": "/icons/UPBIT/ID.png"
+    "icon_path": "/icons/UPBIT/ID.png",
+    "tradingViewSymbol": "BINANCE:IDUSDT",
+    "iconUrl": "/icons/coins/ID.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ILV",
     "cmc_slug": "illuvium",
     "name_ko": "일루비움",
-    "name_en": "Illuvium"
+    "name_en": "Illuvium",
+    "tradingViewSymbol": "BINANCE:ILVUSDT",
+    "iconUrl": "/icons/coins/ILV.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "IMX",
     "cmc_slug": "immutable-x",
     "name_ko": "이뮤터블엑스",
     "name_en": "Immutable X",
-    "icon_path": "/icons/UPBIT/IMX.png"
+    "icon_path": "/icons/UPBIT/IMX.png",
+    "cmcSlug": "immutable-x",
+    "tradingViewSymbol": "BINANCE:IMXUSDT",
+    "iconUrl": "/icons/coins/IMX.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "IN",
     "cmc_slug": "infinit",
     "name_ko": "인피닛",
     "name_en": "Infinit",
-    "icon_path": "/icons/UPBIT/IN.png"
+    "icon_path": "/icons/UPBIT/IN.png",
+    "tradingViewSymbol": "BINANCE:INUSDT",
+    "iconUrl": "/icons/coins/IN.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "INIT",
     "cmc_slug": "initia",
     "name_ko": "이니시아",
     "name_en": "Initia",
-    "icon_path": "/icons/UPBIT/INIT.png"
+    "icon_path": "/icons/UPBIT/INIT.png",
+    "tradingViewSymbol": "BINANCE:INITUSDT",
+    "iconUrl": "/icons/coins/INIT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "INJ",
     "cmc_slug": "injective",
     "name_ko": "인젝티브",
     "name_en": "Injective",
-    "icon_path": "/icons/UPBIT/INJ.png"
+    "icon_path": "/icons/UPBIT/INJ.png",
+    "cmcSlug": "injective-protocol",
+    "tradingViewSymbol": "BINANCE:INJUSDT",
+    "iconUrl": "/icons/coins/INJ.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "INTER",
     "cmc_slug": null,
     "name_ko": "인터밀란",
     "name_en": "Inter Milan Fan Token",
-    "icon_path": "/icons/UPBIT/INTER.png"
+    "icon_path": "/icons/UPBIT/INTER.png",
+    "tradingViewSymbol": "BINANCE:INTERUSDT",
+    "iconUrl": "/icons/coins/INTER.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "IO",
     "cmc_slug": "io-net",
     "name_ko": "아이오넷",
     "name_en": "io.net",
-    "icon_path": "/icons/UPBIT/IO.png"
+    "icon_path": "/icons/UPBIT/IO.png",
+    "tradingViewSymbol": "BINANCE:IOUSDT",
+    "iconUrl": "/icons/coins/IO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "IOST",
     "cmc_slug": null,
     "name_ko": "이오스트",
     "name_en": "IOST",
-    "icon_path": "/icons/UPBIT/IOST.png"
+    "icon_path": "/icons/UPBIT/IOST.png",
+    "tradingViewSymbol": "BINANCE:IOSTUSDT",
+    "iconUrl": "/icons/coins/IOST.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "IOTA",
     "cmc_slug": "iota",
     "name_ko": "아이오타",
     "name_en": "IOTA",
-    "icon_path": "/icons/UPBIT/IOTA.png"
+    "icon_path": "/icons/UPBIT/IOTA.png",
+    "tradingViewSymbol": "BINANCE:IOTAUSDT",
+    "iconUrl": "/icons/coins/IOTA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "IOTX",
     "cmc_slug": "iotex",
     "name_ko": "아이오텍스",
     "name_en": "IoTeX",
-    "icon_path": "/icons/UPBIT/IOTX.png"
+    "icon_path": "/icons/UPBIT/IOTX.png",
+    "tradingViewSymbol": "BINANCE:IOTXUSDT",
+    "iconUrl": "/icons/coins/IOTX.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "IP",
     "cmc_slug": "story",
     "name_ko": "스토리",
     "name_en": "Story",
-    "icon_path": "/icons/UPBIT/IP.png"
+    "icon_path": "/icons/UPBIT/IP.png",
+    "tradingViewSymbol": "BINANCE:IPUSDT",
+    "iconUrl": "/icons/coins/IP.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "IQ",
     "cmc_slug": "iq",
     "name_ko": "아이큐",
     "name_en": "IQ",
-    "icon_path": "/icons/UPBIT/IQ.png"
+    "icon_path": "/icons/UPBIT/IQ.png",
+    "tradingViewSymbol": "BINANCE:IQUSDT",
+    "iconUrl": "/icons/coins/IQ.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "IRYS",
     "cmc_slug": "irys",
     "name_ko": "아이리스",
-    "name_en": "Irys"
+    "name_en": "Irys",
+    "tradingViewSymbol": "BINANCE:IRYSUSDT",
+    "iconUrl": "/icons/coins/IRYS.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ISK",
     "cmc_slug": "iskra",
     "name_ko": "이스크라",
-    "name_en": "Iskra"
+    "name_en": "Iskra",
+    "tradingViewSymbol": "BINANCE:ISKUSDT",
+    "iconUrl": "/icons/coins/ISK.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "JASMY",
     "cmc_slug": "jasmy",
     "name_ko": "재스미코인",
     "name_en": "JasmyCoin",
-    "icon_path": "/icons/UPBIT/JASMY.png"
+    "icon_path": "/icons/UPBIT/JASMY.png",
+    "tradingViewSymbol": "BINANCE:JASMYUSDT",
+    "iconUrl": "/icons/coins/JASMY.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "JOE",
     "cmc_slug": "joe",
     "name_ko": "트레이더 조",
-    "name_en": "JOE"
+    "name_en": "JOE",
+    "tradingViewSymbol": "BINANCE:JOEUSDT",
+    "iconUrl": "/icons/coins/JOE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "JST",
     "cmc_slug": "just",
     "name_ko": "저스트",
     "name_en": "JUST",
-    "icon_path": "/icons/UPBIT/JST.png"
+    "icon_path": "/icons/UPBIT/JST.png",
+    "tradingViewSymbol": "BINANCE:JSTUSDT",
+    "iconUrl": "/icons/coins/JST.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "JTO",
     "cmc_slug": "jito",
     "name_ko": "지토",
     "name_en": "Jito",
-    "icon_path": "/icons/UPBIT/JTO.png"
+    "icon_path": "/icons/UPBIT/JTO.png",
+    "tradingViewSymbol": "BINANCE:JTOUSDT",
+    "iconUrl": "/icons/coins/JTO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "JUP",
     "cmc_slug": "jupiter",
     "name_ko": "주피터",
     "name_en": "Jupiter",
-    "icon_path": "/icons/UPBIT/JUP.png"
+    "icon_path": "/icons/UPBIT/JUP.png",
+    "tradingViewSymbol": "BINANCE:JUPUSDT",
+    "iconUrl": "/icons/coins/JUP.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "JUV",
     "cmc_slug": null,
     "name_ko": "유벤투스",
     "name_en": "Juventus Fan Token",
-    "icon_path": "/icons/UPBIT/JUV.png"
+    "icon_path": "/icons/UPBIT/JUV.png",
+    "tradingViewSymbol": "BINANCE:JUVUSDT",
+    "iconUrl": "/icons/coins/JUV.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "K",
     "cmc_slug": "sidekick",
     "name_ko": "사이드킥",
-    "name_en": "Sidekick"
+    "name_en": "Sidekick",
+    "tradingViewSymbol": "BINANCE:KUSDT",
+    "iconUrl": "/icons/coins/K.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "KAIA",
     "cmc_slug": "kaia",
     "name_ko": "카이아",
-    "name_en": "Kaia"
+    "name_en": "Kaia",
+    "tradingViewSymbol": "BINANCE:KAIAUSDT",
+    "iconUrl": "/icons/coins/KAIA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "KAITO",
     "cmc_slug": "kaito",
     "name_ko": "카이토",
     "name_en": "Kaito",
-    "icon_path": "/icons/UPBIT/KAITO.png"
+    "icon_path": "/icons/UPBIT/KAITO.png",
+    "tradingViewSymbol": "BINANCE:KAITOUSDT",
+    "iconUrl": "/icons/coins/KAITO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "KAS",
     "cmc_slug": "kaspa",
     "name_ko": "카스파",
-    "name_en": "Kaspa"
+    "name_en": "Kaspa",
+    "tradingViewSymbol": "BINANCE:KASUSDT",
+    "iconUrl": "/icons/coins/KAS.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "KAVA",
     "cmc_slug": "kava",
     "name_ko": "카바",
     "name_en": "Kava",
-    "icon_path": "/icons/UPBIT/KAVA.png"
+    "icon_path": "/icons/UPBIT/KAVA.png",
+    "tradingViewSymbol": "BINANCE:KAVAUSDT",
+    "iconUrl": "/icons/coins/KAVA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "KERNEL",
     "cmc_slug": null,
     "name_ko": "커널 다오",
     "name_en": "Kernel DAO",
-    "icon_path": "/icons/UPBIT/KERNEL.png"
+    "icon_path": "/icons/UPBIT/KERNEL.png",
+    "tradingViewSymbol": "BINANCE:KERNELUSDT",
+    "iconUrl": "/icons/coins/KERNEL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "KGEN",
     "cmc_slug": "kgen",
     "name_ko": "케이젠",
-    "name_en": "KGeN"
+    "name_en": "KGeN",
+    "tradingViewSymbol": "BINANCE:KGENUSDT",
+    "iconUrl": "/icons/coins/KGEN.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "KITE",
     "cmc_slug": "kite",
     "name_ko": "카이트",
     "name_en": "Kite",
-    "icon_path": "/icons/UPBIT/KITE.png"
+    "icon_path": "/icons/UPBIT/KITE.png",
+    "tradingViewSymbol": "BINANCE:KITEUSDT",
+    "iconUrl": "/icons/coins/KITE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "KMNO",
     "cmc_slug": "kamino-finance",
     "name_ko": "카미노 파이낸스",
-    "name_en": "Kamino Finance"
+    "name_en": "Kamino Finance",
+    "tradingViewSymbol": "BINANCE:KMNOUSDT",
+    "iconUrl": "/icons/coins/KMNO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "KNC",
     "cmc_slug": "kyber-network",
     "name_ko": "카이버 네트워크",
     "name_en": "Kyber Network",
-    "icon_path": "/icons/UPBIT/KNC.png"
+    "icon_path": "/icons/UPBIT/KNC.png",
+    "tradingViewSymbol": "BINANCE:KNCUSDT",
+    "iconUrl": "/icons/coins/KNC.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "KSM",
     "cmc_slug": "kusama",
     "name_ko": "쿠사마",
-    "name_en": "Kusama"
+    "name_en": "Kusama",
+    "tradingViewSymbol": "BINANCE:KSMUSDT",
+    "iconUrl": "/icons/coins/KSM.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "L3",
     "cmc_slug": "layer3",
     "name_ko": "레이어쓰리",
-    "name_en": "Layer3"
+    "name_en": "Layer3",
+    "tradingViewSymbol": "BINANCE:L3USDT",
+    "iconUrl": "/icons/coins/L3.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "LA",
     "cmc_slug": "lagrange",
     "name_ko": "라그랑주",
     "name_en": "Lagrange",
-    "icon_path": "/icons/UPBIT/LA.png"
+    "icon_path": "/icons/UPBIT/LA.png",
+    "tradingViewSymbol": "BINANCE:LAUSDT",
+    "iconUrl": "/icons/coins/LA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "LAYER",
     "cmc_slug": "solayer",
     "name_ko": "솔레이어",
     "name_en": "Solayer",
-    "icon_path": "/icons/UPBIT/LAYER.png"
+    "icon_path": "/icons/UPBIT/LAYER.png",
+    "tradingViewSymbol": "BINANCE:LAYERUSDT",
+    "iconUrl": "/icons/coins/LAYER.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "LDO",
     "cmc_slug": "lido-dao",
     "name_ko": "리도다오",
-    "name_en": "Lido DAO"
+    "name_en": "Lido DAO",
+    "tradingViewSymbol": "BINANCE:LDOUSDT",
+    "iconUrl": "/icons/coins/LDO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "LINEA",
     "cmc_slug": "linea",
     "name_ko": "리네아",
     "name_en": "Linea",
-    "icon_path": "/icons/UPBIT/LINEA.png"
+    "icon_path": "/icons/UPBIT/LINEA.png",
+    "tradingViewSymbol": "BINANCE:LINEAUSDT",
+    "iconUrl": "/icons/coins/LINEA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "LINK",
     "cmc_slug": "chainlink",
     "name_ko": "체인링크",
     "name_en": "ChainLink",
-    "icon_path": "/icons/UPBIT/LINK.png"
+    "icon_path": "/icons/UPBIT/LINK.png",
+    "cmcSlug": "chainlink",
+    "tradingViewSymbol": "BINANCE:LINKUSDT",
+    "iconUrl": "/icons/coins/LINK.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "LION",
     "cmc_slug": "loaded-lions",
     "name_ko": "로디드라이언즈",
-    "name_en": "Loaded Lions"
+    "name_en": "Loaded Lions",
+    "tradingViewSymbol": "BINANCE:LIONUSDT",
+    "iconUrl": "/icons/coins/LION.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "LISTA",
     "cmc_slug": "lista-dao",
     "name_ko": "리스타 다오",
-    "name_en": "Lista DAO"
+    "name_en": "Lista DAO",
+    "tradingViewSymbol": "BINANCE:LISTAUSDT",
+    "iconUrl": "/icons/coins/LISTA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "LM",
     "cmc_slug": "leisuremeta",
     "name_ko": "레저메타",
-    "name_en": "LeisureMeta"
+    "name_en": "LeisureMeta",
+    "tradingViewSymbol": "BINANCE:LMUSDT",
+    "iconUrl": "/icons/coins/LM.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "LPT",
     "cmc_slug": "livepeer",
     "name_ko": "라이브피어",
     "name_en": "Livepeer",
-    "icon_path": "/icons/UPBIT/LPT.png"
+    "icon_path": "/icons/UPBIT/LPT.png",
+    "tradingViewSymbol": "BINANCE:LPTUSDT",
+    "iconUrl": "/icons/coins/LPT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "LQTY",
     "cmc_slug": "liquity",
     "name_ko": "리퀴티",
-    "name_en": "Liquity"
+    "name_en": "Liquity",
+    "tradingViewSymbol": "BINANCE:LQTYUSDT",
+    "iconUrl": "/icons/coins/LQTY.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "LRC",
     "cmc_slug": "loopring",
     "name_ko": "루프링",
     "name_en": "Loopring",
-    "icon_path": "/icons/UPBIT/LRC.png"
+    "icon_path": "/icons/UPBIT/LRC.png",
+    "tradingViewSymbol": "BINANCE:LRCUSDT",
+    "iconUrl": "/icons/coins/LRC.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "LSK",
     "cmc_slug": "lisk",
     "name_ko": "리스크",
     "name_en": "Lisk",
-    "icon_path": "/icons/UPBIT/LSK.png"
+    "icon_path": "/icons/UPBIT/LSK.png",
+    "tradingViewSymbol": "BINANCE:LSKUSDT",
+    "iconUrl": "/icons/coins/LSK.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "LWA",
     "cmc_slug": "lumiwave",
     "name_ko": "루미웨이브",
     "name_en": "Lumiwave",
-    "icon_path": "/icons/UPBIT/LWA.png"
+    "icon_path": "/icons/UPBIT/LWA.png",
+    "tradingViewSymbol": "BINANCE:LWAUSDT",
+    "iconUrl": "/icons/coins/LWA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "LZM",
     "cmc_slug": null,
     "name_ko": "라운지엠",
-    "name_en": "LoungeM"
+    "name_en": "LoungeM",
+    "tradingViewSymbol": "BINANCE:LZMUSDT",
+    "iconUrl": "/icons/coins/LZM.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "MAGIC",
     "cmc_slug": "magic",
     "name_ko": "매직",
     "name_en": "Magic",
-    "icon_path": "/icons/UPBIT/MAGIC.png"
+    "icon_path": "/icons/UPBIT/MAGIC.png",
+    "tradingViewSymbol": "BINANCE:MAGICUSDT",
+    "iconUrl": "/icons/coins/MAGIC.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MAK",
     "cmc_slug": "metacene",
     "name_ko": "메타씬",
-    "name_en": "MetaCene"
+    "name_en": "MetaCene",
+    "tradingViewSymbol": "BINANCE:MAKUSDT",
+    "iconUrl": "/icons/coins/MAK.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "MANA",
     "cmc_slug": "decentraland",
     "name_ko": "디센트럴랜드",
     "name_en": "Decentraland",
-    "icon_path": "/icons/UPBIT/MANA.png"
+    "icon_path": "/icons/UPBIT/MANA.png",
+    "cmcSlug": "decentraland",
+    "tradingViewSymbol": "BINANCE:MANAUSDT",
+    "iconUrl": "/icons/coins/MANA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MANTA",
     "cmc_slug": "manta-network",
     "name_ko": "만타 네트워크",
-    "name_en": "Manta Network"
+    "name_en": "Manta Network",
+    "tradingViewSymbol": "BINANCE:MANTAUSDT",
+    "iconUrl": "/icons/coins/MANTA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MAPO",
     "cmc_slug": "map-protocol",
     "name_ko": "맵프로토콜",
-    "name_en": "MAP Protocol"
+    "name_en": "MAP Protocol",
+    "tradingViewSymbol": "BINANCE:MAPOUSDT",
+    "iconUrl": "/icons/coins/MAPO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MASA",
     "cmc_slug": null,
     "name_ko": "마사",
-    "name_en": "Masa"
+    "name_en": "Masa",
+    "tradingViewSymbol": "BINANCE:MASAUSDT",
+    "iconUrl": "/icons/coins/MASA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "MASK",
     "cmc_slug": "mask-network",
     "name_ko": "마스크네트워크",
     "name_en": "Mask Network",
-    "icon_path": "/icons/UPBIT/MASK.png"
+    "icon_path": "/icons/UPBIT/MASK.png",
+    "tradingViewSymbol": "BINANCE:MASKUSDT",
+    "iconUrl": "/icons/coins/MASK.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MAV",
     "cmc_slug": "maverick-protocol",
     "name_ko": "매버릭 프로토콜",
-    "name_en": "Maverick Protocol"
+    "name_en": "Maverick Protocol",
+    "tradingViewSymbol": "BINANCE:MAVUSDT",
+    "iconUrl": "/icons/coins/MAV.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MAVIA",
     "cmc_slug": "heroes-of-mavia",
     "name_ko": "히어로즈오브마비아",
-    "name_en": "Heroes of Mavia"
+    "name_en": "Heroes of Mavia",
+    "tradingViewSymbol": "BINANCE:MAVIAUSDT",
+    "iconUrl": "/icons/coins/MAVIA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "MAY",
     "cmc_slug": null,
     "name_ko": "메이플라워",
-    "name_en": "Mayflower"
+    "name_en": "Mayflower",
+    "tradingViewSymbol": "BINANCE:MAYUSDT",
+    "iconUrl": "/icons/coins/MAY.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MBL",
     "cmc_slug": "moviebloc",
     "name_ko": "무비블록",
     "name_en": "MovieBloc",
-    "icon_path": "/icons/UPBIT/MBL.png"
+    "icon_path": "/icons/UPBIT/MBL.png",
+    "tradingViewSymbol": "BINANCE:MBLUSDT",
+    "iconUrl": "/icons/coins/MBL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MBX",
     "cmc_slug": "marblex",
     "name_ko": "마브렉스",
-    "name_en": "Marblex"
+    "name_en": "Marblex",
+    "tradingViewSymbol": "BINANCE:MBXUSDT",
+    "iconUrl": "/icons/coins/MBX.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ME",
     "cmc_slug": null,
     "name_ko": "매직 에덴",
     "name_en": "Magic Eden",
-    "icon_path": "/icons/UPBIT/ME.png"
+    "icon_path": "/icons/UPBIT/ME.png",
+    "tradingViewSymbol": "BINANCE:MEUSDT",
+    "iconUrl": "/icons/coins/ME.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MED",
     "cmc_slug": "medibloc",
     "name_ko": "메디블록",
     "name_en": "MediBloc",
-    "icon_path": "/icons/UPBIT/MED.png"
+    "icon_path": "/icons/UPBIT/MED.png",
+    "tradingViewSymbol": "BINANCE:MEDUSDT",
+    "iconUrl": "/icons/coins/MED.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MEME",
     "cmc_slug": "meme",
     "name_ko": "밈코인",
-    "name_en": "Memecoin"
+    "name_en": "Memecoin",
+    "tradingViewSymbol": "BINANCE:MEMEUSDT",
+    "iconUrl": "/icons/coins/MEME.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "MERL",
     "cmc_slug": "merlin-chain",
     "name_ko": "멀린 체인",
-    "name_en": "Merlin Chain"
+    "name_en": "Merlin Chain",
+    "tradingViewSymbol": "BINANCE:MERLUSDT",
+    "iconUrl": "/icons/coins/MERL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MET",
     "cmc_slug": "meteora",
     "name_ko": "메테오라",
-    "name_en": "Meteora"
+    "name_en": "Meteora",
+    "tradingViewSymbol": "BINANCE:METUSDT",
+    "iconUrl": "/icons/coins/MET.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MET2",
     "cmc_slug": "meteora",
     "name_ko": "메테오라",
     "name_en": "Meteora",
-    "icon_path": "/icons/UPBIT/MET2.png"
+    "icon_path": "/icons/UPBIT/MET2.png",
+    "tradingViewSymbol": "BINANCE:MET2USDT",
+    "iconUrl": "/icons/coins/MET2.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "META",
     "cmc_slug": "metadium",
     "name_ko": "메타디움",
     "name_en": "Metadium",
-    "icon_path": "/icons/UPBIT/META.png"
+    "icon_path": "/icons/UPBIT/META.png",
+    "tradingViewSymbol": "BINANCE:METAUSDT",
+    "iconUrl": "/icons/coins/META.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "METIS",
     "cmc_slug": "metisdao",
     "name_ko": "메티스다오",
-    "name_en": "MetisDAO"
+    "name_en": "MetisDAO",
+    "tradingViewSymbol": "BINANCE:METISUSDT",
+    "iconUrl": "/icons/coins/METIS.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MEV",
     "cmc_slug": "meverse",
     "name_ko": "미버스",
-    "name_en": "MEVerse"
+    "name_en": "MEVerse",
+    "tradingViewSymbol": "BINANCE:MEVUSDT",
+    "iconUrl": "/icons/coins/MEV.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MEW",
     "cmc_slug": "cat-in-a-dogs-world",
     "name_ko": "캣인어독스월드",
     "name_en": "cat in a dogs world",
-    "icon_path": "/icons/UPBIT/MEW.png"
+    "icon_path": "/icons/UPBIT/MEW.png",
+    "tradingViewSymbol": "BINANCE:MEWUSDT",
+    "iconUrl": "/icons/coins/MEW.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MILK",
     "cmc_slug": "milkyway",
     "name_ko": "밀키웨이",
-    "name_en": "MilkyWay"
+    "name_en": "MilkyWay",
+    "tradingViewSymbol": "BINANCE:MILKUSDT",
+    "iconUrl": "/icons/coins/MILK.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "MINA",
     "cmc_slug": "mina",
     "name_ko": "미나",
     "name_en": "Mina",
-    "icon_path": "/icons/UPBIT/MINA.png"
+    "icon_path": "/icons/UPBIT/MINA.png",
+    "tradingViewSymbol": "BINANCE:MINAUSDT",
+    "iconUrl": "/icons/coins/MINA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MIRA",
     "cmc_slug": null,
     "name_ko": "미라",
     "name_en": "Mira",
-    "icon_path": "/icons/UPBIT/MIRA.png"
+    "icon_path": "/icons/UPBIT/MIRA.png",
+    "tradingViewSymbol": "BINANCE:MIRAUSDT",
+    "iconUrl": "/icons/coins/MIRA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MLK",
     "cmc_slug": null,
     "name_ko": "밀크",
     "name_en": "MiL.k",
-    "icon_path": "/icons/UPBIT/MLK.png"
+    "icon_path": "/icons/UPBIT/MLK.png",
+    "tradingViewSymbol": "BINANCE:MLKUSDT",
+    "iconUrl": "/icons/coins/MLK.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MMT",
     "cmc_slug": "momentum",
     "name_ko": "모멘텀",
     "name_en": "Momentum",
-    "icon_path": "/icons/UPBIT/MMT.png"
+    "icon_path": "/icons/UPBIT/MMT.png",
+    "tradingViewSymbol": "BINANCE:MMTUSDT",
+    "iconUrl": "/icons/coins/MMT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MNT",
     "cmc_slug": "mantle",
     "name_ko": "맨틀",
     "name_en": "Mantle",
-    "icon_path": "/icons/UPBIT/MNT.png"
+    "icon_path": "/icons/UPBIT/MNT.png",
+    "tradingViewSymbol": "BINANCE:MNTUSDT",
+    "iconUrl": "/icons/coins/MNT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MOC",
     "cmc_slug": null,
     "name_ko": "모스코인",
     "name_en": "Moss Coin",
-    "icon_path": "/icons/UPBIT/MOC.png"
+    "icon_path": "/icons/UPBIT/MOC.png",
+    "tradingViewSymbol": "BINANCE:MOCUSDT",
+    "iconUrl": "/icons/coins/MOC.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MOCA",
     "cmc_slug": null,
     "name_ko": "모카네트워크",
     "name_en": "Moca Network",
-    "icon_path": "/icons/UPBIT/MOCA.png"
+    "icon_path": "/icons/UPBIT/MOCA.png",
+    "tradingViewSymbol": "BINANCE:MOCAUSDT",
+    "iconUrl": "/icons/coins/MOCA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MOG",
     "cmc_slug": null,
     "name_ko": "모그",
-    "name_en": "Mog"
+    "name_en": "Mog",
+    "tradingViewSymbol": "BINANCE:MOGUSDT",
+    "iconUrl": "/icons/coins/MOG.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "MON",
     "cmc_slug": "monad",
     "name_ko": "모나드",
     "name_en": "Monad",
-    "icon_path": "/icons/UPBIT/MON.png"
+    "icon_path": "/icons/UPBIT/MON.png",
+    "tradingViewSymbol": "BINANCE:MONUSDT",
+    "iconUrl": "/icons/coins/MON.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MONPRO",
     "cmc_slug": "mon-protocol",
     "name_ko": "몬 프로토콜",
-    "name_en": "Mon Protocol"
+    "name_en": "Mon Protocol",
+    "tradingViewSymbol": "BINANCE:MONPROUSDT",
+    "iconUrl": "/icons/coins/MONPRO.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "MOODENG",
     "cmc_slug": "moo-deng",
     "name_ko": "무뎅",
     "name_en": "Moo Deng",
-    "icon_path": "/icons/UPBIT/MOODENG.png"
+    "icon_path": "/icons/UPBIT/MOODENG.png",
+    "tradingViewSymbol": "BINANCE:MOODENGUSDT",
+    "iconUrl": "/icons/coins/MOODENG.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MORPHO",
     "cmc_slug": "morpho",
     "name_ko": "모포",
-    "name_en": "Morpho"
+    "name_en": "Morpho",
+    "tradingViewSymbol": "BINANCE:MORPHOUSDT",
+    "iconUrl": "/icons/coins/MORPHO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MOVE",
     "cmc_slug": "movement",
     "name_ko": "무브먼트",
     "name_en": "Movement",
-    "icon_path": "/icons/UPBIT/MOVE.png"
+    "icon_path": "/icons/UPBIT/MOVE.png",
+    "tradingViewSymbol": "BINANCE:MOVEUSDT",
+    "iconUrl": "/icons/coins/MOVE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MTL",
     "cmc_slug": "metal",
     "name_ko": "메탈",
     "name_en": "Metal",
-    "icon_path": "/icons/UPBIT/MTL.png"
+    "icon_path": "/icons/UPBIT/MTL.png",
+    "tradingViewSymbol": "BINANCE:MTLUSDT",
+    "iconUrl": "/icons/coins/MTL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MVC",
     "cmc_slug": "mileverse",
     "name_ko": "마일벌스",
-    "name_en": "MileVerse"
+    "name_en": "MileVerse",
+    "tradingViewSymbol": "BINANCE:MVCUSDT",
+    "iconUrl": "/icons/coins/MVC.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MVL",
     "cmc_slug": "mvl",
     "name_ko": "엠블",
     "name_en": "MVL",
-    "icon_path": "/icons/UPBIT/MVL.png"
+    "icon_path": "/icons/UPBIT/MVL.png",
+    "tradingViewSymbol": "BINANCE:MVLUSDT",
+    "iconUrl": "/icons/coins/MVL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "MYRO",
     "cmc_slug": "myro",
     "name_ko": "마이로",
-    "name_en": "Myro"
+    "name_en": "Myro",
+    "tradingViewSymbol": "BINANCE:MYROUSDT",
+    "iconUrl": "/icons/coins/MYRO.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "MYX",
     "cmc_slug": "myx-finance",
     "name_ko": "엠와이엑스 파이낸스",
-    "name_en": "MYX Finance"
+    "name_en": "MYX Finance",
+    "tradingViewSymbol": "BINANCE:MYXUSDT",
+    "iconUrl": "/icons/coins/MYX.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "NAP",
     "cmc_slug": null,
     "name_ko": "나폴리",
     "name_en": "Napoli Fan Token",
-    "icon_path": "/icons/UPBIT/NAP.png"
+    "icon_path": "/icons/UPBIT/NAP.png",
+    "tradingViewSymbol": "BINANCE:NAPUSDT",
+    "iconUrl": "/icons/coins/NAP.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "NAVX",
     "cmc_slug": "navi-protocol",
     "name_ko": "나비 프로토콜",
-    "name_en": "Navi Protocol"
+    "name_en": "Navi Protocol",
+    "tradingViewSymbol": "BINANCE:NAVXUSDT",
+    "iconUrl": "/icons/coins/NAVX.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "NCT",
     "cmc_slug": "polyswarm",
     "name_ko": "폴리스웜",
     "name_en": "Polyswarm",
-    "icon_path": "/icons/UPBIT/NCT.png"
+    "icon_path": "/icons/UPBIT/NCT.png",
+    "tradingViewSymbol": "BINANCE:NCTUSDT",
+    "iconUrl": "/icons/coins/NCT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "NEAR",
     "cmc_slug": "near-protocol",
     "name_ko": "니어프로토콜",
     "name_en": "NEAR Protocol",
-    "icon_path": "/icons/UPBIT/NEAR.png"
+    "icon_path": "/icons/UPBIT/NEAR.png",
+    "cmcSlug": "near-protocol",
+    "tradingViewSymbol": "BINANCE:NEARUSDT",
+    "iconUrl": "/icons/coins/NEAR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "NEIRO",
     "cmc_slug": "neiro",
     "name_ko": "네이로",
-    "name_en": "Neiro"
+    "name_en": "Neiro",
+    "tradingViewSymbol": "BINANCE:NEIROUSDT",
+    "iconUrl": "/icons/coins/NEIRO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "NEO",
     "cmc_slug": "neo",
     "name_ko": "네오",
     "name_en": "Neo",
-    "icon_path": "/icons/UPBIT/NEO.png"
+    "icon_path": "/icons/UPBIT/NEO.png",
+    "tradingViewSymbol": "BINANCE:NEOUSDT",
+    "iconUrl": "/icons/coins/NEO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "NEON",
     "cmc_slug": "neon",
     "name_ko": "네온 EVM",
-    "name_en": "NeonEVM"
+    "name_en": "NeonEVM",
+    "tradingViewSymbol": "BINANCE:NEONUSDT",
+    "iconUrl": "/icons/coins/NEON.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "NEWT",
     "cmc_slug": "newton-protocol",
     "name_ko": "뉴턴 프로토콜",
     "name_en": "Newton Protocol",
-    "icon_path": "/icons/UPBIT/NEWT.png"
+    "icon_path": "/icons/UPBIT/NEWT.png",
+    "tradingViewSymbol": "BINANCE:NEWTUSDT",
+    "iconUrl": "/icons/coins/NEWT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "NFT",
     "cmc_slug": "apenft",
     "name_ko": "에이피이앤에프티",
-    "name_en": "APENFT"
+    "name_en": "APENFT",
+    "tradingViewSymbol": "BINANCE:NFTUSDT",
+    "iconUrl": "/icons/coins/NFT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "NIL",
     "cmc_slug": "nillion",
     "name_ko": "닐리온",
-    "name_en": "Nillion"
+    "name_en": "Nillion",
+    "tradingViewSymbol": "BINANCE:NILUSDT",
+    "iconUrl": "/icons/coins/NIL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "NKN",
     "cmc_slug": "nkn",
     "name_ko": "엔케이엔",
     "name_en": "NKN",
-    "icon_path": "/icons/UPBIT/NKN.png"
+    "icon_path": "/icons/UPBIT/NKN.png",
+    "tradingViewSymbol": "BINANCE:NKNUSDT",
+    "iconUrl": "/icons/coins/NKN.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "NMR",
     "cmc_slug": "numeraire",
     "name_ko": "뉴메레르",
     "name_en": "Numeraire",
-    "icon_path": "/icons/UPBIT/NMR.png"
+    "icon_path": "/icons/UPBIT/NMR.png",
+    "tradingViewSymbol": "BINANCE:NMRUSDT",
+    "iconUrl": "/icons/coins/NMR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "NOM",
     "cmc_slug": null,
     "name_ko": "노미나",
     "name_en": "노미나",
-    "icon_path": "/icons/UPBIT/NOM.png"
+    "icon_path": "/icons/UPBIT/NOM.png",
+    "tradingViewSymbol": "BINANCE:NOMUSDT",
+    "iconUrl": "/icons/coins/NOM.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "NS",
     "cmc_slug": "sui-name-service",
     "name_ko": "수이 네임 서비스",
-    "name_en": "Sui Name Service"
+    "name_en": "Sui Name Service",
+    "tradingViewSymbol": "BINANCE:NSUSDT",
+    "iconUrl": "/icons/coins/NS.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "NTRN",
     "cmc_slug": "neutron",
     "name_ko": "뉴트론",
-    "name_en": "Neutron"
+    "name_en": "Neutron",
+    "tradingViewSymbol": "BINANCE:NTRNUSDT",
+    "iconUrl": "/icons/coins/NTRN.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "NXPC",
     "cmc_slug": null,
     "name_ko": "넥스페이스",
     "name_en": "NEXPACE",
-    "icon_path": "/icons/UPBIT/NXPC.png"
+    "icon_path": "/icons/UPBIT/NXPC.png",
+    "tradingViewSymbol": "BINANCE:NXPCUSDT",
+    "iconUrl": "/icons/coins/NXPC.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "OAS",
     "cmc_slug": "oasys",
     "name_ko": "오아시스",
     "name_en": "Oasys",
-    "icon_path": "/icons/UPBIT/OAS.png"
+    "icon_path": "/icons/UPBIT/OAS.png",
+    "tradingViewSymbol": "BINANCE:OASUSDT",
+    "iconUrl": "/icons/coins/OAS.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "OBSR",
     "cmc_slug": "observer",
     "name_ko": "옵저버",
     "name_en": "Observer",
-    "icon_path": "/icons/UPBIT/OBSR.png"
+    "icon_path": "/icons/UPBIT/OBSR.png",
+    "tradingViewSymbol": "BINANCE:OBSRUSDT",
+    "iconUrl": "/icons/coins/OBSR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "OBT",
     "cmc_slug": "orbiter-finance",
     "name_ko": "오비터 파이낸스",
-    "name_en": "Orbiter Finance"
+    "name_en": "Orbiter Finance",
+    "tradingViewSymbol": "BINANCE:OBTUSDT",
+    "iconUrl": "/icons/coins/OBT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "OCEAN",
     "cmc_slug": "ocean-protocol",
     "name_ko": "오션프로토콜",
     "name_en": "Ocean Protocol",
-    "icon_path": "/icons/UPBIT/OCEAN.png"
+    "icon_path": "/icons/UPBIT/OCEAN.png",
+    "tradingViewSymbol": "BINANCE:OCEANUSDT",
+    "iconUrl": "/icons/coins/OCEAN.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "OGN",
     "cmc_slug": "origin-protocol",
     "name_ko": "오리진프로토콜",
     "name_en": "Origin Protocol",
-    "icon_path": "/icons/UPBIT/OGN.png"
+    "icon_path": "/icons/UPBIT/OGN.png",
+    "tradingViewSymbol": "BINANCE:OGNUSDT",
+    "iconUrl": "/icons/coins/OGN.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "OM",
     "cmc_slug": "mantra",
     "name_ko": "만트라",
     "name_en": "MANTRA",
-    "icon_path": "/icons/UPBIT/OM.png"
+    "icon_path": "/icons/UPBIT/OM.png",
+    "tradingViewSymbol": "BINANCE:OMUSDT",
+    "iconUrl": "/icons/coins/OM.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ONDO",
     "cmc_slug": "ondo-finance",
     "name_ko": "온도 파이낸스",
     "name_en": "Ondo Finance",
-    "icon_path": "/icons/UPBIT/ONDO.png"
+    "icon_path": "/icons/UPBIT/ONDO.png",
+    "tradingViewSymbol": "BINANCE:ONDOUSDT",
+    "iconUrl": "/icons/coins/ONDO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ONG",
     "cmc_slug": "ontology-gas",
     "name_ko": "온톨로지가스",
     "name_en": "Ontology Gas",
-    "icon_path": "/icons/UPBIT/ONG.png"
+    "icon_path": "/icons/UPBIT/ONG.png",
+    "tradingViewSymbol": "BINANCE:ONGUSDT",
+    "iconUrl": "/icons/coins/ONG.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ONT",
     "cmc_slug": "ontology",
     "name_ko": "온톨로지",
     "name_en": "Ontology",
-    "icon_path": "/icons/UPBIT/ONT.png"
+    "icon_path": "/icons/UPBIT/ONT.png",
+    "tradingViewSymbol": "BINANCE:ONTUSDT",
+    "iconUrl": "/icons/coins/ONT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "OP",
     "cmc_slug": null,
     "name_ko": "옵티미즘",
     "name_en": "Optimism",
-    "icon_path": "/icons/UPBIT/OP.png"
+    "icon_path": "/icons/UPBIT/OP.png",
+    "cmcSlug": "optimism-ethereum",
+    "tradingViewSymbol": "BINANCE:OPUSDT",
+    "iconUrl": "/icons/coins/OP.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "OPEN",
     "cmc_slug": "openledger",
     "name_ko": "오픈렛저",
     "name_en": "OpenLedger",
-    "icon_path": "/icons/UPBIT/OPEN.png"
+    "icon_path": "/icons/UPBIT/OPEN.png",
+    "tradingViewSymbol": "BINANCE:OPENUSDT",
+    "iconUrl": "/icons/coins/OPEN.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ORBS",
     "cmc_slug": "orbs",
     "name_ko": "오브스",
     "name_en": "Orbs",
-    "icon_path": "/icons/UPBIT/ORBS.png"
+    "icon_path": "/icons/UPBIT/ORBS.png",
+    "tradingViewSymbol": "BINANCE:ORBSUSDT",
+    "iconUrl": "/icons/coins/ORBS.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ORCA",
     "cmc_slug": "orca",
     "name_ko": "오르카",
     "name_en": "Orca",
-    "icon_path": "/icons/UPBIT/ORCA.png"
+    "icon_path": "/icons/UPBIT/ORCA.png",
+    "tradingViewSymbol": "BINANCE:ORCAUSDT",
+    "iconUrl": "/icons/coins/ORCA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "ORDER",
     "cmc_slug": "orderly-network",
     "name_ko": "오덜리 네트워크",
     "name_en": "Orderly Network",
-    "icon_path": "/icons/UPBIT/ORDER.png"
+    "icon_path": "/icons/UPBIT/ORDER.png",
+    "tradingViewSymbol": "BINANCE:ORDERUSDT",
+    "iconUrl": "/icons/coins/ORDER.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "OSMO",
     "cmc_slug": "osmosis",
     "name_ko": "오스모시스",
-    "name_en": "Osmosis"
+    "name_en": "Osmosis",
+    "tradingViewSymbol": "BINANCE:OSMOUSDT",
+    "iconUrl": "/icons/coins/OSMO.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "OXT",
     "cmc_slug": "orchid",
     "name_ko": "오키드",
     "name_en": "Orchid",
-    "icon_path": "/icons/UPBIT/OXT.png"
+    "icon_path": "/icons/UPBIT/OXT.png",
+    "tradingViewSymbol": "BINANCE:OXTUSDT",
+    "iconUrl": "/icons/coins/OXT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PARTI",
     "cmc_slug": "particle-network",
     "name_ko": "파티클 네트워크",
-    "name_en": "Particle Network"
+    "name_en": "Particle Network",
+    "tradingViewSymbol": "BINANCE:PARTIUSDT",
+    "iconUrl": "/icons/coins/PARTI.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PAXG",
     "cmc_slug": "pax-gold",
     "name_ko": "팍스골드",
-    "name_en": "PAX Gold"
+    "name_en": "PAX Gold",
+    "tradingViewSymbol": "BINANCE:PAXGUSDT",
+    "iconUrl": "/icons/coins/PAXG.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PCI",
     "cmc_slug": null,
     "name_ko": "페이코인",
-    "name_en": "Paycoin"
+    "name_en": "Paycoin",
+    "tradingViewSymbol": "BINANCE:PCIUSDT",
+    "iconUrl": "/icons/coins/PCI.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PEAQ",
     "cmc_slug": "peaq",
     "name_ko": "피크",
-    "name_en": "peaq"
+    "name_en": "peaq",
+    "tradingViewSymbol": "BINANCE:PEAQUSDT",
+    "iconUrl": "/icons/coins/PEAQ.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PENDLE",
     "cmc_slug": "pendle",
     "name_ko": "펜들",
     "name_en": "Pendle",
-    "icon_path": "/icons/UPBIT/PENDLE.png"
+    "icon_path": "/icons/UPBIT/PENDLE.png",
+    "tradingViewSymbol": "BINANCE:PENDLEUSDT",
+    "iconUrl": "/icons/coins/PENDLE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PENGU",
     "cmc_slug": "pudgy-penguins",
     "name_ko": "펏지 펭귄",
     "name_en": "Pudgy Penguins",
-    "icon_path": "/icons/UPBIT/PENGU.png"
+    "icon_path": "/icons/UPBIT/PENGU.png",
+    "tradingViewSymbol": "BINANCE:PENGUUSDT",
+    "iconUrl": "/icons/coins/PENGU.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PEPE",
     "cmc_slug": "pepe",
     "name_ko": "페페",
     "name_en": "PEPE",
-    "icon_path": "/icons/UPBIT/PEPE.png"
+    "icon_path": "/icons/UPBIT/PEPE.png",
+    "cmcSlug": "pepe",
+    "tradingViewSymbol": "BINANCE:PEPEUSDT",
+    "iconUrl": "/icons/coins/PEPE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PHA",
     "cmc_slug": "phala-network",
     "name_ko": "팔라 네트워크",
-    "name_en": "Phala Network"
+    "name_en": "Phala Network",
+    "tradingViewSymbol": "BINANCE:PHAUSDT",
+    "iconUrl": "/icons/coins/PHA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "PIB",
     "cmc_slug": "pibble",
     "name_ko": "피블",
-    "name_en": "PIBBLE"
+    "name_en": "PIBBLE",
+    "tradingViewSymbol": "BINANCE:PIBUSDT",
+    "iconUrl": "/icons/coins/PIB.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "PIEVERSE",
     "cmc_slug": "pieverse",
     "name_ko": "파이버스",
-    "name_en": "Pieverse"
+    "name_en": "Pieverse",
+    "tradingViewSymbol": "BINANCE:PIEVERSEUSDT",
+    "iconUrl": "/icons/coins/PIEVERSE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PIXEL",
     "cmc_slug": "pixels",
     "name_ko": "픽셀즈",
-    "name_en": "Pixels"
+    "name_en": "Pixels",
+    "tradingViewSymbol": "BINANCE:PIXELUSDT",
+    "iconUrl": "/icons/coins/PIXEL.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "PLUME",
     "cmc_slug": "plume",
     "name_ko": "플룸",
     "name_en": "Plume",
-    "icon_path": "/icons/UPBIT/PLUME.png"
+    "icon_path": "/icons/UPBIT/PLUME.png",
+    "tradingViewSymbol": "BINANCE:PLUMEUSDT",
+    "iconUrl": "/icons/coins/PLUME.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PNUT",
     "cmc_slug": "peanut-the-squirrel",
     "name_ko": "피넛",
-    "name_en": "Peanut the Squirrel"
+    "name_en": "Peanut the Squirrel",
+    "tradingViewSymbol": "BINANCE:PNUTUSDT",
+    "iconUrl": "/icons/coins/PNUT.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "POKT",
     "cmc_slug": "pocket-network",
     "name_ko": "포켓네트워크",
     "name_en": "Pocket Network",
-    "icon_path": "/icons/UPBIT/POKT.png"
+    "icon_path": "/icons/UPBIT/POKT.png",
+    "tradingViewSymbol": "BINANCE:POKTUSDT",
+    "iconUrl": "/icons/coins/POKT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "POL",
     "cmc_slug": null,
     "name_ko": "폴리곤 에코시스템 토큰",
     "name_en": "Polygon Ecosystem Token",
-    "icon_path": "/icons/UPBIT/POL.png"
+    "icon_path": "/icons/UPBIT/POL.png",
+    "tradingViewSymbol": "BINANCE:POLUSDT",
+    "iconUrl": "/icons/coins/POL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "POLA",
     "cmc_slug": "polaris-share",
     "name_ko": "폴라리스 쉐어",
-    "name_en": "Polaris Share"
+    "name_en": "Polaris Share",
+    "tradingViewSymbol": "BINANCE:POLAUSDT",
+    "iconUrl": "/icons/coins/POLA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "POLYX",
     "cmc_slug": "polymesh",
     "name_ko": "폴리매쉬",
     "name_en": "Polymesh",
-    "icon_path": "/icons/UPBIT/POLYX.png"
+    "icon_path": "/icons/UPBIT/POLYX.png",
+    "tradingViewSymbol": "BINANCE:POLYXUSDT",
+    "iconUrl": "/icons/coins/POLYX.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PONKE",
     "cmc_slug": "ponke",
     "name_ko": "폰케",
-    "name_en": "Ponke"
+    "name_en": "Ponke",
+    "tradingViewSymbol": "BINANCE:PONKEUSDT",
+    "iconUrl": "/icons/coins/PONKE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "POPCAT",
     "cmc_slug": "popcat",
     "name_ko": "팝캣",
-    "name_en": "Popcat"
+    "name_en": "Popcat",
+    "tradingViewSymbol": "BINANCE:POPCATUSDT",
+    "iconUrl": "/icons/coins/POPCAT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PORT3",
     "cmc_slug": "port3-network",
     "name_ko": "포트쓰리",
-    "name_en": "Port3 Network"
+    "name_en": "Port3 Network",
+    "tradingViewSymbol": "BINANCE:PORT3USDT",
+    "iconUrl": "/icons/coins/PORT3.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "POWR",
     "cmc_slug": null,
     "name_ko": "파워렛저",
     "name_en": "Powerledger",
-    "icon_path": "/icons/UPBIT/POWR.png"
+    "icon_path": "/icons/UPBIT/POWR.png",
+    "tradingViewSymbol": "BINANCE:POWRUSDT",
+    "iconUrl": "/icons/coins/POWR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PRCL",
     "cmc_slug": "parcl",
     "name_ko": "파클",
-    "name_en": "Parcl"
+    "name_en": "Parcl",
+    "tradingViewSymbol": "BINANCE:PRCLUSDT",
+    "iconUrl": "/icons/coins/PRCL.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "PRIME",
     "cmc_slug": "echelon-prime",
     "name_ko": "에셜론 프라임",
-    "name_en": "Echelon Prime"
+    "name_en": "Echelon Prime",
+    "tradingViewSymbol": "BINANCE:PRIMEUSDT",
+    "iconUrl": "/icons/coins/PRIME.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "PROM",
     "cmc_slug": "prom",
     "name_ko": "프롬",
     "name_en": "Prom",
-    "icon_path": "/icons/UPBIT/PROM.png"
+    "icon_path": "/icons/UPBIT/PROM.png",
+    "tradingViewSymbol": "BINANCE:PROMUSDT",
+    "iconUrl": "/icons/coins/PROM.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "PROMPT",
     "cmc_slug": "wayfinder",
     "name_ko": "웨이파인더",
-    "name_en": "Wayfinder"
+    "name_en": "Wayfinder",
+    "tradingViewSymbol": "BINANCE:PROMPTUSDT",
+    "iconUrl": "/icons/coins/PROMPT.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PROVE",
     "cmc_slug": "succinct",
     "name_ko": "석싱트",
     "name_en": "Succinct",
-    "icon_path": "/icons/UPBIT/PROVE.png"
+    "icon_path": "/icons/UPBIT/PROVE.png",
+    "tradingViewSymbol": "BINANCE:PROVEUSDT",
+    "iconUrl": "/icons/coins/PROVE.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PSG",
     "cmc_slug": null,
     "name_ko": "파리생제르맹",
     "name_en": "Paris Saint-Germain Fan Token",
-    "icon_path": "/icons/UPBIT/PSG.png"
+    "icon_path": "/icons/UPBIT/PSG.png",
+    "tradingViewSymbol": "BINANCE:PSGUSDT",
+    "iconUrl": "/icons/coins/PSG.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "PTB",
     "cmc_slug": null,
     "name_ko": "포털투비트코인",
-    "name_en": "Portal To Bitcoin"
+    "name_en": "Portal To Bitcoin",
+    "tradingViewSymbol": "BINANCE:PTBUSDT",
+    "iconUrl": "/icons/coins/PTB.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "PUFFER",
     "cmc_slug": "puffer",
     "name_ko": "퍼퍼",
     "name_en": "Puffer",
-    "icon_path": "/icons/UPBIT/PUFFER.png"
+    "icon_path": "/icons/UPBIT/PUFFER.png",
+    "tradingViewSymbol": "BINANCE:PUFFERUSDT",
+    "iconUrl": "/icons/coins/PUFFER.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PUMP",
     "cmc_slug": "pump-fun",
     "name_ko": "펌프닷펀",
     "name_en": "pump.fun",
-    "icon_path": "/icons/UPBIT/PUMP.png"
+    "icon_path": "/icons/UPBIT/PUMP.png",
+    "tradingViewSymbol": "BINANCE:PUMPUSDT",
+    "iconUrl": "/icons/coins/PUMP.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PUMPBTC",
     "cmc_slug": "pump",
     "name_ko": "펌프",
-    "name_en": "PUMP"
+    "name_en": "PUMP",
+    "tradingViewSymbol": "BINANCE:PUMPBTCUSDT",
+    "iconUrl": "/icons/coins/PUMPBTC.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PUNDIX",
     "cmc_slug": "pundi-x",
     "name_ko": "펀디엑스",
     "name_en": "Pundi X",
-    "icon_path": "/icons/UPBIT/PUNDIX.png"
+    "icon_path": "/icons/UPBIT/PUNDIX.png",
+    "tradingViewSymbol": "BINANCE:PUNDIXUSDT",
+    "iconUrl": "/icons/coins/PUNDIX.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PYR",
     "cmc_slug": null,
     "name_ko": "불칸 포지드",
-    "name_en": "Vulcan Forged"
+    "name_en": "Vulcan Forged",
+    "tradingViewSymbol": "BINANCE:PYRUSDT",
+    "iconUrl": "/icons/coins/PYR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "PYTH",
     "cmc_slug": "pyth-network",
     "name_ko": "피스 네트워크",
     "name_en": "Pyth Network",
-    "icon_path": "/icons/UPBIT/PYTH.png"
+    "icon_path": "/icons/UPBIT/PYTH.png",
+    "tradingViewSymbol": "BINANCE:PYTHUSDT",
+    "iconUrl": "/icons/coins/PYTH.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "QKC",
     "cmc_slug": "quarkchain",
     "name_ko": "쿼크체인",
     "name_en": "QuarkChain",
-    "icon_path": "/icons/UPBIT/QKC.png"
+    "icon_path": "/icons/UPBIT/QKC.png",
+    "tradingViewSymbol": "BINANCE:QKCUSDT",
+    "iconUrl": "/icons/coins/QKC.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "QTUM",
     "cmc_slug": "qtum",
     "name_ko": "퀀텀",
     "name_en": "Qtum",
-    "icon_path": "/icons/UPBIT/QTUM.png"
+    "icon_path": "/icons/UPBIT/QTUM.png",
+    "tradingViewSymbol": "BINANCE:QTUMUSDT",
+    "iconUrl": "/icons/coins/QTUM.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "RAD",
     "cmc_slug": "radworks",
     "name_ko": "래드웍스",
     "name_en": "Radworks",
-    "icon_path": "/icons/UPBIT/RAD.png"
+    "icon_path": "/icons/UPBIT/RAD.png",
+    "tradingViewSymbol": "BINANCE:RADUSDT",
+    "iconUrl": "/icons/coins/RAD.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "RAY",
     "cmc_slug": "raydium",
     "name_ko": "레이디움",
     "name_en": "Raydium",
-    "icon_path": "/icons/UPBIT/RAY.png"
+    "icon_path": "/icons/UPBIT/RAY.png",
+    "tradingViewSymbol": "BINANCE:RAYUSDT",
+    "iconUrl": "/icons/coins/RAY.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "RECALL",
     "cmc_slug": null,
     "name_ko": "리콜",
-    "name_en": "Recall"
+    "name_en": "Recall",
+    "tradingViewSymbol": "BINANCE:RECALLUSDT",
+    "iconUrl": "/icons/coins/RECALL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "RED",
     "cmc_slug": "redstone",
     "name_ko": "레드스톤",
     "name_en": "RedStone",
-    "icon_path": "/icons/UPBIT/RED.png"
+    "icon_path": "/icons/UPBIT/RED.png",
+    "tradingViewSymbol": "BINANCE:REDUSDT",
+    "iconUrl": "/icons/coins/RED.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "REI",
     "cmc_slug": null,
     "name_ko": "레이",
     "name_en": "REI",
-    "icon_path": "/icons/UPBIT/REI.png"
+    "icon_path": "/icons/UPBIT/REI.png",
+    "tradingViewSymbol": "BINANCE:REIUSDT",
+    "iconUrl": "/icons/coins/REI.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "REKT",
     "cmc_slug": "rekt",
     "name_ko": "렉트",
-    "name_en": "Rekt"
+    "name_en": "Rekt",
+    "tradingViewSymbol": "BINANCE:REKTUSDT",
+    "iconUrl": "/icons/coins/REKT.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "RENDER",
     "cmc_slug": "render",
     "name_ko": "렌더토큰",
     "name_en": "Render Token",
-    "icon_path": "/icons/UPBIT/RENDER.png"
+    "icon_path": "/icons/UPBIT/RENDER.png",
+    "cmcSlug": "render-token",
+    "tradingViewSymbol": "BINANCE:RENDERUSDT",
+    "iconUrl": "/icons/coins/RENDER.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "REQ",
     "cmc_slug": "request",
     "name_ko": "리퀘스트",
-    "name_en": "Request"
+    "name_en": "Request",
+    "tradingViewSymbol": "BINANCE:REQUSDT",
+    "iconUrl": "/icons/coins/REQ.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "RESOLV",
     "cmc_slug": "resolv",
     "name_ko": "리졸브",
     "name_en": "Resolv",
-    "icon_path": "/icons/UPBIT/RESOLV.png"
+    "icon_path": "/icons/UPBIT/RESOLV.png",
+    "tradingViewSymbol": "BINANCE:RESOLVUSDT",
+    "iconUrl": "/icons/coins/RESOLV.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "REZ",
     "cmc_slug": "renzo",
     "name_ko": "렌조",
-    "name_en": "Renzo"
+    "name_en": "Renzo",
+    "tradingViewSymbol": "BINANCE:REZUSDT",
+    "iconUrl": "/icons/coins/REZ.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "RLC",
     "cmc_slug": "rlc",
     "name_ko": "아이젝",
     "name_en": "iExec RLC",
-    "icon_path": "/icons/UPBIT/RLC.png"
+    "icon_path": "/icons/UPBIT/RLC.png",
+    "tradingViewSymbol": "BINANCE:RLCUSDT",
+    "iconUrl": "/icons/coins/RLC.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "RLY",
     "cmc_slug": "rally",
     "name_ko": "랠리",
     "name_en": "Rally",
-    "icon_path": "/icons/UPBIT/RLY.png"
+    "icon_path": "/icons/UPBIT/RLY.png",
+    "tradingViewSymbol": "BINANCE:RLYUSDT",
+    "iconUrl": "/icons/coins/RLY.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ROA",
     "cmc_slug": "roa-core",
     "name_ko": "로아코어",
-    "name_en": "ROA CORE"
+    "name_en": "ROA CORE",
+    "tradingViewSymbol": "BINANCE:ROAUSDT",
+    "iconUrl": "/icons/coins/ROA.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "RON",
     "cmc_slug": "ronin",
     "name_ko": "로닌",
-    "name_en": "Ronin"
+    "name_en": "Ronin",
+    "tradingViewSymbol": "BINANCE:RONUSDT",
+    "iconUrl": "/icons/coins/RON.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "RPL",
     "cmc_slug": "rocket-pool",
     "name_ko": "로켓풀",
-    "name_en": "Rocket Pool"
+    "name_en": "Rocket Pool",
+    "tradingViewSymbol": "BINANCE:RPLUSDT",
+    "iconUrl": "/icons/coins/RPL.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "RSR",
     "cmc_slug": "reserve-rights",
     "name_ko": "리저브라이트",
     "name_en": "Reserve Rights",
-    "icon_path": "/icons/UPBIT/RSR.png"
+    "icon_path": "/icons/UPBIT/RSR.png",
+    "tradingViewSymbol": "BINANCE:RSRUSDT",
+    "iconUrl": "/icons/coins/RSR.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "RSS3",
     "cmc_slug": "rss3",
     "name_ko": "알에스에스쓰리",
-    "name_en": "RSS3"
+    "name_en": "RSS3",
+    "tradingViewSymbol": "BINANCE:RSS3USDT",
+    "iconUrl": "/icons/coins/RSS3.png",
+    "updatedAt": 1764867747784
   },
   {
     "symbol": "RUNE",
     "cmc_slug": "thorchain",
     "name_ko": "토르체인",
-    "name_en": "THORChain"
+    "name_en": "THORChain",
+    "tradingViewSymbol": "BINANCE:RUNEUSDT",
+    "iconUrl": "/icons/coins/RUNE.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "RVN",
     "cmc_slug": "raven",
     "name_ko": "레이븐코인",
     "name_en": "Ravencoin",
-    "icon_path": "/icons/UPBIT/RVN.png"
+    "icon_path": "/icons/UPBIT/RVN.png",
+    "tradingViewSymbol": "BINANCE:RVNUSDT",
+    "iconUrl": "/icons/coins/RVN.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "S",
     "cmc_slug": "sonic",
     "name_ko": "소닉",
-    "name_en": "Sonic"
+    "name_en": "Sonic",
+    "tradingViewSymbol": "BINANCE:SUSDT",
+    "iconUrl": "/icons/coins/S.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SAFE",
     "cmc_slug": "safe",
     "name_ko": "세이프",
     "name_en": "Safe",
-    "icon_path": "/icons/UPBIT/SAFE.png"
+    "icon_path": "/icons/UPBIT/SAFE.png",
+    "tradingViewSymbol": "BINANCE:SAFEUSDT",
+    "iconUrl": "/icons/coins/SAFE.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SAHARA",
     "cmc_slug": "sahara-ai",
     "name_ko": "사하라에이아이",
     "name_en": "Sahara AI",
-    "icon_path": "/icons/UPBIT/SAHARA.png"
+    "icon_path": "/icons/UPBIT/SAHARA.png",
+    "tradingViewSymbol": "BINANCE:SAHARAUSDT",
+    "iconUrl": "/icons/coins/SAHARA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SAND",
     "cmc_slug": "the-sandbox",
     "name_ko": "샌드박스",
     "name_en": "The Sandbox",
-    "icon_path": "/icons/UPBIT/SAND.png"
+    "icon_path": "/icons/UPBIT/SAND.png",
+    "cmcSlug": "the-sandbox",
+    "tradingViewSymbol": "BINANCE:SANDUSDT",
+    "iconUrl": "/icons/coins/SAND.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SAROS",
     "cmc_slug": "saros",
     "name_ko": "사로스",
-    "name_en": "Saros"
+    "name_en": "Saros",
+    "tradingViewSymbol": "BINANCE:SAROSUSDT",
+    "iconUrl": "/icons/coins/SAROS.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SC",
     "cmc_slug": null,
     "name_ko": "시아코인",
     "name_en": "Siacoin",
-    "icon_path": "/icons/UPBIT/SC.png"
+    "icon_path": "/icons/UPBIT/SC.png",
+    "tradingViewSymbol": "BINANCE:SCUSDT",
+    "iconUrl": "/icons/coins/SC.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SCA",
     "cmc_slug": "scallop",
     "name_ko": "스캘럽",
-    "name_en": "Scallop"
+    "name_en": "Scallop",
+    "tradingViewSymbol": "BINANCE:SCAUSDT",
+    "iconUrl": "/icons/coins/SCA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SCR",
     "cmc_slug": "scroll",
     "name_ko": "스크롤",
     "name_en": "Scroll",
-    "icon_path": "/icons/UPBIT/SCR.png"
+    "icon_path": "/icons/UPBIT/SCR.png",
+    "tradingViewSymbol": "BINANCE:SCRUSDT",
+    "iconUrl": "/icons/coins/SCR.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SD",
     "cmc_slug": "stader",
     "name_ko": "스테이더",
-    "name_en": "Stader"
+    "name_en": "Stader",
+    "tradingViewSymbol": "BINANCE:SDUSDT",
+    "iconUrl": "/icons/coins/SD.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SEI",
     "cmc_slug": "sei",
     "name_ko": "세이",
     "name_en": "Sei",
-    "icon_path": "/icons/UPBIT/SEI.png"
+    "icon_path": "/icons/UPBIT/SEI.png",
+    "cmcSlug": "sei-network",
+    "tradingViewSymbol": "BINANCE:SEIUSDT",
+    "iconUrl": "/icons/coins/SEI.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SEND",
     "cmc_slug": "suilend",
     "name_ko": "수이렌드",
-    "name_en": "SuiLend"
+    "name_en": "SuiLend",
+    "tradingViewSymbol": "BINANCE:SENDUSDT",
+    "iconUrl": "/icons/coins/SEND.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SFP",
     "cmc_slug": "safepal",
     "name_ko": "세이프팔",
-    "name_en": "Safepal"
+    "name_en": "Safepal",
+    "tradingViewSymbol": "BINANCE:SFPUSDT",
+    "iconUrl": "/icons/coins/SFP.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SHELL",
     "cmc_slug": "myshell",
     "name_ko": "마이쉘",
     "name_en": "MyShell",
-    "icon_path": "/icons/UPBIT/SHELL.png"
+    "icon_path": "/icons/UPBIT/SHELL.png",
+    "tradingViewSymbol": "BINANCE:SHELLUSDT",
+    "iconUrl": "/icons/coins/SHELL.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SHIB",
     "cmc_slug": "shiba-inu",
     "name_ko": "시바이누",
     "name_en": "SHIBA INU",
-    "icon_path": "/icons/UPBIT/SHIB.png"
+    "icon_path": "/icons/UPBIT/SHIB.png",
+    "cmcSlug": "shiba-inu",
+    "tradingViewSymbol": "BINANCE:SHIBUSDT",
+    "iconUrl": "/icons/coins/SHIB.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SIGN",
     "cmc_slug": "sign",
     "name_ko": "사인",
     "name_en": "Sign",
-    "icon_path": "/icons/UPBIT/SIGN.png"
+    "icon_path": "/icons/UPBIT/SIGN.png",
+    "tradingViewSymbol": "BINANCE:SIGNUSDT",
+    "iconUrl": "/icons/coins/SIGN.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SIX",
     "cmc_slug": "six",
     "name_ko": "식스",
-    "name_en": "SIX"
+    "name_en": "SIX",
+    "tradingViewSymbol": "BINANCE:SIXUSDT",
+    "iconUrl": "/icons/coins/SIX.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SKL",
     "cmc_slug": null,
     "name_ko": "스케일",
-    "name_en": "SKALE"
+    "name_en": "SKALE",
+    "tradingViewSymbol": "BINANCE:SKLUSDT",
+    "iconUrl": "/icons/coins/SKL.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SKLAY",
     "cmc_slug": "sklay",
     "name_ko": "에스클레이",
-    "name_en": "sKLAY"
+    "name_en": "sKLAY",
+    "tradingViewSymbol": "BINANCE:SKLAYUSDT",
+    "iconUrl": "/icons/coins/SKLAY.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SKY",
     "cmc_slug": "sky",
     "name_ko": "스카이 프로토콜",
     "name_en": "Sky Protocol",
-    "icon_path": "/icons/UPBIT/SKY.png"
+    "icon_path": "/icons/UPBIT/SKY.png",
+    "tradingViewSymbol": "BINANCE:SKYUSDT",
+    "iconUrl": "/icons/coins/SKY.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SKYAI",
     "cmc_slug": "skyai",
     "name_ko": "스카이에이아이",
-    "name_en": "SkyAI"
+    "name_en": "SkyAI",
+    "tradingViewSymbol": "BINANCE:SKYAIUSDT",
+    "iconUrl": "/icons/coins/SKYAI.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SNT",
     "cmc_slug": "snt",
     "name_ko": "스테이터스네트워크토큰",
     "name_en": "Status Network",
-    "icon_path": "/icons/UPBIT/SNT.png"
+    "icon_path": "/icons/UPBIT/SNT.png",
+    "tradingViewSymbol": "BINANCE:SNTUSDT",
+    "iconUrl": "/icons/coins/SNT.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SNX",
     "cmc_slug": "synthetix-network",
     "name_ko": "신세틱스",
     "name_en": "Synthetix Network Token",
-    "icon_path": "/icons/UPBIT/SNX.png"
+    "icon_path": "/icons/UPBIT/SNX.png",
+    "cmcSlug": "synthetix-network-token",
+    "tradingViewSymbol": "BINANCE:SNXUSDT",
+    "iconUrl": "/icons/coins/SNX.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SODA",
     "cmc_slug": null,
     "name_ko": "소다엑스",
-    "name_en": "SODAX"
+    "name_en": "SODAX",
+    "tradingViewSymbol": "BINANCE:SODAUSDT",
+    "iconUrl": "/icons/coins/SODA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SOL",
     "cmc_slug": "solana",
     "name_ko": "솔라나",
     "name_en": "Solana",
-    "icon_path": "/icons/UPBIT/SOL.png"
+    "icon_path": "/icons/UPBIT/SOL.png",
+    "cmcSlug": "solana",
+    "tradingViewSymbol": "BINANCE:SOLUSDT",
+    "iconUrl": "/icons/coins/SOL.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SOLV",
     "cmc_slug": "solv-protocol",
     "name_ko": "솔브 프로토콜",
-    "name_en": "Solv Protocol"
+    "name_en": "Solv Protocol",
+    "tradingViewSymbol": "BINANCE:SOLVUSDT",
+    "iconUrl": "/icons/coins/SOLV.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SOMI",
     "cmc_slug": "somnia",
     "name_ko": "솜니아",
     "name_en": "Somnia",
-    "icon_path": "/icons/UPBIT/SOMI.png"
+    "icon_path": "/icons/UPBIT/SOMI.png",
+    "tradingViewSymbol": "BINANCE:SOMIUSDT",
+    "iconUrl": "/icons/coins/SOMI.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SONIC",
     "cmc_slug": "sonic-svm",
     "name_ko": "소닉 에스브이엠",
     "name_en": "Sonic SVM",
-    "icon_path": "/icons/UPBIT/SONIC.png"
+    "icon_path": "/icons/UPBIT/SONIC.png",
+    "tradingViewSymbol": "BINANCE:SONICUSDT",
+    "iconUrl": "/icons/coins/SONIC.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SOON",
     "cmc_slug": "soon",
     "name_ko": "쑨",
     "name_en": "SOON",
-    "icon_path": "/icons/UPBIT/SOON.png"
+    "icon_path": "/icons/UPBIT/SOON.png",
+    "tradingViewSymbol": "BINANCE:SOONUSDT",
+    "iconUrl": "/icons/coins/SOON.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SOPH",
     "cmc_slug": "sophon",
     "name_ko": "소폰",
     "name_en": "Sophon",
-    "icon_path": "/icons/UPBIT/SOPH.png"
+    "icon_path": "/icons/UPBIT/SOPH.png",
+    "tradingViewSymbol": "BINANCE:SOPHUSDT",
+    "iconUrl": "/icons/coins/SOPH.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SPA",
     "cmc_slug": "sperax",
     "name_ko": "스페라엑스",
-    "name_en": "Sperax"
+    "name_en": "Sperax",
+    "tradingViewSymbol": "BINANCE:SPAUSDT",
+    "iconUrl": "/icons/coins/SPA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SPK",
     "cmc_slug": "spark",
     "name_ko": "스파크",
     "name_en": "Spark",
-    "icon_path": "/icons/UPBIT/SPK.png"
+    "icon_path": "/icons/UPBIT/SPK.png",
+    "tradingViewSymbol": "BINANCE:SPKUSDT",
+    "iconUrl": "/icons/coins/SPK.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SPURS",
     "cmc_slug": null,
     "name_ko": "토트넘 홋스퍼",
     "name_en": "Tottenham Hotspur Fan Token",
-    "icon_path": "/icons/UPBIT/SPURS.png"
+    "icon_path": "/icons/UPBIT/SPURS.png",
+    "tradingViewSymbol": "BINANCE:SPURSUSDT",
+    "iconUrl": "/icons/coins/SPURS.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "STAT",
     "cmc_slug": "stat",
     "name_ko": "스탯",
-    "name_en": "STAT"
+    "name_en": "STAT",
+    "tradingViewSymbol": "BINANCE:STATUSDT",
+    "iconUrl": "/icons/coins/STAT.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "STEEM",
     "cmc_slug": "steem",
     "name_ko": "스팀",
     "name_en": "Steem",
-    "icon_path": "/icons/UPBIT/STEEM.png"
+    "icon_path": "/icons/UPBIT/STEEM.png",
+    "tradingViewSymbol": "BINANCE:STEEMUSDT",
+    "iconUrl": "/icons/coins/STEEM.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "STG",
     "cmc_slug": "stargate-finance",
     "name_ko": "스타게이트 파이낸스",
     "name_en": "Stargate Finance",
-    "icon_path": "/icons/UPBIT/STG.png"
+    "icon_path": "/icons/UPBIT/STG.png",
+    "tradingViewSymbol": "BINANCE:STGUSDT",
+    "iconUrl": "/icons/coins/STG.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "STO",
     "cmc_slug": "stakestone",
     "name_ko": "스테이크스톤",
-    "name_en": "StakeStone"
+    "name_en": "StakeStone",
+    "tradingViewSymbol": "BINANCE:STOUSDT",
+    "iconUrl": "/icons/coins/STO.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "STORJ",
     "cmc_slug": "storj",
     "name_ko": "스토리지",
     "name_en": "Storj",
-    "icon_path": "/icons/UPBIT/STORJ.png"
+    "icon_path": "/icons/UPBIT/STORJ.png",
+    "tradingViewSymbol": "BINANCE:STORJUSDT",
+    "iconUrl": "/icons/coins/STORJ.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "STRAX",
     "cmc_slug": "stratis",
     "name_ko": "스트라티스",
     "name_en": "Stratis",
-    "icon_path": "/icons/UPBIT/STRAX.png"
+    "icon_path": "/icons/UPBIT/STRAX.png",
+    "tradingViewSymbol": "BINANCE:STRAXUSDT",
+    "iconUrl": "/icons/coins/STRAX.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "STRK",
     "cmc_slug": null,
     "name_ko": "스타크넷",
-    "name_en": "Starknet"
+    "name_en": "Starknet",
+    "tradingViewSymbol": "BINANCE:STRKUSDT",
+    "iconUrl": "/icons/coins/STRK.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "STX",
     "cmc_slug": "stacks",
     "name_ko": "스택스",
     "name_en": "Stacks",
-    "icon_path": "/icons/UPBIT/STX.png"
+    "icon_path": "/icons/UPBIT/STX.png",
+    "tradingViewSymbol": "BINANCE:STXUSDT",
+    "iconUrl": "/icons/coins/STX.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SUI",
     "cmc_slug": "sui",
     "name_ko": "수이",
     "name_en": "SUI",
-    "icon_path": "/icons/UPBIT/SUI.png"
+    "icon_path": "/icons/UPBIT/SUI.png",
+    "cmcSlug": "sui",
+    "tradingViewSymbol": "BINANCE:SUIUSDT",
+    "iconUrl": "/icons/coins/SUI.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SUN",
     "cmc_slug": "sun",
     "name_ko": "썬",
     "name_en": "SUN",
-    "icon_path": "/icons/UPBIT/SUN.png"
+    "icon_path": "/icons/UPBIT/SUN.png",
+    "tradingViewSymbol": "BINANCE:SUNUSDT",
+    "iconUrl": "/icons/coins/SUN.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SUNDOG",
     "cmc_slug": "sundog",
     "name_ko": "썬도그",
-    "name_en": "Sundog"
+    "name_en": "Sundog",
+    "tradingViewSymbol": "BINANCE:SUNDOGUSDT",
+    "iconUrl": "/icons/coins/SUNDOG.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SUPER",
     "cmc_slug": "superverse",
     "name_ko": "슈퍼버스",
     "name_en": "SuperVerse",
-    "icon_path": "/icons/UPBIT/SUPER.png"
+    "icon_path": "/icons/UPBIT/SUPER.png",
+    "tradingViewSymbol": "BINANCE:SUPERUSDT",
+    "iconUrl": "/icons/coins/SUPER.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SUSHI",
     "cmc_slug": "sushiswap",
     "name_ko": "스시스왑",
-    "name_en": "Sushiswap"
+    "name_en": "Sushiswap",
+    "cmcSlug": "sushi",
+    "tradingViewSymbol": "BINANCE:SUSHIUSDT",
+    "iconUrl": "/icons/coins/SUSHI.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SWAP",
     "cmc_slug": "trustswap",
     "name_ko": "트러스트스왑",
-    "name_en": "TrustSwap"
+    "name_en": "TrustSwap",
+    "tradingViewSymbol": "BINANCE:SWAPUSDT",
+    "iconUrl": "/icons/coins/SWAP.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SWELL",
     "cmc_slug": "swell-network",
     "name_ko": "스웰 네트워크",
     "name_en": "Swell Network",
-    "icon_path": "/icons/UPBIT/SWELL.png"
+    "icon_path": "/icons/UPBIT/SWELL.png",
+    "tradingViewSymbol": "BINANCE:SWELLUSDT",
+    "iconUrl": "/icons/coins/SWELL.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SXP",
     "cmc_slug": "sxp",
     "name_ko": "솔라",
     "name_en": "Solar",
-    "icon_path": "/icons/UPBIT/SXP.png"
+    "icon_path": "/icons/UPBIT/SXP.png",
+    "tradingViewSymbol": "BINANCE:SXPUSDT",
+    "iconUrl": "/icons/coins/SXP.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SXT",
     "cmc_slug": "space-and-time",
     "name_ko": "스페이스 앤드 타임",
-    "name_en": "Space and Time"
+    "name_en": "Space and Time",
+    "tradingViewSymbol": "BINANCE:SXTUSDT",
+    "iconUrl": "/icons/coins/SXT.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SYND",
     "cmc_slug": "syndicate",
     "name_ko": "신디케이트",
-    "name_en": "Syndicate"
+    "name_en": "Syndicate",
+    "tradingViewSymbol": "BINANCE:SYNDUSDT",
+    "iconUrl": "/icons/coins/SYND.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "SYRUP",
     "cmc_slug": "maple-finance",
     "name_ko": "메이플 파이낸스",
     "name_en": "Maple Finance",
-    "icon_path": "/icons/UPBIT/SYRUP.png"
+    "icon_path": "/icons/UPBIT/SYRUP.png",
+    "tradingViewSymbol": "BINANCE:SYRUPUSDT",
+    "iconUrl": "/icons/coins/SYRUP.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "T",
     "cmc_slug": "threshold",
     "name_ko": "쓰레스홀드",
     "name_en": "Threshold",
-    "icon_path": "/icons/UPBIT/T.png"
+    "icon_path": "/icons/UPBIT/T.png",
+    "tradingViewSymbol": "BINANCE:TUSDT",
+    "iconUrl": "/icons/coins/T.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TAIKO",
     "cmc_slug": "taiko",
     "name_ko": "타이코",
     "name_en": "Taiko",
-    "icon_path": "/icons/UPBIT/TAIKO.png"
+    "icon_path": "/icons/UPBIT/TAIKO.png",
+    "tradingViewSymbol": "BINANCE:TAIKOUSDT",
+    "iconUrl": "/icons/coins/TAIKO.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TAKE",
     "cmc_slug": "overtake",
     "name_ko": "오버테이크",
-    "name_en": "Overtake"
+    "name_en": "Overtake",
+    "tradingViewSymbol": "BINANCE:TAKEUSDT",
+    "iconUrl": "/icons/coins/TAKE.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TALK",
     "cmc_slug": "talken",
     "name_ko": "톡큰",
-    "name_en": "Talken"
+    "name_en": "Talken",
+    "tradingViewSymbol": "BINANCE:TALKUSDT",
+    "iconUrl": "/icons/coins/TALK.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TAO",
     "cmc_slug": "bittensor",
     "name_ko": "비트텐서",
-    "name_en": "Bittensor"
+    "name_en": "Bittensor",
+    "tradingViewSymbol": "BINANCE:TAOUSDT",
+    "iconUrl": "/icons/coins/TAO.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TAVA",
     "cmc_slug": "altava",
     "name_ko": "알타바",
-    "name_en": "ALTAVA"
+    "name_en": "ALTAVA",
+    "tradingViewSymbol": "BINANCE:TAVAUSDT",
+    "iconUrl": "/icons/coins/TAVA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TDROP",
     "cmc_slug": "thetadrop",
     "name_ko": "티드랍",
-    "name_en": "ThetaDrop"
+    "name_en": "ThetaDrop",
+    "tradingViewSymbol": "BINANCE:TDROPUSDT",
+    "iconUrl": "/icons/coins/TDROP.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TEMCO",
     "cmc_slug": "temco",
     "name_ko": "템코",
-    "name_en": "TEMCO"
+    "name_en": "TEMCO",
+    "tradingViewSymbol": "BINANCE:TEMCOUSDT",
+    "iconUrl": "/icons/coins/TEMCO.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TFUEL",
     "cmc_slug": null,
     "name_ko": "쎄타퓨엘",
     "name_en": "TFUEL",
-    "icon_path": "/icons/UPBIT/TFUEL.png"
+    "icon_path": "/icons/UPBIT/TFUEL.png",
+    "tradingViewSymbol": "BINANCE:TFUELUSDT",
+    "iconUrl": "/icons/coins/TFUEL.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "THE",
     "cmc_slug": "thena",
     "name_ko": "테나",
-    "name_en": "THENA"
+    "name_en": "THENA",
+    "tradingViewSymbol": "BINANCE:THEUSDT",
+    "iconUrl": "/icons/coins/THE.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "THETA",
     "cmc_slug": "theta",
     "name_ko": "쎄타토큰",
     "name_en": "Theta Token",
-    "icon_path": "/icons/UPBIT/THETA.png"
+    "icon_path": "/icons/UPBIT/THETA.png",
+    "tradingViewSymbol": "BINANCE:THETAUSDT",
+    "iconUrl": "/icons/coins/THETA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TIA",
     "cmc_slug": "celestia",
     "name_ko": "셀레스티아",
     "name_en": "Celestia",
-    "icon_path": "/icons/UPBIT/TIA.png"
+    "icon_path": "/icons/UPBIT/TIA.png",
+    "tradingViewSymbol": "BINANCE:TIAUSDT",
+    "iconUrl": "/icons/coins/TIA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TNSR",
     "cmc_slug": "tensor",
     "name_ko": "텐서",
-    "name_en": "Tensor"
+    "name_en": "Tensor",
+    "tradingViewSymbol": "BINANCE:TNSRUSDT",
+    "iconUrl": "/icons/coins/TNSR.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TOKAMAK",
     "cmc_slug": "tokamak-network",
     "name_ko": "토카막 네트워크",
     "name_en": "Tokamak Network",
-    "icon_path": "/icons/UPBIT/TOKAMAK.png"
+    "icon_path": "/icons/UPBIT/TOKAMAK.png",
+    "tradingViewSymbol": "BINANCE:TOKAMAKUSDT",
+    "iconUrl": "/icons/coins/TOKAMAK.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TON",
     "cmc_slug": null,
     "name_ko": "톤코인",
-    "name_en": "Toncoin"
+    "name_en": "Toncoin",
+    "tradingViewSymbol": "BINANCE:TONUSDT",
+    "iconUrl": "/icons/coins/TON.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TOSHI",
     "cmc_slug": "toshi",
     "name_ko": "토시",
     "name_en": "Toshi",
-    "icon_path": "/icons/UPBIT/TOSHI.png"
+    "icon_path": "/icons/UPBIT/TOSHI.png",
+    "tradingViewSymbol": "BINANCE:TOSHIUSDT",
+    "iconUrl": "/icons/coins/TOSHI.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TOWNS",
     "cmc_slug": "towns",
     "name_ko": "타운즈",
-    "name_en": "Towns"
+    "name_en": "Towns",
+    "tradingViewSymbol": "BINANCE:TOWNSUSDT",
+    "iconUrl": "/icons/coins/TOWNS.png",
+    "updatedAt": 1764867747785
+  },
+  {
+    "symbol": "TRAC",
+    "name_ko": "오리진트레일",
+    "name_en": "OriginTrail",
+    "tradingViewSymbol": "BINANCE:TRACUSDT",
+    "iconUrl": "/icons/coins/TRAC.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TREE",
     "cmc_slug": "treehouse",
     "name_ko": "트리하우스",
     "name_en": "Treehouse",
-    "icon_path": "/icons/UPBIT/TREE.png"
+    "icon_path": "/icons/UPBIT/TREE.png",
+    "tradingViewSymbol": "BINANCE:TREEUSDT",
+    "iconUrl": "/icons/coins/TREE.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TRUMP",
     "cmc_slug": "official-trump",
     "name_ko": "오피셜 트럼프",
     "name_en": "OFFICIAL TRUMP",
-    "icon_path": "/icons/UPBIT/TRUMP.png"
+    "icon_path": "/icons/UPBIT/TRUMP.png",
+    "tradingViewSymbol": "BINANCE:TRUMPUSDT",
+    "iconUrl": "/icons/coins/TRUMP.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TRUST",
     "cmc_slug": "intuition",
     "name_ko": "인튜이션",
     "name_en": "Intuition",
-    "icon_path": "/icons/UPBIT/TRUST.png"
+    "icon_path": "/icons/UPBIT/TRUST.png",
+    "tradingViewSymbol": "BINANCE:TRUSTUSDT",
+    "iconUrl": "/icons/coins/TRUST.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TRX",
     "cmc_slug": "tron",
     "name_ko": "트론",
     "name_en": "TRON",
-    "icon_path": "/icons/UPBIT/TRX.png"
+    "icon_path": "/icons/UPBIT/TRX.png",
+    "cmcSlug": "tron",
+    "tradingViewSymbol": "BINANCE:TRXUSDT",
+    "iconUrl": "/icons/coins/TRX.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TT",
     "cmc_slug": "thundercore",
     "name_ko": "썬더코어",
     "name_en": "ThunderCore",
-    "icon_path": "/icons/UPBIT/TT.png"
+    "icon_path": "/icons/UPBIT/TT.png",
+    "tradingViewSymbol": "BINANCE:TTUSDT",
+    "iconUrl": "/icons/coins/TT.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TURBO",
     "cmc_slug": "turbo",
     "name_ko": "터보",
-    "name_en": "Turbo"
+    "name_en": "Turbo",
+    "tradingViewSymbol": "BINANCE:TURBOUSDT",
+    "iconUrl": "/icons/coins/TURBO.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TUSD",
     "cmc_slug": "trueusd",
     "name_ko": "트루USD",
     "name_en": "TrueUSD",
-    "icon_path": "/icons/UPBIT/TUSD.png"
+    "icon_path": "/icons/UPBIT/TUSD.png",
+    "tradingViewSymbol": "BINANCE:TUSDUSDT",
+    "iconUrl": "/icons/coins/TUSD.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "TWT",
     "cmc_slug": null,
     "name_ko": "트러스트 월렛 토큰",
-    "name_en": "Trust Wallet Token"
+    "name_en": "Trust Wallet Token",
+    "tradingViewSymbol": "BINANCE:TWTUSDT",
+    "iconUrl": "/icons/coins/TWT.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "UMA",
     "cmc_slug": "uma",
     "name_ko": "우마",
-    "name_en": "UMA"
+    "name_en": "UMA",
+    "tradingViewSymbol": "BINANCE:UMAUSDT",
+    "iconUrl": "/icons/coins/UMA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "UNI",
     "cmc_slug": "uniswap",
     "name_ko": "유니스왑",
     "name_en": "Uniswap",
-    "icon_path": "/icons/UPBIT/UNI.png"
+    "icon_path": "/icons/UPBIT/UNI.png",
+    "cmcSlug": "uniswap",
+    "tradingViewSymbol": "BINANCE:UNIUSDT",
+    "iconUrl": "/icons/coins/UNI.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "UOS",
     "cmc_slug": "ultra",
     "name_ko": "울트라",
-    "name_en": "Ultra"
+    "name_en": "Ultra",
+    "tradingViewSymbol": "BINANCE:UOSUSDT",
+    "iconUrl": "/icons/coins/UOS.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "USD1",
     "cmc_slug": "usd1",
     "name_ko": "월드 리버티 파이낸셜 유에스디",
     "name_en": "World Liberty Financial USD",
-    "icon_path": "/icons/UPBIT/USD1.png"
+    "icon_path": "/icons/UPBIT/USD1.png",
+    "tradingViewSymbol": "BINANCE:USD1USDT",
+    "iconUrl": "/icons/coins/USD1.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "USDC",
     "cmc_slug": "usd",
     "name_ko": "유에스디코인",
     "name_en": "USD Coin",
-    "icon_path": "/icons/UPBIT/USDC.png"
+    "icon_path": "/icons/UPBIT/USDC.png",
+    "cmcSlug": "usd-coin",
+    "tradingViewSymbol": "BINANCE:USDCUSDT",
+    "iconUrl": "/icons/coins/USDC.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "USDE",
     "cmc_slug": "ethena-usde",
     "name_ko": "유에스디이",
-    "name_en": "Ethena USDe"
+    "name_en": "Ethena USDe",
+    "tradingViewSymbol": "BINANCE:USDEUSDT",
+    "iconUrl": "/icons/coins/USDE.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "USDP",
     "cmc_slug": "usdp",
     "name_ko": "팍스달러",
     "name_en": "Pax Dollar",
-    "icon_path": "/icons/UPBIT/USDP.png"
+    "icon_path": "/icons/UPBIT/USDP.png",
+    "tradingViewSymbol": "BINANCE:USDPUSDT",
+    "iconUrl": "/icons/coins/USDP.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "USDS",
     "cmc_slug": "usds",
     "name_ko": "유에스디에스",
     "name_en": "USDS",
-    "icon_path": "/icons/UPBIT/USDS.png"
+    "icon_path": "/icons/UPBIT/USDS.png",
+    "tradingViewSymbol": "BINANCE:USDSUSDT",
+    "iconUrl": "/icons/coins/USDS.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "USDT",
     "cmc_slug": null,
     "name_ko": "테더",
     "name_en": "Tether USDt",
-    "icon_path": "/icons/UPBIT/USDT.png"
+    "icon_path": "/icons/UPBIT/USDT.png",
+    "cmcSlug": "tether",
+    "tradingViewSymbol": "BINANCE:USDTUSDT",
+    "iconUrl": "/icons/coins/USDT.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "VAL",
     "cmc_slug": "validity",
     "name_ko": "밸리디티",
     "name_en": "Validity",
-    "icon_path": "/icons/UPBIT/VAL.png"
+    "icon_path": "/icons/UPBIT/VAL.png",
+    "tradingViewSymbol": "BINANCE:VALUSDT",
+    "iconUrl": "/icons/coins/VAL.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "VANA",
     "cmc_slug": "vana",
     "name_ko": "바나",
     "name_en": "Vana",
-    "icon_path": "/icons/UPBIT/VANA.png"
+    "icon_path": "/icons/UPBIT/VANA.png",
+    "tradingViewSymbol": "BINANCE:VANAUSDT",
+    "iconUrl": "/icons/coins/VANA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "VET",
     "cmc_slug": "vechain",
     "name_ko": "비체인",
     "name_en": "VeChain",
-    "icon_path": "/icons/UPBIT/VET.png"
+    "icon_path": "/icons/UPBIT/VET.png",
+    "cmcSlug": "vechain",
+    "tradingViewSymbol": "BINANCE:VETUSDT",
+    "iconUrl": "/icons/coins/VET.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "VIC",
     "cmc_slug": "viction",
     "name_ko": "빅션",
-    "name_en": "Viction"
+    "name_en": "Viction",
+    "tradingViewSymbol": "BINANCE:VICUSDT",
+    "iconUrl": "/icons/coins/VIC.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "VINE",
     "cmc_slug": null,
     "name_ko": "바인 코인",
-    "name_en": "Vine Coin"
+    "name_en": "Vine Coin",
+    "tradingViewSymbol": "BINANCE:VINEUSDT",
+    "iconUrl": "/icons/coins/VINE.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "VIRTUAL",
     "cmc_slug": null,
     "name_ko": "버추얼 프로토콜",
     "name_en": "Virtuals Protocol",
-    "icon_path": "/icons/UPBIT/VIRTUAL.png"
+    "icon_path": "/icons/UPBIT/VIRTUAL.png",
+    "tradingViewSymbol": "BINANCE:VIRTUALUSDT",
+    "iconUrl": "/icons/coins/VIRTUAL.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "VTHO",
     "cmc_slug": null,
     "name_ko": "비토르 토큰",
     "name_en": "VeThor Token",
-    "icon_path": "/icons/UPBIT/VTHO.png"
+    "icon_path": "/icons/UPBIT/VTHO.png",
+    "tradingViewSymbol": "BINANCE:VTHOUSDT",
+    "iconUrl": "/icons/coins/VTHO.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "W",
     "cmc_slug": "wormhole",
     "name_ko": "웜홀",
     "name_en": "Wormhole",
-    "icon_path": "/icons/UPBIT/W.png"
+    "icon_path": "/icons/UPBIT/W.png",
+    "tradingViewSymbol": "BINANCE:WUSDT",
+    "iconUrl": "/icons/coins/W.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "WAL",
     "cmc_slug": "walrus",
     "name_ko": "월러스",
     "name_en": "Walrus",
-    "icon_path": "/icons/UPBIT/WAL.png"
+    "icon_path": "/icons/UPBIT/WAL.png",
+    "tradingViewSymbol": "BINANCE:WALUSDT",
+    "iconUrl": "/icons/coins/WAL.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "WAVES",
     "cmc_slug": "waves",
     "name_ko": "웨이브",
     "name_en": "Waves",
-    "icon_path": "/icons/UPBIT/WAVES.png"
+    "icon_path": "/icons/UPBIT/WAVES.png",
+    "tradingViewSymbol": "BINANCE:WAVESUSDT",
+    "iconUrl": "/icons/coins/WAVES.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "WAXL",
     "cmc_slug": "axelar",
     "name_ko": "엑셀라",
-    "name_en": "Axelar"
+    "name_en": "Axelar",
+    "tradingViewSymbol": "BINANCE:WAXLUSDT",
+    "iconUrl": "/icons/coins/WAXL.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "WAXP",
     "cmc_slug": null,
     "name_ko": "왁스",
     "name_en": "WAXP",
-    "icon_path": "/icons/UPBIT/WAXP.png"
+    "icon_path": "/icons/UPBIT/WAXP.png",
+    "tradingViewSymbol": "BINANCE:WAXPUSDT",
+    "iconUrl": "/icons/coins/WAXP.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "WBTC",
     "cmc_slug": null,
     "name_ko": "랩트비트코인",
-    "name_en": "Wrapped Bitcoin"
+    "name_en": "Wrapped Bitcoin",
+    "tradingViewSymbol": "BINANCE:WBTCUSDT",
+    "iconUrl": "/icons/coins/WBTC.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "WCT",
     "cmc_slug": null,
     "name_ko": "월렛커넥트",
     "name_en": "WalletConnect",
-    "icon_path": "/icons/UPBIT/WCT.png"
+    "icon_path": "/icons/UPBIT/WCT.png",
+    "tradingViewSymbol": "BINANCE:WCTUSDT",
+    "iconUrl": "/icons/coins/WCT.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "WEN",
     "cmc_slug": "wen",
     "name_ko": "웬",
-    "name_en": "Wen"
+    "name_en": "Wen",
+    "tradingViewSymbol": "BINANCE:WENUSDT",
+    "iconUrl": "/icons/coins/WEN.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "WIF",
     "cmc_slug": "dogwifhat",
     "name_ko": "도그위프햇",
-    "name_en": "dogwifhat"
+    "name_en": "dogwifhat",
+    "cmcSlug": "dogwifcoin",
+    "tradingViewSymbol": "BINANCE:WIFUSDT",
+    "iconUrl": "/icons/coins/WIF.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "WIKEN",
     "cmc_slug": "project-with",
     "name_ko": "위드",
-    "name_en": "Project WITH"
+    "name_en": "Project WITH",
+    "tradingViewSymbol": "BINANCE:WIKENUSDT",
+    "iconUrl": "/icons/coins/WIKEN.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "WITCH",
     "cmc_slug": null,
     "name_ko": "위치 토큰",
-    "name_en": "Witch Token"
+    "name_en": "Witch Token",
+    "tradingViewSymbol": "BINANCE:WITCHUSDT",
+    "iconUrl": "/icons/coins/WITCH.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "WLD",
     "cmc_slug": null,
     "name_ko": "월드코인",
     "name_en": "Worldcoin",
-    "icon_path": "/icons/UPBIT/WLD.png"
+    "icon_path": "/icons/UPBIT/WLD.png",
+    "tradingViewSymbol": "BINANCE:WLDUSDT",
+    "iconUrl": "/icons/coins/WLD.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "WLFI",
     "cmc_slug": "world-liberty-financial",
     "name_ko": "월드 리버티 파이낸셜",
     "name_en": "World Liberty Financial",
-    "icon_path": "/icons/UPBIT/WLFI.png"
+    "icon_path": "/icons/UPBIT/WLFI.png",
+    "tradingViewSymbol": "BINANCE:WLFIUSDT",
+    "iconUrl": "/icons/coins/WLFI.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "WNCG",
     "cmc_slug": "wrapped-ncg",
     "name_ko": "랩트 나인 크로니클 골드",
-    "name_en": "Wrapped NCG"
+    "name_en": "Wrapped NCG",
+    "tradingViewSymbol": "BINANCE:WNCGUSDT",
+    "iconUrl": "/icons/coins/WNCG.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "WOO",
     "cmc_slug": null,
     "name_ko": "우",
-    "name_en": "WOO"
+    "name_en": "WOO",
+    "tradingViewSymbol": "BINANCE:WOOUSDT",
+    "iconUrl": "/icons/coins/WOO.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "XAI",
     "cmc_slug": "xai",
     "name_ko": "자이",
-    "name_en": "Xai"
+    "name_en": "Xai",
+    "tradingViewSymbol": "BINANCE:XAIUSDT",
+    "iconUrl": "/icons/coins/XAI.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "XAN",
     "cmc_slug": "anoma",
     "name_ko": "아노마",
-    "name_en": "Anoma"
+    "name_en": "Anoma",
+    "tradingViewSymbol": "BINANCE:XANUSDT",
+    "iconUrl": "/icons/coins/XAN.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "XAUT",
     "cmc_slug": "tether-gold",
     "name_ko": "테더 골드",
-    "name_en": "Tether Gold"
+    "name_en": "Tether Gold",
+    "tradingViewSymbol": "BINANCE:XAUTUSDT",
+    "iconUrl": "/icons/coins/XAUT.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "XCN",
     "cmc_slug": "onyx",
     "name_ko": "오닉스코인",
-    "name_en": "Onyxcoin"
+    "name_en": "Onyxcoin",
+    "tradingViewSymbol": "BINANCE:XCNUSDT",
+    "iconUrl": "/icons/coins/XCN.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "XDC",
     "cmc_slug": "xdc-network",
     "name_ko": "엑스디씨 네트워크",
-    "name_en": "XDC Network"
+    "name_en": "XDC Network",
+    "tradingViewSymbol": "BINANCE:XDCUSDT",
+    "iconUrl": "/icons/coins/XDC.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "XEC",
     "cmc_slug": "ecash",
     "name_ko": "이캐시",
     "name_en": "eCash",
-    "icon_path": "/icons/UPBIT/XEC.png"
+    "icon_path": "/icons/UPBIT/XEC.png",
+    "tradingViewSymbol": "BINANCE:XECUSDT",
+    "iconUrl": "/icons/coins/XEC.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "XION",
     "cmc_slug": "xion",
     "name_ko": "자이온",
-    "name_en": "XION"
+    "name_en": "XION",
+    "tradingViewSymbol": "BINANCE:XIONUSDT",
+    "iconUrl": "/icons/coins/XION.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "XLM",
     "cmc_slug": null,
     "name_ko": "스텔라루멘",
     "name_en": "Stellar Lumens",
-    "icon_path": "/icons/UPBIT/XLM.png"
+    "icon_path": "/icons/UPBIT/XLM.png",
+    "cmcSlug": "stellar",
+    "tradingViewSymbol": "BINANCE:XLMUSDT",
+    "iconUrl": "/icons/coins/XLM.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "XPL",
     "cmc_slug": "plasma",
     "name_ko": "플라즈마",
     "name_en": "Plasma",
-    "icon_path": "/icons/UPBIT/XPL.png"
+    "icon_path": "/icons/UPBIT/XPL.png",
+    "tradingViewSymbol": "BINANCE:XPLUSDT",
+    "iconUrl": "/icons/coins/XPL.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "XPLA",
     "cmc_slug": "xpla",
     "name_ko": "엑스플라",
-    "name_en": "XPLA"
+    "name_en": "XPLA",
+    "tradingViewSymbol": "BINANCE:XPLAUSDT",
+    "iconUrl": "/icons/coins/XPLA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "XPR",
     "cmc_slug": null,
     "name_ko": "엑스피알 네트워크",
-    "name_en": "XPR Network"
+    "name_en": "XPR Network",
+    "tradingViewSymbol": "BINANCE:XPRUSDT",
+    "iconUrl": "/icons/coins/XPR.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "XRP",
     "cmc_slug": "ripple",
     "name_ko": "엑스알피 [리플]",
     "name_en": "XRP",
-    "icon_path": "/icons/UPBIT/XRP.png"
+    "icon_path": "/icons/UPBIT/XRP.png",
+    "cmcSlug": "xrp",
+    "tradingViewSymbol": "BINANCE:XRPUSDT",
+    "iconUrl": "/icons/coins/XRP.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "XTER",
     "cmc_slug": "xterio",
     "name_ko": "엑스테리오",
-    "name_en": "Xterio"
+    "name_en": "Xterio",
+    "tradingViewSymbol": "BINANCE:XTERUSDT",
+    "iconUrl": "/icons/coins/XTER.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "XTZ",
     "cmc_slug": "tezos",
     "name_ko": "테조스",
     "name_en": "Tezos",
-    "icon_path": "/icons/UPBIT/XTZ.png"
+    "icon_path": "/icons/UPBIT/XTZ.png",
+    "tradingViewSymbol": "BINANCE:XTZUSDT",
+    "iconUrl": "/icons/coins/XTZ.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "XVS",
     "cmc_slug": "venus",
     "name_ko": "비너스",
-    "name_en": "Venus"
+    "name_en": "Venus",
+    "tradingViewSymbol": "BINANCE:XVSUSDT",
+    "iconUrl": "/icons/coins/XVS.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "XYO",
     "cmc_slug": "xyo",
     "name_ko": "엑스와이오",
-    "name_en": "XYO"
+    "name_en": "XYO",
+    "tradingViewSymbol": "BINANCE:XYOUSDT",
+    "iconUrl": "/icons/coins/XYO.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "YALA",
     "cmc_slug": "yala",
     "name_ko": "얄라",
-    "name_en": "Yala"
+    "name_en": "Yala",
+    "tradingViewSymbol": "BINANCE:YALAUSDT",
+    "iconUrl": "/icons/coins/YALA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "YB",
     "cmc_slug": "yieldbasis",
     "name_ko": "일드베이시스",
-    "name_en": "YieldBasis"
+    "name_en": "YieldBasis",
+    "tradingViewSymbol": "BINANCE:YBUSDT",
+    "iconUrl": "/icons/coins/YB.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "YFI",
     "cmc_slug": "yearn-finance",
     "name_ko": "연파이낸스",
-    "name_en": "yearn.finance"
+    "name_en": "yearn.finance",
+    "tradingViewSymbol": "BINANCE:YFIUSDT",
+    "iconUrl": "/icons/coins/YFI.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "YGG",
     "cmc_slug": "yield-guild-games",
     "name_ko": "일드길드게임즈",
     "name_en": "Yield Guild Games",
-    "icon_path": "/icons/UPBIT/YGG.png"
+    "icon_path": "/icons/UPBIT/YGG.png",
+    "tradingViewSymbol": "BINANCE:YGGUSDT",
+    "iconUrl": "/icons/coins/YGG.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ZBT",
     "cmc_slug": "zerobase",
     "name_ko": "제로베이스",
     "name_en": "ZEROBASE",
-    "icon_path": "/icons/UPBIT/ZBT.png"
+    "icon_path": "/icons/UPBIT/ZBT.png",
+    "tradingViewSymbol": "BINANCE:ZBTUSDT",
+    "iconUrl": "/icons/coins/ZBT.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ZETA",
     "cmc_slug": "zetachain",
     "name_ko": "제타체인",
     "name_en": "ZetaChain",
-    "icon_path": "/icons/UPBIT/ZETA.png"
+    "icon_path": "/icons/UPBIT/ZETA.png",
+    "tradingViewSymbol": "BINANCE:ZETAUSDT",
+    "iconUrl": "/icons/coins/ZETA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ZEUS",
     "cmc_slug": "zeus-network",
     "name_ko": "제우스 네트워크",
-    "name_en": "Zeus Network"
+    "name_en": "Zeus Network",
+    "tradingViewSymbol": "BINANCE:ZEUSUSDT",
+    "iconUrl": "/icons/coins/ZEUS.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ZIL",
     "cmc_slug": "zilliqa",
     "name_ko": "질리카",
     "name_en": "Zilliqa",
-    "icon_path": "/icons/UPBIT/ZIL.png"
+    "icon_path": "/icons/UPBIT/ZIL.png",
+    "tradingViewSymbol": "BINANCE:ZILUSDT",
+    "iconUrl": "/icons/coins/ZIL.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ZK",
     "cmc_slug": "zksync",
     "name_ko": "지케이싱크",
-    "name_en": "zkSync"
+    "name_en": "zkSync",
+    "tradingViewSymbol": "BINANCE:ZKUSDT",
+    "iconUrl": "/icons/coins/ZK.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ZKC",
     "cmc_slug": "boundless",
     "name_ko": "바운드리스",
     "name_en": "Boundless",
-    "icon_path": "/icons/UPBIT/ZKC.png"
+    "icon_path": "/icons/UPBIT/ZKC.png",
+    "tradingViewSymbol": "BINANCE:ZKCUSDT",
+    "iconUrl": "/icons/coins/ZKC.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ZKJ",
     "cmc_slug": "polyhedra-network",
     "name_ko": "폴리헤데라 네트워크",
-    "name_en": "Polyhedra Network"
+    "name_en": "Polyhedra Network",
+    "tradingViewSymbol": "BINANCE:ZKJUSDT",
+    "iconUrl": "/icons/coins/ZKJ.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ZKL",
     "cmc_slug": "zklink",
     "name_ko": "지케이링크",
-    "name_en": "zkLink"
+    "name_en": "zkLink",
+    "tradingViewSymbol": "BINANCE:ZKLUSDT",
+    "iconUrl": "/icons/coins/ZKL.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ZORA",
     "cmc_slug": "zora",
     "name_ko": "조라",
     "name_en": "Zora",
-    "icon_path": "/icons/UPBIT/ZORA.png"
+    "icon_path": "/icons/UPBIT/ZORA.png",
+    "tradingViewSymbol": "BINANCE:ZORAUSDT",
+    "iconUrl": "/icons/coins/ZORA.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ZRC",
     "cmc_slug": "zircuit",
     "name_ko": "저킷",
-    "name_en": "Zircuit"
+    "name_en": "Zircuit",
+    "tradingViewSymbol": "BINANCE:ZRCUSDT",
+    "iconUrl": "/icons/coins/ZRC.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ZRO",
     "cmc_slug": "layerzero",
     "name_ko": "레이어제로",
     "name_en": "LayerZero",
-    "icon_path": "/icons/UPBIT/ZRO.png"
+    "icon_path": "/icons/UPBIT/ZRO.png",
+    "tradingViewSymbol": "BINANCE:ZROUSDT",
+    "iconUrl": "/icons/coins/ZRO.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ZRX",
     "cmc_slug": "0x",
     "name_ko": "제로엑스",
     "name_en": "0x",
-    "icon_path": "/icons/UPBIT/ZRX.png"
+    "icon_path": "/icons/UPBIT/ZRX.png",
+    "tradingViewSymbol": "BINANCE:ZRXUSDT",
+    "iconUrl": "/icons/coins/ZRX.png",
+    "updatedAt": 1764867747785
   },
   {
     "symbol": "ZTX",
     "cmc_slug": "ztx",
     "name_ko": "지티엑스",
-    "name_en": "ZTX"
+    "name_en": "ZTX",
+    "tradingViewSymbol": "BINANCE:ZTXUSDT",
+    "iconUrl": "/icons/coins/ZTX.png",
+    "updatedAt": 1764867747785
   }
 ]

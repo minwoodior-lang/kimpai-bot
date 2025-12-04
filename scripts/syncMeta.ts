@@ -197,7 +197,7 @@ async function syncMeta() {
   const cmcSlugs = loadCmcSlugs();
   
   const domesticMarkets = markets.filter(m => m.isDomestic);
-  const uniqueSymbols = [...new Set(domesticMarkets.map(m => m.base))];
+  const uniqueSymbols = Array.from(new Set(domesticMarkets.map(m => m.base)));
   
   console.log(`[SyncMeta] Found ${uniqueSymbols.length} unique symbols from domestic exchanges`);
   
