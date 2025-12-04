@@ -14,8 +14,19 @@ import {
   fetchGatePrices,
   fetchHtxPrices,
   fetchMexcPrices,
+  fetchBithumbStats,
+  fetchCoinoneStats,
+  fetchBinanceStats,
+  fetchOkxStats,
+  fetchBybitStats,
+  fetchBitgetStats,
+  fetchGateStats,
+  fetchHtxStats,
+  fetchMexcStats,
   type MarketInfo,
-  type PriceMap
+  type PriceMap,
+  type MarketStatsMap,
+  type MarketStatsEntry
 } from './fetchers';
 
 const DATA_DIR = path.join(process.cwd(), 'data');
@@ -24,15 +35,6 @@ const PREMIUM_TABLE_FILE = path.join(DATA_DIR, 'premiumTable.json');
 const EXCHANGE_MARKETS_FILE = path.join(DATA_DIR, 'exchange_markets.json');
 const MASTER_SYMBOLS_FILE = path.join(DATA_DIR, 'master_symbols.json');
 const MARKET_STATS_FILE = path.join(DATA_DIR, 'marketStats.json');
-
-interface MarketStatsEntry {
-  change24h: number;
-  high24h: number | null;
-  low24h: number | null;
-  volume24hKrw: number;
-}
-
-type MarketStatsMap = Record<string, MarketStatsEntry>;
 
 let currentPrices: PriceMap = {};
 let currentMarketStats: MarketStatsMap = {};
@@ -116,10 +118,11 @@ async function fetchUpbitMarketStats(markets: MarketInfo[]): Promise<MarketStats
         const key = `UPBIT:${base}:${quote}`;
 
         result[key] = {
-          change24h: (ticker.signed_change_rate ?? 0) * 100,
+          change24hRate: (ticker.signed_change_rate ?? 0) * 100,
+          change24hAbs: ticker.signed_change_price ?? 0,
           high24h: ticker.high_price ?? null,
           low24h: ticker.low_price ?? null,
-          volume24hKrw: ticker.acc_trade_price_24h ?? 0
+          volume24hQuote: ticker.acc_trade_price_24h ?? 0
         };
       }
     } catch (err: any) {
@@ -228,7 +231,7 @@ async function updatePrices(): Promise<void> {
   }));
 
   try {
-    const [priceResults, statsResult] = await Promise.all([
+    const [priceResults, statsResults] = await Promise.all([
       Promise.allSettled([
         fetchUpbitPrices(upbitMarkets),
         fetchBithumbPrices(bithumbMarkets),
@@ -242,7 +245,18 @@ async function updatePrices(): Promise<void> {
         fetchHtxPrices(globalMarkets),
         fetchMexcPrices(globalMarkets)
       ]),
-      fetchUpbitMarketStats(allMarkets)
+      Promise.allSettled([
+        fetchUpbitMarketStats(allMarkets),
+        fetchBithumbStats(bithumbMarkets),
+        fetchCoinoneStats(coinoneMarkets),
+        fetchBinanceStats(globalMarkets),
+        fetchOkxStats(globalMarkets),
+        fetchBybitStats(globalMarkets),
+        fetchBitgetStats(globalMarkets),
+        fetchGateStats(globalMarkets),
+        fetchHtxStats(globalMarkets),
+        fetchMexcStats(globalMarkets)
+      ])
     ]);
 
     for (const result of priceResults) {
@@ -251,7 +265,11 @@ async function updatePrices(): Promise<void> {
       }
     }
 
-    Object.assign(currentMarketStats, statsResult);
+    for (const result of statsResults) {
+      if (result.status === 'fulfilled') {
+        Object.assign(currentMarketStats, result.value);
+      }
+    }
 
     savePrices(currentPrices);
     saveMarketStats(currentMarketStats);
