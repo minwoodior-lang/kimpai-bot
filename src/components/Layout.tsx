@@ -2,7 +2,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import TopInfoBar from "@/components/top/TopInfoBar";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -75,7 +74,6 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-900 text-slate-100">
-      <TopInfoBar />
       <header className="sm:sticky sm:top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-800">
         <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-5">
           <nav className="border-b border-slate-800">

@@ -39,6 +39,7 @@ const MARKET_STATS_FILE = path.join(DATA_DIR, 'marketStats.json');
 let currentPrices: PriceMap = {};
 let currentMarketStats: MarketStatsMap = {};
 let usdKrwRate = 1380;
+let usdtKrwGlobal = 1450;
 let lastFxUpdate = 0;
 
 function loadExchangeMarkets(): MarketInfo[] {
@@ -57,17 +58,21 @@ function loadMasterSymbols(): any[] {
   }
 }
 
-async function updateFxRate(): Promise<void> {
+async function updateGlobalUsdtKrw(): Promise<void> {
   const now = Date.now();
   if (now - lastFxUpdate < 300000) return;
 
   try {
-    const res = await axios.get('https://api.exchangerate-api.com/v4/latest/USD', { timeout: 5000 });
-    usdKrwRate = res.data.rates?.KRW || 1380;
-    lastFxUpdate = now;
-    console.log(`[FX] USD/KRW updated: ${usdKrwRate}`);
-  } catch {
-    console.warn('[FX] Failed to update, using cached rate:', usdKrwRate);
+    const res = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=krw', { timeout: 5000 });
+    const tetherKrw = res.data?.tether?.krw;
+    if (tetherKrw && typeof tetherKrw === 'number') {
+      usdtKrwGlobal = tetherKrw;
+      usdKrwRate = tetherKrw;
+      lastFxUpdate = now;
+      console.log(`[USDT] Global USDT/KRW updated: ₩${usdtKrwGlobal.toLocaleString()}`);
+    }
+  } catch (err: any) {
+    console.warn('[USDT] CoinGecko fetch failed, using cached rate:', usdtKrwGlobal);
   }
 }
 
@@ -210,6 +215,11 @@ function getKoreanPrice(symbol: string): number | null {
 }
 
 function getGlobalPrice(symbol: string): number | null {
+  // USDT 심볼은 CoinGecko 글로벌 테더 시세 사용 (price = 1 USDT)
+  if (symbol === 'USDT') {
+    return 1;
+  }
+  
   const priority = ['BINANCE', 'BINANCE_FUTURES', 'OKX', 'BYBIT', 'BITGET', 'GATE', 'HTX', 'MEXC'];
   for (const ex of priority) {
     const key = `${ex}:${symbol}:USDT`;
@@ -240,7 +250,7 @@ async function updatePricesOnly(): Promise<void> {
   const startTime = Date.now();
   const allMarkets = loadExchangeMarkets();
 
-  await updateFxRate();
+  await updateGlobalUsdtKrw();
 
   const upbitMarkets = filterMarkets(allMarkets, 'UPBIT', ['KRW', 'BTC', 'USDT']);
   const bithumbMarkets = filterMarkets(allMarkets, 'BITHUMB', ['KRW', 'BTC', 'USDT']);
@@ -266,6 +276,24 @@ async function updatePricesOnly(): Promise<void> {
       if (result.status === 'fulfilled') {
         Object.assign(currentPrices, result.value);
       }
+    }
+
+    // GLOBAL:USDT:USDT 엔트리 생성 (CoinGecko 글로벌 테더 시세)
+    if (usdtKrwGlobal) {
+      currentPrices['GLOBAL:USDT:USDT'] = {
+        price: 1,
+        ts: Date.now()
+      };
+    }
+
+    // 모든 해외 거래소 USDT 심볼에 CoinGecko 글로벌 테더 값 적용
+    const foreignExchanges = ['BINANCE', 'BINANCE_FUTURES', 'OKX', 'BYBIT', 'BITGET', 'GATE', 'HTX', 'MEXC'];
+    for (const exchange of foreignExchanges) {
+      const key = `${exchange}:USDT:USDT`;
+      currentPrices[key] = {
+        price: 1,
+        ts: Date.now()
+      };
     }
 
     savePrices(currentPrices);
