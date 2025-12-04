@@ -1,0 +1,267 @@
+📩 레플릿 개발팀 전달용 – 홈 테이블 국내/해외 2줄 표기 설계
+0. 목표
+
+KimpAI 홈 테이블을 **김프가처럼 “2줄 구조”**로 만들고 싶습니다.
+지금은 국내(업비트) 기준 통계만 들어와서 윗줄(국내 %) 만 나오고,
+아랫줄에 들어가야 할 해외 기준/금액 차이 값들이 전부 비어있는 상태입니다.
+
+최종적으로 각 칼럼은 아래처럼 동작해야 합니다:
+
+현재가
+
+1줄: 국내 거래소 현재가 (KRW)
+
+2줄: 해외 거래소 현재가를 KRW로 환산한 값
+
+김프
+
+1줄: 김프 %
+→ ((국내KRW / 해외KRW) - 1) * 100
+
+2줄: 김프 금액(원)
+→ 국내KRW - 해외KRW
+
+전일대비
+
+1줄: 국내 전일대비 등락률 % (국내 거래소에서 제공하는 24h rate)
+
+2줄: 국내 전일대비 금액(원) (국내 거래소 24h price change)
+
+고가대비
+
+1줄: 국내 현재가 vs 24h 고가 %
+→ (현재가 / 고가 - 1) * 100
+
+2줄: 고가와의 금액 차이(원)
+→ 고가 - 현재가
+
+저가대비
+
+1줄: 국내 현재가 vs 24h 저가 %
+→ (현재가 / 저가 - 1) * 100
+
+2줄: 저가와의 금액 차이(원)
+→ 현재가 - 저가
+
+거래액(일)
+
+1줄: 국내 거래소 24h 거래대금 (KRW)
+
+2줄: 해외 거래소 24h 거래대금을 KRW로 환산한 값
+(해외 거래소 24h quote volume × USDT/KRW 환율)
+
+1. 통계 수집 로직 공통화 (국내 + 해외 전체)
+
+현재 marketStats.json 에는 업비트 KRW 통계만 들어가 있습니다.
+이 구조를 그대로 확장해서 국내 3개 + 해외 다수 거래소에 대해 동일 포맷으로 저장 부탁드립니다.
+
+1-1. 공통 키 구조
+
+key: "{EXCHANGE}:{SYMBOL}:{QUOTE}"
+
+예) UPBIT:BTC:KRW, BITHUMB:XRP:KRW, BINANCE:BTC:USDT, OKX:SUI:USDT …
+
+1-2. 값 구조 (MarketStats)
+
+interface MarketStats {
+  // 24h 등락률 (%)
+  change24hRate: number;          // 예: +1.48
+
+  // 24h 등락 금액 (해당 마켓 통화 단위, KRW 또는 USDT)
+  change24hAbs: number;           // 예: +80,000 (KRW), +120 (USDT)
+
+  // 24h 고가/저가 (해당 마켓 통화 단위)
+  high24h: number | null;
+  low24h: number | null;
+
+  // 24h 거래대금 (해당 마켓 통화 단위)
+  volume24hQuote: number;         // KRW 마켓이면 KRW, USDT 마켓이면 USDT
+}
+
+
+1-3. 국내 거래소 처리
+
+업비트: 이미 구현된 ticker 로직에서
+
+signed_change_rate * 100 → change24hRate
+
+signed_change_price → change24hAbs
+
+high_price → high24h
+
+low_price → low24h
+
+acc_trade_price_24h → volume24hQuote
+
+키: UPBIT:{base}:KRW
+
+빗썸 / 코인원도 각 거래소 ticker(24h 통계) API 사용해서
+동일한 방식으로 MarketStats 생성, 키는 각각 BITHUMB:SYMBOL:KRW, COINONE:SYMBOL:KRW 등으로 저장.
+
+1-4. 해외 거래소 처리
+
+바이낸스, OKX, Bybit, Bitget, Gate, HTX, MEXC 에 대해서도
+이미 priceWorker에서 시세를 수집하고 있다면, 같은 API 응답에서 24h 통계 값도 함께 파싱해서 MarketStats 에 저장해 주세요.
+
+예) Binance 24h ticker:
+
+priceChangePercent → change24hRate
+
+priceChange → change24hAbs
+
+highPrice → high24h
+
+lowPrice → low24h
+
+quoteVolume → volume24hQuote (USDT 기준)
+
+키는 BINANCE:{SYMBOL}:USDT 형식으로 통일.
+
+1-5. 결과
+
+data/marketStats.json 안에
+
+국내 3개 + 해외 N개 거래소 전부가
+MarketStatsMap = Record<string, MarketStats> 형태로 모여 있어야 합니다.
+
+2. /api/premium/table-filtered 에서 2줄 데이터 생성
+
+프론트는 “한 row당 2줄”을 그리기만 하면 되도록,
+이 API에서 이미 국내/해외/금액차가 모두 계산된 형태로 내려주세요.
+
+예시용 이름만 맞춰주면 됩니다. 실제 변수명은 지금 프로젝트 스타일에 맞게 써도 됩니다.
+
+2-1. 기본 키
+const domesticKey = `${domesticExchange}:${symbol}:KRW`;   // 예: "UPBIT:BTC:KRW"
+const foreignKey  = `${foreignExchange}:${symbol}:${foreignQuote}`; // 예: "BINANCE:BTC:USDT"
+
+const domesticStats = marketStats[domesticKey];
+const foreignStats  = marketStats[foreignKey];
+
+2-2. 가격 및 김프 관련 계산
+// 이미 가지고 있는 값들 (현재도 premium 계산에 사용 중인 값)
+const domesticPriceKrw = ...;   // 국내 현재가 (KRW)
+const foreignPrice     = ...;   // 해외 현재가 (USDT 등)
+const usdtKrwRate      = ...;   // USDT → KRW 환율 (기존 FX API 활용)
+
+// 해외 가격을 KRW로 환산
+const foreignPriceKrw = foreignPrice * usdtKrwRate;
+
+// 김프 %
+const premiumRate =
+  foreignPriceKrw > 0
+    ? (domesticPriceKrw / foreignPriceKrw - 1) * 100
+    : 0;
+
+// 김프 금액 (원)
+const premiumDiffKrw =
+  foreignPriceKrw > 0 ? domesticPriceKrw - foreignPriceKrw : 0;
+
+2-3. 전일대비 / 고가대비 / 저가대비 / 거래액 계산
+// 국내 전일대비
+const changeRate = domesticStats?.change24hRate ?? 0;    // %
+const changeAbs  = domesticStats?.change24hAbs  ?? 0;    // 원 단위
+
+// 국내 고가/저가
+const high24h = domesticStats?.high24h ?? null;
+const low24h  = domesticStats?.low24h  ?? null;
+
+const fromHighRate =
+  high24h && domesticPriceKrw
+    ? (domesticPriceKrw / high24h - 1) * 100
+    : 0;
+
+const highDiffKrw =
+  high24h && domesticPriceKrw
+    ? high24h - domesticPriceKrw
+    : 0;
+
+const fromLowRate =
+  low24h && domesticPriceKrw
+    ? (domesticPriceKrw / low24h - 1) * 100
+    : 0;
+
+const lowDiffKrw =
+  low24h && domesticPriceKrw
+    ? domesticPriceKrw - low24h
+    : 0;
+
+// 거래액(일)
+const domesticVolumeKrw = domesticStats?.volume24hQuote ?? 0;
+
+const foreignVolumeKrw =
+  foreignStats?.volume24hQuote != null
+    ? foreignStats.volume24hQuote * usdtKrwRate
+    : 0;
+
+2-4. API 응답 예시 구조 (row 하나)
+rows.push({
+  symbol,
+  name_ko,
+
+  // 현재가
+  koreanPrice: domesticPriceKrw,
+  foreignPriceKrw,
+
+  // 김프
+  premiumRate,     // %
+  premiumDiffKrw,  // 원
+
+  // 전일대비
+  changeRate,      // %
+  changeAbsKrw: changeAbs, // 원
+
+  // 고가대비
+  fromHighRate,    // %
+  highDiffKrw,     // 원
+
+  // 저가대비
+  fromLowRate,     // %
+  lowDiffKrw,      // 원
+
+  // 거래액(일)
+  volume24hKrw: domesticVolumeKrw,
+  volume24hForeignKrw: foreignVolumeKrw,
+});
+
+3. 프론트엔드 표시 규칙 (참고용)
+
+프론트에서는 각 칼럼을 2줄 구성으로 사용합니다:
+
+현재가:
+
+1줄 ⇒ koreanPrice
+
+2줄 ⇒ foreignPriceKrw
+
+김프:
+
+1줄 ⇒ premiumRate
+
+2줄 ⇒ premiumDiffKrw
+
+전일대비:
+
+1줄 ⇒ changeRate
+
+2줄 ⇒ changeAbsKrw
+
+고가대비:
+
+1줄 ⇒ fromHighRate
+
+2줄 ⇒ highDiffKrw
+
+저가대비:
+
+1줄 ⇒ fromLowRate
+
+2줄 ⇒ lowDiffKrw
+
+거래액(일):
+
+1줄 ⇒ volume24hKrw
+
+2줄 ⇒ volume24hForeignKrw
+
+포맷팅(억/조 단위, +/– 색상 처리 등)은 프론트에서 알아서 처리하면 됩니다.

@@ -22,3 +22,13 @@ export interface FetcherResult {
   prices: PriceMap;
   errors: string[];
 }
+
+export interface MarketStatsEntry {
+  change24hRate: number;
+  change24hAbs: number;
+  high24h: number | null;
+  low24h: number | null;
+  volume24hQuote: number;
+}
+
+export type MarketStatsMap = Record<string, MarketStatsEntry>;
