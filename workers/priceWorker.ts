@@ -211,7 +211,23 @@ function getGlobalPrice(symbol: string): number | null {
   return null;
 }
 
-async function updatePrices(): Promise<void> {
+function getGlobalMarkets(): MarketInfo[] {
+  const allMarkets = loadExchangeMarkets();
+  const upbitMarkets = filterMarkets(allMarkets, 'UPBIT', ['KRW', 'BTC', 'USDT']);
+  const bithumbMarkets = filterMarkets(allMarkets, 'BITHUMB', ['KRW', 'BTC', 'USDT']);
+  const coinoneMarkets = filterMarkets(allMarkets, 'COINONE', ['KRW']);
+
+  const globalBases = new Set([...upbitMarkets, ...bithumbMarkets, ...coinoneMarkets].map(m => m.base.toUpperCase()));
+  return Array.from(globalBases).map(base => ({
+    id: `GLOBAL:${base}:USDT`,
+    exchange: 'GLOBAL',
+    market: `${base}USDT`,
+    base,
+    quote: 'USDT'
+  }));
+}
+
+async function updatePricesOnly(): Promise<void> {
   const startTime = Date.now();
   const allMarkets = loadExchangeMarkets();
 
@@ -220,43 +236,21 @@ async function updatePrices(): Promise<void> {
   const upbitMarkets = filterMarkets(allMarkets, 'UPBIT', ['KRW', 'BTC', 'USDT']);
   const bithumbMarkets = filterMarkets(allMarkets, 'BITHUMB', ['KRW', 'BTC', 'USDT']);
   const coinoneMarkets = filterMarkets(allMarkets, 'COINONE', ['KRW']);
-
-  const globalBases = new Set([...upbitMarkets, ...bithumbMarkets, ...coinoneMarkets].map(m => m.base.toUpperCase()));
-  const globalMarkets: MarketInfo[] = Array.from(globalBases).map(base => ({
-    id: `GLOBAL:${base}:USDT`,
-    exchange: 'GLOBAL',
-    market: `${base}USDT`,
-    base,
-    quote: 'USDT'
-  }));
+  const globalMarkets = getGlobalMarkets();
 
   try {
-    const [priceResults, statsResults] = await Promise.all([
-      Promise.allSettled([
-        fetchUpbitPrices(upbitMarkets),
-        fetchBithumbPrices(bithumbMarkets),
-        fetchCoinonePrices(coinoneMarkets),
-        fetchBinanceSpotPrices(globalMarkets),
-        fetchBinanceFuturesPrices(globalMarkets),
-        fetchOkxPrices(globalMarkets),
-        fetchBybitPrices(globalMarkets),
-        fetchBitgetPrices(globalMarkets),
-        fetchGatePrices(globalMarkets),
-        fetchHtxPrices(globalMarkets),
-        fetchMexcPrices(globalMarkets)
-      ]),
-      Promise.allSettled([
-        fetchUpbitMarketStats(allMarkets),
-        fetchBithumbStats(bithumbMarkets),
-        fetchCoinoneStats(coinoneMarkets),
-        fetchBinanceStats(globalMarkets),
-        fetchOkxStats(globalMarkets),
-        fetchBybitStats(globalMarkets),
-        fetchBitgetStats(globalMarkets),
-        fetchGateStats(globalMarkets),
-        fetchHtxStats(globalMarkets),
-        fetchMexcStats(globalMarkets)
-      ])
+    const priceResults = await Promise.allSettled([
+      fetchUpbitPrices(upbitMarkets),
+      fetchBithumbPrices(bithumbMarkets),
+      fetchCoinonePrices(coinoneMarkets),
+      fetchBinanceSpotPrices(globalMarkets),
+      fetchBinanceFuturesPrices(globalMarkets),
+      fetchOkxPrices(globalMarkets),
+      fetchBybitPrices(globalMarkets),
+      fetchBitgetPrices(globalMarkets),
+      fetchGatePrices(globalMarkets),
+      fetchHtxPrices(globalMarkets),
+      fetchMexcPrices(globalMarkets)
     ]);
 
     for (const result of priceResults) {
@@ -265,51 +259,98 @@ async function updatePrices(): Promise<void> {
       }
     }
 
+    savePrices(currentPrices);
+    buildPremiumTable();
+
+    const elapsed = Date.now() - startTime;
+    console.log(`[Price] Updated in ${elapsed}ms (${Object.keys(currentPrices).length} entries)`);
+  } catch (err: any) {
+    console.error('[Price] Update failed:', err.message);
+  }
+}
+
+async function updateStatsOnly(): Promise<void> {
+  const startTime = Date.now();
+  const allMarkets = loadExchangeMarkets();
+  const bithumbMarkets = filterMarkets(allMarkets, 'BITHUMB', ['KRW', 'BTC', 'USDT']);
+  const coinoneMarkets = filterMarkets(allMarkets, 'COINONE', ['KRW']);
+  const globalMarkets = getGlobalMarkets();
+
+  try {
+    const statsResults = await Promise.allSettled([
+      fetchUpbitMarketStats(allMarkets),
+      fetchBithumbStats(bithumbMarkets),
+      fetchCoinoneStats(coinoneMarkets),
+      fetchBinanceStats(globalMarkets),
+      fetchOkxStats(globalMarkets),
+      fetchBybitStats(globalMarkets),
+      fetchBitgetStats(globalMarkets),
+      fetchGateStats(globalMarkets),
+      fetchHtxStats(globalMarkets),
+      fetchMexcStats(globalMarkets)
+    ]);
+
     for (const result of statsResults) {
       if (result.status === 'fulfilled') {
         Object.assign(currentMarketStats, result.value);
       }
     }
 
-    savePrices(currentPrices);
     saveMarketStats(currentMarketStats);
-    buildPremiumTable();
 
     const elapsed = Date.now() - startTime;
-    console.log(`[Worker] Prices updated in ${elapsed}ms (${Object.keys(currentPrices).length} entries, ${Object.keys(currentMarketStats).length} stats)`);
+    console.log(`[Stats] Updated in ${elapsed}ms (${Object.keys(currentMarketStats).length} stats)`);
   } catch (err: any) {
-    console.error('[Worker] Update failed:', err.message);
+    console.error('[Stats] Update failed:', err.message);
   }
 }
 
-let cronJob: ReturnType<typeof cron.schedule> | null = null;
-let isUpdating = false;
+let priceCronJob: ReturnType<typeof cron.schedule> | null = null;
+let statsCronJob: ReturnType<typeof cron.schedule> | null = null;
+let isPriceUpdating = false;
+let isStatsUpdating = false;
 
 export function startPriceWorker(): void {
-  console.log('[Worker] Starting price worker (3s interval)');
+  console.log('[Worker] Starting price worker (3s) + stats worker (30s)');
 
-  updatePrices();
+  updatePricesOnly();
+  updateStatsOnly();
 
-  cronJob = cron.schedule('*/3 * * * * *', async () => {
-    if (isUpdating) {
-      console.log('[Worker] Skipping tick - previous update still running');
+  priceCronJob = cron.schedule('*/3 * * * * *', async () => {
+    if (isPriceUpdating) {
       return;
     }
-    isUpdating = true;
+    isPriceUpdating = true;
     try {
-      await updatePrices();
+      await updatePricesOnly();
     } finally {
-      isUpdating = false;
+      isPriceUpdating = false;
+    }
+  });
+
+  statsCronJob = cron.schedule('*/30 * * * * *', async () => {
+    if (isStatsUpdating) {
+      return;
+    }
+    isStatsUpdating = true;
+    try {
+      await updateStatsOnly();
+    } finally {
+      isStatsUpdating = false;
     }
   });
 }
 
 export function stopPriceWorker(): void {
-  if (cronJob) {
-    cronJob.stop();
-    cronJob = null;
-    console.log('[Worker] Price worker stopped');
+  if (priceCronJob) {
+    priceCronJob.stop();
+    priceCronJob = null;
   }
+  if (statsCronJob) {
+    statsCronJob.stop();
+    statsCronJob = null;
+  }
+  console.log('[Worker] Price and stats workers stopped');
 }
 
 if (require.main === module) {
