@@ -52,6 +52,16 @@ app.prepare().then(() => {
             return;
           }
           console.log("[MetaSync] Complete");
+          
+          // 메타 동기화 후 데이터 검증
+          exec("npm run validate", (validateErr, validateStdout, validateStderr) => {
+            if (validateErr) {
+              console.error("[Validate] FAILED - Data pipeline validation error");
+              console.error(validateStdout || validateStderr);
+              return;
+            }
+            console.log("[Validate] PASSED - Data pipeline healthy");
+          });
         });
       });
     });

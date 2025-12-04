@@ -1,0 +1,116 @@
+📌 [전달문] KimpAI 데이터 파이프라인 – 자동 검증·차단 레이어 추가 요청
+
+현재 마켓 수집, 메타 동기화, 가격 수집, 프리미엄 계산까지 전체 자동화는 완성된 상태입니다.
+하지만 특정 거래소의 비정상 API 응답(예: 빗썸 closing_price=0)처럼 구조적 문제가 재발할 수 있는 구간에 대한 보호 장치가 없습니다.
+
+이번 RON/DKA/HUNT 버그처럼
+
+closing_price = 0
+
+prev_closing_price는 존재
+
+가격은 UI에서 null / 0 / -100%로 표기
+같은 상황이 재발해도 현재 파이프라인은 감지를 못하고 그대로 데이터를 배포합니다.
+
+이를 방지하기 위해 아래 기능을 자동화체인에 필수적으로 추가해 주세요.
+
+1️⃣ 자동 검증 스크립트 추가 (validateDataPipeline.ts)
+
+마켓 생성 → 메타 업데이트 → 가격 수집 후
+마지막 단계에서 “데이터 자체가 정상인지” 다음 항목을 검사해야 합니다.
+
+✔ A. 국내 마켓 인변트 검증
+
+Upbit/KRW·BTC·USDT
+
+Bithumb/KRW·BTC
+
+Coinone/KRW
+모든 마켓에 대해:
+
+1) prices.json에 해당 마켓이 존재해야 합니다.
+2) 국내 기준가(KRW 환산)가 0, null, NaN이면 오류 처리합니다.
+3) 기준 거래소에 마켓이 있는데 premiumTable에서 domesticPriceKrw ≤ 0이면 오류 처리합니다.
+
+✔ B. 퍼센트 이상치 자동 감지
+
+예)
+
+전일대비, 고가대비, 저가대비 절댓값 > 10,000%
+
+분모가 0이어서 계산된 NaN, Infinity
+→ 즉시 오류로 판단 후 차단합니다.
+
+✔ C. 마켓 키 불일치 검사
+
+exchange_markets.json 생성 시 사용한 키와
+
+prices.json・premiumTable.json 생성 시 사용한 키가
+동일한 makeMarketKey 함수로 생성되었는지 검증
+→ 키 mismatch로 인한 “가격 없음” 문제 원천 차단
+
+✔ D. 코인원 HTML 파싱 실패 자동 감지
+
+Coinone KRW 유니버스의 name_ko / name_en 중 null 비율이 일정 기준(예: 5%) 초과 시
+→ 오류로 간주 (HTML 구조 변경 감지)
+
+2️⃣ 오류 발생 시 자동 차단 시스템
+🔥 요구조건:
+
+만약 validateDataPipeline 에서 하나라도 오류가 나면:
+
+1) premiumTable.json, prices.json 새로 덮어쓰기 중단
+2) 마지막 정상 데이터 유지
+3) 오류 로그 출력
+4) 서버/프론트는 깨진 데이터를 절대 사용하지 않음
+
+
+→ 이렇게 하면 빗썸 RON/DKA/HUNT 같은 케이스가
+UI에 잘못 표시되는 일이 다시는 발생하지 않습니다.
+
+3️⃣ 3초 priceWorker에도 안전장치 추가
+
+priceWorker에서 각 거래소 응답값이 비정상일 경우:
+
+closing_price = 0 (but prev_close exists)
+
+volume = null → 0
+
+bid/ask가 null
+등의 상황을 자동으로 감지해:
+
+1) 정상 값 재계산 (빗썸처럼 prev + fluctate 활용)
+2) 그래도 비정상이면 해당 거래소 해당 심볼만 스킵
+3) 스킵된 심볼 목록을 로그로 display
+
+4️⃣ 크론 자동 실패 감지(Health Check)
+
+1시간 크론 실행 후:
+
+markets rebuilt count
+
+symbols count
+
+prices count
+
+domestic/foreign mapping count
+이전 대비 비정상적 감소가 있는지 체크.
+
+예)
+
+빗썸 KRW 445개 → 300개로 줄었다면 HTML 파싱 실패
+
+→ 즉시 오류 처리 후 premiumTable 업데이트 중단.
+
+⭐ 최종 목표
+✔ 자동 수집
+✔ 자동 검증
+✔ 자동 차단
+✔ 자동 알림
+
+이 네 가지를 모두 갖추어
+“다시는 동일 계열의 버그가 발생하지 않는 완전 자동화 시스템”을 구축하는 것입니다.
+
+현재 RON/DKA/HUNT 케이스는 해결되었지만,
+유사한 일이 반복될 가능성을 완전히 제거하기 위해
+위 4가지 기능을 필수적으로 적용해 주세요.

@@ -35,12 +35,15 @@ const PREMIUM_TABLE_FILE = path.join(DATA_DIR, 'premiumTable.json');
 const EXCHANGE_MARKETS_FILE = path.join(DATA_DIR, 'exchange_markets.json');
 const MASTER_SYMBOLS_FILE = path.join(DATA_DIR, 'master_symbols.json');
 const MARKET_STATS_FILE = path.join(DATA_DIR, 'marketStats.json');
+const HEALTH_CHECK_FILE = path.join(DATA_DIR, 'healthCheck.json');
 
 let currentPrices: PriceMap = {};
 let currentMarketStats: MarketStatsMap = {};
 let usdKrwRate = 1380;
 let usdtKrwGlobal = 1450;
 let lastFxUpdate = 0;
+let lastHealthCheck: { pricesCount: number; marketsCount: number; timestamp: number } | null = null;
+let skippedSymbols: string[] = [];
 
 function loadExchangeMarkets(): MarketInfo[] {
   try {
@@ -80,6 +83,95 @@ function filterMarkets(markets: MarketInfo[], exchange: string, quotes: string[]
   return markets.filter(m => 
     m.exchange === exchange && quotes.includes(m.quote)
   );
+}
+
+interface ValidationResult {
+  isValid: boolean;
+  invalidPrices: string[];
+  skippedSymbols: string[];
+}
+
+function validatePricesBeforeSave(prices: PriceMap, markets: MarketInfo[]): ValidationResult {
+  const result: ValidationResult = {
+    isValid: true,
+    invalidPrices: [],
+    skippedSymbols: []
+  };
+
+  const domesticExchanges = [
+    { exchange: 'UPBIT', quotes: ['KRW', 'BTC', 'USDT'] },
+    { exchange: 'BITHUMB', quotes: ['KRW', 'BTC'] },
+    { exchange: 'COINONE', quotes: ['KRW'] },
+  ];
+
+  for (const { exchange, quotes } of domesticExchanges) {
+    for (const quote of quotes) {
+      const exchangeMarkets = markets.filter(m => m.exchange === exchange && m.quote === quote);
+      
+      for (const market of exchangeMarkets) {
+        const key = `${exchange}:${market.base}:${quote}`;
+        const priceEntry = prices[key];
+        
+        if (!priceEntry) {
+          result.skippedSymbols.push(key);
+          continue;
+        }
+        
+        if (!priceEntry.price || priceEntry.price <= 0 || isNaN(priceEntry.price) || !isFinite(priceEntry.price)) {
+          result.invalidPrices.push(`${key}:${priceEntry.price}`);
+        }
+      }
+    }
+  }
+
+  if (result.invalidPrices.length > 10) {
+    result.isValid = false;
+  }
+
+  return result;
+}
+
+function performHealthCheck(currentCount: number): boolean {
+  if (!lastHealthCheck) {
+    lastHealthCheck = {
+      pricesCount: currentCount,
+      marketsCount: loadExchangeMarkets().length,
+      timestamp: Date.now()
+    };
+    saveHealthCheck();
+    return true;
+  }
+
+  const prevCount = lastHealthCheck.pricesCount;
+  const dropPercent = ((prevCount - currentCount) / prevCount) * 100;
+
+  if (dropPercent > 20) {
+    console.error(`[HealthCheck] ALERT: Price count dropped ${dropPercent.toFixed(1)}% (${prevCount} → ${currentCount})`);
+    return false;
+  }
+
+  lastHealthCheck = {
+    pricesCount: currentCount,
+    marketsCount: loadExchangeMarkets().length,
+    timestamp: Date.now()
+  };
+  saveHealthCheck();
+  return true;
+}
+
+function saveHealthCheck(): void {
+  try {
+    fs.writeFileSync(HEALTH_CHECK_FILE, JSON.stringify(lastHealthCheck, null, 2), 'utf-8');
+  } catch {}
+}
+
+function loadHealthCheck(): void {
+  try {
+    const data = fs.readFileSync(HEALTH_CHECK_FILE, 'utf-8');
+    lastHealthCheck = JSON.parse(data);
+  } catch {
+    lastHealthCheck = null;
+  }
 }
 
 function savePrices(prices: PriceMap): void {
@@ -299,11 +391,30 @@ async function updatePricesOnly(): Promise<void> {
       };
     }
 
+    // 저장 전 검증
+    const validation = validatePricesBeforeSave(currentPrices, allMarkets);
+    
+    if (validation.invalidPrices.length > 0) {
+      console.warn(`[Validate] Invalid prices (${validation.invalidPrices.length}): ${validation.invalidPrices.slice(0, 5).join(', ')}${validation.invalidPrices.length > 5 ? '...' : ''}`);
+    }
+
+    if (!validation.isValid) {
+      console.error('[Validate] BLOCKED: Too many invalid prices, keeping previous data');
+      return;
+    }
+
+    // Health Check
+    const priceCount = Object.keys(currentPrices).length;
+    if (!performHealthCheck(priceCount)) {
+      console.error('[HealthCheck] BLOCKED: Price count dropped significantly, keeping previous data');
+      return;
+    }
+
     savePrices(currentPrices);
     buildPremiumTable();
 
     const elapsed = Date.now() - startTime;
-    console.log(`[Price] Updated in ${elapsed}ms (${Object.keys(currentPrices).length} entries)`);
+    console.log(`[Price] Updated in ${elapsed}ms (${priceCount} entries)`);
   } catch (err: any) {
     console.error('[Price] Update failed:', err.message);
   }
@@ -353,6 +464,9 @@ let isStatsUpdating = false;
 
 export function startPriceWorker(): void {
   console.log('[Worker] Starting price worker (3s) + stats worker (30s)');
+
+  // Load previous health check state
+  loadHealthCheck();
 
   updatePricesOnly();
   updateStatsOnly();
