@@ -20,6 +20,14 @@ interface DropdownOption {
   logo: string;
 }
 
+interface PremiumTableProps {
+  showHeader?: boolean;
+  showFilters?: boolean;
+  limit?: number;
+  refreshInterval?: number;
+  onTradingViewChartClick?: (tvSymbol: string) => void;
+}
+
 function MiniDropdown({
   value,
   options,
@@ -307,18 +315,12 @@ function matchSearch(item: PremiumData, query: string): boolean {
   return false;
 }
 
-export interface PremiumTableProps {
-  showHeader?: boolean;
-  showFilters?: boolean;
-  limit?: number;
-  refreshInterval?: number;
-}
-
 export default function PremiumTable({
   showHeader = true,
   showFilters = true,
   limit = 0,
   refreshInterval = 3000,
+  onTradingViewChartClick,
 }: PremiumTableProps) {
   const [data, setData] = useState<PremiumData[]>([]);
   const [averagePremium, setAveragePremium] = useState(0);
@@ -1162,7 +1164,17 @@ export default function PremiumTable({
                         <td className="px-1 md:px-2 py-1.5 md:py-2 text-center">
                           <button
                             type="button"
-                            onClick={() => toggleChart(row.symbol)}
+                            onClick={() => {
+                              const tvSymbol = getTvSymbolForRow({
+                                symbol: row.symbol,
+                                domesticExchange,
+                                foreignExchange,
+                              });
+                              if (onTradingViewChartClick) {
+                                onTradingViewChartClick(tvSymbol);
+                              }
+                              toggleChart(row.symbol);
+                            }}
                             className="inline-flex items-center justify-center w-6 h-6 rounded hover:bg-slate-700/60 transition-colors text-slate-400 hover:text-slate-200"
                             title="차트 보기"
                           >

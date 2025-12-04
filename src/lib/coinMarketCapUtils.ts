@@ -10,15 +10,16 @@
  * @returns CMC 상세 페이지 URL
  */
 export function getCmcUrl(symbol: string, cmcSlug?: string): string {
-  const base = symbol.split('/')[0].toLowerCase();
+  let url: string;
 
-  // 1순위: cmcSlug 사용
-  // 2순위: 심볼 소문자
-  const slug = cmcSlug && cmcSlug.trim().length > 0 
-    ? cmcSlug.trim() 
-    : base;
+  if (cmcSlug && cmcSlug.trim().length > 0) {
+    url = `https://coinmarketcap.com/ko/currencies/${cmcSlug}/`;
+  } else {
+    const query = encodeURIComponent(symbol.toLowerCase());
+    url = `https://coinmarketcap.com/ko/search/?q=${query}`;
+  }
 
-  return `https://coinmarketcap.com/currencies/${slug}/`;
+  return url;
 }
 
 /**
@@ -27,6 +28,8 @@ export function getCmcUrl(symbol: string, cmcSlug?: string): string {
  * @param cmcSlug - CoinMarketCap slug (선택)
  */
 export function openCmcPage(symbol: string, cmcSlug?: string): void {
-  const url = getCmcUrl(symbol, cmcSlug);
-  window.open(url, '_blank', 'noopener,noreferrer');
+  if (typeof window !== "undefined") {
+    const url = getCmcUrl(symbol, cmcSlug);
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
 }

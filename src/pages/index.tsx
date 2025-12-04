@@ -39,13 +39,28 @@ const PremiumTable = dynamic(
   }
 );
 
+const TradingViewChartDynamic = dynamic(() => import("@/components/charts/TradingViewChart"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[360px] bg-slate-900/50 animate-pulse rounded-xl flex items-center justify-center">
+      <div className="text-slate-400">차트 로딩 중...</div>
+    </div>
+  ),
+});
+
 export default function Home() {
   const [selectedIndicator, setSelectedIndicator] = useState("BINANCE_BTC");
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [mobileCardTab, setMobileCardTab] = useState<"ai" | "pro" | "alerts">("ai");
   const [isPrefsPanelOpen, setIsPrefsPanelOpen] = useState(false);
+  const [premiumTvSymbol, setPremiumTvSymbol] = useState("BINANCE:BTCUSDT");
   const { prefs, setPrefs, isLoaded } = useUserPrefs();
   const { data, averagePremium, fxRate } = useMarkets();
+
+  const handleTradingViewChartClick = (tvSymbol: string) => {
+    setPremiumTvSymbol(tvSymbol);
+    // 스크롤 예정 (향후 구현)
+  };
 
   const listedData = data.filter(item => item.premium !== null);
   
@@ -249,6 +264,11 @@ export default function Home() {
             </div>
           </div>
 
+          {/* 프리미엄 차트 (Binance BTC 기본) */}
+          <div className="mb-4 h-[360px] rounded-lg overflow-hidden border border-slate-700 bg-slate-900/40">
+            <TradingViewChartDynamic tvSymbol={premiumTvSymbol} height={360} />
+          </div>
+
           {/* 차트 섹션 */}
           {(!isLoaded || !prefs.hideChart) && (
             <div className="h-[240px] md:h-auto">
@@ -262,7 +282,7 @@ export default function Home() {
 
           <div className="mt-2 space-y-3">
             {/* 프리미엄 테이블 */}
-            <PremiumTable showHeader={false} showFilters={true} limit={0} refreshInterval={2000} />
+            <PremiumTable showHeader={false} showFilters={true} limit={0} refreshInterval={2000} onTradingViewChartClick={handleTradingViewChartClick} />
           </div>
         </div>
       </HomeLayout>
