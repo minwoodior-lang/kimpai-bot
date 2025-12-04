@@ -62,10 +62,6 @@ externalPort = 5000
 localPort = 44983
 externalPort = 4200
 
-[[ports]]
-localPort = 45647
-externalPort = 8000
-
 [nix]
 channel = "stable-25_05"
 packages = ["lsof"]
