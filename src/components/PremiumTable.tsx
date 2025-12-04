@@ -718,28 +718,28 @@ export default function PremiumTable({
         <>
           {/* PC 레이아웃: 한 줄 정렬 (justify-between) */}
           <div className="hidden md:flex items-center justify-between gap-3 mt-3 mb-2">
-            {/* 왼쪽: 기준/해외 거래소 */}
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-2">
-                <span className="text-xs md:text-sm text-white/60">기준 거래소</span>
-                <MiniDropdown
-                  value={domesticExchange}
-                  options={DOMESTIC_EXCHANGES}
-                  onChange={setDomesticExchange}
-                />
-              </div>
+            {/* 왼쪽: 기준 거래소 */}
+            <div className="flex items-center gap-2">
+              <span className="text-xs md:text-sm text-white/60">기준 거래소</span>
+              <MiniDropdown
+                value={domesticExchange}
+                options={DOMESTIC_EXCHANGES}
+                onChange={setDomesticExchange}
+              />
+            </div>
 
-              <span className="text-white/30 text-xs md:text-sm">↔</span>
+            {/* 중앙: ↔ */}
+            <span className="text-white/30 text-xs md:text-sm">↔</span>
 
-              <div className="flex items-center gap-2">
-                <span className="text-xs md:text-sm text-white/60">해외 거래소</span>
-                <MiniDropdown
-                  value={foreignExchange}
-                  options={FOREIGN_EXCHANGES}
-                  onChange={setForeignExchange}
-                  showShortName={true}
-                />
-              </div>
+            {/* 오른쪽: 드롭다운 + 해외 거래소 */}
+            <div className="flex items-center gap-2">
+              <MiniDropdown
+                value={foreignExchange}
+                options={FOREIGN_EXCHANGES}
+                onChange={setForeignExchange}
+                showShortName={true}
+              />
+              <span className="text-xs md:text-sm text-white/60">해외 거래소</span>
             </div>
 
             {/* 오른쪽: 암호화폐 총 N개 + 검색 */}
@@ -767,7 +767,7 @@ export default function PremiumTable({
           {/* 모바일 레이아웃: 2단 구조 */}
           <div className="flex md:hidden flex-col gap-2 mb-3">
             {/* 거래소 선택 - 1줄 */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <div className="flex items-center gap-2">
                 <span className="text-xs text-white/60">기준 거래소</span>
                 <MiniDropdown
@@ -777,16 +777,16 @@ export default function PremiumTable({
                 />
               </div>
 
-              <span className="text-white/30 text-xs">↔</span>
+              <span className="text-white/30 text-xs mx-1">↔</span>
 
               <div className="flex items-center gap-2">
-                <span className="text-xs text-white/60">해외 거래소</span>
                 <MiniDropdown
                   value={foreignExchange}
                   options={FOREIGN_EXCHANGES}
                   onChange={setForeignExchange}
                   showShortName={true}
                 />
+                <span className="text-xs text-white/60">해외 거래소</span>
               </div>
             </div>
 
@@ -992,7 +992,7 @@ export default function PremiumTable({
 
                       {expandedSymbol === row.symbol && (
                         <tr key={`${row.symbol}-chart`}>
-                          <td colSpan={visibleColumns.length} className="p-0">
+                          <td colSpan={8} className="p-0">
                             <div className="w-full">
                               <div className="h-[360px] w-full overflow-hidden rounded-b-xl bg-[#050819]">
                                 <TradingViewChart
