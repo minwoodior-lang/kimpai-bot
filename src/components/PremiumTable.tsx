@@ -11,7 +11,7 @@ import {
 } from "@/contexts/ExchangeSelectionContext";
 import CoinIcon from "@/components/CoinIcon";
 import PriceCell from "@/components/PriceCell";
-import TwoLineCell from "@/components/TwoLineCell";
+import TwoLinePriceCell from "@/components/TwoLinePriceCell";
 import { openCmcPage } from "@/lib/coinMarketCapUtils";
 
 interface DropdownOption {
@@ -922,10 +922,10 @@ export default function PremiumTable({
                             <CoinIcon symbol={row.symbol} className="w-3.5 h-3.5 md:w-8 md:h-8 flex-shrink-0" iconUrl={row.icon_url} />
                             <div className="flex flex-col flex-1 min-w-0 cursor-pointer"
                               onClick={() => openCmcPage(row.symbol, row.cmcSlug)}>
-                              <span className="truncate text-white font-medium hover:text-blue-400 transition-colors">
+                              <span className="truncate text-sm font-medium text-white hover:text-blue-400 transition-colors">
                                 {getDisplayName(row)}
                               </span>
-                              <span className="truncate text-[#A7B3C6] uppercase tracking-tight text-xs">
+                              <span className="truncate text-xs text-gray-500 uppercase tracking-tight">
                                 {getDisplaySymbol(row.symbol)}
                               </span>
                             </div>
@@ -937,22 +937,21 @@ export default function PremiumTable({
                           return (
                             <>
                               <td className="px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
-                                <div className="flex flex-col items-end leading-tight">
-                                  <span className="text-[11px] md:text-sm font-medium text-white">
-                                    ₩<PriceCell price={row.koreanPrice} />
-                                  </span>
-                                  <span className="text-[9px] md:text-xs text-gray-500">
-                                    {isUnlisted ? "-" : `₩${formatKrwPrice(row.foreignPriceKrw)}`}
-                                  </span>
-                                </div>
+                                <TwoLinePriceCell
+                                  topValue={row.koreanPrice}
+                                  bottomValue={row.foreignPriceKrw}
+                                  topPrefix="₩"
+                                  bottomPrefix="₩"
+                                  isUnlisted={isUnlisted}
+                                />
                               </td>
 
                               <td className="px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
                                 <div className="flex flex-col items-end leading-tight">
-                                  <span className={`text-[11px] md:text-sm font-medium ${isUnlisted ? "text-gray-500" : getPremiumColor(row.premiumRate)}`}>
+                                  <span className={`text-sm font-medium ${isUnlisted ? "text-gray-500" : getPremiumColor(row.premiumRate)}`}>
                                     {isUnlisted ? "-" : `${row.premiumRate >= 0 ? "+" : ""}${Number(row.premiumRate || 0).toFixed(2)}%`}
                                   </span>
-                                  <span className="text-[9px] md:text-xs text-gray-500">
+                                  <span className="text-xs text-gray-500">
                                     {isUnlisted ? "-" : `${row.premiumDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.premiumDiffKrw || 0))}`}
                                   </span>
                                 </div>
@@ -960,32 +959,32 @@ export default function PremiumTable({
 
                               <td className="px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
                                 <div className="flex flex-col items-end leading-tight">
-                                  <span className={`text-[11px] md:text-sm font-medium ${getChangeColor(row.changeRate)}`}>
+                                  <span className={`text-sm font-medium ${getChangeColor(row.changeRate)}`}>
                                     {row.changeRate >= 0 ? "+" : ""}{Number(row.changeRate || 0).toFixed(2)}%
                                   </span>
-                                  <span className="text-[9px] md:text-xs text-gray-500">
+                                  <span className="text-xs text-gray-500">
                                     {row.changeAbsKrw >= 0 ? "+" : ""}₩{formatKrwPrice(Math.abs(row.changeAbsKrw || 0))}
                                   </span>
                                 </div>
                               </td>
 
-                              <td className="hidden md:table-cell px-1 md:px-2 py-1 md:py-1.5 text-right text-xs whitespace-nowrap">
+                              <td className="hidden md:table-cell px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
                                 <div className="flex flex-col items-end leading-tight">
-                                  <span className={`text-[10px] md:text-xs font-medium ${getChangeColor(row.fromHighRate)}`}>
+                                  <span className={`text-sm font-medium ${getChangeColor(row.fromHighRate)}`}>
                                     {row.fromHighRate >= 0 ? "+" : ""}{Number(row.fromHighRate || 0).toFixed(2)}%
                                   </span>
-                                  <span className="text-[9px] md:text-[10px] text-gray-500">
+                                  <span className="text-xs text-gray-500">
                                     {row.highDiffKrw > 0 ? "-" : "+"}₩{formatKrwPrice(Math.abs(row.highDiffKrw || 0))}
                                   </span>
                                 </div>
                               </td>
 
-                              <td className="hidden md:table-cell px-1 md:px-2 py-1 md:py-1.5 text-right text-xs whitespace-nowrap">
+                              <td className="hidden md:table-cell px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
                                 <div className="flex flex-col items-end leading-tight">
-                                  <span className={`text-[10px] md:text-xs font-medium ${getChangeColor(row.fromLowRate)}`}>
+                                  <span className={`text-sm font-medium ${getChangeColor(row.fromLowRate)}`}>
                                     {row.fromLowRate >= 0 ? "+" : ""}{Number(row.fromLowRate || 0).toFixed(2)}%
                                   </span>
-                                  <span className="text-[9px] md:text-[10px] text-gray-500">
+                                  <span className="text-xs text-gray-500">
                                     {row.lowDiffKrw >= 0 ? "+" : ""}₩{formatKrwPrice(Math.abs(row.lowDiffKrw || 0))}
                                   </span>
                                 </div>
@@ -993,10 +992,10 @@ export default function PremiumTable({
 
                               <td className="px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
                                 <div className="flex flex-col items-end leading-tight">
-                                  <span className="text-[11px] md:text-sm font-medium text-slate-100">
+                                  <span className="text-sm font-medium text-slate-100">
                                     {formatVolumeKRW(row.volume24hKrw)}
                                   </span>
-                                  <span className="text-[9px] md:text-xs text-gray-500">
+                                  <span className="text-xs text-gray-500">
                                     {isUnlisted ? "-" : formatVolumeKRW(row.volume24hForeignKrw)}
                                   </span>
                                 </div>
