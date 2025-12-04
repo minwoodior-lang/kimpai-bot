@@ -34,7 +34,12 @@ export async function fetchBithumbPrices(markets: MarketInfo[]): Promise<PriceMa
             const fluctate = parseFloat(item.fluctate_24H) || 0;
             if (prevPrice > 0) {
               price = prevPrice + fluctate;
+              console.log(`[BITHUMB_ZERO_FIX] symbol=${base}, prev=${prevPrice}, fluctate=${fluctate}, fixedPrice=${price}`);
+            } else {
+              console.warn(`[BITHUMB_ZERO_BLOCK] symbol=${base}, reason=prev_closing_price_invalid (${prevPrice})`);
             }
+          } else if (price === 0) {
+            console.warn(`[BITHUMB_ZERO_BLOCK] symbol=${base}, reason=no_prev_closing_price`);
           }
           
           if (price > 0) {

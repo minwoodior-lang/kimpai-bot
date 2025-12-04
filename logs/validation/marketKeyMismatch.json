@@ -1,0 +1,14 @@
+[
+  {
+    "onlyIn": "exchange_markets",
+    "marketKey": "BITHUMB:AHT:BTC"
+  },
+  {
+    "onlyIn": "exchange_markets",
+    "marketKey": "BITHUMB:DICE:BTC"
+  },
+  {
+    "onlyIn": "exchange_markets",
+    "marketKey": "BITHUMB:ENS:BTC"
+  }
+]

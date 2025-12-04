@@ -1,0 +1,14 @@
+{
+  "timestamp": "2025-12-04T18:09:54.120Z",
+  "isValid": true,
+  "stats": {
+    "pricesCount": 4524,
+    "marketsCount": 1513,
+    "premiumRowsCount": 561,
+    "previousPricesCount": 4524,
+    "dropRatio": 0,
+    "coinoneNullNameRatio": 0
+  },
+  "errorCount": 0,
+  "warningCount": 1
+}

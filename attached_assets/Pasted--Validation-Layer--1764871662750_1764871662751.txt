@@ -1,0 +1,129 @@
+[자동 검증 시스템(Validation Layer) 명세 – 수동 처리 항목 자동화]
+
+목표
+- 지금까지 사람이 수동으로 잡아주던 데이터 이상 징후들을
+  “자동 검증 → 자동 차단(or 자동 보정) → 로그 기록” 구조로 바꾸는 것이 목표입니다.
+- validateDataPipeline.ts / priceWorker.ts 구조는 이미 있다면 재사용하고,
+  없다면 아래 요구사항 기준으로 새로 구현해주세요.
+
+========================================
+1. 빗썸 closing_price=0 자동 처리
+========================================
+요구사항:
+1) Bithumb API에서 closing_price가 '0'으로 오는 코인에 대해:
+   - prev_closing_price + fluctate_24H 값으로 현재가를 재계산합니다.
+2) 위 로직이 적용된 코인은 모두 로그에 남겨야 합니다:
+   - [BITHUMB_ZERO_FIX] symbol=RON, prev=..., fluctate=..., fixedPrice=...
+3) 만약 prev_closing_price 또는 fluctate_24H가 null/0/NaN이라 재계산 자체가 불가능하면:
+   - 해당 마켓은 “저장/노출 차단”하고
+   - [BITHUMB_ZERO_BLOCK] symbol=..., reason=... 형태로 로그를 남깁니다.
+
+========================================
+2. 핵심 마켓(UPBIT_KRW/BTC/USDT) 필수 수집 검증
+========================================
+요구사항:
+1) validateDataPipeline.ts 또는 유사한 검증 스크립트에서,
+   다음 마켓들이 모두 존재하는지 확인해야 합니다:
+   - UPBIT:BTC:KRW
+   - UPBIT:BTC:USDT
+   - UPBIT:ETH:KRW
+   - UPBIT:ETH:USDT
+   (추후 필요시 목록 확장 가능하도록 코드 구조화)
+2) 위 핵심 마켓들 중 하나라도 누락되면:
+   - 검증 결과를 “FAILED”로 처리하고
+   - [CORE_MARKET_MISSING] exchange=UPBIT, market=BTC:USDT 형태로 로그 출력
+3) 검증 실패 시:
+   - 새로운 스냅샷을 UI에 반영하지 말고,
+   - 직전 스냅샷(정상 상태)을 유지합니다.
+
+========================================
+3. BTC/USDT 지표 KRW 변환 검증
+========================================
+요구사항:
+1) BTC/USDT, ETH/USDT 등 주요 지표는 반드시 KRW 환산값이 있어야 합니다.
+   - 예: globalPriceKrw, premium 등.
+2) 다음 조건에 해당하면 “이상치”로 간주하고 저장/노출을 차단합니다:
+   - KRW로 변환된 가격이 0 또는 null 또는 NaN 또는 Infinity
+   - 동일 코인의 KRW 마켓(예: UPBIT_KRW vs UPBIT_USDT 환산)의 차이가 50% 이상
+3) 이상치 발생 시:
+   - [INVALID_KRW_CONVERSION] symbol=BTC, detail=... 로그 출력
+   - 해당 마켓은 premiumTable 등에서 제외 (UI 노출 금지)
+
+========================================
+4. 가격 0/null/NaN 데이터 UI 차단
+========================================
+요구사항:
+1) 백엔드(워커) 레벨:
+   - price, premium, change24h 등이 0/null/NaN/Infinity인 행은 스냅샷에 저장하지 않습니다.
+2) 프론트(UI) 레벨:
+   - 혹시라도 잘못 들어온 값이 있다면,
+     렌더링 직전에 한 번 더 필터링합니다.
+   - 값이 0/null/NaN/Infinity인 코인은 리스트에서 제외하거나 “데이터 없음”으로 표시합니다.
+3) 이 규칙에 걸린 데이터는 로그에:
+   - [INVALID_PRICE_ROW] symbol=..., reason=price_is_zero_or_nan
+
+========================================
+5. 비정상 퍼센트/프리미엄 감지
+========================================
+요구사항:
+1) 다음 조건에 해당하면 “비정상 수치”로 판단하고 차단합니다:
+   - premium 또는 change24h가 ±10,000% 이상
+   - premium 또는 change24h가 NaN 또는 Infinity
+2) 해당 코인은 premiumTable에 포함하지 않고,
+   UI에 노출되지 않도록 합니다.
+3) 로그 형식:
+   - [INVALID_PERCENT] symbol=..., premium=..., change24h=...
+
+========================================
+6. 마켓 키 불일치 자동 검사
+========================================
+요구사항:
+1) 다음 세 곳의 key가 모두 일치하는지 검사합니다:
+   - exchange_markets
+   - prices (워커가 만든 가격 데이터)
+   - premiumTable (최종 김프 테이블)
+2) 세 집합 간에 “어느 한쪽에만 존재하는 마켓” 리스트를 뽑아내고,
+   다음처럼 로그를 남깁니다:
+   - [MARKET_KEY_MISMATCH] onlyIn="prices", marketKey="UPBIT:ABC:KRW"
+3) 불일치가 일정 개수(예: 전체의 5% 이상) 넘으면 검증 실패로 처리하고,
+   이번 스냅샷은 UI에 반영하지 않습니다.
+
+========================================
+7. 코인원 name_ko 파싱 실패 감지
+========================================
+요구사항:
+1) 코인원 마켓/심볼 수집 이후,
+   - name_ko가 null/빈 문자열인 비율을 계산합니다.
+2) name_ko null 비율이 5% 이상이면:
+   - [COINONE_NAME_KO_HIGH_NULL_RATE] total=..., nullCount=..., ratio=...
+   - 검증 결과를 FAILED 처리하고, 이번 스냅샷은 UI 반영 금지.
+3) 비율이 낮더라도, name_ko가 null인 심볼 목록은 별도로 로그/파일로 남겨,
+   나중에 수동 보정 가능하도록 해주세요.
+
+========================================
+8. 크론 실행 후 마켓 수 급감 감지
+========================================
+요구사항:
+1) 직전 스냅샷의 마켓 수 vs 이번 스냅샷의 마켓 수를 비교합니다.
+2) 전체 마켓 수가 20% 이상 감소하면:
+   - [MARKET_COUNT_DROP] previous=..., current=..., dropRatio=...
+   - 검증 FAILED 처리 + 직전 스냅샷 유지.
+3) 감소 기준(20%)는 상수로 하드코딩하지 말고,
+   상단에서 CONFIG 형태로 조정 가능하게 만들어주세요.
+
+========================================
+9. 실행 방식 및 로그
+========================================
+1) 검증 스크립트 실행:
+   - npm run validate
+   - 또는 서버 내부에서 cron 작업 후 자동 호출
+     (예: MarketSync → MetaSync → Validate 순서)
+2) 검증 결과:
+   - PASS: [Validate] PASSED (요약 정보 출력)
+   - FAIL: [Validate] FAILED (상세 원인들 함께 출력)
+3) 가능하면 /logs/validation/*.json 형태로
+   - invalidPrices.json
+   - invalidPercent.json
+   - marketKeyMismatch.json
+   - coinoneNameNull.json
+   등을 저장해두면, 나중에 우리가 웹상에서 확인할 수 있도록 활용할 예정입니다.
