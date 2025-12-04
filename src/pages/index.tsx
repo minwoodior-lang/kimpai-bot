@@ -49,13 +49,16 @@ export default function Home() {
   // 필터링 적용 (리스트 필터)
   let filteredData = [...listedData];
   if (isLoaded && prefs.filterMode === "foreign") {
-    // 해외 거래소 보유 자산: BTC, ETH, BNB 등 주요 글로벌 코인만
-    const globalCoins = ["BTC", "ETH", "BNB", "XRP", "SOL", "ADA", "DOGE", "AVAX", "LINK", "MATIC"];
-    filteredData = filteredData.filter(item => 
-      globalCoins.some(coin => item.symbol.includes(coin))
-    );
+    // 해외 거래소에 상장된 코인만 (binancePrice가 있는 경우)
+    filteredData = filteredData.filter(item => item.binancePrice !== null && item.binancePrice > 0);
+  } else if (isLoaded && prefs.filterMode === "favorites") {
+    // 즐겨찾기한 코인만
+    const favoritesSet = new Set(prefs.favorites || []);
+    filteredData = filteredData.filter(item => {
+      const normalizedSymbol = item.symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
+      return favoritesSet.has(normalizedSymbol);
+    });
   }
-  // TODO: favorites 필터 - localStorage 기반 즐겨찾기 추가 필요
   
   const maxPremium = filteredData.length > 0 
     ? filteredData.reduce((max, item) => 
