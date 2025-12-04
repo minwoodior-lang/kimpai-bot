@@ -61,7 +61,7 @@ const ExchangeSelectionContext = createContext<ExchangeSelectionContextType | un
 
 export function ExchangeSelectionProvider({ children }: { children: ReactNode }) {
   const [domesticExchange, setDomesticExchange] = useState("UPBIT_KRW");
-  const [foreignExchange, setForeignExchange] = useState("BINANCE_BTC");
+  const [foreignExchange, setForeignExchange] = useState("BINANCE_USDT");
 
   const getDomesticExchangeInfo = (): DomesticExchange => {
     const found = DOMESTIC_EXCHANGES.find((e) => e.value === domesticExchange);

@@ -37,7 +37,7 @@ const TradingViewChartDynamic = dynamic(() => import("@/components/charts/Tradin
 });
 
 export default function Home() {
-  const [selectedIndicator, setSelectedIndicator] = useState("BINANCE_BTC");
+  const [selectedIndicator, setSelectedIndicator] = useState("BINANCE_USDT");
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [mobileCardTab, setMobileCardTab] = useState<"ai" | "pro" | "alerts">("ai");
   const [isPrefsPanelOpen, setIsPrefsPanelOpen] = useState(false);

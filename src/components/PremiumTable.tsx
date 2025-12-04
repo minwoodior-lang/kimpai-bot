@@ -331,7 +331,7 @@ export default function PremiumTable({
   const [rateLimitRetryAfter, setRateLimitRetryAfter] = useState(0);
   const [consecutiveRateLimits, setConsecutiveRateLimits] = useState(0);
   const [domesticExchange, setDomesticExchange] = useState<string>("UPBIT_KRW");
-  const [foreignExchange, setForeignExchange] = useState<string>("BINANCE_BTC");
+  const [foreignExchange, setForeignExchange] = useState<string>("BINANCE_USDT");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("volume24hKrw");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
