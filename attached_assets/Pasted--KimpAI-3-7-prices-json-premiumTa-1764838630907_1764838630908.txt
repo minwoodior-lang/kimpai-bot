@@ -1,0 +1,211 @@
+📌 KimpAI 실시간 가격 수집 지시서 (전달문)
+
+목표:
+아래 명시된 국내 3거래소 + 해외 7거래소의 지정 마켓만 실시간 수집해서
+prices.json + premiumTable.json으로 홈 화면에 쓰이도록 구현.
+
+1. 수집 대상 거래소 / 마켓 범위 (필수 조건)
+✅ 국내 거래소
+
+업비트 (UPBIT)
+
+KRW 마켓 전부
+
+BTC 마켓 전부
+
+USDT 마켓 전부
+
+빗썸 (BITHUMB)
+
+KRW 마켓 전부
+
+BTC 마켓 전부
+
+USDT 마켓 전부
+
+코인원 (COINONE)
+
+KRW 마켓 전부
+
+(BTC, USDT 마켓은 이번 수집 범위에서 제외)
+
+✅ 해외 거래소
+
+바이낸스 (BINANCE)
+
+BTC 마켓 전체 (예: BTCUSDT, BTCBUSD 등)
+
+USDT 마켓 전체 (심볼USDT 기준)
+
+선물(USDT Perpetual)
+
+예: BTCUSDT (선물), ETHUSDT (선물)
+
+스팟과 구분 위해 별도 exchange 코드 사용 권장
+
+예: BINANCE_FUTURES
+
+OKX
+
+USDT 마켓 전체
+
+BYBIT
+
+USDT 마켓 전체
+
+BITGET
+
+USDT 마켓 전체
+
+GATE
+
+USDT 마켓 전체
+
+HTX
+
+USDT 마켓 전체
+
+MEXC
+
+USDT 마켓 전체
+
+2. 기준: exchange_markets에 있는 마켓만 사용
+
+마켓의 마스터는 이미 구성된 exchange_markets (또는 exchange_markets.json) 로 한다.
+
+위에 적은 범위는 필터 조건이고, 실제로 수집하는 대상은:
+
+exchange ∈ {UPBIT, BITHUMB, COINONE, BINANCE, BINANCE_FUTURES, OKX, BYBIT, BITGET, GATE, HTX, MEXC}
+
+각 거래소별 위에 지정한 quote 기준(KRW/BTC/USDT/선물)에 해당하는 마켓만.
+
+즉,
+
+exchange_markets에 없으면 수집하지 말 것
+
+있더라도 위에 명시하지 않은 quote 쪽이면 수집하지 말 것
+
+3. 워커 구조 (요약)
+
+파일 예시: workers/priceWorker.ts
+
+exchange_markets.json 읽기
+
+위 수집 범위 조건으로 필터링
+
+각 마켓에 대해 거래소별 API 호출 → 가격 가져오기
+
+결과를 prices.json에 저장
+
+prices.json + 환율(USD/KRW)을 이용해 premiumTable.json 생성
+
+3-1. 크론 주기
+
+3초마다 updatePrices() 실행
+
+node-cron 기준: "*/3 * * * * *"
+
+4. 거래소별 호출 규칙 (핵심만)
+
+(이미 구현해둔 코드가 있으면 재사용해도 되고, 여기 규칙만 맞으면 됨)
+
+4-1. 업비트 (UPBIT)
+
+엔드포인트: GET https://api.upbit.com/v1/ticker?markets={MARKETS}
+
+MARKETS 예:
+
+KRW: KRW-BTC,KRW-ETH,...
+
+BTC: BTC-ETH,BTC-XRP,...
+
+USDT: USDT-BTC,USDT-ETH,...
+
+4-2. 빗썸 (BITHUMB)
+
+엔드포인트: GET https://api.bithumb.com/public/ticker/{CURRENCY_PAIR}
+
+예: BTC_KRW, ETH_KRW, BTC_USDT, ETH_BTC 등
+
+KRW/BTC/USDT 마켓 전부 대상 (단, exchange_markets에 있는 것만)
+
+4-3. 코인원 (COINONE)
+
+KRW 마켓만 수집
+
+엔드포인트:
+
+단일 심볼 기준이면: GET https://api.coinone.co.kr/public/v2/ticker_new/{symbol}
+
+or ALL 호출 후 내부 필터 (기존 구현 방식 따르기)
+
+4-4. 바이낸스 Spot (BINANCE)
+
+BTC/USDT 마켓 전체
+
+엔드포인트:
+GET https://api.binance.com/api/v3/ticker/price?symbol={SYMBOL}
+
+예:
+
+BTCUSDT, ETHUSDT, XRPMAXBTC 등
+
+exchange_markets에서 quote가 USDT 또는 BTC인 심볼만 수집
+
+4-5. 바이낸스 Futures (BINANCE_FUTURES)
+
+USDT Perpetual 기준만 사용
+
+엔드포인트 예:
+GET https://fapi.binance.com/fapi/v1/ticker/price?symbol={SYMBOL}
+
+exchange 코드는 스팟과 구분되게 BINANCE_FUTURES로 관리하는 걸 추천
+
+나중에 차트/표시/라벨링 할 때 구별 용이하게
+
+4-6. 나머지 해외 (OKX / BYBIT / BITGET / GATE / HTX / MEXC)
+
+공통 규칙:
+
+USDT 마켓만 수집
+
+엔드포인트는 현재 구현된 코드/공식 문서 기준 사용
+
+exchange_markets에서 quoteCurrency === "USDT"인 마켓만 수집
+
+5. 구현 시 주의사항
+
+필터 먼저, 호출 나중
+
+exchange_markets → 위 조건대로 필터링 →
+필터된 리스트에 대해서만 API 호출 (불필요한 마켓 호출 금지)
+
+제한 속도(rate limit) 고려
+
+가능하면 거래소별로 한 번에 여러 심볼을 요청할 수 있는 엔드포인트 사용
+
+(업비트/바이낸스처럼 markets=, symbols=에 여러 개 넘길 수 있으면 그렇게 묶어 호출)
+
+가격 저장 형식 (예시)
+
+{
+  "UPBIT:BTC:KRW":   { "price": 135000000, "ts": 1733280000000 },
+  "BITHUMB:BTC:KRW": { "price": 134800000, "ts": 1733280000000 },
+  "BINANCE:BTC:USDT": { "price": 91000, "ts": 1733280000000 },
+  "BINANCE_FUTURES:BTC:USDT": { "price": 91100, "ts": 1733280000000 },
+  "OKX:BTC:USDT":    { "price": 90950, "ts": 1733280000000 },
+  ...
+}
+
+
+프리미엄 계산은 기존 로직 그대로 사용
+
+기준 국내: 업비트 KRW → 빗썸 KRW → 코인원 KRW
+
+기준 해외: BINANCE → BINANCE_FUTURES → OKX → BYBIT → BITGET → GATE → HTX → MEXC 순서 (or 우리가 정한 우선순위)
+
+✉️ 한 줄 전달 요약
+
+업비트(KRW/BTC/USDT), 빗썸(KRW/BTC/USDT), 코인원(KRW) + 바이낸스(BTC/USDT/선물), OKX/바이비트/비트겟/게이트/HTX/MEXC(USDT)
+만 exchange_markets 기준으로 필터링해서 3초마다 가격 수집 → prices.json & premiumTable.json 갱신해 주세요.
+그 외 마켓/쿼트는 이번 수집 범위에서 제외입니다.
