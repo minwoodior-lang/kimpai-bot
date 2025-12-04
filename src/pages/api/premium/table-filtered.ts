@@ -91,10 +91,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         const shouldForcePlaceholder = BAD_ICON_SYMBOLS.includes(symbol);
         const iconUrl = shouldForcePlaceholder ? null : baseIconUrl;
 
-        // cmcSlug 생성: master에서 가져오거나, name_en 기반 자동 생성
-        const cmcSlug = master?.cmc_slug 
-          || master?.cmcSlug 
-          || (master?.name_en ? master.name_en.toLowerCase().replace(/\s+/g, "-") : null);
+        // cmcSlug: cmc_slug 필드만 사용, 확실한 값만 넣기
+        const cmcSlug = master?.cmc_slug ?? null;
 
         return {
           symbol,
