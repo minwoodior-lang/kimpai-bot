@@ -48,6 +48,19 @@ app.get('/', (req, res) => {
   res.json({ status: 'proxy-ok', timestamp: new Date().toISOString() });
 });
 
+app.get('/healthz', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    version: 'proxy-24hr-v1-with-5s-cache-stale-fallback',
+    timestamp: new Date().toISOString(),
+    cacheStatus: {
+      priceCacheTTL: PRICE_CACHE_TTL,
+      statsCacheTTL: STATS_CACHE_TTL,
+      staleCacheTTL: STALE_CACHE_TTL
+    }
+  });
+});
+
 app.get('/binance/api/v3/ticker/price', async (req, res) => {
   try {
     const { symbol } = req.query;
