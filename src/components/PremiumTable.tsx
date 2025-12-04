@@ -12,6 +12,7 @@ import {
 import CoinIcon from "@/components/CoinIcon";
 import PriceCell from "@/components/PriceCell";
 import TwoLinePriceCell from "@/components/TwoLinePriceCell";
+import TwoLineCell from "@/components/TwoLineCell";
 import { openCmcPage } from "@/lib/coinMarketCapUtils";
 
 interface DropdownOption {
@@ -947,58 +948,45 @@ export default function PremiumTable({
                               </td>
 
                               <td className="px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
-                                <div className="flex flex-col items-end leading-tight">
-                                  <span className={`text-sm font-medium ${isUnlisted ? "text-gray-500" : getPremiumColor(row.premiumRate)}`}>
-                                    {isUnlisted ? "-" : `${row.premiumRate >= 0 ? "+" : ""}${Number(row.premiumRate || 0).toFixed(2)}%`}
-                                  </span>
-                                  <span className="text-xs text-gray-500">
-                                    {isUnlisted ? "-" : `${row.premiumDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.premiumDiffKrw || 0))}`}
-                                  </span>
-                                </div>
+                                <TwoLineCell
+                                  line1={isUnlisted ? "-" : `${row.premiumRate >= 0 ? "+" : ""}${Number(row.premiumRate || 0).toFixed(2)}%`}
+                                  line2={`${row.premiumDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.premiumDiffKrw || 0))}`}
+                                  line1Color={isUnlisted ? "text-gray-500" : getPremiumColor(row.premiumRate)}
+                                  isUnlisted={isUnlisted}
+                                />
                               </td>
 
                               <td className="px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
-                                <div className="flex flex-col items-end leading-tight">
-                                  <span className={`text-sm font-medium ${getChangeColor(row.changeRate)}`}>
-                                    {row.changeRate >= 0 ? "+" : ""}{Number(row.changeRate || 0).toFixed(2)}%
-                                  </span>
-                                  <span className="text-xs text-gray-500">
-                                    {row.changeAbsKrw >= 0 ? "+" : ""}₩{formatKrwPrice(Math.abs(row.changeAbsKrw || 0))}
-                                  </span>
-                                </div>
+                                <TwoLineCell
+                                  line1={`${row.changeRate >= 0 ? "+" : ""}${Number(row.changeRate || 0).toFixed(2)}%`}
+                                  line2={`${row.changeAbsKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.changeAbsKrw || 0))}`}
+                                  line1Color={getChangeColor(row.changeRate)}
+                                />
                               </td>
 
                               <td className="hidden md:table-cell px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
-                                <div className="flex flex-col items-end leading-tight">
-                                  <span className={`text-sm font-medium ${getChangeColor(row.fromHighRate)}`}>
-                                    {row.fromHighRate >= 0 ? "+" : ""}{Number(row.fromHighRate || 0).toFixed(2)}%
-                                  </span>
-                                  <span className="text-xs text-gray-500">
-                                    {row.highDiffKrw > 0 ? "-" : "+"}₩{formatKrwPrice(Math.abs(row.highDiffKrw || 0))}
-                                  </span>
-                                </div>
+                                <TwoLineCell
+                                  line1={`${row.fromHighRate >= 0 ? "+" : ""}${Number(row.fromHighRate || 0).toFixed(2)}%`}
+                                  line2={`${row.highDiffKrw > 0 ? "-" : "+"}₩${formatKrwPrice(Math.abs(row.highDiffKrw || 0))}`}
+                                  line1Color={getChangeColor(row.fromHighRate)}
+                                />
                               </td>
 
                               <td className="hidden md:table-cell px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
-                                <div className="flex flex-col items-end leading-tight">
-                                  <span className={`text-sm font-medium ${getChangeColor(row.fromLowRate)}`}>
-                                    {row.fromLowRate >= 0 ? "+" : ""}{Number(row.fromLowRate || 0).toFixed(2)}%
-                                  </span>
-                                  <span className="text-xs text-gray-500">
-                                    {row.lowDiffKrw >= 0 ? "+" : ""}₩{formatKrwPrice(Math.abs(row.lowDiffKrw || 0))}
-                                  </span>
-                                </div>
+                                <TwoLineCell
+                                  line1={`${row.fromLowRate >= 0 ? "+" : ""}${Number(row.fromLowRate || 0).toFixed(2)}%`}
+                                  line2={`${row.lowDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.lowDiffKrw || 0))}`}
+                                  line1Color={getChangeColor(row.fromLowRate)}
+                                />
                               </td>
 
                               <td className="px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
-                                <div className="flex flex-col items-end leading-tight">
-                                  <span className="text-sm font-medium text-slate-100">
-                                    {formatVolumeKRW(row.volume24hKrw)}
-                                  </span>
-                                  <span className="text-xs text-gray-500">
-                                    {isUnlisted ? "-" : formatVolumeKRW(row.volume24hForeignKrw)}
-                                  </span>
-                                </div>
+                                <TwoLineCell
+                                  line1={formatVolumeKRW(row.volume24hKrw)}
+                                  line2={formatVolumeKRW(row.volume24hForeignKrw)}
+                                  line1Color="text-slate-100"
+                                  isUnlisted={isUnlisted}
+                                />
                               </td>
                             </>
                           );

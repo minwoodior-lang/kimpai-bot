@@ -10,20 +10,26 @@ interface TwoLineCellProps {
   line1Suffix?: string;
   line2Suffix?: string;
   align?: "left" | "center" | "right";
+  isUnlisted?: boolean;
 }
 
 export default function TwoLineCell({
   line1,
   line2,
   line1Color = "text-white",
-  line2Color = "text-slate-400",
+  line2Color = "text-gray-500",
   line1Prefix = "",
   line2Prefix = "",
   line1Suffix = "",
   line2Suffix = "",
   align = "right",
+  isUnlisted = false,
 }: TwoLineCellProps) {
-  const alignClass = align === "left" ? "text-left" : align === "center" ? "text-center" : "text-right";
+  const alignClass = align === "left" 
+    ? "items-start" 
+    : align === "center" 
+    ? "items-center" 
+    : "items-end";
 
   const formatValue = (val: string | number | null): string => {
     if (val === null || val === undefined) return "-";
@@ -33,11 +39,11 @@ export default function TwoLineCell({
 
   return (
     <div className={`flex flex-col leading-tight ${alignClass}`}>
-      <span className={`text-[11px] md:text-sm ${line1Color}`}>
+      <span className={`text-sm font-medium whitespace-nowrap ${line1Color}`}>
         {line1Prefix}{formatValue(line1)}{line1Suffix}
       </span>
-      <span className={`text-[9px] md:text-xs ${line2Color}`}>
-        {line2Prefix}{formatValue(line2)}{line2Suffix}
+      <span className={`text-xs whitespace-nowrap ${line2Color}`}>
+        {isUnlisted ? "-" : `${line2Prefix}${formatValue(line2)}${line2Suffix}`}
       </span>
     </div>
   );

@@ -1,0 +1,99 @@
+🔧 레플릿 개발자에게 그대로 보내는 전달문 (완전 정리본)
+📌 PremiumTable 숫자 셀과 코인 셀에 새 컴포넌트가 적용되지 않았습니다.
+
+현재 DOM을 확인한 결과:
+
+TwoLineCell, TwoLinePriceCell이 전혀 렌더링되지 않음
+
+기존 span 구조 그대로 유지됨
+
+따라서
+○ 가격 깜빡임 애니메이션 미작동
+○ 폰트 크기 통일 미적용
+○ 해외 하단 값 회색 스타일 미적용
+○ 상·하단 정렬 규칙 미적용
+
+모든 문제는 새 컴포넌트가 PremiumTable.tsx에 실제 반영되지 않은 것이 원인입니다.
+
+📌 요청사항
+1) PremiumTable.tsx에서 기존 span 기반 렌더링 제거 후 아래처럼 교체해 주세요.
+현재 형태(문제 있음)
+<span className="text-sm font-medium text-white">{koreanPrice}</span>
+<span className="text-xs text-gray-500">{foreignPriceKrw}</span>
+
+변경해야 하는 형태
+<TwoLinePriceCell
+    topValue={koreanPrice}
+    bottomValue={foreignPriceKrw}
+    flashKey={symbol} // 가격 변경 감지용
+/>
+
+2) 김프·전일대비·고가대비·저가대비·거래액도 모두 TwoLineCell로 교체
+
+예:
+
+<TwoLineCell
+    topValue={premiumRate}
+    bottomValue={premiumDiffKrw}
+    type="premium"
+/>
+
+3) TwoLinePriceCell 깜빡임 애니메이션이 실제 DOM에 들어오도록 className 연결 필수
+<div className={clsx("flex flex-col items-end leading-tight", flashClass)}>
+
+🔥 매우 중요한 체크리스트 (레플릿이 반드시 확인해야 함)
+항목	현재 상태	해결책
+TwoLinePriceCell 렌더링	❌ 미적용	PremiumTable.tsx에서 직접 교체
+price-flash-up/down 클래스	❌ DOM에 없음	TwoLinePriceCell 적용해야 생김
+숫자 폰트 크기 통일	❌ 미적용	컴포넌트 적용 후 자동 통일
+해외 하단 회색 처리	❌ 미적용	TwoLineCell에 이미 구현됨🔧 레플릿 개발자에게 그대로 보내는 전달문 (완전 정리본)
+📌 PremiumTable 숫자 셀과 코인 셀에 새 컴포넌트가 적용되지 않았습니다.
+
+현재 DOM을 확인한 결과:
+
+TwoLineCell, TwoLinePriceCell이 전혀 렌더링되지 않음
+
+기존 span 구조 그대로 유지됨
+
+따라서
+○ 가격 깜빡임 애니메이션 미작동
+○ 폰트 크기 통일 미적용
+○ 해외 하단 값 회색 스타일 미적용
+○ 상·하단 정렬 규칙 미적용
+
+모든 문제는 새 컴포넌트가 PremiumTable.tsx에 실제 반영되지 않은 것이 원인입니다.
+
+📌 요청사항
+1) PremiumTable.tsx에서 기존 span 기반 렌더링 제거 후 아래처럼 교체해 주세요.
+현재 형태(문제 있음)
+<span className="text-sm font-medium text-white">{koreanPrice}</span>
+<span className="text-xs text-gray-500">{foreignPriceKrw}</span>
+
+변경해야 하는 형태
+<TwoLinePriceCell
+    topValue={koreanPrice}
+    bottomValue={foreignPriceKrw}
+    flashKey={symbol} // 가격 변경 감지용
+/>
+
+2) 김프·전일대비·고가대비·저가대비·거래액도 모두 TwoLineCell로 교체
+
+예:
+
+<TwoLineCell
+    topValue={premiumRate}
+    bottomValue={premiumDiffKrw}
+    type="premium"
+/>
+
+3) TwoLinePriceCell 깜빡임 애니메이션이 실제 DOM에 들어오도록 className 연결 필수
+<div className={clsx("flex flex-col items-end leading-tight", flashClass)}>
+
+🔥 매우 중요한 체크리스트 (레플릿이 반드시 확인해야 함)
+항목	현재 상태	해결책
+TwoLinePriceCell 렌더링	❌ 미적용	PremiumTable.tsx에서 직접 교체
+price-flash-up/down 클래스	❌ DOM에 없음	TwoLinePriceCell 적용해야 생김
+숫자 폰트 크기 통일	❌ 미적용	컴포넌트 적용 후 자동 통일
+해외 하단 회색 처리	❌ 미적용	TwoLineCell에 이미 구현됨
+국내·해외 현재가 깜빡임	❌ 둘 다 미작동	flashKey props 필요
+국내·해외 현재가 깜빡임	❌ 둘 다 미작동	flashKey props 필요
