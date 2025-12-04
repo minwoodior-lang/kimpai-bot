@@ -34,15 +34,15 @@ export function TodayPremiumSection({
           <span className={`${compact ? 'text-[9px] sm:text-xs' : 'text-sm md:text-[15px]'} font-semibold dark:text-slate-100 light:text-slate-900`}>{avgPremium}</span>
         </div>
         <div className="flex justify-between">
-          <span className={`${compact ? 'text-[9px] sm:text-[10px]' : 'text-[11px] md:text-[13px]'} dark:text-white/60 light:text-slate-600`}>최소 김프</span>
+          <span className={`${compact ? 'text-[9px] sm:text-[10px]' : 'text-[11px] md:text-[14px]'} dark:text-white/60 light:text-slate-600`}>최소 김프</span>
           <span className={`${compact ? 'text-[9px] sm:text-xs' : 'text-sm md:text-[15px]'} font-semibold dark:text-slate-100 light:text-slate-900`}>{minPremium}</span>
         </div>
         <div className="flex justify-between">
-          <span className={`${compact ? 'text-[9px] sm:text-[10px]' : 'text-[11px] md:text-[13px]'} dark:text-white/60 light:text-slate-600`}>최대 김프</span>
+          <span className={`${compact ? 'text-[9px] sm:text-[10px]' : 'text-[11px] md:text-[14px]'} dark:text-white/60 light:text-slate-600`}>최대 김프</span>
           <span className={`${compact ? 'text-[9px] sm:text-xs' : 'text-sm md:text-[15px]'} font-semibold dark:text-slate-100 light:text-slate-900`}>{maxPremium}</span>
         </div>
         <div className="flex justify-between">
-          <span className={`${compact ? 'text-[9px] sm:text-[10px]' : 'text-[11px] md:text-[13px]'} dark:text-white/60 light:text-slate-600`}>환율</span>
+          <span className={`${compact ? 'text-[9px] sm:text-[10px]' : 'text-[11px] md:text-[14px]'} dark:text-white/60 light:text-slate-600`}>환율</span>
           <span className={`${compact ? 'text-[9px] sm:text-xs' : 'text-sm md:text-[15px]'} font-semibold dark:text-slate-100 light:text-slate-900`}>{fxRate}</span>
         </div>
       </div>

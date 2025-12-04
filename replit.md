@@ -3,6 +3,18 @@
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. The project's core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. It handles real-time price collection, premium calculation, and global market metrics, aiming to offer a comprehensive view of the crypto market with a focus on the Korean premium.
 
+### Recent Changes (v3.4.7 - 2024-12-04) - 최종 UI 정교화
+- **프리미엄 차트 상단 드롭다운 정렬 완성**:
+  - MiniDropdown: px-2 py-1.5 → px-3 h-[34px] 통일 + my-auto로 아이콘/텍스트 baseline 정렬
+  - 검색창 높이: 모든 input에 h-[34px] 적용 (PC/모바일 동일)
+  - 결과: 드롭다운과 검색창 높이 완벽 일치
+- **코인셀 리스트 테이블 컬럼 너비 고정**:
+  - 현재가: w-[140px], 김프: w-[90px], 전일대비: w-[100px], 저가대비: w-[100px], 거래액: w-[120px]
+  - 모든 td: py-2.5 → py-3 통일
+  - 결과: 테이블 컬럼 정렬 안정화, 우측 치우침 해소
+- **푸터 간격 개선**: section.mb-3 → mb-20 (하단 여백 확대)
+- **AI 요약 라벨 크기**: md:text-xs → md:text-[14px] (최소/최대/환율)
+
 ### Recent Changes (v3.4.6 - 2024-12-04)
 - **타이포그래피 & 레이아웃 최종 정리**:
   - 오늘의 김프 요약 라벨: text-[11px] md:text-[13px] (라벨 폰트 크기 증가)
@@ -34,6 +46,13 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
   - **모바일**: `flex md:hidden flex-col gap-2`
     - 거래소 선택 (1줄)
     - 검색창 & 개수 (2줄)
+
+### Latest Refinements Completed ✅
+1. ✅ **드롭다운 정렬**: h-[34px] px-3 + my-auto baseline (PC UI 정교화)
+2. ✅ **검색창 높이**: h-[34px] 통일 (드롭다운과 완벽 맞춤)
+3. ✅ **테이블 컬럼 너비**: 고정 width 적용 (현재가/김프/전일대비/저가대비/거래액)
+4. ✅ **푸터 간격**: mb-20으로 확대 (breathing space 확보)
+5. ✅ **AI 요약 텍스트**: md:text-[14px]로 확대 (라벨 가독성)
 
 ### Known Issues
 - **Missing coin icons**: MET2, GAME2, FCT2 (low-priority UI issue)
