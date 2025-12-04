@@ -1,15 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { NextApiRequest, NextApiResponse } from "next";
-
-function loadPremiumTable(): any[] {
-  try {
-    const file = path.join(process.cwd(), "data", "premiumTable.json");
-    return JSON.parse(fs.readFileSync(file, "utf-8"));
-  } catch {
-    return [];
-  }
-}
+import { BAD_ICON_SYMBOLS } from "@/config/badIconSymbols";
 
 function loadExchangeMarkets(): any[] {
   try {
@@ -29,54 +21,100 @@ function loadMasterSymbols(): any[] {
   }
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+function loadPremiumTable(): any[] {
   try {
-    const premiumTable = loadPremiumTable();
-    const exchangeMarkets = loadExchangeMarkets();
+    const file = path.join(process.cwd(), "data", "premiumTable.json");
+    return JSON.parse(fs.readFileSync(file, "utf-8"));
+  } catch {
+    return [];
+  }
+}
+
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    const { domestic = "UPBIT_KRW", foreign = "BINANCE_BTC" } = req.query;
+
+    const domesticParts = (domestic as string).split("_");
+    const domesticExchange = domesticParts[0];
+    const domesticQuote = domesticParts.slice(1).join("_");
+
+    const foreignParts = (foreign as string).split("_");
+    const foreignExchange = foreignParts[0];
+    const foreignQuote = foreignParts.slice(1).join("_");
+
+    const allMarkets = loadExchangeMarkets();
     const masterSymbols = loadMasterSymbols();
+    const premiumTable = loadPremiumTable();
 
-    const results: any[] = [];
+    const filtered = allMarkets
+      .filter((m) => {
+        const matchExchange = m.exchange === domesticExchange;
+        const matchQuote = m.quote === domesticQuote;
+        return matchExchange && matchQuote;
+      })
+      .map((market) => {
+        const symbol = market.base.toUpperCase();
+        const master = masterSymbols.find(
+          (s) => s.base_symbol === symbol || s.symbol === symbol
+        );
+        const premiumRow = premiumTable.find((p: any) => p.symbol === symbol);
 
-    for (const row of premiumTable) {
-      const symbol = row.symbol;
-      const baseSymbol = symbol.includes("/") ? symbol.split("/")[0] : symbol;
+        const shouldForcePlaceholder = BAD_ICON_SYMBOLS.includes(symbol);
+        const baseIconUrl = master?.icon_path || null;
+        const iconUrl = shouldForcePlaceholder ? null : baseIconUrl;
 
-      // master_symbols 매칭 (base_symbol 기반)
-      const master = masterSymbols.find((m: any) => m.base_symbol === baseSymbol || m.symbol === baseSymbol);
+        // cmcSlug 우선순위
+        const cmcSlug =
+          premiumRow?.cmcSlug || market?.cmcSlug || master?.cmc_slug || null;
 
-      // exchange_markets 매칭
-      const market = exchangeMarkets.find((m: any) => m.base === baseSymbol);
+        return {
+          symbol,
+          name_ko: market.name_ko || master?.name_ko || market.base,
+          name_en: market.name_en || master?.name_en || market.base,
+          market: market.market,
+          exchange: market.exchange,
+          quote: market.quote,
+          domesticExchange: market.exchange,
+          foreignExchange: foreignExchange,
+          koreanPrice: market.koreanPrice || 1,
+          globalPrice: market.globalPrice || 1,
+          globalPriceKrw: market.globalPriceKrw || 1,
+          premium: market.premium || 0,
+          volume24hKrw: market.volume24hKrw || 0,
+          volume24hUsdt: market.volume24hUsdt || 0,
+          volume24hForeignKrw: market.volume24hForeignKrw || 0,
+          change24h: market.change24h || 0,
+          isListed: true,
+          icon_url: iconUrl,
+          displayName: market.name_ko || market.name_en || market.base,
+          cmcSlug: cmcSlug,
+        };
+      })
+      .sort((a, b) => (b.volume24hKrw || 0) - (a.volume24hKrw || 0));
 
-      // cmcSlug 우선순위 (어디에 있어도 무조건 잡히도록 설정)
-      const cmcSlug =
-        row.cmcSlug ||           // premiumTable.json (최상위 우선)
-        market?.cmcSlug ||       // exchange_markets.json
-        master?.cmc_slug ||      // master_symbols.cmc_slug
-        null;                    // 없으면 null → 프론트는 /search?q= 처리
-
-      // cmcSlug를 반드시 응답에 포함해야 프론트가 정상 작동합니다.
-      results.push({
-        symbol: row.symbol,
-        koreanName: row.koreanName || row.name_ko,
-        domesticPrice: row.koreanPrice,
-        globalPrice: row.globalPrice,
-        premium: row.premium,
-        domesticExchange: row.domesticExchange,
-        foreignExchange: row.foreignExchange,
-        volume24hKrw: row.volume24hKrw,
-        volume24hUsdt: row.volume24hUsdt,
-        change24h: row.change24h,
-        cmcSlug: cmcSlug,     // ← 핵심! 반드시 포함해야 함
-      });
-    }
-
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
-      data: results,
-      count: results.length,
+      data: filtered,
+      averagePremium: filtered.length
+        ? filtered.reduce((sum, r) => sum + (r.premium || 0), 0) / filtered.length
+        : 0,
+      fxRate: 1330,
+      updatedAt: new Date().toISOString(),
+      domesticExchange,
+      foreignExchange,
+      totalCoins: filtered.length,
+      listedCoins: filtered.length,
     });
   } catch (err) {
-    console.error("TABLE FILTER ERROR:", err);
-    res.status(500).json({ success: false, error: "Internal server error" });
+    console.error("[API] /premium/table-filtered error:", err);
+    return res.status(500).json({
+      success: false,
+      data: [],
+      averagePremium: 0,
+      fxRate: 1330,
+      updatedAt: new Date().toISOString(),
+      totalCoins: 0,
+      listedCoins: 0,
+    });
   }
 }
