@@ -6,13 +6,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 캐시 (2초 TTL)
-const CACHE_TTL = 2000;
+const PRICE_CACHE_TTL = 2000;
+const STATS_CACHE_TTL = 30000;
 const cache = new Map();
 
-function getCached(key) {
+function getCached(key, ttl = PRICE_CACHE_TTL) {
   const item = cache.get(key);
-  if (item && Date.now() - item.ts < CACHE_TTL) {
+  if (item && Date.now() - item.ts < ttl) {
     return item.data;
   }
   return null;
@@ -22,18 +22,16 @@ function setCache(key, data) {
   cache.set(key, { data, ts: Date.now() });
 }
 
-// 1) 헬스체크
 app.get('/', (req, res) => {
   res.json({ status: 'proxy-ok', timestamp: new Date().toISOString() });
 });
 
-// 2) Binance 프록시 - 전체 리스트 호출 후 symbol 필터링
 app.get('/binance/api/v3/ticker/price', async (req, res) => {
   try {
     const { symbol } = req.query;
     const cacheKey = 'binance_spot_all';
 
-    let data = getCached(cacheKey);
+    let data = getCached(cacheKey, PRICE_CACHE_TTL);
 
     if (!data) {
       const response = await axios.get('https://api.binance.com/api/v3/ticker/price', {
@@ -52,18 +50,17 @@ app.get('/binance/api/v3/ticker/price', async (req, res) => {
     }
     return res.json(data);
   } catch (error) {
-    console.error('Binance proxy error:', error?.response?.data || error.message);
+    console.error('Binance spot proxy error:', error?.response?.data || error.message);
     res.status(500).json({ error: 'Binance proxy failed' });
   }
 });
 
-// Binance Futures 프록시
 app.get('/binance/fapi/v1/ticker/price', async (req, res) => {
   try {
     const { symbol } = req.query;
     const cacheKey = 'binance_futures_all';
 
-    let data = getCached(cacheKey);
+    let data = getCached(cacheKey, PRICE_CACHE_TTL);
 
     if (!data) {
       const response = await axios.get('https://fapi.binance.com/fapi/v1/ticker/price', {
@@ -87,15 +84,15 @@ app.get('/binance/fapi/v1/ticker/price', async (req, res) => {
   }
 });
 
-// Binance 24hr Stats 프록시
 app.get('/binance/api/v3/ticker/24hr', async (req, res) => {
   try {
     const { symbol } = req.query;
     const cacheKey = 'binance_spot_24hr';
 
-    let data = getCached(cacheKey);
+    let data = getCached(cacheKey, STATS_CACHE_TTL);
 
     if (!data) {
+      console.log('[24hr] Fetching fresh data from Binance...');
       const response = await axios.get('https://api.binance.com/api/v3/ticker/24hr', {
         timeout: 15000,
         headers: {
@@ -104,6 +101,7 @@ app.get('/binance/api/v3/ticker/24hr', async (req, res) => {
       });
       data = response.data;
       setCache(cacheKey, data);
+      console.log(`[24hr] Cached ${data.length} tickers for 30s`);
     }
 
     if (symbol) {
@@ -117,16 +115,14 @@ app.get('/binance/api/v3/ticker/24hr', async (req, res) => {
   }
 });
 
-// 3) Bybit 프록시 - category만 외부 API에 전달, symbol은 프록시에서 필터링
 app.get('/bybit/v5/market/tickers', async (req, res) => {
   try {
     const { category = 'spot', symbol } = req.query;
     const cacheKey = `bybit_${category}_all`;
 
-    let data = getCached(cacheKey);
+    let data = getCached(cacheKey, PRICE_CACHE_TTL);
 
     if (!data) {
-      // 외부 API에는 symbol 없이 category만 전달
       const response = await axios.get('https://api.bybit.com/v5/market/tickers', {
         params: { category },
         timeout: 10000,
@@ -159,4 +155,5 @@ app.get('/bybit/v5/market/tickers', async (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`KimpAI Proxy Server running on port ${PORT}`);
+  console.log(`Price cache TTL: ${PRICE_CACHE_TTL}ms, Stats cache TTL: ${STATS_CACHE_TTL}ms`);
 });
