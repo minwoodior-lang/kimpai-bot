@@ -199,6 +199,24 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       ? premiumsWithValues.reduce((sum, r) => sum + (r.premium ?? 0), 0) / premiumsWithValues.length
       : 0;
 
+    // totalCoins는 국내 거래소에 상장된 고유 심볼 수로 고정 (해외 거래소 선택과 무관)
+    // 빗썸의 경우 KRW + BTC 마켓 모두 포함
+    const domesticMarkets = allMarkets.filter((m) => {
+      if (m.exchange !== domesticExchange) return false;
+      // 빗썸: KRW + BTC 마켓 모두 포함
+      if (domesticExchange === 'BITHUMB') {
+        return m.quote === 'KRW' || m.quote === 'BTC';
+      }
+      // 업비트: KRW + BTC + USDT 마켓 모두 포함
+      if (domesticExchange === 'UPBIT') {
+        return m.quote === 'KRW' || m.quote === 'BTC' || m.quote === 'USDT';
+      }
+      // 코인원: KRW 마켓만
+      return m.quote === 'KRW';
+    });
+    const domesticUniqueSymbols = new Set(domesticMarkets.map(m => m.base.toUpperCase()));
+    const totalCryptoCount = domesticUniqueSymbols.size;
+
     return res.status(200).json({
       success: true,
       data: filtered,
@@ -207,7 +225,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       updatedAt: new Date().toISOString(),
       domesticExchange,
       foreignExchange,
-      totalCoins: filtered.length,
+      totalCoins: totalCryptoCount,
       listedCoins: filtered.filter(r => r.isListed).length,
     });
   } catch (err) {

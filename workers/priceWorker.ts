@@ -233,7 +233,8 @@ function getGlobalPrice(symbol: string): number | null {
 function getGlobalMarkets(): MarketInfo[] {
   const allMarkets = loadExchangeMarkets();
   const upbitMarkets = filterMarkets(allMarkets, 'UPBIT', ['KRW', 'BTC', 'USDT']);
-  const bithumbMarkets = filterMarkets(allMarkets, 'BITHUMB', ['KRW', 'BTC', 'USDT']);
+  // 빗썸은 KRW/BTC 마켓만 존재 (USDT 마켓 없음)
+  const bithumbMarkets = filterMarkets(allMarkets, 'BITHUMB', ['KRW', 'BTC']);
   const coinoneMarkets = filterMarkets(allMarkets, 'COINONE', ['KRW']);
 
   const globalBases = new Set([...upbitMarkets, ...bithumbMarkets, ...coinoneMarkets].map(m => m.base.toUpperCase()));
@@ -253,7 +254,8 @@ async function updatePricesOnly(): Promise<void> {
   await updateGlobalUsdtKrw();
 
   const upbitMarkets = filterMarkets(allMarkets, 'UPBIT', ['KRW', 'BTC', 'USDT']);
-  const bithumbMarkets = filterMarkets(allMarkets, 'BITHUMB', ['KRW', 'BTC', 'USDT']);
+  // 빗썸은 KRW/BTC 마켓만 존재 (USDT 마켓 없음)
+  const bithumbMarkets = filterMarkets(allMarkets, 'BITHUMB', ['KRW', 'BTC']);
   const coinoneMarkets = filterMarkets(allMarkets, 'COINONE', ['KRW']);
   const globalMarkets = getGlobalMarkets();
 
@@ -309,7 +311,8 @@ async function updatePricesOnly(): Promise<void> {
 async function updateStatsOnly(): Promise<void> {
   const startTime = Date.now();
   const allMarkets = loadExchangeMarkets();
-  const bithumbMarkets = filterMarkets(allMarkets, 'BITHUMB', ['KRW', 'BTC', 'USDT']);
+  // 빗썸은 KRW/BTC 마켓만 존재 (USDT 마켓 없음)
+  const bithumbMarkets = filterMarkets(allMarkets, 'BITHUMB', ['KRW', 'BTC']);
   const coinoneMarkets = filterMarkets(allMarkets, 'COINONE', ['KRW']);
   const globalMarkets = getGlobalMarkets();
 
