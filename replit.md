@@ -1,7 +1,15 @@
-# KimpAI v3.3.3 - Kimchi Premium Analytics Dashboard
+# KimpAI v3.4.0 - Kimchi Premium Analytics Dashboard
 
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. The project's core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. It handles real-time price collection, premium calculation, and global market metrics, aiming to offer a comprehensive view of the crypto market with a focus on the Korean premium.
+
+### Recent Changes (v3.4.0 - 2024-12-04)
+- **Favorites Feature Complete**: Full implementation of coin favorites/watchlist functionality
+  - `useUserPrefs.ts`: Added `favorites[]` array, `toggleFavorite()`, `isFavorite()` functions
+  - `PremiumTable.tsx`: Star (★) toggle button with localStorage persistence, favorites-first sorting
+  - `UserPrefsPanel.tsx`: Shows favorite count, warning message when filter is empty
+  - Filter modes: "all" | "foreign" | "favorites" - all working with search/sort combinations
+- **localStorage Persistence**: Favorites survive page refresh, cross-tab compatible
 
 ### User Preferences
 - I want iterative development.

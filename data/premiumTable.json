@@ -9,19 +9,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "elixir",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "BOA",
     "name_ko": "보아",
     "name_en": "BOSagora",
-    "koreanPrice": 4.463,
+    "koreanPrice": 4.46,
     "globalPrice": 0.001536,
-    "premium": 97.16,
+    "premium": 97.03,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "bosagora",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "EGL1",
@@ -33,7 +33,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "egl1",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "ZKL",
@@ -45,7 +45,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "zklink",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "SPA",
@@ -57,7 +57,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "sperax",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "MONPRO",
@@ -69,7 +69,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "mon-protocol",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "BLY",
@@ -81,7 +81,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "blocery",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "EVERY",
@@ -93,31 +93,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "everyworld",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "IOST",
     "name_ko": "이오스트",
     "name_en": "IOST",
     "koreanPrice": 3.03,
-    "globalPrice": 0.001844,
-    "premium": 11.5,
+    "globalPrice": 0.001845,
+    "premium": 11.44,
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/IOST.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "CLOUD",
     "name_ko": "생텀",
     "name_en": "Sanctum",
     "koreanPrice": 143.9,
-    "globalPrice": 0.0877,
-    "premium": 11.34,
+    "globalPrice": 0.08768,
+    "premium": 11.36,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "cloud",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "DELABS",
@@ -129,19 +129,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "delabs-games",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "PRIME",
     "name_ko": "에셜론 프라임",
     "name_en": "Echelon Prime",
     "koreanPrice": 1790,
-    "globalPrice": 1.119,
-    "premium": 8.54,
+    "globalPrice": 1.118,
+    "premium": 8.64,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "echelon-prime",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "EGLD",
@@ -153,7 +153,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/EGLD.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "PIB",
@@ -165,7 +165,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "pibble",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "SCA",
@@ -177,7 +177,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "scallop",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "K",
+    "name_ko": "사이드킥",
+    "name_en": "Sidekick",
+    "koreanPrice": 11.14,
+    "globalPrice": 0.00707,
+    "premium": 6.92,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "sidekick",
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "NAVX",
@@ -189,19 +201,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "navi-protocol",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "K",
-    "name_ko": "사이드킥",
-    "name_en": "Sidekick",
-    "koreanPrice": 11.14,
-    "globalPrice": 0.00709,
-    "premium": 6.61,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "sidekick",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "IOTA",
@@ -213,43 +213,67 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/IOTA.png",
     "cmcSlug": "iota",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "ONG",
     "name_ko": "온톨로지가스",
     "name_en": "Ontology Gas",
     "koreanPrice": 144,
-    "globalPrice": 0.0921,
-    "premium": 6.09,
+    "globalPrice": 0.092,
+    "premium": 6.21,
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ONG.png",
     "cmcSlug": "ontology-gas",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "CKB",
     "name_ko": "너보스",
     "name_en": "Nervos Network",
     "koreanPrice": 4.04,
-    "globalPrice": 0.002605,
-    "premium": 5.23,
+    "globalPrice": 0.002601,
+    "premium": 5.4,
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/CKB.png",
     "cmcSlug": "nervos-network",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "PRCL",
+    "name_ko": "파클",
+    "name_en": "Parcl",
+    "koreanPrice": 41.46,
+    "globalPrice": 0.02674,
+    "premium": 5.21,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "parcl",
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "CRTS",
+    "name_ko": "크라토스",
+    "name_en": "Cratos",
+    "koreanPrice": 0.1398,
+    "globalPrice": 0.00009032,
+    "premium": 5.03,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "cratos",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "LQTY",
     "name_ko": "리퀴티",
     "name_en": "Liquity",
     "koreanPrice": 736,
-    "globalPrice": 0.475,
-    "premium": 5.14,
+    "globalPrice": 0.476,
+    "premium": 4.92,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "liquity",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "CRU",
@@ -261,19 +285,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "crust-network",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "PRCL",
-    "name_ko": "파클",
-    "name_en": "Parcl",
-    "koreanPrice": 41.46,
-    "globalPrice": 0.02683,
-    "premium": 4.85,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "parcl",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "GM",
@@ -285,19 +297,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "gomble",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "EVER",
-    "name_ko": "에버스케일",
-    "name_en": "Everscale",
-    "koreanPrice": 13.95,
-    "globalPrice": 0.009033,
-    "premium": 4.79,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "everscale",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "XCN",
@@ -309,19 +309,43 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "onyx",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "EVER",
+    "name_ko": "에버스케일",
+    "name_en": "Everscale",
+    "koreanPrice": 13.95,
+    "globalPrice": 0.009043,
+    "premium": 4.67,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "everscale",
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "GHUB",
+    "name_ko": "젬허브",
+    "name_en": "GemHUB",
+    "koreanPrice": 21.7,
+    "globalPrice": 0.01409,
+    "premium": 4.5,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "gemhub",
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "TNSR",
     "name_ko": "텐서",
     "name_en": "Tensor",
     "koreanPrice": 182.4,
-    "globalPrice": 0.1184,
-    "premium": 4.53,
+    "globalPrice": 0.1185,
+    "premium": 4.44,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "tensor",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "BAND",
@@ -333,31 +357,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "VET",
     "name_ko": "비체인",
     "name_en": "VeChain",
     "koreanPrice": 20.3,
-    "globalPrice": 0.01321,
-    "premium": 4.27,
+    "globalPrice": 0.0132,
+    "premium": 4.35,
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/VET.png",
     "cmcSlug": "vechain",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "GHUB",
-    "name_ko": "젬허브",
-    "name_en": "GemHUB",
-    "koreanPrice": 21.7,
-    "globalPrice": 0.01413,
-    "premium": 4.21,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "gemhub",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "LM",
@@ -369,7 +381,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "leisuremeta",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "YALA",
@@ -381,7 +393,43 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "yala",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "TT",
+    "name_ko": "썬더코어",
+    "name_en": "ThunderCore",
+    "koreanPrice": 1.79,
+    "globalPrice": 0.00117,
+    "premium": 3.81,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/TT.png",
+    "cmcSlug": "thundercore",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "H",
+    "name_ko": "휴머니티 프로토콜",
+    "name_en": "Humanity Protocol",
+    "koreanPrice": 118,
+    "globalPrice": 0.07716,
+    "premium": 3.77,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "humanity-protocol",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "A",
+    "name_ko": "볼타",
+    "name_en": "Vaulta",
+    "koreanPrice": 292,
+    "globalPrice": 0.191,
+    "premium": 3.74,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/A.png",
+    "cmcSlug": "vaulta",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "DKA",
@@ -393,31 +441,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/DKA.png",
     "cmcSlug": "dkargo",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "H",
-    "name_ko": "휴머니티 프로토콜",
-    "name_en": "Humanity Protocol",
-    "koreanPrice": 118,
-    "globalPrice": 0.07719,
-    "premium": 3.73,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "humanity-protocol",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "A",
-    "name_ko": "볼타",
-    "name_en": "Vaulta",
-    "koreanPrice": 292,
-    "globalPrice": 0.1912,
-    "premium": 3.63,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/A.png",
-    "cmcSlug": "vaulta",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "MED",
@@ -429,55 +453,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/MED.png",
     "cmcSlug": "medibloc",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ZKJ",
     "name_ko": "폴리헤데라 네트워크",
     "name_en": "Polyhedra Network",
     "koreanPrice": 72.4,
-    "globalPrice": 0.04756,
-    "premium": 3.29,
+    "globalPrice": 0.04755,
+    "premium": 3.32,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "polyhedra-network",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "CRTS",
-    "name_ko": "크라토스",
-    "name_en": "Cratos",
-    "koreanPrice": 0.1398,
-    "globalPrice": 0.00009185,
-    "premium": 3.28,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "cratos",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "HUNT",
-    "name_ko": "헌트",
-    "name_en": "Hunt Town",
-    "koreanPrice": 217,
-    "globalPrice": 0.1426,
-    "premium": 3.26,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/HUNT.png",
-    "cmcSlug": "hunt",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "BOBA",
-    "name_ko": "보바토큰",
-    "name_en": "Boba Network",
-    "koreanPrice": 97.5,
-    "globalPrice": 0.06407,
-    "premium": 3.26,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "boba-network",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "FRAG",
@@ -489,7 +477,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "fragmetric",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "BOBA",
+    "name_ko": "보바토큰",
+    "name_en": "Boba Network",
+    "koreanPrice": 97,
+    "globalPrice": 0.0638,
+    "premium": 3.16,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "boba-network",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "NEON",
@@ -501,7 +501,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "neon",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "WAXP",
@@ -513,7 +513,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/WAXP.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "WAXL",
@@ -525,7 +525,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "axelar",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "EL",
@@ -537,7 +537,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "elysia",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ADP",
@@ -549,7 +549,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "TWT",
+    "name_ko": "트러스트 월렛 토큰",
+    "name_en": "Trust Wallet Token",
+    "koreanPrice": 1575,
+    "globalPrice": 1.0408,
+    "premium": 2.68,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "POLYX",
@@ -561,19 +573,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/POLYX.png",
     "cmcSlug": "polymesh",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "TWT",
-    "name_ko": "트러스트 월렛 토큰",
-    "name_en": "Trust Wallet Token",
-    "koreanPrice": 1575,
-    "globalPrice": 1.0411,
-    "premium": 2.65,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": null,
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "SWAP",
@@ -585,7 +585,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "trustswap",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "OSMO",
+    "name_ko": "오스모시스",
+    "name_en": "Osmosis",
+    "koreanPrice": 110,
+    "globalPrice": 0.0728,
+    "premium": 2.53,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "osmosis",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "DBR",
@@ -597,19 +609,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "debridge",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "SXP",
-    "name_ko": "솔라",
-    "name_en": "Solar",
-    "koreanPrice": 103,
-    "globalPrice": 0.0683,
-    "premium": 2.33,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/SXP.png",
-    "cmcSlug": "sxp",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "AIOZ",
@@ -621,7 +621,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "aioz-network",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ID",
@@ -633,7 +633,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ID.png",
     "cmcSlug": "space-id",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "KAVA",
+    "name_ko": "카바",
+    "name_en": "Kava",
+    "koreanPrice": 176,
+    "globalPrice": 0.1168,
+    "premium": 2.25,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/KAVA.png",
+    "cmcSlug": "kava",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "UOS",
@@ -645,7 +657,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "ultra",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "CFG",
@@ -657,91 +669,79 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "centrifuge",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
-    "symbol": "WNCG",
-    "name_ko": "랩트 나인 크로니클 골드",
-    "name_en": "Wrapped NCG",
-    "koreanPrice": 12.15,
-    "globalPrice": 0.008066,
+    "symbol": "ZRC",
+    "name_ko": "저킷",
+    "name_en": "Zircuit",
+    "koreanPrice": 10.62,
+    "globalPrice": 0.00705,
     "premium": 2.21,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "wrapped-ncg",
-    "updatedAt": 1764873709482
+    "cmcSlug": "zircuit",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "BLAST",
+    "name_ko": "블라스트",
+    "name_en": "Blast",
+    "koreanPrice": 1.36,
+    "globalPrice": 0.000903,
+    "premium": 2.2,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/BLAST.png",
+    "cmcSlug": "blast",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "CHR",
+    "name_ko": "크로미아",
+    "name_en": "Chromia",
+    "koreanPrice": 81,
+    "globalPrice": 0.0538,
+    "premium": 2.16,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/CHR.png",
+    "cmcSlug": "chromia",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "DIA",
     "name_ko": "디아",
     "name_en": "DIA",
     "koreanPrice": 509,
-    "globalPrice": 0.338,
-    "premium": 2.18,
+    "globalPrice": 0.3381,
+    "premium": 2.15,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "dia",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
-    "symbol": "KAVA",
-    "name_ko": "카바",
-    "name_en": "Kava",
-    "koreanPrice": 176,
-    "globalPrice": 0.1169,
-    "premium": 2.16,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/KAVA.png",
-    "cmcSlug": "kava",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "VTHO",
-    "name_ko": "비토르 토큰",
-    "name_en": "VeThor Token",
-    "koreanPrice": 1.48,
-    "globalPrice": 0.000983,
-    "premium": 2.16,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/VTHO.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "YGG",
-    "name_ko": "일드길드게임즈",
-    "name_en": "Yield Guild Games",
-    "koreanPrice": 115,
-    "globalPrice": 0.0764,
+    "symbol": "SAND",
+    "name_ko": "샌드박스",
+    "name_en": "The Sandbox",
+    "koreanPrice": 227,
+    "globalPrice": 0.1508,
     "premium": 2.14,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/YGG.png",
-    "cmcSlug": "yield-guild-games",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/SAND.png",
+    "cmcSlug": "the-sandbox",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "NEIRO",
     "name_ko": "네이로",
     "name_en": "Neiro",
     "koreanPrice": 0.2104,
-    "globalPrice": 0.00013979,
-    "premium": 2.13,
+    "globalPrice": 0.00013977,
+    "premium": 2.14,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "neiro",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "RECALL",
-    "name_ko": "리콜",
-    "name_en": "Recall",
-    "koreanPrice": 191,
-    "globalPrice": 0.1269,
-    "premium": 2.13,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "IO",
@@ -753,31 +753,67 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/IO.png",
     "cmcSlug": "io-net",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "OSMO",
-    "name_ko": "오스모시스",
-    "name_en": "Osmosis",
-    "koreanPrice": 110,
-    "globalPrice": 0.0731,
+    "symbol": "FIS",
+    "name_ko": "스타파이",
+    "name_en": "Stafi",
+    "koreanPrice": 62,
+    "globalPrice": 0.0412,
     "premium": 2.11,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "osmosis",
-    "updatedAt": 1764873709481
+    "cmcSlug": "stafi",
+    "updatedAt": 1764873759898
   },
   {
-    "symbol": "ZRC",
-    "name_ko": "저킷",
-    "name_en": "Zircuit",
-    "koreanPrice": 10.62,
-    "globalPrice": 0.00706,
-    "premium": 2.07,
+    "symbol": "SKYAI",
+    "name_ko": "스카이에이아이",
+    "name_en": "SkyAI",
+    "koreanPrice": 39.33,
+    "globalPrice": 0.02614,
+    "premium": 2.09,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "zircuit",
-    "updatedAt": 1764873709482
+    "cmcSlug": "skyai",
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "AEVO",
+    "name_ko": "에이보",
+    "name_en": "Aevo",
+    "koreanPrice": 67.25,
+    "globalPrice": 0.0447,
+    "premium": 2.09,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "aevo",
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "FLOCK",
+    "name_ko": "플록",
+    "name_en": "FLock.io",
+    "koreanPrice": 190,
+    "globalPrice": 0.1263,
+    "premium": 2.08,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/FLOCK.png",
+    "cmcSlug": "flock-io",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "VANA",
+    "name_ko": "바나",
+    "name_en": "Vana",
+    "koreanPrice": 4442,
+    "globalPrice": 2.953,
+    "premium": 2.07,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/VANA.png",
+    "cmcSlug": "vana",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "LWA",
@@ -789,19 +825,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/LWA.png",
     "cmcSlug": "lumiwave",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "PUFFER",
-    "name_ko": "퍼퍼",
-    "name_en": "Puffer",
-    "koreanPrice": 104,
-    "globalPrice": 0.06915,
-    "premium": 2.05,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/PUFFER.png",
-    "cmcSlug": "puffer",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "NEWT",
@@ -813,31 +837,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/NEWT.png",
     "cmcSlug": "newton-protocol",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "FLOCK",
-    "name_ko": "플록",
-    "name_en": "FLock.io",
-    "koreanPrice": 190,
-    "globalPrice": 0.1264,
+    "symbol": "YGG",
+    "name_ko": "일드길드게임즈",
+    "name_en": "Yield Guild Games",
+    "koreanPrice": 115,
+    "globalPrice": 0.0765,
     "premium": 2,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/FLOCK.png",
-    "cmcSlug": "flock-io",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "VANA",
-    "name_ko": "바나",
-    "name_en": "Vana",
-    "koreanPrice": 4442,
-    "globalPrice": 2.955,
-    "premium": 2,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/VANA.png",
-    "cmcSlug": "vana",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/YGG.png",
+    "cmcSlug": "yield-guild-games",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ARIAIP",
@@ -849,7 +861,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "aria-protocol",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "MINA",
@@ -861,7 +873,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/MINA.png",
     "cmcSlug": "mina",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "POKT",
@@ -873,19 +885,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/POKT.png",
     "cmcSlug": "pocket-network",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "CHR",
-    "name_ko": "크로미아",
-    "name_en": "Chromia",
-    "koreanPrice": 81,
-    "globalPrice": 0.0539,
-    "premium": 1.97,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/CHR.png",
-    "cmcSlug": "chromia",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "AQT",
@@ -897,19 +897,67 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/AQT.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "SAND",
-    "name_ko": "샌드박스",
-    "name_en": "The Sandbox",
-    "koreanPrice": 227,
-    "globalPrice": 0.1511,
+    "symbol": "B3",
+    "name_ko": "비쓰리",
+    "name_en": "B3",
+    "koreanPrice": 1.6,
+    "globalPrice": 0.001065,
     "premium": 1.94,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/SAND.png",
-    "cmcSlug": "the-sandbox",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/B3.png",
+    "cmcSlug": "b3",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "DYDX",
+    "name_ko": "디와이디엑스",
+    "name_en": "dYdX",
+    "koreanPrice": 355,
+    "globalPrice": 0.2363,
+    "premium": 1.94,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "dydx",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "PUFFER",
+    "name_ko": "퍼퍼",
+    "name_en": "Puffer",
+    "koreanPrice": 104,
+    "globalPrice": 0.06924,
+    "premium": 1.92,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/PUFFER.png",
+    "cmcSlug": "puffer",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "HOOK",
+    "name_ko": "훅트 프로토콜",
+    "name_en": "Hooked Protocol",
+    "koreanPrice": 64.14,
+    "globalPrice": 0.0427,
+    "premium": 1.92,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "hooked-protocol",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "RECALL",
+    "name_ko": "리콜",
+    "name_en": "Recall",
+    "koreanPrice": 190,
+    "globalPrice": 0.1265,
+    "premium": 1.92,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ANKR",
@@ -921,7 +969,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ANKR.png",
     "cmcSlug": "ankr-network",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "POPCAT",
@@ -933,91 +981,55 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "popcat",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "BONK",
+    "name_ko": "봉크",
+    "name_en": "Bonk",
+    "koreanPrice": 0.0147,
+    "globalPrice": 0.00000979,
+    "premium": 1.89,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/BONK.png",
+    "cmcSlug": "bonk",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "MAGIC",
+    "name_ko": "매직",
+    "name_en": "Magic",
+    "koreanPrice": 154,
+    "globalPrice": 0.1026,
+    "premium": 1.85,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/MAGIC.png",
+    "cmcSlug": "magic",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "DRIFT",
     "name_ko": "드리프트",
     "name_en": "Drift",
     "koreanPrice": 350,
-    "globalPrice": 0.2331,
-    "premium": 1.88,
+    "globalPrice": 0.2332,
+    "premium": 1.84,
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/DRIFT.png",
     "cmcSlug": "drift",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "CORE",
-    "name_ko": "코어",
-    "name_en": "Core",
-    "koreanPrice": 189,
-    "globalPrice": 0.1259,
-    "premium": 1.86,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "core",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "CVX",
-    "name_ko": "컨벡스 파이낸스",
-    "name_en": "Convex Finance",
-    "koreanPrice": 2774,
-    "globalPrice": 1.848,
-    "premium": 1.86,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "convex-finance",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "FIS",
-    "name_ko": "스타파이",
-    "name_en": "Stafi",
-    "koreanPrice": 62,
-    "globalPrice": 0.0413,
-    "premium": 1.86,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "stafi",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "AEVO",
-    "name_ko": "에이보",
-    "name_en": "Aevo",
-    "koreanPrice": 67.25,
-    "globalPrice": 0.0448,
-    "premium": 1.86,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "aevo",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "MORPHO",
-    "name_ko": "모포",
-    "name_en": "Morpho",
-    "koreanPrice": 2157,
-    "globalPrice": 1.437,
-    "premium": 1.85,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "morpho",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "TIA",
-    "name_ko": "셀레스티아",
-    "name_en": "Celestia",
-    "koreanPrice": 953,
-    "globalPrice": 0.635,
+    "symbol": "ZIL",
+    "name_ko": "질리카",
+    "name_en": "Zilliqa",
+    "koreanPrice": 8.12,
+    "globalPrice": 0.00541,
     "premium": 1.84,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/TIA.png",
-    "cmcSlug": "celestia",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/ZIL.png",
+    "cmcSlug": "zilliqa",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "FIDA",
@@ -1029,19 +1041,43 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "bonfida",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "DYDX",
-    "name_ko": "디와이디엑스",
-    "name_en": "dYdX",
-    "koreanPrice": 355,
-    "globalPrice": 0.2366,
-    "premium": 1.81,
+    "symbol": "TAVA",
+    "name_ko": "알타바",
+    "name_en": "ALTAVA",
+    "koreanPrice": 9.095,
+    "globalPrice": 0.00606,
+    "premium": 1.84,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "dydx",
-    "updatedAt": 1764873709481
+    "cmcSlug": "altava",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "WCT",
+    "name_ko": "월렛커넥트",
+    "name_en": "WalletConnect",
+    "koreanPrice": 143,
+    "globalPrice": 0.0953,
+    "premium": 1.82,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/WCT.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "CVX",
+    "name_ko": "컨벡스 파이낸스",
+    "name_en": "Convex Finance",
+    "koreanPrice": 2774,
+    "globalPrice": 1.849,
+    "premium": 1.8,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "convex-finance",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "HOT",
@@ -1053,19 +1089,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "holo",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "BONK",
-    "name_ko": "봉크",
-    "name_en": "Bonk",
-    "koreanPrice": 0.0147,
-    "globalPrice": 0.0000098,
-    "premium": 1.78,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/BONK.png",
-    "cmcSlug": "bonk",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "LINEA",
@@ -1077,7 +1101,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/LINEA.png",
     "cmcSlug": "linea",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "ASTER",
+    "name_ko": "아스터",
+    "name_en": "Aster",
+    "koreanPrice": 1578,
+    "globalPrice": 1.052,
+    "premium": 1.78,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "aster",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "COOKIE",
@@ -1089,7 +1125,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "cookie",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "CORE",
+    "name_ko": "코어",
+    "name_en": "Core",
+    "koreanPrice": 189,
+    "globalPrice": 0.126,
+    "premium": 1.78,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "core",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "MORPHO",
+    "name_ko": "모포",
+    "name_en": "Morpho",
+    "koreanPrice": 2157,
+    "globalPrice": 1.438,
+    "premium": 1.78,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "morpho",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "S",
@@ -1101,7 +1161,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "sonic",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "WIF",
@@ -1113,7 +1173,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "dogwifhat",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "XAI",
@@ -1125,151 +1185,139 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "xai",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "B3",
-    "name_ko": "비쓰리",
-    "name_en": "B3",
-    "koreanPrice": 1.6,
-    "globalPrice": 0.001067,
-    "premium": 1.75,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/B3.png",
-    "cmcSlug": "b3",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "MAGIC",
-    "name_ko": "매직",
-    "name_en": "Magic",
-    "koreanPrice": 154,
-    "globalPrice": 0.1027,
-    "premium": 1.75,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/MAGIC.png",
-    "cmcSlug": "magic",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "DEEP",
-    "name_ko": "딥북",
-    "name_en": "DeepBook",
-    "koreanPrice": 61.3,
-    "globalPrice": 0.04089,
-    "premium": 1.72,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/DEEP.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "CROSS",
     "name_ko": "크로쓰",
     "name_en": "CROSS",
     "koreanPrice": 177.5,
-    "globalPrice": 0.1184,
-    "premium": 1.72,
+    "globalPrice": 0.11833,
+    "premium": 1.78,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "cross",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
-    "symbol": "WCT",
-    "name_ko": "월렛커넥트",
-    "name_en": "WalletConnect",
-    "koreanPrice": 143,
-    "globalPrice": 0.0954,
-    "premium": 1.71,
+    "symbol": "2Z",
+    "name_ko": "더블제로",
+    "name_en": "DoubleZero",
+    "koreanPrice": 195,
+    "globalPrice": 0.13001,
+    "premium": 1.77,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/WCT.png",
+    "iconUrl": "/icons/UPBIT/2Z.png",
+    "cmcSlug": "doublezero",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "DEEP",
+    "name_ko": "딥북",
+    "name_en": "DeepBook",
+    "koreanPrice": 61.3,
+    "globalPrice": 0.04088,
+    "premium": 1.75,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/DEEP.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "ACH",
-    "name_ko": "알케미페이",
-    "name_en": "Alchemy Pay",
-    "koreanPrice": 13.91,
-    "globalPrice": 0.00928,
-    "premium": 1.71,
+    "symbol": "VTHO",
+    "name_ko": "비토르 토큰",
+    "name_en": "VeThor Token",
+    "koreanPrice": 1.48,
+    "globalPrice": 0.000987,
+    "premium": 1.75,
     "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "alchemy-pay",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/VTHO.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "ICP",
-    "name_ko": "인터넷 컴퓨터",
-    "name_en": "Internet Computer",
-    "koreanPrice": 5535,
-    "globalPrice": 3.693,
-    "premium": 1.7,
+    "symbol": "PYTH",
+    "name_ko": "피스 네트워크",
+    "name_en": "Pyth Network",
+    "koreanPrice": 109,
+    "globalPrice": 0.0727,
+    "premium": 1.74,
     "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "internet-computer",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/PYTH.png",
+    "cmcSlug": "pyth-network",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ALICE",
     "name_ko": "마이네이버앨리스",
     "name_en": "MyNeighborAlice",
     "koreanPrice": 351,
-    "globalPrice": 0.2342,
-    "premium": 1.69,
+    "globalPrice": 0.2341,
+    "premium": 1.74,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "myneighboralice",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "ASTER",
-    "name_ko": "아스터",
-    "name_en": "Aster",
-    "koreanPrice": 1578,
-    "globalPrice": 1.053,
-    "premium": 1.69,
+    "symbol": "MEW",
+    "name_ko": "캣인어독스월드",
+    "name_en": "cat in a dogs world",
+    "koreanPrice": 1.73,
+    "globalPrice": 0.001154,
+    "premium": 1.72,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/MEW.png",
+    "cmcSlug": "cat-in-a-dogs-world",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "ORDER",
+    "name_ko": "오덜리 네트워크",
+    "name_en": "Orderly Network",
+    "koreanPrice": 170,
+    "globalPrice": 0.11341,
+    "premium": 1.71,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/ORDER.png",
+    "cmcSlug": "orderly-network",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "SOMI",
+    "name_ko": "솜니아",
+    "name_en": "Somnia",
+    "koreanPrice": 377,
+    "globalPrice": 0.2515,
+    "premium": 1.71,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/SOMI.png",
+    "cmcSlug": "somnia",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "AVL",
+    "name_ko": "아발론",
+    "name_en": "Avalon",
+    "koreanPrice": 225,
+    "globalPrice": 0.1501,
+    "premium": 1.71,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "aster",
-    "updatedAt": 1764873709481
+    "cmcSlug": "avalon",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "GRND",
-    "name_ko": "슈퍼워크",
-    "name_en": "Superwalk",
-    "koreanPrice": 43.58,
-    "globalPrice": 0.02908,
+    "symbol": "TOSHI",
+    "name_ko": "토시",
+    "name_en": "Toshi",
+    "koreanPrice": 0.611,
+    "globalPrice": 0.0004077,
     "premium": 1.69,
     "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "superwalk",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "AUDIO",
-    "name_ko": "오디우스",
-    "name_en": "Audius",
-    "koreanPrice": 50.5,
-    "globalPrice": 0.0337,
-    "premium": 1.68,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/AUDIO.png",
-    "cmcSlug": "audius",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "PROM",
-    "name_ko": "프롬",
-    "name_en": "Prom",
-    "koreanPrice": 13500,
-    "globalPrice": 9.01,
-    "premium": 1.67,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/PROM.png",
-    "cmcSlug": "prom",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/TOSHI.png",
+    "cmcSlug": "toshi",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ZETA",
@@ -1281,31 +1329,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ZETA.png",
     "cmcSlug": "zetachain",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "BLUE",
-    "name_ko": "블루핀",
-    "name_en": "Bluefin",
-    "koreanPrice": 65.78,
-    "globalPrice": 0.0439,
-    "premium": 1.67,
+    "symbol": "PROM",
+    "name_ko": "프롬",
+    "name_en": "Prom",
+    "koreanPrice": 13500,
+    "globalPrice": 9.011,
+    "premium": 1.66,
     "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "bluefin",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "TAVA",
-    "name_ko": "알타바",
-    "name_en": "ALTAVA",
-    "koreanPrice": 9.095,
-    "globalPrice": 0.00607,
-    "premium": 1.67,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "altava",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/PROM.png",
+    "cmcSlug": "prom",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "TAIKO",
@@ -1317,7 +1353,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/TAIKO.png",
     "cmcSlug": "taiko",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "WOO",
@@ -1329,7 +1365,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "MBX",
@@ -1341,7 +1377,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "marblex",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ARKM",
@@ -1353,7 +1389,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ARKM.png",
     "cmcSlug": "arkham",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "CRO",
@@ -1365,19 +1401,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/CRO.png",
     "cmcSlug": "cronos",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "2Z",
-    "name_ko": "더블제로",
-    "name_en": "DoubleZero",
-    "koreanPrice": 195,
-    "globalPrice": 0.13019,
-    "premium": 1.63,
+    "symbol": "RED",
+    "name_ko": "레드스톤",
+    "name_en": "RedStone",
+    "koreanPrice": 423,
+    "globalPrice": 0.2824,
+    "premium": 1.64,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/2Z.png",
-    "cmcSlug": "doublezero",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/RED.png",
+    "cmcSlug": "redstone",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "SHELL",
@@ -1389,7 +1425,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/SHELL.png",
     "cmcSlug": "myshell",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "SHIB",
@@ -1401,43 +1437,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/SHIB.png",
     "cmcSlug": "shiba-inu",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "SOMI",
-    "name_ko": "솜니아",
-    "name_en": "Somnia",
-    "koreanPrice": 377,
-    "globalPrice": 0.2517,
-    "premium": 1.63,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/SOMI.png",
-    "cmcSlug": "somnia",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "MOCA",
-    "name_ko": "모카네트워크",
-    "name_en": "Moca Network",
-    "koreanPrice": 34.7,
-    "globalPrice": 0.02317,
-    "premium": 1.62,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/MOCA.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "TOSHI",
-    "name_ko": "토시",
-    "name_en": "Toshi",
-    "koreanPrice": 0.611,
-    "globalPrice": 0.000408,
-    "premium": 1.62,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/TOSHI.png",
-    "cmcSlug": "toshi",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "MLK",
@@ -1449,7 +1449,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/MLK.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "GHX",
@@ -1461,7 +1461,67 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "gamer",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "ACH",
+    "name_ko": "알케미페이",
+    "name_en": "Alchemy Pay",
+    "koreanPrice": 13.91,
+    "globalPrice": 0.00929,
+    "premium": 1.6,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "alchemy-pay",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "CELR",
+    "name_ko": "셀러네트워크",
+    "name_en": "Celer Network",
+    "koreanPrice": 6.136,
+    "globalPrice": 0.004098,
+    "premium": 1.6,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "celer-network",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "PARTI",
+    "name_ko": "파티클 네트워크",
+    "name_en": "Particle Network",
+    "koreanPrice": 181,
+    "globalPrice": 0.1209,
+    "premium": 1.59,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "particle-network",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "PCI",
+    "name_ko": "페이코인",
+    "name_en": "Paycoin",
+    "koreanPrice": 97.35,
+    "globalPrice": 0.06502,
+    "premium": 1.59,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "MAVIA",
+    "name_ko": "히어로즈오브마비아",
+    "name_en": "Heroes of Mavia",
+    "koreanPrice": 85.65,
+    "globalPrice": 0.05721,
+    "premium": 1.59,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "heroes-of-mavia",
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "ALT",
@@ -1473,7 +1533,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ALT.png",
     "cmcSlug": "altlayer",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "KITE",
@@ -1485,19 +1545,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/KITE.png",
     "cmcSlug": "kite",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "AVL",
-    "name_ko": "아발론",
-    "name_en": "Avalon",
-    "koreanPrice": 225,
-    "globalPrice": 0.1503,
+    "symbol": "MOCA",
+    "name_ko": "모카네트워크",
+    "name_en": "Moca Network",
+    "koreanPrice": 34.7,
+    "globalPrice": 0.02318,
     "premium": 1.58,
     "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "avalon",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/MOCA.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "RUNE",
@@ -1509,7 +1569,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "thorchain",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "RSR",
+    "name_ko": "리저브라이트",
+    "name_en": "Reserve Rights",
+    "koreanPrice": 5.2,
+    "globalPrice": 0.003474,
+    "premium": 1.57,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/RSR.png",
+    "cmcSlug": "reserve-rights",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "WLD",
@@ -1521,7 +1593,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/WLD.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "CATI",
+    "name_ko": "캣티즌",
+    "name_en": "Catizen",
+    "koreanPrice": 94.9,
+    "globalPrice": 0.0634,
+    "premium": 1.57,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "catizen",
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "HYPER",
@@ -1533,7 +1617,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/HYPER.png",
     "cmcSlug": "hyperlane",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "XEC",
+    "name_ko": "이캐시",
+    "name_en": "eCash",
+    "koreanPrice": 0.0182,
+    "globalPrice": 0.00001216,
+    "premium": 1.56,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/XEC.png",
+    "cmcSlug": "ecash",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "JOE",
@@ -1545,7 +1641,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "joe",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "MANA",
+    "name_ko": "디센트럴랜드",
+    "name_en": "Decentraland",
+    "koreanPrice": 236,
+    "globalPrice": 0.1577,
+    "premium": 1.55,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/MANA.png",
+    "cmcSlug": "decentraland",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ORCA",
@@ -1557,67 +1665,91 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ORCA.png",
     "cmcSlug": "orca",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "PENGU",
-    "name_ko": "펏지 펭귄",
-    "name_en": "Pudgy Penguins",
-    "koreanPrice": 17.9,
-    "globalPrice": 0.01196,
+    "symbol": "DVI",
+    "name_ko": "디비전",
+    "name_en": "Dvision Network",
+    "koreanPrice": 1.968,
+    "globalPrice": 0.001315,
     "premium": 1.55,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/PENGU.png",
-    "cmcSlug": "pudgy-penguins",
-    "updatedAt": 1764873709481
+    "iconUrl": null,
+    "cmcSlug": "dvision-network",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "CELR",
-    "name_ko": "셀러네트워크",
-    "name_en": "Celer Network",
-    "koreanPrice": 6.136,
-    "globalPrice": 0.004101,
-    "premium": 1.53,
+    "symbol": "HEI",
+    "name_ko": "헤이마",
+    "name_en": "Heima",
+    "koreanPrice": 245,
+    "globalPrice": 0.1637,
+    "premium": 1.55,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "celer-network",
-    "updatedAt": 1764873709481
+    "cmcSlug": "heima",
+    "updatedAt": 1764873759898
   },
   {
-    "symbol": "EDEN",
-    "name_ko": "오픈에덴",
-    "name_en": "OpenEden",
-    "koreanPrice": 122.7,
-    "globalPrice": 0.082,
-    "premium": 1.53,
+    "symbol": "IP",
+    "name_ko": "스토리",
+    "name_en": "Story",
+    "koreanPrice": 3539,
+    "globalPrice": 2.365,
+    "premium": 1.54,
     "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "openeden",
-    "updatedAt": 1764873709482
+    "iconUrl": "/icons/UPBIT/IP.png",
+    "cmcSlug": "story",
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "ALGO",
-    "name_ko": "알고랜드",
-    "name_en": "Algorand",
-    "koreanPrice": 209,
-    "globalPrice": 0.1397,
+    "symbol": "LAYER",
+    "name_ko": "솔레이어",
+    "name_en": "Solayer",
+    "koreanPrice": 318,
+    "globalPrice": 0.2125,
+    "premium": 1.54,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/LAYER.png",
+    "cmcSlug": "solayer",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "CHZ",
+    "name_ko": "칠리즈",
+    "name_en": "Chiliz",
+    "koreanPrice": 45.2,
+    "globalPrice": 0.03021,
+    "premium": 1.52,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/CHZ.png",
+    "cmcSlug": "chiliz",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "PENDLE",
+    "name_ko": "펜들",
+    "name_en": "Pendle",
+    "koreanPrice": 3926,
+    "globalPrice": 2.624,
+    "premium": 1.52,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/PENDLE.png",
+    "cmcSlug": "pendle",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "AERO",
+    "name_ko": "에어로드롬 파이낸스",
+    "name_en": "Aerodrome Finance",
+    "koreanPrice": 1077,
+    "globalPrice": 0.7199,
     "premium": 1.51,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ALGO.png",
-    "cmcSlug": "algorand",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "RSR",
-    "name_ko": "리저브라이트",
-    "name_en": "Reserve Rights",
-    "koreanPrice": 5.2,
-    "globalPrice": 0.003476,
-    "premium": 1.51,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/RSR.png",
-    "cmcSlug": "reserve-rights",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/AERO.png",
+    "cmcSlug": "aerodrome-finance",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "SOPH",
@@ -1629,7 +1761,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/SOPH.png",
     "cmcSlug": "sophon",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "STX",
+    "name_ko": "스택스",
+    "name_en": "Stacks",
+    "koreanPrice": 466,
+    "globalPrice": 0.3115,
+    "premium": 1.51,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/STX.png",
+    "cmcSlug": "stacks",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ZBT",
@@ -1641,7 +1785,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ZBT.png",
     "cmcSlug": "zerobase",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "COTI",
+    "name_ko": "코티",
+    "name_en": "COTI",
+    "koreanPrice": 40.6,
+    "globalPrice": 0.02714,
+    "premium": 1.51,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "coti",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "BGB",
@@ -1653,79 +1809,103 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
-    "symbol": "CHZ",
-    "name_ko": "칠리즈",
-    "name_en": "Chiliz",
-    "koreanPrice": 45.2,
-    "globalPrice": 0.03022,
-    "premium": 1.49,
+    "symbol": "JUP",
+    "name_ko": "주피터",
+    "name_en": "Jupiter",
+    "koreanPrice": 372,
+    "globalPrice": 0.2487,
+    "premium": 1.5,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/CHZ.png",
-    "cmcSlug": "chiliz",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/JUP.png",
+    "cmcSlug": "jupiter",
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "GRT",
-    "name_ko": "더그래프",
-    "name_en": "The Graph",
-    "koreanPrice": 72.2,
-    "globalPrice": 0.04827,
-    "premium": 1.49,
+    "symbol": "PLUME",
+    "name_ko": "플룸",
+    "name_en": "Plume",
+    "koreanPrice": 32.1,
+    "globalPrice": 0.02146,
+    "premium": 1.5,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/GRT.png",
-    "cmcSlug": "the-graph",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/PLUME.png",
+    "cmcSlug": "plume",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "HEI",
-    "name_ko": "헤이마",
-    "name_en": "Heima",
-    "koreanPrice": 245,
-    "globalPrice": 0.1638,
-    "premium": 1.49,
+    "symbol": "MANTA",
+    "name_ko": "만타 네트워크",
+    "name_en": "Manta Network",
+    "koreanPrice": 146,
+    "globalPrice": 0.0976,
+    "premium": 1.5,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "heima",
-    "updatedAt": 1764873709482
+    "cmcSlug": "manta-network",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "MANA",
-    "name_ko": "디센트럴랜드",
-    "name_en": "Decentraland",
-    "koreanPrice": 236,
-    "globalPrice": 0.1578,
-    "premium": 1.48,
+    "symbol": "DOGE",
+    "name_ko": "도지코인",
+    "name_en": "Dogecoin",
+    "koreanPrice": 222,
+    "globalPrice": 0.14843,
+    "premium": 1.49,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/MANA.png",
-    "cmcSlug": "decentraland",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/DOGE.png",
+    "cmcSlug": "dogecoin",
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "PENDLE",
-    "name_ko": "펜들",
-    "name_en": "Pendle",
-    "koreanPrice": 3926,
-    "globalPrice": 2.625,
-    "premium": 1.48,
+    "symbol": "NOM",
+    "name_ko": "노미나",
+    "name_en": "노미나",
+    "koreanPrice": 15.9,
+    "globalPrice": 0.01063,
+    "premium": 1.49,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/PENDLE.png",
-    "cmcSlug": "pendle",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/NOM.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "STX",
-    "name_ko": "스택스",
-    "name_en": "Stacks",
-    "koreanPrice": 466,
-    "globalPrice": 0.3116,
+    "symbol": "HUNT",
+    "name_ko": "헌트",
+    "name_en": "Hunt Town",
+    "koreanPrice": 217,
+    "globalPrice": 0.1451,
     "premium": 1.48,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/STX.png",
-    "cmcSlug": "stacks",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/HUNT.png",
+    "cmcSlug": "hunt",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "ME",
+    "name_ko": "매직 에덴",
+    "name_en": "Magic Eden",
+    "koreanPrice": 498,
+    "globalPrice": 0.333,
+    "premium": 1.48,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/ME.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "ROA",
+    "name_ko": "로아코어",
+    "name_en": "ROA CORE",
+    "koreanPrice": 10.08,
+    "globalPrice": 0.00674,
+    "premium": 1.48,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "roa-core",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "SUNDOG",
@@ -1737,19 +1917,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "sundog",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "MAVIA",
-    "name_ko": "히어로즈오브마비아",
-    "name_en": "Heroes of Mavia",
-    "koreanPrice": 85.65,
-    "globalPrice": 0.05727,
-    "premium": 1.48,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "heroes-of-mavia",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "TRUST",
@@ -1761,19 +1929,31 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/TRUST.png",
     "cmcSlug": "intuition",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "ZIL",
-    "name_ko": "질리카",
-    "name_en": "Zilliqa",
-    "koreanPrice": 8.12,
-    "globalPrice": 0.00543,
+    "symbol": "W",
+    "name_ko": "웜홀",
+    "name_en": "Wormhole",
+    "koreanPrice": 64.6,
+    "globalPrice": 0.0432,
     "premium": 1.47,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ZIL.png",
-    "cmcSlug": "zilliqa",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/W.png",
+    "cmcSlug": "wormhole",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "PROMPT",
+    "name_ko": "웨이파인더",
+    "name_en": "Wayfinder",
+    "koreanPrice": 82.31,
+    "globalPrice": 0.05504,
+    "premium": 1.47,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "wayfinder",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "REQ",
@@ -1785,91 +1965,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "request",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "PYTH",
-    "name_ko": "피스 네트워크",
-    "name_en": "Pyth Network",
-    "koreanPrice": 109,
-    "globalPrice": 0.0729,
+    "symbol": "BAT",
+    "name_ko": "베이직어텐션토큰",
+    "name_en": "Basic Attention Token",
+    "koreanPrice": 394,
+    "globalPrice": 0.2635,
     "premium": 1.46,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/PYTH.png",
-    "cmcSlug": "pyth-network",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "MAV",
-    "name_ko": "매버릭 프로토콜",
-    "name_en": "Maverick Protocol",
-    "koreanPrice": 47.67,
-    "globalPrice": 0.03188,
-    "premium": 1.46,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "maverick-protocol",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "ATH",
-    "name_ko": "에이셔",
-    "name_en": "Aethir",
-    "koreanPrice": 21.2,
-    "globalPrice": 0.01418,
-    "premium": 1.45,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ATH.png",
-    "cmcSlug": "aethir",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "IP",
-    "name_ko": "스토리",
-    "name_en": "Story",
-    "koreanPrice": 3539,
-    "globalPrice": 2.367,
-    "premium": 1.45,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/IP.png",
-    "cmcSlug": "story",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/BAT.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "MOODENG",
     "name_ko": "무뎅",
     "name_en": "Moo Deng",
     "koreanPrice": 116,
-    "globalPrice": 0.07759,
-    "premium": 1.45,
+    "globalPrice": 0.07758,
+    "premium": 1.46,
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/MOODENG.png",
     "cmcSlug": "moo-deng",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "SIGN",
-    "name_ko": "사인",
-    "name_en": "Sign",
-    "koreanPrice": 57.4,
-    "globalPrice": 0.03839,
-    "premium": 1.45,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/SIGN.png",
-    "cmcSlug": "sign",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "ZORA",
-    "name_ko": "조라",
-    "name_en": "Zora",
-    "koreanPrice": 74.5,
-    "globalPrice": 0.04983,
-    "premium": 1.45,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ZORA.png",
-    "cmcSlug": "zora",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "CTK",
@@ -1881,7 +2001,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "shentu",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ACS",
@@ -1893,7 +2013,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ACS.png",
     "cmcSlug": "access-protocol",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "INJ",
+    "name_ko": "인젝티브",
+    "name_en": "Injective",
+    "koreanPrice": 8790,
+    "globalPrice": 5.88,
+    "premium": 1.44,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/INJ.png",
+    "cmcSlug": "injective",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "JASMY",
@@ -1905,19 +2037,43 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/JASMY.png",
     "cmcSlug": "jasmy",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "PIEVERSE",
-    "name_ko": "파이버스",
-    "name_en": "Pieverse",
-    "koreanPrice": 698,
-    "globalPrice": 0.4669,
+    "symbol": "BLUE",
+    "name_ko": "블루핀",
+    "name_en": "Bluefin",
+    "koreanPrice": 65.78,
+    "globalPrice": 0.044,
     "premium": 1.44,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "pieverse",
-    "updatedAt": 1764873709481
+    "cmcSlug": "bluefin",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "KAITO",
+    "name_ko": "카이토",
+    "name_en": "Kaito",
+    "koreanPrice": 992,
+    "globalPrice": 0.6636,
+    "premium": 1.43,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/KAITO.png",
+    "cmcSlug": "kaito",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "RENDER",
+    "name_ko": "렌더토큰",
+    "name_en": "Render Token",
+    "koreanPrice": 2580,
+    "globalPrice": 1.726,
+    "premium": 1.43,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/RENDER.png",
+    "cmcSlug": "render",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "SPK",
@@ -1929,43 +2085,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/SPK.png",
     "cmcSlug": "spark",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "AERO",
-    "name_ko": "에어로드롬 파이낸스",
-    "name_en": "Aerodrome Finance",
-    "koreanPrice": 1078,
-    "globalPrice": 0.7212,
-    "premium": 1.42,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/AERO.png",
-    "cmcSlug": "aerodrome-finance",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "PCI",
-    "name_ko": "페이코인",
-    "name_en": "Paycoin",
-    "koreanPrice": 97.35,
-    "globalPrice": 0.06513,
-    "premium": 1.42,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "PROMPT",
-    "name_ko": "웨이파인더",
-    "name_en": "Wayfinder",
-    "koreanPrice": 82.31,
-    "globalPrice": 0.05507,
-    "premium": 1.42,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "wayfinder",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "SOLV",
@@ -1977,7 +2097,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "solv-protocol",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "XAN",
@@ -1989,7 +2109,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "anoma",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "DOT",
+    "name_ko": "폴카닷",
+    "name_en": "Polkadot",
+    "koreanPrice": 3436,
+    "globalPrice": 2.299,
+    "premium": 1.41,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/DOT.png",
+    "cmcSlug": "polkadot",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "POWR",
+    "name_ko": "파워렛저",
+    "name_en": "Powerledger",
+    "koreanPrice": 136,
+    "globalPrice": 0.091,
+    "premium": 1.41,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/POWR.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "SCR",
@@ -2001,91 +2145,43 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/SCR.png",
     "cmcSlug": "scroll",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "BOB",
-    "name_ko": "비오비",
-    "name_en": "BOB",
-    "koreanPrice": 31.43,
-    "globalPrice": 0.021031,
+    "symbol": "ZORA",
+    "name_ko": "조라",
+    "name_en": "Zora",
+    "koreanPrice": 74.5,
+    "globalPrice": 0.04985,
+    "premium": 1.41,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/ZORA.png",
+    "cmcSlug": "zora",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "EDEN",
+    "name_ko": "오픈에덴",
+    "name_en": "OpenEden",
+    "koreanPrice": 122.7,
+    "globalPrice": 0.0821,
     "premium": 1.41,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "cmcSlug": "openeden",
+    "updatedAt": 1764873759898
   },
   {
-    "symbol": "UMA",
-    "name_ko": "우마",
-    "name_en": "UMA",
-    "koreanPrice": 1236,
-    "globalPrice": 0.827,
-    "premium": 1.41,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "uma",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "CATI",
-    "name_ko": "캣티즌",
-    "name_en": "Catizen",
-    "koreanPrice": 94.9,
-    "globalPrice": 0.0635,
-    "premium": 1.41,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "catizen",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "AKT",
-    "name_ko": "아카시 네트워크",
-    "name_en": "Akash Network",
-    "koreanPrice": 694,
-    "globalPrice": 0.4644,
+    "symbol": "XTZ",
+    "name_ko": "테조스",
+    "name_en": "Tezos",
+    "koreanPrice": 746,
+    "globalPrice": 0.4992,
     "premium": 1.4,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/AKT.png",
-    "cmcSlug": "akash-network",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "FORT",
-    "name_ko": "포르타",
-    "name_en": "Forta",
-    "koreanPrice": 35.64,
-    "globalPrice": 0.02385,
-    "premium": 1.4,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/FORT.png",
-    "cmcSlug": "forta",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "LAYER",
-    "name_ko": "솔레이어",
-    "name_en": "Solayer",
-    "koreanPrice": 318,
-    "globalPrice": 0.2128,
-    "premium": 1.4,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/LAYER.png",
-    "cmcSlug": "solayer",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "OBT",
-    "name_ko": "오비터 파이낸스",
-    "name_en": "Orbiter Finance",
-    "koreanPrice": 3.748,
-    "globalPrice": 0.002508,
-    "premium": 1.4,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "orbiter-finance",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/XTZ.png",
+    "cmcSlug": "tezos",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "SXT",
@@ -2097,19 +2193,43 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "space-and-time",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "XEC",
-    "name_ko": "이캐시",
-    "name_en": "eCash",
-    "koreanPrice": 0.0182,
-    "globalPrice": 0.00001218,
+    "symbol": "ATOM",
+    "name_ko": "코스모스",
+    "name_en": "Cosmos",
+    "koreanPrice": 3480,
+    "globalPrice": 2.329,
     "premium": 1.39,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/XEC.png",
-    "cmcSlug": "ecash",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/ATOM.png",
+    "cmcSlug": "cosmos",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "HBAR",
+    "name_ko": "헤데라",
+    "name_en": "Hedera",
+    "koreanPrice": 209,
+    "globalPrice": 0.13987,
+    "premium": 1.39,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/HBAR.png",
+    "cmcSlug": "hedera",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "SD",
+    "name_ko": "스테이더",
+    "name_en": "Stader",
+    "koreanPrice": 380,
+    "globalPrice": 0.2543,
+    "premium": 1.39,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "stader",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "STRK",
@@ -2121,7 +2241,43 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "API3",
+    "name_ko": "에이피아이쓰리",
+    "name_en": "API3",
+    "koreanPrice": 795,
+    "globalPrice": 0.5321,
+    "premium": 1.38,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/API3.png",
+    "cmcSlug": "api3",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "ATH",
+    "name_ko": "에이셔",
+    "name_en": "Aethir",
+    "koreanPrice": 21.2,
+    "globalPrice": 0.01419,
+    "premium": 1.38,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/ATH.png",
+    "cmcSlug": "aethir",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "AUDIO",
+    "name_ko": "오디우스",
+    "name_en": "Audius",
+    "koreanPrice": 50.5,
+    "globalPrice": 0.0338,
+    "premium": 1.38,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/AUDIO.png",
+    "cmcSlug": "audius",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "FCT2",
@@ -2133,7 +2289,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/FCT2.png",
     "cmcSlug": "firmachain",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "KERNEL",
@@ -2145,7 +2301,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/KERNEL.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "ZRX",
@@ -2157,55 +2313,115 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ZRX.png",
     "cmcSlug": "0x",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "JUP",
-    "name_ko": "주피터",
-    "name_en": "Jupiter",
-    "koreanPrice": 372,
-    "globalPrice": 0.249,
+    "symbol": "BNB",
+    "name_ko": "비앤비",
+    "name_en": "BNB",
+    "koreanPrice": 1345000,
+    "globalPrice": 900.23,
+    "premium": 1.38,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "binance-coin",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "BTR",
+    "name_ko": "비트레이어",
+    "name_en": "Bitlayer",
+    "koreanPrice": 50.84,
+    "globalPrice": 0.03403,
     "premium": 1.37,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/JUP.png",
-    "cmcSlug": "jupiter",
-    "updatedAt": 1764873709480
+    "iconUrl": null,
+    "cmcSlug": "bitlayer",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "API3",
-    "name_ko": "에이피아이쓰리",
-    "name_en": "API3",
-    "koreanPrice": 795,
-    "globalPrice": 0.5322,
+    "symbol": "MAY",
+    "name_ko": "메이플라워",
+    "name_en": "Mayflower",
+    "koreanPrice": 28.1,
+    "globalPrice": 0.01881,
+    "premium": 1.37,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "YB",
+    "name_ko": "일드베이시스",
+    "name_en": "YieldBasis",
+    "koreanPrice": 747,
+    "globalPrice": 0.5,
+    "premium": 1.37,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "yieldbasis",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "FORT",
+    "name_ko": "포르타",
+    "name_en": "Forta",
+    "koreanPrice": 35.64,
+    "globalPrice": 0.02386,
     "premium": 1.36,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/API3.png",
-    "cmcSlug": "api3",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/FORT.png",
+    "cmcSlug": "forta",
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "HBAR",
-    "name_ko": "헤데라",
-    "name_en": "Hedera",
-    "koreanPrice": 209,
-    "globalPrice": 0.13991,
+    "symbol": "XTER",
+    "name_ko": "엑스테리오",
+    "name_en": "Xterio",
+    "koreanPrice": 61.2,
+    "globalPrice": 0.04097,
     "premium": 1.36,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/HBAR.png",
-    "cmcSlug": "hedera",
-    "updatedAt": 1764873709480
+    "iconUrl": null,
+    "cmcSlug": "xterio",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "COW",
-    "name_ko": "카우 프로토콜",
-    "name_en": "CoW Protocol",
-    "koreanPrice": 292,
-    "globalPrice": 0.1955,
+    "symbol": "ZK",
+    "name_ko": "지케이싱크",
+    "name_en": "zkSync",
+    "koreanPrice": 55.27,
+    "globalPrice": 0.037,
+    "premium": 1.36,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "zksync",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "NEAR",
+    "name_ko": "니어프로토콜",
+    "name_en": "NEAR Protocol",
+    "koreanPrice": 2681,
+    "globalPrice": 1.795,
     "premium": 1.35,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/COW.png",
-    "cmcSlug": "cow-protocol",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/NEAR.png",
+    "cmcSlug": "near-protocol",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "POL",
+    "name_ko": "폴리곤 에코시스템 토큰",
+    "name_en": "Polygon Ecosystem Token",
+    "koreanPrice": 187,
+    "globalPrice": 0.1252,
+    "premium": 1.35,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/POL.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ES",
@@ -2217,55 +2433,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "eclipse",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "FET",
-    "name_ko": "페치",
-    "name_en": "Fetch.ai",
-    "koreanPrice": 377,
-    "globalPrice": 0.2524,
+    "symbol": "YFI",
+    "name_ko": "연파이낸스",
+    "name_en": "yearn.finance",
+    "koreanPrice": 5682000,
+    "globalPrice": 3804,
     "premium": 1.35,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "cmcSlug": "yearn-finance",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "BAT",
-    "name_ko": "베이직어텐션토큰",
-    "name_en": "Basic Attention Token",
-    "koreanPrice": 394,
-    "globalPrice": 0.2638,
+    "symbol": "AKT",
+    "name_ko": "아카시 네트워크",
+    "name_en": "Akash Network",
+    "koreanPrice": 694,
+    "globalPrice": 0.4647,
     "premium": 1.34,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/BAT.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "BSV",
-    "name_ko": "비트코인에스브이",
-    "name_en": "BITCOINSV",
-    "koreanPrice": 30870,
-    "globalPrice": 20.67,
-    "premium": 1.34,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/BSV.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "DOOD",
-    "name_ko": "두들즈",
-    "name_en": "Doodles",
-    "koreanPrice": 6.64,
-    "globalPrice": 0.004446,
-    "premium": 1.34,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/DOOD.png",
-    "cmcSlug": "doodles",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/AKT.png",
+    "cmcSlug": "akash-network",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "HAEDAL",
@@ -2277,31 +2469,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/HAEDAL.png",
     "cmcSlug": "haedal-protocol",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "HUMA",
-    "name_ko": "후마 파이낸스",
-    "name_en": "Huma Finance",
-    "koreanPrice": 42.04,
-    "globalPrice": 0.02815,
-    "premium": 1.34,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/HUMA.png",
-    "cmcSlug": "huma-finance",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "LSK",
-    "name_ko": "리스크",
-    "name_en": "Lisk",
-    "koreanPrice": 342,
-    "globalPrice": 0.229,
-    "premium": 1.34,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/LSK.png",
-    "cmcSlug": "lisk",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "MIRA",
@@ -2313,55 +2481,43 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/MIRA.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "ZTX",
-    "name_ko": "지티엑스",
-    "name_en": "ZTX",
-    "koreanPrice": 0.7602,
-    "globalPrice": 0.000509,
+    "symbol": "MON",
+    "name_ko": "모나드",
+    "name_en": "Monad",
+    "koreanPrice": 43.4,
+    "globalPrice": 0.02906,
     "premium": 1.34,
     "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "ztx",
-    "updatedAt": 1764873709482
+    "iconUrl": "/icons/UPBIT/MON.png",
+    "cmcSlug": "monad",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "APEPE",
-    "name_ko": "에이프앤페페",
-    "name_en": "Ape and Pepe",
-    "koreanPrice": 0.0022,
-    "globalPrice": 0.000001473,
-    "premium": 1.34,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "ape-and-pepe",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "BLAST",
-    "name_ko": "블라스트",
-    "name_en": "Blast",
-    "koreanPrice": 1.35,
-    "globalPrice": 0.000904,
+    "symbol": "ARB",
+    "name_ko": "아비트럼",
+    "name_en": "Arbitrum",
+    "koreanPrice": 326,
+    "globalPrice": 0.2183,
     "premium": 1.33,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/BLAST.png",
-    "cmcSlug": "blast",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/ARB.png",
+    "cmcSlug": "arbitrum",
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "KAITO",
-    "name_ko": "카이토",
-    "name_en": "Kaito",
-    "koreanPrice": 992,
-    "globalPrice": 0.6643,
+    "symbol": "RAD",
+    "name_ko": "래드웍스",
+    "name_en": "Radworks",
+    "koreanPrice": 451,
+    "globalPrice": 0.302,
     "premium": 1.33,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/KAITO.png",
-    "cmcSlug": "kaito",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/RAD.png",
+    "cmcSlug": "radworks",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "AVAIL",
@@ -2373,7 +2529,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "avail",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "PUMPBTC",
+    "name_ko": "펌프",
+    "name_en": "PUMP",
+    "koreanPrice": 42.77,
+    "globalPrice": 0.02864,
+    "premium": 1.33,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "pump",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "TAO",
+    "name_ko": "비트텐서",
+    "name_en": "Bittensor",
+    "koreanPrice": 439500,
+    "globalPrice": 294.3,
+    "premium": 1.33,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "bittensor",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "XION",
@@ -2385,19 +2565,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "xion",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "XTER",
-    "name_ko": "엑스테리오",
-    "name_en": "Xterio",
-    "koreanPrice": 61.2,
-    "globalPrice": 0.04098,
-    "premium": 1.33,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "xterio",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "AI",
@@ -2409,19 +2577,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "sleepless-ai",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
-    "symbol": "DOT",
-    "name_ko": "폴카닷",
-    "name_en": "Polkadot",
-    "koreanPrice": 3436,
-    "globalPrice": 2.301,
+    "symbol": "AGLD",
+    "name_ko": "어드벤처골드",
+    "name_en": "Adventure Gold",
+    "koreanPrice": 439,
+    "globalPrice": 0.294,
     "premium": 1.32,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/DOT.png",
-    "cmcSlug": "polkadot",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/AGLD.png",
+    "cmcSlug": "adventure-gold",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "G",
@@ -2433,43 +2601,43 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/G.png",
     "cmcSlug": "gravity",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "XTZ",
-    "name_ko": "테조스",
-    "name_en": "Tezos",
-    "koreanPrice": 746,
-    "globalPrice": 0.4996,
+    "symbol": "MNT",
+    "name_ko": "맨틀",
+    "name_en": "Mantle",
+    "koreanPrice": 1593,
+    "globalPrice": 1.0668,
     "premium": 1.32,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/XTZ.png",
-    "cmcSlug": "tezos",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/MNT.png",
+    "cmcSlug": "mantle",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "COTI",
-    "name_ko": "코티",
-    "name_en": "COTI",
-    "koreanPrice": 40.6,
-    "globalPrice": 0.02719,
+    "symbol": "OBT",
+    "name_ko": "오비터 파이낸스",
+    "name_en": "Orbiter Finance",
+    "koreanPrice": 3.748,
+    "globalPrice": 0.00251,
     "premium": 1.32,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "coti",
-    "updatedAt": 1764873709481
+    "cmcSlug": "orbiter-finance",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "ETC",
-    "name_ko": "이더리움 클래식",
-    "name_en": "Ethereum Classic",
-    "koreanPrice": 20560,
-    "globalPrice": 13.77,
+    "symbol": "ADA",
+    "name_ko": "에이다",
+    "name_en": "Cardano",
+    "koreanPrice": 661,
+    "globalPrice": 0.4427,
     "premium": 1.31,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ETC.png",
-    "cmcSlug": "ethereum-classic",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/ADA.png",
+    "cmcSlug": "cardano",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "GTC",
@@ -2481,7 +2649,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/GTC.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "KNC",
+    "name_ko": "카이버 네트워크",
+    "name_en": "Kyber Network",
+    "koreanPrice": 410,
+    "globalPrice": 0.2746,
+    "premium": 1.31,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/KNC.png",
+    "cmcSlug": "kyber-network",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "LRC",
@@ -2493,19 +2673,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/LRC.png",
     "cmcSlug": "loopring",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "RENDER",
-    "name_ko": "렌더토큰",
-    "name_en": "Render Token",
-    "koreanPrice": 2580,
-    "globalPrice": 1.728,
-    "premium": 1.31,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/RENDER.png",
-    "cmcSlug": "render",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "RVN",
@@ -2517,19 +2685,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/RVN.png",
     "cmcSlug": "raven",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "METIS",
-    "name_ko": "메티스다오",
-    "name_en": "MetisDAO",
-    "koreanPrice": 10630,
-    "globalPrice": 7.12,
+    "symbol": "SUSHI",
+    "name_ko": "스시스왑",
+    "name_en": "Sushiswap",
+    "koreanPrice": 542,
+    "globalPrice": 0.363,
     "premium": 1.31,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "metisdao",
-    "updatedAt": 1764873709481
+    "cmcSlug": "sushiswap",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "TOWNS",
@@ -2541,31 +2709,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "towns",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "ATOM",
-    "name_ko": "코스모스",
-    "name_en": "Cosmos",
-    "koreanPrice": 3480,
-    "globalPrice": 2.331,
+    "symbol": "COMP",
+    "name_ko": "컴파운드",
+    "name_en": "Compound",
+    "koreanPrice": 50700,
+    "globalPrice": 33.96,
     "premium": 1.3,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ATOM.png",
-    "cmcSlug": "cosmos",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/COMP.png",
+    "cmcSlug": "compound",
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "AUCTION",
-    "name_ko": "바운스토큰",
-    "name_en": "Bounce Token",
-    "koreanPrice": 8450,
-    "globalPrice": 5.66,
+    "symbol": "COW",
+    "name_ko": "카우 프로토콜",
+    "name_en": "CoW Protocol",
+    "koreanPrice": 292,
+    "globalPrice": 0.1956,
     "premium": 1.3,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/AUCTION.png",
-    "cmcSlug": "bounce",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/COW.png",
+    "cmcSlug": "cow-protocol",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "GAS",
@@ -2577,31 +2745,31 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/GAS.png",
     "cmcSlug": "gas",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "NOM",
-    "name_ko": "노미나",
-    "name_en": "노미나",
-    "koreanPrice": 15.9,
-    "globalPrice": 0.01065,
+    "symbol": "GRT",
+    "name_ko": "더그래프",
+    "name_en": "The Graph",
+    "koreanPrice": 72,
+    "globalPrice": 0.04823,
     "premium": 1.3,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/NOM.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/GRT.png",
+    "cmcSlug": "the-graph",
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "POWR",
-    "name_ko": "파워렛저",
-    "name_en": "Powerledger",
-    "koreanPrice": 136,
-    "globalPrice": 0.0911,
+    "symbol": "PUMP",
+    "name_ko": "펌프닷펀",
+    "name_en": "pump.fun",
+    "koreanPrice": 4.67,
+    "globalPrice": 0.003128,
     "premium": 1.3,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/POWR.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/PUMP.png",
+    "cmcSlug": "pump-fun",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "TREE",
@@ -2613,19 +2781,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/TREE.png",
     "cmcSlug": "treehouse",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "TT",
-    "name_ko": "썬더코어",
-    "name_en": "ThunderCore",
-    "koreanPrice": 1.79,
-    "globalPrice": 0.001199,
+    "symbol": "XPL",
+    "name_ko": "플라즈마",
+    "name_en": "Plasma",
+    "koreanPrice": 292,
+    "globalPrice": 0.1956,
     "premium": 1.3,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/TT.png",
-    "cmcSlug": "thundercore",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/XPL.png",
+    "cmcSlug": "plasma",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "AMP",
@@ -2637,43 +2805,55 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "amp",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "BNB",
-    "name_ko": "비앤비",
-    "name_en": "BNB",
-    "koreanPrice": 1345000,
-    "globalPrice": 900.94,
-    "premium": 1.3,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "binance-coin",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "NEAR",
-    "name_ko": "니어프로토콜",
-    "name_en": "NEAR Protocol",
-    "koreanPrice": 2681,
-    "globalPrice": 1.796,
+    "symbol": "BSV",
+    "name_ko": "비트코인에스브이",
+    "name_en": "BITCOINSV",
+    "koreanPrice": 30870,
+    "globalPrice": 20.68,
     "premium": 1.29,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/NEAR.png",
-    "cmcSlug": "near-protocol",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/BSV.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "PEPE",
-    "name_ko": "페페",
-    "name_en": "PEPE",
-    "koreanPrice": 0.00718,
-    "globalPrice": 0.00000481,
+    "symbol": "RESOLV",
+    "name_ko": "리졸브",
+    "name_en": "Resolv",
+    "koreanPrice": 113,
+    "globalPrice": 0.0757,
     "premium": 1.29,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/PEPE.png",
-    "cmcSlug": "pepe",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/RESOLV.png",
+    "cmcSlug": "resolv",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "THETA",
+    "name_ko": "쎄타토큰",
+    "name_en": "Theta Token",
+    "koreanPrice": 512,
+    "globalPrice": 0.343,
+    "premium": 1.29,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/THETA.png",
+    "cmcSlug": "theta",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "VIRTUAL",
+    "name_ko": "버추얼 프로토콜",
+    "name_en": "Virtuals Protocol",
+    "koreanPrice": 1391,
+    "globalPrice": 0.9318,
+    "premium": 1.29,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/VIRTUAL.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "WAL",
@@ -2685,19 +2865,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/WAL.png",
     "cmcSlug": "walrus",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "CFX",
-    "name_ko": "콘플럭스",
-    "name_en": "Conflux Network",
-    "koreanPrice": 113,
-    "globalPrice": 0.0757,
-    "premium": 1.29,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "conflux-network",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "CSPR",
@@ -2709,43 +2877,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "casper",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "GALA",
-    "name_ko": "갈라",
-    "name_en": "Gala",
-    "koreanPrice": 11.39,
-    "globalPrice": 0.00763,
+    "symbol": "LDO",
+    "name_ko": "리도다오",
+    "name_en": "Lido DAO",
+    "koreanPrice": 946,
+    "globalPrice": 0.6337,
     "premium": 1.29,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "gala",
-    "updatedAt": 1764873709481
+    "cmcSlug": "lido-dao",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "XDC",
-    "name_ko": "엑스디씨 네트워크",
-    "name_en": "XDC Network",
-    "koreanPrice": 74.8,
-    "globalPrice": 0.05011,
+    "symbol": "UMA",
+    "name_ko": "우마",
+    "name_en": "UMA",
+    "koreanPrice": 1236,
+    "globalPrice": 0.828,
     "premium": 1.29,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "xdc-network",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "ARB",
-    "name_ko": "아비트럼",
-    "name_en": "Arbitrum",
-    "koreanPrice": 326,
-    "globalPrice": 0.2184,
-    "premium": 1.28,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ARB.png",
-    "cmcSlug": "arbitrum",
-    "updatedAt": 1764873709480
+    "cmcSlug": "uma",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "AVNT",
@@ -2757,7 +2913,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/AVNT.png",
     "cmcSlug": "avantis",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "BFC",
+    "name_ko": "바이프로스트",
+    "name_en": "Bifrost",
+    "koreanPrice": 32.42,
+    "globalPrice": 0.02172,
+    "premium": 1.28,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/BFC.png",
+    "cmcSlug": "bifrost",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "CYBER",
@@ -2769,7 +2937,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/CYBER.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "EUL",
+    "name_ko": "오일러",
+    "name_en": "Euler",
+    "koreanPrice": 5860,
+    "globalPrice": 3.926,
+    "premium": 1.28,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/EUL.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "MOVE",
@@ -2781,19 +2961,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/MOVE.png",
     "cmcSlug": "movement",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "NEO",
-    "name_ko": "네오",
-    "name_en": "Neo",
-    "koreanPrice": 6275,
-    "globalPrice": 4.204,
-    "premium": 1.28,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/NEO.png",
-    "cmcSlug": "neo",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "PUNDIX",
@@ -2805,31 +2973,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/PUNDIX.png",
     "cmcSlug": "pundi-x",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "RED",
-    "name_ko": "레드스톤",
-    "name_en": "RedStone",
-    "koreanPrice": 423,
-    "globalPrice": 0.2834,
-    "premium": 1.28,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/RED.png",
-    "cmcSlug": "redstone",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "TRX",
-    "name_ko": "트론",
-    "name_en": "TRON",
-    "koreanPrice": 423,
-    "globalPrice": 0.2834,
-    "premium": 1.28,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/TRX.png",
-    "cmcSlug": "tron",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "WLFI",
@@ -2841,31 +2985,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/WLFI.png",
     "cmcSlug": "world-liberty-financial",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "XRP",
-    "name_ko": "엑스알피 [리플]",
-    "name_en": "XRP",
-    "koreanPrice": 3138,
-    "globalPrice": 2.1023,
-    "premium": 1.28,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/XRP.png",
-    "cmcSlug": "ripple",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "ZRO",
-    "name_ko": "레이어제로",
-    "name_en": "LayerZero",
-    "koreanPrice": 2103,
-    "globalPrice": 1.409,
-    "premium": 1.28,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ZRO.png",
-    "cmcSlug": "layerzero",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "BICO",
@@ -2877,7 +2997,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "biconomy",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "GMX",
@@ -2889,19 +3009,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "gmx",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "PEAQ",
-    "name_ko": "피크",
-    "name_en": "peaq",
-    "koreanPrice": 62.99,
-    "globalPrice": 0.0422,
-    "premium": 1.28,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "peaq",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "XPLA",
@@ -2913,43 +3021,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "xpla",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "ZK",
-    "name_ko": "지케이싱크",
-    "name_en": "zkSync",
-    "koreanPrice": 55.27,
-    "globalPrice": 0.03703,
-    "premium": 1.28,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "zksync",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "BLUR",
-    "name_ko": "블러",
-    "name_en": "Blur",
-    "koreanPrice": 54.1,
-    "globalPrice": 0.03625,
+    "symbol": "DOOD",
+    "name_ko": "두들즈",
+    "name_en": "Doodles",
+    "koreanPrice": 6.64,
+    "globalPrice": 0.004449,
     "premium": 1.27,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/BLUR.png",
-    "cmcSlug": "blur",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "MMT",
-    "name_ko": "모멘텀",
-    "name_en": "Momentum",
-    "koreanPrice": 377,
-    "globalPrice": 0.2526,
-    "premium": 1.27,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/MMT.png",
-    "cmcSlug": "momentum",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/DOOD.png",
+    "cmcSlug": "doodles",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "AGI",
@@ -2961,7 +3045,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "delysium",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "KSM",
@@ -2973,31 +3057,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "kusama",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "TON",
-    "name_ko": "톤코인",
-    "name_en": "Toncoin",
-    "koreanPrice": 2382,
-    "globalPrice": 1.596,
-    "premium": 1.27,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "YB",
-    "name_ko": "일드베이시스",
-    "name_en": "YieldBasis",
-    "koreanPrice": 747,
-    "globalPrice": 0.5005,
-    "premium": 1.27,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "yieldbasis",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "AXS",
@@ -3009,67 +3069,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/AXS.png",
     "cmcSlug": "axie-infinity",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "INJ",
-    "name_ko": "인젝티브",
-    "name_en": "Injective",
-    "koreanPrice": 8790,
-    "globalPrice": 5.89,
+    "symbol": "FF",
+    "name_ko": "팔콘 파이낸스",
+    "name_en": "Falcon Finance",
+    "koreanPrice": 178,
+    "globalPrice": 0.11928,
     "premium": 1.26,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/INJ.png",
-    "cmcSlug": "injective",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "PLUME",
-    "name_ko": "플룸",
-    "name_en": "Plume",
-    "koreanPrice": 32.1,
-    "globalPrice": 0.02151,
-    "premium": 1.26,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/PLUME.png",
-    "cmcSlug": "plume",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "GOAT",
-    "name_ko": "고트세우스 막시무스",
-    "name_en": "Goatseus Maximus",
-    "koreanPrice": 59.87,
-    "globalPrice": 0.04012,
-    "premium": 1.26,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "goatseus-maximus",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "SUSHI",
-    "name_ko": "스시스왑",
-    "name_en": "Sushiswap",
-    "koreanPrice": 542,
-    "globalPrice": 0.3632,
-    "premium": 1.26,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "sushiswap",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "TAO",
-    "name_ko": "비트텐서",
-    "name_en": "Bittensor",
-    "koreanPrice": 439500,
-    "globalPrice": 294.5,
-    "premium": 1.26,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "bittensor",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/FF.png",
+    "cmcSlug": "falcon-finance",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "1INCH",
@@ -3081,7 +3093,43 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/1INCH.png",
     "cmcSlug": "1inch",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "ARDR",
+    "name_ko": "아더",
+    "name_en": "Ardor",
+    "koreanPrice": 87.8,
+    "globalPrice": 0.05884,
+    "premium": 1.25,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/ARDR.png",
+    "cmcSlug": "ardor",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "BABY",
+    "name_ko": "바빌론",
+    "name_en": "Babylon",
+    "koreanPrice": 29.5,
+    "globalPrice": 0.01977,
+    "premium": 1.25,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/BABY.png",
+    "cmcSlug": "babylon",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "BIGTIME",
+    "name_ko": "빅타임",
+    "name_en": "Big Time",
+    "koreanPrice": 35.5,
+    "globalPrice": 0.02379,
+    "premium": 1.25,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/BIGTIME.png",
+    "cmcSlug": "big-time",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "CARV",
@@ -3093,43 +3141,31 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/CARV.png",
     "cmcSlug": "carv",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "ENSO",
-    "name_ko": "엔소",
-    "name_en": "Enso",
-    "koreanPrice": 1137,
-    "globalPrice": 0.762,
+    "symbol": "SIGN",
+    "name_ko": "사인",
+    "name_en": "Sign",
+    "koreanPrice": 57.3,
+    "globalPrice": 0.0384,
     "premium": 1.25,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ENSO.png",
-    "cmcSlug": "enso",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/SIGN.png",
+    "cmcSlug": "sign",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "LA",
-    "name_ko": "라그랑주",
-    "name_en": "Lagrange",
-    "koreanPrice": 590,
-    "globalPrice": 0.3954,
+    "symbol": "SYRUP",
+    "name_ko": "메이플 파이낸스",
+    "name_en": "Maple Finance",
+    "koreanPrice": 392,
+    "globalPrice": 0.2627,
     "premium": 1.25,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/LA.png",
-    "cmcSlug": "lagrange",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "RAY",
-    "name_ko": "레이디움",
-    "name_en": "Raydium",
-    "koreanPrice": 1804,
-    "globalPrice": 1.209,
-    "premium": 1.25,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/RAY.png",
-    "cmcSlug": "raydium",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/SYRUP.png",
+    "cmcSlug": "maple-finance",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "HIGH",
@@ -3141,19 +3177,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "highstreet",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "YFI",
-    "name_ko": "연파이낸스",
-    "name_en": "yearn.finance",
-    "koreanPrice": 5682000,
-    "globalPrice": 3808,
-    "premium": 1.25,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "yearn-finance",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ARK",
@@ -3165,7 +3189,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ARK.png",
     "cmcSlug": "ark",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "ENS",
@@ -3177,31 +3201,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ENS.png",
     "cmcSlug": "ethereum-name-service",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "LINK",
-    "name_ko": "체인링크",
-    "name_en": "ChainLink",
-    "koreanPrice": 21320,
-    "globalPrice": 14.29,
+    "symbol": "ETC",
+    "name_ko": "이더리움 클래식",
+    "name_en": "Ethereum Classic",
+    "koreanPrice": 20560,
+    "globalPrice": 13.78,
     "premium": 1.24,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/LINK.png",
-    "cmcSlug": "chainlink",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "MNT",
-    "name_ko": "맨틀",
-    "name_en": "Mantle",
-    "koreanPrice": 1593,
-    "globalPrice": 1.0677,
-    "premium": 1.24,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/MNT.png",
-    "cmcSlug": "mantle",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/ETC.png",
+    "cmcSlug": "ethereum-classic",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "OXT",
@@ -3213,19 +3225,31 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/OXT.png",
     "cmcSlug": "orchid",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "PUMP",
-    "name_ko": "펌프닷펀",
-    "name_en": "pump.fun",
-    "koreanPrice": 4.67,
-    "globalPrice": 0.00313,
+    "symbol": "PROVE",
+    "name_ko": "석싱트",
+    "name_en": "Succinct",
+    "koreanPrice": 706,
+    "globalPrice": 0.4732,
     "premium": 1.24,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/PUMP.png",
-    "cmcSlug": "pump-fun",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/PROVE.png",
+    "cmcSlug": "succinct",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "C98",
+    "name_ko": "코인98",
+    "name_en": "Coin98",
+    "koreanPrice": 41.48,
+    "globalPrice": 0.0278,
+    "premium": 1.24,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "coin98",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "CAMP",
@@ -3237,55 +3261,43 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "camp-network",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "MON",
-    "name_ko": "모나드",
-    "name_en": "Monad",
-    "koreanPrice": 43.4,
-    "globalPrice": 0.02909,
+    "symbol": "LINK",
+    "name_ko": "체인링크",
+    "name_en": "ChainLink",
+    "koreanPrice": 21260,
+    "globalPrice": 14.25,
     "premium": 1.23,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/MON.png",
-    "cmcSlug": "monad",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/LINK.png",
+    "cmcSlug": "chainlink",
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "W",
-    "name_ko": "웜홀",
-    "name_en": "Wormhole",
-    "koreanPrice": 64.6,
-    "globalPrice": 0.0433,
+    "symbol": "GOAT",
+    "name_ko": "고트세우스 막시무스",
+    "name_en": "Goatseus Maximus",
+    "koreanPrice": 59.87,
+    "globalPrice": 0.04013,
     "premium": 1.23,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/W.png",
-    "cmcSlug": "wormhole",
-    "updatedAt": 1764873709481
+    "iconUrl": null,
+    "cmcSlug": "goatseus-maximus",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "ADA",
-    "name_ko": "에이다",
-    "name_en": "Cardano",
-    "koreanPrice": 661,
-    "globalPrice": 0.4431,
-    "premium": 1.22,
+    "symbol": "ILV",
+    "name_ko": "일루비움",
+    "name_en": "Illuvium",
+    "koreanPrice": 10980,
+    "globalPrice": 7.36,
+    "premium": 1.23,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ADA.png",
-    "cmcSlug": "cardano",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "FF",
-    "name_ko": "팔콘 파이낸스",
-    "name_en": "Falcon Finance",
-    "koreanPrice": 178,
-    "globalPrice": 0.11933,
-    "premium": 1.22,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/FF.png",
-    "cmcSlug": "falcon-finance",
-    "updatedAt": 1764873709480
+    "iconUrl": null,
+    "cmcSlug": "illuvium",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "OAS",
@@ -3297,7 +3309,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/OAS.png",
     "cmcSlug": "oasys",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "QTUM",
@@ -3309,7 +3321,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/QTUM.png",
     "cmcSlug": "qtum",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "BEL",
@@ -3321,7 +3333,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "bella-protocol",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "PIEVERSE",
+    "name_ko": "파이버스",
+    "name_en": "Pieverse",
+    "koreanPrice": 695,
+    "globalPrice": 0.4659,
+    "premium": 1.22,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "pieverse",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "PNUT",
@@ -3333,7 +3357,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "peanut-the-squirrel",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "CPOOL",
@@ -3345,7 +3369,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/CPOOL.png",
     "cmcSlug": "clearpool",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "ERA",
@@ -3357,7 +3381,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ERA.png",
     "cmcSlug": "caldera",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "MTL",
@@ -3369,7 +3393,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/MTL.png",
     "cmcSlug": "metal",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "STORJ",
@@ -3381,55 +3405,43 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/STORJ.png",
     "cmcSlug": "storj",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "HOOK",
-    "name_ko": "훅트 프로토콜",
-    "name_en": "Hooked Protocol",
-    "koreanPrice": 64.14,
-    "globalPrice": 0.043,
+    "symbol": "ZKC",
+    "name_ko": "바운드리스",
+    "name_en": "Boundless",
+    "koreanPrice": 223,
+    "globalPrice": 0.1495,
+    "premium": 1.21,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/ZKC.png",
+    "cmcSlug": "boundless",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "MET",
+    "name_ko": "메테오라",
+    "name_en": "Meteora",
+    "koreanPrice": 511,
+    "globalPrice": 0.3426,
     "premium": 1.21,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "hooked-protocol",
-    "updatedAt": 1764873709481
+    "cmcSlug": "meteora",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "LDO",
-    "name_ko": "리도다오",
-    "name_en": "Lido DAO",
-    "koreanPrice": 946,
-    "globalPrice": 0.6342,
+    "symbol": "TON",
+    "name_ko": "톤코인",
+    "name_en": "Toncoin",
+    "koreanPrice": 2382,
+    "globalPrice": 1.597,
     "premium": 1.21,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "lido-dao",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "AVAX",
-    "name_ko": "아발란체",
-    "name_en": "Avalanche",
-    "koreanPrice": 21610,
-    "globalPrice": 14.49,
-    "premium": 1.2,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/AVAX.png",
-    "cmcSlug": "avalanche",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "BABY",
-    "name_ko": "바빌론",
-    "name_en": "Babylon",
-    "koreanPrice": 29.5,
-    "globalPrice": 0.01978,
-    "premium": 1.2,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/BABY.png",
-    "cmcSlug": "babylon",
-    "updatedAt": 1764873709480
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "JTO",
@@ -3441,43 +3453,139 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/JTO.png",
     "cmcSlug": "jito",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "SOL",
-    "name_ko": "솔라나",
-    "name_en": "Solana",
-    "koreanPrice": 210700,
-    "globalPrice": 141.28,
+    "symbol": "NMR",
+    "name_ko": "뉴메레르",
+    "name_en": "Numeraire",
+    "koreanPrice": 16600,
+    "globalPrice": 11.13,
     "premium": 1.2,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/SOL.png",
-    "cmcSlug": "solana",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/NMR.png",
+    "cmcSlug": "numeraire",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "SD",
-    "name_ko": "스테이더",
-    "name_en": "Stader",
-    "koreanPrice": 380,
-    "globalPrice": 0.2548,
+    "symbol": "PENGU",
+    "name_ko": "펏지 펭귄",
+    "name_en": "Pudgy Penguins",
+    "koreanPrice": 17.8,
+    "globalPrice": 0.011935,
+    "premium": 1.2,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/PENGU.png",
+    "cmcSlug": "pudgy-penguins",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "QKC",
+    "name_ko": "쿼크체인",
+    "name_en": "QuarkChain",
+    "koreanPrice": 6.47,
+    "globalPrice": 0.004338,
+    "premium": 1.2,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/QKC.png",
+    "cmcSlug": "quarkchain",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "SAHARA",
+    "name_ko": "사하라에이아이",
+    "name_en": "Sahara AI",
+    "koreanPrice": 61,
+    "globalPrice": 0.0409,
+    "premium": 1.2,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/SAHARA.png",
+    "cmcSlug": "sahara-ai",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "FLR",
+    "name_ko": "플레어",
+    "name_en": "Flare",
+    "koreanPrice": 20.09,
+    "globalPrice": 0.01347,
     "premium": 1.2,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "stader",
-    "updatedAt": 1764873709481
+    "cmcSlug": "flare",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "POL",
-    "name_ko": "폴리곤 에코시스템 토큰",
-    "name_en": "Polygon Ecosystem Token",
-    "koreanPrice": 187,
-    "globalPrice": 0.1254,
+    "symbol": "MAV",
+    "name_ko": "매버릭 프로토콜",
+    "name_en": "Maverick Protocol",
+    "koreanPrice": 47.5,
+    "globalPrice": 0.03185,
+    "premium": 1.2,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "maverick-protocol",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "CTC",
+    "name_ko": "크레딧코인",
+    "name_en": "Creditcoin",
+    "koreanPrice": 428,
+    "globalPrice": 0.287,
     "premium": 1.19,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/POL.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/CTC.png",
+    "cmcSlug": "credit",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "HUMA",
+    "name_ko": "후마 파이낸스",
+    "name_en": "Huma Finance",
+    "koreanPrice": 42.04,
+    "globalPrice": 0.02819,
+    "premium": 1.19,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/HUMA.png",
+    "cmcSlug": "huma-finance",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "NEO",
+    "name_ko": "네오",
+    "name_en": "Neo",
+    "koreanPrice": 6265,
+    "globalPrice": 4.201,
+    "premium": 1.19,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/NEO.png",
+    "cmcSlug": "neo",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "SXP",
+    "name_ko": "솔라",
+    "name_en": "Solar",
+    "koreanPrice": 102,
+    "globalPrice": 0.0684,
+    "premium": 1.19,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/SXP.png",
+    "cmcSlug": "sxp",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "XRP",
+    "name_ko": "엑스알피 [리플]",
+    "name_en": "XRP",
+    "koreanPrice": 3136,
+    "globalPrice": 2.1029,
+    "premium": 1.19,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/XRP.png",
+    "cmcSlug": "ripple",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "GRASS",
@@ -3489,43 +3597,91 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "grass",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "PUMPBTC",
-    "name_ko": "펌프",
-    "name_en": "PUMP",
-    "koreanPrice": 42.59,
-    "globalPrice": 0.02856,
+    "symbol": "PEAQ",
+    "name_ko": "피크",
+    "name_en": "peaq",
+    "koreanPrice": 62.93,
+    "globalPrice": 0.0422,
     "premium": 1.19,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "pump",
-    "updatedAt": 1764873709481
+    "cmcSlug": "peaq",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "COMP",
-    "name_ko": "컴파운드",
-    "name_en": "Compound",
-    "koreanPrice": 50700,
-    "globalPrice": 34,
+    "symbol": "AAVE",
+    "name_ko": "에이브",
+    "name_en": "Aave",
+    "koreanPrice": 286000,
+    "globalPrice": 191.8,
     "premium": 1.18,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/COMP.png",
-    "cmcSlug": "compound",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/AAVE.png",
+    "cmcSlug": "aave",
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "SYRUP",
-    "name_ko": "메이플 파이낸스",
-    "name_en": "Maple Finance",
-    "koreanPrice": 392,
-    "globalPrice": 0.2629,
+    "symbol": "ENA",
+    "name_ko": "에테나",
+    "name_en": "Ethena",
+    "koreanPrice": 429,
+    "globalPrice": 0.2877,
     "premium": 1.18,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/SYRUP.png",
-    "cmcSlug": "maple-finance",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/ENA.png",
+    "cmcSlug": "ethena",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "MASK",
+    "name_ko": "마스크네트워크",
+    "name_en": "Mask Network",
+    "koreanPrice": 1005,
+    "globalPrice": 0.674,
+    "premium": 1.18,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/MASK.png",
+    "cmcSlug": "mask-network",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "REI",
+    "name_ko": "레이",
+    "name_en": "REI",
+    "koreanPrice": 10.99,
+    "globalPrice": 0.00737,
+    "premium": 1.18,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/REI.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "SOL",
+    "name_ko": "솔라나",
+    "name_en": "Solana",
+    "koreanPrice": 210500,
+    "globalPrice": 141.17,
+    "premium": 1.18,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/SOL.png",
+    "cmcSlug": "solana",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "UNI",
+    "name_ko": "유니스왑",
+    "name_en": "Uniswap",
+    "koreanPrice": 8880,
+    "globalPrice": 5.955,
+    "premium": 1.18,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/UNI.png",
+    "cmcSlug": "uniswap",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ASTR",
@@ -3537,43 +3693,43 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ASTR.png",
     "cmcSlug": "astar",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "KNC",
-    "name_ko": "카이버 네트워크",
-    "name_en": "Kyber Network",
-    "koreanPrice": 410,
-    "globalPrice": 0.275,
-    "premium": 1.17,
+    "symbol": "BLUR",
+    "name_ko": "블러",
+    "name_en": "Blur",
+    "koreanPrice": 54,
+    "globalPrice": 0.03622,
+    "premium": 1.16,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/KNC.png",
-    "cmcSlug": "kyber-network",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/BLUR.png",
+    "cmcSlug": "blur",
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "ME",
-    "name_ko": "매직 에덴",
-    "name_en": "Magic Eden",
-    "koreanPrice": 498,
-    "globalPrice": 0.334,
-    "premium": 1.17,
+    "symbol": "MMT",
+    "name_ko": "모멘텀",
+    "name_en": "Momentum",
+    "koreanPrice": 376,
+    "globalPrice": 0.2522,
+    "premium": 1.16,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ME.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/MMT.png",
+    "cmcSlug": "momentum",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "RESOLV",
-    "name_ko": "리졸브",
-    "name_en": "Resolv",
+    "symbol": "CFX",
+    "name_ko": "콘플럭스",
+    "name_en": "Conflux Network",
     "koreanPrice": 113,
     "globalPrice": 0.0758,
     "premium": 1.16,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/RESOLV.png",
-    "cmcSlug": "resolv",
-    "updatedAt": 1764873709481
+    "iconUrl": null,
+    "cmcSlug": "conflux-network",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "COS",
@@ -3585,7 +3741,91 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "contentos",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "FET",
+    "name_ko": "페치",
+    "name_en": "Fetch.ai",
+    "koreanPrice": 376,
+    "globalPrice": 0.2522,
+    "premium": 1.16,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "GALA",
+    "name_ko": "갈라",
+    "name_en": "Gala",
+    "koreanPrice": 11.39,
+    "globalPrice": 0.00764,
+    "premium": 1.16,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "gala",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "METIS",
+    "name_ko": "메티스다오",
+    "name_en": "MetisDAO",
+    "koreanPrice": 10630,
+    "globalPrice": 7.13,
+    "premium": 1.16,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "metisdao",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "ZTX",
+    "name_ko": "지티엑스",
+    "name_en": "ZTX",
+    "koreanPrice": 0.7602,
+    "globalPrice": 0.0005099,
+    "premium": 1.16,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "ztx",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "ANIME",
+    "name_ko": "애니메코인",
+    "name_en": "Animecoin",
+    "koreanPrice": 9.6,
+    "globalPrice": 0.00644,
+    "premium": 1.15,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/ANIME.png",
+    "cmcSlug": "anime",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "AVAX",
+    "name_ko": "아발란체",
+    "name_en": "Avalanche",
+    "koreanPrice": 21600,
+    "globalPrice": 14.49,
+    "premium": 1.15,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/AVAX.png",
+    "cmcSlug": "avalanche",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "BTC",
+    "name_ko": "비트코인",
+    "name_en": "Bitcoin",
+    "koreanPrice": 137222000,
+    "globalPrice": 92048.93,
+    "premium": 1.15,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/BITHUMB/BTC.png",
+    "cmcSlug": "bitcoin",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "LPT",
@@ -3597,67 +3837,31 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/LPT.png",
     "cmcSlug": "livepeer",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "SUI",
-    "name_ko": "수이",
-    "name_en": "SUI",
-    "koreanPrice": 2477,
-    "globalPrice": 1.6617,
+    "symbol": "XDC",
+    "name_ko": "엑스디씨 네트워크",
+    "name_en": "XDC Network",
+    "koreanPrice": 74.8,
+    "globalPrice": 0.05018,
     "premium": 1.15,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/SUI.png",
-    "cmcSlug": "sui",
-    "updatedAt": 1764873709481
+    "iconUrl": null,
+    "cmcSlug": "xdc-network",
+    "updatedAt": 1764873759898
   },
   {
-    "symbol": "VIRTUAL",
-    "name_ko": "버추얼 프로토콜",
-    "name_en": "Virtuals Protocol",
-    "koreanPrice": 1391,
-    "globalPrice": 0.9331,
-    "premium": 1.15,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/VIRTUAL.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "APE",
-    "name_ko": "에이프코인",
-    "name_en": "ApeCoin",
-    "koreanPrice": 361,
-    "globalPrice": 0.2422,
+    "symbol": "SOON",
+    "name_ko": "쑨",
+    "name_en": "SOON",
+    "koreanPrice": 656,
+    "globalPrice": 0.4401,
     "premium": 1.14,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/APE.png",
-    "cmcSlug": "ape",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "BTC",
-    "name_ko": "비트코인",
-    "name_en": "Bitcoin",
-    "koreanPrice": 137231000,
-    "globalPrice": 92070.56,
-    "premium": 1.14,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/BITHUMB/BTC.png",
-    "cmcSlug": "bitcoin",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "SAHARA",
-    "name_ko": "사하라에이아이",
-    "name_en": "Sahara AI",
-    "koreanPrice": 61.1,
-    "globalPrice": 0.04099,
-    "premium": 1.14,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/SAHARA.png",
-    "cmcSlug": "sahara-ai",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/SOON.png",
+    "cmcSlug": "soon",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "T",
@@ -3669,7 +3873,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/T.png",
     "cmcSlug": "threshold",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "USD1",
@@ -3681,7 +3885,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/USD1.png",
     "cmcSlug": "usd1",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "FLUX",
@@ -3693,7 +3897,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "flux",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "ICP",
+    "name_ko": "인터넷 컴퓨터",
+    "name_en": "Internet Computer",
+    "koreanPrice": 5500,
+    "globalPrice": 3.69,
+    "premium": 1.14,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "internet-computer",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "CVC",
@@ -3705,7 +3921,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/CVC.png",
     "cmcSlug": "civic",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "FIL",
@@ -3717,19 +3933,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/FIL.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "QKC",
-    "name_ko": "쿼크체인",
-    "name_en": "QuarkChain",
-    "koreanPrice": 6.47,
-    "globalPrice": 0.004341,
+    "symbol": "ZRO",
+    "name_ko": "레이어제로",
+    "name_en": "LayerZero",
+    "koreanPrice": 2103,
+    "globalPrice": 1.411,
     "premium": 1.13,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/QKC.png",
-    "cmcSlug": "quarkchain",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/ZRO.png",
+    "cmcSlug": "layerzero",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "BMT",
@@ -3741,7 +3957,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "bubblemaps",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "CAKE",
+    "name_ko": "팬케이크스왑",
+    "name_en": "PancakeSwap",
+    "koreanPrice": 3498,
+    "globalPrice": 2.347,
+    "premium": 1.13,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "pancakeswap",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "PYR",
@@ -3753,55 +3981,55 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "BARD",
-    "name_ko": "롬바드",
-    "name_en": "Lombard",
-    "koreanPrice": 1318,
-    "globalPrice": 0.8844,
+    "symbol": "AUCTION",
+    "name_ko": "바운스토큰",
+    "name_en": "Bounce Token",
+    "koreanPrice": 8450,
+    "globalPrice": 5.67,
     "premium": 1.12,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/BARD.png",
-    "cmcSlug": "lombard",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/AUCTION.png",
+    "cmcSlug": "bounce",
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "INIT",
-    "name_ko": "이니시아",
-    "name_en": "Initia",
-    "koreanPrice": 152,
-    "globalPrice": 0.102,
+    "symbol": "ETH",
+    "name_ko": "이더리움",
+    "name_en": "Ethereum",
+    "koreanPrice": 4685000,
+    "globalPrice": 3143.74,
     "premium": 1.12,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/INIT.png",
-    "cmcSlug": "initia",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/ETH.png",
+    "cmcSlug": "ethereum",
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "SOON",
-    "name_ko": "쑨",
-    "name_en": "SOON",
-    "koreanPrice": 656,
-    "globalPrice": 0.4402,
+    "symbol": "NXPC",
+    "name_ko": "넥스페이스",
+    "name_en": "NEXPACE",
+    "koreanPrice": 714,
+    "globalPrice": 0.4791,
     "premium": 1.12,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/SOON.png",
-    "cmcSlug": "soon",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/NXPC.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "UNI",
-    "name_ko": "유니스왑",
-    "name_en": "Uniswap",
-    "koreanPrice": 8885,
-    "globalPrice": 5.962,
+    "symbol": "SUI",
+    "name_ko": "수이",
+    "name_en": "SUI",
+    "koreanPrice": 2473,
+    "globalPrice": 1.6595,
     "premium": 1.12,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/UNI.png",
-    "cmcSlug": "uniswap",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/SUI.png",
+    "cmcSlug": "sui",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "EIGEN",
@@ -3813,19 +4041,43 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "eigenlayer",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "FLOKI",
+    "name_ko": "플로키",
+    "name_en": "FLOKI",
+    "koreanPrice": 0.0725,
+    "globalPrice": 0.00004865,
+    "premium": 1.12,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "floki",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "NIL",
+    "name_ko": "닐리온",
+    "name_en": "Nillion",
+    "koreanPrice": 114,
+    "globalPrice": 0.0765,
+    "premium": 1.12,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "nillion",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "TURBO",
     "name_ko": "터보",
     "name_en": "Turbo",
-    "koreanPrice": 3.578,
-    "globalPrice": 0.002401,
+    "koreanPrice": 3.572,
+    "globalPrice": 0.002397,
     "premium": 1.12,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "turbo",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "XAUT",
@@ -3837,31 +4089,55 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "tether-gold",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
-    "symbol": "AAVE",
-    "name_ko": "에이브",
-    "name_en": "Aave",
-    "koreanPrice": 286000,
-    "globalPrice": 191.93,
+    "symbol": "CRV",
+    "name_ko": "커브",
+    "name_en": "Curve DAO Token",
+    "koreanPrice": 619,
+    "globalPrice": 0.4154,
     "premium": 1.11,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/AAVE.png",
-    "cmcSlug": "aave",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/CRV.png",
+    "cmcSlug": "crv",
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "ENA",
-    "name_ko": "에테나",
-    "name_en": "Ethena",
-    "koreanPrice": 429,
-    "globalPrice": 0.2879,
+    "symbol": "ENSO",
+    "name_ko": "엔소",
+    "name_en": "Enso",
+    "koreanPrice": 1137,
+    "globalPrice": 0.763,
     "premium": 1.11,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ENA.png",
-    "cmcSlug": "ethena",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/ENSO.png",
+    "cmcSlug": "enso",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "FLUID",
+    "name_ko": "플루이드",
+    "name_en": "Fluid",
+    "koreanPrice": 5065,
+    "globalPrice": 3.399,
+    "premium": 1.11,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/FLUID.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "GMT",
+    "name_ko": "스테픈",
+    "name_en": "STEPN",
+    "koreanPrice": 25.6,
+    "globalPrice": 0.01718,
+    "premium": 1.11,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/GMT.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "IMX",
@@ -3873,7 +4149,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/IMX.png",
     "cmcSlug": "immutable-x",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "IQ",
@@ -3885,31 +4161,31 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/IQ.png",
     "cmcSlug": "iq",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "NMR",
-    "name_ko": "뉴메레르",
-    "name_en": "Numeraire",
-    "koreanPrice": 16600,
-    "globalPrice": 11.14,
-    "premium": 1.11,
+    "symbol": "APE",
+    "name_ko": "에이프코인",
+    "name_en": "ApeCoin",
+    "koreanPrice": 361,
+    "globalPrice": 0.2423,
+    "premium": 1.1,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/NMR.png",
-    "cmcSlug": "numeraire",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/APE.png",
+    "cmcSlug": "ape",
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "PROVE",
-    "name_ko": "석싱트",
-    "name_en": "Succinct",
-    "koreanPrice": 706,
-    "globalPrice": 0.4738,
-    "premium": 1.11,
+    "symbol": "AXL",
+    "name_ko": "엑셀라",
+    "name_en": "Axelar",
+    "koreanPrice": 177,
+    "globalPrice": 0.1188,
+    "premium": 1.1,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/PROVE.png",
-    "cmcSlug": "succinct",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/AXL.png",
+    "cmcSlug": "axelar",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "ENJ",
@@ -3921,19 +4197,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ENJ.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "ORDER",
-    "name_ko": "오덜리 네트워크",
-    "name_en": "Orderly Network",
-    "koreanPrice": 169,
-    "globalPrice": 0.11343,
+    "symbol": "LA",
+    "name_ko": "라그랑주",
+    "name_en": "Lagrange",
+    "koreanPrice": 589,
+    "globalPrice": 0.3953,
     "premium": 1.1,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ORDER.png",
-    "cmcSlug": "orderly-network",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/LA.png",
+    "cmcSlug": "lagrange",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "USDT",
@@ -3945,31 +4221,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/USDT.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "FLR",
-    "name_ko": "플레어",
-    "name_en": "Flare",
-    "koreanPrice": 20.07,
-    "globalPrice": 0.01347,
+    "symbol": "BOB",
+    "name_ko": "비오비",
+    "name_en": "BOB",
+    "koreanPrice": 31.43,
+    "globalPrice": 0.021094,
     "premium": 1.1,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "flare",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "AGLD",
-    "name_ko": "어드벤처골드",
-    "name_en": "Adventure Gold",
-    "koreanPrice": 438,
-    "globalPrice": 0.294,
-    "premium": 1.09,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/AGLD.png",
-    "cmcSlug": "adventure-gold",
-    "updatedAt": 1764873709480
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "BERA",
@@ -3981,19 +4245,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/BERA.png",
     "cmcSlug": "berachain",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "CRV",
-    "name_ko": "커브",
-    "name_en": "Curve DAO Token",
-    "koreanPrice": 619,
-    "globalPrice": 0.4155,
-    "premium": 1.09,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/CRV.png",
-    "cmcSlug": "crv",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "USDC",
@@ -4005,43 +4257,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/USDC.png",
     "cmcSlug": "usd",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "CAKE",
-    "name_ko": "팬케이크스왑",
-    "name_en": "PancakeSwap",
-    "koreanPrice": 3498,
-    "globalPrice": 2.348,
-    "premium": 1.09,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "pancakeswap",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "ILV",
-    "name_ko": "일루비움",
-    "name_en": "Illuvium",
-    "koreanPrice": 10980,
-    "globalPrice": 7.37,
-    "premium": 1.09,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "illuvium",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "MANTA",
-    "name_ko": "만타 네트워크",
-    "name_en": "Manta Network",
-    "koreanPrice": 146,
-    "globalPrice": 0.098,
-    "premium": 1.09,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "manta-network",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "XYO",
@@ -4053,19 +4269,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "xyo",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "BIGTIME",
-    "name_ko": "빅타임",
-    "name_en": "Big Time",
-    "koreanPrice": 35.5,
-    "globalPrice": 0.02383,
-    "premium": 1.08,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/BIGTIME.png",
-    "cmcSlug": "big-time",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "BIO",
@@ -4077,7 +4281,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/BIO.png",
     "cmcSlug": "bio",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "ETHFI",
@@ -4089,7 +4293,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ETHFI.png",
     "cmcSlug": "ether-fi",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "HP",
@@ -4101,31 +4305,31 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/HP.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "SAFE",
-    "name_ko": "세이프",
-    "name_en": "Safe",
-    "koreanPrice": 230,
-    "globalPrice": 0.1544,
+    "symbol": "RAY",
+    "name_ko": "레이디움",
+    "name_en": "Raydium",
+    "koreanPrice": 1804,
+    "globalPrice": 1.211,
     "premium": 1.08,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/SAFE.png",
-    "cmcSlug": "safe",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/RAY.png",
+    "cmcSlug": "raydium",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "ZKC",
-    "name_ko": "바운드리스",
-    "name_en": "Boundless",
-    "koreanPrice": 223,
-    "globalPrice": 0.1497,
+    "symbol": "TRUMP",
+    "name_ko": "오피셜 트럼프",
+    "name_en": "OFFICIAL TRUMP",
+    "koreanPrice": 8990,
+    "globalPrice": 6.035,
     "premium": 1.08,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ZKC.png",
-    "cmcSlug": "boundless",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/TRUMP.png",
+    "cmcSlug": "official-trump",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "C",
@@ -4137,19 +4341,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "chainbase",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "FLOKI",
-    "name_ko": "플로키",
-    "name_en": "FLOKI",
-    "koreanPrice": 0.0725,
-    "globalPrice": 0.00004867,
-    "premium": 1.08,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "floki",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "REZ",
@@ -4161,19 +4353,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "renzo",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "ETH",
-    "name_ko": "이더리움",
-    "name_en": "Ethereum",
-    "koreanPrice": 4687000,
-    "globalPrice": 3146.77,
+    "symbol": "APT",
+    "name_ko": "앱토스",
+    "name_en": "Aptos",
+    "koreanPrice": 2930,
+    "globalPrice": 1.967,
     "premium": 1.07,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ETH.png",
-    "cmcSlug": "ethereum",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/APT.png",
+    "cmcSlug": "aptos",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "KGEN",
+    "name_ko": "케이젠",
+    "name_en": "KGeN",
+    "koreanPrice": 282.6,
+    "globalPrice": 0.18972,
+    "premium": 1.07,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "kgen",
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "0G",
@@ -4185,19 +4389,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/0G.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "GMT",
-    "name_ko": "스테픈",
-    "name_en": "STEPN",
-    "koreanPrice": 25.6,
-    "globalPrice": 0.01719,
-    "premium": 1.05,
+    "symbol": "GRND",
+    "name_ko": "슈퍼워크",
+    "name_en": "Superwalk",
+    "koreanPrice": 43.58,
+    "globalPrice": 0.02926,
+    "premium": 1.06,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/GMT.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "iconUrl": null,
+    "cmcSlug": "superwalk",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "IOTX",
@@ -4209,31 +4413,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/IOTX.png",
     "cmcSlug": "iotex",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "REI",
-    "name_ko": "레이",
-    "name_en": "REI",
-    "koreanPrice": 10.99,
-    "globalPrice": 0.00738,
-    "premium": 1.05,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/REI.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "SKY",
-    "name_ko": "스카이 프로토콜",
-    "name_en": "Sky Protocol",
-    "koreanPrice": 83.75,
-    "globalPrice": 0.05624,
-    "premium": 1.05,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/SKY.png",
-    "cmcSlug": "sky",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "GNO",
@@ -4245,7 +4425,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "gnosis",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "FLOW",
@@ -4257,7 +4437,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/FLOW.png",
     "cmcSlug": "flow",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "HOLO",
@@ -4269,31 +4449,55 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/HOLO.png",
     "cmcSlug": "holoworld-ai",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "FLUID",
-    "name_ko": "플루이드",
-    "name_en": "Fluid",
-    "koreanPrice": 5055,
-    "globalPrice": 3.395,
-    "premium": 1.03,
+    "symbol": "LSK",
+    "name_ko": "리스크",
+    "name_en": "Lisk",
+    "koreanPrice": 341,
+    "globalPrice": 0.229,
+    "premium": 1.04,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/FLUID.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/LSK.png",
+    "cmcSlug": "lisk",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "MASK",
-    "name_ko": "마스크네트워크",
-    "name_en": "Mask Network",
-    "koreanPrice": 1005,
-    "globalPrice": 0.675,
+    "symbol": "TRX",
+    "name_ko": "트론",
+    "name_en": "TRON",
+    "koreanPrice": 422,
+    "globalPrice": 0.2834,
+    "premium": 1.04,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/TRX.png",
+    "cmcSlug": "tron",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "FXS",
+    "name_ko": "프랙스 셰어",
+    "name_en": "Frax Share",
+    "koreanPrice": 1230,
+    "globalPrice": 0.826,
+    "premium": 1.04,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "frax-share",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "SKY",
+    "name_ko": "스카이 프로토콜",
+    "name_en": "Sky Protocol",
+    "koreanPrice": 83.75,
+    "globalPrice": 0.05625,
     "premium": 1.03,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/MASK.png",
-    "cmcSlug": "mask-network",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/SKY.png",
+    "cmcSlug": "sky",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "FITFI",
@@ -4305,43 +4509,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "step-app",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "APT",
-    "name_ko": "앱토스",
-    "name_en": "Aptos",
-    "koreanPrice": 2930,
-    "globalPrice": 1.968,
-    "premium": 1.02,
+    "symbol": "WNCG",
+    "name_ko": "랩트 나인 크로니클 골드",
+    "name_en": "Wrapped NCG",
+    "koreanPrice": 12.15,
+    "globalPrice": 0.00816,
+    "premium": 1.03,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/APT.png",
-    "cmcSlug": "aptos",
-    "updatedAt": 1764873709480
+    "iconUrl": null,
+    "cmcSlug": "wrapped-ncg",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "BCH",
-    "name_ko": "비트코인 캐시",
-    "name_en": "Bitcoin Cash",
-    "koreanPrice": 852500,
-    "globalPrice": 572.6,
+    "symbol": "BTT",
+    "name_ko": "비트토렌트",
+    "name_en": "BitTorrent",
+    "koreanPrice": 0.000607,
+    "globalPrice": 4.077e-7,
     "premium": 1.02,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/BCH.png",
-    "cmcSlug": "bitcoin-cash",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "EUL",
-    "name_ko": "오일러",
-    "name_en": "Euler",
-    "koreanPrice": 5860,
-    "globalPrice": 3.936,
-    "premium": 1.02,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/EUL.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/BTT.png",
+    "cmcSlug": "bittorrent",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "HIVE",
@@ -4353,31 +4545,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/HIVE.png",
     "cmcSlug": "hive",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "IN",
-    "name_ko": "인피닛",
-    "name_en": "Infinit",
-    "koreanPrice": 137,
-    "globalPrice": 0.09202,
+    "symbol": "INIT",
+    "name_ko": "이니시아",
+    "name_en": "Initia",
+    "koreanPrice": 152,
+    "globalPrice": 0.1021,
     "premium": 1.02,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/IN.png",
-    "cmcSlug": "infinit",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "NXPC",
-    "name_ko": "넥스페이스",
-    "name_en": "NEXPACE",
-    "koreanPrice": 717,
-    "globalPrice": 0.4816,
-    "premium": 1.02,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/NXPC.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/INIT.png",
+    "cmcSlug": "initia",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "OPEN",
@@ -4389,7 +4569,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/OPEN.png",
     "cmcSlug": "openledger",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "DAO",
@@ -4401,7 +4581,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "dao-maker",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "KAIA",
@@ -4413,7 +4593,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "kaia",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "CETUS",
@@ -4425,43 +4605,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
-    "symbol": "AXL",
-    "name_ko": "엑셀라",
-    "name_en": "Axelar",
-    "koreanPrice": 177,
-    "globalPrice": 0.1189,
+    "symbol": "PEPE",
+    "name_ko": "페페",
+    "name_en": "PEPE",
+    "koreanPrice": 0.00716,
+    "globalPrice": 0.00000481,
     "premium": 1.01,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/AXL.png",
-    "cmcSlug": "axelar",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/PEPE.png",
+    "cmcSlug": "pepe",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "STG",
-    "name_ko": "스타게이트 파이낸스",
-    "name_en": "Stargate Finance",
-    "koreanPrice": 184,
-    "globalPrice": 0.1236,
+    "symbol": "SAFE",
+    "name_ko": "세이프",
+    "name_en": "Safe",
+    "koreanPrice": 230,
+    "globalPrice": 0.1545,
     "premium": 1.01,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/STG.png",
-    "cmcSlug": "stargate-finance",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "TRUMP",
-    "name_ko": "오피셜 트럼프",
-    "name_en": "OFFICIAL TRUMP",
-    "koreanPrice": 8990,
-    "globalPrice": 6.039,
-    "premium": 1.01,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/TRUMP.png",
-    "cmcSlug": "official-trump",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/SAFE.png",
+    "cmcSlug": "safe",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ARPA",
@@ -4473,19 +4641,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ARPA.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "RAD",
-    "name_ko": "래드웍스",
-    "name_en": "Radworks",
-    "koreanPrice": 451,
-    "globalPrice": 0.303,
+    "symbol": "CUDIS",
+    "name_ko": "쿠디스",
+    "name_en": "CUDIS",
+    "koreanPrice": 41.5,
+    "globalPrice": 0.02788,
     "premium": 1,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/RAD.png",
-    "cmcSlug": "radworks",
-    "updatedAt": 1764873709481
+    "iconUrl": null,
+    "cmcSlug": "cudis",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "HFT",
@@ -4497,55 +4665,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "hashflow",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "PARTI",
-    "name_ko": "파티클 네트워크",
-    "name_en": "Particle Network",
-    "koreanPrice": 181,
-    "globalPrice": 0.1216,
+    "symbol": "SKL",
+    "name_ko": "스케일",
+    "name_en": "SKALE",
+    "koreanPrice": 19.41,
+    "globalPrice": 0.01304,
     "premium": 1,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "particle-network",
-    "updatedAt": 1764873709481
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "ANIME",
-    "name_ko": "애니메코인",
-    "name_en": "Animecoin",
-    "koreanPrice": 9.6,
-    "globalPrice": 0.00645,
+    "symbol": "OP",
+    "name_ko": "옵티미즘",
+    "name_en": "Optimism",
+    "koreanPrice": 484,
+    "globalPrice": 0.3252,
     "premium": 0.99,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ANIME.png",
-    "cmcSlug": "anime",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "THETA",
-    "name_ko": "쎄타토큰",
-    "name_en": "Theta Token",
-    "koreanPrice": 512,
-    "globalPrice": 0.344,
-    "premium": 0.99,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/THETA.png",
-    "cmcSlug": "theta",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "XPL",
-    "name_ko": "플라즈마",
-    "name_en": "Plasma",
-    "koreanPrice": 292,
-    "globalPrice": 0.1962,
-    "premium": 0.99,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/XPL.png",
-    "cmcSlug": "plasma",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/OP.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "KMNO",
@@ -4557,7 +4701,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "kamino-finance",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "PAXG",
@@ -4569,67 +4713,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "pax-gold",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "ARDR",
-    "name_ko": "아더",
-    "name_en": "Ardor",
-    "koreanPrice": 87.8,
-    "globalPrice": 0.059,
+    "symbol": "BCH",
+    "name_ko": "비트코인 캐시",
+    "name_en": "Bitcoin Cash",
+    "koreanPrice": 852000,
+    "globalPrice": 572.5,
     "premium": 0.98,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ARDR.png",
-    "cmcSlug": "ardor",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/BCH.png",
+    "cmcSlug": "bitcoin-cash",
+    "updatedAt": 1764873759896
   },
   {
-    "symbol": "NIL",
-    "name_ko": "닐리온",
-    "name_en": "Nillion",
-    "koreanPrice": 114,
-    "globalPrice": 0.0766,
+    "symbol": "IN",
+    "name_ko": "인피닛",
+    "name_en": "Infinit",
+    "koreanPrice": 137,
+    "globalPrice": 0.09206,
     "premium": 0.98,
     "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "nillion",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "RPL",
-    "name_ko": "로켓풀",
-    "name_en": "Rocket Pool",
-    "koreanPrice": 3780,
-    "globalPrice": 2.54,
-    "premium": 0.98,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "rocket-pool",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "BRETT",
-    "name_ko": "브렛",
-    "name_en": "Brett",
-    "koreanPrice": 29.09,
-    "globalPrice": 0.01955,
-    "premium": 0.97,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/BRETT.png",
-    "cmcSlug": "brett",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "EPT",
-    "name_ko": "밸런스",
-    "name_en": "Balance",
-    "koreanPrice": 3.4,
-    "globalPrice": 0.002285,
-    "premium": 0.97,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/EPT.png",
-    "cmcSlug": "balance",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/IN.png",
+    "cmcSlug": "infinit",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "GAME2",
@@ -4641,7 +4749,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/GAME2.png",
     "cmcSlug": "gamebuild",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "ICX",
@@ -4653,7 +4761,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ICX.png",
     "cmcSlug": "icon",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "SNX",
@@ -4665,31 +4773,67 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/SNX.png",
     "cmcSlug": "synthetix-network",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "CUDIS",
-    "name_ko": "쿠디스",
-    "name_en": "CUDIS",
-    "koreanPrice": 41.5,
-    "globalPrice": 0.02789,
+    "symbol": "SONIC",
+    "name_ko": "소닉 에스브이엠",
+    "name_en": "Sonic SVM",
+    "koreanPrice": 125,
+    "globalPrice": 0.084,
     "premium": 0.97,
     "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "cudis",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/SONIC.png",
+    "cmcSlug": "sonic-svm",
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "PIXEL",
-    "name_ko": "픽셀즈",
-    "name_en": "Pixels",
-    "koreanPrice": 15.86,
-    "globalPrice": 0.01066,
+    "symbol": "ALGO",
+    "name_ko": "알고랜드",
+    "name_en": "Algorand",
+    "koreanPrice": 208,
+    "globalPrice": 0.1398,
+    "premium": 0.96,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/ALGO.png",
+    "cmcSlug": "algorand",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "BARD",
+    "name_ko": "롬바드",
+    "name_en": "Lombard",
+    "koreanPrice": 1319,
+    "globalPrice": 0.8865,
+    "premium": 0.96,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/BARD.png",
+    "cmcSlug": "lombard",
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "XLM",
+    "name_ko": "스텔라루멘",
+    "name_en": "Stellar Lumens",
+    "koreanPrice": 374,
+    "globalPrice": 0.2514,
     "premium": 0.95,
     "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "pixels",
-    "updatedAt": 1764873709482
+    "iconUrl": "/icons/UPBIT/XLM.png",
+    "cmcSlug": null,
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "ONDO",
+    "name_ko": "온도 파이낸스",
+    "name_en": "Ondo Finance",
+    "koreanPrice": 735,
+    "globalPrice": 0.4941,
+    "premium": 0.94,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/ONDO.png",
+    "cmcSlug": "ondo-finance",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "SEI",
@@ -4701,19 +4845,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/SEI.png",
     "cmcSlug": "sei",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "DVI",
-    "name_ko": "디비전",
-    "name_en": "Dvision Network",
-    "koreanPrice": 1.968,
-    "globalPrice": 0.001323,
-    "premium": 0.94,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "dvision-network",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "SAROS",
@@ -4725,19 +4857,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "saros",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "KGEN",
-    "name_ko": "케이젠",
-    "name_en": "KGeN",
-    "koreanPrice": 282.6,
-    "globalPrice": 0.18997,
-    "premium": 0.94,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "kgen",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "AIXBT",
@@ -4749,43 +4869,43 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "aixbt",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
-    "symbol": "DOGE",
-    "name_ko": "도지코인",
-    "name_en": "Dogecoin",
-    "koreanPrice": 221,
-    "globalPrice": 0.14857,
+    "symbol": "SC",
+    "name_ko": "시아코인",
+    "name_en": "Siacoin",
+    "koreanPrice": 2.49,
+    "globalPrice": 0.001674,
     "premium": 0.93,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/DOGE.png",
-    "cmcSlug": "dogecoin",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "OP",
-    "name_ko": "옵티미즘",
-    "name_en": "Optimism",
-    "koreanPrice": 484,
-    "globalPrice": 0.3254,
-    "premium": 0.93,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/OP.png",
+    "iconUrl": "/icons/UPBIT/SC.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "BTR",
-    "name_ko": "비트레이어",
-    "name_en": "Bitlayer",
-    "koreanPrice": 50.87,
-    "globalPrice": 0.0342,
+    "symbol": "STG",
+    "name_ko": "스타게이트 파이낸스",
+    "name_en": "Stargate Finance",
+    "koreanPrice": 184,
+    "globalPrice": 0.1237,
     "premium": 0.93,
     "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "bitlayer",
-    "updatedAt": 1764873709481
+    "iconUrl": "/icons/UPBIT/STG.png",
+    "cmcSlug": "stargate-finance",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "TIA",
+    "name_ko": "셀레스티아",
+    "name_en": "Celestia",
+    "koreanPrice": 946,
+    "globalPrice": 0.636,
+    "premium": 0.93,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/TIA.png",
+    "cmcSlug": "celestia",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "EDU",
@@ -4797,7 +4917,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "open-campus",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "THE",
@@ -4809,7 +4929,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "thena",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ONT",
@@ -4821,43 +4941,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ONT.png",
     "cmcSlug": "ontology",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "FXS",
-    "name_ko": "프랙스 셰어",
-    "name_en": "Frax Share",
-    "koreanPrice": 1230,
-    "globalPrice": 0.827,
-    "premium": 0.92,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "frax-share",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "SKL",
-    "name_ko": "스케일",
-    "name_en": "SKALE",
-    "koreanPrice": 19.41,
-    "globalPrice": 0.01305,
-    "premium": 0.92,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "BFC",
-    "name_ko": "바이프로스트",
-    "name_en": "Bifrost",
-    "koreanPrice": 32.42,
-    "globalPrice": 0.0218,
-    "premium": 0.91,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/BFC.png",
-    "cmcSlug": "bifrost",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "BORA",
@@ -4869,7 +4953,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/BORA.png",
     "cmcSlug": "bora",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "BRETT",
+    "name_ko": "브렛",
+    "name_en": "Brett",
+    "koreanPrice": 29.09,
+    "globalPrice": 0.01956,
+    "premium": 0.91,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/BRETT.png",
+    "cmcSlug": "brett",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "OGN",
@@ -4881,31 +4977,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/OGN.png",
     "cmcSlug": "origin-protocol",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "XLM",
-    "name_ko": "스텔라루멘",
-    "name_en": "Stellar Lumens",
-    "koreanPrice": 374,
-    "globalPrice": 0.2515,
-    "premium": 0.91,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/XLM.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "MET",
-    "name_ko": "메테오라",
-    "name_en": "Meteora",
-    "koreanPrice": 511,
-    "globalPrice": 0.3436,
-    "premium": 0.91,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "meteora",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "GLM",
@@ -4917,19 +4989,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/GLM.png",
     "cmcSlug": "golem",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "ONDO",
-    "name_ko": "온도 파이낸스",
-    "name_en": "Ondo Finance",
-    "koreanPrice": 735,
-    "globalPrice": 0.4943,
-    "premium": 0.9,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/ONDO.png",
-    "cmcSlug": "ondo-finance",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "OM",
@@ -4941,7 +5001,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/OM.png",
     "cmcSlug": "mantra",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "XPR",
@@ -4953,43 +5013,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "BTT",
-    "name_ko": "비트토렌트",
-    "name_en": "BitTorrent",
-    "koreanPrice": 0.000606,
-    "globalPrice": 4.076e-7,
-    "premium": 0.88,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/BTT.png",
-    "cmcSlug": "bittorrent",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "C98",
-    "name_ko": "코인98",
-    "name_en": "Coin98",
-    "koreanPrice": 41.48,
-    "globalPrice": 0.0279,
-    "premium": 0.88,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "coin98",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "ROA",
-    "name_ko": "로아코어",
-    "name_en": "ROA CORE",
-    "koreanPrice": 10.08,
-    "globalPrice": 0.00678,
-    "premium": 0.88,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "roa-core",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "CELO",
@@ -5001,19 +5025,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/CELO.png",
     "cmcSlug": "celo",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "SC",
-    "name_ko": "시아코인",
-    "name_en": "Siacoin",
-    "koreanPrice": 2.49,
-    "globalPrice": 0.001675,
-    "premium": 0.87,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/SC.png",
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "XVS",
@@ -5025,7 +5037,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "venus",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "APEPE",
+    "name_ko": "에이프앤페페",
+    "name_en": "Ape and Pepe",
+    "koreanPrice": 0.0022,
+    "globalPrice": 0.0000014799,
+    "premium": 0.87,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "ape-and-pepe",
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "USDS",
@@ -5037,7 +5061,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/USDS.png",
     "cmcSlug": "usds",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "SYND",
@@ -5049,19 +5073,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "syndicate",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "SONIC",
-    "name_ko": "소닉 에스브이엠",
-    "name_en": "Sonic SVM",
-    "koreanPrice": 125,
-    "globalPrice": 0.0841,
-    "premium": 0.85,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/SONIC.png",
-    "cmcSlug": "sonic-svm",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "STRAX",
@@ -5073,7 +5085,31 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/STRAX.png",
     "cmcSlug": "stratis",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "AL",
+    "name_ko": "아치루트",
+    "name_en": "ArchLoot",
+    "koreanPrice": 21.25,
+    "globalPrice": 0.0143,
+    "premium": 0.83,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "archloot",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "BB",
+    "name_ko": "바운스빗",
+    "name_en": "BounceBit",
+    "koreanPrice": 126,
+    "globalPrice": 0.0848,
+    "premium": 0.82,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "bouncebit",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "CBK",
@@ -5085,7 +5121,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/CBK.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
+  },
+  {
+    "symbol": "JST",
+    "name_ko": "저스트",
+    "name_en": "JUST",
+    "koreanPrice": 58.4,
+    "globalPrice": 0.03931,
+    "premium": 0.81,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/JST.png",
+    "cmcSlug": "just",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "RLC",
@@ -5097,19 +5145,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/RLC.png",
     "cmcSlug": "rlc",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "CTC",
-    "name_ko": "크레딧코인",
-    "name_en": "Creditcoin",
-    "koreanPrice": 429,
-    "globalPrice": 0.2888,
-    "premium": 0.8,
+    "symbol": "AWE",
+    "name_ko": "에이더블유이",
+    "name_en": "AWE Network",
+    "koreanPrice": 90.3,
+    "globalPrice": 0.06079,
+    "premium": 0.79,
     "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/CTC.png",
-    "cmcSlug": "credit",
-    "updatedAt": 1764873709480
+    "iconUrl": "/icons/UPBIT/AWE.png",
+    "cmcSlug": "awe-network",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "ACX",
@@ -5121,7 +5169,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "across-protocol",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "CTSI",
@@ -5133,19 +5181,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/CTSI.png",
     "cmcSlug": "cartesi",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "JST",
-    "name_ko": "저스트",
-    "name_en": "JUST",
-    "koreanPrice": 58.4,
-    "globalPrice": 0.03932,
-    "premium": 0.78,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/JST.png",
-    "cmcSlug": "just",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "RSS3",
@@ -5157,7 +5193,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "rss3",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "F",
@@ -5169,7 +5205,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/F.png",
     "cmcSlug": "synfutures",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "TFUEL",
@@ -5181,7 +5217,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/TFUEL.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "D",
@@ -5193,7 +5229,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "d",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "PIXEL",
+    "name_ko": "픽셀즈",
+    "name_en": "Pixels",
+    "koreanPrice": 15.86,
+    "globalPrice": 0.01068,
+    "premium": 0.77,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "pixels",
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "SUPER",
+    "name_ko": "슈퍼버스",
+    "name_en": "SuperVerse",
+    "koreanPrice": 385,
+    "globalPrice": 0.2593,
+    "premium": 0.75,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/SUPER.png",
+    "cmcSlug": "superverse",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "NTRN",
@@ -5205,55 +5265,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "neutron",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "SUPER",
-    "name_ko": "슈퍼버스",
-    "name_en": "SuperVerse",
-    "koreanPrice": 385,
-    "globalPrice": 0.2594,
-    "premium": 0.71,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/SUPER.png",
-    "cmcSlug": "superverse",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "BB",
-    "name_ko": "바운스빗",
-    "name_en": "BounceBit",
-    "koreanPrice": 126,
-    "globalPrice": 0.0849,
-    "premium": 0.7,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "bouncebit",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "AL",
-    "name_ko": "아치루트",
-    "name_en": "ArchLoot",
-    "koreanPrice": 21.25,
-    "globalPrice": 0.01432,
-    "premium": 0.69,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "archloot",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "AWE",
-    "name_ko": "에이더블유이",
-    "name_en": "AWE Network",
-    "koreanPrice": 90.2,
-    "globalPrice": 0.06079,
-    "premium": 0.68,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/AWE.png",
-    "cmcSlug": "awe-network",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "AR",
@@ -5265,19 +5277,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "arweave",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "MAY",
-    "name_ko": "메이플라워",
-    "name_en": "Mayflower",
-    "koreanPrice": 28.1,
-    "globalPrice": 0.01894,
-    "premium": 0.67,
+    "symbol": "KAS",
+    "name_ko": "카스파",
+    "name_en": "Kaspa",
+    "koreanPrice": 82.75,
+    "globalPrice": 0.05577,
+    "premium": 0.68,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "cmcSlug": "kaspa",
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "EPT",
+    "name_ko": "밸런스",
+    "name_en": "Balance",
+    "koreanPrice": 3.396,
+    "globalPrice": 0.002289,
+    "premium": 0.67,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/EPT.png",
+    "cmcSlug": "balance",
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "STO",
@@ -5289,43 +5313,43 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "stakestone",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "KAS",
-    "name_ko": "카스파",
-    "name_en": "Kaspa",
-    "koreanPrice": 82.75,
-    "globalPrice": 0.05579,
-    "premium": 0.64,
+    "symbol": "BOME",
+    "name_ko": "북오브밈",
+    "name_en": "Book of Meme",
+    "koreanPrice": 1.065,
+    "globalPrice": 0.000718,
+    "premium": 0.65,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "kaspa",
-    "updatedAt": 1764873709482
+    "cmcSlug": "book-of-meme",
+    "updatedAt": 1764873759898
   },
   {
-    "symbol": "MEW",
-    "name_ko": "캣인어독스월드",
-    "name_en": "cat in a dogs world",
-    "koreanPrice": 1.71,
-    "globalPrice": 0.001153,
-    "premium": 0.63,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/MEW.png",
-    "cmcSlug": "cat-in-a-dogs-world",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "HOME",
-    "name_ko": "디파이 앱",
-    "name_en": "Defi App",
-    "koreanPrice": 35.95,
-    "globalPrice": 0.02426,
-    "premium": 0.55,
+    "symbol": "LISTA",
+    "name_ko": "리스타 다오",
+    "name_en": "Lista DAO",
+    "koreanPrice": 280,
+    "globalPrice": 0.1889,
+    "premium": 0.58,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "defi-app",
-    "updatedAt": 1764873709481
+    "cmcSlug": "lista-dao",
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "RPL",
+    "name_ko": "로켓풀",
+    "name_en": "Rocket Pool",
+    "koreanPrice": 3780,
+    "globalPrice": 2.55,
+    "premium": 0.58,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "rocket-pool",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "SUN",
@@ -5337,19 +5361,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/SUN.png",
     "cmcSlug": "sun",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "BOME",
-    "name_ko": "북오브밈",
-    "name_en": "Book of Meme",
-    "koreanPrice": 1.065,
-    "globalPrice": 0.000719,
+    "symbol": "HOME",
+    "name_ko": "디파이 앱",
+    "name_en": "Defi App",
+    "koreanPrice": 35.95,
+    "globalPrice": 0.02427,
     "premium": 0.51,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": "book-of-meme",
-    "updatedAt": 1764873709482
+    "cmcSlug": "defi-app",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "USDE",
@@ -5361,19 +5385,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "ethena-usde",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "LISTA",
-    "name_ko": "리스타 다오",
-    "name_en": "Lista DAO",
-    "koreanPrice": 280,
-    "globalPrice": 0.1891,
-    "premium": 0.47,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "lista-dao",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "EDGE",
@@ -5385,7 +5397,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "definitive",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "NCT",
+    "name_ko": "폴리스웜",
+    "name_en": "Polyswarm",
+    "koreanPrice": 15.66,
+    "globalPrice": 0.01058,
+    "premium": 0.44,
+    "usdKrw": 1473.74,
+    "iconUrl": "/icons/UPBIT/NCT.png",
+    "cmcSlug": "polyswarm",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "WEN",
@@ -5397,31 +5421,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "wen",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "STAT",
-    "name_ko": "스탯",
-    "name_en": "STAT",
-    "koreanPrice": 64.77,
-    "globalPrice": 0.04377,
-    "premium": 0.41,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "stat",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "MERL",
     "name_ko": "멀린 체인",
     "name_en": "Merlin Chain",
     "koreanPrice": 531,
-    "globalPrice": 0.35888,
-    "premium": 0.4,
+    "globalPrice": 0.35879,
+    "premium": 0.42,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "merlin-chain",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "A8",
@@ -5433,31 +5445,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "ancient8",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "SKYAI",
-    "name_ko": "스카이에이아이",
-    "name_en": "SkyAI",
-    "koreanPrice": 39.33,
-    "globalPrice": 0.02659,
-    "premium": 0.37,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "skyai",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "IRYS",
-    "name_ko": "아이리스",
-    "name_en": "Irys",
-    "koreanPrice": 53.21,
-    "globalPrice": 0.035981,
-    "premium": 0.35,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "irys",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "BNT",
@@ -5469,19 +5457,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/BNT.png",
     "cmcSlug": "bancor",
-    "updatedAt": 1764873709480
-  },
-  {
-    "symbol": "NCT",
-    "name_ko": "폴리스웜",
-    "name_en": "Polyswarm",
-    "koreanPrice": 15.66,
-    "globalPrice": 0.01059,
-    "premium": 0.34,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/NCT.png",
-    "cmcSlug": "polyswarm",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "SIX",
@@ -5493,7 +5469,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "six",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "TDROP",
@@ -5505,7 +5481,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "thetadrop",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "PTB",
+    "name_ko": "포털투비트코인",
+    "name_en": "Portal To Bitcoin",
+    "koreanPrice": 8.37,
+    "globalPrice": 0.00566,
+    "premium": 0.34,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": null,
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "STAT",
+    "name_ko": "스탯",
+    "name_en": "STAT",
+    "koreanPrice": 64.7,
+    "globalPrice": 0.04376,
+    "premium": 0.32,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "stat",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "L3",
@@ -5517,7 +5517,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "layer3",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "STEEM",
@@ -5529,7 +5529,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/STEEM.png",
     "cmcSlug": "steem",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "SFP",
+    "name_ko": "세이프팔",
+    "name_en": "Safepal",
+    "koreanPrice": 495,
+    "globalPrice": 0.335,
+    "premium": 0.26,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "safepal",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ZEUS",
@@ -5541,7 +5553,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "zeus-network",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "ACE",
@@ -5553,7 +5565,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "fusionist",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "HEMI",
@@ -5565,19 +5577,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "hemi",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
-    "symbol": "PTB",
-    "name_ko": "포털투비트코인",
-    "name_en": "Portal To Bitcoin",
-    "koreanPrice": 8.37,
-    "globalPrice": 0.00567,
-    "premium": 0.17,
+    "symbol": "IRYS",
+    "name_ko": "아이리스",
+    "name_en": "Irys",
+    "koreanPrice": 53.23,
+    "globalPrice": 0.036072,
+    "premium": 0.13,
     "usdKrw": 1473.74,
     "iconUrl": null,
-    "cmcSlug": null,
-    "updatedAt": 1764873709482
+    "cmcSlug": "irys",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "SPURS",
@@ -5589,43 +5601,31 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/SPURS.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "DMAIL",
-    "name_ko": "디메일",
-    "name_en": "Dmail",
-    "koreanPrice": 5.01,
-    "globalPrice": 0.0034,
-    "premium": -0.01,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": null,
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "MEME",
     "name_ko": "밈코인",
     "name_en": "Memecoin",
     "koreanPrice": 1.781,
-    "globalPrice": 0.00121,
-    "premium": -0.12,
+    "globalPrice": 0.001209,
+    "premium": -0.04,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "meme",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "MVL",
     "name_ko": "엠블",
     "name_en": "MVL",
     "koreanPrice": 2.55,
-    "globalPrice": 0.001733,
-    "premium": -0.16,
+    "globalPrice": 0.001732,
+    "premium": -0.1,
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/MVL.png",
     "cmcSlug": "mvl",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "SWELL",
@@ -5637,19 +5637,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/SWELL.png",
     "cmcSlug": "swell-network",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "SFP",
-    "name_ko": "세이프팔",
-    "name_en": "Safepal",
-    "koreanPrice": 495,
-    "globalPrice": 0.3365,
-    "premium": -0.18,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "safepal",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "MAPO",
@@ -5661,7 +5649,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "map-protocol",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "DODO",
@@ -5673,7 +5661,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "dodo",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
+  },
+  {
+    "symbol": "DMAIL",
+    "name_ko": "디메일",
+    "name_en": "Dmail",
+    "koreanPrice": 5.01,
+    "globalPrice": 0.00341,
+    "premium": -0.31,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": null,
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "AZIT",
@@ -5685,7 +5685,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "azit",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "MYX",
@@ -5697,7 +5697,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "myx-finance",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "MAK",
@@ -5709,19 +5709,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "metacene",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "TAKE",
     "name_ko": "오버테이크",
     "name_en": "Overtake",
     "koreanPrice": 448.4,
-    "globalPrice": 0.30644,
-    "premium": -0.71,
+    "globalPrice": 0.30637,
+    "premium": -0.69,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "overtake",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "TRAC",
@@ -5733,67 +5733,67 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "MILK",
-    "name_ko": "밀키웨이",
-    "name_en": "MilkyWay",
-    "koreanPrice": 15.5,
-    "globalPrice": 0.01062,
-    "premium": -0.97,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "milkyway",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "FAI",
-    "name_ko": "프레이사",
-    "name_en": "Freysa",
-    "koreanPrice": 5.59,
-    "globalPrice": 0.003834,
-    "premium": -1.07,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": null,
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "HIPPO",
     "name_ko": "수뎅",
     "name_en": "Sudeng",
     "koreanPrice": 1.834,
-    "globalPrice": 0.001259,
-    "premium": -1.16,
+    "globalPrice": 0.00126,
+    "premium": -1.23,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "sudeng",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "MILK",
+    "name_ko": "밀키웨이",
+    "name_en": "MilkyWay",
+    "koreanPrice": 15.5,
+    "globalPrice": 0.01065,
+    "premium": -1.24,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "milkyway",
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "FAI",
+    "name_ko": "프레이사",
+    "name_en": "Freysa",
+    "koreanPrice": 5.59,
+    "globalPrice": 0.003856,
+    "premium": -1.63,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": null,
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "PHA",
     "name_ko": "팔라 네트워크",
     "name_en": "Phala Network",
     "koreanPrice": 61.1,
-    "globalPrice": 0.0422,
-    "premium": -1.76,
+    "globalPrice": 0.0423,
+    "premium": -1.99,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "phala-network",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "VINE",
     "name_ko": "바인 코인",
     "name_en": "Vine Coin",
     "koreanPrice": 43.95,
-    "globalPrice": 0.03036,
-    "premium": -1.77,
+    "globalPrice": 0.03044,
+    "premium": -2.03,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "RON",
@@ -5805,7 +5805,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "ronin",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "MASA",
@@ -5817,7 +5817,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "ISK",
@@ -5829,19 +5829,31 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "iskra",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "DATA",
+    "name_ko": "스트리머",
+    "name_en": "Streamr",
+    "koreanPrice": 9.87,
+    "globalPrice": 0.00688,
+    "premium": -2.66,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "streamr",
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "CHILLGUY",
     "name_ko": "칠가이",
     "name_en": "Just a chill guy",
     "koreanPrice": 28.76,
-    "globalPrice": 0.02008,
-    "premium": -2.81,
+    "globalPrice": 0.02006,
+    "premium": -2.72,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "just-a-chill-guy",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "SEND",
@@ -5853,31 +5865,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "suilend",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "DATA",
-    "name_ko": "스트리머",
-    "name_en": "Streamr",
-    "koreanPrice": 9.87,
-    "globalPrice": 0.0069,
-    "premium": -2.94,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "streamr",
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "MBL",
-    "name_ko": "무비블록",
-    "name_en": "MovieBloc",
-    "koreanPrice": 2.02,
-    "globalPrice": 0.001413,
-    "premium": -3,
-    "usdKrw": 1473.74,
-    "iconUrl": "/icons/UPBIT/MBL.png",
-    "cmcSlug": "moviebloc",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "VIC",
@@ -5889,43 +5877,55 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "viction",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
-    "symbol": "WBTC",
-    "name_ko": "랩트비트코인",
-    "name_en": "Wrapped Bitcoin",
-    "koreanPrice": 129620000,
-    "globalPrice": 91941.1,
-    "premium": -4.34,
+    "symbol": "MBL",
+    "name_ko": "무비블록",
+    "name_en": "MovieBloc",
+    "koreanPrice": 2,
+    "globalPrice": 0.001412,
+    "premium": -3.89,
     "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": null,
-    "updatedAt": 1764873709482
-  },
-  {
-    "symbol": "NS",
-    "name_ko": "수이 네임 서비스",
-    "name_en": "Sui Name Service",
-    "koreanPrice": 60,
-    "globalPrice": 0.04285,
-    "premium": -4.99,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "sui-name-service",
-    "updatedAt": 1764873709482
+    "iconUrl": "/icons/UPBIT/MBL.png",
+    "cmcSlug": "moviebloc",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "CLEAR",
     "name_ko": "에버클리어",
     "name_en": "Everclear",
     "koreanPrice": 9.02,
-    "globalPrice": 0.006449,
-    "premium": -5.09,
+    "globalPrice": 0.006387,
+    "premium": -4.17,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "everclear",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "WBTC",
+    "name_ko": "랩트비트코인",
+    "name_en": "Wrapped Bitcoin",
+    "koreanPrice": 129620000,
+    "globalPrice": 91945.26,
+    "premium": -4.34,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": null,
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "NS",
+    "name_ko": "수이 네임 서비스",
+    "name_en": "Sui Name Service",
+    "koreanPrice": 60,
+    "globalPrice": 0.04273,
+    "premium": -4.72,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "sui-name-service",
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "AERGO",
@@ -5937,7 +5937,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/AERGO.png",
     "cmcSlug": "aergo",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "FORTH",
@@ -5949,19 +5949,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "MOG",
     "name_ko": "모그",
     "name_en": "Mog",
     "koreanPrice": 0.0004,
-    "globalPrice": 2.97e-7,
-    "premium": -8.61,
+    "globalPrice": 2.972e-7,
+    "premium": -8.67,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "PONKE",
@@ -5973,7 +5973,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "ponke",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "NFT",
@@ -5985,7 +5985,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "apenft",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "MYRO",
@@ -5997,7 +5997,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "myro",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "ALPHA",
@@ -6009,19 +6009,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "alpha",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "LION",
     "name_ko": "로디드라이언즈",
     "name_en": "Loaded Lions",
     "koreanPrice": 9.5,
-    "globalPrice": 0.007495,
-    "premium": -13.99,
+    "globalPrice": 0.007507,
+    "premium": -14.13,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "loaded-lions",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "PORT3",
@@ -6033,7 +6033,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "port3-network",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "BAL",
@@ -6045,7 +6045,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "balancer",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "WAVES",
@@ -6057,7 +6057,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/WAVES.png",
     "cmcSlug": "waves",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "SNT",
@@ -6069,7 +6069,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/SNT.png",
     "cmcSlug": "snt",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "ELF",
@@ -6081,7 +6081,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ELF.png",
     "cmcSlug": "aelf",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "ORBS",
@@ -6093,7 +6093,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ORBS.png",
     "cmcSlug": "orbs",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "HIFI",
@@ -6105,7 +6105,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "hifi-finance",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
+  },
+  {
+    "symbol": "AI16Z",
+    "name_ko": "에이아이식스틴즈",
+    "name_en": "ai16z",
+    "koreanPrice": 22.57,
+    "globalPrice": 0.06168,
+    "premium": -75.17,
+    "usdKrw": 1473.74,
+    "iconUrl": null,
+    "cmcSlug": "ai16z",
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "CTXC",
@@ -6117,19 +6129,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "cortex",
-    "updatedAt": 1764873709481
-  },
-  {
-    "symbol": "AI16Z",
-    "name_ko": "에이아이식스틴즈",
-    "name_en": "ai16z",
-    "koreanPrice": 22.34,
-    "globalPrice": 0.06168,
-    "premium": -75.42,
-    "usdKrw": 1473.74,
-    "iconUrl": null,
-    "cmcSlug": "ai16z",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "CLV",
@@ -6141,7 +6141,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "EGG",
@@ -6153,7 +6153,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "nestree",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "BEAM",
@@ -6165,31 +6165,31 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/BEAM.png",
     "cmcSlug": "beam",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "ACM",
     "name_ko": "AC밀란",
     "name_en": "AC Milan Fan Token",
     "koreanPrice": null,
-    "globalPrice": 0.555,
+    "globalPrice": 0.556,
     "premium": null,
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ACM.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "AFC",
     "name_ko": "아스날",
     "name_en": "Arsenal Fan Token",
     "koreanPrice": null,
-    "globalPrice": 0.4102,
+    "globalPrice": 0.4108,
     "premium": null,
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/AFC.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "AHT",
@@ -6201,7 +6201,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/AHT.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "ATM",
@@ -6213,7 +6213,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/ATM.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "BAR",
@@ -6225,7 +6225,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/BAR.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "BOUNTY",
@@ -6237,7 +6237,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/BOUNTY.png",
     "cmcSlug": "bounty",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "CITY",
@@ -6249,7 +6249,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/CITY.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "DENT",
@@ -6261,19 +6261,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/DENT.png",
     "cmcSlug": "dent",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "DGB",
     "name_ko": "디지바이트",
     "name_en": "DigiByte",
     "koreanPrice": null,
-    "globalPrice": 0.00637,
+    "globalPrice": 0.00636,
     "premium": null,
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/DGB.png",
     "cmcSlug": "digibyte",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "DNT",
@@ -6285,7 +6285,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/DNT.png",
     "cmcSlug": "district0x",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "GLMR",
@@ -6297,43 +6297,43 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/GLMR.png",
     "cmcSlug": "moonbeam",
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "GRS",
     "name_ko": "그로스톨코인",
     "name_en": "Groestlcoin",
-    "koreanPrice": 282,
+    "koreanPrice": 283,
     "globalPrice": null,
     "premium": null,
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/GRS.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "INTER",
     "name_ko": "인터밀란",
     "name_en": "Inter Milan Fan Token",
     "koreanPrice": null,
-    "globalPrice": 0.3312,
+    "globalPrice": 0.331,
     "premium": null,
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/INTER.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "JUV",
     "name_ko": "유벤투스",
     "name_en": "Juventus Fan Token",
     "koreanPrice": null,
-    "globalPrice": 0.652,
+    "globalPrice": 0.653,
     "premium": null,
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/JUV.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709480
+    "updatedAt": 1764873759896
   },
   {
     "symbol": "MET2",
@@ -6345,7 +6345,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/MET2.png",
     "cmcSlug": "meteora",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "META",
@@ -6357,7 +6357,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/META.png",
     "cmcSlug": "metadium",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "MOC",
@@ -6369,19 +6369,19 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/MOC.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "NAP",
     "name_ko": "나폴리",
     "name_en": "Napoli Fan Token",
     "koreanPrice": null,
-    "globalPrice": 0.3814,
+    "globalPrice": 0.378,
     "premium": null,
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/NAP.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "NKN",
@@ -6393,7 +6393,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/NKN.png",
     "cmcSlug": "nkn",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "OBSR",
@@ -6405,7 +6405,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/OBSR.png",
     "cmcSlug": "observer",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "OCEAN",
@@ -6417,7 +6417,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/OCEAN.png",
     "cmcSlug": "ocean-protocol",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "PSG",
@@ -6429,7 +6429,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/PSG.png",
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "TOKAMAK",
@@ -6441,7 +6441,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/TOKAMAK.png",
     "cmcSlug": "tokamak-network",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "TUSD",
@@ -6453,7 +6453,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/TUSD.png",
     "cmcSlug": "trueusd",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "USDP",
@@ -6465,7 +6465,7 @@
     "usdKrw": 1473.74,
     "iconUrl": "/icons/UPBIT/USDP.png",
     "cmcSlug": "usdp",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "AMO",
@@ -6477,19 +6477,19 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "APM",
     "name_ko": "에이피엠 코인",
     "name_en": "apM Coin",
-    "koreanPrice": 1.919,
+    "koreanPrice": 1.929,
     "globalPrice": null,
     "premium": null,
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "BIOT",
@@ -6501,7 +6501,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "EVZ",
@@ -6513,7 +6513,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "FANC",
@@ -6525,7 +6525,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "fanc",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "GRACY",
@@ -6537,7 +6537,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "MEV",
@@ -6549,7 +6549,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "meverse",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "MVC",
@@ -6561,7 +6561,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "mileverse",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "POLA",
@@ -6573,7 +6573,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "polaris-share",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "TEMCO",
@@ -6585,7 +6585,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "temco",
-    "updatedAt": 1764873709481
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "WIKEN",
@@ -6597,7 +6597,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "project-with",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "HVH",
@@ -6609,7 +6609,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "havah",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "TALK",
@@ -6621,7 +6621,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "talken",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759897
   },
   {
     "symbol": "REKT",
@@ -6633,7 +6633,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "rekt",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "CLBK",
@@ -6645,7 +6645,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "cloudbric",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "SKLAY",
@@ -6657,7 +6657,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "sklay",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "FNCY",
@@ -6669,7 +6669,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "fncy",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "SODA",
@@ -6681,7 +6681,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "HPP",
@@ -6693,7 +6693,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "house-party-protocol",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "LZM",
@@ -6705,7 +6705,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": null,
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "BAAS",
@@ -6717,7 +6717,7 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "baasid",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   },
   {
     "symbol": "GXA",
@@ -6729,6 +6729,6 @@
     "usdKrw": 1473.74,
     "iconUrl": null,
     "cmcSlug": "galaxia",
-    "updatedAt": 1764873709482
+    "updatedAt": 1764873759898
   }
 ]
