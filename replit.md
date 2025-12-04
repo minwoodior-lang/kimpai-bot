@@ -1,6 +1,6 @@
-# KimpAI v3.3.2 - Kimchi Premium Analytics Dashboard
+# KimpAI v3.3.3 - Kimchi Premium Analytics Dashboard
 
-## 📋 상태: 환율 실시간 동기화 완료 (Phase 5.2 ✅)
+## 📋 상태: CoinGecko 글로벌 테더 시세 적용 완료 (Phase 5.3 ✅)
 
 ### 최종 아키텍처 (2025-12-04)
 
@@ -226,6 +226,31 @@ POST /api/heartbeat
 
 3. **CMC 슬러그 미매핑** (81개 마이너 토큰)
    - 해결: 수동 override map 또는 무시
+
+---
+
+## 📌 v3.3.3 변경사항 (2025-12-04)
+
+### Phase 5.3: CoinGecko 글로벌 테더 시세 적용 ✅
+
+1. **CoinGecko Tether API 연동**
+   - exchangerate-api.com USD/KRW → CoinGecko Tether KRW로 전환
+   - API: `https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=krw`
+   - 김프가와 동일한 "글로벌 테더 가격" 방식 적용
+
+2. **USDT 글로벌 시세 통일**
+   - `GLOBAL:USDT:USDT` 엔트리 생성 (CoinGecko 기준)
+   - 모든 해외 거래소(Binance, OKX, Bybit, Gate, HTX, MEXC) USDT = 글로벌 테더
+   - `getGlobalPrice('USDT')` → CoinGecko 값 반환
+
+3. **TopInfoBar 제거**
+   - `src/components/Layout.tsx`에서 TopInfoBar 컴포넌트 제거
+   - 환율/지표 정보는 AI 요약 카드에서 표시
+
+4. **데이터 구조**
+   - prices.json: 4,516 entries (+9 USDT 엔트리)
+   - premiumTable.json: 558 rows
+   - usdtKrwGlobal: CoinGecko 글로벌 테더 시세 (₩1,472.87)
 
 ---
 
