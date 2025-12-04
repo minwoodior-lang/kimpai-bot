@@ -3,14 +3,16 @@
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. The project's core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. It handles real-time price collection, premium calculation, and global market metrics, aiming to offer a comprehensive view of the crypto market with a focus on the Korean premium.
 
-### Recent Changes (v3.4.2 - 2024-12-04)
-- **홈 화면 레이아웃 완전 정렬 (200% 배율 기준)**:
-  - 메인 컨테이너 통일: `max-w-[1280px] px-4 lg:px-6` 한 곳에서만 관리
-  - 헤더 로고 / 프리미엄 차트 / 코인 리스트 / 코인셀 차트 좌우 라인 완벽 일직선화
-  - 프리미엄 차트 섹션: `border border-white/5 bg-[#050819]` 스타일로 통일
-  - 코인 테이블 모든 th, td: `px-3 lg:px-4 py-2.5` 패딩 통일
-  - 코인셀 상세 차트: `px-3 lg:px-4 pb-4` 적용 (프리미엄 차트와 동일 라인)
-- **전일대비 테이블 구조**: section으로 감싸짐, 필터 UI와 테이블 분리
+### Recent Changes (v3.4.3 - 2024-12-04)
+- **홈 화면 PC 레이아웃 100% 정렬 완료**:
+  - 메인 컨테이너 통일: `max-w-[1280px] px-4 lg:px-6` (pages/index.tsx)
+  - 헤더 / 상단 요약 카드 / 프리미엄 차트 / 코인 리스트 테이블 / 코인셀 차트 **좌우 라인 완벽 일직선화**
+  - 프리미엄 차트: `border border-white/5 bg-[#050819]` 스타일
+  - 코인 테이블 래퍼: `border border-white/5 bg-[#050819]` 추가 (테두리 일치화)
+  - 모든 테이블 th/td: `px-3 lg:px-4 py-2.5` 패딩 통일
+  - 코인셀 상세 차트: `px-3 lg:px-4 pb-4` (테이블 셀 패딩 상속)
+  - **PremiumTable 루트**: 부모 컨테이너 폭 상속 (`max-w`, `px`, `mx-auto` 제거)
+- **테이블 구조 최적화**: section 태그 사용, 필터 UI 및 테이블 분리
 - **프리미엄 차트 폴링 최적화**: 1000ms → 실시간 반응 속도 개선
 - **BINANCE_BTC Market 제거**: 바이낸스에 BTC 현물 시장 없음
 - **Binance 429 Rate Limit Resolution**: Proxy caching + stale cache fallback

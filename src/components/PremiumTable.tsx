@@ -838,7 +838,7 @@ export default function PremiumTable({
           {error}
         </div>
       ) : (
-        <div className="w-full overflow-hidden">
+        <div className="w-full rounded-xl border border-white/5 bg-[#050819] overflow-hidden">
           <table className="w-full table-fixed border-separate border-spacing-y-0">
             <colgroup><col className="w-[30px]" /><col className="w-[35%]" /><col className="w-[16%]" /><col className="w-[16%]" /><col className="w-[17%]" /><col className="hidden md:table-column w-[8%]" /><col className="hidden md:table-column w-[8%]" /><col className="w-[16%]" /></colgroup>
             <thead>
