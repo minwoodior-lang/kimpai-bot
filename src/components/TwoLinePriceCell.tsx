@@ -11,7 +11,7 @@ interface TwoLinePriceCellProps {
   formatFn?: (value: number) => string;
 }
 
-type Trend = "up" | "down" | null;
+type FlashState = "up" | "down" | null;
 
 const formatKrwPrice = (value: number | null | undefined): string => {
   if (value === null || value === undefined || isNaN(value)) return "-";
@@ -38,60 +38,76 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   isUnlisted = false,
   formatFn = formatKrwPrice,
 }) => {
-  const [trend, setTrend] = useState<Trend>(null);
-  const prevSumRef = useRef<number | null>(null);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const [topFlash, setTopFlash] = useState<FlashState>(null);
+  const [bottomFlash, setBottomFlash] = useState<FlashState>(null);
+  
+  const prevTopRef = useRef<number | null>(null);
+  const prevBottomRef = useRef<number | null>(null);
+  
+  const topTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const bottomTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (isUnlisted) {
-      prevSumRef.current = null;
+      prevTopRef.current = null;
       return;
     }
 
-    const currentSum = (topValue ?? 0) + (bottomValue ?? 0);
-    const prevSum = prevSumRef.current;
+    const currentTop = topValue ?? 0;
+    const prevTop = prevTopRef.current;
 
-    let newTrend: Trend = null;
-
-    if (prevSum !== null && currentSum !== prevSum) {
-      if (currentSum > prevSum) {
-        newTrend = "up";
-      } else if (currentSum < prevSum) {
-        newTrend = "down";
+    if (prevTop !== null && currentTop !== prevTop) {
+      if (topTimerRef.current) {
+        clearTimeout(topTimerRef.current);
       }
-    }
-
-    prevSumRef.current = currentSum;
-
-    if (newTrend) {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-      }
-      setTrend(newTrend);
-      timerRef.current = setTimeout(() => {
-        setTrend(null);
+      setTopFlash(currentTop > prevTop ? "up" : "down");
+      topTimerRef.current = setTimeout(() => {
+        setTopFlash(null);
       }, 400);
     }
 
+    prevTopRef.current = currentTop;
+
     return () => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
+      if (topTimerRef.current) {
+        clearTimeout(topTimerRef.current);
       }
     };
-  }, [topValue, bottomValue, isUnlisted]);
+  }, [topValue, isUnlisted]);
 
-  const flashClass =
-    trend === "up"
-      ? "price-flash-up"
-      : trend === "down"
-      ? "price-flash-down"
-      : "";
+  useEffect(() => {
+    if (isUnlisted) {
+      prevBottomRef.current = null;
+      return;
+    }
+
+    const currentBottom = bottomValue ?? 0;
+    const prevBottom = prevBottomRef.current;
+
+    if (prevBottom !== null && currentBottom !== prevBottom) {
+      if (bottomTimerRef.current) {
+        clearTimeout(bottomTimerRef.current);
+      }
+      setBottomFlash(currentBottom > prevBottom ? "up" : "down");
+      bottomTimerRef.current = setTimeout(() => {
+        setBottomFlash(null);
+      }, 400);
+    }
+
+    prevBottomRef.current = currentBottom;
+
+    return () => {
+      if (bottomTimerRef.current) {
+        clearTimeout(bottomTimerRef.current);
+      }
+    };
+  }, [bottomValue, isUnlisted]);
 
   if (isUnlisted) {
     return (
       <div className="flex flex-col items-end leading-tight">
-        <span className="text-[13px] font-medium text-white whitespace-nowrap">-</span>
-        <span className="text-[11px] text-gray-500 whitespace-nowrap">-</span>
+        <span className="text-[13px] md:text-[14px] font-medium text-white whitespace-nowrap">-</span>
+        <span className="text-[11px] md:text-[12px] text-gray-500 whitespace-nowrap">-</span>
       </div>
     );
   }
@@ -99,12 +115,26 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   const topFormatted = topValue != null ? formatFn(topValue) : "-";
   const bottomFormatted = bottomValue != null ? formatFn(bottomValue) : "-";
 
+  const getTopClass = () => {
+    const base = "text-[13px] md:text-[14px] font-medium whitespace-nowrap";
+    if (topFlash === "up") return `${base} price-flash-up`;
+    if (topFlash === "down") return `${base} price-flash-down`;
+    return `${base} text-white`;
+  };
+
+  const getBottomClass = () => {
+    const base = "text-[11px] md:text-[12px] whitespace-nowrap";
+    if (bottomFlash === "up") return `${base} price-flash-up`;
+    if (bottomFlash === "down") return `${base} price-flash-down`;
+    return `${base} text-gray-500`;
+  };
+
   return (
-    <div className={`flex flex-col items-end leading-tight ${flashClass}`}>
-      <span className="text-[13px] font-medium text-white whitespace-nowrap">
+    <div className="flex flex-col items-end leading-tight">
+      <span className={getTopClass()}>
         {topPrefix}{topFormatted}{topSuffix}
       </span>
-      <span className="text-[11px] text-gray-500 whitespace-nowrap">
+      <span className={getBottomClass()}>
         {bottomPrefix}{bottomFormatted}{bottomSuffix}
       </span>
     </div>

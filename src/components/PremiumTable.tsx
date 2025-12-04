@@ -923,10 +923,10 @@ export default function PremiumTable({
                             <CoinIcon symbol={row.symbol} className="w-3.5 h-3.5 md:w-8 md:h-8 flex-shrink-0" iconUrl={row.icon_url} />
                             <div className="flex flex-col flex-1 min-w-0 cursor-pointer"
                               onClick={() => openCmcPage(row.symbol, row.cmcSlug)}>
-                              <span className="truncate text-[13px] font-medium text-white hover:text-blue-400 transition-colors">
+                              <span className="truncate text-[13px] md:text-[14px] font-medium text-white hover:text-blue-400 transition-colors">
                                 {getDisplayName(row)}
                               </span>
-                              <span className="truncate text-[11px] text-gray-500 uppercase tracking-tight">
+                              <span className="truncate text-[11px] md:text-[12px] text-gray-500 uppercase tracking-tight">
                                 {getDisplaySymbol(row.symbol)}
                               </span>
                             </div>

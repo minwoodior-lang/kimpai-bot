@@ -1,0 +1,159 @@
+📌 목표 요약
+
+“현재가” 셀에서 국내/해외 가격을 개별적으로 감지해서
+
+국내 가격이 오르면 → 국내 숫자만 초록 깜빡임
+
+국내 가격이 내리면 → 국내 숫자만 빨강 깜빡임
+
+해외 가격이 오르면 → 해외 숫자만 초록 깜빡임
+
+해외 가격이 내리면 → 해외 숫자만 빨강 깜빡임
+
+두 값을 합쳐서 비교하거나, 부모 div에 클래스 한 번만 거는 방식은 의미가 없습니다.
+
+1️⃣ 현재 문제 정리
+
+TwoLinePriceCell 에서
+
+topValue + bottomValue 합으로 변화 여부를 감지하고 있음
+
+깜빡임 클래스(price-flash-up, price-flash-down)를 부모 div에 적용하고 있음
+
+실제 숫자 span에는 Tailwind로
+
+상단: text-white
+
+하단: text-gray-500
+이런 고정색 클래스가 붙어 있어서,
+부모에 애니메이션을 걸어도 숫자 색이 바뀌지 않고,
+결과적으로 색 없이 투명도만 깜빡이는 것처럼 보이는 상태입니다.
+
+이 로직으로는
+
+국내/해외가 각각 다른 방향으로 움직여도
+
+둘 중 하나만 움직여도
+전부 한 덩어리로 처리되기 때문에
+김프 테이블 의미가 완전히 사라집니다.
+
+2️⃣ 필수 수정 요구사항
+(A) 합으로 비교하는 로직 제거
+
+topValue + bottomValue 기준 비교는 완전히 제거해 주세요.
+
+대신 국내/해외 각각을 독립적으로 비교해야 합니다.
+
+// 기존 (이런 식이면 안 됨)
+const newSum = topValue + bottomValue;
+if (prevSum !== null && newSum !== prevSum) { ... }
+
+
+👉 위 로직은 전부 삭제하고, 아래처럼 각 값별로 prev를 관리해 주세요.
+
+const [prevTop, setPrevTop] = useState<number | null>(null);
+const [prevBottom, setPrevBottom] = useState<number | null>(null);
+
+const [topFlash, setTopFlash] = useState<"up" | "down" | null>(null);
+const [bottomFlash, setBottomFlash] = useState<"up" | "down" | null>(null);
+
+useEffect(() => {
+  if (prevTop !== null && topValue !== prevTop) {
+    setTopFlash(topValue > prevTop ? "up" : "down");
+    setTimeout(() => setTopFlash(null), 400);
+  }
+  setPrevTop(topValue);
+}, [topValue]);
+
+useEffect(() => {
+  if (prevBottom !== null && bottomValue !== prevBottom) {
+    setBottomFlash(bottomValue > prevBottom ? "up" : "down");
+    setTimeout(() => setBottomFlash(null), 400);
+  }
+  setPrevBottom(bottomValue);
+}, [bottomValue]);
+
+(B) 깜빡임 클래스는 부모 div가 아니라 숫자 span에 직접 적용
+
+지금처럼 div에 price-flash-up을 주면 자식 span의 text-white, text-gray-500이 우선이라 색이 안 바뀝니다.
+반드시 숫자가 들어있는 span에 직접 붙여야 합니다.
+
+// ✅ 수정 후 예시 (TwoLinePriceCell)
+return (
+  <div className="flex flex-col items-end leading-tight">
+    {/* 국내 현재가 */}
+    <span
+      className={clsx(
+        "text-[13px] font-medium whitespace-nowrap",
+        // 기본 색상 규칙
+        topValue > 0 ? "text-green-400" :
+        topValue < 0 ? "text-red-400" :
+        "text-slate-100",
+        // 🔥 깜빡임 클래스는 여기
+        topFlash === "up" && "price-flash-up",
+        topFlash === "down" && "price-flash-down"
+      )}
+    >
+      {topText}
+    </span>
+
+    {/* 해외 현재가 */}
+    <span
+      className={clsx(
+        "text-[11px] whitespace-nowrap",
+        isUnlisted
+          ? "text-gray-500"
+          : bottomValue > 0
+          ? "text-green-400"
+          : bottomValue < 0
+          ? "text-red-400"
+          : "text-gray-400",
+        bottomFlash === "up" && "price-flash-up",
+        bottomFlash === "down" && "price-flash-down"
+      )}
+    >
+      {bottomText}
+    </span>
+  </div>
+);
+
+
+이렇게 해야
+
+국내 가격이 변하면 위 span만 깜빡이고
+
+해외 가격이 변하면 아래 span만 깜빡입니다.
+
+(C) 폰트/스타일 통일
+
+숫자 폰트 사이즈를 전역으로 통일해 주세요:
+
+코인명 (name_ko): text-[13px] font-medium
+
+심볼 (name_en): text-[11px] text-gray-500
+
+모든 숫자 셀 상단(국내 기준값): text-[13px] font-medium
+
+모든 숫자 셀 하단(해외/보조값): text-[11px] text-gray-500
+
+정렬: items-end + whitespace-nowrap 유지
+
+3️⃣ 최종 기대 동작 (이게 충족되면 OK)
+
+업비트 KRW – 바이낸스 USDT 예시:
+
+업비트 가격이 4,720,000 → 4,725,000으로 오르면
+→ “4,725,000” 숫자만 초록색으로 짧게 깜빡
+
+같은 순간 바이낸스 가격이 3,186 → 3,180으로 떨어지면
+→ 하단 해외 가격만 빨간색으로 깜빡
+
+해외 미상장(isUnlisted)일 경우:
+
+하단은 "-" 고정, 깜빡임/색상 변화 없음
+
+어떤 경우에도
+
+국내와 해외가 같이 묶여서 한 번에 깜빡이는 일은 없어야 합니다.
+
+각 줄은 서로 완전히 독립된 애니메이션이어야 합니다.
