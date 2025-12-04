@@ -579,7 +579,25 @@ export default function PremiumTable({
   }, [data, searchQuery, sortKey, sortOrder, limit, favorites]);
 
   // 코인 표시명 생성: displayName ?? name_ko ?? name_en ?? koreanName ?? symbol
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const getDisplayName = (item: PremiumData): string => {
+    const baseKoName = item.name_ko || "";
+    // 모바일에서 5글자 이상이면 자르기
+    if (isMobile && baseKoName.length > 5) {
+      return baseKoName.slice(0, 5) + "…";
+    }
+    return baseKoName;
+  };
+
+  const getOriginalDisplayName = (item: PremiumData): string => {
     // 백엔드에서 생성한 displayName 우선
     if (item.displayName && item.displayName.trim()) return item.displayName;
     // name_ko (한글명) 차선
@@ -590,6 +608,14 @@ export default function PremiumTable({
     if (item.name_en && item.name_en.trim()) return item.name_en;
     // 마지막은 심볼
     return item.symbol;
+  };
+
+  const getDisplaySymbol = (symbol: string): string => {
+    // 모바일에서 8글자 이상이면 자르기
+    if (isMobile && symbol.length > 8) {
+      return symbol.slice(0, 8) + "…";
+    }
+    return symbol;
   };
 
   const formatKRW = (value: number | null) => {
@@ -939,13 +965,13 @@ export default function PremiumTable({
                   return (
                     <React.Fragment key={uniqueKey}>
                       <tr
-                        className="hover:bg-slate-800/60 transition-colors"
+                        className="text-[10px] md:text-sm hover:bg-slate-800/60 transition-colors leading-tight"
                         data-symbol={row.symbol}
                       >
-                        <td className="w-[30px] text-center py-1.5 md:py-2">
+                        <td className="w-[30px] text-center py-1.5 md:py-2 px-1 md:px-2">
                           <button
                             type="button"
-                            className={`p-0.5 leading-none transition-colors text-[10px] md:text-sm ${
+                            className={`p-0.5 leading-none transition-colors ${
                               favorites.has(row.symbol)
                                 ? "text-[#FDCB52]"
                                 : "text-[#A7B3C6]/40 hover:text-[#FDCB52]"
@@ -958,7 +984,7 @@ export default function PremiumTable({
                             ★
                           </button>
                         </td>
-                        <td className="px-1 py-1.5 md:py-2">
+                        <td className="px-1 md:px-2 py-1.5 md:py-2">
                           <div className="flex items-center gap-1.5 md:gap-3 min-w-0">
                             <CoinIcon symbol={row.symbol} className="w-3.5 h-3.5 md:w-8 md:h-8 flex-shrink-0" iconUrl={row.icon_url} />
                             <div className="flex flex-col flex-1 min-w-0">
@@ -966,22 +992,22 @@ export default function PremiumTable({
                                 onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
                                 className="hover:text-blue-400 transition-colors text-left no-underline"
                               >
-                                <span className="truncate text-[11px] md:text-sm text-white font-medium">
+                                <span className="truncate text-white font-medium">
                                   {getDisplayName(row)}
                                 </span>
                               </button>
-                              <span className="truncate text-[9px] md:text-xs text-[#A7B3C6] uppercase tracking-tight">
-                                {row.symbol}
+                              <span className="truncate text-[#A7B3C6] uppercase tracking-tight">
+                                {getDisplaySymbol(row.symbol)}
                               </span>
                             </div>
                           </div>
                         </td>
 
-                        <td className={`px-0.5 sm:px-2 py-1 text-right text-[11px] md:text-sm whitespace-nowrap ${getFlashClass(row.symbol, "price")}`}>
+                        <td className={`px-1 md:px-2 py-1.5 md:py-2 text-right whitespace-nowrap ${getFlashClass(row.symbol, "price")}`}>
                           ₩{formatKrwPrice(row.koreanPrice)}
                         </td>
 
-                        <td className={`px-0.5 sm:px-2 py-1 text-right text-[11px] md:text-sm whitespace-nowrap ${getFlashClass(row.symbol, "premium")}`}>
+                        <td className={`px-1 md:px-2 py-1.5 md:py-2 text-right whitespace-nowrap ${getFlashClass(row.symbol, "premium")}`}>
                           {row.premium !== null && row.premium !== undefined ? (
                             <span className={getPremiumColor(row.premium)}>
                               {row.premium >= 0 ? "+" : ""}{Number(row.premium).toFixed(2)}%
@@ -991,7 +1017,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="px-0.5 sm:px-2 py-1 text-right text-[11px] md:text-sm whitespace-nowrap">
+                        <td className="px-1 md:px-2 py-1.5 md:py-2 text-right whitespace-nowrap">
                           {row.change24h !== null && row.change24h !== undefined ? (
                             <span className={getChangeColor(row.change24h)}>
                               {row.change24h >= 0 ? "+" : ""}{Number(row.change24h).toFixed(2)}%
@@ -1001,7 +1027,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="hidden md:table-cell px-0.5 sm:px-2 py-1 text-right text-[10px] md:text-xs whitespace-nowrap">
+                        <td className="hidden md:table-cell px-1 md:px-2 py-1.5 md:py-2 text-right text-xs whitespace-nowrap">
                           {highDiff.valid && highDiff.percent !== null && highDiff.percent !== undefined ? (
                             <span className={getChangeColor(highDiff.percent)}>
                               {highDiff.percent >= 0 ? "+" : ""}{Number(highDiff.percent).toFixed(2)}%
@@ -1011,7 +1037,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="hidden md:table-cell px-0.5 sm:px-2 py-1 text-right text-[10px] md:text-xs whitespace-nowrap">
+                        <td className="hidden md:table-cell px-1 md:px-2 py-1.5 md:py-2 text-right text-xs whitespace-nowrap">
                           {lowDiff.valid && lowDiff.percent !== null && lowDiff.percent !== undefined ? (
                             <span className={getChangeColor(lowDiff.percent)}>
                               {lowDiff.percent >= 0 ? "+" : ""}{Number(lowDiff.percent).toFixed(2)}%
@@ -1021,7 +1047,7 @@ export default function PremiumTable({
                           )}
                         </td>
 
-                        <td className="px-0.5 sm:px-2 py-1 text-right text-[11px] md:text-sm whitespace-nowrap">
+                        <td className="px-1 md:px-2 py-1.5 md:py-2 text-right whitespace-nowrap">
                           {row.volume24hKrw !== null && row.volume24hKrw !== undefined ? (
                             <span className="text-slate-100">{formatVolumeKRW(row.volume24hKrw)}</span>
                           ) : (
