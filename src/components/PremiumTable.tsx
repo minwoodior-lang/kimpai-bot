@@ -932,71 +932,78 @@ export default function PremiumTable({
                           </div>
                         </td>
 
-                        <td className="px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
-                          <div className="flex flex-col leading-tight text-right">
-                            <span className="text-[11px] md:text-sm text-white">
-                              ₩<PriceCell price={row.koreanPrice} />
-                            </span>
-                            <span className="text-[9px] md:text-xs text-slate-400">
-                              ₩{formatKrwPrice(row.foreignPriceKrw)}
-                            </span>
-                          </div>
-                        </td>
+                        {(() => {
+                          const isUnlisted = !row.foreignPriceKrw || row.foreignPriceKrw <= 0;
+                          return (
+                            <>
+                              <td className="px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
+                                <div className="flex flex-col items-end leading-tight">
+                                  <span className="text-[11px] md:text-sm font-medium text-white">
+                                    ₩<PriceCell price={row.koreanPrice} />
+                                  </span>
+                                  <span className="text-[9px] md:text-xs text-gray-500">
+                                    {isUnlisted ? "-" : `₩${formatKrwPrice(row.foreignPriceKrw)}`}
+                                  </span>
+                                </div>
+                              </td>
 
-                        <td className="px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
-                          <div className="flex flex-col leading-tight text-right">
-                            <span className={`text-[11px] md:text-sm ${getPremiumColor(row.premiumRate)}`}>
-                              {row.premiumRate >= 0 ? "+" : ""}{Number(row.premiumRate || 0).toFixed(2)}%
-                            </span>
-                            <span className={`text-[9px] md:text-xs ${getPremiumColor(row.premiumDiffKrw)}`}>
-                              {row.premiumDiffKrw >= 0 ? "+" : ""}₩{formatKrwPrice(Math.abs(row.premiumDiffKrw || 0))}
-                            </span>
-                          </div>
-                        </td>
+                              <td className="px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
+                                <div className="flex flex-col items-end leading-tight">
+                                  <span className={`text-[11px] md:text-sm font-medium ${isUnlisted ? "text-gray-500" : getPremiumColor(row.premiumRate)}`}>
+                                    {isUnlisted ? "-" : `${row.premiumRate >= 0 ? "+" : ""}${Number(row.premiumRate || 0).toFixed(2)}%`}
+                                  </span>
+                                  <span className="text-[9px] md:text-xs text-gray-500">
+                                    {isUnlisted ? "-" : `${row.premiumDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.premiumDiffKrw || 0))}`}
+                                  </span>
+                                </div>
+                              </td>
 
-                        <td className="px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
-                          <div className="flex flex-col leading-tight text-right">
-                            <span className={`text-[11px] md:text-sm ${getChangeColor(row.changeRate)}`}>
-                              {row.changeRate >= 0 ? "+" : ""}{Number(row.changeRate || 0).toFixed(2)}%
-                            </span>
-                            <span className={`text-[9px] md:text-xs ${getChangeColor(row.changeAbsKrw)}`}>
-                              {row.changeAbsKrw >= 0 ? "+" : ""}₩{formatKrwPrice(Math.abs(row.changeAbsKrw || 0))}
-                            </span>
-                          </div>
-                        </td>
+                              <td className="px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
+                                <div className="flex flex-col items-end leading-tight">
+                                  <span className={`text-[11px] md:text-sm font-medium ${getChangeColor(row.changeRate)}`}>
+                                    {row.changeRate >= 0 ? "+" : ""}{Number(row.changeRate || 0).toFixed(2)}%
+                                  </span>
+                                  <span className="text-[9px] md:text-xs text-gray-500">
+                                    {row.changeAbsKrw >= 0 ? "+" : ""}₩{formatKrwPrice(Math.abs(row.changeAbsKrw || 0))}
+                                  </span>
+                                </div>
+                              </td>
 
-                        <td className="hidden md:table-cell px-1 md:px-2 py-1 md:py-1.5 text-right text-xs whitespace-nowrap">
-                          <div className="flex flex-col leading-tight text-right">
-                            <span className={`text-[10px] md:text-xs ${getChangeColor(row.fromHighRate)}`}>
-                              {row.fromHighRate >= 0 ? "+" : ""}{Number(row.fromHighRate || 0).toFixed(2)}%
-                            </span>
-                            <span className={`text-[9px] md:text-[10px] ${getChangeColor(-row.highDiffKrw)}`}>
-                              {row.highDiffKrw > 0 ? "-" : "+"}₩{formatKrwPrice(Math.abs(row.highDiffKrw || 0))}
-                            </span>
-                          </div>
-                        </td>
+                              <td className="hidden md:table-cell px-1 md:px-2 py-1 md:py-1.5 text-right text-xs whitespace-nowrap">
+                                <div className="flex flex-col items-end leading-tight">
+                                  <span className={`text-[10px] md:text-xs font-medium ${getChangeColor(row.fromHighRate)}`}>
+                                    {row.fromHighRate >= 0 ? "+" : ""}{Number(row.fromHighRate || 0).toFixed(2)}%
+                                  </span>
+                                  <span className="text-[9px] md:text-[10px] text-gray-500">
+                                    {row.highDiffKrw > 0 ? "-" : "+"}₩{formatKrwPrice(Math.abs(row.highDiffKrw || 0))}
+                                  </span>
+                                </div>
+                              </td>
 
-                        <td className="hidden md:table-cell px-1 md:px-2 py-1 md:py-1.5 text-right text-xs whitespace-nowrap">
-                          <div className="flex flex-col leading-tight text-right">
-                            <span className={`text-[10px] md:text-xs ${getChangeColor(row.fromLowRate)}`}>
-                              {row.fromLowRate >= 0 ? "+" : ""}{Number(row.fromLowRate || 0).toFixed(2)}%
-                            </span>
-                            <span className={`text-[9px] md:text-[10px] ${getChangeColor(row.lowDiffKrw)}`}>
-                              {row.lowDiffKrw >= 0 ? "+" : ""}₩{formatKrwPrice(Math.abs(row.lowDiffKrw || 0))}
-                            </span>
-                          </div>
-                        </td>
+                              <td className="hidden md:table-cell px-1 md:px-2 py-1 md:py-1.5 text-right text-xs whitespace-nowrap">
+                                <div className="flex flex-col items-end leading-tight">
+                                  <span className={`text-[10px] md:text-xs font-medium ${getChangeColor(row.fromLowRate)}`}>
+                                    {row.fromLowRate >= 0 ? "+" : ""}{Number(row.fromLowRate || 0).toFixed(2)}%
+                                  </span>
+                                  <span className="text-[9px] md:text-[10px] text-gray-500">
+                                    {row.lowDiffKrw >= 0 ? "+" : ""}₩{formatKrwPrice(Math.abs(row.lowDiffKrw || 0))}
+                                  </span>
+                                </div>
+                              </td>
 
-                        <td className="px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
-                          <div className="flex flex-col leading-tight text-right">
-                            <span className="text-[11px] md:text-sm text-slate-100">
-                              {formatVolumeKRW(row.volume24hKrw)}
-                            </span>
-                            <span className="text-[9px] md:text-xs text-slate-400">
-                              {formatVolumeKRW(row.volume24hForeignKrw)}
-                            </span>
-                          </div>
-                        </td>
+                              <td className="px-1 md:px-2 py-1 md:py-1.5 text-right whitespace-nowrap">
+                                <div className="flex flex-col items-end leading-tight">
+                                  <span className="text-[11px] md:text-sm font-medium text-slate-100">
+                                    {formatVolumeKRW(row.volume24hKrw)}
+                                  </span>
+                                  <span className="text-[9px] md:text-xs text-gray-500">
+                                    {isUnlisted ? "-" : formatVolumeKRW(row.volume24hForeignKrw)}
+                                  </span>
+                                </div>
+                              </td>
+                            </>
+                          );
+                        })()}
                       </tr>
 
                       {expandedSymbol === row.symbol && (
