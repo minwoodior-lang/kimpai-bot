@@ -763,84 +763,41 @@ export default function PremiumTable({
   };
 
   // 코인 row별 TV 심볼 생성 (조건부)
-  const getTvSymbolForRow = (params: {
+  const getTvSymbolForRow = ({
+    symbol,
+    domesticExchange,
+    foreignExchange
+  }: {
     symbol: string;
     domesticExchange: string;
     foreignExchange: string;
   }): string => {
-    let { symbol, domesticExchange, foreignExchange } = params;
-    
-    // symbol에서 /KRW 제거 (BTC만 사용)
-    const cleanSymbol = symbol.split("/")[0].toUpperCase();
-    
-    // domesticExchange와 foreignExchange에서 마켓 분리
+
+    // BTC/KRW → BTC 등 슬래시 제거
+    const base = symbol
+      .replace("/KRW", "")
+      .replace("/BTC", "")
+      .replace("/USDT", "")
+      .toUpperCase();
+
+    // 국내/해외 거래소 정보 분리
     const [domEx, domMarket] = domesticExchange.split("_");
     const [forEx, forMarket] = foreignExchange.split("_");
-    
-    // 1) 업비트 / 빗썸 기준
+
+    // 업비트 또는 빗썸이면 그대로 국내 거래소 차트 사용
     if (domEx === "UPBIT" || domEx === "BITHUMB") {
-      const prefix = TV_DOMESTIC_PREFIX[domEx];
-      if (!prefix) return `BINANCE:${cleanSymbol}USDT`;
-      return `${prefix}:${cleanSymbol}${domMarket || "KRW"}`;
+      const prefix = domEx === "UPBIT" ? "UPBIT" : "BITHUMB";
+      return `${prefix}:${base}${domMarket}`;
     }
 
-    // 2) 코인원 → 해외 거래소 기준
-    if (domEx === "COINONE") {
-      const prefix = TV_FOREIGN_PREFIX[forEx] ?? "BINANCE";
-      return `${prefix}:${cleanSymbol}${forMarket || "USDT"}`;
-    }
-
-    // 3) fallback
-    return `BINANCE:${cleanSymbol}USDT`;
+    // 코인원은 TradingView 심볼이 없으므로 해외 거래소 기준으로 연결
+    const foreignPrefix = TV_FOREIGN_PREFIX[forEx] ?? "BINANCE";
+    const market = forMarket || "USDT";
+    return `${foreignPrefix}:${base}${market}`;
   };
 
   return (
     <div>
-      {showHeader && (
-        <>
-          {/* 프리미엄 차트 - Binance BTC 고정 */}
-          <div className="mb-4 h-96 rounded-lg overflow-hidden border border-slate-700">
-            <TradingViewChart tvSymbol="BINANCE:BTCUSDT" height={384} />
-          </div>
-
-          {/* 메트릭 박스들 */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-            <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
-              <div className="text-gray-400 text-xs mb-1">평균 김프</div>
-              <div
-                className={`text-xl font-bold ${getPremiumColor(averagePremium)}`}
-              >
-                {(averagePremium ?? 0) >= 0 ? "+" : ""}
-                {(averagePremium ?? 0).toFixed(2)}%
-              </div>
-            </div>
-
-            <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
-              <div className="text-gray-400 text-xs mb-1">환율 (USDT/KRW)</div>
-              <div className="text-xl font-bold text-white">
-                ₩{fxRate.toLocaleString("ko-KR")}
-              </div>
-            </div>
-
-            <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
-              <div className="text-gray-400 text-xs mb-1">코인 수</div>
-              <div className="text-xl font-bold text-white">
-                {listedCoins}
-                <span className="text-sm text-gray-400">/{totalCoins}개</span>
-              </div>
-            </div>
-
-            <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
-              <div className="text-gray-400 text-xs mb-1">업데이트</div>
-              <div className="text-lg font-medium text-white">
-                {updatedAt
-                  ? new Date(updatedAt).toLocaleTimeString("ko-KR")
-                  : "--:--:--"}
-              </div>
-            </div>
-          </div>
-        </>
-      )}
 
       {showFilters && (
         <div className="mt-1 lg:mt-2 mb-2 pt-2 md:pt-3">

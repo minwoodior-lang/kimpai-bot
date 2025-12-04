@@ -1,0 +1,107 @@
+📌 1) PremiumTable.tsx 내부의 "프리미엄 차트 중복 렌더링" 완전 삭제
+
+현재 PremiumTable.tsx 상단에 다음 코드가 남아 있습니다:
+
+{showHeader && (
+  <>
+    <div className="mb-4 h-96 rounded-lg overflow-hidden border border-slate-700">
+      <TradingViewChart tvSymbol="BINANCE:BTCUSDT" height={384} />
+    </div>
+
+
+➡ 이 블록 전체를 완전히 삭제해주세요.
+
+홈(index.tsx)에서 프리미엄 차트를 한 번 렌더링하고 있기 때문에
+PremiumTable 내부에서 동일 차트를 렌더링하면 홈에 프리미엄 차트가 2개 뜨는 문제가 발생합니다.
+
+📌 2) 코인셀 차트 클릭 시 AAPL(애플) 차트가 뜨는 문제 해결
+
+getTvSymbolForRow() 함수가 잘못된 심볼을 생성하고 있어
+TradingView가 fallback으로 AAPL 차트를 자동 표시하고 있습니다.
+
+현재 코드를 아래의 새 코드로 전체 교체해주세요:
+
+🔥 교체할 함수 (정상 작동 버전)
+const getTvSymbolForRow = ({
+  symbol,
+  domesticExchange,
+  foreignExchange
+}: {
+  symbol: string;
+  domesticExchange: string;
+  foreignExchange: string;
+}): string => {
+
+  // BTC/KRW → BTC 등 슬래시 제거
+  const base = symbol
+    .replace("/KRW", "")
+    .replace("/BTC", "")
+    .replace("/USDT", "")
+    .toUpperCase();
+
+  // 국내/해외 거래소 정보 분리
+  const [domEx, domMarket] = domesticExchange.split("_");
+  const [forEx, forMarket] = foreignExchange.split("_");
+
+  // 업비트 또는 빗썸이면 그대로 국내 거래소 차트 사용
+  if (domEx === "UPBIT" || domEx === "BITHUMB") {
+    const prefix = domEx === "UPBIT" ? "UPBIT" : "BITHUMB";
+    return `${prefix}:${base}${domMarket}`;
+  }
+
+  // 코인원은 TradingView 심볼이 없으므로 해외 거래소 기준으로 연결
+  const foreignPrefix = TV_FOREIGN_PREFIX[forEx] ?? "BINANCE";
+  const market = forMarket || "USDT";
+  return `${foreignPrefix}:${base}${market}`;
+};
+
+✔ 이 코드로 수정하면 다음 문제들이 모두 해결됩니다:
+
+AAPL 차트가 나오던 문제 해결
+
+존재하지 않는 TV 심볼 생성 문제 해결
+
+업비트/빗썸/코인원 규칙이 정확히 동작
+
+코인셀에서 📈 클릭 → 해당 코인 차트 정확히 열림
+
+📌 3) CoinMarketCap URL 이동 문제
+
+코인명 클릭 시:
+
+https://coinmarketcap.com/ko/search/?q=ada
+
+
+이렇게 뜨는 문제는 slug 파싱 오류 때문입니다.
+
+openCmcPage() 함수의 적용이 누락되었거나 cmcSlug 매핑이 잘못되어 있습니다.
+
+수정해야 하는 CMC URL 규칙:
+
+cmcSlug 있으면 → 다음 URL로 이동해야 합니다:
+
+https://coinmarketcap.com/ko/currencies/{cmcSlug}/?utm_source=apiswap&utm_medium=web&utm_campaign=kimpga
+
+
+slug가 없을 때만 아래 fallback을 사용해야 합니다:
+
+https://coinmarketcap.com/ko/search/?q={symbol}
+
+
+해당 규칙대로 openCmcPage()를 다시 적용해주세요.
+
+🔥 최종 요약 (레플릿에 보내는 지시문)
+1) PremiumTable.tsx 내부의 프리미엄 차트 렌더링 블록(showHeader && ...) 전체 삭제해주세요.
+   이 블록 때문에 홈 화면에서 프리미엄 차트가 2번 렌더링되고 있습니다.
+
+2) getTvSymbolForRow() 함수를 제가 제공한 새 코드로 전체 교체해주세요.
+   기존 코드가 잘못된 TV 심볼을 생성하여 TradingView가 AAPL로 fallback되는 문제가 있습니다.
+
+3) CoinMarketCap URL 이동 로직(openCmcPage)을 다시 적용해주세요.
+   cmcSlug가 있을 경우 'https://coinmarketcap.com/ko/currencies/{slug}/...' 형식으로 이동해야 합니다.
+   slug가 없을 때만 search/?q= 로 이동해야 합니다.
+
+📌 이 3가지만 적용하면 다음이 모두 해결됨:
+✔ 프리미엄 차트 1개만 표시
+✔ 코인셀 차트 클릭 시 올바른 차트 열림 (AAPL 안 뜸)
+✔ CoinMarketCap URL 정상 연결
