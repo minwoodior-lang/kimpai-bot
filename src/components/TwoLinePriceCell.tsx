@@ -41,6 +41,7 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   const [trend, setTrend] = useState<Trend>(null);
   const prevTopRef = useRef<number | null>(null);
   const prevBottomRef = useRef<number | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const prevTop = prevTopRef.current;
@@ -58,17 +59,24 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
       else if (bottomValue < prevBottom) newTrend = "down";
     }
 
-    if (newTrend) {
-      setTrend(newTrend);
-    }
-
     prevTopRef.current = topValue ?? null;
     prevBottomRef.current = bottomValue ?? null;
 
-    if (trend) {
-      const timer = setTimeout(() => setTrend(null), 500);
-      return () => clearTimeout(timer);
+    if (newTrend) {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+      setTrend(newTrend);
+      timerRef.current = setTimeout(() => {
+        setTrend(null);
+      }, 500);
     }
+
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
   }, [topValue, bottomValue]);
 
   const flashClass =
