@@ -228,7 +228,7 @@ export default function Home() {
             <section className="mt-8 mb-6">
               <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
                 <h2 className="text-sm text-slate-300">프리미엄 차트</h2>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1">
                   <button
                     onClick={() => setIsPrefsPanelOpen(true)}
                     className="inline-flex items-center rounded-md bg-slate-800 px-3 py-2 text-sm text-slate-100 hover:bg-slate-700 transition"

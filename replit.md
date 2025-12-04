@@ -3,6 +3,17 @@
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. The project's core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. It handles real-time price collection, premium calculation, and global market metrics, aiming to offer a comprehensive view of the crypto market with a focus on the Korean premium.
 
+### Recent Changes (v3.4.8 - 2024-12-04) - 미세 정렬 최종 완성
+- **프리미엄 차트 버튼 간격 조정**:
+  - "개인화 설정" 버튼과 지표 선택기 사이 간격: gap-2 → gap-1 (미세 정렬)
+- **코인셀 테이블 오른쪽 컬럼 정렬**:
+  - 거래액 컬럼(마지막): pr-0 추가로 오른쪽 padding 제거 (약 10px 왼쪽 이동)
+  - 전체 테이블 밸런스 완성
+- **모바일 KR Premium Score 버튼 스타일 통일**:
+  - PC와 동일한 스타일로 통일 (text-lg md:text-xl, h-1.5, w-28)
+  - compact 모드 제거 → 모바일/PC 동일한 폰트, 크기, 색상 적용
+  - 반응형 유지
+
 ### Recent Changes (v3.4.7 - 2024-12-04) - 최종 UI 정교화
 - **프리미엄 차트 상단 드롭다운 정렬 완성**:
   - MiniDropdown: px-2 py-1.5 → px-3 h-[34px] 통일 + my-auto로 아이콘/텍스트 baseline 정렬
@@ -53,6 +64,9 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 3. ✅ **테이블 컬럼 너비**: 고정 width 적용 (현재가/김프/전일대비/저가대비/거래액)
 4. ✅ **푸터 간격**: mb-20으로 확대 (breathing space 확보)
 5. ✅ **AI 요약 텍스트**: md:text-[14px]로 확대 (라벨 가독성)
+6. ✅ **버튼 간격**: gap-1로 미세 조정 (개인화 설정과 지표 선택기)
+7. ✅ **테이블 오른쪽 정렬**: pr-0으로 거래액 컬럼 왼쪽 이동 (밸런스)
+8. ✅ **모바일 Score 스타일**: PC와 동일한 스타일로 완전 통일
 
 ### Known Issues
 - **Missing coin icons**: MET2, GAME2, FCT2 (low-priority UI issue)

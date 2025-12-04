@@ -965,7 +965,7 @@ export default function PremiumTable({
                                 />
                               </td>
 
-                              <td className="w-[120px] px-3 lg:px-4 py-3 text-right whitespace-nowrap">
+                              <td className="w-[120px] px-3 lg:px-4 py-3 text-right whitespace-nowrap pr-0">
                                 <TwoLineCell
                                   line1={formatVolumeKRW(row.volume24hKrw)}
                                   line2={formatVolumeKRW(row.volume24hForeignKrw)}

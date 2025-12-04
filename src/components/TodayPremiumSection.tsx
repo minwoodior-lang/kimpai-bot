@@ -50,13 +50,13 @@ export function TodayPremiumSection({
       {/* Score 카드 */}
       <div className={`${compact ? 'mt-1' : 'mt-4'} flex items-center justify-between`}>
         <div className="flex flex-col">
-          <span className={`${compact ? 'text-[8px] sm:text-[9px]' : 'text-[11px] md:text-xs'} dark:text-white/60 light:text-indigo-700`}>KR Premium Score</span>
-          <div className={`${compact ? 'mt-0.5 h-1 w-20' : 'mt-1 h-1.5 w-28'} rounded-full dark:bg-white/10 light:bg-indigo-200/50`}>
+          <span className={`text-[11px] md:text-xs dark:text-white/60 light:text-indigo-700`}>KR Premium Score</span>
+          <div className={`mt-1 h-1.5 w-28 rounded-full dark:bg-white/10 light:bg-indigo-200/50`}>
             <div className={`h-full rounded-full dark:bg-[#6366F1] light:bg-indigo-500`} style={{width: `${(score / 10) * 100}%`}} />
           </div>
         </div>
 
-        <span className={`${compact ? 'text-base sm:text-lg' : 'text-lg md:text-xl'} font-semibold dark:text-[#A855F7] light:text-purple-600`}>{score}/10</span>
+        <span className={`text-lg md:text-xl font-semibold dark:text-[#A855F7] light:text-purple-600`}>{score}/10</span>
       </div>
     </div>
   );
