@@ -1,0 +1,109 @@
+[버그 리포트 2] 빗썸 KRW 마켓 일부 종목 현재가 누락 (RON / DKA / HUNT)
+
+증상 요약
+────────────────────
+기준 거래소를 “빗썸 KRW”로 선택했을 때,
+아래 조합에서 국내 현재가가 0 또는 “-” 로 나오고 김프가 -100% 처리가 됩니다.
+
+빗썸 KRW – MEXC USDT : 로닌(RON), 디카르고(DKA)
+
+빗썸 KRW – HTX USDT : 헌트(HUNT), 디카르고(DKA)
+
+빗썸 KRW – Gate USDT : 로닌(RON), 디카르고(DKA)
+
+빗썸 KRW – Bitget USDT : 로닌(RON)
+
+빗썸 KRW – OKX USDT : 로닌(RON)
+
+공통 증상:
+
+코인셀에는 심볼/이름은 보이는데,
+“현재가(국내)”가 0 또는 빈 값으로 나옵니다.
+
+같은 화면에서 다른 코인(ETH, XRP 등)은 정상적으로 빗썸 현재가가 표시됩니다.
+
+김프는 -100% 또는 계산 안 됨으로 표시됩니다.
+
+실제 거래소 상태
+────────────────────
+위 3종목은 빗썸 KRW 마켓에 정상 상장되어 있고, 가격도 존재합니다.
+
+RON/KRW : 현재가 250원, 거래대금 약 4.8억 (빗썸 웹/앱 기준)
+
+DKA/KRW : 현재가 9.966원, 거래대금 약 3백만
+
+HUNT/KRW : 현재가 213원, 거래대금 약 8백만
+
+김프가 사이트에서도 동일 종목들은 빗썸 KRW 기준 가격이 정상적으로 표기되고 있습니다.
+
+→ 즉, 거래소 API 자체 문제라기보다는,
+우리 쪽 수집/매핑 로직에서만 누락되고 있는 상황으로 보입니다.
+(이전에 “3개 코인은 API 문제”라고 하셨던 부분은 다시 한 번 점검이 필요해 보입니다.)
+
+의심 구간 (체크 포인트)
+────────────────────
+아래 세 군데에서 RON / DKA / HUNT 가 어떻게 처리되는지 확인 부탁드립니다.
+
+scripts/fetchBithumbMarkets.ts
+
+data/raw/bithumb/markets.json 안에
+RON/KRW, DKA/KRW, HUNT/KRW 가 정상적으로 포함되어 있는지 확인
+
+base_symbol / quote_symbol 이
+RON / KRW, DKA / KRW, HUNT / KRW 로 제대로 저장되는지 체크
+
+workers/fetchers/bithumb.ts (가격 수집)
+
+빗썸 ticker API 호출 시, 위 세 마켓의 closing_price 가
+prices["BITHUMB:RON:KRW"], prices["BITHUMB:DKA:KRW"],
+prices["BITHUMB:HUNT:KRW"] 형태로 무조건 생성되는지 확인
+
+혹시 status 필터, 거래대금 필터 등으로
+거래량 적은 코인을 스킵하고 있지 않은지 확인
+
+scripts/mergeMarkets.ts + premiumTable 생성부
+
+exchange_markets.json 에
+BITHUMB / RON / KRW, BITHUMB / DKA / KRW, BITHUMB / HUNT / KRW 가 존재하는데도
+prices.json 쪽에는 해당 키가 없어서 domesticPrice 가 null 로 떨어지는지,
+아니면 심볼/마켓 키 불일치 때문에 매칭이 안 되는지 확인 부탁드립니다.
+
+규칙상, 기준 거래소에서 KRW 마켓이 존재하는데 가격이 null 인 경우는
+특별한 예외(상장폐지, 거래 일시중단 등)가 아니면 발생하면 안 됩니다.
+
+기대 동작
+────────────────────
+
+위 3개 코인도 다른 빗썸 KRW 마켓과 동일하게
+
+현재가(국내): 실제 빗썸 KRW 가격
+
+김프: 빗썸 KRW vs 해외 USDT 기준 김프
+로 계산되어야 합니다.
+
+기준 거래소를 빗썸 KRW로 두고
+해외 거래소(OKX, Gate, Bitget, HTX, MEXC)를 바꿔도
+국내 현재가가 0 또는 “-” 로 나오지 않도록 로직을 보정해 주세요.
+
+디버깅 팁 (요청)
+────────────────────
+가능하다면, 디버깅을 위해 아래 로그도 한 번 찍어주시면 좋겠습니다.
+
+// 1) fetchBithumbMarkets.ts 끝부분
+console.log("[Debug][Bithumb Markets] RON/DKA/HUNT entries",
+  markets.filter(m => ["RON", "DKA", "HUNT"].includes(m.base_symbol))
+);
+
+// 2) priceWorker 내 Bithumb fetch 후
+["RON", "DKA", "HUNT"].forEach(sym => {
+  console.log("[Debug][Bithumb Prices]", sym, prices[`BITHUMB:${sym}:KRW`]);
+});
+
+
+이렇게 보면,
+
+마켓 리스트 단계에서 누락인지,
+
+가격 수집 단계에서 누락인지,
+
+premiumTable 매칭 단계에서 누락인지 바로 구분될 것 같습니다.
