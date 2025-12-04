@@ -712,10 +712,10 @@ export default function PremiumTable({
   };
 
   return (
-    <div>
+    <section className="mb-3">
 
       {showFilters && (
-        <div className="mt-1 lg:mt-2 mb-2 pt-2 md:pt-3">
+        <div className="mb-3 flex items-center justify-between gap-2">
           {/* PC 레이아웃: 1줄 가로 배치 */}
           <div className="hidden sm:flex items-center gap-3 md:gap-4">
             {/* 왼쪽: 기준거래소 텍스트 + 드롭다운 */}
@@ -848,27 +848,27 @@ export default function PremiumTable({
                     코인명
                     <SortIcon columnKey="symbol" />
                   </th>
-                  <th className="px-2 md:px-3 py-1 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("koreanPrice")}>
+                  <th className="px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("koreanPrice")}>
                     현재가
                     <SortIcon columnKey="koreanPrice" />
                   </th>
-                  <th className="px-2 md:px-3 py-1 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("premium")}>
+                  <th className="px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("premium")}>
                     김프
                     <SortIcon columnKey="premium" />
                   </th>
-                  <th className="px-2 md:px-3 py-1 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("change24h")}>
+                  <th className="px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("change24h")}>
                     전일대비
                     <SortIcon columnKey="change24h" />
                   </th>
-                  <th className="hidden md:table-cell px-2 md:px-3 py-1 text-right text-[10px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("high24h")}>
+                  <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[10px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("high24h")}>
                     고가대비
                     <SortIcon columnKey="high24h" />
                   </th>
-                  <th className="hidden md:table-cell px-2 md:px-3 py-1 text-right text-[10px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("low24h")}>
+                  <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[10px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("low24h")}>
                     저가대비
                     <SortIcon columnKey="low24h" />
                   </th>
-                  <th className="px-2 md:px-3 py-1 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("volume24hKrw")}>
+                  <th className="px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("volume24hKrw")}>
                     거래액(일)
                     <SortIcon columnKey="volume24hKrw" />
                   </th>
@@ -896,7 +896,7 @@ export default function PremiumTable({
                         className="text-[10px] md:text-sm hover:bg-slate-800/60 transition-colors leading-tight"
                         data-symbol={row.symbol}
                       >
-                        <td className="w-[30px] text-center py-1.5 md:py-2 px-3 md:px-4">
+                        <td className="w-[30px] text-center py-2.5 px-3 lg:px-4">
                           {(() => {
                             const normalizedSymbol = row.symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
                             const isFav = favorites.has(normalizedSymbol);
@@ -919,7 +919,7 @@ export default function PremiumTable({
                             );
                           })()}
                         </td>
-                        <td className="px-3 md:px-4 py-1.5 md:py-2">
+                        <td className="px-3 lg:px-4 py-2.5">
                           <div className="flex items-center gap-1.5 md:gap-3 min-w-0">
                             <button
                               type="button"
@@ -949,7 +949,7 @@ export default function PremiumTable({
                           const isUnlisted = !row.foreignPriceKrw || row.foreignPriceKrw <= 0;
                           return (
                             <>
-                              <td className="px-2 md:px-3 py-1 md:py-1.5 text-right whitespace-nowrap">
+                              <td className="px-3 lg:px-4 py-2.5 text-right whitespace-nowrap">
                                 <TwoLinePriceCell
                                   topValue={row.koreanPrice}
                                   bottomValue={row.foreignPriceKrw}
@@ -959,7 +959,7 @@ export default function PremiumTable({
                                 />
                               </td>
 
-                              <td className="px-2 md:px-3 py-1 md:py-1.5 text-right whitespace-nowrap">
+                              <td className="px-3 lg:px-4 py-2.5 text-right whitespace-nowrap">
                                 <TwoLineCell
                                   line1={isUnlisted ? "-" : `${row.premiumRate >= 0 ? "+" : ""}${Number(row.premiumRate || 0).toFixed(2)}%`}
                                   line2={`${row.premiumDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.premiumDiffKrw || 0))}`}
@@ -968,7 +968,7 @@ export default function PremiumTable({
                                 />
                               </td>
 
-                              <td className="px-2 md:px-3 py-1 md:py-1.5 text-right whitespace-nowrap">
+                              <td className="px-3 lg:px-4 py-2.5 text-right whitespace-nowrap">
                                 <TwoLineCell
                                   line1={`${row.changeRate >= 0 ? "+" : ""}${Number(row.changeRate || 0).toFixed(2)}%`}
                                   line2={`${row.changeAbsKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.changeAbsKrw || 0))}`}
@@ -976,7 +976,7 @@ export default function PremiumTable({
                                 />
                               </td>
 
-                              <td className="hidden md:table-cell px-2 md:px-3 py-1 md:py-1.5 text-right whitespace-nowrap">
+                              <td className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right whitespace-nowrap">
                                 <TwoLineCell
                                   line1={`${row.fromHighRate >= 0 ? "+" : ""}${Number(row.fromHighRate || 0).toFixed(2)}%`}
                                   line2={`${row.highDiffKrw > 0 ? "-" : "+"}₩${formatKrwPrice(Math.abs(row.highDiffKrw || 0))}`}
@@ -984,7 +984,7 @@ export default function PremiumTable({
                                 />
                               </td>
 
-                              <td className="hidden md:table-cell px-2 md:px-3 py-1 md:py-1.5 text-right whitespace-nowrap">
+                              <td className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right whitespace-nowrap">
                                 <TwoLineCell
                                   line1={`${row.fromLowRate >= 0 ? "+" : ""}${Number(row.fromLowRate || 0).toFixed(2)}%`}
                                   line2={`${row.lowDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.lowDiffKrw || 0))}`}
@@ -992,7 +992,7 @@ export default function PremiumTable({
                                 />
                               </td>
 
-                              <td className="px-2 md:px-3 py-1 md:py-1.5 text-right whitespace-nowrap">
+                              <td className="px-3 lg:px-4 py-2.5 text-right whitespace-nowrap">
                                 <TwoLineCell
                                   line1={formatVolumeKRW(row.volume24hKrw)}
                                   line2={formatVolumeKRW(row.volume24hForeignKrw)}
@@ -1007,8 +1007,8 @@ export default function PremiumTable({
 
                       {expandedSymbol === row.symbol && (
                         <tr key={`${row.symbol}-chart`}>
-                          <td colSpan={8} className="p-0">
-                            <div className="bg-[#0F111A] border-t border-b border-slate-700/50 py-3 px-3 md:px-4">
+                          <td colSpan={8} className="px-3 lg:px-4 pb-4">
+                            <div className="rounded-xl border border-white/5 bg-[#050819]">
                               <div className="h-[360px] rounded-xl overflow-hidden bg-slate-900/50">
                                 <TradingViewChart
                                   tvSymbol={(() => {
@@ -1034,6 +1034,6 @@ export default function PremiumTable({
             </table>
         </div>
       )}
-    </div>
+    </section>
   );
 }

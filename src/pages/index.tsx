@@ -112,9 +112,10 @@ export default function Home() {
 
       {/* 메인 콘텐츠 */}
       <HomeLayout>
-        <div className="w-full mx-auto max-w-[1200px] px-4 lg:px-5 py-6">
-          {/* PC: 상단 3컬럼 레이아웃 */}
-          <div className="hidden md:grid grid-cols-3 gap-4 mb-5">
+        <main className="w-full flex justify-center">
+          <div className="w-full max-w-[1280px] px-4 lg:px-6 py-6">
+            {/* PC: 상단 3컬럼 레이아웃 */}
+            <div className="hidden md:grid grid-cols-3 gap-4 mb-8">
             {/* 좌측: 오늘의 AI 김프 요약 */}
             <TodayPremiumSection
               avgPremium={
@@ -223,42 +224,35 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 차트 헤더: 프리미엄 차트 라벨 + 개인화 설정 + 지표 선택 */}
-          <div className="mt-3 mb-3 flex flex-wrap items-center justify-between gap-3">
-            {/* 왼쪽: 라벨 */}
-            <h3 className="text-sm font-medium text-slate-200">
-              프리미엄 차트
-            </h3>
+            {/* 프리미엄 차트 섹션 */}
+            <section className="mt-8 mb-6">
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+                <h2 className="text-sm text-slate-300">프리미엄 차트</h2>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setIsPrefsPanelOpen(true)}
+                    className="inline-flex items-center rounded-md bg-slate-800 px-3 py-2 text-sm text-slate-100 hover:bg-slate-700 transition"
+                  >
+                    <span className="mr-1.5">⚙</span>
+                    <span>개인화 설정</span>
+                  </button>
+                  <IndicatorSelector
+                    selectedIndicator={selectedIndicator}
+                    onIndicatorChange={setSelectedIndicator}
+                  />
+                </div>
+              </div>
+              <div className="rounded-xl border border-white/5 bg-[#050819] h-[360px] overflow-hidden">
+                <TradingViewChartDynamic tvSymbol="BINANCE:BTCUSDT" height={360} />
+              </div>
+            </section>
 
-            {/* 오른쪽: 버튼 그룹 */}
-            <div className="flex items-center gap-2">
-              {/* 개인화 설정 버튼 */}
-              <button
-                onClick={() => setIsPrefsPanelOpen(true)}
-                className="inline-flex items-center rounded-md bg-slate-800 px-3 py-2 text-sm text-slate-100 hover:bg-slate-700 transition"
-              >
-                <span className="mr-1.5">⚙</span>
-                <span>개인화 설정</span>
-              </button>
-
-              {/* 지표 선택 드롭다운 */}
-              <IndicatorSelector
-                selectedIndicator={selectedIndicator}
-                onIndicatorChange={setSelectedIndicator}
-              />
-            </div>
+            {/* 프리미엄 테이블 섹션 */}
+            <section className="mt-6 mb-10">
+              <PremiumTable showHeader={false} showFilters={true} limit={0} refreshInterval={1000} />
+            </section>
           </div>
-
-          {/* 프리미엄 차트 (Binance BTC 고정) */}
-          <div className="mb-4 h-[360px] rounded-lg overflow-hidden border border-slate-700 bg-slate-900/40">
-            <TradingViewChartDynamic tvSymbol="BINANCE:BTCUSDT" height={360} />
-          </div>
-
-          <div className="mt-2 space-y-3">
-            {/* 프리미엄 테이블 */}
-            <PremiumTable showHeader={false} showFilters={true} limit={0} refreshInterval={1000} />
-          </div>
-        </div>
+        </main>
       </HomeLayout>
 
       {/* 개인화 설정 패널 */}

@@ -1,0 +1,78 @@
+홈 화면 PC 레이아웃을 김프가처럼 “좌우 라인 완전 일직선” 상태로 통일하고 싶습니다.  
+아래 기준으로 전체 레이아웃을 정리 부탁드립니다.
+
+1) 페이지 공통 컨테이너 통일
+- pages/index.tsx 기준으로,
+  헤더 아래 메인 영역 전체를 아래 구조로 감싸주세요.
+
+  <main className="w-full flex justify-center">
+    <div className="w-full max-w-[1280px] px-4 lg:px-6">
+      {/* 상단 요약 카드 / 프리미엄 차트 / 코인 리스트 테이블 */}
+    </div>
+  </main>
+
+- 앞으로 홈 화면에서는 이 컨테이너 외부에서 따로 max-w, px-4 등을 주지 않고,
+  모든 섹션(요약 카드, 프리미엄 차트, 코인 리스트, 코인셀 차트)이
+  이 컨테이너 안에서만 레이아웃을 잡도록 해주세요.
+
+2) 프리미엄 차트 영역
+- 프리미엄 차트 섹션은 다음과 같이 정리해주세요.
+
+  <section className="mt-8">
+    <h2 className="text-sm text-slate-300 mb-3">프리미엄 차트</h2>
+    <div className="rounded-xl border border-white/5 bg-[#050819]">
+      {/* TradingView 차트 */}
+    </div>
+  </section>
+
+- 여기서는 차트 wrapper에 추가적인 px-3, px-4를 주지 말고,
+  외곽 컨테이너(max-w-[1280px] px-4 lg:px-6)만 사용해주세요.
+
+3) 코인 리스트 테이블 정렬
+- 프리미엄 차트와 정확히 같은 좌우 폭에서 시작하도록
+  테이블 wrapper는 이렇게만 두고, 별도 내부 padding은 제거해주세요.
+
+  <section className="mt-6 mb-10">
+    <div className="mb-3 flex items-center justify-between gap-2">
+      {/* 기준 거래소 / 해외 거래소 / 검색 */}
+    </div>
+    <div className="overflow-x-auto">
+      <table className="w-full text-sm">
+        {/* thead, tbody */}
+      </table>
+    </div>
+  </section>
+
+- 모든 th, td의 좌우 패딩을 아래와 같이 통일해주세요.
+
+  th, td: className="px-3 lg:px-4 py-2.5 ..."
+
+- 별도의 상위 div에 px-3, px-4를 중복해서 주는 부분이 있다면 제거 부탁드립니다.
+
+4) 코인셀 상세 차트 (행 아래 열리는 차트)
+- 코인셀 아래 차트가 프리미엄 차트 / 테이블과 같은 라인에서 시작되도록,
+  상세 차트 행을 다음처럼 수정해주세요.
+
+  <tr>
+    {/* 기본 데이터 행 */}
+  </tr>
+  <tr>
+    <td colSpan={컬럼수} className="px-3 lg:px-4 pb-4">
+      <div className="rounded-xl border border-white/5 bg-[#050819]">
+        {/* 코인별 차트 */}
+      </div>
+    </td>
+  </tr>
+
+- 여기서도 차트 박스 안쪽에는 좌우 padding을 주지 말고,
+  td의 px-3 lg:px-4 값만 사용해서 위/아래 섹션과 같은 기준선에 맞춰주세요.
+
+최종 목표는 다음 네 지점의 왼쪽/오른쪽 경계가 모두 한 직선에 맞는 것입니다.
+
+- 헤더의 K 로고/텍스트 시작점
+- 프리미엄 차트의 왼쪽/오른쪽 경계
+- 코인 리스트의 첫 컬럼(★, 코인명) 왼쪽/오른쪽 경계
+- 코인셀 상세 차트의 왼쪽/오른쪽 경계
+
+100% 배율 기준으로 보면, 위 네 구간이 완전히 일직선으로 보이게끔
+레이아웃과 padding을 정리 부탁드립니다.

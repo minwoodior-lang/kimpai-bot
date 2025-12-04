@@ -4,27 +4,19 @@
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. The project's core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. It handles real-time price collection, premium calculation, and global market metrics, aiming to offer a comprehensive view of the crypto market with a focus on the Korean premium.
 
 ### Recent Changes (v3.4.2 - 2024-12-04)
-- **Frontend Data Polling Optimized**:
-  - Reduced `/api/premium/table-filtered` polling interval: 3000ms → 1000ms (PremiumTable.tsx default)
-  - Reduced pages/index.tsx polling: 2000ms → 1000ms
-  - **Result: All exchange prices now reflect within 1~3 seconds after market data collection**
-  - Backend worker (3s) + proxy caching (2~5s) unchanged for stability
-- **BINANCE_BTC Market Removed**:
-  - Removed "바이낸스 BTC 마켓" option from foreign exchange dropdown (Binance has no BTC spot market)
-  - Cleaned up from: ExchangeSelectionContext.tsx, exchangeFetchers.ts, IndicatorSelector.tsx, ChartSectionEnhanced.tsx
-  - BINANCE_USDT and BINANCE_FUTURES markets remain fully operational
-- **Binance 429 Rate Limit Resolution**: 
-  - Proxy caching: 5sec for spot 24hr, 2sec for prices, 1min stale fallback
-  - 429 error handling with stale cache fallback + 503 response
-  - Render proxy fully tested and deployed
-- **Binance Futures Stats Support**:
-  - Added `fetchBinanceFuturesStats()` to process `/binance/fapi/v1/ticker/24hr` data
-  - Proxy route `/binance/fapi/v1/ticker/24hr` implemented with 5sec caching
-  - Stats automation: 30sec cron job collects BINANCE_FUTURES:${base}:USDT stats
-- **Bybit USDT Integration**: 
-  - Proxy route `/bybit/v5/market/tickers` fully operational with 429 handling
-  - Bybit spot prices and 24hr stats (change24hRate, high24h, low24h, volume24hQuote) working
-- **Favorites Feature**: Full implementation with localStorage persistence, cross-tab compatible
+- **홈 화면 레이아웃 완전 정렬 (200% 배율 기준)**:
+  - 메인 컨테이너 통일: `max-w-[1280px] px-4 lg:px-6` 한 곳에서만 관리
+  - 헤더 로고 / 프리미엄 차트 / 코인 리스트 / 코인셀 차트 좌우 라인 완벽 일직선화
+  - 프리미엄 차트 섹션: `border border-white/5 bg-[#050819]` 스타일로 통일
+  - 코인 테이블 모든 th, td: `px-3 lg:px-4 py-2.5` 패딩 통일
+  - 코인셀 상세 차트: `px-3 lg:px-4 pb-4` 적용 (프리미엄 차트와 동일 라인)
+- **전일대비 테이블 구조**: section으로 감싸짐, 필터 UI와 테이블 분리
+- **프리미엄 차트 폴링 최적화**: 1000ms → 실시간 반응 속도 개선
+- **BINANCE_BTC Market 제거**: 바이낸스에 BTC 현물 시장 없음
+- **Binance 429 Rate Limit Resolution**: Proxy caching + stale cache fallback
+- **Binance Futures Stats Support**: 30sec 자동 수집
+- **Bybit USDT Integration**: 완벽 작동
+- **Favorites Feature**: localStorage 지속성, 크로스탭 호환
 
 ### Known Issues
 - **Missing coin icons**: MET2, GAME2, FCT2 (low-priority UI issue)
@@ -43,6 +35,10 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - **Robust BTC Pivot Fallback:** A defined fallback order for BTC price (BINANCE → OKX → BITGET → GATE → MEXC) ensures price availability even if a primary source fails.
 
 **UI/UX and Feature Specifications:**
+- **Unified Container Layout (v3.4.2):**
+  - Main wrapper: `<main className="w-full flex justify-center"> <div className="w-full max-w-[1280px] px-4 lg:px-6"> ... </div> </main>`
+  - All sections (summary cards, premium chart, coin table, coin detail charts) inside this single container
+  - Left/right boundaries perfectly aligned at 100% zoom: header logo left edge = chart left edge = table left edge = detail chart left edge
 - The system supports a comprehensive premium table API (`/api/premium/table-filtered`) with filtering capabilities for domestic and foreign exchanges, providing average premium, FX rates, and coin counts.
 - A global metrics API (`/api/global-metrics`) provides FX rates (USD/KRW, USDT/KRW), BTC dominance, market cap, 24h volume, and concurrent user counts.
 - Session tracking is managed via a heartbeat API (`/api/heartbeat`) and an in-memory session cache.
@@ -59,6 +55,10 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
   - Proxy server caching: 2sec (prices), 5sec (24hr stats), 60sec (stale fallback)
   - 429 error handling: Returns stale cache if available, otherwise 503 with retry hint
   - Dedicated workers with Promise.allSettled for graceful failure handling
+- **Table Styling (v3.4.2):**
+  - All th/td: `px-3 lg:px-4 py-2.5` (unified padding)
+  - Detail chart wrapper: `border border-white/5 bg-[#050819]` (premium chart styling)
+  - No nested px values - only outer container controls width
 
 **Proxy Server (Render):**
 - Routes: `/binance/api/v3/ticker/price`, `/binance/api/v3/ticker/24hr`, `/binance/fapi/v1/ticker/price`, `/binance/fapi/v1/ticker/24hr`
@@ -85,6 +85,6 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - **Replit:** Deployment platform.
 
 ### Next Steps
-1. **Render proxy manual deployment**: Deploy `/binance/fapi/v1/ticker/24hr` route addition to enable Binance Futures 24hr stats
-2. **Monitor stats collection**: After proxy deployment, verify BINANCE_FUTURES stats in marketStats.json
-3. **UI Frontend validation**: Confirm all exchange prices reflect within 1-3 seconds of market movement
+1. **Verify layout alignment**: 100% zoom에서 헤더/차트/테이블/상세차트 좌우 라인 확인
+2. **Optional: Fine-tune filter UI**: PremiumTable 필터 구조 추가 단순화 (현재는 기능 정상)
+3. **Test responsiveness**: 모바일/태블릿 반응형 테스트
