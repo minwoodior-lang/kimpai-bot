@@ -51,6 +51,15 @@ function loadSymbolIcons(): Record<string, string> {
   }
 }
 
+function loadPremiumTable(): any[] {
+  try {
+    const file = path.join(process.cwd(), "data", "premiumTable.json");
+    return JSON.parse(fs.readFileSync(file, "utf-8"));
+  } catch {
+    return [];
+  }
+}
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { domestic = "UPBIT_KRW", foreign = "BINANCE_BTC" } = req.query;
@@ -68,6 +77,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const allMarkets = loadExchangeMarkets();
     const masterSymbols = loadMasterSymbols();
     const symbolIcons = loadSymbolIcons();
+    const premiumTable = loadPremiumTable();
 
     console.log(
       `[API] Filtering: domestic=${domesticExchange}_${domesticQuote}, foreign=${foreignExchange}_${foreignQuote}`
@@ -91,8 +101,18 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         const shouldForcePlaceholder = BAD_ICON_SYMBOLS.includes(symbol);
         const iconUrl = shouldForcePlaceholder ? null : baseIconUrl;
 
-        // cmcSlug: cmc_slug 필드만 사용, 확실한 값만 넣기
-        const cmcSlug = master?.cmc_slug ?? null;
+        // cmcSlug 우선순위: 
+        // 1순위: premiumTable.json의 cmcSlug (김프가에서 검증된 값)
+        // 2순위: master_symbols.cmc_slug
+        // 3순위: master_symbols.cmcSlug (camelCase 버전)
+        // 없으면 null → 프론트에서 /search?q= 폴백
+        const premiumRow = premiumTable.find((p: any) => p.symbol === symbol);
+        const cmcSlug = 
+          premiumRow?.cmcSlug ||
+          market.cmcSlug ||
+          master?.cmc_slug ||
+          master?.cmcSlug ||
+          null;
 
         return {
           symbol,

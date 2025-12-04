@@ -1,0 +1,103 @@
+🛠 1. CMC 슬러그는 premiumTable.json 의 cmcSlug를 최우선으로 사용하게 수정
+
+파일 경로
+
+src/pages/api/premium/table-filtered.ts
+
+지금 result.map(...) 안에서 cmcSlug 를 이렇게 만들고 있을 거야 (비슷한 형태):
+
+const cmcSlug = master?.cmc_slug ?? null;
+
+
+이 부분을 다음과 같이 수정해줘:
+
+// premiumRow는 premiumTable.json 에서 온 원본 한 줄(김프가에서 쓰던 데이터)입니다.
+// 변수명이 다르면, premiumTable 한 줄 객체에 있는 cmcSlug 필드를 찾아서 맞춰주세요.
+
+const cmcSlug =
+  premiumRow.cmcSlug ||        // 1순위: 프리미엄 테이블에 이미 있는 슬러그 (김프가에서 쓰던 값)
+  master?.cmc_slug ||          // 2순위: Supabase master_symbols.cmc_slug
+  master?.cmcSlug ||           // 3순위: 혹시 camelCase 로 저장된 경우
+  null;                        // 없으면 null → 프론트에서 /search?q= 로 fallback
+
+
+그리고 API 응답 객체에 반드시 이 값을 실어 보내야 합니다:
+
+return {
+  // ... 기존 필드들
+  cmcSlug,   // <= 이 필드가 최종적으로 프론트 PremiumTable.tsx 로 전달되게 해주세요.
+};
+
+
+핵심: premiumTable.json 안에 원래 들어 있던 cmcSlug 값(김프가에서 이미 검증된 값) 을 그대로 우선 사용하게 해주세요.
+Supabase 쪽 cmc_slug 는 보조 수단이고, 더 이상 name_en.toLowerCase() 처럼 추측해서 슬러그를 만드는 코드는 쓰지 말아 주세요.
+
+🛠 2. 프론트에서 이 cmcSlug 를 그대로 사용 중인지 확인
+
+파일 경로
+
+src/lib/coinMarketCapUtils.ts
+
+src/components/PremiumTable.tsx
+
+이미 아래처럼 되어 있을 거라 생각하지만, 한 번만 다시 확인해 주세요.
+
+// src/lib/coinMarketCapUtils.ts
+export function openCmcPage(symbol: string, cmcSlug?: string | null) {
+  const base = "https://coinmarketcap.com/ko";
+
+  const url = cmcSlug
+    ? `${base}/currencies/${cmcSlug}/?utm_source=apiswap&utm_medium=web&utm_campaign=kimpga`
+    : `${base}/search/?q=${symbol}`;
+
+  console.log("[CMC_URL] →", url);
+  window.open(url, "_blank");
+}
+
+// src/components/PremiumTable.tsx (코인명 클릭 부분)
+onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
+
+
+이 구조라면,
+
+row.cmcSlug 가 있으면 → /ko/currencies/{slug}/?... 로 바로 이동
+
+없으면 → /ko/search/?q=SYMBOL 로 fallback
+
+✅ 최종 기대 동작
+
+수정 후에 아래 코인들로 확인 부탁합니다.
+
+BTC
+
+콘솔: [CMC_URL] → https://coinmarketcap.com/ko/currencies/bitcoin/?utm_source=apiswap...
+
+실제 이동: 비트코인 상세 페이지
+
+LINK (체인링크)
+
+콘솔: .../currencies/chainlink/?...
+
+실제 이동: 체인링크 상세 페이지
+
+API3
+
+만약 premiumTable.json 에 cmcSlug: "api3" 가 있다면:
+
+.../currencies/api3/?... 로 열려야 정상
+
+만약 slug가 아예 없다면:
+
+/search/?q=api3 그대로 유지 (이 경우는 데이터 쪽에서 cmcSlug 채워 넣어야 해결)
+
+📝 추가 메모 (오류 로그 관련)
+
+콘솔에 뜨는
+
+Widget settings parse error: Unexpected end of JSON input
+
+Couldn't load support portal problems 403
+
+이 로그들은 TradingView 위젯 내부에서 support API 불러오다가 403 나는 것이라서
+실제 차트 렌더링과는 큰 상관 없고, 무시해도 되는 수준입니다.
+(지금 차트는 정상 동작하고 있으니, 이 부분은 건드리지 않아도 됩니다.)
