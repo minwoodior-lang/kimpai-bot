@@ -121,28 +121,51 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         const foreignStats = marketStats[foreignStatsKey];
 
         const changeRate = domesticStats?.change24hRate ?? 0;
-        const changeAbsKrw = domesticStats?.change24hAbs ?? 0;
+        
+        // changeAbsKrw, high24h, low24h, volume24hQuote를 KRW로 변환
+        let changeAbsKrw = domesticStats?.change24hAbs ?? 0;
+        let high24hKrw: number | null = domesticStats?.high24h ?? null;
+        let low24hKrw: number | null = domesticStats?.low24h ?? null;
+        let volume24hKrw = domesticStats?.volume24hQuote ?? 0;
 
-        const high24h = domesticStats?.high24h ?? null;
-        const low24h = domesticStats?.low24h ?? null;
+        // BTC/USDT 마켓의 경우 KRW 변환 필요
+        if (domesticQuote === "BTC") {
+          const btcKrwKey = `${domesticExchange}:BTC:KRW`;
+          const btcKrw = prices[btcKrwKey]?.price ?? 0;
+          if (btcKrw > 0) {
+            changeAbsKrw = changeAbsKrw * btcKrw;
+            if (high24hKrw) high24hKrw = high24hKrw * btcKrw;
+            if (low24hKrw) low24hKrw = low24hKrw * btcKrw;
+            volume24hKrw = volume24hKrw * btcKrw;
+          } else {
+            // BTC/KRW 가격 없으면 계산 불가
+            changeAbsKrw = 0;
+            high24hKrw = null;
+            low24hKrw = null;
+            volume24hKrw = 0;
+          }
+        } else if (domesticQuote === "USDT") {
+          changeAbsKrw = changeAbsKrw * fxRate;
+          if (high24hKrw) high24hKrw = high24hKrw * fxRate;
+          if (low24hKrw) low24hKrw = low24hKrw * fxRate;
+          volume24hKrw = volume24hKrw * fxRate;
+        }
 
-        const fromHighRate = (high24h && domesticPriceKrw)
-          ? ((domesticPriceKrw / high24h) - 1) * 100
-          : 0;
+        const fromHighRate = (high24hKrw && domesticPriceKrw && high24hKrw > 0)
+          ? ((domesticPriceKrw / high24hKrw) - 1) * 100
+          : null;
 
-        const highDiffKrw = (high24h && domesticPriceKrw)
-          ? high24h - domesticPriceKrw
-          : 0;
+        const highDiffKrw = (high24hKrw && domesticPriceKrw)
+          ? high24hKrw - domesticPriceKrw
+          : null;
 
-        const fromLowRate = (low24h && domesticPriceKrw)
-          ? ((domesticPriceKrw / low24h) - 1) * 100
-          : 0;
+        const fromLowRate = (low24hKrw && domesticPriceKrw && low24hKrw > 0)
+          ? ((domesticPriceKrw / low24hKrw) - 1) * 100
+          : null;
 
-        const lowDiffKrw = (low24h && domesticPriceKrw)
-          ? domesticPriceKrw - low24h
-          : 0;
-
-        const volume24hKrw = domesticStats?.volume24hQuote ?? 0;
+        const lowDiffKrw = (low24hKrw && domesticPriceKrw)
+          ? domesticPriceKrw - low24hKrw
+          : null;
 
         const foreignVolumeKrw = (foreignStats?.volume24hQuote != null)
           ? foreignStats.volume24hQuote * fxRate
@@ -167,17 +190,17 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           changeRate: Math.round(changeRate * 100) / 100,
           changeAbsKrw: Math.round(changeAbsKrw * 100) / 100,
 
-          fromHighRate: Math.round(fromHighRate * 100) / 100,
-          highDiffKrw: Math.round(highDiffKrw * 100) / 100,
+          fromHighRate: fromHighRate !== null ? Math.round(fromHighRate * 100) / 100 : null,
+          highDiffKrw: highDiffKrw !== null ? Math.round(highDiffKrw * 100) / 100 : null,
 
-          fromLowRate: Math.round(fromLowRate * 100) / 100,
-          lowDiffKrw: Math.round(lowDiffKrw * 100) / 100,
+          fromLowRate: fromLowRate !== null ? Math.round(fromLowRate * 100) / 100 : null,
+          lowDiffKrw: lowDiffKrw !== null ? Math.round(lowDiffKrw * 100) / 100 : null,
 
           volume24hKrw,
           volume24hForeignKrw: Math.round(foreignVolumeKrw * 100) / 100,
 
-          high24h,
-          low24h,
+          high24h: high24hKrw,
+          low24h: low24hKrw,
 
           globalPrice: foreignPrice,
           premium: premiumRate ? Math.round(premiumRate * 100) / 100 : null,

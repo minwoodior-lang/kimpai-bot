@@ -9,7 +9,7 @@ export async function fetchBithumbPrices(markets: MarketInfo[]): Promise<PriceMa
   const prices: PriceMap = {};
   const ts = Date.now();
 
-  const quotes = [...new Set(markets.map(m => m.quote))];
+  const quotes = Array.from(new Set(markets.map(m => m.quote)));
 
   for (const quote of quotes) {
     try {
@@ -43,7 +43,7 @@ export async function fetchBithumbStats(markets: MarketInfo[]): Promise<MarketSt
   if (markets.length === 0) return {};
 
   const stats: MarketStatsMap = {};
-  const quotes = [...new Set(markets.map(m => m.quote))];
+  const quotes = Array.from(new Set(markets.map(m => m.quote)));
 
   for (const quote of quotes) {
     try {

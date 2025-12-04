@@ -97,17 +97,18 @@ function saveMarketStats(stats: MarketStatsMap): void {
 async function fetchUpbitMarketStats(markets: MarketInfo[]): Promise<MarketStatsMap> {
   const result: MarketStatsMap = {};
   
-  const upbitKrwMarkets = markets
-    .filter(m => m.exchange === 'UPBIT' && m.quote === 'KRW')
+  // KRW, BTC, USDT 마켓 모두 처리
+  const upbitMarkets = markets
+    .filter(m => m.exchange === 'UPBIT' && ['KRW', 'BTC', 'USDT'].includes(m.quote))
     .map(m => m.market);
 
-  if (upbitKrwMarkets.length === 0) return result;
+  if (upbitMarkets.length === 0) return result;
 
   const chunkSize = 80;
   const chunks: string[][] = [];
   
-  for (let i = 0; i < upbitKrwMarkets.length; i += chunkSize) {
-    chunks.push(upbitKrwMarkets.slice(i, i + chunkSize));
+  for (let i = 0; i < upbitMarkets.length; i += chunkSize) {
+    chunks.push(upbitMarkets.slice(i, i + chunkSize));
   }
 
   for (const chunk of chunks) {

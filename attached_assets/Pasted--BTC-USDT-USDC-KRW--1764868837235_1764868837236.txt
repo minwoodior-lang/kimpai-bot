@@ -1,0 +1,105 @@
+[버그 리포트] BTC/USDT/USDC 마켓 + KRW 마켓 지표의 전일대비·고가대비·저가대비·거래액(일) 이상치
+
+현재 총 네 가지 문제가 확인된 상태입니다.
+
+──────────────────────────────
+1. 업비트 BTC 기준 + 해외 USDT 마켓
+──────────────────────────────
+증상:
+- 전일대비 / 고가대비 / 저가대비 / 거래액(일)이 거의 모두 0% 또는 "-" 표시.
+- 예: 업비트 BTC – 바이낸스 USDT 조합에서 모든 코인의 지표가 0.00% 로만 나옴.
+
+원인 후보:
+- BTC 마켓 계산 시 KRW 변환 누락 또는 잘못된 값(prev/high/low)이 0/null 상태인 것.
+
+──────────────────────────────
+2. **업비트 USDT 마켓 지표 전체 미표시 (중요)** ← 추가된 문제
+──────────────────────────────
+증상:
+- 업비트 USDT 마켓 선택 시, 대부분 코인의 전일대비/고가대비/저가대비/거래액이 전부 “-” 또는 0%로만 표시됨.
+- 업비트 USDT 마켓은 공식 API에 24h high/low/prev_price가 존재함에도 값이 반영되지 않음.
+
+원인 후보:
+- 업비트 USDT 마켓에서 high/low/prev 값이 KRW 변환 전에 누락되었거나 분기문에서 제외된 것으로 보임.
+- 기존 BTC/USDT 공통 로직에서 업비트 USDT 마켓 케이스가 빠졌을 가능성.
+
+──────────────────────────────
+3. 빗썸 BTC 기준 + 해외 USDT 마켓 (이상치)
+──────────────────────────────
+증상:
+- +13753503327.90% 같은 비정상적인 퍼센트가 출력됨.
+- 전일/고가/저가 대비 값이 모두 비정상적인 초대형 숫자로 나오고,
+  UI가 두 줄 겹쳐서 깨짐.
+
+원인:
+- highKrw / lowKrw / prevKrw 중 하나가 0 또는 null인데 퍼센트 나눗셈 수행한 것.
+- KRW 변환 전/후 값이 혼합되어 계산된 것으로 추정.
+
+──────────────────────────────
+4. **빗썸 KRW 마켓에서 현재가(null) 버그** ← 추가된 문제
+──────────────────────────────
+증상:
+- 일부 빗썸 KRW 마켓(예: USDC, WEMIX 등)에서 “현재가”가 null 로 표시됨.
+- 가격 데이터는 가격 워커에서 정상적으로 들어오고 있는데 merge 과정에서 누락되는 것으로 보임.
+
+원인 후보:
+- priceWorker에서 빗썸 KRW 마켓의 closePriceKRW 매핑이 빠졌거나,
+- 빗썸 KRW 마켓 코드(BTC-USDT 와 구조가 달라서) 분기문에서 제외되었을 가능성.
+
+──────────────────────────────
+[공식 계산 규칙] — KRW 기준으로 통일
+──────────────────────────────
+모든 전일대비/고가대비/저가대비/거래액 계산은 반드시 "KRW 변환 후" 값을 기준으로 해야 합니다.
+
+KRW 마켓:
+  currentKrw = closePriceKRW
+  prevKrw    = prevCloseKRW
+  highKrw    = high24hKRW
+  lowKrw     = low24hKRW
+  volumeKrw  = volume24hKRW
+
+BTC 마켓:
+  currentKrw = closePriceBTC * btcKrw
+  prevKrw    = prevCloseBTC * btcKrw
+  highKrw    = high24hBTC * btcKrw
+  lowKrw     = low24hBTC * btcKrw
+  volumeKrw  = volume24hBTC * btcKrw
+
+USDT 마켓:
+  currentKrw = closePriceUSDT * usdtKrwGlobal
+  prevKrw    = prevCloseUSDT * usdtKrwGlobal
+  highKrw    = high24hUSDT * usdtKrwGlobal
+  lowKrw     = low24hUSDT * usdtKrwGlobal
+  volumeKrw  = volume24hUSDT * usdtKrwGlobal
+
+지표 계산:
+  전일대비% = ((currentKrw - prevKrw) / prevKrw) * 100
+  고가대비% = ((currentKrw - highKrw) / highKrw) * 100
+  저가대비% = ((currentKrw - lowKrw) / lowKrw) * 100
+
+예외 처리(필수):
+  prevKrw == null 또는 0 → 전일대비 null
+  highKrw == null 또는 0 → 고가대비 null
+  lowKrw == null 또는 0 → 저가대비 null
+  volumeKrw == null 또는 0 → 거래액 null
+
+──────────────────────────────
+체크 포인트
+──────────────────────────────
+다음 6개 조합에서 정상 출력 되는지 확인 부탁드립니다:
+
+1) 업비트 BTC → 바이낸스 USDT  
+2) 업비트 BTC → OKX USDT  
+3) 업비트 USDT → 바이낸스 USDT  ← (현재 전체 지표 미출력)  
+4) 업비트 USDT → Bitget USDT  
+
+5) 빗썸 BTC → 바이낸스 USDT  
+6) 빗썸 KRW → 모든 코인  ← (현재가 null 버그)
+
+특히 업비트 USDT 마켓과 빗썸 KRW 마켓은 구조적으로 값이 누락되는 문제가 있으므로 검증 부탁드립니다.
+
+핵심:
+- KRW 기준으로 일관 계산
+- null/0 방어
+- BTC/USDT/KRW 각각 분기 정확히 적용
+- 빗썸 KRW 현재가 null 해결
