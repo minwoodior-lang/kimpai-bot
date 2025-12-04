@@ -1968,6 +1968,13 @@
   },
   {
     "exchange": "COINONE",
+    "base_symbol": "BGB",
+    "quote_symbol": "",
+    "name_ko": "비트겟토큰",
+    "name_en": "Bitget Token"
+  },
+  {
+    "exchange": "COINONE",
     "base_symbol": "TAKE",
     "quote_symbol": "",
     "name_ko": "오버테이크",

@@ -770,6 +770,16 @@
     "isDomestic": true
   },
   {
+    "id": "BITHUMB:KRW-BOB",
+    "exchange": "BITHUMB",
+    "market": "KRW-BOB",
+    "base": "BOB",
+    "quote": "KRW",
+    "name_ko": "비오비",
+    "name_en": "BOB",
+    "isDomestic": true
+  },
+  {
     "id": "BITHUMB:KRW-BOBA",
     "exchange": "BITHUMB",
     "market": "KRW-BOBA",
@@ -3950,6 +3960,16 @@
     "isDomestic": true
   },
   {
+    "id": "BITHUMB:KRW-TRAC",
+    "exchange": "BITHUMB",
+    "market": "KRW-TRAC",
+    "base": "TRAC",
+    "quote": "KRW",
+    "name_ko": "오리진트레일",
+    "name_en": "OriginTrail",
+    "isDomestic": true
+  },
+  {
     "id": "BITHUMB:KRW-TREE",
     "exchange": "BITHUMB",
     "market": "KRW-TREE",
@@ -5047,6 +5067,16 @@
     "quote": "KRW",
     "name_ko": "베라체인",
     "name_en": "Berachain",
+    "isDomestic": true
+  },
+  {
+    "id": "COINONE:BGB-KRW",
+    "exchange": "COINONE",
+    "market": "BGB-KRW",
+    "base": "BGB",
+    "quote": "KRW",
+    "name_ko": "비트겟토큰",
+    "name_en": "Bitget Token",
     "isDomestic": true
   },
   {

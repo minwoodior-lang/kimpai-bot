@@ -2049,6 +2049,14 @@
   },
   {
     "exchange": "BITHUMB",
+    "market_code": "KRW-TRAC",
+    "base_symbol": "KRW",
+    "quote_symbol": "TRAC",
+    "name_ko": "오리진트레일",
+    "name_en": "OriginTrail"
+  },
+  {
+    "exchange": "BITHUMB",
     "market_code": "KRW-BONK",
     "base_symbol": "KRW",
     "quote_symbol": "BONK",
@@ -3182,6 +3190,14 @@
     "quote_symbol": "USD1",
     "name_ko": "월드 리버티 파이낸셜 유에스디",
     "name_en": "World Liberty Financial USD"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-BOB",
+    "base_symbol": "KRW",
+    "quote_symbol": "BOB",
+    "name_ko": "비오비",
+    "name_en": "BOB"
   },
   {
     "exchange": "BITHUMB",
