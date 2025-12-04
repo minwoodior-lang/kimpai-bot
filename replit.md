@@ -3,19 +3,25 @@
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. The project's core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. It handles real-time price collection, premium calculation, and global market metrics, aiming to offer a comprehensive view of the crypto market with a focus on the Korean premium.
 
-### Recent Changes (v3.4.3 - 2024-12-04)
-- **홈 화면 PC 레이아웃 100% 정렬 완료**:
-  - 메인 컨테이너 통일: `max-w-[1280px] px-4 lg:px-6` (pages/index.tsx)
-  - 헤더 / 상단 요약 카드 / 프리미엄 차트 / 코인 리스트 테이블 / 코인셀 차트 **좌우 라인 완벽 일직선화**
+### Recent Changes (v3.4.4 - 2024-12-04)
+- **헤더(navbar) + 메인 컨테이너 폭 통일 (모두 max-w-[1280px] px-6)**:
+  - Layout.tsx: 헤더 정렬 `max-w-[1280px] px-6` (배경색 `bg-[#020617]`, 테두리 `border-white/5`)
+  - pages/index.tsx: 메인 컨테이너 `max-w-[1280px] px-6` (px-4 제거)
+  - Layout.tsx 푸터: 동일하게 `max-w-[1280px] px-6` 통일
+  - 결과: 헤더 로고 / 프리미엄 차트 / 코인 리스트 / 코인셀 차트 모두 **완벽 일직선**
+- **필터 바 PC/모바일 분리 (hidden md:flex + flex md:hidden)**:
+  - **PC (md 이상)**: 한 줄 정렬 `hidden md:flex`
+    - 왼쪽: 🇰🇷 기준 거래소 + ↔ 버튼 + 🌐 해외 거래소
+    - 오른쪽: 암호화폐 총 N개 + 검색창 (w-[260px], `ml-auto`)
+  - **모바일**: `flex md:hidden flex-col gap-2`
+    - 거래소 선택 (1줄)
+    - 검색창 & 개수 (2줄)
+- **홈 화면 PC 레이아웃 최종 완성** (v3.4.3):
+  - 메인 컨테이너: `max-w-[1280px] px-6` 통일
   - 프리미엄 차트: `border border-white/5 bg-[#050819]` 스타일
-  - 코인 테이블 래퍼: `border border-white/5 bg-[#050819]` 추가 (테두리 일치화)
+  - 코인 테이블 래퍼: `border border-white/5 bg-[#050819]` (테두리 일치)
   - 모든 테이블 th/td: `px-3 lg:px-4 py-2.5` 패딩 통일
-  - 코인셀 상세 차트: `px-3 lg:px-4 pb-4` (테이블 셀 패딩 상속)
-  - **PremiumTable 루트**: 부모 컨테이너 폭 상속 (`max-w`, `px`, `mx-auto` 제거)
-- **필터 바 레이아웃 재구성**:
-  - 단일 통합 구조: flex-col (모바일) → md:flex-row (PC)
-  - PC: 기준/해외 거래소 왼쪽 정렬 + "암호화폐 총 N개 + 검색" 오른쪽 정렬 (md:justify-end)
-  - 모바일: 검색창 w-full, 총 개수 텍스트 위쪽에 정렬
+  - 코인셀 상세 차트: `px-3 lg:px-4 pb-4` (프리미엄 차트와 동일 라인)
 - **테이블 구조 최적화**: section 태그 사용, 필터 UI 및 테이블 분리
 - **프리미엄 차트 폴링 최적화**: 1000ms → 실시간 반응 속도 개선
 - **BINANCE_BTC Market 제거**: 바이낸스에 BTC 현물 시장 없음

@@ -715,55 +715,97 @@ export default function PremiumTable({
     <section className="mb-3">
 
       {showFilters && (
-        <div className="mb-3 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-          {/* 왼쪽: 기준/해외 거래소 드롭다운 */}
-          <div className="flex flex-wrap items-center gap-2 md:gap-3">
-            {/* 기준 거래소 */}
+        <>
+          {/* PC 레이아웃: 한 줄 정렬 */}
+          <div className="hidden md:flex items-center gap-3 mt-3 mb-2">
+            {/* 왼쪽: 기준/해외 거래소 */}
             <div className="flex items-center gap-2">
-              <span className="text-gray-400 text-[11px] whitespace-nowrap">🇰🇷 기준 거래소</span>
+              <span className="text-xs text-slate-400">🇰🇷 기준 거래소</span>
               <MiniDropdown
                 value={domesticExchange}
                 options={DOMESTIC_EXCHANGES}
                 onChange={setDomesticExchange}
               />
-            </div>
-
-            {/* 화살표 */}
-            <span className="hidden md:inline text-gray-500 text-sm">↔</span>
-
-            {/* 해외 거래소 */}
-            <div className="flex items-center gap-2">
+              <button className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-slate-300 hover:bg-white/10 transition-colors">
+                ↔
+              </button>
+              <span className="text-xs text-slate-400">🌐 해외 거래소</span>
               <MiniDropdown
                 value={foreignExchange}
                 options={FOREIGN_EXCHANGES}
                 onChange={setForeignExchange}
                 showShortName={true}
               />
-              <span className="text-gray-400 text-[11px] whitespace-nowrap">🌐 해외 거래소</span>
+            </div>
+
+            {/* 오른쪽: 암호화폐 총 N개 + 검색 */}
+            <div className="ml-auto flex items-center gap-3">
+              <span className="text-xs text-slate-500 whitespace-nowrap">
+                암호화폐 총 <span className="font-semibold text-slate-100">{totalCoins}</span>개
+              </span>
+              <div className="w-[260px] relative">
+                <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="BTC, 비트코인, ㅂㅌ"
+                  className="w-full bg-slate-700 text-white rounded-lg pl-8 pr-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs"
+                />
+              </div>
             </div>
           </div>
 
-          {/* 오른쪽: 암호화폐 총 개수 + 검색 */}
-          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-end w-full md:w-auto">
-            <span className="text-gray-400 text-[11px] whitespace-nowrap">
-              암호화폐 총 <span className="text-white font-medium">{totalCoins}</span>개
-            </span>
-            <div className="w-full md:w-[240px] relative">
-              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
+          {/* 모바일 레이아웃 */}
+          <div className="flex md:hidden flex-col gap-2 mb-3">
+            {/* 거래소 선택 */}
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-slate-400">🇰🇷</span>
+                <MiniDropdown
+                  value={domesticExchange}
+                  options={DOMESTIC_EXCHANGES}
+                  onChange={setDomesticExchange}
+                />
+              </div>
+              <span className="text-slate-500">↔</span>
+              <div className="flex items-center gap-2">
+                <MiniDropdown
+                  value={foreignExchange}
+                  options={FOREIGN_EXCHANGES}
+                  onChange={setForeignExchange}
+                  showShortName={true}
+                />
+                <span className="text-xs text-slate-400">🌐</span>
+              </div>
+            </div>
+
+            {/* 검색 및 개수 */}
+            <div className="flex flex-col gap-2">
+              <span className="text-xs text-slate-500">
+                암호화폐 총 <span className="font-semibold text-slate-100">{totalCoins}</span>개
               </span>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="BTC, 비트코인, ㅂㅌ"
-                className="w-full bg-slate-700 text-white rounded-lg pl-8 pr-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs md:text-sm"
-              />
+              <div className="w-full relative">
+                <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="BTC, 비트코인, ㅂㅌ"
+                  className="w-full bg-slate-700 text-white rounded-lg pl-8 pr-3 py-1.5 border border-slate-600 focus:border-blue-500 focus:outline-none text-xs"
+                />
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
 
       {loading && data.length === 0 ? (

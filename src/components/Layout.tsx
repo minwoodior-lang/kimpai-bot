@@ -74,9 +74,9 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-900 text-slate-100">
-      <header className="sm:sticky sm:top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-800">
-        <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-5">
-          <nav className="border-b border-slate-800">
+      <header className="w-full bg-[#020617] border-b border-white/5">
+        <div className="mx-auto max-w-[1280px] px-6 flex items-center justify-between h-14">
+          <nav className="border-b border-slate-800 flex-1">
             <div className="flex justify-between items-center h-14">
               <Link href="/" className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
@@ -186,7 +186,7 @@ export default function Layout({ children }: LayoutProps) {
       <main className="flex-grow">{children}</main>
 
       <footer className="border-t dark:border-slate-800 light:border-slate-200 mt-10">
-        <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-5 py-8">
+        <div className="mx-auto w-full max-w-[1280px] px-6 py-8">
           <div className="space-y-3 dark:text-slate-400 light:text-slate-600 text-[12px]">
             <p className="leading-relaxed">
               데이터 출처: 업비트, 빗썸, 코인원, 바이낸스 등 주요 국내·글로벌 거래소의 공개 API를 사용합니다.
