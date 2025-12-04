@@ -59,11 +59,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         const domesticPriceKey = `${domesticExchange}:${symbol}:${domesticQuote}`;
         const foreignPriceKey = `${foreignExchange}:${symbol}:${foreignQuote}`;
 
-        const domesticPriceKrw = prices[domesticPriceKey]?.price || 0;
-        const foreignPrice = prices[foreignPriceKey]?.price || 0;
+        const domesticPriceKrw = prices[domesticPriceKey]?.price ?? null;
+        const foreignPrice = prices[foreignPriceKey]?.price ?? null;
 
-        let foreignPriceKrw = 0;
-        if (foreignPrice > 0) {
+        let foreignPriceKrw: number | null = null;
+        if (foreignPrice && foreignPrice > 0) {
           if (foreignQuote === "USDT") {
             foreignPriceKrw = foreignPrice * fxRate;
           } else if (foreignQuote === "BTC") {
@@ -81,13 +81,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           }
         }
 
-        const premiumRate = foreignPriceKrw > 0
-          ? ((domesticPriceKrw / foreignPriceKrw) - 1) * 100
-          : 0;
-
-        const premiumDiffKrw = foreignPriceKrw > 0
-          ? domesticPriceKrw - foreignPriceKrw
-          : 0;
+        let premiumRate: number | null = null;
+        let premiumDiffKrw: number | null = null;
+        if (domesticPriceKrw && foreignPriceKrw && foreignPriceKrw > 0) {
+          premiumRate = ((domesticPriceKrw / foreignPriceKrw) - 1) * 100;
+          premiumDiffKrw = domesticPriceKrw - foreignPriceKrw;
+        }
 
         const shouldForcePlaceholder = BAD_ICON_SYMBOLS.includes(symbol);
         const baseIconUrl = master?.icon_path || premiumRow?.iconUrl || null;
@@ -140,10 +139,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           foreignExchange: foreignExchange,
 
           koreanPrice: domesticPriceKrw,
-          foreignPriceKrw: Math.round(foreignPriceKrw * 100) / 100,
+          foreignPriceKrw: foreignPriceKrw ? Math.round(foreignPriceKrw * 100) / 100 : null,
 
-          premiumRate: Math.round(premiumRate * 100) / 100,
-          premiumDiffKrw: Math.round(premiumDiffKrw * 100) / 100,
+          premiumRate: premiumRate ? Math.round(premiumRate * 100) / 100 : null,
+          premiumDiffKrw: premiumDiffKrw ? Math.round(premiumDiffKrw * 100) / 100 : null,
 
           changeRate: Math.round(changeRate * 100) / 100,
           changeAbsKrw: Math.round(changeAbsKrw * 100) / 100,
@@ -161,18 +160,23 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           low24h,
 
           globalPrice: foreignPrice,
-          premium: Math.round(premiumRate * 100) / 100,
-          isListed: domesticPriceKrw > 0 && foreignPrice > 0,
+          premium: premiumRate ? Math.round(premiumRate * 100) / 100 : null,
+          isListed: (domesticPriceKrw && domesticPriceKrw > 0) && (foreignPrice && foreignPrice > 0),
           icon_url: iconUrl,
           displayName: market.name_ko || market.name_en || symbol,
           cmcSlug: cmcSlug,
         };
       })
-      .filter((row) => row.koreanPrice > 0)
-      .sort((a, b) => b.premium - a.premium);
+      .filter((row) => row.koreanPrice || row.foreignPriceKrw)
+      .sort((a, b) => {
+        const aPremium = a.premium ?? -Infinity;
+        const bPremium = b.premium ?? -Infinity;
+        return bPremium - aPremium;
+      });
 
-    const avgPremium = filtered.length > 0
-      ? filtered.reduce((sum, r) => sum + r.premium, 0) / filtered.length
+    const premiumsWithValues = filtered.filter(r => r.premium !== null);
+    const avgPremium = premiumsWithValues.length > 0
+      ? premiumsWithValues.reduce((sum, r) => sum + (r.premium ?? 0), 0) / premiumsWithValues.length
       : 0;
 
     return res.status(200).json({

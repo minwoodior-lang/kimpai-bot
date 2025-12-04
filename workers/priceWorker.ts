@@ -166,13 +166,18 @@ function buildPremiumTable(): void {
 
     const master = symbolMap.get(symbol) || {};
 
+    let finalPremium = null;
+    if (koreanPrice && globalPrice && globalPrice > 0) {
+      finalPremium = Math.round(premium * 100) / 100;
+    }
+
     premiumRows.push({
       symbol,
       name_ko: master.name_ko || symbol,
       name_en: master.name_en || symbol,
-      koreanPrice: koreanPrice || 0,
-      globalPrice: globalPrice || 0,
-      premium: Math.round(premium * 100) / 100,
+      koreanPrice,
+      globalPrice,
+      premium: finalPremium,
       usdKrw: usdKrwRate,
       iconUrl: master.icon_path || null,
       cmcSlug: master.cmc_slug || null,
@@ -180,7 +185,11 @@ function buildPremiumTable(): void {
     });
   }
 
-  premiumRows.sort((a, b) => b.premium - a.premium);
+  premiumRows.sort((a, b) => {
+    const aPrem = a.premium ?? -Infinity;
+    const bPrem = b.premium ?? -Infinity;
+    return bPrem - aPrem;
+  });
 
   const tmpFile = PREMIUM_TABLE_FILE + '.tmp';
   fs.writeFileSync(tmpFile, JSON.stringify(premiumRows, null, 2), 'utf-8');

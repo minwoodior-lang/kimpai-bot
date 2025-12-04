@@ -103,20 +103,12 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
     };
   }, [bottomValue, isUnlisted]);
 
-  if (isUnlisted) {
-    return (
-      <div className="flex flex-col items-end leading-tight">
-        <span className="text-[13px] md:text-[14px] font-medium text-white whitespace-nowrap">-</span>
-        <span className="text-[11px] md:text-[12px] text-gray-500 whitespace-nowrap">-</span>
-      </div>
-    );
-  }
-
   const topFormatted = topValue != null ? formatFn(topValue) : "-";
   const bottomFormatted = bottomValue != null ? formatFn(bottomValue) : "-";
 
   const getTopClass = () => {
     const base = "text-[13px] md:text-[14px] font-medium whitespace-nowrap";
+    if (topValue === null) return `${base} text-gray-500`;
     if (topFlash === "up") return `${base} price-flash-up`;
     if (topFlash === "down") return `${base} price-flash-down`;
     return `${base} text-white`;
@@ -124,6 +116,7 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
 
   const getBottomClass = () => {
     const base = "text-[11px] md:text-[12px] whitespace-nowrap";
+    if (bottomValue === null) return `${base} text-gray-500`;
     if (bottomFlash === "up") return `${base} price-flash-up`;
     if (bottomFlash === "down") return `${base} price-flash-down`;
     return `${base} text-gray-500`;
