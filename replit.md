@@ -1,6 +1,6 @@
 # KimpAI v3.3.3 - Kimchi Premium Analytics Dashboard
 
-## 📋 상태: CoinGecko 글로벌 테더 시세 적용 완료 (Phase 5.3 ✅)
+## 📋 상태: 빗썸 신규 상장 자동 반영 완료 (Phase 5.5 ✅)
 
 ### 최종 아키텍처 (2025-12-04)
 
@@ -54,8 +54,8 @@
 ```
 workers/priceWorker.ts
 ├── 3초마다 모든 거래소 API 호출
-├── prices.json 저장 (4,507 entries)
-├── premiumTable.json 계산 (558 rows)
+├── prices.json 저장 (4,527 entries)
+├── premiumTable.json 계산 (561 rows)
 └── in-progress 락으로 중첩 방지
 ```
 
@@ -230,6 +230,29 @@ POST /api/heartbeat
 ---
 
 ## 📌 v3.3.3 변경사항 (2025-12-04)
+
+### Phase 5.5: 빗썸 신규 상장 자동 반영 ✅
+
+1. **신규 상장 코인 반영 완료**
+   - TRAC (오리진트레일 / OriginTrail) - 12/3 상장
+   - BOB (비오비 / BOB) - 12/4 상장
+   - 빗썸 totalCryptoCount: 443 → 445 (2개 증가)
+
+2. **마켓 데이터 갱신 플로우**
+   - `npm run fetch:bithumb` → 빗썸 API 최신 마켓 수집
+   - `npm run fetch:upbit` → 업비트 API 최신 마켓 수집
+   - `npm run fetch:coinone` → 코인원 API 최신 마켓 수집
+   - `npm run build:markets` → exchange_markets.json 병합 저장
+
+3. **데이터 현황 업데이트**
+   - exchange_markets.json: 1510 → 1513 마켓 (+3)
+   - prices.json: 4516 → 4527 entries (+11)
+   - premiumTable.json: 558 → 561 rows (+3)
+
+4. **자동 반영 문제점 및 원인**
+   - noticeParser.ts: 빗썸 공지 크롤링 실패 (페이지 접근 차단)
+   - refreshExchangeMarkets.ts: Supabase 저장 시도 → 연결 실패
+   - 해결: 기존 스크립트 (fetch:bithumb + build:markets) 사용
 
 ### Phase 5.4: 빗썸 전체 로직 재점검 ✅
 
