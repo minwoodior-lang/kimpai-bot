@@ -1,6 +1,7 @@
 import { useEffect, useRef, memo, useState } from "react";
 
 interface TradingViewChartProps {
+  tvSymbol?: string; // "BINANCE:BTCUSDT" 형식
   symbol?: string;
   exchange?: "UPBIT" | "BINANCE";
   height?: number;
@@ -14,6 +15,7 @@ declare global {
 }
 
 function TradingViewChart({
+  tvSymbol,
   symbol = "BTC",
   exchange = "BINANCE",
   height = 400,
@@ -33,14 +35,17 @@ function TradingViewChart({
     try {
       container.innerHTML = "";
 
-      // TradingView 심볼 결정
-      const tvSymbol =
-        exchange === "UPBIT" ? `UPBIT:${symbol}KRW` : `BINANCE:${symbol}USDT`;
+      // tvSymbol이 직접 전달되면 사용, 아니면 기존 로직
+      let finalTvSymbol = tvSymbol;
+      if (!finalTvSymbol) {
+        finalTvSymbol =
+          exchange === "UPBIT" ? `UPBIT:${symbol}KRW` : `BINANCE:${symbol}USDT`;
+      }
 
       // 설정 객체
       const config: any = {
         autosize: true,
-        symbol: tvSymbol,
+        symbol: finalTvSymbol,
         interval: "60",
         timezone: "Asia/Seoul",
         theme: theme,
@@ -63,7 +68,7 @@ function TradingViewChart({
         script.async = true;
       } catch (e) {
         console.warn("[TradingViewChart] JSON stringify failed, using fallback");
-        script.textContent = JSON.stringify({ autosize: true, symbol: tvSymbol });
+        script.textContent = JSON.stringify({ autosize: true, symbol: finalTvSymbol });
         script.async = true;
       }
 
@@ -99,7 +104,7 @@ function TradingViewChart({
         // Ignore cleanup errors
       }
     };
-  }, [exchange, symbol, theme]);
+  }, [tvSymbol, exchange, symbol, theme]);
 
   return (
     <div

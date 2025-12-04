@@ -746,44 +746,147 @@ export default function PremiumTable({
     return `BINANCE:${base}USDT`;
   };
 
+  // TV 심볼 매핑 - 거래소별
+  const TV_DOMESTIC_PREFIX: Record<string, string> = {
+    UPBIT: "UPBIT",
+    BITHUMB: "BITHUMB",
+  };
+
+  const TV_FOREIGN_PREFIX: Record<string, string> = {
+    BINANCE: "BINANCE",
+    OKX: "OKX",
+    BYBIT: "BYBIT",
+    BITGET: "BITGET",
+    GATEIO: "GATEIO",
+    MEXC: "MEXC",
+    HTX: "HTX",
+  };
+
+  // 거래소 ID에서 거래소명과 마켓 분리
+  const parseExchangeId = (
+    id: string
+  ): { exchange: string; market: string } => {
+    const parts = id.split("_");
+    if (parts.length === 2) {
+      return { exchange: parts[0], market: parts[1] };
+    }
+    return { exchange: id, market: "KRW" };
+  };
+
+  // 해외 거래소 ID에서 거래소명과 마켓 분리 (e.g., "BINANCE_BTC" -> BINANCE, BTC)
+  const parseForeignId = (
+    id: string
+  ): { exchange: string; market: string } => {
+    const parts = id.split("_");
+    if (parts.length === 2) {
+      return { exchange: parts[0], market: parts[1] };
+    }
+    return { exchange: id, market: "USDT" };
+  };
+
+  // TradingView 심볼 생성 (국내 거래소용)
+  const getTvSymbolForDomestic = (params: {
+    symbol: string;
+    exchange: string;
+    market: string;
+  }): string => {
+    const { symbol, exchange, market } = params;
+    const prefix = TV_DOMESTIC_PREFIX[exchange];
+    if (!prefix) return `BINANCE:${symbol}USDT`; // Fallback
+    return `${prefix}:${symbol}${market}`;
+  };
+
+  // TradingView 심볼 생성 (해외 거래소용)
+  const getTvSymbolForForeign = (params: {
+    symbol: string;
+    exchange: string;
+    market: string;
+  }): string => {
+    const { symbol, exchange, market } = params;
+    const prefix = TV_FOREIGN_PREFIX[exchange] ?? "BINANCE";
+    return `${prefix}:${symbol}${market}`;
+  };
+
+  // 코인 row별 TV 심볼 생성 (조건부)
+  const getTvSymbolForRow = (params: {
+    symbol: string;
+    domesticExchange: string;
+    foreignExchange: string;
+  }): string => {
+    const { symbol, domesticExchange, foreignExchange } = params;
+
+    // 국내 거래소 파싱
+    const domestic = parseExchangeId(domesticExchange);
+    const foreign = parseForeignId(foreignExchange);
+
+    // 업비트/빗썸 → 국내 거래소 차트
+    if (domestic.exchange === "UPBIT" || domestic.exchange === "BITHUMB") {
+      return getTvSymbolForDomestic({
+        symbol,
+        exchange: domestic.exchange,
+        market: domestic.market,
+      });
+    }
+
+    // 코인원 → 해외 거래소 차트
+    if (domestic.exchange === "COINONE") {
+      return getTvSymbolForForeign({
+        symbol,
+        exchange: foreign.exchange,
+        market: foreign.market,
+      });
+    }
+
+    // Fallback
+    return `BINANCE:${symbol}USDT`;
+  };
+
   return (
     <div>
       {showHeader && (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-          <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
-            <div className="text-gray-400 text-xs mb-1">평균 김프</div>
-            <div
-              className={`text-xl font-bold ${getPremiumColor(averagePremium)}`}
-            >
-              {(averagePremium ?? 0) >= 0 ? "+" : ""}
-              {(averagePremium ?? 0).toFixed(2)}%
-            </div>
+        <>
+          {/* 프리미엄 차트 - Binance BTC 고정 */}
+          <div className="mb-4 h-96 rounded-lg overflow-hidden border border-slate-700">
+            <TradingViewChart tvSymbol="BINANCE:BTCUSDT" height={384} />
           </div>
 
-          <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
-            <div className="text-gray-400 text-xs mb-1">환율 (USDT/KRW)</div>
-            <div className="text-xl font-bold text-white">
-              ₩{fxRate.toLocaleString("ko-KR")}
+          {/* 메트릭 박스들 */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+            <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
+              <div className="text-gray-400 text-xs mb-1">평균 김프</div>
+              <div
+                className={`text-xl font-bold ${getPremiumColor(averagePremium)}`}
+              >
+                {(averagePremium ?? 0) >= 0 ? "+" : ""}
+                {(averagePremium ?? 0).toFixed(2)}%
+              </div>
             </div>
-          </div>
 
-          <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
-            <div className="text-gray-400 text-xs mb-1">코인 수</div>
-            <div className="text-xl font-bold text-white">
-              {listedCoins}
-              <span className="text-sm text-gray-400">/{totalCoins}개</span>
+            <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
+              <div className="text-gray-400 text-xs mb-1">환율 (USDT/KRW)</div>
+              <div className="text-xl font-bold text-white">
+                ₩{fxRate.toLocaleString("ko-KR")}
+              </div>
             </div>
-          </div>
 
-          <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
-            <div className="text-gray-400 text-xs mb-1">업데이트</div>
-            <div className="text-lg font-medium text-white">
-              {updatedAt
-                ? new Date(updatedAt).toLocaleTimeString("ko-KR")
-                : "--:--:--"}
+            <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
+              <div className="text-gray-400 text-xs mb-1">코인 수</div>
+              <div className="text-xl font-bold text-white">
+                {listedCoins}
+                <span className="text-sm text-gray-400">/{totalCoins}개</span>
+              </div>
+            </div>
+
+            <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
+              <div className="text-gray-400 text-xs mb-1">업데이트</div>
+              <div className="text-lg font-medium text-white">
+                {updatedAt
+                  ? new Date(updatedAt).toLocaleTimeString("ko-KR")
+                  : "--:--:--"}
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
 
       {showFilters && (
@@ -912,7 +1015,7 @@ export default function PremiumTable({
       ) : (
         <div className="w-full overflow-hidden px-4">
           <table className="w-full table-fixed border-separate border-spacing-y-0">
-            <colgroup><col className="w-[30px]" /><col className="w-[35%]" /><col className="w-[16%]" /><col className="w-[16%]" /><col className="w-[17%]" /><col className="hidden md:table-column w-[8%]" /><col className="hidden md:table-column w-[8%]" /><col className="w-[16%]" /></colgroup>
+            <colgroup><col className="w-[30px]" /><col className="w-[35%]" /><col className="w-[16%]" /><col className="w-[16%]" /><col className="w-[17%]" /><col className="hidden md:table-column w-[8%]" /><col className="hidden md:table-column w-[8%]" /><col className="w-[16%]" /><col className="w-[30px]" /></colgroup>
             <thead>
                 <tr className="bg-slate-900/60 text-slate-400 text-[11px] md:text-sm">
                   <th className="w-[30px] text-center text-[11px] text-[#A7B3C6]/50">★</th>
@@ -944,6 +1047,7 @@ export default function PremiumTable({
                     거래액(일)
                     <SortIcon columnKey="volume24hKrw" />
                   </th>
+                  <th className="w-[30px] text-center text-[11px] text-[#A7B3C6]/50">차트</th>
                 </tr>
               </thead>
               <tbody>
@@ -1054,15 +1158,32 @@ export default function PremiumTable({
                             <span className="text-gray-500">-</span>
                           )}
                         </td>
+
+                        <td className="px-1 md:px-2 py-1.5 md:py-2 text-center">
+                          <button
+                            type="button"
+                            onClick={() => toggleChart(row.symbol)}
+                            className="inline-flex items-center justify-center w-6 h-6 rounded hover:bg-slate-700/60 transition-colors text-slate-400 hover:text-slate-200"
+                            title="차트 보기"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                          </button>
+                        </td>
                       </tr>
 
                       {expandedSymbol === row.symbol && (
                         <tr key={`${row.symbol}-chart`}>
-                          <td colSpan={6} className="p-0 md:col-span-8">
+                          <td colSpan={9} className="p-0">
                             <div className="bg-[#0F111A] border-t border-b border-slate-700/50 py-3 px-3">
                               <div className="h-[360px] rounded-xl overflow-hidden bg-slate-900/50">
                                 <TradingViewChart
-                                  symbol={getTvSymbol(row.symbol)}
+                                  tvSymbol={getTvSymbolForRow({
+                                    symbol: row.symbol,
+                                    domesticExchange,
+                                    foreignExchange,
+                                  })}
                                   height={360}
                                 />
                               </div>

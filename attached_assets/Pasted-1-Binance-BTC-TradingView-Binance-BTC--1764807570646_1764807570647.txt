@@ -1,0 +1,167 @@
+1. 프리미엄 차트 – Binance BTC 고정
+
+요구사항
+
+홈 상단 프리미엄 차트는
+항상 TradingView 기준 Binance BTC 차트 로 고정.
+
+기준/해외 거래소 드롭다운과는 연동하지 말고,
+일단 “김프의 기준이 되는 대표 차트” 느낌으로만 사용.
+
+구현 가이드
+
+// PremiumChart.tsx (예시)
+<TradingViewChart tvSymbol="BINANCE:BTCUSDT" />
+
+
+TradingViewChart는 기존에 쓰던 컴포넌트 재사용
+
+tvSymbol은 고정값 BINANCE:BTCUSDT 로 전달
+
+2. 코인셀 – 각 코인 차트 연결 (업비트/빗썸)
+2-1. 기본 규칙
+
+코인셀 오른쪽 “차트보기 아이콘” 클릭 시
+TradingView 차트 열기 (페이지 내 임베드 or 새 탭 – 현재 구조 그대로 사용)
+
+기준거래소가 업비트/빗썸 인 경우
+→ 해당 기준거래소 기준 차트를 연다.
+
+2-2. TradingView 심볼 규칙
+
+TradingView에서 국내 거래소는 보통 이렇게 들어감:
+
+업비트 KRW 마켓: UPBIT:BTCKRW
+
+업비트 BTC 마켓: UPBIT:BTCBTC
+
+빗썸 KRW 마켓: BITHUMB:BTCKRW
+
+빗썸 BTC 마켓: BITHUMB:BTCBTC
+
+헬퍼 함수 예시
+
+type DomesticExchange = "UPBIT" | "BITHUMB" | "COINONE";
+type DomesticMarket = "KRW" | "BTC" | "USDT";
+
+const TV_DOMESTIC_PREFIX: Record<Exclude<DomesticExchange, "COINONE">, string> = {
+  UPBIT: "UPBIT",
+  BITHUMB: "BITHUMB",
+};
+
+function getTvSymbolForDomestic(params: {
+  symbol: string;          // 예: "BTC"
+  domesticExchange: DomesticExchange;
+  domesticMarket: DomesticMarket;  // 기준거래소 드롭다운에서 선택한 마켓 (KRW/BTC/USDT)
+}): string {
+  const { symbol, domesticExchange, domesticMarket } = params;
+
+  // 코인원은 여기서 처리하지 않고, 아래 3번 규칙으로 처리
+  if (domesticExchange === "COINONE") {
+    throw new Error("Coinone is handled by foreign exchange rule.");
+  }
+
+  const prefix = TV_DOMESTIC_PREFIX[domesticExchange];
+  return `${prefix}:${symbol}${domesticMarket}`;
+}
+
+2-3. 코인셀 row에서 사용
+// PremiumTable row 안
+<td className="text-center">
+  <button
+    type="button"
+    onClick={() => {
+      const tvSymbol = getTvSymbolForRow({
+        symbol: row.symbol,
+        domesticExchange,   // 현재 기준거래소 선택 값
+        domesticMarket,     // 현재 기준거래소 마켓 (KRW/BTC/USDT)
+        foreignExchange,    // 아래 3번에서 사용
+        foreignMarket,
+      });
+      openTradingView(tvSymbol); // 페이지 내 차트 변경 or 새 탭 이동 등
+    }}
+  >
+    <ChartIcon />
+  </button>
+</td>
+
+3. 기준거래소 = 코인원일 때 규칙
+
+코인원은 TradingView에 거래소가 없으니,
+기준거래소가 “코인원”인 경우에는 선택된 해외거래소 기준으로 차트를 연다.
+
+3-1. 규칙 정리
+
+기준거래소 = 코인원
+→ 해외 거래소 드롭다운에 선택된 거래소 기준 TV 심볼 사용
+
+해외 거래소는 모두 USDT/BTC 마켓 기준으로 맞춘다
+(현재 드롭다운 라벨에 BTC/USDT가 들어있으니 그 값 사용)
+
+3-2. 심볼 매핑
+type ForeignExchange =
+  | "BINANCE"
+  | "OKX"
+  | "BYBIT"
+  | "BITGET"
+  | "GATEIO"
+  | "MEXC"
+  | "HTX";
+
+type ForeignMarket = "USDT" | "BTC";
+
+const TV_FOREIGN_PREFIX: Record<ForeignExchange, string> = {
+  BINANCE: "BINANCE",
+  OKX: "OKX",
+  BYBIT: "BYBIT",
+  BITGET: "BITGET",
+  GATEIO: "GATEIO",
+  MEXC: "MEXC",
+  HTX: "HTX",
+};
+
+function getTvSymbolForRow(params: {
+  symbol: string;
+  domesticExchange: DomesticExchange;
+  domesticMarket: DomesticMarket;
+  foreignExchange: ForeignExchange;
+  foreignMarket: ForeignMarket;
+}): string {
+  const { symbol, domesticExchange, domesticMarket, foreignExchange, foreignMarket } = params;
+
+  // ① 업비트/빗썸 → 기준거래소 기준 차트
+  if (domesticExchange === "UPBIT" || domesticExchange === "BITHUMB") {
+    return getTvSymbolForDomestic({ symbol, domesticExchange, domesticMarket });
+  }
+
+  // ② 코인원 → 해외거래소 기준 차트
+  if (domesticExchange === "COINONE") {
+    const prefix = TV_FOREIGN_PREFIX[foreignExchange] ?? "BINANCE";
+    return `${prefix}:${symbol}${foreignMarket}`;
+  }
+
+  // 안전 장치: 혹시 모를 경우 Binance USDT로 fallback
+  return `BINANCE:${symbol}USDT`;
+}
+
+3-3. 요약
+
+업비트/빗썸 기준:
+→ 기준거래소 + 기준 마켓(KRW/BTC/USDT) 로 TV 심볼 생성
+
+코인원 기준:
+→ 해외거래소 + 해외 마켓(USDT/BTC) 로 TV 심볼 생성
+
+모두 TradingView 위젯에 tvSymbol로 넘겨서 차트 렌더
+
+이 스펙대로만 구현되면:
+
+프리미엄 차트 = BINANCE BTC 고정
+
+코인셀 차트 버튼 =
+
+업비트/빗썸일 땐 국내 거래소 차트
+
+코인원일 땐 선택된 해외 거래소 차트
+
+전부 TradingView 기준으로 통일
