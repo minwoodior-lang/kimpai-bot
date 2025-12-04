@@ -231,6 +231,31 @@ POST /api/heartbeat
 
 ## 📌 v3.3.3 변경사항 (2025-12-04)
 
+### Phase 5.4: 빗썸 전체 로직 재점검 ✅
+
+1. **totalCryptoCount 고정** (해외 거래소 선택과 무관)
+   - 기존: `filtered.length` → 해외 거래소에 따라 변동
+   - 수정: 국내 거래소 기준 고유 심볼 수로 고정
+   - BITHUMB: 443개 (KRW 439 + BTC 17 = 443 unique)
+   - UPBIT: 299개 (KRW + BTC + USDT)
+   - COINONE: 390개 (KRW only)
+
+2. **BITHUMB_USDT 제거**
+   - 빗썸은 실제로 USDT 마켓이 존재하지 않음 (0개)
+   - priceWorker.ts에서 `['KRW', 'BTC', 'USDT']` → `['KRW', 'BTC']`
+   - getGlobalMarkets, updatePricesOnly, updateStatsOnly 3곳 수정
+
+3. **빗썸 BTC 마켓 현황**
+   - 빗썸 BTC 마켓: 17개 (대부분 closing_price: 0)
+   - 거래가 있는 코인만 가격 표시 (ETH, XRP, TRX, SOL 등)
+   - BTC 전용 심볼: DICE, HVH, TALK, WITCH (KRW에 없음)
+
+4. **사용자 요청 충족 확인**
+   - ✅ 유니버스는 국내 거래소 기준으로 고정
+   - ✅ 해외 거래소는 가격을 붙이는 역할만
+   - ✅ totalCryptoCount는 해외 거래소 선택과 무관
+   - ✅ 행 제거 조건: 둘 다 없을 때만 제거 (국내만 있어도 유지)
+
 ### Phase 5.3: CoinGecko 글로벌 테더 시세 적용 ✅
 
 1. **CoinGecko Tether API 연동**
