@@ -3,7 +3,7 @@
     "change24h": -1.29504505,
     "high24h": 1837,
     "low24h": 1737,
-    "volume24hKrw": 6907521502.853924
+    "volume24hKrw": 6899671201.347329
   },
   "UPBIT:1INCH:KRW": {
     "change24h": -3.7414966,
@@ -15,7 +15,7 @@
     "change24h": 3.6269430099999997,
     "high24h": 208,
     "low24h": 191,
-    "volume24hKrw": 4594547786.889984
+    "volume24hKrw": 4589105396.766988
   },
   "UPBIT:A:KRW": {
     "change24h": 0,
@@ -24,22 +24,22 @@
     "volume24hKrw": 474442439.44975096
   },
   "UPBIT:AAVE:KRW": {
-    "change24h": -1.76810609,
+    "change24h": -1.63209793,
     "high24h": 296900,
     "low24h": 286400,
-    "volume24hKrw": 2704480698.160443
+    "volume24hKrw": 2704487698.158712
   },
   "UPBIT:ADA:KRW": {
     "change24h": -0.7473841600000001,
     "high24h": 678,
     "low24h": 661,
-    "volume24hKrw": 23085505448.690296
+    "volume24hKrw": 23070550741.91075
   },
   "UPBIT:AERGO:KRW": {
-    "change24h": 0.11520737,
+    "change24h": 0.46082948999999995,
     "high24h": 87.7,
     "low24h": 85.6,
-    "volume24hKrw": 649812953.1427637
+    "volume24hKrw": 650379329.8623687
   },
   "UPBIT:AERO:KRW": {
     "change24h": 1.8774703600000002,
@@ -66,22 +66,22 @@
     "volume24hKrw": 695350890.4828026
   },
   "UPBIT:ALGO:KRW": {
-    "change24h": -2.3364486,
+    "change24h": -1.8691588799999999,
     "high24h": 215,
     "low24h": 208,
-    "volume24hKrw": 1127788424.5492113
+    "volume24hKrw": 1127848424.5492084
   },
   "UPBIT:ALT:KRW": {
-    "change24h": -1.95121951,
+    "change24h": -1.46341463,
     "high24h": 20.6,
     "low24h": 19.8,
-    "volume24hKrw": 1823817095.0059893
+    "volume24hKrw": 1823823089.0089877
   },
   "UPBIT:ANIME:KRW": {
     "change24h": 0.61601643,
     "high24h": 10.5,
     "low24h": 9.74,
-    "volume24hKrw": 6157923347.196511
+    "volume24hKrw": 6154502648.671751
   },
   "UPBIT:ANKR:KRW": {
     "change24h": -0.8403361300000001,
@@ -99,25 +99,25 @@
     "change24h": -1.2982689699999999,
     "high24h": 3029,
     "low24h": 2953,
-    "volume24hKrw": 3364880608.6984096
+    "volume24hKrw": 3363727053.493861
   },
   "UPBIT:AQT:KRW": {
     "change24h": -0.98253275,
     "high24h": 924,
     "low24h": 905,
-    "volume24hKrw": 160526492.8512587
+    "volume24hKrw": 160534410.8033695
   },
   "UPBIT:ARB:KRW": {
     "change24h": -0.6042296100000001,
     "high24h": 335,
     "low24h": 326,
-    "volume24hKrw": 3745245751.180102
+    "volume24hKrw": 3746069551.1801014
   },
   "UPBIT:ARDR:KRW": {
-    "change24h": -1.2249443199999999,
+    "change24h": -1.1135857500000002,
     "high24h": 89.9,
     "low24h": 88.4,
-    "volume24hKrw": 427508900.075665
+    "volume24hKrw": 427704260.0756655
   },
   "UPBIT:ARK:KRW": {
     "change24h": 2.2935779800000002,
@@ -135,7 +135,7 @@
     "change24h": -1.98019802,
     "high24h": 20.2,
     "low24h": 19.8,
-    "volume24hKrw": 284215965.5332841
+    "volume24hKrw": 284174288.53328425
   },
   "UPBIT:ATH:KRW": {
     "change24h": -2.27272727,
@@ -144,88 +144,88 @@
     "volume24hKrw": 1585642165.9437804
   },
   "UPBIT:ATOM:KRW": {
-    "change24h": -1.26440011,
+    "change24h": -1.09581343,
     "high24h": 3578,
     "low24h": 3495,
-    "volume24hKrw": 1229031314.495703
+    "volume24hKrw": 1233134195.174272
   },
   "UPBIT:AUCTION:KRW": {
     "change24h": -0.76157001,
     "high24h": 8605,
     "low24h": 8455,
-    "volume24hKrw": 1111106041.975371
+    "volume24hKrw": 1111862276.9463613
   },
   "UPBIT:AVAX:KRW": {
     "change24h": 0.0911577,
     "high24h": 22110,
     "low24h": 21750,
-    "volume24hKrw": 6955942840.086248
+    "volume24hKrw": 6943028236.394003
   },
   "UPBIT:AVNT:KRW": {
     "change24h": -1.65745856,
     "high24h": 561,
     "low24h": 532,
-    "volume24hKrw": 4972212824.30653
+    "volume24hKrw": 4971176816.503224
   },
   "UPBIT:AWE:KRW": {
     "change24h": -4.94736842,
     "high24h": 97.4,
     "low24h": 89.8,
-    "volume24hKrw": 6172593790.82928
+    "volume24hKrw": 6167919620.05141
   },
   "UPBIT:AXL:KRW": {
     "change24h": -0.5555555600000001,
     "high24h": 182,
     "low24h": 177,
-    "volume24hKrw": 320156378.42555726
+    "volume24hKrw": 320120525.3520945
   },
   "UPBIT:AXS:KRW": {
-    "change24h": -2.46768508,
+    "change24h": -2.2914218600000003,
     "high24h": 1714,
     "low24h": 1653,
-    "volume24hKrw": 795009976.1338363
+    "volume24hKrw": 795016176.1338359
   },
   "UPBIT:BARD:KRW": {
-    "change24h": 17.91044776,
+    "change24h": 16.94468832,
     "high24h": 1384,
     "low24h": 1127,
-    "volume24hKrw": 16199451414.086138
+    "volume24hKrw": 16630797100.128595
   },
   "UPBIT:BAT:KRW": {
-    "change24h": -0.49627792,
+    "change24h": -0.74441687,
     "high24h": 411,
     "low24h": 394,
-    "volume24hKrw": 12674049947.51383
+    "volume24hKrw": 12615349018.980457
   },
   "UPBIT:BCH:KRW": {
-    "change24h": -2.3958927599999997,
+    "change24h": -2.45293782,
     "high24h": 889000,
     "low24h": 855000,
-    "volume24hKrw": 20524433193.58299
+    "volume24hKrw": 20525416047.41655
   },
   "UPBIT:BEAM:KRW": {
     "change24h": -1.14942529,
     "high24h": 5.26,
     "low24h": 5.13,
-    "volume24hKrw": 1266249141.8636806
+    "volume24hKrw": 1266254961.8636806
   },
   "UPBIT:BERA:KRW": {
     "change24h": -0.84388186,
     "high24h": 1452,
     "low24h": 1400,
-    "volume24hKrw": 3595862366.2444425
+    "volume24hKrw": 3587455331.7032876
   },
   "UPBIT:BIGTIME:KRW": {
-    "change24h": -1.3812154700000001,
+    "change24h": -1.9337016599999999,
     "high24h": 36.4,
     "low24h": 35.3,
-    "volume24hKrw": 567868783.8570424
+    "volume24hKrw": 571355245.549528
   },
   "UPBIT:BIO:KRW": {
     "change24h": -1.23762376,
     "high24h": 81.6,
     "low24h": 79.4,
-    "volume24hKrw": 336230859.50574005
+    "volume24hKrw": 336236853.5087386
   },
   "UPBIT:BLAST:KRW": {
     "change24h": -0.7299270099999999,
@@ -240,22 +240,22 @@
     "volume24hKrw": 484172721.520834
   },
   "UPBIT:BONK:KRW": {
-    "change24h": -1.34228188,
+    "change24h": -2.01342282,
     "high24h": 0.0151,
     "low24h": 0.0146,
-    "volume24hKrw": 1860830709.4865787
+    "volume24hKrw": 1859989410.4854207
   },
   "UPBIT:BORA:KRW": {
     "change24h": -0.13850416000000002,
     "high24h": 72.7,
     "low24h": 71.5,
-    "volume24hKrw": 220066635.3556425
+    "volume24hKrw": 219545616.8951345
   },
   "UPBIT:BOUNTY:KRW": {
     "change24h": -0.97087379,
     "high24h": 31.2,
     "low24h": 30.4,
-    "volume24hKrw": 79472487.71725518
+    "volume24hKrw": 78011162.0011325
   },
   "UPBIT:BSV:KRW": {
     "change24h": -1.67509482,
@@ -267,49 +267,49 @@
     "change24h": -0.34777975,
     "high24h": 139769000,
     "low24h": 137715000,
-    "volume24hKrw": 267162163075.1501
+    "volume24hKrw": 267008687016.17252
   },
   "UPBIT:BTT:KRW": {
-    "change24h": -0.81699346,
+    "change24h": -0.65359477,
     "high24h": 0.000613,
     "low24h": 0.000604,
-    "volume24hKrw": 612761145.4519128
+    "volume24hKrw": 612767061.8002007
   },
   "UPBIT:CARV:KRW": {
     "change24h": -1.4563106799999999,
     "high24h": 209,
     "low24h": 201,
-    "volume24hKrw": 649664275.3903707
+    "volume24hKrw": 648950275.3903707
   },
   "UPBIT:CBK:KRW": {
     "change24h": -0.5405405400000001,
     "high24h": 560,
     "low24h": 547,
-    "volume24hKrw": 382926693.22986674
+    "volume24hKrw": 382911320.1453396
   },
   "UPBIT:CELO:KRW": {
     "change24h": 0.7518796999999999,
     "high24h": 285,
     "low24h": 263,
-    "volume24hKrw": 2077355444.6159766
+    "volume24hKrw": 2074708738.34753
   },
   "UPBIT:CHZ:KRW": {
     "change24h": -1.51843818,
     "high24h": 46.1,
     "low24h": 45.3,
-    "volume24hKrw": 391678200.7598878
+    "volume24hKrw": 391675391.4188922
   },
   "UPBIT:CKB:KRW": {
     "change24h": -3.85542169,
     "high24h": 4.15,
     "low24h": 3.94,
-    "volume24hKrw": 617989380.0574629
+    "volume24hKrw": 617980486.118339
   },
   "UPBIT:COMP:KRW": {
-    "change24h": -2.65906933,
+    "change24h": -2.84900285,
     "high24h": 53100,
     "low24h": 50800,
-    "volume24hKrw": 12472020033.760483
+    "volume24hKrw": 12456683560.412174
   },
   "UPBIT:COW:KRW": {
     "change24h": -2.33333333,
@@ -321,37 +321,37 @@
     "change24h": -1.9607843100000002,
     "high24h": 62.2,
     "low24h": 60,
-    "volume24hKrw": 630038074.2284834
+    "volume24hKrw": 623963177.874371
   },
   "UPBIT:CRO:KRW": {
     "change24h": -1.2195121999999998,
     "high24h": 166,
     "low24h": 161,
-    "volume24hKrw": 852280496.6608379
+    "volume24hKrw": 837657513.6181746
   },
   "UPBIT:CTC:KRW": {
     "change24h": -1.3513513499999998,
     "high24h": 450,
     "low24h": 435,
-    "volume24hKrw": 1133649993.9425375
+    "volume24hKrw": 1131260528.3717725
   },
   "UPBIT:CVC:KRW": {
     "change24h": 0.28735632,
     "high24h": 70.5,
     "low24h": 68.8,
-    "volume24hKrw": 412510332.64444244
+    "volume24hKrw": 412505327.14719117
   },
   "UPBIT:CYBER:KRW": {
     "change24h": -1.6442451399999998,
     "high24h": 1338,
     "low24h": 1292,
-    "volume24hKrw": 1272979427.0826244
+    "volume24hKrw": 1273978973.339121
   },
   "UPBIT:DEEP:KRW": {
     "change24h": -3.7383177599999997,
     "high24h": 64.2,
     "low24h": 61.5,
-    "volume24hKrw": 2950093109.214048
+    "volume24hKrw": 2950115622.34161
   },
   "UPBIT:DKA:KRW": {
     "change24h": -0.60301508,
@@ -360,16 +360,16 @@
     "volume24hKrw": 283184832.06660455
   },
   "UPBIT:DOGE:KRW": {
-    "change24h": -1.7699115,
+    "change24h": -1.32743363,
     "high24h": 228,
     "low24h": 222,
-    "volume24hKrw": 42014485418.64883
+    "volume24hKrw": 42009357462.44715
   },
   "UPBIT:DOOD:KRW": {
-    "change24h": -2.64705882,
+    "change24h": -2.94117647,
     "high24h": 7.3,
     "low24h": 6.53,
-    "volume24hKrw": 5283745695.611214
+    "volume24hKrw": 5305703864.655389
   },
   "UPBIT:DOT:KRW": {
     "change24h": -1.36752137,
@@ -381,37 +381,37 @@
     "change24h": -0.85714286,
     "high24h": 387,
     "low24h": 343,
-    "volume24hKrw": 6811374077.723875
+    "volume24hKrw": 6811339277.723875
   },
   "UPBIT:EGLD:KRW": {
-    "change24h": -3.91993328,
+    "change24h": -3.7531276099999995,
     "high24h": 13100,
     "low24h": 11490,
-    "volume24hKrw": 3638756561.7139063
+    "volume24hKrw": 3638622634.7675242
   },
   "UPBIT:ELF:KRW": {
     "change24h": -1.36054422,
     "high24h": 149,
     "low24h": 144,
-    "volume24hKrw": 184884219.38198924
+    "volume24hKrw": 185456729.53317404
   },
   "UPBIT:ENA:KRW": {
     "change24h": -2.48868778,
     "high24h": 449,
     "low24h": 425,
-    "volume24hKrw": 16848982410.307005
+    "volume24hKrw": 16850948533.467106
   },
   "UPBIT:ENS:KRW": {
     "change24h": -0.33426184,
     "high24h": 18210,
     "low24h": 17580,
-    "volume24hKrw": 5036901807.250516
+    "volume24hKrw": 5027906043.152077
   },
   "UPBIT:ENSO:KRW": {
     "change24h": -1.6183986399999999,
     "high24h": 1189,
     "low24h": 1143,
-    "volume24hKrw": 1590690100.5864837
+    "volume24hKrw": 1590342479.2928674
   },
   "UPBIT:ERA:KRW": {
     "change24h": -1.37741047,
@@ -423,13 +423,13 @@
     "change24h": -1.3276434300000002,
     "high24h": 21260,
     "low24h": 20770,
-    "volume24hKrw": 5365967762.7987175
+    "volume24hKrw": 5364053342.008025
   },
   "UPBIT:ETH:KRW": {
     "change24h": 0.08444162999999999,
     "high24h": 4813000,
     "low24h": 4711000,
-    "volume24hKrw": 308029827216.1501
+    "volume24hKrw": 308005383418.1827
   },
   "UPBIT:F:KRW": {
     "change24h": -1.6393442599999999,
@@ -447,37 +447,37 @@
     "change24h": -3.7433155099999995,
     "high24h": 187,
     "low24h": 179,
-    "volume24hKrw": 3838098687.269208
+    "volume24hKrw": 3803194417.0629535
   },
   "UPBIT:FIL:KRW": {
     "change24h": 0.71639275,
     "high24h": 2421,
     "low24h": 2364,
-    "volume24hKrw": 2973494190.382351
+    "volume24hKrw": 2973484826.382351
   },
   "UPBIT:FLOCK:KRW": {
-    "change24h": -2.05128205,
+    "change24h": -2.56410256,
     "high24h": 195,
     "low24h": 189,
-    "volume24hKrw": 1099222044.161925
+    "volume24hKrw": 1099719437.268379
   },
   "UPBIT:FLOW:KRW": {
     "change24h": -1.43266476,
     "high24h": 353,
     "low24h": 343,
-    "volume24hKrw": 1034621516.575227
+    "volume24hKrw": 1034421705.4752291
   },
   "UPBIT:FLUID:KRW": {
     "change24h": -3.47744361,
     "high24h": 5540,
     "low24h": 5090,
-    "volume24hKrw": 25044769317.753815
+    "volume24hKrw": 24723675690.578186
   },
   "UPBIT:G:KRW": {
     "change24h": -0.12970169,
     "high24h": 7.75,
     "low24h": 7.67,
-    "volume24hKrw": 134918320.847055
+    "volume24hKrw": 134908323.847055
   },
   "UPBIT:GAME2:KRW": {
     "change24h": -1.07913669,
@@ -498,28 +498,28 @@
     "volume24hKrw": 1149950064.2026892
   },
   "UPBIT:GMT:KRW": {
-    "change24h": -0.76628352,
+    "change24h": -1.14942529,
     "high24h": 26.1,
     "low24h": 25.7,
-    "volume24hKrw": 548101227.5811132
+    "volume24hKrw": 541426216.4717313
   },
   "UPBIT:GRS:KRW": {
-    "change24h": -0.66666667,
+    "change24h": 0,
     "high24h": 339,
     "low24h": 279,
-    "volume24hKrw": 101060874858.01118
+    "volume24hKrw": 100900193743.00586
   },
   "UPBIT:GRT:KRW": {
-    "change24h": -1.07962213,
+    "change24h": -1.2145749000000001,
     "high24h": 74.4,
     "low24h": 72.9,
-    "volume24hKrw": 595896665.5593799
+    "volume24hKrw": 595916092.1073799
   },
   "UPBIT:HBAR:KRW": {
-    "change24h": -2.75229358,
+    "change24h": -3.21100917,
     "high24h": 218,
     "low24h": 210,
-    "volume24hKrw": 7786842248.224387
+    "volume24hKrw": 7787261083.224387
   },
   "UPBIT:HIVE:KRW": {
     "change24h": -1.85185185,
@@ -528,10 +528,10 @@
     "volume24hKrw": 191548238.9289167
   },
   "UPBIT:HOLO:KRW": {
-    "change24h": -2.36220472,
+    "change24h": -3.1496063,
     "high24h": 128,
     "low24h": 122,
-    "volume24hKrw": 830346392.0883629
+    "volume24hKrw": 830833406.706053
   },
   "UPBIT:HP:KRW": {
     "change24h": -1.01522843,
@@ -549,7 +549,7 @@
     "change24h": 1.9047618999999998,
     "high24h": 223,
     "low24h": 208,
-    "volume24hKrw": 1248623105.9618032
+    "volume24hKrw": 1246633104.2584684
   },
   "UPBIT:ICX:KRW": {
     "change24h": 0,
@@ -561,7 +561,7 @@
     "change24h": 0,
     "high24h": 119,
     "low24h": 117,
-    "volume24hKrw": 360062634.22009355
+    "volume24hKrw": 360052394.2200945
   },
   "UPBIT:IMX:KRW": {
     "change24h": -2.9787234,
@@ -570,10 +570,10 @@
     "volume24hKrw": 700901815.2062423
   },
   "UPBIT:IN:KRW": {
-    "change24h": 0,
+    "change24h": 0.70921986,
     "high24h": 147,
     "low24h": 140,
-    "volume24hKrw": 2954281486.88919
+    "volume24hKrw": 2954389082.607566
   },
   "UPBIT:INJ:KRW": {
     "change24h": 0.11185682,
@@ -582,10 +582,10 @@
     "volume24hKrw": 751795355.3658862
   },
   "UPBIT:IOST:KRW": {
-    "change24h": -4.07523511,
+    "change24h": -4.38871473,
     "high24h": 3.31,
     "low24h": 3,
-    "volume24hKrw": 3732894832.2543006
+    "volume24hKrw": 3727032236.814956
   },
   "UPBIT:IOTA:KRW": {
     "change24h": -2.43902439,
@@ -594,40 +594,40 @@
     "volume24hKrw": 733502823.5830944
   },
   "UPBIT:IP:KRW": {
-    "change24h": 0.33860045,
+    "change24h": 0.31038375,
     "high24h": 3647,
     "low24h": 3500,
-    "volume24hKrw": 5491977206.199473
+    "volume24hKrw": 5492245496.820468
   },
   "UPBIT:IQ:KRW": {
     "change24h": -0.36764706,
     "high24h": 2.73,
     "low24h": 2.7,
-    "volume24hKrw": 444901771.1264644
+    "volume24hKrw": 443264409.5569223
   },
   "UPBIT:JST:KRW": {
     "change24h": 0.52631579,
     "high24h": 57.4,
     "low24h": 56.3,
-    "volume24hKrw": 1401961987.4476023
+    "volume24hKrw": 1403359730.9826024
   },
   "UPBIT:JTO:KRW": {
-    "change24h": -6.5333333300000005,
+    "change24h": -6.26666667,
     "high24h": 783,
     "low24h": 695,
-    "volume24hKrw": 1733774291.183038
+    "volume24hKrw": 1726147983.4617143
   },
   "UPBIT:JUP:KRW": {
     "change24h": -0.7874015700000001,
     "high24h": 387,
     "low24h": 374,
-    "volume24hKrw": 526099049.73236895
+    "volume24hKrw": 524999049.73237467
   },
   "UPBIT:KAITO:KRW": {
     "change24h": -0.79681275,
     "high24h": 1012,
     "low24h": 986,
-    "volume24hKrw": 828386672.246787
+    "volume24hKrw": 828286872.246787
   },
   "UPBIT:KAVA:KRW": {
     "change24h": -1.11111111,
@@ -645,7 +645,7 @@
     "change24h": 3.4482758600000003,
     "high24h": 150,
     "low24h": 142,
-    "volume24hKrw": 10159561417.359335
+    "volume24hKrw": 10167550364.838438
   },
   "UPBIT:KNC:KRW": {
     "change24h": -0.9501187600000001,
@@ -654,28 +654,28 @@
     "volume24hKrw": 206321260.5445005
   },
   "UPBIT:LA:KRW": {
-    "change24h": -3.23101777,
+    "change24h": -3.55411955,
     "high24h": 627,
     "low24h": 590,
-    "volume24hKrw": 3533550304.733252
+    "volume24hKrw": 3537318258.6284976
   },
   "UPBIT:LAYER:KRW": {
-    "change24h": -3.62537764,
+    "change24h": -3.9274924500000004,
     "high24h": 358,
     "low24h": 317,
-    "volume24hKrw": 8610121734.351068
+    "volume24hKrw": 8608615558.675734
   },
   "UPBIT:LINEA:KRW": {
     "change24h": -1.45985401,
     "high24h": 14.1,
     "low24h": 13.3,
-    "volume24hKrw": 3428342328.9463573
+    "volume24hKrw": 3427842828.696482
   },
   "UPBIT:LINK:KRW": {
     "change24h": -0.7363092499999999,
     "high24h": 22200,
     "low24h": 21330,
-    "volume24hKrw": 16986848428.261276
+    "volume24hKrw": 16985503814.020685
   },
   "UPBIT:LPT:KRW": {
     "change24h": -0.9128630699999999,
@@ -687,13 +687,13 @@
     "change24h": 0.6116208,
     "high24h": 370,
     "low24h": 317,
-    "volume24hKrw": 18587711825.549744
+    "volume24hKrw": 18584491777.631824
   },
   "UPBIT:MANA:KRW": {
     "change24h": -0.41493776000000004,
     "high24h": 244,
     "low24h": 239,
-    "volume24hKrw": 608171960.318728
+    "volume24hKrw": 607749943.2073776
   },
   "UPBIT:MASK:KRW": {
     "change24h": -2.03094778,
@@ -705,19 +705,19 @@
     "change24h": -1.47058824,
     "high24h": 2.04,
     "low24h": 2,
-    "volume24hKrw": 2075591583.0853708
+    "volume24hKrw": 2060605389.6444304
   },
   "UPBIT:ME:KRW": {
     "change24h": -2.14424951,
     "high24h": 519,
     "low24h": 500,
-    "volume24hKrw": 703661863.6889101
+    "volume24hKrw": 703670696.2654037
   },
   "UPBIT:MED:KRW": {
     "change24h": -0.97560976,
     "high24h": 4.15,
     "low24h": 4.05,
-    "volume24hKrw": 213734201.0308201
+    "volume24hKrw": 213697825.80961478
   },
   "UPBIT:MET2:KRW": {
     "change24h": -3.16831683,
@@ -726,22 +726,22 @@
     "volume24hKrw": 1573653163.73565
   },
   "UPBIT:META:KRW": {
-    "change24h": -0.57142857,
+    "change24h": -1.14285714,
     "high24h": 18.7,
     "low24h": 17.2,
-    "volume24hKrw": 392624152.7410405
+    "volume24hKrw": 392625276.20257914
   },
   "UPBIT:MEW:KRW": {
     "change24h": -2.79329609,
     "high24h": 1.8,
     "low24h": 1.73,
-    "volume24hKrw": 502165044.9772784
+    "volume24hKrw": 502339044.9772784
   },
   "UPBIT:MINA:KRW": {
     "change24h": -1.9607843100000002,
     "high24h": 154,
     "low24h": 149,
-    "volume24hKrw": 865852603.6164234
+    "volume24hKrw": 865850160.1721791
   },
   "UPBIT:MIRA:KRW": {
     "change24h": -0.84745763,
@@ -756,46 +756,46 @@
     "volume24hKrw": 357294597.2706463
   },
   "UPBIT:MMT:KRW": {
-    "change24h": -1.8469657000000002,
+    "change24h": -1.58311346,
     "high24h": 401,
     "low24h": 365,
-    "volume24hKrw": 20530983675.48169
+    "volume24hKrw": 20530641052.744534
   },
   "UPBIT:MNT:KRW": {
-    "change24h": -2.07190737,
+    "change24h": -1.88909202,
     "high24h": 1687,
     "low24h": 1604,
-    "volume24hKrw": 2011897183.5010588
+    "volume24hKrw": 2011888413.5010464
   },
   "UPBIT:MOC:KRW": {
     "change24h": 0,
     "high24h": 56.5,
     "low24h": 55.3,
-    "volume24hKrw": 100904329.99802583
+    "volume24hKrw": 100894329.99802595
   },
   "UPBIT:MOCA:KRW": {
     "change24h": 0,
     "high24h": 37.1,
     "low24h": 34.5,
-    "volume24hKrw": 2711490683.1338334
+    "volume24hKrw": 2709897709.333772
   },
   "UPBIT:MON:KRW": {
-    "change24h": -2.20264317,
+    "change24h": -2.42290749,
     "high24h": 49.3,
     "low24h": 43,
-    "volume24hKrw": 38935542495.08754
+    "volume24hKrw": 38945087323.08144
   },
   "UPBIT:MOODENG:KRW": {
     "change24h": -0.8403361300000001,
     "high24h": 122,
     "low24h": 117,
-    "volume24hKrw": 863499659.9908826
+    "volume24hKrw": 868009483.6252836
   },
   "UPBIT:MOVE:KRW": {
     "change24h": -1.2295082000000002,
     "high24h": 73.9,
     "low24h": 71.9,
-    "volume24hKrw": 1317495327.9898489
+    "volume24hKrw": 1317495327.9898546
   },
   "UPBIT:MTL:KRW": {
     "change24h": -0.7949125600000001,
@@ -813,13 +813,13 @@
     "change24h": 1.01929378,
     "high24h": 2829,
     "low24h": 2727,
-    "volume24hKrw": 9283274205.034962
+    "volume24hKrw": 9282931003.33601
   },
   "UPBIT:NEO:KRW": {
     "change24h": -0.70038911,
     "high24h": 6455,
     "low24h": 6360,
-    "volume24hKrw": 1013196727.8486319
+    "volume24hKrw": 1015581221.6110965
   },
   "UPBIT:NEWT:KRW": {
     "change24h": -0.57471264,
@@ -831,13 +831,13 @@
     "change24h": 1.8987341800000002,
     "high24h": 16.4,
     "low24h": 15.4,
-    "volume24hKrw": 1077944512.3337624
+    "volume24hKrw": 1075446497.5947697
   },
   "UPBIT:NXPC:KRW": {
-    "change24h": 7.975460119999999,
+    "change24h": 8.28220859,
     "high24h": 730,
     "low24h": 649,
-    "volume24hKrw": 9829665715.501196
+    "volume24hKrw": 9813430977.090939
   },
   "UPBIT:OM:KRW": {
     "change24h": -2.56410256,
@@ -846,22 +846,22 @@
     "volume24hKrw": 808609129.087729
   },
   "UPBIT:ONDO:KRW": {
-    "change24h": -1.70603675,
+    "change24h": -1.96850394,
     "high24h": 773,
     "low24h": 746,
-    "volume24hKrw": 8797431124.685335
+    "volume24hKrw": 8828912762.46867
   },
   "UPBIT:ONG:KRW": {
     "change24h": -2.7027026999999997,
     "high24h": 149,
     "low24h": 143,
-    "volume24hKrw": 222205580.2469609
+    "volume24hKrw": 221846172.9469613
   },
   "UPBIT:ONT:KRW": {
     "change24h": -0.9090909100000001,
     "high24h": 110,
     "low24h": 107,
-    "volume24hKrw": 336065869.1033898
+    "volume24hKrw": 336028247.9644498
   },
   "UPBIT:OP:KRW": {
     "change24h": -1.02459016,
@@ -873,61 +873,61 @@
     "change24h": -2.01729107,
     "high24h": 349,
     "low24h": 337,
-    "volume24hKrw": 964065784.4961178
+    "volume24hKrw": 963044795.8364385
   },
   "UPBIT:ORBS:KRW": {
     "change24h": -1.80722892,
     "high24h": 16.7,
     "low24h": 16.2,
-    "volume24hKrw": 145596916.97693914
+    "volume24hKrw": 145091266.5662903
   },
   "UPBIT:ORCA:KRW": {
-    "change24h": -15.09433962,
+    "change24h": -15.445370780000001,
     "high24h": 2450,
-    "low24h": 1923,
-    "volume24hKrw": 15694109594.46768
+    "low24h": 1916,
+    "volume24hKrw": 15759577167.56663
   },
   "UPBIT:ORDER:KRW": {
     "change24h": -2.25988701,
     "high24h": 178,
     "low24h": 171,
-    "volume24hKrw": 2449276512.8983917
+    "volume24hKrw": 2442059027.589505
   },
   "UPBIT:PENDLE:KRW": {
-    "change24h": -2.7092994900000003,
+    "change24h": -2.75811569,
     "high24h": 4092,
     "low24h": 3952,
-    "volume24hKrw": 662301279.3998718
+    "volume24hKrw": 662787327.3998718
   },
   "UPBIT:PENGU:KRW": {
     "change24h": -2.22222222,
     "high24h": 18.4,
     "low24h": 17.3,
-    "volume24hKrw": 7474679386.911133
+    "volume24hKrw": 7476845464.765205
   },
   "UPBIT:PEPE:KRW": {
-    "change24h": 0.8403361300000001,
+    "change24h": 0.70028011,
     "high24h": 0.00728,
     "low24h": 0.00709,
-    "volume24hKrw": 3138471325.8025904
+    "volume24hKrw": 3139837693.693645
   },
   "UPBIT:PLUME:KRW": {
     "change24h": -0.31446541,
     "high24h": 32.6,
     "low24h": 30.9,
-    "volume24hKrw": 4444034110.1929655
+    "volume24hKrw": 4443860010.105393
   },
   "UPBIT:POKT:KRW": {
-    "change24h": -1.37614679,
+    "change24h": -1.83486239,
     "high24h": 22,
     "low24h": 21.1,
-    "volume24hKrw": 298958200.6976495
+    "volume24hKrw": 298964200.6976496
   },
   "UPBIT:POL:KRW": {
     "change24h": -1.03626943,
     "high24h": 194,
     "low24h": 189,
-    "volume24hKrw": 4698762315.716387
+    "volume24hKrw": 4699208567.590449
   },
   "UPBIT:POLYX:KRW": {
     "change24h": 0.71794872,
@@ -945,13 +945,13 @@
     "change24h": -0.13966479999999998,
     "high24h": 738,
     "low24h": 712,
-    "volume24hKrw": 1041909295.2708049
+    "volume24hKrw": 1041802721.7708064
   },
   "UPBIT:PUMP:KRW": {
     "change24h": 1.0615711300000001,
     "high24h": 4.92,
     "low24h": 4.68,
-    "volume24hKrw": 3048383901.1806817
+    "volume24hKrw": 3048283901.1806817
   },
   "UPBIT:PUNDIX:KRW": {
     "change24h": 0.26385224,
@@ -972,52 +972,52 @@
     "volume24hKrw": 210428127.31429023
   },
   "UPBIT:QTUM:KRW": {
-    "change24h": -1.7271157200000002,
+    "change24h": -1.46804836,
     "high24h": 2325,
     "low24h": 2271,
-    "volume24hKrw": 721645085.4474335
+    "volume24hKrw": 721652312.8021958
   },
   "UPBIT:RAY:KRW": {
     "change24h": -16.7845356,
     "high24h": 2366,
     "low24h": 1741,
-    "volume24hKrw": 30301942852.333412
+    "volume24hKrw": 30264753268.379513
   },
   "UPBIT:RED:KRW": {
     "change24h": 8.57843137,
     "high24h": 517,
     "low24h": 408,
-    "volume24hKrw": 44401311894.5156
+    "volume24hKrw": 44413588274.01648
   },
   "UPBIT:RENDER:KRW": {
-    "change24h": -0.2640513,
+    "change24h": -0.30177292,
     "high24h": 2680,
     "low24h": 2612,
-    "volume24hKrw": 410090857.9295262
+    "volume24hKrw": 415730420.2724962
   },
   "UPBIT:RVN:KRW": {
     "change24h": 0,
     "high24h": 12.2,
     "low24h": 12,
-    "volume24hKrw": 369619446.4639511
+    "volume24hKrw": 369613396.4639511
   },
   "UPBIT:SAFE:KRW": {
     "change24h": -1.2765957399999999,
     "high24h": 239,
     "low24h": 230,
-    "volume24hKrw": 755510925.3981162
+    "volume24hKrw": 760799683.63888
   },
   "UPBIT:SAHARA:KRW": {
-    "change24h": 3.57751278,
+    "change24h": 3.40715503,
     "high24h": 67.8,
     "low24h": 57.3,
-    "volume24hKrw": 43300272846.364006
+    "volume24hKrw": 43316936589.00358
   },
   "UPBIT:SAND:KRW": {
     "change24h": -1.2987013,
     "high24h": 232,
     "low24h": 226,
-    "volume24hKrw": 2533673979.47834
+    "volume24hKrw": 2533624004.0293174
   },
   "UPBIT:SC:KRW": {
     "change24h": -1.5625,
@@ -1029,49 +1029,49 @@
     "change24h": 0,
     "high24h": 212,
     "low24h": 206,
-    "volume24hKrw": 5958860880.584664
+    "volume24hKrw": 5961013822.113898
   },
   "UPBIT:SHIB:KRW": {
     "change24h": -1.5037593999999999,
     "high24h": 0.0134,
     "low24h": 0.013,
-    "volume24hKrw": 13403725114.241184
+    "volume24hKrw": 13401253446.391607
   },
   "UPBIT:SIGN:KRW": {
     "change24h": -1.03448276,
     "high24h": 58.2,
     "low24h": 56.6,
-    "volume24hKrw": 1879343037.9341362
+    "volume24hKrw": 1879154942.889222
   },
   "UPBIT:SNT:KRW": {
     "change24h": 0,
     "high24h": 24.2,
     "low24h": 23.7,
-    "volume24hKrw": 298046018.3895564
+    "volume24hKrw": 298079355.4779564
   },
   "UPBIT:SOL:KRW": {
-    "change24h": -0.79180252,
+    "change24h": -0.88495575,
     "high24h": 217500,
     "low24h": 211800,
-    "volume24hKrw": 97387306520.53941
+    "volume24hKrw": 97413096953.70903
   },
   "UPBIT:SOMI:KRW": {
     "change24h": 1.04986877,
     "high24h": 405,
     "low24h": 376,
-    "volume24hKrw": 752575155.3897789
+    "volume24hKrw": 752564555.3897812
   },
   "UPBIT:SONIC:KRW": {
-    "change24h": -3.05343511,
+    "change24h": -5.34351145,
     "high24h": 132,
-    "low24h": 125,
-    "volume24hKrw": 378292690.41839725
+    "low24h": 124,
+    "volume24hKrw": 395475996.0588441
   },
   "UPBIT:SOPH:KRW": {
-    "change24h": -0.40485829999999995,
+    "change24h": -1.2145749000000001,
     "high24h": 24.9,
     "low24h": 24.3,
-    "volume24hKrw": 675141318.205813
+    "volume24hKrw": 681090428.1285363
   },
   "UPBIT:STEEM:KRW": {
     "change24h": -1.7391304300000001,
@@ -1089,25 +1089,25 @@
     "change24h": 0,
     "high24h": 228,
     "low24h": 225,
-    "volume24hKrw": 834063697.2422128
+    "volume24hKrw": 833063697.242212
   },
   "UPBIT:STRAX:KRW": {
     "change24h": -1.63487738,
     "high24h": 36.7,
     "low24h": 36,
-    "volume24hKrw": 514959869.7394902
+    "volume24hKrw": 515003785.1037746
   },
   "UPBIT:STX:KRW": {
-    "change24h": -0.83682008,
+    "change24h": -0.41841004,
     "high24h": 483,
     "low24h": 472,
-    "volume24hKrw": 1802651596.6723833
+    "volume24hKrw": 1802657776.1414258
   },
   "UPBIT:SUI:KRW": {
-    "change24h": -1.11332008,
+    "change24h": -1.19284294,
     "high24h": 2561,
     "low24h": 2457,
-    "volume24hKrw": 49957379886.8237
+    "volume24hKrw": 50118949737.58255
   },
   "UPBIT:SUN:KRW": {
     "change24h": 0,
@@ -1116,22 +1116,22 @@
     "volume24hKrw": 110656846.12107319
   },
   "UPBIT:SUPER:KRW": {
-    "change24h": -4.46650124,
+    "change24h": -4.21836228,
     "high24h": 425,
     "low24h": 382,
-    "volume24hKrw": 10294239705.527514
+    "volume24hKrw": 10281731674.135355
   },
   "UPBIT:SXP:KRW": {
-    "change24h": 15.646258499999998,
+    "change24h": 16.78004535,
     "high24h": 117,
     "low24h": 84.3,
-    "volume24hKrw": 54793788241.64365
+    "volume24hKrw": 54880860796.57115
   },
   "UPBIT:SYRUP:KRW": {
-    "change24h": -1.9178082199999997,
+    "change24h": -1.64383562,
     "high24h": 366,
     "low24h": 357,
-    "volume24hKrw": 1895481461.617631
+    "volume24hKrw": 1895120320.7270763
   },
   "UPBIT:T:KRW": {
     "change24h": 0,
@@ -1143,13 +1143,13 @@
     "change24h": -1.6722408000000002,
     "high24h": 301,
     "low24h": 294,
-    "volume24hKrw": 397692605.56529737
+    "volume24hKrw": 397348315.54781055
   },
   "UPBIT:TFUEL:KRW": {
     "change24h": -2.4539877299999997,
     "high24h": 32.7,
     "low24h": 31.7,
-    "volume24hKrw": 661575295.124698
+    "volume24hKrw": 656965078.6615024
   },
   "UPBIT:THETA:KRW": {
     "change24h": -0.57581574,
@@ -1167,43 +1167,43 @@
     "change24h": -0.7978723400000001,
     "high24h": 1134,
     "low24h": 1111,
-    "volume24hKrw": 188266774.5012676
+    "volume24hKrw": 188202472.1018556
   },
   "UPBIT:TOSHI:KRW": {
     "change24h": -1.6025641,
     "high24h": 0.639,
     "low24h": 0.601,
-    "volume24hKrw": 1553842124.742223
+    "volume24hKrw": 1550794387.6340752
   },
   "UPBIT:TREE:KRW": {
     "change24h": 2.57731959,
     "high24h": 202,
     "low24h": 195,
-    "volume24hKrw": 1544302547.1756864
+    "volume24hKrw": 1555726497.9345872
   },
   "UPBIT:TRUMP:KRW": {
     "change24h": -0.77605322,
     "high24h": 9105,
     "low24h": 8935,
-    "volume24hKrw": 4491167207.245231
+    "volume24hKrw": 4490998854.67006
   },
   "UPBIT:TRUST:KRW": {
-    "change24h": 1.35746606,
-    "high24h": 224,
+    "change24h": 1.80995475,
+    "high24h": 225,
     "low24h": 215,
-    "volume24hKrw": 8409342944.3209305
+    "volume24hKrw": 8426404574.2983885
   },
   "UPBIT:TRX:KRW": {
     "change24h": 0,
     "high24h": 418,
     "low24h": 415,
-    "volume24hKrw": 4895934930.380677
+    "volume24hKrw": 4901650496.048731
   },
   "UPBIT:TT:KRW": {
     "change24h": -2.1857923500000003,
     "high24h": 1.86,
     "low24h": 1.79,
-    "volume24hKrw": 231814162.928657
+    "volume24hKrw": 231879881.57778502
   },
   "UPBIT:UNI:KRW": {
     "change24h": -0.71783545,
@@ -1215,7 +1215,7 @@
     "change24h": 0.13449899,
     "high24h": 1491,
     "low24h": 1483,
-    "volume24hKrw": 649815694.213725
+    "volume24hKrw": 649793711.213731
   },
   "UPBIT:USDC:KRW": {
     "change24h": -0.13413816,
@@ -1227,13 +1227,13 @@
     "change24h": 0.13449899,
     "high24h": 1490,
     "low24h": 1485,
-    "volume24hKrw": 98796131235.93037
+    "volume24hKrw": 98682198899.94328
   },
   "UPBIT:VANA:KRW": {
-    "change24h": -1.44156132,
+    "change24h": -1.55245065,
     "high24h": 4542,
     "low24h": 4429,
-    "volume24hKrw": 2083568568.5209785
+    "volume24hKrw": 2082947762.5595853
   },
   "UPBIT:VET:KRW": {
     "change24h": -0.49019608,
@@ -1245,13 +1245,13 @@
     "change24h": -3.55677155,
     "high24h": 1507,
     "low24h": 1404,
-    "volume24hKrw": 18529987701.736694
+    "volume24hKrw": 18522784855.24161
   },
   "UPBIT:VTHO:KRW": {
-    "change24h": -0.67567568,
+    "change24h": 0,
     "high24h": 1.51,
     "low24h": 1.47,
-    "volume24hKrw": 188174250.5081532
+    "volume24hKrw": 188058086.7207378
   },
   "UPBIT:W:KRW": {
     "change24h": -0.30674847,
@@ -1260,22 +1260,22 @@
     "volume24hKrw": 1288878508.2617352
   },
   "UPBIT:WAL:KRW": {
-    "change24h": -0.8196721299999999,
+    "change24h": -0.40983607000000005,
     "high24h": 252,
     "low24h": 239,
-    "volume24hKrw": 2403677931.420312
+    "volume24hKrw": 2403848106.3328547
   },
   "UPBIT:WAVES:KRW": {
     "change24h": -3.31588133,
     "high24h": 1146,
     "low24h": 1099,
-    "volume24hKrw": 3577532364.594458
+    "volume24hKrw": 3576691662.8555036
   },
   "UPBIT:WAXP:KRW": {
-    "change24h": -0.7142857100000001,
+    "change24h": 0,
     "high24h": 14,
     "low24h": 13.8,
-    "volume24hKrw": 227313087.21536747
+    "volume24hKrw": 227323159.1578135
   },
   "UPBIT:WCT:KRW": {
     "change24h": -2.7027026999999997,
@@ -1287,85 +1287,85 @@
     "change24h": 0.42372881,
     "high24h": 958,
     "low24h": 939,
-    "volume24hKrw": 2413622369.807681
+    "volume24hKrw": 2413351697.543916
   },
   "UPBIT:WLFI:KRW": {
     "change24h": -1.25,
     "high24h": 243,
     "low24h": 235,
-    "volume24hKrw": 8165688968.339196
+    "volume24hKrw": 8163559653.342477
   },
   "UPBIT:XEC:KRW": {
-    "change24h": -2.12765957,
+    "change24h": -1.5957446800000001,
     "high24h": 0.0189,
     "low24h": 0.0183,
-    "volume24hKrw": 761205603.9752084
+    "volume24hKrw": 760994211.3987774
   },
   "UPBIT:XLM:KRW": {
     "change24h": -1.5625,
     "high24h": 386,
     "low24h": 376,
-    "volume24hKrw": 9926522459.396135
+    "volume24hKrw": 9922898142.896997
   },
   "UPBIT:XPL:KRW": {
     "change24h": 3.2374100699999997,
     "high24h": 310,
     "low24h": 275,
-    "volume24hKrw": 51874797816.05449
+    "volume24hKrw": 51897442439.67372
   },
   "UPBIT:XRP:KRW": {
-    "change24h": -1.8387986500000002,
+    "change24h": -1.77750536,
     "high24h": 3291,
     "low24h": 3187,
-    "volume24hKrw": 299310082664.08276
+    "volume24hKrw": 299250458637.69653
   },
   "UPBIT:XTZ:KRW": {
     "change24h": -0.53404539,
     "high24h": 755,
     "low24h": 745,
-    "volume24hKrw": 278187627.558656
+    "volume24hKrw": 277400679.45866096
   },
   "UPBIT:YGG:KRW": {
-    "change24h": -1.6949152499999998,
+    "change24h": -0.84745763,
     "high24h": 119,
     "low24h": 115,
-    "volume24hKrw": 189534828.58274665
+    "volume24hKrw": 189540825.58274588
   },
   "UPBIT:ZBT:KRW": {
     "change24h": 0,
     "high24h": 175,
     "low24h": 172,
-    "volume24hKrw": 1003869341.9389457
+    "volume24hKrw": 1004890853.4748094
   },
   "UPBIT:ZETA:KRW": {
     "change24h": -0.74626866,
     "high24h": 134,
     "low24h": 132,
-    "volume24hKrw": 419240695.7949411
+    "volume24hKrw": 418680215.64562434
   },
   "UPBIT:ZIL:KRW": {
     "change24h": -1.20481928,
     "high24h": 8.35,
     "low24h": 8.17,
-    "volume24hKrw": 307968652.84506905
+    "volume24hKrw": 307823264.0828947
   },
   "UPBIT:ZKC:KRW": {
-    "change24h": 5.990783410000001,
+    "change24h": 5.06912442,
     "high24h": 232,
     "low24h": 214,
-    "volume24hKrw": 3193173052.1099753
+    "volume24hKrw": 3215659543.7579403
   },
   "UPBIT:ZORA:KRW": {
     "change24h": -0.39840637,
     "high24h": 80.7,
     "low24h": 74.4,
-    "volume24hKrw": 3861873446.4235535
+    "volume24hKrw": 3861910970.618177
   },
   "UPBIT:ZRO:KRW": {
-    "change24h": 4.6778043,
+    "change24h": 4.39140811,
     "high24h": 2225,
     "low24h": 2060,
-    "volume24hKrw": 1540515260.7097268
+    "volume24hKrw": 1569286850.6489363
   },
   "UPBIT:ZRX:KRW": {
     "change24h": -2.16450216,

@@ -4,10 +4,11 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { BAD_ICON_SYMBOLS } from "@/config/badIconSymbols";
 
 interface MarketStatsEntry {
-  change24h: number;
+  change24hRate: number;
+  change24hAbs: number;
   high24h: number | null;
   low24h: number | null;
-  volume24hKrw: number;
+  volume24hQuote: number;
 }
 
 type MarketStatsMap = Record<string, MarketStatsEntry>;
@@ -23,7 +24,7 @@ function loadJsonFile(filename: string): any {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const { domestic = "UPBIT_KRW", foreign = "OKX_USDT" } = req.query;
+    const { domestic = "UPBIT_KRW", foreign = "BINANCE_USDT" } = req.query;
 
     const domesticParts = (domestic as string).split("_");
     const domesticExchange = domesticParts[0];
@@ -58,15 +59,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         const domesticPriceKey = `${domesticExchange}:${symbol}:${domesticQuote}`;
         const foreignPriceKey = `${foreignExchange}:${symbol}:${foreignQuote}`;
 
-        const domesticPrice = prices[domesticPriceKey]?.price || 0;
+        const domesticPriceKrw = prices[domesticPriceKey]?.price || 0;
         const foreignPrice = prices[foreignPriceKey]?.price || 0;
 
-        let premium = 0;
-        let globalPriceKrw = 0;
-
-        if (domesticPrice > 0 && foreignPrice > 0) {
+        let foreignPriceKrw = 0;
+        if (foreignPrice > 0) {
           if (foreignQuote === "USDT") {
-            globalPriceKrw = foreignPrice * fxRate;
+            foreignPriceKrw = foreignPrice * fxRate;
           } else if (foreignQuote === "BTC") {
             const btcPriceOrder = ["BINANCE:BTC:USDT", "OKX:BTC:USDT", "BITGET:BTC:USDT", "GATE:BTC:USDT", "MEXC:BTC:USDT"];
             let btcUsdtPrice = 0;
@@ -76,15 +75,19 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
                 break;
               }
             }
-            globalPriceKrw = foreignPrice * btcUsdtPrice * fxRate;
+            foreignPriceKrw = foreignPrice * btcUsdtPrice * fxRate;
           } else {
-            globalPriceKrw = foreignPrice;
-          }
-
-          if (globalPriceKrw > 0) {
-            premium = ((domesticPrice - globalPriceKrw) / globalPriceKrw) * 100;
+            foreignPriceKrw = foreignPrice;
           }
         }
+
+        const premiumRate = foreignPriceKrw > 0
+          ? ((domesticPriceKrw / foreignPriceKrw) - 1) * 100
+          : 0;
+
+        const premiumDiffKrw = foreignPriceKrw > 0
+          ? domesticPriceKrw - foreignPriceKrw
+          : 0;
 
         const shouldForcePlaceholder = BAD_ICON_SYMBOLS.includes(symbol);
         const baseIconUrl = master?.icon_path || premiumRow?.iconUrl || null;
@@ -92,8 +95,39 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
         const cmcSlug = premiumRow?.cmcSlug || master?.cmc_slug || null;
 
-        const statsKey = `${domesticExchange}:${symbol}:${domesticQuote}`;
-        const stats = marketStats[statsKey];
+        const domesticStatsKey = `${domesticExchange}:${symbol}:${domesticQuote}`;
+        const foreignStatsKey = `${foreignExchange}:${symbol}:${foreignQuote}`;
+        
+        const domesticStats = marketStats[domesticStatsKey];
+        const foreignStats = marketStats[foreignStatsKey];
+
+        const changeRate = domesticStats?.change24hRate ?? 0;
+        const changeAbsKrw = domesticStats?.change24hAbs ?? 0;
+
+        const high24h = domesticStats?.high24h ?? null;
+        const low24h = domesticStats?.low24h ?? null;
+
+        const fromHighRate = (high24h && domesticPriceKrw)
+          ? ((domesticPriceKrw / high24h) - 1) * 100
+          : 0;
+
+        const highDiffKrw = (high24h && domesticPriceKrw)
+          ? high24h - domesticPriceKrw
+          : 0;
+
+        const fromLowRate = (low24h && domesticPriceKrw)
+          ? ((domesticPriceKrw / low24h) - 1) * 100
+          : 0;
+
+        const lowDiffKrw = (low24h && domesticPriceKrw)
+          ? domesticPriceKrw - low24h
+          : 0;
+
+        const volume24hKrw = domesticStats?.volume24hQuote ?? 0;
+
+        const foreignVolumeKrw = (foreignStats?.volume24hQuote != null)
+          ? foreignStats.volume24hQuote * fxRate
+          : 0;
 
         return {
           symbol,
@@ -104,17 +138,31 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           quote: market.quote,
           domesticExchange: domesticExchange,
           foreignExchange: foreignExchange,
-          koreanPrice: domesticPrice,
+
+          koreanPrice: domesticPriceKrw,
+          foreignPriceKrw: Math.round(foreignPriceKrw * 100) / 100,
+
+          premiumRate: Math.round(premiumRate * 100) / 100,
+          premiumDiffKrw: Math.round(premiumDiffKrw * 100) / 100,
+
+          changeRate: Math.round(changeRate * 100) / 100,
+          changeAbsKrw: Math.round(changeAbsKrw * 100) / 100,
+
+          fromHighRate: Math.round(fromHighRate * 100) / 100,
+          highDiffKrw: Math.round(highDiffKrw * 100) / 100,
+
+          fromLowRate: Math.round(fromLowRate * 100) / 100,
+          lowDiffKrw: Math.round(lowDiffKrw * 100) / 100,
+
+          volume24hKrw,
+          volume24hForeignKrw: Math.round(foreignVolumeKrw * 100) / 100,
+
+          high24h,
+          low24h,
+
           globalPrice: foreignPrice,
-          globalPriceKrw: Math.round(globalPriceKrw * 100) / 100,
-          premium: Math.round(premium * 100) / 100,
-          volume24hKrw: stats?.volume24hKrw ?? 0,
-          volume24hUsdt: 0,
-          volume24hForeignKrw: 0,
-          change24h: stats?.change24h ?? 0,
-          high24h: stats?.high24h ?? null,
-          low24h: stats?.low24h ?? null,
-          isListed: domesticPrice > 0 && foreignPrice > 0,
+          premium: Math.round(premiumRate * 100) / 100,
+          isListed: domesticPriceKrw > 0 && foreignPrice > 0,
           icon_url: iconUrl,
           displayName: market.name_ko || market.name_en || symbol,
           cmcSlug: cmcSlug,
