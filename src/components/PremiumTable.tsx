@@ -1082,11 +1082,15 @@ export default function PremiumTable({
                             <div className="bg-[#0F111A] border-t border-b border-slate-700/50 py-3 px-3">
                               <div className="h-[360px] rounded-xl overflow-hidden bg-slate-900/50">
                                 <TradingViewChart
-                                  tvSymbol={getTvSymbolForRow({
-                                    symbol: row.symbol,
-                                    domesticExchange,
-                                    foreignExchange,
-                                  })}
+                                  tvSymbol={(() => {
+                                    const tv = getTvSymbolForRow({
+                                      symbol: row.symbol,
+                                      domesticExchange,
+                                      foreignExchange,
+                                    });
+                                    console.log("[TV_SYMBOL_ROW]", row.symbol, domesticExchange, foreignExchange, tv);
+                                    return tv;
+                                  })()}
                                   height={360}
                                 />
                               </div>

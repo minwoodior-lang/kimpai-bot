@@ -1,0 +1,146 @@
+이번 작업 목표는 3가지입니다.
+
+1) 코인셀 차트가 엉뚱한 심볼(AAPL 등)로 열리는 문제 디버깅
+2) CoinMarketCap URL이 항상 /search?q= 로만 열리는 문제 수정
+3) 위 두 문제를 해결했는지 브라우저에서 바로 검증할 수 있게 로그와 구조 정리
+
+아래 순서대로 코드를 수정해주세요.
+
+==================================================
+1. PremiumTable.tsx – 차트 심볼 디버깅 로그 추가
+==================================================
+
+파일: src/components/PremiumTable.tsx
+
+(1) expandedSymbol === row.symbol && (...) 로 차트 행을 렌더링하는 부분을 찾습니다.
+
+대략 이런 구조일 것입니다:
+
+{expandedSymbol === row.symbol && (
+  <tr ...>
+    <td ...>
+      <TradingViewChart
+        tvSymbol={getTvSymbolForRow({ symbol: row.symbol, domesticExchange, foreignExchange })}
+        height={360}
+      />
+    </td>
+  </tr>
+)}
+
+(2) tvSymbol에 전달되는 값을 한 번 변수에 담고 console.log를 추가해 주세요.
+
+아래와 같이 수정해주세요:
+
+{expandedSymbol === row.symbol && (
+  <tr key={`${row.symbol}-chart`}>
+    <td colSpan={8} className="p-0">
+      <div className="bg-[#0F111A] border-t border-b border-slate-700/50 py-3 px-3">
+        <div className="h-[360px] rounded-xl overflow-hidden bg-slate-900/50">
+          <TradingViewChart
+            tvSymbol={(() => {
+              const tv = getTvSymbolForRow({
+                symbol: row.symbol,
+                domesticExchange,
+                foreignExchange,
+              });
+              console.log("[TV_SYMBOL_ROW]", row.symbol, domesticExchange, foreignExchange, tv);
+              return tv;
+            })()}
+            height={360}
+          />
+        </div>
+      </div>
+    </td>
+  </tr>
+)}
+
+(3) 이 상태로 서버를 실행한 뒤, 브라우저 개발자 도구 콘솔(또는 서버 로그)에
+"[TV_SYMBOL_ROW]" 로그가 찍히는지 확인할 수 있도록 준비만 해두세요.
+(Autonomous 모드에서는 단순히 이 로그가 찍히도록 구현만 하면 됩니다.)
+
+==================================================
+2. coinMarketCapUtils.ts – openCmcPage 로직 교체
+==================================================
+
+파일: src/lib/coinMarketCapUtils.ts
+
+(1) openCmcPage 함수 구현을 아래 코드로 교체해주세요.
+
+export function openCmcPage(symbol: string, cmcSlug?: string) {
+  // 1) slug가 있으면 currencies/{slug}/ 로 이동
+  if (cmcSlug && cmcSlug.trim().length > 0) {
+    const slug = cmcSlug.trim().toLowerCase();
+    const url = `https://coinmarketcap.com/ko/currencies/${slug}/?utm_source=apiswap&utm_medium=web&utm_campaign=kimpga`;
+    if (typeof window !== "undefined") {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+    return;
+  }
+
+  // 2) slug가 없을 때만 검색 페이지로 폴백
+  const baseSymbol = symbol.replace(/\/[A-Z]+$/i, "").toLowerCase();
+  const url = `https://coinmarketcap.com/ko/search/?q=${encodeURIComponent(baseSymbol)}`;
+  if (typeof window !== "undefined") {
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+}
+
+(2) PremiumTable.tsx에서 코인명을 클릭할 때 openCmcPage가
+다음과 같이 호출되는지 확인하고, 아니라면 아래처럼 맞춰주세요.
+
+onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
+
+==================================================
+3. /api/premium/table-filtered – 응답에 cmcSlug 포함
+==================================================
+
+파일: src/pages/api/premium/table-filtered.ts
+(실제 파일명이 다를 수 있지만, PremiumTable에서 호출하는 API입니다.)
+
+(1) PremiumTable.tsx에서 사용하는 API 엔드포인트를 확인합니다.
+예: "/api/premium/table-filtered" 또는 비슷한 이름.
+
+(2) 해당 API 파일에서 응답 객체를 만드는 부분을 찾습니다.
+예를 들어:
+
+const data = mappedRows.map(row => ({
+  symbol: row.symbol,
+  name_ko: row.name_ko,
+  name_en: row.name_en,
+  ...
+}));
+
+(3) 각 row에 cmcSlug 필드를 추가해 주세요.
+
+예시:
+
+const data = mappedRows.map(row => ({
+  symbol: row.symbol,
+  name_ko: row.name_ko,
+  name_en: row.name_en,
+  // 기존 필드들 ...
+  cmcSlug: row.cmcSlug ?? null, // master_symbols 또는 기존 매핑에서 가져온 slug
+}));
+
+(4) 만약 row.cmcSlug가 없다면, 가능하다면 master_symbols 또는
+이미 존재하는 CMC 매핑 테이블에서 slug를 가져와서 세팅해 주세요.
+slug가 전혀 없으면 null로 두면 됩니다. (이 경우 fallback으로 search/?q=가 동작합니다.)
+
+==================================================
+4. 마무리 동작 확인 (Autonomous 관점에서 준비)
+==================================================
+
+위 변경사항까지 적용한 뒤, 다음 상태가 되어야 합니다:
+
+1) 코인셀에서 📈 아이콘 클릭 시,
+   콘솔에 [TV_SYMBOL_ROW] 로그가 찍히고, tvSymbol 값이
+   - 업비트/빗썸 기준: UPBIT:BTCKRW, BITHUMB:ETHKRW 등 정상 포맷
+   - 코인원 기준: BINANCE:BTCUSDT 등 해외 거래소 포맷
+   으로 생성되도록 되어 있어야 합니다.
+
+2) PremiumTable에서 코인명을 클릭할 때
+   - row.cmcSlug가 존재하면: /ko/currencies/{slug}/?... 형태로 열릴 준비가 되어 있어야 하고
+   - row.cmcSlug가 없으면: /ko/search/?q=symbol 형태로 열리도록 구현되어 있어야 합니다.
+
+테스트 자체는 사용자가 브라우저에서 수행할 예정이므로,
+Autonomous 모드에서는 위 코드 변경까지 정확히 반영해 주세요.

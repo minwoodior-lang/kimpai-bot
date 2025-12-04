@@ -91,6 +91,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         const shouldForcePlaceholder = BAD_ICON_SYMBOLS.includes(symbol);
         const iconUrl = shouldForcePlaceholder ? null : baseIconUrl;
 
+        // cmcSlug 생성: master에서 가져오거나, name_en 기반 자동 생성
+        const cmcSlug = master?.cmc_slug 
+          || master?.cmcSlug 
+          || (master?.name_en ? master.name_en.toLowerCase().replace(/\s+/g, "-") : null);
+
         return {
           symbol,
           name_ko: market.name_ko || master?.name_ko || market.base,
@@ -110,6 +115,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           change24h: market.change24h || 0,
           isListed: true,
           icon_url: iconUrl,
+          cmcSlug: cmcSlug,
         };
       })
       .sort((a, b) => (b.volume24hKrw || 0) - (a.volume24hKrw || 0));
