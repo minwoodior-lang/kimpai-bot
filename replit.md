@@ -12,6 +12,10 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
   - 모든 테이블 th/td: `px-3 lg:px-4 py-2.5` 패딩 통일
   - 코인셀 상세 차트: `px-3 lg:px-4 pb-4` (테이블 셀 패딩 상속)
   - **PremiumTable 루트**: 부모 컨테이너 폭 상속 (`max-w`, `px`, `mx-auto` 제거)
+- **필터 바 레이아웃 재구성**:
+  - 단일 통합 구조: flex-col (모바일) → md:flex-row (PC)
+  - PC: 기준/해외 거래소 왼쪽 정렬 + "암호화폐 총 N개 + 검색" 오른쪽 정렬 (md:justify-end)
+  - 모바일: 검색창 w-full, 총 개수 텍스트 위쪽에 정렬
 - **테이블 구조 최적화**: section 태그 사용, 필터 UI 및 테이블 분리
 - **프리미엄 차트 폴링 최적화**: 1000ms → 실시간 반응 속도 개선
 - **BINANCE_BTC Market 제거**: 바이낸스에 BTC 현물 시장 없음
