@@ -15,18 +15,6 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useMarkets } from "@/hooks/useMarkets";
 
-const ChartSectionEnhanced = dynamic(
-  () => import("@/components/charts/ChartSectionEnhanced"),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="mb-6 rounded-xl bg-slate-900/80 p-3 h-[360px] flex items-center justify-center">
-        <div className="text-slate-400">차트 로딩 중...</div>
-      </div>
-    ),
-  }
-);
-
 const PremiumTable = dynamic(
   () => import("@/components/PremiumTable"),
   {
@@ -53,15 +41,8 @@ export default function Home() {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [mobileCardTab, setMobileCardTab] = useState<"ai" | "pro" | "alerts">("ai");
   const [isPrefsPanelOpen, setIsPrefsPanelOpen] = useState(false);
-  const [premiumTvSymbol, setPremiumTvSymbol] = useState("BINANCE:BTCUSDT");
   const { prefs, setPrefs, isLoaded } = useUserPrefs();
   const { data, averagePremium, fxRate } = useMarkets();
-
-  const openTradingViewChart = (tvSymbol: string) => {
-    setPremiumTvSymbol(tvSymbol);
-  };
-
-  const handleTradingViewChartClick = openTradingViewChart;
 
   const listedData = data.filter(item => item.premium !== null);
   
@@ -265,15 +246,14 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 프리미엄 차트 (Binance BTC 기본) */}
+          {/* 프리미엄 차트 (Binance BTC 고정) */}
           <div className="mb-4 h-[360px] rounded-lg overflow-hidden border border-slate-700 bg-slate-900/40">
-            <TradingViewChartDynamic tvSymbol={premiumTvSymbol} height={360} />
+            <TradingViewChartDynamic tvSymbol="BINANCE:BTCUSDT" height={360} />
           </div>
-
 
           <div className="mt-2 space-y-3">
             {/* 프리미엄 테이블 */}
-            <PremiumTable showHeader={false} showFilters={true} limit={0} refreshInterval={2000} onTradingViewChartClick={handleTradingViewChartClick} />
+            <PremiumTable showHeader={false} showFilters={true} limit={0} refreshInterval={2000} />
           </div>
         </div>
       </HomeLayout>

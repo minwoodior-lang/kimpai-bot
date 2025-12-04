@@ -1,0 +1,258 @@
+📌 현재 문제 요약 (반드시 먼저 읽어줘)
+
+프리미엄 차트
+
+홈 상단에 트레이딩뷰 차트가 2개(Apple 차트) 가 동시에 뜸.
+
+코인셀에서 📈 아이콘을 눌러도 해당 행에 차트가 열리는 게 아니라, 위 프리미엄 차트 심볼만 바뀌는 구조로 보임.
+
+코인셀 차트 버튼
+
+📈 아이콘은 보이는데,
+
+어떤 건 아예 차트가 안 뜨거나
+
+엉뚱한 심볼(Apple 등)로 로딩됨.
+
+CoinMarketCap 링크
+
+지금은 https://coinmarketcap.com/ko/search/?q=ada 이런 식으로 검색 페이지로만 감.
+
+내가 원하는 건 김프가와 동일한 풀 URL:
+
+예:
+https://coinmarketcap.com/ko/currencies/chainlink/?utm_source=apiswap&utm_medium=web&utm_campaign=kimpga
+
+✅ 내가 원하는 최종 동작
+
+프리미엄 차트
+
+홈 상단 “프리미엄 차트” 카드 안에 TradingView 차트 1개만 렌더링.
+
+디폴트 심볼은 BINANCE:BTCUSDT 한 개.
+
+코인셀에서 📈를 눌러도 이 차트는 안 바뀜.
+(프리미엄 차트는 그냥 “대표 BTC 차트” 느낌으로 고정)
+
+코인셀 차트 버튼
+
+각 코인 행의 📈 아이콘 클릭 시:
+
+그 행 바로 아래에 작은 트레이딩뷰 차트(1개)가 열리고
+
+다시 누르면 접히는 구조(토글)면 좋음.
+
+심볼 매핑 규칙:
+
+기준거래소가 업비트 / 빗썸이면 → 그 국내 거래소 차트
+
+예) 업비트 KRW BTC → UPBIT:BTCKRW
+
+예) 빗썸 KRW ETH → BITHUMB:ETHKRW
+
+기준거래소가 코인원이면 → 선택된 해외거래소 기준
+
+예) 기준거래소: 코인원, 해외: Binance, 심볼: BTC → BINANCE:BTCUSDT
+
+위 규칙에서 심볼/마켓이 애매하면 마지막 fallback 으로
+
+BINANCE:{SYMBOL}USDT 형식 사용.
+
+CoinMarketCap 링크
+
+코인명 클릭 시:
+
+가능하면 김프가와 동일한 CMC 상세 링크로 이동
+
+형식:
+https://coinmarketcap.com/ko/currencies/{cmcSlug}/?utm_source=apiswap&utm_medium=web&utm_campaign=kimpga
+
+cmcSlug를 모르는 경우에만 검색 URL로 fallback:
+
+https://coinmarketcap.com/ko/search/?q={symbol}
+
+🔧 파일 단위로 해야 할 작업 지시
+1) 홈 프리미엄 차트 – 하나만 남기기
+
+파일: src/pages/index.tsx
+
+화면 상단에 트레이딩뷰 차트를 두 번 쓰는 부분이 있음:
+
+하나는 프리미엄 차트 카드 안
+
+하나는 예전에 쓰던 ChartSectionEnhanced 또는 비슷한 섹션
+
+아래처럼 처리해줘:
+
+ChartSectionEnhanced 관련 블록(예: <ChartSectionEnhanced ... />, 그 주변 래퍼 div 포함) 전부 삭제하거나 아예 false && <ChartSectionEnhanced ...> 로 감싸서 렌더 안 되게.
+
+프리미엄 차트 카드는 이것만 남기고, 거기서만 TradingViewChartDynamic을 렌더:
+
+// 예시 형태 (구조만 맞춰줘)
+<section id="premium-chart" className="...">
+  <TradingViewChartDynamic
+    tvSymbol="BINANCE:BTCUSDT"
+    height={360}
+  />
+</section>
+
+
+코인셀에서 📈 아이콘 눌렀을 때 이 tvSymbol을 바꾸는 콜백을 더 이상 넘기지 말아줘.
+
+즉, PremiumTable에 onTradingViewChartClick 같은 prop을 넘기고 있다면 그 prop과 관련 로직 전부 제거.
+
+2) 코인셀 차트 – 행 아래에서 열리도록 수정
+
+파일: src/components/PremiumTable.tsx (이름은 다를 수 있는데, 코인 리스트 테이블 렌더링하는 컴포넌트)
+
+상태 추가
+
+이 컴포넌트 내부에, “어느 행의 차트가 열려 있는지” 관리하는 state를 추가해줘:
+
+const [expandedSymbol, setExpandedSymbol] = useState<string | null>(null);
+
+
+📈 버튼 클릭 로직 수정
+
+현재는 📈 아이콘 클릭 시 부모에게 tvSymbol을 전달하는 식일 텐데, 그 대신:
+
+const handleChartClick = (row: PremiumRow) => {
+  const next = expandedSymbol === row.symbol ? null : row.symbol;
+  setExpandedSymbol(next);
+};
+
+
+📈 버튼 onClick 은 이렇게:
+
+<button onClick={() => handleChartClick(row)} ...>
+  📈
+</button>
+
+
+부모로 tvSymbol을 넘기는 콜백(onTradingViewChartClick 등)은 더 이상 사용하지 말고 삭제.
+
+행 아래에 트레이딩뷰 차트 렌더링
+
+각 row를 렌더링하는 부분 바로 아래에, expandedSymbol === row.symbol일 때만 트레이딩뷰 차트를 한 줄 더 렌더:
+
+{expandedSymbol === row.symbol && (
+  <tr>
+    <td colSpan={전체컬럼수} className="bg-[#050816]">
+      <div className="h-64 w-full">
+        <TradingViewChartDynamic
+          tvSymbol={getTvSymbolForRow(row)}
+          height={256}
+        />
+      </div>
+    </td>
+  </tr>
+)}
+
+
+colSpan 값은 현재 테이블 컬럼 수에 맞춰줘 (예: 8 또는 9).
+
+getTvSymbolForRow 로직 다시 확인
+
+symbol 이 "BTC/KRW" 같이 들어올 수도 있으니까, / 기준으로 앞부분 ticker만 쓰도록:
+
+const normalizeSymbol = (symbol: string) => symbol.split('/')[0];
+
+
+domesticExchange, foreignExchange 문자열에서 거래소와 마켓을 분리해서 심볼을 만들 것:
+
+// 예시: "UPBIT_KRW" → exchange: "UPBIT", quote: "KRW"
+const parseExchange = (ex: string | null) => {
+  if (!ex) return null;
+  const [name, quote] = ex.split('_');
+  return { name, quote }; // { name: "UPBIT", quote: "KRW" }
+};
+
+
+최종 getTvSymbolForRow 예시 (의미만 맞춰줘):
+
+const getTvSymbolForRow = (row: PremiumRow): string => {
+  const base = normalizeSymbol(row.symbol); // "BTC"
+  const domestic = parseExchange(row.domesticExchange);
+  const foreign = parseExchange(row.foreignExchange);
+
+  // 1) 업비트 / 빗썸 기준일 때 → 국내 거래소 차트
+  if (domestic && (domestic.name === "UPBIT" || domestic.name === "BITHUMB")) {
+    const quote = domestic.quote || "KRW";
+    return `${domestic.name}:${base}${quote}`; // UPBIT:BTCKRW 같은 형태
+  }
+
+  // 2) 코인원 기준일 때 → 선택된 해외 거래소
+  if (domestic && domestic.name === "COINONE" && foreign) {
+    const quote = foreign.quote || "USDT";
+    return `${foreign.name}:${base}${quote}`; // BINANCE:BTCUSDT 등
+  }
+
+  // 3) 그 외 또는 정보 부족 시 → 기본값 BINANCE USDT 마켓
+  return `BINANCE:${base}USDT`;
+};
+
+3) CoinMarketCap URL – 김프가와 동일하게
+a) API에서 cmcSlug 전달
+
+파일: src/pages/api/premium/table.ts (프리미엄 테이블 데이터 만드는 API)
+
+PremiumRow 타입 또는 응답 row에 cmcSlug 필드가 있어야 함.
+만약 DB에 이미 slug가 있으면 그 값을 그대로 넘기고, 없으면 심볼 기준으로 추론하는 guessCmcSlug를 추가.
+
+function guessCmcSlug(row: PremiumRow): string | null {
+  if (row.cmcSlug) return row.cmcSlug;
+
+  // 심볼 별로 예외 처리 필요하면 여기서
+  // 예: LINK → chainlink, BTC → bitcoin 등
+  switch (row.symbol.split('/')[0]) {
+    case "BTC": return "bitcoin";
+    case "ETH": return "ethereum";
+    case "LINK": return "chainlink";
+    // ...
+    default: return null;
+  }
+}
+
+
+premium.map(row => ({ ... })) 부분에서:
+
+result = premium.map((row) => ({
+  ...,
+  cmcSlug: guessCmcSlug(row),
+}));
+
+b) 프론트에서 openCmcPage 수정
+
+파일: src/lib/coinMarketCapUtils.ts 또는 비슷한 유틸 함수 있는 곳
+
+함수 로직을 아래처럼 바꿔줘:
+
+export function openCmcPage(symbol: string, cmcSlug?: string | null) {
+  const base = "https://coinmarketcap.com/ko";
+
+  if (cmcSlug) {
+    const url = `${base}/currencies/${cmcSlug}/?utm_source=apiswap&utm_medium=web&utm_campaign=kimpga`;
+    window.open(url, "_blank");
+    return;
+  }
+
+  // slug 없을 때만 검색 페이지로 fallback
+  const query = symbol.split('/')[0];
+  const url = `${base}/search/?q=${encodeURIComponent(query)}`;
+  window.open(url, "_blank");
+}
+
+
+코인명 클릭 부분에서는 꼭 row.cmcSlug를 두 번째 인자로 넘겨줘야 함:
+
+<button onClick={() => openCmcPage(row.symbol, row.cmcSlug)}>
+  {row.koreanName || row.name}
+</button>
+
+🔚 한 줄 요약 (복붙용)
+
+홈 상단 프리미엄 차트는 TradingViewChartDynamic 하나만 남기고 BINANCE:BTCUSDT 고정으로 띄워줘. 코인셀 📈 클릭해도 이 차트는 건드리지 말고,
+
+코인셀 📈 아이콘을 클릭하면 그 행 바로 아래에 트레이딩뷰 차트가 토글되도록 만들고, getTvSymbolForRow는 업비트/빗썸/코인원 규칙에 따라 UPBIT:BTCKRW, BINANCE:BTCUSDT 같은 심볼을 정확히 만들도록 수정해줘.
+
+API 응답에 cmcSlug를 추가해서 프론트의 openCmcPage(symbol, cmcSlug)가 슬러그가 있을 땐 https://coinmarketcap.com/ko/currencies/{slug}/?utm_source=apiswap&utm_medium=web&utm_campaign=kimpga로, 없을 땐 search/?q=로만 가게 김프가와 동일하게 맞춰줘.

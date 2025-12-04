@@ -25,7 +25,6 @@ interface PremiumTableProps {
   showFilters?: boolean;
   limit?: number;
   refreshInterval?: number;
-  onTradingViewChartClick?: (tvSymbol: string) => void;
 }
 
 function MiniDropdown({
@@ -320,7 +319,6 @@ export default function PremiumTable({
   showFilters = true,
   limit = 0,
   refreshInterval = 3000,
-  onTradingViewChartClick,
 }: PremiumTableProps) {
   const [data, setData] = useState<PremiumData[]>([]);
   const [averagePremium, setAveragePremium] = useState(0);
@@ -1047,14 +1045,8 @@ export default function PremiumTable({
                             <button
                               type="button"
                               onClick={() => {
-                                const tvSymbol = getTvSymbolForRow({
-                                  symbol: row.symbol,
-                                  domesticExchange,
-                                  foreignExchange,
-                                });
-                                if (onTradingViewChartClick) {
-                                  onTradingViewChartClick(tvSymbol);
-                                }
+                                const next = expandedSymbol === row.symbol ? null : row.symbol;
+                                setExpandedSymbol(next);
                               }}
                               className="p-1 text-slate-400 hover:text-slate-200 transition-colors flex-shrink-0"
                               title="차트 보기"
