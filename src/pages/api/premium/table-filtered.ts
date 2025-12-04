@@ -67,6 +67,17 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         const cmcSlug =
           premiumRow?.cmcSlug || market?.cmcSlug || master?.cmc_slug || null;
 
+        // 디버깅: BTC, ETH, LINK만 로그
+        if (["BTC", "ETH", "LINK"].includes(symbol)) {
+          console.log("[CMC_DEBUG]", {
+            symbol,
+            premiumTableSlug: premiumRow?.cmcSlug,
+            marketSlug: market?.cmcSlug,
+            masterSlug: master?.cmc_slug,
+            finalSlug: cmcSlug,
+          });
+        }
+
         return {
           symbol,
           name_ko: market.name_ko || master?.name_ko || market.base,
