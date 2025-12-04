@@ -1,0 +1,107 @@
+[레플릿 전달용 지시문] – CoinMarketCap URL 오류 완전 해결 패치 적용 요청
+
+다음 내용을 그대로 적용해 주세요.
+현재 CMC URL이 /search/?q= 로만 열리는 이유는 API 응답에서 cmcSlug 필드가 누락되어 프론트가 항상 fallback 경로로만 처리하기 때문입니다.
+따라서 table-filtered.ts 파일 수정이 반드시 필요합니다.
+
+🔧 1. 수정할 파일
+src/pages/api/premium/table-filtered.ts
+
+🔥 2. 반드시 아래 코드로 전체 교체해주세요 (아래 코드 그대로 복붙)
+import type { NextApiRequest, NextApiResponse } from "next";
+import premiumTable from "@/data/premiumTable.json";
+import exchangeMarkets from "@/data/exchange_markets.json";
+import masterSymbols from "@/data/master_symbols.json";
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    const results: any[] = [];
+
+    for (const row of premiumTable) {
+      const symbol = row.symbol;
+      const baseSymbol = symbol.includes("/") ? symbol.split("/")[0] : symbol;
+
+      // master_symbols 매칭
+      const master = masterSymbols.find((m: any) => m.symbol === baseSymbol);
+
+      // exchange_markets 매칭
+      const market = exchangeMarkets.find((m: any) => m.baseSymbol === baseSymbol);
+
+      // cmcSlug 우선순위 (어디에 있어도 무조건 잡히도록 설정)
+      const cmcSlug =
+        row.cmcSlug ||           // premiumTable.json (최상위 우선)
+        market?.cmcSlug ||       // exchange_markets.json
+        master?.cmc_slug ||      // master_symbols.cmc_slug
+        null;                    // 없으면 null → 프론트는 /search?q= 처리
+
+      // 여기서 cmcSlug를 반드시 응답에 포함해야 프론트가 정상 작동합니다.
+      results.push({
+        symbol: row.symbol,
+        koreanName: row.koreanName,
+        domesticPrice: row.koreanPrice,
+        globalPrice: row.globalPrice,
+        premium: row.premium,
+        domesticExchange: row.domesticExchange,
+        foreignExchange: row.foreignExchange,
+        volume24hKrw: row.volume24hKrw,
+        volume24hUsdt: row.volume24hUsdt,
+        change24h: row.change24h,
+        cmcSlug: cmcSlug,     // ← 핵심! 반드시 포함해야 함
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: results,
+      count: results.length,
+    });
+  } catch (err) {
+    console.error("TABLE FILTER ERROR:", err);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+}
+
+📌 3. 이 수정이 필요한 이유 (개발팀이 이해하기 쉽게)
+
+현재 프론트에서는 openCmcPage(symbol, cmcSlug) 로 URL을 만든다.
+
+그러나 API 응답(json)에 cmcSlug가 아예 포함되지 않음 → 항상 null
+
+null 값이 들어오면 프론트는 fallback URL:
+
+https://coinmarketcap.com/ko/search/?q=btc
+
+
+만 열게 되어 있음.
+
+그래서 BTC / ETH처럼 slug가 있는 코인들도 검색 페이지만 열리는 문제 발생.
+
+위 패치를 적용하면:
+
+/currencies/bitcoin/
+/currencies/ethereum/
+/currencies/chainlink/
+
+
+모두 정상 이동한다.
+
+🚀 4. 패치 후 확인 방법
+
+서버 재시작 후 브라우저에서 BTC/ETH 코인명 클릭
+
+이동 URL이 아래처럼 나오는지 확인:
+
+https://coinmarketcap.com/ko/currencies/bitcoin/
+
+
+콘솔 로그:
+
+[CMC_URL] Using slug: bitcoin
+
+🔥 5. 반드시 이 순서대로 진행
+
+table-filtered.ts 위 코드로 완전 교체
+
+저장 후 서버 자동 재빌드 확인
+
+프론트 F5 새로고침 후 테스트

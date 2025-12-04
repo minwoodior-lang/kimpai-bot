@@ -1,27 +1,14 @@
 import fs from "fs";
 import path from "path";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { BAD_ICON_SYMBOLS } from "@/config/badIconSymbols";
 
-interface PremiumRow {
-  symbol: string;
-  name_ko?: string;
-  name_en?: string;
-  exchange: string;
-  market: string;
-  base: string;
-  quote: string;
-  koreanPrice?: number;
-  globalPrice?: number;
-  globalPriceKrw?: number;
-  premium?: number;
-  volume24hKrw?: number;
-  volume24hUsdt?: number;
-  volume24hForeignKrw?: number;
-  change24h?: number;
-  high24h?: number;
-  low24h?: number;
-  isDomestic?: boolean;
+function loadPremiumTable(): any[] {
+  try {
+    const file = path.join(process.cwd(), "data", "premiumTable.json");
+    return JSON.parse(fs.readFileSync(file, "utf-8"));
+  } catch {
+    return [];
+  }
 }
 
 function loadExchangeMarkets(): any[] {
@@ -42,129 +29,54 @@ function loadMasterSymbols(): any[] {
   }
 }
 
-function loadSymbolIcons(): Record<string, string> {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const file = path.join(process.cwd(), "data", "symbolIcons.json");
-    return JSON.parse(fs.readFileSync(file, "utf-8"));
-  } catch {
-    return {};
-  }
-}
-
-function loadPremiumTable(): any[] {
-  try {
-    const file = path.join(process.cwd(), "data", "premiumTable.json");
-    return JSON.parse(fs.readFileSync(file, "utf-8"));
-  } catch {
-    return [];
-  }
-}
-
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  try {
-    const { domestic = "UPBIT_KRW", foreign = "BINANCE_BTC" } = req.query;
-
-    // Parse domestic exchange
-    const domesticParts = (domestic as string).split("_");
-    const domesticExchange = domesticParts[0];
-    const domesticQuote = domesticParts.slice(1).join("_");
-
-    // Parse foreign exchange
-    const foreignParts = (foreign as string).split("_");
-    const foreignExchange = foreignParts[0];
-    const foreignQuote = foreignParts.slice(1).join("_");
-
-    const allMarkets = loadExchangeMarkets();
-    const masterSymbols = loadMasterSymbols();
-    const symbolIcons = loadSymbolIcons();
     const premiumTable = loadPremiumTable();
+    const exchangeMarkets = loadExchangeMarkets();
+    const masterSymbols = loadMasterSymbols();
 
-    console.log(
-      `[API] Filtering: domestic=${domesticExchange}_${domesticQuote}, foreign=${foreignExchange}_${foreignQuote}`
-    );
+    const results: any[] = [];
 
-    // Filter markets by exchange and quote
-    const filtered = allMarkets
-      .filter((m) => {
-        const matchExchange = m.exchange === domesticExchange;
-        const matchQuote = m.quote === domesticQuote;
-        return matchExchange && matchQuote;
-      })
-      .map((market) => {
-        const symbol = market.base.toUpperCase();
-        // master_symbols의 컬럼명은 base_symbol입니다.
-        const master = masterSymbols.find((s) => s.base_symbol === symbol);
-        
-        // master_symbols.icon_path 사용 (심볼 단위 통합 아이콘)
-        const baseIconUrl = master?.icon_path || null;
-        
-        // BAD_ICON_SYMBOLS 에 포함된 심볼은 강제로 icon_url = null 처리
-        const shouldForcePlaceholder = BAD_ICON_SYMBOLS.includes(symbol);
-        const iconUrl = shouldForcePlaceholder ? null : baseIconUrl;
+    for (const row of premiumTable) {
+      const symbol = row.symbol;
+      const baseSymbol = symbol.includes("/") ? symbol.split("/")[0] : symbol;
 
-        // cmcSlug 우선순위: 
-        // 1순위: premiumTable.json의 cmcSlug (김프가에서 검증된 값)
-        // 2순위: master_symbols.cmc_slug
-        // 3순위: master_symbols.cmcSlug (camelCase 버전)
-        // 없으면 null → 프론트에서 /search?q= 폴백
-        const premiumRow = premiumTable.find((p: any) => p.symbol === symbol);
-        const cmcSlug = 
-          premiumRow?.cmcSlug ||
-          market.cmcSlug ||
-          master?.cmc_slug ||
-          master?.cmcSlug ||
-          null;
+      // master_symbols 매칭 (base_symbol 기반)
+      const master = masterSymbols.find((m: any) => m.base_symbol === baseSymbol || m.symbol === baseSymbol);
 
-        return {
-          symbol,
-          name_ko: market.name_ko || master?.name_ko || market.base,
-          name_en: market.name_en || master?.name_en || market.base,
-          market: market.market,
-          exchange: market.exchange,
-          quote: market.quote,
-          domesticExchange: market.exchange,
-          foreignExchange: foreignExchange,
-          koreanPrice: market.koreanPrice || 1,
-          globalPrice: market.globalPrice || 1,
-          globalPriceKrw: market.globalPriceKrw || 1,
-          premium: market.premium || 0,
-          volume24hKrw: market.volume24hKrw || 0,
-          volume24hUsdt: market.volume24hUsdt || 0,
-          volume24hForeignKrw: market.volume24hForeignKrw || 0,
-          change24h: market.change24h || 0,
-          isListed: true,
-          icon_url: iconUrl,
-          cmcSlug: cmcSlug,
-        };
-      })
-      .sort((a, b) => (b.volume24hKrw || 0) - (a.volume24hKrw || 0));
+      // exchange_markets 매칭
+      const market = exchangeMarkets.find((m: any) => m.base === baseSymbol);
 
-    console.log(`[API] Filtered result: ${filtered.length} items`);
+      // cmcSlug 우선순위 (어디에 있어도 무조건 잡히도록 설정)
+      const cmcSlug =
+        row.cmcSlug ||           // premiumTable.json (최상위 우선)
+        market?.cmcSlug ||       // exchange_markets.json
+        master?.cmc_slug ||      // master_symbols.cmc_slug
+        null;                    // 없으면 null → 프론트는 /search?q= 처리
 
-    return res.status(200).json({
+      // cmcSlug를 반드시 응답에 포함해야 프론트가 정상 작동합니다.
+      results.push({
+        symbol: row.symbol,
+        koreanName: row.koreanName || row.name_ko,
+        domesticPrice: row.koreanPrice,
+        globalPrice: row.globalPrice,
+        premium: row.premium,
+        domesticExchange: row.domesticExchange,
+        foreignExchange: row.foreignExchange,
+        volume24hKrw: row.volume24hKrw,
+        volume24hUsdt: row.volume24hUsdt,
+        change24h: row.change24h,
+        cmcSlug: cmcSlug,     // ← 핵심! 반드시 포함해야 함
+      });
+    }
+
+    res.status(200).json({
       success: true,
-      data: filtered,
-      averagePremium: filtered.length
-        ? filtered.reduce((sum, r) => sum + (r.premium || 0), 0) /
-          filtered.length
-        : 0,
-      fxRate: 1330,
-      updatedAt: new Date().toISOString(),
-      domesticExchange,
-      foreignExchange,
-      totalCoins: filtered.length,
-      listedCoins: filtered.length,
+      data: results,
+      count: results.length,
     });
   } catch (err) {
-    console.error("[API] /premium/table-filtered error:", err);
-    return res.status(500).json({
-      success: false,
-      data: [],
-      averagePremium: 0,
-      fxRate: 1330,
-      updatedAt: new Date().toISOString(),
-      totalCoins: 0,
-      listedCoins: 0,
-    });
+    console.error("TABLE FILTER ERROR:", err);
+    res.status(500).json({ success: false, error: "Internal server error" });
   }
 }
