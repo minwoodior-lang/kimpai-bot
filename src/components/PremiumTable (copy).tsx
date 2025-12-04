@@ -3,6 +3,7 @@ import React, {
   useEffect,
   useMemo,
   useRef,
+  useCallback,
 } from "react";
 import dynamic from "next/dynamic";
 import {
@@ -10,7 +11,6 @@ import {
   EXCHANGE_LOGOS,
 } from "@/contexts/ExchangeSelectionContext";
 import CoinIcon from "@/components/CoinIcon";
-import PriceCell from "@/components/PriceCell";
 import { openCmcPage } from "@/lib/coinMarketCapUtils";
 
 interface DropdownOption {
@@ -183,6 +183,13 @@ type SortKey =
 
 type SortOrder = "asc" | "desc";
 
+interface FlashState {
+  [key: string]: {
+    price?: "up" | "down";
+    premium?: "up" | "down";
+  };
+}
+
 const DOMESTIC_EXCHANGES: DropdownOption[] = [
   {
     id: "UPBIT_KRW",
@@ -330,6 +337,11 @@ export default function PremiumTable({
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [expandedSymbol, setExpandedSymbol] = useState<string | null>(null);
+  const [flashStates, setFlashStates] = useState<FlashState>({});
+
+  const prevDataRef = useRef<
+    Record<string, { price: number; premium: number | null }>
+  >({});
 
   const toggleFavorite = (symbol: string) => {
     setFavorites((prev) => {
@@ -346,6 +358,88 @@ export default function PremiumTable({
   const toggleChart = (symbol: string) => {
     setExpandedSymbol((prev) => (prev === symbol ? null : symbol));
   };
+
+  const detectChanges = useCallback((newData: PremiumData[]) => {
+    try {
+      if (!Array.isArray(newData)) return;
+
+      const newFlashStates: FlashState = {};
+      const newPrevData: Record<
+        string,
+        { price: number; premium: number | null }
+      > = {};
+
+      newData.forEach((item) => {
+        if (
+          !item ||
+          typeof item.symbol !== "string" ||
+          typeof item.koreanPrice !== "number"
+        ) {
+          return;
+        }
+
+        const prev = prevDataRef.current[item.symbol];
+        newPrevData[item.symbol] = {
+          price: item.koreanPrice,
+          premium: item.premium,
+        };
+
+        if (prev) {
+          const priceDiff = Math.abs(item.koreanPrice - prev.price);
+          const priceThreshold = Math.max(prev.price * 0.0001, 0.00001);
+
+          if (priceDiff > priceThreshold && priceDiff > 0) {
+            newFlashStates[item.symbol] = {
+              ...newFlashStates[item.symbol],
+              price: item.koreanPrice > prev.price ? "up" : "down",
+            };
+          }
+
+          if (
+            item.premium !== null &&
+            prev.premium !== null &&
+            Math.abs(item.premium - prev.premium) > 0.01
+          ) {
+            newFlashStates[item.symbol] = {
+              ...newFlashStates[item.symbol],
+              premium: item.premium > prev.premium ? "up" : "down",
+            };
+          }
+        }
+      });
+
+      prevDataRef.current = newPrevData;
+
+      if (Object.keys(newFlashStates).length > 0) {
+        try {
+          setFlashStates(newFlashStates);
+          setTimeout(() => {
+            try {
+              setFlashStates({});
+            } catch (e) {
+              if (process.env.NODE_ENV === "development") {
+                // eslint-disable-next-line no-console
+                console.error(
+                  "[PremiumTable] setFlashStates cleanup error:",
+                  e,
+                );
+              }
+            }
+          }, 600);
+        } catch (e) {
+          if (process.env.NODE_ENV === "development") {
+            // eslint-disable-next-line no-console
+            console.error("[PremiumTable] setFlashStates error:", e);
+          }
+        }
+      }
+    } catch (err) {
+      if (process.env.NODE_ENV === "development") {
+        // eslint-disable-next-line no-console
+        console.error("[PremiumTable] detectChanges error:", err);
+      }
+    }
+  }, []);
 
   const fetchData = async () => {
     try {
@@ -399,6 +493,7 @@ export default function PremiumTable({
       }
 
       try {
+        detectChanges(json.data);
         setData(json.data);
         setAveragePremium(typeof json.averagePremium === "number" ? json.averagePremium : 0);
         setFxRate(typeof json.fxRate === "number" ? json.fxRate : 0);
@@ -598,6 +693,12 @@ export default function PremiumTable({
     if (change > 0) return "text-[#50e3a4]";
     if (change < 0) return "text-[#ff6b6b]";
     return "text-[#A7B3C6]";
+  };
+
+  const getFlashClass = (symbol: string, field: "price" | "premium") => {
+    const flash = flashStates[symbol]?.[field];
+    if (!flash) return "";
+    return flash === "up" ? "animate-flash-green" : "animate-flash-red";
   };
 
   const SortIcon = ({ columnKey }: { columnKey: SortKey }) => {
@@ -922,12 +1023,11 @@ export default function PremiumTable({
                           </div>
                         </td>
 
-                        <td className="px-1 md:px-2 py-1.5 md:py-2 text-right whitespace-nowrap">
-                          <span className="whitespace-nowrap">₩</span>
-                          <PriceCell price={row.koreanPrice} />
+                        <td className={`px-1 md:px-2 py-1.5 md:py-2 text-right whitespace-nowrap ${getFlashClass(row.symbol, "price")}`}>
+                          ₩{formatKrwPrice(row.koreanPrice)}
                         </td>
 
-                        <td className="px-1 md:px-2 py-1.5 md:py-2 text-right whitespace-nowrap">
+                        <td className={`px-1 md:px-2 py-1.5 md:py-2 text-right whitespace-nowrap ${getFlashClass(row.symbol, "premium")}`}>
                           {row.premium !== null && row.premium !== undefined ? (
                             <span className={getPremiumColor(row.premium)}>
                               {row.premium >= 0 ? "+" : ""}{Number(row.premium).toFixed(2)}%
