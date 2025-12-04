@@ -8,47 +8,47 @@
   },
   {
     "symbol": "1INCH",
-    "cmc_slug": null,
+    "cmc_slug": "1inch",
     "name_ko": "1인치",
     "name_en": "1inch",
     "icon_path": "/icons/UPBIT/1INCH.png"
   },
   {
     "symbol": "2Z",
-    "cmc_slug": null,
+    "cmc_slug": "doublezero",
     "name_ko": "더블제로",
     "name_en": "DoubleZero",
     "icon_path": "/icons/UPBIT/2Z.png"
   },
   {
     "symbol": "A",
-    "cmc_slug": null,
+    "cmc_slug": "vaulta",
     "name_ko": "볼타",
     "name_en": "Vaulta",
     "icon_path": "/icons/UPBIT/A.png"
   },
   {
     "symbol": "A8",
-    "cmc_slug": null,
+    "cmc_slug": "ancient8",
     "name_ko": "에인션트8",
     "name_en": "Ancient8"
   },
   {
     "symbol": "AAVE",
-    "cmc_slug": null,
+    "cmc_slug": "aave",
     "name_ko": "에이브",
     "name_en": "Aave",
     "icon_path": "/icons/UPBIT/AAVE.png"
   },
   {
     "symbol": "ACE",
-    "cmc_slug": null,
+    "cmc_slug": "fusionist",
     "name_ko": "퓨저니스트",
     "name_en": "Fusionist"
   },
   {
     "symbol": "ACH",
-    "cmc_slug": null,
+    "cmc_slug": "alchemy-pay",
     "name_ko": "알케미페이",
     "name_en": "Alchemy Pay"
   },
@@ -61,14 +61,14 @@
   },
   {
     "symbol": "ACS",
-    "cmc_slug": null,
+    "cmc_slug": "access-protocol",
     "name_ko": "액세스프로토콜",
     "name_en": "Access Protocol",
     "icon_path": "/icons/UPBIT/ACS.png"
   },
   {
     "symbol": "ACX",
-    "cmc_slug": null,
+    "cmc_slug": "across-protocol",
     "name_ko": "어크로스 프로토콜",
     "name_en": "Across Protocol"
   },
@@ -87,21 +87,21 @@
   },
   {
     "symbol": "AERGO",
-    "cmc_slug": null,
+    "cmc_slug": "aergo",
     "name_ko": "아르고",
     "name_en": "Aergo",
     "icon_path": "/icons/UPBIT/AERGO.png"
   },
   {
     "symbol": "AERO",
-    "cmc_slug": null,
+    "cmc_slug": "aerodrome-finance",
     "name_ko": "에어로드롬 파이낸스",
     "name_en": "Aerodrome Finance",
     "icon_path": "/icons/UPBIT/AERO.png"
   },
   {
     "symbol": "AEVO",
-    "cmc_slug": null,
+    "cmc_slug": "aevo",
     "name_ko": "에이보",
     "name_en": "Aevo"
   },
@@ -114,13 +114,13 @@
   },
   {
     "symbol": "AGI",
-    "cmc_slug": null,
+    "cmc_slug": "delysium",
     "name_ko": "델리시움",
     "name_en": "Delysium"
   },
   {
     "symbol": "AGLD",
-    "cmc_slug": null,
+    "cmc_slug": "adventure-gold",
     "name_ko": "어드벤처골드",
     "name_en": "Adventure Gold",
     "icon_path": "/icons/UPBIT/AGLD.png"
@@ -134,63 +134,63 @@
   },
   {
     "symbol": "AI",
-    "cmc_slug": null,
+    "cmc_slug": "sleepless-ai",
     "name_ko": "슬립리스 에이아이",
     "name_en": "Sleepless AI"
   },
   {
     "symbol": "AI16Z",
-    "cmc_slug": null,
+    "cmc_slug": "ai16z",
     "name_ko": "에이아이식스틴즈",
     "name_en": "ai16z"
   },
   {
     "symbol": "AIOZ",
-    "cmc_slug": null,
+    "cmc_slug": "aioz-network",
     "name_ko": "아이오즈 네트워크",
     "name_en": "AIOZ Network"
   },
   {
     "symbol": "AIXBT",
-    "cmc_slug": null,
+    "cmc_slug": "aixbt",
     "name_ko": "에이아이엑스비티",
     "name_en": "aixbt"
   },
   {
     "symbol": "AKT",
-    "cmc_slug": null,
+    "cmc_slug": "akash-network",
     "name_ko": "아카시 네트워크",
     "name_en": "Akash Network",
     "icon_path": "/icons/UPBIT/AKT.png"
   },
   {
     "symbol": "AL",
-    "cmc_slug": null,
+    "cmc_slug": "archloot",
     "name_ko": "아치루트",
     "name_en": "ArchLoot"
   },
   {
     "symbol": "ALGO",
-    "cmc_slug": null,
+    "cmc_slug": "algorand",
     "name_ko": "알고랜드",
     "name_en": "Algorand",
     "icon_path": "/icons/UPBIT/ALGO.png"
   },
   {
     "symbol": "ALICE",
-    "cmc_slug": null,
+    "cmc_slug": "myneighboralice",
     "name_ko": "마이네이버앨리스",
     "name_en": "MyNeighborAlice"
   },
   {
     "symbol": "ALPHA",
-    "cmc_slug": null,
+    "cmc_slug": "alpha",
     "name_ko": "스텔라",
     "name_en": "Stella"
   },
   {
     "symbol": "ALT",
-    "cmc_slug": null,
+    "cmc_slug": "altlayer",
     "name_ko": "알트레이어",
     "name_en": "AltLayer",
     "icon_path": "/icons/UPBIT/ALT.png"
@@ -203,40 +203,40 @@
   },
   {
     "symbol": "AMP",
-    "cmc_slug": null,
+    "cmc_slug": "amp",
     "name_ko": "앰프",
     "name_en": "Amp"
   },
   {
     "symbol": "ANIME",
-    "cmc_slug": null,
+    "cmc_slug": "anime",
     "name_ko": "애니메코인",
     "name_en": "Animecoin",
     "icon_path": "/icons/UPBIT/ANIME.png"
   },
   {
     "symbol": "ANKR",
-    "cmc_slug": null,
+    "cmc_slug": "ankr-network",
     "name_ko": "앵커",
     "name_en": "Ankr Network",
     "icon_path": "/icons/UPBIT/ANKR.png"
   },
   {
     "symbol": "APE",
-    "cmc_slug": null,
+    "cmc_slug": "ape",
     "name_ko": "에이프코인",
     "name_en": "ApeCoin",
     "icon_path": "/icons/UPBIT/APE.png"
   },
   {
     "symbol": "APEPE",
-    "cmc_slug": null,
+    "cmc_slug": "ape-and-pepe",
     "name_ko": "에이프앤페페",
     "name_en": "Ape and Pepe"
   },
   {
     "symbol": "API3",
-    "cmc_slug": null,
+    "cmc_slug": "api3",
     "name_ko": "에이피아이쓰리",
     "name_en": "API3",
     "icon_path": "/icons/UPBIT/API3.png"
@@ -249,7 +249,7 @@
   },
   {
     "symbol": "APT",
-    "cmc_slug": null,
+    "cmc_slug": "aptos",
     "name_ko": "앱토스",
     "name_en": "Aptos",
     "icon_path": "/icons/UPBIT/APT.png"
@@ -263,40 +263,40 @@
   },
   {
     "symbol": "AR",
-    "cmc_slug": null,
+    "cmc_slug": "arweave",
     "name_ko": "알위브",
     "name_en": "Arweave"
   },
   {
     "symbol": "ARB",
-    "cmc_slug": null,
+    "cmc_slug": "arbitrum",
     "name_ko": "아비트럼",
     "name_en": "Arbitrum",
     "icon_path": "/icons/UPBIT/ARB.png"
   },
   {
     "symbol": "ARDR",
-    "cmc_slug": null,
+    "cmc_slug": "ardor",
     "name_ko": "아더",
     "name_en": "Ardor",
     "icon_path": "/icons/UPBIT/ARDR.png"
   },
   {
     "symbol": "ARIAIP",
-    "cmc_slug": null,
+    "cmc_slug": "aria-protocol",
     "name_ko": "아리아 프로토콜",
     "name_en": "Aria Protocol"
   },
   {
     "symbol": "ARK",
-    "cmc_slug": null,
+    "cmc_slug": "ark",
     "name_ko": "아크",
     "name_en": "Ark",
     "icon_path": "/icons/UPBIT/ARK.png"
   },
   {
     "symbol": "ARKM",
-    "cmc_slug": null,
+    "cmc_slug": "arkham",
     "name_ko": "아캄",
     "name_en": "Arkham",
     "icon_path": "/icons/UPBIT/ARKM.png"
@@ -310,20 +310,20 @@
   },
   {
     "symbol": "ASTER",
-    "cmc_slug": null,
+    "cmc_slug": "aster",
     "name_ko": "아스터",
     "name_en": "Aster"
   },
   {
     "symbol": "ASTR",
-    "cmc_slug": null,
+    "cmc_slug": "astar",
     "name_ko": "아스타",
     "name_en": "Astar",
     "icon_path": "/icons/UPBIT/ASTR.png"
   },
   {
     "symbol": "ATH",
-    "cmc_slug": null,
+    "cmc_slug": "aethir",
     "name_ko": "에이셔",
     "name_en": "Aethir",
     "icon_path": "/icons/UPBIT/ATH.png"
@@ -337,28 +337,28 @@
   },
   {
     "symbol": "ATOM",
-    "cmc_slug": null,
+    "cmc_slug": "cosmos",
     "name_ko": "코스모스",
     "name_en": "Cosmos",
     "icon_path": "/icons/UPBIT/ATOM.png"
   },
   {
     "symbol": "AUCTION",
-    "cmc_slug": null,
+    "cmc_slug": "bounce",
     "name_ko": "바운스토큰",
     "name_en": "Bounce Token",
     "icon_path": "/icons/UPBIT/AUCTION.png"
   },
   {
     "symbol": "AUDIO",
-    "cmc_slug": null,
+    "cmc_slug": "audius",
     "name_ko": "오디우스",
     "name_en": "Audius",
     "icon_path": "/icons/UPBIT/AUDIO.png"
   },
   {
     "symbol": "AVAIL",
-    "cmc_slug": null,
+    "cmc_slug": "avail",
     "name_ko": "어베일",
     "name_en": "Avail"
   },
@@ -371,67 +371,67 @@
   },
   {
     "symbol": "AVL",
-    "cmc_slug": null,
+    "cmc_slug": "avalon",
     "name_ko": "아발론",
     "name_en": "Avalon"
   },
   {
     "symbol": "AVNT",
-    "cmc_slug": null,
+    "cmc_slug": "avantis",
     "name_ko": "아반티스",
     "name_en": "Avantis",
     "icon_path": "/icons/UPBIT/AVNT.png"
   },
   {
     "symbol": "AWE",
-    "cmc_slug": null,
+    "cmc_slug": "awe-network",
     "name_ko": "에이더블유이",
     "name_en": "AWE Network",
     "icon_path": "/icons/UPBIT/AWE.png"
   },
   {
     "symbol": "AXL",
-    "cmc_slug": null,
+    "cmc_slug": "axelar",
     "name_ko": "엑셀라",
     "name_en": "Axelar",
     "icon_path": "/icons/UPBIT/AXL.png"
   },
   {
     "symbol": "AXS",
-    "cmc_slug": null,
+    "cmc_slug": "axie-infinity",
     "name_ko": "엑시인피니티",
     "name_en": "Axie Infinity",
     "icon_path": "/icons/UPBIT/AXS.png"
   },
   {
     "symbol": "AZIT",
-    "cmc_slug": null,
+    "cmc_slug": "azit",
     "name_ko": "아지트",
     "name_en": "Azit"
   },
   {
     "symbol": "B3",
-    "cmc_slug": null,
+    "cmc_slug": "b3",
     "name_ko": "비쓰리",
     "name_en": "B3",
     "icon_path": "/icons/UPBIT/B3.png"
   },
   {
     "symbol": "BAAS",
-    "cmc_slug": null,
+    "cmc_slug": "baasid",
     "name_ko": "바스아이디",
     "name_en": "BaaSid"
   },
   {
     "symbol": "BABY",
-    "cmc_slug": null,
+    "cmc_slug": "babylon",
     "name_ko": "바빌론",
     "name_en": "Babylon",
     "icon_path": "/icons/UPBIT/BABY.png"
   },
   {
     "symbol": "BAL",
-    "cmc_slug": null,
+    "cmc_slug": "balancer",
     "name_ko": "밸런서",
     "name_en": "Balancer"
   },
@@ -450,7 +450,7 @@
   },
   {
     "symbol": "BARD",
-    "cmc_slug": null,
+    "cmc_slug": "lombard",
     "name_ko": "롬바드",
     "name_en": "Lombard",
     "icon_path": "/icons/UPBIT/BARD.png"
@@ -464,7 +464,7 @@
   },
   {
     "symbol": "BB",
-    "cmc_slug": null,
+    "cmc_slug": "bouncebit",
     "name_ko": "바운스빗",
     "name_en": "BounceBit"
   },
@@ -477,47 +477,47 @@
   },
   {
     "symbol": "BEAM",
-    "cmc_slug": null,
+    "cmc_slug": "beam",
     "name_ko": "빔",
     "name_en": "Beam",
     "icon_path": "/icons/UPBIT/BEAM.png"
   },
   {
     "symbol": "BEL",
-    "cmc_slug": null,
+    "cmc_slug": "bella-protocol",
     "name_ko": "벨라프로토콜",
     "name_en": "Bella Protocol"
   },
   {
     "symbol": "BERA",
-    "cmc_slug": null,
+    "cmc_slug": "berachain",
     "name_ko": "베라체인",
     "name_en": "Berachain",
     "icon_path": "/icons/UPBIT/BERA.png"
   },
   {
     "symbol": "BFC",
-    "cmc_slug": null,
+    "cmc_slug": "bifrost",
     "name_ko": "바이프로스트",
     "name_en": "Bifrost",
     "icon_path": "/icons/UPBIT/BFC.png"
   },
   {
     "symbol": "BICO",
-    "cmc_slug": null,
+    "cmc_slug": "biconomy",
     "name_ko": "바이코노미",
     "name_en": "Biconomy"
   },
   {
     "symbol": "BIGTIME",
-    "cmc_slug": null,
+    "cmc_slug": "big-time",
     "name_ko": "빅타임",
     "name_en": "Big Time",
     "icon_path": "/icons/UPBIT/BIGTIME.png"
   },
   {
     "symbol": "BIO",
-    "cmc_slug": null,
+    "cmc_slug": "bio",
     "name_ko": "바이오 프로토콜",
     "name_en": "Bio Protocol",
     "icon_path": "/icons/UPBIT/BIO.png"
@@ -530,33 +530,33 @@
   },
   {
     "symbol": "BLAST",
-    "cmc_slug": null,
+    "cmc_slug": "blast",
     "name_ko": "블라스트",
     "name_en": "Blast",
     "icon_path": "/icons/UPBIT/BLAST.png"
   },
   {
     "symbol": "BLUE",
-    "cmc_slug": null,
+    "cmc_slug": "bluefin",
     "name_ko": "블루핀",
     "name_en": "Bluefin"
   },
   {
     "symbol": "BLUR",
-    "cmc_slug": null,
+    "cmc_slug": "blur",
     "name_ko": "블러",
     "name_en": "Blur",
     "icon_path": "/icons/UPBIT/BLUR.png"
   },
   {
     "symbol": "BLY",
-    "cmc_slug": null,
+    "cmc_slug": "blocery",
     "name_ko": "블로서리",
     "name_en": "Blocery"
   },
   {
     "symbol": "BMT",
-    "cmc_slug": null,
+    "cmc_slug": "bubblemaps",
     "name_ko": "버블맵스",
     "name_en": "Bubblemaps"
   },
@@ -568,53 +568,53 @@
   },
   {
     "symbol": "BNT",
-    "cmc_slug": null,
+    "cmc_slug": "bancor",
     "name_ko": "뱅코르",
     "name_en": "Bancor",
     "icon_path": "/icons/UPBIT/BNT.png"
   },
   {
     "symbol": "BOA",
-    "cmc_slug": null,
+    "cmc_slug": "bosagora",
     "name_ko": "보아",
     "name_en": "BOSagora"
   },
   {
     "symbol": "BOBA",
-    "cmc_slug": null,
+    "cmc_slug": "boba-network",
     "name_ko": "보바토큰",
     "name_en": "Boba Network"
   },
   {
     "symbol": "BOME",
-    "cmc_slug": null,
+    "cmc_slug": "book-of-meme",
     "name_ko": "북오브밈",
     "name_en": "Book of Meme"
   },
   {
     "symbol": "BONK",
-    "cmc_slug": null,
+    "cmc_slug": "bonk",
     "name_ko": "봉크",
     "name_en": "Bonk",
     "icon_path": "/icons/UPBIT/BONK.png"
   },
   {
     "symbol": "BORA",
-    "cmc_slug": null,
+    "cmc_slug": "bora",
     "name_ko": "보라",
     "name_en": "BORA",
     "icon_path": "/icons/UPBIT/BORA.png"
   },
   {
     "symbol": "BOUNTY",
-    "cmc_slug": null,
+    "cmc_slug": "bounty",
     "name_ko": "체인바운티",
     "name_en": "Chainbounty",
     "icon_path": "/icons/UPBIT/BOUNTY.png"
   },
   {
     "symbol": "BRETT",
-    "cmc_slug": null,
+    "cmc_slug": "brett",
     "name_ko": "브렛",
     "name_en": "Brett",
     "icon_path": "/icons/UPBIT/BRETT.png"
@@ -635,51 +635,51 @@
   },
   {
     "symbol": "BTR",
-    "cmc_slug": null,
+    "cmc_slug": "bitlayer",
     "name_ko": "비트레이어",
     "name_en": "Bitlayer"
   },
   {
     "symbol": "BTT",
-    "cmc_slug": null,
+    "cmc_slug": "bittorrent",
     "name_ko": "비트토렌트",
     "name_en": "BitTorrent",
     "icon_path": "/icons/UPBIT/BTT.png"
   },
   {
     "symbol": "C",
-    "cmc_slug": null,
+    "cmc_slug": "chainbase",
     "name_ko": "체인베이스 토큰",
     "name_en": "Chainbase Token"
   },
   {
     "symbol": "C98",
-    "cmc_slug": null,
+    "cmc_slug": "coin98",
     "name_ko": "코인98",
     "name_en": "Coin98"
   },
   {
     "symbol": "CAKE",
-    "cmc_slug": null,
+    "cmc_slug": "pancakeswap",
     "name_ko": "팬케이크스왑",
     "name_en": "PancakeSwap"
   },
   {
     "symbol": "CAMP",
-    "cmc_slug": null,
+    "cmc_slug": "camp-network",
     "name_ko": "캠프 네트워크",
     "name_en": "Camp Network"
   },
   {
     "symbol": "CARV",
-    "cmc_slug": null,
+    "cmc_slug": "carv",
     "name_ko": "카브",
     "name_en": "CARV",
     "icon_path": "/icons/UPBIT/CARV.png"
   },
   {
     "symbol": "CATI",
-    "cmc_slug": null,
+    "cmc_slug": "catizen",
     "name_ko": "캣티즌",
     "name_en": "Catizen"
   },
@@ -692,14 +692,14 @@
   },
   {
     "symbol": "CELO",
-    "cmc_slug": null,
+    "cmc_slug": "celo",
     "name_ko": "셀로",
     "name_en": "Celo",
     "icon_path": "/icons/UPBIT/CELO.png"
   },
   {
     "symbol": "CELR",
-    "cmc_slug": null,
+    "cmc_slug": "celer-network",
     "name_ko": "셀러네트워크",
     "name_en": "Celer Network"
   },
@@ -711,32 +711,32 @@
   },
   {
     "symbol": "CFG",
-    "cmc_slug": null,
+    "cmc_slug": "centrifuge",
     "name_ko": "센트리퓨즈",
     "name_en": "Centrifuge"
   },
   {
     "symbol": "CFX",
-    "cmc_slug": null,
+    "cmc_slug": "conflux-network",
     "name_ko": "콘플럭스",
     "name_en": "Conflux Network"
   },
   {
     "symbol": "CHILLGUY",
-    "cmc_slug": null,
+    "cmc_slug": "just-a-chill-guy",
     "name_ko": "칠가이",
     "name_en": "Just a chill guy"
   },
   {
     "symbol": "CHR",
-    "cmc_slug": null,
+    "cmc_slug": "chromia",
     "name_ko": "크로미아",
     "name_en": "Chromia",
     "icon_path": "/icons/UPBIT/CHR.png"
   },
   {
     "symbol": "CHZ",
-    "cmc_slug": null,
+    "cmc_slug": "chiliz",
     "name_ko": "칠리즈",
     "name_en": "Chiliz",
     "icon_path": "/icons/UPBIT/CHZ.png"
@@ -750,26 +750,26 @@
   },
   {
     "symbol": "CKB",
-    "cmc_slug": null,
+    "cmc_slug": "nervos-network",
     "name_ko": "너보스",
     "name_en": "Nervos Network",
     "icon_path": "/icons/UPBIT/CKB.png"
   },
   {
     "symbol": "CLBK",
-    "cmc_slug": null,
+    "cmc_slug": "cloudbric",
     "name_ko": "클라우드브릭",
     "name_en": "Cloudbric"
   },
   {
     "symbol": "CLEAR",
-    "cmc_slug": null,
+    "cmc_slug": "everclear",
     "name_ko": "에버클리어",
     "name_en": "Everclear"
   },
   {
     "symbol": "CLOUD",
-    "cmc_slug": null,
+    "cmc_slug": "cloud",
     "name_ko": "생텀",
     "name_en": "Sanctum"
   },
@@ -781,129 +781,129 @@
   },
   {
     "symbol": "COMP",
-    "cmc_slug": null,
+    "cmc_slug": "compound",
     "name_ko": "컴파운드",
     "name_en": "Compound",
     "icon_path": "/icons/UPBIT/COMP.png"
   },
   {
     "symbol": "COOKIE",
-    "cmc_slug": null,
+    "cmc_slug": "cookie",
     "name_ko": "쿠키 다오",
     "name_en": "Cookie DAO"
   },
   {
     "symbol": "CORE",
-    "cmc_slug": null,
+    "cmc_slug": "core",
     "name_ko": "코어",
     "name_en": "Core"
   },
   {
     "symbol": "COS",
-    "cmc_slug": null,
+    "cmc_slug": "contentos",
     "name_ko": "콘텐토스",
     "name_en": "Contentos"
   },
   {
     "symbol": "COTI",
-    "cmc_slug": null,
+    "cmc_slug": "coti",
     "name_ko": "코티",
     "name_en": "COTI"
   },
   {
     "symbol": "COW",
-    "cmc_slug": null,
+    "cmc_slug": "cow-protocol",
     "name_ko": "카우 프로토콜",
     "name_en": "CoW Protocol",
     "icon_path": "/icons/UPBIT/COW.png"
   },
   {
     "symbol": "CPOOL",
-    "cmc_slug": null,
+    "cmc_slug": "clearpool",
     "name_ko": "클리어풀",
     "name_en": "Clearpool",
     "icon_path": "/icons/UPBIT/CPOOL.png"
   },
   {
     "symbol": "CRO",
-    "cmc_slug": null,
+    "cmc_slug": "cronos",
     "name_ko": "크로노스",
     "name_en": "Cronos",
     "icon_path": "/icons/UPBIT/CRO.png"
   },
   {
     "symbol": "CROSS",
-    "cmc_slug": null,
+    "cmc_slug": "cross",
     "name_ko": "크로쓰",
     "name_en": "CROSS"
   },
   {
     "symbol": "CRTS",
-    "cmc_slug": null,
+    "cmc_slug": "cratos",
     "name_ko": "크라토스",
     "name_en": "Cratos"
   },
   {
     "symbol": "CRU",
-    "cmc_slug": null,
+    "cmc_slug": "crust-network",
     "name_ko": "크러스트 네트워크",
     "name_en": "Crust Network"
   },
   {
     "symbol": "CRV",
-    "cmc_slug": null,
+    "cmc_slug": "crv",
     "name_ko": "커브",
     "name_en": "Curve DAO Token",
     "icon_path": "/icons/UPBIT/CRV.png"
   },
   {
     "symbol": "CSPR",
-    "cmc_slug": null,
+    "cmc_slug": "casper",
     "name_ko": "캐스퍼",
     "name_en": "Casper"
   },
   {
     "symbol": "CTC",
-    "cmc_slug": null,
+    "cmc_slug": "credit",
     "name_ko": "크레딧코인",
     "name_en": "Creditcoin",
     "icon_path": "/icons/UPBIT/CTC.png"
   },
   {
     "symbol": "CTK",
-    "cmc_slug": null,
+    "cmc_slug": "shentu",
     "name_ko": "셴투",
     "name_en": "Shentu"
   },
   {
     "symbol": "CTSI",
-    "cmc_slug": null,
+    "cmc_slug": "cartesi",
     "name_ko": "카르테시",
     "name_en": "Cartesi",
     "icon_path": "/icons/UPBIT/CTSI.png"
   },
   {
     "symbol": "CTXC",
-    "cmc_slug": null,
+    "cmc_slug": "cortex",
     "name_ko": "코르텍스",
     "name_en": "Cortex"
   },
   {
     "symbol": "CUDIS",
-    "cmc_slug": null,
+    "cmc_slug": "cudis",
     "name_ko": "쿠디스",
     "name_en": "CUDIS"
   },
   {
     "symbol": "CVC",
-    "cmc_slug": null,
+    "cmc_slug": "civic",
     "name_ko": "시빅",
     "name_en": "Civic",
     "icon_path": "/icons/UPBIT/CVC.png"
   },
   {
     "symbol": "CVX",
-    "cmc_slug": null,
+    "cmc_slug": "convex-finance",
     "name_ko": "컨벡스 파이낸스",
     "name_en": "Convex Finance"
   },
@@ -916,25 +916,25 @@
   },
   {
     "symbol": "D",
-    "cmc_slug": null,
+    "cmc_slug": "d",
     "name_ko": "달 오픈 네트워크",
     "name_en": "DAR Open Network"
   },
   {
     "symbol": "DAO",
-    "cmc_slug": null,
+    "cmc_slug": "dao-maker",
     "name_ko": "다오메이커",
     "name_en": "DAO Maker"
   },
   {
     "symbol": "DATA",
-    "cmc_slug": null,
+    "cmc_slug": "streamr",
     "name_ko": "스트리머",
     "name_en": "Streamr"
   },
   {
     "symbol": "DBR",
-    "cmc_slug": null,
+    "cmc_slug": "debridge",
     "name_ko": "디브릿지",
     "name_en": "deBridge"
   },
@@ -947,39 +947,39 @@
   },
   {
     "symbol": "DELABS",
-    "cmc_slug": null,
+    "cmc_slug": "delabs-games",
     "name_ko": "디랩스게임즈",
     "name_en": "Delabs Games"
   },
   {
     "symbol": "DENT",
-    "cmc_slug": null,
+    "cmc_slug": "dent",
     "name_ko": "덴트",
     "name_en": "Dent",
     "icon_path": "/icons/UPBIT/DENT.png"
   },
   {
     "symbol": "DGB",
-    "cmc_slug": null,
+    "cmc_slug": "digibyte",
     "name_ko": "디지바이트",
     "name_en": "DigiByte",
     "icon_path": "/icons/UPBIT/DGB.png"
   },
   {
     "symbol": "DIA",
-    "cmc_slug": null,
+    "cmc_slug": "dia",
     "name_ko": "디아",
     "name_en": "DIA"
   },
   {
     "symbol": "DICE",
-    "cmc_slug": null,
+    "cmc_slug": "klaydice",
     "name_ko": "클레이다이스",
     "name_en": "KLAYDICE"
   },
   {
     "symbol": "DKA",
-    "cmc_slug": null,
+    "cmc_slug": "dkargo",
     "name_ko": "디카르고",
     "name_en": "dKargo",
     "icon_path": "/icons/UPBIT/DKA.png"
@@ -992,14 +992,14 @@
   },
   {
     "symbol": "DNT",
-    "cmc_slug": null,
+    "cmc_slug": "district0x",
     "name_ko": "디스트릭트0x",
     "name_en": "district0x",
     "icon_path": "/icons/UPBIT/DNT.png"
   },
   {
     "symbol": "DODO",
-    "cmc_slug": null,
+    "cmc_slug": "dodo",
     "name_ko": "도도",
     "name_en": "DODO"
   },
@@ -1012,64 +1012,64 @@
   },
   {
     "symbol": "DOOD",
-    "cmc_slug": null,
+    "cmc_slug": "doodles",
     "name_ko": "두들즈",
     "name_en": "Doodles",
     "icon_path": "/icons/UPBIT/DOOD.png"
   },
   {
     "symbol": "DOT",
-    "cmc_slug": null,
+    "cmc_slug": "polkadot",
     "name_ko": "폴카닷",
     "name_en": "Polkadot",
     "icon_path": "/icons/UPBIT/DOT.png"
   },
   {
     "symbol": "DRIFT",
-    "cmc_slug": null,
+    "cmc_slug": "drift",
     "name_ko": "드리프트",
     "name_en": "Drift",
     "icon_path": "/icons/UPBIT/DRIFT.png"
   },
   {
     "symbol": "DVI",
-    "cmc_slug": null,
+    "cmc_slug": "dvision-network",
     "name_ko": "디비전",
     "name_en": "Dvision Network"
   },
   {
     "symbol": "DYDX",
-    "cmc_slug": null,
+    "cmc_slug": "dydx",
     "name_ko": "디와이디엑스",
     "name_en": "dYdX"
   },
   {
     "symbol": "EDEN",
-    "cmc_slug": null,
+    "cmc_slug": "openeden",
     "name_ko": "오픈에덴",
     "name_en": "OpenEden"
   },
   {
     "symbol": "EDGE",
-    "cmc_slug": null,
+    "cmc_slug": "definitive",
     "name_ko": "디피니티브",
     "name_en": "Definitive"
   },
   {
     "symbol": "EDU",
-    "cmc_slug": null,
+    "cmc_slug": "open-campus",
     "name_ko": "오픈 캠퍼스",
     "name_en": "Open Campus"
   },
   {
     "symbol": "EGG",
-    "cmc_slug": null,
+    "cmc_slug": "nestree",
     "name_ko": "네스트리",
     "name_en": "Nestree"
   },
   {
     "symbol": "EGL1",
-    "cmc_slug": null,
+    "cmc_slug": "egl1",
     "name_ko": "이글스랜딩",
     "name_en": "Eagles Landing"
   },
@@ -1082,32 +1082,32 @@
   },
   {
     "symbol": "EIGEN",
-    "cmc_slug": null,
+    "cmc_slug": "eigenlayer",
     "name_ko": "아이겐레이어",
     "name_en": "EigenLayer"
   },
   {
     "symbol": "EL",
-    "cmc_slug": null,
+    "cmc_slug": "elysia",
     "name_ko": "엘리시아",
     "name_en": "ELYSIA"
   },
   {
     "symbol": "ELF",
-    "cmc_slug": null,
+    "cmc_slug": "aelf",
     "name_ko": "엘프",
     "name_en": "aelf",
     "icon_path": "/icons/UPBIT/ELF.png"
   },
   {
     "symbol": "ELX",
-    "cmc_slug": null,
+    "cmc_slug": "elixir",
     "name_ko": "엘릭서",
     "name_en": "Elixir"
   },
   {
     "symbol": "ENA",
-    "cmc_slug": null,
+    "cmc_slug": "ethena",
     "name_ko": "에테나",
     "name_en": "Ethena",
     "icon_path": "/icons/UPBIT/ENA.png"
@@ -1121,41 +1121,41 @@
   },
   {
     "symbol": "ENS",
-    "cmc_slug": null,
+    "cmc_slug": "ethereum-name-service",
     "name_ko": "이더리움네임서비스",
     "name_en": "Ethereum Name Service",
     "icon_path": "/icons/UPBIT/ENS.png"
   },
   {
     "symbol": "ENSO",
-    "cmc_slug": null,
+    "cmc_slug": "enso",
     "name_ko": "엔소",
     "name_en": "Enso",
     "icon_path": "/icons/UPBIT/ENSO.png"
   },
   {
     "symbol": "EPT",
-    "cmc_slug": null,
+    "cmc_slug": "balance",
     "name_ko": "밸런스",
     "name_en": "Balance",
     "icon_path": "/icons/UPBIT/EPT.png"
   },
   {
     "symbol": "ERA",
-    "cmc_slug": null,
+    "cmc_slug": "caldera",
     "name_ko": "칼데라",
     "name_en": "Caldera",
     "icon_path": "/icons/UPBIT/ERA.png"
   },
   {
     "symbol": "ES",
-    "cmc_slug": null,
+    "cmc_slug": "eclipse",
     "name_ko": "이클립스",
     "name_en": "Eclipse"
   },
   {
     "symbol": "ETC",
-    "cmc_slug": null,
+    "cmc_slug": "ethereum-classic",
     "name_ko": "이더리움 클래식",
     "name_en": "Ethereum Classic",
     "icon_path": "/icons/UPBIT/ETC.png"
@@ -1169,7 +1169,7 @@
   },
   {
     "symbol": "ETHFI",
-    "cmc_slug": null,
+    "cmc_slug": "ether-fi",
     "name_ko": "이더파이",
     "name_en": "ether.fi",
     "icon_path": "/icons/UPBIT/ETHFI.png"
@@ -1183,13 +1183,13 @@
   },
   {
     "symbol": "EVER",
-    "cmc_slug": null,
+    "cmc_slug": "everscale",
     "name_ko": "에버스케일",
     "name_en": "Everscale"
   },
   {
     "symbol": "EVERY",
-    "cmc_slug": null,
+    "cmc_slug": "everyworld",
     "name_ko": "에브리월드",
     "name_en": "Everyworld"
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "symbol": "F",
-    "cmc_slug": null,
+    "cmc_slug": "synfutures",
     "name_ko": "신퓨처스",
     "name_en": "Synfutures",
     "icon_path": "/icons/UPBIT/F.png"
@@ -1214,13 +1214,13 @@
   },
   {
     "symbol": "FANC",
-    "cmc_slug": null,
+    "cmc_slug": "fanc",
     "name_ko": "팬시",
     "name_en": "fanC"
   },
   {
     "symbol": "FCT2",
-    "cmc_slug": null,
+    "cmc_slug": "firmachain",
     "name_ko": "피르마체인",
     "name_en": "Firmachain",
     "icon_path": "/icons/UPBIT/FCT2.png"
@@ -1233,14 +1233,14 @@
   },
   {
     "symbol": "FF",
-    "cmc_slug": null,
+    "cmc_slug": "falcon-finance",
     "name_ko": "팔콘 파이낸스",
     "name_en": "Falcon Finance",
     "icon_path": "/icons/UPBIT/FF.png"
   },
   {
     "symbol": "FIDA",
-    "cmc_slug": null,
+    "cmc_slug": "bonfida",
     "name_ko": "본피다",
     "name_en": "Bonfida"
   },
@@ -1253,39 +1253,39 @@
   },
   {
     "symbol": "FIS",
-    "cmc_slug": null,
+    "cmc_slug": "stafi",
     "name_ko": "스타파이",
     "name_en": "Stafi"
   },
   {
     "symbol": "FITFI",
-    "cmc_slug": null,
+    "cmc_slug": "step-app",
     "name_ko": "스텝앱",
     "name_en": "Step App"
   },
   {
     "symbol": "FLOCK",
-    "cmc_slug": null,
+    "cmc_slug": "flock-io",
     "name_ko": "플록",
     "name_en": "FLock.io",
     "icon_path": "/icons/UPBIT/FLOCK.png"
   },
   {
     "symbol": "FLOKI",
-    "cmc_slug": null,
+    "cmc_slug": "floki",
     "name_ko": "플로키",
     "name_en": "FLOKI"
   },
   {
     "symbol": "FLOW",
-    "cmc_slug": null,
+    "cmc_slug": "flow",
     "name_ko": "플로우",
     "name_en": "Flow",
     "icon_path": "/icons/UPBIT/FLOW.png"
   },
   {
     "symbol": "FLR",
-    "cmc_slug": null,
+    "cmc_slug": "flare",
     "name_ko": "플레어",
     "name_en": "Flare"
   },
@@ -1298,19 +1298,19 @@
   },
   {
     "symbol": "FLUX",
-    "cmc_slug": null,
+    "cmc_slug": "flux",
     "name_ko": "플럭스",
     "name_en": "Flux"
   },
   {
     "symbol": "FNCY",
-    "cmc_slug": null,
+    "cmc_slug": "fncy",
     "name_ko": "팬시(FNCY)",
     "name_en": "FNCY"
   },
   {
     "symbol": "FORT",
-    "cmc_slug": null,
+    "cmc_slug": "forta",
     "name_ko": "포르타",
     "name_en": "Forta",
     "icon_path": "/icons/UPBIT/FORT.png"
@@ -1323,72 +1323,72 @@
   },
   {
     "symbol": "FRAG",
-    "cmc_slug": null,
+    "cmc_slug": "fragmetric",
     "name_ko": "프래그메트릭",
     "name_en": "Fragmetric"
   },
   {
     "symbol": "FXS",
-    "cmc_slug": null,
+    "cmc_slug": "frax-share",
     "name_ko": "프랙스 셰어",
     "name_en": "Frax Share"
   },
   {
     "symbol": "G",
-    "cmc_slug": null,
+    "cmc_slug": "gravity",
     "name_ko": "그래비티",
     "name_en": "Gravity",
     "icon_path": "/icons/UPBIT/G.png"
   },
   {
     "symbol": "GALA",
-    "cmc_slug": null,
+    "cmc_slug": "gala",
     "name_ko": "갈라",
     "name_en": "Gala"
   },
   {
     "symbol": "GAME2",
-    "cmc_slug": null,
+    "cmc_slug": "gamebuild",
     "name_ko": "게임빌드",
     "name_en": "GameBuild",
     "icon_path": "/icons/UPBIT/GAME2.png"
   },
   {
     "symbol": "GAS",
-    "cmc_slug": null,
+    "cmc_slug": "gas",
     "name_ko": "가스",
     "name_en": "Gas",
     "icon_path": "/icons/UPBIT/GAS.png"
   },
   {
     "symbol": "GHUB",
-    "cmc_slug": null,
+    "cmc_slug": "gemhub",
     "name_ko": "젬허브",
     "name_en": "GemHUB"
   },
   {
     "symbol": "GHX",
-    "cmc_slug": null,
+    "cmc_slug": "gamer",
     "name_ko": "게이머코인",
     "name_en": "Gamercoin"
   },
   {
     "symbol": "GLM",
-    "cmc_slug": null,
+    "cmc_slug": "golem",
     "name_ko": "골렘",
     "name_en": "Golem",
     "icon_path": "/icons/UPBIT/GLM.png"
   },
   {
     "symbol": "GLMR",
-    "cmc_slug": null,
+    "cmc_slug": "moonbeam",
     "name_ko": "문빔",
     "name_en": "Moonbeam",
     "icon_path": "/icons/UPBIT/GLMR.png"
   },
   {
     "symbol": "GM",
-    "cmc_slug": null,
+    "cmc_slug": "gomble",
     "name_ko": "곰블",
     "name_en": "Gomble"
   },
@@ -1401,26 +1401,26 @@
   },
   {
     "symbol": "GMX",
-    "cmc_slug": null,
+    "cmc_slug": "gmx",
     "name_ko": "지엠엑스",
     "name_en": "GMX"
   },
   {
     "symbol": "GNO",
-    "cmc_slug": null,
+    "cmc_slug": "gnosis",
     "name_ko": "노시스",
     "name_en": "Gnosis"
   },
   {
     "symbol": "GO",
-    "cmc_slug": null,
+    "cmc_slug": "gochain",
     "name_ko": "고체인",
     "name_en": "GoChain",
     "icon_path": "/icons/UPBIT/GO.png"
   },
   {
     "symbol": "GOAT",
-    "cmc_slug": null,
+    "cmc_slug": "goatseus-maximus",
     "name_ko": "고트세우스 막시무스",
     "name_en": "Goatseus Maximus"
   },
@@ -1432,13 +1432,13 @@
   },
   {
     "symbol": "GRASS",
-    "cmc_slug": null,
+    "cmc_slug": "grass",
     "name_ko": "그래스",
     "name_en": "Grass"
   },
   {
     "symbol": "GRND",
-    "cmc_slug": null,
+    "cmc_slug": "superwalk",
     "name_ko": "슈퍼워크",
     "name_en": "Superwalk"
   },
@@ -1451,7 +1451,7 @@
   },
   {
     "symbol": "GRT",
-    "cmc_slug": null,
+    "cmc_slug": "the-graph",
     "name_ko": "더그래프",
     "name_en": "The Graph",
     "icon_path": "/icons/UPBIT/GRT.png"
@@ -1465,102 +1465,102 @@
   },
   {
     "symbol": "GXA",
-    "cmc_slug": null,
+    "cmc_slug": "galaxia",
     "name_ko": "갤럭시아",
     "name_en": "Galaxia"
   },
   {
     "symbol": "H",
-    "cmc_slug": null,
+    "cmc_slug": "humanity-protocol",
     "name_ko": "휴머니티 프로토콜",
     "name_en": "Humanity Protocol"
   },
   {
     "symbol": "HAEDAL",
-    "cmc_slug": null,
+    "cmc_slug": "haedal-protocol",
     "name_ko": "해달 프로토콜",
     "name_en": "Haedal Protocol",
     "icon_path": "/icons/UPBIT/HAEDAL.png"
   },
   {
     "symbol": "HBAR",
-    "cmc_slug": null,
+    "cmc_slug": "hedera",
     "name_ko": "헤데라",
     "name_en": "Hedera",
     "icon_path": "/icons/UPBIT/HBAR.png"
   },
   {
     "symbol": "HBD",
-    "cmc_slug": null,
+    "cmc_slug": "hive-dollar",
     "name_ko": "하이브달러",
     "name_en": "Hive Dollar",
     "icon_path": "/icons/UPBIT/HBD.png"
   },
   {
     "symbol": "HEI",
-    "cmc_slug": null,
+    "cmc_slug": "heima",
     "name_ko": "헤이마",
     "name_en": "Heima"
   },
   {
     "symbol": "HEMI",
-    "cmc_slug": null,
+    "cmc_slug": "hemi",
     "name_ko": "헤미",
     "name_en": "Hemi"
   },
   {
     "symbol": "HFT",
-    "cmc_slug": null,
+    "cmc_slug": "hashflow",
     "name_ko": "해시플로우",
     "name_en": "Hashflow"
   },
   {
     "symbol": "HIFI",
-    "cmc_slug": null,
+    "cmc_slug": "hifi-finance",
     "name_ko": "하이파이",
     "name_en": "Hifi Finance"
   },
   {
     "symbol": "HIGH",
-    "cmc_slug": null,
+    "cmc_slug": "highstreet",
     "name_ko": "하이스트리트",
     "name_en": "Highstreet"
   },
   {
     "symbol": "HIPPO",
-    "cmc_slug": null,
+    "cmc_slug": "sudeng",
     "name_ko": "수뎅",
     "name_en": "Sudeng"
   },
   {
     "symbol": "HIVE",
-    "cmc_slug": null,
+    "cmc_slug": "hive",
     "name_ko": "하이브",
     "name_en": "Hive",
     "icon_path": "/icons/UPBIT/HIVE.png"
   },
   {
     "symbol": "HOLO",
-    "cmc_slug": null,
+    "cmc_slug": "holoworld-ai",
     "name_ko": "홀로월드 에이아이",
     "name_en": "Holoworld AI",
     "icon_path": "/icons/UPBIT/HOLO.png"
   },
   {
     "symbol": "HOME",
-    "cmc_slug": null,
+    "cmc_slug": "defi-app",
     "name_ko": "디파이 앱",
     "name_en": "Defi App"
   },
   {
     "symbol": "HOOK",
-    "cmc_slug": null,
+    "cmc_slug": "hooked-protocol",
     "name_ko": "훅트 프로토콜",
     "name_en": "Hooked Protocol"
   },
   {
     "symbol": "HOT",
-    "cmc_slug": null,
+    "cmc_slug": "holo",
     "name_ko": "홀로",
     "name_en": "Holo"
   },
@@ -1573,87 +1573,87 @@
   },
   {
     "symbol": "HPP",
-    "cmc_slug": null,
+    "cmc_slug": "house-party-protocol",
     "name_ko": "하우스 파티 프로토콜",
     "name_en": "House Party Protocol"
   },
   {
     "symbol": "HUMA",
-    "cmc_slug": null,
+    "cmc_slug": "huma-finance",
     "name_ko": "후마 파이낸스",
     "name_en": "Huma Finance",
     "icon_path": "/icons/UPBIT/HUMA.png"
   },
   {
     "symbol": "HUNT",
-    "cmc_slug": null,
+    "cmc_slug": "hunt",
     "name_ko": "헌트",
     "name_en": "Hunt Town",
     "icon_path": "/icons/UPBIT/HUNT.png"
   },
   {
     "symbol": "HVH",
-    "cmc_slug": null,
+    "cmc_slug": "havah",
     "name_ko": "하바",
     "name_en": "HAVAH"
   },
   {
     "symbol": "HYPER",
-    "cmc_slug": null,
+    "cmc_slug": "hyperlane",
     "name_ko": "하이퍼레인",
     "name_en": "Hyperlane",
     "icon_path": "/icons/UPBIT/HYPER.png"
   },
   {
     "symbol": "ICP",
-    "cmc_slug": null,
+    "cmc_slug": "internet-computer",
     "name_ko": "인터넷 컴퓨터",
     "name_en": "Internet Computer"
   },
   {
     "symbol": "ICX",
-    "cmc_slug": null,
+    "cmc_slug": "icon",
     "name_ko": "아이콘",
     "name_en": "ICON",
     "icon_path": "/icons/UPBIT/ICX.png"
   },
   {
     "symbol": "ID",
-    "cmc_slug": null,
+    "cmc_slug": "space-id",
     "name_ko": "스페이스 아이디",
     "name_en": "SPACE ID",
     "icon_path": "/icons/UPBIT/ID.png"
   },
   {
     "symbol": "ILV",
-    "cmc_slug": null,
+    "cmc_slug": "illuvium",
     "name_ko": "일루비움",
     "name_en": "Illuvium"
   },
   {
     "symbol": "IMX",
-    "cmc_slug": null,
+    "cmc_slug": "immutable-x",
     "name_ko": "이뮤터블엑스",
     "name_en": "Immutable X",
     "icon_path": "/icons/UPBIT/IMX.png"
   },
   {
     "symbol": "IN",
-    "cmc_slug": null,
+    "cmc_slug": "infinit",
     "name_ko": "인피닛",
     "name_en": "Infinit",
     "icon_path": "/icons/UPBIT/IN.png"
   },
   {
     "symbol": "INIT",
-    "cmc_slug": null,
+    "cmc_slug": "initia",
     "name_ko": "이니시아",
     "name_en": "Initia",
     "icon_path": "/icons/UPBIT/INIT.png"
   },
   {
     "symbol": "INJ",
-    "cmc_slug": null,
+    "cmc_slug": "injective",
     "name_ko": "인젝티브",
     "name_en": "Injective",
     "icon_path": "/icons/UPBIT/INJ.png"
@@ -1667,7 +1667,7 @@
   },
   {
     "symbol": "IO",
-    "cmc_slug": null,
+    "cmc_slug": "io-net",
     "name_ko": "아이오넷",
     "name_en": "io.net",
     "icon_path": "/icons/UPBIT/IO.png"
@@ -1681,74 +1681,74 @@
   },
   {
     "symbol": "IOTA",
-    "cmc_slug": null,
+    "cmc_slug": "iota",
     "name_ko": "아이오타",
     "name_en": "IOTA",
     "icon_path": "/icons/UPBIT/IOTA.png"
   },
   {
     "symbol": "IOTX",
-    "cmc_slug": null,
+    "cmc_slug": "iotex",
     "name_ko": "아이오텍스",
     "name_en": "IoTeX",
     "icon_path": "/icons/UPBIT/IOTX.png"
   },
   {
     "symbol": "IP",
-    "cmc_slug": null,
+    "cmc_slug": "story",
     "name_ko": "스토리",
     "name_en": "Story",
     "icon_path": "/icons/UPBIT/IP.png"
   },
   {
     "symbol": "IQ",
-    "cmc_slug": null,
+    "cmc_slug": "iq",
     "name_ko": "아이큐",
     "name_en": "IQ",
     "icon_path": "/icons/UPBIT/IQ.png"
   },
   {
     "symbol": "IRYS",
-    "cmc_slug": null,
+    "cmc_slug": "irys",
     "name_ko": "아이리스",
     "name_en": "Irys"
   },
   {
     "symbol": "ISK",
-    "cmc_slug": null,
+    "cmc_slug": "iskra",
     "name_ko": "이스크라",
     "name_en": "Iskra"
   },
   {
     "symbol": "JASMY",
-    "cmc_slug": null,
+    "cmc_slug": "jasmy",
     "name_ko": "재스미코인",
     "name_en": "JasmyCoin",
     "icon_path": "/icons/UPBIT/JASMY.png"
   },
   {
     "symbol": "JOE",
-    "cmc_slug": null,
+    "cmc_slug": "joe",
     "name_ko": "트레이더 조",
     "name_en": "JOE"
   },
   {
     "symbol": "JST",
-    "cmc_slug": null,
+    "cmc_slug": "just",
     "name_ko": "저스트",
     "name_en": "JUST",
     "icon_path": "/icons/UPBIT/JST.png"
   },
   {
     "symbol": "JTO",
-    "cmc_slug": null,
+    "cmc_slug": "jito",
     "name_ko": "지토",
     "name_en": "Jito",
     "icon_path": "/icons/UPBIT/JTO.png"
   },
   {
     "symbol": "JUP",
-    "cmc_slug": null,
+    "cmc_slug": "jupiter",
     "name_ko": "주피터",
     "name_en": "Jupiter",
     "icon_path": "/icons/UPBIT/JUP.png"
@@ -1762,32 +1762,32 @@
   },
   {
     "symbol": "K",
-    "cmc_slug": null,
+    "cmc_slug": "sidekick",
     "name_ko": "사이드킥",
     "name_en": "Sidekick"
   },
   {
     "symbol": "KAIA",
-    "cmc_slug": null,
+    "cmc_slug": "kaia",
     "name_ko": "카이아",
     "name_en": "Kaia"
   },
   {
     "symbol": "KAITO",
-    "cmc_slug": null,
+    "cmc_slug": "kaito",
     "name_ko": "카이토",
     "name_en": "Kaito",
     "icon_path": "/icons/UPBIT/KAITO.png"
   },
   {
     "symbol": "KAS",
-    "cmc_slug": null,
+    "cmc_slug": "kaspa",
     "name_ko": "카스파",
     "name_en": "Kaspa"
   },
   {
     "symbol": "KAVA",
-    "cmc_slug": null,
+    "cmc_slug": "kava",
     "name_ko": "카바",
     "name_en": "Kava",
     "icon_path": "/icons/UPBIT/KAVA.png"
@@ -1801,65 +1801,65 @@
   },
   {
     "symbol": "KGEN",
-    "cmc_slug": null,
+    "cmc_slug": "kgen",
     "name_ko": "케이젠",
     "name_en": "KGeN"
   },
   {
     "symbol": "KITE",
-    "cmc_slug": null,
+    "cmc_slug": "kite",
     "name_ko": "카이트",
     "name_en": "Kite",
     "icon_path": "/icons/UPBIT/KITE.png"
   },
   {
     "symbol": "KMNO",
-    "cmc_slug": null,
+    "cmc_slug": "kamino-finance",
     "name_ko": "카미노 파이낸스",
     "name_en": "Kamino Finance"
   },
   {
     "symbol": "KNC",
-    "cmc_slug": null,
+    "cmc_slug": "kyber-network",
     "name_ko": "카이버 네트워크",
     "name_en": "Kyber Network",
     "icon_path": "/icons/UPBIT/KNC.png"
   },
   {
     "symbol": "KSM",
-    "cmc_slug": null,
+    "cmc_slug": "kusama",
     "name_ko": "쿠사마",
     "name_en": "Kusama"
   },
   {
     "symbol": "L3",
-    "cmc_slug": null,
+    "cmc_slug": "layer3",
     "name_ko": "레이어쓰리",
     "name_en": "Layer3"
   },
   {
     "symbol": "LA",
-    "cmc_slug": null,
+    "cmc_slug": "lagrange",
     "name_ko": "라그랑주",
     "name_en": "Lagrange",
     "icon_path": "/icons/UPBIT/LA.png"
   },
   {
     "symbol": "LAYER",
-    "cmc_slug": null,
+    "cmc_slug": "solayer",
     "name_ko": "솔레이어",
     "name_en": "Solayer",
     "icon_path": "/icons/UPBIT/LAYER.png"
   },
   {
     "symbol": "LDO",
-    "cmc_slug": null,
+    "cmc_slug": "lido-dao",
     "name_ko": "리도다오",
     "name_en": "Lido DAO"
   },
   {
     "symbol": "LINEA",
-    "cmc_slug": null,
+    "cmc_slug": "linea",
     "name_ko": "리네아",
     "name_en": "Linea",
     "icon_path": "/icons/UPBIT/LINEA.png"
@@ -1873,52 +1873,52 @@
   },
   {
     "symbol": "LION",
-    "cmc_slug": null,
+    "cmc_slug": "loaded-lions",
     "name_ko": "로디드라이언즈",
     "name_en": "Loaded Lions"
   },
   {
     "symbol": "LISTA",
-    "cmc_slug": null,
+    "cmc_slug": "lista-dao",
     "name_ko": "리스타 다오",
     "name_en": "Lista DAO"
   },
   {
     "symbol": "LM",
-    "cmc_slug": null,
+    "cmc_slug": "leisuremeta",
     "name_ko": "레저메타",
     "name_en": "LeisureMeta"
   },
   {
     "symbol": "LPT",
-    "cmc_slug": null,
+    "cmc_slug": "livepeer",
     "name_ko": "라이브피어",
     "name_en": "Livepeer",
     "icon_path": "/icons/UPBIT/LPT.png"
   },
   {
     "symbol": "LQTY",
-    "cmc_slug": null,
+    "cmc_slug": "liquity",
     "name_ko": "리퀴티",
     "name_en": "Liquity"
   },
   {
     "symbol": "LRC",
-    "cmc_slug": null,
+    "cmc_slug": "loopring",
     "name_ko": "루프링",
     "name_en": "Loopring",
     "icon_path": "/icons/UPBIT/LRC.png"
   },
   {
     "symbol": "LSK",
-    "cmc_slug": null,
+    "cmc_slug": "lisk",
     "name_ko": "리스크",
     "name_en": "Lisk",
     "icon_path": "/icons/UPBIT/LSK.png"
   },
   {
     "symbol": "LWA",
-    "cmc_slug": null,
+    "cmc_slug": "lumiwave",
     "name_ko": "루미웨이브",
     "name_en": "Lumiwave",
     "icon_path": "/icons/UPBIT/LWA.png"
@@ -1931,33 +1931,33 @@
   },
   {
     "symbol": "MAGIC",
-    "cmc_slug": null,
+    "cmc_slug": "magic",
     "name_ko": "매직",
     "name_en": "Magic",
     "icon_path": "/icons/UPBIT/MAGIC.png"
   },
   {
     "symbol": "MAK",
-    "cmc_slug": null,
+    "cmc_slug": "metacene",
     "name_ko": "메타씬",
     "name_en": "MetaCene"
   },
   {
     "symbol": "MANA",
-    "cmc_slug": null,
+    "cmc_slug": "decentraland",
     "name_ko": "디센트럴랜드",
     "name_en": "Decentraland",
     "icon_path": "/icons/UPBIT/MANA.png"
   },
   {
     "symbol": "MANTA",
-    "cmc_slug": null,
+    "cmc_slug": "manta-network",
     "name_ko": "만타 네트워크",
     "name_en": "Manta Network"
   },
   {
     "symbol": "MAPO",
-    "cmc_slug": null,
+    "cmc_slug": "map-protocol",
     "name_ko": "맵프로토콜",
     "name_en": "MAP Protocol"
   },
@@ -1969,20 +1969,20 @@
   },
   {
     "symbol": "MASK",
-    "cmc_slug": null,
+    "cmc_slug": "mask-network",
     "name_ko": "마스크네트워크",
     "name_en": "Mask Network",
     "icon_path": "/icons/UPBIT/MASK.png"
   },
   {
     "symbol": "MAV",
-    "cmc_slug": null,
+    "cmc_slug": "maverick-protocol",
     "name_ko": "매버릭 프로토콜",
     "name_en": "Maverick Protocol"
   },
   {
     "symbol": "MAVIA",
-    "cmc_slug": null,
+    "cmc_slug": "heroes-of-mavia",
     "name_ko": "히어로즈오브마비아",
     "name_en": "Heroes of Mavia"
   },
@@ -1994,14 +1994,14 @@
   },
   {
     "symbol": "MBL",
-    "cmc_slug": null,
+    "cmc_slug": "moviebloc",
     "name_ko": "무비블록",
     "name_en": "MovieBloc",
     "icon_path": "/icons/UPBIT/MBL.png"
   },
   {
     "symbol": "MBX",
-    "cmc_slug": null,
+    "cmc_slug": "marblex",
     "name_ko": "마브렉스",
     "name_en": "Marblex"
   },
@@ -2014,71 +2014,71 @@
   },
   {
     "symbol": "MED",
-    "cmc_slug": null,
+    "cmc_slug": "medibloc",
     "name_ko": "메디블록",
     "name_en": "MediBloc",
     "icon_path": "/icons/UPBIT/MED.png"
   },
   {
     "symbol": "MEME",
-    "cmc_slug": null,
+    "cmc_slug": "meme",
     "name_ko": "밈코인",
     "name_en": "Memecoin"
   },
   {
     "symbol": "MERL",
-    "cmc_slug": null,
+    "cmc_slug": "merlin-chain",
     "name_ko": "멀린 체인",
     "name_en": "Merlin Chain"
   },
   {
     "symbol": "MET",
-    "cmc_slug": null,
+    "cmc_slug": "meteora",
     "name_ko": "메테오라",
     "name_en": "Meteora"
   },
   {
     "symbol": "MET2",
-    "cmc_slug": null,
+    "cmc_slug": "meteora",
     "name_ko": "메테오라",
     "name_en": "Meteora",
     "icon_path": "/icons/UPBIT/MET2.png"
   },
   {
     "symbol": "META",
-    "cmc_slug": null,
+    "cmc_slug": "metadium",
     "name_ko": "메타디움",
     "name_en": "Metadium",
     "icon_path": "/icons/UPBIT/META.png"
   },
   {
     "symbol": "METIS",
-    "cmc_slug": null,
+    "cmc_slug": "metisdao",
     "name_ko": "메티스다오",
     "name_en": "MetisDAO"
   },
   {
     "symbol": "MEV",
-    "cmc_slug": null,
+    "cmc_slug": "meverse",
     "name_ko": "미버스",
     "name_en": "MEVerse"
   },
   {
     "symbol": "MEW",
-    "cmc_slug": null,
+    "cmc_slug": "cat-in-a-dogs-world",
     "name_ko": "캣인어독스월드",
     "name_en": "cat in a dogs world",
     "icon_path": "/icons/UPBIT/MEW.png"
   },
   {
     "symbol": "MILK",
-    "cmc_slug": null,
+    "cmc_slug": "milkyway",
     "name_ko": "밀키웨이",
     "name_en": "MilkyWay"
   },
   {
     "symbol": "MINA",
-    "cmc_slug": null,
+    "cmc_slug": "mina",
     "name_ko": "미나",
     "name_en": "Mina",
     "icon_path": "/icons/UPBIT/MINA.png"
@@ -2099,14 +2099,14 @@
   },
   {
     "symbol": "MMT",
-    "cmc_slug": null,
+    "cmc_slug": "momentum",
     "name_ko": "모멘텀",
     "name_en": "Momentum",
     "icon_path": "/icons/UPBIT/MMT.png"
   },
   {
     "symbol": "MNT",
-    "cmc_slug": null,
+    "cmc_slug": "mantle",
     "name_ko": "맨틀",
     "name_en": "Mantle",
     "icon_path": "/icons/UPBIT/MNT.png"
@@ -2133,66 +2133,66 @@
   },
   {
     "symbol": "MON",
-    "cmc_slug": null,
+    "cmc_slug": "monad",
     "name_ko": "모나드",
     "name_en": "Monad",
     "icon_path": "/icons/UPBIT/MON.png"
   },
   {
     "symbol": "MONPRO",
-    "cmc_slug": null,
+    "cmc_slug": "mon-protocol",
     "name_ko": "몬 프로토콜",
     "name_en": "Mon Protocol"
   },
   {
     "symbol": "MOODENG",
-    "cmc_slug": null,
+    "cmc_slug": "moo-deng",
     "name_ko": "무뎅",
     "name_en": "Moo Deng",
     "icon_path": "/icons/UPBIT/MOODENG.png"
   },
   {
     "symbol": "MORPHO",
-    "cmc_slug": null,
+    "cmc_slug": "morpho",
     "name_ko": "모포",
     "name_en": "Morpho"
   },
   {
     "symbol": "MOVE",
-    "cmc_slug": null,
+    "cmc_slug": "movement",
     "name_ko": "무브먼트",
     "name_en": "Movement",
     "icon_path": "/icons/UPBIT/MOVE.png"
   },
   {
     "symbol": "MTL",
-    "cmc_slug": null,
+    "cmc_slug": "metal",
     "name_ko": "메탈",
     "name_en": "Metal",
     "icon_path": "/icons/UPBIT/MTL.png"
   },
   {
     "symbol": "MVC",
-    "cmc_slug": null,
+    "cmc_slug": "mileverse",
     "name_ko": "마일벌스",
     "name_en": "MileVerse"
   },
   {
     "symbol": "MVL",
-    "cmc_slug": null,
+    "cmc_slug": "mvl",
     "name_ko": "엠블",
     "name_en": "MVL",
     "icon_path": "/icons/UPBIT/MVL.png"
   },
   {
     "symbol": "MYRO",
-    "cmc_slug": null,
+    "cmc_slug": "myro",
     "name_ko": "마이로",
     "name_en": "Myro"
   },
   {
     "symbol": "MYX",
-    "cmc_slug": null,
+    "cmc_slug": "myx-finance",
     "name_ko": "엠와이엑스 파이낸스",
     "name_en": "MYX Finance"
   },
@@ -2205,72 +2205,72 @@
   },
   {
     "symbol": "NAVX",
-    "cmc_slug": null,
+    "cmc_slug": "navi-protocol",
     "name_ko": "나비 프로토콜",
     "name_en": "Navi Protocol"
   },
   {
     "symbol": "NCT",
-    "cmc_slug": null,
+    "cmc_slug": "polyswarm",
     "name_ko": "폴리스웜",
     "name_en": "Polyswarm",
     "icon_path": "/icons/UPBIT/NCT.png"
   },
   {
     "symbol": "NEAR",
-    "cmc_slug": null,
+    "cmc_slug": "near-protocol",
     "name_ko": "니어프로토콜",
     "name_en": "NEAR Protocol",
     "icon_path": "/icons/UPBIT/NEAR.png"
   },
   {
     "symbol": "NEIRO",
-    "cmc_slug": null,
+    "cmc_slug": "neiro",
     "name_ko": "네이로",
     "name_en": "Neiro"
   },
   {
     "symbol": "NEO",
-    "cmc_slug": null,
+    "cmc_slug": "neo",
     "name_ko": "네오",
     "name_en": "Neo",
     "icon_path": "/icons/UPBIT/NEO.png"
   },
   {
     "symbol": "NEON",
-    "cmc_slug": null,
+    "cmc_slug": "neon",
     "name_ko": "네온 EVM",
     "name_en": "NeonEVM"
   },
   {
     "symbol": "NEWT",
-    "cmc_slug": null,
+    "cmc_slug": "newton-protocol",
     "name_ko": "뉴턴 프로토콜",
     "name_en": "Newton Protocol",
     "icon_path": "/icons/UPBIT/NEWT.png"
   },
   {
     "symbol": "NFT",
-    "cmc_slug": null,
+    "cmc_slug": "apenft",
     "name_ko": "에이피이앤에프티",
     "name_en": "APENFT"
   },
   {
     "symbol": "NIL",
-    "cmc_slug": null,
+    "cmc_slug": "nillion",
     "name_ko": "닐리온",
     "name_en": "Nillion"
   },
   {
     "symbol": "NKN",
-    "cmc_slug": null,
+    "cmc_slug": "nkn",
     "name_ko": "엔케이엔",
     "name_en": "NKN",
     "icon_path": "/icons/UPBIT/NKN.png"
   },
   {
     "symbol": "NMR",
-    "cmc_slug": null,
+    "cmc_slug": "numeraire",
     "name_ko": "뉴메레르",
     "name_en": "Numeraire",
     "icon_path": "/icons/UPBIT/NMR.png"
@@ -2284,13 +2284,13 @@
   },
   {
     "symbol": "NS",
-    "cmc_slug": null,
+    "cmc_slug": "sui-name-service",
     "name_ko": "수이 네임 서비스",
     "name_en": "Sui Name Service"
   },
   {
     "symbol": "NTRN",
-    "cmc_slug": null,
+    "cmc_slug": "neutron",
     "name_ko": "뉴트론",
     "name_en": "Neutron"
   },
@@ -2303,62 +2303,62 @@
   },
   {
     "symbol": "OAS",
-    "cmc_slug": null,
+    "cmc_slug": "oasys",
     "name_ko": "오아시스",
     "name_en": "Oasys",
     "icon_path": "/icons/UPBIT/OAS.png"
   },
   {
     "symbol": "OBSR",
-    "cmc_slug": null,
+    "cmc_slug": "observer",
     "name_ko": "옵저버",
     "name_en": "Observer",
     "icon_path": "/icons/UPBIT/OBSR.png"
   },
   {
     "symbol": "OBT",
-    "cmc_slug": null,
+    "cmc_slug": "orbiter-finance",
     "name_ko": "오비터 파이낸스",
     "name_en": "Orbiter Finance"
   },
   {
     "symbol": "OCEAN",
-    "cmc_slug": null,
+    "cmc_slug": "ocean-protocol",
     "name_ko": "오션프로토콜",
     "name_en": "Ocean Protocol",
     "icon_path": "/icons/UPBIT/OCEAN.png"
   },
   {
     "symbol": "OGN",
-    "cmc_slug": null,
+    "cmc_slug": "origin-protocol",
     "name_ko": "오리진프로토콜",
     "name_en": "Origin Protocol",
     "icon_path": "/icons/UPBIT/OGN.png"
   },
   {
     "symbol": "OM",
-    "cmc_slug": null,
+    "cmc_slug": "mantra",
     "name_ko": "만트라",
     "name_en": "MANTRA",
     "icon_path": "/icons/UPBIT/OM.png"
   },
   {
     "symbol": "ONDO",
-    "cmc_slug": null,
+    "cmc_slug": "ondo-finance",
     "name_ko": "온도 파이낸스",
     "name_en": "Ondo Finance",
     "icon_path": "/icons/UPBIT/ONDO.png"
   },
   {
     "symbol": "ONG",
-    "cmc_slug": null,
+    "cmc_slug": "ontology-gas",
     "name_ko": "온톨로지가스",
     "name_en": "Ontology Gas",
     "icon_path": "/icons/UPBIT/ONG.png"
   },
   {
     "symbol": "ONT",
-    "cmc_slug": null,
+    "cmc_slug": "ontology",
     "name_ko": "온톨로지",
     "name_en": "Ontology",
     "icon_path": "/icons/UPBIT/ONT.png"
@@ -2372,54 +2372,54 @@
   },
   {
     "symbol": "OPEN",
-    "cmc_slug": null,
+    "cmc_slug": "openledger",
     "name_ko": "오픈렛저",
     "name_en": "OpenLedger",
     "icon_path": "/icons/UPBIT/OPEN.png"
   },
   {
     "symbol": "ORBS",
-    "cmc_slug": null,
+    "cmc_slug": "orbs",
     "name_ko": "오브스",
     "name_en": "Orbs",
     "icon_path": "/icons/UPBIT/ORBS.png"
   },
   {
     "symbol": "ORCA",
-    "cmc_slug": null,
+    "cmc_slug": "orca",
     "name_ko": "오르카",
     "name_en": "Orca",
     "icon_path": "/icons/UPBIT/ORCA.png"
   },
   {
     "symbol": "ORDER",
-    "cmc_slug": null,
+    "cmc_slug": "orderly-network",
     "name_ko": "오덜리 네트워크",
     "name_en": "Orderly Network",
     "icon_path": "/icons/UPBIT/ORDER.png"
   },
   {
     "symbol": "OSMO",
-    "cmc_slug": null,
+    "cmc_slug": "osmosis",
     "name_ko": "오스모시스",
     "name_en": "Osmosis"
   },
   {
     "symbol": "OXT",
-    "cmc_slug": null,
+    "cmc_slug": "orchid",
     "name_ko": "오키드",
     "name_en": "Orchid",
     "icon_path": "/icons/UPBIT/OXT.png"
   },
   {
     "symbol": "PARTI",
-    "cmc_slug": null,
+    "cmc_slug": "particle-network",
     "name_ko": "파티클 네트워크",
     "name_en": "Particle Network"
   },
   {
     "symbol": "PAXG",
-    "cmc_slug": null,
+    "cmc_slug": "pax-gold",
     "name_ko": "팍스골드",
     "name_en": "PAX Gold"
   },
@@ -2431,71 +2431,71 @@
   },
   {
     "symbol": "PEAQ",
-    "cmc_slug": null,
+    "cmc_slug": "peaq",
     "name_ko": "피크",
     "name_en": "peaq"
   },
   {
     "symbol": "PENDLE",
-    "cmc_slug": null,
+    "cmc_slug": "pendle",
     "name_ko": "펜들",
     "name_en": "Pendle",
     "icon_path": "/icons/UPBIT/PENDLE.png"
   },
   {
     "symbol": "PENGU",
-    "cmc_slug": null,
+    "cmc_slug": "pudgy-penguins",
     "name_ko": "펏지 펭귄",
     "name_en": "Pudgy Penguins",
     "icon_path": "/icons/UPBIT/PENGU.png"
   },
   {
     "symbol": "PEPE",
-    "cmc_slug": null,
+    "cmc_slug": "pepe",
     "name_ko": "페페",
     "name_en": "PEPE",
     "icon_path": "/icons/UPBIT/PEPE.png"
   },
   {
     "symbol": "PHA",
-    "cmc_slug": null,
+    "cmc_slug": "phala-network",
     "name_ko": "팔라 네트워크",
     "name_en": "Phala Network"
   },
   {
     "symbol": "PIB",
-    "cmc_slug": null,
+    "cmc_slug": "pibble",
     "name_ko": "피블",
     "name_en": "PIBBLE"
   },
   {
     "symbol": "PIEVERSE",
-    "cmc_slug": null,
+    "cmc_slug": "pieverse",
     "name_ko": "파이버스",
     "name_en": "Pieverse"
   },
   {
     "symbol": "PIXEL",
-    "cmc_slug": null,
+    "cmc_slug": "pixels",
     "name_ko": "픽셀즈",
     "name_en": "Pixels"
   },
   {
     "symbol": "PLUME",
-    "cmc_slug": null,
+    "cmc_slug": "plume",
     "name_ko": "플룸",
     "name_en": "Plume",
     "icon_path": "/icons/UPBIT/PLUME.png"
   },
   {
     "symbol": "PNUT",
-    "cmc_slug": null,
+    "cmc_slug": "peanut-the-squirrel",
     "name_ko": "피넛",
     "name_en": "Peanut the Squirrel"
   },
   {
     "symbol": "POKT",
-    "cmc_slug": null,
+    "cmc_slug": "pocket-network",
     "name_ko": "포켓네트워크",
     "name_en": "Pocket Network",
     "icon_path": "/icons/UPBIT/POKT.png"
@@ -2509,32 +2509,32 @@
   },
   {
     "symbol": "POLA",
-    "cmc_slug": null,
+    "cmc_slug": "polaris-share",
     "name_ko": "폴라리스 쉐어",
     "name_en": "Polaris Share"
   },
   {
     "symbol": "POLYX",
-    "cmc_slug": null,
+    "cmc_slug": "polymesh",
     "name_ko": "폴리매쉬",
     "name_en": "Polymesh",
     "icon_path": "/icons/UPBIT/POLYX.png"
   },
   {
     "symbol": "PONKE",
-    "cmc_slug": null,
+    "cmc_slug": "ponke",
     "name_ko": "폰케",
     "name_en": "Ponke"
   },
   {
     "symbol": "POPCAT",
-    "cmc_slug": null,
+    "cmc_slug": "popcat",
     "name_ko": "팝캣",
     "name_en": "Popcat"
   },
   {
     "symbol": "PORT3",
-    "cmc_slug": null,
+    "cmc_slug": "port3-network",
     "name_ko": "포트쓰리",
     "name_en": "Port3 Network"
   },
@@ -2547,32 +2547,32 @@
   },
   {
     "symbol": "PRCL",
-    "cmc_slug": null,
+    "cmc_slug": "parcl",
     "name_ko": "파클",
     "name_en": "Parcl"
   },
   {
     "symbol": "PRIME",
-    "cmc_slug": null,
+    "cmc_slug": "echelon-prime",
     "name_ko": "에셜론 프라임",
     "name_en": "Echelon Prime"
   },
   {
     "symbol": "PROM",
-    "cmc_slug": null,
+    "cmc_slug": "prom",
     "name_ko": "프롬",
     "name_en": "Prom",
     "icon_path": "/icons/UPBIT/PROM.png"
   },
   {
     "symbol": "PROMPT",
-    "cmc_slug": null,
+    "cmc_slug": "wayfinder",
     "name_ko": "웨이파인더",
     "name_en": "Wayfinder"
   },
   {
     "symbol": "PROVE",
-    "cmc_slug": null,
+    "cmc_slug": "succinct",
     "name_ko": "석싱트",
     "name_en": "Succinct",
     "icon_path": "/icons/UPBIT/PROVE.png"
@@ -2592,27 +2592,27 @@
   },
   {
     "symbol": "PUFFER",
-    "cmc_slug": null,
+    "cmc_slug": "puffer",
     "name_ko": "퍼퍼",
     "name_en": "Puffer",
     "icon_path": "/icons/UPBIT/PUFFER.png"
   },
   {
     "symbol": "PUMP",
-    "cmc_slug": null,
+    "cmc_slug": "pump-fun",
     "name_ko": "펌프닷펀",
     "name_en": "pump.fun",
     "icon_path": "/icons/UPBIT/PUMP.png"
   },
   {
     "symbol": "PUMPBTC",
-    "cmc_slug": null,
+    "cmc_slug": "pump",
     "name_ko": "펌프",
     "name_en": "PUMP"
   },
   {
     "symbol": "PUNDIX",
-    "cmc_slug": null,
+    "cmc_slug": "pundi-x",
     "name_ko": "펀디엑스",
     "name_en": "Pundi X",
     "icon_path": "/icons/UPBIT/PUNDIX.png"
@@ -2625,35 +2625,35 @@
   },
   {
     "symbol": "PYTH",
-    "cmc_slug": null,
+    "cmc_slug": "pyth-network",
     "name_ko": "피스 네트워크",
     "name_en": "Pyth Network",
     "icon_path": "/icons/UPBIT/PYTH.png"
   },
   {
     "symbol": "QKC",
-    "cmc_slug": null,
+    "cmc_slug": "quarkchain",
     "name_ko": "쿼크체인",
     "name_en": "QuarkChain",
     "icon_path": "/icons/UPBIT/QKC.png"
   },
   {
     "symbol": "QTUM",
-    "cmc_slug": null,
+    "cmc_slug": "qtum",
     "name_ko": "퀀텀",
     "name_en": "Qtum",
     "icon_path": "/icons/UPBIT/QTUM.png"
   },
   {
     "symbol": "RAD",
-    "cmc_slug": null,
+    "cmc_slug": "radworks",
     "name_ko": "래드웍스",
     "name_en": "Radworks",
     "icon_path": "/icons/UPBIT/RAD.png"
   },
   {
     "symbol": "RAY",
-    "cmc_slug": null,
+    "cmc_slug": "raydium",
     "name_ko": "레이디움",
     "name_en": "Raydium",
     "icon_path": "/icons/UPBIT/RAY.png"
@@ -2666,7 +2666,7 @@
   },
   {
     "symbol": "RED",
-    "cmc_slug": null,
+    "cmc_slug": "redstone",
     "name_ko": "레드스톤",
     "name_en": "RedStone",
     "icon_path": "/icons/UPBIT/RED.png"
@@ -2680,124 +2680,124 @@
   },
   {
     "symbol": "REKT",
-    "cmc_slug": null,
+    "cmc_slug": "rekt",
     "name_ko": "렉트",
     "name_en": "Rekt"
   },
   {
     "symbol": "RENDER",
-    "cmc_slug": null,
+    "cmc_slug": "render",
     "name_ko": "렌더토큰",
     "name_en": "Render Token",
     "icon_path": "/icons/UPBIT/RENDER.png"
   },
   {
     "symbol": "REQ",
-    "cmc_slug": null,
+    "cmc_slug": "request",
     "name_ko": "리퀘스트",
     "name_en": "Request"
   },
   {
     "symbol": "RESOLV",
-    "cmc_slug": null,
+    "cmc_slug": "resolv",
     "name_ko": "리졸브",
     "name_en": "Resolv",
     "icon_path": "/icons/UPBIT/RESOLV.png"
   },
   {
     "symbol": "REZ",
-    "cmc_slug": null,
+    "cmc_slug": "renzo",
     "name_ko": "렌조",
     "name_en": "Renzo"
   },
   {
     "symbol": "RLC",
-    "cmc_slug": null,
+    "cmc_slug": "rlc",
     "name_ko": "아이젝",
     "name_en": "iExec RLC",
     "icon_path": "/icons/UPBIT/RLC.png"
   },
   {
     "symbol": "RLY",
-    "cmc_slug": null,
+    "cmc_slug": "rally",
     "name_ko": "랠리",
     "name_en": "Rally",
     "icon_path": "/icons/UPBIT/RLY.png"
   },
   {
     "symbol": "ROA",
-    "cmc_slug": null,
+    "cmc_slug": "roa-core",
     "name_ko": "로아코어",
     "name_en": "ROA CORE"
   },
   {
     "symbol": "RON",
-    "cmc_slug": null,
+    "cmc_slug": "ronin",
     "name_ko": "로닌",
     "name_en": "Ronin"
   },
   {
     "symbol": "RPL",
-    "cmc_slug": null,
+    "cmc_slug": "rocket-pool",
     "name_ko": "로켓풀",
     "name_en": "Rocket Pool"
   },
   {
     "symbol": "RSR",
-    "cmc_slug": null,
+    "cmc_slug": "reserve-rights",
     "name_ko": "리저브라이트",
     "name_en": "Reserve Rights",
     "icon_path": "/icons/UPBIT/RSR.png"
   },
   {
     "symbol": "RSS3",
-    "cmc_slug": null,
+    "cmc_slug": "rss3",
     "name_ko": "알에스에스쓰리",
     "name_en": "RSS3"
   },
   {
     "symbol": "RUNE",
-    "cmc_slug": null,
+    "cmc_slug": "thorchain",
     "name_ko": "토르체인",
     "name_en": "THORChain"
   },
   {
     "symbol": "RVN",
-    "cmc_slug": null,
+    "cmc_slug": "raven",
     "name_ko": "레이븐코인",
     "name_en": "Ravencoin",
     "icon_path": "/icons/UPBIT/RVN.png"
   },
   {
     "symbol": "S",
-    "cmc_slug": null,
+    "cmc_slug": "sonic",
     "name_ko": "소닉",
     "name_en": "Sonic"
   },
   {
     "symbol": "SAFE",
-    "cmc_slug": null,
+    "cmc_slug": "safe",
     "name_ko": "세이프",
     "name_en": "Safe",
     "icon_path": "/icons/UPBIT/SAFE.png"
   },
   {
     "symbol": "SAHARA",
-    "cmc_slug": null,
+    "cmc_slug": "sahara-ai",
     "name_ko": "사하라에이아이",
     "name_en": "Sahara AI",
     "icon_path": "/icons/UPBIT/SAHARA.png"
   },
   {
     "symbol": "SAND",
-    "cmc_slug": null,
+    "cmc_slug": "the-sandbox",
     "name_ko": "샌드박스",
     "name_en": "The Sandbox",
     "icon_path": "/icons/UPBIT/SAND.png"
   },
   {
     "symbol": "SAROS",
-    "cmc_slug": null,
+    "cmc_slug": "saros",
     "name_ko": "사로스",
     "name_en": "Saros"
   },
@@ -2810,66 +2810,66 @@
   },
   {
     "symbol": "SCA",
-    "cmc_slug": null,
+    "cmc_slug": "scallop",
     "name_ko": "스캘럽",
     "name_en": "Scallop"
   },
   {
     "symbol": "SCR",
-    "cmc_slug": null,
+    "cmc_slug": "scroll",
     "name_ko": "스크롤",
     "name_en": "Scroll",
     "icon_path": "/icons/UPBIT/SCR.png"
   },
   {
     "symbol": "SD",
-    "cmc_slug": null,
+    "cmc_slug": "stader",
     "name_ko": "스테이더",
     "name_en": "Stader"
   },
   {
     "symbol": "SEI",
-    "cmc_slug": null,
+    "cmc_slug": "sei",
     "name_ko": "세이",
     "name_en": "Sei",
     "icon_path": "/icons/UPBIT/SEI.png"
   },
   {
     "symbol": "SEND",
-    "cmc_slug": null,
+    "cmc_slug": "suilend",
     "name_ko": "수이렌드",
     "name_en": "SuiLend"
   },
   {
     "symbol": "SFP",
-    "cmc_slug": null,
+    "cmc_slug": "safepal",
     "name_ko": "세이프팔",
     "name_en": "Safepal"
   },
   {
     "symbol": "SHELL",
-    "cmc_slug": null,
+    "cmc_slug": "myshell",
     "name_ko": "마이쉘",
     "name_en": "MyShell",
     "icon_path": "/icons/UPBIT/SHELL.png"
   },
   {
     "symbol": "SHIB",
-    "cmc_slug": null,
+    "cmc_slug": "shiba-inu",
     "name_ko": "시바이누",
     "name_en": "SHIBA INU",
     "icon_path": "/icons/UPBIT/SHIB.png"
   },
   {
     "symbol": "SIGN",
-    "cmc_slug": null,
+    "cmc_slug": "sign",
     "name_ko": "사인",
     "name_en": "Sign",
     "icon_path": "/icons/UPBIT/SIGN.png"
   },
   {
     "symbol": "SIX",
-    "cmc_slug": null,
+    "cmc_slug": "six",
     "name_ko": "식스",
     "name_en": "SIX"
   },
@@ -2881,33 +2881,33 @@
   },
   {
     "symbol": "SKLAY",
-    "cmc_slug": null,
+    "cmc_slug": "sklay",
     "name_ko": "에스클레이",
     "name_en": "sKLAY"
   },
   {
     "symbol": "SKY",
-    "cmc_slug": null,
+    "cmc_slug": "sky",
     "name_ko": "스카이 프로토콜",
     "name_en": "Sky Protocol",
     "icon_path": "/icons/UPBIT/SKY.png"
   },
   {
     "symbol": "SKYAI",
-    "cmc_slug": null,
+    "cmc_slug": "skyai",
     "name_ko": "스카이에이아이",
     "name_en": "SkyAI"
   },
   {
     "symbol": "SNT",
-    "cmc_slug": null,
+    "cmc_slug": "snt",
     "name_ko": "스테이터스네트워크토큰",
     "name_en": "Status Network",
     "icon_path": "/icons/UPBIT/SNT.png"
   },
   {
     "symbol": "SNX",
-    "cmc_slug": null,
+    "cmc_slug": "synthetix-network",
     "name_ko": "신세틱스",
     "name_en": "Synthetix Network Token",
     "icon_path": "/icons/UPBIT/SNX.png"
@@ -2927,47 +2927,47 @@
   },
   {
     "symbol": "SOLV",
-    "cmc_slug": null,
+    "cmc_slug": "solv-protocol",
     "name_ko": "솔브 프로토콜",
     "name_en": "Solv Protocol"
   },
   {
     "symbol": "SOMI",
-    "cmc_slug": null,
+    "cmc_slug": "somnia",
     "name_ko": "솜니아",
     "name_en": "Somnia",
     "icon_path": "/icons/UPBIT/SOMI.png"
   },
   {
     "symbol": "SONIC",
-    "cmc_slug": null,
+    "cmc_slug": "sonic-svm",
     "name_ko": "소닉 에스브이엠",
     "name_en": "Sonic SVM",
     "icon_path": "/icons/UPBIT/SONIC.png"
   },
   {
     "symbol": "SOON",
-    "cmc_slug": null,
+    "cmc_slug": "soon",
     "name_ko": "쑨",
     "name_en": "SOON",
     "icon_path": "/icons/UPBIT/SOON.png"
   },
   {
     "symbol": "SOPH",
-    "cmc_slug": null,
+    "cmc_slug": "sophon",
     "name_ko": "소폰",
     "name_en": "Sophon",
     "icon_path": "/icons/UPBIT/SOPH.png"
   },
   {
     "symbol": "SPA",
-    "cmc_slug": null,
+    "cmc_slug": "sperax",
     "name_ko": "스페라엑스",
     "name_en": "Sperax"
   },
   {
     "symbol": "SPK",
-    "cmc_slug": null,
+    "cmc_slug": "spark",
     "name_ko": "스파크",
     "name_en": "Spark",
     "icon_path": "/icons/UPBIT/SPK.png"
@@ -2981,40 +2981,40 @@
   },
   {
     "symbol": "STAT",
-    "cmc_slug": null,
+    "cmc_slug": "stat",
     "name_ko": "스탯",
     "name_en": "STAT"
   },
   {
     "symbol": "STEEM",
-    "cmc_slug": null,
+    "cmc_slug": "steem",
     "name_ko": "스팀",
     "name_en": "Steem",
     "icon_path": "/icons/UPBIT/STEEM.png"
   },
   {
     "symbol": "STG",
-    "cmc_slug": null,
+    "cmc_slug": "stargate-finance",
     "name_ko": "스타게이트 파이낸스",
     "name_en": "Stargate Finance",
     "icon_path": "/icons/UPBIT/STG.png"
   },
   {
     "symbol": "STO",
-    "cmc_slug": null,
+    "cmc_slug": "stakestone",
     "name_ko": "스테이크스톤",
     "name_en": "StakeStone"
   },
   {
     "symbol": "STORJ",
-    "cmc_slug": null,
+    "cmc_slug": "storj",
     "name_ko": "스토리지",
     "name_en": "Storj",
     "icon_path": "/icons/UPBIT/STORJ.png"
   },
   {
     "symbol": "STRAX",
-    "cmc_slug": null,
+    "cmc_slug": "stratis",
     "name_ko": "스트라티스",
     "name_en": "Stratis",
     "icon_path": "/icons/UPBIT/STRAX.png"
@@ -3027,130 +3027,130 @@
   },
   {
     "symbol": "STX",
-    "cmc_slug": null,
+    "cmc_slug": "stacks",
     "name_ko": "스택스",
     "name_en": "Stacks",
     "icon_path": "/icons/UPBIT/STX.png"
   },
   {
     "symbol": "SUI",
-    "cmc_slug": null,
+    "cmc_slug": "sui",
     "name_ko": "수이",
     "name_en": "SUI",
     "icon_path": "/icons/UPBIT/SUI.png"
   },
   {
     "symbol": "SUN",
-    "cmc_slug": null,
+    "cmc_slug": "sun",
     "name_ko": "썬",
     "name_en": "SUN",
     "icon_path": "/icons/UPBIT/SUN.png"
   },
   {
     "symbol": "SUNDOG",
-    "cmc_slug": null,
+    "cmc_slug": "sundog",
     "name_ko": "썬도그",
     "name_en": "Sundog"
   },
   {
     "symbol": "SUPER",
-    "cmc_slug": null,
+    "cmc_slug": "superverse",
     "name_ko": "슈퍼버스",
     "name_en": "SuperVerse",
     "icon_path": "/icons/UPBIT/SUPER.png"
   },
   {
     "symbol": "SUSHI",
-    "cmc_slug": null,
+    "cmc_slug": "sushiswap",
     "name_ko": "스시스왑",
     "name_en": "Sushiswap"
   },
   {
     "symbol": "SWAP",
-    "cmc_slug": null,
+    "cmc_slug": "trustswap",
     "name_ko": "트러스트스왑",
     "name_en": "TrustSwap"
   },
   {
     "symbol": "SWELL",
-    "cmc_slug": null,
+    "cmc_slug": "swell-network",
     "name_ko": "스웰 네트워크",
     "name_en": "Swell Network",
     "icon_path": "/icons/UPBIT/SWELL.png"
   },
   {
     "symbol": "SXP",
-    "cmc_slug": null,
+    "cmc_slug": "sxp",
     "name_ko": "솔라",
     "name_en": "Solar",
     "icon_path": "/icons/UPBIT/SXP.png"
   },
   {
     "symbol": "SXT",
-    "cmc_slug": null,
+    "cmc_slug": "space-and-time",
     "name_ko": "스페이스 앤드 타임",
     "name_en": "Space and Time"
   },
   {
     "symbol": "SYND",
-    "cmc_slug": null,
+    "cmc_slug": "syndicate",
     "name_ko": "신디케이트",
     "name_en": "Syndicate"
   },
   {
     "symbol": "SYRUP",
-    "cmc_slug": null,
+    "cmc_slug": "maple-finance",
     "name_ko": "메이플 파이낸스",
     "name_en": "Maple Finance",
     "icon_path": "/icons/UPBIT/SYRUP.png"
   },
   {
     "symbol": "T",
-    "cmc_slug": null,
+    "cmc_slug": "threshold",
     "name_ko": "쓰레스홀드",
     "name_en": "Threshold",
     "icon_path": "/icons/UPBIT/T.png"
   },
   {
     "symbol": "TAIKO",
-    "cmc_slug": null,
+    "cmc_slug": "taiko",
     "name_ko": "타이코",
     "name_en": "Taiko",
     "icon_path": "/icons/UPBIT/TAIKO.png"
   },
   {
     "symbol": "TAKE",
-    "cmc_slug": null,
+    "cmc_slug": "overtake",
     "name_ko": "오버테이크",
     "name_en": "Overtake"
   },
   {
     "symbol": "TALK",
-    "cmc_slug": null,
+    "cmc_slug": "talken",
     "name_ko": "톡큰",
     "name_en": "Talken"
   },
   {
     "symbol": "TAO",
-    "cmc_slug": null,
+    "cmc_slug": "bittensor",
     "name_ko": "비트텐서",
     "name_en": "Bittensor"
   },
   {
     "symbol": "TAVA",
-    "cmc_slug": null,
+    "cmc_slug": "altava",
     "name_ko": "알타바",
     "name_en": "ALTAVA"
   },
   {
     "symbol": "TDROP",
-    "cmc_slug": null,
+    "cmc_slug": "thetadrop",
     "name_ko": "티드랍",
     "name_en": "ThetaDrop"
   },
   {
     "symbol": "TEMCO",
-    "cmc_slug": null,
+    "cmc_slug": "temco",
     "name_ko": "템코",
     "name_en": "TEMCO"
   },
@@ -3163,33 +3163,33 @@
   },
   {
     "symbol": "THE",
-    "cmc_slug": null,
+    "cmc_slug": "thena",
     "name_ko": "테나",
     "name_en": "THENA"
   },
   {
     "symbol": "THETA",
-    "cmc_slug": null,
+    "cmc_slug": "theta",
     "name_ko": "쎄타토큰",
     "name_en": "Theta Token",
     "icon_path": "/icons/UPBIT/THETA.png"
   },
   {
     "symbol": "TIA",
-    "cmc_slug": null,
+    "cmc_slug": "celestia",
     "name_ko": "셀레스티아",
     "name_en": "Celestia",
     "icon_path": "/icons/UPBIT/TIA.png"
   },
   {
     "symbol": "TNSR",
-    "cmc_slug": null,
+    "cmc_slug": "tensor",
     "name_ko": "텐서",
     "name_en": "Tensor"
   },
   {
     "symbol": "TOKAMAK",
-    "cmc_slug": null,
+    "cmc_slug": "tokamak-network",
     "name_ko": "토카막 네트워크",
     "name_en": "Tokamak Network",
     "icon_path": "/icons/UPBIT/TOKAMAK.png"
@@ -3202,34 +3202,34 @@
   },
   {
     "symbol": "TOSHI",
-    "cmc_slug": null,
+    "cmc_slug": "toshi",
     "name_ko": "토시",
     "name_en": "Toshi",
     "icon_path": "/icons/UPBIT/TOSHI.png"
   },
   {
     "symbol": "TOWNS",
-    "cmc_slug": null,
+    "cmc_slug": "towns",
     "name_ko": "타운즈",
     "name_en": "Towns"
   },
   {
     "symbol": "TREE",
-    "cmc_slug": null,
+    "cmc_slug": "treehouse",
     "name_ko": "트리하우스",
     "name_en": "Treehouse",
     "icon_path": "/icons/UPBIT/TREE.png"
   },
   {
     "symbol": "TRUMP",
-    "cmc_slug": null,
+    "cmc_slug": "official-trump",
     "name_ko": "오피셜 트럼프",
     "name_en": "OFFICIAL TRUMP",
     "icon_path": "/icons/UPBIT/TRUMP.png"
   },
   {
     "symbol": "TRUST",
-    "cmc_slug": null,
+    "cmc_slug": "intuition",
     "name_ko": "인튜이션",
     "name_en": "Intuition",
     "icon_path": "/icons/UPBIT/TRUST.png"
@@ -3243,20 +3243,20 @@
   },
   {
     "symbol": "TT",
-    "cmc_slug": null,
+    "cmc_slug": "thundercore",
     "name_ko": "썬더코어",
     "name_en": "ThunderCore",
     "icon_path": "/icons/UPBIT/TT.png"
   },
   {
     "symbol": "TURBO",
-    "cmc_slug": null,
+    "cmc_slug": "turbo",
     "name_ko": "터보",
     "name_en": "Turbo"
   },
   {
     "symbol": "TUSD",
-    "cmc_slug": null,
+    "cmc_slug": "trueusd",
     "name_ko": "트루USD",
     "name_en": "TrueUSD",
     "icon_path": "/icons/UPBIT/TUSD.png"
@@ -3269,53 +3269,53 @@
   },
   {
     "symbol": "UMA",
-    "cmc_slug": null,
+    "cmc_slug": "uma",
     "name_ko": "우마",
     "name_en": "UMA"
   },
   {
     "symbol": "UNI",
-    "cmc_slug": null,
+    "cmc_slug": "uniswap",
     "name_ko": "유니스왑",
     "name_en": "Uniswap",
     "icon_path": "/icons/UPBIT/UNI.png"
   },
   {
     "symbol": "UOS",
-    "cmc_slug": null,
+    "cmc_slug": "ultra",
     "name_ko": "울트라",
     "name_en": "Ultra"
   },
   {
     "symbol": "USD1",
-    "cmc_slug": null,
+    "cmc_slug": "usd1",
     "name_ko": "월드 리버티 파이낸셜 유에스디",
     "name_en": "World Liberty Financial USD",
     "icon_path": "/icons/UPBIT/USD1.png"
   },
   {
     "symbol": "USDC",
-    "cmc_slug": null,
+    "cmc_slug": "usd",
     "name_ko": "유에스디코인",
     "name_en": "USD Coin",
     "icon_path": "/icons/UPBIT/USDC.png"
   },
   {
     "symbol": "USDE",
-    "cmc_slug": null,
+    "cmc_slug": "ethena-usde",
     "name_ko": "유에스디이",
     "name_en": "Ethena USDe"
   },
   {
     "symbol": "USDP",
-    "cmc_slug": null,
+    "cmc_slug": "usdp",
     "name_ko": "팍스달러",
     "name_en": "Pax Dollar",
     "icon_path": "/icons/UPBIT/USDP.png"
   },
   {
     "symbol": "USDS",
-    "cmc_slug": null,
+    "cmc_slug": "usds",
     "name_ko": "유에스디에스",
     "name_en": "USDS",
     "icon_path": "/icons/UPBIT/USDS.png"
@@ -3329,28 +3329,28 @@
   },
   {
     "symbol": "VAL",
-    "cmc_slug": null,
+    "cmc_slug": "validity",
     "name_ko": "밸리디티",
     "name_en": "Validity",
     "icon_path": "/icons/UPBIT/VAL.png"
   },
   {
     "symbol": "VANA",
-    "cmc_slug": null,
+    "cmc_slug": "vana",
     "name_ko": "바나",
     "name_en": "Vana",
     "icon_path": "/icons/UPBIT/VANA.png"
   },
   {
     "symbol": "VET",
-    "cmc_slug": null,
+    "cmc_slug": "vechain",
     "name_ko": "비체인",
     "name_en": "VeChain",
     "icon_path": "/icons/UPBIT/VET.png"
   },
   {
     "symbol": "VIC",
-    "cmc_slug": null,
+    "cmc_slug": "viction",
     "name_ko": "빅션",
     "name_en": "Viction"
   },
@@ -3376,28 +3376,28 @@
   },
   {
     "symbol": "W",
-    "cmc_slug": null,
+    "cmc_slug": "wormhole",
     "name_ko": "웜홀",
     "name_en": "Wormhole",
     "icon_path": "/icons/UPBIT/W.png"
   },
   {
     "symbol": "WAL",
-    "cmc_slug": null,
+    "cmc_slug": "walrus",
     "name_ko": "월러스",
     "name_en": "Walrus",
     "icon_path": "/icons/UPBIT/WAL.png"
   },
   {
     "symbol": "WAVES",
-    "cmc_slug": null,
+    "cmc_slug": "waves",
     "name_ko": "웨이브",
     "name_en": "Waves",
     "icon_path": "/icons/UPBIT/WAVES.png"
   },
   {
     "symbol": "WAXL",
-    "cmc_slug": null,
+    "cmc_slug": "axelar",
     "name_ko": "엑셀라",
     "name_en": "Axelar"
   },
@@ -3423,19 +3423,19 @@
   },
   {
     "symbol": "WEN",
-    "cmc_slug": null,
+    "cmc_slug": "wen",
     "name_ko": "웬",
     "name_en": "Wen"
   },
   {
     "symbol": "WIF",
-    "cmc_slug": null,
+    "cmc_slug": "dogwifhat",
     "name_ko": "도그위프햇",
     "name_en": "dogwifhat"
   },
   {
     "symbol": "WIKEN",
-    "cmc_slug": null,
+    "cmc_slug": "project-with",
     "name_ko": "위드",
     "name_en": "Project WITH"
   },
@@ -3454,14 +3454,14 @@
   },
   {
     "symbol": "WLFI",
-    "cmc_slug": null,
+    "cmc_slug": "world-liberty-financial",
     "name_ko": "월드 리버티 파이낸셜",
     "name_en": "World Liberty Financial",
     "icon_path": "/icons/UPBIT/WLFI.png"
   },
   {
     "symbol": "WNCG",
-    "cmc_slug": null,
+    "cmc_slug": "wrapped-ncg",
     "name_ko": "랩트 나인 크로니클 골드",
     "name_en": "Wrapped NCG"
   },
@@ -3473,44 +3473,44 @@
   },
   {
     "symbol": "XAI",
-    "cmc_slug": null,
+    "cmc_slug": "xai",
     "name_ko": "자이",
     "name_en": "Xai"
   },
   {
     "symbol": "XAN",
-    "cmc_slug": null,
+    "cmc_slug": "anoma",
     "name_ko": "아노마",
     "name_en": "Anoma"
   },
   {
     "symbol": "XAUT",
-    "cmc_slug": null,
+    "cmc_slug": "tether-gold",
     "name_ko": "테더 골드",
     "name_en": "Tether Gold"
   },
   {
     "symbol": "XCN",
-    "cmc_slug": null,
+    "cmc_slug": "onyx",
     "name_ko": "오닉스코인",
     "name_en": "Onyxcoin"
   },
   {
     "symbol": "XDC",
-    "cmc_slug": null,
+    "cmc_slug": "xdc-network",
     "name_ko": "엑스디씨 네트워크",
     "name_en": "XDC Network"
   },
   {
     "symbol": "XEC",
-    "cmc_slug": null,
+    "cmc_slug": "ecash",
     "name_ko": "이캐시",
     "name_en": "eCash",
     "icon_path": "/icons/UPBIT/XEC.png"
   },
   {
     "symbol": "XION",
-    "cmc_slug": null,
+    "cmc_slug": "xion",
     "name_ko": "자이온",
     "name_en": "XION"
   },
@@ -3523,14 +3523,14 @@
   },
   {
     "symbol": "XPL",
-    "cmc_slug": null,
+    "cmc_slug": "plasma",
     "name_ko": "플라즈마",
     "name_en": "Plasma",
     "icon_path": "/icons/UPBIT/XPL.png"
   },
   {
     "symbol": "XPLA",
-    "cmc_slug": null,
+    "cmc_slug": "xpla",
     "name_ko": "엑스플라",
     "name_en": "XPLA"
   },
@@ -3549,136 +3549,136 @@
   },
   {
     "symbol": "XTER",
-    "cmc_slug": null,
+    "cmc_slug": "xterio",
     "name_ko": "엑스테리오",
     "name_en": "Xterio"
   },
   {
     "symbol": "XTZ",
-    "cmc_slug": null,
+    "cmc_slug": "tezos",
     "name_ko": "테조스",
     "name_en": "Tezos",
     "icon_path": "/icons/UPBIT/XTZ.png"
   },
   {
     "symbol": "XVS",
-    "cmc_slug": null,
+    "cmc_slug": "venus",
     "name_ko": "비너스",
     "name_en": "Venus"
   },
   {
     "symbol": "XYO",
-    "cmc_slug": null,
+    "cmc_slug": "xyo",
     "name_ko": "엑스와이오",
     "name_en": "XYO"
   },
   {
     "symbol": "YALA",
-    "cmc_slug": null,
+    "cmc_slug": "yala",
     "name_ko": "얄라",
     "name_en": "Yala"
   },
   {
     "symbol": "YB",
-    "cmc_slug": null,
+    "cmc_slug": "yieldbasis",
     "name_ko": "일드베이시스",
     "name_en": "YieldBasis"
   },
   {
     "symbol": "YFI",
-    "cmc_slug": null,
+    "cmc_slug": "yearn-finance",
     "name_ko": "연파이낸스",
     "name_en": "yearn.finance"
   },
   {
     "symbol": "YGG",
-    "cmc_slug": null,
+    "cmc_slug": "yield-guild-games",
     "name_ko": "일드길드게임즈",
     "name_en": "Yield Guild Games",
     "icon_path": "/icons/UPBIT/YGG.png"
   },
   {
     "symbol": "ZBT",
-    "cmc_slug": null,
+    "cmc_slug": "zerobase",
     "name_ko": "제로베이스",
     "name_en": "ZEROBASE",
     "icon_path": "/icons/UPBIT/ZBT.png"
   },
   {
     "symbol": "ZETA",
-    "cmc_slug": null,
+    "cmc_slug": "zetachain",
     "name_ko": "제타체인",
     "name_en": "ZetaChain",
     "icon_path": "/icons/UPBIT/ZETA.png"
   },
   {
     "symbol": "ZEUS",
-    "cmc_slug": null,
+    "cmc_slug": "zeus-network",
     "name_ko": "제우스 네트워크",
     "name_en": "Zeus Network"
   },
   {
     "symbol": "ZIL",
-    "cmc_slug": null,
+    "cmc_slug": "zilliqa",
     "name_ko": "질리카",
     "name_en": "Zilliqa",
     "icon_path": "/icons/UPBIT/ZIL.png"
   },
   {
     "symbol": "ZK",
-    "cmc_slug": null,
+    "cmc_slug": "zksync",
     "name_ko": "지케이싱크",
     "name_en": "zkSync"
   },
   {
     "symbol": "ZKC",
-    "cmc_slug": null,
+    "cmc_slug": "boundless",
     "name_ko": "바운드리스",
     "name_en": "Boundless",
     "icon_path": "/icons/UPBIT/ZKC.png"
   },
   {
     "symbol": "ZKJ",
-    "cmc_slug": null,
+    "cmc_slug": "polyhedra-network",
     "name_ko": "폴리헤데라 네트워크",
     "name_en": "Polyhedra Network"
   },
   {
     "symbol": "ZKL",
-    "cmc_slug": null,
+    "cmc_slug": "zklink",
     "name_ko": "지케이링크",
     "name_en": "zkLink"
   },
   {
     "symbol": "ZORA",
-    "cmc_slug": null,
+    "cmc_slug": "zora",
     "name_ko": "조라",
     "name_en": "Zora",
     "icon_path": "/icons/UPBIT/ZORA.png"
   },
   {
     "symbol": "ZRC",
-    "cmc_slug": null,
+    "cmc_slug": "zircuit",
     "name_ko": "저킷",
     "name_en": "Zircuit"
   },
   {
     "symbol": "ZRO",
-    "cmc_slug": null,
+    "cmc_slug": "layerzero",
     "name_ko": "레이어제로",
     "name_en": "LayerZero",
     "icon_path": "/icons/UPBIT/ZRO.png"
   },
   {
     "symbol": "ZRX",
-    "cmc_slug": null,
+    "cmc_slug": "0x",
     "name_ko": "제로엑스",
     "name_en": "0x",
     "icon_path": "/icons/UPBIT/ZRX.png"
   },
   {
     "symbol": "ZTX",
-    "cmc_slug": null,
+    "cmc_slug": "ztx",
     "name_ko": "지티엑스",
     "name_en": "ZTX"
   }
