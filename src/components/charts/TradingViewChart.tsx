@@ -1,128 +1,59 @@
-import { useEffect, useRef, memo, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 interface TradingViewChartProps {
-  tvSymbol?: string; // "BINANCE:BTCUSDT" 형식
-  symbol?: string;
-  exchange?: "UPBIT" | "BINANCE";
+  tvSymbol: string;
   height?: number;
-  theme?: "dark" | "light";
 }
 
-declare global {
-  interface Window {
-    TradingView?: any;
-  }
-}
-
-function TradingViewChart({
+const TradingViewChart: React.FC<TradingViewChartProps> = ({
   tvSymbol,
-  symbol = "BTC",
-  exchange = "BINANCE",
-  height = 400,
-  theme = "dark",
-}: TradingViewChartProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  height = 360,
+}) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (!containerRef.current) return;
 
-    const container = containerRef.current;
-    if (!container) return;
+    // 이전 위젯 제거
+    containerRef.current.innerHTML = "";
 
-    setIsLoading(true);
+    const script = document.createElement("script");
+    script.src =
+      "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+    script.type = "text/javascript";
+    script.async = true;
 
-    try {
-      container.innerHTML = "";
-
-      // tvSymbol이 직접 전달되면 사용, 아니면 기존 로직
-      let finalTvSymbol = tvSymbol;
-      if (!finalTvSymbol) {
-        finalTvSymbol =
-          exchange === "UPBIT" ? `UPBIT:${symbol}KRW` : `BINANCE:${symbol}USDT`;
-      }
-
-      // 설정 객체
-      const config: any = {
-        autosize: true,
-        symbol: finalTvSymbol,
-        interval: "60",
-        timezone: "Asia/Seoul",
-        theme: theme,
-        style: "1",
-        locale: "kr",
-        enable_publishing: false,
-        allow_symbol_change: false,
-        calendar: false,
-        hide_top_toolbar: false,
-        hide_legend: false,
-        save_image: false,
-      };
-
-      // script 태그 생성 및 설정 저장
-      const script = document.createElement("script");
-      script.type = "text/tradingview-widget";
-      
-      try {
-        script.textContent = JSON.stringify(config);
-        script.async = true;
-      } catch (e) {
-        console.warn("[TradingViewChart] JSON stringify failed, using fallback");
-        script.textContent = JSON.stringify({ autosize: true, symbol: finalTvSymbol });
-        script.async = true;
-      }
-
-      container.appendChild(script);
-
-      // TradingView 로더 스크립트 추가 (약간 지연)
-      setTimeout(() => {
-        const loaderScript = document.createElement("script");
-        loaderScript.src =
-          "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
-        loaderScript.async = true;
-        loaderScript.onload = () => {
-          setTimeout(() => setIsLoading(false), 800);
-        };
-        loaderScript.onerror = () => {
-          console.warn("[TradingViewChart] Widget loader failed");
-          setIsLoading(false);
-        };
-
-        container.appendChild(loaderScript);
-      }, 100);
-    } catch (err) {
-      console.error("[TradingViewChart] Error:", err);
-      setIsLoading(false);
-    }
-
-    return () => {
-      try {
-        if (container) {
-          container.innerHTML = "";
-        }
-      } catch (e) {
-        // Ignore cleanup errors
-      }
+    // TradingView에서 그대로 요구하는 JSON 설정을 문자열로 넣어줍니다.
+    const config = {
+      autosize: true,
+      symbol: tvSymbol || "BINANCE:BTCUSDT",
+      interval: "60",
+      timezone: "Asia/Seoul",
+      theme: "dark",
+      style: "1",
+      locale: "kr",
+      enable_publishing: false,
+      hide_top_toolbar: false,
+      hide_legend: false,
+      save_image: false,
+      hide_volume: false,
+      calendar: false,
+      support_host: "https://www.tradingview.com",
     };
-  }, [tvSymbol, exchange, symbol, theme]);
+
+    script.innerHTML = JSON.stringify(config);
+
+    containerRef.current.appendChild(script);
+  }, [tvSymbol]);
 
   return (
-    <div
-      className="tradingview-widget-container"
-      style={{ height: `${height}px`, width: "100%" }}
-    >
+    <div className="w-full" style={{ height }}>
       <div
         ref={containerRef}
-        style={{ height: "100%", width: "100%" }}
-        className="bg-slate-800/50 rounded"
+        className="tradingview-widget-container h-full w-full"
       />
-      {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-slate-800/30 rounded">
-          <div className="text-slate-400 text-sm">차트 로드 중...</div>
-        </div>
-      )}
     </div>
   );
-}
+};
 
-export default memo(TradingViewChart);
+export default TradingViewChart;
