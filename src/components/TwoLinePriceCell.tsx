@@ -70,7 +70,7 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
       setTrend(newTrend);
       timerRef.current = setTimeout(() => {
         setTrend(null);
-      }, 500);
+      }, 400);
     }
 
     return () => {
@@ -90,8 +90,8 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   if (isUnlisted) {
     return (
       <div className="flex flex-col items-end leading-tight">
-        <span className="text-sm font-medium text-white whitespace-nowrap">-</span>
-        <span className="text-xs text-gray-500 whitespace-nowrap">-</span>
+        <span className="text-[13px] font-medium text-white whitespace-nowrap">-</span>
+        <span className="text-[11px] text-gray-500 whitespace-nowrap">-</span>
       </div>
     );
   }
@@ -101,10 +101,10 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
 
   return (
     <div className={`flex flex-col items-end leading-tight ${flashClass}`}>
-      <span className="text-sm font-medium text-white whitespace-nowrap">
+      <span className="text-[13px] font-medium text-white whitespace-nowrap">
         {topPrefix}{topFormatted}{topSuffix}
       </span>
-      <span className="text-xs text-gray-500 whitespace-nowrap">
+      <span className="text-[11px] text-gray-500 whitespace-nowrap">
         {bottomPrefix}{bottomFormatted}{bottomSuffix}
       </span>
     </div>

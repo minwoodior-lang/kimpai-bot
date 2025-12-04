@@ -1,0 +1,115 @@
+[가격 깜빡임 효과 수정 요청]
+
+현재 globals.css 에 정의된 price-flash-up / price-flash-down 이
+background-color 만 변경하는 방식이라,
+셀 배경만 번쩍이고 숫자 텍스트는 거의 변화를 느끼기 어렵습니다.
+
+예전 PriceCell 처럼 "텍스트"가 깜빡이는 효과가 필요해서,
+아래처럼 CSS 를 수정해 주세요.
+
+1) 배경색 애니메이션 제거
+- price-flash-up / price-flash-down 에 들어간 background-color, border-radius 관련 속성은 제거해 주세요.
+
+2) 텍스트 컬러 + 투명도 애니메이션으로 변경
+아래와 비슷하게 구현해 주시면 됩니다.
+
+.price-flash-up {
+  animation: priceFlashUp 0.4s ease-out;
+}
+
+.price-flash-down {
+  animation: priceFlashDown 0.4s ease-out;
+}
+
+@keyframes priceFlashUp {
+  0% {
+    color: rgb(74 222 128);   /* 초록색 */
+    opacity: 1;
+  }
+  50% {
+    color: rgb(187 247 208);  /* 더 밝게 */
+    opacity: 0.4;
+  }
+  100% {
+    color: inherit;
+    opacity: 1;
+  }
+}
+
+@keyframes priceFlashDown {
+  0% {
+    color: rgb(248 113 113);  /* 빨간색 */
+    opacity: 1;
+  }
+  50% {
+    color: rgb(254 202 202);  /* 더 밝게 */
+    opacity: 0.4;
+  }
+  100% {
+    color: inherit;
+    opacity: 1;
+  }
+}
+
+추가로, price-flash-up / price-flash-down 클래스는
+TwoLinePriceCell 의 바깥 div 에만 걸려 있으니,
+CSS 에서도 background 가 아니라 "문자색/opacity" 만 건드리게 해 주세요.
+
+[숫자 폰트 크기 / 정렬 완전 통일 요청]
+
+PremiumTable.tsx 상에서는 모든 숫자 셀이
+TwoLinePriceCell / TwoLineCell 을 쓰도록 연결되어 있습니다.
+
+실제 화면에서는 아직 컬럼마다 폰트 크기가 조금씩 달라 보이는데,
+td 에 걸린 text-xs 같은 상위 클래스 영향일 수 있어서,
+아래처럼 컴포넌트 내부에서 폰트를 "강제"로 통일해 주세요.
+
+1) TwoLinePriceCell.tsx
+
+div / span 구조는 유지하고, 안쪽 span 에 아래 클래스를 고정해주세요.
+
+- 상단(국내 값): text-[13px] font-medium text-white whitespace-nowrap
+- 하단(해외 값): text-[11px] text-gray-500 whitespace-nowrap
+
+예시:
+
+return (
+  <div className={`flex flex-col items-end leading-tight ${flashClass}`}>
+    <span className="text-[13px] font-medium text-white whitespace-nowrap">
+      {topText}
+    </span>
+    <span className="text-[11px] text-gray-500 whitespace-nowrap">
+      {bottomText}
+    </span>
+  </div>
+);
+
+2) TwoLineCell.tsx
+
+이쪽도 동일하게 상단/하단 폰트를 고정해주세요.
+
+return (
+  <div className="flex flex-col items-end leading-tight">
+    <span className={
+      `text-[13px] font-medium whitespace-nowrap ${
+        isUnlisted ? "text-gray-500" : line1Color ?? "text-slate-100"
+      }`
+    }>
+      {top}
+    </span>
+    <span className="text-[11px] text-gray-500 whitespace-nowrap">
+      {bottom}
+    </span>
+  </div>
+);
+
+3) td 쪽에서는 text-xs, text-sm 등 폰트 크기 관련 클래스는 제거해주세요.
+정렬(text-right)과 padding 만 남기고, 폰트 크기는 전부 위 컴포넌트에서만 관리하게 하면 됩니다.
+
+이렇게 맞추면:
+
+- 코인명(한글) / 모든 숫자 상단은 13px
+- 심볼 / 숫자 하단은 11px
+- 모든 숫자 셀은 오른쪽 정렬 + 동일 폰트 크기
+
+로 KimPGA 와 같은 느낌으로 통일됩니다.

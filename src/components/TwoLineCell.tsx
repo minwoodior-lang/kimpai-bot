@@ -37,21 +37,23 @@ export default function TwoLineCell({
     return String(val);
   };
 
+  const topColor = isUnlisted ? "text-gray-500" : line1Color;
+
   if (isUnlisted) {
     return (
       <div className={`flex flex-col leading-tight ${alignClass}`}>
-        <span className={`text-sm font-medium whitespace-nowrap ${line1Color}`}>-</span>
-        <span className={`text-xs whitespace-nowrap ${line2Color}`}>-</span>
+        <span className={`text-[13px] font-medium whitespace-nowrap ${topColor}`}>-</span>
+        <span className={`text-[11px] whitespace-nowrap ${line2Color}`}>-</span>
       </div>
     );
   }
 
   return (
     <div className={`flex flex-col leading-tight ${alignClass}`}>
-      <span className={`text-sm font-medium whitespace-nowrap ${line1Color}`}>
+      <span className={`text-[13px] font-medium whitespace-nowrap ${topColor}`}>
         {line1Prefix}{formatValue(line1)}{line1Suffix}
       </span>
-      <span className={`text-xs whitespace-nowrap ${line2Color}`}>
+      <span className={`text-[11px] whitespace-nowrap ${line2Color}`}>
         {line2Prefix}{formatValue(line2)}{line2Suffix}
       </span>
     </div>
