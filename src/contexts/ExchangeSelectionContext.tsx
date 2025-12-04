@@ -35,8 +35,8 @@ export const DOMESTIC_EXCHANGES: { value: string; label: string; exchange: Domes
 ];
 
 export const FOREIGN_EXCHANGES: { value: string; label: string; shortName: string; exchange: ForeignExchange["exchange"]; quote: ForeignExchange["quote"]; logo: string }[] = [
-  { value: "BINANCE_BTC", label: "바이낸스 BTC 마켓", shortName: "바이낸스 BTC", exchange: "BINANCE", quote: "BTC", logo: EXCHANGE_LOGOS.BINANCE },
   { value: "BINANCE_USDT", label: "바이낸스 USDT 마켓", shortName: "바이낸스 USDT", exchange: "BINANCE", quote: "USDT", logo: EXCHANGE_LOGOS.BINANCE },
+  { value: "BINANCE_BTC", label: "바이낸스 BTC 마켓", shortName: "바이낸스 BTC", exchange: "BINANCE", quote: "BTC", logo: EXCHANGE_LOGOS.BINANCE },
   { value: "BINANCE_FUTURES", label: "바이낸스 선물 (USDⓈ-M)", shortName: "바이낸스 선물", exchange: "BINANCE_FUTURES", quote: "USD", logo: EXCHANGE_LOGOS.BINANCE_FUTURES },
   { value: "OKX_USDT", label: "OKX USDT 마켓", shortName: "OKX USDT", exchange: "OKX", quote: "USDT", logo: EXCHANGE_LOGOS.OKX },
   { value: "BYBIT_USDT", label: "Bybit USDT 마켓", shortName: "Bybit USDT", exchange: "BYBIT", quote: "USDT", logo: EXCHANGE_LOGOS.BYBIT },
