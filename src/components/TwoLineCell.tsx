@@ -16,7 +16,7 @@ interface TwoLineCellProps {
 export default function TwoLineCell({
   line1,
   line2,
-  line1Color = "text-white",
+  line1Color = "text-slate-100",
   line2Color = "text-gray-500",
   line1Prefix = "",
   line2Prefix = "",
@@ -37,13 +37,22 @@ export default function TwoLineCell({
     return String(val);
   };
 
+  if (isUnlisted) {
+    return (
+      <div className={`flex flex-col leading-tight ${alignClass}`}>
+        <span className={`text-sm font-medium whitespace-nowrap ${line1Color}`}>-</span>
+        <span className={`text-xs whitespace-nowrap ${line2Color}`}>-</span>
+      </div>
+    );
+  }
+
   return (
     <div className={`flex flex-col leading-tight ${alignClass}`}>
       <span className={`text-sm font-medium whitespace-nowrap ${line1Color}`}>
         {line1Prefix}{formatValue(line1)}{line1Suffix}
       </span>
       <span className={`text-xs whitespace-nowrap ${line2Color}`}>
-        {isUnlisted ? "-" : `${line2Prefix}${formatValue(line2)}${line2Suffix}`}
+        {line2Prefix}{formatValue(line2)}{line2Suffix}
       </span>
     </div>
   );

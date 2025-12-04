@@ -39,28 +39,29 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   formatFn = formatKrwPrice,
 }) => {
   const [trend, setTrend] = useState<Trend>(null);
-  const prevTopRef = useRef<number | null>(null);
-  const prevBottomRef = useRef<number | null>(null);
+  const prevSumRef = useRef<number | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    const prevTop = prevTopRef.current;
-    const prevBottom = prevBottomRef.current;
+    if (isUnlisted) {
+      prevSumRef.current = null;
+      return;
+    }
+
+    const currentSum = (topValue ?? 0) + (bottomValue ?? 0);
+    const prevSum = prevSumRef.current;
 
     let newTrend: Trend = null;
 
-    if (topValue != null && prevTop != null) {
-      if (topValue > prevTop) newTrend = "up";
-      else if (topValue < prevTop) newTrend = "down";
+    if (prevSum !== null && currentSum !== prevSum) {
+      if (currentSum > prevSum) {
+        newTrend = "up";
+      } else if (currentSum < prevSum) {
+        newTrend = "down";
+      }
     }
 
-    if (!newTrend && bottomValue != null && prevBottom != null) {
-      if (bottomValue > prevBottom) newTrend = "up";
-      else if (bottomValue < prevBottom) newTrend = "down";
-    }
-
-    prevTopRef.current = topValue ?? null;
-    prevBottomRef.current = bottomValue ?? null;
+    prevSumRef.current = currentSum;
 
     if (newTrend) {
       if (timerRef.current) {
@@ -77,7 +78,7 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
         clearTimeout(timerRef.current);
       }
     };
-  }, [topValue, bottomValue]);
+  }, [topValue, bottomValue, isUnlisted]);
 
   const flashClass =
     trend === "up"
@@ -86,8 +87,17 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
       ? "price-flash-down"
       : "";
 
+  if (isUnlisted) {
+    return (
+      <div className="flex flex-col items-end leading-tight">
+        <span className="text-sm font-medium text-white whitespace-nowrap">-</span>
+        <span className="text-xs text-gray-500 whitespace-nowrap">-</span>
+      </div>
+    );
+  }
+
   const topFormatted = topValue != null ? formatFn(topValue) : "-";
-  const bottomFormatted = isUnlisted ? "-" : (bottomValue != null ? formatFn(bottomValue) : "-");
+  const bottomFormatted = bottomValue != null ? formatFn(bottomValue) : "-";
 
   return (
     <div className={`flex flex-col items-end leading-tight ${flashClass}`}>
@@ -95,7 +105,7 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
         {topPrefix}{topFormatted}{topSuffix}
       </span>
       <span className="text-xs text-gray-500 whitespace-nowrap">
-        {isUnlisted ? "-" : `${bottomPrefix}${bottomFormatted}${bottomSuffix}`}
+        {bottomPrefix}{bottomFormatted}{bottomSuffix}
       </span>
     </div>
   );
