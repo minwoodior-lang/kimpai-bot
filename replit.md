@@ -4,12 +4,22 @@
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. The project's core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. It handles real-time price collection, premium calculation, and global market metrics, aiming to offer a comprehensive view of the crypto market with a focus on the Korean premium.
 
 ### Recent Changes (v3.4.0 - 2024-12-04)
-- **Favorites Feature Complete**: Full implementation of coin favorites/watchlist functionality
-  - `useUserPrefs.ts`: Added `favorites[]` array, `toggleFavorite()`, `isFavorite()` functions
-  - `PremiumTable.tsx`: Star (★) toggle button with localStorage persistence, favorites-first sorting
-  - `UserPrefsPanel.tsx`: Shows favorite count, warning message when filter is empty
-  - Filter modes: "all" | "foreign" | "favorites" - all working with search/sort combinations
-- **localStorage Persistence**: Favorites survive page refresh, cross-tab compatible
+- **Binance 429 Rate Limit Resolution**: 
+  - Proxy caching: 5sec for spot 24hr, 2sec for prices, 1min stale fallback
+  - 429 error handling with stale cache fallback + 503 response
+  - Render proxy fully tested and deployed (✓ /healthz returns v1 version)
+- **Binance Futures Stats Support**:
+  - Added `fetchBinanceFuturesStats()` to process `/binance/fapi/v1/ticker/24hr` data
+  - Proxy route `/binance/fapi/v1/ticker/24hr` implemented with 5sec caching
+  - Stats automation: 30sec cron job collects BINANCE_FUTURES:${base}:USDT stats
+- **Bybit USDT Integration**: 
+  - Proxy route `/bybit/v5/market/tickers` fully operational with 429 handling
+  - Bybit spot prices and 24hr stats (change24hRate, high24h, low24h, volume24hQuote) working
+- **Favorites Feature**: Full implementation with localStorage persistence, cross-tab compatible
+
+### Known Issues
+- **BINANCE_BTC**: Binance does not have a BTC spot market. This option in UI should be removed or handled specially (currently returns no data for Binance BTC)
+- **Missing coin icons**: MET2, GAME2, FCT2 (low-priority UI issue)
 
 ### User Preferences
 - I want iterative development.
@@ -31,16 +41,27 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - Coin icons are served from the `public/icons/` directory.
 
 **Technical Implementations:**
-- **Price Collection:** Workers for individual exchanges (Upbit, Bithumb, Coinone, Binance, OKX, Bybit, Bitget, Gate.io, HTX, MEXC) fetch real-time data. Binance and Bybit specifically use the Render proxy.
-- **Data Storage:** `prices.json` stores real-time price entries, and `premiumTable.json` stores calculated premium data. `exchange_markets.json` and `master_symbols.json` manage market and symbol metadata.
-- **Market Data Automation:** A hourly cron job automatically updates market data from domestic exchanges and synchronizes it to `master_symbols.json`, including CMC slug mapping and TradingView symbol generation.
+- **Price Collection:** Workers for individual exchanges (Upbit, Bithumb, Coinone, Binance, OKX, Bybit, Bitget, Gate.io, HTX, MEXC) fetch real-time data via Render proxy for Binance/Bybit.
+- **Stats Collection:** 30sec cron job collects 24hr market stats (change rate, high/low prices, volume) for all exchanges.
+- **Data Storage:** `prices.json` stores real-time price entries, `marketStats.json` stores 24hr statistics, and `premiumTable.json` stores calculated premium data. `exchange_markets.json` and `master_symbols.json` manage market and symbol metadata.
+- **Market Data Automation:** A hourly cron job automatically updates market data from domestic exchanges and synchronizes it to `master_symbols.json`, including CMC slug mapping.
 - **Currency Conversion:** USDT to KRW conversion uses CoinGecko's Tether API for global consistency.
-- **Rate Limit Handling:** Dedicated workers for price and statistical data, combined with proxy server caching (2s for prices, 30s for 24hr stats), mitigate API rate limits.
+- **Rate Limit Handling:** 
+  - Proxy server caching: 2sec (prices), 5sec (24hr stats), 60sec (stale fallback)
+  - 429 error handling: Returns stale cache if available, otherwise 503 with retry hint
+  - Dedicated workers with Promise.allSettled for graceful failure handling
+
+**Proxy Server (Render):**
+- Routes: `/binance/api/v3/ticker/price`, `/binance/api/v3/ticker/24hr`, `/binance/fapi/v1/ticker/price`, `/binance/fapi/v1/ticker/24hr`
+- Routes: `/bybit/v5/market/tickers`
+- Version check: `/healthz` → returns "proxy-24hr-v1-with-5s-cache-stale-fallback"
+- All routes implement: cache TTL, stale cache fallback, 429 error handling with rate limit tracking
 
 **Code Structure:**
 - `workers/`: Contains price fetching logic and the main `priceWorker.ts`.
+- `workers/fetchers/`: Exchange-specific fetchers (binance.ts, globalExchanges.ts for OKX/Bybit/Bitget/Gate/HTX/MEXC, upbit.ts, bithumb.ts, coinone.ts).
 - `proxy-server-render/`: Node.js/Express proxy server for Render deployment.
-- `data/`: Stores JSON data files (`prices.json`, `premiumTable.json`, etc.).
+- `data/`: Stores JSON data files (`prices.json`, `premiumTable.json`, `marketStats.json`, etc.).
 - `scripts/`: Utility scripts for market synchronization and master symbol building.
 - `src/pages/api/`: API endpoints for premium data, global metrics, heartbeat, and authentication.
 - `src/components/`: Frontend React components.
@@ -53,3 +74,8 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - **Next.js 14, React, Tailwind CSS:** Frontend development stack.
 - **Node.js, TypeScript:** Backend development stack.
 - **Replit:** Deployment platform.
+
+### Next Steps
+1. **BINANCE_BTC Handling**: Decide whether to remove from UI or implement special handling since Binance doesn't have BTC spot market
+2. **Monitor stats collection**: Verify BINANCE_FUTURES stats are being collected (check marketStats.json for BINANCE_FUTURES:BTC:USDT entries)
+3. **Frontend validation**: Ensure all 24hr stats (changeRate, changeAbsKrw, fromHighRate, fromLowRate, volume24hKrw) display correctly

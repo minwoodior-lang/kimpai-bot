@@ -1,0 +1,114 @@
+Binance 마켓 3종 데이터 점검 요청
+
+다음 3개의 Binance 마켓 연결이 방금 Render 프록시로 완전히 교체되어 정상적인 API 응답은 확인되었습니다.
+
+BINANCE_USDT (Spot USDT Market)
+
+BINANCE_BTC (Spot BTC Market)
+
+BINANCE_FUTURES (USDT-M Futures)
+
+현재 프록시는 정상적으로 데이터를 반환하고 있으며, 로그에서도 아래 항목이 모두 확인됩니다.
+
+[Binance Spot Price] Request: symbol=ALL
+
+[Binance 24hr] Returning all XXXX tickers
+
+[Binance Futures Price] Request: symbol=ALL
+
+[Bybit Tickers] Request: category=spot, symbol=ALL
+
+그러나 프론트엔드 화면에서 다음 값들이 표시되지 않고 있습니다:
+
+김프(%)
+
+전일대비(%)
+
+고가/저가 대비(%)
+
+거래대금(24h)
+
+👉 확인이 필요한 핵심 포인트 6가지
+1) 백엔드 워커에서 Binance USDT/BTC/선물 데이터를 실제로 읽고 있는지 확인
+
+경로:
+workers/fetchers/binance.ts
+workers/calcPremium.ts
+
+검증할 항목:
+
+symbol 매핑이 "BTCUSDT", "BTCBTC" 등으로 맞는지
+
+futures의 경우 "BTCUSDT" vs "btcusdt" 케이스 민감 문제 확인
+
+프록시 응답 배열 길이와 매칭되는지
+
+2) BINANCE_USDT / BINANCE_BTC / BINANCE_FUTURES 마켓 키가 PremiumTable 계산 로직에서 누락되지 않았는지 확인
+
+경로:
+/api/premium/table-filtered.ts
+
+확인:
+
+foreignExchange 값이 정확히 다음 세 가지를 수용하는지
+
+BINANCE_USDT
+BINANCE_BTC
+BINANCE_FUTURES
+
+3) 24hr 데이터 구조가 Binance API 표준 형식과 동일한지 확인
+
+프록시에서는 Binance API의 원본 구조를 그대로 반환하고 있음.
+계산 로직이 다음 필드를 요구하는지 확인 필요:
+
+필드 예시:
+
+priceChangePercent
+lastPrice
+volume
+quoteVolume
+openTime
+closeTime
+highPrice
+lowPrice
+
+
+만약 계산 로직이 가격 계산에 다른 key 이름을 쓰고 있다면 매핑 필요.
+
+4) Symbol 매핑 불일치 여부 체크
+
+프론트/백엔드 모두 다음 케이스 반드시 확인:
+
+마켓	기대 심볼	실제 Binance 심볼
+BINANCE_USDT	BTC-USDT	BTCUSDT
+BINANCE_BTC	BTC-BTC	BTCBTC (이 값 없음 → Spot BTC 마켓은 없음)
+BINANCE_FUTURES	BTC-USDT (perpetual)	BTCUSDT
+
+특히 BINANCE_BTC는 실제로 존재하지 않는 시장이므로 다음이 필요:
+
+➡️ BTC/BTC 마켓은 Binance에서 제공하지 않음 → 대체 데이터로 처리 필요
+(Upbit는 BTC 마켓이 있지만 Binance는 없다)
+
+이 경우 김프 계산이 정상 작동할 수 없음 → 로직 수정 필요.
+
+5) Premium 계산식이 Binance 24hr 데이터를 읽지 못할 때 null 처리되는지 확인
+
+김프 계산은 다음 식을 요구:
+
+premium = (domesticPrice - foreignPriceInKrw) / foreignPriceInKrw * 100
+
+
+여기서 foreignPriceInKrw = lastPrice × USD/KRW 환율
+
+➡️ lastPrice 누락, 0, undefined일 경우 김프가 표시되지 않음
+➡️ Console 로그로 lastPrice 값 출력 요청
+
+6) 프론트에서 숫자가 ‘-’로 나오는 이유 2개
+
+다음 중 하나일 가능성이 매우 높음:
+
+백엔드 PremiumTable에서 해당 코인을 스킵하거나 undefined 반환
+
+프론트에서 if (!premium) return "-" 처럼 0 또는 null을 걸러내는 조건식 존재
+
+이 두 부분도 함께 점검 요청.
