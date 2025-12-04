@@ -23,8 +23,19 @@ const PRICES_FILE = path.join(DATA_DIR, 'prices.json');
 const PREMIUM_TABLE_FILE = path.join(DATA_DIR, 'premiumTable.json');
 const EXCHANGE_MARKETS_FILE = path.join(DATA_DIR, 'exchange_markets.json');
 const MASTER_SYMBOLS_FILE = path.join(DATA_DIR, 'master_symbols.json');
+const MARKET_STATS_FILE = path.join(DATA_DIR, 'marketStats.json');
+
+interface MarketStatsEntry {
+  change24h: number;
+  high24h: number | null;
+  low24h: number | null;
+  volume24hKrw: number;
+}
+
+type MarketStatsMap = Record<string, MarketStatsEntry>;
 
 let currentPrices: PriceMap = {};
+let currentMarketStats: MarketStatsMap = {};
 let usdKrwRate = 1380;
 let lastFxUpdate = 0;
 
@@ -68,6 +79,55 @@ function savePrices(prices: PriceMap): void {
   const tmpFile = PRICES_FILE + '.tmp';
   fs.writeFileSync(tmpFile, JSON.stringify(prices, null, 2), 'utf-8');
   fs.renameSync(tmpFile, PRICES_FILE);
+}
+
+function saveMarketStats(stats: MarketStatsMap): void {
+  const tmpFile = MARKET_STATS_FILE + '.tmp';
+  fs.writeFileSync(tmpFile, JSON.stringify(stats, null, 2), 'utf-8');
+  fs.renameSync(tmpFile, MARKET_STATS_FILE);
+}
+
+async function fetchUpbitMarketStats(markets: MarketInfo[]): Promise<MarketStatsMap> {
+  const result: MarketStatsMap = {};
+  
+  const upbitKrwMarkets = markets
+    .filter(m => m.exchange === 'UPBIT' && m.quote === 'KRW')
+    .map(m => m.market);
+
+  if (upbitKrwMarkets.length === 0) return result;
+
+  const chunkSize = 80;
+  const chunks: string[][] = [];
+  
+  for (let i = 0; i < upbitKrwMarkets.length; i += chunkSize) {
+    chunks.push(upbitKrwMarkets.slice(i, i + chunkSize));
+  }
+
+  for (const chunk of chunks) {
+    try {
+      const url = `https://api.upbit.com/v1/ticker?markets=${chunk.join(',')}`;
+      const res = await axios.get(url, { timeout: 5000 });
+      
+      if (!Array.isArray(res.data)) continue;
+
+      for (const ticker of res.data) {
+        const market = ticker.market as string;
+        const [quote, base] = market.split('-');
+        const key = `UPBIT:${base}:${quote}`;
+
+        result[key] = {
+          change24h: (ticker.signed_change_rate ?? 0) * 100,
+          high24h: ticker.high_price ?? null,
+          low24h: ticker.low_price ?? null,
+          volume24hKrw: ticker.acc_trade_price_24h ?? 0
+        };
+      }
+    } catch (err: any) {
+      console.warn('[Stats] Upbit ticker fetch failed:', err.message);
+    }
+  }
+
+  return result;
 }
 
 function buildPremiumTable(): void {
@@ -168,31 +228,37 @@ async function updatePrices(): Promise<void> {
   }));
 
   try {
-    const results = await Promise.allSettled([
-      fetchUpbitPrices(upbitMarkets),
-      fetchBithumbPrices(bithumbMarkets),
-      fetchCoinonePrices(coinoneMarkets),
-      fetchBinanceSpotPrices(globalMarkets),
-      fetchBinanceFuturesPrices(globalMarkets),
-      fetchOkxPrices(globalMarkets),
-      fetchBybitPrices(globalMarkets),
-      fetchBitgetPrices(globalMarkets),
-      fetchGatePrices(globalMarkets),
-      fetchHtxPrices(globalMarkets),
-      fetchMexcPrices(globalMarkets)
+    const [priceResults, statsResult] = await Promise.all([
+      Promise.allSettled([
+        fetchUpbitPrices(upbitMarkets),
+        fetchBithumbPrices(bithumbMarkets),
+        fetchCoinonePrices(coinoneMarkets),
+        fetchBinanceSpotPrices(globalMarkets),
+        fetchBinanceFuturesPrices(globalMarkets),
+        fetchOkxPrices(globalMarkets),
+        fetchBybitPrices(globalMarkets),
+        fetchBitgetPrices(globalMarkets),
+        fetchGatePrices(globalMarkets),
+        fetchHtxPrices(globalMarkets),
+        fetchMexcPrices(globalMarkets)
+      ]),
+      fetchUpbitMarketStats(allMarkets)
     ]);
 
-    for (const result of results) {
+    for (const result of priceResults) {
       if (result.status === 'fulfilled') {
         Object.assign(currentPrices, result.value);
       }
     }
 
+    Object.assign(currentMarketStats, statsResult);
+
     savePrices(currentPrices);
+    saveMarketStats(currentMarketStats);
     buildPremiumTable();
 
     const elapsed = Date.now() - startTime;
-    console.log(`[Worker] Prices updated in ${elapsed}ms (${Object.keys(currentPrices).length} entries)`);
+    console.log(`[Worker] Prices updated in ${elapsed}ms (${Object.keys(currentPrices).length} entries, ${Object.keys(currentMarketStats).length} stats)`);
   } catch (err: any) {
     console.error('[Worker] Update failed:', err.message);
   }

@@ -1,0 +1,215 @@
+1단계: 워커에서 “시세 통계”까지 저장하도록 확장
+
+지금 prices.json 구조:
+
+"UPBIT:BTC:KRW": { "price": 138711000, "ts": 1764845955271 },
+"BINANCE:BTC:USDT": { "price": 93249.38, "ts": 1764845955404 }
+
+
+여기에 건들지 말고, 별도 파일로 통계를 저장하게 만드는 게 깔끔해.
+
+👉 새 파일: data/marketStats.json
+
+형태 예시:
+
+{
+  "UPBIT:BTC:KRW": {
+    "change24h": 1.49,
+    "high24h": 139200000,
+    "low24h": 135000000,
+    "volume24hKrw": 2819000000000
+  },
+  "UPBIT:ETH:KRW": {
+    "change24h": 1.45,
+    "high24h": 4800000,
+    "low24h": 4300000,
+    "volume24hKrw": 3099000000000
+  }
+}
+
+📌 워커 쪽 구현 (레플릿에 그대로 넘길 코드 예시)
+
+파일 이름은 지금 priceWorker 있는 데 옆에 marketStatsWorker.ts 따로 두거나,
+기존 워커 안에 “추가 블록”으로 붙여도 됨.
+
+// scripts/marketStatsWorker.ts (예시)
+
+import fs from "fs";
+import path from "path";
+import { DOMESTIC_EXCHANGES } from "../src/config/domesticExchanges";
+import { loadJsonFile } from "../src/lib/fsUtils";
+
+// 1) master_symbols / exchange_markets 에서 국내 기준(업비트 KRW) 마켓 리스트 가져오기
+//    이미 어딘가에서 사용 중이면 그 함수 재사용해도 됨.
+interface MarketInfo {
+  symbol: string;          // BTC
+  domesticExchange: string; // "UPBIT"
+  domesticMarket: string;   // "KRW-BTC"
+}
+
+async function fetchUpbitStats(markets: MarketInfo[]) {
+  const upbitKrwMarkets = markets
+    .filter(m => m.domesticExchange === "UPBIT")
+    .map(m => m.domesticMarket); // "KRW-BTC"
+
+  if (!upbitKrwMarkets.length) return {};
+
+  const chunks: string[][] = [];
+  const size = 80; // 업비트 API 한 번에 100개 제한 고려해서 여유
+  for (let i = 0; i < upbitKrwMarkets.length; i += size) {
+    chunks.push(upbitKrwMarkets.slice(i, i + size));
+  }
+
+  const result: Record<string, any> = {};
+
+  for (const chunk of chunks) {
+    const url =
+      "https://api.upbit.com/v1/ticker?markets=" + chunk.join(",");
+    const res = await fetch(url);
+    if (!res.ok) continue;
+
+    const tickers: any[] = await res.json();
+
+    for (const t of tickers) {
+      // t.market: "KRW-BTC"
+      const [quote, base] = (t.market as string).split("-");
+      const key = `UPBIT:${base}:KRW`;
+
+      result[key] = {
+        change24h: (t.signed_change_rate ?? 0) * 100, // 0.0149 → 1.49%
+        high24h: t.high_price ?? null,
+        low24h: t.low_price ?? null,
+        volume24hKrw: t.acc_trade_price_24h ?? 0
+      };
+    }
+  }
+
+  return result;
+}
+
+async function main() {
+  // TODO: 여기서 exchange_markets / master_symbols 로부터
+  // 국내 기준 마켓 리스트를 가져오는 로직 연결
+  const markets: MarketInfo[] = await loadDomesticMarketsSomehow();
+
+  const upbitStats = await fetchUpbitStats(markets);
+
+  const outPath = path.join(process.cwd(), "data", "marketStats.json");
+  await fs.promises.writeFile(outPath, JSON.stringify(upbitStats));
+  console.log(
+    `✅ marketStats.json 저장 완료 (${Object.keys(upbitStats).length}개)`
+  );
+}
+
+main().catch(err => {
+  console.error("marketStatsWorker error", err);
+  process.exit(1);
+});
+
+
+레플릿한테는:
+“기존 priceWorker 돌릴 때 같이, 또는 별도 npm script npm run worker:market-stats 만들어서
+크론(5초/10초 등)으로 돌려 달라”고 부탁하면 됨.
+
+2단계: /api/premium/table-filtered에서 통계 가져다가 컬럼 채우기
+
+이제 홈 테이블 API가 prices.json + marketStats.json을 둘 다 사용하게 만들면 된다.
+
+👉 API 안에 추가할 타입
+interface MarketStats {
+  change24h: number;       // %
+  high24h: number | null;  // 원화 기준
+  low24h: number | null;
+  volume24hKrw: number;    // 24h 누적 거래대금(원)
+}
+
+type MarketStatsMap = Record<string, MarketStats>;
+
+👉 API 상단에서 stats 로드
+import path from "path";
+import fs from "fs";
+
+function loadJson<T>(relPath: string): T {
+  const full = path.join(process.cwd(), relPath);
+  const raw = fs.readFileSync(full, "utf-8");
+  return JSON.parse(raw) as T;
+}
+
+const prices = loadJson<Record<string, { price: number; ts: number }>>(
+  "data/prices.json"
+);
+const marketStats = loadJson<MarketStatsMap>(
+  "data/marketStats.json"
+);
+
+👉 각 코인 row 만들 때 통계 매핑
+
+지금 row 만드는 곳(심볼마다 객체 하나 리턴하는 위치)에
+국내 key를 만들어 stats를 찾아 붙이면 됨.
+
+const domesticKey = `${domesticExchange}:${symbol}:KRW`; // 예: "UPBIT:BTC:KRW"
+const stats = marketStats[domesticKey];
+
+rows.push({
+  symbol,
+  name_ko,
+  koreanPrice,          // 이미 계산되어 있는 값
+  globalPrice,
+  globalPriceKrw,
+  premium,
+
+  // 🔻 새로 채우는 부분
+  change24h: stats?.change24h ?? 0,
+  high24h: stats?.high24h ?? null,
+  low24h: stats?.low24h ?? null,
+  volume24hKrw: stats?.volume24hKrw ?? 0
+});
+
+
+프론트에서는:
+
+전일대비 → change24h (% 포맷)
+
+거래액(일) → volume24hKrw (억/조 단위로 포맷)
+
+고가/저가 컬럼은 일단 - 유지하거나,
+현재가 / high24h 비율로 간단한 퍼센트 만들어 줄 수 있음 (필요하면 수식도 써줄게).
+
+3단계: 해외 거래소(외국 가격)는 그대로 prices.json 쓰면 됨
+
+이미:
+
+dropdown 윗쪽에서 해외 거래소 선택 → 예: BINANCE_USDT
+
+API에서는 foreignKey = "BINANCE:BTC:USDT" 이런 식으로 prices.json 조회해서
+globalPrice, globalPriceKrw, premium 계산 중일 거라서
+이 부분은 그대로 두고, 국내 통계만 marketStats에서 더 가져오는 구조가 제일 깔끔함.
+
+나중에 원하면:
+
+“거래액(일)을 해외 거래소 24h volume 기준으로 보정”
+
+“전일대비를 해외 시세 기준으로도 하나 더 보여주기”
+
+이런 것도 같은 방식으로 marketStats_foreign.json 하나 더 만들면 확장 가능.
+
+정리해서 레플릿한테 이렇게 말해주면 된다
+
+워커 단계
+
+업비트 KRW 마켓 기준으로
+change24h, high24h, low24h, volume24hKrw를 수집하는 워커 추가
+
+결과를 data/marketStats.json에
+UPBIT:BTC:KRW 같은 key 기준으로 저장
+
+API 단계
+
+/api/premium/table-filtered에서 marketStats.json을 로드해서
+
+각 row에 change24h / volume24hKrw를 넣고
+
+프론트가 전일대비 / 거래액(일)로 바로 쓰게 해주기
+
+이렇게만 하면
+👉 지금 홈 화면에서 죽어있는 전일대비 / 거래액(일) / (원하면 고가·저가) 컬럼들이 바로 살아난다.

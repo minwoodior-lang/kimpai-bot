@@ -3,6 +3,15 @@ import path from "path";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { BAD_ICON_SYMBOLS } from "@/config/badIconSymbols";
 
+interface MarketStatsEntry {
+  change24h: number;
+  high24h: number | null;
+  low24h: number | null;
+  volume24hKrw: number;
+}
+
+type MarketStatsMap = Record<string, MarketStatsEntry>;
+
 function loadJsonFile(filename: string): any {
   try {
     const file = path.join(process.cwd(), "data", filename);
@@ -28,6 +37,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const masterSymbols = loadJsonFile("master_symbols.json") as any[];
     const premiumTable = loadJsonFile("premiumTable.json") as any[];
     const prices = loadJsonFile("prices.json") as Record<string, { price: number; ts: number }>;
+    const marketStats = loadJsonFile("marketStats.json") as MarketStatsMap;
 
     const masterMap = new Map(masterSymbols.map((s: any) => [s.symbol, s]));
     const premiumMap = new Map(premiumTable.map((p: any) => [p.symbol, p]));
@@ -82,6 +92,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
         const cmcSlug = premiumRow?.cmcSlug || master?.cmc_slug || null;
 
+        const statsKey = `${domesticExchange}:${symbol}:${domesticQuote}`;
+        const stats = marketStats[statsKey];
+
         return {
           symbol,
           name_ko: market.name_ko || master?.name_ko || premiumRow?.name_ko || symbol,
@@ -95,10 +108,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           globalPrice: foreignPrice,
           globalPriceKrw: Math.round(globalPriceKrw * 100) / 100,
           premium: Math.round(premium * 100) / 100,
-          volume24hKrw: 0,
+          volume24hKrw: stats?.volume24hKrw ?? 0,
           volume24hUsdt: 0,
           volume24hForeignKrw: 0,
-          change24h: 0,
+          change24h: stats?.change24h ?? 0,
+          high24h: stats?.high24h ?? null,
+          low24h: stats?.low24h ?? null,
           isListed: domesticPrice > 0 && foreignPrice > 0,
           icon_url: iconUrl,
           displayName: market.name_ko || market.name_en || symbol,
