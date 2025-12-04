@@ -3,19 +3,23 @@
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. The project's core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. It handles real-time price collection, premium calculation, and global market metrics, aiming to offer a comprehensive view of the crypto market with a focus on the Korean premium.
 
+### Recent Changes (v3.4.6 - 2024-12-04)
+- **타이포그래피 & 레이아웃 최종 정리**:
+  - 오늘의 김프 요약 라벨: text-[11px] md:text-[13px] (라벨 폰트 크기 증가)
+  - 필터 바 재정렬: 기준/해외 드롭다운 + ↔를 gap-1로 묶어 한 덩어리로 배치
+  - 필터 바 레이아웃: PC gap-3 → gap-4, 검색창 w-64 → w-56 (더 컴팩트하게)
+  - 코인셀 메타정보 추가: TradingViewChart에 domesticExchange/foreignExchange props 전달
+  - 코인셀 메타정보 텍스트: "KR 기준 거래소 / 해외 거래소 기준" (text-[11px] md:text-[13px] font-medium)
+
 ### Recent Changes (v3.4.5 - 2024-12-04)
 - **타이포그래피 & UI 위계 최종 개선**:
   - 내 알림 카드 (MyAlertsCard): 제목 text-[15px] md:text-base, 본문 text-xs md:text-sm, 버튼 px-4 md:px-5 py-2 md:py-2.5로 위계 정렬
   - 오늘의 AI 김프 요약: 지표 라벨 text-[11px] md:text-xs, 값 text-sm md:text-[15px], KR Premium Score 카드 → 좌우 정렬 (라벨+게이지 / 점수)
 - **필터 바 라벨 순서 통일**:
-  - PC: flex justify-between으로 명시적 좌우 정렬
-  - 라벨 순서: "기준 거래소 [드롭다운] ↔ 해외 거래소 [드롭다운]" → "텍스트 먼저" 패턴 통일
-  - 검색창 폭: w-48 md:w-64 (이전: w-[260px])
-  - 모바일: 라벨 동일하게 적용 (드롭다운 → 라벨 형식 제거)
+  - 라벨 순서: "기준 거래소 [드롭다운] ↔ [드롭다운] 해외 거래소" 최종 확정
 - **코인셀 확장 차트 레이아웃 개선**:
-  - 확장 행 td: colSpan={visibleColumns.length} + className="p-0" 적용
+  - 확장 행 td: colSpan={8} + className="p-0" 적용
   - 안쪽 wrapper: div.w-full만 유지, 모든 px/mx 제거
-  - 결과: 테이블 폭과 완전히 동일하게 맞춤
 
 ### Recent Changes (v3.4.4 - 2024-12-04)
 - **헤더(navbar) + 메인 컨테이너 폭 통일 (모두 max-w-[1280px] px-6)**:

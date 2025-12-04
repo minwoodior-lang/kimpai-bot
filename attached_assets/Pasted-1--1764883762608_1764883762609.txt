@@ -1,0 +1,112 @@
+1. 오늘의 김프 요약 – 라벨 폰트 살짝 키우기
+
+문제 인식
+
+평균 김프 / 최소 김프 / 최대 김프 / 환율 라벨이 숫자에 비해 너무 작아서 눈에 잘 안 들어옴.
+
+카드 전체가 넓어지면서 여백이 충분한데, 타이포가 약하게 느껴짐.
+
+지시사항
+
+오늘의 김프 요약 카드에서 라벨 텍스트만 한 단계 키우기.
+
+모바일은 유지, PC에서만 살짝 키우는 방식이 좋음.
+
+// TodaySummaryCard.tsx (혹은 동일 역할 컴포넌트)
+
+<label
+  className="
+    text-[11px] md:text-[13px]      // 변경 전이 10/12 정도였다면 이렇게
+    text-slate-400
+    leading-tight
+  "
+>
+  평균 김프
+</label>
+
+
+요약 카드 안에 있는 모든 라벨(평균/최소/최대/환율) 전부 위랑 같은 스케일로 통일해 달라고 하면 됨.
+숫자는 지금처럼 text-[15px] md:text-[17px] font-semibold 정도면 딱 균형 맞음.
+
+2. 기준 거래소 / 해외 거래소 드롭다운 – 간격 붙이기 + 표기 원복
+
+문제 인식
+
+왼쪽에 KR 기준 거래소 드롭다운, 오른쪽에 해외 거래소 드롭다운 사이 간격이 너무 넓음.
+
+기존에는 KR 기준 거래소 [드롭다운] <> 해외 거래소 [드롭다운]처럼 한 덩어리로 붙어 있었는데, 지금은 < > 와 드롭다운 사이가 벌어져서 끊겨 보임.
+
+우측의 암호화폐 총 XXX개 · 검색창 그룹도 너무 오른쪽으로 빠져서 전체적으로 느슨해 보임.
+
+지시사항
+
+// PremiumTable 상단 필터 바
+
+<div className="flex flex-wrap items-center justify-between gap-3 md:gap-4">
+
+  {/* 왼쪽 그룹: 기준/해외 드롭다운 + <> */}
+  <div className="flex items-center gap-1 md:gap-2">
+    <BaseExchangeDropdown />   // KR 기준 거래소
+    <span className="text-xs md:text-sm text-slate-500 px-1">
+      &lt;&gt;
+    </span>
+    <ForeignExchangeDropdown />  // 해외 거래소
+  </div>
+
+  {/* 오른쪽 그룹: 암호화폐 총 X개 + 검색창 */}
+  <div className="flex items-center gap-2 md:gap-3">
+    <span className="text-[11px] md:text-[12px] text-slate-400">
+      암호화폐 총 {totalCount}개
+    </span>
+    <SearchInput className="w-[180px] md:w-[260px]" />
+  </div>
+
+</div>
+
+
+포인트만 요약해서 전달
+
+기준/해외 드롭다운을 flex items-center gap-1 로 묶어서 서로 딱 붙게.
+
+< > 텍스트는 좌측 드롭다운 바로 오른쪽에 붙이고, 오른쪽 드롭다운과는 gap-1 정도만.
+
+우측 영역(암호화폐 총 XXX개 + 검색창)은 기존처럼 justify-between에서 오른쪽 그룹으로 두되, 검색창 폭을 w-[260px] 정도로 조정해서 너무 길지 않게.
+
+3. 코인셀 내부 “해외 거래소 기준” 텍스트 – 폰트 업 & 일관성
+
+문제 인식
+
+코인셀 펼쳤을 때, 상단에 나오는
+KR 기준 거래소: 업비트 / 해외 거래소 기준: 바이낸스 USDT 같은 텍스트가 전체 레이아웃 넓어진 것에 비해 너무 작음.
+
+상단 필터 라벨이나 카드 내 라벨보다 한 단계 더 작아서 시선이 안 감.
+
+지시사항
+
+// CoinRowExpanded.tsx (코인셀 펼쳐졌을 때 메타정보 영역)
+
+<p
+  className="
+    text-[11px] md:text-[13px]     // 기존보다 1단계 키우기
+    text-slate-400
+    font-medium
+    flex items-center gap-2
+  "
+>
+  <span>KR 기준 거래소: {baseExchangeLabel}</span>
+  <span className="text-slate-500">/</span>
+  <span>해외 거래소 기준: {foreignExchangeLabel}</span>
+</p>
+
+
+데스크톱 기준 md:text-[13px] font-medium 정도로 해서, 상단 필터 라벨과 같은 급으로 맞추는 게 좋음.
+
+색은 text-slate-400 유지하되, 숫자/가격 컬럼보다는 살짝 옅은 정도로만.
+
+정리해서 한 줄로 전달하면
+
+오늘의 김프 요약 카드 안 라벨 폰트를 한 단계 키워서(모바일 11, 데스크톱 13px 수준) 숫자와 밸런스 맞춰주고,
+
+기준 거래소 / 해외 거래소 드롭다운은 < > 포함해서 한 덩어리로 붙여서 gap-1~2로 줄이고, 오른쪽의 “암호화폐 총 X개 + 검색창” 그룹은 검색창 폭을 줄여 전체 라인이 더 타이트하게 보이도록 정렬해 주세요.
+
+코인셀 펼쳤을 때 상단에 나오는 “KR 기준 거래소 / 해외 거래소 기준” 텍스트는 md 기준 13px, font-medium 정도로 올려서 상단 필터 라벨과 시각적 급을 맞춰 주세요.

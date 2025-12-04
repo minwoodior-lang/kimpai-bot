@@ -717,37 +717,31 @@ export default function PremiumTable({
       {showFilters && (
         <>
           {/* PC 레이아웃: 한 줄 정렬 (justify-between) */}
-          <div className="hidden md:flex items-center justify-between gap-3 mt-3 mb-2">
-            {/* 왼쪽: 기준 거래소 */}
-            <div className="flex items-center gap-2">
-              <span className="text-xs md:text-sm text-white/60">기준 거래소</span>
+          <div className="hidden md:flex items-center justify-between gap-4 mt-3 mb-2">
+            {/* 왼쪽: 기준/해외 거래소 + ↔ */}
+            <div className="flex items-center gap-1">
+              <span className="text-xs md:text-[13px] text-white/60">기준 거래소</span>
               <MiniDropdown
                 value={domesticExchange}
                 options={DOMESTIC_EXCHANGES}
                 onChange={setDomesticExchange}
               />
-            </div>
-
-            {/* 중앙: ↔ */}
-            <span className="text-white/30 text-xs md:text-sm">↔</span>
-
-            {/* 오른쪽: 드롭다운 + 해외 거래소 */}
-            <div className="flex items-center gap-2">
+              <span className="text-white/30 text-xs md:text-sm px-1">↔</span>
               <MiniDropdown
                 value={foreignExchange}
                 options={FOREIGN_EXCHANGES}
                 onChange={setForeignExchange}
                 showShortName={true}
               />
-              <span className="text-xs md:text-sm text-white/60">해외 거래소</span>
+              <span className="text-xs md:text-[13px] text-white/60">해외 거래소</span>
             </div>
 
             {/* 오른쪽: 암호화폐 총 N개 + 검색 */}
             <div className="flex items-center gap-3">
-              <span className="hidden md:inline text-xs md:text-sm text-white/50 whitespace-nowrap">
+              <span className="text-xs md:text-sm text-white/50 whitespace-nowrap">
                 암호화폐 총 <span className="font-semibold text-white">{totalCoins}</span>개
               </span>
-              <div className="w-48 md:w-64 relative">
+              <div className="w-48 md:w-56 relative">
                 <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -767,27 +761,21 @@ export default function PremiumTable({
           {/* 모바일 레이아웃: 2단 구조 */}
           <div className="flex md:hidden flex-col gap-2 mb-3">
             {/* 거래소 선택 - 1줄 */}
-            <div className="flex items-center gap-2">
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-white/60">기준 거래소</span>
-                <MiniDropdown
-                  value={domesticExchange}
-                  options={DOMESTIC_EXCHANGES}
-                  onChange={setDomesticExchange}
-                />
-              </div>
-
-              <span className="text-white/30 text-xs mx-1">↔</span>
-
-              <div className="flex items-center gap-2">
-                <MiniDropdown
-                  value={foreignExchange}
-                  options={FOREIGN_EXCHANGES}
-                  onChange={setForeignExchange}
-                  showShortName={true}
-                />
-                <span className="text-xs text-white/60">해외 거래소</span>
-              </div>
+            <div className="flex items-center gap-1">
+              <span className="text-xs text-white/60">기준 거래소</span>
+              <MiniDropdown
+                value={domesticExchange}
+                options={DOMESTIC_EXCHANGES}
+                onChange={setDomesticExchange}
+              />
+              <span className="text-white/30 text-xs px-1">↔</span>
+              <MiniDropdown
+                value={foreignExchange}
+                options={FOREIGN_EXCHANGES}
+                onChange={setForeignExchange}
+                showShortName={true}
+              />
+              <span className="text-xs text-white/60">해외 거래소</span>
             </div>
 
             {/* 검색 및 개수 - 2줄 */}
@@ -993,21 +981,21 @@ export default function PremiumTable({
                       {expandedSymbol === row.symbol && (
                         <tr key={`${row.symbol}-chart`}>
                           <td colSpan={8} className="p-0">
-                            <div className="w-full">
-                              <div className="h-[360px] w-full overflow-hidden rounded-b-xl bg-[#050819]">
-                                <TradingViewChart
-                                  tvSymbol={(() => {
-                                    const tv = getTvSymbolForRow({
-                                      symbol: row.symbol,
-                                      domesticExchange,
-                                      foreignExchange,
-                                    });
-                                    console.log("[TV_SYMBOL_ROW]", row.symbol, domesticExchange, foreignExchange, tv);
-                                    return tv;
-                                  })()}
-                                  height={360}
-                                />
-                              </div>
+                            <div className="w-full rounded-b-xl overflow-hidden bg-[#050819]">
+                              <TradingViewChart
+                                tvSymbol={(() => {
+                                  const tv = getTvSymbolForRow({
+                                    symbol: row.symbol,
+                                    domesticExchange,
+                                    foreignExchange,
+                                  });
+                                  console.log("[TV_SYMBOL_ROW]", row.symbol, domesticExchange, foreignExchange, tv);
+                                  return tv;
+                                })()}
+                                height={360}
+                                domesticExchange={domesticExchange}
+                                foreignExchange={foreignExchange}
+                              />
                             </div>
                           </td>
                         </tr>

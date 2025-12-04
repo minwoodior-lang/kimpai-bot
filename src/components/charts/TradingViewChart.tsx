@@ -3,11 +3,15 @@ import React, { useEffect, useRef } from "react";
 interface TradingViewChartProps {
   tvSymbol: string;
   height?: number;
+  domesticExchange?: string;
+  foreignExchange?: string;
 }
 
 const TradingViewChart: React.FC<TradingViewChartProps> = ({
   tvSymbol,
   height = 360,
+  domesticExchange,
+  foreignExchange,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -46,12 +50,29 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
     containerRef.current.appendChild(script);
   }, [tvSymbol]);
 
+  const getExchangeName = (exchange?: string) => {
+    if (!exchange) return "";
+    const [exName] = exchange.split("_");
+    return exName;
+  };
+
   return (
-    <div className="w-full" style={{ height }}>
-      <div
-        ref={containerRef}
-        className="tradingview-widget-container h-full w-full"
-      />
+    <div className="w-full flex flex-col" style={{ height }}>
+      {(domesticExchange || foreignExchange) && (
+        <div className="px-4 py-2 border-b border-white/10 bg-slate-900/30">
+          <p className="text-[11px] md:text-[13px] text-slate-400 font-medium flex items-center gap-2">
+            <span>KR 기준 거래소: {getExchangeName(domesticExchange)}</span>
+            <span className="text-slate-500">/</span>
+            <span>해외 거래소 기준: {getExchangeName(foreignExchange)}</span>
+          </p>
+        </div>
+      )}
+      <div className="flex-1 w-full overflow-hidden">
+        <div
+          ref={containerRef}
+          className="tradingview-widget-container h-full w-full"
+        />
+      </div>
     </div>
   );
 };
