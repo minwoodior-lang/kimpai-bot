@@ -1,18 +1,21 @@
 import 'dotenv/config';
 import fs from 'fs';
 import path from 'path';
-import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = process.env.SUPABASE_URL!;
-const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+// Supabase는 선택사항 (환경변수 있을 때만 사용)
+let supabase: any = null;
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
-  throw new Error('Supabase 환경변수가 설정되지 않았습니다.');
+if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY) {
+  const { createClient } = require('@supabase/supabase-js');
+  supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+    auth: { persistSession: false }
+  });
+  console.log('✅ Supabase 연결됨');
+} else {
+  console.log('⚠️ Supabase 환경변수 없음 (JSON 처리만 진행)');
 }
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
-  auth: { persistSession: false }
-});
 
 // 심볼 → 코인마켓캡 slug 수동 매핑 (점점 추가)
 const SYMBOL_SLUG_OVERRIDES: Record<string, string> = {
@@ -104,6 +107,7 @@ async function syncCmcSlugs() {
   }
 
   // 3️⃣ 각 코인의 slug 찾기
+  let successCount = 0;
   for (const row of needsSlug) {
     const { symbol, name_en } = row;
     const upper = symbol.toUpperCase();
@@ -140,6 +144,7 @@ async function syncCmcSlugs() {
     const symbolIndex = masterSymbols.findIndex((s: any) => s.symbol === symbol);
     if (symbolIndex !== -1) {
       masterSymbols[symbolIndex].cmc_slug = finalSlug;
+      successCount++;
     }
 
     await delay(800);
@@ -148,23 +153,33 @@ async function syncCmcSlugs() {
   // 5️⃣ master_symbols.json 저장
   await saveMasterSymbols(masterSymbols);
 
-  // 6️⃣ (선택) Supabase에도 저장 (DB 싱크)
-  for (const row of needsSlug) {
-    const { symbol } = row;
-    const updated = masterSymbols.find((s: any) => s.symbol === symbol);
-    
-    if (updated?.cmc_slug) {
-      const { error } = await supabase
-        .from('master_symbols')
-        .update({ cmc_slug: updated.cmc_slug })
-        .eq('base_symbol', symbol);
+  console.log(`\n📊 JSON 업데이트 결과: ${successCount}개 코인 성공`);
 
-      if (error) {
-        console.warn(`⚠️ Supabase 업데이트 실패 (${symbol}):`, error);
-      } else {
-        console.log(`💾 Supabase 저장: ${symbol} → ${updated.cmc_slug}`);
+  // 6️⃣ (선택) Supabase에도 저장 (DB 싱크)
+  if (supabase) {
+    console.log('\n🔄 Supabase DB 동기화 시작...');
+    for (const row of needsSlug) {
+      const { symbol } = row;
+      const updated = masterSymbols.find((s: any) => s.symbol === symbol);
+      
+      if (updated?.cmc_slug) {
+        try {
+          const { error } = await supabase
+            .from('master_symbols')
+            .update({ cmc_slug: updated.cmc_slug })
+            .eq('base_symbol', symbol);
+
+          if (error) {
+            console.warn(`⚠️ Supabase 업데이트 실패 (${symbol}):`, error);
+          } else {
+            console.log(`💾 Supabase 저장: ${symbol} → ${updated.cmc_slug}`);
+          }
+        } catch (err) {
+          console.warn(`⚠️ Supabase 오류 (${symbol}):`, err);
+        }
       }
     }
+    console.log('✅ Supabase 동기화 완료');
   }
 
   console.log('\n🎉 CMC 슬러그 자동 수집 완료');
