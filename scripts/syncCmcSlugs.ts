@@ -1,4 +1,6 @@
 import 'dotenv/config';
+import fs from 'fs';
+import path from 'path';
 import { createClient } from '@supabase/supabase-js';
 
 const SUPABASE_URL = process.env.SUPABASE_URL!;
@@ -65,36 +67,53 @@ async function delay(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+async function loadMasterSymbols(): Promise<any[]> {
+  try {
+    const file = path.join(process.cwd(), 'data', 'master_symbols.json');
+    return JSON.parse(fs.readFileSync(file, 'utf-8'));
+  } catch {
+    return [];
+  }
+}
+
+async function saveMasterSymbols(symbols: any[]): Promise<void> {
+  const file = path.join(process.cwd(), 'data', 'master_symbols.json');
+  fs.writeFileSync(file, JSON.stringify(symbols, null, 2), 'utf-8');
+  console.log('💾 master_symbols.json 저장 완료');
+}
+
 async function syncCmcSlugs() {
   console.log('🔄 CMC slug 자동 수집 시작');
 
-  const { data: rows, error } = await supabase
-    .from('master_symbols')
-    .select('id, base_symbol, name_en, cmc_slug')
-    .is('cmc_slug', null) as any;
-
-  if (error) {
-    console.error('❌ master_symbols 조회 오류:', error);
+  // 1️⃣ master_symbols.json 로드
+  const masterSymbols = await loadMasterSymbols();
+  if (masterSymbols.length === 0) {
+    console.warn('⚠️ master_symbols.json이 비어있습니다.');
     return;
   }
 
-  if (!rows || rows.length === 0) {
-    console.log('✅ 업데이트할 slug 없음');
+  console.log(`📌 총 심볼: ${masterSymbols.length}개`);
+
+  // 2️⃣ slug가 없는 심볼 찾기
+  const needsSlug = masterSymbols.filter((s: any) => !s.cmc_slug);
+  console.log(`📌 slug 미등록 코인: ${needsSlug.length}개`);
+
+  if (needsSlug.length === 0) {
+    console.log('✅ 모든 코인의 slug가 이미 등록되어 있습니다.');
     return;
   }
 
-  console.log(`📌 slug 미등록 코인: ${rows.length}개`);
-
-  for (const row of rows) {
-    const { id, base_symbol, name_en } = row;
-    const upper = base_symbol.toUpperCase();
+  // 3️⃣ 각 코인의 slug 찾기
+  for (const row of needsSlug) {
+    const { symbol, name_en } = row;
+    const upper = symbol.toUpperCase();
 
     console.log(`\n==============================`);
-    console.log(`심볼: ${base_symbol}, name_en: ${name_en}`);
+    console.log(`심볼: ${symbol}, name_en: ${name_en}`);
 
     const overrideSlug = SYMBOL_SLUG_OVERRIDES[upper];
     const nameSlug = normalizeNameToSlug(name_en);
-    const symbolSlug = base_symbol.toLowerCase();
+    const symbolSlug = symbol.toLowerCase();
 
     const candidates = [overrideSlug, nameSlug, symbolSlug].filter(Boolean) as string[];
 
@@ -111,24 +130,41 @@ async function syncCmcSlugs() {
     }
 
     if (!finalSlug) {
-      console.warn(`⚠️ ${base_symbol}: 유효한 slug를 찾지 못해 건너뜀`);
+      console.warn(`⚠️ ${symbol}: 유효한 slug를 찾지 못해 건너뜀`);
       continue;
     }
 
-    console.log(`✅ 최종 slug=${finalSlug}, DB 업데이트 진행`);
+    console.log(`✅ 최종 slug=${finalSlug}, master_symbols.json 업데이트`);
 
-    const { error: updateErr } = await supabase
-      .from('master_symbols')
-      .update({ cmc_slug: finalSlug })
-      .eq('id', id);
-
-    if (updateErr) {
-      console.error(`❌ 업데이트 실패:`, updateErr);
-    } else {
-      console.log(`💾 저장 완료: ${base_symbol} → ${finalSlug}`);
+    // 4️⃣ master_symbols.json에서 해당 심볼 업데이트
+    const symbolIndex = masterSymbols.findIndex((s: any) => s.symbol === symbol);
+    if (symbolIndex !== -1) {
+      masterSymbols[symbolIndex].cmc_slug = finalSlug;
     }
 
     await delay(800);
+  }
+
+  // 5️⃣ master_symbols.json 저장
+  await saveMasterSymbols(masterSymbols);
+
+  // 6️⃣ (선택) Supabase에도 저장 (DB 싱크)
+  for (const row of needsSlug) {
+    const { symbol } = row;
+    const updated = masterSymbols.find((s: any) => s.symbol === symbol);
+    
+    if (updated?.cmc_slug) {
+      const { error } = await supabase
+        .from('master_symbols')
+        .update({ cmc_slug: updated.cmc_slug })
+        .eq('base_symbol', symbol);
+
+      if (error) {
+        console.warn(`⚠️ Supabase 업데이트 실패 (${symbol}):`, error);
+      } else {
+        console.log(`💾 Supabase 저장: ${symbol} → ${updated.cmc_slug}`);
+      }
+    }
   }
 
   console.log('\n🎉 CMC 슬러그 자동 수집 완료');
