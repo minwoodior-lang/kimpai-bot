@@ -2,6 +2,7 @@ import { createServer } from "http";
 import { parse } from "url";
 import next from "next";
 import { createChatServer } from "./src/server/chatServer";
+import { startPriceWorker } from "./workers/priceWorker";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = process.env.HOSTNAME || "0.0.0.0";
@@ -28,5 +29,8 @@ app.prepare().then(() => {
   server.listen(port, hostname, () => {
     console.log(`> Ready on http://${hostname}:${port}`);
     console.log(`> WebSocket server at /ws/chat`);
+    
+    // 가격 수집 워커 시작
+    startPriceWorker();
   });
 });
