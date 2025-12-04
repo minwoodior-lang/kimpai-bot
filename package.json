@@ -18,7 +18,10 @@
     "update:prices": "tsx scripts/updatePrices.ts",
     "price:worker": "tsx scripts/priceWorker.ts",
     "update:notices": "tsx scripts/noticeUpdateWorker.ts",
-    "sync:cmc-slugs": "tsx scripts/syncCmcSlugs.ts"
+    "sync:cmc-slugs": "tsx scripts/syncCmcSlugs.ts",
+    "build:markets:all": "npm run fetch:upbit && npm run fetch:bithumb && npm run fetch:coinone && npm run build:markets",
+    "sync:meta": "tsx scripts/syncMeta.ts",
+    "sync:all": "npm run build:markets:all && npm run sync:meta"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.86.0",
