@@ -256,7 +256,7 @@ export default function Home() {
 
           <div className="mt-2 space-y-3">
             {/* 프리미엄 테이블 */}
-            <PremiumTable showHeader={false} showFilters={true} limit={0} refreshInterval={2000} />
+            <PremiumTable showHeader={false} showFilters={true} limit={0} refreshInterval={1000} />
           </div>
         </div>
       </HomeLayout>

@@ -323,7 +323,7 @@ export default function PremiumTable({
   showHeader = true,
   showFilters = true,
   limit = 0,
-  refreshInterval = 3000,
+  refreshInterval = 1000,
 }: PremiumTableProps) {
   const [data, setData] = useState<PremiumData[]>([]);
   const [averagePremium, setAveragePremium] = useState(0);

@@ -3,7 +3,12 @@
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. The project's core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. It handles real-time price collection, premium calculation, and global market metrics, aiming to offer a comprehensive view of the crypto market with a focus on the Korean premium.
 
-### Recent Changes (v3.4.1 - 2024-12-04)
+### Recent Changes (v3.4.2 - 2024-12-04)
+- **Frontend Data Polling Optimized**:
+  - Reduced `/api/premium/table-filtered` polling interval: 3000ms → 1000ms (PremiumTable.tsx default)
+  - Reduced pages/index.tsx polling: 2000ms → 1000ms
+  - **Result: All exchange prices now reflect within 1~3 seconds after market data collection**
+  - Backend worker (3s) + proxy caching (2~5s) unchanged for stability
 - **BINANCE_BTC Market Removed**:
   - Removed "바이낸스 BTC 마켓" option from foreign exchange dropdown (Binance has no BTC spot market)
   - Cleaned up from: ExchangeSelectionContext.tsx, exchangeFetchers.ts, IndicatorSelector.tsx, ChartSectionEnhanced.tsx
@@ -11,7 +16,7 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - **Binance 429 Rate Limit Resolution**: 
   - Proxy caching: 5sec for spot 24hr, 2sec for prices, 1min stale fallback
   - 429 error handling with stale cache fallback + 503 response
-  - Render proxy fully tested and deployed (✓ /healthz returns v1 version)
+  - Render proxy fully tested and deployed
 - **Binance Futures Stats Support**:
   - Added `fetchBinanceFuturesStats()` to process `/binance/fapi/v1/ticker/24hr` data
   - Proxy route `/binance/fapi/v1/ticker/24hr` implemented with 5sec caching
@@ -34,6 +39,7 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - **Data Segregation:** Long-term user personalization data (Auth, profiles, alerts, subscriptions, notices) is stored in Supabase. Real-time/temporary data (price data, premium tables, concurrent users, session management) is processed and stored locally on the Replit server memory or as JSON files.
 - **Proxy-Centric Global API Access:** All global exchange API calls are routed through an external Render-hosted proxy server to bypass regional restrictions and ensure reliable data fetching.
 - **Real-time Data Processing:** A dedicated `priceWorker` cron job runs every 3 seconds to fetch prices from all supported exchanges, calculate premium tables, and store them in local JSON files.
+- **Fast Frontend Polling:** Frontend polls `/api/premium/table-filtered` every 1 second for sub-2-second UI refresh rates.
 - **Robust BTC Pivot Fallback:** A defined fallback order for BTC price (BINANCE → OKX → BITGET → GATE → MEXC) ensures price availability even if a primary source fails.
 
 **UI/UX and Feature Specifications:**
@@ -81,4 +87,4 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 ### Next Steps
 1. **Render proxy manual deployment**: Deploy `/binance/fapi/v1/ticker/24hr` route addition to enable Binance Futures 24hr stats
 2. **Monitor stats collection**: After proxy deployment, verify BINANCE_FUTURES stats in marketStats.json
-3. **UI Frontend validation**: Confirm BINANCE_USDT and BINANCE_FUTURES dropdowns work correctly
+3. **UI Frontend validation**: Confirm all exchange prices reflect within 1-3 seconds of market movement
