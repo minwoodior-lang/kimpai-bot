@@ -59,7 +59,27 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         const domesticPriceKey = `${domesticExchange}:${symbol}:${domesticQuote}`;
         const foreignPriceKey = `${foreignExchange}:${symbol}:${foreignQuote}`;
 
-        const domesticPriceKrw = prices[domesticPriceKey]?.price ?? null;
+        let domesticPriceRaw = prices[domesticPriceKey]?.price ?? null;
+        let domesticPriceKrw: number | null = null;
+        
+        // 국내 마켓 원화 환산 로직
+        if (domesticPriceRaw && domesticPriceRaw > 0) {
+          if (domesticQuote === "KRW") {
+            // KRW 마켓: 이미 원화
+            domesticPriceKrw = domesticPriceRaw;
+          } else if (domesticQuote === "BTC") {
+            // BTC 마켓: 코인 BTC가 × 같은 거래소 BTC/KRW
+            const btcKrwKey = `${domesticExchange}:BTC:KRW`;
+            const btcKrw = prices[btcKrwKey]?.price ?? 0;
+            if (btcKrw > 0) {
+              domesticPriceKrw = domesticPriceRaw * btcKrw;
+            }
+          } else if (domesticQuote === "USDT") {
+            // USDT 마켓: 코인 USDT가 × 글로벌 테더 시세
+            domesticPriceKrw = domesticPriceRaw * fxRate;
+          }
+        }
+        
         const foreignPrice = prices[foreignPriceKey]?.price ?? null;
 
         let foreignPriceKrw: number | null = null;

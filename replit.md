@@ -252,6 +252,13 @@ POST /api/heartbeat
    - premiumTable.json: 558 rows
    - usdtKrwGlobal: CoinGecko 글로벌 테더 시세 (₩1,472.87)
 
+5. **국내 BTC/USDT 마켓 원화 환산 수정**
+   - 버그: BTC 마켓 가격을 그대로 원화로 사용 → ₩0 표시, 김프 -100%
+   - 수정: `domesticPriceKrw = 코인BTC가 × BTC/KRW`
+   - KRW 마켓: 이미 원화 (그대로 사용)
+   - BTC 마켓: `priceBtc × btcKrw` (같은 거래소 BTC/KRW 곱셈)
+   - USDT 마켓: `priceUsdt × fxRate` (글로벌 테더 시세 곱셈)
+
 ---
 
 ## 📌 v3.3.2 변경사항 (2025-12-04)
