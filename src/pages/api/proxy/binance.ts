@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const BINANCE_SPOT_URL = 'https://api.binance.com/api/v3/ticker/24hr';
-const BINANCE_FUTURES_URL = 'https://fapi.binance.com/fapi/v1/ticker/24hr';
+const PROXY_BASE = 'https://kimpai-price-proxy-1.onrender.com';
+const BINANCE_SPOT_URL = `${PROXY_BASE}/binance/api/v3/ticker/price`;
+const BINANCE_FUTURES_URL = `${PROXY_BASE}/binance/fapi/v1/ticker/price`;
 const COINGECKO_FALLBACK = 'https://api.coingecko.com/api/v3/coins/markets';
 
 let cachedSpotData: any = null;
@@ -37,29 +38,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
 
       if (response.ok) {
-        cachedFuturesData = await response.json();
+        const rawData = await response.json();
+        cachedFuturesData = transformPriceData(rawData);
         lastFuturesFetch = now;
         return res.status(200).json({ source: 'binance_futures', data: cachedFuturesData });
       }
 
-      console.log('Binance Futures API blocked, using CoinGecko spot data as fallback');
-      
-      if (cachedCoingeckoData && now - lastCoingeckoFetch < CACHE_DURATION * 6) {
-        return res.status(200).json({ source: 'coingecko_futures_fallback_cached', data: transformCoingeckoData(cachedCoingeckoData) });
-      }
-
-      const cgResponse = await fetch(
-        `${COINGECKO_FALLBACK}?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h`,
-        { headers: { 'Accept': 'application/json' } }
-      );
-
-      if (cgResponse.ok) {
-        cachedCoingeckoData = await cgResponse.json();
-        lastCoingeckoFetch = now;
-        return res.status(200).json({ source: 'coingecko_futures_fallback', data: transformCoingeckoData(cachedCoingeckoData) });
-      }
-
-      return res.status(200).json({ source: 'cache', data: cachedFuturesData || transformCoingeckoData(cachedCoingeckoData) || [] });
+      console.log('Binance Futures proxy failed, using CoinGecko fallback');
+      return await fallbackToCoingecko(res, now, 'futures');
     }
 
     if (cachedSpotData && now - lastSpotFetch < CACHE_DURATION) {
@@ -74,37 +60,65 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     if (response.ok) {
-      cachedSpotData = await response.json();
+      const rawData = await response.json();
+      cachedSpotData = transformPriceData(rawData);
       lastSpotFetch = now;
       return res.status(200).json({ source: 'binance_spot', data: cachedSpotData });
     }
 
-    console.log('Binance API blocked, falling back to CoinGecko');
-
-    if (cachedCoingeckoData && now - lastCoingeckoFetch < CACHE_DURATION * 6) {
-      return res.status(200).json({ source: 'coingecko_cached', data: transformCoingeckoData(cachedCoingeckoData) });
-    }
-
-    const cgResponse = await fetch(
-      `${COINGECKO_FALLBACK}?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h`,
-      {
-        headers: { 'Accept': 'application/json' },
-      }
-    );
-
-    if (cgResponse.ok) {
-      cachedCoingeckoData = await cgResponse.json();
-      lastCoingeckoFetch = now;
-      return res.status(200).json({ source: 'coingecko', data: transformCoingeckoData(cachedCoingeckoData) });
-    }
-
-    return res.status(200).json({ source: 'cache', data: cachedSpotData || transformCoingeckoData(cachedCoingeckoData) || [] });
+    console.log('Binance proxy failed, falling back to CoinGecko');
+    return await fallbackToCoingecko(res, now, 'spot');
 
   } catch (error) {
     console.error('Binance proxy error:', error);
     const fallbackData = cachedSpotData || transformCoingeckoData(cachedCoingeckoData) || [];
     return res.status(200).json({ source: 'error_cache', data: fallbackData });
   }
+}
+
+async function fallbackToCoingecko(res: NextApiResponse, now: number, market: string) {
+  if (cachedCoingeckoData && now - lastCoingeckoFetch < CACHE_DURATION * 6) {
+    return res.status(200).json({ source: `coingecko_${market}_fallback_cached`, data: transformCoingeckoData(cachedCoingeckoData) });
+  }
+
+  const cgResponse = await fetch(
+    `${COINGECKO_FALLBACK}?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h`,
+    { headers: { 'Accept': 'application/json' } }
+  );
+
+  if (cgResponse.ok) {
+    cachedCoingeckoData = await cgResponse.json();
+    lastCoingeckoFetch = now;
+    return res.status(200).json({ source: `coingecko_${market}_fallback`, data: transformCoingeckoData(cachedCoingeckoData) });
+  }
+
+  const fallbackData = market === 'futures' ? cachedFuturesData : cachedSpotData;
+  return res.status(200).json({ source: 'cache', data: fallbackData || transformCoingeckoData(cachedCoingeckoData) || [] });
+}
+
+function transformPriceData(data: any[]): any[] {
+  if (!Array.isArray(data)) return [];
+  
+  return data.map(item => ({
+    symbol: item.symbol,
+    lastPrice: item.price,
+    priceChangePercent: '0',
+    quoteVolume: null,
+    openPrice: item.price,
+    highPrice: item.price,
+    lowPrice: item.price,
+    volume: null,
+    count: 0,
+    bidPrice: item.price,
+    askPrice: item.price,
+    weightedAvgPrice: item.price,
+    prevClosePrice: item.price,
+    closeTime: Date.now(),
+    openTime: Date.now() - 86400000,
+    firstId: 0,
+    lastId: 0,
+    _source: 'proxy'
+  }));
 }
 
 function transformCoingeckoData(cgData: any[]): any[] {

@@ -321,13 +321,15 @@ export async function fetchOKX(fxRate: number): Promise<ExchangePrice[]> {
 }
 
 // Bybit Spot: turnover24h = 24h trading volume in quote currency (USDT)
-// GET https://api.bybit.com/v5/market/tickers?category=spot
+// Uses external proxy: https://kimpai-price-proxy-1.onrender.com/bybit/v5/market/tickers?category=spot
+const BYBIT_PROXY_URL = 'https://kimpai-price-proxy-1.onrender.com/bybit/v5/market/tickers?category=spot';
+
 export async function fetchBybit(fxRate: number): Promise<ExchangePrice[]> {
   try {
-    const response = await fetch('https://api.bybit.com/v5/market/tickers?category=spot');
+    const response = await fetch(BYBIT_PROXY_URL);
     
     if (!response.ok) {
-      console.error('Bybit API blocked or error:', response.status);
+      console.error('Bybit proxy error:', response.status);
       return [];
     }
     
