@@ -1,0 +1,244 @@
+📌 작업 목표
+현재 master_symbols에 등록된 코인들에 대해,
+CoinMarketCap 개별 코인 페이지 slug(cmc_slug)를 자동으로 수집해서 저장하고,
+프론트에서는 이 cmc_slug를 사용해 바로 /currencies/{slug}/로 이동하게 연결하고 싶습니다.
+
+1차 목표는 “지금 있는 코인들 도메인부터 제대로 연결”하는 것입니다.
+(이후 CRON으로 돌려서 신규 상장까지 자동화할 예정입니다.)
+
+============================================================
+1️⃣ Supabase master_symbols 구조 확인
+============================================================
+테이블: master_symbols
+
+필수 컬럼:
+- id
+- symbol (예: BTC, ETH, LINK)
+- name_en (예: Bitcoin, Chainlink)
+- cmc_slug (nullable, VARCHAR)
+
+👉 만약 cmc_slug 컬럼이 없다면:
+- VARCHAR(128) 정도로 cmc_slug 컬럼을 추가해주세요.
+
+============================================================
+2️⃣ CMC slug 자동 수집 스크립트 생성
+============================================================
+파일: scripts/syncCmcSlugs.ts 를 새로 만들고,
+아래 코드를 그대로 넣어주세요.
+
+(코드 시작)
+------------------------------------------------------------
+import 'dotenv/config';
+import fetch from 'node-fetch';
+import { createClient } from '@supabase/supabase-js';
+
+const SUPABASE_URL = process.env.SUPABASE_URL!;
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
+  throw new Error('Supabase 환경변수가 설정되지 않았습니다.');
+}
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+  auth: { persistSession: false }
+});
+
+// 심볼 → 코인마켓캡 slug 수동 매핑 (점점 추가)
+const SYMBOL_SLUG_OVERRIDES: Record<string, string> = {
+  BTC: 'bitcoin',
+  ETH: 'ethereum',
+  XRP: 'ripple',
+  ADA: 'cardano',
+  DOGE: 'dogecoin',
+  SOL: 'solana',
+  TRX: 'tron',
+  AVAX: 'avalanche',
+  LINK: 'chainlink',
+  LTC: 'litecoin',
+  BCH: 'bitcoin-cash',
+  BNB: 'binance-coin',
+};
+
+function normalizeNameToSlug(name?: string | null): string | null {
+  if (!name) return null;
+
+  return name
+    .toLowerCase()
+    .replace(/\s*token$/g, '')
+    .replace(/\s*coin$/g, '')
+    .replace(/\s*\(.*?\)/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+async function testCmcSlug(slug: string): Promise<boolean> {
+  const url = `https://coinmarketcap.com/ko/currencies/${slug}/`;
+
+  try {
+    const res = await fetch(url, {
+      headers: {
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36',
+        'Accept-Language': 'ko-KR,ko;q=0.9'
+      }
+    });
+
+    console.log(`[CMC TEST] slug=${slug} status=${res.status}`);
+    return res.status === 200;
+  } catch (err) {
+    console.error('[CMC TEST ERROR]', slug, err);
+    return false;
+  }
+}
+
+async function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function syncCmcSlugs() {
+  console.log('🔄 CMC slug 자동 수집 시작');
+
+  const { data: rows, error } = await supabase
+    .from('master_symbols')
+    .select('id, symbol, name_en, cmc_slug')
+    .is('cmc_slug', null);
+
+  if (error) {
+    console.error('❌ master_symbols 조회 오류:', error);
+    return;
+  }
+
+  if (!rows || rows.length === 0) {
+    console.log('✅ 업데이트할 slug 없음');
+    return;
+  }
+
+  console.log(`📌 slug 미등록 코인: ${rows.length}개`);
+
+  for (const row of rows) {
+    const { id, symbol, name_en } = row;
+    const upper = symbol.toUpperCase();
+
+    console.log(`\n==============================`);
+    console.log(`심볼: ${symbol}, name_en: ${name_en}`);
+
+    const overrideSlug = SYMBOL_SLUG_OVERRIDES[upper];
+    const nameSlug = normalizeNameToSlug(name_en);
+    const symbolSlug = symbol.toLowerCase();
+
+    const candidates = [overrideSlug, nameSlug, symbolSlug].filter(Boolean) as string[];
+
+    let finalSlug: string | null = null;
+
+    for (const candidate of candidates) {
+      const ok = await testCmcSlug(candidate);
+      await delay(800); // CMC에 부담 덜 주기
+
+      if (ok) {
+        finalSlug = candidate;
+        break;
+      }
+    }
+
+    if (!finalSlug) {
+      console.warn(`⚠️ ${symbol}: 유효한 slug를 찾지 못해 건너뜀`);
+      continue;
+    }
+
+    console.log(`✅ 최종 slug=${finalSlug}, DB 업데이트 진행`);
+
+    const { error: updateErr } = await supabase
+      .from('master_symbols')
+      .update({ cmc_slug: finalSlug })
+      .eq('id', id);
+
+    if (updateErr) {
+      console.error(`❌ 업데이트 실패:`, updateErr);
+    } else {
+      console.log(`💾 저장 완료: ${symbol} → ${finalSlug}`);
+    }
+
+    await delay(800);
+  }
+
+  console.log('\n🎉 CMC 슬러그 자동 수집 완료');
+}
+
+if (require.main === module) {
+  syncCmcSlugs()
+    .then(() => process.exit(0))
+    .catch(err => {
+      console.error(err);
+      process.exit(1);
+    });
+}
+------------------------------------------------------------
+(코드 끝)
+
+============================================================
+3️⃣ package.json에 실행 스크립트 추가
+============================================================
+package.json의 "scripts" 안에 다음을 추가해주세요:
+
+"scripts": {
+  ...
+  "sync:cmc-slugs": "ts-node scripts/syncCmcSlugs.ts"
+}
+
+(ts-node 사용 방식은 현재 프로젝트 설정에 맞게 조정해도 됩니다.)
+
+============================================================
+4️⃣ 프론트엔드 CMC 링크 연결 확인
+============================================================
+이미 다음 구조로 되어 있는지 확인하고, 아니라면 이렇게 수정해주세요.
+
+1) CoinMarketCap 유틸
+파일: src/lib/coinMarketCapUtils.ts
+
+export function openCmcPage(symbol: string, cmcSlug?: string | null) {
+  const base = "https://coinmarketcap.com/ko";
+
+  const effectiveSlug =
+    (cmcSlug && cmcSlug.trim()) ||
+    symbol.toLowerCase(); // cmcSlug 없으면 일단 symbol 기반
+
+  const url = `${base}/currencies/${effectiveSlug}/?utm_source=apiswap&utm_medium=web&utm_campaign=kimpga`;
+
+  console.log("[CMC_URL]", { symbol, cmcSlug, effectiveSlug, url });
+
+  if (typeof window !== "undefined") {
+    window.open(url, "_blank");
+  }
+}
+
+2) 프리미엄 테이블에서 호출 부분
+파일: src/components/PremiumTable.tsx
+
+코인명/심볼 클릭 시:
+
+onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
+
+즉, API 응답에 포함된 row.cmcSlug를 그대로 두 번째 인자로 넘기도록 유지해주세요.
+
+============================================================
+5️⃣ 실제 실행 및 도메인 연결 확인
+============================================================
+1) 콘솔에서 한 번 실행:
+   npm run sync:cmc-slugs
+
+2) 실행 후 DB에서 master_symbols.cmc_slug 값이 채워졌는지 확인:
+   - BTC → bitcoin
+   - ETH → ethereum
+   - LINK → chainlink
+   - 등 메이저 코인 위주로 먼저 확인
+
+3) 브라우저에서:
+   - 홈 화면 코인셀에서 BTC, ETH, LINK 코인명 클릭
+   - URL이 다음 형식으로 열리는지 확인:
+     https://coinmarketcap.com/ko/currencies/bitcoin/...
+     https://coinmarketcap.com/ko/currencies/ethereum/...
+     https://coinmarketcap.com/ko/currencies/chainlink/...
+
+이렇게 하면 현재 등록된 코인들부터 CoinMarketCap 도메인이 제대로 연결됩니다.
+이후에는 상장 → master_symbols 자동 등록 → 주기적으로 npm run sync:cmc-slugs 실행만 해주면
+새 코인들도 자동으로 CMC 도메인까지 연결되는 구조가 완성됩니다.

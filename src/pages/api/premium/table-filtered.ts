@@ -92,7 +92,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       })
       .map((market) => {
         const symbol = market.base.toUpperCase();
-        const master = masterSymbols.find((s) => s.symbol === symbol);
+        // master_symbols의 컬럼명은 base_symbol입니다.
+        const master = masterSymbols.find((s) => s.base_symbol === symbol);
         
         // master_symbols.icon_path 사용 (심볼 단위 통합 아이콘)
         const baseIconUrl = master?.icon_path || null;

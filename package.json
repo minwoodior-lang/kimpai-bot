@@ -17,7 +17,8 @@
     "build:all": "npm run fetch:upbit && npm run fetch:bithumb && npm run fetch:coinone && npm run build:markets && npm run build:exchange-icons && npm run build:master-symbols && npm run build:premium",
     "update:prices": "tsx scripts/updatePrices.ts",
     "price:worker": "tsx scripts/priceWorker.ts",
-    "update:notices": "tsx scripts/noticeUpdateWorker.ts"
+    "update:notices": "tsx scripts/noticeUpdateWorker.ts",
+    "sync:cmc-slugs": "tsx scripts/syncCmcSlugs.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.86.0",
