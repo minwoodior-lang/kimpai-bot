@@ -768,27 +768,32 @@ export default function PremiumTable({
   const getTvSymbolForRow = (params: {
     symbol: string;
     domesticExchange: string;
-    domesticMarket: string;
     foreignExchange: string;
-    foreignMarket: string;
   }): string => {
-    const { symbol, domesticExchange, domesticMarket, foreignExchange, foreignMarket } = params;
-
-    // 1) 업비트 / 빗썸
-    if (domesticExchange === "UPBIT" || domesticExchange === "BITHUMB") {
-      const prefix = TV_DOMESTIC_PREFIX[domesticExchange];
-      if (!prefix) return `BINANCE:${symbol}USDT`;
-      return `${prefix}:${symbol}${domesticMarket}`;
+    let { symbol, domesticExchange, foreignExchange } = params;
+    
+    // symbol에서 /KRW 제거 (BTC만 사용)
+    const cleanSymbol = symbol.split("/")[0].toUpperCase();
+    
+    // domesticExchange와 foreignExchange에서 마켓 분리
+    const [domEx, domMarket] = domesticExchange.split("_");
+    const [forEx, forMarket] = foreignExchange.split("_");
+    
+    // 1) 업비트 / 빗썸 기준
+    if (domEx === "UPBIT" || domEx === "BITHUMB") {
+      const prefix = TV_DOMESTIC_PREFIX[domEx];
+      if (!prefix) return `BINANCE:${cleanSymbol}USDT`;
+      return `${prefix}:${cleanSymbol}${domMarket || "KRW"}`;
     }
 
     // 2) 코인원 → 해외 거래소 기준
-    if (domesticExchange === "COINONE") {
-      const prefix = TV_FOREIGN_PREFIX[foreignExchange] ?? "BINANCE";
-      return `${prefix}:${symbol}${foreignMarket}`;
+    if (domEx === "COINONE") {
+      const prefix = TV_FOREIGN_PREFIX[forEx] ?? "BINANCE";
+      return `${prefix}:${cleanSymbol}${forMarket || "USDT"}`;
     }
 
     // 3) fallback
-    return `BINANCE:${symbol}USDT`;
+    return `BINANCE:${cleanSymbol}USDT`;
   };
 
   return (
@@ -1045,9 +1050,7 @@ export default function PremiumTable({
                                 const tvSymbol = getTvSymbolForRow({
                                   symbol: row.symbol,
                                   domesticExchange,
-                                  domesticMarket: domesticExchange.split('_')[1] || 'KRW',
                                   foreignExchange,
-                                  foreignMarket: foreignExchange.split('_')[1] || 'USDT',
                                 });
                                 if (onTradingViewChartClick) {
                                   onTradingViewChartClick(tvSymbol);
@@ -1133,9 +1136,7 @@ export default function PremiumTable({
                                   tvSymbol={getTvSymbolForRow({
                                     symbol: row.symbol,
                                     domesticExchange,
-                                    domesticMarket: domesticExchange.split('_')[1] || 'KRW',
                                     foreignExchange,
-                                    foreignMarket: foreignExchange.split('_')[1] || 'USDT',
                                   })}
                                   height={360}
                                 />

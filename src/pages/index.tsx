@@ -270,16 +270,6 @@ export default function Home() {
             <TradingViewChartDynamic tvSymbol={premiumTvSymbol} height={360} />
           </div>
 
-          {/* 차트 섹션 */}
-          {(!isLoaded || !prefs.hideChart) && (
-            <div className="h-[240px] md:h-auto">
-              <ChartSectionEnhanced
-                selectedIndicator={selectedIndicator}
-                onIndicatorChange={setSelectedIndicator}
-                hideDropdown={true}
-              />
-            </div>
-          )}
 
           <div className="mt-2 space-y-3">
             {/* 프리미엄 테이블 */}

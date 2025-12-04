@@ -18,6 +18,14 @@ interface PremiumRow {
   icon_url: string | null;
 }
 
+function guessCmcSlug(row: PremiumRow): string {
+  // symbol에서 /KRW 제거 후 소문자로 변환
+  const coin = row.symbol.split("/")[0].toLowerCase();
+  // 한글명 우선 사용 가능하면 영문명 폴백
+  const name = (row.name_en || row.symbol).toLowerCase().replace(/\s+/g, "-");
+  return `${coin}-${name}`.replace(/--+/g, "-");
+}
+
 function loadPremium(): PremiumRow[] {
   const file = path.join(process.cwd(), "data/premiumTable.json");
   if (!fs.existsSync(file)) return [];
@@ -47,6 +55,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       volume24hKrw: row.volume24hKrw ?? 0,
       volume24hUsdt: row.volume24hUsdt ?? null,
       volume24hForeignKrw: null,
+      cmcSlug: guessCmcSlug(row),
     }));
 
     return res.status(200).json({
