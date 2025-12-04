@@ -30,29 +30,33 @@ export function TodayPremiumSection({
       {/* 정보 그리드 */}
       <div className={`${compact ? 'space-y-1' : 'space-y-2'} flex-1`}>
         <div className="flex justify-between">
-          <span className={`${compact ? 'text-[9px] sm:text-[10px]' : 'text-[10px] sm:text-xs'} dark:text-slate-400 light:text-slate-600`}>평균 김프</span>
-          <span className={`${compact ? 'text-[9px] sm:text-xs' : 'text-xs sm:text-sm'} font-semibold dark:text-slate-100 light:text-slate-900`}>{avgPremium}</span>
+          <span className={`${compact ? 'text-[9px] sm:text-[10px]' : 'text-[11px] md:text-xs'} dark:text-white/60 light:text-slate-600`}>평균 김프</span>
+          <span className={`${compact ? 'text-[9px] sm:text-xs' : 'text-sm md:text-[15px]'} font-semibold dark:text-slate-100 light:text-slate-900`}>{avgPremium}</span>
         </div>
         <div className="flex justify-between">
-          <span className={`${compact ? 'text-[9px] sm:text-[10px]' : 'text-[10px] sm:text-xs'} dark:text-slate-400 light:text-slate-600`}>최소 김프</span>
-          <span className={`${compact ? 'text-[9px] sm:text-xs' : 'text-xs sm:text-sm'} font-semibold dark:text-slate-100 light:text-slate-900`}>{minPremium}</span>
+          <span className={`${compact ? 'text-[9px] sm:text-[10px]' : 'text-[11px] md:text-xs'} dark:text-white/60 light:text-slate-600`}>최소 김프</span>
+          <span className={`${compact ? 'text-[9px] sm:text-xs' : 'text-sm md:text-[15px]'} font-semibold dark:text-slate-100 light:text-slate-900`}>{minPremium}</span>
         </div>
         <div className="flex justify-between">
-          <span className={`${compact ? 'text-[9px] sm:text-[10px]' : 'text-[10px] sm:text-xs'} dark:text-slate-400 light:text-slate-600`}>최대 김프</span>
-          <span className={`${compact ? 'text-[9px] sm:text-xs' : 'text-xs sm:text-sm'} font-semibold dark:text-slate-100 light:text-slate-900`}>{maxPremium}</span>
+          <span className={`${compact ? 'text-[9px] sm:text-[10px]' : 'text-[11px] md:text-xs'} dark:text-white/60 light:text-slate-600`}>최대 김프</span>
+          <span className={`${compact ? 'text-[9px] sm:text-xs' : 'text-sm md:text-[15px]'} font-semibold dark:text-slate-100 light:text-slate-900`}>{maxPremium}</span>
         </div>
         <div className="flex justify-between">
-          <span className={`${compact ? 'text-[9px] sm:text-[10px]' : 'text-[10px] sm:text-xs'} dark:text-slate-400 light:text-slate-600`}>환율</span>
-          <span className={`${compact ? 'text-[9px] sm:text-xs' : 'text-xs sm:text-sm'} font-semibold dark:text-slate-100 light:text-slate-900`}>{fxRate}</span>
+          <span className={`${compact ? 'text-[9px] sm:text-[10px]' : 'text-[11px] md:text-xs'} dark:text-white/60 light:text-slate-600`}>환율</span>
+          <span className={`${compact ? 'text-[9px] sm:text-xs' : 'text-sm md:text-[15px]'} font-semibold dark:text-slate-100 light:text-slate-900`}>{fxRate}</span>
         </div>
       </div>
 
       {/* Score 카드 */}
-      <div className={`${compact ? 'mt-1 py-0.5' : 'mt-2 py-1'} rounded-lg dark:bg-indigo-900/60 light:bg-indigo-100/60 px-2 flex items-center justify-center`}>
-        <div className="text-center">
-          <div className={`${compact ? 'text-[8px] sm:text-[9px] mb-0.5' : 'text-[10px] sm:text-xs mb-1'} dark:text-slate-300 light:text-indigo-700`}>KR Premium Score</div>
-          <div className={`${compact ? 'text-sm sm:text-base' : 'text-lg sm:text-xl'} font-bold dark:text-emerald-400 light:text-emerald-600`}>{score}/10</div>
+      <div className={`${compact ? 'mt-1' : 'mt-4'} flex items-center justify-between`}>
+        <div className="flex flex-col">
+          <span className={`${compact ? 'text-[8px] sm:text-[9px]' : 'text-[11px] md:text-xs'} dark:text-white/60 light:text-indigo-700`}>KR Premium Score</span>
+          <div className={`${compact ? 'mt-0.5 h-1 w-20' : 'mt-1 h-1.5 w-28'} rounded-full dark:bg-white/10 light:bg-indigo-200/50`}>
+            <div className={`h-full rounded-full dark:bg-[#6366F1] light:bg-indigo-500`} style={{width: `${(score / 10) * 100}%`}} />
+          </div>
         </div>
+
+        <span className={`${compact ? 'text-base sm:text-lg' : 'text-lg md:text-xl'} font-semibold dark:text-[#A855F7] light:text-purple-600`}>{score}/10</span>
       </div>
     </div>
   );

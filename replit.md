@@ -3,6 +3,20 @@
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. The project's core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. It handles real-time price collection, premium calculation, and global market metrics, aiming to offer a comprehensive view of the crypto market with a focus on the Korean premium.
 
+### Recent Changes (v3.4.5 - 2024-12-04)
+- **타이포그래피 & UI 위계 최종 개선**:
+  - 내 알림 카드 (MyAlertsCard): 제목 text-[15px] md:text-base, 본문 text-xs md:text-sm, 버튼 px-4 md:px-5 py-2 md:py-2.5로 위계 정렬
+  - 오늘의 AI 김프 요약: 지표 라벨 text-[11px] md:text-xs, 값 text-sm md:text-[15px], KR Premium Score 카드 → 좌우 정렬 (라벨+게이지 / 점수)
+- **필터 바 라벨 순서 통일**:
+  - PC: flex justify-between으로 명시적 좌우 정렬
+  - 라벨 순서: "기준 거래소 [드롭다운] ↔ 해외 거래소 [드롭다운]" → "텍스트 먼저" 패턴 통일
+  - 검색창 폭: w-48 md:w-64 (이전: w-[260px])
+  - 모바일: 라벨 동일하게 적용 (드롭다운 → 라벨 형식 제거)
+- **코인셀 확장 차트 레이아웃 개선**:
+  - 확장 행 td: colSpan={visibleColumns.length} + className="p-0" 적용
+  - 안쪽 wrapper: div.w-full만 유지, 모든 px/mx 제거
+  - 결과: 테이블 폭과 완전히 동일하게 맞춤
+
 ### Recent Changes (v3.4.4 - 2024-12-04)
 - **헤더(navbar) + 메인 컨테이너 폭 통일 (모두 max-w-[1280px] px-6)**:
   - Layout.tsx: 헤더 정렬 `max-w-[1280px] px-6` (배경색 `bg-[#020617]`, 테두리 `border-white/5`)
@@ -16,19 +30,6 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
   - **모바일**: `flex md:hidden flex-col gap-2`
     - 거래소 선택 (1줄)
     - 검색창 & 개수 (2줄)
-- **홈 화면 PC 레이아웃 최종 완성** (v3.4.3):
-  - 메인 컨테이너: `max-w-[1280px] px-6` 통일
-  - 프리미엄 차트: `border border-white/5 bg-[#050819]` 스타일
-  - 코인 테이블 래퍼: `border border-white/5 bg-[#050819]` (테두리 일치)
-  - 모든 테이블 th/td: `px-3 lg:px-4 py-2.5` 패딩 통일
-  - 코인셀 상세 차트: `px-3 lg:px-4 pb-4` (프리미엄 차트와 동일 라인)
-- **테이블 구조 최적화**: section 태그 사용, 필터 UI 및 테이블 분리
-- **프리미엄 차트 폴링 최적화**: 1000ms → 실시간 반응 속도 개선
-- **BINANCE_BTC Market 제거**: 바이낸스에 BTC 현물 시장 없음
-- **Binance 429 Rate Limit Resolution**: Proxy caching + stale cache fallback
-- **Binance Futures Stats Support**: 30sec 자동 수집
-- **Bybit USDT Integration**: 완벽 작동
-- **Favorites Feature**: localStorage 지속성, 크로스탭 호환
 
 ### Known Issues
 - **Missing coin icons**: MET2, GAME2, FCT2 (low-priority UI issue)

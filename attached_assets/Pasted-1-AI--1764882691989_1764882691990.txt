@@ -1,0 +1,179 @@
+1. 우측 상단 내 알림 카드 타이포/버튼 사이즈
+문제
+
+카드 안 텍스트, 버튼이 전체 레이아웃 대비 조금 작게 느껴짐.
+
+왼쪽 “오늘의 AI 김프 요약” 카드와 위계가 비슷해야 하는데 살짝 기가 죽어 있음.
+
+수정 가이드
+// 알림 카드 제목
+<p className="text-[15px] md:text-base font-semibold">내 알림</p>
+
+// 설명 텍스트
+<p className="mt-3 text-xs md:text-sm leading-relaxed text-white/60">
+  로그인하고 알림 설정하기
+</p>
+
+// 버튼
+<button className="mt-4 inline-flex items-center justify-center
+  px-4 md:px-5 py-2 md:py-2.5
+  text-xs md:text-sm font-semibold
+  rounded-lg">
+  로그인
+</button>
+
+
+요약: 제목 +1단계, 본문 +0.5단계, 버튼 패딩/폰트 약간 업 정도로 맞추면 균형 잡힘.
+
+2. 오늘의 AI 김프 요약 카드 타이포 & KR 프리미엄 스코어 정렬
+문제
+
+지표 텍스트(평균/최소/최대/환율) 크기가 전체 레이아웃 대비 조금 작음.
+
+아래 “KR Premium Score” 바 + 스코어가 가운데에만 떠 있어서, 카드와 시각적 연결이 약함.
+
+수정 가이드
+
+지표 텍스트/값 키우기
+
+// 라벨: 평균 김프, 최소 김프, 최대 김프, 환율
+<span className="text-[11px] md:text-xs text-white/60">평균 김프</span>
+
+// 값
+<span className="text-sm md:text-[15px] font-semibold text-white">
+  -0.7%
+</span>
+
+
+하단 KR Premium Score를 카드 폭에 맞춰 정렬
+
+현재처럼 카드 밖 느낌이 아니라, 카드 안에서 아래쪽을 양 끝 정렬:
+
+<div className="mt-4 flex items-center justify-between">
+  <div className="flex flex-col">
+    <span className="text-[11px] md:text-xs text-white/60">
+      KR Premium Score
+    </span>
+    <div className="mt-1 h-1.5 w-28 rounded-full bg-white/10">
+      <div className="h-full w-2/5 rounded-full bg-[#6366F1]" />
+    </div>
+  </div>
+
+  <span className="text-lg md:text-xl font-semibold text-[#A855F7]">
+    2/10
+  </span>
+</div>
+
+
+이렇게 하면 카드 안에서 왼쪽: 라벨+게이지 / 오른쪽: 점수 숫자로 딱 맞음.
+
+3. 기준 거래소 / 해외 거래소 / 검색창 레이아웃
+원하는 상태 (PC)
+
+한 줄에 정리:
+
+왼쪽: 기준 거래소 [드롭다운] ↔ 해외 거래소 [드롭다운]
+
+오른쪽: 암호화폐 총 XXX개 + 검색창
+
+라벨 순서:
+기준 거래소 (텍스트) + 드롭다운
+해외 거래소 (텍스트) + 드롭다운
+→ 지금처럼 (드롭다운) 해외 거래소가 아니라, 텍스트가 먼저.
+
+수정 가이드 (구조)
+<div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+
+  {/* 왼쪽: 기준/해외 거래소 */}
+  <div className="flex flex-wrap items-center gap-3">
+    <div className="flex items-center gap-2">
+      <span className="text-xs md:text-sm text-white/60">기준 거래소</span>
+      <ExchangeDropdown ... />   // 업비트/빗썸/코인원
+    </div>
+
+    <span className="text-white/30 text-xs md:text-sm">↔</span>
+
+    <div className="flex items-center gap-2">
+      <span className="text-xs md:text-sm text-white/60">해외 거래소</span>
+      <ExchangeDropdown ... />   // 바이낸스/OKX/…
+    </div>
+  </div>
+
+  {/* 오른쪽: 총 개수 + 검색창 */}
+  <div className="flex items-center gap-3">
+    <span className="hidden md:inline text-xs md:text-sm text-white/50">
+      암호화폐 총 {totalMarkets}개
+    </span>
+    <SearchInput className="w-48 md:w-64" />  {/* 검색창 살짝 줄이기 */}
+  </div>
+</div>
+
+
+핵심 포인트
+
+컨테이너: flex justify-between 으로 무조건 1줄 유지 (폭 좁을 땐 wrap).
+
+검색창 폭: w-64 정도로 줄여서 우측 끝 정렬이 어색하지 않게.
+
+4. 코인셀 안에서 차트 열렸을 때 좌우 꽉 차게
+문제
+
+코인셀 클릭 시 열리는 하단 차트가 테이블보다 살짝 좁게 열려서, 위 프리미엄 차트/코인 리스트 폭이랑 안 맞아 보임.
+
+원인:
+
+expanded row <td>에 패딩/마진이 남아 있거나
+
+안쪽 wrapper에 px-3 같은 여백이 들어가 있는 경우가 많음.
+
+수정 가이드 (가장 깔끔한 패턴)
+
+확장 행 구조
+
+{expandedSymbol === row.symbol && (
+  <tr className="bg-[#050819]">
+    <td colSpan={visibleColumns.length} className="p-0">
+      <div className="w-full">
+        <CoinDetailChart symbol={row.symbol} />
+      </div>
+    </td>
+  </tr>
+)}
+
+
+td에 colSpan + className="p-0" 꼭 넣기.
+
+이 td 안쪽에서만 차트 렌더.
+
+차트 wrapper에서 패딩 제거
+
+// CoinDetailChart 내부
+return (
+  <div className="w-full">
+    <div className="h-[360px] w-full overflow-hidden rounded-b-2xl">
+      {/* TradingView */}
+      <div id={containerId} className="w-full h-full" />
+    </div>
+  </div>
+);
+
+
+여기서 절대 px-3, mx-4 같은 것 넣지 말기.
+
+테이블 자체가 이미 좌우 패딩을 갖고 있으니, 확장 행은 p-0로 테이블 안에서 완전 꽉 차게.
+
+한 줄 요약으로 정리해서 개발자한테 넘길 수 있게
+
+내 알림 카드: 제목/본문/버튼 폰트와 패딩 1단계씩 키워서 왼쪽 카드와 위계 맞추기.
+
+오늘의 AI 김프 요약: 지표 라벨·값 폰트 살짝 키우고, 하단 KR Premium Score를 카드 내부에서 좌우 정렬(라벨+게이지 / 점수)로 배치.
+
+필터 바:
+
+“기준 거래소 [드롭다운] ↔ 해외 거래소 [드롭다운]”을 왼쪽에 한 줄로,
+
+“암호화폐 총 N개 + 검색창”을 오른쪽에 배치.
+
+라벨 순서를 (드롭다운) 해외거래소가 아니라 텍스트 → 드롭다운으로 변경.
+
+코인셀 확장 차트: 확장 행 <td>에 colSpan + p-0 적용, 안쪽 wrapper는 w-full만 남기고 모든 px, mx 제거해서 테이블 폭과 완전히 동일하게 맞추기.
