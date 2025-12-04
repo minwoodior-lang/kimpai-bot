@@ -1,14 +1,15 @@
 import axios from 'axios';
 import type { MarketInfo, PriceMap } from './types';
 
-const BINANCE_SPOT_API = 'https://api.binance.com/api/v3/ticker/price';
-const BINANCE_FUTURES_API = 'https://fapi.binance.com/fapi/v1/ticker/price';
+const PROXY_BASE = 'https://kimpai-price-proxy-1.onrender.com';
+const BINANCE_SPOT_API = `${PROXY_BASE}/binance/api/v3/ticker/price`;
+const BINANCE_FUTURES_API = `${PROXY_BASE}/binance/fapi/v1/ticker/price`;
 
 export async function fetchBinanceSpotPrices(markets: MarketInfo[]): Promise<PriceMap> {
   if (markets.length === 0) return {};
 
   try {
-    const res = await axios.get(BINANCE_SPOT_API, { timeout: 5000 });
+    const res = await axios.get(BINANCE_SPOT_API, { timeout: 15000 });
 
     const prices: PriceMap = {};
     const ts = Date.now();
@@ -21,7 +22,7 @@ export async function fetchBinanceSpotPrices(markets: MarketInfo[]): Promise<Pri
     for (const market of markets) {
       const symbol = `${market.base}${market.quote}`;
       const price = priceMap.get(symbol);
-      if (price !== undefined) {
+      if (price !== undefined && price > 0) {
         const key = `BINANCE:${market.base}:${market.quote}`;
         prices[key] = { price, ts };
       }
@@ -38,7 +39,7 @@ export async function fetchBinanceFuturesPrices(markets: MarketInfo[]): Promise<
   if (markets.length === 0) return {};
 
   try {
-    const res = await axios.get(BINANCE_FUTURES_API, { timeout: 5000 });
+    const res = await axios.get(BINANCE_FUTURES_API, { timeout: 15000 });
 
     const prices: PriceMap = {};
     const ts = Date.now();
@@ -51,7 +52,7 @@ export async function fetchBinanceFuturesPrices(markets: MarketInfo[]): Promise<
     for (const market of markets) {
       const symbol = `${market.base}${market.quote}`;
       const price = priceMap.get(symbol);
-      if (price !== undefined) {
+      if (price !== undefined && price > 0) {
         const key = `BINANCE_FUTURES:${market.base}:${market.quote}`;
         prices[key] = { price, ts };
       }

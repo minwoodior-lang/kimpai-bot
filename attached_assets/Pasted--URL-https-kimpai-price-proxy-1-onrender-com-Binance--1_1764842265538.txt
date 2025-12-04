@@ -1,0 +1,103 @@
+프록시 서버 URL은 아래입니다.
+
+https://kimpai-price-proxy-1.onrender.com
+
+말씀해주신 대로
+
+- Binance: 전체 리스트 호출 후 symbol로 필터링
+- Bybit: category만 외부 API에 넘기고, symbol은 프록시에서 필터링
+
+이 구조로 가면 됩니다.
+
+다만, Kimp AI 쪽 기존 fetcher 구조를 바꾸지 않게 하려면
+프록시 서버의 라우트는 "실제 거래소 API 경로와 최대한 비슷하게" 맞춰주시면 좋겠습니다.
+
+원하는 최종 형태는 아래와 같습니다.
+
+1) 헬스체크
+- GET /  →  { "status": "proxy-ok", "timestamp": ... }
+
+2) Binance 프록시
+- 엔드포인트: GET /binance/api/v3/ticker/price?symbol=BTCUSDT
+- 구현 로직:
+  - 외부 호출: https://api.binance.com/api/v3/ticker/price   (symbol 없이 전체 리스트)
+  - 응답(data는 배열): 프록시에서 symbol 쿼리 파라미터로 필터링해서
+    - symbol이 있으면 해당 심볼 1개만 반환
+    - 없으면 전체 리스트 반환
+
+예시 코드:
+
+app.get('/binance/api/v3/ticker/price', async (req, res) => {
+  try {
+    const { symbol } = req.query;
+
+    const response = await axios.get('https://api.binance.com/api/v3/ticker/price');
+    const data = response.data;
+
+    if (symbol) {
+      const filtered = data.find(x => x.symbol === symbol);
+      return res.json(filtered || { symbol, price: '0' });
+    }
+    return res.json(data);
+  } catch (error) {
+    console.error('Binance proxy error:', error?.response?.data || error.message);
+    res.status(500).json({ error: 'Binance proxy failed' });
+  }
+});
+
+3) Bybit 프록시
+- 엔드포인트: GET /bybit/v5/market/tickers?category=spot&symbol=BTCUSDT
+- 구현 로직:
+  - 외부 호출 시에는 symbol을 제거하고, category만 전달
+    - https://api.bybit.com/v5/market/tickers?category=spot
+  - 응답(result.list)에서 symbol 쿼리로 필터링해서
+    - symbol이 있으면 해당 심볼 1개만 들어 있는 list로 재구성
+    - 없으면 전체 list 그대로 반환
+
+예시 코드:
+
+app.get('/bybit/v5/market/tickers', async (req, res) => {
+  try {
+    const { category = 'spot', symbol } = req.query;
+
+    // 외부 API에는 symbol 없이 category만 전달
+    const response = await axios.get('https://api.bybit.com/v5/market/tickers', {
+      params: { category }
+    });
+
+    const data = response.data;
+
+    if (symbol && data.result?.list) {
+      const filtered = data.result.list.filter(x => x.symbol === symbol);
+      return res.json({
+        ...data,
+        result: {
+          ...data.result,
+          list: filtered
+        }
+      });
+    }
+
+    return res.json(data);
+  } catch (error) {
+    console.error('Bybit proxy error:', error?.response?.data || error.message);
+    res.status(500).json({ error: 'Bybit proxy failed' });
+  }
+});
+
+4) KimpAI fetcher 쪽 요청 방식
+
+- Binance:
+  - 기존: https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT
+  - 변경: https://kimpai-price-proxy-1.onrender.com/binance/api/v3/ticker/price?symbol=BTCUSDT
+
+- Bybit:
+  - 기존: https://api.bybit.com/v5/market/tickers?category=spot&symbol=BTCUSDT
+  - 변경: https://kimpai-price-proxy-1.onrender.com/bybit/v5/market/tickers?category=spot&symbol=BTCUSDT
+
+즉, 프론트/백엔드에서는 baseURL만 프록시로 바꾸고,
+path와 query 구조는 실제 거래소 API와 동일하게 유지되도록 해주시면 됩니다.
+
+이렇게 적용해주시면,
+- 브라우저 CORS 문제 없이
+- Binance/Bybit 모두 단일 심볼 단건 조회가 안정적으로 동작하는 구조가 됩니다.

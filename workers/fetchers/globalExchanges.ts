@@ -1,9 +1,11 @@
 import axios from 'axios';
 import type { MarketInfo, PriceMap } from './types';
 
+const PROXY_BASE = 'https://kimpai-price-proxy-1.onrender.com';
+
 const EXCHANGE_APIS = {
   OKX: 'https://www.okx.com/api/v5/market/tickers?instType=SPOT',
-  BYBIT: 'https://api.bybit.com/v5/market/tickers?category=spot',
+  BYBIT: `${PROXY_BASE}/bybit/v5/market/tickers?category=spot`,
   BITGET: 'https://api.bitget.com/api/v2/spot/market/tickers',
   GATE: 'https://api.gateio.ws/api/v4/spot/tickers',
   HTX: 'https://api.huobi.pro/market/tickers',
@@ -34,7 +36,7 @@ export async function fetchOkxPrices(markets: MarketInfo[]): Promise<PriceMap> {
 export async function fetchBybitPrices(markets: MarketInfo[]): Promise<PriceMap> {
   if (markets.length === 0) return {};
   try {
-    const res = await axios.get(EXCHANGE_APIS.BYBIT, { timeout: 5000 });
+    const res = await axios.get(EXCHANGE_APIS.BYBIT, { timeout: 15000 });
     const prices: PriceMap = {};
     const ts = Date.now();
     const marketBases = new Set(markets.map(m => m.base.toUpperCase()));
