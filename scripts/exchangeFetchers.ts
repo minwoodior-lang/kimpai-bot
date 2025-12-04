@@ -678,7 +678,6 @@ export const allFetchers = [
   { name: 'BITHUMB_BTC', fn: fetchBithumbBTC },
   { name: 'COINONE_KRW', fn: fetchCoinoneKRW },
   { name: 'BINANCE_USDT', fn: fetchBinanceUSDT },
-  { name: 'BINANCE_BTC', fn: fetchBinanceBTC },
   { name: 'BINANCE_FUTURES', fn: fetchBinanceFutures },
   { name: 'OKX_USDT', fn: fetchOKX },
   { name: 'BYBIT_USDT', fn: fetchBybit },

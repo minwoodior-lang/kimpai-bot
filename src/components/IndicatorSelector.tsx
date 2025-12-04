@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 const SYMBOL_MAP: Record<string, string> = {
-  "BINANCE_BTC": "BINANCE:BTCUSDT",
   "UPBIT_BTC_KRW_PREMIUM": "KRW_BTC_PREMIUM",
   "BITHUMB_BTC_KRW_PREMIUM": "KRW_BTC_BITHUMB_PREMIUM",
   "COINBASE_BTC_PREMIUM": "BTC_COINBASE_PREMIUM",
@@ -17,7 +16,6 @@ const SYMBOL_MAP: Record<string, string> = {
 
 const INDICATOR_GROUPS = {
   "BTC / Premium": [
-    { id: "BINANCE_BTC", label: "BTC Binance" },
     { id: "UPBIT_BTC_KRW_PREMIUM", label: "BTC 김치프리미엄 (Upbit)" },
     { id: "BITHUMB_BTC_KRW_PREMIUM", label: "BTC 김치프리미엄 (Bithumb)" },
     { id: "COINBASE_BTC_PREMIUM", label: "BTC Coinbase Premium" },

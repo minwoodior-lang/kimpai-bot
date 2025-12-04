@@ -3,7 +3,11 @@
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. The project's core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. It handles real-time price collection, premium calculation, and global market metrics, aiming to offer a comprehensive view of the crypto market with a focus on the Korean premium.
 
-### Recent Changes (v3.4.0 - 2024-12-04)
+### Recent Changes (v3.4.1 - 2024-12-04)
+- **BINANCE_BTC Market Removed**:
+  - Removed "바이낸스 BTC 마켓" option from foreign exchange dropdown (Binance has no BTC spot market)
+  - Cleaned up from: ExchangeSelectionContext.tsx, exchangeFetchers.ts, IndicatorSelector.tsx, ChartSectionEnhanced.tsx
+  - BINANCE_USDT and BINANCE_FUTURES markets remain fully operational
 - **Binance 429 Rate Limit Resolution**: 
   - Proxy caching: 5sec for spot 24hr, 2sec for prices, 1min stale fallback
   - 429 error handling with stale cache fallback + 503 response
@@ -18,7 +22,6 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - **Favorites Feature**: Full implementation with localStorage persistence, cross-tab compatible
 
 ### Known Issues
-- **BINANCE_BTC**: Binance does not have a BTC spot market. This option in UI should be removed or handled specially (currently returns no data for Binance BTC)
 - **Missing coin icons**: MET2, GAME2, FCT2 (low-priority UI issue)
 
 ### User Preferences
@@ -76,6 +79,6 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - **Replit:** Deployment platform.
 
 ### Next Steps
-1. **BINANCE_BTC Handling**: Decide whether to remove from UI or implement special handling since Binance doesn't have BTC spot market
-2. **Monitor stats collection**: Verify BINANCE_FUTURES stats are being collected (check marketStats.json for BINANCE_FUTURES:BTC:USDT entries)
-3. **Frontend validation**: Ensure all 24hr stats (changeRate, changeAbsKrw, fromHighRate, fromLowRate, volume24hKrw) display correctly
+1. **Render proxy manual deployment**: Deploy `/binance/fapi/v1/ticker/24hr` route addition to enable Binance Futures 24hr stats
+2. **Monitor stats collection**: After proxy deployment, verify BINANCE_FUTURES stats in marketStats.json
+3. **UI Frontend validation**: Confirm BINANCE_USDT and BINANCE_FUTURES dropdowns work correctly
