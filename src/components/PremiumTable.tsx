@@ -14,6 +14,7 @@ import PriceCell from "@/components/PriceCell";
 import TwoLinePriceCell from "@/components/TwoLinePriceCell";
 import TwoLineCell from "@/components/TwoLineCell";
 import { openCmcPage } from "@/lib/coinMarketCapUtils";
+import { useUserPrefs } from "@/hooks/useUserPrefs";
 
 interface DropdownOption {
   id: string;
@@ -339,20 +340,11 @@ export default function PremiumTable({
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("volume24hKrw");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
-  const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [expandedSymbol, setExpandedSymbol] = useState<string | null>(null);
 
-  const toggleFavorite = (symbol: string) => {
-    setFavorites((prev) => {
-      const newFavorites = new Set(prev);
-      if (newFavorites.has(symbol)) {
-        newFavorites.delete(symbol);
-      } else {
-        newFavorites.add(symbol);
-      }
-      return newFavorites;
-    });
-  };
+  // useUserPrefs hook으로 즐겨찾기 관리
+  const { prefs, toggleFavorite, isFavorite, isLoaded: prefsLoaded } = useUserPrefs();
+  const favorites = useMemo(() => new Set(prefs.favorites || []), [prefs.favorites]);
 
   const toggleChart = (symbol: string) => {
     setExpandedSymbol((prev) => (prev === symbol ? null : symbol));
@@ -452,13 +444,26 @@ export default function PremiumTable({
   const filteredAndSortedData = useMemo(() => {
     let result = [...data];
 
+    // filterMode에 따른 필터링
+    if (prefsLoaded && prefs.filterMode === "favorites") {
+      result = result.filter((item) => {
+        const normalizedSymbol = item.symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
+        return favorites.has(normalizedSymbol);
+      });
+    } else if (prefsLoaded && prefs.filterMode === "foreign") {
+      // 해외 거래소에 상장된 코인만 (globalPrice가 있는 경우)
+      result = result.filter((item) => item.globalPrice !== null && item.globalPrice > 0);
+    }
+
     if (searchQuery) {
       result = result.filter((item) => matchSearch(item, searchQuery));
     }
 
     result.sort((a, b) => {
-      const aIsFavorite = favorites.has(a.symbol);
-      const bIsFavorite = favorites.has(b.symbol);
+      const aNormalized = a.symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
+      const bNormalized = b.symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
+      const aIsFavorite = favorites.has(aNormalized);
+      const bIsFavorite = favorites.has(bNormalized);
 
       if (aIsFavorite !== bIsFavorite) {
         return aIsFavorite ? -1 : 1;
@@ -492,7 +497,7 @@ export default function PremiumTable({
     }
 
     return result;
-  }, [data, searchQuery, sortKey, sortOrder, limit, favorites]);
+  }, [data, searchQuery, sortKey, sortOrder, limit, favorites, prefs.filterMode, prefsLoaded]);
 
   // 코인 표시명 생성: displayName ?? name_ko ?? name_en ?? koreanName ?? symbol
   const [isMobile, setIsMobile] = useState(false);
@@ -892,20 +897,27 @@ export default function PremiumTable({
                         data-symbol={row.symbol}
                       >
                         <td className="w-[30px] text-center py-1.5 md:py-2 px-1 md:px-2">
-                          <button
-                            type="button"
-                            className={`p-0.5 leading-none transition-colors ${
-                              favorites.has(row.symbol)
-                                ? "text-[#FDCB52]"
-                                : "text-[#A7B3C6]/40 hover:text-[#FDCB52]"
-                            }`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              toggleFavorite(row.symbol);
-                            }}
-                          >
-                            ★
-                          </button>
+                          {(() => {
+                            const normalizedSymbol = row.symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
+                            const isFav = favorites.has(normalizedSymbol);
+                            return (
+                              <button
+                                type="button"
+                                className={`p-0.5 leading-none transition-colors ${
+                                  isFav
+                                    ? "text-[#FDCB52]"
+                                    : "text-[#A7B3C6]/40 hover:text-[#FDCB52]"
+                                }`}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  toggleFavorite(row.symbol);
+                                }}
+                                title={isFav ? "즐겨찾기 해제" : "즐겨찾기 추가"}
+                              >
+                                ★
+                              </button>
+                            );
+                          })()}
                         </td>
                         <td className="px-1 md:px-2 py-1.5 md:py-2">
                           <div className="flex items-center gap-1.5 md:gap-3 min-w-0">
