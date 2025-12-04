@@ -87,6 +87,36 @@ app.get('/binance/fapi/v1/ticker/price', async (req, res) => {
   }
 });
 
+// Binance 24hr Stats 프록시
+app.get('/binance/api/v3/ticker/24hr', async (req, res) => {
+  try {
+    const { symbol } = req.query;
+    const cacheKey = 'binance_spot_24hr';
+
+    let data = getCached(cacheKey);
+
+    if (!data) {
+      const response = await axios.get('https://api.binance.com/api/v3/ticker/24hr', {
+        timeout: 15000,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+      });
+      data = response.data;
+      setCache(cacheKey, data);
+    }
+
+    if (symbol) {
+      const filtered = data.find(x => x.symbol === symbol);
+      return res.json(filtered || null);
+    }
+    return res.json(data);
+  } catch (error) {
+    console.error('Binance 24hr proxy error:', error?.response?.data || error.message);
+    res.status(500).json({ error: 'Binance 24hr proxy failed' });
+  }
+});
+
 // 3) Bybit 프록시 - category만 외부 API에 전달, symbol은 프록시에서 필터링
 app.get('/bybit/v5/market/tickers', async (req, res) => {
   try {
