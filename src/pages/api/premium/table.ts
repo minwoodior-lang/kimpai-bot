@@ -16,6 +16,7 @@ interface PremiumRow {
   name_ko: string | null;
   name_en: string | null;
   icon_url: string | null;
+  usdKrw: number;
 }
 
 function guessCmcSlug(row: PremiumRow): string {
@@ -35,6 +36,9 @@ function loadPremium(): PremiumRow[] {
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const premium = loadPremium();
+    
+    // premiumTable의 첫 번째 행에서 usdKrw 값 추출 (모든 행이 동일한 FX rate 사용)
+    const fxRate = premium.length > 0 ? premium[0].usdKrw : 1380;
 
     const result = premium.map((row: PremiumRow) => ({
       exchange: row.exchange,
@@ -58,15 +62,17 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       cmcSlug: guessCmcSlug(row),
     }));
 
+    const premiumsWithValues = result.filter(r => r.premium !== null);
+    const averagePremium = premiumsWithValues.length > 0
+      ? premiumsWithValues.reduce((sum: number, r: any) => sum + (r.premium ?? 0), 0) /
+        premiumsWithValues.length
+      : 0;
+
     return res.status(200).json({
       success: true,
       data: result,
-      averagePremium:
-        result.length > 0
-          ? result.reduce((sum: number, r: any) => sum + (r.premium || 0), 0) /
-            result.length
-          : 0,
-      fxRate: 1350,
+      averagePremium: Math.round(averagePremium * 100) / 100,
+      fxRate,
       updatedAt: new Date().toISOString(),
       totalMarkets: result.length,
     });
@@ -76,7 +82,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       success: false,
       data: [],
       averagePremium: 0,
-      fxRate: 0,
+      fxRate: 1380,
       updatedAt: new Date().toISOString(),
       totalMarkets: 0,
     });

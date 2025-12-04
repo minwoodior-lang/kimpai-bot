@@ -1,6 +1,6 @@
-# KimpAI v3.3.1 - Kimchi Premium Analytics Dashboard
+# KimpAI v3.3.2 - Kimchi Premium Analytics Dashboard
 
-## 📋 상태: 프록시 서버 통합 완료 (Phase 5.1 ✅)
+## 📋 상태: 환율 실시간 동기화 완료 (Phase 5.2 ✅)
 
 ### 최종 아키텍처 (2025-12-04)
 
@@ -231,20 +231,39 @@ POST /api/heartbeat
 
 ## 📌 v3.3.2 변경사항 (2025-12-04)
 
-1. **Rate Limit 해결을 위한 Worker 분리**
-   - 가격 수집 Worker: 3초 간격 (기존 유지)
-   - 통계 수집 Worker: 30초 간격 (신규 분리)
-   - Binance API 호출 횟수 대폭 감소 (분당 2400 → ~120)
+### Phase 5.2: 환율 실시간 API 동기화 ✅
 
-2. **프록시 서버 캐싱 강화**
+1. **환율 데이터 흐름 통합**
+   - `workers/priceWorker.ts`: usdKrwRate를 premiumTable.json에 저장
+   - `src/pages/api/premium/table-filtered.ts`: fxRate 그대로 반환
+   - `src/pages/api/premium/table.ts`: premiumTable의 usdKrw 값 추출하여 반환
+   - 모든 엔드포인트에서 동일한 FX 값 사용 (일관성 보장)
+
+2. **프론트엔드 환율 표시**
+   - `useMarkets` hook에서 `fxRate` 받음
+   - `AIInsightBox.tsx`: `₩{fxRate.toLocaleString()} / $1` 포맷으로 렌더링
+   - `TodayPremiumSection`: 동일 환율 값 표시
+   - TopInfoBar 제거 준비: 환율 정보는 AI 요약 카드에서 관리
+
+3. **데이터 무결성 개선**
+   - premiumTable.json: 558 rows, null 값 보존
+   - prices.json: 4,507 entries, 각각 null 또는 실제 가격
+   - premiumTable.json: 동일 행의 모든 값이 동일한 usdKrw 사용
+
+4. **API 응답 구조**
+   - `/api/premium/table`: `{ fxRate: number, averagePremium, ... }`
+   - `/api/premium/table-filtered`: `{ fxRate: number, averagePremium, ... }`
+   - 모든 클라이언트가 동일한 FX 기준값 사용 가능
+
+### Phase 5.1: Rate Limit 해결을 위한 Worker 분리 ✅
+
+1. **Worker 분리**
+   - 가격 수집 Worker: 3초 간격
+   - 통계 수집 Worker: 30초 간격
+
+2. **프록시 서버 캐싱**
    - 가격 API: 2초 캐시 TTL
    - 24hr 통계 API: 30초 캐시 TTL
-   - `/binance/api/v3/ticker/24hr` 엔드포인트 추가
-
-3. **주요 수치**
-   - 가격 수집: 4,507 entries
-   - 통계 수집: 3,366 stats
-   - 프리미엄 테이블: 558 rows
 
 ## 📌 v3.3.1 변경사항 (2025-12-04)
 
