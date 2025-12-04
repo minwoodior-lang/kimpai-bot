@@ -12,7 +12,7 @@ export function openCmcPage(symbol: string, cmcSlug?: string) {
   // 1) slug가 있으면 currencies/{slug}/ 로 이동
   if (cmcSlug && cmcSlug.trim().length > 0) {
     const slug = cmcSlug.trim().toLowerCase();
-    const url = `https://coinmarketcap.com/ko/currencies/${slug}/?utm_source=apiswap&utm_medium=web&utm_campaign=kimpga`;
+    const url = `https://coinmarketcap.com/ko/currencies/${slug}/?utm_source=kimpai&utm_medium=web&utm_campaign=premium-table`;
     console.log("[CMC_URL] Using slug:", slug, "→", url);
     if (typeof window !== "undefined") {
       window.open(url, "_blank", "noopener,noreferrer");
@@ -38,7 +38,7 @@ export function openCmcPage(symbol: string, cmcSlug?: string) {
 export function getCmcUrl(symbol: string, cmcSlug?: string): string {
   if (cmcSlug && cmcSlug.trim().length > 0) {
     const slug = cmcSlug.trim().toLowerCase();
-    return `https://coinmarketcap.com/ko/currencies/${slug}/?utm_source=apiswap&utm_medium=web&utm_campaign=kimpga`;
+    return `https://coinmarketcap.com/ko/currencies/${slug}/?utm_source=kimpai&utm_medium=web&utm_campaign=premium-table`;
   }
   const baseSymbol = symbol.replace(/\/[A-Z]+$/i, "").toLowerCase();
   return `https://coinmarketcap.com/ko/search/?q=${encodeURIComponent(baseSymbol)}`;
