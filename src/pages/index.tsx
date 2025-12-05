@@ -227,9 +227,9 @@ export default function Home() {
 
             {/* 프리미엄 차트 섹션 */}
             <section className="mt-6 mb-4 md:mt-8 md:mb-6">
-              <div className="mb-3 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3 relative z-10">
+              <div className="mb-3 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3 relative z-30">
                 <h2 className="text-sm text-slate-300">프리미엄 차트</h2>
-                <div className="flex items-center gap-1 md:gap-1 relative z-20">
+                <div className="flex items-center gap-1 md:gap-1 relative z-40">
                   <button
                     onClick={() => setIsPrefsPanelOpen(true)}
                     className="inline-flex items-center rounded-md bg-slate-800 px-3 py-2 text-sm text-slate-100 hover:bg-slate-700 transition"
@@ -243,7 +243,7 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <div className="rounded-xl border border-white/5 bg-[#050819] h-[320px] md:h-[480px] overflow-hidden relative z-0">
+              <div className="rounded-xl border border-white/5 bg-[#050819] h-[220px] md:h-[320px] overflow-hidden relative isolate">
                 <TradingViewChartDynamic 
                   tvSymbol={SYMBOL_MAP[selectedIndicator] || "BINANCE:BTCUSDT"} 
                   height="100%" 
