@@ -594,10 +594,7 @@ async function updatePricesOnly(): Promise<void> {
       fetchCoinonePrices(coinoneMarkets)
     ];
     
-    const globalPromises = useWebSocket ? [
-      fetchBitgetPrices(globalMarkets),
-      fetchHtxPrices(globalMarkets)
-    ] : [
+    const globalPromises = [
       fetchBinanceSpotPrices(globalMarkets),
       fetchBinanceFuturesPrices(globalMarkets),
       fetchOkxPrices(globalMarkets),
