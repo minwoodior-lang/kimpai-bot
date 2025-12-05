@@ -791,7 +791,8 @@ export default function PremiumTable({
     if (value >= 1) {
       return value.toFixed(2);
     }
-    return value.toFixed(4);
+    // 1 미만: 2자리로 통일 (이전 4자리에서 수정)
+    return value.toFixed(2);
   }, []);
 
   const formatUsdtPrice = (value: number | null) => {

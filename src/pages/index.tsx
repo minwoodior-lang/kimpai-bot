@@ -229,10 +229,10 @@ export default function Home() {
             <section className="mt-4 sm:mt-6 mb-3 sm:mb-4 md:mt-8 md:mb-6">
               <div className="mb-2 sm:mb-3 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3 relative z-30">
                 <h2 className="text-xs sm:text-sm text-slate-300">프리미엄 차트</h2>
-                <div className="flex items-center gap-1 md:gap-1 relative z-40">
+                <div className="flex items-center gap-1 md:gap-2 relative z-40">
                   <button
                     onClick={() => setIsPrefsPanelOpen(true)}
-                    className="inline-flex items-center rounded-md bg-slate-800 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-100 hover:bg-slate-700 transition"
+                    className="inline-flex items-center h-9 rounded-md bg-slate-800 px-2 sm:px-3 py-2 text-xs sm:text-sm text-slate-100 hover:bg-slate-700 transition"
                   >
                     <span className="mr-1">⚙</span>
                     <span>개인화 설정</span>
@@ -248,6 +248,12 @@ export default function Home() {
                   tvSymbol={SYMBOL_MAP[selectedIndicator] || "BINANCE:BTCUSDT"} 
                   height="100%" 
                 />
+              </div>
+              {/* 차트 설명 텍스트 */}
+              <div className="mt-2 text-[10px] sm:text-xs text-slate-400 flex flex-col sm:flex-row sm:gap-2">
+                <span>KR 기준 거래소: UPBIT</span>
+                <span className="hidden sm:inline">•</span>
+                <span>해외 거래소 기준: BINANCE</span>
               </div>
             </section>
 

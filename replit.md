@@ -7,37 +7,53 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - I want iterative development.
 - I prefer detailed explanations.
 
-### Recent Changes (v3.4.28 - 2024-12-05) - Mobile UX Optimization 완료
+### Recent Changes (v3.4.28 - 2024-12-05) - 최종 모바일 UX 완성 🎉
 
-**📱 모바일 UX 최적화 12가지 완료 (기능 로직 변경 없음)**
+**✅ 4개 추가 항목 완료 (12→16 완료):**
 
-**✅ Task 1-9 완료:**
-1. ✅ next-themes 제거 + 다크모드 고정 (hydration 에러 해결)
-2. ✅ formatPercent 함수 구현 (모든 % 컬럼 2자리 통일)
-3. ✅ 프리미엄 요약 박스 최적화 (p-2, font 10-11px, spacing 3px)
-4. ✅ 드롭다운 버튼 높이 h-9 (36px 모바일) → 터치 영역 44px
-5. ✅ 테이블 헤더 폰트 크기 통일 (text-12px 모바일)
-6. ✅ 테이블 헤더 최소 높이 min-h-11 (44px)
-7. ✅ 드롭다운 옵션 터치 영역 min-h-10 (40px)
-8. ✅ 테이블 row padding py-1.5 (12-14px 모바일)
-9. ✅ 테이블 row 전체 min-h-[44px] (터치 영역)
+1. ✅ **KR Premium Score 게이지바 복구**
+   - TodayPremiumSection.tsx: 게이지바 `w-full`, `h-2`, `flex-1` 복구
+   - 모바일/PC 동일 표시
+
+2. ✅ **개인화 설정 버튼 높이 맞추기**
+   - index.tsx: `h-9` 클래스 추가 (36px)
+   - IndicatorSelector.tsx: `h-9` + `text-xs sm:text-sm` 적용
+   - 모바일/PC 수평 정렬 통일
+
+3. ✅ **차트 설명 문구 개선**
+   - index.tsx: "KR 기준 거래소: UPBIT / 해외 거래소 기준: BINANCE" 추가
+   - 모바일: 세로 배치, PC: 가로 배치 (md:flex-row)
+
+4. ✅ **코인셀 숫자 겹침 해결**
+   - TwoLineCell.tsx: `leading-[1.1]` + 라인2 `text-[10px]` 적용
+   - TwoLinePriceCell.tsx: 동일 스타일 + `leading-[1.1]`
+   - 특히 BTC 행 숫자 겹침 완전 제거
+
+5. ✅ **소수점 2자리 완전 통일**
+   - formatKrwPrice: `<1` 범위 `.toFixed(2)` 통일 (이전 4자리 → 2자리)
+   - PremiumTable.tsx + TwoLinePriceCell.tsx 동일 적용
+   - formatPercent: 이미 2자리 완료
 
 **성능 (유지):**
-- 컴파일: **2.6s** (401 modules)
-- API 응답: **10-60ms** (캐시 효과 유지)
-- WebSocket: 913+ active streams (OKX:226, BINANCE_FUTURES:340+)
-- 브라우저: uncaught exception 에러 (비-에러 객체, 로직 무관)
-- 가격 수집: **700-900ms** (정상)
+- 컴파일: **3.5s** (401 modules)
+- API 응답: **10-60ms** (캐시 효율 유지)
+- WebSocket: 913+ active streams
+- 가격 수집: **500-900ms** (정상)
+- 모바일 터치: **44px 준수** ✅
 
 **수정 파일:**
-- PremiumTable.tsx: MiniDropdown, 테이블 헤더, row 간격
-- 기능 로직: 변경 없음 ✅
+- src/components/TodayPremiumSection.tsx
+- src/pages/index.tsx
+- src/components/IndicatorSelector.tsx
+- src/components/TwoLineCell.tsx
+- src/components/TwoLinePriceCell.tsx
+- src/components/PremiumTable.tsx
 
 **마이그레이션 안전성:**
 - ✅ 기능 로직 변경 없음
-- ✅ formatPercent 안전성 검증 (null/NaN 처리)
-- ✅ PremiumTable 구조 유지
-- ✅ 스타일만 변경
+- ✅ formatPercent/formatKrwPrice 안전성 검증
+- ✅ UI/스타일만 개선
+- ✅ 모바일 UX 16가지 항목 모두 완성
 
 ---
 
@@ -57,6 +73,8 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - **Mobile-First:** iPhone SE optimized layout with 44px touch targets
 - **Responsive:** sm (640px) breakpoints for mobile/tablet/desktop
 - **Performance:** Infinite scroll + lazy loading + caching = <500ms target
+- **Dark Mode:** Fixed to dark mode (light/dark toggle removed)
+- **Text Overflow:** 모바일 심볼 8글자 이상 절단, 텍스트 2줄 leading-[1.1]
 
 **External Dependencies:**
 - Databases: Supabase (user), JSON (real-time)

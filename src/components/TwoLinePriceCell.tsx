@@ -22,10 +22,12 @@ const formatKrwPrice = (value: number | null | undefined): string => {
   if (value >= 100) {
     return value.toFixed(1);
   }
+  // 1 이상 100 미만: 2자리
   if (value >= 1) {
     return value.toFixed(2);
   }
-  return value.toFixed(4);
+  // 1 미만: 2자리 (이전 4자리에서 2자리로 수정)
+  return value.toFixed(2);
 };
 
 const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
@@ -115,7 +117,7 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   };
 
   const getBottomClass = () => {
-    const base = "text-[11px] md:text-[12px] whitespace-nowrap";
+    const base = "text-[10px] md:text-[11px] whitespace-nowrap";
     if (bottomValue === null) return `${base} text-gray-500`;
     if (bottomFlash === "up") return `${base} price-flash-up`;
     if (bottomFlash === "down") return `${base} price-flash-down`;
@@ -123,7 +125,7 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-end leading-tight">
+    <div className="flex flex-col items-end leading-[1.1]">
       <span className={getTopClass()}>
         {topPrefix}{topFormatted}{topSuffix}
       </span>

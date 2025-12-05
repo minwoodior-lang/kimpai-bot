@@ -41,19 +41,19 @@ export default function TwoLineCell({
 
   if (isUnlisted) {
     return (
-      <div className={`flex flex-col leading-tight ${alignClass}`}>
+      <div className={`flex flex-col leading-[1.1] ${alignClass}`}>
         <span className={`text-[13px] md:text-[14px] font-medium whitespace-nowrap ${topColor}`}>-</span>
-        <span className={`text-[11px] md:text-[12px] whitespace-nowrap ${line2Color}`}>-</span>
+        <span className={`text-[10px] md:text-[11px] whitespace-nowrap ${line2Color}`}>-</span>
       </div>
     );
   }
 
   return (
-    <div className={`flex flex-col leading-tight ${alignClass}`}>
+    <div className={`flex flex-col leading-[1.1] ${alignClass}`}>
       <span className={`text-[13px] md:text-[14px] font-medium whitespace-nowrap ${topColor}`}>
         {line1Prefix}{formatValue(line1)}{line1Suffix}
       </span>
-      <span className={`text-[11px] md:text-[12px] whitespace-nowrap ${line2Color}`}>
+      <span className={`text-[10px] md:text-[11px] whitespace-nowrap ${line2Color}`}>
         {line2Prefix}{formatValue(line2)}{line2Suffix}
       </span>
     </div>
