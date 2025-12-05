@@ -205,10 +205,10 @@ const PremiumTableRow = React.memo(({
   return (
     <React.Fragment key={uniqueKey}>
       <tr
-        className="text-[10px] md:text-sm hover:bg-slate-800/60 transition-colors leading-tight"
+        className="text-[9px] sm:text-[10px] md:text-sm hover:bg-slate-800/60 transition-colors leading-tight"
         data-symbol={row.symbol}
       >
-        <td className="w-[30px] text-center py-1 md:py-3 px-2 md:px-3 lg:px-4">
+        <td className="w-[24px] sm:w-[30px] text-center py-0.5 sm:py-1 md:py-3 px-1 sm:px-2 md:px-3 lg:px-4">
           <button
             type="button"
             className={`p-0.5 leading-none transition-colors ${
@@ -225,8 +225,8 @@ const PremiumTableRow = React.memo(({
             ★
           </button>
         </td>
-        <td className="px-2 md:px-3 lg:px-4 py-1 md:py-3">
-          <div className="flex items-center gap-1.5 md:gap-3 min-w-0">
+        <td className="px-1 sm:px-2 md:px-3 lg:px-4 py-1 md:py-3">
+          <div className="flex items-center gap-1 sm:gap-1.5 md:gap-3 min-w-0">
             <button
               type="button"
               onClick={() => {
@@ -236,25 +236,25 @@ const PremiumTableRow = React.memo(({
                   onChartSelect(row.symbol, domesticExchange, foreignExchange);
                 }
               }}
-              className="p-1 text-slate-400 hover:text-slate-200 transition-colors flex-shrink-0"
+              className="p-0.5 sm:p-1 text-slate-400 hover:text-slate-200 transition-colors flex-shrink-0 text-xs sm:text-base"
               title="차트 보기"
             >
               📈
             </button>
-            <CoinIcon symbol={row.symbol} className="w-3.5 h-3.5 md:w-8 md:h-8 flex-shrink-0" iconUrl={row.icon_url} />
+            <CoinIcon symbol={row.symbol} className="w-3 sm:w-3.5 md:w-8 h-3 sm:h-3.5 md:h-8 flex-shrink-0" iconUrl={row.icon_url} />
             <div className="flex flex-col flex-1 min-w-0 cursor-pointer"
               onClick={() => openCmcPage(row.symbol, row.cmcSlug)}>
-              <span className="truncate text-[13px] md:text-[14px] font-medium text-white hover:text-blue-400 transition-colors">
+              <span className="truncate text-[11px] sm:text-[13px] md:text-[14px] font-medium text-white hover:text-blue-400 transition-colors">
                 {getDisplayName(row)}
               </span>
-              <span className="truncate text-[11px] md:text-[12px] text-gray-500 uppercase tracking-tight">
+              <span className="truncate text-[9px] sm:text-[11px] md:text-[12px] text-gray-500 uppercase tracking-tight">
                 {getDisplaySymbol(row.symbol)}
               </span>
             </div>
           </div>
         </td>
 
-        <td className="w-[140px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
+        <td className="w-[110px] sm:w-[140px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
           <TwoLinePriceCell
             topValue={row.koreanPrice}
             bottomValue={row.foreignPriceKrw}
@@ -264,7 +264,7 @@ const PremiumTableRow = React.memo(({
           />
         </td>
 
-        <td className="w-[90px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
+        <td className="w-[85px] sm:w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={isUnlisted ? "-" : `${row.premiumRate >= 0 ? "+" : ""}${Number(row.premiumRate || 0).toFixed(2)}%`}
             line2={`${row.premiumDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.premiumDiffKrw || 0))}`}
@@ -273,7 +273,7 @@ const PremiumTableRow = React.memo(({
           />
         </td>
 
-        <td className="w-[100px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
+        <td className="w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={`${row.changeRate >= 0 ? "+" : ""}${Number(row.changeRate || 0).toFixed(2)}%`}
             line2={`${row.changeAbsKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.changeAbsKrw || 0))}`}
@@ -281,7 +281,7 @@ const PremiumTableRow = React.memo(({
           />
         </td>
 
-        <td className="hidden md:table-cell w-[100px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
+        <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={`${row.fromHighRate >= 0 ? "+" : ""}${Number(row.fromHighRate || 0).toFixed(2)}%`}
             line2={`${row.highDiffKrw > 0 ? "-" : "+"}₩${formatKrwPrice(Math.abs(row.highDiffKrw || 0))}`}
@@ -289,7 +289,7 @@ const PremiumTableRow = React.memo(({
           />
         </td>
 
-        <td className="hidden md:table-cell w-[100px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
+        <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={`${row.fromLowRate >= 0 ? "+" : ""}${Number(row.fromLowRate || 0).toFixed(2)}%`}
             line2={`${row.lowDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.lowDiffKrw || 0))}`}
@@ -297,7 +297,7 @@ const PremiumTableRow = React.memo(({
           />
         </td>
 
-        <td className="w-[120px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap pr-0">
+        <td className="w-[105px] sm:w-[120px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap pr-0">
           <TwoLineCell
             line1={formatVolumeKRW(row.volume24hKrw)}
             line2={

@@ -20,7 +20,7 @@ export function TodayPremiumSection({
   compact = false,
 }: TodayPremiumSectionProps) {
   return (
-    <div className={`rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 ${compact ? 'p-2.5 sm:p-3' : 'p-3 sm:p-4'} h-full flex flex-col`}>
+    <div className={`rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 ${compact ? 'p-2.5 sm:p-3' : 'p-3 sm:p-4'} sm:${compact ? 'p-2.5' : 'p-4'} h-full flex flex-col`}>
       {/* 제목 */}
       <h2 className={`${compact ? 'text-xs sm:text-sm' : 'text-sm sm:text-base'} font-bold dark:text-slate-100 light:text-slate-900 ${compact ? 'mb-1.5' : 'mb-2'} flex items-center gap-2`}>
         <span>📊</span>
@@ -28,7 +28,7 @@ export function TodayPremiumSection({
       </h2>
 
       {/* 정보 그리드 */}
-      <div className={`${compact ? 'space-y-1' : 'space-y-2'} flex-1`}>
+      <div className={`${compact ? 'space-y-1' : 'space-y-2'} sm:${compact ? 'space-y-1' : 'space-y-2'} flex-1`}>
         <div className="flex justify-between">
           <span className={`${compact ? 'text-[9px] sm:text-[10px]' : 'text-[11px] md:text-[13px]'} dark:text-white/60 light:text-slate-600`}>평균 김프</span>
           <span className={`${compact ? 'text-[9px] sm:text-xs' : 'text-sm md:text-[15px]'} font-semibold dark:text-slate-100 light:text-slate-900`}>{avgPremium}</span>

@@ -126,8 +126,8 @@ export default function ChartWithControls({
 
   return (
     <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl overflow-hidden">
-      <div className="flex flex-wrap items-center justify-between gap-2 p-3 border-b border-slate-700/50">
-        <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 p-3 sm:p-4 border-b border-slate-700/50">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
           <select
             value={chartPreset.id}
             onChange={(e) => {
@@ -136,7 +136,7 @@ export default function ChartWithControls({
                 setChartPreset(preset);
               }
             }}
-            className="bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 focus:outline-none focus:border-blue-500 text-sm min-w-[180px]"
+            className="bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 focus:outline-none focus:border-blue-500 text-xs sm:text-sm min-w-full sm:min-w-[160px] h-9 sm:h-auto"
           >
             <optgroup label="BTC / 프리미엄 지표">
               {CHART_PRESETS.slice(0, 7).map((preset) => (
@@ -170,7 +170,7 @@ export default function ChartWithControls({
                   setTimeframe(tf);
                 }
               }}
-              className="bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 focus:outline-none focus:border-blue-500 text-sm min-w-[80px]"
+              className="bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 focus:outline-none focus:border-blue-500 text-xs sm:text-sm min-w-full sm:min-w-[70px] h-9 sm:h-auto"
             >
               {TIMEFRAMES.map((tf) => (
                 <option key={tf.id} value={tf.id}>
@@ -180,7 +180,7 @@ export default function ChartWithControls({
             </select>
           )}
         </div>
-        <span className="text-slate-500 text-xs hidden sm:inline">
+        <span className="text-slate-500 text-xs hidden sm:inline flex-shrink-0">
           {chartPreset.isCustom ? "KimpAI" : "TradingView"}
         </span>
       </div>

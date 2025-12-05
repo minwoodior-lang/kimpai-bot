@@ -13,6 +13,9 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
   domesticExchange,
   foreignExchange,
 }) => {
+  // 모바일 환경에서 높이 축소
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const chartHeight = isMobile && typeof height === 'number' ? Math.min(height, 240) : height;
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -57,10 +60,10 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
   };
 
   return (
-    <div className="w-full flex flex-col" style={{ height }}>
+    <div className="w-full flex flex-col" style={{ height: chartHeight }}>
       {(domesticExchange || foreignExchange) && (
-        <div className="px-4 py-2 border-b border-white/10 bg-slate-900/30">
-          <p className="text-[11px] md:text-[13px] text-slate-400 font-medium flex items-center gap-2">
+        <div className="px-2 sm:px-4 py-1 sm:py-2 border-b border-white/10 bg-slate-900/30">
+          <p className="text-[9px] sm:text-[11px] md:text-[13px] text-slate-400 font-medium flex items-center gap-1 sm:gap-2">
             <span>KR 기준 거래소: {getExchangeName(domesticExchange)}</span>
             <span className="text-slate-500">/</span>
             <span>해외 거래소 기준: {getExchangeName(foreignExchange)}</span>

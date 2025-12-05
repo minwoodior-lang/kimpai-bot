@@ -7,6 +7,15 @@
   --foreground: #f8fafc;
 }
 
+@media (max-width: 640px) {
+  * {
+    letter-spacing: -0.2px;
+  }
+  body {
+    font-size: 13px;
+  }
+}
+
 body {
   color: var(--foreground);
   background: var(--background);

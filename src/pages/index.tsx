@@ -114,7 +114,7 @@ export default function Home() {
       {/* 메인 콘텐츠 */}
       <HomeLayout>
         <main className="w-full flex justify-center">
-          <div className="w-full px-2 md:px-6 py-6 md:max-w-[1280px] md:mx-auto">
+          <div className="w-full px-2 sm:px-4 md:px-6 py-3 sm:py-6 md:max-w-[1280px] md:mx-auto">
             {/* PC: 상단 3컬럼 레이아웃 */}
             <div className="hidden md:grid grid-cols-3 gap-4 mb-8">
             {/* 좌측: 오늘의 AI 김프 요약 */}
@@ -226,15 +226,15 @@ export default function Home() {
           </div>
 
             {/* 프리미엄 차트 섹션 */}
-            <section className="mt-6 mb-4 md:mt-8 md:mb-6">
-              <div className="mb-3 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3 relative z-30">
-                <h2 className="text-sm text-slate-300">프리미엄 차트</h2>
+            <section className="mt-4 sm:mt-6 mb-3 sm:mb-4 md:mt-8 md:mb-6">
+              <div className="mb-2 sm:mb-3 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3 relative z-30">
+                <h2 className="text-xs sm:text-sm text-slate-300">프리미엄 차트</h2>
                 <div className="flex items-center gap-1 md:gap-1 relative z-40">
                   <button
                     onClick={() => setIsPrefsPanelOpen(true)}
-                    className="inline-flex items-center rounded-md bg-slate-800 px-3 py-2 text-sm text-slate-100 hover:bg-slate-700 transition"
+                    className="inline-flex items-center rounded-md bg-slate-800 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-100 hover:bg-slate-700 transition"
                   >
-                    <span className="mr-1.5">⚙</span>
+                    <span className="mr-1">⚙</span>
                     <span>개인화 설정</span>
                   </button>
                   <IndicatorSelector
@@ -243,7 +243,7 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <div className="rounded-xl border border-white/5 bg-[#050819] h-[220px] md:h-[320px] overflow-hidden relative isolate">
+              <div className="rounded-xl border border-white/5 bg-[#050819] h-[200px] sm:h-[240px] md:h-[320px] overflow-hidden relative isolate">
                 <TradingViewChartDynamic 
                   tvSymbol={SYMBOL_MAP[selectedIndicator] || "BINANCE:BTCUSDT"} 
                   height="100%" 
