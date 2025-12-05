@@ -3,15 +3,19 @@ import path from "path";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { BAD_ICON_SYMBOLS } from "@/config/badIconSymbols";
 
-interface MarketStatsEntry {
-  change24hRate: number;
-  change24hAbs: number;
-  high24h: number | null;
-  low24h: number | null;
-  volume24hQuote: number;
+interface PriceEntry {
+  price: number;
+  ts: number;
+  volume24hKrw?: number;
+  volume24hQuote?: number;
+  change24hRate?: number;
+  change24hAbs?: number;
+  high24h?: number;
+  low24h?: number;
+  prev_price?: number;
 }
 
-type MarketStatsMap = Record<string, MarketStatsEntry>;
+type PricesMap = Record<string, PriceEntry>;
 
 function loadJsonFile(filename: string): any {
   try {
@@ -37,8 +41,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const allMarkets = loadJsonFile("exchange_markets.json") as any[];
     const masterSymbols = loadJsonFile("master_symbols.json") as any[];
     const premiumTable = loadJsonFile("premiumTable.json") as any[];
-    const prices = loadJsonFile("prices.json") as Record<string, { price: number; ts: number }>;
-    const marketStats = loadJsonFile("marketStats.json") as MarketStatsMap;
+    const prices = loadJsonFile("prices.json") as PricesMap;
 
     const masterMap = new Map(masterSymbols.map((s: any) => [s.symbol, s]));
     const premiumMap = new Map(premiumTable.map((p: any) => [p.symbol, p]));
@@ -59,28 +62,28 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         const domesticPriceKey = `${domesticExchange}:${symbol}:${domesticQuote}`;
         const foreignPriceKey = `${foreignExchange}:${symbol}:${foreignQuote}`;
 
-        let domesticPriceRaw = prices[domesticPriceKey]?.price ?? null;
+        const domesticEntry = prices[domesticPriceKey];
+        const foreignEntry = prices[foreignPriceKey];
+
+        const domesticPriceRaw = domesticEntry?.price ?? null;
         let domesticPriceKrw: number | null = null;
         
-        // 국내 마켓 원화 환산 로직
+        const btcKrwKey = `${domesticExchange}:BTC:KRW`;
+        const btcKrw = prices[btcKrwKey]?.price ?? 0;
+
         if (domesticPriceRaw && domesticPriceRaw > 0) {
           if (domesticQuote === "KRW") {
-            // KRW 마켓: 이미 원화
             domesticPriceKrw = domesticPriceRaw;
           } else if (domesticQuote === "BTC") {
-            // BTC 마켓: 코인 BTC가 × 같은 거래소 BTC/KRW
-            const btcKrwKey = `${domesticExchange}:BTC:KRW`;
-            const btcKrw = prices[btcKrwKey]?.price ?? 0;
             if (btcKrw > 0) {
               domesticPriceKrw = domesticPriceRaw * btcKrw;
             }
           } else if (domesticQuote === "USDT") {
-            // USDT 마켓: 코인 USDT가 × 글로벌 테더 시세
             domesticPriceKrw = domesticPriceRaw * fxRate;
           }
         }
         
-        const foreignPrice = prices[foreignPriceKey]?.price ?? null;
+        const foreignPrice = foreignEntry?.price ?? null;
 
         let foreignPriceKrw: number | null = null;
         if (foreignPrice && foreignPrice > 0) {
@@ -114,42 +117,60 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
         const cmcSlug = premiumRow?.cmcSlug || master?.cmc_slug || null;
 
-        const domesticStatsKey = `${domesticExchange}:${symbol}:${domesticQuote}`;
-        const foreignStatsKey = `${foreignExchange}:${symbol}:${foreignQuote}`;
-        
-        const domesticStats = marketStats[domesticStatsKey];
-        const foreignStats = marketStats[foreignStatsKey];
+        const changeRate = domesticEntry?.change24hRate ?? null;
+        let changeAbsKrw = domesticEntry?.change24hAbs ?? null;
+        let high24hKrw = domesticEntry?.high24h ?? null;
+        let low24hKrw = domesticEntry?.low24h ?? null;
 
-        const changeRate = domesticStats?.change24hRate ?? 0;
-        
-        // changeAbsKrw, high24h, low24h를 KRW로 변환
-        let changeAbsKrw = domesticStats?.change24hAbs ?? 0;
-        let high24hKrw: number | null = domesticStats?.high24h ?? null;
-        let low24hKrw: number | null = domesticStats?.low24h ?? null;
-        
-        // volume24hKrw는 premiumTable.json에서 직접 가져옴 (priceWorker에서 생성)
-        const volume24hKrw = premiumRow?.volume24hKrw ?? null;
+        let volume24hKrw: number | null = null;
+        const domesticVolume = domesticEntry?.volume24hKrw;
 
-        // BTC/USDT 마켓의 경우 변동 정보만 KRW 변환 필요 (volume24hKrw는 이미 priceWorker에서 계산됨)
-        if (domesticQuote === "BTC") {
-          const btcKrwKey = `${domesticExchange}:BTC:KRW`;
-          const btcKrw = prices[btcKrwKey]?.price ?? 0;
+        if (domesticQuote === "KRW") {
+          volume24hKrw = domesticVolume ?? null;
+        } else if (domesticQuote === "USDT") {
+          if (domesticVolume != null) {
+            volume24hKrw = domesticVolume * fxRate;
+          }
+          if (changeAbsKrw != null) changeAbsKrw = changeAbsKrw * fxRate;
+          if (high24hKrw != null) high24hKrw = high24hKrw * fxRate;
+          if (low24hKrw != null) low24hKrw = low24hKrw * fxRate;
+        } else if (domesticQuote === "BTC") {
           if (btcKrw > 0) {
-            changeAbsKrw = changeAbsKrw * btcKrw;
-            if (high24hKrw) high24hKrw = high24hKrw * btcKrw;
-            if (low24hKrw) low24hKrw = low24hKrw * btcKrw;
-            // volume24hKrw는 이미 priceWorker에서 KRW로 계산됨
+            if (domesticVolume != null) {
+              volume24hKrw = domesticVolume * btcKrw;
+            }
+            if (changeAbsKrw != null) changeAbsKrw = changeAbsKrw * btcKrw;
+            if (high24hKrw != null) high24hKrw = high24hKrw * btcKrw;
+            if (low24hKrw != null) low24hKrw = low24hKrw * btcKrw;
           } else {
-            // BTC/KRW 가격 없으면 계산 불가
-            changeAbsKrw = 0;
+            volume24hKrw = null;
+            changeAbsKrw = null;
             high24hKrw = null;
             low24hKrw = null;
           }
-        } else if (domesticQuote === "USDT") {
-          changeAbsKrw = changeAbsKrw * fxRate;
-          if (high24hKrw) high24hKrw = high24hKrw * fxRate;
-          if (low24hKrw) low24hKrw = low24hKrw * fxRate;
-          // volume24hKrw는 이미 priceWorker에서 KRW로 계산됨
+        }
+
+        let volume24hForeignKrw: number | null = null;
+        const foreignVolume = foreignEntry?.volume24hKrw ?? foreignEntry?.volume24hQuote;
+
+        if (foreignQuote === "USDT") {
+          if (foreignVolume != null) {
+            volume24hForeignKrw = foreignVolume * fxRate;
+          }
+        } else if (foreignQuote === "BTC") {
+          const btcPriceOrder = ["BINANCE:BTC:USDT", "OKX:BTC:USDT", "BITGET:BTC:USDT", "GATE:BTC:USDT", "MEXC:BTC:USDT"];
+          let btcUsdtPrice = 0;
+          for (const key of btcPriceOrder) {
+            if (prices[key]?.price) {
+              btcUsdtPrice = prices[key].price;
+              break;
+            }
+          }
+          if (foreignVolume != null && btcUsdtPrice > 0) {
+            volume24hForeignKrw = foreignVolume * btcUsdtPrice * fxRate;
+          }
+        } else {
+          volume24hForeignKrw = foreignVolume ?? null;
         }
 
         const fromHighRate = (high24hKrw && domesticPriceKrw && high24hKrw > 0)
@@ -168,9 +189,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           ? domesticPriceKrw - low24hKrw
           : null;
 
-        // foreignVolumeKrw는 premiumTable.json의 volume24hForeignKrw 사용
-        const foreignVolumeKrw = premiumRow?.volume24hForeignKrw ?? null;
-
         return {
           symbol,
           name_ko: market.name_ko || master?.name_ko || premiumRow?.name_ko || symbol,
@@ -187,8 +205,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           premiumRate: premiumRate ? Math.round(premiumRate * 100) / 100 : null,
           premiumDiffKrw: premiumDiffKrw ? Math.round(premiumDiffKrw * 100) / 100 : null,
 
-          changeRate: Math.round(changeRate * 100) / 100,
-          changeAbsKrw: Math.round(changeAbsKrw * 100) / 100,
+          changeRate: changeRate != null ? Math.round(changeRate * 100) / 100 : null,
+          changeAbsKrw: changeAbsKrw != null ? Math.round(changeAbsKrw * 100) / 100 : null,
 
           fromHighRate: fromHighRate !== null ? Math.round(fromHighRate * 100) / 100 : null,
           highDiffKrw: highDiffKrw !== null ? Math.round(highDiffKrw * 100) / 100 : null,
@@ -196,8 +214,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           fromLowRate: fromLowRate !== null ? Math.round(fromLowRate * 100) / 100 : null,
           lowDiffKrw: lowDiffKrw !== null ? Math.round(lowDiffKrw * 100) / 100 : null,
 
-          volume24hKrw: volume24hKrw ?? null,
-          volume24hForeignKrw: foreignVolumeKrw ?? null,
+          volume24hKrw: volume24hKrw,
+          volume24hForeignKrw: volume24hForeignKrw,
 
           high24h: high24hKrw,
           low24h: low24hKrw,
@@ -222,7 +240,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       ? premiumsWithValues.reduce((sum, r) => sum + (r.premium ?? 0), 0) / premiumsWithValues.length
       : 0;
 
-    // totalCoins는 선택된 마켓(domesticQuote)의 실제 고유 심볼 수
     const selectedMarkets = allMarkets.filter((m) => {
       return m.exchange === domesticExchange && m.quote === domesticQuote;
     });

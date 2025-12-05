@@ -1,0 +1,102 @@
+🔧 기준 거래소별 “마켓 1:1 매핑”으로 교체 요청
+
+요청사항 핵심:
+
+기준 거래소 드롭다운에서 선택한 값이
+UPBIT_KRW, UPBIT_BTC, UPBIT_USDT, BITHUMB_KRW, BITHUMB_BTC, BITHUMB_USDT, COINONE_KRW
+이런 형태입니다.
+이 값을 그대로 사용해서 해당 마켓 ticker의 현재가와 거래액(일)을 1:1로 보여주세요.
+
+1) priceWorker.ts – 국내 기준 마켓 선택 함수 수정
+type DomesticExchange = 'UPBIT' | 'BITHUMB' | 'COINONE';
+type Market = 'KRW' | 'BTC' | 'USDT';
+
+function getDomesticPriceEntry(
+  prices: Record<string, PriceEntry>,
+  domesticParam: string,  // 예: "UPBIT_KRW", "BITHUMB_BTC"
+  symbol: string
+): { entry: PriceEntry | null; exchange: DomesticExchange | null; market: Market | null } {
+  const [exchangeRaw, marketRaw] = domesticParam.split('_');
+  const exchange = exchangeRaw as DomesticExchange;
+  const market = marketRaw as Market;
+
+  const key = `${exchange}:${symbol}:${market}`;
+  const entry = prices[key];
+
+  if (entry && typeof entry.lastPriceKrw === 'number') {
+    return { entry, exchange, market };
+  }
+
+  // 정말로 ticker가 없을 때만 null 리턴 (이 경우엔 UI에서 "-"로 처리)
+  return { entry: null, exchange, market };
+}
+
+2) 프리미엄 row 생성 시 현재가/거래액 매핑
+const { entry: domesticEntry, exchange: domesticExchange, market: domesticMarket } =
+  getDomesticPriceEntry(prices, domesticParam, symbol); // domesticParam = "UPBIT_KRW" 등
+
+// 해외 쪽은 기존 getGlobalPriceEntry 그대로 사용
+const { entry: foreignEntry, exchange: foreignExchange, market: foreignMarket } =
+  getGlobalPriceEntry(prices, foreignParam, symbol);
+
+rows.push({
+  symbol,
+
+  domesticExchange,
+  domesticMarket,
+  foreignExchange,
+  foreignMarket,
+
+  // ✅ 국내 – 기준 거래소+마켓 ticker 1:1 매핑
+  koreanPrice: domesticEntry?.lastPriceKrw ?? null,
+  volume24hKrw: domesticEntry?.volume24hKrw ?? null,
+
+  // ✅ 해외 – 기준 해외 거래소+마켓 ticker 1:1 매핑
+  globalPriceKrw: foreignEntry?.lastPriceKrw ?? null,
+  volume24hForeignKrw: foreignEntry?.volume24hKrw ?? null,
+
+  // 나머지 premium, change24h 등은 기존 계산 로직 그대로
+});
+
+
+여기서 절대 하지 말아야 할 것:
+
+우선순위로 KRW/USDT/BTC를 돌면서 다른 마켓 값으로 대체 ❌
+
+0을 falsy로 보고 || null 처리해서 날려버리기 ❌
+
+글로벌 거래소 volume을 국내 volume에 섞기 ❌
+
+3) /api/premium/table-filtered에서는 값을 “있는 그대로” 전달
+
+table-filtered.ts에서는:
+
+premiumTable.json에 있는 koreanPrice, volume24hKrw, volume24hForeignKrw를
+
+가공 없이 그대로 응답에 넣어 주세요.
+
+추가로 null 처리나 재계산은 하지 마세요.
+
+프론트 포맷터는 이미 이렇게 되어 있습니다:
+
+if (value === null || value === undefined || Number.isNaN(value))
+  return "-";   // null만 "-" 처리, 0은 숫자로 표시
+
+
+그래서 API는 있는 그대로, 프론트가 null만 "-"로 바꾸면 됩니다.
+
+🔚 결론
+
+이렇게만 바꾸면:
+
+기준 거래소 = 업비트 KRW → 업비트 앱 KRW 마켓 현재가/거래액(일) 값과 1:1 동일
+
+기준 거래소 = 업비트 BTC → 업비트 BTC 마켓 값과 1:1
+
+기준 거래소 = 업비트 USDT → 업비트 USDT 마켓 값과 1:1
+
+기준 거래소 = 빗썸 KRW/BTC/USDT → 각각 빗썸 해당 마켓 값과 1:1
+
+기준 거래소 = 코인원 KRW → 코인원 KRW 마켓 값과 1:1
+
+즉 **“실제 거래소 마켓별 현재가/거래액(일)을 사실적으로 그대로 가져와서 표에 박는 구조”**가 된다.
