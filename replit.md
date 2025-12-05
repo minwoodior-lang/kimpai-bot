@@ -1,4 +1,4 @@
-# KimpAI v3.4.21 - Kimchi Premium Analytics Dashboard
+# KimpAI v3.4.25 - Kimchi Premium Analytics Dashboard
 
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. Its core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. The project handles real-time price collection, premium calculation, and global market metrics, offering a comprehensive view of the crypto market with a focus on the Korean premium.
@@ -6,6 +6,46 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 ### User Preferences
 - I want iterative development.
 - I prefer detailed explanations.
+
+### Recent Changes (v3.4.25 - 2024-12-05) - WebSocket Hybrid 300ms Ultra-Fast Mode
+
+**Target: 0.1-0.3 second latency for real-time updates**
+
+**Key Changes:**
+
+1. **ULTRA-FAST 300ms Interval**:
+   - priceWorker: `setInterval(300ms)` (ULTRA-FAST mode)
+   - Dirty-set pattern for efficient file writes
+   - Parallel REST fetching with `Promise.allSettled`
+
+2. **WebSocket Infrastructure**:
+   - All handlers now include `high24h`, `low24h`, `volume24hQuote`
+   - OKX: 226 active streams
+   - Bybit, MEXC, Gate.io: Connected
+   - Binance Spot/Futures: Circuit breaker (451 regional block) with 5-min REST fallback
+
+3. **Render Proxy Configuration**:
+   - Environment: `RENDER_PROXY_URL` for WebSocket relay
+   - Binance WS routes: `/ws/binance/spot`, `/ws/binance/futures` (pending deployment)
+   - Graceful fallback: Proxy WS → Direct WS → REST
+
+4. **Performance Metrics**:
+   - Price update latency: 500-850ms (improved from 700ms+)
+   - 2,500+ price entries updated per cycle
+   - 558 premium table rows
+
+**Circuit Breaker Logic**:
+- Trips after 5 consecutive failures
+- 5-minute REST fallback period
+- Auto-reset after successful connection
+
+**수정 금지 영역:**
+- `src/pages/api/premium/table-filtered.ts`
+- `src/components/PremiumTable.tsx`
+- `workers/fetchers/*` (모든 거래소 fetcher)
+- `data/*.json` 구조
+
+---
 
 ### Recent Changes (v3.4.23 - 2024-12-05) - Binance Futures 연동 완료 + 속도 최적화
 
@@ -27,12 +67,6 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
    - 거래액 수집: **3초 주기**
    - 프론트엔드 갱신: **1초 주기**
    - 실제 수집 시간: **500~800ms** (병렬 처리 효과)
-
-**수정 금지 영역:**
-- `src/pages/api/premium/table-filtered.ts`
-- `src/components/PremiumTable.tsx`
-- `workers/fetchers/*` (모든 거래소 fetcher)
-- `data/*.json` 구조
 
 ---
 
