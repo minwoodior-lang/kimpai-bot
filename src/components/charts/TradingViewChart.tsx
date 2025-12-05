@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 
 interface TradingViewChartProps {
   tvSymbol: string;
-  height?: number;
+  height?: number | string;
   domesticExchange?: string;
   foreignExchange?: string;
 }
