@@ -22,6 +22,7 @@
     "build:markets:all": "npm run fetch:upbit && npm run fetch:bithumb && npm run fetch:coinone && npm run build:markets",
     "sync:meta": "tsx scripts/syncMeta.ts",
     "sync:all": "npm run build:markets:all && npm run sync:meta",
+    "sync:markets": "tsx scripts/syncMarkets.ts",
     "validate": "tsx scripts/validateDataPipeline.ts"
   },
   "dependencies": {

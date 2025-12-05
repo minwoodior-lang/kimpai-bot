@@ -3410,6 +3410,16 @@
     "isDomestic": true
   },
   {
+    "id": "BITHUMB:KRW-SAPIEN",
+    "exchange": "BITHUMB",
+    "market": "KRW-SAPIEN",
+    "base": "SAPIEN",
+    "quote": "KRW",
+    "name_ko": "사피엔",
+    "name_en": "Sapien",
+    "isDomestic": true
+  },
+  {
     "id": "BITHUMB:KRW-SC",
     "exchange": "BITHUMB",
     "market": "KRW-SC",

@@ -35,36 +35,21 @@ app.prepare().then(() => {
     // 가격 수집 워커 시작
     startPriceWorker();
     
-    // 마켓 목록 자동 갱신 (1시간마다)
-    cron.schedule("0 * * * *", () => {
-      console.log("[MarketSync] Starting hourly market update...");
-      exec("npm run build:markets:all", (err, stdout, stderr) => {
+    // 자동 상장 수집 크론 (5분마다, 테스트 단계)
+    // 운영 단계 시 "0,10,20,30,40,50 * * * *"로 변경 권장
+    cron.schedule("*/5 * * * *", () => {
+      const now = new Date().toISOString();
+      console.log(`[MarketSync] Starting auto-sync (5min interval) at ${now}...`);
+      exec("npm run sync:markets", (err, stdout, stderr) => {
         if (err) {
-          console.error("[MarketSync] Error:", err.message);
+          console.error(`[MarketSync] Error: ${err.message}`);
+          if (stderr) console.error(`[MarketSync] stderr: ${stderr}`);
           return;
         }
-        console.log("[MarketSync] Complete");
-        
-        // 마켓 갱신 후 메타 동기화
-        exec("npm run sync:meta", (metaErr, metaStdout) => {
-          if (metaErr) {
-            console.error("[MetaSync] Error:", metaErr.message);
-            return;
-          }
-          console.log("[MetaSync] Complete");
-          
-          // 메타 동기화 후 데이터 검증
-          exec("npm run validate", (validateErr, validateStdout, validateStderr) => {
-            if (validateErr) {
-              console.error("[Validate] FAILED - Data pipeline validation error");
-              console.error(validateStdout || validateStderr);
-              return;
-            }
-            console.log("[Validate] PASSED - Data pipeline healthy");
-          });
-        });
+        if (stdout) console.log(stdout);
+        console.log(`[MarketSync] Auto-sync completed at ${new Date().toISOString()}`);
       });
     });
-    console.log(`> Market sync scheduled (hourly at :00)`);
+    console.log(`> Market sync scheduled (every 5 minutes for auto-listing detection)`);
   });
 });

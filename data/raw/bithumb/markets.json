@@ -3361,6 +3361,14 @@
   },
   {
     "exchange": "BITHUMB",
+    "market_code": "KRW-SAPIEN",
+    "base_symbol": "KRW",
+    "quote_symbol": "SAPIEN",
+    "name_ko": "사피엔",
+    "name_en": "Sapien"
+  },
+  {
+    "exchange": "BITHUMB",
     "market_code": "KRW-HOLO",
     "base_symbol": "KRW",
     "quote_symbol": "HOLO",
