@@ -37,6 +37,18 @@ export default function Layout({ children }: LayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
 
+  // 모바일 메뉴 열릴 때 body 스크롤 잠금
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
   // 세션 ID 초기화 및 하트비트
   useEffect(() => {
     let sessionId = localStorage.getItem("kimpai_session_id");
@@ -117,8 +129,9 @@ export default function Layout({ children }: LayoutProps) {
               </div>
 
               <button
-                className="md:hidden text-white p-2"
+                className="md:hidden text-white p-2 z-50 relative"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="메뉴"
               >
                 <svg
                   className="w-6 h-6"
@@ -144,44 +157,86 @@ export default function Layout({ children }: LayoutProps) {
                 </svg>
               </button>
             </div>
-
-            {mobileMenuOpen && (
-              <div className="md:hidden py-4 border-t border-slate-700/50">
-                <div className="flex flex-col gap-4">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className={`transition-colors ${
-                        isActive(link.href)
-                          ? "dark:text-white light:text-slate-900 font-medium"
-                          : "dark:text-slate-300 light:text-slate-700 dark:hover:text-white light:hover:text-slate-900"
-                      }`}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                  <button
-                    onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                    className="dark:text-slate-300 light:text-slate-700 dark:hover:text-white light:hover:text-slate-900 transition-colors text-sm py-2"
-                  >
-                    {theme === "light" ? "🌙 다크 모드" : "☀️ 라이트 모드"}
-                  </button>
-                  <div className="mt-4 flex gap-2 pt-4 border-t dark:border-slate-700/50 light:border-slate-200">
-                    <button className="flex-1 rounded-lg border dark:border-slate-600 light:border-slate-300 py-2 text-sm dark:text-slate-300 light:text-slate-700 dark:hover:text-white light:hover:text-slate-900 transition-colors">
-                      로그인
-                    </button>
-                    <button className="flex-1 rounded-lg bg-indigo-500 hover:bg-indigo-600 py-2 text-sm font-semibold dark:text-white light:text-white transition-colors">
-                      회원가입
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
           </nav>
         </div>
       </header>
+
+      {/* 모바일 메뉴 오버레이 */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 z-40 md:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* 모바일 메뉴 슬라이드인 패널 */}
+      <div
+        className={`fixed top-0 right-0 h-full w-[280px] bg-slate-900 border-l border-slate-700 shadow-2xl z-50 md:hidden transition-transform duration-300 ease-in-out ${
+          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex flex-col h-full p-6">
+          {/* 헤더 */}
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-lg font-bold text-white">메뉴</h2>
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-slate-400 hover:text-white transition-colors"
+              aria-label="닫기"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          {/* 네비게이션 링크 */}
+          <nav className="flex flex-col gap-1 flex-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`px-4 py-3 rounded-lg transition-colors text-left ${
+                  isActive(link.href)
+                    ? "bg-slate-800 text-white font-medium"
+                    : "text-slate-300 hover:bg-slate-800/50 hover:text-white"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            {/* 테마 토글 */}
+            <button
+              onClick={() => {
+                setTheme(theme === "light" ? "dark" : "light");
+              }}
+              className="px-4 py-3 rounded-lg text-left text-slate-300 hover:bg-slate-800/50 hover:text-white transition-colors mt-2"
+            >
+              {theme === "light" ? "🌙 다크 모드" : "☀️ 라이트 모드"}
+            </button>
+          </nav>
+
+          {/* 하단 버튼 */}
+          <div className="flex flex-col gap-3 pt-6 border-t border-slate-700">
+            <Link
+              href="/login"
+              className="w-full rounded-lg border border-slate-600 py-3 text-center text-sm text-slate-300 hover:text-white hover:border-slate-500 transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              로그인
+            </Link>
+            <Link
+              href="/signup"
+              className="w-full rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 py-3 text-center text-sm font-semibold text-white transition-all"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              회원가입
+            </Link>
+          </div>
+        </div>
+      </div>
 
       <main className="flex-grow">{children}</main>
 

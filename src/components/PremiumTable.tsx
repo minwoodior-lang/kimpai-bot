@@ -378,12 +378,12 @@ interface ApiResponse {
 
 type SortKey =
   | "symbol"
-  | "premium"
+  | "premiumRate"
   | "volume24hKrw"
-  | "change24h"
+  | "changeRate"
   | "koreanPrice"
-  | "high24h"
-  | "low24h";
+  | "fromHighRate"
+  | "fromLowRate";
 
 type SortOrder = "asc" | "desc";
 
@@ -531,7 +531,7 @@ export default function PremiumTable({
   const [domesticExchange, setDomesticExchange] = useState<string>("UPBIT_KRW");
   const [foreignExchange, setForeignExchange] = useState<string>("BINANCE_USDT");
   const [searchQuery, setSearchQuery] = useState("");
-  const [sortKey, setSortKey] = useState<SortKey>("volume24hKrw");
+  const [sortKey, setSortKey] = useState<SortKey | null>("volume24hKrw");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
   const [expandedSymbol, setExpandedSymbol] = useState<string | null>(null);
 
@@ -634,8 +634,15 @@ export default function PremiumTable({
 
   const handleSort = (key: SortKey) => {
     if (sortKey === key) {
-      setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
+      // 같은 컬럼 클릭 시: desc → asc → null (정렬 해제)
+      if (sortOrder === "desc") {
+        setSortOrder("asc");
+      } else if (sortOrder === "asc") {
+        setSortKey(null);
+        setSortOrder("desc");
+      }
     } else {
+      // 다른 컬럼 클릭 시: desc로 시작
       setSortKey(key);
       setSortOrder("desc");
     }
@@ -659,6 +666,7 @@ export default function PremiumTable({
       result = result.filter((item) => matchSearch(item, searchQuery));
     }
 
+    // 즐겨찾기 우선 정렬
     result.sort((a, b) => {
       const aNormalized = a.symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
       const bNormalized = b.symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
@@ -669,16 +677,23 @@ export default function PremiumTable({
         return aIsFavorite ? -1 : 1;
       }
 
+      // sortKey가 null이면 정렬하지 않음 (원본 순서 유지)
+      if (sortKey === null) {
+        return 0;
+      }
+
       let aVal: any = a[sortKey];
       let bVal: any = b[sortKey];
 
-      if (aVal === null || aVal === undefined) {
-        aVal = sortOrder === "asc" ? Infinity : -Infinity;
-      }
-      if (bVal === null || bVal === undefined) {
-        bVal = sortOrder === "asc" ? Infinity : -Infinity;
-      }
+      // null/undefined/NaN 값은 항상 맨 아래로
+      const aIsInvalid = aVal === null || aVal === undefined || (typeof aVal === "number" && isNaN(aVal));
+      const bIsInvalid = bVal === null || bVal === undefined || (typeof bVal === "number" && isNaN(bVal));
 
+      if (aIsInvalid && bIsInvalid) return 0;
+      if (aIsInvalid) return 1; // a를 아래로
+      if (bIsInvalid) return -1; // b를 아래로
+
+      // 정상 값 정렬
       if (typeof aVal === "string") {
         aVal = aVal.toLowerCase();
         bVal = (bVal as string).toLowerCase();
@@ -841,7 +856,7 @@ export default function PremiumTable({
   }, []);
 
   const SortIcon = ({ columnKey }: { columnKey: SortKey }) => {
-    if (sortKey !== columnKey) {
+    if (sortKey !== columnKey || sortKey === null) {
       return <span className="text-gray-600 ml-1 text-xs">↕</span>;
     }
     return sortOrder === "asc" ? (
@@ -1049,21 +1064,21 @@ export default function PremiumTable({
                     현재가
                     <SortIcon columnKey="koreanPrice" />
                   </th>
-                  <th className="px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("premium")}>
+                  <th className="px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("premiumRate")}>
                     김프
-                    <SortIcon columnKey="premium" />
+                    <SortIcon columnKey="premiumRate" />
                   </th>
-                  <th className="px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("change24h")}>
+                  <th className="px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("changeRate")}>
                     전일대비
-                    <SortIcon columnKey="change24h" />
+                    <SortIcon columnKey="changeRate" />
                   </th>
-                  <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[10px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("high24h")}>
+                  <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[10px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("fromHighRate")}>
                     고가대비
-                    <SortIcon columnKey="high24h" />
+                    <SortIcon columnKey="fromHighRate" />
                   </th>
-                  <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[10px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("low24h")}>
+                  <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[10px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("fromLowRate")}>
                     저가대비
-                    <SortIcon columnKey="low24h" />
+                    <SortIcon columnKey="fromLowRate" />
                   </th>
                   <th className="px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("volume24hKrw")}>
                     거래액(일)
