@@ -3,6 +3,15 @@
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. The project's core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. It handles real-time price collection, premium calculation, and global market metrics, aiming to offer a comprehensive view of the crypto market with a focus on the Korean premium.
 
+### Recent Changes (v3.4.9 - 2024-12-05) - 암호화폐 개수 필터링 버그 수정
+- **Critical Bug Fix: 암호화폐 총 개수가 업비트/빗썸 모든 마켓(KRW/BTC/USDT)을 합쳐서 고정 299개로 표기**:
+  - **원인**: `/api/premium/table-filtered` API가 `totalCoins`를 국내거래소의 모든 마켓 고유심볼을 합산해서 계산 (e.g., UPBIT_KRW 299 + UPBIT_BTC 299 + UPBIT_USDT 299 → 결과적으로 299)
+  - **해결책**: `totalCoins`를 실제 선택된 마켓의 고유심볼 수로 변경
+  - `src/pages/api/premium/table-filtered.ts` (L225-241):
+    - Before: 업비트는 모든 마켓(KRW+BTC+USDT) 합산 → 항상 299
+    - After: 선택된 마켓(domesticQuote)만 필터링 → UPBIT_KRW, UPBIT_BTC, UPBIT_USDT 각각 다른 개수
+    - 빗썸도 동일하게 BITHUMB_KRW, BITHUMB_BTC 개수 정확하게 표기 가능
+
 ### Recent Changes (v3.4.8 - 2024-12-04) - 미세 정렬 최종 완성
 - **프리미엄 차트 버튼 간격 조정**:
   - "개인화 설정" 버튼과 지표 선택기 사이 간격: gap-2 → gap-1 (미세 정렬)
