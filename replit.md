@@ -7,6 +7,32 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - I want iterative development.
 - I prefer detailed explanations.
 
+### Recent Changes (v3.4.22 - 2024-12-05) - Gate.io/MEXC API 필드 매핑 수정
+
+**🔧 핵심 수정: 거래소별 API 응답 필드명 통일**
+
+1. **Gate.io (globalExchanges.ts)**:
+   - `fetchGatePrices`: `item.quoteVolume` → `item.quote_volume` (snake_case)
+   - `fetchGateStats`: `item.quoteVolume` → `item.quote_volume`
+   - 결과: 510개 마켓 모두 volume24hQuote > 0 ✓
+
+2. **MEXC (globalExchanges.ts)**:
+   - `fetchMexcPrices`: `item.quoteAssetVolume` → `item.quoteVolume` (camelCase)
+   - `fetchMexcStats`: `item.quoteAssetVolume` → `item.quoteVolume`
+   - 결과: 460개 마켓 모두 volume24hQuote > 0 ✓
+
+3. **Binance Futures Stats**:
+   - 직접 API 접근 시 451 에러 (지역 제한)
+   - 프록시 URL로 설정 (`PROXY_BASE/binance/fapi/v1/ticker/24hr`)
+   - **주의**: 프록시 서버(Render)에 해당 라우트 추가 필요
+
+**API 필드명 교훈**:
+- Gate.io: snake_case (`quote_volume`, `base_volume`)
+- MEXC: camelCase (`quoteVolume`, `volume`)
+- Binance: camelCase (`quoteVolume`, `volume`)
+
+---
+
 ### Recent Changes (v3.4.21 - 2024-12-05) - 거래액(일) 로직 최종 픽스
 
 **🚨 핵심 변경: marketStats.volume24hQuote 기반 1:1 마켓 매핑**
