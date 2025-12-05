@@ -441,7 +441,7 @@ export async function fetchMexcStats(markets: MarketInfo[]): Promise<MarketStats
 export async function fetchBinanceSpotStats(markets: MarketInfo[]): Promise<MarketStatsMap> {
   if (markets.length === 0) return {};
   try {
-    const res = await axios.get('https://api.binance.com/api/v3/ticker/24hr', { timeout: 5000 });
+    const res = await axios.get(`${PROXY_BASE}/binance/api/v3/ticker/24hr`, { timeout: 15000 });
     const stats: MarketStatsMap = {};
     const marketBases = new Set(markets.map(m => m.base.toUpperCase()));
 
@@ -460,7 +460,7 @@ export async function fetchBinanceSpotStats(markets: MarketInfo[]): Promise<Mark
             change24hAbs,
             high24h: parseFloat(item.highPrice) || null,
             low24h: parseFloat(item.lowPrice) || null,
-            volume24hQuote: parseFloat(item.quoteAssetVolume) || 0
+            volume24hQuote: parseFloat(item.quoteVolume) || 0
           };
         }
       }
@@ -475,7 +475,7 @@ export async function fetchBinanceSpotStats(markets: MarketInfo[]): Promise<Mark
 export async function fetchBinanceFuturesStats(markets: MarketInfo[]): Promise<MarketStatsMap> {
   if (markets.length === 0) return {};
   try {
-    const res = await axios.get('https://fapi.binance.com/fapi/v1/ticker/24hr', { timeout: 5000 });
+    const res = await axios.get(`${PROXY_BASE}/binance/fapi/v1/ticker/24hr`, { timeout: 15000 });
     const stats: MarketStatsMap = {};
     const marketBases = new Set(markets.map(m => m.base.toUpperCase()));
 
@@ -494,7 +494,7 @@ export async function fetchBinanceFuturesStats(markets: MarketInfo[]): Promise<M
             change24hAbs,
             high24h: parseFloat(item.highPrice) || null,
             low24h: parseFloat(item.lowPrice) || null,
-            volume24hQuote: parseFloat(item.quoteAssetVolume) || 0
+            volume24hQuote: parseFloat(item.quoteVolume) || 0
           };
         }
       }

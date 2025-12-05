@@ -1,4 +1,4 @@
-# KimpAI v3.4.25 - Kimchi Premium Analytics Dashboard
+# KimpAI v3.4.26 - Kimchi Premium Analytics Dashboard
 
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. Its core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. The project handles real-time price collection, premium calculation, and global market metrics, offering a comprehensive view of the crypto market with a focus on the Korean premium.
@@ -6,6 +6,50 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 ### User Preferences
 - I want iterative development.
 - I prefer detailed explanations.
+
+### Recent Changes (v3.4.26 - 2024-12-05) - Binance WebSocket via Proxy + Volume Data Verified
+
+**Render Proxy WebSocket Relay 완성 + 거래액 데이터 검증 완료**
+
+**핵심 성과:**
+
+1. **Binance WebSocket via Render Proxy (정상 작동)**:
+   - BINANCE Spot: 328 active streams via `/ws/binance/spot`
+   - BINANCE Futures: 350 active streams via `/ws/binance/futures`
+   - OKX: 226 active streams (direct connection)
+   - Bybit, MEXC, Gate.io: Connected with auto-reconnect
+
+2. **거래액 데이터 파이프라인 완전 검증**:
+   - STATS_DEBUG 로그 확인:
+     - BINANCE BTC: $1.68B
+     - BINANCE_FUTURES BTC: $14.86B
+     - BYBIT BTC: $756M
+     - GATE BTC: $908M
+     - MEXC BTC: $916M
+   - 4,520 stats entries per update cycle
+
+3. **Performance Metrics**:
+   - Price updates: ~700ms per cycle (3,219 entries)
+   - Stats updates: ~1.5s per cycle (4,520 stats)
+   - WebSocket active streams: 904+ total
+   - Premium table: 558 rows
+
+4. **안정화된 아키텍처**:
+   - Binance regional block → Render Proxy bypass
+   - MEXC auto-reconnect (3s delay)
+   - Volume data: domestic + foreign 모두 표시
+
+**Debug Logging Added**:
+- `[STATS_DEBUG]` for foreign exchange volume verification
+- `[WS] Active streams:` for WebSocket status monitoring
+
+**수정 금지 영역:**
+- `src/pages/api/premium/table-filtered.ts`
+- `src/components/PremiumTable.tsx`
+- `workers/fetchers/*` (모든 거래소 fetcher)
+- `data/*.json` 구조
+
+---
 
 ### Recent Changes (v3.4.25 - 2024-12-05) - WebSocket Hybrid 300ms Ultra-Fast Mode
 

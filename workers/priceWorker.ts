@@ -713,6 +713,15 @@ async function updateStatsOnly(): Promise<void> {
 
     saveMarketStats(currentMarketStats);
 
+    // Debug logging for foreign exchange volumes
+    console.log("[STATS_DEBUG]",
+      "BINANCE BTC:", currentMarketStats["BINANCE:BTC:USDT"]?.volume24hQuote,
+      "BINANCE_FUTURES BTC:", currentMarketStats["BINANCE_FUTURES:BTC:USDT"]?.volume24hQuote,
+      "BYBIT BTC:", currentMarketStats["BYBIT:BTC:USDT"]?.volume24hQuote,
+      "GATE BTC:", currentMarketStats["GATE:BTC:USDT"]?.volume24hQuote,
+      "MEXC BTC:", currentMarketStats["MEXC:BTC:USDT"]?.volume24hQuote
+    );
+
     const elapsed = Date.now() - startTime;
     console.log(`[Stats] Updated in ${elapsed}ms (${Object.keys(currentMarketStats).length} stats)`);
   } catch (err: any) {

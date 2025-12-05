@@ -1,0 +1,141 @@
+1. 지금 상태 정리 (레플릿에게 설명할 내용)
+
+Render 프록시 도메인
+https://kimpai-price-proxy-1.onrender.com
+
+아래 세 엔드포인트 정상 응답 확인 완료:
+
+/healthz
+
+/binance/api/v3/ticker/24hr?symbol=BTCUSDT
+
+/binance/fapi/v1/ticker/24hr?symbol=BTCUSDT
+
+OKX / Bybit / MEXC / Gate WebSocket은 레플릿에서 이미 붙어 있음.
+
+그런데 화면에서
+
+BINANCE_USDT spot
+
+BINANCE_FUTURES 선물
+
+BYBIT / GATE / MEXC
+이 네트워크 기준으로 선택하면 현재가/거래액 값이 비거나 0으로 나오는 문제가 남아 있음.
+
+2. 레플릿에게 그대로 던질 전달문
+
+이거 통째로 복붙해서 레플릿 채팅에 넣으면 돼 👇
+
+[TASK 1] Binance Spot / Futures 를 Render 프록시로 강제 연결
+
+환경변수 또는 상수로 프록시 베이스 URL을 하나 잡아줘:
+
+// 예: workers/fetchers/binance.ts
+const PRICE_PROXY_BASE_URL =
+  process.env.PRICE_PROXY_BASE_URL ||
+  "https://kimpai-price-proxy-1.onrender.com";
+
+
+Binance Spot/Futures 24hr 통계 fetch 함수에서
+직접 Binance 도메인을 호출하지 말고 프록시를 사용하게 바꿔줘.
+
+Spot 24hr:
+
+// BEFORE (직접 호출)
+// https://api.binance.com/api/v3/ticker/24hr
+
+// AFTER (프록시 경유)
+const url = `${PRICE_PROXY_BASE_URL}/binance/api/v3/ticker/24hr`;
+
+
+Futures 24hr:
+
+// BEFORE
+// https://fapi.binance.com/fapi/v1/ticker/24hr
+
+// AFTER
+const url = `${PRICE_PROXY_BASE_URL}/binance/fapi/v1/ticker/24hr`;
+
+
+위 두 함수에서 받아온 데이터로 marketStats[ "BINANCE:SYMBOL:USDT" ] 와
+marketStats[ "BINANCE_FUTURES:SYMBOL:USDT" ] 의
+volume24hQuote 필드를 반드시 채워줘.
+
+priceWorker / statsWorker에서 Binance 쪽은 WebSocket이 막혀 있으면 프록시 REST로 폴백하는 구조만 유지하면 된다.
+WebSocket 안 붙어 있어도 좋으니, 최소한 REST + 프록시 조합으로 현재가/거래액이 제대로 나오게 하는 게 1차 목표.
+
+[TASK 2] Bybit / Gate / MEXC 현재가 & 거래액 연결 상태 점검
+
+이미 WebSocket 하이브리드가 있다면 그대로 두고, 최종적으로 marketStats.json에 제대로 들어가는지 확인해줘.
+
+data/marketStats.json 생성 로직에서 다음 키들을 검사해줘:
+
+// 예시 키
+"BYBIT:BTC:USDT"
+"GATE:BTC:USDT"
+"MEXC:BTC:USDT"
+
+
+각각에 대해:
+
+lastPrice 또는 close 같은 현재가 필드
+
+quote_volume / quoteVolume 에서 파생한 volume24hQuote
+가 0이 아닌 값으로 들어가 있어야 한다.
+
+필요하면 fetcher 매핑을 다시 확인해줘:
+
+Gate 24hr: quote_volume 사용
+
+MEXC 24hr: quoteVolume 사용
+
+Bybit: result.list[*].turnover24h 나 volume24h → USDT 기준으로 변환해서 volume24hQuote 에 넣기
+
+statsWorker 로그에 다음처럼 디버깅 로그를 잠깐 추가해줘:
+
+console.log("[STATS_DEBUG]",
+  "BINANCE_FUTURES BTC:", marketStats["BINANCE_FUTURES:BTC:USDT"]?.volume24hQuote,
+  "BYBIT BTC:", marketStats["BYBIT:BTC:USDT"]?.volume24hQuote,
+  "GATE BTC:", marketStats["GATE:BTC:USDT"]?.volume24hQuote,
+  "MEXC BTC:", marketStats["MEXC:BTC:USDT"]?.volume24hQuote,
+);
+
+
+이 값들이 숫자로 잘 찍히는지 확인해줘.
+
+[TASK 3] PremiumTable 파이프라인 연결 확인
+
+절대 수정하면 안 되는 파일/로직 (이미 내 요청대로 완성된 영역):
+
+src/pages/api/premium/table-filtered.ts
+
+KRW/USDT/BTC 기준에 따라 volume24hKrw, volume24hForeignKrw 계산하는 부분
+
+주석으로 “임의 수정 금지 (PM 협의 필수)” 적혀 있는 로직
+
+src/components/PremiumTable.tsx
+
+거래액 셀에서 row.volume24hKrw / row.volume24hForeignKrw 를 표시하는 부분
+
+table-filtered API가 아래 조합에서 foreign 거래액을 제대로 돌려주는지 확인해줘:
+
+/api/premium/table-filtered?domestic=UPBIT_KRW&foreign=BINANCE_USDT
+/api/premium/table-filtered?domestic=UPBIT_KRW&foreign=BINANCE_FUTURES_USDT
+/api/premium/table-filtered?domestic=UPBIT_KRW&foreign=BYBIT_USDT
+/api/premium/table-filtered?domestic=UPBIT_KRW&foreign=GATE_USDT
+/api/premium/table-filtered?domestic=UPBIT_KRW&foreign=MEXC_USDT
+
+
+각 응답에서 BTC, ETH, SUI 같은 메이저 코인의
+
+volume24hKrw (국내)
+
+volume24hForeignKrw (해외)
+값이 null 이나 0이 아니라면 프론트에는 자동으로 뜨게 되어 있다.
+
+만약 API까지는 값이 나오는데 화면에만 안 나온다면,
+
+PremiumTable.tsx 안에 특정 foreign 거래소를 필터링하는 조건이 있는지 체크해줘
+
+BINANCE / OKX 만 허용하는 식의 조건이 있으면
+거기에 BINANCE_FUTURES, BYBIT, GATE, MEXC 를 함께 허용하도록만 수정해줘.
