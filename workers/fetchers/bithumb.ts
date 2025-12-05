@@ -26,27 +26,27 @@ export async function fetchBithumbPrices(markets: MarketInfo[]): Promise<PriceMa
         if (data[base]) {
           const item = data[base];
           let price = parseFloat(item.closing_price) || 0;
+          const prevPrice = parseFloat(item.prev_closing_price) || 0;
           
-          // 빗썸 API 특이사항: 당일 거래가 적은 코인은 closing_price가 0
-          // 이 경우 prev_closing_price + fluctate_24H로 현재가 계산
-          if (price === 0 && item.prev_closing_price) {
-            const prevPrice = parseFloat(item.prev_closing_price) || 0;
+          if (price === 0 && prevPrice > 0) {
             const fluctate = parseFloat(item.fluctate_24H) || 0;
-            if (prevPrice > 0) {
-              price = prevPrice + fluctate;
-              console.log(`[BITHUMB_ZERO_FIX] symbol=${base}, prev=${prevPrice}, fluctate=${fluctate}, fixedPrice=${price}`);
-            } else {
-              console.warn(`[BITHUMB_ZERO_BLOCK] symbol=${base}, reason=prev_closing_price_invalid (${prevPrice})`);
-            }
-          } else if (price === 0) {
-            console.warn(`[BITHUMB_ZERO_BLOCK] symbol=${base}, reason=no_prev_closing_price`);
+            price = prevPrice + fluctate;
           }
           
           if (price > 0) {
             const key = `BITHUMB:${base}:${quote}`;
-            // 24시간 거래대금 (원화 기준)
-            const volume24hKrw = parseFloat(item.acc_trade_value_24H) || 0;
-            prices[key] = { price, ts, volume24hKrw };
+            const change24hAbs = parseFloat(item.fluctate_24H) || 0;
+            const change24hRate = parseFloat(item.fluctate_rate_24H) || 0;
+            prices[key] = {
+              price,
+              ts,
+              volume24hKrw: parseFloat(item.acc_trade_value_24H) || 0,
+              change24hRate,
+              change24hAbs,
+              high24h: parseFloat(item.max_price) || undefined,
+              low24h: parseFloat(item.min_price) || undefined,
+              prev_price: prevPrice || undefined
+            };
           }
         }
       }

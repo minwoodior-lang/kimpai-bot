@@ -15,5 +15,6 @@ export {
   fetchBitgetStats,
   fetchGateStats,
   fetchHtxStats,
-  fetchMexcStats
+  fetchMexcStats,
+  setGlobalUsdKrwRate
 } from './globalExchanges';

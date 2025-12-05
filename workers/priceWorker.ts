@@ -24,6 +24,7 @@ import {
   fetchGateStats,
   fetchHtxStats,
   fetchMexcStats,
+  setGlobalUsdKrwRate,
   type MarketInfo,
   type PriceMap,
   type MarketStatsMap,
@@ -72,6 +73,7 @@ async function updateGlobalUsdtKrw(): Promise<void> {
     if (tetherKrw && typeof tetherKrw === 'number') {
       usdtKrwGlobal = tetherKrw;
       usdKrwRate = tetherKrw;
+      setGlobalUsdKrwRate(tetherKrw);
       lastFxUpdate = now;
       console.log(`[USDT] Global USDT/KRW updated: ₩${usdtKrwGlobal.toLocaleString()}`);
     }
@@ -270,15 +272,9 @@ function buildPremiumTable(): void {
       finalPremium = Math.round(premium * 100) / 100;
     }
 
-    // 국내 거래소 거래액 (우선순위: UPBIT > BITHUMB > COINONE) - priceWorker에서 직접 계산
-    const volume24hKrw = getKoreanVolume24h(symbol);
-    
-    // 해외 거래소 거래액 (우선순위: BINANCE > OKX > BYBIT > ...) - prices에서 직접 가져오기
-    const globalVolume24hKrw = getGlobalVolume24h(symbol);
-
-    // 통계 정보는 여전히 필요 (변동률, 고저가)
-    const domesticStatsKey = getKoreanStatsKey(symbol);
-    const domesticStats = domesticStatsKey ? currentMarketStats[domesticStatsKey] : null;
+    // prices.json에서 직접 가져온 데이터
+    const domesticPriceEntry = getDomesticPriceEntry(symbol);
+    const globalPriceEntry = getGlobalPriceEntry(symbol);
 
     premiumRows.push({
       symbol,
@@ -290,16 +286,13 @@ function buildPremiumTable(): void {
       usdKrw: usdKrwRate,
       iconUrl: master.icon_path || null,
       cmcSlug: master.cmc_slug || null,
-      // 거래액 (국내) - priceWorker에서 계산
-      volume24hKrw: volume24hKrw || null,
-      // 거래액 (해외) - USDT 단위를 KRW로 변환
-      volume24hForeignKrw: globalVolume24hKrw ? globalVolume24hKrw * usdKrwRate : null,
-      // 전일대비 변동
-      change24hRate: domesticStats?.change24hRate || null,
-      change24hAbs: domesticStats?.change24hAbs || null,
-      // 고가/저가 대비
-      high24h: domesticStats?.high24h || null,
-      low24h: domesticStats?.low24h || null,
+      // 모든 데이터는 prices.json에서 직접 가져옴
+      volume24hKrw: domesticPriceEntry?.volume24hKrw || null,
+      volume24hForeignKrw: globalPriceEntry?.volume24hKrw || null,
+      change24hRate: domesticPriceEntry?.change24hRate || null,
+      change24hAbs: domesticPriceEntry?.change24hAbs || null,
+      high24h: domesticPriceEntry?.high24h || null,
+      low24h: domesticPriceEntry?.low24h || null,
       updatedAt: Date.now()
     });
   }
@@ -328,27 +321,23 @@ function getKoreanPrice(symbol: string): number | null {
   return null;
 }
 
-function getKoreanVolume24h(symbol: string): number | null {
-  // priceWorker에서 계산한 volume24hKrw 사용 (우선순위: UPBIT > BITHUMB > COINONE)
+function getDomesticPriceEntry(symbol: string): any {
   const priority = ['UPBIT', 'BITHUMB', 'COINONE'];
   for (const ex of priority) {
     const key = `${ex}:${symbol}:KRW`;
-    const priceEntry = currentPrices[key];
-    if (priceEntry && priceEntry.volume24hKrw && priceEntry.volume24hKrw > 0) {
-      return priceEntry.volume24hKrw;
+    if (currentPrices[key]) {
+      return currentPrices[key];
     }
   }
   return null;
 }
 
-function getGlobalVolume24h(symbol: string): number | null {
-  // 글로벌 거래소의 USDT 마켓 거래액 (우선순위: BINANCE > OKX > BYBIT > ...)
+function getGlobalPriceEntry(symbol: string): any {
   const priority = ['BINANCE', 'BINANCE_FUTURES', 'OKX', 'BYBIT', 'BITGET', 'GATE', 'HTX', 'MEXC'];
   for (const ex of priority) {
     const key = `${ex}:${symbol}:USDT`;
-    const priceEntry = currentPrices[key];
-    if (priceEntry && priceEntry.volume24hKrw && priceEntry.volume24hKrw > 0) {
-      return priceEntry.volume24hKrw;
+    if (currentPrices[key]) {
+      return currentPrices[key];
     }
   }
   return null;

@@ -20,12 +20,15 @@ export async function fetchUpbitPrices(markets: MarketInfo[]): Promise<PriceMap>
     for (const item of res.data) {
       const [quote, base] = item.market.split('-');
       const key = `UPBIT:${base}:${quote}`;
-      // 24시간 거래대금 (원화 기준)
-      const volume24hKrw = item.acc_trade_price_24h || 0;
       prices[key] = {
         price: item.trade_price,
         ts,
-        volume24hKrw
+        volume24hKrw: item.acc_trade_price_24h || 0,
+        change24hRate: (item.signed_change_rate ?? 0) * 100,
+        change24hAbs: item.signed_change_price ?? 0,
+        high24h: item.high_price ?? undefined,
+        low24h: item.low_price ?? undefined,
+        prev_price: item.prev_closing_price ?? undefined
       };
     }
 

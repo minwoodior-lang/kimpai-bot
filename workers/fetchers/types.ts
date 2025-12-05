@@ -2,6 +2,11 @@ export interface PriceEntry {
   price: number;
   ts: number;
   volume24hKrw?: number;
+  change24hRate?: number;
+  change24hAbs?: number;
+  high24h?: number;
+  low24h?: number;
+  prev_price?: number;
 }
 
 export interface PriceMap {
