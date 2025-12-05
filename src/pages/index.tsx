@@ -155,11 +155,11 @@ export default function Home() {
 
           {/* 모바일: 탭 구조 */}
           <div className="md:hidden mt-3 mb-4">
-            {/* 탭 버튼 */}
-            <div className="flex gap-2 mb-3">
+            {/* 탭 버튼 - PRO 배지 강화 */}
+            <div className="flex gap-1.5 mb-3">
               <button
                 onClick={() => setMobileCardTab("ai")}
-                className={`flex-1 py-2 px-3 rounded-lg font-semibold text-xs transition-colors ${
+                className={`flex-1 py-2.5 px-3 rounded-lg font-semibold text-[11px] transition-colors ${
                   mobileCardTab === "ai"
                     ? "bg-indigo-600 text-white"
                     : "bg-slate-800 text-slate-300 hover:bg-slate-700"
@@ -169,17 +169,17 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setMobileCardTab("pro")}
-                className={`flex-1 py-2 px-3 rounded-lg font-semibold text-xs transition-colors ${
+                className={`flex-1 py-2.5 px-3 rounded-lg font-semibold text-[11px] transition-all ${
                   mobileCardTab === "pro"
-                    ? "bg-indigo-600 text-white"
-                    : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                    ? "bg-indigo-600 text-white border-2 border-yellow-500/60"
+                    : "bg-slate-800 text-slate-300 hover:bg-slate-700 border-2 border-yellow-500/30"
                 }`}
               >
                 🔒 PRO 예측
               </button>
               <button
                 onClick={() => setMobileCardTab("alerts")}
-                className={`flex-1 py-2 px-3 rounded-lg font-semibold text-xs transition-colors ${
+                className={`flex-1 py-2.5 px-3 rounded-lg font-semibold text-[11px] transition-colors ${
                   mobileCardTab === "alerts"
                     ? "bg-indigo-600 text-white"
                     : "bg-slate-800 text-slate-300 hover:bg-slate-700"
