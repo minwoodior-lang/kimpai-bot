@@ -5,6 +5,7 @@ import React, {
   useRef,
 } from "react";
 import dynamic from "next/dynamic";
+import { useInView } from "react-intersection-observer";
 import {
   FOREIGN_EXCHANGES as CONTEXT_FOREIGN_EXCHANGES,
   EXCHANGE_LOGOS,
@@ -138,6 +139,195 @@ const TradingViewChart = dynamic(() => import("./charts/TradingViewChart"), {
   loading: () => (
     <div className="h-[360px] bg-slate-900/50 animate-pulse rounded-xl" />
   ),
+});
+
+// Memoized Row Component for performance
+interface PremiumTableRowProps {
+  row: PremiumData;
+  index: number;
+  favorites: Set<string>;
+  expandedSymbol: string | null;
+  domesticExchange: string;
+  foreignExchange: string;
+  toggleFavorite: (symbol: string) => void;
+  setExpandedSymbol: (symbol: string | null) => void;
+  onChartSelect?: (symbol: string, domesticExchange: string, foreignExchange: string) => void;
+  getDisplayName: (item: PremiumData) => string;
+  getDisplaySymbol: (symbol: string) => string;
+  formatKrwPrice: (value: number | null) => string;
+  formatVolumeKRW: (value: number | null) => string;
+  getPremiumColor: (premium: number | null) => string;
+  getChangeColor: (change: number | null) => string;
+  calcDiff: (current: number, base: number) => { percent: number; diff: number; valid: boolean };
+  getTvSymbolForRow: (params: { symbol: string; domesticExchange: string; foreignExchange: string }) => string;
+  openCmcPage: (symbol: string, cmcSlug?: string) => void;
+}
+
+const PremiumTableRow = React.memo(({
+  row,
+  index,
+  favorites,
+  expandedSymbol,
+  domesticExchange,
+  foreignExchange,
+  toggleFavorite,
+  setExpandedSymbol,
+  onChartSelect,
+  getDisplayName,
+  getDisplaySymbol,
+  formatKrwPrice,
+  formatVolumeKRW,
+  getPremiumColor,
+  getChangeColor,
+  calcDiff,
+  getTvSymbolForRow,
+  openCmcPage,
+}: PremiumTableRowProps) => {
+  const uniqueKey = `${row.symbol}_${index}`;
+  const normalizedSymbol = row.symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
+  const isFav = favorites.has(normalizedSymbol);
+  const isUnlisted = !row.foreignPriceKrw || row.foreignPriceKrw <= 0;
+
+  const prevClose =
+    row.change24h !== null
+      ? row.koreanPrice / (1 + row.change24h / 100)
+      : row.koreanPrice;
+
+  const prevDiff =
+    row.change24h !== null
+      ? calcDiff(row.koreanPrice, prevClose)
+      : { percent: 0, diff: 0, valid: false };
+
+  const highDiff = calcDiff(row.koreanPrice, row.high24h);
+  const lowDiff = calcDiff(row.koreanPrice, row.low24h);
+
+  return (
+    <React.Fragment key={uniqueKey}>
+      <tr
+        className="text-[10px] md:text-sm hover:bg-slate-800/60 transition-colors leading-tight"
+        data-symbol={row.symbol}
+      >
+        <td className="w-[30px] text-center py-1 md:py-3 px-2 md:px-3 lg:px-4">
+          <button
+            type="button"
+            className={`p-0.5 leading-none transition-colors ${
+              isFav
+                ? "text-[#FDCB52]"
+                : "text-[#A7B3C6]/40 hover:text-[#FDCB52]"
+            }`}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleFavorite(row.symbol);
+            }}
+            title={isFav ? "즐겨찾기 해제" : "즐겨찾기 추가"}
+          >
+            ★
+          </button>
+        </td>
+        <td className="px-2 md:px-3 lg:px-4 py-1 md:py-3">
+          <div className="flex items-center gap-1.5 md:gap-3 min-w-0">
+            <button
+              type="button"
+              onClick={() => {
+                const next = expandedSymbol === row.symbol ? null : row.symbol;
+                setExpandedSymbol(next);
+                if (onChartSelect && next) {
+                  onChartSelect(row.symbol, domesticExchange, foreignExchange);
+                }
+              }}
+              className="p-1 text-slate-400 hover:text-slate-200 transition-colors flex-shrink-0"
+              title="차트 보기"
+            >
+              📈
+            </button>
+            <CoinIcon symbol={row.symbol} className="w-3.5 h-3.5 md:w-8 md:h-8 flex-shrink-0" iconUrl={row.icon_url} />
+            <div className="flex flex-col flex-1 min-w-0 cursor-pointer"
+              onClick={() => openCmcPage(row.symbol, row.cmcSlug)}>
+              <span className="truncate text-[13px] md:text-[14px] font-medium text-white hover:text-blue-400 transition-colors">
+                {getDisplayName(row)}
+              </span>
+              <span className="truncate text-[11px] md:text-[12px] text-gray-500 uppercase tracking-tight">
+                {getDisplaySymbol(row.symbol)}
+              </span>
+            </div>
+          </div>
+        </td>
+
+        <td className="w-[140px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
+          <TwoLinePriceCell
+            topValue={row.koreanPrice}
+            bottomValue={row.foreignPriceKrw}
+            topPrefix="₩"
+            bottomPrefix="₩"
+            isUnlisted={isUnlisted}
+          />
+        </td>
+
+        <td className="w-[90px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
+          <TwoLineCell
+            line1={isUnlisted ? "-" : `${row.premiumRate >= 0 ? "+" : ""}${Number(row.premiumRate || 0).toFixed(2)}%`}
+            line2={`${row.premiumDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.premiumDiffKrw || 0))}`}
+            line1Color={isUnlisted ? "text-gray-500" : getPremiumColor(row.premiumRate)}
+            isUnlisted={isUnlisted}
+          />
+        </td>
+
+        <td className="w-[100px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
+          <TwoLineCell
+            line1={`${row.changeRate >= 0 ? "+" : ""}${Number(row.changeRate || 0).toFixed(2)}%`}
+            line2={`${row.changeAbsKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.changeAbsKrw || 0))}`}
+            line1Color={getChangeColor(row.changeRate)}
+          />
+        </td>
+
+        <td className="hidden md:table-cell w-[100px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
+          <TwoLineCell
+            line1={`${row.fromHighRate >= 0 ? "+" : ""}${Number(row.fromHighRate || 0).toFixed(2)}%`}
+            line2={`${row.highDiffKrw > 0 ? "-" : "+"}₩${formatKrwPrice(Math.abs(row.highDiffKrw || 0))}`}
+            line1Color={getChangeColor(row.fromHighRate)}
+          />
+        </td>
+
+        <td className="hidden md:table-cell w-[100px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
+          <TwoLineCell
+            line1={`${row.fromLowRate >= 0 ? "+" : ""}${Number(row.fromLowRate || 0).toFixed(2)}%`}
+            line2={`${row.lowDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.lowDiffKrw || 0))}`}
+            line1Color={getChangeColor(row.fromLowRate)}
+          />
+        </td>
+
+        <td className="w-[120px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap pr-0">
+          <TwoLineCell
+            line1={formatVolumeKRW(row.volume24hKrw)}
+            line2={
+              row.volume24hForeignKrw && row.volume24hForeignKrw > 0
+                ? formatVolumeKRW(row.volume24hForeignKrw)
+                : "-"
+            }
+          />
+        </td>
+      </tr>
+
+      {expandedSymbol === row.symbol && (
+        <tr key={`${row.symbol}-chart`}>
+          <td colSpan={8} className="p-0">
+            <div className="w-full rounded-b-xl overflow-hidden bg-[#050819]">
+              <TradingViewChart
+                tvSymbol={getTvSymbolForRow({
+                  symbol: row.symbol,
+                  domesticExchange,
+                  foreignExchange,
+                })}
+                height={360}
+                domesticExchange={domesticExchange}
+                foreignExchange={foreignExchange}
+              />
+            </div>
+          </td>
+        </tr>
+      )}
+    </React.Fragment>
+  );
 });
 
 interface PremiumData {
@@ -344,6 +534,13 @@ export default function PremiumTable({
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
   const [expandedSymbol, setExpandedSymbol] = useState<string | null>(null);
 
+  // Virtualized Rendering: 무한 스크롤 방식
+  const [visibleCount, setVisibleCount] = useState(100);
+  const { ref: loadMoreRef, inView: loadMoreInView } = useInView({
+    threshold: 0,
+    rootMargin: "200px",
+  });
+
   // useUserPrefs hook으로 즐겨찾기 관리
   const { prefs, toggleFavorite, isFavorite, isLoaded: prefsLoaded } = useUserPrefs();
   const favorites = useMemo(() => new Set(prefs.favorites || []), [prefs.favorites]);
@@ -500,6 +697,18 @@ export default function PremiumTable({
 
     return result;
   }, [data, searchQuery, sortKey, sortOrder, limit, favorites, prefs.filterMode, prefsLoaded]);
+
+  // 무한 스크롤: 스크롤 시 더 많은 row 로드
+  useEffect(() => {
+    if (loadMoreInView && visibleCount < filteredAndSortedData.length) {
+      setVisibleCount((prev) => Math.min(prev + 50, filteredAndSortedData.length));
+    }
+  }, [loadMoreInView, visibleCount, filteredAndSortedData.length]);
+
+  // 데이터 변경 시 visibleCount 초기화
+  useEffect(() => {
+    setVisibleCount(100);
+  }, [searchQuery, domesticExchange, foreignExchange, sortKey, sortOrder]);
 
   // 코인 표시명 생성: displayName ?? name_ko ?? name_en ?? koreanName ?? symbol
   const [isMobile, setIsMobile] = useState(false);
@@ -862,174 +1071,36 @@ export default function PremiumTable({
                 </tr>
               </thead>
               <tbody>
-                {filteredAndSortedData.map((row, index) => {
-          console.log(
-            "[VOLUME_ROW]",
-            row.symbol,
-            "domestic:", row.volume24hKrw,
-            "foreign:", row.volume24hForeignKrw
-          );
-                  const uniqueKey = `${row.symbol}_${index}`;
-                  const prevClose =
-                    row.change24h !== null
-                      ? row.koreanPrice / (1 + row.change24h / 100)
-                      : row.koreanPrice;
-
-                  const prevDiff =
-                    row.change24h !== null
-                      ? calcDiff(row.koreanPrice, prevClose)
-                      : { percent: 0, diff: 0, valid: false };
-
-                  const highDiff = calcDiff(row.koreanPrice, row.high24h);
-                  const lowDiff = calcDiff(row.koreanPrice, row.low24h);
-
-                  return (
-                    <React.Fragment key={uniqueKey}>
-                      <tr
-                        className="text-[10px] md:text-sm hover:bg-slate-800/60 transition-colors leading-tight"
-                        data-symbol={row.symbol}
-                      >
-                        <td className="w-[30px] text-center py-1 md:py-3 px-2 md:px-3 lg:px-4">
-                          {(() => {
-                            const normalizedSymbol = row.symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
-                            const isFav = favorites.has(normalizedSymbol);
-                            return (
-                              <button
-                                type="button"
-                                className={`p-0.5 leading-none transition-colors ${
-                                  isFav
-                                    ? "text-[#FDCB52]"
-                                    : "text-[#A7B3C6]/40 hover:text-[#FDCB52]"
-                                }`}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  toggleFavorite(row.symbol);
-                                }}
-                                title={isFav ? "즐겨찾기 해제" : "즐겨찾기 추가"}
-                              >
-                                ★
-                              </button>
-                            );
-                          })()}
-                        </td>
-                        <td className="px-2 md:px-3 lg:px-4 py-1 md:py-3">
-                          <div className="flex items-center gap-1.5 md:gap-3 min-w-0">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const next = expandedSymbol === row.symbol ? null : row.symbol;
-                                setExpandedSymbol(next);
-                                if (onChartSelect && next) {
-                                  onChartSelect(row.symbol, domesticExchange, foreignExchange);
-                                }
-                              }}
-                              className="p-1 text-slate-400 hover:text-slate-200 transition-colors flex-shrink-0"
-                              title="차트 보기"
-                            >
-                              📈
-                            </button>
-                            <CoinIcon symbol={row.symbol} className="w-3.5 h-3.5 md:w-8 md:h-8 flex-shrink-0" iconUrl={row.icon_url} />
-                            <div className="flex flex-col flex-1 min-w-0 cursor-pointer"
-                              onClick={() => openCmcPage(row.symbol, row.cmcSlug)}>
-                              <span className="truncate text-[13px] md:text-[14px] font-medium text-white hover:text-blue-400 transition-colors">
-                                {getDisplayName(row)}
-                              </span>
-                              <span className="truncate text-[11px] md:text-[12px] text-gray-500 uppercase tracking-tight">
-                                {getDisplaySymbol(row.symbol)}
-                              </span>
-                            </div>
-                          </div>
-                        </td>
-
-                        {(() => {
-                          const isUnlisted = !row.foreignPriceKrw || row.foreignPriceKrw <= 0;
-                          return (
-                            <>
-                              <td className="w-[140px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
-                                <TwoLinePriceCell
-                                  topValue={row.koreanPrice}
-                                  bottomValue={row.foreignPriceKrw}
-                                  topPrefix="₩"
-                                  bottomPrefix="₩"
-                                  isUnlisted={isUnlisted}
-                                />
-                              </td>
-
-                              <td className="w-[90px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
-                                <TwoLineCell
-                                  line1={isUnlisted ? "-" : `${row.premiumRate >= 0 ? "+" : ""}${Number(row.premiumRate || 0).toFixed(2)}%`}
-                                  line2={`${row.premiumDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.premiumDiffKrw || 0))}`}
-                                  line1Color={isUnlisted ? "text-gray-500" : getPremiumColor(row.premiumRate)}
-                                  isUnlisted={isUnlisted}
-                                />
-                              </td>
-
-                              <td className="w-[100px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
-                                <TwoLineCell
-                                  line1={`${row.changeRate >= 0 ? "+" : ""}${Number(row.changeRate || 0).toFixed(2)}%`}
-                                  line2={`${row.changeAbsKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.changeAbsKrw || 0))}`}
-                                  line1Color={getChangeColor(row.changeRate)}
-                                />
-                              </td>
-
-                              <td className="hidden md:table-cell w-[100px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
-                                <TwoLineCell
-                                  line1={`${row.fromHighRate >= 0 ? "+" : ""}${Number(row.fromHighRate || 0).toFixed(2)}%`}
-                                  line2={`${row.highDiffKrw > 0 ? "-" : "+"}₩${formatKrwPrice(Math.abs(row.highDiffKrw || 0))}`}
-                                  line1Color={getChangeColor(row.fromHighRate)}
-                                />
-                              </td>
-
-                              <td className="hidden md:table-cell w-[100px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
-                                <TwoLineCell
-                                  line1={`${row.fromLowRate >= 0 ? "+" : ""}${Number(row.fromLowRate || 0).toFixed(2)}%`}
-                                  line2={`${row.lowDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.lowDiffKrw || 0))}`}
-                                  line1Color={getChangeColor(row.fromLowRate)}
-                                />
-                              </td>
-
-                              <td className="w-[120px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap pr-0">
-                                <TwoLineCell
-                                  // 국내 거래액: 항상 표시 (0 이하면 "-" 처리)
-                                  line1={formatVolumeKRW(row.volume24hKrw)}
-                                  // 해외 거래액: 값이 있을 때만 표시, 없으면 "-"
-                                  line2={
-                                    row.volume24hForeignKrw && row.volume24hForeignKrw > 0
-                                      ? formatVolumeKRW(row.volume24hForeignKrw)
-                                      : "-"
-                                  }
-                                />
-                              </td>
-                            </>
-                          );
-                        })()}
-                      </tr>
-
-                      {expandedSymbol === row.symbol && (
-                        <tr key={`${row.symbol}-chart`}>
-                          <td colSpan={8} className="p-0">
-                            <div className="w-full rounded-b-xl overflow-hidden bg-[#050819]">
-                              <TradingViewChart
-                                tvSymbol={(() => {
-                                  const tv = getTvSymbolForRow({
-                                    symbol: row.symbol,
-                                    domesticExchange,
-                                    foreignExchange,
-                                  });
-                                  console.log("[TV_SYMBOL_ROW]", row.symbol, domesticExchange, foreignExchange, tv);
-                                  return tv;
-                                })()}
-                                height={360}
-                                domesticExchange={domesticExchange}
-                                foreignExchange={foreignExchange}
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                      )}
-                    </React.Fragment>
-                  );
-                })}
+                {filteredAndSortedData.slice(0, visibleCount).map((row, index) => (
+                  <PremiumTableRow
+                    key={`${row.symbol}_${index}`}
+                    row={row}
+                    index={index}
+                    favorites={favorites}
+                    expandedSymbol={expandedSymbol}
+                    domesticExchange={domesticExchange}
+                    foreignExchange={foreignExchange}
+                    toggleFavorite={toggleFavorite}
+                    setExpandedSymbol={setExpandedSymbol}
+                    onChartSelect={onChartSelect}
+                    getDisplayName={getDisplayName}
+                    getDisplaySymbol={getDisplaySymbol}
+                    formatKrwPrice={formatKrwPrice}
+                    formatVolumeKRW={formatVolumeKRW}
+                    getPremiumColor={getPremiumColor}
+                    getChangeColor={getChangeColor}
+                    calcDiff={calcDiff}
+                    getTvSymbolForRow={getTvSymbolForRow}
+                    openCmcPage={openCmcPage}
+                  />
+                ))}
+                {visibleCount < filteredAndSortedData.length && (
+                  <tr ref={loadMoreRef}>
+                    <td colSpan={8} className="text-center py-4 text-slate-400 text-sm">
+                      {visibleCount} / {filteredAndSortedData.length} 로딩 중...
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
         </div>

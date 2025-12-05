@@ -346,7 +346,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     };
 
     // 메모리 캐시에 저장 (800ms TTL)
-    const cacheKey = getCacheKey(domestic as string, foreign as string);
     setCache(cacheKey, responseData);
 
     return res.status(200).json(responseData);

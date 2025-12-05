@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import { BAD_ICON_SYMBOLS } from "@/config/badIconSymbols";
 
 interface CoinIconProps {
@@ -30,6 +31,12 @@ export default function CoinIcon({
   const [cdnIndex, setCdnIndex] = useState(0);
   const [hasError, setHasError] = useState(false);
   
+  // Intersection Observer로 화면에 보일 때만 로드
+  const { ref, inView } = useInView({
+    triggerOnce: true, // 한 번만 로드
+    rootMargin: "100px", // 화면 진입 100px 전에 미리 로드
+  });
+  
   // BAD_ICON_SYMBOLS 에 포함된 심볼은 항상 Placeholder 사용 (즉시 반환)
   const forcePlaceholder = BAD_ICON_SYMBOLS.includes(upper);
 
@@ -49,7 +56,20 @@ export default function CoinIcon({
   if (forcePlaceholder) {
     return (
       <div
+        ref={ref}
         className={`${sizeClasses[size]} rounded-full bg-slate-600 flex items-center justify-center text-white font-bold ${textSizes[size]} ${className}`}
+      >
+        {upper.charAt(0)}
+      </div>
+    );
+  }
+
+  // 화면에 보이지 않으면 placeholder 표시
+  if (!inView) {
+    return (
+      <div
+        ref={ref}
+        className={`${sizeClasses[size]} rounded-full bg-slate-700 flex items-center justify-center text-slate-400 font-bold ${textSizes[size]} ${className}`}
       >
         {upper.charAt(0)}
       </div>
@@ -92,6 +112,7 @@ export default function CoinIcon({
   if (hasError) {
     return (
       <div
+        ref={ref}
         className={`${sizeClasses[size]} rounded-full bg-slate-600 flex items-center justify-center text-white font-bold ${textSizes[size]} ${className}`}
       >
         {upper.charAt(0)}
@@ -101,6 +122,7 @@ export default function CoinIcon({
 
   return (
     <img
+      ref={ref}
       src={iconSources[cdnIndex]}
       alt={upper}
       className={`${sizeClasses[size]} rounded-full ${className}`}
