@@ -270,6 +270,14 @@ function buildPremiumTable(): void {
       finalPremium = Math.round(premium * 100) / 100;
     }
 
+    // 국내 거래소 거래액 (우선순위: UPBIT > BITHUMB > COINONE)
+    const domesticStatsKey = getKoreanStatsKey(symbol);
+    const domesticStats = domesticStatsKey ? currentMarketStats[domesticStatsKey] : null;
+    
+    // 해외 거래소 거래액 (우선순위: BINANCE > OKX > BYBIT > ...)
+    const globalStatsKey = getGlobalStatsKey(symbol);
+    const globalStats = globalStatsKey ? currentMarketStats[globalStatsKey] : null;
+
     premiumRows.push({
       symbol,
       name_ko: master.name_ko || symbol,
@@ -280,6 +288,16 @@ function buildPremiumTable(): void {
       usdKrw: usdKrwRate,
       iconUrl: master.icon_path || null,
       cmcSlug: master.cmc_slug || null,
+      // 거래액 (국내)
+      volume24hKrw: domesticStats?.volume24hQuote || null,
+      // 거래액 (해외) - USDT 단위를 KRW로 변환
+      volume24hForeignKrw: globalStats?.volume24hQuote ? globalStats.volume24hQuote * usdKrwRate : null,
+      // 전일대비 변동
+      change24hRate: domesticStats?.change24hRate || null,
+      change24hAbs: domesticStats?.change24hAbs || null,
+      // 고가/저가 대비
+      high24h: domesticStats?.high24h || null,
+      low24h: domesticStats?.low24h || null,
       updatedAt: Date.now()
     });
   }
@@ -308,6 +326,17 @@ function getKoreanPrice(symbol: string): number | null {
   return null;
 }
 
+function getKoreanStatsKey(symbol: string): string | null {
+  const priority = ['UPBIT', 'BITHUMB', 'COINONE'];
+  for (const ex of priority) {
+    const key = `${ex}:${symbol}:KRW`;
+    if (currentMarketStats[key]) {
+      return key;
+    }
+  }
+  return null;
+}
+
 function getGlobalPrice(symbol: string): number | null {
   // USDT 심볼은 CoinGecko 글로벌 테더 시세 사용 (price = 1 USDT)
   if (symbol === 'USDT') {
@@ -319,6 +348,17 @@ function getGlobalPrice(symbol: string): number | null {
     const key = `${ex}:${symbol}:USDT`;
     if (currentPrices[key]) {
       return currentPrices[key].price;
+    }
+  }
+  return null;
+}
+
+function getGlobalStatsKey(symbol: string): string | null {
+  const priority = ['BINANCE', 'BINANCE_FUTURES', 'OKX', 'BYBIT', 'BITGET', 'GATE', 'HTX', 'MEXC'];
+  for (const ex of priority) {
+    const key = `${ex}:${symbol}:USDT`;
+    if (currentMarketStats[key]) {
+      return key;
     }
   }
   return null;

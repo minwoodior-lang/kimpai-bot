@@ -1,4 +1,4 @@
-# KimpAI v3.4.16 - Kimchi Premium Analytics Dashboard
+# KimpAI v3.4.17 - Kimchi Premium Analytics Dashboard
 
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. Its core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. The project handles real-time price collection, premium calculation, and global market metrics, offering a comprehensive view of the crypto market with a focus on the Korean premium.
@@ -6,6 +6,22 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 ### User Preferences
 - I want iterative development.
 - I prefer detailed explanations.
+
+### Recent Changes (v3.4.17 - 2024-12-05) - buildPremiumTable 거래액 필드 완성
+- **핵심 수정: `buildPremiumTable()` 함수 데이터 파이프라인 완성**:
+  - `workers/priceWorker.ts` L276-304: premiumRows 생성 시 6개 필드 추가
+  - `volume24hKrw`: 국내 거래소 거래액 (KRW 단위)
+  - `volume24hForeignKrw`: 해외 거래소 거래액 (USDT → KRW 환산)
+  - `change24hRate`: 전일대비 변동률 (%)
+  - `change24hAbs`: 전일대비 변동금액 (KRW)
+  - `high24h`, `low24h`: 24시간 고저가
+- **헬퍼 함수 추가**:
+  - `getKoreanStatsKey()`: 국내 거래소 통계 키 조회 (UPBIT > BITHUMB > COINONE)
+  - `getGlobalStatsKey()`: 해외 거래소 통계 키 조회 (BINANCE > OKX > BYBIT > ...)
+- **검증 결과**:
+  - 거래액 있는 코인: 528개 / 전체 562개 (COINONE 38개는 실제 거래 없음)
+  - 거래액 Top 5: XRP(3,079억), ETH(2,028억), BTC(1,772억), USDT(951억), SOL(781억)
+- **데이터 흐름**: marketStats.json → priceWorker buildPremiumTable() → premiumTable.json → API → 프론트엔드
 
 ### Recent Changes (v3.4.16 - 2024-12-05) - 프리미엄 차트 분리 + 코인원 거래액 수정
 - **프리미엄 차트 완전 분리 (BTC 고정)**:
