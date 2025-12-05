@@ -31,14 +31,25 @@ export default function CoinIcon({
   const [cdnIndex, setCdnIndex] = useState(0);
   const [hasError, setHasError] = useState(false);
   
-  // Intersection Observer로 화면에 보일 때만 로드
+  // BAD_ICON_SYMBOLS 에 포함된 심볼은 항상 Placeholder 사용
+  const forcePlaceholder = BAD_ICON_SYMBOLS.includes(upper);
+  
+  // Intersection Observer로 화면에 보일 때만 로드 (모든 경우에 호출)
   const { ref, inView } = useInView({
-    triggerOnce: true, // 한 번만 로드
-    rootMargin: "100px", // 화면 진입 100px 전에 미리 로드
+    triggerOnce: true,
+    rootMargin: "100px",
+    skip: forcePlaceholder, // forcePlaceholder면 observer 비활성화
   });
   
-  // BAD_ICON_SYMBOLS 에 포함된 심볼은 항상 Placeholder 사용 (즉시 반환)
-  const forcePlaceholder = BAD_ICON_SYMBOLS.includes(upper);
+  // useEffect는 항상 호출되어야 함 (Hook Rules)
+  useEffect(() => {
+    if (hasError && process.env.NODE_ENV === "development") {
+      if (!loggedMissingIcons.has(upper)) {
+        loggedMissingIcons.add(upper);
+        console.warn("[CoinIcon] Missing icon for:", upper);
+      }
+    }
+  }, [hasError, upper]);
 
   const sizeClasses = {
     sm: "w-5 h-5",
@@ -99,15 +110,6 @@ export default function CoinIcon({
       setHasError(true);
     }
   };
-
-  useEffect(() => {
-    if (hasError && process.env.NODE_ENV === "development") {
-      if (!loggedMissingIcons.has(upper)) {
-        loggedMissingIcons.add(upper);
-        console.warn("[CoinIcon] Missing icon for:", upper);
-      }
-    }
-  }, [hasError, upper]);
 
   if (hasError) {
     return (

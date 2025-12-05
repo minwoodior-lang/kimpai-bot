@@ -2,6 +2,7 @@ import React, {
   useState,
   useEffect,
   useMemo,
+  useCallback,
   useRef,
 } from "react";
 import dynamic from "next/dynamic";
@@ -720,14 +721,14 @@ export default function PremiumTable({
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const getDisplayName = (item: PremiumData): string => {
+  const getDisplayName = useCallback((item: PremiumData): string => {
     const baseKoName = item.name_ko || "";
     // 모바일에서 5글자 이상이면 자르기
     if (isMobile && baseKoName.length > 5) {
       return baseKoName.slice(0, 5) + "…";
     }
     return baseKoName;
-  };
+  }, [isMobile]);
 
   const getOriginalDisplayName = (item: PremiumData): string => {
     // 백엔드에서 생성한 displayName 우선
@@ -742,20 +743,20 @@ export default function PremiumTable({
     return item.symbol;
   };
 
-  const getDisplaySymbol = (symbol: string): string => {
+  const getDisplaySymbol = useCallback((symbol: string): string => {
     // 모바일에서 8글자 이상이면 자르기
     if (isMobile && symbol.length > 8) {
       return symbol.slice(0, 8) + "…";
     }
     return symbol;
-  };
+  }, [isMobile]);
 
   const formatKRW = (value: number | null) => {
     if (value === null || value === undefined || isNaN(value)) return "-";
     return value.toLocaleString("ko-KR");
   };
 
-  const formatKrwPrice = (value: number | null) => {
+  const formatKrwPrice = useCallback((value: number | null) => {
     if (value === null || value === undefined || isNaN(value)) return "-";
 
     if (value >= 1000) {
@@ -768,7 +769,7 @@ export default function PremiumTable({
       return value.toFixed(2);
     }
     return value.toFixed(4);
-  };
+  }, []);
 
   const formatUsdtPrice = (value: number | null) => {
     if (value === null || value === undefined || isNaN(value)) return "-";
@@ -787,7 +788,7 @@ export default function PremiumTable({
   // - 0 이하: 실제 거래 없음 → "-" 표시
   // - 0 초과: 숫자 포맷 출력
   // - 임의 수정 금지 (PM 협의 필수)
-  const formatVolumeKRW = (value: number | null) => {
+  const formatVolumeKRW = useCallback((value: number | null) => {
     // null/undefined 또는 0 이하는 "-" 표시
     if (value == null || Number.isNaN(value) || value <= 0) {
       return "-";
@@ -811,7 +812,7 @@ export default function PremiumTable({
       return `${Math.floor(value / 1e4)}만`;
     }
     return Math.round(value).toLocaleString("ko-KR");
-  };
+  }, []);
 
   const formatVolumeUsdt = (value: number | null) => {
     // null/undefined 또는 0 이하는 "-" 표시
@@ -825,19 +826,19 @@ export default function PremiumTable({
     return `$${value.toFixed(2)}`;
   };
 
-  const getPremiumColor = (premium: number | null) => {
+  const getPremiumColor = useCallback((premium: number | null) => {
     if (premium === null) return "text-[#A7B3C6]";
     if (premium > 0) return "text-[#50e3a4]";
     if (premium < 0) return "text-[#ff6b6b]";
     return "text-[#A7B3C6]";
-  };
+  }, []);
 
-  const getChangeColor = (change: number | null) => {
+  const getChangeColor = useCallback((change: number | null) => {
     if (change === null) return "text-[#A7B3C6]";
     if (change > 0) return "text-[#50e3a4]";
     if (change < 0) return "text-[#ff6b6b]";
     return "text-[#A7B3C6]";
-  };
+  }, []);
 
   const SortIcon = ({ columnKey }: { columnKey: SortKey }) => {
     if (sortKey !== columnKey) {
@@ -862,14 +863,14 @@ export default function PremiumTable({
     return exchange ? (exchange.shortName ?? exchange.label) : "해외";
   };
 
-  const calcDiff = (current: number, base: number) => {
+  const calcDiff = useCallback((current: number, base: number) => {
     if (!current || !base || isNaN(current) || isNaN(base) || base === 0) {
       return { percent: 0, diff: 0, valid: false };
     }
     const diff = current - base;
     const percent = (diff / base) * 100;
     return { percent, diff, valid: true };
-  };
+  }, []);
 
   // TradingView 심볼 오버라이드 (특수 마켓용)
   const TV_SYMBOL_OVERRIDES: Record<string, string> = {
@@ -901,7 +902,7 @@ export default function PremiumTable({
   };
 
   // 코인 row별 TV 심볼 생성 (조건부)
-  const getTvSymbolForRow = ({
+  const getTvSymbolForRow = useCallback(({
     symbol,
     domesticExchange,
     foreignExchange
@@ -932,7 +933,7 @@ export default function PremiumTable({
     const foreignPrefix = TV_FOREIGN_PREFIX[forEx] ?? "BINANCE";
     const market = forMarket || "USDT";
     return `${foreignPrefix}:${base}${market}`;
-  };
+  }, []);
 
   return (
     <section className="w-full px-0 md:px-0 mb-20">
@@ -1073,7 +1074,7 @@ export default function PremiumTable({
               <tbody>
                 {filteredAndSortedData.slice(0, visibleCount).map((row, index) => (
                   <PremiumTableRow
-                    key={`${row.symbol}_${index}`}
+                    key={row.symbol}
                     row={row}
                     index={index}
                     favorites={favorites}
