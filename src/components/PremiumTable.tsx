@@ -74,7 +74,7 @@ function MiniDropdown({
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex items-center gap-1 bg-slate-700 rounded-lg px-3 h-[34px] border border-slate-600 hover:border-slate-500 transition-colors"
+        className="flex items-center gap-0.5 sm:gap-1 bg-slate-700 rounded-lg px-2.5 sm:px-3 h-9 sm:h-10 border border-slate-600 hover:border-slate-500 transition-colors"
       >
         {selectedOption && (
           <img
@@ -83,7 +83,7 @@ function MiniDropdown({
             className="w-4 h-4 rounded flex-shrink-0 my-auto"
           />
         )}
-        <span className="text-white text-sm whitespace-nowrap my-auto">
+        <span className="text-white text-xs sm:text-sm whitespace-nowrap my-auto">
           {renderLabel(selectedOption)}
         </span>
         <svg
@@ -114,7 +114,7 @@ function MiniDropdown({
                   onChange(option.id);
                   setIsOpen(false);
                 }}
-                className={`w-full flex items-center gap-2 px-2 py-1.5 hover:bg-slate-700 transition-colors text-left ${
+                className={`w-full flex items-center gap-2 px-2 py-2 hover:bg-slate-700 transition-colors text-left min-h-10 ${
                   value === option.id ? "bg-slate-700/50" : ""
                 }`}
               >
@@ -207,10 +207,10 @@ const PremiumTableRow = React.memo(({
   return (
     <React.Fragment key={uniqueKey}>
       <tr
-        className="text-[9px] sm:text-[10px] md:text-sm hover:bg-slate-800/60 transition-colors leading-tight"
+        className="text-[9px] sm:text-[10px] md:text-sm hover:bg-slate-800/60 transition-colors leading-relaxed"
         data-symbol={row.symbol}
       >
-        <td className="w-[24px] sm:w-[30px] text-center py-0.5 sm:py-1 md:py-3 px-1 sm:px-2 md:px-3 lg:px-4">
+        <td className="w-[24px] sm:w-[30px] text-center py-1 sm:py-1.5 md:py-3 px-1 sm:px-2 md:px-3 lg:px-4 min-h-[44px] sm:min-h-auto">
           <button
             type="button"
             className={`p-0.5 leading-none transition-colors ${
@@ -227,7 +227,7 @@ const PremiumTableRow = React.memo(({
             ★
           </button>
         </td>
-        <td className="px-1 sm:px-2 md:px-3 lg:px-4 py-1 md:py-3">
+        <td className="px-1 sm:px-2 md:px-3 lg:px-4 py-1.5 md:py-3 min-h-[44px] sm:min-h-auto">
           <div className="flex items-center gap-1 sm:gap-1.5 md:gap-3 min-w-0">
             <button
               type="button"
@@ -256,7 +256,7 @@ const PremiumTableRow = React.memo(({
           </div>
         </td>
 
-        <td className="w-[110px] sm:w-[140px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
+        <td className="w-[110px] sm:w-[140px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLinePriceCell
             topValue={row.koreanPrice}
             bottomValue={row.foreignPriceKrw}
@@ -266,7 +266,7 @@ const PremiumTableRow = React.memo(({
           />
         </td>
 
-        <td className="w-[85px] sm:w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
+        <td className="w-[85px] sm:w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={isUnlisted ? "-" : formatPercent(row.premiumRate)}
             line2={`${row.premiumDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.premiumDiffKrw || 0))}`}
@@ -283,7 +283,7 @@ const PremiumTableRow = React.memo(({
           />
         </td>
 
-        <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
+        <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={formatPercent(row.fromHighRate)}
             line2={`${row.highDiffKrw > 0 ? "-" : "+"}₩${formatKrwPrice(Math.abs(row.highDiffKrw || 0))}`}
@@ -291,7 +291,7 @@ const PremiumTableRow = React.memo(({
           />
         </td>
 
-        <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
+        <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={formatPercent(row.fromLowRate)}
             line2={`${row.lowDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.lowDiffKrw || 0))}`}
@@ -299,7 +299,7 @@ const PremiumTableRow = React.memo(({
           />
         </td>
 
-        <td className="w-[105px] sm:w-[120px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap pr-0">
+        <td className="w-[105px] sm:w-[120px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap pr-0">
           <TwoLineCell
             line1={formatVolumeKRW(row.volume24hKrw)}
             line2={
@@ -1008,7 +1008,7 @@ export default function PremiumTable({
           {/* 모바일 레이아웃: 2단 구조 */}
           <div className="flex md:hidden flex-col gap-1.5 mb-2">
             {/* 거래소 선택 - 1줄 */}
-            <div className="flex items-center gap-1 flex-wrap">
+            <div className="flex items-center gap-0.5 sm:gap-1 flex-wrap">
               <span className="text-[12px] text-white/60">기준</span>
               <MiniDropdown
                 value={domesticExchange}
@@ -1063,32 +1063,32 @@ export default function PremiumTable({
             <colgroup><col className="w-[30px]" /><col className="w-[35%]" /><col className="w-[16%]" /><col className="w-[16%]" /><col className="w-[17%]" /><col className="hidden md:table-column w-[8%]" /><col className="hidden md:table-column w-[8%]" /><col className="w-[16%]" /></colgroup>
             <thead>
                 <tr className="bg-slate-900/60 text-slate-400 text-[11px] md:text-sm">
-                  <th className="w-[30px] text-center text-[11px] text-[#A7B3C6]/50">★</th>
-                  <th className="px-3 md:px-4 py-1.5 text-left text-[12px] font-medium text-[#A7B3C6]/60 tracking-wide cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("symbol")}>
+                  <th className="w-[30px] text-center text-[12px] text-[#A7B3C6]/50 py-2.5 min-h-11">★</th>
+                  <th className="px-3 md:px-4 py-2.5 text-left text-[12px] md:text-sm font-medium text-[#A7B3C6]/60 tracking-wide cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("symbol")}>
                     코인명
                     <SortIcon columnKey="symbol" />
                   </th>
-                  <th className="px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("koreanPrice")}>
+                  <th className="px-3 lg:px-4 py-2.5 text-right text-[12px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("koreanPrice")}>
                     현재가
                     <SortIcon columnKey="koreanPrice" />
                   </th>
-                  <th className="px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("premiumRate")}>
+                  <th className="px-3 lg:px-4 py-2.5 text-right text-[12px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("premiumRate")}>
                     김프
                     <SortIcon columnKey="premiumRate" />
                   </th>
-                  <th className="px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("changeRate")}>
+                  <th className="px-3 lg:px-4 py-2.5 text-right text-[12px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("changeRate")}>
                     전일대비
                     <SortIcon columnKey="changeRate" />
                   </th>
-                  <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[10px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("fromHighRate")}>
+                  <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("fromHighRate")}>
                     고가대비
                     <SortIcon columnKey="fromHighRate" />
                   </th>
-                  <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[10px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("fromLowRate")}>
+                  <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("fromLowRate")}>
                     저가대비
                     <SortIcon columnKey="fromLowRate" />
                   </th>
-                  <th className="px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors" onClick={() => handleSort("volume24hKrw")}>
+                  <th className="px-3 lg:px-4 py-2.5 text-right text-[12px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("volume24hKrw")}>
                     거래액(일)
                     <SortIcon columnKey="volume24hKrw" />
                   </th>

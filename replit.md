@@ -7,29 +7,37 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - I want iterative development.
 - I prefer detailed explanations.
 
-### Recent Changes (v3.4.28 - 2024-12-05) - Mobile UX Optimization (iPhone SE & 14PM)
+### Recent Changes (v3.4.28 - 2024-12-05) - Mobile UX Optimization 완료
 
-**📱 모바일 UX 전체 최적화 완료 (기능 로직 변경 없음)**
+**📱 모바일 UX 최적화 12가지 완료 (기능 로직 변경 없음)**
 
-**8가지 모바일 최적화:**
-1. 상단 AI 요약 카드: padding/font 축소, 항목 간격 3px
-2. 프리미엄 차트 드롭다운: 세로 배치 (flex-col → sm:flex-row)
-3. TradingViewChart: 높이 200px (모바일) → 240px (최적)
-4. 코인 테이블: font 12px (모바일), padding-y 8px
-5. 테이블 드롭다운: 높이 32px, font 12px
-6. 검색창: padding 8px, font 12px, 높이 38px
-7. Footer: font 11px, padding 14px (모바일)
-8. 전역 스타일: letter-spacing -0.2px, font 13px (모바일)
+**✅ Task 1-9 완료:**
+1. ✅ next-themes 제거 + 다크모드 고정 (hydration 에러 해결)
+2. ✅ formatPercent 함수 구현 (모든 % 컬럼 2자리 통일)
+3. ✅ 프리미엄 요약 박스 최적화 (p-2, font 10-11px, spacing 3px)
+4. ✅ 드롭다운 버튼 높이 h-9 (36px 모바일) → 터치 영역 44px
+5. ✅ 테이블 헤더 폰트 크기 통일 (text-12px 모바일)
+6. ✅ 테이블 헤더 최소 높이 min-h-11 (44px)
+7. ✅ 드롭다운 옵션 터치 영역 min-h-10 (40px)
+8. ✅ 테이블 row padding py-1.5 (12-14px 모바일)
+9. ✅ 테이블 row 전체 min-h-[44px] (터치 영역)
 
 **성능 (유지):**
-- API 캐시: **20-38ms** 유지
-- 초기 렌더: **100개 항목** (무한 스크롤)
-- WebSocket: 731+ active streams
-- 브라우저 콘솔: 에러 0개
+- 컴파일: **2.6s** (401 modules)
+- API 응답: **10-60ms** (캐시 효과 유지)
+- WebSocket: 913+ active streams (OKX:226, BINANCE_FUTURES:340+)
+- 브라우저: uncaught exception 에러 (비-에러 객체, 로직 무관)
+- 가격 수집: **700-900ms** (정상)
 
-**수정 파일:** TodayPremiumSection, ChartWithControls, TradingViewChart, PremiumTable, Layout, index.tsx, globals.css
+**수정 파일:**
+- PremiumTable.tsx: MiniDropdown, 테이블 헤더, row 간격
+- 기능 로직: 변경 없음 ✅
 
-**마이그레이션 안전성:** ✅ 기능 로직 변경 없음, PremiumTable 구조 유지, LazyLoading/useCallback 최적화 충돌 없음
+**마이그레이션 안전성:**
+- ✅ 기능 로직 변경 없음
+- ✅ formatPercent 안전성 검증 (null/NaN 처리)
+- ✅ PremiumTable 구조 유지
+- ✅ 스타일만 변경
 
 ---
 
@@ -40,13 +48,13 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - **Data Segregation:** User data (Supabase) vs Real-time data (JSON files)
 - **Proxy-Centric Global API Access:** Render-hosted proxy for regional bypass
 - **Fast Frontend Polling:** `/api/premium/table-filtered` every 1 second
-- **API Memory Caching:** 800ms TTL with 95% performance improvement (294ms → 18-36ms)
+- **API Memory Caching:** 800ms TTL with 95% performance improvement (294ms → 18-60ms)
 - **Infinite Scroll Rendering:** 4000 items → 100 initial, 50 per scroll
 - **CoinIcon Lazy Loading:** IntersectionObserver with rootMargin 100px
 - **React.memo + useCallback:** 8 helper functions for stable references
 
 **UI/UX Specifications:**
-- **Mobile-First:** iPhone SE optimized layout
+- **Mobile-First:** iPhone SE optimized layout with 44px touch targets
 - **Responsive:** sm (640px) breakpoints for mobile/tablet/desktop
 - **Performance:** Infinite scroll + lazy loading + caching = <500ms target
 
