@@ -1,4 +1,4 @@
-# KimpAI v3.4.19 - Kimchi Premium Analytics Dashboard
+# KimpAI v3.4.20 - Kimchi Premium Analytics Dashboard
 
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. Its core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. The project handles real-time price collection, premium calculation, and global market metrics, offering a comprehensive view of the crypto market with a focus on the Korean premium.
@@ -6,6 +6,35 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 ### User Preferences
 - I want iterative development.
 - I prefer detailed explanations.
+
+### Recent Changes (v3.4.20 - 2024-12-05) - 거래액 표시 버그 완전 수정
+
+**핵심 수정: `|| null` → `?? null` (nullish coalescing)**
+
+모든 레이어에서 falsy 체크로 인해 0이 null로 변환되던 문제를 완전 수정:
+
+1. **Fetchers (upbit.ts, bithumb.ts, coinone.ts)**:
+   - `Number.isFinite()` 체크로 안전한 null 처리
+   - 업비트: `Number(item.acc_trade_price_24h)` → `Number.isFinite() ? value : null`
+   - 빗썸: `Number(item.acc_trade_value_24H)` → `Number.isFinite() ? value : null`
+   - 코인원: `quote_volume` 또는 `target_volume * lastPrice` 계산
+
+2. **priceWorker.ts (buildPremiumTable)**:
+   - `domesticPriceEntry?.volume24hKrw || null` → `?? null` 수정
+   - 모든 필드: volume24hKrw, volume24hForeignKrw, change24hRate, change24hAbs, high24h, low24h
+
+3. **프론트엔드 포맷터 (PremiumTable.tsx)**:
+   - `formatVolumeKRW`: 1백만 단위 추가 (`1e6` → `n백만`)
+   - `formatVolumeUsdt`: `value === 0` 체크 제거
+   - `Number.isNaN()` 사용으로 정확한 NaN 체크
+
+**결과**:
+- 업비트 54백만, 56백만 등 소액 거래대금도 정상 표시 ✓
+- 빗썸 312만, 366만 등 소액 거래대금도 정상 표시 ✓
+- 정렬 순서와 표시 값이 항상 일치 ✓
+- 0 값도 "0원"으로 표시 (null/undefined만 "-")
+
+---
 
 ### Recent Changes (v3.4.19 - 2024-12-05) - 거래액(일) 파이프라인 완전 통합 (priceWorker)
 - **핵심 개선: 3초 priceWorker에 24시간 거래액 계산 통합**:

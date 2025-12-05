@@ -23,9 +23,13 @@ export async function fetchCoinonePrices(markets: MarketInfo[]): Promise<PriceMa
         const key = `COINONE:${base}:KRW`;
         const lastPrice = parseFloat(ticker.last);
         const prevPrice = parseFloat(ticker.yesterday_last) || 0;
-        let volume24hKrw = parseFloat(ticker.quote_volume) || 0;
-        if (volume24hKrw === 0 && ticker.target_volume && ticker.last) {
-          volume24hKrw = parseFloat(ticker.target_volume) * lastPrice;
+        const baseVol = Number(ticker.target_volume);
+        const quoteVol = Number(ticker.quote_volume);
+        let volume24hKrw: number | null = null;
+        if (Number.isFinite(quoteVol) && quoteVol > 0) {
+          volume24hKrw = quoteVol;
+        } else if (Number.isFinite(baseVol) && Number.isFinite(lastPrice)) {
+          volume24hKrw = baseVol * lastPrice;
         }
         const change24hAbs = lastPrice - prevPrice;
         const change24hRate = prevPrice > 0 ? (change24hAbs / prevPrice) * 100 : 0;

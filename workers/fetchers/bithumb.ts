@@ -37,10 +37,11 @@ export async function fetchBithumbPrices(markets: MarketInfo[]): Promise<PriceMa
             const key = `BITHUMB:${base}:${quote}`;
             const change24hAbs = parseFloat(item.fluctate_24H) || 0;
             const change24hRate = parseFloat(item.fluctate_rate_24H) || 0;
+            const rawVolume24h = Number(item.acc_trade_value_24H);
             prices[key] = {
               price,
               ts,
-              volume24hKrw: parseFloat(item.acc_trade_value_24H) || 0,
+              volume24hKrw: Number.isFinite(rawVolume24h) ? rawVolume24h : null,
               change24hRate,
               change24hAbs,
               high24h: parseFloat(item.max_price) || undefined,

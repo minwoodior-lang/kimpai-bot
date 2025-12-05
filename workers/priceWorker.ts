@@ -286,13 +286,13 @@ function buildPremiumTable(): void {
       usdKrw: usdKrwRate,
       iconUrl: master.icon_path || null,
       cmcSlug: master.cmc_slug || null,
-      // 모든 데이터는 prices.json에서 직접 가져옴
-      volume24hKrw: domesticPriceEntry?.volume24hKrw || null,
-      volume24hForeignKrw: globalPriceEntry?.volume24hKrw || null,
-      change24hRate: domesticPriceEntry?.change24hRate || null,
-      change24hAbs: domesticPriceEntry?.change24hAbs || null,
-      high24h: domesticPriceEntry?.high24h || null,
-      low24h: domesticPriceEntry?.low24h || null,
+      // 모든 데이터는 prices.json에서 직접 가져옴 (nullish coalescing 사용!)
+      volume24hKrw: domesticPriceEntry?.volume24hKrw ?? null,
+      volume24hForeignKrw: globalPriceEntry?.volume24hKrw ?? null,
+      change24hRate: domesticPriceEntry?.change24hRate ?? null,
+      change24hAbs: domesticPriceEntry?.change24hAbs ?? null,
+      high24h: domesticPriceEntry?.high24h ?? null,
+      low24h: domesticPriceEntry?.low24h ?? null,
       updatedAt: Date.now()
     });
   }

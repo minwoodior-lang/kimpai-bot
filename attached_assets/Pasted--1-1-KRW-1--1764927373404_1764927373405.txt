@@ -1,0 +1,236 @@
+📌 1. 현재 문제점 총정리
+1) 업비트 KRW 마켓 – 거래대금 누락
+
+업비트 기준으로 보면,
+
+거래대금 1억 미만 종목은 전부 - 로 표기되고 있음.
+
+예: 업비트 앱/웹에서 54백만, 56백만, 71백만 이런 코인들
+→ 우리 사이트에서는 거래대금 칼럼이 -.
+
+거래대금 수백억~수천억인 종목 중에서도 중간중간 - 이 섞여 있음.
+
+예: GRS(그로스톨코인) 같은 애들
+→ 업비트에서는 거래대금 상위권인데
+→ 우리 화면에서는 거래대금 순 정렬 상위에 위치하면서도 표기는 -.
+
+👉 공통점
+
+정렬은 거래대금 순으로 잘 되어 있다.
+
+그런데 표기 칼럼만 - 로 나오는 코인이 많다.
+→ 즉, 백엔드 숫자 값은 있는데 포맷터/매핑에서 가려 버리는 상황.
+
+2) 빗썸 KRW 마켓 – 단위/스케일 오차 & 일부만 다름
+
+빗썸 기준 화면:
+
+최소 거래대금: 312만, 366만, 444만 … 까지 정상적으로 표기됨.
+
+66,199백만, 48,556백만 같은 값 → 우리 화면에서는 661억, 485억 으로 잘 변환된 케이스도 있음.
+
+하지만,
+
+QKC(쿼크체인) 등 일부는
+
+빗썸: 1백만 수준
+
+우리: 1억처럼 10배/100배 뻥튀기 되었던 이력.
+
+즉 대부분 코인은 단위 변환 정상인데, 일부 종목만 스케일이 틀어짐.
+
+👉 느낌상
+
+빗썸 fetcher나 포맷터 어딘가에서:
+
+일부 심볼에만 추가 스케일링(×100, /1_000_000 등)이 한 번 더 먹는 상황이 있음.
+
+3) 거래대금 필드 자체는 파이프라인에 존재
+
+업비트/빗썸 모두:
+
+거래대금 정렬은 정상 작동.
+
+→ premiumTable / API 내부에는 숫자 값이 들어가 있다는 뜻.
+
+문제는:
+
+API → 프론트로 전달할 때 null 처리 / falsy 체크 / 필드명 mismatch 때문에
+
+실제로 렌더링 시 - 로 바뀌거나, 스케일이 틀어진 것.
+
+📌 2. 원하는 최종 동작 (명확한 스펙)
+
+업비트 / 빗썸 / 코인원 모든 종목
+
+거래대금이 0이 아니면 무조건 숫자로 표시.
+
+값이 실제로 없거나 API에서 안 내려오는 경우에만 -.
+
+정렬(거래대금순)과 표시 값이 항상 일치.
+
+단위:
+
+내부: 원(KRW) 정수
+
+화면:
+
+1억 이상: n억
+
+1백만 이상: n백만
+
+그 이하는 그냥 숫자 (123,456)
+
+📌 3. 수정해야 할 포인트 (레이어별)
+A. Fetcher – 거래소 API 값 그대로 쓰기
+
+업비트
+
+// fetchers/upbit.ts
+const accTradePrice24h = Number(item.acc_trade_price_24h); // 24h 거래대금(KRW)
+const volume24hKrw = Number.isFinite(accTradePrice24h) ? accTradePrice24h : null;
+
+
+빗썸
+
+// fetchers/bithumb.ts
+const rawVolume24h = Number(item.acc_trade_value_24H); // 24h 거래금액(KRW)
+const volume24hKrw = Number.isFinite(rawVolume24h) ? rawVolume24h : null;
+
+
+코인원
+
+// fetchers/coinone.ts
+const baseVol = Number(item.baseVolume); // or volume
+const lastPrice = Number(item.last);     // KRW 가격
+const volume24hKrw =
+  Number.isFinite(baseVol) && Number.isFinite(lastPrice)
+    ? baseVol * lastPrice
+    : null;
+
+
+⚠️ 여기서는 절대 ×100, /1_000_000 같은 스케일링 하지 말 것.
+원 단위 값 그대로 PriceEntry.volume24hKrw에 저장.
+
+B. prices.json – 덮어쓰기/필드명 체크
+
+PriceEntry 에 명시적으로 volume24hKrw: number | null 필드 포함.
+
+addEntries 로직에서 다른 거래소 엔트리가 기존 값을 null 로 덮어쓰지 않도록 확인:
+
+function addEntries(list: PriceEntry[]) {
+  for (const p of list) {
+    const key = `${p.exchange}:${p.symbol}:${p.quote}`;
+
+    // 기존 값이 있고 새 값이 null이면 유지
+    const prev = prices[key] ?? {};
+    prices[key] = {
+      ...prev,
+      ...p,
+      volume24hKrw:
+        p.volume24hKrw !== null && p.volume24hKrw !== undefined
+          ? p.volume24hKrw
+          : prev.volume24hKrw ?? null,
+    };
+  }
+}
+
+
+이렇게 해야 업비트 값이 들어간 뒤 코인원/빗썸 null이 덮어쓰는 문제 방지.
+
+C. premiumTable.json – 단순 복사만
+const domestic = prices[`${domesticExchange}:${symbol}:KRW`];
+const foreign = prices[`${foreignExchange}:${symbol}:USDT`];
+
+row.volume24hKrw = domestic?.volume24hKrw ?? null;
+row.volume24hForeignKrw = foreign?.volume24hKrw ?? null;
+
+
+여기서 추가 threshold, || null 같은 falsy 체크 금지.
+
+무조건 fetcher에서 가져온 값을 그대로 복사.
+
+D. API – 널 처리/필드명만 통일
+
+/api/premium/table-filtered:
+
+data: rows.map(row => ({
+  // ...
+  volume24hKrw: row.volume24hKrw ?? null,
+  volume24hForeignKrw: row.volume24hForeignKrw ?? null,
+}))
+
+
+row.volume24hKrw || null 금지 (0도 null로 처리되는 문제).
+
+프론트 타입도 volume24hKrw / volume24hForeignKrw 로 일치하게.
+
+E. 프론트 – 공통 포맷터로 정리 & 숨기기 로직 제거
+export function formatVolumeKrw(value?: number | null) {
+  if (value === null || value === undefined || Number.isNaN(value)) {
+    return "-";
+  }
+
+  if (value >= 100_000_000) {       // 1억 이상
+    const unit = value / 100_000_000;
+    return `${unit.toFixed(0)}억`;
+  }
+
+  if (value >= 1_000_000) {         // 1백만 이상
+    const unit = value / 1_000_000;
+    return `${unit.toFixed(0)}백만`;
+  }
+
+  return value.toLocaleString("ko-KR");
+}
+
+
+규칙
+
+if (!value) 같은 falsy 체크 절대 사용 금지.
+
+“업비트일 때 1억 미만 숨기기” 같은 조건이 혹시라도 있다면 전부 삭제.
+
+빗썸/업비트/코인원 모두 이 하나의 포맷터만 쓰게 맞추기.
+
+📌 4. 필수 테스트 케이스 (완료 기준)
+
+수정 후 아래 케이스를 실제 화면/거래소 둘 다 놓고 비교해 달라고 해.
+
+✅ 업비트
+
+거래대금 가장 낮은 코인들
+
+업비트: 54백만, 56백만, 71백만 …
+
+우리: 동일 순서 + 거래액 칼럼에 전부 54백만, 56백만 … 처럼 숫자 표기 ( - 없어야 함).
+
+GRS, CVC, MON 등 중간/상위 거래대금 코인
+
+업비트: 수십억~수백억 거래대금
+
+우리:
+
+정렬 상위에 있고
+
+거래액 칼럼도 전부 xx억 같은 숫자로 표기 (- 없어야 함).
+
+✅ 빗썸
+
+최저 거래대금 구간
+
+빗썸: 312만, 366만, 444만 …
+
+우리: 동일 순서, 숫자도 312만, 366만 등으로 정상 표기.
+
+QKC / BOUNTY / SAHARA 등
+
+빗썸: 각 코인의 거래금액 기준
+
+우리: 비례하는 값으로 표시되며, 10배/100배 차이 없음.
+
+✅ 공통
+
+거래대금 순 정렬과 실제 표기 값이 항상 일치.
+
+- 가 찍힌 행은 실제 거래소에서 거래대금이 0이거나 아예 상장 직후로 데이터가 거의 없는 코인만 나와야 함.

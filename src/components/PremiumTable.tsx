@@ -574,8 +574,8 @@ export default function PremiumTable({
   };
 
   const formatVolumeKRW = (value: number | null) => {
-    // null/undefined만 "-" 표시, 0도 표시
-    if (value === null || value === undefined || isNaN(value))
+    // null/undefined만 "-" 표시, 0도 숫자로 표시
+    if (value === null || value === undefined || Number.isNaN(value))
       return "-";
 
     if (value >= 1e12) {
@@ -589,6 +589,9 @@ export default function PremiumTable({
     if (value >= 1e8) {
       return `${Math.floor(value / 1e8)}억`;
     }
+    if (value >= 1e6) {
+      return `${Math.floor(value / 1e6)}백만`;
+    }
     if (value >= 1e4) {
       return `${Math.floor(value / 1e4)}만`;
     }
@@ -599,13 +602,15 @@ export default function PremiumTable({
   };
 
   const formatVolumeUsdt = (value: number | null) => {
-    if (value === null || value === undefined || isNaN(value) || value === 0)
+    // null/undefined만 "-" 표시, 0도 숫자로 표시
+    if (value === null || value === undefined || Number.isNaN(value))
       return "-";
 
     if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
     if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
     if (value >= 1e3) return `$${(value / 1e3).toFixed(2)}K`;
-    return `$${value.toFixed(2)}`;
+    if (value >= 1) return `$${value.toFixed(2)}`;
+    return "$0";
   };
 
   const getPremiumColor = (premium: number | null) => {

@@ -20,10 +20,11 @@ export async function fetchUpbitPrices(markets: MarketInfo[]): Promise<PriceMap>
     for (const item of res.data) {
       const [quote, base] = item.market.split('-');
       const key = `UPBIT:${base}:${quote}`;
+      const accTradePrice24h = Number(item.acc_trade_price_24h);
       prices[key] = {
         price: item.trade_price,
         ts,
-        volume24hKrw: item.acc_trade_price_24h || 0,
+        volume24hKrw: Number.isFinite(accTradePrice24h) ? accTradePrice24h : null,
         change24hRate: (item.signed_change_rate ?? 0) * 100,
         change24hAbs: item.signed_change_price ?? 0,
         high24h: item.high_price ?? undefined,
