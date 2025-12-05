@@ -113,7 +113,7 @@ export default function Home() {
       {/* 메인 콘텐츠 */}
       <HomeLayout>
         <main className="w-full flex justify-center">
-          <div className="w-full px-6 py-6 md:max-w-[1280px] md:mx-auto">
+          <div className="w-full px-3 md:px-6 py-6 md:max-w-[1280px] md:mx-auto">
             {/* PC: 상단 3컬럼 레이아웃 */}
             <div className="hidden md:grid grid-cols-3 gap-4 mb-8">
             {/* 좌측: 오늘의 AI 김프 요약 */}
@@ -242,13 +242,13 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <div className="rounded-xl border border-white/5 bg-[#050819] h-[360px] overflow-hidden">
+              <div className="rounded-xl border border-white/5 bg-[#050819] h-[320px] md:h-[480px] overflow-hidden">
                 <TradingViewChartDynamic tvSymbol="BINANCE:BTCUSDT" height={360} />
               </div>
             </section>
 
             {/* 프리미엄 테이블 섹션 */}
-            <section className="mt-6 mb-10">
+            <section className="mt-6 mb-10 -mx-3 md:mx-0">
               <PremiumTable showHeader={false} showFilters={true} limit={0} refreshInterval={1000} />
             </section>
           </div>
