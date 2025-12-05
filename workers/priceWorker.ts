@@ -30,6 +30,14 @@ import {
   type MarketStatsMap,
   type MarketStatsEntry
 } from './fetchers';
+import {
+  startAllWebSockets,
+  stopAllWebSockets,
+  getAllWebSocketPrices,
+  isWebSocketRunning,
+  getWebSocketStats,
+  type WebSocketPrice
+} from './websocket';
 
 const DATA_DIR = path.join(process.cwd(), 'data');
 const PRICES_FILE = path.join(DATA_DIR, 'prices.json');
@@ -46,6 +54,56 @@ let usdtKrwGlobal = 1450;
 let lastFxUpdate = 0;
 let lastHealthCheck: { pricesCount: number; marketsCount: number; timestamp: number } | null = null;
 let skippedSymbols: string[] = [];
+let wsInitialized = false;
+let lastWsStatsLog = 0;
+
+function mergeWebSocketPrices(): number {
+  const wsPrices = getAllWebSocketPrices();
+  let mergedCount = 0;
+  
+  wsPrices.forEach((wsPrice) => {
+    const key = `${wsPrice.exchange}:${wsPrice.symbol}:${wsPrice.quote}`;
+    const existingEntry = currentPrices[key];
+    
+    if (wsPrice.timestamp > (existingEntry?.ts || 0)) {
+      currentPrices[key] = {
+        price: wsPrice.price,
+        ts: wsPrice.timestamp,
+        volume24hQuote: wsPrice.volume24hQuote || existingEntry?.volume24hQuote,
+        volume24hKrw: (wsPrice.volume24hQuote || 0) * usdtKrwGlobal,
+        change24hRate: wsPrice.change24hRate || existingEntry?.change24hRate,
+        change24hAbs: existingEntry?.change24hAbs,
+        high24h: existingEntry?.high24h,
+        low24h: existingEntry?.low24h,
+        prev_price: existingEntry?.prev_price
+      };
+      mergedCount++;
+    }
+  });
+  
+  return mergedCount;
+}
+
+function initializeWebSockets(): void {
+  if (wsInitialized) return;
+  
+  const allMarkets = loadExchangeMarkets();
+  const upbitMarkets = filterMarkets(allMarkets, 'UPBIT', ['KRW', 'BTC', 'USDT']);
+  const bithumbMarkets = filterMarkets(allMarkets, 'BITHUMB', ['KRW', 'BTC']);
+  const coinoneMarkets = filterMarkets(allMarkets, 'COINONE', ['KRW']);
+  
+  const domesticBases = new Set([
+    ...upbitMarkets.map(m => m.base.toUpperCase()),
+    ...bithumbMarkets.map(m => m.base.toUpperCase()),
+    ...coinoneMarkets.map(m => m.base.toUpperCase())
+  ]);
+  
+  const symbols = Array.from(domesticBases);
+  console.log(`[WS] Initializing WebSocket connections for ${symbols.length} symbols...`);
+  
+  startAllWebSockets(symbols);
+  wsInitialized = true;
+}
 
 function loadExchangeMarkets(): MarketInfo[] {
   try {
@@ -134,6 +192,8 @@ function validatePricesBeforeSave(prices: PriceMap, markets: MarketInfo[]): Vali
   return result;
 }
 
+let healthCheckResetCount = 0;
+
 function performHealthCheck(currentCount: number): boolean {
   if (!lastHealthCheck) {
     lastHealthCheck = {
@@ -149,10 +209,25 @@ function performHealthCheck(currentCount: number): boolean {
   const dropPercent = ((prevCount - currentCount) / prevCount) * 100;
 
   if (dropPercent > 20) {
-    console.error(`[HealthCheck] ALERT: Price count dropped ${dropPercent.toFixed(1)}% (${prevCount} → ${currentCount})`);
+    healthCheckResetCount++;
+    
+    if (healthCheckResetCount >= 3) {
+      console.log(`[HealthCheck] Resetting baseline after ${healthCheckResetCount} consecutive blocks (${prevCount} → ${currentCount})`);
+      lastHealthCheck = {
+        pricesCount: currentCount,
+        marketsCount: loadExchangeMarkets().length,
+        timestamp: Date.now()
+      };
+      saveHealthCheck();
+      healthCheckResetCount = 0;
+      return true;
+    }
+    
+    console.error(`[HealthCheck] ALERT: Price count dropped ${dropPercent.toFixed(1)}% (${prevCount} → ${currentCount}) [${healthCheckResetCount}/3]`);
     return false;
   }
 
+  healthCheckResetCount = 0;
   lastHealthCheck = {
     pricesCount: currentCount,
     marketsCount: loadExchangeMarkets().length,
@@ -486,16 +561,36 @@ async function updatePricesOnly(): Promise<void> {
   await updateGlobalUsdtKrw();
 
   const upbitMarkets = filterMarkets(allMarkets, 'UPBIT', ['KRW', 'BTC', 'USDT']);
-  // 빗썸은 KRW/BTC 마켓만 존재 (USDT 마켓 없음)
   const bithumbMarkets = filterMarkets(allMarkets, 'BITHUMB', ['KRW', 'BTC']);
   const coinoneMarkets = filterMarkets(allMarkets, 'COINONE', ['KRW']);
   const globalMarkets = getGlobalMarkets();
 
   try {
-    const priceResults = await Promise.allSettled([
+    const useWebSocket = isWebSocketRunning();
+    let wsMergedCount = 0;
+    
+    if (useWebSocket) {
+      wsMergedCount = mergeWebSocketPrices();
+      
+      const now = Date.now();
+      if (now - lastWsStatsLog > 10000) {
+        const wsStats = getWebSocketStats();
+        const statsSummary = wsStats.map(s => `${s.exchange}:${s.count}`).join(', ');
+        console.log(`[WS] Active streams: ${statsSummary}`);
+        lastWsStatsLog = now;
+      }
+    }
+    
+    const domesticPromises = [
       fetchUpbitPrices(upbitMarkets),
       fetchBithumbPrices(bithumbMarkets),
-      fetchCoinonePrices(coinoneMarkets),
+      fetchCoinonePrices(coinoneMarkets)
+    ];
+    
+    const globalPromises = useWebSocket ? [
+      fetchBitgetPrices(globalMarkets),
+      fetchHtxPrices(globalMarkets)
+    ] : [
       fetchBinanceSpotPrices(globalMarkets),
       fetchBinanceFuturesPrices(globalMarkets),
       fetchOkxPrices(globalMarkets),
@@ -504,11 +599,18 @@ async function updatePricesOnly(): Promise<void> {
       fetchGatePrices(globalMarkets),
       fetchHtxPrices(globalMarkets),
       fetchMexcPrices(globalMarkets)
-    ]);
+    ];
+    
+    const priceResults = await Promise.allSettled([...domesticPromises, ...globalPromises]);
 
     for (const result of priceResults) {
       if (result.status === 'fulfilled') {
-        Object.assign(currentPrices, result.value);
+        for (const [key, value] of Object.entries(result.value)) {
+          const existing = currentPrices[key];
+          if (!existing || (value as any).ts > existing.ts) {
+            currentPrices[key] = value as any;
+          }
+        }
       }
     }
 
@@ -620,12 +722,15 @@ const PRICE_INTERVAL_MS = 700;  // 0.7초 주기 (초고속)
 const STATS_INTERVAL_MS = 3000; // 3초 주기
 
 export function startPriceWorker(): void {
-  console.log(`[Worker] Starting price worker (${PRICE_INTERVAL_MS}ms) + stats worker (${STATS_INTERVAL_MS}ms)`);
+  console.log(`[Worker] Starting HYBRID price worker (WS + REST ${PRICE_INTERVAL_MS}ms) + stats worker (${STATS_INTERVAL_MS}ms)`);
 
   // Load previous health check state
   loadHealthCheck();
 
-  // 초기 실행
+  // Initialize WebSocket connections for global exchanges
+  initializeWebSockets();
+
+  // 초기 실행 (REST fallback for first run)
   updatePricesOnly();
   updateStatsOnly();
 
@@ -664,7 +769,9 @@ export function stopPriceWorker(): void {
     clearInterval(statsIntervalId);
     statsIntervalId = null;
   }
-  console.log('[Worker] Price and stats workers stopped');
+  stopAllWebSockets();
+  wsInitialized = false;
+  console.log('[Worker] Price worker, stats worker, and WebSocket connections stopped');
 }
 
 if (require.main === module) {
