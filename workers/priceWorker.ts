@@ -468,6 +468,20 @@ async function updatePricesOnly(): Promise<void> {
       return;
     }
 
+    // ▼ 디버그용: KRW 마켓인데 거래대금이 비어 있는 심볼들 확인
+    const missingVolumeKeys: string[] = [];
+    for (const [key, entry] of Object.entries(currentPrices)) {
+      const e: any = entry;
+      if (key.endsWith(':KRW') &&
+          e.price > 0 &&
+          (e.volume24hKrw === null || e.volume24hKrw === undefined || Number.isNaN(e.volume24hKrw))) {
+        missingVolumeKeys.push(key);
+      }
+    }
+    if (missingVolumeKeys.length > 0) {
+      console.log(`[VOL-DEBUG] Missing volume24hKrw (${missingVolumeKeys.length}): ${missingVolumeKeys.slice(0, 10).join(', ')}${missingVolumeKeys.length > 10 ? '...' : ''}`);
+    }
+
     savePrices(currentPrices);
     buildPremiumTable();
 

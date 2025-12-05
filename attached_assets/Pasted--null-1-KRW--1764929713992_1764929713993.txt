@@ -1,0 +1,162 @@
+전달문: “거래대금 null/‘-’ 표시 버그 최종 점검 요청”
+
+지금 거래대금 관련해서 남아 있는 버그들을 정리했습니다.
+
+1) 현재 증상
+
+업비트 (기준: 업비트 KRW)
+
+공식 앱에서 54백만, 56백만, 71백만 등으로 나오는 코인들이
+우리 사이트에서는 순서는 맞는데 거래액 컬럼이 -로 표시됩니다.
+
+거래대금 수십억~수백억 구간에서도 중간중간 값이 비어 있는 종목이 있습니다.
+
+빗썸
+
+빗썸 원화마켓에서 1백만, 3백만, 5백만 수준 거래대금이 있는 코인들이
+우리 사이트에서는 리스트 위치는 맞는데 역시 거래액이 -로 나옵니다.
+
+일부 고액 거래대금(수십억 이상) 코인도 값이 비어 있는 경우가 있습니다.
+
+코인원
+
+코인원 KRW 마켓의 대부분 코인은 거래액이 0 또는 -로 표시되고 있습니다.
+
+2) 현재 코드 구조 (확인한 파일)
+
+거래대금 파이프라인은 아래 5개 파일만 사용하고 있습니다.
+
+workers/fetchers/upbit.ts
+
+workers/fetchers/bithumb.ts
+
+workers/fetchers/coinone.ts
+
+workers/priceWorker.ts
+
+pages/api/premium/table-filtered.ts
+
+프론트에서는 formatVolumeKRW() 한 군데에서만 거래대금 포맷팅을 합니다.
+
+3) 의심 포인트 & 해야 할 작업
+(A) currentPrices에 volume24hKrw가 null인 심볼 로그 찍기
+
+priceWorker.ts에서 currentPrices 세팅이 끝난 직후에 디버그 코드를 넣어 주세요:
+
+// ▼ 디버그용: KRW 마켓인데 거래대금이 비어 있는 심볼들 확인
+for (const [key, entry] of Object.entries(currentPrices)) {
+  const e: any = entry;
+  if (key.endsWith(':KRW') &&
+      e.price > 0 &&
+      (e.volume24hKrw === null || e.volume24hKrw === undefined || Number.isNaN(e.volume24hKrw))) {
+    console.log('[VOL-DEBUG] Missing volume24hKrw', key, e);
+  }
+}
+
+
+여기에 실제로 어떤 심볼들이 찍히는지 보고,
+
+예를 들어 UPBIT:GRS:KRW, UPBIT:CVC:KRW, UPBIT:QKC:KRW 같은 것들이 나온다면
+→ fetcher 레벨 문제 or API 응답 파싱 문제입니다.
+
+(B) Upbit / Bithumb fetcher에서 거래대금 파싱 재확인
+
+이미 코드상으로는 문제 없어 보이지만, 안전하게 아래 형태로 고정해 주세요.
+
+upbit.ts
+
+const accTradePrice24hRaw = item.acc_trade_price_24h;
+const accTradePrice24h = Number(accTradePrice24hRaw);
+
+const volume24hKrw =
+  Number.isFinite(accTradePrice24h) && accTradePrice24h > 0
+    ? accTradePrice24h
+    : null;
+
+prices[key] = {
+  price: item.trade_price,
+  ts,
+  volume24hKrw,
+  ...
+};
+
+
+bithumb.ts
+
+const rawVolume24h = Number(item.acc_trade_value_24H);
+const volume24hKrw =
+  Number.isFinite(rawVolume24h) && rawVolume24h > 0
+    ? rawVolume24h
+    : null;
+
+prices[key] = {
+  price,
+  ts,
+  volume24hKrw,
+  ...
+};
+
+
+여기서는 절대로 || 0 또는 || null 같은 falsy 처리를 추가하지 말아 주세요.
+
+(C) Coinone – quote_volume / target_volume 계산 고정
+
+coinone.ts에서 다음 로직이 맞는지 다시 한 번 확인해 주세요.
+
+const baseVol = Number(ticker.target_volume);   // 코인 개수
+const quoteVol = Number(ticker.quote_volume);   // KRW 거래대금
+
+let volume24hKrw: number | null = null;
+
+if (Number.isFinite(quoteVol) && quoteVol > 0) {
+  volume24hKrw = quoteVol;
+} else if (Number.isFinite(baseVol) && Number.isFinite(lastPrice) && baseVol > 0 && lastPrice > 0) {
+  volume24hKrw = baseVol * lastPrice;
+} else {
+  volume24hKrw = null;
+}
+
+
+그리고 Coinone 공식 ticker API를 직접 찍어서
+quote_volume / target_volume 중 어떤 게 실제 24h KRW 거래대금인지 확인 후,
+그에 맞게 하나만 사용해 주세요.
+
+(D) premiumTable → API → 프론트 체인 확인
+
+priceWorker.ts:
+
+volume24hKrw: domesticPriceEntry?.volume24hKrw ?? null,
+
+
+table-filtered.ts:
+
+const volume24hKrw = premiumRow?.volume24hKrw ?? null;
+
+
+프론트 formatVolumeKRW(value)는 null/undefined/NaN만 막아야 합니다.
+
+export function formatVolumeKRW(value?: number | null): string {
+  if (value === null || value === undefined || Number.isNaN(value)) return "-";
+
+  if (value >= 1e8) return `${Math.floor(value / 1e8)}억`;
+  if (value >= 1e6) return `${Math.floor(value / 1e6)}백만`;
+  if (value >= 1e4) return `${Math.floor(value / 1e4)}만`;
+  return `${Math.floor(value)}원`;
+}
+
+
+여기에서 if (!value) return "-" 같은 falsy 체크가 아직 남아있다면 반드시 제거해 주세요.
+
+4) 기대 결과
+
+위 작업 후에는:
+
+업비트: 공식 앱에서 54백만 / 56백만 / 71백만인 코인들이 우리 사이트에서도 그대로 54백만 / 56백만 / 71백만으로 표기.
+
+빗썸: 1백만 단위 코인들도 동일하게 1백만으로 표기.
+
+코인원: 24h 거래량이 있는 코인들은 0/-가 아니라 실제 값으로 표시.
+
+특히 priceWorker의 [VOL-DEBUG] 로그를 보면
+“어떤 심볼이 어느 시점에서 volume24hKrw가 사라지는지” 바로 확인 가능할 거라
+이 로그를 기준으로 fetcher 쪽 혹은 stats 쪽 문제를 정확히 잡을 수 있습니다.

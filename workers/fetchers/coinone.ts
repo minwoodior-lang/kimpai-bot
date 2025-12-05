@@ -28,7 +28,7 @@ export async function fetchCoinonePrices(markets: MarketInfo[]): Promise<PriceMa
         let volume24hKrw: number | null = null;
         if (Number.isFinite(quoteVol) && quoteVol > 0) {
           volume24hKrw = quoteVol;
-        } else if (Number.isFinite(baseVol) && Number.isFinite(lastPrice)) {
+        } else if (Number.isFinite(baseVol) && baseVol > 0 && Number.isFinite(lastPrice) && lastPrice > 0) {
           volume24hKrw = baseVol * lastPrice;
         }
         const change24hAbs = lastPrice - prevPrice;
