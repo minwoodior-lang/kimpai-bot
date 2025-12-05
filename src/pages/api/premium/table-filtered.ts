@@ -127,8 +127,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         let high24hKrw: number | null = domesticStats?.high24h ?? null;
         let low24hKrw: number | null = domesticStats?.low24h ?? null;
         
-        // volume24hKrw는 premiumTable.json에서 이미 계산됨 (priceWorker에서 생성)
-        let volume24hKrw: number | null = premiumRow?.volume24hKrw ?? null;
+        // volume24hKrw는 premiumTable.json에서 직접 가져옴 (priceWorker에서 생성)
+        const volume24hKrw = premiumRow?.volume24hKrw ?? null;
 
         // BTC/USDT 마켓의 경우 변동 정보만 KRW 변환 필요 (volume24hKrw는 이미 priceWorker에서 계산됨)
         if (domesticQuote === "BTC") {
@@ -196,8 +196,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           fromLowRate: fromLowRate !== null ? Math.round(fromLowRate * 100) / 100 : null,
           lowDiffKrw: lowDiffKrw !== null ? Math.round(lowDiffKrw * 100) / 100 : null,
 
-          volume24hKrw,
-          volume24hForeignKrw: Math.round(foreignVolumeKrw * 100) / 100,
+          volume24hKrw: volume24hKrw ?? null,
+          volume24hForeignKrw: foreignVolumeKrw ?? null,
 
           high24h: high24hKrw,
           low24h: low24hKrw,

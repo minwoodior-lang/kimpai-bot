@@ -153,9 +153,9 @@ interface PremiumData {
   premium: number | null;
   premiumRate: number;
   premiumDiffKrw: number;
-  volume24hKrw: number;
+  volume24hKrw: number | null;
   volume24hUsdt: number | null;
-  volume24hForeignKrw: number;
+  volume24hForeignKrw: number | null;
   change24h: number | null;
   changeRate: number;
   changeAbsKrw: number;
@@ -574,7 +574,8 @@ export default function PremiumTable({
   };
 
   const formatVolumeKRW = (value: number | null) => {
-    if (value === null || value === undefined || isNaN(value) || value === 0)
+    // null/undefined만 "-" 표시, 0도 표시
+    if (value === null || value === undefined || isNaN(value))
       return "-";
 
     if (value >= 1e12) {
@@ -591,7 +592,10 @@ export default function PremiumTable({
     if (value >= 1e4) {
       return `${Math.floor(value / 1e4)}만`;
     }
-    return Math.round(value).toLocaleString("ko-KR");
+    if (value >= 1) {
+      return Math.round(value).toLocaleString("ko-KR");
+    }
+    return "0원";
   };
 
   const formatVolumeUsdt = (value: number | null) => {

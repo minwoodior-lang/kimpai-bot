@@ -1,0 +1,79 @@
+1️⃣ API 응답부터 다시 점검해줘
+
+/api/premium/table-filtered?domestic=UPBIT_KRW&foreign=BINANCE_USDT 호출해서
+SUI / TAIKO / MON 같은 코인의 volume24hKrw 값이 실제 숫자로 들어오는지 먼저 확인해줘.
+
+예: 27900000000 이런 식으로 0이 아닌 number로 와야 함.
+
+응답 JSON 안에 volume24hKrw 말고 volume24h, volume_24h, volume24hKrwRaw 같은 비슷한 필드가 또 있다면,
+정렬에 쓰는 필드와 화면에 보여주는 필드를 하나로 통일해줘.
+
+정렬 순서는 맞는데 셀에는 "-"만 보이는 상태라,
+정렬용 데이터는 있는데, 셀에서 표시할 때는 null/undefined 취급해서 "-"로 바꾸고 있을 가능성이 큼.
+
+2️⃣ API 레벨에서 volume24hKrw 매핑 고정
+
+src/pages/api/premium/table-filtered.ts 안에서
+프리미엄 테이블 엔트리를 row로 변환하는 부분을 이렇게 통일해줘:
+
+// premiumTableEntry → row 변환 부분에 추가/수정
+const row: PremiumRow = {
+  // ... 기존 필드들
+  volume24hKrw: entry.volume24hKrw ?? null,  // ✅ marketStats 같은 다른 소스 쓰지 말고 premiumTable 기준으로
+};
+
+
+절대 domesticStats?.volume24hQuote ?? 0 이런 식으로 0을 기본값으로 넣지 말고
+→ 없으면 null, 있으면 그대로 숫자만 내려줘.
+
+3️⃣ 타입/모델 통일
+
+types.ts (또는 PremiumRow 타입 정의된 곳)에 이렇게 맞춰줘:
+
+export interface PremiumRow {
+  // ... 기타 필드
+  volume24hKrw: number | null;  // ✅ 명시적으로 number | null
+}
+
+
+혹시 formattedVolume24hKrw, volume24hKrwDisplay 같은 필드가 별도로 있다면
+그냥 다 지우고, 화면에서 직접 포맷팅하게 해줘. (source of truth는 volume24hKrw 한 개만)
+
+4️⃣ 테이블 컬럼 렌더링 로직 수정 (여기가 핵심)
+
+PremiumTable 컴포넌트에서 거래액(일) 컬럼 정의 부분을 다음처럼 고쳐줘:
+
+{
+  Header: "거래액(일)",
+  accessor: "volume24hKrw",
+  Cell: ({ value }) => {
+    // ✅ null/undefined 일 때만 "-" 표기
+    if (value === null || value === undefined) return "-";
+
+    // 혹시 문자열로 들어오면 숫자로 변환
+    const num = typeof value === "string" ? Number(value) : value;
+
+    // 0원일 수도 있으니 0도 그냥 표시
+    if (Number.isNaN(num)) return "-";
+
+    return formatKoreanWonShort(num); // 예: 279억, 41백만 등
+  },
+  sortType: (a, b, columnId) => {
+    const va = a.values[columnId];
+    const vb = b.values[columnId];
+
+    const na = typeof va === "string" ? Number(va) : (va ?? 0);
+    const nb = typeof vb === "string ? Number(vb) : (vb ?? 0);
+
+    return nb - na; // ✅ 높은 거래액 순 정렬
+  },
+}
+
+
+중요 포인트 두 개:
+
+기존에 if (!value) return "-" 같은 코드가 들어가 있으면
+→ 0, "0", "27900000000"도 전부 truthy/falsy 오작동 가능성 있어서
+반드시 value === null || value === undefined 로만 "-" 처리하게 바꿔줘.
+
+정렬에 쓰는 값이랑 화면에 보여주는 값이 꼭 같은 필드(volume24hKrw) 를 사용하게 해줘.
