@@ -759,27 +759,27 @@ export default function PremiumTable({
           </div>
 
           {/* 모바일 레이아웃: 2단 구조 */}
-          <div className="flex md:hidden flex-col gap-2 mb-3">
+          <div className="flex md:hidden flex-col gap-2.5 mb-3">
             {/* 거래소 선택 - 1줄 */}
-            <div className="flex items-center gap-1">
-              <span className="text-xs text-white/60">기준 거래소</span>
+            <div className="flex items-center gap-1 flex-wrap">
+              <span className="text-xs text-white/60">기준</span>
               <MiniDropdown
                 value={domesticExchange}
                 options={DOMESTIC_EXCHANGES}
                 onChange={setDomesticExchange}
               />
-              <span className="text-white/30 text-xs px-1">↔</span>
+              <span className="text-white/30 text-xs px-0.5">↔</span>
               <MiniDropdown
                 value={foreignExchange}
                 options={FOREIGN_EXCHANGES}
                 onChange={setForeignExchange}
                 showShortName={true}
               />
-              <span className="text-xs text-white/60">해외 거래소</span>
+              <span className="text-xs text-white/60">해외</span>
             </div>
 
             {/* 검색 및 개수 - 2줄 */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1.5">
               <span className="text-xs text-white/50">
                 암호화폐 총 <span className="font-semibold text-white">{totalCoins}</span>개
               </span>

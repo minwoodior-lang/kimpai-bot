@@ -153,7 +153,7 @@ export default function Home() {
           </div>
 
           {/* 모바일: 탭 구조 */}
-          <div className="md:hidden mb-5">
+          <div className="md:hidden mt-3 mb-4">
             {/* 탭 버튼 */}
             <div className="flex gap-2 mb-3">
               <button
@@ -189,7 +189,7 @@ export default function Home() {
             </div>
 
             {/* 공통 카드 껍데기 - 고정 높이 */}
-            <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 p-2 h-[180px] flex flex-col">
+            <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 px-4 py-3 h-[180px] flex flex-col">
               {mobileCardTab === "ai" && (
                 <AiSummaryMobileContent
                   avgPremium={
@@ -226,9 +226,9 @@ export default function Home() {
 
             {/* 프리미엄 차트 섹션 */}
             <section className="mt-8 mb-6">
-              <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+              <div className="mb-3 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3">
                 <h2 className="text-sm text-slate-300">프리미엄 차트</h2>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 md:gap-1">
                   <button
                     onClick={() => setIsPrefsPanelOpen(true)}
                     className="inline-flex items-center rounded-md bg-slate-800 px-3 py-2 text-sm text-slate-100 hover:bg-slate-700 transition"

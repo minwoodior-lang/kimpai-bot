@@ -73,8 +73,8 @@ export default function Layout({ children }: LayoutProps) {
   const isActive = (path: string) => router.pathname === path;
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-900 text-slate-100">
-      <header className="w-full bg-[#020617] border-b border-white/5">
+    <div className="min-h-screen flex flex-col bg-slate-900 text-slate-100 overflow-x-hidden">
+      <header className="w-full bg-[#020617] border-b border-white/5 overflow-x-hidden">
         <div className="mx-auto max-w-[1280px] px-6 flex items-center justify-between h-14">
           <nav className="border-b border-slate-800 flex-1">
             <div className="flex justify-between items-center h-14">

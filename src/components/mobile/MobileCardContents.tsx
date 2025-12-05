@@ -46,12 +46,15 @@ export function AiSummaryMobileContent({
         </div>
       </div>
 
-      {/* Score 카드 */}
-      <div className="mt-2 md:mt-3 py-1.5 md:py-2 rounded-lg dark:bg-indigo-900/60 light:bg-indigo-100/60 px-2 flex items-center justify-center">
-        <div className="text-center w-full">
-          <div className="text-[11px] md:text-[10px] dark:text-slate-300 light:text-indigo-700 mb-0.5 md:mb-1">KR Premium Score</div>
-          <div className="text-[14px] md:text-[16px] font-semibold dark:text-emerald-400 light:text-emerald-600">{score}/10</div>
+      {/* Score 카드 - PC와 동일한 스타일 */}
+      <div className="mt-2 flex items-center justify-between">
+        <div className="flex flex-col">
+          <span className="text-[11px] dark:text-white/60 light:text-indigo-700">KR Premium Score</span>
+          <div className="mt-1 h-1.5 w-28 rounded-full dark:bg-white/10 light:bg-indigo-200/50">
+            <div className="h-full rounded-full dark:bg-[#6366F1] light:bg-indigo-500" style={{width: `${(score / 10) * 100}%`}} />
+          </div>
         </div>
+        <span className="text-lg font-semibold dark:text-[#A855F7] light:text-purple-600">{score}/10</span>
       </div>
     </div>
   );

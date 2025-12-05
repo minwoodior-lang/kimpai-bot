@@ -3,6 +3,25 @@
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. The project's core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. It handles real-time price collection, premium calculation, and global market metrics, aiming to offer a comprehensive view of the crypto market with a focus on the Korean premium.
 
+### Recent Changes (v3.4.10 - 2024-12-05) - 모바일 홈 화면 1차 UX 최적화
+- **모바일 AI 요약 카드 여백/폭 조정**:
+  - 카드 내부 패딩: p-2 → px-4 py-3 (화면 폭 100% 활용)
+  - 모바일 상단/하단 여백: mt-3 mb-4 추가 (PC 느낌 유지)
+- **KR Premium Score 영역 모바일 스타일 통일**:
+  - 모바일에서도 PC와 동일한 디자인 적용
+  - 게이지 바 높이: h-1.5, 너비: w-28, 색상/border-radius 통일
+  - 점수 표시: text-lg font-semibold, 좌우 배치 동일
+- **프리미엄 차트 상단 컨트롤 바 모바일 정렬**:
+  - 모바일에서 개인화 설정 + 지표 선택기를 한 줄에 정렬
+  - flex-col md:flex-row로 반응형 처리 (모바일은 세로, PC는 가로)
+- **모바일 테이블 필터 바 개선**:
+  - 2줄 구조 유지 + 세로 간격 조정 (gap-2.5, gap-1.5)
+  - 라벨 간단화: "기준 거래소" → "기준", "해외 거래소" → "해외"
+  - 검색 인풋: w-full로 100% 활용
+- **모바일 좌우 스크롤 완전 제거**:
+  - Layout 루트 div/header에 overflow-x-hidden 추가
+  - 모든 모바일 뷰에서 가로 스크롤 완전 차단
+
 ### Recent Changes (v3.4.9 - 2024-12-05) - 암호화폐 개수 필터링 버그 수정
 - **Critical Bug Fix: 암호화폐 총 개수가 업비트/빗썸 모든 마켓(KRW/BTC/USDT)을 합쳐서 고정 299개로 표기**:
   - **원인**: `/api/premium/table-filtered` API가 `totalCoins`를 국내거래소의 모든 마켓 고유심볼을 합산해서 계산 (e.g., UPBIT_KRW 299 + UPBIT_BTC 299 + UPBIT_USDT 299 → 결과적으로 299)
