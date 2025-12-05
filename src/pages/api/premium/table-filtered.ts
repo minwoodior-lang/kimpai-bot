@@ -136,14 +136,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         // - 항상 선택된 domesticKey / foreignKey 기준으로만 계산
         // - premiumTable.volume24h* 에 의존 금지
         // - KRW/USDT/BTC 환산 규칙 외에는 임의로 수정 금지 (PM 협의 필수)
-        // - marketStats의 volume24hQuote를 사용 (quote 기준 거래량)
+        // - prices와 marketStats의 volume24hQuote를 사용 (quote 기준 거래량)
 
-        // 국내 거래소 거래액 계산 (marketStats 기반)
-        const domesticStats = marketStats[domesticPriceKey];
+        // 국내 거래소 거래액 계산 (prices 또는 marketStats 기반)
         let volume24hKrw: number | null = null;
+        
+        // prices.json의 volume24hQuote 우선 사용, 없으면 marketStats 확인
+        const domesticVolumeQuote = domesticEntry?.volume24hQuote ?? marketStats[domesticPriceKey]?.volume24hQuote;
 
-        if (domesticStats && domesticStats.volume24hQuote != null) {
-          const vol = domesticStats.volume24hQuote;
+        if (domesticVolumeQuote != null && domesticVolumeQuote > 0) {
+          const vol = domesticVolumeQuote;
 
           if (domesticQuote === "KRW") {
             // KRW 마켓: 이미 원화
@@ -174,12 +176,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           }
         }
 
-        // 해외 거래소 거래액 계산 (marketStats 기반)
-        const foreignStats = marketStats[foreignPriceKey];
+        // 해외 거래소 거래액 계산 (prices 또는 marketStats 기반)
         let volume24hForeignKrw: number | null = null;
+        
+        // prices.json의 volume24hQuote 우선 사용, 없으면 marketStats 확인
+        const foreignVolumeQuote = foreignEntry?.volume24hQuote ?? marketStats[foreignPriceKey]?.volume24hQuote;
 
-        if (foreignStats && foreignStats.volume24hQuote != null) {
-          const vol = foreignStats.volume24hQuote;
+        if (foreignVolumeQuote != null && foreignVolumeQuote > 0) {
+          const vol = foreignVolumeQuote;
 
           if (foreignQuote === "USDT" && fxRate) {
             // USDT 마켓: USDT 거래대금 × 환율
