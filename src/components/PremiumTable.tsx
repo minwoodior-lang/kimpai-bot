@@ -383,7 +383,8 @@ type SortKey =
   | "changeRate"
   | "koreanPrice"
   | "fromHighRate"
-  | "fromLowRate";
+  | "fromLowRate"
+  | null;
 
 type SortOrder = "asc" | "desc";
 
@@ -531,7 +532,7 @@ export default function PremiumTable({
   const [domesticExchange, setDomesticExchange] = useState<string>("UPBIT_KRW");
   const [foreignExchange, setForeignExchange] = useState<string>("BINANCE_USDT");
   const [searchQuery, setSearchQuery] = useState("");
-  const [sortKey, setSortKey] = useState<SortKey | null>("volume24hKrw");
+  const [sortKey, setSortKey] = useState<SortKey>("volume24hKrw");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
   const [expandedSymbol, setExpandedSymbol] = useState<string | null>(null);
 
@@ -632,7 +633,7 @@ export default function PremiumTable({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [domesticExchange, foreignExchange, refreshInterval]);
 
-  const handleSort = (key: SortKey) => {
+  const handleSort = (key: Exclude<SortKey, null>) => {
     if (sortKey === key) {
       // 같은 컬럼 클릭 시: desc → asc → null (정렬 해제)
       if (sortOrder === "desc") {
@@ -855,7 +856,7 @@ export default function PremiumTable({
     return "text-[#A7B3C6]";
   }, []);
 
-  const SortIcon = ({ columnKey }: { columnKey: SortKey }) => {
+  const SortIcon = ({ columnKey }: { columnKey: Exclude<SortKey, null> }) => {
     if (sortKey !== columnKey || sortKey === null) {
       return <span className="text-gray-600 ml-1 text-xs">↕</span>;
     }
