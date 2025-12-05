@@ -179,11 +179,16 @@ export async function fetchHtxPrices(markets: MarketInfo[]): Promise<PriceMap> {
           const lastPrice = parseFloat(item.close) || 0;
           const open = parseFloat(item.open) || 0;
           const amount = parseFloat(item.amount) || 0;
+          
+          // HTX amount = 코인 수량(개수) → USDT 기준 거래대금 계산
+          const volume24hQuote = amount * lastPrice;
+          const volume24hKrw = volume24hQuote * usdKrwRate;
+          
           prices[`HTX:${base}:USDT`] = {
             price: lastPrice,
             ts,
-            volume24hKrw: amount * usdKrwRate,
-            volume24hQuote: amount,
+            volume24hKrw,
+            volume24hQuote,
             change24hRate: open > 0 ? ((lastPrice - open) / open) * 100 : 0,
             change24hAbs: lastPrice - open,
             high24h: parseFloat(item.high) || undefined,
@@ -386,13 +391,17 @@ export async function fetchHtxStats(markets: MarketInfo[]): Promise<MarketStatsM
           const open = parseFloat(item.open) || 0;
           const change24hAbs = lastPrice - open;
           const change24hRate = open > 0 ? (change24hAbs / open) * 100 : 0;
+          const amount = parseFloat(item.amount) || 0;
+          
+          // HTX amount = 코인 수량(개수) → USDT 기준 거래대금 계산
+          const volume24hQuote = amount * lastPrice;
 
           stats[`HTX:${base}:USDT`] = {
             change24hRate,
             change24hAbs,
             high24h: parseFloat(item.high) || null,
             low24h: parseFloat(item.low) || null,
-            volume24hQuote: parseFloat(item.amount) || 0
+            volume24hQuote
           };
         }
       }
