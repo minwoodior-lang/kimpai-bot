@@ -35,15 +35,27 @@ function loadJsonFile(filename: string): any {
   }
 }
 
-function parseMarketParam(value: string) {
-  const parts = (value || "").split("_").filter(Boolean);
+function parseMarketParam(value: string): { exchange: string; quote: string } {
+  const v = (value || "").trim();
+  if (!v) return { exchange: "UPBIT", quote: "KRW" };
 
-  if (parts.length === 0) return { exchange: "UPBIT", quote: "KRW" };
-  if (parts.length === 1) return { exchange: parts[0], quote: "USDT" };
+  // 바이낸스 선물 특수 처리 (BINANCE_FUTURES, BINANCE_FUTURES_USDT 둘 다 지원)
+  if (v === "BINANCE_FUTURES") {
+    return { exchange: "BINANCE_FUTURES", quote: "USDT" };
+  }
 
+  const parts = v.split("_").filter(Boolean);
+
+  // EXCHANGE 하나만 온 경우 (OKX, BYBIT 등) → 기본 USDT
+  if (parts.length === 1) {
+    const ex = parts[0];
+    const defaultQuote = ex === "UPBIT" ? "KRW" : "USDT";
+    return { exchange: ex, quote: defaultQuote };
+  }
+
+  // 나머지는 "EXCHANGE_..._QUOTE" 형식 → 마지막만 quote, 나머지는 exchange
   const quote = parts[parts.length - 1];
   const exchange = parts.slice(0, -1).join("_");
-
   return { exchange, quote };
 }
 
