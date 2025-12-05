@@ -863,6 +863,12 @@ export default function PremiumTable({
               </thead>
               <tbody>
                 {filteredAndSortedData.map((row, index) => {
+          console.log(
+            "[VOLUME_ROW]",
+            row.symbol,
+            "domestic:", row.volume24hKrw,
+            "foreign:", row.volume24hForeignKrw
+          );
                   const uniqueKey = `${row.symbol}_${index}`;
                   const prevClose =
                     row.change24h !== null
@@ -984,10 +990,14 @@ export default function PremiumTable({
 
                               <td className="w-[120px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap pr-0">
                                 <TwoLineCell
+                                  // 국내 거래액: 항상 표시 (0 이하면 "-" 처리)
                                   line1={formatVolumeKRW(row.volume24hKrw)}
-                                  line2={formatVolumeKRW(row.volume24hForeignKrw)}
-                                  line1Color="text-slate-100"
-                                  isUnlisted={isUnlisted}
+                                  // 해외 거래액: 값이 있을 때만 표시, 없으면 "-"
+                                  line2={
+                                    row.volume24hForeignKrw && row.volume24hForeignKrw > 0
+                                      ? formatVolumeKRW(row.volume24hForeignKrw)
+                                      : "-"
+                                  }
                                 />
                               </td>
                             </>

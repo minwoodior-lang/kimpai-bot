@@ -1,0 +1,159 @@
+0. 지금 상태 정리
+
+marketStats.json
+
+총 4,151개 항목
+
+국내: UPBIT/BITHUMB/COINONE 전부 volume24hQuote 정상
+
+해외 Spot: BINANCE/OKX/BYBIT/BITGET/GATE/MEXC/HTX 다 들어있음
+
+BINANCE_FUTURES 는 0개 (완전히 없음) ✅
+
+prices.json
+
+BINANCE_FUTURES:BTC:USDT 포함해서 선물 시세는 잘 들어있음
+
+table-filtered.ts
+
+거래액(일)은 marketStats[domesticPriceKey | foreignPriceKey].volume24hQuote 기준으로
+KRW / BTC / USDT 마켓에 맞게 환산하는 구조 → 설계 자체는 이상 없음
+
+PremiumTable.tsx
+
+방금 수정한 대로라면 거래액(일) 셀은 isUnlisted 영향 안 받고
+line1 = volume24hKrw, line2 = volume24hForeignKrw 잘 표시됨
+
+1. 확인된 버그 ① – Binance Futures 거래액(일) 안 나오는 문제
+원인
+
+선물 시세는 prices.json 에 잘 들어있음:
+
+예: BINANCE_FUTURES:BTC:USDT
+
+그런데 marketStats.json 을 보면:
+
+BINANCE_FUTURES:* 키가 아예 없음
+
+table-filtered.ts 에서는 거래액(일)을 이렇게 가져옴:
+
+const foreignStats = marketStats[foreignPriceKey];
+let volume24hForeignKrw: number | null = null;
+
+if (foreignStats && foreignStats.volume24hQuote != null) {
+  const vol = foreignStats.volume24hQuote;
+  ...
+}
+
+
+→ foreignExchange = BINANCE_FUTURES 인 상태에서
+→ marketStats["BINANCE_FUTURES:BTC:USDT"] 가 없으니까
+→ volume24hForeignKrw 는 항상 null → 화면에서는 "-"
+
+즉, “선물 시세는 뜨는데 거래액만 비어 있는” 현상 =
+
+statsWorker 가 Binance Futures 24H 통계를 저장하지 않고 있음
+
+✅ 레플릿에게 줄 지시문 (Binance Futures Stats 연동)
+
+파일: workers/statsWorker.ts (또는 marketStats.json 생성 워커)
+목표: marketStats.json 에 BINANCE_FUTURES:${base}:USDT 엔트리 추가
+
+Binance Futures 통계 함수 호출 추가
+
+이미 binance.ts 에는 아래 함수가 구현되어 있음:
+
+export async function fetchBinanceFuturesStats(
+  markets: MarketInfo[]
+): Promise<MarketStatsMap> { ... }
+
+
+그러니 statsWorker.ts 에서 다른 글로벌 거래소와 함께 호출해줘야 함:
+
+import {
+  fetchBinanceStats,
+  fetchBinanceFuturesStats,
+  fetchOkxStats,
+  fetchBybitStats,
+  fetchBitgetStats,
+  fetchGateStats,
+  fetchHtxStats,
+  fetchMexcStats,
+} from "./xxx"; // 기존 경로 그대로
+
+const [upbitStats, bithumbStats, coinoneStats,
+       binanceStats, binanceFuturesStats,
+       okxStats, bybitStats, bitgetStats,
+       gateStats, htxStats, mexcStats] = await Promise.all([
+  fetchUpbitStats(allMarkets),
+  fetchBithumbStats(allMarkets),
+  fetchCoinoneStats(allMarkets),
+  fetchBinanceStats(globalMarkets),
+  fetchBinanceFuturesStats(globalMarkets),   // ★ 신규 추가
+  fetchOkxStats(globalMarkets),
+  fetchBybitStats(globalMarkets),
+  fetchBitgetStats(globalMarkets),
+  fetchGateStats(globalMarkets),
+  fetchHtxStats(globalMarkets),
+  fetchMexcStats(globalMarkets),
+]);
+
+
+marketStats 머지할 때 BINANCE_FUTURES 포함
+
+기존에 Spot만 합치고 있다면, Futures 도 같이 머지:
+
+const marketStats: MarketStatsMap = {
+  ...upbitStats,
+  ...bithumbStats,
+  ...coinoneStats,
+  ...binanceStats,
+  ...binanceFuturesStats,   // ★ 여기 추가
+  ...okxStats,
+  ...bybitStats,
+  ...bitgetStats,
+  ...gateStats,
+  ...htxStats,
+  ...mexcStats,
+};
+
+fs.writeFileSync(MARKET_STATS_FILE, JSON.stringify(marketStats));
+
+
+검증 포인트
+
+data/marketStats.json 안에
+BINANCE_FUTURES:BTC:USDT, BINANCE_FUTURES:ETH:USDT 등 키가 생기는지 확인
+
+프론트에서 기준 거래소를 바이낸스 선물 로 바꿨을 때
+→ 거래액(일) 해외 줄에 숫자가 뜨는지 확인
+
+2. 확인된 버그 ② – 거래액(일) 셀에서 isUnlisted 때문에 값이 가려졌던 문제
+
+이건 우리가 이미 손 본 부분인데,
+레플릿에게도 최종 버전이 이거다 라고 전달해주는 게 좋음.
+
+✅ 레플릿 지시문 (PremiumTable.tsx – 거래액 셀 수정)
+
+파일: src/components/PremiumTable.tsx
+목표: 해외 미상장(isUnlisted)라 하더라도 국내 거래액(일)은 항상 표시
+
+“거래액(일)” 컬럼 <td> 안의 <TwoLineCell> 을 다음처럼 유지:
+
+<td className="w-[120px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap pr-0">
+  <TwoLineCell
+    // 국내 거래액: 항상 표시 (0 이하는 formatVolumeKRW 내부에서 "-" 처리)
+    line1={formatVolumeKRW(row.volume24hKrw)}
+    // 해외 거래액: 값이 있을 때만 표시, 없으면 "-"
+    line2={
+      row.volume24hForeignKrw && row.volume24hForeignKrw > 0
+        ? formatVolumeKRW(row.volume24hForeignKrw)
+        : "-"
+    }
+    // isUnlisted 전달 금지 → 거래액이 미상장 플래그에 의해 가려지지 않도록 함
+  />
+</td>
+
+
+과거 버전에서 isUnlisted={isUnlisted} 가 들어가 있었다면 삭제해야 함.
+이게 들어가 있으면 해외 미상장 코인의 경우 국내 거래액까지 “-”로 숨김.
