@@ -611,21 +611,26 @@ async function updateStatsOnly(): Promise<void> {
   }
 }
 
-let priceCronJob: ReturnType<typeof cron.schedule> | null = null;
-let statsCronJob: ReturnType<typeof cron.schedule> | null = null;
+let priceIntervalId: NodeJS.Timeout | null = null;
+let statsIntervalId: NodeJS.Timeout | null = null;
 let isPriceUpdating = false;
 let isStatsUpdating = false;
 
+const PRICE_INTERVAL_MS = 700;  // 0.7초 주기 (초고속)
+const STATS_INTERVAL_MS = 3000; // 3초 주기
+
 export function startPriceWorker(): void {
-  console.log('[Worker] Starting price worker (1s) + stats worker (3s)');
+  console.log(`[Worker] Starting price worker (${PRICE_INTERVAL_MS}ms) + stats worker (${STATS_INTERVAL_MS}ms)`);
 
   // Load previous health check state
   loadHealthCheck();
 
+  // 초기 실행
   updatePricesOnly();
   updateStatsOnly();
 
-  priceCronJob = cron.schedule('*/1 * * * * *', async () => {
+  // setInterval 방식 (700ms 주기 가능)
+  priceIntervalId = setInterval(async () => {
     if (isPriceUpdating) {
       return;
     }
@@ -635,9 +640,9 @@ export function startPriceWorker(): void {
     } finally {
       isPriceUpdating = false;
     }
-  });
+  }, PRICE_INTERVAL_MS);
 
-  statsCronJob = cron.schedule('*/3 * * * * *', async () => {
+  statsIntervalId = setInterval(async () => {
     if (isStatsUpdating) {
       return;
     }
@@ -647,17 +652,17 @@ export function startPriceWorker(): void {
     } finally {
       isStatsUpdating = false;
     }
-  });
+  }, STATS_INTERVAL_MS);
 }
 
 export function stopPriceWorker(): void {
-  if (priceCronJob) {
-    priceCronJob.stop();
-    priceCronJob = null;
+  if (priceIntervalId) {
+    clearInterval(priceIntervalId);
+    priceIntervalId = null;
   }
-  if (statsCronJob) {
-    statsCronJob.stop();
-    statsCronJob = null;
+  if (statsIntervalId) {
+    clearInterval(statsIntervalId);
+    statsIntervalId = null;
   }
   console.log('[Worker] Price and stats workers stopped');
 }

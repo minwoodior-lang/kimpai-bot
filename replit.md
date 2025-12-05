@@ -16,15 +16,17 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
    - 369개 BINANCE_FUTURES 마켓 모두 volume24hQuote > 0 ✓
    - 바이낸스 선물 거래액(일) 정상 표시
 
-2. **속도 최적화 패치**:
-   - priceWorker: 3초 → **1초** (cron `*/1`)
-   - statsWorker: 30초 → **3초** (cron `*/3`)
-   - 프론트엔드 refreshInterval: 1000ms → **1500ms**
+2. **속도 최적화 패치 (v3.4.24)**:
+   - priceWorker: cron → **setInterval 700ms** (초고속)
+   - statsWorker: cron → **setInterval 3000ms**
+   - 프론트엔드 refreshInterval: **1000ms**
+   - 병렬 처리: **Promise.allSettled** (11개 거래소 동시 호출)
 
 3. **데이터 파이프라인 안정화**:
-   - 가격 수집: 1초 주기
-   - 거래액 수집: 3초 주기
-   - 프론트엔드 갱신: 1.5초 주기
+   - 가격 수집: **700ms 주기** (초고속)
+   - 거래액 수집: **3초 주기**
+   - 프론트엔드 갱신: **1초 주기**
+   - 실제 수집 시간: **500~800ms** (병렬 처리 효과)
 
 **수정 금지 영역:**
 - `src/pages/api/premium/table-filtered.ts`

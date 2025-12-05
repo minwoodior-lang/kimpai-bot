@@ -257,7 +257,7 @@ export default function Home() {
                 showHeader={false} 
                 showFilters={true} 
                 limit={0} 
-                refreshInterval={1500}
+                refreshInterval={1000}
               />
             </section>
           </div>
