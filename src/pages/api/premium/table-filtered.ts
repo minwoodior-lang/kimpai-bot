@@ -126,7 +126,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         let changeAbsKrw = domesticStats?.change24hAbs ?? 0;
         let high24hKrw: number | null = domesticStats?.high24h ?? null;
         let low24hKrw: number | null = domesticStats?.low24h ?? null;
-        let volume24hKrw = domesticStats?.volume24hQuote ?? 0;
+        let volume24hKrw: number | null = domesticStats?.volume24hQuote ?? null;
 
         // BTC/USDT 마켓의 경우 KRW 변환 필요
         if (domesticQuote === "BTC") {
@@ -136,19 +136,19 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             changeAbsKrw = changeAbsKrw * btcKrw;
             if (high24hKrw) high24hKrw = high24hKrw * btcKrw;
             if (low24hKrw) low24hKrw = low24hKrw * btcKrw;
-            volume24hKrw = volume24hKrw * btcKrw;
+            if (volume24hKrw) volume24hKrw = volume24hKrw * btcKrw;
           } else {
             // BTC/KRW 가격 없으면 계산 불가
             changeAbsKrw = 0;
             high24hKrw = null;
             low24hKrw = null;
-            volume24hKrw = 0;
+            volume24hKrw = null;
           }
         } else if (domesticQuote === "USDT") {
           changeAbsKrw = changeAbsKrw * fxRate;
           if (high24hKrw) high24hKrw = high24hKrw * fxRate;
           if (low24hKrw) low24hKrw = low24hKrw * fxRate;
-          volume24hKrw = volume24hKrw * fxRate;
+          if (volume24hKrw) volume24hKrw = volume24hKrw * fxRate;
         }
 
         const fromHighRate = (high24hKrw && domesticPriceKrw && high24hKrw > 0)
@@ -169,7 +169,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
         const foreignVolumeKrw = (foreignStats?.volume24hQuote != null)
           ? foreignStats.volume24hQuote * fxRate
-          : 0;
+          : null;
 
         return {
           symbol,
