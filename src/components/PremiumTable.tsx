@@ -573,10 +573,16 @@ export default function PremiumTable({
     return `$${value.toFixed(4)}`;
   };
 
+  // 🚨 IMPORTANT: 거래액(일) 표시 로직
+  // - null/undefined: 데이터 없음 → "-" 표시
+  // - 0 이하: 실제 거래 없음 → "-" 표시
+  // - 0 초과: 숫자 포맷 출력
+  // - 임의 수정 금지 (PM 협의 필수)
   const formatVolumeKRW = (value: number | null) => {
-    // null/undefined만 "-" 표시, 0도 숫자로 표시
-    if (value === null || value === undefined || Number.isNaN(value))
+    // null/undefined 또는 0 이하는 "-" 표시
+    if (value == null || Number.isNaN(value) || value <= 0) {
       return "-";
+    }
 
     if (value >= 1e12) {
       const jo = Math.floor(value / 1e12);
@@ -595,22 +601,19 @@ export default function PremiumTable({
     if (value >= 1e4) {
       return `${Math.floor(value / 1e4)}만`;
     }
-    if (value >= 1) {
-      return Math.round(value).toLocaleString("ko-KR");
-    }
-    return "0원";
+    return Math.round(value).toLocaleString("ko-KR");
   };
 
   const formatVolumeUsdt = (value: number | null) => {
-    // null/undefined만 "-" 표시, 0도 숫자로 표시
-    if (value === null || value === undefined || Number.isNaN(value))
+    // null/undefined 또는 0 이하는 "-" 표시
+    if (value == null || Number.isNaN(value) || value <= 0) {
       return "-";
+    }
 
     if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
     if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
     if (value >= 1e3) return `$${(value / 1e3).toFixed(2)}K`;
-    if (value >= 1) return `$${value.toFixed(2)}`;
-    return "$0";
+    return `$${value.toFixed(2)}`;
   };
 
   const getPremiumColor = (premium: number | null) => {

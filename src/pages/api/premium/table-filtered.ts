@@ -15,7 +15,16 @@ interface PriceEntry {
   prev_price?: number;
 }
 
+interface MarketStats {
+  change24hRate?: number;
+  change24hAbs?: number;
+  high24h?: number;
+  low24h?: number;
+  volume24hQuote?: number;
+}
+
 type PricesMap = Record<string, PriceEntry>;
+type MarketStatsMap = Record<string, MarketStats>;
 
 function loadJsonFile(filename: string): any {
   try {
@@ -42,6 +51,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const masterSymbols = loadJsonFile("master_symbols.json") as any[];
     const premiumTable = loadJsonFile("premiumTable.json") as any[];
     const prices = loadJsonFile("prices.json") as PricesMap;
+    const marketStats = loadJsonFile("marketStats.json") as MarketStatsMap;
 
     const masterMap = new Map(masterSymbols.map((s: any) => [s.symbol, s]));
     const premiumMap = new Map(premiumTable.map((p: any) => [p.symbol, p]));
@@ -122,55 +132,75 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         let high24hKrw = domesticEntry?.high24h ?? null;
         let low24hKrw = domesticEntry?.low24h ?? null;
 
-        let volume24hKrw: number | null = null;
-        const domesticVolume = domesticEntry?.volume24hKrw;
+        // 🚨 IMPORTANT: 거래액(일) 로직
+        // - 항상 선택된 domesticKey / foreignKey 기준으로만 계산
+        // - premiumTable.volume24h* 에 의존 금지
+        // - KRW/USDT/BTC 환산 규칙 외에는 임의로 수정 금지 (PM 협의 필수)
+        // - marketStats의 volume24hQuote를 사용 (quote 기준 거래량)
 
-        if (domesticQuote === "KRW") {
-          volume24hKrw = domesticVolume ?? null;
-        } else if (domesticQuote === "USDT") {
-          if (domesticVolume != null) {
-            volume24hKrw = domesticVolume * fxRate;
+        // 국내 거래소 거래액 계산 (marketStats 기반)
+        const domesticStats = marketStats[domesticPriceKey];
+        let volume24hKrw: number | null = null;
+
+        if (domesticStats && domesticStats.volume24hQuote != null) {
+          const vol = domesticStats.volume24hQuote;
+
+          if (domesticQuote === "KRW") {
+            // KRW 마켓: 이미 원화
+            volume24hKrw = vol;
+          } else if (domesticQuote === "USDT" && fxRate) {
+            // USDT 마켓: USDT 거래대금 × 환율
+            volume24hKrw = vol * fxRate;
+          } else if (domesticQuote === "BTC" && btcKrw > 0) {
+            // BTC 마켓: BTC 거래대금 × BTC/KRW 가격
+            volume24hKrw = vol * btcKrw;
           }
+        }
+
+        // 가격 관련 KRW 환산 (changeAbs, high, low)
+        if (domesticQuote === "USDT") {
           if (changeAbsKrw != null) changeAbsKrw = changeAbsKrw * fxRate;
           if (high24hKrw != null) high24hKrw = high24hKrw * fxRate;
           if (low24hKrw != null) low24hKrw = low24hKrw * fxRate;
         } else if (domesticQuote === "BTC") {
           if (btcKrw > 0) {
-            if (domesticVolume != null) {
-              volume24hKrw = domesticVolume * btcKrw;
-            }
             if (changeAbsKrw != null) changeAbsKrw = changeAbsKrw * btcKrw;
             if (high24hKrw != null) high24hKrw = high24hKrw * btcKrw;
             if (low24hKrw != null) low24hKrw = low24hKrw * btcKrw;
           } else {
-            volume24hKrw = null;
             changeAbsKrw = null;
             high24hKrw = null;
             low24hKrw = null;
           }
         }
 
+        // 해외 거래소 거래액 계산 (marketStats 기반)
+        const foreignStats = marketStats[foreignPriceKey];
         let volume24hForeignKrw: number | null = null;
-        const foreignVolume = foreignEntry?.volume24hKrw ?? foreignEntry?.volume24hQuote;
 
-        if (foreignQuote === "USDT") {
-          if (foreignVolume != null) {
-            volume24hForeignKrw = foreignVolume * fxRate;
-          }
-        } else if (foreignQuote === "BTC") {
-          const btcPriceOrder = ["BINANCE:BTC:USDT", "OKX:BTC:USDT", "BITGET:BTC:USDT", "GATE:BTC:USDT", "MEXC:BTC:USDT"];
-          let btcUsdtPrice = 0;
-          for (const key of btcPriceOrder) {
-            if (prices[key]?.price) {
-              btcUsdtPrice = prices[key].price;
-              break;
+        if (foreignStats && foreignStats.volume24hQuote != null) {
+          const vol = foreignStats.volume24hQuote;
+
+          if (foreignQuote === "USDT" && fxRate) {
+            // USDT 마켓: USDT 거래대금 × 환율
+            volume24hForeignKrw = vol * fxRate;
+          } else if (foreignQuote === "BTC") {
+            // BTC 마켓: BTC 거래대금 × BTC/USDT × 환율
+            const btcPriceOrder = ["BINANCE:BTC:USDT", "OKX:BTC:USDT", "BITGET:BTC:USDT", "GATE:BTC:USDT", "MEXC:BTC:USDT"];
+            let btcUsdtPrice = 0;
+            for (const key of btcPriceOrder) {
+              if (prices[key]?.price) {
+                btcUsdtPrice = prices[key].price;
+                break;
+              }
             }
+            if (btcUsdtPrice > 0) {
+              volume24hForeignKrw = vol * btcUsdtPrice * fxRate;
+            }
+          } else {
+            // 기타 (KRW 마켓 등): 그대로 사용
+            volume24hForeignKrw = vol;
           }
-          if (foreignVolume != null && btcUsdtPrice > 0) {
-            volume24hForeignKrw = foreignVolume * btcUsdtPrice * fxRate;
-          }
-        } else {
-          volume24hForeignKrw = foreignVolume ?? null;
         }
 
         const fromHighRate = (high24hKrw && domesticPriceKrw && high24hKrw > 0)

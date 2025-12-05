@@ -1,0 +1,231 @@
+📩 개발자 전달문 – 거래액(일) 로직 최종 픽스 요청
+1. 목표
+
+국내/해외 선택한 마켓별 실제 ticker 기준으로
+
+현재가
+
+거래액(일)
+
+을 1:1로 정확히 반영해야 합니다.
+
+거래액(일)은 진짜 0인 경우만 - 표기,
+데이터가 존재하는데도 -가 나오는 일은 절대 없도록 로직을 고정합니다.
+
+이 로직은 김프 서비스의 핵심 파이프라인이므로,
+향후 임의 변경 금지(주석으로 강하게 명시) 부탁드립니다.
+
+2. 현재 구조 요약 (기준)
+
+가격/김프는 이미 아래처럼 마켓키 1:1로 잘 동작 중:
+
+국내: domesticExchange, domesticQuote
+
+예: UPBIT_KRW, UPBIT_BTC, UPBIT_USDT, BITHUMB_KRW, BITHUMB_BTC, BITHUMB_USDT, COINONE_KRW
+
+해외: foreignExchange, foreignQuote
+
+예: BINANCE_USDT, BINANCE_BTC, OKX_USDT …
+
+각 마켓의 키:
+
+const domesticKey = `${domesticExchange}:${symbol}:${domesticQuote}`;
+const foreignKey  = `${foreignExchange}:${symbol}:${foreignQuote}`;
+
+
+가격은 이미 prices.json / marketStats 를 통해 위 key 기준으로 가져오고 있음 → 이 부분은 손대지 말고 유지.
+
+3. 문제점 (현재 버그 원인)
+
+/api/premium/table-filtered 에서 거래액(일) 을 여전히 예전 구조로 가져오고 있음:
+
+premiumTable.json 의 premiumRow.volume24hKrw, volume24hForeignKrw 사용
+
+buildPremiumTable 내부에서 getDomesticPriceEntry() 가 KRW 마켓만 탐색
+→ BTC/USDT 전용 마켓, 코인원 특수 케이스 등은 항상 null 로 떨어짐
+
+프론트 쪽에서 거래액을 if (!volume) '-' 처럼 falsy 체크로 렌더링
+→ null, undefined 뿐 아니라 0 도 모두 - 로 처리됨
+
+결과적으로,
+
+실제 거래액이 존재하는데도 -로 나오는 코인들이 발생합니다.
+
+4. 원하는 최종 동작
+✅ 핵심 규칙
+
+선택한 마켓 기준으로만 거래액(일)을 계산한다.
+
+업비트 KRW 선택 → 업비트 KRW 마켓 ticker 기준
+
+업비트 BTC 선택 → 업비트 BTC 마켓 ticker 기준
+
+업비트 USDT 선택 → 업비트 USDT 마켓 ticker 기준
+
+빗썸/코인원도 동일
+
+거래액(일)은 marketStats (또는 PriceEntry)에 저장된 volume24hQuote 를 사용한다.
+
+volume24hQuote 는 항상 코인 기준 수량이 아니라 해당 마켓의 기준 통화(quote) 기준 거래량이라고 가정한다:
+
+KRW 마켓: 원화 거래대금
+
+USDT 마켓: USDT 거래대금
+
+BTC 마켓: BTC 거래대금
+
+KRW 환산:
+
+KRW 마켓: 그대로 사용
+
+USDT 마켓: volume24hQuote * fxRate
+
+BTC 마켓: volume24hQuote * btcKrw
+(btcKrw 는 이미 사용 중인 BTC/KRW 가격 사용)
+
+프론트는 null/undefined 와 0 을 구분해서 처리:
+
+데이터 없음 (null/undefined) → -
+
+0 또는 0 이하 → 정책에 따라 - 또는 0원 (현재는 - 유지 OK)
+
+0 초과 → 포맷해서 숫자 출력
+
+5. 서버 코드 수정 지시 (table-filtered.ts)
+5-1. premiumTable 의 volume24h* 의존 제거
+
+table-filtered.ts 안에서 아래처럼 되어있는 부분이 있다면:
+
+const premiumRow = premiumTable.find(...);
+
+const volume24hKrw =
+  premiumRow?.volume24hKrw ?? null;
+
+const foreignVolumeKrw =
+  premiumRow?.volume24hForeignKrw ?? null;
+
+
+➡️ 이 부분은 사용하지 말고 완전히 제거 해주세요.
+(premiumTable 자체는 다른 용도로 필요하면 유지하되, 거래액(일) 계산에는 사용 금지)
+
+5-2. 국내 거래소 거래액 계산
+
+동일 파일에서, 이미 계산된 domesticKey, domesticQuote, domesticPriceKrw, fxRate, btcKrw, marketStats 를 사용하여 아래처럼 새 필드를 계산해 주세요:
+
+const domesticStats = marketStats[domesticKey];
+
+let domesticVolumeKrw: number | null = null;
+
+if (domesticStats && domesticStats.volume24hQuote != null) {
+  const vol = domesticStats.volume24hQuote;
+
+  if (domesticQuote === "KRW") {
+    domesticVolumeKrw = vol; // 이미 원화
+  } else if (domesticQuote === "USDT" && fxRate) {
+    domesticVolumeKrw = vol * fxRate;
+  } else if (domesticQuote === "BTC" && btcKrw) {
+    domesticVolumeKrw = vol * btcKrw;
+  }
+}
+
+
+그리고 API 응답 객체에:
+
+return {
+  // 기존 필드들...
+  domesticVolumeKrw, // 새 필드
+};
+
+5-3. 해외 거래소 거래액 계산
+
+동일한 방식으로 해외도 처리:
+
+const foreignStats = marketStats[foreignKey];
+
+let foreignVolumeKrw: number | null = null;
+
+if (foreignStats && foreignStats.volume24hQuote != null) {
+  const vol = foreignStats.volume24hQuote;
+
+  if (foreignQuote === "USDT" && fxRate) {
+    foreignVolumeKrw = vol * fxRate;
+  } else if (foreignQuote === "BTC" && btcKrw) {
+    foreignVolumeKrw = vol * btcKrw;
+  }
+  // (향후 다른 quote 추가 시 여기서만 확장)
+}
+
+return {
+  // 기존 필드들...
+  foreignVolumeKrw,
+};
+
+5-4. 중요: 폴백/우선순위 로직 금지
+
+과거에 있던 다음과 같은 로직은 절대 사용하지 말아 주세요:
+
+KRW → USDT → BTC 순으로 돌아 다니면서 첫 번째로 발견된 마켓을 쓰는 폴백
+
+심볼 단위로 한 번 합산해서 쓰는 구조
+
+volume24hKrw || null 처럼 0을 falsy로 날려버리는 표현
+
+이 엔드포인트는 “사용자가 선택한 domestic/foreign 조합과 완전히 1:1” 이어야 합니다.
+
+주석으로도 명시 부탁드립니다:
+
+// 🚨 IMPORTANT: 거래액(일) 로직
+// - 항상 선택된 domesticKey / foreignKey 기준으로만 계산
+// - premiumTable.volume24h* 에 의존 금지
+// - KRW/USDT/BTC 환산 규칙 외에는 임의로 수정 금지 (PM 협의 필수)
+
+6. 프론트 렌더링 수정 지시
+
+거래액 표시 컴포넌트에서 기존에 아래처럼 되어 있다면:
+
+const volume = row.domesticVolumeKrw; // 또는 기존 필드
+
+const display = !volume ? "-" : formatVolume(volume);
+
+
+➡️ 다음처럼 명시적으로 비교하도록 변경:
+
+const volume = row.domesticVolumeKrw;
+
+const display =
+  volume == null || volume <= 0
+    ? "-"
+    : formatVolume(volume);
+
+
+해외 거래액도 동일한 패턴으로 적용:
+
+const foreignVolume = row.foreignVolumeKrw;
+
+const foreignDisplay =
+  foreignVolume == null || foreignVolume <= 0
+    ? "-"
+    : formatVolume(foreignVolume);
+
+7. 결과 검증 기준
+
+작업 후에는 다음 케이스들을 실제 거래소 웹/앱과 눈으로 대조해서 확인해 주세요.
+
+업비트 KRW / BTC / USDT 마켓 각각에서
+
+현재가 / 24h 거래대금이 실제 업비트 화면과 일치하는지
+
+빗썸 KRW / BTC / USDT 마켓에서 동일 검증
+
+코인원 KRW 마켓에서 동일 검증
+
+거래가 거의 없는 코인:
+
+실제 거래대금 0 이면 - 로 나오는지
+
+1만원, 10만원 단위처럼 아주 작은 값도 제대로 숫자로 찍히는지
+(이 케이스에서 - 가 나오면 안 됨)
+
+이 전달문 그대로 구현해 주시면,
+“선택한 거래소·마켓 기준으로 가격·거래액(일)이 100% 사실적 1:1 매핑” 되는 구조가 됩니다.
+그리고 premiumTable 쪽은 이제 거래액과 완전히 분리되니까, 앞으로 이 부분은 건드리지 않아도 됩니다.
