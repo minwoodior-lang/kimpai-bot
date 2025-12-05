@@ -1,0 +1,113 @@
+1. Binance Futures 거래액(일) 안 나오는 문제 – 지시문
+
+레플릿에게 이대로 보내면 됨:
+
+[작업 1] Binance Futures 24hr Stats 연동 버그 수정 요청
+
+현재 workers/fetchers/binance.ts 안에서 Binance Futures 24hr 통계를 가져올 때
+https://kimpai-price-proxy-1.onrender.com/binance/fapi/v1/ticker/24hr
+경로를 사용하고 있는데, 이 엔드포인트가 404라서 항상 실패하고 있습니다.
+
+그 결과:
+
+fetchBinanceFuturesStats() 가 항상 빈 결과를 반환
+
+marketStats.json 안에 BINANCE_FUTURES:* 키가 하나도 없음
+→ /api/premium/table-filtered 에서 선물 기준을 선택해도 volume24hForeignKrw 가 항상 null 이라 거래액이 “-”로 표시됨
+
+해결 방법 (둘 중 하나로 처리해 주세요):
+
+방법 A – 프록시 고치기 (지금 구조 유지)
+
+Render 프록시 서버 코드에 Binance Futures 24hr 라우트 추가:
+
+// Binance Futures 24hr ticker
+app.get("/binance/fapi/v1/ticker/24hr", async (req, res) => {
+  const url = "https://fapi.binance.com/fapi/v1/ticker/24hr" + (req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "");
+  const response = await fetch(url);
+  const data = await response.json();
+  res.json(data);
+});
+
+
+workers/fetchers/binance.ts 의 BINANCE_FUTURES_24HR_API 는 기존처럼 프록시 URL을 사용.
+
+방법 B – 프록시 우회 (워커에서 직접 Binance 호출)
+
+workers/fetchers/binance.ts 에서 Futures 24hr용 상수를:
+
+const BINANCE_FUTURES_24HR_API = "https://fapi.binance.com/fapi/v1/ticker/24hr";
+
+
+로 바꾸고, 기존 로직 그대로 fetch() 하도록 수정.
+
+워커는 서버 사이드이기 때문에 CORS 문제 없으니 직접 호출해도 무방합니다.
+
+그리고 statsWorker 쪽에서:
+
+fetchBinanceFuturesStats() 가 이미 Promise.all([...]) 안에 포함되어 있다면 그대로 두고,
+
+marketStats 머지할 때 반드시:
+
+const marketStats: MarketStatsMap = {
+  ...upbitStats,
+  ...bithumbStats,
+  ...coinoneStats,
+  ...binanceStats,
+  ...binanceFuturesStats, // ★ 이 줄이 꼭 포함되도록 확인
+  ...okxStats,
+  ...bybitStats,
+  ...bitgetStats,
+  ...gateStats,
+  ...htxStats,
+  ...mexcStats,
+};
+
+
+형태로 BINANCE_FUTURES 결과까지 합쳐 주세요.
+
+수정 후엔 data/marketStats.json 에
+BINANCE_FUTURES:BTC:USDT, BINANCE_FUTURES:ETH:USDT 같은 키들이 생성되는지 확인 부탁드립니다.
+
+2. MEXC / Gate.io 거래액(일) 0으로 나오는 문제 – 지시문
+
+marketStats.json 분석해보면:
+
+GATE:* 510개, MEXC:* 460개 키가 있는데
+
+두 거래소 모두 volume24hQuote가 전부 0 으로 저장돼 있음
+→ /premium/table-filtered에서는 <= 0 이면 “-”로 처리하기 때문에 거래액이 안 나옴.
+
+레플릿에게 이렇게 지시:
+
+[작업 2] Gate.io / MEXC 24h 거래대금 필드 매핑 수정 요청
+
+workers/fetchers/gate.ts 와 workers/fetchers/mexc.ts 에서
+24h 통계 API를 파싱할 때 volume24hQuote 를 0으로만 채우고 있습니다.
+
+현재 data/marketStats.json 기준:
+
+GATE:* 510개, MEXC:* 460개 키가 있지만
+
+두 거래소의 volume24hQuote 값이 모두 0이라
+거래액(일) 컬럼이 항상 “-” 로 나옵니다.
+
+각 거래소의 24hr ticker 응답에서 quote 기준 24h 거래대금 필드를 찾아서
+volume24hQuote 에 제대로 매핑해 주세요.
+
+예시 느낌(실제 필드명은 Gate/MEXC 문서 확인 필요):
+
+// Gate 예시
+volume24hQuote: Number(item.quote_volume ?? 0),
+// 또는 item.base_volume × price 등 정확한 필드 사용
+
+// MEXC 예시
+volume24hQuote: Number(item.quoteVolume ?? 0),
+
+
+수정 후에는 data/marketStats.json 재생성 시:
+
+GATE:*, MEXC:* 항목들에 volume24hQuote > 0 이 정상적으로 들어가고,
+
+프론트에서 기준 거래소를 Gate/MEXC로 선택했을 때
+해외 거래액(일)이 숫자로 표시되는지 확인 부탁드립니다.

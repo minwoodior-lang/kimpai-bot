@@ -141,7 +141,7 @@ export async function fetchGatePrices(markets: MarketInfo[]): Promise<PriceMap> 
         if (marketBases.has(base)) {
           const lastPrice = parseFloat(item.last) || 0;
           const open = parseFloat(item.open) || 0;
-          const quoteVolume = parseFloat(item.quoteVolume) || 0;
+          const quoteVolume = parseFloat(item.quote_volume) || 0;
           prices[`GATE:${base}:USDT`] = {
             price: lastPrice,
             ts,
@@ -215,12 +215,12 @@ export async function fetchMexcPrices(markets: MarketInfo[]): Promise<PriceMap> 
         if (marketBases.has(base)) {
           const lastPrice = parseFloat(item.lastPrice) || 0;
           const openPrice = parseFloat(item.openPrice) || 0;
-          const quoteAssetVolume = parseFloat(item.quoteAssetVolume) || 0;
+          const quoteVolume = parseFloat(item.quoteVolume) || 0;
           prices[`MEXC:${base}:USDT`] = {
             price: lastPrice,
             ts,
-            volume24hKrw: quoteAssetVolume * usdKrwRate,
-            volume24hQuote: quoteAssetVolume,
+            volume24hKrw: quoteVolume * usdKrwRate,
+            volume24hQuote: quoteVolume,
             change24hRate: openPrice > 0 ? ((lastPrice - openPrice) / openPrice) * 100 : 0,
             change24hAbs: lastPrice - openPrice,
             high24h: parseFloat(item.highPrice) || undefined,
@@ -358,7 +358,7 @@ export async function fetchGateStats(markets: MarketInfo[]): Promise<MarketStats
             change24hAbs,
             high24h: parseFloat(item.high) || null,
             low24h: parseFloat(item.low) || null,
-            volume24hQuote: parseFloat(item.quoteVolume) || 0
+            volume24hQuote: parseFloat(item.quote_volume) || 0
           };
         }
       }
@@ -426,7 +426,7 @@ export async function fetchMexcStats(markets: MarketInfo[]): Promise<MarketStats
             change24hAbs,
             high24h: parseFloat(item.highPrice) || null,
             low24h: parseFloat(item.lowPrice) || null,
-            volume24hQuote: parseFloat(item.quoteAssetVolume) || 0
+            volume24hQuote: parseFloat(item.quoteVolume) || 0
           };
         }
       }
