@@ -56,12 +56,19 @@ export async function fetchCoinoneStats(markets: MarketInfo[]): Promise<MarketSt
         const change24hRate = yesterdayLast > 0 ? (change24hAbs / yesterdayLast) * 100 : 0;
 
         const key = `COINONE:${base}:KRW`;
+        
+        // quote_volume이 0이면 target_volume * last로 대체 계산
+        let volume24hQuote = parseFloat(ticker.quote_volume) || 0;
+        if (volume24hQuote === 0 && ticker.target_volume && ticker.last) {
+          volume24hQuote = parseFloat(ticker.target_volume) * parseFloat(ticker.last);
+        }
+        
         stats[key] = {
           change24hRate,
           change24hAbs,
           high24h: parseFloat(ticker.high) || null,
           low24h: parseFloat(ticker.low) || null,
-          volume24hQuote: parseFloat(ticker.quote_volume) || 0
+          volume24hQuote
         };
       }
     }
