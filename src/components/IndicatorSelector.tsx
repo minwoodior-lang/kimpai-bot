@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-const SYMBOL_MAP: Record<string, string> = {
+export const SYMBOL_MAP: Record<string, string> = {
+  "BINANCE_BTCUSDT": "BINANCE:BTCUSDT",
   "UPBIT_BTC_KRW_PREMIUM": "KRW_BTC_PREMIUM",
   "BITHUMB_BTC_KRW_PREMIUM": "KRW_BTC_BITHUMB_PREMIUM",
   "COINBASE_BTC_PREMIUM": "BTC_COINBASE_PREMIUM",
@@ -15,7 +16,8 @@ const SYMBOL_MAP: Record<string, string> = {
 };
 
 const INDICATOR_GROUPS = {
-  "BTC / Premium": [
+  "BTC / PREMIUM": [
+    { id: "BINANCE_BTCUSDT", label: "Binance BTC USDT" },
     { id: "UPBIT_BTC_KRW_PREMIUM", label: "BTC 김치프리미엄 (Upbit)" },
     { id: "BITHUMB_BTC_KRW_PREMIUM", label: "BTC 김치프리미엄 (Bithumb)" },
     { id: "COINBASE_BTC_PREMIUM", label: "BTC Coinbase Premium" },
@@ -23,14 +25,10 @@ const INDICATOR_GROUPS = {
     { id: "BTC_SHORTS", label: "BTC Shorts" },
     { id: "BTC_DOMINANCE", label: "BTC Dominance" },
   ],
-  "Market Index": [
+  "MARKET INDEX": [
     { id: "TOTAL_MARKET_CAP", label: "TOTAL Market Cap" },
     { id: "TOTAL2_INDEX", label: "TOTAL2" },
     { id: "TOTAL3_INDEX", label: "TOTAL3" },
-  ],
-  "Extended Indicators": [
-    { id: "ALT_DOMINANCE", label: "ALT Dominance" },
-    { id: "KOREA_PREMIUM_INDEX", label: "Korea Premium Index" },
   ],
 };
 
@@ -47,7 +45,7 @@ export default function IndicatorSelector({
 
   const currentLabel = Object.entries(INDICATOR_GROUPS)
     .flatMap(([, items]) => items)
-    .find((item) => item.id === selectedIndicator)?.label || "BTC Binance";
+    .find((item) => item.id === selectedIndicator)?.label || "Binance BTC USDT";
 
   const handleSelect = (indicatorId: string) => {
     onIndicatorChange(indicatorId);
