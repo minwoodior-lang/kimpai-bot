@@ -1,4 +1,4 @@
-# KimpAI v3.4.0 - Kimchi Premium Analytics Dashboard
+# KimpAI v3.4.15 - Kimchi Premium Analytics Dashboard
 
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. Its core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. The project handles real-time price collection, premium calculation, and global market metrics, offering a comprehensive view of the crypto market with a focus on the Korean premium.
@@ -6,6 +6,23 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 ### User Preferences
 - I want iterative development.
 - I prefer detailed explanations.
+
+### Recent Changes (v3.4.15 - 2024-12-05) - 자동 아이콘 수집 + 차트보기 기능 복구
+- **자동 아이콘 수집 파이프라인 추가**:
+  - `scripts/buildIcons.ts`: CoinGecko API로 누락된 아이콘 URL 자동 조회
+  - `package.json`: `"build:icons": "tsx scripts/buildIcons.ts"` 스크립트 추가
+  - `scripts/syncMarkets.ts`: Step 7로 build:icons 추가 (기존 6단계 → 7단계)
+  - 결과: 신규 상장 코인 5~10분 내 아이콘까지 포함된 완전한 코인셀 표시
+- **코인셀 차트보기 기능 복구**:
+  - `src/components/PremiumTable.tsx`: `onChartSelect` 콜백 prop 추가
+  - `src/pages/index.tsx`: `handleChartSelect` 함수로 심볼 → TradingView 형식 변환
+  - 동작: 📈 버튼 클릭 → 상단 프리미엄 차트가 해당 코인으로 전환
+  - 모바일: 자동 스크롤 (`scrollIntoView`) + 현재 심볼 표시
+- **신규 상장 전체 동선 검증**:
+  - 검색: matchSearch → symbol, name_ko, name_en, 초성 모두 지원 ✓
+  - 정렬: 김프/전일대비/거래액 정렬 정상 ✓
+  - 즐겨찾기: toggleFavorite → normalizedSymbol 기반 ✓
+  - 아이콘 fallback: CoinIcon → 다중 CDN + placeholder 처리 ✓
 
 ### Recent Changes (v3.4.14 - 2024-12-05) - 모바일 홈 화면 최종 UX 튜닝 (두나무/Kimpga 기준)
 - **메인 컨테이너 좌우 패딩 축소 (모바일 전용)**:
