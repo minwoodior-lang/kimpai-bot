@@ -24,7 +24,7 @@ export async function fetchOkxPrices(markets: MarketInfo[]): Promise<PriceMap> {
     for (const item of res.data.data || []) {
       const [base, quote] = item.instId.split('-');
       if (quote === 'USDT' && marketBases.has(base)) {
-        prices[`OKX:${base}:USDT`] = { price: parseFloat(item.last), ts };
+        prices[`OKX:${base}:USDT`] = { price: parseFloat(item.last), ts, volume24hKrw: 0 };
       }
     }
     return prices;
@@ -47,7 +47,7 @@ export async function fetchBybitPrices(markets: MarketInfo[]): Promise<PriceMap>
       if (symbol.endsWith('USDT')) {
         const base = symbol.replace('USDT', '');
         if (marketBases.has(base)) {
-          prices[`BYBIT:${base}:USDT`] = { price: parseFloat(item.lastPrice), ts };
+          prices[`BYBIT:${base}:USDT`] = { price: parseFloat(item.lastPrice), ts, volume24hKrw: 0 };
         }
       }
     }
@@ -71,7 +71,7 @@ export async function fetchBitgetPrices(markets: MarketInfo[]): Promise<PriceMap
       if (symbol.endsWith('USDT')) {
         const base = symbol.replace('USDT', '');
         if (marketBases.has(base)) {
-          prices[`BITGET:${base}:USDT`] = { price: parseFloat(item.lastPr), ts };
+          prices[`BITGET:${base}:USDT`] = { price: parseFloat(item.lastPr), ts, volume24hKrw: 0 };
         }
       }
     }
@@ -95,7 +95,7 @@ export async function fetchGatePrices(markets: MarketInfo[]): Promise<PriceMap> 
       if (pair.endsWith('_USDT')) {
         const base = pair.replace('_USDT', '');
         if (marketBases.has(base)) {
-          prices[`GATE:${base}:USDT`] = { price: parseFloat(item.last), ts };
+          prices[`GATE:${base}:USDT`] = { price: parseFloat(item.last), ts, volume24hKrw: 0 };
         }
       }
     }
@@ -119,7 +119,7 @@ export async function fetchHtxPrices(markets: MarketInfo[]): Promise<PriceMap> {
       if (symbol.endsWith('usdt')) {
         const base = symbol.replace('usdt', '').toUpperCase();
         if (marketBases.has(base.toLowerCase())) {
-          prices[`HTX:${base}:USDT`] = { price: parseFloat(item.close), ts };
+          prices[`HTX:${base}:USDT`] = { price: parseFloat(item.close), ts, volume24hKrw: 0 };
         }
       }
     }
@@ -143,7 +143,7 @@ export async function fetchMexcPrices(markets: MarketInfo[]): Promise<PriceMap> 
       if (symbol.endsWith('USDT')) {
         const base = symbol.replace('USDT', '');
         if (marketBases.has(base)) {
-          prices[`MEXC:${base}:USDT`] = { price: parseFloat(item.price), ts };
+          prices[`MEXC:${base}:USDT`] = { price: parseFloat(item.price), ts, volume24hKrw: 0 };
         }
       }
     }

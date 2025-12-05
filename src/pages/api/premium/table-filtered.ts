@@ -122,13 +122,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
         const changeRate = domesticStats?.change24hRate ?? 0;
         
-        // changeAbsKrw, high24h, low24h, volume24hQuote를 KRW로 변환
+        // changeAbsKrw, high24h, low24h를 KRW로 변환
         let changeAbsKrw = domesticStats?.change24hAbs ?? 0;
         let high24hKrw: number | null = domesticStats?.high24h ?? null;
         let low24hKrw: number | null = domesticStats?.low24h ?? null;
-        let volume24hKrw: number | null = domesticStats?.volume24hQuote ?? null;
+        
+        // volume24hKrw는 premiumTable.json에서 이미 계산됨 (priceWorker에서 생성)
+        let volume24hKrw: number | null = premiumRow?.volume24hKrw ?? null;
 
-        // BTC/USDT 마켓의 경우 KRW 변환 필요
+        // BTC/USDT 마켓의 경우 변동 정보만 KRW 변환 필요 (volume24hKrw는 이미 priceWorker에서 계산됨)
         if (domesticQuote === "BTC") {
           const btcKrwKey = `${domesticExchange}:BTC:KRW`;
           const btcKrw = prices[btcKrwKey]?.price ?? 0;
@@ -136,19 +138,18 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             changeAbsKrw = changeAbsKrw * btcKrw;
             if (high24hKrw) high24hKrw = high24hKrw * btcKrw;
             if (low24hKrw) low24hKrw = low24hKrw * btcKrw;
-            if (volume24hKrw) volume24hKrw = volume24hKrw * btcKrw;
+            // volume24hKrw는 이미 priceWorker에서 KRW로 계산됨
           } else {
             // BTC/KRW 가격 없으면 계산 불가
             changeAbsKrw = 0;
             high24hKrw = null;
             low24hKrw = null;
-            volume24hKrw = null;
           }
         } else if (domesticQuote === "USDT") {
           changeAbsKrw = changeAbsKrw * fxRate;
           if (high24hKrw) high24hKrw = high24hKrw * fxRate;
           if (low24hKrw) low24hKrw = low24hKrw * fxRate;
-          if (volume24hKrw) volume24hKrw = volume24hKrw * fxRate;
+          // volume24hKrw는 이미 priceWorker에서 KRW로 계산됨
         }
 
         const fromHighRate = (high24hKrw && domesticPriceKrw && high24hKrw > 0)
@@ -167,9 +168,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           ? domesticPriceKrw - low24hKrw
           : null;
 
-        const foreignVolumeKrw = (foreignStats?.volume24hQuote != null)
-          ? foreignStats.volume24hQuote * fxRate
-          : null;
+        // foreignVolumeKrw는 premiumTable.json의 volume24hForeignKrw 사용
+        const foreignVolumeKrw = premiumRow?.volume24hForeignKrw ?? null;
 
         return {
           symbol,

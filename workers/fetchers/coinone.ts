@@ -21,9 +21,16 @@ export async function fetchCoinonePrices(markets: MarketInfo[]): Promise<PriceMa
       const base = ticker.target_currency?.toUpperCase();
       if (base && marketBases.has(base) && ticker.last) {
         const key = `COINONE:${base}:KRW`;
+        const lastPrice = parseFloat(ticker.last);
+        // 24시간 거래대금 (원화): quote_volume 또는 target_volume × last로 계산
+        let volume24hKrw = parseFloat(ticker.quote_volume) || 0;
+        if (volume24hKrw === 0 && ticker.target_volume && ticker.last) {
+          volume24hKrw = parseFloat(ticker.target_volume) * lastPrice;
+        }
         prices[key] = {
-          price: parseFloat(ticker.last),
-          ts
+          price: lastPrice,
+          ts,
+          volume24hKrw
         };
       }
     }

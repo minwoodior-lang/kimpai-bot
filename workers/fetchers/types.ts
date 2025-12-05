@@ -1,6 +1,7 @@
 export interface PriceEntry {
   price: number;
   ts: number;
+  volume24hKrw?: number;
 }
 
 export interface PriceMap {

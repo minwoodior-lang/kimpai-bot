@@ -26,7 +26,7 @@ export async function fetchBinanceSpotPrices(markets: MarketInfo[]): Promise<Pri
       const price = priceMap.get(symbol);
       if (price !== undefined && price > 0) {
         const key = `BINANCE:${market.base}:${market.quote}`;
-        prices[key] = { price, ts };
+        prices[key] = { price, ts, volume24hKrw: 0 };
       }
     }
 
@@ -56,7 +56,7 @@ export async function fetchBinanceFuturesPrices(markets: MarketInfo[]): Promise<
       const price = priceMap.get(symbol);
       if (price !== undefined && price > 0) {
         const key = `BINANCE_FUTURES:${market.base}:${market.quote}`;
-        prices[key] = { price, ts };
+        prices[key] = { price, ts, volume24hKrw: 0 };
       }
     }
 

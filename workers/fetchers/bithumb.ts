@@ -44,7 +44,9 @@ export async function fetchBithumbPrices(markets: MarketInfo[]): Promise<PriceMa
           
           if (price > 0) {
             const key = `BITHUMB:${base}:${quote}`;
-            prices[key] = { price, ts };
+            // 24시간 거래대금 (원화 기준)
+            const volume24hKrw = parseFloat(item.acc_trade_value_24H) || 0;
+            prices[key] = { price, ts, volume24hKrw };
           }
         }
       }
