@@ -35,17 +35,24 @@ function loadJsonFile(filename: string): any {
   }
 }
 
+function parseMarketParam(value: string) {
+  const parts = (value || "").split("_").filter(Boolean);
+
+  if (parts.length === 0) return { exchange: "UPBIT", quote: "KRW" };
+  if (parts.length === 1) return { exchange: parts[0], quote: "USDT" };
+
+  const quote = parts[parts.length - 1];
+  const exchange = parts.slice(0, -1).join("_");
+
+  return { exchange, quote };
+}
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { domestic = "UPBIT_KRW", foreign = "BINANCE_USDT" } = req.query;
 
-    const domesticParts = (domestic as string).split("_");
-    const domesticExchange = domesticParts[0];
-    const domesticQuote = domesticParts.slice(1).join("_");
-
-    const foreignParts = (foreign as string).split("_");
-    const foreignExchange = foreignParts[0];
-    const foreignQuote = foreignParts.slice(1).join("_");
+    const { exchange: domesticExchange, quote: domesticQuote } = parseMarketParam(domestic as string);
+    const { exchange: foreignExchange, quote: foreignQuote } = parseMarketParam(foreign as string);
 
     const allMarkets = loadJsonFile("exchange_markets.json") as any[];
     const masterSymbols = loadJsonFile("master_symbols.json") as any[];
