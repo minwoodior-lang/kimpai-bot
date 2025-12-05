@@ -759,10 +759,10 @@ export default function PremiumTable({
           </div>
 
           {/* 모바일 레이아웃: 2단 구조 */}
-          <div className="flex md:hidden flex-col gap-2.5 mb-3">
+          <div className="flex md:hidden flex-col gap-1.5 mb-2">
             {/* 거래소 선택 - 1줄 */}
             <div className="flex items-center gap-1 flex-wrap">
-              <span className="text-xs text-white/60">기준</span>
+              <span className="text-[12px] text-white/60">기준</span>
               <MiniDropdown
                 value={domesticExchange}
                 options={DOMESTIC_EXCHANGES}
@@ -775,17 +775,17 @@ export default function PremiumTable({
                 onChange={setForeignExchange}
                 showShortName={true}
               />
-              <span className="text-xs text-white/60">해외</span>
+              <span className="text-[12px] text-white/60">해외</span>
             </div>
 
             {/* 검색 및 개수 - 2줄 */}
-            <div className="flex flex-col gap-1.5">
-              <span className="text-xs text-white/50">
+            <div className="flex flex-col gap-1">
+              <span className="text-[12px] text-white/50">
                 암호화폐 총 <span className="font-semibold text-white">{totalCoins}</span>개
               </span>
               <div className="w-full relative">
                 <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </span>
@@ -794,7 +794,7 @@ export default function PremiumTable({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="BTC, 비트코인, ㅂㅌ"
-                  className="w-full bg-slate-700 text-white rounded-lg pl-8 pr-3 h-[34px] border border-slate-600 focus:border-blue-500 focus:outline-none text-xs"
+                  className="w-full bg-slate-700 text-white rounded-lg pl-8 pr-3 h-[32px] border border-slate-600 focus:border-blue-500 focus:outline-none text-[12px]"
                 />
               </div>
             </div>
@@ -869,7 +869,7 @@ export default function PremiumTable({
                         className="text-[10px] md:text-sm hover:bg-slate-800/60 transition-colors leading-tight"
                         data-symbol={row.symbol}
                       >
-                        <td className="w-[30px] text-center py-3 px-3 lg:px-4">
+                        <td className="w-[30px] text-center py-1 md:py-3 px-2 md:px-3 lg:px-4">
                           {(() => {
                             const normalizedSymbol = row.symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
                             const isFav = favorites.has(normalizedSymbol);
@@ -892,7 +892,7 @@ export default function PremiumTable({
                             );
                           })()}
                         </td>
-                        <td className="px-3 lg:px-4 py-3">
+                        <td className="px-2 md:px-3 lg:px-4 py-1 md:py-3">
                           <div className="flex items-center gap-1.5 md:gap-3 min-w-0">
                             <button
                               type="button"
@@ -922,7 +922,7 @@ export default function PremiumTable({
                           const isUnlisted = !row.foreignPriceKrw || row.foreignPriceKrw <= 0;
                           return (
                             <>
-                              <td className="w-[140px] px-3 lg:px-4 py-3 text-right whitespace-nowrap">
+                              <td className="w-[140px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
                                 <TwoLinePriceCell
                                   topValue={row.koreanPrice}
                                   bottomValue={row.foreignPriceKrw}
@@ -932,7 +932,7 @@ export default function PremiumTable({
                                 />
                               </td>
 
-                              <td className="w-[90px] px-3 lg:px-4 py-3 text-right whitespace-nowrap">
+                              <td className="w-[90px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
                                 <TwoLineCell
                                   line1={isUnlisted ? "-" : `${row.premiumRate >= 0 ? "+" : ""}${Number(row.premiumRate || 0).toFixed(2)}%`}
                                   line2={`${row.premiumDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.premiumDiffKrw || 0))}`}
@@ -941,7 +941,7 @@ export default function PremiumTable({
                                 />
                               </td>
 
-                              <td className="w-[100px] px-3 lg:px-4 py-3 text-right whitespace-nowrap">
+                              <td className="w-[100px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
                                 <TwoLineCell
                                   line1={`${row.changeRate >= 0 ? "+" : ""}${Number(row.changeRate || 0).toFixed(2)}%`}
                                   line2={`${row.changeAbsKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.changeAbsKrw || 0))}`}
@@ -949,7 +949,7 @@ export default function PremiumTable({
                                 />
                               </td>
 
-                              <td className="hidden md:table-cell w-[100px] px-3 lg:px-4 py-3 text-right whitespace-nowrap">
+                              <td className="hidden md:table-cell w-[100px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
                                 <TwoLineCell
                                   line1={`${row.fromHighRate >= 0 ? "+" : ""}${Number(row.fromHighRate || 0).toFixed(2)}%`}
                                   line2={`${row.highDiffKrw > 0 ? "-" : "+"}₩${formatKrwPrice(Math.abs(row.highDiffKrw || 0))}`}
@@ -957,7 +957,7 @@ export default function PremiumTable({
                                 />
                               </td>
 
-                              <td className="hidden md:table-cell w-[100px] px-3 lg:px-4 py-3 text-right whitespace-nowrap">
+                              <td className="hidden md:table-cell w-[100px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap">
                                 <TwoLineCell
                                   line1={`${row.fromLowRate >= 0 ? "+" : ""}${Number(row.fromLowRate || 0).toFixed(2)}%`}
                                   line2={`${row.lowDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.lowDiffKrw || 0))}`}
@@ -965,7 +965,7 @@ export default function PremiumTable({
                                 />
                               </td>
 
-                              <td className="w-[120px] px-3 lg:px-4 py-3 text-right whitespace-nowrap pr-0">
+                              <td className="w-[120px] px-2 md:px-3 lg:px-4 py-1 md:py-3 text-right whitespace-nowrap pr-0">
                                 <TwoLineCell
                                   line1={formatVolumeKRW(row.volume24hKrw)}
                                   line2={formatVolumeKRW(row.volume24hForeignKrw)}

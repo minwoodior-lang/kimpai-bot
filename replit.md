@@ -7,6 +7,33 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - I want iterative development.
 - I prefer detailed explanations.
 
+### Recent Changes (v3.4.14 - 2024-12-05) - 모바일 홈 화면 최종 UX 튜닝 (두나무/Kimpga 기준)
+- **메인 컨테이너 좌우 패딩 축소 (모바일 전용)**:
+  - `src/pages/index.tsx` line 119: `px-3 md:px-6` → `px-2 md:px-6`
+  - 모바일 좌우 여백: 12px → 8px (코인셀 폭 최대화)
+- **차트 높이 세분화 (모바일 전용)**:
+  - `src/pages/index.tsx` line 248: `h-[320px] md:h-[480px]` → `h-[260px] sm:h-[300px] md:h-[480px]`
+  - SE(소형): 260px, 일반 모바일: 300px, PC: 480px
+  - 차트가 화면을 덜 차지하게 해서 코인 리스트 빠르게 노출
+- **섹션 간 여백 축소 (모바일 전용)**:
+  - 프리미엄 차트: `mt-8 mb-6` → `mt-6 mb-4 md:mt-8 md:mb-6`
+  - 테이블 섹션: `mt-6 -mx-3` → `mt-4 md:mt-6 -mx-2 md:mx-0`
+  - 모바일 전체 여백 컴팩트화
+- **필터바 정리 및 폰트 축소 (모바일 전용)**:
+  - `src/components/PremiumTable.tsx` L765-801:
+    - 라벨: text-xs → text-[12px]
+    - 간격: gap-2.5 → gap-1.5, gap-1.5 → gap-1
+    - 검색 높이: h-[34px] → h-[32px], 텍스트: text-xs → text-[12px]
+    - 아이콘: w-4 h-4 → w-3.5 h-3.5
+- **코인셀 행 패딩 축소 (모바일 전용)**:
+  - 모든 td 요소: `py-3 px-3` → `py-1 md:py-3 px-2 md:px-3` (replace_all 적용)
+  - 모바일에서 행 높이 축소, 코인 리스트 촘촘하게 표시
+  - 아이콘 gap: `gap-2` → `gap-1.5 md:gap-3` (코인명 영역 최적화)
+- **결과**: 두나무/Kimpga 모바일 수준의 정제된 UX 달성
+  - 좌우 스크롤 완전 차단 (overflow-x-hidden 유지)
+  - 모바일에서 정보량 효율적으로 표시
+  - PC 레이아웃 완벽 보호 (모든 변경에 md: 브레이크포인트 적용)
+
 ### Recent Changes (v3.4.13 - 2024-12-05) - 자동 상장 수집 크론 작업 추가
 - **자동 상장 수집 크론 구현 (5분 간격, 테스트 단계)**:
   - `server.ts` L41-56: `*/5 * * * *` 크론 스케줄 추가
