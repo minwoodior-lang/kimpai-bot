@@ -14,6 +14,7 @@
     "build:exchange-icons": "tsx scripts/fetchDomesticIcons.ts",
     "build:master-symbols": "tsx scripts/buildMasterSymbols.ts",
     "build:premium": "tsx scripts/buildPremiumTable.ts",
+    "build:icons": "tsx scripts/buildIcons.ts",
     "build:all": "npm run fetch:upbit && npm run fetch:bithumb && npm run fetch:coinone && npm run build:markets && npm run build:exchange-icons && npm run build:master-symbols && npm run build:premium",
     "update:prices": "tsx scripts/updatePrices.ts",
     "price:worker": "tsx scripts/priceWorker.ts",

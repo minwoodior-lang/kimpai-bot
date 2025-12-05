@@ -12,7 +12,7 @@ import UserPrefsPanel from "@/components/settings/UserPrefsPanel";
 import IndicatorSelector from "@/components/IndicatorSelector";
 import { useUserPrefs } from "@/hooks/useUserPrefs";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useMarkets } from "@/hooks/useMarkets";
 
 const PremiumTable = dynamic(
@@ -43,6 +43,20 @@ export default function Home() {
   const [isPrefsPanelOpen, setIsPrefsPanelOpen] = useState(false);
   const { prefs, setPrefs, isLoaded } = useUserPrefs();
   const { data, averagePremium, fxRate } = useMarkets();
+
+  const [selectedChartSymbol, setSelectedChartSymbol] = useState<string>("BINANCE:BTCUSDT");
+  const chartSectionRef = useRef<HTMLElement>(null);
+
+  const handleChartSelect = useCallback((symbol: string, domesticExchange: string, foreignExchange: string) => {
+    const baseSymbol = symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
+    const foreignEx = foreignExchange.split("_")[0].toUpperCase();
+    const tvSymbol = `${foreignEx}:${baseSymbol}USDT`;
+    setSelectedChartSymbol(tvSymbol);
+
+    if (chartSectionRef.current) {
+      chartSectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
 
   const listedData = data.filter(item => item.premium !== null);
   
@@ -225,9 +239,14 @@ export default function Home() {
           </div>
 
             {/* 프리미엄 차트 섹션 */}
-            <section className="mt-6 mb-4 md:mt-8 md:mb-6">
+            <section ref={chartSectionRef} className="mt-6 mb-4 md:mt-8 md:mb-6">
               <div className="mb-3 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3">
-                <h2 className="text-sm text-slate-300">프리미엄 차트</h2>
+                <h2 className="text-sm text-slate-300">
+                  프리미엄 차트 
+                  <span className="ml-2 text-xs text-slate-500">
+                    ({selectedChartSymbol.replace(":", " / ")})
+                  </span>
+                </h2>
                 <div className="flex items-center gap-1 md:gap-1">
                   <button
                     onClick={() => setIsPrefsPanelOpen(true)}
@@ -243,13 +262,19 @@ export default function Home() {
                 </div>
               </div>
               <div className="rounded-xl border border-white/5 bg-[#050819] h-[260px] sm:h-[300px] md:h-[480px] overflow-hidden">
-                <TradingViewChartDynamic tvSymbol="BINANCE:BTCUSDT" height={360} />
+                <TradingViewChartDynamic tvSymbol={selectedChartSymbol} height={360} />
               </div>
             </section>
 
             {/* 프리미엄 테이블 섹션 */}
             <section className="mt-4 mb-10 md:mt-6 -mx-2 md:mx-0">
-              <PremiumTable showHeader={false} showFilters={true} limit={0} refreshInterval={1000} />
+              <PremiumTable 
+                showHeader={false} 
+                showFilters={true} 
+                limit={0} 
+                refreshInterval={1000}
+                onChartSelect={handleChartSelect}
+              />
             </section>
           </div>
         </main>

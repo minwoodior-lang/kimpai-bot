@@ -28,6 +28,7 @@ interface PremiumTableProps {
   showFilters?: boolean;
   limit?: number;
   refreshInterval?: number;
+  onChartSelect?: (symbol: string, domesticExchange: string, foreignExchange: string) => void;
 }
 
 function MiniDropdown({
@@ -324,6 +325,7 @@ export default function PremiumTable({
   showFilters = true,
   limit = 0,
   refreshInterval = 1000,
+  onChartSelect,
 }: PremiumTableProps) {
   const [data, setData] = useState<PremiumData[]>([]);
   const [averagePremium, setAveragePremium] = useState(0);
@@ -899,6 +901,9 @@ export default function PremiumTable({
                               onClick={() => {
                                 const next = expandedSymbol === row.symbol ? null : row.symbol;
                                 setExpandedSymbol(next);
+                                if (onChartSelect && next) {
+                                  onChartSelect(row.symbol, domesticExchange, foreignExchange);
+                                }
                               }}
                               className="p-1 text-slate-400 hover:text-slate-200 transition-colors flex-shrink-0"
                               title="차트 보기"

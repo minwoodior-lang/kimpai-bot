@@ -12,23 +12,26 @@ async function runSync(): Promise<void> {
   
   try {
     console.log(`\n[AutoSync] Starting at ${timestamp}`);
-    console.log('[AutoSync] Step 1/5: Syncing Upbit markets...');
+    console.log('[AutoSync] Step 1/6: Syncing Upbit markets...');
     await execAsync('npm run fetch:upbit');
     
-    console.log('[AutoSync] Step 2/5: Syncing Bithumb markets...');
+    console.log('[AutoSync] Step 2/6: Syncing Bithumb markets...');
     await execAsync('npm run fetch:bithumb');
     
-    console.log('[AutoSync] Step 3/5: Syncing Coinone markets...');
+    console.log('[AutoSync] Step 3/6: Syncing Coinone markets...');
     await execAsync('npm run fetch:coinone');
     
-    console.log('[AutoSync] Step 4/5: Merging markets...');
+    console.log('[AutoSync] Step 4/6: Merging markets...');
     await execAsync('npm run build:markets');
     
-    console.log('[AutoSync] Step 5/5: Updating master symbols...');
+    console.log('[AutoSync] Step 5/6: Updating master symbols...');
     await execAsync('npm run build:master-symbols');
     
-    console.log('[AutoSync] Building premium table...');
+    console.log('[AutoSync] Step 6/6: Building premium table...');
     await execAsync('npm run build:premium');
+    
+    console.log('[AutoSync] Fetching missing icons (async)...');
+    await execAsync('npm run build:icons');
     
     console.log(`[AutoSync] ✓ Completed successfully at ${new Date().toISOString()}`);
   } catch (err: any) {
