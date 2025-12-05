@@ -113,7 +113,7 @@ export default function Home() {
       {/* 메인 콘텐츠 */}
       <HomeLayout>
         <main className="w-full flex justify-center">
-          <div className="w-full max-w-[1280px] px-6 py-6">
+          <div className="w-full px-6 py-6 md:max-w-[1280px] md:mx-auto">
             {/* PC: 상단 3컬럼 레이아웃 */}
             <div className="hidden md:grid grid-cols-3 gap-4 mb-8">
             {/* 좌측: 오늘의 AI 김프 요약 */}

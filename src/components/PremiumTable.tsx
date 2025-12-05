@@ -712,7 +712,7 @@ export default function PremiumTable({
   };
 
   return (
-    <section className="mb-20">
+    <section className="w-full px-0 md:px-0 mb-20">
 
       {showFilters && (
         <>

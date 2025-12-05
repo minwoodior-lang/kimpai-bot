@@ -3,6 +3,20 @@
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. The project's core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. It handles real-time price collection, premium calculation, and global market metrics, aiming to offer a comprehensive view of the crypto market with a focus on the Korean premium.
 
+### Recent Changes (v3.4.11 - 2024-12-05) - 모바일 코인셀 폭 및 레이아웃 수정
+- **메인 컨테이너 max-width 모바일 제거**:
+  - `src/pages/index.tsx` line 119:
+    - Before: `w-full max-w-[1280px] px-6` (모바일에서도 1280px 제한)
+    - After: `w-full px-6 md:max-w-[1280px] md:mx-auto` (PC only 제한)
+  - 모바일에서는 화면 양쪽까지 콘텐츠가 꽉 찼음
+- **코인셀 테이블 폭 최적화**:
+  - PremiumTable section: `px-0` 적용 (패딩 없음, 메인 컨테이너의 px-6만 상속)
+  - 테이블: 이미 `w-full table-fixed` 적용 (모바일에서 화면 폭에 100% 맞춤)
+  - 결과: 모바일 코인셀 한 줄이 화면 끝까지 꽉 차서 표시됨
+- **반응형 동작**:
+  - 모바일: 메인 div px-6, section px-0, 테이블 w-full table-fixed
+  - PC: 메인 div max-w-[1280px] mx-auto로 중앙 정렬
+
 ### Recent Changes (v3.4.10 - 2024-12-05) - 모바일 홈 화면 1차 UX 최적화
 - **모바일 AI 요약 카드 여백/폭 조정**:
   - 카드 내부 패딩: p-2 → px-4 py-3 (화면 폭 100% 활용)
