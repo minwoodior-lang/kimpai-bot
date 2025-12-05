@@ -2,6 +2,7 @@ export interface PriceEntry {
   price: number;
   ts: number;
   volume24hKrw?: number;
+  volume24hQuote?: number;
   change24hRate?: number;
   change24hAbs?: number;
   high24h?: number;

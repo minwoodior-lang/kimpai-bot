@@ -322,24 +322,105 @@ function getKoreanPrice(symbol: string): number | null {
 }
 
 function getDomesticPriceEntry(symbol: string): any {
-  const priority = ['UPBIT', 'BITHUMB', 'COINONE'];
-  for (const ex of priority) {
-    const key = `${ex}:${symbol}:KRW`;
-    if (currentPrices[key]) {
-      return currentPrices[key];
+  const priorityExchanges = ['UPBIT', 'BITHUMB', 'COINONE'];
+  
+  // 1순위: KRW 마켓 (직접 원화 거래대금 있음)
+  for (const ex of priorityExchanges) {
+    const krwKey = `${ex}:${symbol}:KRW`;
+    if (currentPrices[krwKey] && currentPrices[krwKey].volume24hKrw != null) {
+      return currentPrices[krwKey];
     }
   }
+  
+  // 2순위: USDT 마켓 → 원화 환산
+  for (const ex of priorityExchanges) {
+    const usdtKey = `${ex}:${symbol}:USDT`;
+    if (currentPrices[usdtKey]) {
+      const entry = { ...currentPrices[usdtKey] };
+      // USDT 거래대금을 KRW로 환산 (volume24hQuote 또는 기존 volume24hKrw 사용)
+      if (entry.volume24hQuote && entry.volume24hQuote > 0) {
+        entry.volume24hKrw = entry.volume24hQuote * usdtKrwGlobal;
+      } else if (entry.volume24hKrw == null || entry.volume24hKrw === 0) {
+        // 글로벌 USDT 거래소에서 volume 가져오기
+        const globalEntry = getGlobalPriceEntry(symbol);
+        if (globalEntry?.volume24hQuote && globalEntry.volume24hQuote > 0) {
+          entry.volume24hKrw = globalEntry.volume24hQuote * usdtKrwGlobal;
+        }
+      }
+      if (entry.volume24hKrw != null && entry.volume24hKrw > 0) {
+        return entry;
+      }
+    }
+  }
+  
+  // 3순위: BTC 마켓 → 원화 환산
+  for (const ex of priorityExchanges) {
+    const btcKey = `${ex}:${symbol}:BTC`;
+    if (currentPrices[btcKey]) {
+      const entry = { ...currentPrices[btcKey] };
+      // BTC/KRW 가격 가져오기
+      const btcKrwPrice = currentPrices['UPBIT:BTC:KRW']?.price || 
+                          currentPrices['BITHUMB:BTC:KRW']?.price || 
+                          currentPrices['COINONE:BTC:KRW']?.price;
+      if (btcKrwPrice && btcKrwPrice > 0) {
+        // BTC 거래대금을 KRW로 환산
+        if (entry.volume24hQuote && entry.volume24hQuote > 0) {
+          entry.volume24hKrw = entry.volume24hQuote * btcKrwPrice;
+        }
+      }
+      if (entry.volume24hKrw != null && entry.volume24hKrw > 0) {
+        return entry;
+      }
+    }
+  }
+  
+  // 4순위: 글로벌 거래소 USDT 마켓에서 거래대금 가져오기 (KRW 마켓이 아예 없는 코인)
+  const globalEntry = getGlobalPriceEntry(symbol);
+  if (globalEntry) {
+    const entry = { ...globalEntry };
+    if (globalEntry.volume24hQuote && globalEntry.volume24hQuote > 0) {
+      entry.volume24hKrw = globalEntry.volume24hQuote * usdtKrwGlobal;
+    }
+    if (entry.volume24hKrw != null && entry.volume24hKrw > 0) {
+      return entry;
+    }
+  }
+  
   return null;
 }
 
 function getGlobalPriceEntry(symbol: string): any {
   const priority = ['BINANCE', 'BINANCE_FUTURES', 'OKX', 'BYBIT', 'BITGET', 'GATE', 'HTX', 'MEXC'];
+  
+  // 1순위: volume24hQuote가 있는 글로벌 거래소
+  for (const ex of priority) {
+    const key = `${ex}:${symbol}:USDT`;
+    const entry = currentPrices[key];
+    if (entry && entry.volume24hQuote && entry.volume24hQuote > 0) {
+      return entry;
+    }
+  }
+  
+  // 2순위: marketStats에서 volume24hQuote 가져오기 (Binance 등)
+  for (const ex of priority) {
+    const key = `${ex}:${symbol}:USDT`;
+    const entry = currentPrices[key];
+    if (entry) {
+      const stats = currentMarketStats[key];
+      if (stats && stats.volume24hQuote && stats.volume24hQuote > 0) {
+        return { ...entry, volume24hQuote: stats.volume24hQuote };
+      }
+    }
+  }
+  
+  // 3순위: 가격만 있는 글로벌 거래소
   for (const ex of priority) {
     const key = `${ex}:${symbol}:USDT`;
     if (currentPrices[key]) {
       return currentPrices[key];
     }
   }
+  
   return null;
 }
 

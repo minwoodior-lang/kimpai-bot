@@ -1,0 +1,112 @@
+📮 전달용 텍스트
+
+[거래액(일) 표시 버그 – 원인 정리]
+
+현재 거래액(일) 컬럼은 /api/premium/table-filtered 응답의 volume24hKrw 값을 그대로 사용하고 있습니다.
+프론트에서는 value === null || value === undefined || Number.isNaN(value) 인 경우에만 "-" 로 표기합니다.
+
+volume24hKrw 값은 workers/priceWorker.ts 안의 getDomesticPriceEntry() → buildPremiumTable() 에서 세팅되고 있습니다.
+
+function getDomesticPriceEntry(symbol: string): any {
+  const priority = ['UPBIT', 'BITHUMB', 'COINONE'];
+  for (const ex of priority) {
+    const key = `${ex}:${symbol}:KRW`;
+    if (currentPrices[key]) {
+      return currentPrices[key];
+    }
+  }
+  return null;
+}
+
+const domesticPriceEntry = getDomesticPriceEntry(row.symbol);
+
+const volume24hKrw =
+  domesticPriceEntry && domesticPriceEntry.volume24hKrw != null
+    ? domesticPriceEntry.volume24hKrw
+    : null;
+
+row.volume24hKrw = volume24hKrw;
+
+
+위 로직 때문에,
+업비트/빗썸/코인원 어디에도 KRW 마켓이 없는 코인은 전부 volume24hKrw = null 로 떨어지고,
+프론트에서는 거래액(일) = "-" 로 표시됩니다.
+
+실제 거래소에서는 BTC마켓 또는 USDT마켓으로 수십억~수백억 거래대금이 있어도,
+
+우리 쪽에서는 KRW 마켓만 보다가 null 이 되어버리는 구조입니다.
+
+정렬은 tickerStats.volume24hQuote 기준으로 하고 있어서,
+
+순서는 거래소 페이지와 비슷한데, 값은 - 로 찍히는 현상이 생깁니다.
+
+이 volume24hKrw는 심볼 기준 단일 값이라,
+
+KRW 탭에서 -로 나오는 코인은
+
+같은 심볼의 BTC / USDT 탭에서도 똑같이 -가 나옵니다.
+→ 그래서 “KRW, BTC, USDT 마켓 모두 동일한 증상”으로 보이게 됩니다.
+
+코인원 쪽도 비슷합니다.
+
+coinone.ts에서 quote_volume, target_volume 둘 다 0이거나 없으면 volume24hKrw = null 로 세팅하고 있어서,
+
+이 경우 역시 모든 탭에서 거래액(일) = "-" 로 나옵니다.
+
+✅ 수정 방향 제안
+
+getDomesticPriceEntry를 KRW-only에서 KRW 우선(priority) 구조로 변경
+
+function getDomesticPriceEntry(symbol: string): any {
+  // 1순위: KRW 마켓
+  const priorityExchanges = ['UPBIT', 'BITHUMB', 'COINONE'];
+  for (const ex of priorityExchanges) {
+    const krwKey = `${ex}:${symbol}:KRW`;
+    if (currentPrices[krwKey]) return currentPrices[krwKey];
+  }
+
+  // 2순위: BTC / USDT 마켓
+  for (const ex of priorityExchanges) {
+    for (const quote of ['USDT', 'BTC']) {
+      const key = `${ex}:${symbol}:${quote}`;
+      if (currentPrices[key]) return currentPrices[key];
+    }
+  }
+
+  return null;
+}
+
+
+BTC / USDT 마켓에서 가져온 경우에는 KRW 환산 거래액도 같이 만들어주기
+
+예시 아이디어 (실제 구현은 priceWorker 안에서):
+
+// BTC, USDT 원화 환율을 현재가에서 가져오기
+const btcKrw = currentPrices['UPBIT:BTC:KRW']?.last || currentPrices['BITHUMB:BTC:KRW']?.last;
+const usdtKrw = currentPrices['BITHUMB:USDT:KRW']?.last || currentPrices['UPBIT:USDT:KRW']?.last;
+
+// domesticPriceEntry.volume24hQuote를 quote 기준 거래대금으로 사용하고,
+// quote가 BTC/USDT면 위 환율 곱해서 volume24hKrw로 변환
+
+
+이렇게 바뀌면:
+
+KRW 마켓이 있는 코인 → 지금처럼 KRW 기준 24h 거래대금 사용
+
+KRW 마켓이 전혀 없는 BTC/USDT 전용 코인 → BTC/USDT 거래액을 KRW로 환산해서 volume24hKrw 채움
+
+따라서 현재 -로 나오는 코인들도 모두 숫자(XX백만 / XX억)로 표시 가능해집니다.
+
+KRW / BTC / USDT 탭 모두 같은 값 공유하게 되고, 정렬/표시가 일관되게 맞습니다.
+
+요약하면:
+
+증상: KRW/BTC/USDT 전부에서 특정 코인만 거래액(일)이 - 로 나온다.
+
+원인: KRW 마켓만 보도록 짜여있는 getDomesticPriceEntry 때문에, KRW 미상장 코인의 volume24hKrw가 null.
+
+해결 방향:
+
+KRW → BTC/USDT 순으로 마켓 탐색,
+
+BTC/USDT 마켓이면 거래대금을 원화로 환산해서 volume24hKrw 채우기.
