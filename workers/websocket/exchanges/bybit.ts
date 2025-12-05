@@ -81,7 +81,9 @@ function connect(): void {
             price: lastPrice,
             timestamp: Date.now(),
             change24hRate: (parseFloat(ticker.price24hPcnt) || 0) * 100,
-            volume24hQuote: parseFloat(ticker.turnover24h) || 0
+            volume24hQuote: parseFloat(ticker.turnover24h) || 0,
+            high24h: parseFloat(ticker.highPrice24h) || 0,
+            low24h: parseFloat(ticker.lowPrice24h) || 0
           };
           
           if (callback) callback(price);

@@ -6,6 +6,8 @@ export interface WebSocketPrice {
   timestamp: number;
   change24hRate?: number;
   volume24hQuote?: number;
+  high24h?: number;
+  low24h?: number;
 }
 
 export interface ExchangeWebSocketConfig {

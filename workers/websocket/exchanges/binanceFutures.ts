@@ -1,7 +1,9 @@
 import WebSocket from 'ws';
 import { WebSocketPrice, PriceUpdateCallback } from '../types';
 
+const PROXY_BASE = process.env.PROXY_WS_BASE || 'wss://kimpai-price-proxy-1.onrender.com';
 const WS_URLS = [
+  `${PROXY_BASE}/ws/binance/futures`,
   'wss://fstream.binance.com/ws/!miniTicker@arr',
   'wss://fstream.binance.vision/ws/!miniTicker@arr'
 ];
@@ -80,7 +82,8 @@ function connect(): void {
     ws.on('open', () => {
       isConnecting = false;
       consecutiveFailures = 0;
-      console.log('[WS-Binance-Futures] Connected');
+      const isProxy = wsUrl.includes('onrender.com') || wsUrl.includes('proxy');
+      console.log(`[WS-Binance-Futures] Connected${isProxy ? ' (via proxy)' : ''}`);
       
       pingTimer = setInterval(() => {
         if (ws && ws.readyState === WebSocket.OPEN) {
@@ -109,7 +112,9 @@ function connect(): void {
             change24hRate: parseFloat(ticker.o) > 0 
               ? ((parseFloat(ticker.c) - parseFloat(ticker.o)) / parseFloat(ticker.o)) * 100 
               : 0,
-            volume24hQuote: parseFloat(ticker.q) || 0
+            volume24hQuote: parseFloat(ticker.q) || 0,
+            high24h: parseFloat(ticker.h) || 0,
+            low24h: parseFloat(ticker.l) || 0
           };
           
           if (callback) callback(price);

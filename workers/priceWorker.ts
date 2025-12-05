@@ -66,17 +66,19 @@ function mergeWebSocketPrices(): number {
     const existingEntry = currentPrices[key];
     
     if (wsPrice.timestamp > (existingEntry?.ts || 0)) {
+      const newVolume24hQuote = wsPrice.volume24hQuote || existingEntry?.volume24hQuote;
       currentPrices[key] = {
         price: wsPrice.price,
         ts: wsPrice.timestamp,
-        volume24hQuote: wsPrice.volume24hQuote || existingEntry?.volume24hQuote,
-        volume24hKrw: (wsPrice.volume24hQuote || 0) * usdtKrwGlobal,
+        volume24hQuote: newVolume24hQuote,
+        volume24hKrw: (newVolume24hQuote || 0) * usdtKrwGlobal,
         change24hRate: wsPrice.change24hRate || existingEntry?.change24hRate,
         change24hAbs: existingEntry?.change24hAbs,
-        high24h: existingEntry?.high24h,
-        low24h: existingEntry?.low24h,
+        high24h: wsPrice.high24h || existingEntry?.high24h,
+        low24h: wsPrice.low24h || existingEntry?.low24h,
         prev_price: existingEntry?.prev_price
       };
+      dirtyPriceKeys.add(key);
       mergedCount++;
     }
   });
@@ -121,6 +123,8 @@ function loadMasterSymbols(): any[] {
   }
 }
 
+let lastFxErrorLog = 0;
+
 async function updateGlobalUsdtKrw(): Promise<void> {
   const now = Date.now();
   if (now - lastFxUpdate < 300000) return;
@@ -136,7 +140,10 @@ async function updateGlobalUsdtKrw(): Promise<void> {
       console.log(`[USDT] Global USDT/KRW updated: ₩${usdtKrwGlobal.toLocaleString()}`);
     }
   } catch (err: any) {
-    console.warn('[USDT] CoinGecko fetch failed, using cached rate:', usdtKrwGlobal);
+    if (now - lastFxErrorLog > 60000) {
+      console.warn('[USDT] CoinGecko fetch failed, using cached rate:', usdtKrwGlobal);
+      lastFxErrorLog = now;
+    }
   }
 }
 
@@ -718,11 +725,20 @@ let statsIntervalId: NodeJS.Timeout | null = null;
 let isPriceUpdating = false;
 let isStatsUpdating = false;
 
-const PRICE_INTERVAL_MS = 700;  // 0.7초 주기 (초고속)
+const PRICE_INTERVAL_MS = 300;  // 0.3초 주기 (초고속 WS 반영)
 const STATS_INTERVAL_MS = 3000; // 3초 주기
 
+let lastPricesHash = '';
+let lastStatsHash = '';
+let dirtyPriceKeys = new Set<string>();
+let dirtyStatsKeys = new Set<string>();
+
+function computeHash(obj: object): string {
+  return JSON.stringify(Object.keys(obj).sort()).slice(0, 100);
+}
+
 export function startPriceWorker(): void {
-  console.log(`[Worker] Starting HYBRID price worker (WS + REST ${PRICE_INTERVAL_MS}ms) + stats worker (${STATS_INTERVAL_MS}ms)`);
+  console.log(`[Worker] Starting ULTRA-FAST HYBRID worker (WS + REST ${PRICE_INTERVAL_MS}ms) + stats (${STATS_INTERVAL_MS}ms)`);
 
   // Load previous health check state
   loadHealthCheck();

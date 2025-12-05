@@ -114,7 +114,9 @@ function connect(): void {
               price: lastPrice,
               timestamp: ts,
               change24hRate: open24h > 0 ? ((lastPrice - open24h) / open24h) * 100 : 0,
-              volume24hQuote: parseFloat(ticker.volCcy24h) || 0
+              volume24hQuote: parseFloat(ticker.volCcy24h) || 0,
+              high24h: parseFloat(ticker.high24h) || 0,
+              low24h: parseFloat(ticker.low24h) || 0
             };
             
             if (callback) callback(price);
