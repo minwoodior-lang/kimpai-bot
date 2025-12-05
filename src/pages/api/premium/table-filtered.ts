@@ -26,6 +26,33 @@ interface MarketStats {
 type PricesMap = Record<string, PriceEntry>;
 type MarketStatsMap = Record<string, MarketStats>;
 
+// 메모리 캐시: 500ms~1초 TTL
+interface CacheEntry {
+  data: any;
+  timestamp: number;
+}
+
+const memoryCache: Record<string, CacheEntry> = {};
+const CACHE_TTL = 800; // 800ms
+
+function getCacheKey(domestic: string, foreign: string): string {
+  return `${domestic}:${foreign}`;
+}
+
+function getFromCache(key: string): any | null {
+  const entry = memoryCache[key];
+  if (!entry) return null;
+  if (Date.now() - entry.timestamp > CACHE_TTL) {
+    delete memoryCache[key];
+    return null;
+  }
+  return entry.data;
+}
+
+function setCache(key: string, data: any): void {
+  memoryCache[key] = { data, timestamp: Date.now() };
+}
+
 function loadJsonFile(filename: string): any {
   try {
     const file = path.join(process.cwd(), "data", filename);
@@ -62,6 +89,13 @@ function parseMarketParam(value: string): { exchange: string; quote: string } {
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { domestic = "UPBIT_KRW", foreign = "BINANCE_USDT" } = req.query;
+
+    // 메모리 캐시 체크 (800ms TTL)
+    const cacheKey = getCacheKey(domestic as string, foreign as string);
+    const cachedData = getFromCache(cacheKey);
+    if (cachedData) {
+      return res.status(200).json(cachedData);
+    }
 
     const { exchange: domesticExchange, quote: domesticQuote } = parseMarketParam(domestic as string);
     const { exchange: foreignExchange, quote: foreignQuote } = parseMarketParam(foreign as string);
@@ -299,7 +333,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const selectedUniqueSymbols = new Set(selectedMarkets.map(m => m.base.toUpperCase()));
     const totalCryptoCount = selectedUniqueSymbols.size;
 
-    return res.status(200).json({
+    const responseData = {
       success: true,
       data: filtered,
       averagePremium: Math.round(avgPremium * 100) / 100,
@@ -309,7 +343,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       foreignExchange,
       totalCoins: totalCryptoCount,
       listedCoins: filtered.filter(r => r.isListed).length,
-    });
+    };
+
+    // 메모리 캐시에 저장 (800ms TTL)
+    const cacheKey = getCacheKey(domestic as string, foreign as string);
+    setCache(cacheKey, responseData);
+
+    return res.status(200).json(responseData);
   } catch (err) {
     console.error("[API] /premium/table-filtered error:", err);
     return res.status(500).json({
