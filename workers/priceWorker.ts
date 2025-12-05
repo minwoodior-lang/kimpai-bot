@@ -617,7 +617,7 @@ let isPriceUpdating = false;
 let isStatsUpdating = false;
 
 export function startPriceWorker(): void {
-  console.log('[Worker] Starting price worker (3s) + stats worker (30s)');
+  console.log('[Worker] Starting price worker (1s) + stats worker (3s)');
 
   // Load previous health check state
   loadHealthCheck();
@@ -625,7 +625,7 @@ export function startPriceWorker(): void {
   updatePricesOnly();
   updateStatsOnly();
 
-  priceCronJob = cron.schedule('*/3 * * * * *', async () => {
+  priceCronJob = cron.schedule('*/1 * * * * *', async () => {
     if (isPriceUpdating) {
       return;
     }
@@ -637,7 +637,7 @@ export function startPriceWorker(): void {
     }
   });
 
-  statsCronJob = cron.schedule('*/30 * * * * *', async () => {
+  statsCronJob = cron.schedule('*/3 * * * * *', async () => {
     if (isStatsUpdating) {
       return;
     }
