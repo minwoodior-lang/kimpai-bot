@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -35,7 +34,6 @@ function ScrollToTopButton() {
 export default function Layout({ children }: LayoutProps) {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
 
   // 모바일 메뉴 열릴 때 body 스크롤 잠금
   useEffect(() => {
@@ -206,16 +204,6 @@ export default function Layout({ children }: LayoutProps) {
                 {link.label}
               </Link>
             ))}
-
-            {/* 테마 토글 */}
-            <button
-              onClick={() => {
-                setTheme(theme === "light" ? "dark" : "light");
-              }}
-              className="px-4 py-3 rounded-lg text-left text-slate-300 hover:bg-slate-800/50 hover:text-white transition-colors mt-2"
-            >
-              {theme === "light" ? "🌙 다크 모드" : "☀️ 라이트 모드"}
-            </button>
           </nav>
 
           {/* 하단 버튼 */}

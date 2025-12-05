@@ -155,6 +155,7 @@ interface PremiumTableRowProps {
   onChartSelect?: (symbol: string, domesticExchange: string, foreignExchange: string) => void;
   getDisplayName: (item: PremiumData) => string;
   getDisplaySymbol: (symbol: string) => string;
+  formatPercent: (value: number | null) => string;
   formatKrwPrice: (value: number | null) => string;
   formatVolumeKRW: (value: number | null) => string;
   getPremiumColor: (premium: number | null) => string;
@@ -176,6 +177,7 @@ const PremiumTableRow = React.memo(({
   onChartSelect,
   getDisplayName,
   getDisplaySymbol,
+  formatPercent,
   formatKrwPrice,
   formatVolumeKRW,
   getPremiumColor,
@@ -266,7 +268,7 @@ const PremiumTableRow = React.memo(({
 
         <td className="w-[85px] sm:w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
-            line1={isUnlisted ? "-" : `${row.premiumRate >= 0 ? "+" : ""}${Number(row.premiumRate || 0).toFixed(2)}%`}
+            line1={isUnlisted ? "-" : formatPercent(row.premiumRate)}
             line2={`${row.premiumDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.premiumDiffKrw || 0))}`}
             line1Color={isUnlisted ? "text-gray-500" : getPremiumColor(row.premiumRate)}
             isUnlisted={isUnlisted}
@@ -275,7 +277,7 @@ const PremiumTableRow = React.memo(({
 
         <td className="w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
-            line1={`${row.changeRate >= 0 ? "+" : ""}${Number(row.changeRate || 0).toFixed(2)}%`}
+            line1={formatPercent(row.changeRate)}
             line2={`${row.changeAbsKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.changeAbsKrw || 0))}`}
             line1Color={getChangeColor(row.changeRate)}
           />
@@ -283,7 +285,7 @@ const PremiumTableRow = React.memo(({
 
         <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
-            line1={`${row.fromHighRate >= 0 ? "+" : ""}${Number(row.fromHighRate || 0).toFixed(2)}%`}
+            line1={formatPercent(row.fromHighRate)}
             line2={`${row.highDiffKrw > 0 ? "-" : "+"}₩${formatKrwPrice(Math.abs(row.highDiffKrw || 0))}`}
             line1Color={getChangeColor(row.fromHighRate)}
           />
@@ -291,7 +293,7 @@ const PremiumTableRow = React.memo(({
 
         <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
-            line1={`${row.fromLowRate >= 0 ? "+" : ""}${Number(row.fromLowRate || 0).toFixed(2)}%`}
+            line1={formatPercent(row.fromLowRate)}
             line2={`${row.lowDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.lowDiffKrw || 0))}`}
             line1Color={getChangeColor(row.fromLowRate)}
           />
@@ -767,6 +769,11 @@ export default function PremiumTable({
     return symbol;
   }, [isMobile]);
 
+  const formatPercent = useCallback((value: number | null): string => {
+    if (value === null || value === undefined || isNaN(value)) return "-";
+    return `${value >= 0 ? "+" : ""}${value.toFixed(2)}%`;
+  }, []);
+
   const formatKRW = (value: number | null) => {
     if (value === null || value === undefined || isNaN(value)) return "-";
     return value.toLocaleString("ko-KR");
@@ -1102,6 +1109,7 @@ export default function PremiumTable({
                     onChartSelect={onChartSelect}
                     getDisplayName={getDisplayName}
                     getDisplaySymbol={getDisplaySymbol}
+                    formatPercent={formatPercent}
                     formatKrwPrice={formatKrwPrice}
                     formatVolumeKRW={formatVolumeKRW}
                     getPremiumColor={getPremiumColor}
