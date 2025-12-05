@@ -68,7 +68,8 @@ export default function CoinIcon({
     return (
       <div
         ref={ref}
-        className={`${sizeClasses[size]} rounded-full bg-slate-600 flex items-center justify-center text-white font-bold ${textSizes[size]} ${className}`}
+        className={`${sizeClasses[size]} rounded-full bg-slate-600 flex items-center justify-center text-white font-bold ${textSizes[size]} ${className} flex-shrink-0`}
+        style={{ minWidth: sizeClasses[size].split(" ")[0].replace("w-", "") || "auto" }}
       >
         {upper.charAt(0)}
       </div>
@@ -80,7 +81,8 @@ export default function CoinIcon({
     return (
       <div
         ref={ref}
-        className={`${sizeClasses[size]} rounded-full bg-slate-700 flex items-center justify-center text-slate-400 font-bold ${textSizes[size]} ${className}`}
+        className={`${sizeClasses[size]} rounded-full bg-slate-700 flex items-center justify-center text-slate-400 font-bold ${textSizes[size]} ${className} flex-shrink-0`}
+        style={{ minWidth: sizeClasses[size].split(" ")[0].replace("w-", "") || "auto" }}
       >
         {upper.charAt(0)}
       </div>
@@ -115,7 +117,8 @@ export default function CoinIcon({
     return (
       <div
         ref={ref}
-        className={`${sizeClasses[size]} rounded-full bg-slate-600 flex items-center justify-center text-white font-bold ${textSizes[size]} ${className}`}
+        className={`${sizeClasses[size]} rounded-full bg-slate-600 flex items-center justify-center text-white font-bold ${textSizes[size]} ${className} flex-shrink-0`}
+        style={{ minWidth: sizeClasses[size].split(" ")[0].replace("w-", "") || "auto" }}
       >
         {upper.charAt(0)}
       </div>
@@ -127,7 +130,7 @@ export default function CoinIcon({
       ref={ref}
       src={iconSources[cdnIndex]}
       alt={upper}
-      className={`${sizeClasses[size]} rounded-full ${className}`}
+      className={`${sizeClasses[size]} rounded-full ${className} flex-shrink-0 object-cover`}
       onError={handleError}
       loading="lazy"
     />

@@ -173,16 +173,16 @@ export default function Layout({ children }: LayoutProps) {
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex flex-col h-full p-6">
+        <div className="flex flex-col h-full p-4 sm:p-6">
           {/* 헤더 */}
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-lg font-bold text-white">메뉴</h2>
+          <div className="flex items-center justify-between mb-6 sm:mb-8">
+            <h2 className="text-base sm:text-lg font-bold text-white">메뉴</h2>
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="text-slate-400 hover:text-white transition-colors"
+              className="text-slate-400 hover:text-white transition-colors p-1"
               aria-label="닫기"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -194,7 +194,7 @@ export default function Layout({ children }: LayoutProps) {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-3 rounded-lg transition-colors text-left ${
+                className={`px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg transition-colors text-left text-sm sm:text-base min-h-10 ${
                   isActive(link.href)
                     ? "bg-slate-800 text-white font-medium"
                     : "text-slate-300 hover:bg-slate-800/50 hover:text-white"
@@ -207,17 +207,17 @@ export default function Layout({ children }: LayoutProps) {
           </nav>
 
           {/* 하단 버튼 */}
-          <div className="flex flex-col gap-3 pt-6 border-t border-slate-700">
+          <div className="flex flex-col gap-2 sm:gap-3 pt-4 sm:pt-6 border-t border-slate-700">
             <Link
               href="/login"
-              className="w-full rounded-lg border border-slate-600 py-3 text-center text-sm text-slate-300 hover:text-white hover:border-slate-500 transition-colors"
+              className="w-full rounded-lg border border-slate-600 py-2.5 sm:py-3 text-center text-xs sm:text-sm text-slate-300 hover:text-white hover:border-slate-500 transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               로그인
             </Link>
             <Link
               href="/signup"
-              className="w-full rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 py-3 text-center text-sm font-semibold text-white transition-all"
+              className="w-full rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 py-2.5 sm:py-3 text-center text-xs sm:text-sm font-semibold text-white transition-all"
               onClick={() => setMobileMenuOpen(false)}
             >
               회원가입

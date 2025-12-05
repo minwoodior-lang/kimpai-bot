@@ -81,7 +81,7 @@ export default function TopInfoBar() {
 
   return (
     <div className="w-full bg-[#050816] border-b border-[#0b1120]">
-      <div className="mx-auto max-w-[1200px] px-4 lg:px-5 py-1 sm:py-0">
+      <div className="mx-auto max-w-[1200px] px-3 sm:px-4 lg:px-5 py-1.5 sm:py-1">
         {/* PC: 한 줄 레이아웃 */}
         <div className="hidden sm:flex items-center justify-between gap-4 h-7">
           {/* 좌측: 글로벌 지표 */}
@@ -138,9 +138,9 @@ export default function TopInfoBar() {
         </div>
 
         {/* 모바일: 2줄 레이아웃 */}
-        <div className="sm:hidden flex flex-col gap-2">
+        <div className="sm:hidden flex flex-col gap-1.5 py-1">
           {/* 1줄: 환율, BTC 점유율 */}
-          <div className="flex items-center justify-between gap-3 text-[10px] text-[#A7B3C6]">
+          <div className="flex items-center justify-between gap-2 text-[10px] text-[#A7B3C6]">
             <div className="flex items-center gap-1 flex-shrink-0 min-w-0">
               <div className="w-3 h-3 rounded-full bg-[#26A17B] flex items-center justify-center flex-shrink-0">
                 <span className="text-[7px] text-white font-bold">₮</span>
@@ -167,7 +167,7 @@ export default function TopInfoBar() {
           </div>
 
           {/* 2줄: 시가총액, 24h 거래량 */}
-          <div className="flex items-center justify-between gap-3 text-[10px] text-[#A7B3C6]">
+          <div className="flex items-center justify-between gap-2 text-[10px] text-[#A7B3C6]">
             <div className="flex items-center gap-1 flex-shrink-0 min-w-0">
               <span className="text-[#A7B3C6]">시총:</span>
               <span className="font-medium text-white truncate">{formatCurrency(metrics.global.marketCapKrw)}</span>
