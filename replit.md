@@ -1,4 +1,4 @@
-# KimpAI v3.4.20 - Kimchi Premium Analytics Dashboard
+# KimpAI v3.4.21 - Kimchi Premium Analytics Dashboard
 
 ### Overview
 KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. Its core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. The project handles real-time price collection, premium calculation, and global market metrics, offering a comprehensive view of the crypto market with a focus on the Korean premium.
@@ -7,32 +7,44 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - I want iterative development.
 - I prefer detailed explanations.
 
+### Recent Changes (v3.4.21 - 2024-12-05) - 거래액(일) 로직 최종 픽스
+
+**🚨 핵심 변경: marketStats.volume24hQuote 기반 1:1 마켓 매핑**
+
+1. **table-filtered.ts 완전 재작성**:
+   - `marketStats.json` 로드 추가
+   - `premiumTable.volume24h*` 의존 완전 제거
+   - 선택된 `domesticKey`/`foreignKey` 기준으로만 거래액 계산
+   - KRW/USDT/BTC 환산 규칙:
+     - KRW 마켓: `volume24hQuote` 그대로 (이미 원화)
+     - USDT 마켓: `volume24hQuote × fxRate`
+     - BTC 마켓: `volume24hQuote × btcKrw` (국내) / `× btcUsdtPrice × fxRate` (해외)
+   - **주석으로 "임의 수정 금지 (PM 협의 필수)" 명시**
+
+2. **PremiumTable.tsx formatVolume 함수 수정**:
+   - `null/undefined` 또는 `≤ 0` → "-" 표시
+   - `0 초과` → 숫자 포맷 출력
+   - **주석으로 "임의 수정 금지 (PM 협의 필수)" 명시**
+
+**결과**:
+- 업비트 KRW/BTC/USDT 마켓 각각 1:1 거래액 표시 ✓
+- 빗썸 KRW/BTC/USDT 마켓 각각 1:1 거래액 표시 ✓
+- 코인원 KRW 마켓 1:1 거래액 표시 ✓
+- 해외 거래소도 동일한 로직 적용 ✓
+- 데이터 없음(null) → "-", 거래 없음(0) → "-", 거래 있음 → 숫자 출력
+
+**데이터 파이프라인**:
+```
+Ticker API → statsWorker → marketStats.json (volume24hQuote)
+                                     ↓
+table-filtered API → 선택된 마켓 키로 직접 조회 → KRW 환산 → 프론트엔드
+```
+
+---
+
 ### Recent Changes (v3.4.20 - 2024-12-05) - 거래액 표시 버그 완전 수정
 
 **핵심 수정: `|| null` → `?? null` (nullish coalescing)**
-
-모든 레이어에서 falsy 체크로 인해 0이 null로 변환되던 문제를 완전 수정:
-
-1. **Fetchers (upbit.ts, bithumb.ts, coinone.ts)**:
-   - `Number.isFinite()` 체크로 안전한 null 처리
-   - 업비트: `Number(item.acc_trade_price_24h)` → `Number.isFinite() ? value : null`
-   - 빗썸: `Number(item.acc_trade_value_24H)` → `Number.isFinite() ? value : null`
-   - 코인원: `quote_volume` 또는 `target_volume * lastPrice` 계산
-
-2. **priceWorker.ts (buildPremiumTable)**:
-   - `domesticPriceEntry?.volume24hKrw || null` → `?? null` 수정
-   - 모든 필드: volume24hKrw, volume24hForeignKrw, change24hRate, change24hAbs, high24h, low24h
-
-3. **프론트엔드 포맷터 (PremiumTable.tsx)**:
-   - `formatVolumeKRW`: 1백만 단위 추가 (`1e6` → `n백만`)
-   - `formatVolumeUsdt`: `value === 0` 체크 제거
-   - `Number.isNaN()` 사용으로 정확한 NaN 체크
-
-**결과**:
-- 업비트 54백만, 56백만 등 소액 거래대금도 정상 표시 ✓
-- 빗썸 312만, 366만 등 소액 거래대금도 정상 표시 ✓
-- 정렬 순서와 표시 값이 항상 일치 ✓
-- 0 값도 "0원"으로 표시 (null/undefined만 "-")
 
 ---
 
