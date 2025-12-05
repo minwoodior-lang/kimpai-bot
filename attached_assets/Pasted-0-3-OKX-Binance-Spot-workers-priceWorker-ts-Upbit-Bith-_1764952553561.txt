@@ -1,0 +1,170 @@
+0. 절대 건드리면 안 되는 영역
+
+국내 3거래소 + OKX + Binance Spot + 거래액 파이프라인
+
+workers/priceWorker.ts 안에서
+
+Upbit/Bithumb/Coinone Spot
+
+Binance Spot
+
+OKX Spot
+
+workers/fetchers/*.ts 안의
+
+Upbit/Bithumb/Coinone/Binance/OKX REST fetcher
+
+src/pages/api/premium/table-filtered.ts 에서
+
+volume24hKrw, volume24hForeignKrw 계산 부분
+
+KRW/USDT/BTC 환산 로직
+→ 이미 검증 끝났으니 전혀 수정하지 말 것.
+→ 바이낸스 스팟, OKX, Gate, MEXC, Bybit의 거래액(일) 표시는 지금 상태 유지.
+
+프론트 PremiumTable 레이아웃/셀 구조
+
+현재 코인 셀, 김프, 거래액 컬럼 구조 그대로 유지
+
+formatVolume, formatPrice 포맷 함수, isUnlisted 관련 처리도 건드리지 말 것.
+
+1. BINANCE 선물 현재가 / 거래액(일) 안 나오는 문제
+원하는 최종 상태
+
+기준 거래소 업비트 KRW, 해외 거래소 바이낸스 선물 선택 시
+
+해외 현재가: USDT 선물 가격 × 환율
+
+해외 거래액(일): 24h quoteVolume × 환율
+
+키 포맷: BINANCE_FUTURES:${symbol}:USDT
+
+확인/수정 요청
+
+prices.json 키 매핑 확인
+
+data/prices.json 안에
+
+BINANCE_FUTURES:BTC:USDT
+
+BINANCE_FUTURES:ETH:USDT
+
+…
+가 실제로 존재하는지 확인해 달라.
+
+없으면 workers/priceWorker.ts 에서 Binance Futures 부분이
+
+BINANCE_FUTURES:${symbol}:USDT 로 저장하는지 확인·수정 필요.
+
+const key = `BINANCE_FUTURES:${symbol}:USDT`;
+prices[key] = { price: lastPrice, ... };
+
+
+웹소켓 핸들러에서 쓰는 key 일치 여부
+
+Binance Futures WebSocket 핸들러 파일(예: workers/ws/binanceFutures.ts 혹은 비슷한 이름)에서
+
+price 업데이트 시 사용하는 key가 REST에서 쓰는 key와 완전히 같은지 확인:
+
+const priceKey = `BINANCE_FUTURES:${base}:USDT`;
+
+
+만약 BINANCE_FUTURES_PERP, BINANCE:PERP 처럼 다른 prefix 를 쓰고 있으면
+→ REST와 똑같이 BINANCE_FUTURES 로 통일해 달라.
+
+marketStats.json (거래액) 키 확인
+
+data/marketStats.json 안에
+
+BINANCE_FUTURES:BTC:USDT 에 volume24hQuote 가 들어오는지 확인.
+
+키는 있는데 PremiumTable에서 거래액이 - 라면
+
+src/pages/api/premium/table-filtered.ts 에서
+
+foreignKey 계산이 BINANCE_FUTURES:${symbol}:USDT 를 제대로 바라보는지 확인:
+
+const foreignKey = `${foreignExchange}:${symbol}:${foreignQuote}`; 
+// foreignExchange === 'BINANCE_FUTURES', foreignQuote === 'USDT'
+
+
+여기서 다른 문자열로 쓰고 있으면 BINANCE_FUTURES 로 맞춰 달라.
+
+2. BYBIT / GATE / MEXC 해외 현재가가 - 로 뜨는 문제
+원하는 상태
+
+기준 거래소 업비트 KRW, 해외 거래소를 다음 셋으로 바꿔도:
+
+바이비트 USDT, 게이트 USDT, MEXC USDT
+
+각 거래소의 해외 현재가 컬럼이 모두 채워져야 한다.
+
+키 포맷:
+
+BYBIT: BYBIT:${symbol}:USDT
+
+GATE: GATE:${symbol}:USDT
+
+MEXC: MEXC:${symbol}:USDT
+
+확인/수정 요청
+
+prices.json 키 존재 여부
+
+data/prices.json 에서 다음 키들이 실제로 있는지 확인:
+
+BYBIT:BTC:USDT
+
+GATE:BTC:USDT
+
+MEXC:BTC:USDT
+
+없으면 workers/priceWorker.ts 안에서 각 거래소 가격 수집 부분이
+바로 위 포맷으로 저장하고 있는지 확인·수정:
+
+const key = `BYBIT:${symbol}:USDT`;
+prices[key] = { price: lastPrice, ... };
+
+
+웹소켓 핸들러 키 매핑
+
+Bybit/Gate/MEXC WebSocket 핸들러(예: ws/bybit.ts, ws/gate.ts, ws/mexc.ts) 에서
+
+price 업데이트 시 사용하는 key가 REST와 동일한지 확인:
+
+const priceKey = `BYBIT:${baseSymbol}:USDT`;
+// GATE, MEXC도 동일 형식
+
+
+현재 BYBIT_SPOT, GATEIO, MEXC_GLOBAL 등 다른 prefix 를 쓰고 있으면
+→ REST, exchange_markets.json, premiumTable 에서 쓰는 prefix 로 통일해 달라.
+
+table-filtered.ts foreignKey 포맷 확인
+
+src/pages/api/premium/table-filtered.ts 에서 foreignKey 가 다음 포맷인지 재확인:
+
+const foreignKey = `${foreignExchange}:${symbol}:${foreignQuote}`; 
+// 예) foreignExchange = 'BYBIT', foreignQuote = 'USDT'
+
+
+여기서 BYBIT/GATE/MEXC 쪽만 다르게 처리하는 분기문이 있다면 제거하고
+위 공통 포맷을 사용하도록 맞춰 달라.
+
+3. 작업 순서 제안 (Replit용)
+
+prices.json / marketStats.json 샘플 로그 먼저 찍기
+
+로컬에서 간단히:
+
+node -e "const p=require('./data/prices.json'); console.log('BINANCE_FUTURES BTC', p['BINANCE_FUTURES:BTC:USDT']); console.log('BYBIT BTC', p['BYBIT:BTC:USDT']); console.log('GATE BTC', p['GATE:BTC:USDT']); console.log('MEXC BTC', p['MEXC:BTC:USDT']);"
+
+
+값이 undefined 면 priceWorker or ws-handler 키 문제.
+
+값은 있는데 프론트에 - 가 뜨면 table-filtered foreignKey 문제.
+
+키 포맷만 수정하고, 이미 잘 작동하는 부분은 절대 수정 X
+
+Upbit/Bithumb/Coinone/Binance Spot/OKX/거래액 계산/프리미엄 계산 로직은 그대로 유지.
+
+이번 작업은 **“BINANCE_FUTURES / BYBIT / GATE / MEXC 의 price 키 포맷과 foreignKey 매칭만 맞추는 것”**으로 한정해 달라고 명시.

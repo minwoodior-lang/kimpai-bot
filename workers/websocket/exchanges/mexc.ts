@@ -42,19 +42,14 @@ function connect(): void {
       console.log('[WS-MEXC] Connected');
       
       const params = Array.from(targetSymbols).map(s => 
-        `spot@public.miniTicker.v3.api@${s}USDT`
+        `spot@public.miniTickers.v3.api`
       );
       
-      if (params.length > 0) {
-        const batchSize = 25;
-        for (let i = 0; i < params.length; i += batchSize) {
-          const batch = params.slice(i, i + batchSize);
-          ws!.send(JSON.stringify({
-            method: 'SUBSCRIPTION',
-            params: batch
-          }));
-        }
-      }
+      ws!.send(JSON.stringify({
+        method: 'SUBSCRIPTION',
+        params: ['spot@public.miniTickers.v3.api']
+      }));
+      console.log('[WS-MEXC] Subscribing to all tickers stream');
       
       pingTimer = setInterval(() => {
         if (ws && ws.readyState === WebSocket.OPEN) {
@@ -71,32 +66,40 @@ function connect(): void {
         
         const parsed = JSON.parse(msg);
         
-        if (parsed.c && parsed.c.includes('miniTicker')) {
-          const ticker = parsed.d;
-          if (!ticker) return;
+        if (parsed.msg === 'SUBSCRIPTION') {
+          console.log('[WS-MEXC] Subscribed:', parsed.code === 0 ? 'OK' : 'FAILED');
+          return;
+        }
+        
+        if (parsed.c && parsed.c.includes('miniTicker') && parsed.d) {
+          const tickers = Array.isArray(parsed.d) ? parsed.d : [parsed.d];
           
-          const symbol = ticker.s || '';
-          if (!symbol.endsWith('USDT')) return;
-          
-          const base = symbol.replace('USDT', '');
-          if (!targetSymbols.has(base)) return;
-          
-          const lastPrice = parseFloat(ticker.c) || 0;
-          const openPrice = parseFloat(ticker.o) || 0;
-          
-          const price: WebSocketPrice = {
-            exchange: 'MEXC',
-            symbol: base,
-            quote: 'USDT',
-            price: lastPrice,
-            timestamp: Date.now(),
-            change24hRate: openPrice > 0 ? ((lastPrice - openPrice) / openPrice) * 100 : 0,
-            volume24hQuote: parseFloat(ticker.q) || 0,
-            high24h: parseFloat(ticker.h) || 0,
-            low24h: parseFloat(ticker.l) || 0
-          };
-          
-          if (callback) callback(price);
+          for (const ticker of tickers) {
+            if (!ticker) continue;
+            
+            const symbol = ticker.s || '';
+            if (!symbol.endsWith('USDT')) continue;
+            
+            const base = symbol.replace('USDT', '');
+            if (!targetSymbols.has(base)) continue;
+            
+            const lastPrice = parseFloat(ticker.c) || 0;
+            const openPrice = parseFloat(ticker.o) || 0;
+            
+            const price: WebSocketPrice = {
+              exchange: 'MEXC',
+              symbol: base,
+              quote: 'USDT',
+              price: lastPrice,
+              timestamp: Date.now(),
+              change24hRate: openPrice > 0 ? ((lastPrice - openPrice) / openPrice) * 100 : 0,
+              volume24hQuote: parseFloat(ticker.q) || 0,
+              high24h: parseFloat(ticker.h) || 0,
+              low24h: parseFloat(ticker.l) || 0
+            };
+            
+            if (callback) callback(price);
+          }
         }
       } catch (err) {
         // ignore parse errors

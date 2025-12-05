@@ -44,10 +44,15 @@ function connect(): void {
       const args = targetSymbols.map(s => `tickers.${s}USDT`);
       
       if (args.length > 0) {
-        ws!.send(JSON.stringify({
-          op: 'subscribe',
-          args
-        }));
+        const batchSize = 10;
+        for (let i = 0; i < args.length; i += batchSize) {
+          const batch = args.slice(i, i + batchSize);
+          ws!.send(JSON.stringify({
+            op: 'subscribe',
+            args: batch
+          }));
+        }
+        console.log(`[WS-Bybit] Subscribing to ${args.length} symbols in ${Math.ceil(args.length / batchSize)} batches`);
       }
       
       pingTimer = setInterval(() => {
@@ -62,7 +67,10 @@ function connect(): void {
         const parsed = JSON.parse(data.toString());
         
         if (parsed.op === 'pong' || parsed.ret_msg === 'pong') return;
-        if (parsed.op === 'subscribe') return;
+        if (parsed.op === 'subscribe') {
+          console.log('[WS-Bybit] Subscribed:', parsed.success ? 'OK' : 'FAILED', parsed.ret_msg || '');
+          return;
+        }
         
         if (parsed.topic && parsed.topic.startsWith('tickers.') && parsed.data) {
           const ticker = parsed.data;

@@ -71,7 +71,12 @@ function connect(): void {
         const parsed = JSON.parse(data.toString());
         
         if (parsed.channel === 'spot.pong') return;
-        if (parsed.event === 'subscribe') return;
+        if (parsed.event === 'subscribe') {
+          if (parsed.error) {
+            console.log('[WS-Gate] Sub error:', parsed.error.message || JSON.stringify(parsed.error));
+          }
+          return;
+        }
         
         if (parsed.channel === 'spot.tickers' && parsed.event === 'update' && parsed.result) {
           const ticker = parsed.result;
