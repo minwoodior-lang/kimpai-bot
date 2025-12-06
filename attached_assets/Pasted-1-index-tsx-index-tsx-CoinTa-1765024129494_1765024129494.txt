@@ -1,0 +1,131 @@
+1️⃣ index.tsx에서 코인셀 섹션이 아직 렌더되고 있는지 먼저 확인
+
+index.tsx(홈) 안에 아래처럼 코인 리스트/코인셀 섹션이 있을 거야:
+
+// 예시
+<CoinTableSection
+  coins={filteredCoins}
+  domesticSelection={domesticSelection}
+  foreignSelection={foreignSelection}
+/>
+
+
+혹은
+
+<HomeCoinSection
+  coins={coins}
+  ...
+/>
+
+
+✅ 확인할 것:
+
+이 컴포넌트 호출 자체가 통째로 지워지거나 주석 처리 안 됐는지
+
+return (...) 안에서 TodayPremiumSection 주변 레이아웃 수정하다가
+코인 섹션을 감싸는 <div> 열고 닫는 위치가 꼬여서 return 밖으로 밀려나지 않았는지
+
+👉 가장 흔한 케이스: 상단 카드 레이아웃 바꾸다가
+</div> 하나 잘못 옮겨서 코인 리스트 섹션이 조건문 밖으로 빠지거나
+아예 렌더링 안 되는 영역으로 들어가버린 경우.
+
+2️⃣ hidden / md:hidden 같은 Tailwind 클래스에 갇힌 건 아닌지
+
+모바일/PC 따로 만지다가:
+
+<div className="hidden md:block">
+  {/* 코인 셀 리스트 */}
+</div>
+
+
+이렇게 되어 있으면 모바일에선 아예 안 보인다.
+
+✅ 체크:
+
+코인셀 감싸는 최상위 <div>에
+hidden, md:hidden, lg:hidden 이런 게 들어가 있는지
+
+반대로 모바일 전용인데 PC에서 안 보이는 상황이면
+block md:hidden 이런 조합인지
+
+안전하게 가려면 일단:
+
+<div className="mt-3">
+  {/* 코인 셀 섹션 */}
+</div>
+
+
+정도로만 두고, 숨김 클래스는 다 빼놓고 확인해봐.
+
+3️⃣ 데이터가 날아가서 “빈 배열”이 된 건 아닌지
+
+코인셀에서 보통 이렇게 돌릴 거야:
+
+coins.map((coin) => (
+  <CoinRow key={coin.symbol} coin={coin} />
+))
+
+
+근데 index.tsx에서 TodayPremiumSection 건드리면서
+상단에서 filteredCoins 만드는 로직을 건드렸거나, props 이름 바꿨거나 했을 수 있음.
+
+✅ 체크 포인트:
+
+코인셀 쪽에서 쓰는 prop 이름
+
+예전: <CoinTableSection coins={filteredCoins} />
+
+지금: <CoinTableSection data={filteredCoins} /> 이런 식으로 바뀌면 안 나옴
+
+브라우저 콘솔에서:
+
+console.log('coins in CoinTableSection', coins);
+
+
+찍어보고 length가 0인지 / undefined인지 확인
+
+4️⃣ 브라우저 콘솔 에러 한 번만 꼭 봐봐
+
+F12 → Console에 이런 거 뜨면:
+
+Cannot read properties of undefined (reading 'map')
+
+coins.map is not a function
+
+filteredCoins is undefined
+
+이면 100% 데이터/props 문제다.
+
+콘솔에 에러 하나라도 있으면, 그 줄 번호 클릭해서 어떤 컴포넌트에서 터졌는지 먼저 보고
+거기서부터 역추적하면 됨.
+
+5️⃣ 오늘 할 최소 안전 복구 전략
+
+“어디서 꼬였는지 잘 모르겠다” 싶으면 이렇게 하는 게 제일 안전해:
+
+어제까지 정상 동작하던 커밋/파일 버전 기준으로
+
+index.tsx의 코인셀 렌더링 부분만 복사
+
+지금 파일에서 상단 TodayPremiumSection 래퍼 / 카드 레이아웃 부분만 유지하고
+코인셀 섹션은 어제 버전 그대로 덮어쓰기
+
+즉:
+
+상단 카드: 오늘 버전
+
+코인 리스트: 어제 정상 버전
+
+이렇게 “위/아래”만 조합하는 식.
+
+6️⃣ 정리하면
+
+지금 이 증상(“코인셀 표기가 안 된다”)은 보통 네 가지 중 하나야:
+
+index.tsx에서 코인셀 컴포넌트 호출 줄이 날아감/위치 옮겨짐
+
+코인셀을 감싸고 있는 <div>에 hidden 계열 클래스가 들어감
+
+props 이름 바뀌어서 coins가 undefined/[] 됨
+
+조건부 렌더링 coins.length > 0 && ... 같은 거에 잘못 걸려서 안 나옴
