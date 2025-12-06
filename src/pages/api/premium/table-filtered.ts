@@ -7,8 +7,7 @@ import {
   getCurrentMarketStats,
   getUsdKrwRate,
   getExchangeMarkets,
-  getMasterSymbols,
-  type PremiumRow
+  getMasterSymbols
 } from "@/../workers/priceWorker";
 
 interface PriceEntry {

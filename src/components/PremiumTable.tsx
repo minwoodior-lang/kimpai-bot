@@ -12,7 +12,6 @@ import {
   EXCHANGE_LOGOS,
 } from "@/contexts/ExchangeSelectionContext";
 import CoinIcon from "@/components/CoinIcon";
-import PriceCell from "@/components/PriceCell";
 import TwoLinePriceCell from "@/components/TwoLinePriceCell";
 import TwoLineCell from "@/components/TwoLineCell";
 import { openCmcPage } from "@/lib/coinMarketCapUtils";
@@ -549,9 +548,6 @@ export default function PremiumTable({
   const { prefs, toggleFavorite, isFavorite, isLoaded: prefsLoaded } = useUserPrefs();
   const favorites = useMemo(() => new Set(prefs.favorites || []), [prefs.favorites]);
 
-  const toggleChart = (symbol: string) => {
-    setExpandedSymbol((prev) => (prev === symbol ? null : symbol));
-  };
 
   const fetchData = async () => {
     try {
@@ -562,7 +558,7 @@ export default function PremiumTable({
         response = await fetch(
           `/api/premium/table-filtered?domestic=${domesticExchange}&foreign=${foreignExchange}`,
         );
-      } catch (err) {
+      } catch {
         // Network error - silently ignore (don't log, could trigger error handler)
         return;
       }
@@ -590,7 +586,7 @@ export default function PremiumTable({
       let json: ApiResponse | null = null;
       try {
         json = await response.json();
-      } catch (err) {
+      } catch {
         // JSON parse error - silently ignore
         return;
       }
@@ -617,12 +613,12 @@ export default function PremiumTable({
         setListedCoins(typeof json.listedCoins === "number" ? json.listedCoins : 0);
         setError(null);
         setConsecutiveRateLimits(0);
-      } catch (err) {
+      } catch {
         // Catch-all: silently suppress all errors
       } finally {
         setLoading(false);
       }
-    } catch (err) {
+    } catch {
       // Silent error suppression
     }
   };
@@ -685,8 +681,8 @@ export default function PremiumTable({
         return 0;
       }
 
-      let aVal: any = a[sortKey];
-      let bVal: any = b[sortKey];
+      let aVal: string | number | null | undefined = a[sortKey];
+      let bVal: string | number | null | undefined = b[sortKey];
 
       // null/undefined/NaN 값은 항상 맨 아래로
       const aIsInvalid = aVal === null || aVal === undefined || (typeof aVal === "number" && isNaN(aVal));
