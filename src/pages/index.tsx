@@ -115,6 +115,17 @@ export default function Home() {
       <HomeLayout>
         <main className="w-full flex justify-center">
           <div className="w-full px-2 sm:px-4 md:px-6 py-3 sm:py-6 md:max-w-[1280px] md:mx-auto">
+            {/* ✅ 모바일 전용 TodayPremiumSection */}
+            <div className="md:hidden mb-4">
+              <TodayPremiumSection
+                compact
+                avgPremium={formatPremium(safeAvgPremium)}
+                minPremium={formatPremium(minPremium?.premium ?? null)}
+                maxPremium={formatPremium(maxPremium?.premium ?? null)}
+                fxRate={fxRate ?? "-"}
+                score={riskScore}
+              />
+            </div>
             {/* PC: 상단 3컬럼 레이아웃 */}
             <div className="hidden md:grid grid-cols-3 gap-4 mb-8">
             {/* 좌측: 오늘의 AI 김프 요약 */}
