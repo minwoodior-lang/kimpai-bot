@@ -57,9 +57,123 @@ let skippedSymbols: string[] = [];
 let wsInitialized = false;
 let lastWsStatsLog = 0;
 
+// ⚡ IN-MEMORY PREMIUM TABLE (Real-time updates)
+interface PremiumRow {
+  symbol: string;
+  name_ko: string;
+  name_en: string;
+  koreanPrice: number | null;
+  globalPrice: number | null;
+  premium: number | null;
+  usdKrw: number;
+  iconUrl: string | null;
+  cmcSlug: string | null;
+  volume24hKrw: number | null;
+  volume24hForeignKrw: number | null;
+  change24hRate: number | null;
+  change24hAbs: number | null;
+  high24h: number | null;
+  low24h: number | null;
+  updatedAt: number;
+  latency?: number; // WebSocket tick → premium calculation latency
+}
+
+let inMemoryPremiumTable: Map<string, PremiumRow> = new Map();
+let lastFileBackupTime = 0;
+const FILE_BACKUP_INTERVAL = 60000; // 1분마다 파일 백업
+
+// ⚡ IN-MEMORY CACHE: API용 정적 데이터 캐싱
+let cachedExchangeMarkets: MarketInfo[] | null = null;
+let cachedMasterSymbols: any[] | null = null;
+let cachedSymbolMap: Map<string, any> | null = null; // 🚀 CRITICAL: 심볼 Map 재사용
+
+// Latency tracking
+interface LatencyStats {
+  count: number;
+  total: number;
+  min: number;
+  max: number;
+}
+let latencyStats: LatencyStats = { count: 0, total: 0, min: Infinity, max: 0 };
+let lastLatencyLog = 0;
+
+function updatePremiumRowsIncremental(symbols: string[]): void {
+  // 🚀 CRITICAL: 심볼 Map 재사용 (매 틱마다 재생성 방지)
+  if (!cachedSymbolMap) {
+    const masterSymbols = loadMasterSymbols();
+    cachedSymbolMap = new Map(masterSymbols.map((s: any) => [s.symbol, s]));
+  }
+  const symbolMap = cachedSymbolMap;
+  const now = Date.now();
+  
+  for (const symbol of symbols) {
+    const koreanPrice = getKoreanPrice(symbol);
+    const globalPrice = getGlobalPrice(symbol);
+    
+    if (!koreanPrice && !globalPrice) continue;
+    
+    let finalPremium = null;
+    if (koreanPrice && globalPrice && globalPrice > 0) {
+      const globalKrw = globalPrice * usdKrwRate;
+      const premium = ((koreanPrice - globalKrw) / globalKrw) * 100;
+      finalPremium = Math.round(premium * 100) / 100;
+    }
+    
+    const master = symbolMap.get(symbol) || {};
+    const domesticPriceEntry = getDomesticPriceEntry(symbol);
+    const globalPriceEntry = getGlobalPriceEntry(symbol);
+    
+    // Calculate latency (WebSocket tick → premium calculation)
+    const priceTimestamp = Math.max(
+      currentPrices[`BINANCE:${symbol}:USDT`]?.ts || 0,
+      currentPrices[`UPBIT:${symbol}:KRW`]?.ts || 0
+    );
+    const latency = priceTimestamp > 0 ? now - priceTimestamp : undefined;
+    
+    // Track latency stats
+    if (latency !== undefined) {
+      latencyStats.count++;
+      latencyStats.total += latency;
+      latencyStats.min = Math.min(latencyStats.min, latency);
+      latencyStats.max = Math.max(latencyStats.max, latency);
+      
+      // Log every 10 seconds
+      if (now - lastLatencyLog > 10000) {
+        const avg = latencyStats.total / latencyStats.count;
+        console.log(`[LATENCY] WS→Premium: avg=${avg.toFixed(0)}ms, min=${latencyStats.min}ms, max=${latencyStats.max}ms (${latencyStats.count} updates)`);
+        lastLatencyLog = now;
+        latencyStats = { count: 0, total: 0, min: Infinity, max: 0 };
+      }
+    }
+    
+    const premiumRow: PremiumRow = {
+      symbol,
+      name_ko: master.name_ko || symbol,
+      name_en: master.name_en || symbol,
+      koreanPrice,
+      globalPrice,
+      premium: finalPremium,
+      usdKrw: usdKrwRate,
+      iconUrl: master.icon_path || null,
+      cmcSlug: master.cmc_slug || null,
+      volume24hKrw: domesticPriceEntry?.volume24hKrw ?? null,
+      volume24hForeignKrw: globalPriceEntry?.volume24hKrw ?? null,
+      change24hRate: domesticPriceEntry?.change24hRate ?? null,
+      change24hAbs: domesticPriceEntry?.change24hAbs ?? null,
+      high24h: domesticPriceEntry?.high24h ?? null,
+      low24h: domesticPriceEntry?.low24h ?? null,
+      updatedAt: now,
+      latency
+    };
+    
+    inMemoryPremiumTable.set(symbol, premiumRow);
+  }
+}
+
 function mergeWebSocketPrices(): number {
   const wsPrices = getAllWebSocketPrices();
   let mergedCount = 0;
+  const updatedSymbols = new Set<string>();
   
   wsPrices.forEach((wsPrice) => {
     const key = `${wsPrice.exchange}:${wsPrice.symbol}:${wsPrice.quote}`;
@@ -80,10 +194,42 @@ function mergeWebSocketPrices(): number {
       };
       dirtyPriceKeys.add(key);
       mergedCount++;
+      
+      // ⚡ REAL-TIME: 즉시 premium 재계산
+      updatedSymbols.add(wsPrice.symbol);
     }
   });
   
+  // 변경된 심볼들의 premium을 즉시 업데이트
+  if (updatedSymbols.size > 0) {
+    updatePremiumRowsIncremental(Array.from(updatedSymbols));
+  }
+  
   return mergedCount;
+}
+
+// ⚡ REAL-TIME: WebSocket 가격 틱 → 즉시 메모리 업데이트
+function handleWebSocketPrice(wsPrice: WebSocketPrice): void {
+  const key = `${wsPrice.exchange}:${wsPrice.symbol}:${wsPrice.quote}`;
+  const existingEntry = currentPrices[key];
+  
+  if (wsPrice.timestamp > (existingEntry?.ts || 0)) {
+    const newVolume24hQuote = wsPrice.volume24hQuote || existingEntry?.volume24hQuote;
+    currentPrices[key] = {
+      price: wsPrice.price,
+      ts: wsPrice.timestamp,
+      volume24hQuote: newVolume24hQuote,
+      volume24hKrw: (newVolume24hQuote || 0) * usdtKrwGlobal,
+      change24hRate: wsPrice.change24hRate || existingEntry?.change24hRate,
+      change24hAbs: existingEntry?.change24hAbs,
+      high24h: wsPrice.high24h || existingEntry?.high24h,
+      low24h: wsPrice.low24h || existingEntry?.low24h,
+      prev_price: existingEntry?.prev_price
+    };
+    
+    // ⚡ INSTANT: 즉시 premium 재계산
+    updatePremiumRowsIncremental([wsPrice.symbol]);
+  }
 }
 
 function initializeWebSockets(): void {
@@ -103,21 +249,28 @@ function initializeWebSockets(): void {
   const symbols = Array.from(domesticBases);
   console.log(`[WS] Initializing WebSocket connections for ${symbols.length} symbols...`);
   
-  startAllWebSockets(symbols);
+  // ⚡ CRITICAL: WebSocket 콜백 연결
+  startAllWebSockets(symbols, handleWebSocketPrice);
   wsInitialized = true;
 }
 
 function loadExchangeMarkets(): MarketInfo[] {
+  if (cachedExchangeMarkets) return cachedExchangeMarkets;
+  
   try {
-    return JSON.parse(fs.readFileSync(EXCHANGE_MARKETS_FILE, 'utf-8'));
+    cachedExchangeMarkets = JSON.parse(fs.readFileSync(EXCHANGE_MARKETS_FILE, 'utf-8'));
+    return cachedExchangeMarkets;
   } catch {
     return [];
   }
 }
 
 function loadMasterSymbols(): any[] {
+  if (cachedMasterSymbols) return cachedMasterSymbols;
+  
   try {
-    return JSON.parse(fs.readFileSync(MASTER_SYMBOLS_FILE, 'utf-8'));
+    cachedMasterSymbols = JSON.parse(fs.readFileSync(MASTER_SYMBOLS_FILE, 'utf-8'));
+    return cachedMasterSymbols;
   } catch {
     return [];
   }
@@ -319,6 +472,7 @@ async function fetchUpbitMarketStats(markets: MarketInfo[]): Promise<MarketStats
 function buildPremiumTable(): void {
   const masterSymbols = loadMasterSymbols();
   const symbolMap = new Map(masterSymbols.map((s: any) => [s.symbol, s]));
+  const now = Date.now();
 
   // 심볼 추출 최적화: Set으로 중복 제거
   const symbolSet = new Set<string>();
@@ -327,7 +481,7 @@ function buildPremiumTable(): void {
     symbolSet.add(base);
   }
 
-  const premiumRows: any[] = [];
+  const premiumRows: PremiumRow[] = [];
 
   for (const symbol of symbolSet) {
     const koreanPrice = getKoreanPrice(symbol);
@@ -343,12 +497,10 @@ function buildPremiumTable(): void {
     }
 
     const master = symbolMap.get(symbol) || {};
-
-    // prices.json에서 직접 가져온 데이터
     const domesticPriceEntry = getDomesticPriceEntry(symbol);
     const globalPriceEntry = getGlobalPriceEntry(symbol);
 
-    premiumRows.push({
+    const premiumRow: PremiumRow = {
       symbol,
       name_ko: master.name_ko || symbol,
       name_en: master.name_en || symbol,
@@ -364,18 +516,28 @@ function buildPremiumTable(): void {
       change24hAbs: domesticPriceEntry?.change24hAbs ?? null,
       high24h: domesticPriceEntry?.high24h ?? null,
       low24h: domesticPriceEntry?.low24h ?? null,
-      updatedAt: Date.now()
-    });
+      updatedAt: now
+    };
+
+    premiumRows.push(premiumRow);
+    
+    // ⚡ REAL-TIME: 메모리에 즉시 업데이트
+    inMemoryPremiumTable.set(symbol, premiumRow);
   }
 
   // 프리미엄 내림차순 정렬
   premiumRows.sort((a, b) => (b.premium ?? -Infinity) - (a.premium ?? -Infinity));
 
-  const tmpFile = PREMIUM_TABLE_FILE + '.tmp';
-  fs.writeFileSync(tmpFile, JSON.stringify(premiumRows, null, 2), 'utf-8');
-  fs.renameSync(tmpFile, PREMIUM_TABLE_FILE);
+  // 파일 백업 (1분마다만)
+  if (now - lastFileBackupTime > FILE_BACKUP_INTERVAL) {
+    const tmpFile = PREMIUM_TABLE_FILE + '.tmp';
+    fs.writeFileSync(tmpFile, JSON.stringify(premiumRows, null, 2), 'utf-8');
+    fs.renameSync(tmpFile, PREMIUM_TABLE_FILE);
+    lastFileBackupTime = now;
+    console.log(`[Premium] Backup saved: ${premiumRows.length} rows`);
+  }
 
-  console.log(`[Premium] Updated ${premiumRows.length} rows`);
+  console.log(`[Premium] Memory updated: ${premiumRows.length} rows`);
 }
 
 function getKoreanPrice(symbol: string): number | null {
@@ -717,8 +879,8 @@ let statsIntervalId: NodeJS.Timeout | null = null;
 let isPriceUpdating = false;
 let isStatsUpdating = false;
 
-const PRICE_INTERVAL_MS = 300;  // 0.3초 주기 (초고속 WS 반영)
-const STATS_INTERVAL_MS = 3000; // 3초 주기
+const PRICE_INTERVAL_MS = 5000;  // 5초 주기 (WebSocket이 메인, REST는 보조)
+const STATS_INTERVAL_MS = 3000;  // 3초 주기
 
 let lastPricesHash = '';
 let lastStatsHash = '';
@@ -781,6 +943,40 @@ export function stopPriceWorker(): void {
   wsInitialized = false;
   console.log('[Worker] Price worker, stats worker, and WebSocket connections stopped');
 }
+
+// ⚡ EXPORT: API에서 In-Memory Premium Table 접근
+export function getInMemoryPremiumTable(): Map<string, PremiumRow> {
+  return inMemoryPremiumTable;
+}
+
+export function getPremiumTableArray(): PremiumRow[] {
+  return Array.from(inMemoryPremiumTable.values())
+    .sort((a, b) => (b.premium ?? -Infinity) - (a.premium ?? -Infinity));
+}
+
+// EXPORT: 현재 가격 데이터 접근
+export function getCurrentPrices(): PriceMap {
+  return currentPrices;
+}
+
+export function getCurrentMarketStats(): MarketStatsMap {
+  return currentMarketStats;
+}
+
+export function getUsdKrwRate(): number {
+  return usdKrwRate;
+}
+
+// EXPORT: API용 정적 데이터 (메모리 캐싱)
+export function getExchangeMarkets(): MarketInfo[] {
+  return loadExchangeMarkets();
+}
+
+export function getMasterSymbols(): any[] {
+  return loadMasterSymbols();
+}
+
+export { type PremiumRow };
 
 if (require.main === module) {
   startPriceWorker();
