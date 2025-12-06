@@ -320,39 +320,29 @@ function buildPremiumTable(): void {
   const masterSymbols = loadMasterSymbols();
   const symbolMap = new Map(masterSymbols.map((s: any) => [s.symbol, s]));
 
-  const domesticSymbols: string[] = [];
-  const globalSymbols: string[] = [];
-
+  // 심볼 추출 최적화: Set으로 중복 제거
+  const symbolSet = new Set<string>();
   for (const key of Object.keys(currentPrices)) {
-    const [exchange, base] = key.split(':');
-    if (['UPBIT', 'BITHUMB', 'COINONE'].includes(exchange)) {
-      if (!domesticSymbols.includes(base)) domesticSymbols.push(base);
-    } else {
-      if (!globalSymbols.includes(base)) globalSymbols.push(base);
-    }
+    const [, base] = key.split(':');
+    symbolSet.add(base);
   }
 
-  const allSymbols = Array.from(new Set([...domesticSymbols, ...globalSymbols]));
   const premiumRows: any[] = [];
 
-  for (const symbol of allSymbols) {
+  for (const symbol of symbolSet) {
     const koreanPrice = getKoreanPrice(symbol);
     const globalPrice = getGlobalPrice(symbol);
 
     if (!koreanPrice && !globalPrice) continue;
 
-    let premium = 0;
+    let finalPremium = null;
     if (koreanPrice && globalPrice && globalPrice > 0) {
       const globalKrw = globalPrice * usdKrwRate;
-      premium = ((koreanPrice - globalKrw) / globalKrw) * 100;
+      const premium = ((koreanPrice - globalKrw) / globalKrw) * 100;
+      finalPremium = Math.round(premium * 100) / 100;
     }
 
     const master = symbolMap.get(symbol) || {};
-
-    let finalPremium = null;
-    if (koreanPrice && globalPrice && globalPrice > 0) {
-      finalPremium = Math.round(premium * 100) / 100;
-    }
 
     // prices.json에서 직접 가져온 데이터
     const domesticPriceEntry = getDomesticPriceEntry(symbol);
@@ -368,7 +358,6 @@ function buildPremiumTable(): void {
       usdKrw: usdKrwRate,
       iconUrl: master.icon_path || null,
       cmcSlug: master.cmc_slug || null,
-      // 모든 데이터는 prices.json에서 직접 가져옴 (nullish coalescing 사용!)
       volume24hKrw: domesticPriceEntry?.volume24hKrw ?? null,
       volume24hForeignKrw: globalPriceEntry?.volume24hKrw ?? null,
       change24hRate: domesticPriceEntry?.change24hRate ?? null,
@@ -379,11 +368,8 @@ function buildPremiumTable(): void {
     });
   }
 
-  premiumRows.sort((a, b) => {
-    const aPrem = a.premium ?? -Infinity;
-    const bPrem = b.premium ?? -Infinity;
-    return bPrem - aPrem;
-  });
+  // 프리미엄 내림차순 정렬
+  premiumRows.sort((a, b) => (b.premium ?? -Infinity) - (a.premium ?? -Infinity));
 
   const tmpFile = PREMIUM_TABLE_FILE + '.tmp';
   fs.writeFileSync(tmpFile, JSON.stringify(premiumRows, null, 2), 'utf-8');
