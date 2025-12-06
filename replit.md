@@ -1,68 +1,11 @@
-# KimpAI v3.5.0 - Kimchi Premium Analytics Dashboard
+# KimpAI v3.4.28 - Kimchi Premium Analytics Dashboard
 
 ### Overview
-KimpAI is a **real-time** analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. Its core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. The project handles **instant price collection via WebSockets**, premium calculation, and global market metrics, offering a comprehensive view of the crypto market with a focus on the Korean premium.
+KimpAI is a real-time analytics dashboard designed to track and display the "Kimchi Premium" across various cryptocurrency exchanges. Its core purpose is to provide users with up-to-date arbitrage opportunities and market insights by comparing cryptocurrency prices on Korean exchanges with global exchanges. The project handles real-time price collection, premium calculation, and global market metrics, offering a comprehensive view of the crypto market with a focus on the Korean premium.
 
 ### User Preferences
 - I want iterative development.
 - I prefer detailed explanations.
-- **I need real-time price reflection** (WebSocket tick → User screen within 1 second)
-
-### Recent Changes (v3.5.0 - 2024-12-06) - 실시간 가격 반영 시스템 완성 🚀⚡
-
-**🎯 목표: 해외 거래소 가격 실시간 반영 (1초 이내)**
-
-**✅ 핵심 개선 완료:**
-
-1. ✅ **WebSocket-First 실시간 아키텍처 전환**
-   - WebSocket 콜백 직접 연결: `handleWebSocketPrice()` → 즉시 메모리 업데이트
-   - REST는 5초마다 보조 검증용으로만 실행 (이전: 300ms 벌크)
-   - 4,826 updates/10s (초당 ~480 가격 틱)
-
-2. ✅ **In-Memory Premium Table 시스템**
-   - `inMemoryPremiumTable: Map<string, PremiumRow>` 메모리 구조
-   - WebSocket 틱마다 incremental premium 재계산
-   - 파일 백업: 1분마다 (이전: 매번)
-
-3. ✅ **API 완전 메모리 기반 전환**
-   - 파일 I/O 완전 제거 (0개)
-   - `getExchangeMarkets()`, `getMasterSymbols()` 메모리 캐싱
-   - API 응답: **3-5ms** (이전: 570ms, 100배 이상 개선!)
-
-4. ✅ **Latency Tracking 시스템**
-   - WebSocket tick → Premium calculation 시간 측정
-   - 10초마다 로깅: avg/min/max latency
-   - 현재: avg=991-1200ms (지속 개선 중)
-
-5. ✅ **BYBIT WebSocket 완전 활성화**
-   - 568개 심볼 구독 (이전: 9개)
-   - 재연결 타이밍 최적화 (5초)
-
-**성능 결과:**
-- **API 응답**: **3-5ms** (목표 <50ms ✅ 완전 달성!)
-- **WebSocket 틱**: 4,826 updates/10s (실시간 작동 ✅)
-- **파일 I/O**: **0개** (완전 제거 ✅)
-- **Latency**: avg=991-1200ms (목표 100-500ms, 개선 중 ⚠️)
-- **활성 스트림**: BINANCE 286, BINANCE_FUTURES 306, OKX 226, BYBIT 58
-
-**수정 파일:**
-- workers/priceWorker.ts: WebSocket 콜백, in-memory system, incremental updates
-- src/pages/api/premium/table-filtered.ts: 메모리 기반 API
-- workers/websocket/index.ts: 콜백 연결 구조
-
-**아키텍처 변화:**
-```
-[이전] REST 300ms → 파일 저장 → API 파일 읽기 → 응답 (3-4초)
-[현재] WebSocket 틱 → 메모리 업데이트 → API 메모리 읽기 → 응답 (~1초)
-```
-
-**마이그레이션 안전성:**
-- ✅ 기능 로직 유지 (가격 계산 동일)
-- ✅ 파일 백업 유지 (1분마다)
-- ✅ REST 보조 시스템 유지 (5초)
-- ✅ 기존 API 호환성 유지
-
----
 
 ### Recent Changes (v3.4.28 - 2024-12-05) - 최종 모바일 UX 완성 🎉
 
@@ -116,15 +59,12 @@ KimpAI is a **real-time** analytics dashboard designed to track and display the 
 
 ### System Architecture
 
-**Core Design Principles (v3.5.0):**
-- **WebSocket-First Real-time System:** WebSocket ticks → instant memory update → <1s latency
-- **In-Memory Premium Table:** `Map<string, PremiumRow>` for zero-latency access
-- **Data Segregation:** User data (Supabase) vs Real-time data (In-memory + JSON backup)
+**Core Design Principles:**
+- **Unified 3-Second Pipeline:** Price, premium, and volume data flow through priceWorker (3s)
+- **Data Segregation:** User data (Supabase) vs Real-time data (JSON files)
 - **Proxy-Centric Global API Access:** Render-hosted proxy for regional bypass
-- **Ultra-Fast Frontend Polling:** `/api/premium/table-filtered` every 1 second (3-5ms response)
-- **API Zero File I/O:** 100% memory-based (exchange_markets, master_symbols cached)
-- **Incremental Updates:** Only changed symbols recalculated (not full table rebuild)
-- **Latency Tracking:** WebSocket tick → premium → API end-to-end measurement
+- **Fast Frontend Polling:** `/api/premium/table-filtered` every 1 second
+- **API Memory Caching:** 800ms TTL with 95% performance improvement (294ms → 18-60ms)
 - **Infinite Scroll Rendering:** 4000 items → 100 initial, 50 per scroll
 - **CoinIcon Lazy Loading:** IntersectionObserver with rootMargin 100px
 - **React.memo + useCallback:** 8 helper functions for stable references

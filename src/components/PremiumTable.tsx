@@ -12,6 +12,7 @@ import {
   EXCHANGE_LOGOS,
 } from "@/contexts/ExchangeSelectionContext";
 import CoinIcon from "@/components/CoinIcon";
+import PriceCell from "@/components/PriceCell";
 import TwoLinePriceCell from "@/components/TwoLinePriceCell";
 import TwoLineCell from "@/components/TwoLineCell";
 import { openCmcPage } from "@/lib/coinMarketCapUtils";
@@ -548,28 +549,25 @@ export default function PremiumTable({
   const { prefs, toggleFavorite, isFavorite, isLoaded: prefsLoaded } = useUserPrefs();
   const favorites = useMemo(() => new Set(prefs.favorites || []), [prefs.favorites]);
 
+  const toggleChart = (symbol: string) => {
+    setExpandedSymbol((prev) => (prev === symbol ? null : symbol));
+  };
 
   const fetchData = async () => {
     try {
-      if (rateLimitRetryAfter > 0) {
-        setLoading(false);
-        return;
-      }
+      if (rateLimitRetryAfter > 0) return;
 
       let response: Response | null = null;
       try {
         response = await fetch(
           `/api/premium/table-filtered?domestic=${domesticExchange}&foreign=${foreignExchange}`,
         );
-      } catch {
-        setLoading(false);
+      } catch (err) {
+        // Network error - silently ignore (don't log, could trigger error handler)
         return;
       }
 
-      if (!response) {
-        setLoading(false);
-        return;
-      }
+      if (!response) return;
 
       if (response.status === 429) {
         const retryAfter = Math.max(
@@ -584,31 +582,25 @@ export default function PremiumTable({
           setRateLimitRetryAfter(0);
           setConsecutiveRateLimits(0);
         }, delayMs);
-        setLoading(false);
         return;
       }
 
-      if (!response.ok) {
-        setLoading(false);
-        return;
-      }
+      if (!response.ok) return;
 
       let json: ApiResponse | null = null;
       try {
         json = await response.json();
-      } catch {
-        setLoading(false);
+      } catch (err) {
+        // JSON parse error - silently ignore
         return;
       }
 
       if (!json || !json.success) {
-        setLoading(false);
         return;
       }
 
       if (!Array.isArray(json.data) || json.data.length === 0) {
         setData([]);
-        setLoading(false);
         return;
       }
 
@@ -625,13 +617,13 @@ export default function PremiumTable({
         setListedCoins(typeof json.listedCoins === "number" ? json.listedCoins : 0);
         setError(null);
         setConsecutiveRateLimits(0);
-      } catch {
+      } catch (err) {
         // Catch-all: silently suppress all errors
       } finally {
         setLoading(false);
       }
-    } catch {
-      setLoading(false);
+    } catch (err) {
+      // Silent error suppression
     }
   };
 
@@ -664,13 +656,10 @@ export default function PremiumTable({
 
     // filterMode에 따른 필터링
     if (prefsLoaded && prefs.filterMode === "favorites") {
-      // 즐겨찾기가 비어있으면 모든 코인 표시 (빈 화면 방지)
-      if (favorites.size > 0) {
-        result = result.filter((item) => {
-          const normalizedSymbol = item.symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
-          return favorites.has(normalizedSymbol);
-        });
-      }
+      result = result.filter((item) => {
+        const normalizedSymbol = item.symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
+        return favorites.has(normalizedSymbol);
+      });
     } else if (prefsLoaded && prefs.filterMode === "foreign") {
       // 해외 거래소에 상장된 코인만 (globalPrice가 있는 경우)
       result = result.filter((item) => item.globalPrice !== null && item.globalPrice > 0);
@@ -696,8 +685,8 @@ export default function PremiumTable({
         return 0;
       }
 
-      let aVal: string | number | null | undefined = a[sortKey];
-      let bVal: string | number | null | undefined = b[sortKey];
+      let aVal: any = a[sortKey];
+      let bVal: any = b[sortKey];
 
       // null/undefined/NaN 값은 항상 맨 아래로
       const aIsInvalid = aVal === null || aVal === undefined || (typeof aVal === "number" && isNaN(aVal));
@@ -1021,7 +1010,7 @@ export default function PremiumTable({
           <div className="flex md:hidden flex-col gap-1.5 mb-2">
             {/* 거래소 선택 - 1줄 */}
             <div className="flex items-center gap-0.5 sm:gap-1 flex-wrap">
-              <span className="text-[12px] text-white/60">기준 거래소</span>
+              <span className="text-[12px] text-white/60">기준</span>
               <MiniDropdown
                 value={domesticExchange}
                 options={DOMESTIC_EXCHANGES}
@@ -1034,7 +1023,7 @@ export default function PremiumTable({
                 onChange={setForeignExchange}
                 showShortName={true}
               />
-              <span className="text-[12px] text-white/60">해외 거래소</span>
+              <span className="text-[12px] text-white/60">해외</span>
             </div>
 
             {/* 검색 및 개수 - 2줄 */}

@@ -1,5 +1,6 @@
+import fs from "fs";
+import path from "path";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getPremiumTableArray, getUsdKrwRate } from "@/../workers/priceWorker";
 
 interface PremiumRow {
   symbol: string;
@@ -27,26 +28,9 @@ function guessCmcSlug(row: PremiumRow): string {
 }
 
 function loadPremium(): PremiumRow[] {
-  // ⚡ ULTRA-FAST: 메모리에서 직접 읽기 (파일 I/O 0)
-  const premiumArray = getPremiumTableArray();
-  const fxRate = getUsdKrwRate();
-  
-  return premiumArray.map(row => ({
-    symbol: row.symbol,
-    exchange: "UPBIT",
-    market: "KRW",
-    koreanPrice: row.koreanPrice,
-    globalPrice: row.globalPrice,
-    globalPriceKrw: row.globalPrice ? row.globalPrice * fxRate : null,
-    premium: row.premium,
-    volume24hKrw: row.volume24hKrw,
-    volume24hUsdt: row.volume24hForeignKrw ? row.volume24hForeignKrw / fxRate : null,
-    change24h: row.change24hRate,
-    name_ko: row.name_ko,
-    name_en: row.name_en,
-    icon_url: row.iconUrl,
-    usdKrw: fxRate
-  }));
+  const file = path.join(process.cwd(), "data/premiumTable.json");
+  if (!fs.existsSync(file)) return [];
+  return JSON.parse(fs.readFileSync(file, "utf8"));
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

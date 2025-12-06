@@ -2,13 +2,6 @@ import fs from "fs";
 import path from "path";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { BAD_ICON_SYMBOLS } from "@/config/badIconSymbols";
-import {
-  getCurrentPrices,
-  getCurrentMarketStats,
-  getUsdKrwRate,
-  getExchangeMarkets,
-  getMasterSymbols
-} from "@/../workers/priceWorker";
 
 interface PriceEntry {
   price: number;
@@ -33,14 +26,14 @@ interface MarketStats {
 type PricesMap = Record<string, PriceEntry>;
 type MarketStatsMap = Record<string, MarketStats>;
 
-// ⚡ 메모리 캐시: 100ms TTL (거의 실시간)
+// 메모리 캐시: 500ms~1초 TTL
 interface CacheEntry {
   data: any;
   timestamp: number;
 }
 
 const memoryCache: Record<string, CacheEntry> = {};
-const CACHE_TTL = 100; // 100ms (실시간)
+const CACHE_TTL = 800; // 800ms
 
 function getCacheKey(domestic: string, foreign: string): string {
   return `${domestic}:${foreign}`;
@@ -94,12 +87,10 @@ function parseMarketParam(value: string): { exchange: string; quote: string } {
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const startTime = Date.now();
-  
   try {
     const { domestic = "UPBIT_KRW", foreign = "BINANCE_USDT" } = req.query;
 
-    // 메모리 캐시 체크 (100ms TTL - 실시간)
+    // 메모리 캐시 체크 (800ms TTL)
     const cacheKey = getCacheKey(domestic as string, foreign as string);
     const cachedData = getFromCache(cacheKey);
     if (cachedData) {
@@ -109,14 +100,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const { exchange: domesticExchange, quote: domesticQuote } = parseMarketParam(domestic as string);
     const { exchange: foreignExchange, quote: foreignQuote } = parseMarketParam(foreign as string);
 
-    // ⚡ ULTRA-FAST: 모든 데이터를 메모리에서 읽기 (파일 I/O 0)
-    const allMarkets = getExchangeMarkets() as any[];
-    const masterSymbols = getMasterSymbols() as any[];
-    const prices = getCurrentPrices() as unknown as PricesMap;
-    const marketStats = getCurrentMarketStats() as unknown as MarketStatsMap;
-    const fxRate = getUsdKrwRate();
+    const allMarkets = loadJsonFile("exchange_markets.json") as any[];
+    const masterSymbols = loadJsonFile("master_symbols.json") as any[];
+    const premiumTable = loadJsonFile("premiumTable.json") as any[];
+    const prices = loadJsonFile("prices.json") as PricesMap;
+    const marketStats = loadJsonFile("marketStats.json") as MarketStatsMap;
 
     const masterMap = new Map(masterSymbols.map((s: any) => [s.symbol, s]));
+    const premiumMap = new Map(premiumTable.map((p: any) => [p.symbol, p]));
+
+    const fxRate = premiumTable[0]?.usdKrw || 1380;
 
     const filtered = allMarkets
       .filter((m) => {
@@ -127,6 +120,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       .map((market) => {
         const symbol = market.base.toUpperCase();
         const master = masterMap.get(symbol);
+        const premiumRow = premiumMap.get(symbol);
 
         const domesticPriceKey = `${domesticExchange}:${symbol}:${domesticQuote}`;
         const foreignPriceKey = `${foreignExchange}:${symbol}:${foreignQuote}`;
@@ -181,10 +175,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         }
 
         const shouldForcePlaceholder = BAD_ICON_SYMBOLS.includes(symbol);
-        const baseIconUrl = master?.icon_path || null;
+        const baseIconUrl = master?.icon_path || premiumRow?.iconUrl || null;
         const iconUrl = shouldForcePlaceholder ? null : baseIconUrl;
 
-        const cmcSlug = master?.cmc_slug || null;
+        const cmcSlug = premiumRow?.cmcSlug || master?.cmc_slug || null;
 
         const changeRate = domesticEntry?.change24hRate ?? null;
         let changeAbsKrw = domesticEntry?.change24hAbs ?? null;
@@ -284,8 +278,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
         return {
           symbol,
-          name_ko: market.name_ko || master?.name_ko || symbol,
-          name_en: market.name_en || master?.name_en || symbol,
+          name_ko: market.name_ko || master?.name_ko || premiumRow?.name_ko || symbol,
+          name_en: market.name_en || master?.name_en || premiumRow?.name_en || symbol,
           market: market.market,
           exchange: market.exchange,
           quote: market.quote,
@@ -339,7 +333,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const selectedUniqueSymbols = new Set(selectedMarkets.map(m => m.base.toUpperCase()));
     const totalCryptoCount = selectedUniqueSymbols.size;
 
-    const elapsed = Date.now() - startTime;
     const responseData = {
       success: true,
       data: filtered,
@@ -350,13 +343,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       foreignExchange,
       totalCoins: totalCryptoCount,
       listedCoins: filtered.filter(r => r.isListed).length,
-      _meta: {
-        apiLatency: elapsed, // API 응답 시간 (ms)
-        source: "memory" // 메모리 기반
-      }
     };
 
-    // 메모리 캐시에 저장 (100ms TTL - 실시간)
+    // 메모리 캐시에 저장 (800ms TTL)
     setCache(cacheKey, responseData);
 
     return res.status(200).json(responseData);
