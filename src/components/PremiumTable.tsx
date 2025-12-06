@@ -1016,7 +1016,7 @@ export default function PremiumTable({
                 options={DOMESTIC_EXCHANGES}
                 onChange={setDomesticExchange}
               />
-              <span className="text-white/30 text-xs px-0.5">/</span>
+              <span className="text-white/30 text-xs px-0.5">↔</span>
               <MiniDropdown
                 value={foreignExchange}
                 options={FOREIGN_EXCHANGES}
