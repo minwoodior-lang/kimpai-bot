@@ -551,7 +551,10 @@ export default function PremiumTable({
 
   const fetchData = async () => {
     try {
-      if (rateLimitRetryAfter > 0) return;
+      if (rateLimitRetryAfter > 0) {
+        setLoading(false);
+        return;
+      }
 
       let response: Response | null = null;
       try {
@@ -559,11 +562,14 @@ export default function PremiumTable({
           `/api/premium/table-filtered?domestic=${domesticExchange}&foreign=${foreignExchange}`,
         );
       } catch {
-        // Network error - silently ignore (don't log, could trigger error handler)
+        setLoading(false);
         return;
       }
 
-      if (!response) return;
+      if (!response) {
+        setLoading(false);
+        return;
+      }
 
       if (response.status === 429) {
         const retryAfter = Math.max(
@@ -578,25 +584,31 @@ export default function PremiumTable({
           setRateLimitRetryAfter(0);
           setConsecutiveRateLimits(0);
         }, delayMs);
+        setLoading(false);
         return;
       }
 
-      if (!response.ok) return;
+      if (!response.ok) {
+        setLoading(false);
+        return;
+      }
 
       let json: ApiResponse | null = null;
       try {
         json = await response.json();
       } catch {
-        // JSON parse error - silently ignore
+        setLoading(false);
         return;
       }
 
       if (!json || !json.success) {
+        setLoading(false);
         return;
       }
 
       if (!Array.isArray(json.data) || json.data.length === 0) {
         setData([]);
+        setLoading(false);
         return;
       }
 
@@ -619,7 +631,7 @@ export default function PremiumTable({
         setLoading(false);
       }
     } catch {
-      // Silent error suppression
+      setLoading(false);
     }
   };
 
