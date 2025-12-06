@@ -111,11 +111,11 @@ function connect(): void {
     });
     
     ws.on('close', () => {
-      console.log('[WS-MEXC] Disconnected, reconnecting in 3s...');
+      console.log('[WS-MEXC] Disconnected, reconnecting in 5s...');
       isConnecting = false;
       if (pingTimer) clearInterval(pingTimer);
       
-      reconnectTimer = setTimeout(connect, 3000);
+      reconnectTimer = setTimeout(connect, 5000);
     });
     
   } catch (err) {

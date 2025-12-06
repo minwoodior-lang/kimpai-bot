@@ -9,6 +9,7 @@ let pingTimer: NodeJS.Timeout | null = null;
 let isConnecting = false;
 let callback: PriceUpdateCallback | null = null;
 let targetSymbols: string[] = [];
+let failedSymbols: Set<string> = new Set();
 
 export function startBybitWebSocket(
   symbols: string[],
@@ -41,18 +42,20 @@ function connect(): void {
       isConnecting = false;
       console.log('[WS-Bybit] Connected');
       
-      const args = targetSymbols.map(s => `tickers.${s}USDT`);
+      const validArgs = targetSymbols
+        .filter(s => !failedSymbols.has(s))
+        .map(s => `tickers.${s}USDT`);
       
-      if (args.length > 0) {
-        const batchSize = 10;
-        for (let i = 0; i < args.length; i += batchSize) {
-          const batch = args.slice(i, i + batchSize);
+      if (validArgs.length > 0) {
+        const batchSize = 5;
+        for (let i = 0; i < validArgs.length; i += batchSize) {
+          const batch = validArgs.slice(i, i + batchSize);
           ws!.send(JSON.stringify({
             op: 'subscribe',
             args: batch
           }));
         }
-        console.log(`[WS-Bybit] Subscribing to ${args.length} symbols in ${Math.ceil(args.length / batchSize)} batches`);
+        console.log(`[WS-Bybit] Subscribing to ${validArgs.length} symbols (${failedSymbols.size} skipped) in ${Math.ceil(validArgs.length / batchSize)} batches`);
       }
       
       pingTimer = setInterval(() => {
@@ -68,7 +71,14 @@ function connect(): void {
         
         if (parsed.op === 'pong' || parsed.ret_msg === 'pong') return;
         if (parsed.op === 'subscribe') {
-          console.log('[WS-Bybit] Subscribed:', parsed.success ? 'OK' : 'FAILED', parsed.ret_msg || '');
+          if (!parsed.success) {
+            if (parsed.args && Array.isArray(parsed.args)) {
+              parsed.args.forEach((arg: string) => {
+                const symbol = arg.replace('tickers.', '').replace('USDT', '');
+                failedSymbols.add(symbol);
+              });
+            }
+          }
           return;
         }
         
@@ -106,11 +116,11 @@ function connect(): void {
     });
     
     ws.on('close', () => {
-      console.log('[WS-Bybit] Disconnected, reconnecting in 3s...');
+      console.log('[WS-Bybit] Disconnected, reconnecting in 5s...');
       isConnecting = false;
       if (pingTimer) clearInterval(pingTimer);
       
-      reconnectTimer = setTimeout(connect, 3000);
+      reconnectTimer = setTimeout(connect, 5000);
     });
     
   } catch (err) {
