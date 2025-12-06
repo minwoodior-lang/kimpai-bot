@@ -19,6 +19,8 @@ export function TodayPremiumSection({
   score,
   compact = false,
 }: TodayPremiumSectionProps) {
+  const gaugePercent = Math.min(Math.max((score ?? 0) * 10, 0), 100);
+
   return (
     <div className={`rounded-2xl border dark:border-slate-700/60 light:border-slate-300/40 dark:bg-slate-900/40 light:bg-slate-100/30 ${compact ? 'p-2 sm:p-3' : 'p-3 sm:p-4'} h-full flex flex-col`}>
       {/* 제목 */}
@@ -51,8 +53,11 @@ export function TodayPremiumSection({
       <div className={`${compact ? 'mt-2' : 'mt-4'} flex items-center justify-between gap-3`}>
         <div className="flex flex-col flex-1 min-w-0">
           <span className={`${compact ? 'text-[10px]' : 'text-[11px]'} md:text-xs dark:text-white/60 light:text-indigo-700`}>KR Premium Score</span>
-          <div className="mt-1.5 h-3 w-full rounded-full dark:bg-slate-700 light:bg-indigo-200/50 overflow-hidden">
-            <div className="h-full rounded-full dark:bg-indigo-500 light:bg-indigo-500 transition-all" style={{width: `${(score / 10) * 100}%`}} />
+          <div className="mt-1 w-full h-2 rounded-full bg-slate-700/80">
+            <div
+              className="h-full rounded-full bg-indigo-500"
+              style={{ width: `${gaugePercent}%` }}
+            />
           </div>
         </div>
 
