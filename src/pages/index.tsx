@@ -250,10 +250,9 @@ export default function Home() {
                 />
               </div>
               {/* 차트 설명 텍스트 */}
-              <div className="mt-2 text-[10px] sm:text-xs text-slate-400 flex flex-col sm:flex-row sm:gap-2">
-                <span>KR 기준 거래소: UPBIT</span>
-                <span className="hidden sm:inline">•</span>
-                <span>해외 거래소 기준: BINANCE</span>
+              <div className="mt-2 text-[10px] sm:text-xs text-slate-400 space-y-1 sm:space-y-0 sm:flex sm:gap-4">
+                <span>기준 &gt; 기준 거래소</span>
+                <span>해외 &gt; 해외 거래소</span>
               </div>
             </section>
 
