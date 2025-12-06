@@ -59,16 +59,18 @@ export default function Home() {
       (item) => item.binancePrice !== null && item.binancePrice > 0
     );
   } else if (isLoaded && prefs.filterMode === "favorites") {
-    // 즐겨찾기한 코인만
+    // 즐겨찾기한 코인만 (즐겨찾기가 비어있으면 모든 코인 표시)
     const favoritesSet = new Set(prefs.favorites || []);
-    filteredData = filteredData.filter((item) => {
-      const normalizedSymbol = item.symbol
-        .replace("/KRW", "")
-        .replace("/USDT", "")
-        .replace("/BTC", "")
-        .toUpperCase();
-      return favoritesSet.has(normalizedSymbol);
-    });
+    if (favoritesSet.size > 0) {
+      filteredData = filteredData.filter((item) => {
+        const normalizedSymbol = item.symbol
+          .replace("/KRW", "")
+          .replace("/USDT", "")
+          .replace("/BTC", "")
+          .toUpperCase();
+        return favoritesSet.has(normalizedSymbol);
+      });
+    }
   }
 
   const maxPremium =
