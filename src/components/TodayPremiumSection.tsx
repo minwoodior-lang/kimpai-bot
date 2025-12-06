@@ -48,15 +48,15 @@ export function TodayPremiumSection({
       </div>
 
       {/* Score 카드 - 게이지바 */}
-      <div className={`${compact ? 'mt-2' : 'mt-4'} flex items-center justify-between`}>
-        <div className="flex flex-col">
+      <div className={`${compact ? 'mt-2' : 'mt-4'} flex items-center justify-between gap-3`}>
+        <div className="flex flex-col flex-1 min-w-0">
           <span className={`${compact ? 'text-[10px]' : 'text-[11px]'} md:text-xs dark:text-white/60 light:text-indigo-700`}>KR Premium Score</span>
-          <div className={`mt-1 h-2 w-28 rounded-full dark:bg-white/10 light:bg-indigo-200/50`}>
-            <div className={`h-full rounded-full dark:bg-[#6366F1] light:bg-indigo-500`} style={{width: `${(score / 10) * 100}%`}} />
+          <div className="mt-1 h-2 w-full rounded-full dark:bg-white/10 light:bg-indigo-200/50">
+            <div className="h-full rounded-full dark:bg-[#6366F1] light:bg-indigo-500" style={{width: `${(score / 10) * 100}%`}} />
           </div>
         </div>
 
-        <span className={`${compact ? 'text-base' : 'text-lg'} md:text-xl font-semibold dark:text-[#A855F7] light:text-purple-600`}>{score}/10</span>
+        <span className={`${compact ? 'text-base' : 'text-lg'} md:text-xl font-semibold dark:text-[#A855F7] light:text-purple-600 flex-shrink-0`}>{score}/10</span>
       </div>
     </div>
   );

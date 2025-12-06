@@ -1010,20 +1010,20 @@ export default function PremiumTable({
           <div className="flex md:hidden flex-col gap-1.5 mb-2">
             {/* 거래소 선택 - 1줄 */}
             <div className="flex items-center gap-0.5 sm:gap-1 flex-wrap">
-              <span className="text-[12px] text-white/60">기준</span>
+              <span className="text-[12px] text-white/60">기준 거래소</span>
               <MiniDropdown
                 value={domesticExchange}
                 options={DOMESTIC_EXCHANGES}
                 onChange={setDomesticExchange}
               />
-              <span className="text-white/30 text-xs px-0.5">↔</span>
+              <span className="text-white/30 text-xs px-0.5">/</span>
               <MiniDropdown
                 value={foreignExchange}
                 options={FOREIGN_EXCHANGES}
                 onChange={setForeignExchange}
                 showShortName={true}
               />
-              <span className="text-[12px] text-white/60">해외</span>
+              <span className="text-[12px] text-white/60">해외 거래소</span>
             </div>
 
             {/* 검색 및 개수 - 2줄 */}

@@ -249,11 +249,6 @@ export default function Home() {
                   height="100%" 
                 />
               </div>
-              {/* 차트 설명 텍스트 */}
-              <div className="mt-2 text-[10px] sm:text-xs text-slate-400">
-                <div>KR 기준 거래소: UPBIT</div>
-                <div>해외 거래소 기준: BINANCE</div>
-              </div>
             </section>
 
             {/* 프리미엄 테이블 섹션 */}
