@@ -50,17 +50,21 @@ export function TodayPremiumSection({
       </div>
 
       {/* KR Premium Score 라인 */}
-      <div className="mt-2 flex items-center gap-2">
-        <span className="text-[11px] text-slate-300">KR Premium Score</span>
-        <div className="flex-1 h-2 overflow-hidden rounded-full bg-slate-700">
-          <div
-            className="h-full bg-indigo-500"
-            style={{ width: `${gaugePercent}%` }}
-          />
+      <div className="mt-3">
+        <div className="flex items-center gap-2">
+          <span className="text-[11px] md:text-xs text-slate-300 whitespace-nowrap">
+            KR Premium Score
+          </span>
+          <div className="flex-1 h-2 md:h-2.5 rounded-full bg-slate-700 overflow-hidden">
+            <div
+              className="h-full bg-[#6366F1]"
+              style={{ width: `${gaugePercent}%` }}
+            />
+          </div>
+          <span className="ml-1 text-[12px] md:text-sm font-semibold text-[#A855F7]">
+            {score}/10
+          </span>
         </div>
-        <span className="text-[11px] font-semibold text-violet-400">
-          {score}/10
-        </span>
       </div>
     </div>
   );
