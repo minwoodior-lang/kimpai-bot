@@ -664,10 +664,13 @@ export default function PremiumTable({
 
     // filterMode에 따른 필터링
     if (prefsLoaded && prefs.filterMode === "favorites") {
-      result = result.filter((item) => {
-        const normalizedSymbol = item.symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
-        return favorites.has(normalizedSymbol);
-      });
+      // 즐겨찾기가 비어있으면 모든 코인 표시 (빈 화면 방지)
+      if (favorites.size > 0) {
+        result = result.filter((item) => {
+          const normalizedSymbol = item.symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
+          return favorites.has(normalizedSymbol);
+        });
+      }
     } else if (prefsLoaded && prefs.filterMode === "foreign") {
       // 해외 거래소에 상장된 코인만 (globalPrice가 있는 경우)
       result = result.filter((item) => item.globalPrice !== null && item.globalPrice > 0);
