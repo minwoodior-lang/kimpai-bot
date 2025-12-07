@@ -1,0 +1,111 @@
+[레플릿 팀 전달문] – 코인테이블 문제점 점검 요청 (로직 수정 금지 / 점검만)
+
+안녕하세요.
+현재 KimpAI 코인테이블에서 일부 데이터 표시 이상이 발견되어,
+로직을 수정하지 않는 범위에서 ‘정확한 원인 진단만’ 요청드립니다.
+
+아래 3가지 항목을 우선 점검 부탁드립니다.
+
+✅ 1. 전일대비 금액이 잘리는 현상 (UI 폭 문제)
+📌 증상
+
+일부 코인(BCH, AAVE 등)에서 전일대비 아래줄 금액이
+예: +₩9, , +₩3,3 처럼 끝이 잘려 출력됩니다.
+
+📌 요청사항 (수정 X, 원인만 확인)
+
+PremiumTable.tsx 내 전일대비 컬럼 <td> 폭이 충분한지 확인
+
+TwoLineCell/TwoLinePriceCell의 내부 span 폭이 정상 적용되고 있는지 점검
+
+Tailwind class 충돌 또는 상위 flex/grid 구조로 인해 폭이 강제로 잘리는지 여부 확인
+
+※ 로직 수정이 아닌, 레이아웃 강제 제한 여부 확인만 요청드립니다.
+
+✅ 2. 특정 코인(MOODENG)의 전일대비 퍼센트 vs 금액 부호 불일치
+📌 증상
+
+무뎅(MOODENG)에서 아래와 같은 오류가 발생합니다:
+
+전일대비 퍼센트: -1.94% (하락)
+
+전일대비 금액: +₩3 (상승)
+
+정상이라면 두 값의 부호는 반드시 일치해야 합니다.
+
+📌 요청사항 (수정 X, 원인만 확인)
+
+아래 값들이 백엔드 API에서 어떻게 내려오는지 로그로 확인 부탁드립니다.
+
+koreanPrice
+
+prevCloseKrw
+
+changeAbsKrw
+
+changeRate
+
+체크 포인트:
+
+changeAbsKrw = currentPrice - prevClose 일치 여부
+
+changeRate 계산식과 부호가 동일하게 나오고 있는지
+
+특정 코인(MOODENG)에서만 prevClose 값이 잘못 들어오는 패턴이 있는지
+
+※ 계산 로직은 수정하지 말고, 어느 구간에서 값이 뒤집히는지만 확인 부탁드립니다.
+
+✅ 3. 해외 거래소(Binance / Bybit 등) 가격 누락 – MOODENG 해외가가 '-'로 표시됨
+📌 증상
+
+무뎅(MOODENG)은 Binance·Bybit 등 해외거래소에 상장되어 있음에도
+우리 코인테이블에서는 해외가격이 ‘–’로 출력되는 문제가 있습니다.
+
+📌 요청사항 (수정 X, 원인만 확인)
+
+아래 3단계를 통해 수집 파이프라인에서 어느 구간에서 누락되는지 점검 부탁드립니다.
+
+3-1) 마켓 리스트에 MOODENG 존재 확인
+
+Supabase exchange_markets 또는 exchange_markets.json 내
+MOODENG가 해당 해외거래소 키(BINANCE_USDT, BYBIT_USDT 등)에 존재하는지
+
+심볼 변환(MOODENGUSDT, MOODENG/USDT) 문제 여부 확인
+
+3-2) priceWorker에서 시세 수집 여부 확인
+
+priceWorker 로그에서 MOODENG 관련 메시지가 출력되는지
+
+exchange, marketSymbol, lastPrice
+
+특정 거래소에서만 시세가 아예 들어오지 않는지 여부 확인
+
+WS/REST fetchers의 심볼 매핑 오류 여부 확인
+
+3-3) table-filtered API 단계에서 foreignPriceKrw 확인
+
+API 호출 예시:
+
+/api/premium/table-filtered?domestic=UPBIT_KRW&foreign=BINANCE_USDT
+
+
+체크할 값:
+
+foreignPriceKrw 가 null 또는 0인지
+
+premiumRate, premiumDiffKrw 필드가 생성되고 있는지
+
+API에서 정상인데 프론트에서 ‘-’ 처리되는 패턴인지
+
+🔎 요약: 레플릿이 해야 할 것 (수정 금지, 점검만)
+항목	작업내용	수정여부
+전일대비 금액 잘림	UI 폭 제한 원인 조사	❌ 코드 수정 금지
+무뎅 전일대비 부호 오류	API 값과 계산 결과 비교· 로그 확인	❌ 로직 수정 금지
+무뎅 해외가격 누락	마켓 리스트 → priceWorker → API 3단계 흐름에서 누락 지점 찾기	❌ 로직 수정 금지
+📌 추가 참고 (반드시 전달)
+
+현재 우리는 코인테이블 로직 자체를 바꾸지 않습니다.
+이번 작업의 목적은 **“문제가 어디에서 발생하는지 명확히 파악하는 것”**입니다.
+
+문제 지점이 파악되면,
+다음 단계에서 수정 전달문을 별도로 요청할 예정입니다.
