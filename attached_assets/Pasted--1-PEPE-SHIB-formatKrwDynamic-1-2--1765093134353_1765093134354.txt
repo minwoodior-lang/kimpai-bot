@@ -1,0 +1,147 @@
+✅ 1. 저가 코인(PEPE, SHIB…) 해외 현재가 소수점 규칙 재정의
+
+현재 formatKrwDynamic 안에서 1 미만 숫자도 2자리 정도로만 잘리는 상황이라
+해외 현재가가 0.01처럼 뭉개집니다.
+김프가처럼 보이도록 소수점 자릿수를 다시 고정해 주세요.
+
+🔧 수정 지시 – src/components/TwoLinePriceCell.tsx
+
+formatKrwDynamic 를 아래 규칙으로 다시 구현해주세요.
+
+export function formatKrwDynamic(
+  value: number | null | undefined,
+  options: { signed?: boolean } = {}
+): string {
+  const { signed = false } = options;
+
+  // 값이 없으면 "-"
+  if (value === null || value === undefined || Number.isNaN(value)) {
+    return "-";
+  }
+
+  const abs = Math.abs(value);
+  let decimals = 0;
+
+  // 🔹 김프가 스타일 소수점 규칙 (저가 코인 강조)
+  if (abs >= 1000) {
+    // 1,000원 이상 → 정수
+    decimals = 0;
+  } else if (abs >= 1) {
+    // 1원 ~ 1,000원 → 소수 2자리
+    decimals = 2;
+  } else if (abs >= 0.1) {
+    // 0.1 ~ 1 → 소수 3자리
+    decimals = 3;
+  } else if (abs >= 0.01) {
+    // 0.01 ~ 0.1 → 소수 4자리
+    decimals = 4;
+  } else if (abs >= 0.001) {
+    // 0.001 ~ 0.01 → 소수 5자리
+    decimals = 5;
+  } else {
+    // 0.001 미만 → 소수 6자리
+    decimals = 6;
+  }
+
+  // 기본 포맷 (천단위 콤마 + 소수 자릿수)
+  let formatted = new Intl.NumberFormat("ko-KR", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  }).format(abs);
+
+  // 끝 0 제거: 0.010000 → 0.01, 42.000000 → 42
+  formatted = formatted.replace(/\.?0+$/, "");
+
+  // 부호 적용
+  if (signed) {
+    const sign = value > 0 ? "+" : value < 0 ? "-" : "";
+    return `${sign}₩${formatted}`;
+  }
+  return `₩${formatted}`;
+}
+
+
+효과
+
+PEPE 예시
+
+국내: 0.00677
+
+해외: 0.00891 같은 값이면 → 0.00891 그대로 표시 (더 이상 0.01으로 뭉개지지 않음)
+
+SHIB / BONK / XEC 모두
+
+윗줄(국내) / 아랫줄(해외)가 비슷한 자리수로 보여서 비교가 쉬움
+
+주의:
+국내 현재가(위 줄)는 지금처럼 formatKrwDomestic 쓰고,
+해외 현재가(아래 줄) / 김프 차액 / 고가·저가 차액에는 **위 formatKrwDynamic**을 그대로 사용.
+
+✅ 2. 비트코인 고가대비/저가대비 아래 숫자 잘림 (643, / 319, 문제)
+
+이건 포맷 문제가 아니라,
+아래줄 숫자를 렌더링하는 span 폭이 너무 좁아서 643,000 → 643, 까지만 보이는 현상이에요.
+
+🔧 수정 지시 – 숫자 겹치는 셀 스타일 통일
+
+TwoLinePriceCell 에서 숫자 span에 이미 비슷한 스타일을 쓰고 있다면,
+전일대비/고가대비/저가대비 컬럼에서 사용하는 TwoLineCell 도 동일하게 맞춰주세요.
+
+src/components/TwoLinePriceCell.tsx 안 숫자 span 스타일을 기준으로:
+
+// 예시 – 가격 셀에서 쓰는 스타일
+<span
+  className="block text-right whitespace-nowrap tabular-nums min-w-[92px] leading-tight"
+>
+  {topPrefix}{topFormatted}{topSuffix}
+</span>
+<span
+  className="block text-right whitespace-nowrap tabular-nums min-w-[92px] leading-tight"
+>
+  {bottomPrefix}{bottomFormatted}{bottomSuffix}
+</span>
+
+
+src/components/PremiumTable.tsx 에서
+전일대비 / 고가대비(24h) / 저가대비(24h) 칼럼에서 쓰는 TwoLineCell 의 숫자 span도
+위와 비슷하게 수정해 주세요.
+
+중요 포인트:
+
+whitespace-nowrap 유지 → 줄바꿈 금지
+
+tabular-nums → 숫자 간격 일정
+
+truncate / overflow-hidden / text-ellipsis 같은 거 제거
+
+min-w-[92px] 정도로 폭 확보 (필요하면 96px~100px까지 늘려도 됨)
+
+이렇게 하면:
+
+BTC 고가대비(24h) 아래가
+
+지금: 643, / 319,
+
+수정 후: 643,000 / 319,000 처럼 전체 숫자 다 보임
+
+한 번에 정리
+
+지금 단계에서 절대 건들지 말아야 하는 것
+
+workers/, websocket/, priceWorker.ts, data/*.json → 그대로 유지
+
+김프 계산 공식 / 고가·저가 차액 계산 로직은 손대지 말고,
+표시용 포맷 + CSS만 위 규칙대로 수정
+
+위 두 가지(소수점 규칙 + 셀 스타일)만 정확히 적용하면:
+
+PEPE / SHIB / BONK 같은 저가 코인
+
+해외 현재가가 더 이상 0.01처럼 뭉개지지 않고,
+
+김프가처럼 세밀하게 표기됨.
+
+BTC 고가대비/저가대비 아래 숫자
+
+643,000 / 319,000 전부 보여서
+김프가와 같은 느낌으로 깔끔하게 보이게 됩니다.

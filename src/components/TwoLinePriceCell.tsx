@@ -20,6 +20,7 @@ export function formatKrwDynamic(
 ): string {
   const { signed = false } = options;
 
+  // 값이 없으면 "-"
   if (value === null || value === undefined || Number.isNaN(value)) {
     return "-";
   }
@@ -27,35 +28,42 @@ export function formatKrwDynamic(
   const abs = Math.abs(value);
   let decimals = 0;
 
-  // 동적 소수점 규칙 (김프가와 동일)
-  if (abs >= 1000) decimals = 0;
-  else if (abs >= 1) decimals = 2;
-  else if (abs >= 0.1) decimals = 3;
-  else if (abs >= 0.01) decimals = 4;
-  else if (abs >= 0.001) decimals = 5;
-  else decimals = 6; // 김프가는 최대 소수점 6자리 정도까지 표기
+  // 🔹 김프가 스타일 소수점 규칙 (저가 코인 강조)
+  if (abs >= 1000) {
+    // 1,000원 이상 → 정수
+    decimals = 0;
+  } else if (abs >= 1) {
+    // 1원 ~ 1,000원 → 소수 2자리
+    decimals = 2;
+  } else if (abs >= 0.1) {
+    // 0.1 ~ 1 → 소수 3자리
+    decimals = 3;
+  } else if (abs >= 0.01) {
+    // 0.01 ~ 0.1 → 소수 4자리
+    decimals = 4;
+  } else if (abs >= 0.001) {
+    // 0.001 ~ 0.01 → 소수 5자리
+    decimals = 5;
+  } else {
+    // 0.001 미만 → 소수 6자리
+    decimals = 6;
+  }
 
-  // 1) 지정된 자리수까지 포맷
+  // 기본 포맷 (천단위 콤마 + 소수 자릿수)
   let formatted = new Intl.NumberFormat("ko-KR", {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   }).format(abs);
 
-  // 2) 끝에 붙은 0 자동 제거
-  // 예: 0.010000 → 0.01, 0.00056000 → 0.00056
+  // 끝 0 제거: 0.010000 → 0.01, 42.000000 → 42
   formatted = formatted.replace(/\.?0+$/, "");
 
-  let result = formatted;
-
-  // 3) 부호 처리
+  // 부호 적용
   if (signed) {
     const sign = value > 0 ? "+" : value < 0 ? "-" : "";
-    result = `${sign}₩${result}`;
-  } else {
-    result = `₩${result}`;
+    return `${sign}₩${formatted}`;
   }
-
-  return result;
+  return `₩${formatted}`;
 }
 
 export function formatKrwDomestic(value: number | null | undefined): string {
@@ -155,7 +163,7 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   const bottomFormatted = bottomValue != null ? formatBottom(bottomValue) : "-";
 
   const getTopClass = () => {
-    const base = "text-[13px] md:text-[14px] font-medium whitespace-nowrap tabular-nums text-right min-w-[92px]";
+    const base = "block text-right whitespace-nowrap tabular-nums min-w-[92px] text-[13px] md:text-[14px] font-medium";
     if (topValue === null) return `${base} text-gray-500`;
     if (topFlash === "up") return `${base} price-flash-up`;
     if (topFlash === "down") return `${base} price-flash-down`;
@@ -163,7 +171,7 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   };
 
   const getBottomClass = () => {
-    const base = "text-[10px] md:text-[11px] whitespace-nowrap tabular-nums text-right min-w-[92px]";
+    const base = "block text-right whitespace-nowrap tabular-nums min-w-[92px] text-[10px] md:text-[11px]";
     if (bottomValue === null) return `${base} text-gray-500`;
     if (bottomFlash === "up") return `${base} price-flash-up`;
     if (bottomFlash === "down") return `${base} price-flash-down`;

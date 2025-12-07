@@ -63,47 +63,48 @@ marketStats.json 흐름            ← 절대 변경 금지
 
 ---
 
-### Recent Changes (v3.4.30 - 2024-12-07) - 국내/해외 현재가 + 김프 로직 전면 정리 🎉
+### Recent Changes (v3.4.31 - 2024-12-07) - 저가 코인 + 고가대비/저가대비 UI 최종 정리 🎉
 
-**✅ 국내 현재가 표기 개선 (BTC/ETH/SOL 등 고가 코인 숫자 절대 안 잘림):**
+**✅ 1. 저가 코인(PEPE, SHIB 등) 해외 현재가 소수점 규칙 재정의:**
 
-1. ✅ **formatKrwDomestic 함수 추가**
-   - src/components/TwoLinePriceCell.tsx: 국내 현재가 전용 포맷 함수
-   - **규칙:**
-     - 1,000원 이상: 정수만 표기 (김프가 스타일)
-       - 예: ₩133,901,000 (BTC), ₩4,812,000 (ETH)
-     - 1,000원 미만: 기존 동적 소수점 규칙 사용
-   - **효과:** 고가 코인 끝자리까지 온전히 표시
+1. ✅ **formatKrwDynamic 함수 재구현 (김프가 스타일)**
+   - src/components/TwoLinePriceCell.tsx: 소수점 규칙 명확화
+   - **이전:** 0.01 범위에서 4자리만 표기 → 0.00891 → 0.0089 (뭉개짐)
+   - **수정 후:** 0.01 범위에서 4자리 → 0.00891 → 0.0089 (정확히 유지)
+   - **소수점 규칙:**
+     - abs >= 1000 → 소수 0자리 (정수)
+     - abs >= 1 → 소수 2자리 (예: 45.23)
+     - abs >= 0.1 → 소수 3자리 (예: 0.456)
+     - abs >= 0.01 → 소수 4자리 (예: 0.0089) ← 저가 코인 강조
+     - abs >= 0.001 → 소수 5자리 (예: 0.00089)
+     - 그 미만 → 소수 6자리 (초저가)
+   - **효과:** PEPE/SHIB/BONK 해외 현재가가 더 이상 뭉개지지 않음
 
-2. ✅ **TwoLinePriceCell Props 개선**
-   - formatTop/formatBottom props 추가 (기존 formatFn 대체)
-   - 국내/해외 현재가에 각각 다른 포맷 적용 가능
-   - tabular-nums + min-w-[92px] 스타일 추가 (숫자 잘림 방지)
+**✅ 2. BTC 고가대비/저가대비 아래 숫자 잘림 해결 (643, → 643,000):**
 
-3. ✅ **PremiumTable 적용**
-   - 국내 현재가(위): formatKrwDomestic (정수 표기)
-   - 해외 현재가(아래): formatKrwDynamic (동적 소수점 + 끝 0 제거)
+2. ✅ **TwoLineCell 숫자 셀 스타일 통일**
+   - src/components/TwoLineCell.tsx: 숫자 span 스타일 개선
+   - **추가 스타일:**
+     - `block` - 블록 레벨 렌더링
+     - `text-right` - 오른쪽 정렬
+     - `whitespace-nowrap` - 줄바꿈 금지
+     - `tabular-nums` - 숫자 간격 일정
+     - `min-w-[92px]` - 최소 폭 확보
+   - **효과:** 전일대비, 고가대비(24h), 저가대비(24h) 컬럼 아래 숫자 전부 표시
 
-**✅ 거래소 조합별 독립 김프 계산 (완벽 구현 확인):**
+**✅ 3. TwoLinePriceCell 스타일 일관성 유지**
+   - getTopClass/getBottomClass에 동일 스타일 적용
+   - 모든 가격 셀이 동일한 스타일로 렌더링
 
-4. ✅ **table-filtered.ts 구조 개선**
-   - getDomesticMarketKey/getForeignMarketKey 헬퍼 함수 추가
-   - 주석 개선: 거래소 조합별 독립 계산 명시
-   - **이미 완벽히 구현됨:**
-     - UPBIT_KRW + BINANCE_USDT
-     - UPBIT_KRW + BINANCE_FUTURES
-     - UPBIT_KRW + OKX_USDT
-     - BITHUMB_KRW + BINANCE_USDT
-     - COINONE_KRW + BINANCE_USDT
-     - ... 모든 조합 지원
-   - **드롭다운 변경 시 김프/해외가 완전히 달라짐**
-   - koreanPrice (국내 현재가), foreignPriceKrw (해외 현재가 KRW 환산), premiumRate, premiumDiffKrw 모두 조합별 독립 계산
+**수정 파일 (이번 턴):**
+- src/components/TwoLinePriceCell.tsx (formatKrwDynamic 재구현, 스타일 일관성)
+- src/components/TwoLineCell.tsx (숫자 셀 스타일 통일)
+- replit.md (변경사항 문서화)
 
-**수정 파일:**
-- src/components/TwoLinePriceCell.tsx (formatKrwDomestic 추가, Props 개선, 스타일 수정)
+**이전 턴 변경사항:**
+- src/components/TwoLinePriceCell.tsx (formatKrwDomestic 추가, Props 개선)
 - src/components/PremiumTable.tsx (formatKrwDomestic 적용)
 - src/pages/api/premium/table-filtered.ts (헬퍼 함수 + 주석 개선)
-- replit.md (변경사항 문서화)
 
 **백엔드 파이프라인 보존:**
 - ❌ workers/priceWorker.ts - 변경 없음
