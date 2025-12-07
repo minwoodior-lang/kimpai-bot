@@ -8,39 +8,50 @@ interface TwoLinePriceCellProps {
   topSuffix?: string;
   bottomSuffix?: string;
   isUnlisted?: boolean;
-  formatFn?: (value: number) => string;
+  formatFn?: (value: number, options?: { signed?: boolean }) => string;
 }
 
 type FlashState = "up" | "down" | null;
 
-const formatKrwDynamic = (value: number | null | undefined): string => {
-  // 0 또는 null일 때 "-"로 표시
-  if (value === null || value === undefined || isNaN(value) || value === 0) return "-";
+export function formatKrwDynamic(
+  value: number | null | undefined,
+  options: { signed?: boolean } = {}
+): string {
+  const { signed = false } = options;
 
-  const absValue = Math.abs(value);
-  
-  // 값이 작을수록 자리수를 늘려서 표시
-  if (absValue >= 1000) {
-    return Math.round(value).toLocaleString("ko-KR");
+  // ✅ 진짜 데이터가 없을 때만 "-" 표시
+  if (value === null || value === undefined || Number.isNaN(value)) {
+    return "-";
   }
-  if (absValue >= 1) {
-    return value.toFixed(2);
+
+  const abs = Math.abs(value);
+  let decimals = 0;
+
+  if (abs >= 1000) decimals = 0;
+  else if (abs >= 1) decimals = 2;
+  else if (abs >= 0.1) decimals = 3;
+  else if (abs >= 0.01) decimals = 4;
+  else if (abs >= 0.001) decimals = 5;
+  else if (abs >= 0.0001) decimals = 6;
+  else decimals = 8;
+
+  const formatter = new Intl.NumberFormat("ko-KR", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
+
+  if (!signed) {
+    // 일반 가격 (부호 없음)
+    return `₩${formatter.format(value)}`;
   }
-  if (absValue >= 0.1) {
-    return value.toFixed(3);
-  }
-  if (absValue >= 0.01) {
-    return value.toFixed(4);
-  }
-  if (absValue >= 0.001) {
-    return value.toFixed(5);
-  }
-  if (absValue >= 0.0001) {
-    return value.toFixed(6);
-  }
-  // 그 미만: 소수 8자리
-  return value.toFixed(8);
-};
+
+  // 차액/김프 차액용 (부호 포함)
+  const sign = value > 0 ? "+" : value < 0 ? "-" : "";
+  const absFormatted = formatter.format(Math.abs(value));
+
+  // 0이어도 실제 데이터면 "+₩0.00" 처럼 그대로 보여줌
+  return `${sign}₩${absFormatted}`;
+}
 
 const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   topValue,

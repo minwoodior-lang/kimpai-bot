@@ -13,7 +13,7 @@ import {
 } from "@/contexts/ExchangeSelectionContext";
 import CoinIcon from "@/components/CoinIcon";
 import PriceCell from "@/components/PriceCell";
-import TwoLinePriceCell from "@/components/TwoLinePriceCell";
+import TwoLinePriceCell, { formatKrwDynamic } from "@/components/TwoLinePriceCell";
 import TwoLineCell from "@/components/TwoLineCell";
 import { openCmcPage } from "@/lib/coinMarketCapUtils";
 import { useUserPrefs } from "@/hooks/useUserPrefs";
@@ -260,8 +260,6 @@ const PremiumTableRow = React.memo(({
           <TwoLinePriceCell
             topValue={row.koreanPrice}
             bottomValue={row.foreignPriceKrw}
-            topPrefix="₩"
-            bottomPrefix="₩"
             isUnlisted={isUnlisted}
           />
         </td>
@@ -269,7 +267,7 @@ const PremiumTableRow = React.memo(({
         <td className="w-[85px] sm:w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={isUnlisted ? "-" : formatPercent(row.premiumRate)}
-            line2={`${row.premiumDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.premiumDiffKrw || 0))}`}
+            line2={formatKrwDynamic(row.premiumDiffKrw, { signed: true })}
             line1Color={isUnlisted ? "text-gray-500" : getPremiumColor(row.premiumRate)}
             isUnlisted={isUnlisted}
           />
@@ -278,7 +276,7 @@ const PremiumTableRow = React.memo(({
         <td className="w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={formatPercent(row.changeRate)}
-            line2={`${row.changeAbsKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.changeAbsKrw || 0))}`}
+            line2={formatKrwDynamic(row.changeAbsKrw, { signed: true })}
             line1Color={getChangeColor(row.changeRate)}
           />
         </td>
@@ -286,7 +284,7 @@ const PremiumTableRow = React.memo(({
         <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={formatPercent(row.fromHighRate)}
-            line2={`${row.highDiffKrw > 0 ? "-" : "+"}₩${formatKrwPrice(Math.abs(row.highDiffKrw || 0))}`}
+            line2={formatKrwDynamic(row.highDiffKrw, { signed: true })}
             line1Color={getChangeColor(row.fromHighRate)}
           />
         </td>
@@ -294,7 +292,7 @@ const PremiumTableRow = React.memo(({
         <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={formatPercent(row.fromLowRate)}
-            line2={`${row.lowDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.lowDiffKrw || 0))}`}
+            line2={formatKrwDynamic(row.lowDiffKrw, { signed: true })}
             line1Color={getChangeColor(row.fromLowRate)}
           />
         </td>

@@ -1,0 +1,90 @@
+⚠️ 백엔드/워커/파이프라인 절대 수정 금지
+오직 src/components/TwoLinePriceCell.tsx 한 파일만 수정
+
+(1) formatKrwDynamic 함수 자체를 이렇게 교체해줘
+// src/components/TwoLinePriceCell.tsx
+
+function formatKrwDynamic(
+  value: number | null | undefined,
+  options: { signed?: boolean } = {}
+) {
+  const { signed = false } = options;
+
+  // ✅ 진짜 데이터가 없을 때만 "-" 표시
+  if (value === null || value === undefined || Number.isNaN(value)) {
+    return "-";
+  }
+
+  const abs = Math.abs(value);
+  let decimals = 0;
+
+  if (abs >= 1000) decimals = 0;
+  else if (abs >= 1) decimals = 2;
+  else if (abs >= 0.1) decimals = 3;
+  else if (abs >= 0.01) decimals = 4;
+  else if (abs >= 0.001) decimals = 5;
+  else if (abs >= 0.0001) decimals = 6;
+  else decimals = 8;
+
+  const formatter = new Intl.NumberFormat("ko-KR", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
+
+  if (!signed) {
+    // 일반 가격 (부호 없음)
+    return `₩${formatter.format(value)}`;
+  }
+
+  // 차액/김프 차액용 (부호 포함)
+  const sign = value > 0 ? "+" : value < 0 ? "-" : "";
+  const absFormatted = formatter.format(Math.abs(value));
+
+  // 0이어도 실제 데이터면 "+₩0.00" 처럼 그대로 보여줌
+  return `${sign}₩${absFormatted}`;
+}
+
+
+포인트
+
+0은 더 이상 “데이터 없음”으로 보지 않는다.
+→ 진짜 null/undefined/NaN만 "-" 처리.
+
+아주 작은 값도 규칙대로 3~8자리까지 찍힌다.
+→ 저가 코인에서 +₩0.00001234 같은 값도 살릴 수 있음.
+
+(2) TwoLinePriceCell 사용 부분 정리
+
+TwoLinePriceCell 안에서 숫자 포맷하는 부분이 대략 이런 식일 거야(이름이 조금 달라도 개념은 같음):
+
+// (예시) 현재가
+const primaryText = formatKrwDynamic(koreanPrice);
+const secondaryText = foreignPriceKrw != null
+  ? formatKrwDynamic(foreignPriceKrw)
+  : "-";
+
+// (예시) 김프 %
+const premiumPercentText = formatPercent(premium); // 이건 그대로
+
+// (예시) 김프 차액
+const premiumDiffText = formatKrwDynamic(premiumDiffKrw, { signed: true });
+
+// (예시) 전일 / 고가 / 저가 차액
+const changeAbsText = formatKrwDynamic(changeAbsKrw, { signed: true });
+const highDiffText = formatKrwDynamic(highDiffKrw, { signed: true });
+const lowDiffText = formatKrwDynamic(lowDiffKrw, { signed: true });
+
+
+Replit에게 꼭 이 두 가지를 확인하게 해줘:
+
+koreanPrice, foreignPriceKrw 둘 다 formatKrwDynamic(..., { signed: false }) (또는 옵션 생략) 쓰게 하기
+
+중간에 Math.round, toFixed(2) 같은 거 한 번 더 쓰지 말 것
+
+특히 해외 가격에 예전 formatKrw 섞여 있으면 전부 formatKrwDynamic으로 통일
+
+premiumDiffKrw, changeAbsKrw, highDiffKrw, lowDiffKrw 는
+무조건 formatKrwDynamic(값, { signed: true }) 을 쓰게 하기
+
+여기에도 value ? ... : "-" 같은 거 쓰면서 0을 죽이지 말 것
+(null/undefined 체크만 하고 나머지는 그대로 보내기)

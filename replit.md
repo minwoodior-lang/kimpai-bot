@@ -83,8 +83,17 @@ marketStats.json 흐름            ← 절대 변경 금지
      - abs >= 0.001 → 소수 5자리
      - abs >= 0.0001 → 소수 6자리
      - 그 미만 → 소수 8자리
-   - 0 또는 null 값은 "-"로 표시 (₩0.00 대신)
-   - 적용 대상: koreanPrice, foreignPriceKrw, changeAbsKrw, highDiffKrw, lowDiffKrw, premiumDiffKrw
+   - **중요:** 0은 더 이상 "-"로 표시하지 않음 (실제 데이터로 간주)
+     - null/undefined/NaN만 "-"로 표시
+     - 0 값도 "+₩0.00" 형태로 정상 표시
+   - **signed 옵션 추가:**
+     - signed: false (기본값) → "₩1,234.56" (일반 가격)
+     - signed: true → "+₩1,234.56" 또는 "-₩1,234.56" (차액/김프 차액)
+   - **적용 대상:**
+     - koreanPrice, foreignPriceKrw: formatKrwDynamic(value) [signed: false]
+     - premiumDiffKrw, changeAbsKrw, highDiffKrw, lowDiffKrw: formatKrwDynamic(value, { signed: true })
+   - **Math.abs 제거:** formatKrwDynamic이 부호 처리하므로 제거
+   - **Intl.NumberFormat 사용:** 천단위 콤마 + 동적 소수점 자리수
    - 백엔드 raw 값은 변경 없음 (표시만 조정)
 
 **✅ WebSocket → prices.json → API 파이프라인 버그 수정:**
