@@ -630,7 +630,12 @@ export default function PremiumTable({
   useEffect(() => {
     setLoading(true);
     fetchData();
-    const interval = setInterval(fetchData, refreshInterval);
+    
+    // 국내 거래소(KRW 마켓)일 때는 800ms, 그 외는 1000ms
+    const isKoreanExchange = domesticExchange.includes('_KRW');
+    const actualRefreshInterval = isKoreanExchange ? 800 : refreshInterval;
+    
+    const interval = setInterval(fetchData, actualRefreshInterval);
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [domesticExchange, foreignExchange, refreshInterval]);

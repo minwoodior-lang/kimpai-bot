@@ -65,6 +65,14 @@ marketStats.json 흐름            ← 절대 변경 금지
 
 ### Recent Changes (v3.4.29 - 2024-12-07) - WebSocket 실시간 가격 업데이트 완성 🎉
 
+**✅ 프론트엔드 폴링 주기 최적화 (국내 시세 체감 딜레이 감소):**
+
+1. ✅ **PremiumTable 폴링 주기 조정**
+   - src/components/PremiumTable.tsx: 국내 거래소(KRW 마켓) 폴링 주기 1000ms → 800ms
+   - 조건: domesticExchange.includes('_KRW') 체크
+   - 효과: 국내 시세 체감 딜레이 약 0.2초 감소
+   - 백엔드 가격 파이프라인은 변경 없음 (고정)
+
 **✅ WebSocket → prices.json → API 파이프라인 버그 수정:**
 
 1. ✅ **Map.forEach 버그 수정**
