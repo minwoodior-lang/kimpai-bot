@@ -63,7 +63,63 @@ marketStats.json 흐름            ← 절대 변경 금지
 
 ---
 
-### Recent Changes (v3.4.29 - 2024-12-07) - WebSocket 실시간 가격 업데이트 완성 🎉
+### Recent Changes (v3.4.30 - 2024-12-07) - 국내/해외 현재가 + 김프 로직 전면 정리 🎉
+
+**✅ 국내 현재가 표기 개선 (BTC/ETH/SOL 등 고가 코인 숫자 절대 안 잘림):**
+
+1. ✅ **formatKrwDomestic 함수 추가**
+   - src/components/TwoLinePriceCell.tsx: 국내 현재가 전용 포맷 함수
+   - **규칙:**
+     - 1,000원 이상: 정수만 표기 (김프가 스타일)
+       - 예: ₩133,901,000 (BTC), ₩4,812,000 (ETH)
+     - 1,000원 미만: 기존 동적 소수점 규칙 사용
+   - **효과:** 고가 코인 끝자리까지 온전히 표시
+
+2. ✅ **TwoLinePriceCell Props 개선**
+   - formatTop/formatBottom props 추가 (기존 formatFn 대체)
+   - 국내/해외 현재가에 각각 다른 포맷 적용 가능
+   - tabular-nums + min-w-[92px] 스타일 추가 (숫자 잘림 방지)
+
+3. ✅ **PremiumTable 적용**
+   - 국내 현재가(위): formatKrwDomestic (정수 표기)
+   - 해외 현재가(아래): formatKrwDynamic (동적 소수점 + 끝 0 제거)
+
+**✅ 거래소 조합별 독립 김프 계산 (완벽 구현 확인):**
+
+4. ✅ **table-filtered.ts 구조 개선**
+   - getDomesticMarketKey/getForeignMarketKey 헬퍼 함수 추가
+   - 주석 개선: 거래소 조합별 독립 계산 명시
+   - **이미 완벽히 구현됨:**
+     - UPBIT_KRW + BINANCE_USDT
+     - UPBIT_KRW + BINANCE_FUTURES
+     - UPBIT_KRW + OKX_USDT
+     - BITHUMB_KRW + BINANCE_USDT
+     - COINONE_KRW + BINANCE_USDT
+     - ... 모든 조합 지원
+   - **드롭다운 변경 시 김프/해외가 완전히 달라짐**
+   - koreanPrice (국내 현재가), foreignPriceKrw (해외 현재가 KRW 환산), premiumRate, premiumDiffKrw 모두 조합별 독립 계산
+
+**수정 파일:**
+- src/components/TwoLinePriceCell.tsx (formatKrwDomestic 추가, Props 개선, 스타일 수정)
+- src/components/PremiumTable.tsx (formatKrwDomestic 적용)
+- src/pages/api/premium/table-filtered.ts (헬퍼 함수 + 주석 개선)
+- replit.md (변경사항 문서화)
+
+**백엔드 파이프라인 보존:**
+- ❌ workers/priceWorker.ts - 변경 없음
+- ❌ workers/websocket/** - 변경 없음
+- ❌ data/prices.json - 변경 없음
+- ✅ 프론트엔드 + API 표시 로직만 개선
+
+**성능 (유지):**
+- API 응답: **8-477ms** (캐시 효율 유지)
+- WebSocket: 690+ active streams
+- 가격 수집: **4400+개**
+- 폴링 주기: 국내 800ms, 해외 1000ms
+
+---
+
+### Previous Changes (v3.4.29 - 2024-12-07) - WebSocket 실시간 가격 업데이트 완성
 
 **✅ 프론트엔드 폴링 주기 최적화 (국내 시세 체감 딜레이 감소):**
 

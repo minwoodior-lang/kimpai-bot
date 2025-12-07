@@ -13,7 +13,7 @@ import {
 } from "@/contexts/ExchangeSelectionContext";
 import CoinIcon from "@/components/CoinIcon";
 import PriceCell from "@/components/PriceCell";
-import TwoLinePriceCell, { formatKrwDynamic } from "@/components/TwoLinePriceCell";
+import TwoLinePriceCell, { formatKrwDynamic, formatKrwDomestic } from "@/components/TwoLinePriceCell";
 import TwoLineCell from "@/components/TwoLineCell";
 import { openCmcPage } from "@/lib/coinMarketCapUtils";
 import { useUserPrefs } from "@/hooks/useUserPrefs";
@@ -310,6 +310,8 @@ const PremiumTableRow = React.memo(({
           <TwoLinePriceCell
             topValue={row.koreanPrice}
             bottomValue={row.foreignPriceKrw}
+            formatTop={formatKrwDomestic}
+            formatBottom={formatKrwDynamic}
             isUnlisted={isUnlisted}
           />
         </td>

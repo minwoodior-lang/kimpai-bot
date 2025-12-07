@@ -8,7 +8,8 @@ interface TwoLinePriceCellProps {
   topSuffix?: string;
   bottomSuffix?: string;
   isUnlisted?: boolean;
-  formatFn?: (value: number, options?: { signed?: boolean }) => string;
+  formatTop?: (value: number, options?: { signed?: boolean }) => string;
+  formatBottom?: (value: number, options?: { signed?: boolean }) => string;
 }
 
 type FlashState = "up" | "down" | null;
@@ -57,6 +58,23 @@ export function formatKrwDynamic(
   return result;
 }
 
+export function formatKrwDomestic(value: number | null | undefined): string {
+  if (value === null || value === undefined || Number.isNaN(value)) return "-";
+
+  const abs = Math.abs(value);
+
+  // 1,000원 이상: 정수만 (김프가 스타일)
+  if (abs >= 1000) {
+    return "₩" + new Intl.NumberFormat("ko-KR", {
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    }).format(value);
+  }
+
+  // 1,000원 미만: 기존 동적 규칙 사용 (소수점)
+  return formatKrwDynamic(value, { signed: false });
+}
+
 const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   topValue,
   bottomValue,
@@ -65,7 +83,8 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   topSuffix = "",
   bottomSuffix = "",
   isUnlisted = false,
-  formatFn = formatKrwDynamic,
+  formatTop = formatKrwDynamic,
+  formatBottom = formatKrwDynamic,
 }) => {
   const [topFlash, setTopFlash] = useState<FlashState>(null);
   const [bottomFlash, setBottomFlash] = useState<FlashState>(null);
@@ -132,11 +151,11 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
     };
   }, [bottomValue, isUnlisted]);
 
-  const topFormatted = topValue != null ? formatFn(topValue) : "-";
-  const bottomFormatted = bottomValue != null ? formatFn(bottomValue) : "-";
+  const topFormatted = topValue != null ? formatTop(topValue) : "-";
+  const bottomFormatted = bottomValue != null ? formatBottom(bottomValue) : "-";
 
   const getTopClass = () => {
-    const base = "text-[13px] md:text-[14px] font-medium whitespace-nowrap";
+    const base = "text-[13px] md:text-[14px] font-medium whitespace-nowrap tabular-nums text-right min-w-[92px]";
     if (topValue === null) return `${base} text-gray-500`;
     if (topFlash === "up") return `${base} price-flash-up`;
     if (topFlash === "down") return `${base} price-flash-down`;
@@ -144,7 +163,7 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   };
 
   const getBottomClass = () => {
-    const base = "text-[10px] md:text-[11px] whitespace-nowrap";
+    const base = "text-[10px] md:text-[11px] whitespace-nowrap tabular-nums text-right min-w-[92px]";
     if (bottomValue === null) return `${base} text-gray-500`;
     if (bottomFlash === "up") return `${base} price-flash-up`;
     if (bottomFlash === "down") return `${base} price-flash-down`;

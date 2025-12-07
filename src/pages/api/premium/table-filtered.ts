@@ -88,6 +88,17 @@ function parseMarketParam(value: string): { exchange: string; quote: string } {
   return { exchange, quote };
 }
 
+// 🔧 거래소 조합별 마켓 키 생성 헬퍼 함수
+// 각 거래소 조합마다 독립적인 prices.json 키를 생성합니다
+// 예시: "UPBIT:BTC:KRW", "BINANCE:BTC:USDT", "BINANCE_FUTURES:BTC:USDT"
+function getDomesticMarketKey(symbol: string, exchange: string, quote: string): string {
+  return `${exchange}:${symbol}:${quote}`;
+}
+
+function getForeignMarketKey(symbol: string, exchange: string, quote: string): string {
+  return `${exchange}:${symbol}:${quote}`;
+}
+
 // ❌ WebSocket override 로직 제거:
 // priceWorker가 이미 WebSocket 가격을 prices.json에 병합하고 있으므로
 // API 레벨에서 별도 override가 불필요함 (프로세스 격리로 인해 작동도 안 함)
@@ -128,12 +139,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         const master = masterMap.get(symbol);
         const premiumRow = premiumMap.get(symbol);
 
-        const domesticPriceKey = `${domesticExchange}:${symbol}:${domesticQuote}`;
-        const foreignPriceKey = `${foreignExchange}:${symbol}:${foreignQuote}`;
+        // 🔧 거래소 조합별 독립 계산: 드롭다운 변경 시 김프/해외가가 완전히 달라짐
+        // 예시: UPBIT_KRW + BINANCE_USDT, UPBIT_KRW + BINANCE_FUTURES, BITHUMB_KRW + OKX_USDT 등
+        const domesticPriceKey = getDomesticMarketKey(symbol, domesticExchange, domesticQuote);
+        const foreignPriceKey = getForeignMarketKey(symbol, foreignExchange, foreignQuote);
 
         const domesticEntry = prices[domesticPriceKey];
         const foreignEntry = prices[foreignPriceKey];
 
+        // 📌 1. 국내 현재가 KRW 환산 (koreanPrice)
         const domesticPriceRaw = domesticEntry?.price ?? null;
         let domesticPriceKrw: number | null = null;
         
@@ -152,6 +166,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           }
         }
         
+        // 📌 2. 해외 현재가 KRW 환산 (foreignPriceKrw)
         // prices.json에서 해외 가격 가져오기 (priceWorker가 이미 WebSocket 가격을 병합함)
         const foreignPrice = foreignEntry?.price ?? null;
 
@@ -174,6 +189,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           }
         }
 
+        // 📌 3. 김프 % + 김프 차액 계산 (조합별로 독립)
+        // 드롭다운에서 foreignKey만 바뀌면 해외가/김프가 전부 달라짐
         let premiumRate: number | null = null;
         let premiumDiffKrw: number | null = null;
         if (domesticPriceKrw && foreignPriceKrw && foreignPriceKrw > 0) {

@@ -1,0 +1,256 @@
+📌 전달문: 코인테이블 국내/해외 현재가 + 김프 로직 전면 정리
+변경 범위
+
+프론트
+
+src/components/TwoLinePriceCell.tsx
+
+src/components/PremiumTable.tsx (표시부만)
+
+백엔드
+
+src/pages/api/premium/table-filtered.ts
+
+❌ workers/, websocket, data/*.json 은 절대 수정하지 말 것
+
+1️⃣ 국내 현재가 표기 – “예전처럼 + 숫자 절대 안 잘리게”
+A. 국내 현재가 포맷 전용 함수 추가 (TwoLinePriceCell.tsx)
+export function formatKrwDomestic(value: number | null | undefined): string {
+  if (value === null || value === undefined || Number.isNaN(value)) return "-";
+
+  const abs = Math.abs(value);
+
+  // 1,000원 이상: 정수만 (김프가 스타일)
+  if (abs >= 1000) {
+    return "₩" + new Intl.NumberFormat("ko-KR", {
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    }).format(value);
+  }
+
+  // 1,000원 미만: 기존 동적 규칙 사용 (소수점)
+  return formatKrwDynamic(value, { signed: false });
+}
+
+B. 국내 현재가(위 줄)에만 이 함수 사용
+
+PremiumTable.tsx 에서:
+
+<TwoLinePriceCell
+  topValue={row.koreanPrice}          // 국내 현재가
+  bottomValue={row.foreignPriceKrw}   // 해외 현재가 (KRW 환산)
+  formatTop={formatKrwDomestic}       // ✅ 새 함수 사용
+  formatBottom={formatKrwDynamic}     // 기존 동적 포맷 + 소수점
+/>
+
+
+(필요하면 TwoLinePriceCell에 formatTop, formatBottom props 추가해서 위처럼 적용)
+
+C. 숫자 잘림 방지 – 셀 스타일 수정
+
+TwoLinePriceCell 상단/하단 숫자 span에 다음 조건을 맞춰준다:
+
+text-right
+
+whitespace-nowrap
+
+tabular-nums
+
+truncate/overflow-hidden 제거
+
+최소 폭 확보: 예) min-w-[92px] 또는 더 넓게
+
+예시:
+
+<span className="block text-right whitespace-nowrap tabular-nums min-w-[92px] leading-tight">
+  {formattedTop}
+</span>
+
+
+이렇게 하면 BTC, ETH, SOL 같이 자릿수 긴 코인도 마지막 숫자까지 절대 안 잘림.
+
+2️⃣ 해외 현재가 + 김프를 “각 거래소 조합마다” 다시 계산
+
+핵심:
+/api/premium/table-filtered 에서 쿼리로 받은 domestic/foreign 값을 실제 계산에 반영해서,
+각 조합마다 다른 김프/해외가가 나오도록 만든다.
+
+A. 쿼리 파라미터 수신
+const domesticKey = (req.query.domestic as string) || "UPBIT_KRW";
+const foreignKey  = (req.query.foreign as string)  || "BINANCE_USDT";
+
+
+예시 조합
+
+UPBIT_KRW + BINANCE_USDT
+
+UPBIT_KRW + BINANCE_FUTURES
+
+UPBIT_KRW + OKX_USDT
+
+BITHUMB_KRW + BINANCE_USDT
+
+COINONE_KRW + BINANCE_USDT
+
+… 필요 시 확장
+
+B. 마켓 키 매핑 함수 정의
+function getDomesticMarketKey(symbol: string, domesticKey: string): string | null {
+  switch (domesticKey) {
+    case "UPBIT_KRW":
+      return `UPBIT:${symbol}:KRW`;
+    case "BITHUMB_KRW":
+      return `BITHUMB:${symbol}:KRW`;
+    case "COINONE_KRW":
+      return `COINONE:${symbol}:KRW`;
+    default:
+      return null;
+  }
+}
+
+function getForeignMarketKey(symbol: string, foreignKey: string): string | null {
+  switch (foreignKey) {
+    case "BINANCE_USDT":
+      return `BINANCE:${symbol}:USDT`;
+    case "BINANCE_FUTURES":
+      return `BINANCE_FUTURES:${symbol}:USDT`;
+    case "OKX_USDT":
+      return `OKX:${symbol}:USDT`;
+    // 필요하면 BYBIT_USDT, GATE_USDT 등 추가
+    default:
+      return null;
+  }
+}
+
+C. 국내/해외 현재가 로딩 및 KRW 환산
+const prices = loadPricesJson();          // 기존 로딩 그대로 사용
+const fxRate = fx.usdKrw;                 // 1 USDT ≈ ? KRW
+const btcKrw = stats.btcKrw;              // BTC → KRW 환산값 (있으면 사용)
+
+...
+
+const domesticMarketKey = getDomesticMarketKey(symbol, domesticKey);
+const foreignMarketKey  = getForeignMarketKey(symbol, foreignKey);
+
+const domestic = domesticMarketKey ? prices[domesticMarketKey] : null;
+const foreign  = foreignMarketKey  ? prices[foreignMarketKey]  : null;
+
+const koreanPrice = domestic?.price ?? null;
+
+let foreignPriceKrw: number | null = null;
+
+if (foreign?.price != null) {
+  if (foreignKey.endsWith("_USDT")) {
+    foreignPriceKrw = foreign.price * fxRate;
+  } else if (foreignKey.endsWith("_BTC")) {
+    foreignPriceKrw = foreign.price * btcKrw;
+  }
+}
+
+
+해외 마켓이 없으면 foreignPriceKrw = null 로 두고, 프론트에서는 "-" 표시.
+
+이제 드롭다운에서 foreignKey만 바뀌면 해외가/김프가 전부 달라진다.
+
+D. 김프 % + 김프 차액 계산 (조합별로 독립)
+let premiumDiffKrw: number | null = null;
+let premiumRate: number | null = null;
+
+if (koreanPrice != null && foreignPriceKrw != null && foreignPriceKrw > 0) {
+  premiumDiffKrw = koreanPrice - foreignPriceKrw;
+  premiumRate    = (premiumDiffKrw / foreignPriceKrw) * 100;
+}
+
+
+응답 row에:
+
+{
+  ...,
+  koreanPrice,       // 국내 현재가 (윗줄)
+  foreignPriceKrw,   // 해외 현재가 KRW (아랫줄)
+  premiumRate,       // 김프 %
+  premiumDiffKrw,    // 김프 차액 (원)
+}
+
+
+프론트에서는:
+
+위줄: formatKrwDomestic(koreanPrice)
+
+아랫줄: formatKrwDynamic(foreignPriceKrw)
+
+김프%: formatPercent(premiumRate)
+
+김프 차액: formatKrwDynamic(premiumDiffKrw, { signed: true })
+
+만 써주면 된다.
+
+3️⃣ 소숫점 처리(해외가 + 차액) – 김프가 스타일로 최종 정리
+
+formatKrwDynamic 은 지금 규칙을 유지하되,
+뒤에 붙는 0만 제거해서 깔끔하게 만든다.
+
+export function formatKrwDynamic(
+  value: number | null | undefined,
+  options: { signed?: boolean } = {}
+): string {
+  const { signed = false } = options;
+
+  if (value === null || value === undefined || Number.isNaN(value)) return "-";
+
+  const abs = Math.abs(value);
+  let decimals = 0;
+
+  if (abs >= 1000) decimals = 0;
+  else if (abs >= 1) decimals = 2;
+  else if (abs >= 0.1) decimals = 3;
+  else if (abs >= 0.01) decimals = 4;
+  else if (abs >= 0.001) decimals = 5;
+  else decimals = 6; // 초저가 코인 최대 6자리
+
+  let formatted = new Intl.NumberFormat("ko-KR", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  }).format(abs);
+
+  // 끝 0 제거 (0.010000 → 0.01, 42.000 → 42)
+  formatted = formatted.replace(/\.?0+$/, "");
+
+  let result = formatted;
+
+  if (signed) {
+    const sign = value > 0 ? "+" : value < 0 ? "-" : "";
+    result = `${sign}₩${result}`;
+  } else {
+    result = `₩${result}`;
+  }
+
+  return result;
+}
+
+✅ 기대 결과
+
+국내 현재가
+
+BTC / ETH / SOL 같은 고가 코인:
+
+₩133,901,000 처럼 끝 숫자까지 온전히 표시
+
+더 이상 잘려서 ₩133,901, 처럼 보이는 일 없음
+
+저가 코인: 예전처럼 동적 소수점 그대로 유지
+
+해외 현재가 / 김프
+
+업비트–바이낸스 USDT, 업비트–바이낸스 선물, 업비트–OKX …
+각 조합마다 완전히 다른 김프/해외가가 계산됨
+
+드롭다운 바꾸면 숫자도 정확히 함께 바뀜
+
+김프가와 거의 동일한 수치 구조
+
+소숫점
+
+0.010000 → 0.01, 0.00056000 → 0.00056, 42.000 → 42
+
+김프/차액 숫자 깔끔하게 표기
