@@ -312,37 +312,40 @@ export default function Home() {
             </div>
 
             {/* 프리미엄 차트 섹션 */}
-            <section className="mt-4 sm:mt-5 md:mt-7 mb-4 md:mb-6">
-              {/* 상단 타이틀 + 버튼 영역 */}
-              <div className="mb-2 sm:mb-2.5 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3">
-                <h2 className="text-xs sm:text-sm text-slate-200">
-                  프리미엄 차트
-                </h2>
+            {!prefs.hideChart && (
+              <section className="mt-4 sm:mt-5 md:mt-7 mb-4 md:mb-6">
+                {/* 상단 타이틀 + 버튼 영역 */}
+                <div className="mb-2 sm:mb-2.5 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3">
+                  <h2 className="text-xs sm:text-sm text-slate-200">
+                    프리미엄 차트
+                  </h2>
 
-                <div className="flex items-center gap-1.5 md:gap-2">
-                  <button
-                    onClick={() => setIsPrefsPanelOpen(true)}
-                    className="inline-flex items-center justify-center h-9 rounded-md bg-slate-800 px-3 text-[11px] sm:text-sm text-slate-100 hover:bg-slate-700 transition"
-                  >
-                    <span className="mr-1">⚙</span>
-                    <span>개인화 설정</span>
-                  </button>
+                  <div className="flex items-center gap-1.5 md:gap-2">
+                    <button
+                      onClick={() => setIsPrefsPanelOpen(true)}
+                      className="inline-flex items-center justify-center h-9 rounded-md bg-slate-800 px-3 text-[11px] sm:text-sm text-slate-100 hover:bg-slate-700 transition"
+                    >
+                      <span className="mr-1">⚙</span>
+                      <span>개인화 설정</span>
+                    </button>
 
-                  <IndicatorSelector
-                    selectedIndicator={selectedIndicator}
-                    onIndicatorChange={setSelectedIndicator}
+                    <IndicatorSelector
+                      selectedIndicator={selectedIndicator}
+                      onIndicatorChange={setSelectedIndicator}
+                    />
+                  </div>
+                </div>
+
+                {/* TradingView 차트 컨테이너 - 좌우 꽉 차게 */}
+                <div className="w-full h-[200px] sm:h-[240px] md:h-[320px] overflow-hidden border border-white/5 bg-[#050819]">
+                  <TradingViewChartDynamic
+                    tvSymbol={SYMBOL_MAP[selectedIndicator] || "BINANCE:BTCUSDT"}
+                    height="100%"
+                    defaultTimeframe={prefs.defaultTimeframe}
                   />
                 </div>
-              </div>
-
-              {/* TradingView 차트 컨테이너 - 좌우 꽉 차게 */}
-              <div className="w-full h-[200px] sm:h-[240px] md:h-[320px] overflow-hidden border border-white/5 bg-[#050819]">
-                <TradingViewChartDynamic
-                  tvSymbol={SYMBOL_MAP[selectedIndicator] || "BINANCE:BTCUSDT"}
-                  height="100%"
-                />
-              </div>
-            </section>
+              </section>
+            )}
 
             {/* 프리미엄 테이블 섹션 */}
             <section className="mt-4 mb-10 md:mt-6 -mx-2 md:mx-0">

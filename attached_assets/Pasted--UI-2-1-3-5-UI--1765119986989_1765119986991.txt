@@ -1,0 +1,194 @@
+🎯 목표
+
+개인화 설정 패널 UI는 그대로 유지
+
+아래 2가지만 실제로 반영
+
+차트 > 홈 차트 숨기기
+
+기본 차트 시간간격 (1분·3분·5분… 버튼)
+
+기존 UI/정렬/폰트/색상은 절대 변경하지 않음
+
+CSS, Tailwind 클래스 수정/추가 금지
+
+JSX 구조도 최대한 그대로 유지
+→ 조건부 렌더링/props 추가만 수행
+
+1. 홈 페이지에서 개인화 값 읽기
+수정 파일
+
+src/pages/index.tsx (홈 페이지 컴포넌트)
+
+변경 내용
+
+상단 import 에 useUserPrefs 추가
+
+// 기존 import 들 아래에 추가
+import { useUserPrefs } from "@/hooks/useUserPrefs";
+
+
+Home 컴포넌트 내부에서 prefs 가져오기
+
+export default function Home() {
+  // ⬇⬇ 이 한 줄만 추가
+  const { prefs } = useUserPrefs();
+
+  // 이하 기존 코드 그대로 유지
+
+
+⚠ 여기서는 아무 JSX도 건드리지 않음.
+차트/테이블/카드 레이아웃은 전혀 영향 없음.
+
+2. “홈 차트 숨기기” 실제 동작 연결
+
+지금 홈 상단 차트(TradingView 들어간 컴포넌트)를 PremiumChartSection 이라고 가정하고 설명할게. 실제 이름이 다르면 “홈 차트” 렌더링하는 컴포넌트 자리에 동일하게 적용해주면 됨.
+
+수정 파일
+
+src/pages/index.tsx (또는 홈에서 차트 렌더링하는 컴포넌트가 있는 파일)
+
+변경 전 (예시)
+// 예시 – 현재 홈에서 차트 렌더링하는 부분
+<TodayPremiumSection />
+
+// TodayPremiumSection 내부 어딘가
+<PremiumChartSection />
+
+변경 후
+// Home 컴포넌트 JSX 안에서
+{/* 기존: <PremiumChartSection /> 를 직접 호출했다면 */}
+{!prefs.hideChart && <PremiumChartSection />}
+
+
+또는 TodayPremiumSection 안에서 렌더링 중이면, 거기서만 조건 걸어도 됨:
+
+// src/components/TodayPremiumSection.tsx 예시
+// 상단에서 useUserPrefs import + prefs 가져오기
+import { useUserPrefs } from "@/hooks/useUserPrefs";
+
+export default function TodayPremiumSection() {
+  const { prefs } = useUserPrefs();
+
+  return (
+    <>
+      {/* ...상단 카드들 그대로... */}
+
+      {/* 차트 부분만 조건부 렌더링 */}
+      {!prefs.hideChart && <PremiumChartSection />}
+    </>
+  );
+}
+
+
+✅ 이 변경은 차트 전체를 보여줄지 말지만 제어하고,
+카드·테이블·폰트는 건드리지 않음.
+
+3. “기본 차트 시간간격” → TradingView interval 적용
+3-1. 차트 컴포넌트가 기본시간값을 prop 으로 받도록
+수정 파일
+
+src/components/PremiumChartSection.tsx (또는 실제 차트 컴포넌트)
+
+1) props 타입 추가
+interface PremiumChartSectionProps {
+  defaultTimeframe?: string;  // "1m" | "3m" | "5m" ... 등
+}
+
+export default function PremiumChartSection({
+  defaultTimeframe = "1h",   // 기본값: 1시간 (기존 동작 유지)
+}: PremiumChartSectionProps) {
+  // 기존 코드...
+
+2) TradingView 위젯에 interval 전달
+
+기존에 이런 코드가 있을 거야:
+
+<TradingViewWidget
+  symbol={...}
+  interval="1h"   // ← 기존 하드코딩
+  // ... 기타 props
+/>
+
+
+이걸 아래처럼 교체:
+
+<TradingViewWidget
+  symbol={...}
+  interval={defaultTimeframe}   // ✅ 개인화 값 사용
+  // ... 기타 props 그대로 유지
+/>
+
+
+⚠ className, height, width, style 등은 절대 수정하지 말 것.
+오직 interval="1h" → interval={defaultTimeframe} 만 변경.
+
+3-2. 홈에서 차트에 defaultTimeframe 넘겨주기
+수정 파일
+
+src/pages/index.tsx 또는 TodayPremiumSection.tsx
+
+Home 컴포넌트에서 이미 const { prefs } = useUserPrefs(); 했으니
+차트 호출을 이렇게 바꿔줘.
+
+변경 전
+{!prefs.hideChart && <PremiumChartSection />}
+
+변경 후
+{!prefs.hideChart && (
+  <PremiumChartSection defaultTimeframe={prefs.defaultTimeframe} />
+)}
+
+
+만약 TodayPremiumSection 안에서 차트를 렌더링한다면:
+
+// TodayPremiumSection.tsx
+const { prefs } = useUserPrefs();
+
+...
+
+{!prefs.hideChart && (
+  <PremiumChartSection defaultTimeframe={prefs.defaultTimeframe} />
+)}
+
+
+✅ 이렇게 하면:
+
+패널에서 5분 선택 → prefs.defaultTimeframe = "5m"
+
+차트 interval 이 자동으로 "5m" 으로 렌더링
+
+버튼 UI, 색상, 정렬 변경 없음
+
+4. 일부 옵션은 아직 연결하지 말 것
+
+이번 전달에서 절대 건드리지 말아야 할 것:
+
+priceUnit (KRW 기준 / USDT 기준)
+→ 가격 변환/포맷 로직 건드리면 숫자 꼬일 수 있음
+
+filterMode (모든 코인 / 해외 보유 / 즐겨찾기)
+→ PremiumTable 필터링 로직은 추후 별도 작업
+
+지금 단계에서는 UI는 그대로, 동작은 “차트 숨기기 + 기본 시간간격”까지만
+확실히 안정화하는 게 목적.
+
+🧪 최종 체크리스트
+
+개인화 패널 열림/닫힘 동작 기존과 동일
+
+“홈 차트 숨기기” 체크
+
+차트 영역 전체가 사라지고,
+
+상단 카드 & 코인 테이블 레이아웃 깨짐 없음
+
+기본 시간간격 버튼 클릭 후 새로고침
+
+로컬스토리지에 저장된 값대로 interval 적용
+
+예: 5분 선택 → 페이지 새로고침해도 5분 차트
+
+PC / 모바일에서
+
+컬럼 정렬, 폰트, 색상, 여백 기존과 완전히 동일한지 확인

@@ -5,13 +5,33 @@ interface TradingViewChartProps {
   height?: number | string;
   domesticExchange?: string;
   foreignExchange?: string;
+  defaultTimeframe?: "1m" | "3m" | "5m" | "15m" | "30m" | "1h" | "2h" | "3h" | "4h" | "1d" | "1w";
 }
+
+// 시간간격을 TradingView interval로 변환
+const timeframeToInterval = (tf?: string): string => {
+  const mapping: Record<string, string> = {
+    "1m": "1",
+    "3m": "3",
+    "5m": "5",
+    "15m": "15",
+    "30m": "30",
+    "1h": "60",
+    "2h": "120",
+    "3h": "180",
+    "4h": "240",
+    "1d": "1D",
+    "1w": "1W",
+  };
+  return mapping[tf || "1h"] || "60";
+};
 
 const TradingViewChart: React.FC<TradingViewChartProps> = ({
   tvSymbol,
   height = 360,
   domesticExchange,
   foreignExchange,
+  defaultTimeframe = "1h",
 }) => {
   // 모바일 환경에서 높이 축소
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
@@ -34,7 +54,7 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
     const config = {
       autosize: true,
       symbol: tvSymbol || "BINANCE:BTCUSDT",
-      interval: "60",
+      interval: timeframeToInterval(defaultTimeframe),
       timezone: "Asia/Seoul",
       theme: "dark",
       style: "1",
@@ -51,7 +71,7 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
     script.innerHTML = JSON.stringify(config);
 
     containerRef.current.appendChild(script);
-  }, [tvSymbol]);
+  }, [tvSymbol, defaultTimeframe]);
 
   const getExchangeName = (exchange?: string) => {
     if (!exchange) return "";
