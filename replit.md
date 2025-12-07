@@ -6,10 +6,23 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 ### User Preferences
 - I want iterative development.
 - I prefer detailed explanations.
-- Do not make changes to the price pipeline structure (workers/websocket/**, workers/priceWorker.ts, data/prices.json creation, src/pages/api/premium/table.ts, src/pages/api/premium/table-filtered.ts).
-- Do not make changes to the domestic price collection logic (Upbit/Bithumb/Coinone KRW prices, 300ms cycle).
-- Do not change priceWorker interval (300ms), API cache TTL (200-800ms), WebSocket merge criteria, prices.json structure, premium calculation method, or marketStats.json flow.
-- Any changes to fixed components require prior consultation.
+
+### ⛔ CRITICAL: BACKEND PIPELINE FROZEN (v3.4.29)
+**NEVER modify without explicit user permission:**
+- ✅ **Verified Working:** All domestic (UPBIT/BITHUMB/COINONE KRW/USDT/BTC) and global (BINANCE/OKX/BYBIT/BITGET/GATE/MEXC/HTX) markets are correctly collected with NO gaps
+- ✅ **Auto-Delisting:** Delisted coins are automatically removed from collection
+- ✅ **Real-time Pipeline:** WebSocket (300ms) + REST fallback working perfectly
+
+**FROZEN Components (DO NOT TOUCH):**
+- `workers/` directory (WebSocket connections, market sync)
+- `workers/priceWorker.ts` (300ms update cycle)
+- `data/prices.json` (structure and creation logic)
+- `src/pages/api/premium/table.ts` (calculation, cache 800ms TTL)
+- `src/pages/api/premium/table-filtered.ts` (mapping, filtering)
+- Domestic price collection logic (KRW prices 300ms cycle)
+- WebSocket merge criteria, premium calculation method, marketStats.json flow
+
+**ALLOWED:** Frontend display, styling, formatting functions (TwoLinePriceCell.tsx, PremiumTable.tsx, etc.)
 
 ### System Architecture
 
