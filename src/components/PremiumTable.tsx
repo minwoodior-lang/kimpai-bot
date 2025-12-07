@@ -1135,11 +1135,11 @@ export default function PremiumTable({
                     <SortIcon columnKey="changeRate" />
                   </th>
                   <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("fromHighRate")}>
-                    고가대비
+                    고가대비(24h)
                     <SortIcon columnKey="fromHighRate" />
                   </th>
                   <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("fromLowRate")}>
-                    저가대비
+                    저가대비(24h)
                     <SortIcon columnKey="fromLowRate" />
                   </th>
                   <th className="px-3 lg:px-4 py-2.5 text-right text-[12px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("volume24hKrw")}>

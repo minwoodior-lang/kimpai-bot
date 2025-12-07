@@ -19,7 +19,6 @@ export function formatKrwDynamic(
 ): string {
   const { signed = false } = options;
 
-  // ✅ 진짜 데이터가 없을 때만 "-" 표시
   if (value === null || value === undefined || Number.isNaN(value)) {
     return "-";
   }
@@ -27,30 +26,35 @@ export function formatKrwDynamic(
   const abs = Math.abs(value);
   let decimals = 0;
 
+  // 동적 소수점 규칙 (김프가와 동일)
   if (abs >= 1000) decimals = 0;
   else if (abs >= 1) decimals = 2;
   else if (abs >= 0.1) decimals = 3;
   else if (abs >= 0.01) decimals = 4;
   else if (abs >= 0.001) decimals = 5;
-  else if (abs >= 0.0001) decimals = 6;
-  else decimals = 8;
+  else decimals = 6; // 김프가는 최대 소수점 6자리 정도까지 표기
 
-  const formatter = new Intl.NumberFormat("ko-KR", {
+  // 1) 지정된 자리수까지 포맷
+  let formatted = new Intl.NumberFormat("ko-KR", {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
-  });
+  }).format(abs);
 
-  if (!signed) {
-    // 일반 가격 (부호 없음)
-    return `₩${formatter.format(value)}`;
+  // 2) 끝에 붙은 0 자동 제거
+  // 예: 0.010000 → 0.01, 0.00056000 → 0.00056
+  formatted = formatted.replace(/\.?0+$/, "");
+
+  let result = formatted;
+
+  // 3) 부호 처리
+  if (signed) {
+    const sign = value > 0 ? "+" : value < 0 ? "-" : "";
+    result = `${sign}₩${result}`;
+  } else {
+    result = `₩${result}`;
   }
 
-  // 차액/김프 차액용 (부호 포함)
-  const sign = value > 0 ? "+" : value < 0 ? "-" : "";
-  const absFormatted = formatter.format(Math.abs(value));
-
-  // 0이어도 실제 데이터면 "+₩0.00" 처럼 그대로 보여줌
-  return `${sign}₩${absFormatted}`;
+  return result;
 }
 
 const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({

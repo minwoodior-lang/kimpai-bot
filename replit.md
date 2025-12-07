@@ -73,27 +73,29 @@ marketStats.json 흐름            ← 절대 변경 금지
    - 효과: 국내 시세 체감 딜레이 약 0.2초 감소
    - 백엔드 가격 파이프라인은 변경 없음 (고정)
 
-2. ✅ **TwoLinePriceCell 소수점 포맷 개선 (formatKrwDynamic)**
-   - src/components/TwoLinePriceCell.tsx: 동적 소수점 자리수 규칙 적용
-   - 규칙:
+2. ✅ **TwoLinePriceCell 소수점 포맷 개선 (formatKrwDynamic - 김프가 동일 방식)**
+   - src/components/TwoLinePriceCell.tsx: 동적 소수점 자리수 규칙 + 끝 0 제거
+   - **동적 소수점 규칙 (김프가와 동일):**
      - abs >= 1000 → 소수 0자리 (정수 표시 + 천단위 콤마)
      - abs >= 1 → 소수 2자리
      - abs >= 0.1 → 소수 3자리
      - abs >= 0.01 → 소수 4자리
      - abs >= 0.001 → 소수 5자리
-     - abs >= 0.0001 → 소수 6자리
-     - 그 미만 → 소수 8자리
+     - 그 미만 → 소수 6자리 (최대)
+   - **끝 0 자동 제거 (NEW):**
+     - `0.010000` → `0.01`
+     - `0.00056000` → `0.00056`
+     - `42.000` → `42`
+     - 정규식 `.replace(/\.?0+$/, "")` 적용
    - **중요:** 0은 더 이상 "-"로 표시하지 않음 (실제 데이터로 간주)
      - null/undefined/NaN만 "-"로 표시
-     - 0 값도 "+₩0.00" 형태로 정상 표시
-   - **signed 옵션 추가:**
+     - 0 값도 "+₩0" 또는 "₩0" 형태로 정상 표시
+   - **signed 옵션:**
      - signed: false (기본값) → "₩1,234.56" (일반 가격)
      - signed: true → "+₩1,234.56" 또는 "-₩1,234.56" (차액/김프 차액)
    - **적용 대상:**
      - koreanPrice, foreignPriceKrw: formatKrwDynamic(value) [signed: false]
-     - premiumDiffKrw, changeAbsKrw, highDiffKrw, lowDiffKrw: formatKrwDynamic(value, { signed: true })
-   - **Math.abs 제거:** formatKrwDynamic이 부호 처리하므로 제거
-   - **Intl.NumberFormat 사용:** 천단위 콤마 + 동적 소수점 자리수
+     - premiumDiffKrw, changeAbsKrw, highDiffKrw, lowDiffKrw: formatKrwDynamic(value, { signed: true/false })
    - 백엔드 raw 값은 변경 없음 (표시만 조정)
 
 3. ✅ **PremiumTableRow 차액 계산 로직 프론트엔드 재계산 (API 0 값 문제 해결)**
@@ -110,6 +112,14 @@ marketStats.json 흐름            ← 절대 변경 금지
      - 고가/저가: `formatKrwDynamic(value, { signed: false })` (부호 없음)
    - **효과:** API가 0으로 내려줘도 프론트에서 정확한 차액 계산 및 표시
    - 백엔드 파이프라인 변경 없음 (고정)
+
+4. ✅ **고가/저가 컬럼 라벨 수정 - "24h 기준" 명확화**
+   - src/components/PremiumTable.tsx: 테이블 헤더 라벨 변경
+   - **변경 내용:**
+     - "고가대비" → "고가대비(24h)"
+     - "저가대비" → "저가대비(24h)"
+   - **효과:** 24시간 기준임을 사용자에게 명확히 전달
+   - 계산 로직은 이미 high24h/low24h 기준이므로 변경 없음
 
 **✅ WebSocket → prices.json → API 파이프라인 버그 수정:**
 
