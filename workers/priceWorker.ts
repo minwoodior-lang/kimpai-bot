@@ -61,7 +61,8 @@ function mergeWebSocketPrices(): number {
   const wsPrices = getAllWebSocketPrices();
   let mergedCount = 0;
   
-  wsPrices.forEach((wsPrice) => {
+  // Map.forEach는 (value, key) 순서!
+  wsPrices.forEach((wsPrice, wsKey) => {
     const key = `${wsPrice.exchange}:${wsPrice.symbol}:${wsPrice.quote}`;
     const existingEntry = currentPrices[key];
     
@@ -594,6 +595,7 @@ async function updatePricesOnly(): Promise<void> {
       fetchCoinonePrices(coinoneMarkets)
     ];
     
+    // 모든 거래소 REST API 호출 (WebSocket fallback용)
     const globalPromises = [
       fetchBinanceSpotPrices(globalMarkets),
       fetchBinanceFuturesPrices(globalMarkets),
@@ -607,9 +609,15 @@ async function updatePricesOnly(): Promise<void> {
     
     const priceResults = await Promise.allSettled([...domesticPromises, ...globalPromises]);
 
+    // REST 결과 병합: WebSocket으로 최근 업데이트된 키는 보호
     for (const result of priceResults) {
       if (result.status === 'fulfilled') {
         for (const [key, value] of Object.entries(result.value)) {
+          // dirtyPriceKeys에 있으면 WebSocket이 최근 업데이트한 것이므로 REST로 덮어쓰지 않음
+          if (dirtyPriceKeys.has(key)) {
+            continue;
+          }
+          
           const existing = currentPrices[key];
           if (!existing || (value as any).ts > existing.ts) {
             currentPrices[key] = value as any;
@@ -617,6 +625,9 @@ async function updatePricesOnly(): Promise<void> {
         }
       }
     }
+    
+    // dirtyPriceKeys 초기화 (다음 주기를 위해)
+    dirtyPriceKeys.clear();
 
     // GLOBAL:USDT:USDT 엔트리 생성 (CoinGecko 글로벌 테더 시세)
     if (usdtKrwGlobal) {
