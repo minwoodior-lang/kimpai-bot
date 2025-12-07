@@ -76,6 +76,6 @@ packages = ["lsof", "jq"]
 USE_WS_OVERRIDE = "true"
 
 [deployment]
-run = ["npm", "start"]
-deploymentTarget = "autoscale"
+run = ["tsx", "server.ts"]
+deploymentTarget = "vm"
 build = ["npm", "run", "build"]

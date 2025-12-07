@@ -1,0 +1,56 @@
+// src/server/startAllWorkers.ts
+import { startPriceWorker } from "@/workers/priceWorker";
+import { startStatsWorker } from "@/workers/statsWorker"; // premiumTable/marketStats 계산
+import { refreshExchangeMarkets } from "@/scripts/refreshExchangeMarkets"; // 업비트/빗썸/코인원 마켓 동기화
+import { buildMasterSymbols } from "@/scripts/buildMasterSymbols"; // master_symbols.json 재생성
+import { syncMetadata } from "@/scripts/syncMetadata"; // name_ko, name_en, icon 등 메타 병합
+import { runNoticeUpdateWorker } from "@/workers/noticeUpdateWorker"; // 상장/폐지 공지 크롤링
+// 필요하면 global metrics, 환율 등도 import
+
+export function startAllWorkers() {
+  console.log("[KimpAI] 🔥 startAllWorkers called");
+
+  // 1) 실시간 가격 + 프리미엄 테이블 (코인테이블 데이터)
+  // -------------------------------------------------
+  // priceWorker: 3초 단위로 각 거래소 가격 수집 → data/prices.json
+  startPriceWorker();
+  // statsWorker: prices.json 기반으로 premiumTable.json / marketStats.json 등 계산
+  startStatsWorker();
+
+  // 2) 거래소 마켓 동기화 + 상장/폐지/메타데이터
+  // -------------------------------------------------
+  // (A) 매일 새벽 4시: 업비트/빗썸/코인원 마켓 전체 동기화
+  setInterval(async () => {
+    const now = new Date();
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+
+    // 새벽 4시 정각 근처에서만 1회 실행되도록 단순 체크 (node-cron 안 쓰고 기본 setInterval 사용)
+    if (hour === 4 && minute === 0) {
+      try {
+        console.log("[KimpAI] 🕓 04:00: refreshExchangeMarkets + buildMasterSymbols + syncMetadata 시작");
+        await refreshExchangeMarkets();   // exchange_markets.json 재작성
+        await buildMasterSymbols();      // master_symbols.json 재작성
+        await syncMetadata();            // name_ko/name_en/icon_url 병합
+        console.log("[KimpAI] ✅ 마켓/심볼/메타데이터 동기화 완료");
+      } catch (err) {
+        console.error("[KimpAI] ❌ 마켓/메타 동기화 에러:", err);
+      }
+    }
+  }, 60 * 1000); // 1분마다 체크
+
+  // (B) 10분마다: 빗썸/코인원 상장/폐지 공지 크롤링 → master_symbols 반영
+  setInterval(async () => {
+    try {
+      console.log("[KimpAI] 🔍 상장/폐지 공지 크롤러 실행 (10분 주기)");
+      await runNoticeUpdateWorker();
+      console.log("[KimpAI] ✅ 상장/폐지 공지 반영 완료");
+    } catch (err) {
+      console.error("[KimpAI] ❌ 상장/폐지 공지 처리 에러:", err);
+    }
+  }, 10 * 60 * 1000); // 10분
+
+  // 3) 필요하면 글로벌 메트릭(환율, BTC 도미넌스 등)도 여기서 시작
+  // -------------------------------------------------
+  // startGlobalMetricsWorker();
+}
