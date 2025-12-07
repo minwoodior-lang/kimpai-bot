@@ -4,6 +4,8 @@ import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "@/lib/supabaseClient";
 
+export const revalidate = 0; // ISR 비활성화 - 클라이언트 사이드 렌더링만 사용
+
 type AlertRow = {
   id: string;
   symbol: string;
