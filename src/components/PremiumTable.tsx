@@ -13,7 +13,7 @@ import {
 } from "@/contexts/ExchangeSelectionContext";
 import CoinIcon from "@/components/CoinIcon";
 import PriceCell from "@/components/PriceCell";
-import TwoLinePriceCell, { formatKrwDynamic, formatKrwDomestic } from "@/components/TwoLinePriceCell";
+import TwoLinePriceCell, { formatKrwDynamic, formatKrwDomestic, formatKrwDiffByBase } from "@/components/TwoLinePriceCell";
 import TwoLineCell from "@/components/TwoLineCell";
 import { openCmcPage } from "@/lib/coinMarketCapUtils";
 import { useUserPrefs } from "@/hooks/useUserPrefs";
@@ -191,68 +191,8 @@ const PremiumTableRow = React.memo(({
   const isFav = favorites.has(normalizedSymbol);
   const isUnlisted = !row.foreignPriceKrw || row.foreignPriceKrw <= 0;
 
-  // === 김프가 스타일로 맞추기 위한 표시용 파생 값들 ===
-
-  // 국내가가 유효한지 체크
-  const hasDomesticPrice =
-    row.koreanPrice !== null &&
-    row.koreanPrice !== undefined &&
-    !Number.isNaN(row.koreanPrice);
-
-  // 1) 김프 차액 (국내가 - 해외가)
-  //    → 김프가 하단 숫자와 동일한 개념
-  const premiumDiffKrw =
-    hasDomesticPrice &&
-    row.foreignPriceKrw !== null &&
-    row.foreignPriceKrw !== undefined &&
-    row.foreignPriceKrw > 0
-      ? row.koreanPrice - row.foreignPriceKrw
-      : null;
-
-  // 2) 전일대비 차액 (현재가 - 전일 종가)
-  //    changeRate 또는 change24h 둘 중 존재하는 퍼센트에서 역산
-  const changePercentSource =
-    row.changeRate !== null &&
-    row.changeRate !== undefined &&
-    !Number.isNaN(row.changeRate)
-      ? row.changeRate
-      : row.change24h !== null &&
-        row.change24h !== undefined &&
-        !Number.isNaN(row.change24h)
-      ? row.change24h
-      : null;
-
-  let prevClose: number | null = null;
-  if (
-    hasDomesticPrice &&
-    changePercentSource !== null &&
-    changePercentSource !== undefined
-  ) {
-    const ratio = 1 + changePercentSource / 100;
-    if (ratio !== 0) {
-      prevClose = row.koreanPrice / ratio;
-    }
-  }
-
-  const changeAbsKrw =
-    hasDomesticPrice && prevClose !== null ? row.koreanPrice - prevClose : null;
-
-  // 3) 고가대비 / 저가대비 차액
-  //    고가대비 하단: (고가 - 현재가)
-  //    저가대비 하단: (현재가 - 저가)
-  const highDiffKrw =
-    hasDomesticPrice &&
-    row.high24h !== null &&
-    row.high24h !== undefined
-      ? row.high24h - row.koreanPrice
-      : null;
-
-  const lowDiffKrw =
-    hasDomesticPrice &&
-    row.low24h !== null &&
-    row.low24h !== undefined
-      ? row.koreanPrice - row.low24h
-      : null;
+  // 더 이상 프론트에서 diff 재계산하지 않음
+  // 백엔드에서 제공하는 값 그대로 사용
 
   return (
     <React.Fragment key={uniqueKey}>
@@ -318,8 +258,12 @@ const PremiumTableRow = React.memo(({
 
         <td className="w-[85px] sm:w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
-            line1={isUnlisted ? "-" : formatPercent(row.premiumRate)}
-            line2={formatKrwDynamic(premiumDiffKrw, { signed: true })}
+            line1={row.premiumRate !== null ? formatPercent(row.premiumRate) : "-"}
+            line2={
+              row.premiumDiffKrw !== null && row.koreanPrice !== null
+                ? formatKrwDiffByBase(row.premiumDiffKrw, row.koreanPrice)
+                : "-"
+            }
             line1Color={isUnlisted ? "text-gray-500" : getPremiumColor(row.premiumRate)}
             isUnlisted={isUnlisted}
           />
@@ -327,8 +271,12 @@ const PremiumTableRow = React.memo(({
 
         <td className="w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
-            line1={formatPercent(row.changeRate)}
-            line2={formatKrwDynamic(changeAbsKrw, { signed: true })}
+            line1={row.changeRate !== null ? formatPercent(row.changeRate) : "-"}
+            line2={
+              row.changeAbsKrw !== null && row.koreanPrice !== null
+                ? formatKrwDiffByBase(row.changeAbsKrw, row.koreanPrice)
+                : "-"
+            }
             line1Color={getChangeColor(row.changeRate)}
           />
         </td>

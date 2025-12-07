@@ -1,0 +1,230 @@
+KimpAI 코인테이블 로직·표시 전면 정리 지시서 (최종 버전)
+
+아래 내용을 기준으로 코인테이블의 모든 컬럼을
+정확한 계산식 / 정확한 필드 매핑 / 정확한 포맷 규칙으로 정리해 주세요.
+
+현재 전체 구조는 잘 되어 있으나,
+
+일부 컬럼에서 프론트 재계산 로직이 백엔드 값과 충돌,
+
+금액/퍼센트 표기 규칙 불일치,
+
+폭 부족으로 숫자 잘리는 문제가 발생하고 있으므로
+아래 지시대로 수정하면 모든 문제가 해소됩니다.
+
+✅ 1. 새로운 포맷 유틸 추가 (TwoLinePriceCell.tsx)
+
+파일: src/components/TwoLinePriceCell.tsx
+위치: 기존 formatKrwDynamic 근처
+
+아래 코드를 그대로 추가:
+
+export function formatKrwDiffByBase(
+  diff: number | null | undefined,
+  base: number | null | undefined
+): string {
+  if (
+    diff === null ||
+    diff === undefined ||
+    Number.isNaN(diff) ||
+    base === null ||
+    base === undefined ||
+    Number.isNaN(base)
+  ) {
+    return "-";
+  }
+
+  const absBase = Math.abs(base);
+  let decimals = 0;
+
+  if (absBase >= 1000) decimals = 0;
+  else if (absBase >= 1) decimals = 2;
+  else if (absBase >= 0.1) decimals = 3;
+  else if (absBase >= 0.01) decimals = 4;
+  else if (absBase >= 0.001) decimals = 5;
+  else decimals = 6;
+
+  const absDiff = Math.abs(diff);
+  let formatted = new Intl.NumberFormat("ko-KR", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  }).format(absDiff);
+
+  formatted = formatted.replace(/\.?0+$/, ""); // 끝 0 제거
+
+  const sign = diff > 0 ? "+" : diff < 0 ? "-" : "";
+  return `${sign}₩${formatted}`;
+}
+
+
+효과:
+
+김프 금액
+
+전일대비 금액
+
+이제 현재가 자리수(국내·해외 가격 기준)와 완전히 일치하는 포맷으로 표시됨.
+(김프가·무딩·PEPE 등 저가/고가 코인 모두 정밀하게 출력됨)
+
+✅ 2. 숫자 잘림 현상 해결 (TwoLineCell 폭 증가)
+
+파일: src/components/TwoLineCell.tsx
+
+아래 두 span의 min-w를 모두 아래 값으로 교체:
+
+min-w-[112px] md:min-w-[128px]
+
+
+즉, 기존:
+
+min-w-[100px] md:min-w-[112px]
+
+
+→ 아래로 변경:
+
+min-w-[112px] md:min-w-[128px]
+
+
+모든 TwoLineCell span (상단/하단/Unlisted 포함) 동일하게 적용.
+
+효과:
+
+230, → 230,000
+
+643, → 643,000
+
+319, → 319,000
+더 이상 짤리지 않음.
+
+✅ 3. PremiumTable.tsx 컬럼별 “정답 매핑” 확정
+
+파일: src/components/PremiumTable.tsx
+
+아래 패턴대로 필드를 반드시 매핑해서 사용.
+
+🔹 (1) 현재가 컬럼
+<TwoLinePriceCell
+  topValue={row.koreanPrice}
+  bottomValue={row.foreignPriceKrw}
+  formatTop={formatKrwDomestic}
+  formatBottom={formatKrwDynamic}
+  isUnlisted={isUnlisted}
+/>
+
+🔹 (2) 김프 컬럼
+<TwoLineCell
+  line1={row.premiumRate !== null ? formatPercent(row.premiumRate) : "-"}
+  line2={
+    row.premiumDiffKrw !== null && row.koreanPrice !== null
+      ? formatKrwDiffByBase(row.premiumDiffKrw, row.koreanPrice)
+      : "-"
+  }
+  line1Color={getChangeColor(row.premiumRate)}
+/>
+
+
+핵심:
+
+김프 금액은 백엔드 premiumDiffKrw 그대로 사용
+
+프론트 재계산 금지
+
+포맷만 formatKrwDiffByBase로 통일
+
+🔹 (3) 전일대비 컬럼
+<TwoLineCell
+  line1={row.changeRate !== null ? formatPercent(row.changeRate) : "-"}
+  line2={
+    row.changeAbsKrw !== null && row.koreanPrice !== null
+      ? formatKrwDiffByBase(row.changeAbsKrw, row.koreanPrice)
+      : "-"
+  }
+  line1Color={getChangeColor(row.changeRate)}
+/>
+
+
+핵심:
+
+전일대비 금액은 반드시 changeAbsKrw 사용
+
+프론트에서 prevClose 재계산 금지
+
+자리수는 현재가 기반 포맷 적용
+
+🔹 (4) 고가대비(24h) 컬럼
+<TwoLineCell
+  line1={
+    row.fromHighRate !== null
+      ? formatPercent(row.fromHighRate)
+      : "-"
+  }
+  line2={
+    row.high24h !== null
+      ? formatKrwDomestic(row.high24h)
+      : "-"
+  }
+  line1Color={getChangeColor(row.fromHighRate)}
+/>
+
+
+2번째 줄은 반드시 24시간 고가 절대값 그대로 사용.
+
+🔹 (5) 저가대비(24h) 컬럼
+<TwoLineCell
+  line1={
+    row.fromLowRate !== null
+      ? formatPercent(row.fromLowRate)
+      : "-"
+  }
+  line2={
+    row.low24h !== null
+      ? formatKrwDomestic(row.low24h)
+      : "-"
+  }
+  line1Color={getChangeColor(row.fromLowRate)}
+/>
+
+
+2번째 줄은 반드시 24시간 저가 절대값 그대로 사용.
+
+📌 4. 이 전달문 적용 후 기대되는 결과
+✔ 해외 현재가 반올림 문제 완전 해결
+
+PEPE, SHIB, BONK 등 초저가 코인
+→ 해외가 0.00891 → 0.0089로 정확히 표시
+
+✔ 김프 금액 계산 100% 일치
+
+국내 – 해외 = 김프 금액
+
+자리수도 가격 형식과 동일하게 표시됨
+
+✔ 전일대비 금액 정확하게 표시
+
+업비트 전일대비 "4" → 아래줄 +₩4로 정확히 표시
+
+✔ 고가/저가대비 아래줄
+
+실제 고가/저가(24h) 가격 그대로 표시됨
+
+더 이상 원인 불명의 숫자 미스매치 없음
+
+✔ 숫자 잘림 전면 해결
+
+230, 643, 319, 등
+→ 폭 부족 문제 제거됨
+
+📌 5. 마무리
+
+이 전달문에 적힌 3가지 수정만 적용하면
+지금까지 며칠 동안 반복되던 코인테이블 문제는 한 번에 전부 해결됩니다.
+
+수정 대상 파일은 아래 3개:
+
+TwoLinePriceCell.tsx
+
+TwoLineCell.tsx
+
+PremiumTable.tsx
+
+수정 후, 무딩 / BTC / PEPE 3개로 출력값만 검증하면 됩니다.

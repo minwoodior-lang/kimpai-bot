@@ -83,6 +83,50 @@ export function formatKrwDomestic(value: number | null | undefined): string {
   return formatKrwDynamic(value, { signed: false });
 }
 
+// ✨ 새로운 포맷 유틸: 차액을 기준값 자리수에 맞춰 포맷
+// 용도: 김프 금액, 전일대비 금액 등
+// 효과: 현재가와 동일한 자리수로 차액을 표시
+export function formatKrwDiffByBase(
+  diff: number | null | undefined,
+  base: number | null | undefined
+): string {
+  if (
+    diff === null ||
+    diff === undefined ||
+    Number.isNaN(diff) ||
+    base === null ||
+    base === undefined ||
+    Number.isNaN(base)
+  ) {
+    return "-";
+  }
+
+  const absBase = Math.abs(base);
+  let decimals = 0;
+
+  // 기준값(base)의 자리수에 따라 소수점 결정
+  if (absBase >= 1000) decimals = 0;
+  else if (absBase >= 1) decimals = 2;
+  else if (absBase >= 0.1) decimals = 3;
+  else if (absBase >= 0.01) decimals = 4;
+  else if (absBase >= 0.001) decimals = 5;
+  else decimals = 6;
+
+  // 차액의 절댓값을 포맷
+  const absDiff = Math.abs(diff);
+  let formatted = new Intl.NumberFormat("ko-KR", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  }).format(absDiff);
+
+  // 끝 0 제거: 0.010000 → 0.01, 42.000000 → 42
+  formatted = formatted.replace(/\.?0+$/, "");
+
+  // 부호 적용
+  const sign = diff > 0 ? "+" : diff < 0 ? "-" : "";
+  return `${sign}₩${formatted}`;
+}
+
 const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   topValue,
   bottomValue,
