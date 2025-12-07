@@ -98,3 +98,8 @@ packages = ["lsof", "jq"]
 
 [userenv.development]
 USE_WS_OVERRIDE = "true"
+
+[deployment]
+run = ["npm", "run"]
+deploymentTarget = "vm"
+build = ["npm", "run", "build"]
