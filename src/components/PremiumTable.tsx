@@ -360,6 +360,7 @@ interface PremiumData {
   koreanName: string;
   koreanPrice: number;
   foreignPriceKrw: number;
+  prevPriceKrw: number | null;
   globalPrice: number | null;
   globalPriceKrw: number | null;
   premium: number | null;
