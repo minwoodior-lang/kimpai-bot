@@ -97,11 +97,17 @@ function connect(): void {
         const tickers = JSON.parse(data.toString());
         const ts = Date.now();
         
+        let filteredCount = 0;
+        let callbackCount = 0;
+        
         for (const ticker of tickers) {
           if (!ticker.s || !ticker.s.endsWith('USDT')) continue;
           
           const base = ticker.s.replace('USDT', '');
-          if (!targetSymbols.has(base)) continue;
+          if (!targetSymbols.has(base)) {
+            filteredCount++;
+            continue;
+          }
           
           const price: WebSocketPrice = {
             exchange: 'BINANCE',
@@ -117,7 +123,19 @@ function connect(): void {
             low24h: parseFloat(ticker.l) || 0
           };
           
-          if (callback) callback(price);
+          if (callback) {
+            callback(price);
+            callbackCount++;
+          }
+        }
+        
+        // 디버깅: callback 호출 횟수 (매 메시지마다 샘플링)
+        if (Math.random() < 0.1) { // 10% 확률로 출력
+          console.log(`[WS-Binance-Spot] Callback: ${callbackCount}, Filtered: ${filteredCount}, Targets: ${targetSymbols.size}`);
+          // 샘플 심볼 출력 (처음 3개)
+          const sampleTargets = Array.from(targetSymbols).slice(0, 3).join(', ');
+          const sampleTickers = tickers.slice(0, 3).map((t: any) => t.s).join(', ');
+          console.log(`[WS-Binance-Spot] Sample targets: [${sampleTargets}], sample tickers: [${sampleTickers}]`);
         }
       } catch (err) {
         console.error('[WS-Binance-Spot] Parse error:', err);
