@@ -96,6 +96,25 @@ marketStats.json 흐름            ← 절대 변경 금지
 - 업비트처럼 가격 크기에 따라 자동 소수점 조정
 - 국내가/해외가 일관된 포맷
 
+**✅ 차액 칼럼 동적 포맷 개선 (김프%, 전일대비%, 고가대비%, 저가대비% 하단 금액):**
+
+1. ✅ **premiumDiffKrw, changeAbsKrw, highDiffKrw, lowDiffKrw 포맷 개선**
+   - src/components/PremiumTable.tsx: formatKrwPrice → formatKrwDynamic 적용
+   - 모든 차액 칼럼의 하단 금액이 동적 소수점 표시
+   - 규칙: formatKrwDynamic과 동일 (0자리 ~ 8자리)
+
+2. ✅ **값이 0 또는 null일 때 "-" 처리**
+   - 기존: "+₩0.00" 표시
+   - 개선: 실제 데이터가 없을 때만 "-" (저가 코인도 숫자 손실 없음)
+
+3. ✅ **테이블 헤더 명확화**
+   - "고가대비" → "고가대비(24h)"
+   - "저가대비" → "저가대비(24h)"
+   - (나중에 52주 데이터 추가 시 레이블 변경 가능)
+
+**수정 파일:**
+- src/components/PremiumTable.tsx (차액 칼럼 4곳, 헤더 2곳)
+
 **✅ 프론트엔드 폴링 주기 최적화 (국내 시세 체감 딜레이 감소):**
 
 1. ✅ **PremiumTable 폴링 주기 조정**

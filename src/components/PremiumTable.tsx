@@ -272,7 +272,11 @@ const PremiumTableRow = React.memo(({
         <td className="w-[85px] sm:w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={isUnlisted ? "-" : formatPercent(row.premiumRate)}
-            line2={`${row.premiumDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.premiumDiffKrw || 0))}`}
+            line2={
+              row.premiumDiffKrw === null || row.premiumDiffKrw === undefined || row.premiumDiffKrw === 0
+                ? "-"
+                : `${row.premiumDiffKrw >= 0 ? "+" : ""}₩${formatKrwDynamic(Math.abs(row.premiumDiffKrw))}`
+            }
             line1Color={isUnlisted ? "text-gray-500" : getPremiumColor(row.premiumRate)}
             isUnlisted={isUnlisted}
           />
@@ -281,7 +285,11 @@ const PremiumTableRow = React.memo(({
         <td className="w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={formatPercent(row.changeRate)}
-            line2={`${row.changeAbsKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.changeAbsKrw || 0))}`}
+            line2={
+              row.changeAbsKrw === null || row.changeAbsKrw === undefined || row.changeAbsKrw === 0
+                ? "-"
+                : `${row.changeAbsKrw >= 0 ? "+" : ""}₩${formatKrwDynamic(Math.abs(row.changeAbsKrw))}`
+            }
             line1Color={getChangeColor(row.changeRate)}
           />
         </td>
@@ -289,7 +297,11 @@ const PremiumTableRow = React.memo(({
         <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={formatPercent(row.fromHighRate)}
-            line2={`${row.highDiffKrw > 0 ? "-" : "+"}₩${formatKrwPrice(Math.abs(row.highDiffKrw || 0))}`}
+            line2={
+              row.highDiffKrw === null || row.highDiffKrw === undefined || row.highDiffKrw === 0
+                ? "-"
+                : `${row.highDiffKrw > 0 ? "-" : "+"}₩${formatKrwDynamic(Math.abs(row.highDiffKrw))}`
+            }
             line1Color={getChangeColor(row.fromHighRate)}
           />
         </td>
@@ -297,7 +309,11 @@ const PremiumTableRow = React.memo(({
         <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={formatPercent(row.fromLowRate)}
-            line2={`${row.lowDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.lowDiffKrw || 0))}`}
+            line2={
+              row.lowDiffKrw === null || row.lowDiffKrw === undefined || row.lowDiffKrw === 0
+                ? "-"
+                : `${row.lowDiffKrw >= 0 ? "+" : ""}₩${formatKrwDynamic(Math.abs(row.lowDiffKrw))}`
+            }
             line1Color={getChangeColor(row.fromLowRate)}
           />
         </td>
@@ -1119,11 +1135,11 @@ export default function PremiumTable({
                     <SortIcon columnKey="changeRate" />
                   </th>
                   <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("fromHighRate")}>
-                    고가대비
+                    고가대비(24h)
                     <SortIcon columnKey="fromHighRate" />
                   </th>
                   <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("fromLowRate")}>
-                    저가대비
+                    저가대비(24h)
                     <SortIcon columnKey="fromLowRate" />
                   </th>
                   <th className="px-3 lg:px-4 py-2.5 text-right text-[12px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("volume24hKrw")}>
