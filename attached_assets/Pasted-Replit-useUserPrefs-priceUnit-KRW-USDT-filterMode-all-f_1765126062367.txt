@@ -1,0 +1,105 @@
+Replit 전달문 (최종본)
+
+목표:
+useUserPrefs의
+
+priceUnit ( "KRW" / "USDT" )
+
+filterMode ( "all" / "foreign" / "favorites" )
+
+값이 PremiumTable.tsx 렌더링에 실제로 반영되도록 해 주세요.
+⚠️ 김프/변동률 등 계산 로직은 전혀 건드리지 말고, “프론트 표기만” 바꾸는 선에서 작업해 주세요.
+백엔드 코드(api/premium/*, 워커 코드)는 절대 수정하지 마세요.
+
+[1] 가격 단위 (priceUnit) 적용 – “표기만” 변경
+
+파일: src/components/PremiumTable.tsx
+
+useUserPrefs()로 prefs.priceUnit을 받아와서
+현재가 컬럼(TwoLinePriceCell)에서만 동작하게 해 주세요.
+
+기준:
+
+김프, 전일대비, 고가대비, 저가대비 등
+premiumRate, premiumDiffKrw, changeRate 등의 값/계산식은 절대 수정 금지
+→ 백엔드 계산 그대로 사용
+
+priceUnit에 따라 현재가 표기만 변경
+
+동작 방식:
+
+priceUnit === "KRW" 일 때 → 기존 로직 그대로
+
+priceUnit === "USDT" 일 때:
+
+상단(국내): koreanPrice / fxRate → $3,241.20 처럼 USDT 금액으로 표기
+
+하단(해외): foreignPriceKrw / fxRate → 같은 방식으로 $x.xx 표기
+
+가능하면 “현재가” 컬럼 헤더에 단위 힌트도 추가해 주세요.
+
+KRW 모드: 현재가
+
+USDT 모드: 현재가 (USDT) 또는 작은 아이콘/라벨 정도
+
+참고: fxRate는 이미 API 응답에 있으니,
+PremiumTable에서 해당 값을 포맷 함수/TwoLinePriceCell 쪽으로 같이 넘기는 식으로 구현해 주세요.
+
+[2] 리스트 필터 (filterMode) 적용 – 선택된 해외 거래소 기준
+
+파일: src/components/PremiumTable.tsx
+
+데이터 정렬/슬라이스 전에, filterMode에 따라 필터링을 추가해 주세요.
+
+let result = [...data];
+
+// 1) 해외 상장 코인만
+if (prefs.filterMode === "foreign") {
+  result = result.filter(item =>
+    item.isListed === true &&
+    item.foreignPriceKrw !== null &&
+    item.foreignPriceKrw > 0
+  );
+}
+
+// 2) 즐겨찾기 코인만
+if (prefs.filterMode === "favorites") {
+  const favorites = new Set(prefs.favorites || []);
+  result = result.filter(item => {
+    const normalizedSymbol = item.symbol
+      .replace("/KRW", "")
+      .replace("/USDT", "")
+      .replace("/BTC", "")
+      .toUpperCase();
+    return favorites.has(normalizedSymbol);
+  });
+}
+
+
+여기서 isListed, foreignPriceKrw는
+/api/premium/table-filtered?domestic=XX&foreign=YY 응답 기준으로
+이미 “선택된 해외 거래소”에 맞춰진 값이라고 가정합니다.
+
+→ 유저가 해외 거래소 드롭다운을 BINANCE → OKX로 바꾸면
+filterMode === "foreign"일 때 자동으로
+
+✅ 그 거래소에 실제 상장된 코인만 남도록 해 주세요.
+
+[3] 주의사항
+
+index.tsx에서 하는 리스트 필터링은
+**별도의 데이터소스(useMarkets)**를 쓰고 있으므로,
+여기와 충돌하지 않도록 PremiumTable 내부에서만 필터를 적용해 주세요.
+
+기존 정렬, 가상 스크롤(visibleCount), 차트 토글 등은 깨지지 않도록
+가능한 최소 변경으로 조건만 추가해 주세요.
+
+이 버전대로 구현되면:
+
+김프/변동률/수치 계산은 그대로 → 리스크 없음
+
+유저는 표시 단위만 KRW ↔ USDT 토글 가능
+
+filterMode = "foreign"일 때는 선택한 해외 거래소 기준으로, 실제 상장 코인만 보기
+
+filterMode = "favorites"일 때는 즐겨찾기 코인만 보기
