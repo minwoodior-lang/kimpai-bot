@@ -55,9 +55,6 @@ export function formatKrwDynamic(
     maximumFractionDigits: decimals,
   }).format(abs);
 
-  // 끝 0 제거: 0.010000 → 0.01, 42.000000 → 42
-  formatted = formatted.replace(/\.?0+$/, "");
-
   // 부호 적용
   if (signed) {
     const sign = value > 0 ? "+" : value < 0 ? "-" : "";
@@ -118,9 +115,6 @@ export function formatKrwDiffByBase(
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   }).format(absDiff);
-
-  // 끝 0 제거: 0.010000 → 0.01, 42.000000 → 42
-  formatted = formatted.replace(/\.?0+$/, "");
 
   // 부호 적용
   const sign = diff > 0 ? "+" : diff < 0 ? "-" : "";
