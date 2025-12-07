@@ -64,6 +64,21 @@ function loadJsonFile(filename: string): any {
   }
 }
 
+// 거래소별 심볼 정규화 (BTT ↔ BTTC 등)
+function normalizeSymbolForExchange(symbol: string, exchange: string): string {
+  const symbolMap: Record<string, Record<string, string>> = {
+    "BINANCE": {
+      "BTT": "BTTC",  // 바이낸스는 BTTC 사용
+    },
+    "OKX": {
+      "BTT": "BTTC",  // OKX도 BTTC 사용
+    },
+    // 필요 시 다른 거래소/심볼 추가
+  };
+
+  return symbolMap[exchange]?.[symbol] || symbol;
+}
+
 function parseMarketParam(value: string): { exchange: string; quote: string } {
   const v = (value || "").trim();
   if (!v) return { exchange: "UPBIT", quote: "KRW" };
@@ -130,8 +145,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
         const domesticPriceKey = `${domesticExchange}:${symbol}:${domesticQuote}`;
         
-        // 해외 가격: 선택된 거래소 우선, 없으면 fallback 거래소 시도
-        let foreignPriceKey = `${foreignExchange}:${symbol}:${foreignQuote}`;
+        // 해외 가격: 선택된 거래소 우선, 없으면 fallback 거래소 시도 (심볼 정규화 적용)
+        const normalizedSymbol = normalizeSymbolForExchange(symbol, foreignExchange);
+        let foreignPriceKey = `${foreignExchange}:${normalizedSymbol}:${foreignQuote}`;
         let foreignEntry = prices[foreignPriceKey];
         
         // Fallback: 선택된 거래소에 해당 심볼이 없으면 다른 거래소 시도
@@ -139,7 +155,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           const fallbackExchanges = ["BINANCE", "OKX", "BYBIT", "BITGET", "GATE", "MEXC"];
           for (const fallbackEx of fallbackExchanges) {
             if (fallbackEx === foreignExchange) continue; // 이미 시도한 거래소는 스킵
-            const fallbackKey = `${fallbackEx}:${symbol}:${foreignQuote}`;
+            const fallbackNormalizedSymbol = normalizeSymbolForExchange(symbol, fallbackEx);
+            const fallbackKey = `${fallbackEx}:${fallbackNormalizedSymbol}:${foreignQuote}`;
             const fallbackEntry = prices[fallbackKey];
             if (fallbackEntry && fallbackEntry.price) {
               foreignPriceKey = fallbackKey;

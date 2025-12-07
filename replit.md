@@ -63,7 +63,52 @@ marketStats.json 흐름            ← 절대 변경 금지
 
 ---
 
-### Recent Changes (v3.4.29 - 2024-12-07) - WebSocket 실시간 가격 업데이트 완성 🎉
+### Recent Changes (v3.4.30 - 2024-12-07) - BTT 심볼 매핑 + 전일 종가 (prevPriceKrw) 구현
+
+**✅ BTT 심볼 매핑 및 거래소 fallback 로직:**
+
+1. ✅ **normalizeSymbolForExchange() 함수 추가**
+   - src/pages/api/premium/table-filtered.ts: 거래소별 심볼 정규화 함수
+   - BTT → BTTC 매핑 (BINANCE, OKX)
+   - 확장 가능한 구조로 다른 심볼도 추가 가능
+
+2. ✅ **Fallback 거래소 체인 구현**
+   - 선택된 거래소에 심볼이 없으면 자동으로 다른 거래소 시도
+   - 순서: BINANCE, OKX, BYBIT, BITGET, GATE, MEXC
+   - BTT처럼 특정 거래소에 없는 코인도 다른 거래소에서 가격 수집
+
+3. ✅ **심볼 정규화 + Fallback 통합**
+   - 각 fallback 거래소마다 normalizeSymbolForExchange() 적용
+   - BTT는 BYBIT에서, BTTC는 BINANCE/OKX에서 자동으로 찾음
+
+**효과:**
+- BTT 같은 코인도 foreignPriceKrw, premium, premiumDiffKrw 계산 가능
+- 거래소별 심볼 차이 자동 해결
+
+**✅ prevPriceKrw (전일 종가) 필드 추가:**
+
+1. ✅ **API 응답에 prevPriceKrw 추가**
+   - src/pages/api/premium/table-filtered.ts: domesticEntry.prev_price를 KRW로 환산
+   - KRW/BTC/USDT 마켓 모두 환산 지원
+   - API 응답에 prevPriceKrw 필드 포함
+
+2. ✅ **프론트엔드 수정**
+   - src/components/PremiumTable.tsx: TwoLinePriceCell bottomValue를 foreignPriceKrw → prevPriceKrw로 변경
+   - PremiumData 인터페이스에 prevPriceKrw 필드 추가
+   - null 값은 자동으로 "-" 표시
+
+**⚠️ 제한 사항:**
+- **prevPriceKrw는 업비트에서만 작동**: Bithumb/Coinone은 prev_price를 수집하지 않음
+- 업비트 KRW 마켓만 전일 종가 표시됨
+- Bithumb/Coinone 지원은 workers/fetchers 수정 필요 (가격 파이프라인 수정 필요)
+
+**수정 파일:**
+- src/pages/api/premium/table-filtered.ts (normalizeSymbolForExchange, fallback 로직, prevPriceKrw 계산)
+- src/components/PremiumTable.tsx (PremiumData 인터페이스, bottomValue 변경)
+
+---
+
+### Previous Changes (v3.4.29 - 2024-12-07) - WebSocket 실시간 가격 업데이트 완성 🎉
 
 **✅ 저가 코인 가격 표시 개선 (동적 소수점 포맷, 최대 8자리):**
 
