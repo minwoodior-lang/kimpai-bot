@@ -7,6 +7,62 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - I want iterative development.
 - I prefer detailed explanations.
 
+---
+
+## 🔒 CRITICAL: FIXED COMPONENTS (절대 수정 금지)
+
+**v3.4.29에서 가격 파이프라인이 최적 성능에 도달했으므로 아래 항목은 절대 수정/리팩터링/최적화 시도 금지**
+
+### ❌ 절대 수정 금지 파일 및 로직:
+
+**1. 가격 파이프라인 전체 구조 (FROZEN)**
+```
+workers/websocket/**              ← WebSocket 연결 관리
+workers/priceWorker.ts            ← 300ms 주기 고정
+  - dirtyPriceKeys 기반 병합 로직
+  - mergeWebSocketPrices()
+  - updatePricesOnly()
+data/prices.json 생성 구조        ← tmp → atomic write
+src/pages/api/premium/table.ts
+src/pages/api/premium/table-filtered.ts
+  - API 캐싱 정책 (200~800ms)
+  - 가격 참조 방식
+```
+
+**2. 국내 가격 수집 (최고 성능 유지)**
+- 업비트/Bithumb/코인원 KRW 가격: **300ms 주기 유지**
+- REST → prices.json → API 동일 구조
+- 타임스탬프 비교 로직 유지
+- 국내 가격 수집 로직 안정 버전 고정
+
+**3. 절대 변경 금지 파라미터:**
+```javascript
+priceWorker interval: 300ms       ← 절대 변경 금지
+API 캐시 TTL: 200~800ms          ← 절대 변경 금지
+WebSocket 병합 기준               ← 절대 변경 금지
+prices.json 구조                  ← 절대 변경 금지
+premium 계산 방식                 ← 절대 변경 금지
+marketStats.json 흐름            ← 절대 변경 금지
+```
+
+**⚠️ 위 항목 변경 시 발생하는 문제:**
+- 실시간성 깨짐 (1-3초 latency → 5-10초)
+- 정확도 저하 (WebSocket 가격 손실)
+- 김프 UI 깜빡임 발생
+- 가격 개수 급감 (4400+ → 1500)
+
+**✅ 개발 가능 영역:**
+- 홈 UX / 개인화 설정
+- 알림 기능
+- AI 분석
+- 채팅 기능
+- 기타 프론트엔드 기능
+
+**📌 변경 필요 시:**
+반드시 사용자와 사전 협의 후 진행
+
+---
+
 ### Recent Changes (v3.4.29 - 2024-12-07) - WebSocket 실시간 가격 업데이트 완성 🎉
 
 **✅ WebSocket → prices.json → API 파이프라인 버그 수정:**
