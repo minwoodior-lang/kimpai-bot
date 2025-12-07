@@ -11,7 +11,7 @@
     "change24hAbs": -27,
     "high24h": 1555,
     "low24h": 1523,
-    "volume24hQuote": 3339861132.969995
+    "volume24hQuote": 3340715132.969995
   },
   "UPBIT:0G:USDT": {
     "change24hRate": 0,
@@ -116,7 +116,7 @@
     "change24hAbs": 3,
     "high24h": 629,
     "low24h": 619,
-    "volume24hQuote": 6940902044.655002
+    "volume24hQuote": 6940872059.647506
   },
   "UPBIT:ADA:USDT": {
     "change24hRate": -1.92759756,
@@ -378,11 +378,11 @@
     "volume24hQuote": 0.004997
   },
   "UPBIT:ARDR:KRW": {
-    "change24hRate": -0.11273957,
-    "change24hAbs": -0.1,
+    "change24hRate": 0,
+    "change24hAbs": 0,
     "high24h": 92.7,
     "low24h": 88,
-    "volume24hQuote": 1053887067.7859416
+    "volume24hQuote": 1053892167.7859416
   },
   "UPBIT:ARK:BTC": {
     "change24hRate": 3.2258064500000003,
@@ -634,7 +634,7 @@
     "change24hAbs": 19,
     "high24h": 1229,
     "low24h": 1163,
-    "volume24hQuote": 1266965406.2335377
+    "volume24hQuote": 1269073002.039337
   },
   "UPBIT:BARD:USDT": {
     "change24hRate": 20.55533091,
@@ -655,7 +655,7 @@
     "change24hAbs": 1,
     "high24h": 376,
     "low24h": 370,
-    "volume24hQuote": 6477284725.790343
+    "volume24hQuote": 6485558566.978536
   },
   "UPBIT:BAT:USDT": {
     "change24hRate": 2.55249074,
@@ -718,7 +718,7 @@
     "change24hAbs": -18,
     "high24h": 1326,
     "low24h": 1289,
-    "volume24hQuote": 897942855.6255794
+    "volume24hQuote": 897872712.2235793
   },
   "UPBIT:BERA:USDT": {
     "change24hRate": 0,
@@ -893,7 +893,7 @@
     "change24hAbs": 399000,
     "high24h": 134459000,
     "low24h": 133497000,
-    "volume24hQuote": 77159149352.73013
+    "volume24hQuote": 77157149351.61664
   },
   "UPBIT:BTC:USDT": {
     "change24hRate": -0.27318974999999995,
@@ -1229,7 +1229,7 @@
     "change24hAbs": 1.11,
     "high24h": 9.32,
     "low24h": 7.15,
-    "volume24hQuote": 52036242056.148026
+    "volume24hQuote": 52038571244.282646
   },
   "UPBIT:DOOD:USDT": {
     "change24hRate": 86.55603656000001,
@@ -1362,7 +1362,7 @@
     "change24hAbs": -8,
     "high24h": 1104,
     "low24h": 1074,
-    "volume24hQuote": 1447326159.9805489
+    "volume24hQuote": 1447320664.9805489
   },
   "UPBIT:ENSO:USDT": {
     "change24hRate": 25.179211470000002,
@@ -1432,7 +1432,7 @@
     "change24hAbs": 9000,
     "high24h": 4578000,
     "low24h": 4541000,
-    "volume24hQuote": 64733377748.01788
+    "volume24hQuote": 64729455870.36626
   },
   "UPBIT:ETH:USDT": {
     "change24hRate": 0.71875,
@@ -1614,7 +1614,7 @@
     "change24hAbs": 0.02,
     "high24h": 7.52,
     "low24h": 7.43,
-    "volume24hQuote": 48401136.968132
+    "volume24hQuote": 48340833.96813201
   },
   "UPBIT:GAME2:BTC": {
     "change24hRate": 0,
@@ -1712,7 +1712,7 @@
     "change24hAbs": -12,
     "high24h": 260,
     "low24h": 236,
-    "volume24hQuote": 18010257038.157436
+    "volume24hQuote": 18010251560.157436
   },
   "UPBIT:GRT:BTC": {
     "change24hRate": 1.8867924500000002,
@@ -1838,7 +1838,7 @@
     "change24hAbs": -3,
     "high24h": 230,
     "low24h": 209,
-    "volume24hQuote": 21754084955.11914
+    "volume24hQuote": 21741237045.028404
   },
   "UPBIT:HYPER:BTC": {
     "change24hRate": -5.52147239,
@@ -2062,7 +2062,7 @@
     "change24hAbs": -0.2,
     "high24h": 60.2,
     "low24h": 59.5,
-    "volume24hQuote": 2122063757.6414254
+    "volume24hQuote": 2122053757.6414251
   },
   "UPBIT:JTO:BTC": {
     "change24hRate": 2.61324042,
@@ -2314,7 +2314,7 @@
     "change24hAbs": -5,
     "high24h": 344,
     "low24h": 324,
-    "volume24hQuote": 17300594724.145622
+    "volume24hQuote": 17299770612.367786
   },
   "UPBIT:LWA:BTC": {
     "change24hRate": 0,
@@ -2454,7 +2454,7 @@
     "change24hAbs": 0.06,
     "high24h": 1.78,
     "low24h": 1.64,
-    "volume24hQuote": 6719243505.119829
+    "volume24hQuote": 6712939186.279249
   },
   "UPBIT:MEW:USDT": {
     "change24hRate": 0,
@@ -2618,11 +2618,11 @@
     "volume24hQuote": 0.64686153
   },
   "UPBIT:MOODENG:KRW": {
-    "change24hRate": 9.03225806,
-    "change24hAbs": 14,
+    "change24hRate": 8.38709677,
+    "change24hAbs": 13,
     "high24h": 190,
     "low24h": 152,
-    "volume24hQuote": 135513890491.2979
+    "volume24hQuote": 135513968404.77704
   },
   "UPBIT:MOODENG:USDT": {
     "change24hRate": -43.40161982,
@@ -2709,11 +2709,11 @@
     "volume24hQuote": 0.0005147
   },
   "UPBIT:NEAR:KRW": {
-    "change24hRate": 0.42985541,
-    "change24hAbs": 11,
+    "change24hRate": 0.35169988,
+    "change24hAbs": 9,
     "high24h": 2590,
     "low24h": 2555,
-    "volume24hQuote": 3238168499.471268
+    "volume24hQuote": 3247794891.198684
   },
   "UPBIT:NEAR:USDT": {
     "change24hRate": 0,
@@ -2811,7 +2811,7 @@
     "change24hAbs": -5,
     "high24h": 733,
     "low24h": 713,
-    "volume24hQuote": 3791833637.342665
+    "volume24hQuote": 3791810021.5862126
   },
   "UPBIT:NXPC:USDT": {
     "change24hRate": -5.0433592,
@@ -3091,7 +3091,7 @@
     "change24hAbs": -0.1,
     "high24h": 31.8,
     "low24h": 29.6,
-    "volume24hQuote": 5866233247.161524
+    "volume24hQuote": 5866227247.161524
   },
   "UPBIT:PLUME:USDT": {
     "change24hRate": 1.63528246,
@@ -3133,7 +3133,7 @@
     "change24hAbs": 1,
     "high24h": 186,
     "low24h": 184,
-    "volume24hQuote": 1600697056.0744407
+    "volume24hQuote": 1600641976.0744407
   },
   "UPBIT:POLYX:BTC": {
     "change24hRate": -10.38961039,
@@ -3322,7 +3322,7 @@
     "change24hAbs": 30,
     "high24h": 461,
     "low24h": 392,
-    "volume24hQuote": 9177649813.209303
+    "volume24hQuote": 9179563902.204584
   },
   "UPBIT:RED:USDT": {
     "change24hRate": -22.3880597,
@@ -3451,11 +3451,11 @@
     "volume24hQuote": 0.00057917
   },
   "UPBIT:SAHARA:KRW": {
-    "change24hRate": 4.212454210000001,
-    "change24hAbs": 2.3,
+    "change24hRate": 3.8461538500000003,
+    "change24hAbs": 2.1,
     "high24h": 58.7,
     "low24h": 53.2,
-    "volume24hQuote": 14596725942.596287
+    "volume24hQuote": 14635102309.187773
   },
   "UPBIT:SAHARA:USDT": {
     "change24hRate": -3.85276074,
@@ -3542,11 +3542,11 @@
     "volume24hQuote": 0
   },
   "UPBIT:SHIB:KRW": {
-    "change24hRate": 0.79365079,
-    "change24hAbs": 0.0001,
+    "change24hRate": 0,
+    "change24hAbs": 0,
     "high24h": 0.0128,
     "low24h": 0.0126,
-    "volume24hQuote": 5155075165.6477165
+    "volume24hQuote": 5155087765.6477165
   },
   "UPBIT:SIGN:BTC": {
     "change24hRate": 2.5,
@@ -3798,7 +3798,7 @@
     "change24hAbs": 29,
     "high24h": 2394,
     "low24h": 2337,
-    "volume24hQuote": 21413783798.645798
+    "volume24hQuote": 21413887053.396786
   },
   "UPBIT:SUN:BTC": {
     "change24hRate": 4.54545455,
@@ -3868,7 +3868,7 @@
     "change24hAbs": -1.3,
     "high24h": 89.1,
     "low24h": 85.5,
-    "volume24hQuote": 4716972653.617426
+    "volume24hQuote": 4714232059.219461
   },
   "UPBIT:SYRUP:BTC": {
     "change24hRate": -0.9375,
@@ -3980,7 +3980,7 @@
     "change24hAbs": 0.017,
     "high24h": 0.673,
     "low24h": 0.604,
-    "volume24hQuote": 13828355375.009413
+    "volume24hQuote": 13832794327.158337
   },
   "UPBIT:TOSHI:USDT": {
     "change24hRate": 0,
@@ -4043,7 +4043,7 @@
     "change24hAbs": -4,
     "high24h": 212,
     "low24h": 206,
-    "volume24hQuote": 3878743240.615527
+    "volume24hQuote": 3878733689.046022
   },
   "UPBIT:TRUST:USDT": {
     "change24hRate": -2.88461538,
@@ -4190,7 +4190,7 @@
     "change24hAbs": -2,
     "high24h": 1498,
     "low24h": 1495,
-    "volume24hQuote": 43364168656.671234
+    "volume24hQuote": 43363758741.15829
   },
   "UPBIT:VAL:BTC": {
     "change24hRate": 1.8867924500000002,
@@ -4246,7 +4246,7 @@
     "change24hAbs": 1,
     "high24h": 1289,
     "low24h": 1267,
-    "volume24hQuote": 5038213572.616844
+    "volume24hQuote": 5038212336.816954
   },
   "UPBIT:VIRTUAL:USDT": {
     "change24hRate": -7.195196419999999,
@@ -4463,7 +4463,7 @@
     "change24hAbs": 23,
     "high24h": 3103,
     "low24h": 3039,
-    "volume24hQuote": 116244092944.88307
+    "volume24hQuote": 116240711549.71198
   },
   "UPBIT:XRP:USDT": {
     "change24hRate": 1.38271605,
@@ -4743,7 +4743,7 @@
     "change24hAbs": 27,
     "high24h": 1041,
     "low24h": 990,
-    "volume24hQuote": 372954647.0319843
+    "volume24hQuote": 373030039.0319843
   },
   "BITHUMB:AGI:KRW": {
     "change24hRate": -0.42,
@@ -4823,11 +4823,11 @@
     "volume24hQuote": 44491005.27459047
   },
   "BITHUMB:AMP:KRW": {
-    "change24hRate": 1.15,
-    "change24hAbs": 0.036,
+    "change24hRate": 1.12,
+    "change24hAbs": 0.035,
     "high24h": 3.301,
     "low24h": 3.15,
-    "volume24hQuote": 200208083.6737498
+    "volume24hQuote": 200215134.6987498
   },
   "BITHUMB:ANIME:KRW": {
     "change24hRate": 2.25,
@@ -5044,7 +5044,7 @@
     "change24hAbs": -13,
     "high24h": 381,
     "low24h": 369,
-    "volume24hQuote": 378528270.3868314
+    "volume24hQuote": 378497635.6348314
   },
   "BITHUMB:BB:KRW": {
     "change24hRate": 5.79,
@@ -5173,11 +5173,11 @@
     "volume24hQuote": 388072775.0574023
   },
   "BITHUMB:BOB:KRW": {
-    "change24hRate": -7.76,
-    "change24hAbs": -2.23,
+    "change24hRate": -7.55,
+    "change24hAbs": -2.17,
     "high24h": 31.19,
     "low24h": 26.44,
-    "volume24hQuote": 6600682103.861299
+    "volume24hQuote": 6600687207.221298
   },
   "BITHUMB:BOBA:KRW": {
     "change24hRate": -3.38,
@@ -5401,7 +5401,7 @@
     "change24hAbs": 0.49,
     "high24h": 9.365,
     "low24h": 8.14,
-    "volume24hQuote": 250772206.69935974
+    "volume24hQuote": 250726732.80875975
   },
   "BITHUMB:CTC:KRW": {
     "change24hRate": -3.38,
@@ -5495,11 +5495,11 @@
     "volume24hQuote": 5552562728.26437
   },
   "BITHUMB:DOOD:KRW": {
-    "change24hRate": 26.71,
-    "change24hAbs": 1.754,
+    "change24hRate": 26.47,
+    "change24hAbs": 1.738,
     "high24h": 9.736,
     "low24h": 6.569,
-    "volume24hQuote": 5177215581.465883
+    "volume24hQuote": 5179715463.275884
   },
   "BITHUMB:DOT:KRW": {
     "change24hRate": 1.68,
@@ -5551,11 +5551,11 @@
     "volume24hQuote": 309784028.0427198
   },
   "BITHUMB:EIGEN:KRW": {
-    "change24hRate": 0.4,
-    "change24hAbs": 3,
+    "change24hRate": 0.27,
+    "change24hAbs": 2,
     "high24h": 778,
     "low24h": 752,
-    "volume24hQuote": 343394033.65200365
+    "volume24hQuote": 343394033.6061316
   },
   "BITHUMB:EL:KRW": {
     "change24hRate": -2.49,
@@ -5639,7 +5639,7 @@
     "change24hAbs": 4000,
     "high24h": 4584000,
     "low24h": 4527000,
-    "volume24hQuote": 23184760977.247734
+    "volume24hQuote": 23184766474.813885
   },
   "BITHUMB:ETHFI:KRW": {
     "change24hRate": 1.97,
@@ -5838,11 +5838,11 @@
     "volume24hQuote": 142485108.43038553
   },
   "BITHUMB:GOAT:KRW": {
-    "change24hRate": 15.4,
-    "change24hAbs": 8.58,
+    "change24hRate": 15.2,
+    "change24hAbs": 8.47,
     "high24h": 67.54,
     "low24h": 56.06,
-    "volume24hQuote": 4859681588.4293585
+    "volume24hQuote": 4859693799.739627
   },
   "BITHUMB:GRACY:KRW": {
     "change24hRate": 1.5,
@@ -5891,7 +5891,7 @@
     "change24hAbs": -27.47,
     "high24h": 95.85,
     "low24h": 84.81,
-    "volume24hQuote": 9437657257.86271
+    "volume24hQuote": 9438882150.312536
   },
   "BITHUMB:HAEDAL:KRW": {
     "change24hRate": 1.25,
@@ -6622,11 +6622,11 @@
     "volume24hQuote": 20435907.323767815
   },
   "BITHUMB:ORCA:KRW": {
-    "change24hRate": -2.84,
-    "change24hAbs": -57,
+    "change24hRate": -2.74,
+    "change24hAbs": -55,
     "high24h": 2130,
     "low24h": 1927,
-    "volume24hQuote": 1299699567.3073893
+    "volume24hQuote": 1299615514.2130892
   },
   "BITHUMB:ORDER:KRW": {
     "change24hRate": 0,
@@ -6657,11 +6657,11 @@
     "volume24hQuote": 1119492137.1458848
   },
   "BITHUMB:PAXG:KRW": {
-    "change24hRate": 0.1,
-    "change24hAbs": 6000,
+    "change24hRate": 0.08,
+    "change24hAbs": 5000,
     "high24h": 6309000,
     "low24h": 6294000,
-    "volume24hQuote": 101789442.33974
+    "volume24hQuote": 101437328.23974
   },
   "BITHUMB:PCI:KRW": {
     "change24hRate": 1.92,
@@ -6706,11 +6706,11 @@
     "volume24hQuote": 33229734943.75177
   },
   "BITHUMB:PLUME:KRW": {
-    "change24hRate": -0.51,
-    "change24hAbs": -0.16,
+    "change24hRate": -0.54,
+    "change24hAbs": -0.17,
     "high24h": 31.68,
     "low24h": 29.75,
-    "volume24hQuote": 1423807694.2357638
+    "volume24hQuote": 1424517994.3837032
   },
   "BITHUMB:POKT:KRW": {
     "change24hRate": 0.99,
@@ -6962,7 +6962,7 @@
     "change24hAbs": 2.26,
     "high24h": 57.44,
     "low24h": 52.82,
-    "volume24hQuote": 2500586988.1525073
+    "volume24hQuote": 2501012855.484178
   },
   "BITHUMB:SAND:KRW": {
     "change24hRate": 2.37,
@@ -6976,7 +6976,7 @@
     "change24hAbs": 1,
     "high24h": 260,
     "low24h": 233,
-    "volume24hQuote": 14460358460.034006
+    "volume24hQuote": 14461779214.841208
   },
   "BITHUMB:SC:KRW": {
     "change24hRate": 0.08,
@@ -7438,7 +7438,7 @@
     "change24hAbs": -1,
     "high24h": 1497,
     "low24h": 1494,
-    "volume24hQuote": 64217866543.83155
+    "volume24hQuote": 64189603394.61306
   },
   "BITHUMB:VANA:KRW": {
     "change24hRate": -1.02,
@@ -7567,11 +7567,11 @@
     "volume24hQuote": 266907617.31383795
   },
   "BITHUMB:XCN:KRW": {
-    "change24hRate": 17.12,
-    "change24hAbs": 1.223,
+    "change24hRate": 17.16,
+    "change24hAbs": 1.226,
     "high24h": 9.4,
     "low24h": 7.177,
-    "volume24hQuote": 2545062727.9043865
+    "volume24hQuote": 2545067726.670485
   },
   "BITHUMB:XEC:KRW": {
     "change24hRate": 2.87,
@@ -7620,7 +7620,7 @@
     "change24hAbs": 0,
     "high24h": 3100,
     "low24h": 3025,
-    "volume24hQuote": 53143560409.03266
+    "volume24hQuote": 53125185822.140236
   },
   "BITHUMB:XTER:KRW": {
     "change24hRate": 0.44,
@@ -7648,7 +7648,7 @@
     "change24hAbs": 1.536,
     "high24h": 11.5,
     "low24h": 7.325,
-    "volume24hQuote": 3030692339.587844
+    "volume24hQuote": 3031293169.9138317
   },
   "BITHUMB:YB:KRW": {
     "change24hRate": -2.64,
@@ -9780,17 +9780,17 @@
   },
   "COINONE:UMA:KRW": {
     "change24hRate": 0,
-    "change24hAbs": 1223,
+    "change24hAbs": 1221,
     "high24h": 1247,
     "low24h": 1190,
-    "volume24hQuote": 6154150.1081
+    "volume24hQuote": 6535056.1985
   },
   "COINONE:XRP:KRW": {
     "change24hRate": 0,
     "change24hAbs": 3063,
     "high24h": 3101,
     "low24h": 3020,
-    "volume24hQuote": 4917462524.7781
+    "volume24hQuote": 4917843956.7988
   },
   "COINONE:PUFFER:KRW": {
     "change24hRate": 0,
@@ -13069,11 +13069,11 @@
     "volume24hQuote": 420547.6303730226
   },
   "OKX:BONK:USDT": {
-    "change24hRate": 7.318423383525255,
-    "change24hAbs": 6.61000000000001e-7,
+    "change24hRate": 7.373782108060231,
+    "change24hAbs": 6.660000000000001e-7,
     "high24h": 0.000009815,
     "low24h": 0.000008965,
-    "volume24hQuote": 1921257.017851823
+    "volume24hQuote": 1921259.927701823
   },
   "OKX:PNUT:USDT": {
     "change24hRate": 8.43402904918833,
@@ -13370,11 +13370,11 @@
     "volume24hQuote": 1029702.6867381
   },
   "OKX:BICO:USDT": {
-    "change24hRate": 1.9661280903251002,
-    "change24hAbs": 0.001010000000000004,
+    "change24hRate": 2.102394393614946,
+    "change24hAbs": 0.0010799999999999976,
     "high24h": 0.05331,
     "low24h": 0.05121,
-    "volume24hQuote": 67047.63445539067
+    "volume24hQuote": 67114.61806949947
   },
   "OKX:PAXG:USDT": {
     "change24hRate": 0.08314526665874808,
@@ -13398,11 +13398,11 @@
     "volume24hQuote": 452894.352153
   },
   "OKX:XRP:USDT": {
-    "change24hRate": 0.15657875422029122,
-    "change24hAbs": 0.0032000000000000917,
+    "change24hRate": 0.14679258208152438,
+    "change24hAbs": 0.0030000000000001137,
     "high24h": 2.0748,
     "low24h": 2.0156,
-    "volume24hQuote": 16597100.531138226
+    "volume24hQuote": 16599339.729274154
   },
   "OKX:ENS:USDT": {
     "change24hRate": 0.053533190578160486,
@@ -13500,7 +13500,7 @@
     "change24hAbs": 0,
     "high24h": 0.9999,
     "low24h": 0.9996,
-    "volume24hQuote": 24563945.849471405
+    "volume24hQuote": 24564258.95418792
   },
   "OKX:DOT:USDT": {
     "change24hRate": 1.5632401705352874,
@@ -13549,7 +13549,7 @@
     "change24hAbs": 0.0001020000000000001,
     "high24h": 0.001183,
     "low24h": 0.001048,
-    "volume24hQuote": 1043081.026271
+    "volume24hQuote": 1043093.843601
   },
   "OKX:SKL:USDT": {
     "change24hRate": 0.4750593824227972,
@@ -13612,7 +13612,7 @@
     "change24hAbs": -156.60000000000582,
     "high24h": 90279.8,
     "low24h": 88914.1,
-    "volume24hQuote": 286634611.8705418
+    "volume24hQuote": 286634612.86823714
   },
   "OKX:WOO:USDT": {
     "change24hRate": 3.826225587883615,
@@ -13636,11 +13636,11 @@
     "volume24hQuote": 537501.844484
   },
   "OKX:PARTI:USDT": {
-    "change24hRate": -3.0882230197813163,
-    "change24hAbs": -0.003699999999999995,
+    "change24hRate": -3.1049161171855446,
+    "change24hAbs": -0.003720000000000001,
     "high24h": 0.123,
     "low24h": 0.1153,
-    "volume24hQuote": 761973.1733763
+    "volume24hQuote": 761979.6070841
   },
   "OKX:ACH:USDT": {
     "change24hRate": -0.22246941045605323,
@@ -13706,11 +13706,11 @@
     "volume24hQuote": 13955.99282833
   },
   "OKX:TIA:USDT": {
-    "change24hRate": 2.9329118370214147,
-    "change24hAbs": 0.016699999999999937,
+    "change24hRate": 2.915349490691947,
+    "change24hAbs": 0.016599999999999948,
     "high24h": 0.5902,
     "low24h": 0.5655,
-    "volume24hQuote": 1012188.19647716
+    "volume24hQuote": 1012189.95447716
   },
   "OKX:ADA:USDT": {
     "change24hRate": 0.3618817852834744,
@@ -13769,11 +13769,11 @@
     "volume24hQuote": 8704922.63767567
   },
   "OKX:PENGU:USDT": {
-    "change24hRate": 6.968706212050446,
-    "change24hAbs": 0.0007460000000000001,
+    "change24hRate": 6.950023353573112,
+    "change24hAbs": 0.0007440000000000016,
     "high24h": 0.0117,
     "low24h": 0.010525,
-    "volume24hQuote": 4677727.314766
+    "volume24hQuote": 4677730.749616
   },
   "OKX:KAITO:USDT": {
     "change24hRate": 0.48429932822996274,
@@ -13839,11 +13839,11 @@
     "volume24hQuote": 229879.614742
   },
   "OKX:LINK:USDT": {
-    "change24hRate": 2.1817116919247383,
-    "change24hAbs": 0.29800000000000004,
+    "change24hRate": 2.1963540522732186,
+    "change24hAbs": 0.29999999999999893,
     "high24h": 14.084,
     "low24h": 13.501,
-    "volume24hQuote": 11205968.672594862
+    "volume24hQuote": 11206695.718765697
   },
   "OKX:NAVX:USDT": {
     "change24hRate": -2.961672473867596,
@@ -13930,25 +13930,25 @@
     "volume24hQuote": 73051.662857461
   },
   "OKX:MOODENG:USDT": {
-    "change24hRate": 55.93597773138483,
-    "change24hAbs": 0.040190000000000003,
+    "change24hRate": 56.130828114126665,
+    "change24hAbs": 0.040330000000000005,
     "high24h": 0.2075,
     "low24h": 0.0714,
-    "volume24hQuote": 41084564.6210078
+    "volume24hQuote": 41084638.7289062
   },
   "OKX:SUI:USDT": {
-    "change24hRate": 2.7837259100642506,
-    "change24hAbs": 0.04290000000000016,
+    "change24hRate": 2.7642592953085585,
+    "change24hAbs": 0.04260000000000019,
     "high24h": 1.5978,
     "low24h": 1.5108,
-    "volume24hQuote": 15727277.16232391
+    "volume24hQuote": 15727810.41595556
   },
   "OKX:ICP:USDT": {
-    "change24hRate": -0.2281151981750786,
-    "change24hAbs": -0.008000000000000007,
+    "change24hRate": -0.17108639863131528,
+    "change24hAbs": -0.006000000000000227,
     "high24h": 3.548,
     "low24h": 3.462,
-    "volume24hQuote": 1252231.462163878
+    "volume24hQuote": 1255266.088345276
   },
   "OKX:WLFI:USDT": {
     "change24hRate": -0.3994673768308851,
@@ -13993,11 +13993,11 @@
     "volume24hQuote": 321804.87011504
   },
   "OKX:BIO:USDT": {
-    "change24hRate": 2.7115188583078447,
-    "change24hAbs": 0.0013299999999999979,
+    "change24hRate": 2.7930682976554455,
+    "change24hAbs": 0.0013699999999999962,
     "high24h": 0.05649,
     "low24h": 0.04869,
-    "volume24hQuote": 1852043.38631464
+    "volume24hQuote": 1852100.10881464
   },
   "OKX:ZORA:USDT": {
     "change24hRate": 2.1642266072565244,
@@ -14266,11 +14266,11 @@
     "volume24hQuote": 502718.148557603
   },
   "OKX:BAT:USDT": {
-    "change24hRate": -3.084732526356888,
-    "change24hAbs": -0.00789999999999999,
+    "change24hRate": -3.0456852791878175,
+    "change24hAbs": -0.007800000000000001,
     "high24h": 0.2676,
     "low24h": 0.2461,
-    "volume24hQuote": 1468411.4659193556
+    "volume24hQuote": 1468477.1807490557
   },
   "OKX:MANA:USDT": {
     "change24hRate": 0.980392156862746,
@@ -14298,7 +14298,7 @@
     "change24hAbs": -0.003359999999999995,
     "high24h": 0.05143,
     "low24h": 0.04697,
-    "volume24hQuote": 284730.3506241396
+    "volume24hQuote": 284774.94422413956
   },
   "OKX:OM:USDT": {
     "change24hRate": 2.5577557755775393,
@@ -14326,7 +14326,7 @@
     "change24hAbs": 6.960000000000036,
     "high24h": 3069.13,
     "low24h": 3013.33,
-    "volume24hQuote": 160075943.49389747
+    "volume24hQuote": 160076034.8783512
   },
   "OKX:STORJ:USDT": {
     "change24hRate": -0.9702009702009786,
@@ -14406,11 +14406,11 @@
     "volume24hQuote": 350358.5399092726
   },
   "OKX:BARD:USDT": {
-    "change24hRate": 2.2435897435897383,
-    "change24hAbs": 0.01749999999999996,
+    "change24hRate": 2.1538461538461444,
+    "change24hAbs": 0.016799999999999926,
     "high24h": 0.8206,
     "low24h": 0.7729,
-    "volume24hQuote": 459298.170393
+    "volume24hQuote": 460026.121002
   },
   "OKX:ASTER:USDT": {
     "change24hRate": -2.6192610297779093,
@@ -14448,11 +14448,11 @@
     "volume24hQuote": 209580.265867
   },
   "OKX:CORE:USDT": {
-    "change24hRate": -0.39154267815191884,
-    "change24hAbs": -0.0005000000000000004,
+    "change24hRate": -0.234925606891147,
+    "change24hAbs": -0.0002999999999999947,
     "high24h": 0.1312,
     "low24h": 0.1226,
-    "volume24hQuote": 1593688.954071
+    "volume24hQuote": 1593959.340187
   },
   "OKX:TURBO:USDT": {
     "change24hRate": -0.8234217749313917,
@@ -16786,25 +16786,25 @@
     "volume24hQuote": 1312830.5901
   },
   "BITGET:XRP:USDT": {
-    "change24hRate": 0.17127477367263425,
-    "change24hAbs": 0.0035000000000002807,
+    "change24hRate": 0.17616833863469772,
+    "change24hAbs": 0.0036000000000000476,
     "high24h": 2.0737,
     "low24h": 2.0156,
-    "volume24hQuote": 79978430.4482
+    "volume24hQuote": 79982972.6423
   },
   "BITGET:BTC:USDT": {
     "change24hRate": -0.16772851210651274,
     "change24hAbs": -150.33000000000175,
     "high24h": 90273.97,
     "low24h": 88910.08,
-    "volume24hQuote": 305892085.734653
+    "volume24hQuote": 305895662.474371
   },
   "BITGET:ETH:USDT": {
     "change24hRate": 0.22800252678124378,
     "change24hAbs": 6.929999999999836,
     "high24h": 3068.95,
     "low24h": 3013.11,
-    "volume24hQuote": 191216850.47
+    "volume24hQuote": 191216851.0793
   },
   "BITGET:BCH:USDT": {
     "change24hRate": 2.4301336573511545,
@@ -17003,11 +17003,11 @@
     "volume24hQuote": 10751.583
   },
   "BITGET:SOL:USDT": {
-    "change24hRate": -0.30021014710297633,
-    "change24hAbs": -0.4000000000000057,
+    "change24hRate": -0.3077154007805438,
+    "change24hAbs": -0.4099999999999966,
     "high24h": 134,
     "low24h": 131.29,
-    "volume24hQuote": 22360531.7391
+    "volume24hQuote": 22360535.7373
   },
   "BITGET:FIL:USDT": {
     "change24hRate": 1.2145748987854261,
@@ -17913,11 +17913,11 @@
     "volume24hQuote": 2031194
   },
   "BITGET:SUI:USDT": {
-    "change24hRate": 2.796522190500917,
-    "change24hAbs": 0.04310000000000014,
+    "change24hRate": 2.7835452893849055,
+    "change24hAbs": 0.04290000000000016,
     "high24h": 1.598,
     "low24h": 1.5104,
-    "volume24hQuote": 15002733.59
+    "volume24hQuote": 15004804.47
   },
   "BITGET:TURBO:USDT": {
     "change24hRate": -1.0045662100456767,
@@ -17966,7 +17966,7 @@
     "change24hAbs": 0.005700000000000038,
     "high24h": 0.585,
     "low24h": 0.5708,
-    "volume24hQuote": 435166.09
+    "volume24hQuote": 435169.73
   },
   "BITGET:SEI:USDT": {
     "change24hRate": 3.4837688044338995,
@@ -17980,7 +17980,7 @@
     "change24hAbs": -0.0030000000000000027,
     "high24h": 0.902,
     "low24h": 0.831,
-    "volume24hQuote": 182036.7
+    "volume24hQuote": 182046.61
   },
   "BITGET:XLM:USDT": {
     "change24hRate": 0.20790020790020808,
@@ -18312,11 +18312,11 @@
     "volume24hQuote": 7712.4
   },
   "BITGET:MAPO:USDT": {
-    "change24hRate": 3.0303030303030196,
-    "change24hAbs": 0.00012099999999999958,
+    "change24hRate": 3.005259203606319,
+    "change24hAbs": 0.00012000000000000031,
     "high24h": 0.004129,
     "low24h": 0.003975,
-    "volume24hQuote": 104631.05
+    "volume24hQuote": 104642.51
   },
   "BITGET:SCA:USDT": {
     "change24hRate": 0.7812499999999952,
@@ -18372,7 +18372,7 @@
     "change24hAbs": -0.0034000000000000002,
     "high24h": 0.0514,
     "low24h": 0.0466,
-    "volume24hQuote": 363355.17
+    "volume24hQuote": 363382.18
   },
   "BITGET:USDE:USDT": {
     "change24hRate": 0,
@@ -18669,11 +18669,11 @@
     "volume24hQuote": 242169.34
   },
   "BITGET:MOODENG:USDT": {
-    "change24hRate": 55.93880389429762,
-    "change24hAbs": 0.04021999999999999,
+    "change24hRate": 55.95271210013906,
+    "change24hAbs": 0.04022999999999999,
     "high24h": 0.2041,
     "low24h": 0.07137,
-    "volume24hQuote": 12563509.21
+    "volume24hQuote": 12563579.05
   },
   "BITGET:EIGEN:USDT": {
     "change24hRate": 0.39777247414478956,
@@ -18792,7 +18792,7 @@
     "change24hAbs": -0.010899999999999965,
     "high24h": 0.4,
     "low24h": 0.3136,
-    "volume24hQuote": 2247490.81
+    "volume24hQuote": 2247638.81
   },
   "BITGET:OM:USDT": {
     "change24hRate": 2.7510316368638263,
@@ -18865,8 +18865,8 @@
     "volume24hQuote": 513178.41
   },
   "BITGET:SONIC:USDT": {
-    "change24hRate": 3.0166746537889666,
-    "change24hAbs": 0.002454999999999999,
+    "change24hRate": 3.0203610179280203,
+    "change24hAbs": 0.002458000000000002,
     "high24h": 0.084422,
     "low24h": 0.081193,
     "volume24hQuote": 2580617.28
@@ -18879,11 +18879,11 @@
     "volume24hQuote": 41640.64
   },
   "BITGET:XTER:USDT": {
-    "change24hRate": 1.5909090909090873,
-    "change24hAbs": 0.0006299999999999986,
+    "change24hRate": 1.6414141414141357,
+    "change24hAbs": 0.0006499999999999978,
     "high24h": 0.04533,
     "low24h": 0.03944,
-    "volume24hQuote": 59245.69
+    "volume24hQuote": 59258.17
   },
   "BITGET:D:USDT": {
     "change24hRate": 4.816053511705687,
@@ -19229,11 +19229,11 @@
     "volume24hQuote": 581928.61
   },
   "BITGET:CUDIS:USDT": {
-    "change24hRate": 2.7382645803698433,
-    "change24hAbs": 0.0007699999999999999,
+    "change24hRate": 2.7027027027027035,
+    "change24hAbs": 0.0007600000000000003,
     "high24h": 0.03039,
     "low24h": 0.0275,
-    "volume24hQuote": 81367.6
+    "volume24hQuote": 81374.74
   },
   "BITGET:RVN:USDT": {
     "change24hRate": 0.7692307692307824,
@@ -19324,7 +19324,7 @@
     "change24hAbs": -0.00004000000000000184,
     "high24h": 0.0189,
     "low24h": 0.0184,
-    "volume24hQuote": 1150805.41
+    "volume24hQuote": 1151018.96
   },
   "BITGET:TREE:USDT": {
     "change24hRate": -1.2638230647709245,
@@ -19369,18 +19369,18 @@
     "volume24hQuote": 597388.73
   },
   "BITGET:CAMP:USDT": {
-    "change24hRate": -4.228855721393035,
-    "change24hAbs": -0.00034,
+    "change24hRate": -4.353233830845777,
+    "change24hAbs": -0.0003500000000000005,
     "high24h": 0.00831,
     "low24h": 0.00768,
-    "volume24hQuote": 591873.48
+    "volume24hQuote": 591902.07
   },
   "BITGET:BTR:USDT": {
-    "change24hRate": 0.9826589595375723,
-    "change24hAbs": 0.00034,
+    "change24hRate": 0.8959537572254271,
+    "change24hAbs": 0.0003099999999999978,
     "high24h": 0.03534,
     "low24h": 0.03319,
-    "volume24hQuote": 206978.5
+    "volume24hQuote": 207059.5
   },
   "BITGET:WLFI:USDT": {
     "change24hRate": -0.3994673768308851,
@@ -19439,11 +19439,11 @@
     "volume24hQuote": 111105.63
   },
   "BITGET:BARD:USDT": {
-    "change24hRate": 2.106626320648279,
-    "change24hAbs": 0.016430000000000056,
+    "change24hRate": 2.1694532772592123,
+    "change24hAbs": 0.016920000000000046,
     "high24h": 0.82048,
     "low24h": 0.77224,
-    "volume24hQuote": 287938.15
+    "volume24hQuote": 287978.14
   },
   "BITGET:0G:USDT": {
     "change24hRate": -2.0225368390638456,
@@ -19453,11 +19453,11 @@
     "volume24hQuote": 215825.46
   },
   "BITGET:XPL:USDT": {
-    "change24hRate": 2.1646516983304624,
-    "change24hAbs": 0.0037600000000000133,
+    "change24hRate": 2.199194012665526,
+    "change24hAbs": 0.003820000000000018,
     "high24h": 0.17855,
     "low24h": 0.1704,
-    "volume24hQuote": 1487561.14
+    "volume24hQuote": 1487605.13
   },
   "BITGET:MIRA:USDT": {
     "change24hRate": 2.5572005383580065,
@@ -19565,11 +19565,11 @@
     "volume24hQuote": 154814.8
   },
   "BITGET:TRUST:USDT": {
-    "change24hRate": -2.5214818988589944,
-    "change24hAbs": -0.00358,
+    "change24hRate": -2.493308916748829,
+    "change24hAbs": -0.0035399999999999876,
     "high24h": 0.14481,
     "low24h": 0.13776,
-    "volume24hQuote": 478982.97
+    "volume24hQuote": 478996.38
   },
   "BITGET:ARIAIP:USDT": {
     "change24hRate": 2.839116719242916,
@@ -19579,11 +19579,11 @@
     "volume24hQuote": 17903.55
   },
   "BITGET:MON:USDT": {
-    "change24hRate": 0.1842978252856541,
-    "change24hAbs": 0.00004999999999999796,
+    "change24hRate": 0.22115739034278492,
+    "change24hAbs": 0.000059999999999997555,
     "high24h": 0.02758,
     "low24h": 0.02566,
-    "volume24hQuote": 1356769.5
+    "volume24hQuote": 1356803.5
   },
   "BITGET:IRYS:USDT": {
     "change24hRate": 9.756097560975602,
@@ -23174,21 +23174,21 @@
     "change24hAbs": -0.00010000000000000286,
     "high24h": 0.0829,
     "low24h": 0.0805,
-    "volume24hQuote": 2386957.77644885
+    "volume24hQuote": 2386886.26062265
   },
   "HTX:BABY:USDT": {
-    "change24hRate": -2.7101335428122564,
-    "change24hAbs": -0.0005520000000000004,
+    "change24hRate": -2.724862529457973,
+    "change24hAbs": -0.0005549999999999999,
     "high24h": 0.02075,
     "low24h": 0.019428,
-    "volume24hQuote": 2726997.311514124
+    "volume24hQuote": 2719581.0729578077
   },
   "HTX:SC:USDT": {
     "change24hRate": 0.9230769230769256,
     "change24hAbs": 0.00001500000000000004,
     "high24h": 0.00166,
     "low24h": 0.00161,
-    "volume24hQuote": 1525636.4559180425
+    "volume24hQuote": 1523833.9902036425
   },
   "HTX:BOME:USDT": {
     "change24hRate": 3.817914831130688,
@@ -23202,28 +23202,28 @@
     "change24hAbs": -0.00020000000000000573,
     "high24h": 0.1054,
     "low24h": 0.0986,
-    "volume24hQuote": 2312822.36962656
+    "volume24hQuote": 2312523.28939392
   },
   "HTX:MLK:USDT": {
     "change24hRate": -0.7575757575757617,
     "change24hAbs": -0.0006000000000000033,
     "high24h": 0.0799,
     "low24h": 0.0769,
-    "volume24hQuote": 458457.50701386
+    "volume24hQuote": 458377.88780766
   },
   "HTX:ELF:USDT": {
     "change24hRate": 0,
     "change24hAbs": 0,
     "high24h": 0.0922,
     "low24h": 0.0903,
-    "volume24hQuote": 448376.65167988
+    "volume24hQuote": 448317.34487961995
   },
   "HTX:WAXL:USDT": {
-    "change24hRate": 0.20129529144056899,
-    "change24hAbs": 0.0002299999999999941,
+    "change24hRate": 0.21004726063364615,
+    "change24hAbs": 0.0002400000000000041,
     "high24h": 0.11626,
     "low24h": 0.11375,
-    "volume24hQuote": 1478301.1152811965
+    "volume24hQuote": 1478257.4663407102
   },
   "HTX:PRCL:USDT": {
     "change24hRate": 0.7490636704119804,
@@ -23237,35 +23237,35 @@
     "change24hAbs": 0.017000000000000015,
     "high24h": 0.5853,
     "low24h": 0.5644,
-    "volume24hQuote": 2175607.922759659
+    "volume24hQuote": 2174691.485698619
   },
   "HTX:ALICE:USDT": {
     "change24hRate": 4.183006535947712,
     "change24hAbs": 0.009599999999999997,
     "high24h": 0.2496,
     "low24h": 0.2282,
-    "volume24hQuote": 874009.2322490356
+    "volume24hQuote": 874144.9730250855
   },
   "HTX:EIGEN:USDT": {
     "change24hRate": -0.19747235387045833,
     "change24hAbs": -0.0010000000000000009,
     "high24h": 0.5215,
     "low24h": 0.5023,
-    "volume24hQuote": 2502603.524538689
+    "volume24hQuote": 2502461.455284649
   },
   "HTX:CFX:USDT": {
     "change24hRate": 1.392405063291146,
     "change24hAbs": 0.0009900000000000048,
     "high24h": 0.07311,
     "low24h": 0.0711,
-    "volume24hQuote": 1095936.0976227298
+    "volume24hQuote": 1094964.7544179528
   },
   "HTX:AAVE:USDT": {
     "change24hRate": 0.3893974877581512,
     "change24hAbs": 0.7316000000000145,
     "high24h": 191.335,
     "low24h": 186.5465,
-    "volume24hQuote": 124965.99047377643
+    "volume24hQuote": 124939.56598861642
   },
   "HTX:ANKR:USDT": {
     "change24hRate": -0.945928671865017,
@@ -23275,18 +23275,18 @@
     "volume24hQuote": 3202.4500755652243
   },
   "HTX:JST:USDT": {
-    "change24hRate": 0.7013574660633346,
-    "change24hAbs": 0.00027899999999999453,
+    "change24hRate": 0.6234288587229718,
+    "change24hAbs": 0.0002479999999999982,
     "high24h": 0.040349,
     "low24h": 0.039656,
-    "volume24hQuote": 6971479.755906895
+    "volume24hQuote": 6961231.757866699
   },
   "HTX:AI:USDT": {
     "change24hRate": 1.357466063348408,
     "change24hAbs": 0.0005999999999999964,
     "high24h": 0.0453,
     "low24h": 0.0441,
-    "volume24hQuote": 422999.59880639997
+    "volume24hQuote": 422758.0486528
   },
   "HTX:AKT:USDT": {
     "change24hRate": 1.896709323583188,
@@ -23303,18 +23303,18 @@
     "volume24hQuote": 8209.441372340001
   },
   "HTX:XAN:USDT": {
-    "change24hRate": -2.0692974013474483,
-    "change24hAbs": -0.0004299999999999998,
+    "change24hRate": -1.9730510105871062,
+    "change24hAbs": -0.00041000000000000064,
     "high24h": 0.02134,
     "low24h": 0.02034,
-    "volume24hQuote": 6890927.763446619
+    "volume24hQuote": 6897425.377383931
   },
   "HTX:ZBT:USDT": {
     "change24hRate": -0.997280145058921,
     "change24hAbs": -0.0010999999999999899,
     "high24h": 0.1121,
     "low24h": 0.1086,
-    "volume24hQuote": 2928598.9599157204
+    "volume24hQuote": 2927849.5932504004
   },
   "HTX:RESOLV:USDT": {
     "change24hRate": -2.99089726918075,
@@ -23328,14 +23328,14 @@
     "change24hAbs": 0.0027000000000000357,
     "high24h": 0.3376,
     "low24h": 0.3297,
-    "volume24hQuote": 1073731.2015694
+    "volume24hQuote": 1073658.5500173501
   },
   "HTX:DOGE:USDT": {
     "change24hRate": 0.38979091729841703,
     "change24hAbs": 0.0005440000000000167,
     "high24h": 0.140583,
     "low24h": 0.139089,
-    "volume24hQuote": 21285262.611263167
+    "volume24hQuote": 21283081.857169986
   },
   "HTX:RAD:USDT": {
     "change24hRate": 2.776837114798505,
@@ -23349,7 +23349,7 @@
     "change24hAbs": -0.006299999999999972,
     "high24h": 0.2618,
     "low24h": 0.2527,
-    "volume24hQuote": 1030673.8182322402
+    "volume24hQuote": 1030456.0394746801
   },
   "HTX:FLR:USDT": {
     "change24hRate": 0,
@@ -23363,28 +23363,28 @@
     "change24hAbs": 0.0011700000000000044,
     "high24h": 0.26749,
     "low24h": 0.25982,
-    "volume24hQuote": 889345.7952887849
+    "volume24hQuote": 888869.8618640999
   },
   "HTX:SKY:USDT": {
     "change24hRate": 1.3571998025891203,
     "change24hAbs": 0.0007150000000000004,
     "high24h": 0.053945,
     "low24h": 0.052502,
-    "volume24hQuote": 2214141.617594538
+    "volume24hQuote": 2214096.9424124607
   },
   "HTX:INIT:USDT": {
-    "change24hRate": 1.0162601626016268,
-    "change24hAbs": 0.0010000000000000009,
+    "change24hRate": 1.2195121951219439,
+    "change24hAbs": 0.0011999999999999927,
     "high24h": 0.1193,
     "low24h": 0.0928,
-    "volume24hQuote": 2420196.53496698
+    "volume24hQuote": 2425217.90911968
   },
   "HTX:FITFI:USDT": {
     "change24hRate": -0.5802707930367437,
     "change24hAbs": -0.0000029999999999999645,
     "high24h": 0.000525,
     "low24h": 0.000507,
-    "volume24hQuote": 629723.4308098179
+    "volume24hQuote": 629651.8637355758
   },
   "HTX:CRTS:USDT": {
     "change24hRate": 9.816753926701567,
@@ -23398,35 +23398,35 @@
     "change24hAbs": 0.0001999999999999988,
     "high24h": 0.0572,
     "low24h": 0.0518,
-    "volume24hQuote": 434146.26544092
+    "volume24hQuote": 434237.02699884
   },
   "HTX:ANIME:USDT": {
-    "change24hRate": 5.786786322141423,
-    "change24hAbs": 0.0003740000000000002,
+    "change24hRate": 5.709422868636863,
+    "change24hAbs": 0.0003690000000000004,
     "high24h": 0.00705,
     "low24h": 0.006446,
-    "volume24hQuote": 2291284.8617774155
+    "volume24hQuote": 2288170.3505566195
   },
   "HTX:PONKE:USDT": {
-    "change24hRate": 5.0616423833035435,
-    "change24hAbs": 0.0016709999999999989,
+    "change24hRate": 5.064671493048192,
+    "change24hAbs": 0.0016719999999999999,
     "high24h": 0.036247,
     "low24h": 0.032615,
-    "volume24hQuote": 461722.0495844996
+    "volume24hQuote": 461679.75347853097
   },
   "HTX:POLYX:USDT": {
     "change24hRate": -1.7656500802568278,
     "change24hAbs": -0.0011000000000000038,
     "high24h": 0.064,
     "low24h": 0.0592,
-    "volume24hQuote": 2107525.79013264
+    "volume24hQuote": 2107451.83888008
   },
   "HTX:PROVE:USDT": {
     "change24hRate": -0.2703920684993193,
     "change24hAbs": -0.0011999999999999789,
     "high24h": 0.4524,
     "low24h": 0.441,
-    "volume24hQuote": 2078260.7337280002
+    "volume24hQuote": 2078086.3032090801
   },
   "HTX:MAVIA:USDT": {
     "change24hRate": -0.5769230769230668,
@@ -23447,28 +23447,28 @@
     "change24hAbs": -0.0000010000000000001327,
     "high24h": 0.00217,
     "low24h": 0.002113,
-    "volume24hQuote": 1827882.625424703
+    "volume24hQuote": 1824217.319246835
   },
   "HTX:JUP:USDT": {
     "change24hRate": 0.5744586831639398,
     "change24hAbs": 0.0012999999999999956,
     "high24h": 0.2315,
     "low24h": 0.2256,
-    "volume24hQuote": 391055.5162394
+    "volume24hQuote": 391013.97450531996
   },
   "HTX:HOT:USDT": {
     "change24hRate": 2.161100196463643,
     "change24hAbs": 0.000010999999999999942,
     "high24h": 0.00056,
     "low24h": 0.000508,
-    "volume24hQuote": 2149692.1532592997
+    "volume24hQuote": 2149462.4450519998
   },
   "HTX:GLM:USDT": {
     "change24hRate": 0.22634676324128586,
     "change24hAbs": 0.0005000000000000004,
     "high24h": 0.2239,
     "low24h": 0.2205,
-    "volume24hQuote": 767954.48010534
+    "volume24hQuote": 767862.4057788601
   },
   "HTX:NFT:USDT": {
     "change24hRate": -0.19439044709802822,
@@ -23482,7 +23482,7 @@
     "change24hAbs": -0.003599999999999992,
     "high24h": 0.257,
     "low24h": 0.2453,
-    "volume24hQuote": 2737420.973833355
+    "volume24hQuote": 2736357.219993355
   },
   "HTX:ACS:USDT": {
     "change24hRate": 0,
@@ -23496,7 +23496,7 @@
     "change24hAbs": -0.000019999999999999185,
     "high24h": 0.008311,
     "low24h": 0.008118,
-    "volume24hQuote": 5848029.721302237
+    "volume24hQuote": 5840532.716538258
   },
   "HTX:REZ:USDT": {
     "change24hRate": 0,
@@ -23510,14 +23510,14 @@
     "change24hAbs": 0.00010899999999999972,
     "high24h": 0.015479,
     "low24h": 0.015219,
-    "volume24hQuote": 355378.70098939596
+    "volume24hQuote": 355337.8604894664
   },
   "HTX:FLOKI:USDT": {
     "change24hRate": 3.0900723208415406,
     "change24hAbs": 0.000001409999999999995,
     "high24h": 0.00004763,
     "low24h": 0.00004562,
-    "volume24hQuote": 2242240.187648928
+    "volume24hQuote": 2242137.6683902177
   },
   "HTX:CHR:USDT": {
     "change24hRate": 0,
@@ -23531,14 +23531,14 @@
     "change24hAbs": 0.0058,
     "high24h": 0.2264,
     "low24h": 0.2165,
-    "volume24hQuote": 1522502.6797833873
+    "volume24hQuote": 1522475.0206737872
   },
   "HTX:MANA:USDT": {
     "change24hRate": 1.0423452768729577,
     "change24hAbs": 0.0015999999999999903,
     "high24h": 0.1571,
     "low24h": 0.153,
-    "volume24hQuote": 2189812.9700821685
+    "volume24hQuote": 2188078.3239271683
   },
   "HTX:OM:USDT": {
     "change24hRate": 0.268817204301083,
@@ -23559,7 +23559,7 @@
     "change24hAbs": -0.0012199999999999989,
     "high24h": 0.09351,
     "low24h": 0.08979,
-    "volume24hQuote": 11582148.757010106
+    "volume24hQuote": 11572775.480317434
   },
   "HTX:SEI:USDT": {
     "change24hRate": 1.9531250000000018,
@@ -23580,49 +23580,49 @@
     "change24hAbs": 0.0007000000000000062,
     "high24h": 0.0754,
     "low24h": 0.0743,
-    "volume24hQuote": 3217655.19245926
+    "volume24hQuote": 3217529.2262754897
   },
   "HTX:AIOZ:USDT": {
     "change24hRate": 0,
     "change24hAbs": 0,
     "high24h": 0.1183,
     "low24h": 0.1133,
-    "volume24hQuote": 1415941.1362462984
+    "volume24hQuote": 1415711.6561241683
   },
   "HTX:CYBER:USDT": {
-    "change24hRate": -2.809372156505908,
-    "change24hAbs": -0.024699999999999944,
+    "change24hRate": -2.786624203821652,
+    "change24hAbs": -0.024499999999999966,
     "high24h": 0.8974,
     "low24h": 0.8299,
-    "volume24hQuote": 1708786.5391318074
+    "volume24hQuote": 1709467.567436153
   },
   "HTX:AQT:USDT": {
     "change24hRate": -0.7434944237918147,
     "change24hAbs": -0.0043999999999999595,
     "high24h": 0.5981,
     "low24h": 0.5854,
-    "volume24hQuote": 596879.74855608
+    "volume24hQuote": 596801.54041662
   },
   "HTX:SAHARA:USDT": {
-    "change24hRate": 4.9792531120331835,
-    "change24hAbs": 0.001799999999999996,
+    "change24hRate": 4.868603042876895,
+    "change24hAbs": 0.0017599999999999977,
     "high24h": 0.03887,
     "low24h": 0.03553,
-    "volume24hQuote": 1850659.5635917
+    "volume24hQuote": 1849262.3564314304
   },
   "HTX:MOG:USDT": {
     "change24hRate": 1.4659685863874339,
     "change24hAbs": 4.199999999999998e-9,
     "high24h": 2.958e-7,
     "low24h": 2.837e-7,
-    "volume24hQuote": 604589.5893404111
+    "volume24hQuote": 604500.7389168344
   },
   "HTX:MNT:USDT": {
     "change24hRate": -1.0154158589494968,
     "change24hAbs": -0.010999999999999899,
     "high24h": 1.0865,
     "low24h": 1.0566,
-    "volume24hQuote": 2056971.507126135
+    "volume24hQuote": 2056597.994475585
   },
   "HTX:ICX:USDT": {
     "change24hRate": 1.0590015128592924,
@@ -23636,35 +23636,35 @@
     "change24hAbs": 0.001999999999999988,
     "high24h": 0.0721,
     "low24h": 0.0684,
-    "volume24hQuote": 1064772.2207890998
+    "volume24hQuote": 1064729.6177573998
   },
   "HTX:DOT:USDT": {
     "change24hRate": 1.1793009104202987,
     "change24hAbs": 0.02499999999999991,
     "high24h": 2.1637,
     "low24h": 2.1192,
-    "volume24hQuote": 6651074.4140409455
+    "volume24hQuote": 6650184.397009015
   },
   "HTX:BIGTIME:USDT": {
     "change24hRate": 0.6926406926406945,
     "change24hAbs": 0.00016000000000000042,
     "high24h": 0.0236,
     "low24h": 0.02304,
-    "volume24hQuote": 421105.393676014
+    "volume24hQuote": 421081.419915002
   },
   "HTX:SUPER:USDT": {
-    "change24hRate": -2.194732641660007,
-    "change24hAbs": -0.005499999999999977,
+    "change24hRate": -1.9553072625698276,
+    "change24hAbs": -0.004899999999999988,
     "high24h": 0.2546,
     "low24h": 0.2446,
-    "volume24hQuote": 871909.2374730001
+    "volume24hQuote": 874042.2548757901
   },
   "HTX:LINK:USDT": {
     "change24hRate": 0.9963820549927684,
     "change24hAbs": 0.1377000000000006,
     "high24h": 14.0798,
     "low24h": 13.803,
-    "volume24hQuote": 22125639.596250623
+    "volume24hQuote": 22120925.103921622
   },
   "HTX:STG:USDT": {
     "change24hRate": -0.9685230024213016,
@@ -23685,21 +23685,21 @@
     "change24hAbs": -0.00031099999999999964,
     "high24h": 0.007192,
     "low24h": 0.00618,
-    "volume24hQuote": 612186.0460699035
+    "volume24hQuote": 612152.045119848
   },
   "HTX:MEME:USDT": {
-    "change24hRate": 2.0270270270270396,
-    "change24hAbs": 0.00002400000000000015,
+    "change24hRate": 2.1959459459459443,
+    "change24hAbs": 0.00002599999999999998,
     "high24h": 0.001266,
     "low24h": 0.001173,
-    "volume24hQuote": 674056.597564289
+    "volume24hQuote": 675132.0016013817
   },
   "HTX:TOWNS:USDT": {
     "change24hRate": 0.9912461380020573,
     "change24hAbs": 0.00007699999999999981,
     "high24h": 0.009555,
     "low24h": 0.007708,
-    "volume24hQuote": 4630416.548919324
+    "volume24hQuote": 4630317.424650351
   },
   "HTX:TAVA:USDT": {
     "change24hRate": 0,
@@ -23709,46 +23709,46 @@
     "volume24hQuote": 0
   },
   "HTX:0G:USDT": {
-    "change24hRate": -1.6524932354077981,
-    "change24hAbs": -0.017099999999999893,
+    "change24hRate": -1.6718206416698755,
+    "change24hAbs": -0.01729999999999987,
     "high24h": 1.0442,
     "low24h": 1.0117,
-    "volume24hQuote": 5130655.27646204
+    "volume24hQuote": 5128403.7949732505
   },
   "HTX:XVS:USDT": {
-    "change24hRate": -0.2646180110968741,
-    "change24hAbs": -0.012399999999999523,
+    "change24hRate": -0.2667520273154114,
+    "change24hAbs": -0.012500000000000178,
     "high24h": 4.7237,
     "low24h": 4.6531,
-    "volume24hQuote": 3915696.8453292805
+    "volume24hQuote": 3914115.6698137
   },
   "HTX:AVL:USDT": {
     "change24hRate": -2.055765595463128,
     "change24hAbs": -0.0026099999999999873,
     "high24h": 0.12825,
     "low24h": 0.11899,
-    "volume24hQuote": 2547044.3013233696
+    "volume24hQuote": 2546661.128325615
   },
   "HTX:TRX:USDT": {
-    "change24hRate": -1.3617845547229839,
-    "change24hAbs": -0.003950999999999982,
+    "change24hRate": -1.3621292230486641,
+    "change24hAbs": -0.003952000000000011,
     "high24h": 0.290225,
     "low24h": 0.286066,
-    "volume24hQuote": 42645155.02966797
+    "volume24hQuote": 42645071.04707574
   },
   "HTX:LPT:USDT": {
     "change24hRate": 0.720593244765869,
     "change24hAbs": 0.027499999999999858,
     "high24h": 3.9443,
     "low24h": 3.8088,
-    "volume24hQuote": 1194064.6458845423
+    "volume24hQuote": 1194034.2571861222
   },
   "HTX:VIRTUAL:USDT": {
     "change24hRate": -0.9671405266837537,
     "change24hAbs": -0.008299999999999974,
     "high24h": 0.8669,
     "low24h": 0.8413,
-    "volume24hQuote": 1638767.743225797
+    "volume24hQuote": 1638690.9499163672
   },
   "HTX:HFT:USDT": {
     "change24hRate": -10.846560846560845,
@@ -23762,42 +23762,42 @@
     "change24hAbs": 0.00007500000000000041,
     "high24h": 0.010697,
     "low24h": 0.01054,
-    "volume24hQuote": 1487126.5130878561
+    "volume24hQuote": 1486867.6574727301
   },
   "HTX:GRT:USDT": {
     "change24hRate": 1.3620320045040115,
     "change24hAbs": 0.0006289999999999976,
     "high24h": 0.047029,
     "low24h": 0.046119,
-    "volume24hQuote": 1618964.9245479945
+    "volume24hQuote": 1618922.9903665336
   },
   "HTX:ASTER:USDT": {
     "change24hRate": -0.12244897959183458,
     "change24hAbs": -0.0011999999999999789,
     "high24h": 0.9879,
     "low24h": 0.9634,
-    "volume24hQuote": 4330666.216360614
+    "volume24hQuote": 4327591.059617134
   },
   "HTX:CVC:USDT": {
     "change24hRate": -5.210420841683363,
     "change24hAbs": -0.002599999999999998,
     "high24h": 0.0508,
     "low24h": 0.047,
-    "volume24hQuote": 1943435.897337
+    "volume24hQuote": 1942137.921009
   },
   "HTX:MOODENG:USDT": {
-    "change24hRate": 52.337342810278834,
-    "change24hAbs": 0.03828999999999999,
+    "change24hRate": 52.58337889557133,
+    "change24hAbs": 0.03846999999999999,
     "high24h": 0.19299,
     "low24h": 0.07249,
-    "volume24hQuote": 2269421.2035141084
+    "volume24hQuote": 2273328.0392231424
   },
   "HTX:AL:USDT": {
     "change24hRate": 0.3776435045317198,
     "change24hAbs": 0.0000499999999999997,
     "high24h": 0.01342,
     "low24h": 0.01313,
-    "volume24hQuote": 409834.50227993703
+    "volume24hQuote": 409559.323667811
   },
   "HTX:PNUT:USDT": {
     "change24hRate": 5.213270142180096,
@@ -23818,7 +23818,7 @@
     "change24hAbs": -0.018299999999999997,
     "high24h": 0.0946,
     "low24h": 0.0728,
-    "volume24hQuote": 374356.1796268836
+    "volume24hQuote": 374110.4142031035
   },
   "HTX:HOME:USDT": {
     "change24hRate": -0.6611570247933901,
@@ -23832,42 +23832,42 @@
     "change24hAbs": -0.00010799999999999959,
     "high24h": 0.007924,
     "low24h": 0.007669,
-    "volume24hQuote": 2525632.9730984746
+    "volume24hQuote": 2525188.5446907957
   },
   "HTX:XEC:USDT": {
     "change24hRate": -0.9023789991796607,
     "change24hAbs": -1.1000000000000064e-7,
     "high24h": 0.00001229,
     "low24h": 0.00001201,
-    "volume24hQuote": 866532.4492038646
+    "volume24hQuote": 866493.2780599957
   },
   "HTX:PCI:USDT": {
     "change24hRate": 1.2664092664092683,
     "change24hAbs": 0.0008200000000000013,
     "high24h": 0.06563,
     "low24h": 0.0646,
-    "volume24hQuote": 69890.8643229
+    "volume24hQuote": 69829.95044860001
   },
   "HTX:SYRUP:USDT": {
-    "change24hRate": 6.622516556291397,
-    "change24hAbs": 0.018000000000000016,
+    "change24hRate": 6.659308314937457,
+    "change24hAbs": 0.018100000000000005,
     "high24h": 0.3157,
     "low24h": 0.2688,
-    "volume24hQuote": 6751665.3258936005
+    "volume24hQuote": 6750956.49298837
   },
   "HTX:XCN:USDT": {
     "change24hRate": 12.351251538777188,
     "change24hAbs": 0.0006020000000000001,
     "high24h": 0.006288,
     "low24h": 0.004758,
-    "volume24hQuote": 2105468.500942256
+    "volume24hQuote": 2105158.663328758
   },
   "HTX:EGLD:USDT": {
-    "change24hRate": -3.6309974082019942,
-    "change24hAbs": -0.2928000000000006,
+    "change24hRate": -3.6471186398640887,
+    "change24hAbs": -0.29410000000000025,
     "high24h": 8.1363,
     "low24h": 7.6937,
-    "volume24hQuote": 4463048.505931965
+    "volume24hQuote": 4454821.385761621
   },
   "HTX:TNSR:USDT": {
     "change24hRate": 0,
@@ -23888,21 +23888,21 @@
     "change24hAbs": 0.0039000000000000146,
     "high24h": 0.3398,
     "low24h": 0.3308,
-    "volume24hQuote": 906474.4011191502
+    "volume24hQuote": 906406.9019358602
   },
   "HTX:SXP:USDT": {
     "change24hRate": -3.6484245439469327,
     "change24hAbs": -0.0022000000000000006,
     "high24h": 0.0634,
     "low24h": 0.0572,
-    "volume24hQuote": 58611.46218417
+    "volume24hQuote": 58583.89782440999
   },
   "HTX:CAKE:USDT": {
-    "change24hRate": 0.3267973856208986,
-    "change24hAbs": 0.007399999999999629,
+    "change24hRate": 0.3753753753753634,
+    "change24hAbs": 0.00849999999999973,
     "high24h": 2.2829,
     "low24h": 2.2538,
-    "volume24hQuote": 2659257.3135390463
+    "volume24hQuote": 2660264.5558432597
   },
   "HTX:NEAR:USDT": {
     "change24hRate": -0.4194337644180283,
@@ -23930,7 +23930,7 @@
     "change24hAbs": 0.009500000000000064,
     "high24h": 1.8684,
     "low24h": 1.6846,
-    "volume24hQuote": 442214.94617503916
+    "volume24hQuote": 442202.1997979991
   },
   "HTX:FET:USDT": {
     "change24hRate": -1.1864406779661005,
@@ -23940,74 +23940,74 @@
     "volume24hQuote": 2329.4249738014605
   },
   "HTX:GMX:USDT": {
-    "change24hRate": 2.745955297858429,
-    "change24hAbs": 0.23490000000000144,
+    "change24hRate": 3.5630786495838422,
+    "change24hAbs": 0.3048000000000002,
     "high24h": 8.9014,
     "low24h": 8.5334,
-    "volume24hQuote": 825761.8648801601
+    "volume24hQuote": 832294.9523279999
   },
   "HTX:TUSD:USDT": {
     "change24hRate": -0.010019036168719466,
     "change24hAbs": -0.00009999999999998899,
     "high24h": 0.99885,
     "low24h": 0.99791,
-    "volume24hQuote": 387515.35901420005
+    "volume24hQuote": 387512.78367519996
   },
   "HTX:ETH:USDT": {
     "change24hRate": 0.15883873428877496,
     "change24hAbs": 4.829999999999927,
     "high24h": 3066.31,
     "low24h": 3024.77,
-    "volume24hQuote": 44656134.4015246
+    "volume24hQuote": 44693499.653984606
   },
   "HTX:ME:USDT": {
     "change24hRate": 0.6771314250538565,
     "change24hAbs": 0.0021999999999999797,
     "high24h": 0.3304,
     "low24h": 0.3238,
-    "volume24hQuote": 792217.63010777
+    "volume24hQuote": 792087.18151563
   },
   "HTX:HAEDAL:USDT": {
     "change24hRate": 1.621308627678055,
     "change24hAbs": 0.0008400000000000005,
     "high24h": 0.05316,
     "low24h": 0.05181,
-    "volume24hQuote": 2597373.054970785
+    "volume24hQuote": 2597280.91528581
   },
   "HTX:LISTA:USDT": {
     "change24hRate": -0.6417112299465276,
     "change24hAbs": -0.0012000000000000066,
     "high24h": 0.2094,
     "low24h": 0.1846,
-    "volume24hQuote": 5428857.56252064
+    "volume24hQuote": 5428808.55894118
   },
   "HTX:SUN:USDT": {
     "change24hRate": -0.009308386856567067,
     "change24hAbs": -0.000002000000000002,
     "high24h": 0.021539,
     "low24h": 0.021342,
-    "volume24hQuote": 7684043.477352416
+    "volume24hQuote": 7651166.333405536
   },
   "HTX:TRUMP:USDT": {
     "change24hRate": 0.3001579778830984,
     "change24hAbs": 0.017100000000000115,
     "high24h": 5.7572,
     "low24h": 5.6917,
-    "volume24hQuote": 17088406.31922328
+    "volume24hQuote": 17082732.927614503
   },
   "HTX:PSG:USDT": {
-    "change24hRate": 0.48208611811110674,
-    "change24hAbs": 0.0044000000000000705,
+    "change24hRate": 0.4273036046893847,
+    "change24hAbs": 0.0039000000000000146,
     "high24h": 0.9659,
     "low24h": 0.8741,
-    "volume24hQuote": 1380887.99518986
+    "volume24hQuote": 1380004.98509302
   },
   "HTX:GAS:USDT": {
     "change24hRate": 0.28566076613280855,
     "change24hAbs": 0.006099999999999994,
     "high24h": 2.1736,
     "low24h": 2.134,
-    "volume24hQuote": 1087886.7014491002
+    "volume24hQuote": 1087847.28821235
   },
   "HTX:NKN:USDT": {
     "change24hRate": 1.4178605894142988,
@@ -24021,21 +24021,21 @@
     "change24hAbs": 0.17430000000000234,
     "high24h": 127.1838,
     "low24h": 123.7908,
-    "volume24hQuote": 2013960.13816415
+    "volume24hQuote": 2010442.7752626
   },
   "HTX:DRIFT:USDT": {
     "change24hRate": -1.7536355859709238,
     "change24hAbs": -0.00410000000000002,
     "high24h": 0.2363,
     "low24h": 0.2289,
-    "volume24hQuote": 1970276.31898764
+    "volume24hQuote": 1970107.0403781997
   },
   "HTX:BTC:USDT": {
-    "change24hRate": -0.29867177397998607,
-    "change24hAbs": -268.09999999999127,
+    "change24hRate": -0.29683362244300265,
+    "change24hAbs": -266.4499999999971,
     "high24h": 90101.08,
     "low24h": 88923.08,
-    "volume24hQuote": 185434302.40018675
+    "volume24hQuote": 185437681.13615564
   },
   "HTX:IMX:USDT": {
     "change24hRate": -0.5052206130010108,
@@ -24077,56 +24077,56 @@
     "change24hAbs": -0.0023,
     "high24h": 0.0335,
     "low24h": 0.0308,
-    "volume24hQuote": 77831.04205500001
+    "volume24hQuote": 77743.801467
   },
   "HTX:TREE:USDT": {
     "change24hRate": -0.63542494042893,
     "change24hAbs": -0.0008000000000000229,
     "high24h": 0.1377,
     "low24h": 0.1245,
-    "volume24hQuote": 1636756.0718709598
+    "volume24hQuote": 1636711.7578355698
   },
   "HTX:BLAST:USDT": {
     "change24hRate": 1.3528748590755317,
     "change24hAbs": 0.000011999999999999966,
     "high24h": 0.000986,
     "low24h": 0.000887,
-    "volume24hQuote": 636573.5225283458
+    "volume24hQuote": 636529.6079460221
   },
   "HTX:APE:USDT": {
     "change24hRate": -0.6762468300929916,
     "change24hAbs": -0.001600000000000018,
     "high24h": 0.2399,
     "low24h": 0.2346,
-    "volume24hQuote": 857940.914948876
+    "volume24hQuote": 857524.044829876
   },
   "HTX:MERL:USDT": {
-    "change24hRate": -2.478888586216289,
-    "change24hAbs": -0.009099999999999997,
+    "change24hRate": -2.5061291201307507,
+    "change24hAbs": -0.009199999999999986,
     "high24h": 0.3683,
     "low24h": 0.3526,
-    "volume24hQuote": 2613778.465119638
+    "volume24hQuote": 2612717.8833832545
   },
   "HTX:BAL:USDT": {
     "change24hRate": 0.7674943566591412,
     "change24hAbs": 0.005099999999999993,
     "high24h": 0.7098,
     "low24h": 0.6532,
-    "volume24hQuote": 106477.642584
+    "volume24hQuote": 106418.99901599999
   },
   "HTX:IOTA:USDT": {
     "change24hRate": 2.1782178217821717,
     "change24hAbs": 0.0021999999999999936,
     "high24h": 0.1046,
     "low24h": 0.101,
-    "volume24hQuote": 1182921.08191921
+    "volume24hQuote": 1182958.45620169
   },
   "HTX:MTL:USDT": {
     "change24hRate": 0.22704339051463468,
     "change24hAbs": 0.0009000000000000119,
     "high24h": 0.4059,
     "low24h": 0.3946,
-    "volume24hQuote": 448261.6855128524
+    "volume24hQuote": 448233.6588584124
   },
   "HTX:ALT:USDT": {
     "change24hRate": -0.5315110098709103,
@@ -24140,14 +24140,14 @@
     "change24hAbs": -0.00017400000000000054,
     "high24h": 0.02562,
     "low24h": 0.024625,
-    "volume24hQuote": 6014295.494445069
+    "volume24hQuote": 6011720.410590328
   },
   "HTX:TAIKO:USDT": {
     "change24hRate": -3.629032258064508,
     "change24hAbs": -0.007199999999999984,
     "high24h": 0.2017,
     "low24h": 0.189,
-    "volume24hQuote": 1240699.65654712
+    "volume24hQuote": 1240527.38404696
   },
   "HTX:PYR:USDT": {
     "change24hRate": 0.7065889418830601,
@@ -24161,7 +24161,7 @@
     "change24hAbs": -0.0014399999999999968,
     "high24h": 0.05843,
     "low24h": 0.05646,
-    "volume24hQuote": 1728754.52657388
+    "volume24hQuote": 1728678.588483964
   },
   "HTX:XPL:USDT": {
     "change24hRate": 1.4874141876430154,
@@ -24175,63 +24175,63 @@
     "change24hAbs": 0.00006899999999999962,
     "high24h": 0.014851,
     "low24h": 0.01423,
-    "volume24hQuote": 2178884.8423004397
+    "volume24hQuote": 2174164.0760215
   },
   "HTX:BFC:USDT": {
     "change24hRate": 0,
     "change24hAbs": 0,
     "high24h": 0.02097,
     "low24h": 0.02087,
-    "volume24hQuote": 595406.160961476
+    "volume24hQuote": 595372.944162464
   },
   "HTX:CELO:USDT": {
-    "change24hRate": 3.6396181384248174,
-    "change24hAbs": 0.006099999999999994,
+    "change24hRate": 3.758949880668258,
+    "change24hAbs": 0.0063,
     "high24h": 0.1759,
     "low24h": 0.1669,
-    "volume24hQuote": 1496534.194032351
+    "volume24hQuote": 1498302.5305926886
   },
   "HTX:XDC:USDT": {
     "change24hRate": -0.16951546828648265,
     "change24hAbs": -0.00008400000000000074,
     "high24h": 0.049867,
     "low24h": 0.049426,
-    "volume24hQuote": 4894798.175954519
+    "volume24hQuote": 4894178.446739827
   },
   "HTX:RED:USDT": {
     "change24hRate": 7.010231148162167,
     "change24hAbs": 0.01849999999999996,
     "high24h": 0.3036,
     "low24h": 0.2618,
-    "volume24hQuote": 2172154.902844097
+    "volume24hQuote": 2171974.127505777
   },
   "HTX:ACH:USDT": {
     "change24hRate": -0.26492990396290667,
     "change24hAbs": -0.000023999999999999716,
     "high24h": 0.009149,
     "low24h": 0.009001,
-    "volume24hQuote": 831074.6150021914
+    "volume24hQuote": 830561.8239720829
   },
   "HTX:PHA:USDT": {
     "change24hRate": 1.411265451136175,
     "change24hAbs": 0.0005720000000000031,
     "high24h": 0.04165,
     "low24h": 0.040531,
-    "volume24hQuote": 635681.0554636014
+    "volume24hQuote": 635626.9983845772
   },
   "HTX:MEW:USDT": {
     "change24hRate": 9.689557855127001,
     "change24hAbs": 0.00010300000000000001,
     "high24h": 0.00118,
     "low24h": 0.001053,
-    "volume24hQuote": 1477065.3126201087
+    "volume24hQuote": 1476464.6533729935
   },
   "HTX:MORPHO:USDT": {
-    "change24hRate": -0.5053746189635787,
-    "change24hAbs": -0.006299999999999972,
+    "change24hRate": -0.4813091609176966,
+    "change24hAbs": -0.006000000000000005,
     "high24h": 1.2654,
     "low24h": 1.2349,
-    "volume24hQuote": 5062140.504874989
+    "volume24hQuote": 5062348.72983484
   },
   "HTX:PENDLE:USDT": {
     "change24hRate": -1.0898622249640308,
@@ -24245,7 +24245,7 @@
     "change24hAbs": 0.0013000000000000095,
     "high24h": 0.088,
     "low24h": 0.0829,
-    "volume24hQuote": 3212905.4899678403
+    "volume24hQuote": 3212863.9764305903
   },
   "HTX:ACE:USDT": {
     "change24hRate": -3.568773234200742,
@@ -24259,7 +24259,7 @@
     "change24hAbs": -0.0007999999999999952,
     "high24h": 0.1118,
     "low24h": 0.1095,
-    "volume24hQuote": 1110698.0437735
+    "volume24hQuote": 1110497.8589016001
   },
   "HTX:ZIL:USDT": {
     "change24hRate": 1.8064516129032255,
@@ -24269,18 +24269,18 @@
     "volume24hQuote": 2554040.2355894796
   },
   "HTX:MAPO:USDT": {
-    "change24hRate": 2.8193612774450942,
-    "change24hAbs": 0.00011299999999999939,
+    "change24hRate": 2.7944111776447134,
+    "change24hAbs": 0.00011200000000000012,
     "high24h": 0.004126,
     "low24h": 0.003991,
-    "volume24hQuote": 202184.47761480667
+    "volume24hQuote": 202083.46200872402
   },
   "HTX:GALA:USDT": {
-    "change24hRate": 0.49923727638329735,
-    "change24hAbs": 0.000035999999999999574,
+    "change24hRate": 0.5131049785050577,
+    "change24hAbs": 0.00003699999999999971,
     "high24h": 0.007386,
     "low24h": 0.007134,
-    "volume24hQuote": 11195058.227927856
+    "volume24hQuote": 11196603.763207303
   },
   "HTX:ETHFI:USDT": {
     "change24hRate": 0.5798562964830516,
@@ -24294,7 +24294,7 @@
     "change24hAbs": 0.0013500000000000005,
     "high24h": 0.01847,
     "low24h": 0.01679,
-    "volume24hQuote": 1636846.3377772884
+    "volume24hQuote": 1636641.7494110162
   },
   "HTX:SWELL:USDT": {
     "change24hRate": -0.8196721311475431,
@@ -24308,28 +24308,28 @@
     "change24hAbs": 0.0259999999999998,
     "high24h": 4.0484,
     "low24h": 3.9763,
-    "volume24hQuote": 2137094.9625669224
+    "volume24hQuote": 2137005.8120229226
   },
   "HTX:MET:USDT": {
     "change24hRate": -2.1811572250833033,
     "change24hAbs": -0.007199999999999984,
     "high24h": 0.3353,
     "low24h": 0.3212,
-    "volume24hQuote": 7488918.276795273
+    "volume24hQuote": 7485697.140152942
   },
   "HTX:BCH:USDT": {
-    "change24hRate": 0.5126807582906083,
-    "change24hAbs": 3.009999999999991,
+    "change24hRate": 0.5263068249561466,
+    "change24hAbs": 3.090000000000032,
     "high24h": 592.62,
     "low24h": 580.94,
-    "volume24hQuote": 22130925.487883087
+    "volume24hQuote": 22117492.15233028
   },
   "HTX:LA:USDT": {
     "change24hRate": -2.070929329536617,
     "change24hAbs": -0.007999999999999952,
     "high24h": 0.3914,
     "low24h": 0.378,
-    "volume24hQuote": 4561112.27316303
+    "volume24hQuote": 4557428.42426898
   },
   "HTX:USD1:USDT": {
     "change24hRate": 0,
@@ -24339,11 +24339,11 @@
     "volume24hQuote": 209082.04421569032
   },
   "HTX:BERA:USDT": {
-    "change24hRate": -1.4092510512558207,
-    "change24hAbs": -0.012399999999999967,
+    "change24hRate": -1.3978861234231137,
+    "change24hAbs": -0.012299999999999978,
     "high24h": 0.897,
     "low24h": 0.8621,
-    "volume24hQuote": 1430847.41885775
+    "volume24hQuote": 1431066.6379605602
   },
   "HTX:DAO:USDT": {
     "change24hRate": 0,
@@ -24357,7 +24357,7 @@
     "change24hAbs": 0.0005399999999999988,
     "high24h": 0.11526,
     "low24h": 0.11241,
-    "volume24hQuote": 2151797.488628088
+    "volume24hQuote": 2150275.8879447374
   },
   "HTX:OGN:USDT": {
     "change24hRate": 0.8522727272727123,
@@ -24367,11 +24367,11 @@
     "volume24hQuote": 116138.27768999999
   },
   "HTX:KAITO:USDT": {
-    "change24hRate": -1.3040810064437038,
-    "change24hAbs": -0.008500000000000063,
+    "change24hRate": -1.3194231359312751,
+    "change24hAbs": -0.008600000000000052,
     "high24h": 0.6979,
     "low24h": 0.6416,
-    "volume24hQuote": 808900.8328247
+    "volume24hQuote": 808774.23523008
   },
   "HTX:PROM:USDT": {
     "change24hRate": 0,
@@ -24385,7 +24385,7 @@
     "change24hAbs": 0,
     "high24h": 0.0809,
     "low24h": 0.0798,
-    "volume24hQuote": 272537.35198544
+    "volume24hQuote": 272494.86571974
   },
   "HTX:APT:USDT": {
     "change24hRate": -2.0318814548720256,
@@ -24399,7 +24399,7 @@
     "change24hAbs": -0.00019999999999999185,
     "high24h": 0.0797,
     "low24h": 0.0755,
-    "volume24hQuote": 444404.8368705242
+    "volume24hQuote": 444353.04344304424
   },
   "HTX:METIS:USDT": {
     "change24hRate": -0.3420111505005167,
@@ -24413,14 +24413,14 @@
     "change24hAbs": -0.000009999999999999593,
     "high24h": 0.00824,
     "low24h": 0.0071,
-    "volume24hQuote": 2181776.752572745
+    "volume24hQuote": 2181443.5018861215
   },
   "HTX:ES:USDT": {
     "change24hRate": 2.757158006362678,
     "change24hAbs": 0.002600000000000005,
     "high24h": 0.1027,
     "low24h": 0.0934,
-    "volume24hQuote": 3010520.8859123997
+    "volume24hQuote": 3009996.4416006
   },
   "HTX:ACX:USDT": {
     "change24hRate": 2.4647887323943634,
@@ -24430,18 +24430,18 @@
     "volume24hQuote": 491555.56605692464
   },
   "HTX:EUL:USDT": {
-    "change24hRate": -4.176964903608514,
-    "change24hAbs": -0.16900000000000048,
+    "change24hRate": -4.23628274839348,
+    "change24hAbs": -0.17140000000000022,
     "high24h": 4.086,
     "low24h": 3.8381,
-    "volume24hQuote": 2069217.4530687998
+    "volume24hQuote": 2066247.3133604398
   },
   "HTX:ONDO:USDT": {
     "change24hRate": 0.20387075152903775,
     "change24hAbs": 0.0009490000000000332,
     "high24h": 0.470456,
     "low24h": 0.463757,
-    "volume24hQuote": 3982277.1737250667
+    "volume24hQuote": 3982156.769655463
   },
   "HTX:OAS:USDT": {
     "change24hRate": 0,
@@ -24455,28 +24455,28 @@
     "change24hAbs": 0.0004000000000000045,
     "high24h": 0.0386,
     "low24h": 0.0348,
-    "volume24hQuote": 612163.7925216
+    "volume24hQuote": 612117.66148896
   },
   "HTX:ZKC:USDT": {
     "change24hRate": 0.2883922134102462,
     "change24hAbs": 0.00040000000000001146,
     "high24h": 0.1413,
     "low24h": 0.1379,
-    "volume24hQuote": 679742.72123108
+    "volume24hQuote": 679751.48578298
   },
   "HTX:USDP:USDT": {
     "change24hRate": 0.010030090270811332,
     "change24hAbs": 0.00009999999999998899,
     "high24h": 0.9971,
     "low24h": 0.997,
-    "volume24hQuote": 36163.34069374
+    "volume24hQuote": 36150.11107123
   },
   "HTX:REQ:USDT": {
     "change24hRate": 1.4058106841612008,
     "change24hAbs": 0.0015000000000000013,
     "high24h": 0.1089,
     "low24h": 0.1063,
-    "volume24hQuote": 1452643.6876800002
+    "volume24hQuote": 1452547.1300000001
   },
   "HTX:SCR:USDT": {
     "change24hRate": 0.8918617614269734,
@@ -24490,21 +24490,21 @@
     "change24hAbs": -0.030200000000000005,
     "high24h": 0.4996,
     "low24h": 0.453,
-    "volume24hQuote": 3072822.04558641
+    "volume24hQuote": 3072757.88115465
   },
   "HTX:BMT:USDT": {
     "change24hRate": 3.5371011149557887,
     "change24hAbs": 0.0009200000000000007,
     "high24h": 0.02751,
     "low24h": 0.02601,
-    "volume24hQuote": 1685636.865739208
+    "volume24hQuote": 1685610.035808395
   },
   "HTX:STRK:USDT": {
     "change24hRate": 1.5490533562822686,
     "change24hAbs": 0.001799999999999996,
     "high24h": 0.1231,
     "low24h": 0.1146,
-    "volume24hQuote": 1065022.9273182238
+    "volume24hQuote": 1064698.2633100236
   },
   "HTX:CTSI:USDT": {
     "change24hRate": 1.3157894736842117,
@@ -24518,28 +24518,28 @@
     "change24hAbs": 0.0011000000000000038,
     "high24h": 0.0435,
     "low24h": 0.0423,
-    "volume24hQuote": 597801.3696047401
+    "volume24hQuote": 597631.6659352201
   },
   "HTX:SXT:USDT": {
     "change24hRate": 1.2920067409047318,
     "change24hAbs": 0.000390999999999999,
     "high24h": 0.031163,
     "low24h": 0.030059,
-    "volume24hQuote": 2207824.3895712732
+    "volume24hQuote": 2207504.277558754
   },
   "HTX:MOCA:USDT": {
     "change24hRate": -0.44762757385854696,
     "change24hAbs": -0.0000999999999999994,
     "high24h": 0.02261,
     "low24h": 0.02217,
-    "volume24hQuote": 1509701.6336687745
+    "volume24hQuote": 1509477.8571017347
   },
   "HTX:ARKM:USDT": {
-    "change24hRate": 0.8924587237840257,
-    "change24hAbs": 0.0020000000000000018,
+    "change24hRate": 0.9370816599732346,
+    "change24hAbs": 0.0021000000000000185,
     "high24h": 0.2368,
     "low24h": 0.2222,
-    "volume24hQuote": 482193.29670067586
+    "volume24hQuote": 482455.42155954696
   },
   "HTX:S:USDT": {
     "change24hRate": 0.4184100418410016,
@@ -24553,7 +24553,7 @@
     "change24hAbs": 0.0023999999999999994,
     "high24h": 0.1052,
     "low24h": 0.0936,
-    "volume24hQuote": 2514837.20891326
+    "volume24hQuote": 2514730.7238015397
   },
   "HTX:POWR:USDT": {
     "change24hRate": -0.33333333333332743,
@@ -24567,21 +24567,21 @@
     "change24hAbs": -0.000008999999999999894,
     "high24h": 0.001846,
     "low24h": 0.001797,
-    "volume24hQuote": 661278.0159824108
+    "volume24hQuote": 661094.1312250957
   },
   "HTX:YGG:USDT": {
     "change24hRate": 2.3224043715846903,
     "change24hAbs": 0.0016999999999999932,
     "high24h": 0.0771,
     "low24h": 0.0732,
-    "volume24hQuote": 1453350.4265253488
+    "volume24hQuote": 1452848.0073993988
   },
   "HTX:RAY:USDT": {
-    "change24hRate": 1.0239209109365395,
-    "change24hAbs": 0.011600000000000055,
+    "change24hRate": 1.1298437637920313,
+    "change24hAbs": 0.012799999999999923,
     "high24h": 1.1604,
     "low24h": 1.1234,
-    "volume24hQuote": 2207729.61019695
+    "volume24hQuote": 2210275.33031016
   },
   "HTX:ATOM:USDT": {
     "change24hRate": -0.2103190584866044,
@@ -24630,14 +24630,14 @@
     "change24hAbs": -0.008299999999999974,
     "high24h": 0.3237,
     "low24h": 0.2995,
-    "volume24hQuote": 1885648.39494522
+    "volume24hQuote": 1885531.7777334803
   },
   "HTX:BSV:USDT": {
     "change24hRate": 0.2231705884656058,
     "change24hAbs": 0.04560000000000031,
     "high24h": 20.568,
     "low24h": 20.2545,
-    "volume24hQuote": 2151653.1809384306
+    "volume24hQuote": 2151465.0049208305
   },
   "HTX:POPCAT:USDT": {
     "change24hRate": 3.1872509960159308,
@@ -24651,42 +24651,42 @@
     "change24hAbs": 0.0015680000000000138,
     "high24h": 0.188525,
     "low24h": 0.184799,
-    "volume24hQuote": 319387.7860014741
+    "volume24hQuote": 319344.88407306926
   },
   "HTX:YFI:USDT": {
     "change24hRate": 0.20255440528084814,
     "change24hAbs": 7.300000000000182,
     "high24h": 3792.72,
     "low24h": 3589.85,
-    "volume24hQuote": 3322108.997698418
+    "volume24hQuote": 3314675.2200710378
   },
   "HTX:JASMY:USDT": {
     "change24hRate": 1.4639145073927595,
     "change24hAbs": 0.0000999999999999994,
     "high24h": 0.006987,
     "low24h": 0.006811,
-    "volume24hQuote": 4241980.331967503
+    "volume24hQuote": 4239515.461777959
   },
   "HTX:AERGO:USDT": {
-    "change24hRate": 0.595133905128654,
-    "change24hAbs": 0.00034,
+    "change24hRate": 0.6301417819009263,
+    "change24hAbs": 0.0003599999999999992,
     "high24h": 0.05838,
     "low24h": 0.05636,
-    "volume24hQuote": 2160145.4473753143
+    "volume24hQuote": 2160671.792060686
   },
   "HTX:CHZ:USDT": {
     "change24hRate": 1.4215400556958806,
     "change24hAbs": 0.0004390000000000019,
     "high24h": 0.032219,
     "low24h": 0.030861,
-    "volume24hQuote": 15106206.717908757
+    "volume24hQuote": 15088339.377398593
   },
   "HTX:CUDIS:USDT": {
-    "change24hRate": 0.16691007719590872,
-    "change24hAbs": 0.00004799999999999943,
+    "change24hRate": -0.22602406286945922,
+    "change24hAbs": -0.00006499999999999909,
     "high24h": 0.030323,
     "low24h": 0.027731,
-    "volume24hQuote": 2632825.043251145
+    "volume24hQuote": 2622198.5196787245
   },
   "HTX:PIXEL:USDT": {
     "change24hRate": 0,
@@ -24700,7 +24700,7 @@
     "change24hAbs": -1.1670000000000009e-7,
     "high24h": 0.00000135,
     "low24h": 0.0000012033,
-    "volume24hQuote": 9214287.461146608
+    "volume24hQuote": 9211801.587174932
   },
   "HTX:ENJ:USDT": {
     "change24hRate": 0.9287925696594262,
@@ -24721,14 +24721,14 @@
     "change24hAbs": 0.00040000000000001146,
     "high24h": 0.2051,
     "low24h": 0.2018,
-    "volume24hQuote": 190209.20732892002
+    "volume24hQuote": 188964.80926154
   },
   "HTX:IO:USDT": {
     "change24hRate": -0.38188761593015735,
     "change24hAbs": -0.0006999999999999784,
     "high24h": 0.1937,
     "low24h": 0.1809,
-    "volume24hQuote": 850528.8945712622
+    "volume24hQuote": 850355.553468602
   },
   "HTX:BONK:USDT": {
     "change24hRate": 6.3539609392144065,
@@ -24756,21 +24756,21 @@
     "change24hAbs": -0.00001000000000000046,
     "high24h": 0.008,
     "low24h": 0.00774,
-    "volume24hQuote": 473688.17156546604
+    "volume24hQuote": 473543.0095275
   },
   "HTX:COTI:USDT": {
     "change24hRate": 0.3731343283582067,
     "change24hAbs": 0.0000999999999999994,
     "high24h": 0.0272,
     "low24h": 0.0268,
-    "volume24hQuote": 638449.8396812619
+    "volume24hQuote": 638336.941188262
   },
   "HTX:FLOW:USDT": {
     "change24hRate": -0.5013673655423964,
     "change24hAbs": -0.0011000000000000176,
     "high24h": 0.2213,
     "low24h": 0.2175,
-    "volume24hQuote": 364904.60481124
+    "volume24hQuote": 364725.89930119
   },
   "HTX:EPT:USDT": {
     "change24hRate": -2.2532672374943727,
@@ -24784,7 +24784,7 @@
     "change24hAbs": -0.002000000000000224,
     "high24h": 2.2352,
     "low24h": 2.1861,
-    "volume24hQuote": 4315377.072492659
+    "volume24hQuote": 4314641.50075472
   },
   "HTX:NEO:USDT": {
     "change24hRate": 0.7299270072992544,
@@ -24798,7 +24798,7 @@
     "change24hAbs": 0.00051,
     "high24h": 0.01429,
     "low24h": 0.01365,
-    "volume24hQuote": 1195297.3514895346
+    "volume24hQuote": 1194968.5275586906
   },
   "HTX:WLFI:USDT": {
     "change24hRate": 0.537995965030259,
@@ -24808,74 +24808,74 @@
     "volume24hQuote": 1901176.0678326
   },
   "HTX:SAND:USDT": {
-    "change24hRate": 0.9525682814431804,
-    "change24hAbs": 0.001355999999999996,
+    "change24hRate": 0.9588906372934733,
+    "change24hAbs": 0.001365000000000005,
     "high24h": 0.149226,
     "low24h": 0.142352,
-    "volume24hQuote": 2812161.4999602046
+    "volume24hQuote": 2812224.7971222964
   },
   "HTX:C98:USDT": {
     "change24hRate": 5.300353356890464,
     "change24hAbs": 0.0015000000000000013,
     "high24h": 0.0307,
     "low24h": 0.0283,
-    "volume24hQuote": 1675535.2290013155
+    "volume24hQuote": 1675336.7006533355
   },
   "HTX:KAVA:USDT": {
     "change24hRate": -1.0685663401602785,
     "change24hAbs": -0.0011999999999999927,
     "high24h": 0.1149,
     "low24h": 0.1095,
-    "volume24hQuote": 57533.39607898918
+    "volume24hQuote": 57483.79326198918
   },
   "HTX:RLC:USDT": {
     "change24hRate": 2.542841348811494,
     "change24hAbs": 0.018399999999999972,
     "high24h": 0.7456,
     "low24h": 0.7235,
-    "volume24hQuote": 211072.67354319998
+    "volume24hQuote": 211044.2996116
   },
   "HTX:MASK:USDT": {
     "change24hRate": 1.695699090488654,
     "change24hAbs": 0.010999999999999899,
     "high24h": 0.669,
     "low24h": 0.6487,
-    "volume24hQuote": 1837297.0331054998
+    "volume24hQuote": 1837186.5335534099
   },
   "HTX:A8:USDT": {
     "change24hRate": -12.873326467559219,
     "change24hAbs": -0.0075,
     "high24h": 0.05841,
     "low24h": 0.05015,
-    "volume24hQuote": 1353076.744599435
+    "volume24hQuote": 1352887.7962911509
   },
   "HTX:ZRX:USDT": {
     "change24hRate": 1.3898540653231424,
     "change24hAbs": 0.0020000000000000018,
     "high24h": 0.1598,
     "low24h": 0.1437,
-    "volume24hQuote": 1443252.597185
+    "volume24hQuote": 1443209.851403
   },
   "HTX:MAY:USDT": {
     "change24hRate": -1.3453168277655227,
     "change24hAbs": -0.00023799999999999863,
     "high24h": 0.017714,
     "low24h": 0.017364,
-    "volume24hQuote": 2890430.27447934
+    "volume24hQuote": 2890039.25368353
   },
   "HTX:EVER:USDT": {
     "change24hRate": -2.9850746268656603,
     "change24hAbs": -0.000253999999999999,
     "high24h": 0.008634,
     "low24h": 0.008106,
-    "volume24hQuote": 29027.9308539155
+    "volume24hQuote": 28998.5546109155
   },
   "HTX:OPEN:USDT": {
     "change24hRate": 0.1376778338687447,
     "change24hAbs": 0.0002999999999999947,
     "high24h": 0.2243,
     "low24h": 0.2165,
-    "volume24hQuote": 1969667.1083395
+    "volume24hQuote": 1969471.8696564203
   },
   "HTX:FRAG:USDT": {
     "change24hRate": -16.95652173913043,
@@ -24889,7 +24889,7 @@
     "change24hAbs": 0.00020000000000000052,
     "high24h": 0.0112,
     "low24h": 0.0103,
-    "volume24hQuote": 282334.60317134263
+    "volume24hQuote": 282288.5207101427
   },
   "HTX:RUNE:USDT": {
     "change24hRate": 1.4914130762277826,
@@ -24903,35 +24903,35 @@
     "change24hAbs": 0.00102,
     "high24h": 0.05736,
     "low24h": 0.04935,
-    "volume24hQuote": 2685631.966176755
+    "volume24hQuote": 2685590.140826705
   },
   "HTX:NXPC:USDT": {
     "change24hRate": 0,
     "change24hAbs": 0,
     "high24h": 0.4938,
     "low24h": 0.4776,
-    "volume24hQuote": 5610137.537705264
+    "volume24hQuote": 5609891.698034984
   },
   "HTX:ZETA:USDT": {
     "change24hRate": 0.46674445740956544,
     "change24hAbs": 0.0003999999999999976,
     "high24h": 0.0873,
     "low24h": 0.0857,
-    "volume24hQuote": 346306.6132435211
+    "volume24hQuote": 346241.1143388611
   },
   "HTX:INJ:USDT": {
     "change24hRate": 1.1925166842930501,
     "change24hAbs": 0.06539999999999946,
     "high24h": 5.6321,
     "low24h": 5.4834,
-    "volume24hQuote": 1592143.2904655635
+    "volume24hQuote": 1592092.5193950036
   },
   "HTX:XLM:USDT": {
     "change24hRate": 0.31474689104179,
     "change24hAbs": 0.0007560000000000067,
     "high24h": 0.242695,
     "low24h": 0.238609,
-    "volume24hQuote": 10595203.409804586
+    "volume24hQuote": 10593157.804984141
   },
   "HTX:RPL:USDT": {
     "change24hRate": 0,
@@ -24952,35 +24952,35 @@
     "change24hAbs": 0.000899999999999998,
     "high24h": 0.0754,
     "low24h": 0.0705,
-    "volume24hQuote": 946519.88674284
+    "volume24hQuote": 946395.08279032
   },
   "HTX:AVAIL:USDT": {
     "change24hRate": -0.45385779122542375,
     "change24hAbs": -0.000030000000000000512,
     "high24h": 0.00663,
     "low24h": 0.00657,
-    "volume24hQuote": 454186.109792394
+    "volume24hQuote": 454112.14955472806
   },
   "HTX:LWA:USDT": {
     "change24hRate": -1.8612521150592336,
     "change24hAbs": -0.00011000000000000072,
     "high24h": 0.00591,
     "low24h": 0.00579,
-    "volume24hQuote": 438541.67480459996
+    "volume24hQuote": 438470.67713335995
   },
   "HTX:CARV:USDT": {
-    "change24hRate": 1.347305389221554,
-    "change24hAbs": 0.001799999999999996,
+    "change24hRate": 1.4221556886227642,
+    "change24hAbs": 0.0019000000000000128,
     "high24h": 0.1356,
     "low24h": 0.1335,
-    "volume24hQuote": 2305857.7765761195
+    "volume24hQuote": 2307205.2406708
   },
   "HTX:XTZ:USDT": {
     "change24hRate": 1.9179759232809672,
     "change24hAbs": 0.00940000000000002,
     "high24h": 0.5006,
     "low24h": 0.4888,
-    "volume24hQuote": 1831992.4667050613
+    "volume24hQuote": 1831898.9805348113
   },
   "HTX:UOS:USDT": {
     "change24hRate": -9.917355371900824,
@@ -24994,14 +24994,14 @@
     "change24hAbs": 0.000020000000000006124,
     "high24h": 0.13166,
     "low24h": 0.12126,
-    "volume24hQuote": 1986607.056624324
+    "volume24hQuote": 1984910.8177193599
   },
   "HTX:SOLV:USDT": {
     "change24hRate": -1.0572139303482588,
     "change24hAbs": -0.00017,
     "high24h": 0.01616,
     "low24h": 0.0158,
-    "volume24hQuote": 987311.412131971
+    "volume24hQuote": 982960.405898159
   },
   "HTX:USDC:USDT": {
     "change24hRate": -0.010003000900268979,
@@ -25015,7 +25015,7 @@
     "change24hAbs": -0.0033999999999999586,
     "high24h": 0.5303,
     "low24h": 0.5153,
-    "volume24hQuote": 590689.8137613601
+    "volume24hQuote": 590602.24746786
   },
   "HTX:G:USDT": {
     "change24hRate": 1.0141987829614543,
@@ -25025,25 +25025,25 @@
     "volume24hQuote": 130979.426296146
   },
   "HTX:DKA:USDT": {
-    "change24hRate": 0.27190332326283667,
-    "change24hAbs": 0.000017999999999999787,
+    "change24hRate": 0.3021148036253784,
+    "change24hAbs": 0.000020000000000000052,
     "high24h": 0.006775,
     "low24h": 0.006401,
-    "volume24hQuote": 571089.7798947
+    "volume24hQuote": 571157.948644
   },
   "HTX:RENDER:USDT": {
     "change24hRate": -0.0936797401948574,
     "change24hAbs": -0.0015000000000000568,
     "high24h": 1.625,
     "low24h": 1.5885,
-    "volume24hQuote": 1799327.3973134952
+    "volume24hQuote": 1799065.8949943753
   },
   "HTX:ONT:USDT": {
     "change24hRate": 0.4341534008683192,
     "change24hAbs": 0.0003000000000000086,
     "high24h": 0.0705,
     "low24h": 0.0689,
-    "volume24hQuote": 229692.00354508002
+    "volume24hQuote": 229593.27177388003
   },
   "HTX:SAFE:USDT": {
     "change24hRate": -1.0113780025284564,
@@ -25057,56 +25057,56 @@
     "change24hAbs": 0.005599999999999994,
     "high24h": 0.3858,
     "low24h": 0.3709,
-    "volume24hQuote": 8452623.826393934
+    "volume24hQuote": 8451712.407413933
   },
   "HTX:OBT:USDT": {
     "change24hRate": 1.6460905349794281,
     "change24hAbs": 0.000040000000000000105,
     "high24h": 0.00269,
     "low24h": 0.0024,
-    "volume24hQuote": 700293.02718882
+    "volume24hQuote": 700136.8139217009
   },
   "HTX:PUNDIX:USDT": {
     "change24hRate": -0.9696969696969638,
     "change24hAbs": -0.0023999999999999855,
     "high24h": 0.2499,
     "low24h": 0.244,
-    "volume24hQuote": 574338.11278089
+    "volume24hQuote": 573463.3297287599
   },
   "HTX:PLUME:USDT": {
     "change24hRate": 0.5308880308880427,
     "change24hAbs": 0.00011000000000000246,
     "high24h": 0.02185,
     "low24h": 0.01986,
-    "volume24hQuote": 2035759.8140663751
+    "volume24hQuote": 2035147.837764919
   },
   "HTX:XRP:USDT": {
-    "change24hRate": 0.8797177017929555,
-    "change24hAbs": 0.017850000000000144,
+    "change24hRate": 0.8954885513489015,
+    "change24hAbs": 0.01817000000000002,
     "high24h": 2.07375,
     "low24h": 2.0208,
-    "volume24hQuote": 50615942.10619194
+    "volume24hQuote": 50613727.268513404
   },
   "HTX:GRASS:USDT": {
-    "change24hRate": 0.8612734543217547,
-    "change24hAbs": 0.0028000000000000247,
+    "change24hRate": 0.9227929867733013,
+    "change24hAbs": 0.0030000000000000027,
     "high24h": 0.3345,
     "low24h": 0.3185,
-    "volume24hQuote": 2469087.4898086647
+    "volume24hQuote": 2470370.491495959
   },
   "HTX:BTT:USDT": {
     "change24hRate": 2.3354037267080656,
     "change24hAbs": 9.399999999999965e-9,
     "high24h": 4.136e-7,
     "low24h": 4.009e-7,
-    "volume24hQuote": 2794598.445896759
+    "volume24hQuote": 2794169.1389173185
   },
   "HTX:VET:USDT": {
     "change24hRate": 0.6918489065606384,
     "change24hAbs": 0.00008700000000000027,
     "high24h": 0.012879,
     "low24h": 0.01253,
-    "volume24hQuote": 1443916.6942193487
+    "volume24hQuote": 1444355.6577548033
   },
   "HTX:GMT:USDT": {
     "change24hRate": -0.5847953216374233,
@@ -25120,7 +25120,7 @@
     "change24hAbs": 0.0006000000000000033,
     "high24h": 0.0438,
     "low24h": 0.0415,
-    "volume24hQuote": 1799844.0110709025
+    "volume24hQuote": 1799528.1679940824
   },
   "HTX:AEVO:USDT": {
     "change24hRate": 3.2183908045977137,
@@ -25130,11 +25130,11 @@
     "volume24hQuote": 370951.06792701
   },
   "HTX:ERA:USDT": {
-    "change24hRate": 0,
-    "change24hAbs": 0,
+    "change24hRate": -0.043084877208095215,
+    "change24hAbs": -0.00009999999999998899,
     "high24h": 0.2361,
     "low24h": 0.2312,
-    "volume24hQuote": 4007944.2337957
+    "volume24hQuote": 4006266.8972288
   },
   "HTX:JOE:USDT": {
     "change24hRate": 1.9830028328611877,
@@ -25148,21 +25148,21 @@
     "change24hAbs": -0.00002599999999999998,
     "high24h": 0.012719,
     "low24h": 0.012451,
-    "volume24hQuote": 150359.14854786024
+    "volume24hQuote": 150339.50323290026
   },
   "HTX:COOKIE:USDT": {
     "change24hRate": 1.4678899082568846,
     "change24hAbs": 0.0008000000000000021,
     "high24h": 0.0564,
     "low24h": 0.0543,
-    "volume24hQuote": 1603675.36938553
+    "volume24hQuote": 1603624.34695113
   },
   "HTX:XAUT:USDT": {
-    "change24hRate": -0.042314961191469144,
-    "change24hAbs": -1.7799999999997453,
+    "change24hRate": -0.048971247221604404,
+    "change24hAbs": -2.0600000000004,
     "high24h": 4207.82,
     "low24h": 4201.08,
-    "volume24hQuote": 5552561.049046306
+    "volume24hQuote": 5551674.911188154
   },
   "HTX:WAXP:USDT": {
     "change24hRate": 0.6862962143015225,
@@ -25183,49 +25183,49 @@
     "change24hAbs": 0.0009000000000000119,
     "high24h": 0.8731,
     "low24h": 0.7859,
-    "volume24hQuote": 587408.4216604801
+    "volume24hQuote": 587296.2502974
   },
   "HTX:SKYAI:USDT": {
-    "change24hRate": -6.10256553418386,
-    "change24hAbs": -0.0021860000000000004,
+    "change24hRate": -6.105357192708192,
+    "change24hAbs": -0.0021870000000000014,
     "high24h": 0.036049,
     "low24h": 0.033191,
-    "volume24hQuote": 2245949.5168151283
+    "volume24hQuote": 2245648.3837391115
   },
   "HTX:WOO:USDT": {
     "change24hRate": 3.460620525059663,
     "change24hAbs": 0.0008699999999999992,
     "high24h": 0.02676,
     "low24h": 0.02512,
-    "volume24hQuote": 421336.74689099996
+    "volume24hQuote": 421323.65163629997
   },
   "HTX:PUMP:USDT": {
     "change24hRate": 0.40053404539385373,
     "change24hAbs": 0.000011999999999999858,
     "high24h": 0.003058,
     "low24h": 0.002953,
-    "volume24hQuote": 13108326.987310527
+    "volume24hQuote": 13083130.341235545
   },
   "HTX:JTO:USDT": {
     "change24hRate": 3.5315561631351136,
     "change24hAbs": 0.015500000000000014,
     "high24h": 0.4775,
     "low24h": 0.4385,
-    "volume24hQuote": 566490.7154892801
+    "volume24hQuote": 566476.92794816
   },
   "HTX:LSK:USDT": {
     "change24hRate": -3.0612244897959138,
     "change24hAbs": -0.0068999999999999895,
     "high24h": 0.2272,
     "low24h": 0.2181,
-    "volume24hQuote": 649755.6435586482
+    "volume24hQuote": 649731.1245811483
   },
   "HTX:AVAX:USDT": {
     "change24hRate": 1.214444068688235,
     "change24hAbs": 0.16159999999999997,
     "high24h": 13.5513,
     "low24h": 13.2784,
-    "volume24hQuote": 9364466.165096972
+    "volume24hQuote": 9364490.724177323
   },
   "HTX:HIVE:USDT": {
     "change24hRate": -2.087286527514226,
@@ -25235,18 +25235,18 @@
     "volume24hQuote": 19191.835091039142
   },
   "HTX:CHILLGUY:USDT": {
-    "change24hRate": 14.175654853620948,
-    "change24hAbs": 0.0027599999999999986,
+    "change24hRate": 14.278376990241384,
+    "change24hAbs": 0.0027799999999999978,
     "high24h": 0.02284,
     "low24h": 0.01937,
-    "volume24hQuote": 2355218.527320126
+    "volume24hQuote": 2356914.714771825
   },
   "HTX:CTXC:USDT": {
     "change24hRate": -4.142011834319523,
     "change24hAbs": -0.0006999999999999992,
     "high24h": 0.019,
     "low24h": 0.0147,
-    "volume24hQuote": 365372.7106842446
+    "volume24hQuote": 365327.4948642446
   },
   "HTX:ARB:USDT": {
     "change24hRate": 1.4002897151134648,
@@ -25260,28 +25260,28 @@
     "change24hAbs": 0.0010560000000000014,
     "high24h": 0.421335,
     "low24h": 0.411217,
-    "volume24hQuote": 2335193.1945603713
+    "volume24hQuote": 2334327.1956951995
   },
   "HTX:L3:USDT": {
     "change24hRate": -0.9068425391591155,
     "change24hAbs": -0.00011000000000000072,
     "high24h": 0.01256,
     "low24h": 0.01197,
-    "volume24hQuote": 973165.0994360523
+    "volume24hQuote": 972982.8549378143
   },
   "HTX:FIL:USDT": {
     "change24hRate": 1.5092041147807247,
     "change24hAbs": 0.022299999999999986,
     "high24h": 1.5079,
     "low24h": 1.4746,
-    "volume24hQuote": 16804740.268275935
+    "volume24hQuote": 16802288.132762533
   },
   "HTX:ATM:USDT": {
-    "change24hRate": 0.1872040524171385,
-    "change24hAbs": 0.0017000000000000348,
+    "change24hRate": 0.17619204933376661,
+    "change24hAbs": 0.0015999999999999348,
     "high24h": 0.944,
     "low24h": 0.9021,
-    "volume24hQuote": 1358176.2549903002
+    "volume24hQuote": 1358040.18279732
   },
   "HTX:ELX:USDT": {
     "change24hRate": -17.647058823529417,
@@ -25295,28 +25295,28 @@
     "change24hAbs": -0.0013000000000000025,
     "high24h": 0.04871,
     "low24h": 0.04502,
-    "volume24hQuote": 490332.68166959996
+    "volume24hQuote": 490178.24235996
   },
   "HTX:AGLD:USDT": {
     "change24hRate": 1.442803160425964,
     "change24hAbs": 0.0041999999999999815,
     "high24h": 0.3088,
     "low24h": 0.2899,
-    "volume24hQuote": 1715101.33972535
+    "volume24hQuote": 1715033.32419178
   },
   "HTX:AXS:USDT": {
     "change24hRate": -0.34338747099766265,
     "change24hAbs": -0.0036999999999998145,
     "high24h": 1.1092,
     "low24h": 1.0596,
-    "volume24hQuote": 2168463.96879112
+    "volume24hQuote": 2168428.18870132
   },
   "HTX:AVNT:USDT": {
     "change24hRate": -2.4969915764139516,
     "change24hAbs": -0.008299999999999974,
     "high24h": 0.3345,
     "low24h": 0.3223,
-    "volume24hQuote": 934675.55166454
+    "volume24hQuote": 934506.70956566
   },
   "HTX:W:USDT": {
     "change24hRate": -0.4950495049504921,
@@ -25330,21 +25330,21 @@
     "change24hAbs": 0.0027000000000000357,
     "high24h": 0.7303,
     "low24h": 0.695,
-    "volume24hQuote": 2936794.907716547
+    "volume24hQuote": 2936423.584654547
   },
   "HTX:BARD:USDT": {
-    "change24hRate": 1.60714285714285,
-    "change24hAbs": 0.012599999999999945,
+    "change24hRate": 1.6454081632653088,
+    "change24hAbs": 0.012900000000000023,
     "high24h": 0.8206,
     "low24h": 0.7744,
-    "volume24hQuote": 3084463.4526935597
+    "volume24hQuote": 3084365.6905469205
   },
   "HTX:UNI:USDT": {
     "change24hRate": 1.3112267013437282,
     "change24hAbs": 0.07259999999999955,
     "high24h": 5.632,
     "low24h": 5.5368,
-    "volume24hQuote": 7455347.356124292
+    "volume24hQuote": 7452272.785646533
   },
   "HTX:MASA:USDT": {
     "change24hRate": 4.716981132075484,
@@ -25358,42 +25358,42 @@
     "change24hAbs": 0.0014780000000000001,
     "high24h": 0.009037,
     "low24h": 0.004991,
-    "volume24hQuote": 3642445.450792938
+    "volume24hQuote": 3641796.813334927
   },
   "HTX:KAIA:USDT": {
     "change24hRate": 1.677419354838704,
     "change24hAbs": 0.0012999999999999956,
     "high24h": 0.0792,
     "low24h": 0.0775,
-    "volume24hQuote": 834133.13482392
+    "volume24hQuote": 833662.9130968798
   },
   "HTX:ENS:USDT": {
     "change24hRate": 0.3787980549660077,
     "change24hAbs": 0.042299999999999116,
     "high24h": 11.2816,
     "low24h": 11.103,
-    "volume24hQuote": 1405774.91704092
+    "volume24hQuote": 1405657.99948032
   },
   "HTX:COW:USDT": {
     "change24hRate": 0.6325777543489609,
     "change24hAbs": 0.0011999999999999789,
     "high24h": 0.1992,
     "low24h": 0.1881,
-    "volume24hQuote": 351132.2225399
+    "volume24hQuote": 351116.36451508
   },
   "HTX:CKB:USDT": {
     "change24hRate": -2.279305354558615,
     "change24hAbs": -0.00006300000000000012,
     "high24h": 0.002799,
     "low24h": 0.002661,
-    "volume24hQuote": 2988946.909025753
+    "volume24hQuote": 2984860.122459493
   },
   "HTX:KNC:USDT": {
     "change24hRate": -0.547445255474453,
     "change24hAbs": -0.0015000000000000013,
     "high24h": 0.2833,
     "low24h": 0.2722,
-    "volume24hQuote": 524827.841425
+    "volume24hQuote": 524805.2757
   },
   "HTX:MANTA:USDT": {
     "change24hRate": 0.4278074866310134,
@@ -25421,7 +25421,7 @@
     "change24hAbs": 0.0015999999999998238,
     "high24h": 5.8588,
     "low24h": 5.5206,
-    "volume24hQuote": 906265.1835462099
+    "volume24hQuote": 906228.2421977099
   },
   "HTX:WEN:USDT": {
     "change24hRate": -8.219178082191783,
@@ -25449,14 +25449,14 @@
     "change24hAbs": -0.019000000000000017,
     "high24h": 0.1711,
     "low24h": 0.1362,
-    "volume24hQuote": 610648.00122836
+    "volume24hQuote": 610596.5997402599
   },
   "HTX:SOON:USDT": {
-    "change24hRate": -0.27790643816582544,
-    "change24hAbs": -0.0012000000000000344,
+    "change24hRate": -0.2547475683186637,
+    "change24hAbs": -0.0010999999999999899,
     "high24h": 0.4418,
     "low24h": 0.425,
-    "volume24hQuote": 1573549.82797076
+    "volume24hQuote": 1573772.45815711
   },
   "HTX:CETUS:USDT": {
     "change24hRate": 2.836879432624121,
@@ -25477,28 +25477,28 @@
     "change24hAbs": -0.000013999999999999907,
     "high24h": 0.001322,
     "low24h": 0.001256,
-    "volume24hQuote": 936077.9961179239
+    "volume24hQuote": 935936.3273711732
   },
   "HTX:SWAP:USDT": {
     "change24hRate": -3.2663316582914637,
     "change24hAbs": -0.0013000000000000025,
     "high24h": 0.0401,
     "low24h": 0.0382,
-    "volume24hQuote": 37114.37519405
+    "volume24hQuote": 37081.30665855
   },
   "HTX:SCA:USDT": {
     "change24hRate": 0.3906249999999976,
     "change24hAbs": 0.0001999999999999988,
     "high24h": 0.0525,
     "low24h": 0.05,
-    "volume24hQuote": 496366.38498400006
+    "volume24hQuote": 496321.11906000006
   },
   "HTX:SKL:USDT": {
     "change24hRate": 0.3000157903047516,
     "change24hAbs": 0.00003799999999999984,
     "high24h": 0.01317,
     "low24h": 0.012635,
-    "volume24hQuote": 636548.1316718515
+    "volume24hQuote": 636533.2285052788
   },
   "HTX:OXT:USDT": {
     "change24hRate": -1.0791366906474755,
@@ -25519,7 +25519,7 @@
     "change24hAbs": -0.000035999999999999574,
     "high24h": 0.011091,
     "low24h": 0.009939,
-    "volume24hQuote": 3685845.8861427517
+    "volume24hQuote": 3685798.037716752
   },
   "HTX:ZRO:USDT": {
     "change24hRate": -0.31108597285069156,
@@ -25547,14 +25547,14 @@
     "change24hAbs": 0.012800000000000034,
     "high24h": 0.6772,
     "low24h": 0.644,
-    "volume24hQuote": 1576173.41768817
+    "volume24hQuote": 1576144.4974741198
   },
   "HTX:ORCA:USDT": {
-    "change24hRate": -1.5414840562188286,
-    "change24hAbs": -0.020399999999999974,
+    "change24hRate": -1.609490705757887,
+    "change24hAbs": -0.021299999999999875,
     "high24h": 1.3492,
     "low24h": 1.2907,
-    "volume24hQuote": 2403579.1703373
+    "volume24hQuote": 2390906.39253302
   },
   "HTX:GAME2:USDT": {
     "change24hRate": 0,
@@ -25564,25 +25564,25 @@
     "volume24hQuote": 0
   },
   "HTX:DGB:USDT": {
-    "change24hRate": 5.5102947711450145,
-    "change24hAbs": 0.0007439999999999999,
+    "change24hRate": 5.488075840616208,
+    "change24hAbs": 0.0007410000000000003,
     "high24h": 0.01624,
     "low24h": 0.013468,
-    "volume24hQuote": 774941.1444830796
+    "volume24hQuote": 772573.2496509381
   },
   "HTX:BNT:USDT": {
     "change24hRate": -0.02198768689533619,
     "change24hAbs": -0.00009999999999998899,
     "high24h": 0.4624,
     "low24h": 0.4499,
-    "volume24hQuote": 758404.028819
+    "volume24hQuote": 758373.9686019999
   },
   "HTX:HIPPO:USDT": {
     "change24hRate": 1.0416666666666659,
     "change24hAbs": 0.00001299999999999999,
     "high24h": 0.001283,
     "low24h": 0.001221,
-    "volume24hQuote": 2511998.2964977925
+    "volume24hQuote": 2511533.5391663774
   },
   "HTX:MOVE:USDT": {
     "change24hRate": 1.351351351351343,
@@ -25603,7 +25603,7 @@
     "change24hAbs": 0.012399999999999967,
     "high24h": 0.8364,
     "low24h": 0.804,
-    "volume24hQuote": 1939260.8480898193
+    "volume24hQuote": 1939212.1265490793
   },
   "HTX:TIA:USDT": {
     "change24hRate": 1.0758285615130978,
@@ -25613,11 +25613,11 @@
     "volume24hQuote": 14837.714514555304
   },
   "HTX:BNB:USDT": {
-    "change24hRate": 0.467352716487661,
-    "change24hAbs": 4.159999999999968,
+    "change24hRate": 0.46847616051767843,
+    "change24hAbs": 4.169999999999959,
     "high24h": 898.22,
     "low24h": 888.17,
-    "volume24hQuote": 30531245.23544403
+    "volume24hQuote": 30523376.701410253
   },
   "HTX:POL:USDT": {
     "change24hRate": 1.3923013923013867,
@@ -25627,102 +25627,102 @@
     "volume24hQuote": 2845623.406327577
   },
   "HTX:PARTI:USDT": {
-    "change24hRate": -1.1829787234042455,
-    "change24hAbs": -0.0013899999999999885,
+    "change24hRate": -1.1744680851063765,
+    "change24hAbs": -0.0013799999999999923,
     "high24h": 0.12054,
     "low24h": 0.11522,
-    "volume24hQuote": 2825020.69507044
+    "volume24hQuote": 2824856.6795833404
   },
   "HTX:SPA:USDT": {
     "change24hRate": 2.98897814309732,
     "change24hAbs": 0.00015999999999999955,
     "high24h": 0.005519,
     "low24h": 0.005349,
-    "volume24hQuote": 1442511.8440112998
+    "volume24hQuote": 1442290.89328061
   },
   "HTX:ARDR:USDT": {
-    "change24hRate": 0.16920473773266137,
-    "change24hAbs": 0.00010000000000000286,
+    "change24hRate": -0.16920473773266137,
+    "change24hAbs": -0.00010000000000000286,
     "high24h": 0.0621,
     "low24h": 0.0588,
-    "volume24hQuote": 4482945.84768496
+    "volume24hQuote": 4467656.4235523
   },
   "HTX:SNX:USDT": {
     "change24hRate": 0.40160642570281163,
     "change24hAbs": 0.0020000000000000018,
     "high24h": 0.5224,
     "low24h": 0.4963,
-    "volume24hQuote": 1611487.0624677564
+    "volume24hQuote": 1611326.0024677564
   },
   "HTX:AIXBT:USDT": {
     "change24hRate": 1.918465227817751,
     "change24hAbs": 0.0008000000000000021,
     "high24h": 0.046,
     "low24h": 0.0415,
-    "volume24hQuote": 450594.9892269368
+    "volume24hQuote": 450521.9940871868
   },
   "HTX:SUNDOG:USDT": {
     "change24hRate": 5.465949820788525,
     "change24hAbs": 0.0006099999999999994,
     "high24h": 0.01184,
     "low24h": 0.01098,
-    "volume24hQuote": 2240492.909038918
+    "volume24hQuote": 2240087.1714450084
   },
   "HTX:XTER:USDT": {
     "change24hRate": -0.8661222469685796,
     "change24hAbs": -0.0003500000000000031,
     "high24h": 0.04258,
     "low24h": 0.03954,
-    "volume24hQuote": 1487980.8334757518
+    "volume24hQuote": 1487763.322738312
   },
   "HTX:PEPE:USDT": {
-    "change24hRate": 2.855043541364292,
-    "change24hAbs": 1.2589599999999982e-7,
+    "change24hRate": 2.82762608853411,
+    "change24hAbs": 1.2468700000000012e-7,
     "high24h": 0.0000046,
     "low24h": 0.000004407206,
-    "volume24hQuote": 17622480.529658295
+    "volume24hQuote": 17619843.17656139
   },
   "HTX:SUI:USDT": {
     "change24hRate": 3.8234522560335797,
     "change24hAbs": 0.05830000000000002,
     "high24h": 1.5978,
     "low24h": 1.5226,
-    "volume24hQuote": 34828362.93287385
+    "volume24hQuote": 34827147.611541905
   },
   "HTX:COMP:USDT": {
     "change24hRate": -1.8308080808080756,
     "change24hAbs": -0.5799999999999983,
     "high24h": 31.91,
     "low24h": 30.95,
-    "volume24hQuote": 944178.2907311233
+    "volume24hQuote": 944222.7602168232
   },
   "HTX:HBAR:USDT": {
-    "change24hRate": 1.4763312941601536,
-    "change24hAbs": 0.0019620000000000193,
+    "change24hRate": 1.5417955258583889,
+    "change24hAbs": 0.002049000000000023,
     "high24h": 0.135981,
     "low24h": 0.132739,
-    "volume24hQuote": 10564875.994124753
+    "volume24hQuote": 10572401.632293597
   },
   "HTX:RVN:USDT": {
     "change24hRate": 0.5253042921204386,
     "change24hAbs": 0.00004100000000000024,
     "high24h": 0.008054,
     "low24h": 0.007805,
-    "volume24hQuote": 1188864.1941021902
+    "volume24hQuote": 1188210.4351750903
   },
   "HTX:TON:USDT": {
     "change24hRate": 0.9270938446014226,
     "change24hAbs": 0.014700000000000157,
     "high24h": 1.6067,
     "low24h": 1.5833,
-    "volume24hQuote": 491961.7618762171
+    "volume24hQuote": 489853.2249996671
   },
   "HTX:XION:USDT": {
     "change24hRate": -1.613867304243878,
     "change24hAbs": -0.005400000000000016,
     "high24h": 0.361,
     "low24h": 0.3205,
-    "volume24hQuote": 1467169.6116589976
+    "volume24hQuote": 1466944.912841158
   },
   "HTX:MVL:USDT": {
     "change24hRate": 0,
@@ -25736,21 +25736,21 @@
     "change24hAbs": 0.1266999999999996,
     "high24h": 11.2351,
     "low24h": 11,
-    "volume24hQuote": 842475.0983649009
+    "volume24hQuote": 842390.1965577009
   },
   "HTX:MIRA:USDT": {
     "change24hRate": 2.6244952893674203,
     "change24hAbs": 0.003899999999999987,
     "high24h": 0.1565,
     "low24h": 0.1486,
-    "volume24hQuote": 2635815.7787399003
+    "volume24hQuote": 2633174.07438615
   },
   "HTX:THETA:USDT": {
     "change24hRate": 1.787842669845055,
     "change24hAbs": 0.006000000000000005,
     "high24h": 0.3454,
     "low24h": 0.3348,
-    "volume24hQuote": 2254053.49338581
+    "volume24hQuote": 2253972.73214301
   },
   "HTX:API3:USDT": {
     "change24hRate": -0.21594032194738713,
@@ -25774,25 +25774,25 @@
     "volume24hQuote": 121691.57363999999
   },
   "HTX:SOL:USDT": {
-    "change24hRate": -0.04086999653017763,
-    "change24hAbs": -0.054299999999983584,
+    "change24hRate": -0.02295644372321101,
+    "change24hAbs": -0.030499999999989313,
     "high24h": 133.5543,
     "low24h": 131.2906,
-    "volume24hQuote": 9256373.99428189
+    "volume24hQuote": 9259541.631384635
   },
   "HTX:AUDIO:USDT": {
     "change24hRate": -0.3003003003003089,
     "change24hAbs": -0.00010000000000000286,
     "high24h": 0.0346,
     "low24h": 0.0331,
-    "volume24hQuote": 428637.52204183995
+    "volume24hQuote": 428620.6430556
   },
   "HTX:NEWT:USDT": {
     "change24hRate": 1.2334801762114525,
     "change24hAbs": 0.0013999999999999985,
     "high24h": 0.1167,
     "low24h": 0.1135,
-    "volume24hQuote": 140692.05006441
+    "volume24hQuote": 140625.55351632
   },
   "HTX:DODO:USDT": {
     "change24hRate": 0,
@@ -25806,14 +25806,14 @@
     "change24hAbs": -0.0024000000000000132,
     "high24h": 0.3667,
     "low24h": 0.3623,
-    "volume24hQuote": 1464907.1799336958
+    "volume24hQuote": 1464689.9683842957
   },
   "HTX:TURBO:USDT": {
     "change24hRate": -0.8698189244880609,
     "change24hAbs": -0.000019080000000000312,
     "high24h": 0.00223575,
     "low24h": 0.00215027,
-    "volume24hQuote": 2486957.427868795
+    "volume24hQuote": 2486836.205109969
   },
   "HTX:VINE:USDT": {
     "change24hRate": -2.515723270440258,
@@ -25834,7 +25834,7 @@
     "change24hAbs": 0.000020000000000000052,
     "high24h": 0.00497,
     "low24h": 0.00484,
-    "volume24hQuote": 558290.07267691
+    "volume24hQuote": 558206.85161297
   },
   "MEXC:BNT:USDT": {
     "change24hRate": 0.6872090445577459,
