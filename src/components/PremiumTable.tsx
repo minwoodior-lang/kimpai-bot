@@ -247,22 +247,13 @@ const PremiumTableRow = React.memo(({
         </td>
 
         <td className="w-[110px] sm:w-[140px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
-          {row.symbol === "MOODENG" && foreignExchange === "BINANCE_USDT" ? (
-            <TwoLineCell
-              line1={row.koreanPrice !== null ? formatKrwDomestic(row.koreanPrice) : "-"}
-              line2="미상장"
-              line1Color="text-slate-100"
-              line2Color="text-red-400"
-            />
-          ) : (
-            <TwoLinePriceCell
-              topValue={row.koreanPrice}
-              bottomValue={row.foreignPriceKrw}
-              formatTop={formatKrwDomestic}
-              formatBottom={formatKrwDynamic}
-              isUnlisted={isUnlisted}
-            />
-          )}
+          <TwoLinePriceCell
+            topValue={row.koreanPrice}
+            bottomValue={row.foreignPriceKrw}
+            formatTop={formatKrwDomestic}
+            formatBottom={formatKrwDynamic}
+            isUnlisted={isUnlisted}
+          />
         </td>
 
         <td className="w-[85px] sm:w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
@@ -278,7 +269,7 @@ const PremiumTableRow = React.memo(({
           />
         </td>
 
-        <td className="w-[110px] sm:w-[124px] md:w-[140px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
+        <td className="w-[120px] sm:w-[140px] md:w-[160px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={row.changeRate !== null ? formatPercent(row.changeRate) : "-"}
             line2={
@@ -1089,7 +1080,7 @@ export default function PremiumTable({
                     김프
                     <SortIcon columnKey="premiumRate" />
                   </th>
-                  <th className="w-[110px] sm:w-[124px] md:w-[140px] px-3 lg:px-4 py-2.5 text-right text-[12px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("changeRate")}>
+                  <th className="w-[120px] sm:w-[140px] md:w-[160px] px-3 lg:px-4 py-2.5 text-right text-[12px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("changeRate")}>
                     전일대비
                     <SortIcon columnKey="changeRate" />
                   </th>
