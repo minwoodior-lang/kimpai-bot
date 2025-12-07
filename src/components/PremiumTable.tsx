@@ -269,7 +269,7 @@ const PremiumTableRow = React.memo(({
           />
         </td>
 
-        <td className="w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
+        <td className="w-[90px] sm:w-[112px] md:w-[128px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={row.changeRate !== null ? formatPercent(row.changeRate) : "-"}
             line2={

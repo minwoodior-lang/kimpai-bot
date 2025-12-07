@@ -1,0 +1,184 @@
+📄 레플릿 팀 전달용 – KimpAI 코인테이블 진단 결과 & 추가 점검 요청
+
+제목: KimpAI 코인테이블 – 전일대비 UI / MOODENG 데이터 이상 점검 요청 (로직 최소 변경)
+
+안녕하세요.
+KimpAI 코인테이블 관련해서, 아래 3가지 이슈의 원인 진단 및 최소한의 보정만 우선 부탁드립니다.
+(핵심: 가격 계산 로직 자체는 바꾸지 말고, 어디서 값이 잘리거나 누락되는지만 잡아주시면 됩니다.)
+
+1️⃣ 전일대비 금액 잘림 현상 (UI 폭 문제) – 원인 이미 파악됨
+
+증상
+
+BCH, AAVE 등 일부 코인에서 전일대비 아래줄 금액이
++₩9, / +₩3,3 이런 식으로 마지막 자리가 잘려 보입니다.
+
+원인 (이미 확인)
+
+PremiumTable.tsx 전일대비 <td>:
+
+className="w-[90px] sm:w-[100px]"
+
+
+TwoLineCell 내부 span:
+
+className="min-w-[112px] md:min-w-[128px]"
+
+
+즉, 부모는 최대 100px, 자식은 최소 112px 요구해서
+→ 오른쪽 숫자가 잘리는 구조입니다.
+
+요청
+
+로직 수정 없이, 폭만 살짝 맞춰 주세요.
+
+추천:
+
+// PremiumTable.tsx – 전일대비 <td>
+className="w-[100px] sm:w-[112px] md:w-[128px]"
+
+
+혹은 이와 동등한 방식으로,
+TwoLineCell 의 min-w와 <td>의 w가 충돌나지 않도록만 조정 부탁드립니다.
+
+2️⃣ MOODENG 전일대비 퍼센트 vs 금액 부호 불일치 – 백엔드 값 점검 요청
+
+증상
+
+무뎅(MOODENG) 한 줄에서:
+
+전일대비 퍼센트: 예) -1.94% (하락)
+
+전일대비 금액: +₩3 (상승)
+
+두 값의 부호가 서로 반대입니다.
+정상이라면 퍼센트와 금액의 부호는 항상 같아야 합니다.
+
+의심 구간
+
+prices.json 또는 priceWorker에서 내려오는:
+
+change24hRate
+
+change24hAbs (혹은 동일 역할 필드)
+
+둘 중 하나가 prevClose 기준 계산이 역전됐을 가능성.
+
+요청 (수정 말고 로그/원인만)
+
+priceWorker 또는 stats 생성 구간에서
+UPBIT:MOODENG:KRW 의 아래 값들을 로그로 찍어주세요.
+
+currentPrice
+
+prevClose
+
+change24hAbs
+
+change24hRate
+
+기대되는 정상 공식은 다음과 같습니다(이걸로 계산되는지 확인만):
+
+changeAbsKrw = currentPriceKrw - prevCloseKrw;
+changeRate   = (currentPriceKrw / prevCloseKrw - 1) * 100;
+
+
+실제 값 기준으로:
+
+sign(changeAbsKrw) 와 sign(changeRate) 가 항상 같은지,
+
+혹시 prevClose - current 형태로 뒤집혀 있는지 확인 부탁드립니다.
+
+여기서는 당장 로직을 바꾸기보다는,
+“어느 레벨에서 값이 뒤집히는지”까지만 찾아주시면 됩니다.
+(위치가 확정되면 그때 수정 전달문을 따로 드리겠습니다.)
+
+3️⃣ MOODENG 해외가격 누락 (BINANCE_USDT) + 다른 코인도 누락 여부 점검
+
+증상
+
+KimpAI에서 기준: UPBIT_KRW, 해외: BINANCE_USDT 선택 시
+무뎅(MOODENG)의 해외 현재가가 항상 ‘–’로 표시됩니다.
+
+하지만 실제로 MOODENG/USDT 스팟 페어는 존재합니다.
+(Binance.US 기준 MOODENG/USDT 스팟 마켓 확인됨)
+
+의심 포인트
+
+exchange_markets 에는 MOODENG 관련 엔트리가 있는데,
+
+BINANCE_USDT 용 마켓이 누락되었거나
+
+우리가 참조하는 binance 엔드포인트가 글로벌/US 구분 문제로
+해당 마켓을 못 가져오는 상황일 수 있습니다.
+
+WebSocket 또는 REST fetcher에서
+
+심볼 매핑(MOODENGUSDT, MOODENG/USDT, etc) 불일치,
+
+실패 시 REST 폴백이 제대로 동작하지 않는 케이스일 수 있습니다.
+
+3-1) MOODENG에 대한 구체적인 점검 요청
+
+마켓 리스트 확인
+
+exchange_markets (또는 json)에서
+BINANCE_USDT 관련 MOODENG 마켓이 실제로 존재하는지 확인
+
+예: BINANCE:MOODENG:USDT 형태
+
+priceWorker 로그
+
+priceWorker에서 exchange === "BINANCE" && symbol === "MOODENG" 인 항목을
+임시로 로그 출력해서:
+
+marketSymbol
+
+lastPrice
+
+에러 여부
+를 확인해 주세요.
+
+table-filtered API 응답
+
+domestic=UPBIT_KRW&foreign=BINANCE_USDT 요청에서
+symbol == "MOODENG"인 row를 찍어:
+
+foreignPriceKrw
+
+premiumRate
+
+premiumDiffKrw
+값이 null인지, 0인지, 아예 row가 없는지 확인 부탁드립니다.
+
+3-2) “무뎅만 그런지” vs “다른 코인도 누락되는지” 간단 검증 요청
+
+추가로, MOODENG 외에도 같은 유형의 누락이 있는지 빠르게 확인해주시면 좋겠습니다.
+
+방법 예시:
+
+exchange_markets 에서 BINANCE_USDT 마켓 중 일부를 샘플링
+
+Binance 실제 Spot API 응답과 우리 prices.json / table-filtered 응답을 비교
+
+“거래소에는 있는데 우리 시스템에서는 해외가가 항상 ‘–’인 코인”들이 있는지 여부만 보고
+
+이렇게 해서:
+
+MOODENG만의 특수 케이스인지,
+
+혹시 심볼 매핑/폴백 문제로 인해 여러 코인이 같이 빠지고 있는지
+를 한 번에 파악해 주시면 됩니다.
+
+🔚 정리
+
+전일대비 금액 잘림 → UI width 충돌 문제 (원인 확인됨) → 폭만 조정 부탁
+
+MOODENG 전일대비 부호 오류 → 백엔드 change 값 불일치 의심 → 로그로 위치만 특정
+
+MOODENG Binance USDT 해외가 ‘–’ → 실제 스팟 페어는 존재하는데 우리 쪽에서만 누락 →
+마켓 리스트/priceWorker/API 3단계로 누락 지점 확인 + 다른 코인도 같은 패턴 있는지 간단 점검
+
+계산 로직 전체를 갈아엎는 건 원치 않고,
+어디서부터 값이 잘못되기 시작하는지 위치만 정확히 잡아주시면
+이후 수정은 그 지점을 기준으로 단계적으로 진행하겠습니다. 감사합니다.
