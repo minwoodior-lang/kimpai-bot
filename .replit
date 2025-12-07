@@ -76,6 +76,6 @@ packages = ["lsof", "jq"]
 USE_WS_OVERRIDE = "true"
 
 [deployment]
-run = ["next", "start", "-p", "5000"]
+run = ["npm", "start"]
 deploymentTarget = "autoscale"
 build = ["npm", "run", "build"]
