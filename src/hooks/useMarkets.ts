@@ -125,6 +125,11 @@ export function useMarkets(options?: UseMarketsOptions | number): UseMarketsResu
 
   useEffect(() => {
     fetchData();
+    
+    // 1초마다 폴링하여 실시간 가격 업데이트
+    const interval = setInterval(fetchData, 1000);
+    
+    return () => clearInterval(interval);
   }, [fetchData]);
 
   return {
