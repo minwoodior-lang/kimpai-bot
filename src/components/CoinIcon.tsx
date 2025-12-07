@@ -10,7 +10,6 @@ interface CoinIconProps {
 }
 
 const COIN_ID_MAP: Record<string, string> = {};
-const GRADIENT_COLORS: Record<string, string> = {};
 
 const loggedMissingIcons = new Set<string>();
 

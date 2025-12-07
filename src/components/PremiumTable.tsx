@@ -12,7 +12,6 @@ import {
   EXCHANGE_LOGOS,
 } from "@/contexts/ExchangeSelectionContext";
 import CoinIcon from "@/components/CoinIcon";
-import PriceCell from "@/components/PriceCell";
 import TwoLinePriceCell, {
   formatKrwDynamic,
   formatKrwDomestic,
@@ -30,7 +29,6 @@ interface DropdownOption {
 }
 
 interface PremiumTableProps {
-  showHeader?: boolean;
   showFilters?: boolean;
   limit?: number;
   refreshInterval?: number;

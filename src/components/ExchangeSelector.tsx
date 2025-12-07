@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useExchangeSelection, DOMESTIC_EXCHANGES, FOREIGN_EXCHANGES, EXCHANGE_LOGOS } from "@/contexts/ExchangeSelectionContext";
+import { useExchangeSelection, DOMESTIC_EXCHANGES, FOREIGN_EXCHANGES } from "@/contexts/ExchangeSelectionContext";
 
 interface ExchangeSelectorProps {
   compact?: boolean;

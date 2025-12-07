@@ -21,7 +21,6 @@ interface ChartModalProps {
 export default function ChartModal({ symbol, onClose }: ChartModalProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -59,7 +58,6 @@ export default function ChartModal({ symbol, onClose }: ChartModalProps) {
     const container = containerRef.current;
     
     try {
-      setIsLoading(true);
       container.innerHTML = "";
 
       // TradingView 위젯 설정
