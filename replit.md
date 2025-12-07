@@ -96,6 +96,21 @@ marketStats.json 흐름            ← 절대 변경 금지
    - **Intl.NumberFormat 사용:** 천단위 콤마 + 동적 소수점 자리수
    - 백엔드 raw 값은 변경 없음 (표시만 조정)
 
+3. ✅ **PremiumTableRow 차액 계산 로직 프론트엔드 재계산 (API 0 값 문제 해결)**
+   - **문제:** API에서 row.premiumDiffKrw, row.changeAbsKrw, row.highDiffKrw, row.lowDiffKrw가 0으로 내려와 화면에 ₩0.00000000으로 잘못 표시
+   - **해결:** PremiumTableRow 내부에서 김프가 공식으로 차액 재계산 (백엔드 미수정)
+   - **계산 로직:**
+     - `premiumDiffKrw = koreanPrice - foreignPriceKrw` (김프 차액)
+     - `changeAbsKrw = koreanPrice - prevClose` (전일대비 차액, changeRate/change24h로 prevClose 역산)
+     - `highDiffKrw = high24h - koreanPrice` (고가대비 차액)
+     - `lowDiffKrw = koreanPrice - low24h` (저가대비 차액)
+   - **적용 위치:** src/components/PremiumTable.tsx의 PremiumTableRow 컴포넌트
+   - **표시 옵션:**
+     - 김프/전일대비: `formatKrwDynamic(value, { signed: true })` (부호 포함)
+     - 고가/저가: `formatKrwDynamic(value, { signed: false })` (부호 없음)
+   - **효과:** API가 0으로 내려줘도 프론트에서 정확한 차액 계산 및 표시
+   - 백엔드 파이프라인 변경 없음 (고정)
+
 **✅ WebSocket → prices.json → API 파이프라인 버그 수정:**
 
 1. ✅ **Map.forEach 버그 수정**
