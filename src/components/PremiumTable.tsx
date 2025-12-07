@@ -157,7 +157,6 @@ interface PremiumTableRowProps {
   getDisplaySymbol: (symbol: string) => string;
   formatPercent: (value: number | null) => string;
   formatKrwPrice: (value: number | null) => string;
-  formatKrwDynamic: (value: number | null) => string;
   formatVolumeKRW: (value: number | null) => string;
   getPremiumColor: (premium: number | null) => string;
   getChangeColor: (change: number | null) => string;
@@ -180,7 +179,6 @@ const PremiumTableRow = React.memo(({
   getDisplaySymbol,
   formatPercent,
   formatKrwPrice,
-  formatKrwDynamic,
   formatVolumeKRW,
   getPremiumColor,
   getChangeColor,
@@ -261,22 +259,17 @@ const PremiumTableRow = React.memo(({
         <td className="w-[110px] sm:w-[140px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLinePriceCell
             topValue={row.koreanPrice}
-            bottomValue={row.prevPriceKrw}
+            bottomValue={row.foreignPriceKrw}
             topPrefix="₩"
             bottomPrefix="₩"
             isUnlisted={isUnlisted}
-            formatFn={formatKrwDynamic}
           />
         </td>
 
         <td className="w-[85px] sm:w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={isUnlisted ? "-" : formatPercent(row.premiumRate)}
-            line2={
-              row.premiumDiffKrw === null || row.premiumDiffKrw === undefined || row.premiumDiffKrw === 0
-                ? "-"
-                : `${row.premiumDiffKrw >= 0 ? "+" : ""}₩${formatKrwDynamic(Math.abs(row.premiumDiffKrw))}`
-            }
+            line2={`${row.premiumDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.premiumDiffKrw || 0))}`}
             line1Color={isUnlisted ? "text-gray-500" : getPremiumColor(row.premiumRate)}
             isUnlisted={isUnlisted}
           />
@@ -285,11 +278,7 @@ const PremiumTableRow = React.memo(({
         <td className="w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={formatPercent(row.changeRate)}
-            line2={
-              row.changeAbsKrw === null || row.changeAbsKrw === undefined || row.changeAbsKrw === 0
-                ? "-"
-                : `${row.changeAbsKrw >= 0 ? "+" : ""}₩${formatKrwDynamic(Math.abs(row.changeAbsKrw))}`
-            }
+            line2={`${row.changeAbsKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.changeAbsKrw || 0))}`}
             line1Color={getChangeColor(row.changeRate)}
           />
         </td>
@@ -297,11 +286,7 @@ const PremiumTableRow = React.memo(({
         <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={formatPercent(row.fromHighRate)}
-            line2={
-              row.highDiffKrw === null || row.highDiffKrw === undefined || row.highDiffKrw === 0
-                ? "-"
-                : `${row.highDiffKrw > 0 ? "-" : "+"}₩${formatKrwDynamic(Math.abs(row.highDiffKrw))}`
-            }
+            line2={`${row.highDiffKrw > 0 ? "-" : "+"}₩${formatKrwPrice(Math.abs(row.highDiffKrw || 0))}`}
             line1Color={getChangeColor(row.fromHighRate)}
           />
         </td>
@@ -309,11 +294,7 @@ const PremiumTableRow = React.memo(({
         <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={formatPercent(row.fromLowRate)}
-            line2={
-              row.lowDiffKrw === null || row.lowDiffKrw === undefined || row.lowDiffKrw === 0
-                ? "-"
-                : `${row.lowDiffKrw >= 0 ? "+" : ""}₩${formatKrwDynamic(Math.abs(row.lowDiffKrw))}`
-            }
+            line2={`${row.lowDiffKrw >= 0 ? "+" : ""}₩${formatKrwPrice(Math.abs(row.lowDiffKrw || 0))}`}
             line1Color={getChangeColor(row.fromLowRate)}
           />
         </td>
@@ -360,7 +341,6 @@ interface PremiumData {
   koreanName: string;
   koreanPrice: number;
   foreignPriceKrw: number;
-  prevPriceKrw: number | null;
   globalPrice: number | null;
   globalPriceKrw: number | null;
   premium: number | null;
@@ -820,35 +800,6 @@ export default function PremiumTable({
     return value.toFixed(2);
   }, []);
 
-  // 동적 KRW 가격 포맷 (저가 코인도 0.00 으로 안 죽게, 최대 8자리)
-  const formatKrwDynamic = useCallback((value: number | null) => {
-    if (value === null || value === undefined || isNaN(value)) return "-";
-
-    const abs = Math.abs(value);
-    let fractionDigits = 0;
-
-    if (abs >= 1000) {
-      fractionDigits = 0;             // 1,000 이상: 0자리
-    } else if (abs >= 1) {
-      fractionDigits = 2;             // 1 ~ 1,000 미만: 2자리
-    } else if (abs >= 0.1) {
-      fractionDigits = 3;             // 0.1 ~ 1 미만: 3자리
-    } else if (abs >= 0.01) {
-      fractionDigits = 4;             // 0.01 ~ 0.1 미만: 4자리
-    } else if (abs >= 0.001) {
-      fractionDigits = 5;             // 0.001 ~ 0.01 미만: 5자리
-    } else if (abs >= 0.0001) {
-      fractionDigits = 6;             // 0.0001 ~ 0.001 미만: 6자리
-    } else {
-      fractionDigits = 8;             // 0.0001 미만: 8자리 (초저가 코인)
-    }
-
-    return value.toLocaleString("ko-KR", {
-      minimumFractionDigits: fractionDigits,
-      maximumFractionDigits: fractionDigits,
-    });
-  }, []);
-
   const formatUsdtPrice = (value: number | null) => {
     if (value === null || value === undefined || isNaN(value)) return "-";
 
@@ -1136,11 +1087,11 @@ export default function PremiumTable({
                     <SortIcon columnKey="changeRate" />
                   </th>
                   <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("fromHighRate")}>
-                    고가대비(24h)
+                    고가대비
                     <SortIcon columnKey="fromHighRate" />
                   </th>
                   <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("fromLowRate")}>
-                    저가대비(24h)
+                    저가대비
                     <SortIcon columnKey="fromLowRate" />
                   </th>
                   <th className="px-3 lg:px-4 py-2.5 text-right text-[12px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("volume24hKrw")}>
@@ -1166,7 +1117,6 @@ export default function PremiumTable({
                     getDisplaySymbol={getDisplaySymbol}
                     formatPercent={formatPercent}
                     formatKrwPrice={formatKrwPrice}
-                    formatKrwDynamic={formatKrwDynamic}
                     formatVolumeKRW={formatVolumeKRW}
                     getPremiumColor={getPremiumColor}
                     getChangeColor={getChangeColor}
