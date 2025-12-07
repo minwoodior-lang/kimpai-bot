@@ -1,3 +1,4 @@
+// src/pages/index.tsx
 import Head from "next/head";
 import Layout from "@/components/Layout";
 import HomeLayout from "@/components/layout/HomeLayout";
@@ -49,7 +50,7 @@ export default function Home() {
   );
   const [isPrefsPanelOpen, setIsPrefsPanelOpen] = useState(false);
 
-  // 🔥 toggleFavorite 같이 꺼내오기
+  // 사용자 설정 훅
   const { prefs, setPrefs, isLoaded, toggleFavorite } = useUserPrefs();
 
   const { data, averagePremium, fxRate } = useMarkets();
@@ -84,6 +85,7 @@ export default function Home() {
           filteredData[0]
         )
       : null;
+
   const minPremium =
     filteredData.length > 0
       ? filteredData.reduce(
@@ -98,7 +100,7 @@ export default function Home() {
     return `${value >= 0 ? "+" : ""}${value.toFixed(1)}%`;
   };
 
-  /** 🔥 오늘 시장 요약 한 줄 계산 */
+  /** 오늘 시장 요약 한 줄 계산 */
   const volatilityLabel = (() => {
     if (!maxPremium || !minPremium) return "-";
     const diff = (maxPremium.premium || 0) - (minPremium.premium || 0);
@@ -165,205 +167,203 @@ export default function Home() {
 
       {/* 메인 콘텐츠 */}
       <HomeLayout>
-        <main className="w-full flex justify-center">
-          <div className="w-full px-2 sm:px-4 md:px-6 py-3 sm:py-6 md:max-w-[1280px] md:mx-auto">
-            {/* PC: 상단 3컬럼 레이아웃 */}
-            <div className="hidden md:grid grid-cols-3 gap-4 mb-8 items-stretch">
-              {/* 좌측: 오늘의 AI 김프 요약 */}
-              <TodayPremiumSection
-                avgPremium={
+        {/* ⚠ 폭/패딩은 Layout에서 이미 1280px + px-6로 관리하므로 여기선 수직 여백만 */}
+        <div className="w-full py-3 sm:py-6">
+          {/* PC: 상단 3컬럼 레이아웃 */}
+          <div className="hidden md:grid grid-cols-3 gap-4 mb-8 items-stretch">
+            {/* 좌측: 오늘의 AI 김프 요약 */}
+            <TodayPremiumSection
+              avgPremium={
+                <span
+                  className={
+                    safeAvgPremium >= 0
+                      ? "text-green-400 font-bold"
+                      : "text-red-400 font-bold"
+                  }
+                >
+                  {formatPremium(safeAvgPremium)}
+                </span>
+              }
+              maxPremium={
+                maxPremium ? (
+                  <span className="text-green-400 font-bold">
+                    {formatPremium(maxPremium.premium)} (
+                    {maxPremium.symbol.replace("/KRW", "")})
+                  </span>
+                ) : (
+                  "-"
+                )
+              }
+              minPremium={
+                minPremium ? (
                   <span
                     className={
-                      safeAvgPremium >= 0
-                        ? "text-green-400 font-bold"
-                        : "text-red-400 font-bold"
+                      minPremium.premium && minPremium.premium < 0
+                        ? "text-red-400 font-bold"
+                        : "text-slate-300 font-bold"
                     }
                   >
-                    {formatPremium(safeAvgPremium)}
+                    {formatPremium(minPremium.premium)} (
+                    {minPremium.symbol.replace("/KRW", "")})
                   </span>
-                }
-                maxPremium={
-                  maxPremium ? (
-                    <span className="text-green-400 font-bold">
-                      {formatPremium(maxPremium.premium)} (
-                      {maxPremium.symbol.replace("/KRW", "")})
-                    </span>
-                  ) : (
-                    "-"
-                  )
-                }
-                minPremium={
-                  minPremium ? (
+                ) : (
+                  "-"
+                )
+              }
+              fxRate={
+                <span className="text-white font-bold">
+                  ₩{(fxRate || 0).toLocaleString()}/USDT
+                </span>
+              }
+              score={riskScore}
+              marketSummary={marketSummary}
+            />
+
+            {/* 중앙: PRO 예측 카드 */}
+            <ProPredictionCard />
+
+            {/* 우측: 내 알림 카드 */}
+            <MyAlertsCard />
+          </div>
+
+          {/* 모바일: 탭 구조 */}
+          <div className="md:hidden mt-3 mb-4">
+            {/* 탭 버튼 - PRO 배지 강화 */}
+            <div className="flex gap-1.5 mb-3">
+              <button
+                onClick={() => setMobileCardTab("ai")}
+                className={`flex-1 py-2.5 px-3 rounded-lg font-semibold text-[11px] transition-colors ${
+                  mobileCardTab === "ai"
+                    ? "bg-indigo-600 text-white"
+                    : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                }`}
+              >
+                📊 AI 요약
+              </button>
+              <button
+                onClick={() => setMobileCardTab("pro")}
+                className={`flex-1 py-2.5 px-3 rounded-lg font-semibold text-[11px] transition-all ${
+                  mobileCardTab === "pro"
+                    ? "bg-indigo-600 text-white border-2 border-yellow-500/60"
+                    : "bg-slate-800 text-slate-300 hover:bg-slate-700 border-2 border-yellow-500/30"
+                }`}
+              >
+                🔒 PRO 예측
+              </button>
+              <button
+                onClick={() => setMobileCardTab("alerts")}
+                className={`flex-1 py-2.5 px-3 rounded-lg font-semibold text-[11px] transition-colors ${
+                  mobileCardTab === "alerts"
+                    ? "bg-indigo-600 text-white"
+                    : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                }`}
+              >
+                🔔 내 알림
+              </button>
+            </div>
+
+            {/* 공통 카드 껍데기 - 고정 높이 */}
+            <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 px-4 py-3 h-[180px] flex flex-col">
+              {mobileCardTab === "ai" && (
+                <AiSummaryMobileContent
+                  avgPremium={
                     <span
                       className={
-                        minPremium.premium && minPremium.premium < 0
-                          ? "text-red-400 font-bold"
-                          : "text-slate-300 font-bold"
+                        safeAvgPremium >= 0
+                          ? "text-green-400 font-bold"
+                          : "text-red-400 font-bold"
                       }
                     >
-                      {formatPremium(minPremium.premium)} (
-                      {minPremium.symbol.replace("/KRW", "")})
+                      {formatPremium(safeAvgPremium)}
                     </span>
-                  ) : (
-                    "-"
-                  )
-                }
-                fxRate={
-                  <span className="text-white font-bold">
-                    ₩{(fxRate || 0).toLocaleString()}/USDT
-                  </span>
-                }
-                score={riskScore}
-                marketSummary={marketSummary}
-              />
-
-              {/* 중앙: PRO 예측 카드 */}
-              <ProPredictionCard />
-
-              {/* 우측: 내 알림 카드 */}
-              <MyAlertsCard />
-            </div>
-
-            {/* 모바일: 탭 구조 */}
-            <div className="md:hidden mt-3 mb-4">
-              {/* 탭 버튼 - PRO 배지 강화 */}
-              <div className="flex gap-1.5 mb-3">
-                <button
-                  onClick={() => setMobileCardTab("ai")}
-                  className={`flex-1 py-2.5 px-3 rounded-lg font-semibold text-[11px] transition-colors ${
-                    mobileCardTab === "ai"
-                      ? "bg-indigo-600 text-white"
-                      : "bg-slate-800 text-slate-300 hover:bg-slate-700"
-                  }`}
-                >
-                  📊 AI 요약
-                </button>
-                <button
-                  onClick={() => setMobileCardTab("pro")}
-                  className={`flex-1 py-2.5 px-3 rounded-lg font-semibold text-[11px] transition-all ${
-                    mobileCardTab === "pro"
-                      ? "bg-indigo-600 text-white border-2 border-yellow-500/60"
-                      : "bg-slate-800 text-slate-300 hover:bg-slate-700 border-2 border-yellow-500/30"
-                  }`}
-                >
-                  🔒 PRO 예측
-                </button>
-                <button
-                  onClick={() => setMobileCardTab("alerts")}
-                  className={`flex-1 py-2.5 px-3 rounded-lg font-semibold text-[11px] transition-colors ${
-                    mobileCardTab === "alerts"
-                      ? "bg-indigo-600 text-white"
-                      : "bg-slate-800 text-slate-300 hover:bg-slate-700"
-                  }`}
-                >
-                  🔔 내 알림
-                </button>
-              </div>
-
-              {/* 공통 카드 껍데기 - 고정 높이 */}
-              <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 px-4 py-3 h-[180px] flex flex-col">
-                {mobileCardTab === "ai" && (
-                  <AiSummaryMobileContent
-                    avgPremium={
+                  }
+                  maxPremium={
+                    maxPremium ? (
+                      <span className="text-green-400 font-bold">
+                        {formatPremium(maxPremium.premium)} (
+                        {maxPremium.symbol.replace("/KRW", "")})
+                      </span>
+                    ) : (
+                      "-"
+                    )
+                  }
+                  minPremium={
+                    minPremium ? (
                       <span
                         className={
-                          safeAvgPremium >= 0
-                            ? "text-green-400 font-bold"
-                            : "text-red-400 font-bold"
+                          minPremium.premium && minPremium.premium < 0
+                            ? "text-red-400 font-bold"
+                            : "text-slate-300 font-bold"
                         }
                       >
-                        {formatPremium(safeAvgPremium)}
+                        {formatPremium(minPremium.premium)} (
+                        {minPremium.symbol.replace("/KRW", "")})
                       </span>
-                    }
-                    maxPremium={
-                      maxPremium ? (
-                        <span className="text-green-400 font-bold">
-                          {formatPremium(maxPremium.premium)} (
-                          {maxPremium.symbol.replace("/KRW", "")})
-                        </span>
-                      ) : (
-                        "-"
-                      )
-                    }
-                    minPremium={
-                      minPremium ? (
-                        <span
-                          className={
-                            minPremium.premium && minPremium.premium < 0
-                              ? "text-red-400 font-bold"
-                              : "text-slate-300 font-bold"
-                          }
-                        >
-                          {formatPremium(minPremium.premium)} (
-                          {minPremium.symbol.replace("/KRW", "")})
-                        </span>
-                      ) : (
-                        "-"
-                      )
-                    }
-                    fxRate={
-                      <span className="text-white font-bold">
-                        ₩{(fxRate || 0).toLocaleString()}/USDT
-                      </span>
-                    }
-                    score={riskScore}
-                  />
-                )}
-                {mobileCardTab === "pro" && <ProForecastMobileContent />}
-                {mobileCardTab === "alerts" && <MyAlertsMobileContent />}
+                    ) : (
+                      "-"
+                    )
+                  }
+                  fxRate={
+                    <span className="text-white font-bold">
+                      ₩{(fxRate || 0).toLocaleString()}/USDT
+                    </span>
+                  }
+                  score={riskScore}
+                />
+              )}
+              {mobileCardTab === "pro" && <ProForecastMobileContent />}
+              {mobileCardTab === "alerts" && <MyAlertsMobileContent />}
+            </div>
+          </div>
+
+          {/* 프리미엄 차트 섹션 */}
+          <section className="mt-4 sm:mt-5 md:mt-7 mb-4 md:mb-6">
+            {/* 상단 타이틀 + 버튼 영역 */}
+            <div className="mb-2 sm:mb-2.5 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3">
+              <h2 className="text-xs sm:text-sm text-slate-200">
+                프리미엄 차트
+              </h2>
+
+              <div className="flex items-center gap-1.5 md:gap-2">
+                <button
+                  onClick={() => setIsPrefsPanelOpen(true)}
+                  className="inline-flex items-center justify-center h-9 rounded-md bg-slate-800 px-3 text-[11px] sm:text-sm text-slate-100 hover:bg-slate-700 transition"
+                >
+                  <span className="mr-1">⚙</span>
+                  <span>개인화 설정</span>
+                </button>
+
+                <IndicatorSelector
+                  selectedIndicator={selectedIndicator}
+                  onIndicatorChange={setSelectedIndicator}
+                />
               </div>
             </div>
 
-            {/* 프리미엄 차트 섹션 */}
-            <section className="mt-4 sm:mt-5 md:mt-7 mb-4 md:mb-6">
-              {/* 상단 타이틀 + 버튼 영역 */}
-              <div className="mb-2 sm:mb-2.5 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3">
-                <h2 className="text-xs sm:text-sm text-slate-200">
-                  프리미엄 차트
-                </h2>
-
-                <div className="flex items-center gap-1.5 md:gap-2">
-                  <button
-                    onClick={() => setIsPrefsPanelOpen(true)}
-                    className="inline-flex items-center justify-center h-9 rounded-md bg-slate-800 px-3 text-[11px] sm:text-sm text-slate-100 hover:bg-slate-700 transition"
-                  >
-                    <span className="mr-1">⚙</span>
-                    <span>개인화 설정</span>
-                  </button>
-
-                  <IndicatorSelector
-                    selectedIndicator={selectedIndicator}
-                    onIndicatorChange={setSelectedIndicator}
-                  />
-                </div>
+            {/* 차트만 hideChart 적용 */}
+            {!prefs.hideChart && (
+              <div className="w-full h-[200px] sm:h-[240px] md:h-[320px] overflow-hidden border border-white/5 bg-[#050819]">
+                <TradingViewChartDynamic
+                  tvSymbol={SYMBOL_MAP[selectedIndicator] || "BINANCE:BTCUSDT"}
+                  height="100%"
+                  defaultTimeframe={prefs.defaultTimeframe}
+                />
               </div>
+            )}
+          </section>
 
-              {/* 차트만 hideChart 적용 */}
-              {!prefs.hideChart && (
-                <div className="w-full h-[200px] sm:h-[240px] md:h-[320px] overflow-hidden border border-white/5 bg-[#050819]">
-                  <TradingViewChartDynamic
-                    tvSymbol={SYMBOL_MAP[selectedIndicator] || "BINANCE:BTCUSDT"}
-                    height="100%"
-                    defaultTimeframe={prefs.defaultTimeframe}
-                  />
-                </div>
-              )}
-            </section>
-
-            {/* 프리미엄 테이블 섹션 */}
-            <section className="mt-4 mb-10 md:mt-6 -mx-2 md:mx-0">
-              <PremiumTable
-                showHeader={false}
-                showFilters={true}
-                limit={0}
-                refreshInterval={1000}
-                prefs={prefs}
-                // 🔥 여기서 즐겨찾기 토글 전달
-                toggleFavorite={toggleFavorite}
-              />
-            </section>
-          </div>
-        </main>
+          {/* 프리미엄 테이블 섹션 */}
+          <section className="mt-4 mb-10 md:mt-6 -mx-2 md:mx-0">
+            <PremiumTable
+              showHeader={false}
+              showFilters={true}
+              limit={0}
+              refreshInterval={1000}
+              prefs={prefs}
+              toggleFavorite={toggleFavorite}
+            />
+          </section>
+        </div>
       </HomeLayout>
 
       {/* 개인화 설정 패널 */}

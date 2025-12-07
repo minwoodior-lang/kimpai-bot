@@ -1,16 +1,14 @@
+// src/components/layout/HomeLayout.tsx
 import React from "react";
 
 interface HomeLayoutProps {
   children: React.ReactNode;
 }
 
+/**
+ * 홈 전용 레이아웃 껍데기
+ * - 폭/패딩은 Layout.tsx에서만 관리
+ */
 export default function HomeLayout({ children }: HomeLayoutProps) {
-  return (
-    <main className="w-full text-slate-50 overflow-x-hidden">
-      {/* Header와 동일한 컨테이너 규격 적용: max-w-[1280px] + px-6 */}
-      <div className="mx-auto w-full max-w-[1280px] px-6">
-        {children}
-      </div>
-    </main>
-  );
+  return <>{children}</>;
 }

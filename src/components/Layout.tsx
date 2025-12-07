@@ -226,7 +226,12 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </div>
 
-      <main className="flex-grow">{children}</main>
+      <main className="flex-grow w-full text-slate-50 overflow-x-hidden">
+        <div className="mx-auto w-full max-w-[1280px] px-6">
+          {children}
+        </div>
+      </main>
+
 
       <footer className="border-t dark:border-slate-800 light:border-slate-200 mt-14">
         <div className="w-full flex justify-center py-6 sm:py-10 px-4">
