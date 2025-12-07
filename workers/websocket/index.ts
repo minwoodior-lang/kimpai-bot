@@ -14,11 +14,14 @@ let priceCallback: PriceUpdateCallback | null = null;
 let isRunning = false;
 
 function handlePriceUpdate(price: WebSocketPrice): void {
-  const key = `${price.exchange}:${price.symbol}:${price.quote}`;
-  wsPrices.set(key, price);
+  // 심볼을 대문자로 통일하여 저장 (API와의 일관성)
+  const normalizedSymbol = price.symbol.toUpperCase();
+  const key = `${price.exchange}:${normalizedSymbol}:${price.quote}`;
+  const normalizedPrice = { ...price, symbol: normalizedSymbol };
+  wsPrices.set(key, normalizedPrice);
   
   if (priceCallback) {
-    priceCallback(price);
+    priceCallback(normalizedPrice);
   }
 }
 

@@ -112,7 +112,15 @@ function parseMarketParam(value: string): { exchange: string; quote: string } {
 function getWebSocketPriceIfFresh(exchange: string, symbol: string, quote: string): number | null {
   if (!USE_WS_OVERRIDE) return null;
 
-  const wsPrice = getWebSocketPrice(exchange, symbol, quote);
+  // WebSocket worker는 소문자 심볼을 사용하므로 대문자로 변환하여 조회
+  const normalizedSymbol = symbol.toUpperCase();
+  const wsPrice = getWebSocketPrice(exchange, normalizedSymbol, quote);
+  
+  // 디버깅: WebSocket 가격 조회 시도 로그 (5% 확률)
+  if (!wsPrice && Math.random() < 0.05) {
+    console.log(`[WS-DEBUG] No WS price for ${exchange}:${normalizedSymbol}:${quote}`);
+  }
+  
   if (!wsPrice) return null;
 
   const now = Date.now();
@@ -137,9 +145,9 @@ function getWebSocketPriceIfFresh(exchange: string, symbol: string, quote: strin
     delayMetrics.maxDelay = Math.max(delayMetrics.maxDelay, delay);
     delayMetrics.avgDelay = delayMetrics.totalDelay / delayMetrics.count;
 
-    // 10개마다 로그 출력
-    if (delayMetrics.count % 10 === 0) {
-      console.log(`[WS-DELAY] Avg: ${delayMetrics.avgDelay.toFixed(0)}ms, Max: ${delayMetrics.maxDelay}ms, Count: ${delayMetrics.count}`);
+    // 5개마다 로그 출력 (더 자주 확인)
+    if (delayMetrics.count === 1 || delayMetrics.count % 5 === 0) {
+      console.log(`[WS-DELAY] ${exchange}:${symbol} - Avg: ${delayMetrics.avgDelay.toFixed(0)}ms, Max: ${delayMetrics.maxDelay}ms, Count: ${delayMetrics.count}, Age: ${age}ms`);
     }
   }
 
@@ -154,6 +162,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const cacheKey = getCacheKey(domestic as string, foreign as string);
     const cachedData = getFromCache(cacheKey);
     if (cachedData) {
+      // 캐시 히트 로그 (WS override 테스트용)
+      if (USE_WS_OVERRIDE && Math.random() < 0.05) {
+        console.log(`[WS-INFO] Cache hit, WS override enabled, delay metrics: avg=${delayMetrics.avgDelay.toFixed(0)}ms, count=${delayMetrics.count}`);
+      }
       return res.status(200).json(cachedData);
     }
 
