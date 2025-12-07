@@ -3,15 +3,21 @@ import type { MarketInfo, PriceMap } from './types';
 
 const UPBIT_API = 'https://api.upbit.com/v1/ticker';
 
+// 업빗 전용 axios 인스턴스 (연결 풀링 활성화)
+const upbitInstance = axios.create({
+  timeout: 3000,
+  httpAgent: new (require('http').Agent)({ keepAlive: true, maxSockets: 10 }),
+  httpsAgent: new (require('https').Agent)({ keepAlive: true, maxSockets: 10 })
+});
+
 export async function fetchUpbitPrices(markets: MarketInfo[]): Promise<PriceMap> {
   if (markets.length === 0) return {};
 
   const marketCodes = markets.map(m => `${m.quote}-${m.base}`).join(',');
   
   try {
-    const res = await axios.get(UPBIT_API, {
-      params: { markets: marketCodes },
-      timeout: 5000
+    const res = await upbitInstance.get(UPBIT_API, {
+      params: { markets: marketCodes }
     });
 
     const prices: PriceMap = {};

@@ -312,7 +312,7 @@ const PremiumTableRow = React.memo(({
       {expandedSymbol === row.symbol && (
         <tr key={`${row.symbol}-chart`}>
           <td colSpan={8} className="p-0">
-            <div className="w-full rounded-b-xl overflow-hidden bg-[#050819]">
+            <div className="w-full overflow-hidden bg-[#050819]">
               <TradingViewChart
                 tvSymbol={getTvSymbolForRow({
                   symbol: row.symbol,
@@ -1062,42 +1062,151 @@ export default function PremiumTable({
           {error}
         </div>
       ) : (
-        <div className="w-full rounded-xl border border-white/5 bg-[#050819] overflow-hidden">
-          <table className="w-full table-fixed border-separate border-spacing-y-0">
-            <colgroup><col className="w-[30px]" /><col className="w-[35%]" /><col className="w-[16%]" /><col className="w-[16%]" /><col className="w-[17%]" /><col className="hidden md:table-column w-[8%]" /><col className="hidden md:table-column w-[8%]" /><col className="w-[16%]" /></colgroup>
-            <thead>
-                <tr className="bg-slate-900/60 text-slate-400 text-[11px] md:text-sm">
-                  <th className="w-[30px] text-center text-[12px] text-[#A7B3C6]/50 py-2.5 min-h-11">★</th>
-                  <th className="px-3 md:px-4 py-2.5 text-left text-[12px] md:text-sm font-medium text-[#A7B3C6]/60 tracking-wide cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("symbol")}>
-                    코인명
-                    <SortIcon columnKey="symbol" />
-                  </th>
-                  <th className="px-3 lg:px-4 py-2.5 text-right text-[12px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("koreanPrice")}>
-                    현재가
-                    <SortIcon columnKey="koreanPrice" />
-                  </th>
-                  <th className="px-3 lg:px-4 py-2.5 text-right text-[12px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("premiumRate")}>
-                    김프
-                    <SortIcon columnKey="premiumRate" />
-                  </th>
-                  <th className="w-[140px] sm:w-[160px] md:w-[180px] px-3 lg:px-4 py-2.5 text-right text-[12px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("changeRate")}>
-                    전일대비
-                    <SortIcon columnKey="changeRate" />
-                  </th>
-                  <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("fromHighRate")}>
-                    고가대비(24h)
-                    <SortIcon columnKey="fromHighRate" />
-                  </th>
-                  <th className="hidden md:table-cell px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("fromLowRate")}>
-                    저가대비(24h)
-                    <SortIcon columnKey="fromLowRate" />
-                  </th>
-                  <th className="px-3 lg:px-4 py-2.5 text-right text-[12px] md:text-sm font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11" onClick={() => handleSort("volume24hKrw")}>
-                    거래액(일)
-                    <SortIcon columnKey="volume24hKrw" />
-                  </th>
-                </tr>
-              </thead>
+      <div className="w-full border border-white/5 bg-[#050819] overflow-hidden">
+        <table className="w-full table-fixed border-separate border-spacing-y-0">
+          <colgroup>
+            <col className="w-[30px]" />
+            <col className="w-[35%]" />
+            <col className="w-[16%]" />
+            <col className="w-[16%]" />
+            <col className="w-[17%]" />
+            <col className="hidden md:table-column w-[8%]" />
+            <col className="hidden md:table-column w-[8%]" />
+            <col className="w-[16%]" />
+          </colgroup>
+
+          <thead>
+            <tr className="bg-slate-900/60 text-slate-400 text-[11px] md:text-sm">
+              {/* ★ 즐겨찾기 */}
+              <th
+                className="
+                  w-[30px]
+                  text-center
+                  text-[11px] md:text-xs text-[#A7B3C6]/50
+                  py-1.5 md:py-2.5
+                  min-h-11
+                "
+              >
+                ★
+              </th>
+
+              {/* 코인명 */}
+              <th
+                className="
+                  px-2 md:px-4
+                  py-1.5 md:py-2.5
+                  text-left text-[11px] md:text-sm
+                  font-medium text-[#A7B3C6]/60 tracking-wide
+                  cursor-pointer hover:text-white transition-colors
+                  min-h-11
+                "
+                onClick={() => handleSort("symbol")}
+              >
+                코인명
+                <SortIcon columnKey="symbol" />
+              </th>
+
+              {/* 현재가 */}
+              <th
+                className="
+                  px-2 md:px-4 lg:px-4
+                  py-1.5 md:py-2.5
+                  text-right text-[11px] md:text-sm
+                  font-medium whitespace-nowrap
+                  cursor-pointer hover:text-white transition-colors
+                  min-h-11
+                "
+                onClick={() => handleSort("koreanPrice")}
+              >
+                현재가
+                <SortIcon columnKey="koreanPrice" />
+              </th>
+
+              {/* 김프 */}
+              <th
+                className="
+                  px-2 md:px-4 lg:px-4
+                  py-1.5 md:py-2.5
+                  text-right text-[11px] md:text-sm
+                  font-medium whitespace-nowrap
+                  cursor-pointer hover:text-white transition-colors
+                  min-h-11
+                "
+                onClick={() => handleSort("premiumRate")}
+              >
+                김프
+                <SortIcon columnKey="premiumRate" />
+              </th>
+
+              {/* 전일대비 */}
+              <th
+                className="
+                  w-[140px] sm:w-[160px] md:w-[180px]
+                  px-2 md:px-4 lg:px-4
+                  py-1.5 md:py-2.5
+                  text-right text-[11px] md:text-sm
+                  font-medium whitespace-nowrap
+                  cursor-pointer hover:text-white transition-colors
+                  min-h-11
+                "
+                onClick={() => handleSort("changeRate")}
+              >
+                전일대비
+                <SortIcon columnKey="changeRate" />
+              </th>
+
+              {/* 고가대비(24h) - PC 전용 */}
+              <th
+                className="
+                  hidden md:table-cell
+                  px-3 lg:px-4
+                  py-1.5 md:py-2.5
+                  text-right text-[11px] md:text-xs
+                  font-medium whitespace-nowrap
+                  cursor-pointer hover:text-white transition-colors
+                  min-h-11
+                "
+                onClick={() => handleSort("fromHighRate")}
+              >
+                고가대비(24h)
+                <SortIcon columnKey="fromHighRate" />
+              </th>
+
+              {/* 저가대비(24h) - PC 전용 */}
+              <th
+                className="
+                  hidden md:table-cell
+                  px-3 lg:px-4
+                  py-1.5 md:py-2.5
+                  text-right text-[11px] md:text-xs
+                  font-medium whitespace-nowrap
+                  cursor-pointer hover:text-white transition-colors
+                  min-h-11
+                "
+                onClick={() => handleSort("fromLowRate")}
+              >
+                저가대비(24h)
+                <SortIcon columnKey="fromLowRate" />
+              </th>
+
+              {/* 거래액(일) */}
+              <th
+                className="
+                  px-2 md:px-4 lg:px-4
+                  py-1.5 md:py-2.5
+                  text-right text-[11px] md:text-sm
+                  font-medium whitespace-nowrap
+                  cursor-pointer hover:text-white transition-colors
+                  min-h-11
+                "
+                onClick={() => handleSort("volume24hKrw")}
+              >
+                거래액(일)
+                <SortIcon columnKey="volume24hKrw" />
+              </th>
+            </tr>
+          </thead>
+
               <tbody>
                 {filteredAndSortedData.slice(0, visibleCount).map((row, index) => (
                   <PremiumTableRow

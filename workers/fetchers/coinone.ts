@@ -3,11 +3,18 @@ import type { MarketInfo, PriceMap, MarketStatsMap } from './types';
 
 const COINONE_API = 'https://api.coinone.co.kr/public/v2/ticker_new/KRW';
 
+// 코인원 전용 axios 인스턴스 (연결 풀링 활성화)
+const coinoneInstance = axios.create({
+  timeout: 3000,
+  httpAgent: new (require('http').Agent)({ keepAlive: true, maxSockets: 10 }),
+  httpsAgent: new (require('https').Agent)({ keepAlive: true, maxSockets: 10 })
+});
+
 export async function fetchCoinonePrices(markets: MarketInfo[]): Promise<PriceMap> {
   if (markets.length === 0) return {};
 
   try {
-    const res = await axios.get(COINONE_API, { timeout: 5000 });
+    const res = await coinoneInstance.get(COINONE_API);
 
     if (res.data.result !== 'success') return {};
 
@@ -57,7 +64,7 @@ export async function fetchCoinoneStats(markets: MarketInfo[]): Promise<MarketSt
   if (markets.length === 0) return {};
 
   try {
-    const res = await axios.get(COINONE_API, { timeout: 5000 });
+    const res = await coinoneInstance.get(COINONE_API);
 
     if (res.data.result !== 'success') return {};
 

@@ -3,6 +3,13 @@ import type { MarketInfo, PriceMap, MarketStatsMap } from './types';
 
 const BITHUMB_API = 'https://api.bithumb.com/public/ticker/ALL_';
 
+// 빗썸 전용 axios 인스턴스 (연결 풀링 활성화)
+const bithumbInstance = axios.create({
+  timeout: 3000,
+  httpAgent: new (require('http').Agent)({ keepAlive: true, maxSockets: 10 }),
+  httpsAgent: new (require('https').Agent)({ keepAlive: true, maxSockets: 10 })
+});
+
 export async function fetchBithumbPrices(markets: MarketInfo[]): Promise<PriceMap> {
   if (markets.length === 0) return {};
 
@@ -14,7 +21,7 @@ export async function fetchBithumbPrices(markets: MarketInfo[]): Promise<PriceMa
   for (const quote of quotes) {
     try {
       const url = `${BITHUMB_API}${quote}`;
-      const res = await axios.get(url, { timeout: 5000 });
+      const res = await bithumbInstance.get(url);
 
       if (res.data.status !== '0000') continue;
 
@@ -68,7 +75,7 @@ export async function fetchBithumbStats(markets: MarketInfo[]): Promise<MarketSt
   for (const quote of quotes) {
     try {
       const url = `${BITHUMB_API}${quote}`;
-      const res = await axios.get(url, { timeout: 5000 });
+      const res = await bithumbInstance.get(url);
 
       if (res.data.status !== '0000') continue;
 
