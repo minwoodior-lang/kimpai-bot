@@ -129,10 +129,27 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         const premiumRow = premiumMap.get(symbol);
 
         const domesticPriceKey = `${domesticExchange}:${symbol}:${domesticQuote}`;
-        const foreignPriceKey = `${foreignExchange}:${symbol}:${foreignQuote}`;
+        
+        // 해외 가격: 선택된 거래소 우선, 없으면 fallback 거래소 시도
+        let foreignPriceKey = `${foreignExchange}:${symbol}:${foreignQuote}`;
+        let foreignEntry = prices[foreignPriceKey];
+        
+        // Fallback: 선택된 거래소에 해당 심볼이 없으면 다른 거래소 시도
+        if (!foreignEntry || !foreignEntry.price) {
+          const fallbackExchanges = ["BINANCE", "OKX", "BYBIT", "BITGET", "GATE", "MEXC"];
+          for (const fallbackEx of fallbackExchanges) {
+            if (fallbackEx === foreignExchange) continue; // 이미 시도한 거래소는 스킵
+            const fallbackKey = `${fallbackEx}:${symbol}:${foreignQuote}`;
+            const fallbackEntry = prices[fallbackKey];
+            if (fallbackEntry && fallbackEntry.price) {
+              foreignPriceKey = fallbackKey;
+              foreignEntry = fallbackEntry;
+              break;
+            }
+          }
+        }
 
         const domesticEntry = prices[domesticPriceKey];
-        const foreignEntry = prices[foreignPriceKey];
 
         const domesticPriceRaw = domesticEntry?.price ?? null;
         let domesticPriceKrw: number | null = null;
@@ -191,6 +208,21 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         let changeAbsKrw = domesticEntry?.change24hAbs ?? null;
         let high24hKrw = domesticEntry?.high24h ?? null;
         let low24hKrw = domesticEntry?.low24h ?? null;
+        
+        // 전일 종가 (업비트 ticker의 prev_closing_price)
+        let prevPriceKrw: number | null = null;
+        const prevPriceRaw = domesticEntry?.prev_price ?? null;
+        if (prevPriceRaw && prevPriceRaw > 0) {
+          if (domesticQuote === "KRW") {
+            prevPriceKrw = prevPriceRaw;
+          } else if (domesticQuote === "BTC") {
+            if (btcKrw > 0) {
+              prevPriceKrw = prevPriceRaw * btcKrw;
+            }
+          } else if (domesticQuote === "USDT") {
+            prevPriceKrw = prevPriceRaw * fxRate;
+          }
+        }
 
         // 🚨 IMPORTANT: 거래액(일) 로직
         // - 항상 선택된 domesticKey / foreignKey 기준으로만 계산
@@ -295,6 +327,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
           koreanPrice: domesticPriceKrw,
           foreignPriceKrw: foreignPriceKrw ? Math.round(foreignPriceKrw * 100) / 100 : null,
+          prevPriceKrw: prevPriceKrw,
 
           premiumRate: premiumRate ? Math.round(premiumRate * 100) / 100 : null,
           premiumDiffKrw: premiumDiffKrw ? Math.round(premiumDiffKrw * 100) / 100 : null,
