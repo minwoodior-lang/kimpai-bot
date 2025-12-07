@@ -101,5 +101,5 @@ USE_WS_OVERRIDE = "true"
 
 [deployment]
 run = ["npm", "start"]
-deploymentTarget = "vm"
+deploymentTarget = "autoscale"
 build = ["npm", "run", "build"]
