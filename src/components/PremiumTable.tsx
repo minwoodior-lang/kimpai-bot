@@ -261,7 +261,7 @@ const PremiumTableRow = React.memo(({
         <td className="w-[110px] sm:w-[140px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLinePriceCell
             topValue={row.koreanPrice}
-            bottomValue={row.foreignPriceKrw}
+            bottomValue={row.prevPriceKrw}
             topPrefix="₩"
             bottomPrefix="₩"
             isUnlisted={isUnlisted}
