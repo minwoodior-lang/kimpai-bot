@@ -157,6 +157,7 @@ interface PremiumTableRowProps {
   getDisplaySymbol: (symbol: string) => string;
   formatPercent: (value: number | null) => string;
   formatKrwPrice: (value: number | null) => string;
+  formatKrwDynamic: (value: number | null) => string;
   formatVolumeKRW: (value: number | null) => string;
   getPremiumColor: (premium: number | null) => string;
   getChangeColor: (change: number | null) => string;
@@ -179,6 +180,7 @@ const PremiumTableRow = React.memo(({
   getDisplaySymbol,
   formatPercent,
   formatKrwPrice,
+  formatKrwDynamic,
   formatVolumeKRW,
   getPremiumColor,
   getChangeColor,
@@ -263,6 +265,7 @@ const PremiumTableRow = React.memo(({
             topPrefix="₩"
             bottomPrefix="₩"
             isUnlisted={isUnlisted}
+            formatFn={formatKrwDynamic}
           />
         </td>
 
@@ -800,6 +803,33 @@ export default function PremiumTable({
     return value.toFixed(2);
   }, []);
 
+  // 동적 KRW 가격 포맷 (저가 코인도 0.00 으로 안 죽게)
+  const formatKrwDynamic = useCallback((value: number | null) => {
+    if (value === null || value === undefined || isNaN(value)) return "-";
+
+    const abs = Math.abs(value);
+    let fractionDigits = 0;
+
+    if (abs >= 1000) {
+      fractionDigits = 0;             // 1,000 이상
+    } else if (abs >= 1) {
+      fractionDigits = 2;             // 1 ~ 1,000 미만
+    } else if (abs >= 0.1) {
+      fractionDigits = 3;             // 0.1 ~ 1 미만
+    } else if (abs >= 0.01) {
+      fractionDigits = 4;             // 0.01 ~ 0.1 미만
+    } else if (abs >= 0.001) {
+      fractionDigits = 5;             // 0.001 ~ 0.01 미만
+    } else {
+      fractionDigits = 6;             // 그 이하
+    }
+
+    return value.toLocaleString("ko-KR", {
+      minimumFractionDigits: fractionDigits,
+      maximumFractionDigits: fractionDigits,
+    });
+  }, []);
+
   const formatUsdtPrice = (value: number | null) => {
     if (value === null || value === undefined || isNaN(value)) return "-";
 
@@ -1117,6 +1147,7 @@ export default function PremiumTable({
                     getDisplaySymbol={getDisplaySymbol}
                     formatPercent={formatPercent}
                     formatKrwPrice={formatKrwPrice}
+                    formatKrwDynamic={formatKrwDynamic}
                     formatVolumeKRW={formatVolumeKRW}
                     getPremiumColor={getPremiumColor}
                     getChangeColor={getChangeColor}

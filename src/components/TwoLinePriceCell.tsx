@@ -30,6 +30,33 @@ const formatKrwPrice = (value: number | null | undefined): string => {
   return value.toFixed(2);
 };
 
+// 동적 KRW 가격 포맷 (저가 코인도 0.00 으로 안 죽게)
+export const formatKrwDynamic = (value: number | null | undefined): string => {
+  if (value === null || value === undefined || isNaN(value)) return "-";
+
+  const abs = Math.abs(value);
+  let fractionDigits = 0;
+
+  if (abs >= 1000) {
+    fractionDigits = 0;             // 1,000 이상
+  } else if (abs >= 1) {
+    fractionDigits = 2;             // 1 ~ 1,000 미만
+  } else if (abs >= 0.1) {
+    fractionDigits = 3;             // 0.1 ~ 1 미만
+  } else if (abs >= 0.01) {
+    fractionDigits = 4;             // 0.01 ~ 0.1 미만
+  } else if (abs >= 0.001) {
+    fractionDigits = 5;             // 0.001 ~ 0.01 미만
+  } else {
+    fractionDigits = 6;             // 그 이하
+  }
+
+  return value.toLocaleString("ko-KR", {
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: fractionDigits,
+  });
+};
+
 const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   topValue,
   bottomValue,

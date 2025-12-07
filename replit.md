@@ -65,6 +65,30 @@ marketStats.json 흐름            ← 절대 변경 금지
 
 ### Recent Changes (v3.4.29 - 2024-12-07) - WebSocket 실시간 가격 업데이트 완성 🎉
 
+**✅ 저가 코인 가격 표시 개선 (동적 소수점 포맷):**
+
+1. ✅ **formatKrwDynamic 함수 추가**
+   - src/components/TwoLinePriceCell.tsx: 새로운 `formatKrwDynamic` 함수 추가
+   - src/components/PremiumTable.tsx: `formatKrwDynamic` useCallback 구현
+   - 동작: 가격 크기에 따라 소수 자릿수 동적 조정
+   - 규칙:
+     * ₩1,000 이상: 0자리 (예: ₩1,234)
+     * ₩1~₩1,000: 2자리 (예: ₩123.45)
+     * ₩0.1~₩1: 3자리 (예: ₩0.123)
+     * ₩0.01~₩0.1: 4자리 (예: ₩0.0123)
+     * ₩0.001~₩0.01: 5자리 (예: ₩0.00123)
+     * ₩0.001 미만: 6자리 (예: ₩0.000123)
+
+2. ✅ **코인 테이블에 적용**
+   - TwoLinePriceCell에 formatFn={formatKrwDynamic} 전달
+   - 국내가/해외가 현재가만 동적 포맷 적용
+   - 김프%, 전일대비%, 거래액은 기존 포맷 유지
+
+**효과:**
+- BTT, PEPE 같은 저가 코인이 ₩0.00 대신 ₩0.000616, ₩0.00675 등으로 표시
+- 업비트처럼 가격 수준별로 자동 조정
+- 저가 코인도 가격이 제대로 보임
+
 **✅ 프론트엔드 폴링 주기 최적화 (국내 시세 체감 딜레이 감소):**
 
 1. ✅ **PremiumTable 폴링 주기 조정**
