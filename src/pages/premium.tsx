@@ -2,8 +2,10 @@ import Head from "next/head";
 import Link from "next/link";
 import Layout from "@/components/Layout";
 import PremiumTable from "@/components/PremiumTable";
+import { useUserPrefs } from "@/hooks/useUserPrefs";
 
 export default function PremiumPage() {
+  const { prefs } = useUserPrefs();
   return (
     <Layout>
       <Head>
@@ -25,7 +27,7 @@ export default function PremiumPage() {
             </p>
           </div>
 
-          <PremiumTable showHeader={true} showFilters={true} limit={0} />
+          <PremiumTable showHeader={true} showFilters={true} limit={0} prefs={prefs} />
 
           <div className="mt-8 bg-gray-800/30 rounded-lg p-6 border border-gray-700">
             <h2 className="text-xl font-bold text-white mb-4">

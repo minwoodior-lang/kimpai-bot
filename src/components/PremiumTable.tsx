@@ -19,7 +19,14 @@ import TwoLinePriceCell, {
 } from "@/components/TwoLinePriceCell";
 import TwoLineCell from "@/components/TwoLineCell";
 import { openCmcPage } from "@/lib/coinMarketCapUtils";
-import { useUserPrefs } from "@/hooks/useUserPrefs";
+import { useUserPrefs, UserPrefs } from "@/hooks/useUserPrefs";
+
+function normalize(symbol: string): string {
+  return symbol
+    .replace(/[-/]/g, "")
+    .replace(/KRW|USDT|BTC/g, "")
+    .toUpperCase();
+}
 
 interface DropdownOption {
   id: string;
@@ -33,6 +40,7 @@ interface PremiumTableProps {
   showFilters?: boolean;
   limit?: number;
   refreshInterval?: number;
+  prefs?: UserPrefs;
   onChartSelect?: (
     symbol: string,
     domesticExchange: string,
@@ -285,11 +293,7 @@ const PremiumTableRow = React.memo(
     openCmcPage,
   }: PremiumTableRowProps) => {
     const uniqueKey = `${row.symbol}_${index}`;
-    const normalizedSymbol = row.symbol
-      .replace("/KRW", "")
-      .replace("/USDT", "")
-      .replace("/BTC", "")
-      .toUpperCase();
+    const normalizedSymbol = normalize(row.symbol);
     const isFav = favorites.has(normalizedSymbol);
     const isUnlisted = !row.foreignPriceKrw || row.foreignPriceKrw <= 0;
 
@@ -606,6 +610,7 @@ export default function PremiumTable({
   showFilters = true,
   limit = 0,
   refreshInterval = 1000,
+  prefs: propPrefs,
   onChartSelect,
 }: PremiumTableProps) {
   const [data, setData] = useState<PremiumData[]>([]);
@@ -635,10 +640,11 @@ export default function PremiumTable({
   });
 
   // 즐겨찾기
-  const { prefs, toggleFavorite, isFavorite, isLoaded: prefsLoaded } =
+  const { prefs: internalPrefs, toggleFavorite, isFavorite, isLoaded: prefsLoaded } =
     useUserPrefs();
+  const prefs = propPrefs || internalPrefs;
   const favorites = useMemo(
-    () => new Set(prefs.favorites || []),
+    () => new Set((prefs.favorites || []).map(normalize)),
     [prefs.favorites],
   );
 
@@ -753,14 +759,7 @@ export default function PremiumTable({
     let result = [...data];
 
     if (prefsLoaded && prefs.filterMode === "favorites") {
-      result = result.filter((item) => {
-        const normalizedSymbol = item.symbol
-          .replace("/KRW", "")
-          .replace("/USDT", "")
-          .replace("/BTC", "")
-          .toUpperCase();
-        return favorites.has(normalizedSymbol);
-      });
+      result = result.filter((item) => favorites.has(normalize(item.symbol)));
     } else if (prefsLoaded && prefs.filterMode === "foreign") {
       result = result.filter(
         (item) =>
@@ -776,18 +775,8 @@ export default function PremiumTable({
 
     // 즐겨찾기 먼저
     result.sort((a, b) => {
-      const aNormalized = a.symbol
-        .replace("/KRW", "")
-        .replace("/USDT", "")
-        .replace("/BTC", "")
-        .toUpperCase();
-      const bNormalized = b.symbol
-        .replace("/KRW", "")
-        .replace("/USDT", "")
-        .replace("/BTC", "")
-        .toUpperCase();
-      const aIsFavorite = favorites.has(aNormalized);
-      const bIsFavorite = favorites.has(bNormalized);
+      const aIsFavorite = favorites.has(normalize(a.symbol));
+      const bIsFavorite = favorites.has(normalize(b.symbol));
 
       if (aIsFavorite !== bIsFavorite) {
         return aIsFavorite ? -1 : 1;

@@ -355,6 +355,7 @@ export default function Home() {
                 showFilters={true}
                 limit={0}
                 refreshInterval={1000}
+                prefs={prefs}
               />
             </section>
           </div>
