@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { BAD_ICON_SYMBOLS } from "@/config/badIconSymbols";
+import { getAllWebSocketPrices, getWebSocketPrice } from "@/../workers/websocket";
 
 interface PriceEntry {
   price: number;
@@ -34,6 +35,27 @@ interface CacheEntry {
 
 const memoryCache: Record<string, CacheEntry> = {};
 const CACHE_TTL = 800; // 800ms
+
+// WebSocket 실시간 가격 override 설정
+const USE_WS_OVERRIDE = process.env.USE_WS_OVERRIDE === 'true';
+const WS_FRESHNESS_THRESHOLD = 2000; // 2초 이상 지난 WS 가격은 무시
+
+// 딜레이 측정용 Map (심볼별 마지막 WS 업데이트 시간)
+const wsUpdateTimestamps: Map<string, number> = new Map();
+
+interface DelayMetrics {
+  totalDelay: number;
+  count: number;
+  maxDelay: number;
+  avgDelay: number;
+}
+
+const delayMetrics: DelayMetrics = {
+  totalDelay: 0,
+  count: 0,
+  maxDelay: 0,
+  avgDelay: 0
+};
 
 function getCacheKey(domestic: string, foreign: string): string {
   return `${domestic}:${foreign}`;
@@ -84,6 +106,44 @@ function parseMarketParam(value: string): { exchange: string; quote: string } {
   const quote = parts[parts.length - 1];
   const exchange = parts.slice(0, -1).join("_");
   return { exchange, quote };
+}
+
+// WebSocket 가격으로 해외 거래소 가격 override
+function getWebSocketPriceIfFresh(exchange: string, symbol: string, quote: string): number | null {
+  if (!USE_WS_OVERRIDE) return null;
+
+  const wsPrice = getWebSocketPrice(exchange, symbol, quote);
+  if (!wsPrice) return null;
+
+  const now = Date.now();
+  const age = now - wsPrice.timestamp;
+
+  // 2초 이상 지난 가격은 무시 (fallback to file-based data)
+  if (age > WS_FRESHNESS_THRESHOLD) {
+    return null;
+  }
+
+  // 딜레이 측정
+  const key = `${exchange}:${symbol}:${quote}`;
+  const lastUpdate = wsUpdateTimestamps.get(key);
+  
+  if (lastUpdate !== wsPrice.timestamp) {
+    wsUpdateTimestamps.set(key, wsPrice.timestamp);
+    
+    // API 응답 생성 시점과 WS 수신 시점 차이 계산
+    const delay = age;
+    delayMetrics.totalDelay += delay;
+    delayMetrics.count++;
+    delayMetrics.maxDelay = Math.max(delayMetrics.maxDelay, delay);
+    delayMetrics.avgDelay = delayMetrics.totalDelay / delayMetrics.count;
+
+    // 10개마다 로그 출력
+    if (delayMetrics.count % 10 === 0) {
+      console.log(`[WS-DELAY] Avg: ${delayMetrics.avgDelay.toFixed(0)}ms, Max: ${delayMetrics.maxDelay}ms, Count: ${delayMetrics.count}`);
+    }
+  }
+
+  return wsPrice.price;
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -146,7 +206,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           }
         }
         
-        const foreignPrice = foreignEntry?.price ?? null;
+        // WebSocket 실시간 가격 override (USE_WS_OVERRIDE=true일 때만)
+        const foreignPriceFromFile = foreignEntry?.price ?? null;
+        const wsForeignPrice = getWebSocketPriceIfFresh(foreignExchange, symbol, foreignQuote);
+        const foreignPrice = wsForeignPrice ?? foreignPriceFromFile;
 
         let foreignPriceKrw: number | null = null;
         if (foreignPrice && foreignPrice > 0) {
@@ -343,6 +406,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       foreignExchange,
       totalCoins: totalCryptoCount,
       listedCoins: filtered.filter(r => r.isListed).length,
+      // WebSocket 실시간 가격 사용 여부 및 딜레이 정보 (디버깅용)
+      wsOverride: USE_WS_OVERRIDE,
+      wsDelayMetrics: USE_WS_OVERRIDE ? {
+        avgDelay: Math.round(delayMetrics.avgDelay),
+        maxDelay: delayMetrics.maxDelay,
+        count: delayMetrics.count
+      } : null,
     };
 
     // 메모리 캐시에 저장 (800ms TTL)

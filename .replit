@@ -93,3 +93,8 @@ externalPort = 8008
 [nix]
 channel = "stable-25_05"
 packages = ["lsof"]
+
+[userenv]
+
+[userenv.development]
+USE_WS_OVERRIDE = "true"
