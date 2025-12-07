@@ -336,7 +336,7 @@ const PremiumTableRow = React.memo(({
         <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={formatPercent(row.fromHighRate)}
-            line2={formatKrwDynamic(highDiffKrw, { signed: false })}
+            line2={formatKrwDomestic(row.high24h)}
             line1Color={getChangeColor(row.fromHighRate)}
           />
         </td>
@@ -344,7 +344,7 @@ const PremiumTableRow = React.memo(({
         <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
           <TwoLineCell
             line1={formatPercent(row.fromLowRate)}
-            line2={formatKrwDynamic(lowDiffKrw, { signed: false })}
+            line2={formatKrwDomestic(row.low24h)}
             line1Color={getChangeColor(row.fromLowRate)}
           />
         </td>

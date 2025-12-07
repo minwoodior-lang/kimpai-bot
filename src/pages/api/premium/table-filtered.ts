@@ -310,20 +310,21 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           domesticExchange: domesticExchange,
           foreignExchange: foreignExchange,
 
+          // ✨ 반올림 제거: 원본 값 그대로 전달 (프론트엔드에서 포맷)
           koreanPrice: domesticPriceKrw,
-          foreignPriceKrw: foreignPriceKrw ? Math.round(foreignPriceKrw * 100) / 100 : null,
+          foreignPriceKrw: foreignPriceKrw,
 
-          premiumRate: premiumRate ? Math.round(premiumRate * 100) / 100 : null,
-          premiumDiffKrw: premiumDiffKrw ? Math.round(premiumDiffKrw * 100) / 100 : null,
+          premiumRate: premiumRate,
+          premiumDiffKrw: premiumDiffKrw,
 
-          changeRate: changeRate != null ? Math.round(changeRate * 100) / 100 : null,
-          changeAbsKrw: changeAbsKrw != null ? Math.round(changeAbsKrw * 100) / 100 : null,
+          changeRate: changeRate,
+          changeAbsKrw: changeAbsKrw,
 
-          fromHighRate: fromHighRate !== null ? Math.round(fromHighRate * 100) / 100 : null,
-          highDiffKrw: highDiffKrw !== null ? Math.round(highDiffKrw * 100) / 100 : null,
+          fromHighRate: fromHighRate,
+          highDiffKrw: highDiffKrw,
 
-          fromLowRate: fromLowRate !== null ? Math.round(fromLowRate * 100) / 100 : null,
-          lowDiffKrw: lowDiffKrw !== null ? Math.round(lowDiffKrw * 100) / 100 : null,
+          fromLowRate: fromLowRate,
+          lowDiffKrw: lowDiffKrw,
 
           volume24hKrw: volume24hKrw,
           volume24hForeignKrw: volume24hForeignKrw,
@@ -332,7 +333,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           low24h: low24hKrw,
 
           globalPrice: foreignPrice,
-          premium: premiumRate ? Math.round(premiumRate * 100) / 100 : null,
+          premium: premiumRate,
           isListed: (domesticPriceKrw && domesticPriceKrw > 0) && (foreignPrice && foreignPrice > 0),
           icon_url: iconUrl,
           displayName: market.name_ko || market.name_en || symbol,

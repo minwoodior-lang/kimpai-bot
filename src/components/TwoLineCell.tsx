@@ -42,18 +42,18 @@ export default function TwoLineCell({
   if (isUnlisted) {
     return (
       <div className={`flex flex-col leading-[1.1] ${alignClass}`}>
-        <span className={`block text-right whitespace-nowrap tabular-nums min-w-[92px] text-[13px] md:text-[14px] font-medium ${topColor}`}>-</span>
-        <span className={`block text-right whitespace-nowrap tabular-nums min-w-[92px] text-[10px] md:text-[11px] ${line2Color}`}>-</span>
+        <span className={`block text-right whitespace-nowrap tabular-nums min-w-[100px] md:min-w-[112px] text-[13px] md:text-[14px] font-medium ${topColor}`}>-</span>
+        <span className={`block text-right whitespace-nowrap tabular-nums min-w-[100px] md:min-w-[112px] text-[10px] md:text-[11px] ${line2Color}`}>-</span>
       </div>
     );
   }
 
   return (
     <div className={`flex flex-col leading-[1.1] ${alignClass}`}>
-      <span className={`block text-right whitespace-nowrap tabular-nums min-w-[92px] text-[13px] md:text-[14px] font-medium ${topColor}`}>
+      <span className={`block text-right whitespace-nowrap tabular-nums min-w-[100px] md:min-w-[112px] text-[13px] md:text-[14px] font-medium ${topColor}`}>
         {line1Prefix}{formatValue(line1)}{line1Suffix}
       </span>
-      <span className={`block text-right whitespace-nowrap tabular-nums min-w-[92px] text-[10px] md:text-[11px] ${line2Color}`}>
+      <span className={`block text-right whitespace-nowrap tabular-nums min-w-[100px] md:min-w-[112px] text-[10px] md:text-[11px] ${line2Color}`}>
         {line2Prefix}{formatValue(line2)}{line2Suffix}
       </span>
     </div>

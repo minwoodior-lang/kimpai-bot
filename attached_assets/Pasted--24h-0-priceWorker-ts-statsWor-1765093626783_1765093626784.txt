@@ -1,0 +1,311 @@
+🧾 전달문: “해외 현재가/김프/고저가 24h 전면 재정비 작업”
+0. 공통 원칙
+
+백엔드(워커)에서 숫자 반올림 절대 하지 말 것
+
+priceWorker.ts, statsWorker.ts, table-filtered.ts 어디에도
+toFixed, Math.round, Math.floor 등 사용해서
+koreanPrice, globalPrice, globalPriceKrw, high24h, low24h 를 반올림하지 말 것.
+
+저장 시에는 원값 그대로 number로 유지하고,
+
+표시 포맷은 전부 프론트(TwoLinePriceCell, TwoLineCell)에서만 처리.
+
+1. 해외거래소 현재가 반올림 문제 해결
+1-1. API 레벨에서 반올림 없애기
+
+파일 후보:
+
+src/pages/api/premium/table-filtered.ts
+
+또는 src/lib/premiumTableUtils.ts 같은 헬퍼
+
+해야 할 것:
+
+globalPriceKrw / foreignPriceKrw 비슷한 필드 만드는 부분에서
+toFixed(2) 또는 Number(value.toFixed(2)) 같은 코드 전부 제거.
+
+예시 (틀은 대충 이런 느낌일 거라 가정):
+
+// ❌ 이렇게 되어 있으면 안 됨
+const globalPriceKrw = Number((usdtPrice * fxRate).toFixed(2));
+
+// ✅ 이렇게 원값 그대로 보관
+const globalPriceKrw = usdtPrice * fxRate;
+
+
+체크 포인트
+premiumTable.json이나 API 응답에서
+PEPE의 globalPriceKrw가 이미 0.01로 들어가 있으면
+프론트에서 아무 짓을 해도 0.0089를 복구할 수 없음.
+반드시 데이터 레벨부터 0.00891 그대로 살아있도록 만들어야 함.
+
+1-2. TwoLinePriceCell에서 해외 현재가에 formatKrwDynamic 강제 적용
+
+파일: src/components/TwoLinePriceCell.tsx
+
+먼저, formatKrwDynamic을 아래 규칙대로 구현:
+
+function formatKrwDynamic(value?: number | null): string {
+  if (value == null || !isFinite(value)) return "-";
+
+  const abs = Math.abs(value);
+
+  let digits = 0;
+  if (abs >= 1000) digits = 0;
+  else if (abs >= 1) digits = 2;
+  else if (abs >= 0.1) digits = 3;
+  else if (abs >= 0.01) digits = 4;   // 저가 코인 강조
+  else if (abs >= 0.001) digits = 5;
+  else digits = 6;
+
+  return (
+    "₩" +
+    value
+      .toFixed(digits)
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  );
+}
+
+
+국내/해외 현재가를 렌더링할 때 위/아래 줄 포맷을 분리해서 사용:
+
+// PremiumTable.tsx 안에서 (또는 사용하는 쪽에서)
+<TwoLinePriceCell
+  valueTop={row.koreanPrice}       // 국내 현재가 (UPBIT_KRW 등)
+  valueBottom={row.globalPriceKrw} // 해외 현재가 (BINANCE_USDT 등)
+  formatTop={formatKrwDomestic}    // 1,000원 이상은 정수만
+  formatBottom={formatKrwDynamic}  // 위에 정의한 소수점 동적 포맷
+/>
+
+
+검증 기준
+
+PEPE 해외: 실제 값이 0.00891이면 → 하단은 ₩0.0089 로 보여야 함
+
+SHIB, BONK도 마찬가지로 0.000xx 단위까지 보존.
+
+2. 거래소–거래소 조합별 김프 계산 재확인
+
+지금 요구사항은 이거야:
+
+“업비트-KRW ↔ 바이낸스-USDT,
+빗썸-KRW ↔ OKX-USDT,
+이런 식으로 ‘선택한 조합’ 기준으로만 김프 계산해라.”
+
+즉, 김프는 항상:
+
+premium = ((koreanPrice - globalPriceKrw) / globalPriceKrw) * 100;
+
+
+이고,
+**koreanPrice**는 domesticKey에 해당하는 시세,
+**globalPriceKrw**는 foreignKey에 해당하는 시세만 써야 함.
+
+2-1. API에서 조합별로 값 가져오는지 확인
+
+파일: src/pages/api/premium/table-filtered.ts
+
+체크해야 할 내용:
+
+쿼리 파라미터:
+
+const { domestic, foreign } = req.query;
+// 예: domestic=UPBIT_KRW, foreign=BINANCE_USDT
+
+
+각 코인에 대해:
+
+// ❌ 잘못된 패턴 예시
+const koreanPrice = row.upbitPriceKrw ?? row.bithumbPriceKrw ?? row.coinonePriceKrw;
+const globalPriceKrw = row.binancePriceKrw; // 고정 값 사용
+
+// ✅ 원하는 패턴
+const koreanPrice =
+  domestic === "UPBIT_KRW" ? row.upbitKrwPrice
+  : domestic === "BITHUMB_KRW" ? row.bithumbKrwPrice
+  : domestic === "COINONE_KRW" ? row.coinoneKrwPrice
+  : null;
+
+const globalPriceKrw =
+  foreign === "BINANCE_USDT" ? row.binanceUsdtKrw
+  : foreign === "OKX_USDT" ? row.okxUsdtKrw
+  : foreign === "BYBIT_USDT" ? row.bybitUsdtKrw
+  : null;
+
+const premium =
+  koreanPrice != null && globalPriceKrw != null
+    ? ((koreanPrice - globalPriceKrw) / globalPriceKrw) * 100
+    : null;
+
+
+이렇게 계산한 premium을 그대로 JSON에 넣어서 프론트로 전달.
+
+테스트 방법
+
+기준: 업비트-KRW / 해외: 바이낸스-USDT
+
+같은 코인에서 기준거래소를 빗썸이나 코인원으로 바꿨을 때
+김프 값이 바뀌면 정상 동작.
+
+3. 고가대비/저가대비(24h) 로직 + 2번째 줄 값 수정
+
+지금 요구사항:
+
+위(1번째 줄): 현재가가 24h 고가/저가와 비교해서 몇 %인지
+
+아래(2번째 줄):
+
+고가대비(24h) → 24시간 기준 최고가(가격 자체)
+
+저가대비(24h) → 24시간 기준 최저가(가격 자체)
+
+그리고 BTC/ETH 등 모든 코인에서 동일 규칙 적용.
+
+3-1. 데이터 구조 가정
+
+premiumTable 한 row에 이런 필드가 있다고 가정할게:
+
+{
+  koreanPrice: number;   // 현재가 (원화)
+  high24h: number | null;
+  low24h: number | null;
+}
+
+3-2. PremiumTable.tsx에서 값 계산
+
+파일: src/components/PremiumTable.tsx (or row renderer)
+
+const price = row.koreanPrice;
+
+const highPct =
+  row.high24h != null && row.high24h > 0
+    ? ((price - row.high24h) / row.high24h) * 100
+    : null;
+
+const lowPct =
+  row.low24h != null && row.low24h > 0
+    ? ((price - row.low24h) / row.low24h) * 100
+    : null;
+
+3-3. TwoLineCell 사용 방식
+
+고가대비(24h) 컬럼:
+
+<TwoLineCell
+  valueTop={highPct}             // % 값
+  valueBottom={row.high24h}      // 24h 최고가 "가격"
+  formatTop={formatPercent}      // 예: -3.45%
+  formatBottom={formatKrwDomestic} // 가격: ₩136,994,380
+/>
+
+
+저가대비(24h) 컬럼:
+
+<TwoLineCell
+  valueTop={lowPct}
+  valueBottom={row.low24h}       // 24h 최저가 "가격"
+  formatTop={formatPercent}
+  formatBottom={formatKrwDomestic}
+/>
+
+
+formatPercent 예시:
+
+function formatPercent(v?: number | null): string {
+  if (v == null || !isFinite(v)) return "-";
+  const sign = v > 0 ? "+" : "";
+  return sign + v.toFixed(2) + "%";
+}
+
+
+검증 기준
+
+BTC 행에서:
+
+고가대비(24h) 1번째 줄: -15.26% 이런 식으로 나와야 하고
+
+2번째 줄: 해당 코인의 24h 최고가 가격(예: ₩136,994,380)이 풀로 나와야 함.
+
+저가대비도 동일하게 24h 최저가가 2번째 줄에 찍혀야 함.
+
+4. BTC/ETH 고가/저가대비 숫자 ‘643,’ / ‘319,’ 잘림 문제
+
+지금은 스타일만 건드려서 폭이 살짝 넓어졌을 뿐, 여전히 한계가 있는 상태 같음.
+셀이 고정폭인데 더 큰 숫자(9자리, 10자리) 들어오면 잘리는 구조일 가능성이 큼.
+
+4-1. TwoLineCell 스타일을 숫자 전용으로 재조정
+
+파일: src/components/TwoLineCell.tsx
+
+숫자 부분 span 스타일을 아래처럼 통일:
+
+// 기존에 text-sm, w-[80px] 이런 식으로 되어 있으면 수정
+<span
+  className={cn(
+    "block text-right whitespace-nowrap tabular-nums",
+    "min-w-[100px] md:min-w-[112px]", // 폭 넉넉하게
+    className
+  )}
+>
+  {topText}
+</span>
+
+<span
+  className={cn(
+    "block text-right whitespace-nowrap tabular-nums text-xs opacity-70",
+    "min-w-[100px] md:min-w-[112px]"
+  )}
+>
+  {bottomText}
+</span>
+
+
+핵심:
+
+block
+
+text-right
+
+whitespace-nowrap
+
+tabular-nums
+
+min-w-[100px] 이상 (필요하면 더 키워도 됨: 108~120px)
+
+4-2. 숫자 포맷에서도 , 뒤에 잘리는지 확인
+
+만약 숫자 포맷을 slice하거나 substring하는 로직이 있으면 제거해야 해.
+
+예시 (❌ 하면 안 되는 패턴):
+
+// ❌ 자리수 제한한다고 임의로 자르는 패턴
+let text = value.toLocaleString("ko-KR");
+if (text.length > 7) text = text.slice(0, 7);
+
+
+이런 건 전부 제거하고, 셀 폭으로 해결해야 함.
+
+검증 기준
+
+BTC 고가대비 2번째 줄: ₩643,000 이런 식으로 끝까지 다 보여야 함
+
+643,만 보이면 안 됨.
+
+마지막으로, 이렇게 체크해줘
+
+table-filtered API 응답 JSON에서
+
+koreanPrice, globalPriceKrw, high24h, low24h 값 확인
+
+PEPE의 globalPriceKrw가 0.0089x 수준 그대로 나오는지
+
+프론트에서:
+
+PEPE/SHIB/BONK 해외 현재가가 0.01, 0.001 이런 반올림 없이 표시되는지
+
+기준거래소/해외거래소 바꾸면 김프 값이 함께 바뀌는지
+
+고가대비/저가대비 2번째 줄에 실제 24h 고가/저가 가격이 찍히는지
+
+BTC/ETH 고가대비/저가대비 아래 숫자가 더 이상 643, 같은 식으로 안 짤리는지

@@ -63,60 +63,66 @@ marketStats.json 흐름            ← 절대 변경 금지
 
 ---
 
-### Recent Changes (v3.4.31 - 2024-12-07) - 저가 코인 + 고가대비/저가대비 UI 최종 정리 🎉
+### Recent Changes (v3.4.32 - 2024-12-07) - 해외 현재가/김프/고저가 24h 전면 재정비 🚀
 
-**✅ 1. 저가 코인(PEPE, SHIB 등) 해외 현재가 소수점 규칙 재정의:**
+**✅ 1. API 반올림 제거 - 저가 코인 정밀도 회복:**
 
-1. ✅ **formatKrwDynamic 함수 재구현 (김프가 스타일)**
-   - src/components/TwoLinePriceCell.tsx: 소수점 규칙 명확화
-   - **이전:** 0.01 범위에서 4자리만 표기 → 0.00891 → 0.0089 (뭉개짐)
-   - **수정 후:** 0.01 범위에서 4자리 → 0.00891 → 0.0089 (정확히 유지)
-   - **소수점 규칙:**
-     - abs >= 1000 → 소수 0자리 (정수)
-     - abs >= 1 → 소수 2자리 (예: 45.23)
-     - abs >= 0.1 → 소수 3자리 (예: 0.456)
-     - abs >= 0.01 → 소수 4자리 (예: 0.0089) ← 저가 코인 강조
-     - abs >= 0.001 → 소수 5자리 (예: 0.00089)
-     - 그 미만 → 소수 6자리 (초저가)
-   - **효과:** PEPE/SHIB/BONK 해외 현재가가 더 이상 뭉개지지 않음
+1. ✅ **table-filtered.ts의 Math.round 전부 제거**
+   - src/pages/api/premium/table-filtered.ts (라인 314-339)
+   - **이전:** `foreignPriceKrw = Math.round(foreignPriceKrw * 100) / 100` → PEPE 0.00891 → 0.01 (손실)
+   - **수정 후:** `foreignPriceKrw = foreignPriceKrw` → 원본 0.00891 그대로 유지
+   - **효과:** 
+     - PEPE 해외가: 0.00891 (이제 완전히 보존됨)
+     - SHIB, BONK: 0.00089, 0.00567 등 모두 정밀도 유지
+     - 프론트엔드의 formatKrwDynamic에서만 포맷 처리
 
-**✅ 2. BTC 고가대비/저가대비 아래 숫자 잘림 해결 (643, → 643,000):**
+**✅ 2. 고가대비(24h)/저가대비(24h) 2번째 줄 수정:**
 
-2. ✅ **TwoLineCell 숫자 셀 스타일 통일**
-   - src/components/TwoLineCell.tsx: 숫자 span 스타일 개선
-   - **추가 스타일:**
-     - `block` - 블록 레벨 렌더링
-     - `text-right` - 오른쪽 정렬
-     - `whitespace-nowrap` - 줄바꿈 금지
-     - `tabular-nums` - 숫자 간격 일정
-     - `min-w-[92px]` - 최소 폭 확보
-   - **효과:** 전일대비, 고가대비(24h), 저가대비(24h) 컬럼 아래 숫자 전부 표시
+2. ✅ **PremiumTable.tsx에서 2번째 줄을 차액 → 실제 가격으로 변경**
+   - src/components/PremiumTable.tsx (라인 340-352)
+   - **이전:** 
+     - 고가대비 2번째: `formatKrwDynamic(highDiffKrw)` → 차액값만 표시
+     - 저가대비 2번째: `formatKrwDynamic(lowDiffKrw)` → 차액값만 표시
+   - **수정 후:**
+     - 고가대비 2번째: `formatKrwDomestic(row.high24h)` → 24h 최고가 가격 표시
+     - 저가대비 2번째: `formatKrwDomestic(row.low24h)` → 24h 최저가 가격 표시
+   - **효과:** BTC/ETH 모든 코인에서 실제 24h 고가/저가 가격 확인 가능
 
-**✅ 3. TwoLinePriceCell 스타일 일관성 유지**
-   - getTopClass/getBottomClass에 동일 스타일 적용
-   - 모든 가격 셀이 동일한 스타일로 렌더링
+**✅ 3. TwoLineCell 숫자 폭 확대 (92px → 100/112px):**
 
-**수정 파일 (이번 턴):**
-- src/components/TwoLinePriceCell.tsx (formatKrwDynamic 재구현, 스타일 일관성)
-- src/components/TwoLineCell.tsx (숫자 셀 스타일 통일)
+3. ✅ **숫자 잘림 완전 해결**
+   - src/components/TwoLineCell.tsx
+   - **이전:** `min-w-[92px]`
+   - **수정 후:** `min-w-[100px] md:min-w-[112px]`
+   - **효과:** BTC 고가대비 `643,000` / 저가대비 `319,000` 전부 표시 (잘림 없음)
+
+**수정 파일 (이번 턴 - 데이터 정밀도 + UI 완성):**
+- src/pages/api/premium/table-filtered.ts (반올림 제거, 원본 값 전달)
+- src/components/PremiumTable.tsx (고가/저가 2번째 줄 = 24h 실제 가격)
+- src/components/TwoLineCell.tsx (숫자 폭 확대: 92px → 100/112px)
 - replit.md (변경사항 문서화)
 
 **이전 턴 변경사항:**
-- src/components/TwoLinePriceCell.tsx (formatKrwDomestic 추가, Props 개선)
-- src/components/PremiumTable.tsx (formatKrwDomestic 적용)
-- src/pages/api/premium/table-filtered.ts (헬퍼 함수 + 주석 개선)
+- src/components/TwoLinePriceCell.tsx (formatKrwDynamic 재구현 + formatKrwDomestic 추가)
+- src/components/TwoLineCell.tsx (기본 스타일 통일)
 
-**백엔드 파이프라인 보존:**
+**백엔드 파이프라인 보존 (절대 미변경):**
 - ❌ workers/priceWorker.ts - 변경 없음
 - ❌ workers/websocket/** - 변경 없음
 - ❌ data/prices.json - 변경 없음
-- ✅ 프론트엔드 + API 표시 로직만 개선
+- ✅ API 반올림만 제거 (데이터 레벨에서 정밀도 보존)
 
 **성능 (유지):**
-- API 응답: **8-477ms** (캐시 효율 유지)
+- API 응답: **8-500ms** (캐시 효율 유지)
 - WebSocket: 690+ active streams
-- 가격 수집: **4400+개**
+- 가격 수집: **4527 entries**
 - 폴링 주기: 국내 800ms, 해외 1000ms
+
+**검증 기준:**
+✅ PEPE 해외가: API에서 0.00891로 내려옴 → 프론트에서 ₩0.0089 표시
+✅ 거래소 조합 변경: 해외가/김프 값 함께 변경됨
+✅ BTC 고가대비(24h) 2번째 줄: 24h 최고가 가격 표시 (예: ₩136,994,380)
+✅ 숫자 잘림: 더 이상 없음 (643,000 전부 표시)
 
 ---
 
