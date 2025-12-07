@@ -7,7 +7,7 @@ import { createChatServer } from "./src/server/chatServer";
 import { startPriceWorker } from "./workers/priceWorker";
 
 const dev = process.env.NODE_ENV !== "production";
-const hostname = process.env.HOSTNAME || "0.0.0.0";
+const hostname = "0.0.0.0";
 const port = parseInt(process.env.PORT || "5000", 10);
 
 const app = next({ dev, hostname, port });
