@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "tsx server.ts",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "tsx server.ts",
     "lint": "next lint",
     "fetch:upbit": "tsx scripts/fetchUpbitMarkets.ts",
     "fetch:bithumb": "tsx scripts/fetchBithumbMarkets.ts",
