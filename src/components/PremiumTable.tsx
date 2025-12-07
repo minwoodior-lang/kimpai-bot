@@ -314,7 +314,7 @@ const PremiumTableRow = React.memo(
               }`}
               onClick={(e) => {
                 e.stopPropagation();
-                toggleFavorite(row.symbol);
+                toggleFavorite(normalizedSymbol);
               }}
               title={isFav ? "즐겨찾기 해제" : "즐겨찾기 추가"}
             >

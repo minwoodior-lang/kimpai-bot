@@ -57,11 +57,14 @@ export function useUserPrefs() {
     });
   };
 
-  // 즐겨찾기 토글
+  // 즐겨찾기 토글 (이미 정규화된 심볼을 받거나, 정규화 수행)
   const toggleFavorite = useCallback((symbol: string) => {
     setPrefsState((prev) => {
       const currentFavorites = prev.favorites || [];
-      const normalizedSymbol = symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
+      const normalizedSymbol = symbol
+        .replace(/[-/]/g, "")
+        .replace(/KRW|USDT|BTC/g, "")
+        .toUpperCase();
       
       let newFavorites: string[];
       if (currentFavorites.includes(normalizedSymbol)) {
@@ -87,7 +90,10 @@ export function useUserPrefs() {
 
   // 즐겨찾기 여부 확인
   const isFavorite = useCallback((symbol: string): boolean => {
-    const normalizedSymbol = symbol.replace("/KRW", "").replace("/USDT", "").replace("/BTC", "").toUpperCase();
+    const normalizedSymbol = symbol
+      .replace(/[-/]/g, "")
+      .replace(/KRW|USDT|BTC/g, "")
+      .toUpperCase();
     return (prefs.favorites || []).includes(normalizedSymbol);
   }, [prefs.favorites]);
 
