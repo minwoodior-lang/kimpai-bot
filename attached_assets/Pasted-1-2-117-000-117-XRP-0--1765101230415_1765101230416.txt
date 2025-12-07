@@ -1,0 +1,119 @@
+1️⃣ 전일대비 2번째 줄 숫자 잘림 문제
+
+증상
+
+전일대비 하단 숫자가
++₩117,000 → 화면에서는 +₩117, 까지만 보임.
+
+XRP처럼 0%인 코인은 하단이 ₩ 처럼 이상하게 보이기도 함.
+
+원인 추정
+
+TwoLineCell 의 두 줄 span 에 min-w-[100px] md:min-w-[112px] 가 잡혀있는데,
+전일대비 컬럼 <th>/<td> 에 폭이 명시되어 있지 않아서
+table-fixed 레이아웃에서 이 컬럼 폭이 부족하게 잡힘.
+
+그 결과, 문자열 끝부분이 잘려서 쉼표 뒤 숫자가 안 보이는 것처럼 보임.
+(실제 값은 제대로 들어와 있는데, UI 폭이 모자람)
+
+✅ 레플릿 전달문 (전일대비 컬럼)
+[요청 1] 전일대비 하단 숫자 잘림 문제 수정
+
+1. 현재 구조
+- PremiumTable.tsx
+  - 헤더 쪽 전일대비 <th> : w- 클래스 없음 (px-3 lg:px-4 ... 정도만 있음)
+  - 바디 쪽 전일대비 <td> : width 지정 없음
+- TwoLineCell.tsx
+  - 상/하단 span 둘 다:
+    "block text-right whitespace-nowrap tabular-nums min-w-[100px] md:min-w-[112px] ..."
+
+2. 증상
+- BTC/XRP 등 일부 코인에서 전일대비 하단이
+  "+₩117,000" → "+₩117," 처럼 끝이 잘려 보임.
+- XRP 같이 전일대비 0% 인 경우, 하단이 "₩" 처럼 어색하게 보임.
+- 숫자는 들어와 있는데, table-fixed + 폭 부족 때문에 오른쪽이 잘리는 상황.
+
+3. 수정 요청 (둘 중 하나 적용, 가능하면 1+2 같이)
+(1) 전일대비 컬럼 폭 넉넉히 지정
+- 헤더 <th> 에 폭 추가:
+  className에 아래 폭 추가
+  "w-[110px] sm:w-[124px] md:w-[140px]"
+- 바디 <td> 에도 동일한 폭 또는 최소 w-[110px] 이상 지정:
+  <td className="w-[110px] sm:w-[124px] md:w-[140px] px-1 sm:px-2 md:px-3 lg:px-4 ...">
+
+(2) TwoLineCell 최소 폭 약간 축소
+- 상/하단 span 클래스에서
+  min-w-[100px] md:min-w-[112px]
+  → min-w-[96px] md:min-w-[108px]
+  정도로 한 단계 줄여서 여유 확보.
+
+4. 기대 결과
+- 전일대비 하단 숫자가 "+₩117,000" 전체가 보이고,
+  더 이상 쉼표 뒤 숫자 잘림 없음.
+- XRP처럼 0%인 코인도 "₩0" 또는 "-"가 온전히 표시됨
+  (값이 0인 경우 formatKrwDynamic에서 "₩0" 형태로 내려보내고 있음).
+
+2️⃣ 무뎅 BINANCE USDT 해외가격 계속 - 인 문제
+
+이건 우리 로직 문제가 아니라, 데이터 소스 특성 문제라서 정리해서 전달해야 된다.
+
+실제 상황
+
+OKX, Bitget, Gate USDT 마켓에는 MOODENG/USDT 존재 → 우리 시스템에서도 잘 가져옴.
+
+사용자가 선택한 기준은 BINANCE USDT (우리 시스템에서 Binance CEX Spot USDT 마켓만 사용).
+
+Binance 쪽은:
+
+공식 가격 페이지에서 **“이 코인은 Binance에 상장되어 있지 않다”**고 명시되어 있고
+Binance
++1
+
+→ 스팟 CEX에는 없는 상태.
+
+현재는 Binance Futures, Web3 Wallet/DEX, Alpha 등에는 노출되어 있지만
+MOODENGUSDT 스팟 티커는 존재하지 않음.
+
+그래서:
+
+exchange_markets.json 에 BINANCE:MOODENG:USDT 를 억지로 추가해도
+실제 Binance Spot API에서 해당 심볼을 찾지 못해서
+foreignPriceKrw 가 계속 null → 화면에서 - 로 나오는 것이 정상 동작임.
+
+✅ 레플릿 전달문 (무뎅 해외 가격)
+[요청 2] MOODENG BINANCE USDT 해외가 관련 설명 및 처리
+
+1. 현재 동작
+- 사용자가 기준거래소: 업비트 KRW, 해외거래소: BINANCE USDT 선택 시,
+  MOODENG 행의 해외 현재가가 "-" 로 표시됨.
+
+2. 확인한 사실
+- OKX/Bitget/Gate USDT 마켓에는 MOODENG/USDT 존재 → 우리 priceWorker가 정상 수집.
+- BINANCE USDT 쪽은
+  - exchange_markets.json 에 BINANCE:MOODENG:USDT 를 추가해도
+  - Binance Spot REST/WebSocket 티커 목록에 MOODENGUSDT 자체가 없음.
+- Binance 공식 price 페이지에서도
+  "Note: This coin is not listed on Binance for trade and service."
+  라고 명시되어 있어 실제 CEX 스팟 마켓에는 미상장 상태.
+
+3. 결론
+- 우리 시스템의 "BINANCE USDT" 는 Binance CEX Spot USDT 마켓만 대상으로 하고 있어서
+  MOODENG 은 구조적으로 값을 가져올 수 없음.
+- 현재 "-" 로 나오는 동작이 오히려 정상이고,
+  이걸 고치려면
+  (a) BinanceUS, Web3/DEX, Alpha 등을 별도 거래소 타입으로 추가하거나
+  (b) MOODENG 선택 시, BINANCE USDT 에서는 자동으로 OKX/Bitget 등 다른 해외거래소로 fallback 하는
+      별도 예외 처리가 필요함.
+
+4. 요청
+- 당장은 백엔드 로직 건드리지 말고,
+  프론트에서라도 다음 중 하나 처리 부탁:
+  - MOODENG + BINANCE USDT 조합에서는
+    해외 가격 셀에 "-" 대신 "미상장" 같은 텍스트 노출
+  - 또는 해당 조합에서 다른 해외거래소로 자동 스위치 (예: OKX USDT).
+
+요약
+
+전일대비 2줄 콤마 문제 → 전일대비 컬럼 폭이 아직 부족한 거라서 <th>/<td> 폭을 아예 넉넉하게 고정해 달라고 요청하면 됨.
+
+무뎅 BINANCE USDT 가격 → Binance 메인 스팟에 상장 자체가 안 되어 있어서, 지금 구조로는 절대 값이 안 들어오는 게 맞음. 이건 예외 처리(“미상장” 표시 or 다른 거래소 fallback)로 가야 함.
