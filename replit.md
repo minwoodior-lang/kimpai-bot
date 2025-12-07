@@ -73,6 +73,20 @@ marketStats.json 흐름            ← 절대 변경 금지
    - 효과: 국내 시세 체감 딜레이 약 0.2초 감소
    - 백엔드 가격 파이프라인은 변경 없음 (고정)
 
+2. ✅ **TwoLinePriceCell 소수점 포맷 개선 (formatKrwDynamic)**
+   - src/components/TwoLinePriceCell.tsx: 동적 소수점 자리수 규칙 적용
+   - 규칙:
+     - abs >= 1000 → 소수 0자리 (정수 표시 + 천단위 콤마)
+     - abs >= 1 → 소수 2자리
+     - abs >= 0.1 → 소수 3자리
+     - abs >= 0.01 → 소수 4자리
+     - abs >= 0.001 → 소수 5자리
+     - abs >= 0.0001 → 소수 6자리
+     - 그 미만 → 소수 8자리
+   - 0 또는 null 값은 "-"로 표시 (₩0.00 대신)
+   - 적용 대상: koreanPrice, foreignPriceKrw, changeAbsKrw, highDiffKrw, lowDiffKrw, premiumDiffKrw
+   - 백엔드 raw 값은 변경 없음 (표시만 조정)
+
 **✅ WebSocket → prices.json → API 파이프라인 버그 수정:**
 
 1. ✅ **Map.forEach 버그 수정**

@@ -13,21 +13,33 @@ interface TwoLinePriceCellProps {
 
 type FlashState = "up" | "down" | null;
 
-const formatKrwPrice = (value: number | null | undefined): string => {
-  if (value === null || value === undefined || isNaN(value)) return "-";
+const formatKrwDynamic = (value: number | null | undefined): string => {
+  // 0 또는 null일 때 "-"로 표시
+  if (value === null || value === undefined || isNaN(value) || value === 0) return "-";
 
-  if (value >= 1000) {
+  const absValue = Math.abs(value);
+  
+  // 값이 작을수록 자리수를 늘려서 표시
+  if (absValue >= 1000) {
     return Math.round(value).toLocaleString("ko-KR");
   }
-  if (value >= 100) {
-    return value.toFixed(1);
-  }
-  // 1 이상 100 미만: 2자리
-  if (value >= 1) {
+  if (absValue >= 1) {
     return value.toFixed(2);
   }
-  // 1 미만: 2자리 (이전 4자리에서 2자리로 수정)
-  return value.toFixed(2);
+  if (absValue >= 0.1) {
+    return value.toFixed(3);
+  }
+  if (absValue >= 0.01) {
+    return value.toFixed(4);
+  }
+  if (absValue >= 0.001) {
+    return value.toFixed(5);
+  }
+  if (absValue >= 0.0001) {
+    return value.toFixed(6);
+  }
+  // 그 미만: 소수 8자리
+  return value.toFixed(8);
 };
 
 const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
@@ -38,7 +50,7 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   topSuffix = "",
   bottomSuffix = "",
   isUnlisted = false,
-  formatFn = formatKrwPrice,
+  formatFn = formatKrwDynamic,
 }) => {
   const [topFlash, setTopFlash] = useState<FlashState>(null);
   const [bottomFlash, setBottomFlash] = useState<FlashState>(null);
