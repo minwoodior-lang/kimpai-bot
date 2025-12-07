@@ -1,0 +1,137 @@
+[레플릿 전달문] 거래소별 시세 수집 상태 점검 + MOODENG BINANCE_USDT 누락
+1️⃣ 전체 거래소 시세 수집 헬스체크 요청
+
+목표:
+각 거래소에서 상장된 마켓 리스트와
+우리 exchange_markets / prices.json / premiumTable 가 1:1로 맞는지 검증.
+
+(A) 마켓 리스트 동기화 점검
+
+각 거래소별로 다음을 확인해 주세요:
+
+거래소: UPBIT_KRW/BTC/USDT, BITHUMB_KRW/BTC, COINONE_KRW,
+BINANCE_USDT, OKX_USDT, BYBIT_USDT, BITGET_USDT, GATE_USDT, MEXC_USDT, HTX_USDT …
+
+실시간 마켓 리스트 가져오기
+
+각 거래소 공식 API에서 spot 마켓 리스트 전체 가져오기
+(예: BINANCE → exchangeInfo, OKX/Gate/Bitget 등 각각의 spot symbol 리스트)
+
+우리 시스템과 diff
+
+Supabase exchange_markets 또는 exchange_markets.json 에서
+해당 거래소(ex: BINANCE_USDT)에 해당하는 마켓들만 필터
+
+“실제 거래소에는 있는데 우리 exchange_markets 에 없는 마켓” 목록 출력
+
+반대로 “우리 리스트에는 있는데 실제 거래소에는 없는 마켓”도 같이 출력
+
+👉 이걸로 어떤 코인들이 처음부터 리스트에서 빠져있는지 한 번에 볼 수 있게 해주세요.
+
+(B) premiumTable 기준 시세 수집 헬스체크
+
+premiumTable.json 혹은 /api/premium/table-filtered 를 이용해서:
+
+기준: domestic=UPBIT_KRW, foreign=BINANCE_USDT (그리고 OKX/Bybit 등도 동일하게 반복)
+
+각 row에 대해:
+
+koreanPrice > 0 인데
+
+foreignPriceKrw 가 null 또는 0인 코인만 필터
+
+그 코인들의 심볼 리스트를 거래소 실제 상장 리스트와 비교해서
+
+실제 거래소에도 있는 코인인데 우리 쪽 foreignPriceKrw 가 항상 null → 수집/매핑 문제
+
+거래소에 아예 없는 코인인데 null → 정상 (표시만 ‘-’로 두면 됨)
+
+이렇게 해서 “수집/매핑이 잘못된 코인 목록”을 뽑아 달라고 해 주세요.
+
+2️⃣ MOODENG + BINANCE_USDT 스팟 누락 케이스 집중 점검
+
+MOODENG은 내가 직접 확인했을 때 Binance USDT 스팟 마켓에 상장된 상태입니다.
+그런데 우리 사이트에서:
+
+기준: UPBIT_KRW
+
+해외: BINANCE_USDT
+
+로 선택하면 무뎅 해외 현재가가 항상 - 로 표시됩니다.
+
+이 케이스를 다음 순서로 꼭 확인해 주세요.
+
+(1) exchange_markets 확인
+
+exchange_markets / exchange_markets.json 에
+아래와 같은 엔트리가 실제로 존재하는지:
+
+{
+  "exchange": "BINANCE",
+  "market": "MOODENGUSDT",
+  "base": "MOODENG",
+  "quote": "USDT",
+  ...
+}
+
+
+만약 없다면 → 추가 후 재실행 필요
+
+있다면 → 다음 단계로
+
+(2) priceWorker 로그 확인
+
+priceWorker 에서:
+
+exchange === "BINANCE" && marketSymbol / symbol 에 MOODENGUSDT 가 들어오는지
+
+REST/WS 둘 다 시도하고 있는지
+
+에러 로그(Invalid symbol, unknown market 등)가 찍히는지
+
+간단히, MOODENGUSDT 에 대해:
+
+“요청까지 안 나가는지”
+
+“요청은 나가는데 응답이 실패하는지”
+
+“응답은 성공인데 prices 저장 단계에서 버려지는지”
+
+이 세 단계 중 어디에서 끊기는지 로그로 확인해 주세요.
+
+(3) prices.json & table-filtered 확인
+
+data/prices.json 에 BINANCE:MOODENG:USDT 키가 있는지 확인
+
+/api/premium/table-filtered?domestic=UPBIT_KRW&foreign=BINANCE_USDT 호출해서
+
+symbol === "MOODENG" row 의
+
+foreignPriceKrw
+
+globalPrice (있다면)
+를 확인
+
+prices.json 까지는 값이 있는데 table-filtered 에서 null → table-filtered 매핑 문제
+
+prices.json 에서부터 값이 없음 → priceWorker / 수집단계 문제
+
+이 위치만 정확히 잡아주시면,
+그다음 수정 전달문은 내가 그 위치 기준으로 다시 써서 넘길게요.
+
+3️⃣ 요구사항 요약
+
+거래소별 spot 마켓 리스트 ↔ exchange_markets 동기화 검증
+
+premiumTable 기준으로 “국내는 가격 있는데, 해외는 항상 null인 코인” 목록 추출
+
+MOODENG + BINANCE_USDT 조합에 대해
+
+exchange_markets 엔트리 존재 여부
+
+priceWorker 수집 여부
+
+prices.json / table-filtered 에서 어느 단계부터 값이 끊기는지
+
+위 3가지 결과만 정리해서 알려주시면 됩니다.
+큰 구조나 포맷팅 코드는 건드리지 말고, “어디서 누락되는지 위치만” 정확히 잡아 주세요.
