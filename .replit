@@ -75,6 +75,10 @@ packages = ["lsof", "jq"]
 [userenv.development]
 USE_WS_OVERRIDE = "true"
 
+[userenv.production]
+PORT = "5000"
+NODE_ENV = "production"
+
 [deployment]
 run = ["tsx", "server.ts"]
 deploymentTarget = "vm"
