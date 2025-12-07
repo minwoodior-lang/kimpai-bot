@@ -29,6 +29,7 @@ interface DropdownOption {
 }
 
 interface PremiumTableProps {
+  showHeader?: boolean;
   showFilters?: boolean;
   limit?: number;
   refreshInterval?: number;
@@ -216,6 +217,8 @@ interface PremiumTableRowProps {
   expandedSymbol: string | null;
   domesticExchange: string;
   foreignExchange: string;
+  priceUnit: "KRW" | "USDT";
+  fxRate: number;
   toggleFavorite: (symbol: string) => void;
   setExpandedSymbol: (symbol: string | null) => void;
   onChartSelect?: (
@@ -242,6 +245,21 @@ interface PremiumTableRowProps {
   openCmcPage: (symbol: string, cmcSlug?: string) => void;
 }
 
+const formatUsdtDynamic = (value: number | null | undefined, fxRate: number): string => {
+  if (value === null || value === undefined || Number.isNaN(value) || fxRate <= 0) return "-";
+  const usdt = value / fxRate;
+  if (usdt >= 1000) {
+    return `$${usdt.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  }
+  if (usdt >= 1) {
+    return `$${usdt.toFixed(2)}`;
+  }
+  if (usdt >= 0.01) {
+    return `$${usdt.toFixed(4)}`;
+  }
+  return `$${usdt.toFixed(6)}`;
+};
+
 const PremiumTableRow = React.memo(
   ({
     row,
@@ -250,6 +268,8 @@ const PremiumTableRow = React.memo(
     expandedSymbol,
     domesticExchange,
     foreignExchange,
+    priceUnit,
+    fxRate,
     toggleFavorite,
     setExpandedSymbol,
     onChartSelect,
@@ -337,13 +357,23 @@ const PremiumTableRow = React.memo(
 
           {/* 현재가 */}
           <td className="w-[110px] sm:w-[140px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
-            <TwoLinePriceCell
-              topValue={row.koreanPrice}
-              bottomValue={row.foreignPriceKrw}
-              formatTop={formatKrwDomestic}
-              formatBottom={formatKrwDynamic}
-              isUnlisted={isUnlisted}
-            />
+            {priceUnit === "USDT" ? (
+              <TwoLinePriceCell
+                topValue={row.koreanPrice}
+                bottomValue={row.foreignPriceKrw}
+                formatTop={(v) => formatUsdtDynamic(v, fxRate)}
+                formatBottom={(v) => formatUsdtDynamic(v, fxRate)}
+                isUnlisted={isUnlisted}
+              />
+            ) : (
+              <TwoLinePriceCell
+                topValue={row.koreanPrice}
+                bottomValue={row.foreignPriceKrw}
+                formatTop={formatKrwDomestic}
+                formatBottom={formatKrwDynamic}
+                isUnlisted={isUnlisted}
+              />
+            )}
           </td>
 
           {/* 김프 */}
@@ -733,7 +763,10 @@ export default function PremiumTable({
       });
     } else if (prefsLoaded && prefs.filterMode === "foreign") {
       result = result.filter(
-        (item) => item.globalPrice !== null && item.globalPrice > 0,
+        (item) =>
+          item.isListed === true &&
+          item.foreignPriceKrw !== null &&
+          item.foreignPriceKrw > 0,
       );
     }
 
@@ -1218,7 +1251,7 @@ export default function PremiumTable({
                              hover:text-white transition-colors min-h-11"
                   onClick={() => handleSort('koreanPrice')}
                 >
-                  현재가
+                  현재가{prefs.priceUnit === "USDT" && <span className="text-[9px] text-blue-400 ml-0.5">(USDT)</span>}
                   <SortIcon columnKey="koreanPrice" />
                 </th>
 
@@ -1291,6 +1324,8 @@ export default function PremiumTable({
                   expandedSymbol={expandedSymbol}
                   domesticExchange={domesticExchange}
                   foreignExchange={foreignExchange}
+                  priceUnit={prefs.priceUnit}
+                  fxRate={fxRate}
                   toggleFavorite={toggleFavorite}
                   setExpandedSymbol={setExpandedSymbol}
                   onChartSelect={onChartSelect}
