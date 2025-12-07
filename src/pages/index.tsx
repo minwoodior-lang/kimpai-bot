@@ -48,7 +48,10 @@ export default function Home() {
     "ai"
   );
   const [isPrefsPanelOpen, setIsPrefsPanelOpen] = useState(false);
-  const { prefs, setPrefs, isLoaded } = useUserPrefs();
+
+  // 🔥 toggleFavorite 같이 꺼내오기
+  const { prefs, setPrefs, isLoaded, toggleFavorite } = useUserPrefs();
+
   const { data, averagePremium, fxRate } = useMarkets();
 
   const listedData = data.filter((item) => item.premium !== null);
@@ -341,12 +344,11 @@ export default function Home() {
                   <TradingViewChartDynamic
                     tvSymbol={SYMBOL_MAP[selectedIndicator] || "BINANCE:BTCUSDT"}
                     height="100%"
-                    defaultTimeframe={prefs.defaultTimeframe}  // 🔥 핵심 추가
+                    defaultTimeframe={prefs.defaultTimeframe}
                   />
                 </div>
               )}
             </section>
-
 
             {/* 프리미엄 테이블 섹션 */}
             <section className="mt-4 mb-10 md:mt-6 -mx-2 md:mx-0">
@@ -356,6 +358,8 @@ export default function Home() {
                 limit={0}
                 refreshInterval={1000}
                 prefs={prefs}
+                // 🔥 여기서 즐겨찾기 토글 전달
+                toggleFavorite={toggleFavorite}
               />
             </section>
           </div>
