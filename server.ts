@@ -28,8 +28,8 @@ app.prepare().then(() => {
   // WebSocket 서버 추가
   createChatServer(server);
 
-  server.listen(port, hostname, () => {
-    console.log(`> Ready on http://${hostname}:${port}`);
+  server.listen(port, () => {
+    console.log(`> Ready on http://0.0.0.0:${port}`);
     console.log(`> WebSocket server at /ws/chat`);
     
     // 가격 수집 워커 시작
