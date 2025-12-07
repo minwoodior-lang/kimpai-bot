@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { BAD_ICON_SYMBOLS } from "@/config/badIconSymbols";
-import { getAllWebSocketPrices, getWebSocketPrice } from "@/../workers/websocket";
 
 interface PriceEntry {
   price: number;
@@ -34,28 +33,9 @@ interface CacheEntry {
 }
 
 const memoryCache: Record<string, CacheEntry> = {};
-const CACHE_TTL = 800; // 800ms
-
-// WebSocket 실시간 가격 override 설정
-const USE_WS_OVERRIDE = process.env.USE_WS_OVERRIDE === 'true';
-const WS_FRESHNESS_THRESHOLD = 2000; // 2초 이상 지난 WS 가격은 무시
-
-// 딜레이 측정용 Map (심볼별 마지막 WS 업데이트 시간)
-const wsUpdateTimestamps: Map<string, number> = new Map();
-
-interface DelayMetrics {
-  totalDelay: number;
-  count: number;
-  maxDelay: number;
-  avgDelay: number;
-}
-
-const delayMetrics: DelayMetrics = {
-  totalDelay: 0,
-  count: 0,
-  maxDelay: 0,
-  avgDelay: 0
-};
+// ✨ 캐시 TTL을 priceWorker 주기(300ms)보다 짧게 설정하여 실시간성 확보
+// priceWorker가 WebSocket 가격을 prices.json에 병합하므로, 캐시만 줄이면 됨
+const CACHE_TTL = 200; // 200ms (priceWorker 300ms 주기보다 짧게)
 
 function getCacheKey(domestic: string, foreign: string): string {
   return `${domestic}:${foreign}`;
@@ -108,64 +88,18 @@ function parseMarketParam(value: string): { exchange: string; quote: string } {
   return { exchange, quote };
 }
 
-// WebSocket 가격으로 해외 거래소 가격 override
-function getWebSocketPriceIfFresh(exchange: string, symbol: string, quote: string): number | null {
-  if (!USE_WS_OVERRIDE) return null;
-
-  // WebSocket worker는 소문자 심볼을 사용하므로 대문자로 변환하여 조회
-  const normalizedSymbol = symbol.toUpperCase();
-  const wsPrice = getWebSocketPrice(exchange, normalizedSymbol, quote);
-  
-  // 디버깅: WebSocket 가격 조회 시도 로그 (5% 확률)
-  if (!wsPrice && Math.random() < 0.05) {
-    console.log(`[WS-DEBUG] No WS price for ${exchange}:${normalizedSymbol}:${quote}`);
-  }
-  
-  if (!wsPrice) return null;
-
-  const now = Date.now();
-  const age = now - wsPrice.timestamp;
-
-  // 2초 이상 지난 가격은 무시 (fallback to file-based data)
-  if (age > WS_FRESHNESS_THRESHOLD) {
-    return null;
-  }
-
-  // 딜레이 측정
-  const key = `${exchange}:${symbol}:${quote}`;
-  const lastUpdate = wsUpdateTimestamps.get(key);
-  
-  if (lastUpdate !== wsPrice.timestamp) {
-    wsUpdateTimestamps.set(key, wsPrice.timestamp);
-    
-    // API 응답 생성 시점과 WS 수신 시점 차이 계산
-    const delay = age;
-    delayMetrics.totalDelay += delay;
-    delayMetrics.count++;
-    delayMetrics.maxDelay = Math.max(delayMetrics.maxDelay, delay);
-    delayMetrics.avgDelay = delayMetrics.totalDelay / delayMetrics.count;
-
-    // 5개마다 로그 출력 (더 자주 확인)
-    if (delayMetrics.count === 1 || delayMetrics.count % 5 === 0) {
-      console.log(`[WS-DELAY] ${exchange}:${symbol} - Avg: ${delayMetrics.avgDelay.toFixed(0)}ms, Max: ${delayMetrics.maxDelay}ms, Count: ${delayMetrics.count}, Age: ${age}ms`);
-    }
-  }
-
-  return wsPrice.price;
-}
+// ❌ WebSocket override 로직 제거:
+// priceWorker가 이미 WebSocket 가격을 prices.json에 병합하고 있으므로
+// API 레벨에서 별도 override가 불필요함 (프로세스 격리로 인해 작동도 안 함)
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { domestic = "UPBIT_KRW", foreign = "BINANCE_USDT" } = req.query;
 
-    // 메모리 캐시 체크 (800ms TTL)
+    // 메모리 캐시 체크 (200ms TTL - priceWorker 300ms 주기보다 짧게)
     const cacheKey = getCacheKey(domestic as string, foreign as string);
     const cachedData = getFromCache(cacheKey);
     if (cachedData) {
-      // 캐시 히트 로그 (WS override 테스트용)
-      if (USE_WS_OVERRIDE && Math.random() < 0.05) {
-        console.log(`[WS-INFO] Cache hit, WS override enabled, delay metrics: avg=${delayMetrics.avgDelay.toFixed(0)}ms, count=${delayMetrics.count}`);
-      }
       return res.status(200).json(cachedData);
     }
 
@@ -218,10 +152,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           }
         }
         
-        // WebSocket 실시간 가격 override (USE_WS_OVERRIDE=true일 때만)
-        const foreignPriceFromFile = foreignEntry?.price ?? null;
-        const wsForeignPrice = getWebSocketPriceIfFresh(foreignExchange, symbol, foreignQuote);
-        const foreignPrice = wsForeignPrice ?? foreignPriceFromFile;
+        // prices.json에서 해외 가격 가져오기 (priceWorker가 이미 WebSocket 가격을 병합함)
+        const foreignPrice = foreignEntry?.price ?? null;
 
         let foreignPriceKrw: number | null = null;
         if (foreignPrice && foreignPrice > 0) {
@@ -418,13 +350,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       foreignExchange,
       totalCoins: totalCryptoCount,
       listedCoins: filtered.filter(r => r.isListed).length,
-      // WebSocket 실시간 가격 사용 여부 및 딜레이 정보 (디버깅용)
-      wsOverride: USE_WS_OVERRIDE,
-      wsDelayMetrics: USE_WS_OVERRIDE ? {
-        avgDelay: Math.round(delayMetrics.avgDelay),
-        maxDelay: delayMetrics.maxDelay,
-        count: delayMetrics.count
-      } : null,
     };
 
     // 메모리 캐시에 저장 (800ms TTL)

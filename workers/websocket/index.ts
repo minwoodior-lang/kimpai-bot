@@ -17,25 +17,11 @@ let wsUpdateCount = 0;
 let lastLogTime = 0;
 
 function handlePriceUpdate(price: WebSocketPrice): void {
-  // 디버깅: exchange별 호출 확인 (5% 확률)
-  if (Math.random() < 0.05) {
-    console.log(`[WS-UPDATE] ${price.exchange}:${price.symbol}:${price.quote} = $${price.price.toFixed(2)}`);
-  }
-  
   // 심볼을 대문자로 통일하여 저장 (API와의 일관성)
   const normalizedSymbol = price.symbol.toUpperCase();
   const key = `${price.exchange}:${normalizedSymbol}:${price.quote}`;
   const normalizedPrice = { ...price, symbol: normalizedSymbol };
   wsPrices.set(key, normalizedPrice);
-  
-  // 디버깅: 가격 저장 확인 (1초마다 한 번)
-  wsUpdateCount++;
-  const now = Date.now();
-  if (now - lastLogTime > 1000) {
-    console.log(`[WS-SAVED] ${key} = $${price.price.toFixed(2)} (${wsUpdateCount} updates, ${wsPrices.size} total)`);
-    lastLogTime = now;
-    wsUpdateCount = 0;
-  }
   
   if (priceCallback) {
     priceCallback(normalizedPrice);

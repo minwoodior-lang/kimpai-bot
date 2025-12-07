@@ -129,14 +129,7 @@ function connect(): void {
           }
         }
         
-        // 디버깅: callback 호출 횟수 (매 메시지마다 샘플링)
-        if (Math.random() < 0.1) { // 10% 확률로 출력
-          console.log(`[WS-Binance-Spot] Callback: ${callbackCount}, Filtered: ${filteredCount}, Targets: ${targetSymbols.size}`);
-          // 샘플 심볼 출력 (처음 3개)
-          const sampleTargets = Array.from(targetSymbols).slice(0, 3).join(', ');
-          const sampleTickers = tickers.slice(0, 3).map((t: any) => t.s).join(', ');
-          console.log(`[WS-Binance-Spot] Sample targets: [${sampleTargets}], sample tickers: [${sampleTickers}]`);
-        }
+        // 디버깅 로그 제거 (WebSocket 정상 작동 확인됨)
       } catch (err) {
         console.error('[WS-Binance-Spot] Parse error:', err);
       }

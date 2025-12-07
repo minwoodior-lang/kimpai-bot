@@ -1,0 +1,115 @@
+WebSocket 로그를 보면 현재 상태는 다음과 같습니다.
+
+WS-UPDATE, WS-SAVED 로그를 통해
+BINANCE/OKX/Bybit 가격이 wsPrices Map에 정상 저장되고 있습니다.
+
+BTC, ETH, TRUMP, LINK, PEPE 등 주요 코인도 모두 저장되는 것을 확인했습니다.
+
+하지만, 홈 화면에서 해외 거래소 가격 반영 속도는 여전히 2~3초 단위로만 갱신되고 있습니다.
+국내 가격처럼 “틱마다 깜빡이는 느낌”이 전혀 없고,
+/api/premium/table-filtered 응답도 WebSocket 기반 실시간 가격이 아닌
+기존 스냅샷 값을 그대로 사용하는 것처럼 보입니다.
+
+즉,
+“WebSocket → wsPrices Map 저장” 까지는 성공했는데,
+“table-filtered API에서 wsPrices를 실제로 사용하는 부분”이 동작하지 않고 있는 것 같습니다.
+
+아래 항목들을 꼭 한 번씩 확인/수정해 주세요.
+
+1️⃣ USE_WS_OVERRIDE 환경 변수 실제 값 확인
+
+현재 홈 화면이 사용하는 서버 환경에서
+USE_WS_OVERRIDE 값이 실제로 true인지 확인해 주세요.
+
+dev/local만 true이고, 실제 서버(프록시/배포 환경)에는 false일 수 있습니다.
+
+table-filtered.ts 내부에서:
+
+console.log("USE_WS_OVERRIDE =", USE_WS_OVERRIDE);
+
+
+를 찍어서, API 요청 시 어떤 값으로 들어오는지 확인 부탁드립니다.
+
+2️⃣ table-filtered API에서 override 함수가 실제로 호출되는지 확인
+
+getWebSocketPriceIfFresh 또는 유사한 override 함수가
+실제로 호출되고 있는지 강제로 로그를 찍어 주세요:
+
+const wsOverride = getWebSocketPriceIfFresh(exchange, base, quote);
+
+console.log("[WS-OVERRIDE-TRY]", exchange, base, quote, wsOverride);
+
+
+이 로그가 전혀 안 찍히면 → override 로직 자체가 실행되지 않는 것입니다.
+
+찍히는데 항상 null이면 → 키 매칭 또는 freshness 조건에서 계속 실패하는 것입니다.
+
+특히,
+홈 화면에서 자주 보는 조합 예시:
+
+국내: UPBIT_KRW / 해외: BINANCE_USDT / 심볼: BTC
+
+국내: UPBIT_KRW / 해외: OKX_USDT / 심볼: ETH
+
+에 대해 override 경로가 타는지 확인해 주세요.
+
+3️⃣ WebSocket 캐시 키와 API 키가 정확히 일치하는지 확인
+
+현재 WS 저장 키는 예를 들어:
+
+BINANCE:BTC:USDT
+OKX:BTC:USDT
+BYBIT:BTC:USDT
+
+
+이런 형태일 텐데,
+table-filtered.ts에서 이 키를 만들 때도 정확히 같은 포맷으로 만들고 있는지 확인이 필요합니다.
+
+예를 들어:
+
+BINANCE:BTCUSDT (콜론 없음)
+
+BINANCE:btc:USDT (소문자 base)
+
+BINANCE_FUTURES:BTC:USDT vs BINANCE:BTC:USDT
+
+이런 식으로 조금이라도 다르면,
+Map에 데이터가 있어도 항상 못 찾고 fallback만 쓰게 됩니다.
+
+getWebSocketPriceIfFresh 내부나 그 직전에:
+
+console.log("[WS-KEY-CHECK]", exchange, base, quote, composedKey, wsPrices.has(composedKey));
+
+
+같은 로그를 추가해서,
+홈 화면에서 실제로 사용하는 조합(BTC/ETH/DOGE/UNI 등)에 대해
+키 일치 여부를 확인해 주세요.
+
+4️⃣ WebSocket Map과 table-filtered API가 같은 프로세스에서 돌아가는지 확인
+
+만약 WebSocket worker가 별도 node 프로세스로 돌고 있고,
+Next.js API 서버는 다른 프로세스라면:
+
+wsPrices Map은 worker 프로세스 메모리 안에만 존재하고
+
+/api/premium/table-filtered는 그 Map에 접근할 수 없습니다.
+
+이 경우:
+
+WebSocket worker와 API가 같은 런타임(globalThis 공유)에서 돌아가게 하거나
+
+또는 Redis 등 외부 캐시를 사용해서 가격을 공유하는 구조가 필요합니다.
+
+이 부분도 함께 확인 부탁드립니다.
+
+5️⃣ 최종 목표 (체감 기준)
+
+국내 가격처럼 해외 가격도 틱 단위로 값이 깜빡이는 수준을 목표로 합니다.
+
+“틱 수신 시점 → table-filtered 응답 반영 시점” 딜레이를 로그로 측정해서
+평균 0.5~1초 수준이 되는지 함께 확인해 주세요.
+
+홈 UX는 이 작업이 완료된 뒤에 정리할 예정이니,
+지금은 WebSocket override가 실제 API 응답에 반영되도록 만드는 작업을 최우선으로 부탁드립니다.
+
+감사합니다.
