@@ -1,3 +1,4 @@
+// src/components/PremiumTable.tsx
 import React, {
   useState,
   useEffect,
@@ -37,9 +38,8 @@ interface PremiumTableProps {
   onChartSelect?: (
     symbol: string,
     domesticExchange: string,
-    foreignExchange: string,
+    foreignExchange: string
   ) => void;
-  // 🔥 부모에서 넘겨받는 즐겨찾기 토글
   toggleFavorite?: (symbol: string) => void;
 }
 
@@ -153,7 +153,7 @@ const TradingViewChart = dynamic(() => import("./charts/TradingViewChart"), {
 });
 
 // =======================
-// Row 컴포넌트
+// Row 타입
 // =======================
 
 interface PremiumData {
@@ -227,7 +227,7 @@ interface PremiumTableRowProps {
   onChartSelect?: (
     symbol: string,
     domesticExchange: string,
-    foreignExchange: string,
+    foreignExchange: string
   ) => void;
   getDisplayName: (item: PremiumData) => string;
   getDisplaySymbol: (symbol: string) => string;
@@ -238,7 +238,7 @@ interface PremiumTableRowProps {
   getChangeColor: (change: number | null) => string;
   calcDiff: (
     current: number,
-    base: number,
+    base: number
   ) => { percent: number; diff: number; valid: boolean };
   getTvSymbolForRow: (params: {
     symbol: string;
@@ -250,7 +250,7 @@ interface PremiumTableRowProps {
 
 const formatUsdtDynamic = (
   value: number | null | undefined,
-  fxRate: number,
+  fxRate: number
 ): string => {
   if (value === null || value === undefined || Number.isNaN(value) || fxRate <= 0)
     return "-";
@@ -316,7 +316,6 @@ const PremiumTableRow = React.memo(
               }`}
               onClick={(e) => {
                 e.stopPropagation();
-                // 부모에서 받은 toggleFavorite 사용 (raw symbol 전달)
                 if (toggleFavorite) {
                   toggleFavorite(row.symbol);
                 }
@@ -340,7 +339,7 @@ const PremiumTableRow = React.memo(
                     onChartSelect(
                       row.symbol,
                       domesticExchange,
-                      foreignExchange,
+                      foreignExchange
                     );
                   }
                 }}
@@ -480,11 +479,11 @@ const PremiumTableRow = React.memo(
         )}
       </React.Fragment>
     );
-  },
+  }
 );
 
 // =======================
-// 검색/초성 매칭 유틸
+// 검색/초성 매칭
 // =======================
 
 const DOMESTIC_EXCHANGES: DropdownOption[] = [
@@ -531,7 +530,7 @@ const FOREIGN_EXCHANGES: DropdownOption[] = CONTEXT_FOREIGN_EXCHANGES.map(
     name: ex.label,
     shortName: ex.shortName ?? ex.label,
     logo: ex.logo,
-  }),
+  })
 );
 
 const EXCHANGE_LABEL_KO: Record<string, string> = {
@@ -649,10 +648,10 @@ export default function PremiumTable({
     rootMargin: "200px",
   });
 
-  // 🔥 즐겨찾기 Set (부모 prefs 기준으로만)
+  // 즐겨찾기 Set
   const favorites = useMemo(
     () => new Set((prefs?.favorites || []).map((s) => normalizeSymbol(s))),
-    [prefs?.favorites],
+    [prefs?.favorites]
   );
 
   const fetchData = async () => {
@@ -662,7 +661,7 @@ export default function PremiumTable({
       let response: Response | null = null;
       try {
         response = await fetch(
-          `/api/premium/table-filtered?domestic=${domesticExchange}&foreign=${foreignExchange}`,
+          `/api/premium/table-filtered?domestic=${domesticExchange}&foreign=${foreignExchange}`
         );
       } catch {
         return;
@@ -673,7 +672,7 @@ export default function PremiumTable({
       if (response.status === 429) {
         const retryAfter = Math.max(
           parseInt(response.headers.get("retry-after") || "10", 10),
-          10,
+          10
         );
         const newCount = consecutiveRateLimits + 1;
         setConsecutiveRateLimits(newCount);
@@ -707,19 +706,19 @@ export default function PremiumTable({
       try {
         setData(json.data);
         setAveragePremium(
-          typeof json.averagePremium === "number" ? json.averagePremium : 0,
+          typeof json.averagePremium === "number" ? json.averagePremium : 0
         );
         setFxRate(typeof json.fxRate === "number" ? json.fxRate : 0);
         setUpdatedAt(
           typeof json.updatedAt === "string"
             ? json.updatedAt
-            : new Date().toISOString(),
+            : new Date().toISOString()
         );
         setTotalCoins(
-          typeof json.totalCoins === "number" ? json.totalCoins : 0,
+          typeof json.totalCoins === "number" ? json.totalCoins : 0
         );
         setListedCoins(
-          typeof json.listedCoins === "number" ? json.listedCoins : 0,
+          typeof json.listedCoins === "number" ? json.listedCoins : 0
         );
         setError(null);
         setConsecutiveRateLimits(0);
@@ -763,14 +762,14 @@ export default function PremiumTable({
 
     if (prefs?.filterMode === "favorites") {
       result = result.filter((item) =>
-        favorites.has(normalizeSymbol(item.symbol)),
+        favorites.has(normalizeSymbol(item.symbol))
       );
     } else if (prefs?.filterMode === "foreign") {
       result = result.filter(
         (item) =>
           item.isListed === true &&
           item.foreignPriceKrw !== null &&
-          item.foreignPriceKrw > 0,
+          item.foreignPriceKrw > 0
       );
     }
 
@@ -778,7 +777,7 @@ export default function PremiumTable({
       result = result.filter((item) => matchSearch(item, searchQuery));
     }
 
-    // 즐겨찾기 먼저
+    // 즐겨찾기 우선
     result.sort((a, b) => {
       const aIsFavorite = favorites.has(normalizeSymbol(a.symbol));
       const bIsFavorite = favorites.has(normalizeSymbol(b.symbol));
@@ -839,7 +838,7 @@ export default function PremiumTable({
   useEffect(() => {
     if (loadMoreInView && visibleCount < filteredAndSortedData.length) {
       setVisibleCount((prev) =>
-        Math.min(prev + 50, filteredAndSortedData.length),
+        Math.min(prev + 50, filteredAndSortedData.length)
       );
     }
   }, [loadMoreInView, visibleCount, filteredAndSortedData.length]);
@@ -866,7 +865,7 @@ export default function PremiumTable({
       }
       return baseKoName;
     },
-    [isMobile],
+    [isMobile]
   );
 
   const getDisplaySymbol = useCallback(
@@ -876,7 +875,7 @@ export default function PremiumTable({
       }
       return symbol;
     },
-    [isMobile],
+    [isMobile]
   );
 
   const formatPercent = useCallback((value: number | null): string => {
@@ -984,7 +983,7 @@ export default function PremiumTable({
 
   const getForeignName = () => {
     const exchange = CONTEXT_FOREIGN_EXCHANGES.find(
-      (e) => e.value === foreignExchange,
+      (e) => e.value === foreignExchange
     );
     return exchange ? exchange.shortName ?? exchange.label : "해외";
   };
@@ -1047,7 +1046,7 @@ export default function PremiumTable({
       const market = forMarket || "USDT";
       return `${foreignPrefix}:${base}${market}`;
     },
-    [],
+    []
   );
 
   // =======================
@@ -1055,7 +1054,7 @@ export default function PremiumTable({
   // =======================
 
   return (
-    <section className="w-full px-0 md:px-0 mb-20">
+    <section className="w-full mb-20">
       {showFilters && (
         <>
           {/* PC 필터 영역 */}
@@ -1118,15 +1117,12 @@ export default function PremiumTable({
 
           {/* 모바일 필터 영역 */}
           <div className="flex md:hidden flex-col gap-1.5 mb-2">
-
-            {/* 1줄: 좌/우 라벨 */}
+            {/* 1줄: 기준 거래소 */}
             <div className="flex items-center gap-1 flex-nowrap mb-1 relative">
-              {/* 기준 거래소 텍스트 */}
               <span className="text-[11px] sm:text-[12px] text-white/60 whitespace-nowrap">
                 기준 거래소
               </span>
 
-              {/* 기준 거래소 드롭다운 */}
               <MiniDropdown
                 value={domesticExchange}
                 options={DOMESTIC_EXCHANGES}
@@ -1135,7 +1131,6 @@ export default function PremiumTable({
 
               <span className="text-white/30 text-xs px-0.5">↔</span>
 
-              {/* 해외 거래소 드롭다운 */}
               <MiniDropdown
                 value={foreignExchange}
                 options={FOREIGN_EXCHANGES}
@@ -1143,22 +1138,22 @@ export default function PremiumTable({
                 showShortName={true}
               />
 
-              {/* 해외 거래소 텍스트 — 드롭다운과 정확히 맞춰 정렬됨 */}
               <span className="text-[11px] sm:text-[12px] text-white/60 whitespace-nowrap ml-1">
                 해외 거래소
               </span>
             </div>
 
-
-            <div className="flex flex-col gap-1">
-              <span className="text-[12px] text-white/50">
+            {/* 2줄: 암호화폐 개수 + 검색창 한 줄 정렬 */}
+            <div className="flex items-center gap-2 w-full">
+              <span className="text-[11px] sm:text-[12px] text-white/60 whitespace-nowrap">
                 암호화폐 총{" "}
                 <span className="font-semibold text-white">
                   {totalCoins}
                 </span>
                 개
               </span>
-              <div className="w-full relative">
+
+              <div className="flex-1 relative">
                 <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400">
                   <svg
                     className="w-3.5 h-3.5"
@@ -1179,7 +1174,7 @@ export default function PremiumTable({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="BTC, 비트코인, ㅂㅌ"
-                  className="w-full bg-slate-700 text-white rounded-lg pl-8 pr-3 h-[32px] border border-slate-600 focus:border-blue-500 focus:outline-none text-[12px]"
+                  className="w-full bg-slate-700 text-white rounded-lg pl-8 pr-3 h-[32px] border border-slate-600 focus:border-blue-500 focus:outline-none text-[16px]"
                 />
               </div>
             </div>
@@ -1199,29 +1194,20 @@ export default function PremiumTable({
         <div className="w-full border border-white/5 bg-[#050819] overflow-hidden">
           <table className="w-full table-fixed border-separate border-spacing-y-0">
             <colgroup>
-              {/* ★ */}
               <col className="w-[24px] sm:w-[30px]" />
-              {/* 코인명 */}
               <col />
-              {/* 현재가 */}
               <col className="w-[110px] sm:w-[140px]" />
-              {/* 김프 */}
               <col className="w-[85px] sm:w-[90px]" />
-              {/* 전일대비 */}
               <col className="w-[140px] sm:w-[160px] md:w-[180px]" />
-              {/* 고가대비 */}
               <col className="hidden md:table-column w-[90px] sm:w-[100px]" />
-              {/* 저가대비 */}
               <col className="hidden md:table-column w-[90px] sm:w-[100px]" />
-              {/* 거래액(일) */}
               <col className="w-[105px] sm:w-[120px]" />
             </colgroup>
 
             <thead>
               <tr className="bg-slate-900/60 text-[#A7B3C6]/60 text-[11px] md:text-sm leading-tight">
-                {/* ★ 즐겨찾기 — 아래 셀과 완전 동일 정렬 */}
                 <th className="w-[26px] sm:w-[30px] min-h-11">
-                  <div className="flex items-center justify-center h-[32px]"></div>
+                  <div className="flex items-center justify-center h-[32px]" />
                 </th>
 
                 {/* 코인명 */}
@@ -1230,9 +1216,7 @@ export default function PremiumTable({
                   onClick={() => handleSort("symbol")}
                 >
                   <div className="flex items-center gap-[2px] sm:gap-[4px]">
-                    {/* 차트아이콘 자리 */}
                     <span className="inline-block w-[16px] sm:w-[18px] md:w-[20px]" />
-                    {/* 코인아이콘 자리 */}
                     <span className="inline-block w-[18px] sm:w-[20px] md:w-[22px]" />
                     <span className="whitespace-nowrap">코인명</span>
                     <SortIcon columnKey="symbol" />
@@ -1241,9 +1225,7 @@ export default function PremiumTable({
 
                 {/* 현재가 */}
                 <th
-                  className="w-[110px] sm:w-[140px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 
-                             text-right font-medium whitespace-nowrap cursor-pointer 
-                             hover:text-white transition-colors min-h-11"
+                  className="w-[110px] sm:w-[140px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11"
                   onClick={() => handleSort("koreanPrice")}
                 >
                   현재가
@@ -1257,9 +1239,7 @@ export default function PremiumTable({
 
                 {/* 김프 */}
                 <th
-                  className="w-[80px] sm:w-[95px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 
-                             text-right font-medium whitespace-nowrap cursor-pointer 
-                             hover:text-white transition-colors min-h-11"
+                  className="w-[80px] sm:w-[95px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11"
                   onClick={() => handleSort("premiumRate")}
                 >
                   김프
@@ -1268,9 +1248,7 @@ export default function PremiumTable({
 
                 {/* 전일대비 */}
                 <th
-                  className="w-[140px] sm:w-[160px] md:w-[180px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 
-                             text-right font-medium whitespace-nowrap cursor-pointer 
-                             hover:text-white transition-colors min-h-11"
+                  className="w-[140px] sm:w-[160px] md:w-[180px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11"
                   onClick={() => handleSort("changeRate")}
                 >
                   전일대비
@@ -1279,9 +1257,7 @@ export default function PremiumTable({
 
                 {/* 고가대비 */}
                 <th
-                  className="hidden md:table-cell w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 
-                             text-right text-[11px] md:text-xs font-medium whitespace-nowrap 
-                             cursor-pointer hover:text-white transition-colors min-h-11"
+                  className="hidden md:table-cell w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11"
                   onClick={() => handleSort("fromHighRate")}
                 >
                   고가대비(24h)
@@ -1290,9 +1266,7 @@ export default function PremiumTable({
 
                 {/* 저가대비 */}
                 <th
-                  className="hidden md:table-cell w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 
-                             text-right text-[11px] md:text-xs font-medium whitespace-nowrap 
-                             cursor-pointer hover:text-white transition-colors min-h-11"
+                  className="hidden md:table-cell w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11"
                   onClick={() => handleSort("fromLowRate")}
                 >
                   저가대비(24h)
@@ -1301,9 +1275,7 @@ export default function PremiumTable({
 
                 {/* 거래액 */}
                 <th
-                  className="w-[105px] sm:w-[120px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 
-                             text-right font-medium whitespace-nowrap cursor-pointer 
-                             hover:text-white transition-colors min-h-11"
+                  className="w-[105px] sm:w-[120px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11"
                   onClick={() => handleSort("volume24hKrw")}
                 >
                   거래액(일)

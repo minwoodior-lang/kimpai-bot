@@ -50,22 +50,18 @@ export default function Home() {
   );
   const [isPrefsPanelOpen, setIsPrefsPanelOpen] = useState(false);
 
-  // 사용자 설정 훅
   const { prefs, setPrefs, isLoaded, toggleFavorite } = useUserPrefs();
-
   const { data, averagePremium, fxRate } = useMarkets();
 
   const listedData = data.filter((item) => item.premium !== null);
 
-  // 필터링 적용 (리스트 필터)
+  // 리스트 필터 적용
   let filteredData = [...listedData];
   if (isLoaded && prefs.filterMode === "foreign") {
-    // 해외 거래소에 상장된 코인만 (binancePrice가 있는 경우)
     filteredData = filteredData.filter(
       (item) => item.binancePrice !== null && item.binancePrice > 0
     );
   } else if (isLoaded && prefs.filterMode === "favorites") {
-    // 즐겨찾기한 코인만
     const favoritesSet = new Set(prefs.favorites || []);
     filteredData = filteredData.filter((item) => {
       const normalizedSymbol = item.symbol
@@ -100,7 +96,7 @@ export default function Home() {
     return `${value >= 0 ? "+" : ""}${value.toFixed(1)}%`;
   };
 
-  /** 오늘 시장 요약 한 줄 계산 */
+  // 오늘 시장 요약
   const volatilityLabel = (() => {
     if (!maxPremium || !minPremium) return "-";
     const diff = (maxPremium.premium || 0) - (minPremium.premium || 0);
@@ -138,7 +134,7 @@ export default function Home() {
   return (
     <Layout>
       <Head>
-        <title>KimpAI - 실시간 김프 & AI 분석</title>
+        <title>KimpAI - 실시간 김프 &amp; AI 분석</title>
         <meta
           name="description"
           content="코인 김프 실시간 확인, AI 시장 분석, 자동 가격/김프 알림 서비스. 무료로 BTC·ETH·XRP·SOL 실시간 김치프리미엄 데이터를 확인하세요."
@@ -167,11 +163,10 @@ export default function Home() {
 
       {/* 메인 콘텐츠 */}
       <HomeLayout>
-        {/* ⚠ 폭/패딩은 Layout에서 이미 1280px + px-6로 관리하므로 여기선 수직 여백만 */}
+        {/* 여기서는 수직 여백만 관리 (폭/패딩은 Layout/HomeLayout에서 관리) */}
         <div className="w-full py-3 sm:py-6">
           {/* PC: 상단 3컬럼 레이아웃 */}
           <div className="hidden md:grid grid-cols-3 gap-4 mb-8 items-stretch">
-            {/* 좌측: 오늘의 AI 김프 요약 */}
             <TodayPremiumSection
               avgPremium={
                 <span
@@ -219,16 +214,13 @@ export default function Home() {
               marketSummary={marketSummary}
             />
 
-            {/* 중앙: PRO 예측 카드 */}
             <ProPredictionCard />
-
-            {/* 우측: 내 알림 카드 */}
             <MyAlertsCard />
           </div>
 
           {/* 모바일: 탭 구조 */}
           <div className="md:hidden mt-2 md:mt-4 mb-4">
-            {/* 탭 버튼 - PRO 배지 강화 */}
+            {/* 탭 버튼 */}
             <div className="flex gap-1.5 mb-3">
               <button
                 onClick={() => setMobileCardTab("ai")}
@@ -262,7 +254,7 @@ export default function Home() {
               </button>
             </div>
 
-            {/* 공통 카드 껍데기 - 모바일 전용, 내용에 따라 자동 높이 */}
+            {/* 공통 카드 껍데기 */}
             <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 px-4 py-3 pb-3 min-h-[260px] h-auto flex flex-col">
               {mobileCardTab === "ai" && (
                 <AiSummaryMobileContent
@@ -317,44 +309,39 @@ export default function Home() {
             </div>
           </div>
 
-            {/* 프리미엄 차트 섹션 */}
-            <section className="mt-3 md:mt-6 mb-4 md:mb-6">
+          {/* 프리미엄 차트 섹션 */}
+          <section className="mt-3 md:mt-6 mb-4 md:mb-6">
+            {/* 제목 + 버튼 영역 */}
+            <div
+              className="
+                flex flex-row flex-wrap
+                items-center
+                md:flex-nowrap md:justify-between
+                gap-1.5 md:gap-3
+                mb-2 sm:mb-2.5
+              "
+            >
+              <h2 className="text-xs sm:text-sm text-slate-200 mr-2">
+                프리미엄 차트
+              </h2>
 
-              {/* 제목 + 버튼 영역 */}
-              <div
-                className="
-                  flex flex-row flex-wrap      /* ★ 모바일도 한 줄, 필요하면 줄바꿈 */
-                  items-center                
-                  md:flex-nowrap              /* ★ PC에서는 줄바꿈 없이 */
-                  md:justify-between
-                  gap-1.5 md:gap-3
-                  mb-2 sm:mb-2.5
-                "
-              >
-                {/* 제목 — 모바일/PC 둘 다 같은 라인 */}
-                <h2 className="text-xs sm:text-sm text-slate-200 mr-2">
-                  프리미엄 차트
-                </h2>
+              <div className="flex items-center gap-1.5 md:gap-2 ml-auto md:ml-0">
+                <button
+                  onClick={() => setIsPrefsPanelOpen(true)}
+                  className="inline-flex items-center justify-center h-9 rounded-md bg-slate-800 px-3 text-[11px] sm:text-sm text-slate-100 hover:bg-slate-700 transition"
+                >
+                  <span className="mr-1">⚙</span>
+                  <span>개인화 설정</span>
+                </button>
 
-                {/* 버튼들 */}
-                <div className="flex items-center gap-1.5 md:gap-2 ml-auto md:ml-0">
-                  <button
-                    onClick={() => setIsPrefsPanelOpen(true)}
-                    className="inline-flex items-center justify-center h-9 rounded-md bg-slate-800 px-3 text-[11px] sm:text-sm text-slate-100 hover:bg-slate-700 transition"
-                  >
-                    <span className="mr-1">⚙</span>
-                    <span>개인화 설정</span>
-                  </button>
-
-                  <IndicatorSelector
-                    selectedIndicator={selectedIndicator}
-                    onIndicatorChange={setSelectedIndicator}
-                  />
-                </div>
+                <IndicatorSelector
+                  selectedIndicator={selectedIndicator}
+                  onIndicatorChange={setSelectedIndicator}
+                />
               </div>
+            </div>
 
-
-            {/* 차트만 hideChart 적용 */}
+            {/* 차트 (개인화에서 숨김 설정되면 안 보이게) */}
             {!prefs.hideChart && (
               <div className="w-full h-[200px] sm:h-[240px] md:h-[320px] border border-white/5 bg-[#050819]">
                 <TradingViewChartDynamic
@@ -367,7 +354,7 @@ export default function Home() {
           </section>
 
           {/* 프리미엄 테이블 섹션 */}
-          <section className="mt-4 mb-10 md:mt-6 -mx-2 md:mx-0">
+          <section className="mt-4 mb-10 md:mt-6">
             <PremiumTable
               showHeader={false}
               showFilters={true}
