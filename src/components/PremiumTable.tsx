@@ -1194,15 +1194,16 @@ export default function PremiumTable({
         <div className="w-full border border-white/5 bg-[#050819] overflow-hidden">
           <table className="w-full table-fixed border-separate border-spacing-y-0">
             <colgroup>
-              <col className="w-[24px] sm:w-[30px]" />
-              <col />
-              <col className="w-[110px] sm:w-[140px]" />
-              <col className="w-[85px] sm:w-[90px]" />
-              <col className="w-[140px] sm:w-[160px] md:w-[180px]" />
-              <col className="hidden md:table-column w-[90px] sm:w-[100px]" />
-              <col className="hidden md:table-column w-[90px] sm:w-[100px]" />
-              <col className="w-[105px] sm:w-[120px]" />
+              <col className="w-[24px]" />
+              <col className="w-[72px] md:w-auto" />
+              <col className="w-[74px] md:w-[140px]" />
+              <col className="w-[48px] md:w-[90px]" />
+              <col className="w-[70px] md:w-[180px]" />
+              <col className="hidden md:table-column w-[90px]" />
+              <col className="hidden md:table-column w-[90px]" />
+              <col className="w-[72px] md:w-[120px]" />
             </colgroup>
+
 
             <thead>
               <tr className="bg-slate-900/60 text-[#A7B3C6]/60 text-[11px] md:text-sm leading-tight">
