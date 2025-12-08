@@ -1,0 +1,190 @@
+작업 범위 요약 (모바일 홈 상단 3카드)
+
+대상 파일(추정):
+
+src/components/TodayPremiumSection.tsx
+
+src/components/ai-summary/AiSummaryContentBase.tsx
+
+src/components/ProPredictionCard.tsx
+
+src/components/MyAlertsCard.tsx
+
+src/components/mobile/MobileCardContents.tsx
+
+원칙
+
+PC 레이아웃/스타일은 현재 상태 그대로 유지
+
+모바일(대략 max-width: 768px)에서만 레이아웃·폰트·여백 조정
+
+텍스트 내용, 색상, 스타일은 PC 기준 1:1 미러링
+
+1️⃣ AI 요약 카드 (첫 번째 탭)
+1-1. KR Premium Score 게이지바 위치/폭 수정
+
+현재:
+
+모바일에서 게이지바가 카드 하단 패딩 바깥으로 살짝 삐져나오거나, 카드 폭보다 넓어 보임.
+
+요구사항:
+
+PC와 동일한 구조 유지하면서, 모바일에서만 폭·여백을 조정.
+
+AiSummaryContentBase.tsx 안에서:
+
+게이지바 래퍼 div에 다음과 같이 적용:
+
+className 예시:
+
+<div
+  className={clsx(
+    "mt-2 flex items-center gap-2",
+    layout === "desktop" && "w-full",
+    layout === "mobile" && "w-full max-w-[220px]"
+  )}
+>
+
+
+즉,
+
+데스크톱: w-full 그대로
+
+모바일: w-full max-w-[220px] 정도로 카드 안에 자연스럽게 들어오게 제한
+
+게이지바 자체는 기존 스타일 유지하되, 바깥으로 튀어나오지 않게 래퍼 기준으로 맞추기.
+
+1-2. AI 요약 카드 하단 설명 텍스트 복구
+
+현재:
+
+PC에는 AI 요약 카드 상단/하단에 다음과 같은 설명 텍스트가 있음 (예:
+
+오늘 변동성 높은 종목 · 주식 일부 · 약 229종목
+※ 본 데이터는 국내-해외 가격 차이를 기준으로 실시간 산출됩니다.
+
+모바일에는 이 텍스트 블록이 아예 보이지 않음.
+
+요구사항:
+
+PC와 동일한 텍스트 내용을 AiSummaryContentBase.tsx 안에 포함시키고,
+
+layout === "desktop" / layout === "mobile"에 따라 폰트 크기·줄 간격만 다르게.
+
+예시 구조:
+
+{layout === "desktop" ? (
+  <p className="mt-1 text-[13px] text-slate-300">
+    … PC에서 쓰던 설명문 전체 …
+  </p>
+) : (
+  <p className="mt-1 text-[12px] text-slate-400 leading-relaxed">
+    … 같은 내용, 폰트만 살짝 줄인 버전 …
+  </p>
+)}
+
+
+내용(문장, 줄바꿈)은 PC 카드와 100% 동일하게 유지.
+
+2️⃣ PRO 예측 카드 (두 번째 탭)
+
+모바일 캡처에서:
+
+상단 제목 “PRO 예측”만 있고, 카드 안 본문은 빈 상태 + 하단 각주/버튼만 있음.
+
+PC에서는 잠금(자물쇠) 아이콘 + “PRO 전용 48시간 김프 예측” + 블러 처리된 설명 텍스트가 들어가 있음.
+
+요구사항:
+
+내용 동기화
+
+ProPredictionCard.tsx에서 사용 중인 본문 텍스트/구조를 기준으로,
+
+모바일용 ProForecastMobileContent (또는 베이스 컴포넌트)를 만들어서 같은 텍스트를 사용.
+
+Blur 효과(불투명 오버레이, gradient 등)는 PC와 동일한 느낌으로, 다만 모바일에서는 카드 폭에 맞게 padding/폰트만 줄이기.
+
+컴포넌트 구조 제안
+
+src/components/pro/ProForecastContentBase.tsx (새 파일) 생성:
+
+props: layout: "desktop" | "mobile"
+
+안에는:
+
+상단 제목: "🔒 PRO 전용 48시간 김프 예측"
+
+본문 텍스트 2~3줄 (PC와 동일 문구)
+
+블러/오버레이 처리
+
+ProPredictionCard.tsx → layout="desktop"으로 사용
+
+MobileCardContents.tsx의 ProForecastMobileContent → layout="mobile"으로 사용
+
+스타일
+
+데스크톱: 현 상태 유지
+
+모바일:
+
+카드 padding 약간 축소 (p-4 → p-3)
+
+제목 text-[14px], 본문 text-[12px]
+
+버튼(“전체 보기” / “PRO 분석 전체 보기”)는 PC와 텍스트 동일, 폭만 w-full로.
+
+3️⃣ 내 알림 카드 (세 번째 탭)
+
+모바일 캡처:
+
+"로그인하고 알림 설정하기" 텍스트는 있는데,
+
+아래 "로그인" 링크 텍스트가 PC처럼 파란색 + 밑줄이 아니라 그냥 일반 텍스트로 보임.
+
+요구사항:
+
+PC의 MyAlertsCard.tsx에서 로그인 링크에 적용한 Tailwind 클래스와 완전히 동일하게 맞출 것.
+
+예시 (실제 PC 코드에 맞춰 적용):
+
+<button
+  className="mt-3 text-sm font-medium text-blue-400 underline underline-offset-2 hover:text-blue-300"
+>
+  로그인
+</button>
+
+
+모바일 컴포넌트(MyAlertsMobileContent)에서도 위와 동일한 클래스 사용.
+
+주변 안내문 텍스트(“로그인하고 알림 설정하기”)도 PC와 같은 색 (text-slate-300 또는 사용 중인 색상)으로 맞추기.
+
+4️⃣ 공통 주의사항
+
+PC는 절대 건드리지 말 것
+
+md: 프리픽스가 없는 공통 스타일은 그대로 두고,
+
+모바일 전용은 md:hidden / hidden md:block, text-sm md:text-[15px] 형태로 브레이크포인트 분기만 사용.
+
+모바일에서만 여백·폰트 조정
+
+카드 간 간격:
+
+상단 탭 ↔ 카드 사이: mt-3
+
+카드 ↔ 프리미엄 차트 섹션: mt-4
+
+이 값들도 지금 PC가 보기 좋은 상태라면, md:mt-6 / 기본 mt-3 이런 식으로 분기만.
+
+빌드/배포 전 확인 체크리스트
+
+ PC 해상도(>1024px)에서 상단 3카드 레이아웃 변동 없음
+
+ iPhone 14 Pro Max 기준:
+
+ AI 요약 카드에서 게이지바가 카드 안에 깨끗이 들어가고, 아래 설명 텍스트 보임
+
+ PRO 예측 카드에 잠금 타이틀 + 설명문 + 버튼이 PC와 같은 문구로 표시
+
+ 내 알림 카드에서 "로그인"이 파란색 + 밑줄 링크로 보임

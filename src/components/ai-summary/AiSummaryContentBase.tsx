@@ -10,6 +10,7 @@ interface AiSummaryContentBaseProps {
   minPremium: React.ReactNode;
   fxRate: React.ReactNode;
   score: number;
+  marketSummary?: string;
   layout?: "desktop" | "mobile";
 }
 
@@ -28,6 +29,7 @@ export function AiSummaryContentBase({
   minPremium,
   fxRate,
   score,
+  marketSummary,
   layout = "desktop",
 }: AiSummaryContentBaseProps) {
   const scoreTextClass = getScoreTextClass(score);
@@ -47,21 +49,22 @@ export function AiSummaryContentBase({
   const spaceClass =
     layout === "mobile" ? "space-y-1.5" : "space-y-2 sm:space-y-2";
 
-  const scoreBarHeight =
-    layout === "mobile" ? "h-2 w-24" : "h-2.5 w-full";
-
-  const scoreLabelClass =
-    layout === "mobile"
-      ? "text-[11px] dark:text-slate-400 light:text-slate-500"
-      : "text-[11px] dark:text-slate-400 light:text-slate-500";
-
-  const scoreNumberClass =
-    layout === "mobile" ? "text-base" : "text-lg";
-
   const scoreMarginTop = layout === "mobile" ? "mt-3" : "mt-3";
 
   return (
     <div className="flex flex-col gap-2 flex-1">
+      {/* 시장 요약 - 모바일에만 표시 */}
+      {marketSummary && layout === "mobile" && (
+        <div className="mb-1">
+          <p className="text-[12px] text-slate-300 leading-tight">
+            {marketSummary}
+          </p>
+          <p className="text-[10px] text-slate-500 mt-0.5">
+            ※ 변동성·추세·역프는 김프(국내-해외 가격 차이) 기준으로 실시간 산출됩니다.
+          </p>
+        </div>
+      )}
+
       {/* 정보 그리드 */}
       <div className={spaceClass}>
         <div className="flex justify-between items-baseline">
@@ -86,11 +89,17 @@ export function AiSummaryContentBase({
       </div>
 
       {/* Score 카드 - 게이지바 */}
-      <div className={`${scoreMarginTop} flex items-center justify-between`}>
+      <div className={`${scoreMarginTop} flex items-center gap-2 ${
+        layout === "desktop" ? "w-full" : "w-full max-w-[220px]"
+      }`}>
         <div className="flex flex-col flex-1">
-          <span className={scoreLabelClass}>KR Premium Score</span>
+          <span className="text-[11px] dark:text-slate-400 light:text-slate-500">
+            KR Premium Score
+          </span>
 
-          <div className={`mt-1.5 ${scoreBarHeight} rounded-full bg-slate-700/80 overflow-hidden`}>
+          <div className={`mt-1.5 ${
+            layout === "mobile" ? "h-2 w-24" : "h-2.5 w-full"
+          } rounded-full bg-slate-700/80 overflow-hidden`}>
             <div
               className="h-full rounded-full bg-gradient-to-r from-indigo-400 via-violet-400 to-fuchsia-400 transition-all duration-300"
               style={{ width: `${widthPercent}%` }}
@@ -99,7 +108,9 @@ export function AiSummaryContentBase({
         </div>
 
         <span
-          className={`${scoreNumberClass} font-semibold ml-3 ${scoreTextClass}`}
+          className={`${
+            layout === "mobile" ? "text-base" : "text-lg"
+          } font-semibold flex-shrink-0 ${scoreTextClass}`}
         >
           {score}/10
         </span>
