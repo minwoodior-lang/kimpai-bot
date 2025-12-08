@@ -4,17 +4,13 @@
  * layout prop으로만 스타일을 분기
  */
 
-const MARKET_SUMMARY_TITLE =
-  "오늘 변동성 높음 · 추세 상승 · 역프 39종목";
-const MARKET_SUMMARY_SUB =
-  "※ 변동성·추세·역프는 김프(국내-해외 가격 차이) 기준으로 실시간 산출됩니다.";
-
 interface AiSummaryContentBaseProps {
   avgPremium: React.ReactNode;
   maxPremium: React.ReactNode;
   minPremium: React.ReactNode;
   fxRate: React.ReactNode;
   score: number;
+  marketSummary?: string;
   layout?: "desktop" | "mobile";
 }
 
@@ -33,6 +29,7 @@ export function AiSummaryContentBase({
   minPremium,
   fxRate,
   score,
+  marketSummary,
   layout = "desktop",
 }: AiSummaryContentBaseProps) {
   const scoreTextClass = getScoreTextClass(score);
@@ -56,13 +53,17 @@ export function AiSummaryContentBase({
 
   return (
     <div className="flex flex-col gap-2 flex-1">
-      {/* 시장 요약 텍스트 - PC/모바일 모두 표시 */}
-      <p className="text-[11px] md:text-xs text-slate-300 mb-0.5">
-        {MARKET_SUMMARY_TITLE}
-      </p>
-      <p className="text-[10px] md:text-[11px] text-slate-400 mb-1">
-        {MARKET_SUMMARY_SUB}
-      </p>
+      {/* 시장 요약 - 모바일에만 표시 */}
+      {marketSummary && layout === "mobile" && (
+        <div className="mb-1">
+          <p className="text-[12px] text-slate-300 leading-tight">
+            {marketSummary}
+          </p>
+          <p className="text-[10px] text-slate-500 mt-0.5">
+            ※ 변동성·추세·역프는 김프(국내-해외 가격 차이) 기준으로 실시간 산출됩니다.
+          </p>
+        </div>
+      )}
 
       {/* 정보 그리드 */}
       <div className={spaceClass}>
@@ -88,7 +89,9 @@ export function AiSummaryContentBase({
       </div>
 
       {/* Score 카드 - 게이지바 */}
-      <div className={`${scoreMarginTop} w-full max-w-[220px] md:max-w-none flex items-center gap-2`}>
+      <div className={`${scoreMarginTop} flex items-center gap-2 ${
+        layout === "desktop" ? "w-full" : "w-full max-w-[220px]"
+      }`}>
         <div className="flex flex-col flex-1">
           <span className="text-[11px] dark:text-slate-400 light:text-slate-500">
             KR Premium Score

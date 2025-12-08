@@ -4,7 +4,6 @@
  */
 
 import { AiSummaryContentBase } from "@/components/ai-summary/AiSummaryContentBase";
-import { ProForecastContentBase } from "@/components/ai-summary/ProForecastContentBase";
 
 interface AiSummaryMobileContentProps {
   avgPremium: React.ReactNode;
@@ -12,6 +11,7 @@ interface AiSummaryMobileContentProps {
   minPremium: React.ReactNode;
   fxRate: React.ReactNode;
   score: number;
+  marketSummary?: string;
 }
 
 export function AiSummaryMobileContent({
@@ -20,6 +20,7 @@ export function AiSummaryMobileContent({
   minPremium,
   fxRate,
   score,
+  marketSummary,
 }: AiSummaryMobileContentProps) {
   return (
     <div className="flex flex-col h-full">
@@ -37,6 +38,7 @@ export function AiSummaryMobileContent({
         fxRate={fxRate}
         score={score}
         layout="mobile"
+        marketSummary={marketSummary}
       />
     </div>
   );
@@ -51,9 +53,23 @@ export function ProForecastMobileContent() {
         <span>PRO 전용 48시간 김프 예측</span>
       </div>
 
-      {/* 공통 콘텐츠 - 블러 박스 */}
-      <div className="flex-1 mb-2">
-        <ProForecastContentBase />
+      {/* 블러 박스 */}
+      <div className="relative w-full rounded-xl border border-white/10 bg-gradient-to-b from-slate-800/90 to-slate-900/95 px-3 py-2 min-h-[70px] overflow-hidden flex-1 mb-2">
+        {/* 실제 예측 텍스트 - 희미하게 보이도록 blur + 살짝 어둡게 */}
+        <div className="pointer-events-none select-none text-[10px] leading-relaxed text-slate-100/85 blur-[1.4px]">
+          <p>
+            • 향후 48시간 내, 김프 2% 이상 급변 구간이 3회 이상 발생할 가능성이 높습니다.
+          </p>
+          <p className="mt-1.5">
+            • 최근 패턴 기준, 새벽 시간대(02~05시)에 변동성이 집중되는 경향이 관측됩니다.
+          </p>
+          <p className="mt-1.5">
+            • 과거 유사 구간에서 평균 최대 김프 스파이크는 +4.3% 수준이었습니다.
+          </p>
+        </div>
+
+        {/* 아주 옅은 오버레이로 모자이크 느낌 보강 */}
+        <div className="pointer-events-none absolute inset-0 bg-slate-900/18" />
       </div>
 
       {/* 안내 텍스트 */}
@@ -65,6 +81,12 @@ export function ProForecastMobileContent() {
       <p className="text-[10px] dark:text-slate-400 light:text-slate-600 mb-1.5 leading-snug">
         최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
       </p>
+
+      {/* PRO 버튼 */}
+      <button className="w-full bg-gradient-to-r from-[#8155FF] to-[#5D3DFF] dark:hover:from-[#7043FF] dark:hover:to-[#4C2FFF] h-8 rounded-lg font-semibold text-white text-[10px] flex items-center justify-center gap-1 transition-all">
+        <span>🔒</span>
+        <span>전체 보기</span>
+      </button>
     </div>
   );
 }
@@ -100,13 +122,10 @@ export function MyAlertsMobileContent() {
           </div>
         ) : (
           <div className="text-center w-full">
-            <p className="text-[13px] md:text-sm dark:text-slate-400 light:text-slate-600 mb-2.5 leading-relaxed">
+            <p className="text-[12px] dark:text-slate-400 light:text-slate-600 mb-2.5 leading-relaxed">
               로그인하고 알림 설정하기
             </p>
-            <button
-              type="button"
-              className="mt-2 text-[13px] md:text-sm text-indigo-300 underline underline-offset-4 hover:text-indigo-200 transition cursor-pointer font-semibold"
-            >
+            <button className="underline underline-offset-4 text-indigo-300 hover:text-indigo-200 transition cursor-pointer font-semibold text-[12px]">
               로그인
             </button>
           </div>

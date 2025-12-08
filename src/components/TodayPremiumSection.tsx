@@ -71,6 +71,7 @@ export function TodayPremiumSection({
         fxRate={fxRate}
         score={score}
         layout="desktop"
+        marketSummary={marketSummary}
       />
     </div>
   );
