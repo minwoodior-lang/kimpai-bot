@@ -31,8 +31,7 @@
     "symbol": "A8",
     "cmc_slug": "ancient8",
     "name_ko": "에인션트8",
-    "name_en": "Ancient8",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/39170/small/A8_Token-04_200x200.png?1720798300"
+    "name_en": "Ancient8"
   },
   {
     "symbol": "AAVE",
@@ -45,15 +44,13 @@
     "symbol": "ACE",
     "cmc_slug": "fusionist",
     "name_ko": "퓨저니스트",
-    "name_en": "Fusionist",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/15211/small/acent-logo.png?1696514867"
+    "name_en": "Fusionist"
   },
   {
     "symbol": "ACH",
     "cmc_slug": "alchemy-pay",
     "name_ko": "알케미페이",
-    "name_en": "Alchemy Pay",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/12390/small/ACH_%281%29.png?1696512213"
+    "name_en": "Alchemy Pay"
   },
   {
     "symbol": "ACM",
@@ -73,8 +70,7 @@
     "symbol": "ACX",
     "cmc_slug": "across-protocol",
     "name_ko": "어크로스 프로토콜",
-    "name_en": "Across Protocol",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/28161/small/across-200x200.png?1696527165"
+    "name_en": "Across Protocol"
   },
   {
     "symbol": "ADA",
@@ -87,8 +83,7 @@
     "symbol": "ADP",
     "cmc_slug": null,
     "name_ko": "어댑터 토큰",
-    "name_en": "Adappter Token",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/14203/small/logo_on.png?1696513920"
+    "name_en": "Adappter Token"
   },
   {
     "symbol": "AERGO",
@@ -108,8 +103,7 @@
     "symbol": "AEVO",
     "cmc_slug": "aevo",
     "name_ko": "에이보",
-    "name_en": "Aevo",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/35893/small/aevo.png?1710138340"
+    "name_en": "Aevo"
   },
   {
     "symbol": "AFC",
@@ -122,8 +116,7 @@
     "symbol": "AGI",
     "cmc_slug": "delysium",
     "name_ko": "델리시움",
-    "name_en": "Delysium",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/53560/small/Untitled_design-2.png?1736675632"
+    "name_en": "Delysium"
   },
   {
     "symbol": "AGLD",
@@ -143,29 +136,25 @@
     "symbol": "AI",
     "cmc_slug": "sleepless-ai",
     "name_ko": "슬립리스 에이아이",
-    "name_en": "Sleepless AI",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/30308/small/HZixmXSs_400x400.jpg?1696529211"
+    "name_en": "Sleepless AI"
   },
   {
     "symbol": "AI16Z",
     "cmc_slug": "ai16z",
     "name_ko": "에이아이식스틴즈",
-    "name_en": "ai16z",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/51090/small/AI16Z.jpg?1730027175"
+    "name_en": "ai16z"
   },
   {
     "symbol": "AIOZ",
     "cmc_slug": "aioz-network",
     "name_ko": "아이오즈 네트워크",
-    "name_en": "AIOZ Network",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/14631/small/aioz-logo-200.png?1696514309"
+    "name_en": "AIOZ Network"
   },
   {
     "symbol": "AIXBT",
     "cmc_slug": "aixbt",
     "name_ko": "에이아이엑스비티",
-    "name_en": "aixbt",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/51784/small/3.png?1731981138"
+    "name_en": "aixbt"
   },
   {
     "symbol": "AKT",
@@ -178,8 +167,7 @@
     "symbol": "AL",
     "cmc_slug": "archloot",
     "name_ko": "아치루트",
-    "name_en": "ArchLoot",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/28919/small/7.png?1696527894"
+    "name_en": "ArchLoot"
   },
   {
     "symbol": "ALGO",
@@ -192,15 +180,13 @@
     "symbol": "ALICE",
     "cmc_slug": "myneighboralice",
     "name_ko": "마이네이버앨리스",
-    "name_en": "MyNeighborAlice",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/52763/small/Alice.png?1734264618"
+    "name_en": "MyNeighborAlice"
   },
   {
     "symbol": "ALPHA",
     "cmc_slug": "alpha",
     "name_ko": "스텔라",
-    "name_en": "Stella",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/24738/small/alpha.png?1696523901"
+    "name_en": "Stella"
   },
   {
     "symbol": "ALT",
@@ -213,15 +199,13 @@
     "symbol": "AMO",
     "cmc_slug": null,
     "name_ko": "아모코인",
-    "name_en": "AMO Coin",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/4009/small/amo-logomark_black.png?1696504648"
+    "name_en": "AMO Coin"
   },
   {
     "symbol": "AMP",
     "cmc_slug": "amp",
     "name_ko": "앰프",
-    "name_en": "Amp",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/12409/small/amp-200x200.png?1696512231"
+    "name_en": "Amp"
   },
   {
     "symbol": "ANIME",
@@ -248,8 +232,7 @@
     "symbol": "APEPE",
     "cmc_slug": "ape-and-pepe",
     "name_ko": "에이프앤페페",
-    "name_en": "Ape and Pepe",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/39614/small/APEPE_200.png?1723142351"
+    "name_en": "Ape and Pepe"
   },
   {
     "symbol": "API3",
@@ -262,8 +245,7 @@
     "symbol": "APM",
     "cmc_slug": null,
     "name_ko": "에이피엠 코인",
-    "name_en": "apM Coin",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/10069/small/PvDCvh5h_400x400.png?1696510100"
+    "name_en": "apM Coin"
   },
   {
     "symbol": "APT",
@@ -283,8 +265,7 @@
     "symbol": "AR",
     "cmc_slug": "arweave",
     "name_ko": "알위브",
-    "name_en": "Arweave",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/4343/small/oRt6SiEN_400x400.jpg?1696504946"
+    "name_en": "Arweave"
   },
   {
     "symbol": "ARB",
@@ -304,8 +285,7 @@
     "symbol": "ARIAIP",
     "cmc_slug": "aria-protocol",
     "name_ko": "아리아 프로토콜",
-    "name_en": "Aria Protocol",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/70388/small/logo-abberation-token-white.png?1762454816"
+    "name_en": "Aria Protocol"
   },
   {
     "symbol": "ARK",
@@ -332,8 +312,7 @@
     "symbol": "ASTER",
     "cmc_slug": "aster",
     "name_ko": "아스터",
-    "name_en": "Aster",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/69040/small/_ASTER.png?1757326782"
+    "name_en": "Aster"
   },
   {
     "symbol": "ASTR",
@@ -381,8 +360,7 @@
     "symbol": "AVAIL",
     "cmc_slug": "avail",
     "name_ko": "어베일",
-    "name_en": "Avail",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/37372/small/avail-logo-200-200.png?1761925657"
+    "name_en": "Avail"
   },
   {
     "symbol": "AVAX",
@@ -395,8 +373,7 @@
     "symbol": "AVL",
     "cmc_slug": "avalon",
     "name_ko": "아발론",
-    "name_en": "Avalon",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/19444/small/AVL.png?1741425601"
+    "name_en": "Avalon"
   },
   {
     "symbol": "AVNT",
@@ -430,8 +407,7 @@
     "symbol": "AZIT",
     "cmc_slug": "azit",
     "name_ko": "아지트",
-    "name_en": "Azit",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/24515/small/ofbC3qtQ_400x400.jpg?1696523694"
+    "name_en": "Azit"
   },
   {
     "symbol": "B3",
@@ -444,8 +420,7 @@
     "symbol": "BAAS",
     "cmc_slug": "baasid",
     "name_ko": "바스아이디",
-    "name_en": "BaaSid",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/5463/small/baasid.png?1696505940"
+    "name_en": "BaaSid"
   },
   {
     "symbol": "BABY",
@@ -458,15 +433,13 @@
     "symbol": "BAL",
     "cmc_slug": "balancer",
     "name_ko": "밸런서",
-    "name_en": "Balancer",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/11683/small/Balancer.png?1696511572"
+    "name_en": "Balancer"
   },
   {
     "symbol": "BAND",
     "cmc_slug": null,
     "name_ko": "밴드",
-    "name_en": "Band",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/9545/small/Band_Token.png?1754368504"
+    "name_en": "Band"
   },
   {
     "symbol": "BAR",
@@ -493,8 +466,7 @@
     "symbol": "BB",
     "cmc_slug": "bouncebit",
     "name_ko": "바운스빗",
-    "name_en": "BounceBit",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/20789/small/New-Era-of-Baby-Bali-200x200pxl.png?1696520182"
+    "name_en": "BounceBit"
   },
   {
     "symbol": "BCH",
@@ -514,8 +486,7 @@
     "symbol": "BEL",
     "cmc_slug": "bella-protocol",
     "name_ko": "벨라프로토콜",
-    "name_en": "Bella Protocol",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/12478/small/Bella.png?1696512296"
+    "name_en": "Bella Protocol"
   },
   {
     "symbol": "BERA",
@@ -535,15 +506,13 @@
     "symbol": "BGB",
     "cmc_slug": null,
     "name_ko": "비트겟토큰",
-    "name_en": "Bitget Token",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/11610/small/Bitget_logo.png?1736925727"
+    "name_en": "Bitget Token"
   },
   {
     "symbol": "BICO",
     "cmc_slug": "biconomy",
     "name_ko": "바이코노미",
-    "name_en": "Biconomy",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/21061/small/biconomy_logo.jpg?1696520444"
+    "name_en": "Biconomy"
   },
   {
     "symbol": "BIGTIME",
@@ -563,8 +532,7 @@
     "symbol": "BIOT",
     "cmc_slug": null,
     "name_ko": "바이오패스포트",
-    "name_en": "BioPassport",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/14167/small/logo_%2895%29.png?1696513885"
+    "name_en": "BioPassport"
   },
   {
     "symbol": "BLAST",
@@ -577,8 +545,7 @@
     "symbol": "BLUE",
     "cmc_slug": "bluefin",
     "name_ko": "블루핀",
-    "name_en": "Bluefin",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/50935/small/blue.jpg?1729583684"
+    "name_en": "Bluefin"
   },
   {
     "symbol": "BLUR",
@@ -591,22 +558,19 @@
     "symbol": "BLY",
     "cmc_slug": "blocery",
     "name_ko": "블로서리",
-    "name_en": "Blocery",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/12095/small/Blocery_logo_200x200_.png?1696511941"
+    "name_en": "Blocery"
   },
   {
     "symbol": "BMT",
     "cmc_slug": "bubblemaps",
     "name_ko": "버블맵스",
-    "name_en": "Bubblemaps",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/54113/small/BMT_-_Bitcoin_Maxi_Tears_Logo.jpg?1738959667"
+    "name_en": "Bubblemaps"
   },
   {
     "symbol": "BNB",
     "cmc_slug": "binance-coin",
     "name_ko": "비앤비",
-    "name_en": "BNB",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/825/small/bnb-icon2_2x.png?1696501970"
+    "name_en": "BNB"
   },
   {
     "symbol": "BNT",
@@ -619,29 +583,25 @@
     "symbol": "BOA",
     "cmc_slug": "bosagora",
     "name_ko": "보아",
-    "name_en": "BOSagora",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/67104/small/BOSagora.jpg?1751769330"
+    "name_en": "BOSagora"
   },
   {
     "symbol": "BOB",
     "cmc_slug": null,
     "name_ko": "비오비",
-    "name_en": "BOB",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/52713/small/Bobonsol.png?1734059909"
+    "name_en": "BOB"
   },
   {
     "symbol": "BOBA",
     "cmc_slug": "boba-network",
     "name_ko": "보바토큰",
-    "name_en": "Boba Network",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/31777/small/bobalogo200x200.png?1758228522"
+    "name_en": "Boba Network"
   },
   {
     "symbol": "BOME",
     "cmc_slug": "book-of-meme",
     "name_ko": "북오브밈",
-    "name_en": "Book of Meme",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/36071/small/bome.png?1710407255"
+    "name_en": "Book of Meme"
   },
   {
     "symbol": "BONK",
@@ -689,8 +649,7 @@
     "symbol": "BTR",
     "cmc_slug": "bitlayer",
     "name_ko": "비트레이어",
-    "name_en": "Bitlayer",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/55177/small/App_Logo.png?1744368194"
+    "name_en": "Bitlayer"
   },
   {
     "symbol": "BTT",
@@ -703,29 +662,25 @@
     "symbol": "C",
     "cmc_slug": "chainbase",
     "name_ko": "체인베이스 토큰",
-    "name_en": "Chainbase Token",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/67281/small/chainbase.jpg?1752294319"
+    "name_en": "Chainbase Token"
   },
   {
     "symbol": "C98",
     "cmc_slug": "coin98",
     "name_ko": "코인98",
-    "name_en": "Coin98",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/17117/small/logo.png?1696516677"
+    "name_en": "Coin98"
   },
   {
     "symbol": "CAKE",
     "cmc_slug": "pancakeswap",
     "name_ko": "팬케이크스왑",
-    "name_en": "PancakeSwap",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/12632/small/pancakeswap-cake-logo_%281%29.png?1696512440"
+    "name_en": "PancakeSwap"
   },
   {
     "symbol": "CAMP",
     "cmc_slug": "camp-network",
     "name_ko": "캠프 네트워크",
-    "name_en": "Camp Network",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/68465/small/camp.png?1755828258"
+    "name_en": "Camp Network"
   },
   {
     "symbol": "CARV",
@@ -738,8 +693,7 @@
     "symbol": "CATI",
     "cmc_slug": "catizen",
     "name_ko": "캣티즌",
-    "name_en": "Catizen",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/50236/small/cati.png?1726638258"
+    "name_en": "Catizen"
   },
   {
     "symbol": "CBK",
@@ -759,36 +713,31 @@
     "symbol": "CELR",
     "cmc_slug": "celer-network",
     "name_ko": "셀러네트워크",
-    "name_en": "Celer Network",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/4379/small/Celr.png?1696504978"
+    "name_en": "Celer Network"
   },
   {
     "symbol": "CETUS",
     "cmc_slug": null,
     "name_ko": "세터스",
-    "name_en": "Cetus",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/30256/small/cetus.png?1696529165"
+    "name_en": "Cetus"
   },
   {
     "symbol": "CFG",
     "cmc_slug": "centrifuge",
     "name_ko": "센트리퓨즈",
-    "name_en": "Centrifuge",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/15380/small/centrifuge.PNG?1696515027"
+    "name_en": "Centrifuge"
   },
   {
     "symbol": "CFX",
     "cmc_slug": "conflux-network",
     "name_ko": "콘플럭스",
-    "name_en": "Conflux Network",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/70856/small/cfx_logo.png?1764223159"
+    "name_en": "Conflux Network"
   },
   {
     "symbol": "CHILLGUY",
     "cmc_slug": "just-a-chill-guy",
     "name_ko": "칠가이",
-    "name_en": "Just a chill guy",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/51746/small/Scherm%C2%ADafbeelding_2024-11-15_om_20.57.58.png?1731926037"
+    "name_en": "Just a chill guy"
   },
   {
     "symbol": "CHR",
@@ -822,29 +771,25 @@
     "symbol": "CLBK",
     "cmc_slug": "cloudbric",
     "name_ko": "클라우드브릭",
-    "name_en": "Cloudbric",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/5090/small/7j1i0yIe_400x400.jpg?1696505612"
+    "name_en": "Cloudbric"
   },
   {
     "symbol": "CLEAR",
     "cmc_slug": "everclear",
     "name_ko": "에버클리어",
-    "name_en": "Everclear",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/52496/small/photo_2024-06-03_12-14-59_%281%29.png?1733450397"
+    "name_en": "Everclear"
   },
   {
     "symbol": "CLOUD",
     "cmc_slug": "cloud",
     "name_ko": "생텀",
-    "name_en": "Sanctum",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/55126/small/cloudal.webp?1743920572"
+    "name_en": "Sanctum"
   },
   {
     "symbol": "CLV",
     "cmc_slug": null,
     "name_ko": "씨엘브이",
-    "name_en": "CLV",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/35577/small/CLVCoin_200x200.png?1709194709"
+    "name_en": "CLV"
   },
   {
     "symbol": "COMP",
@@ -857,29 +802,25 @@
     "symbol": "COOKIE",
     "cmc_slug": "cookie",
     "name_ko": "쿠키 다오",
-    "name_en": "Cookie DAO",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/38450/small/cookie_token_logo_200x200.png?1733194528"
+    "name_en": "Cookie DAO"
   },
   {
     "symbol": "CORE",
     "cmc_slug": "core",
     "name_ko": "코어",
-    "name_en": "Core",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/68310/small/Untitled_design_%281%29.png?1755329948"
+    "name_en": "Core"
   },
   {
     "symbol": "COS",
     "cmc_slug": "contentos",
     "name_ko": "콘텐토스",
-    "name_en": "Contentos",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/8379/small/4036.png?1696508571"
+    "name_en": "Contentos"
   },
   {
     "symbol": "COTI",
     "cmc_slug": "coti",
     "name_ko": "코티",
-    "name_en": "COTI",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/2962/small/Coti.png?1696503705"
+    "name_en": "COTI"
   },
   {
     "symbol": "COW",
@@ -906,22 +847,19 @@
     "symbol": "CROSS",
     "cmc_slug": "cross",
     "name_ko": "크로쓰",
-    "name_en": "CROSS",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/67058/small/CROSS_200x200_%281%29.png?1753936811"
+    "name_en": "CROSS"
   },
   {
     "symbol": "CRTS",
     "cmc_slug": "cratos",
     "name_ko": "크라토스",
-    "name_en": "Cratos",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/17322/small/cratos.png?1696516876"
+    "name_en": "Cratos"
   },
   {
     "symbol": "CRU",
     "cmc_slug": "crust-network",
     "name_ko": "크러스트 네트워크",
-    "name_en": "Crust Network",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/12549/small/sAB3KVzD_400x400.jpg?1696512360"
+    "name_en": "Crust Network"
   },
   {
     "symbol": "CRV",
@@ -934,8 +872,7 @@
     "symbol": "CSPR",
     "cmc_slug": "casper",
     "name_ko": "캐스퍼",
-    "name_en": "Casper",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/15279/small/Casper_Monogram_Favicon_White_on_Red_Circle_RGB_200px.png?1749832573"
+    "name_en": "Casper"
   },
   {
     "symbol": "CTC",
@@ -948,8 +885,7 @@
     "symbol": "CTK",
     "cmc_slug": "shentu",
     "name_ko": "셴투",
-    "name_en": "Shentu",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/12944/small/shentu_2.jpg?1696512733"
+    "name_en": "Shentu"
   },
   {
     "symbol": "CTSI",
@@ -962,15 +898,13 @@
     "symbol": "CTXC",
     "cmc_slug": "cortex",
     "name_ko": "코르텍스",
-    "name_en": "Cortex",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/3861/small/2638.png?1696504523"
+    "name_en": "Cortex"
   },
   {
     "symbol": "CUDIS",
     "cmc_slug": "cudis",
     "name_ko": "쿠디스",
-    "name_en": "CUDIS",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/66296/small/cudis.jpg?1749115219"
+    "name_en": "CUDIS"
   },
   {
     "symbol": "CVC",
@@ -983,8 +917,7 @@
     "symbol": "CVX",
     "cmc_slug": "convex-finance",
     "name_ko": "컨벡스 파이낸스",
-    "name_en": "Convex Finance",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/15585/small/convex.png?1696515221"
+    "name_en": "Convex Finance"
   },
   {
     "symbol": "CYBER",
@@ -997,29 +930,25 @@
     "symbol": "D",
     "cmc_slug": "d",
     "name_ko": "달 오픈 네트워크",
-    "name_en": "DAR Open Network",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/53414/small/dar.png?1736325510"
+    "name_en": "DAR Open Network"
   },
   {
     "symbol": "DAO",
     "cmc_slug": "dao-maker",
     "name_ko": "다오메이커",
-    "name_en": "DAO Maker",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/13915/small/4.jpg?1727532864"
+    "name_en": "DAO Maker"
   },
   {
     "symbol": "DATA",
     "cmc_slug": "streamr",
     "name_ko": "스트리머",
-    "name_en": "Streamr",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/70127/small/datalogo.jpg?1760693227"
+    "name_en": "Streamr"
   },
   {
     "symbol": "DBR",
     "cmc_slug": "debridge",
     "name_ko": "디브릿지",
-    "name_en": "deBridge",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/38019/small/DBR_icon_Color.png?1724708885"
+    "name_en": "deBridge"
   },
   {
     "symbol": "DEEP",
@@ -1032,8 +961,7 @@
     "symbol": "DELABS",
     "cmc_slug": "delabs-games",
     "name_ko": "디랩스게임즈",
-    "name_en": "Delabs Games",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/67675/small/delabs.jpg?1753444183"
+    "name_en": "Delabs Games"
   },
   {
     "symbol": "DENT",
@@ -1053,15 +981,13 @@
     "symbol": "DIA",
     "cmc_slug": "dia",
     "name_ko": "디아",
-    "name_en": "DIA",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/11955/small/Token_Logo.png?1696511815"
+    "name_en": "DIA"
   },
   {
     "symbol": "DICE",
     "cmc_slug": "klaydice",
     "name_ko": "클레이다이스",
-    "name_en": "KLAYDICE",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/26695/small/GY2KF8jw_400x400.jpeg?1696525768"
+    "name_en": "KLAYDICE"
   },
   {
     "symbol": "DKA",
@@ -1074,8 +1000,7 @@
     "symbol": "DMAIL",
     "cmc_slug": null,
     "name_ko": "디메일",
-    "name_en": "Dmail",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/34915/small/dmail.jpg?1706610761"
+    "name_en": "Dmail"
   },
   {
     "symbol": "DNT",
@@ -1088,8 +1013,7 @@
     "symbol": "DODO",
     "cmc_slug": "dodo",
     "name_ko": "도도",
-    "name_en": "DODO",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/12651/small/dodo_logo.png?1696512458"
+    "name_en": "DODO"
   },
   {
     "symbol": "DOGE",
@@ -1123,50 +1047,43 @@
     "symbol": "DVI",
     "cmc_slug": "dvision-network",
     "name_ko": "디비전",
-    "name_en": "Dvision Network",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/13020/small/WGAhHOLv_400x400.png?1696512809"
+    "name_en": "Dvision Network"
   },
   {
     "symbol": "DYDX",
     "cmc_slug": "dydx",
     "name_ko": "디와이디엑스",
-    "name_en": "dYdX",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/32594/small/dydx.png?1698673495"
+    "name_en": "dYdX"
   },
   {
     "symbol": "EDEN",
     "cmc_slug": "openeden",
     "name_ko": "오픈에덴",
-    "name_en": "OpenEden",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/17470/small/Iyc0XM5-_400x400.jpg?1696517012"
+    "name_en": "OpenEden"
   },
   {
     "symbol": "EDGE",
     "cmc_slug": "definitive",
     "name_ko": "디피니티브",
-    "name_en": "Definitive",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/55072/small/EDGE-120x120.png?1743598652"
+    "name_en": "Definitive"
   },
   {
     "symbol": "EDU",
     "cmc_slug": "open-campus",
     "name_ko": "오픈 캠퍼스",
-    "name_en": "Open Campus",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/29948/small/EDU_Logo.png?1696528874"
+    "name_en": "Open Campus"
   },
   {
     "symbol": "EGG",
     "cmc_slug": "nestree",
     "name_ko": "네스트리",
-    "name_en": "Nestree",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/21811/small/EggToken_200_Transparent.png?1696521162"
+    "name_en": "Nestree"
   },
   {
     "symbol": "EGL1",
     "cmc_slug": "egl1",
     "name_ko": "이글스랜딩",
-    "name_en": "Eagles Landing",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/66481/small/no260x3by4omje0ip6sygqqqfnfi.?1749485303"
+    "name_en": "Eagles Landing"
   },
   {
     "symbol": "EGLD",
@@ -1179,15 +1096,13 @@
     "symbol": "EIGEN",
     "cmc_slug": "eigenlayer",
     "name_ko": "아이겐레이어",
-    "name_en": "EigenLayer",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/37441/small/eigencloud.jpg?1751003565"
+    "name_en": "EigenLayer"
   },
   {
     "symbol": "EL",
     "cmc_slug": "elysia",
     "name_ko": "엘리시아",
-    "name_en": "ELYSIA",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/10887/small/elysia_logo_200.png?1718149410"
+    "name_en": "ELYSIA"
   },
   {
     "symbol": "ELF",
@@ -1200,8 +1115,7 @@
     "symbol": "ELX",
     "cmc_slug": "elixir",
     "name_ko": "엘릭서",
-    "name_en": "Elixir",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/30711/small/ELX_logo_%281%29.png?1741217569"
+    "name_en": "Elixir"
   },
   {
     "symbol": "ENA",
@@ -1249,8 +1163,7 @@
     "symbol": "ES",
     "cmc_slug": "eclipse",
     "name_ko": "이클립스",
-    "name_en": "Eclipse",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/54958/small/image_%2832%29.png?1742979704"
+    "name_en": "Eclipse"
   },
   {
     "symbol": "ETC",
@@ -1284,22 +1197,19 @@
     "symbol": "EVER",
     "cmc_slug": "everscale",
     "name_ko": "에버스케일",
-    "name_en": "Everscale",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/12783/small/everscale_badge_main_round_1x.png?1696512578"
+    "name_en": "Everscale"
   },
   {
     "symbol": "EVERY",
     "cmc_slug": "everyworld",
     "name_ko": "에브리월드",
-    "name_en": "Everyworld",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/70971/small/everydotmeme.png?1765091461"
+    "name_en": "Everyworld"
   },
   {
     "symbol": "EVZ",
     "cmc_slug": null,
     "name_ko": "이브이지",
-    "name_en": "Electronic Vehicle Zone",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/9456/small/kLohzILUIln6mHFYOlecpWjINVIH-BVghP2vRTeuD0XteaQa7Lpn4sLcuPN4gHw8MU2pKWZCJRNwBmyyl1CYxplCLDcgSVihMC7vvfmkepY-_O_ImWBA27s4pKNlhcBnBYrc8y5WH0ZB2CjmqPh-32nPslrv329tqFWr2DAR8dl4R5LZGgeZ1ubCdtMoUua6gEL3umYShHBxrYLto.jpg?1696509547"
+    "name_en": "Electronic Vehicle Zone"
   },
   {
     "symbol": "F",
@@ -1312,15 +1222,13 @@
     "symbol": "FAI",
     "cmc_slug": null,
     "name_ko": "프레이사",
-    "name_en": "Freysa",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/53739/small/fortify.jpg?1737151133"
+    "name_en": "Freysa"
   },
   {
     "symbol": "FANC",
     "cmc_slug": "fanc",
     "name_ko": "팬시",
-    "name_en": "fanC",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/26500/small/hJ6MD49P_400x400.jpeg?1696525574"
+    "name_en": "fanC"
   },
   {
     "symbol": "FCT2",
@@ -1333,8 +1241,7 @@
     "symbol": "FET",
     "cmc_slug": null,
     "name_ko": "페치",
-    "name_en": "Fetch.ai",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/5681/small/ASI.png?1719827289"
+    "name_en": "Fetch.ai"
   },
   {
     "symbol": "FF",
@@ -1347,8 +1254,7 @@
     "symbol": "FIDA",
     "cmc_slug": "bonfida",
     "name_ko": "본피다",
-    "name_en": "Bonfida",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/13395/small/bonfida.png?1696513157"
+    "name_en": "Bonfida"
   },
   {
     "symbol": "FIL",
@@ -1361,15 +1267,13 @@
     "symbol": "FIS",
     "cmc_slug": "stafi",
     "name_ko": "스타파이",
-    "name_en": "Stafi",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/12423/small/FIS.png?1696512244"
+    "name_en": "Stafi"
   },
   {
     "symbol": "FITFI",
     "cmc_slug": "step-app",
     "name_ko": "스텝앱",
-    "name_en": "Step App",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/25015/small/200x200.png?1701432003"
+    "name_en": "Step App"
   },
   {
     "symbol": "FLOCK",
@@ -1382,8 +1286,7 @@
     "symbol": "FLOKI",
     "cmc_slug": "floki",
     "name_ko": "플로키",
-    "name_en": "FLOKI",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/16746/small/PNG_image.png?1696516318"
+    "name_en": "FLOKI"
   },
   {
     "symbol": "FLOW",
@@ -1396,8 +1299,7 @@
     "symbol": "FLR",
     "cmc_slug": "flare",
     "name_ko": "플레어",
-    "name_en": "Flare",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/28624/small/FLR-icon200x200.png?1696527609"
+    "name_en": "Flare"
   },
   {
     "symbol": "FLUID",
@@ -1410,8 +1312,7 @@
     "symbol": "FLUX",
     "cmc_slug": "flux",
     "name_ko": "플럭스",
-    "name_en": "Flux",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/11756/small/fluxres.png?1696511637"
+    "name_en": "Flux"
   },
   {
     "symbol": "FNCY",
@@ -1430,15 +1331,13 @@
     "symbol": "FORTH",
     "cmc_slug": null,
     "name_ko": "앰플포스 거버넌스 토큰",
-    "name_en": "Ampleforth Governance Token",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/14917/small/photo_2021-04-22_00.00.03.jpeg?1696514579"
+    "name_en": "Ampleforth Governance Token"
   },
   {
     "symbol": "FRAG",
     "cmc_slug": "fragmetric",
     "name_ko": "프래그메트릭",
-    "name_en": "Fragmetric",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/66980/small/frag.png?1751342117"
+    "name_en": "Fragmetric"
   },
   {
     "symbol": "FXS",
@@ -1457,8 +1356,7 @@
     "symbol": "GALA",
     "cmc_slug": "gala",
     "name_ko": "갈라",
-    "name_en": "Gala",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/12493/small/GALA_token_image_-_200PNG.png?1709725869"
+    "name_en": "Gala"
   },
   {
     "symbol": "GAME2",
@@ -1478,15 +1376,13 @@
     "symbol": "GHUB",
     "cmc_slug": "gemhub",
     "name_ko": "젬허브",
-    "name_en": "GemHUB",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/25239/small/19709.png?1696524380"
+    "name_en": "GemHUB"
   },
   {
     "symbol": "GHX",
     "cmc_slug": "gamer",
     "name_ko": "게이머코인",
-    "name_en": "Gamercoin",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/14714/small/ghx_icon.png?1696514385"
+    "name_en": "Gamercoin"
   },
   {
     "symbol": "GLM",
@@ -1506,8 +1402,7 @@
     "symbol": "GM",
     "cmc_slug": "gomble",
     "name_ko": "곰블",
-    "name_en": "Gomble",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/52746/small/200.png?1734316320"
+    "name_en": "Gomble"
   },
   {
     "symbol": "GMT",
@@ -1520,15 +1415,13 @@
     "symbol": "GMX",
     "cmc_slug": "gmx",
     "name_ko": "지엠엑스",
-    "name_en": "GMX",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/51113/small/CoinGecko_200x200_%281%29_%281%29.png?1730117522"
+    "name_en": "GMX"
   },
   {
     "symbol": "GNO",
     "cmc_slug": "gnosis",
     "name_ko": "노시스",
-    "name_en": "Gnosis",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/662/small/logo_square_simple_300px.png?1696501854"
+    "name_en": "Gnosis"
   },
   {
     "symbol": "GO",
@@ -1541,29 +1434,25 @@
     "symbol": "GOAT",
     "cmc_slug": "goatseus-maximus",
     "name_ko": "고트세우스 막시무스",
-    "name_en": "Goatseus Maximus",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/55460/small/Goat_Coin_-_Small_200x200.png?1746126397"
+    "name_en": "Goatseus Maximus"
   },
   {
     "symbol": "GRACY",
     "cmc_slug": null,
     "name_ko": "그레이시",
-    "name_en": "Gracy",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/31943/small/gracy_200x200.png?1696530750"
+    "name_en": "Gracy"
   },
   {
     "symbol": "GRASS",
     "cmc_slug": "grass",
     "name_ko": "그래스",
-    "name_en": "Grass",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/40094/small/Grass.jpg?1725697048"
+    "name_en": "Grass"
   },
   {
     "symbol": "GRND",
     "cmc_slug": "superwalk",
     "name_ko": "슈퍼워크",
-    "name_en": "Superwalk",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/27186/small/GRND_3x.png?1696526235"
+    "name_en": "Superwalk"
   },
   {
     "symbol": "GRS",
@@ -1590,15 +1479,13 @@
     "symbol": "GXA",
     "cmc_slug": "galaxia",
     "name_ko": "갤럭시아",
-    "name_en": "Galaxia",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/26505/small/ECRcsefS_400x400.png?1696525578"
+    "name_en": "Galaxia"
   },
   {
     "symbol": "H",
     "cmc_slug": "humanity-protocol",
     "name_ko": "휴머니티 프로토콜",
-    "name_en": "Humanity Protocol",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/53684/small/h-logo.jpg?1737016605"
+    "name_en": "Humanity Protocol"
   },
   {
     "symbol": "HAEDAL",
@@ -1625,43 +1512,37 @@
     "symbol": "HEI",
     "cmc_slug": "heima",
     "name_ko": "헤이마",
-    "name_en": "Heima",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/54379/small/heima.png?1739444240"
+    "name_en": "Heima"
   },
   {
     "symbol": "HEMI",
     "cmc_slug": "hemi",
     "name_ko": "헤미",
-    "name_en": "Hemi",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/68469/small/hemi.png?1755838145"
+    "name_en": "Hemi"
   },
   {
     "symbol": "HFT",
     "cmc_slug": "hashflow",
     "name_ko": "해시플로우",
-    "name_en": "Hashflow",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/26136/small/200x200_360.png?1728551257"
+    "name_en": "Hashflow"
   },
   {
     "symbol": "HIFI",
     "cmc_slug": "hifi-finance",
     "name_ko": "하이파이",
-    "name_en": "Hifi Finance",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/28712/small/hft.png?1696527693"
+    "name_en": "Hifi Finance"
   },
   {
     "symbol": "HIGH",
     "cmc_slug": "highstreet",
     "name_ko": "하이스트리트",
-    "name_en": "Highstreet",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/36318/small/high200x200.png?1711092521"
+    "name_en": "Highstreet"
   },
   {
     "symbol": "HIPPO",
     "cmc_slug": "sudeng",
     "name_ko": "수뎅",
-    "name_en": "Sudeng",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/50450/small/sudeng.png?1753214629"
+    "name_en": "Sudeng"
   },
   {
     "symbol": "HIVE",
@@ -1681,22 +1562,19 @@
     "symbol": "HOME",
     "cmc_slug": "defi-app",
     "name_ko": "디파이 앱",
-    "name_en": "Defi App",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/54873/small/defi-app.png?1742235743"
+    "name_en": "Defi App"
   },
   {
     "symbol": "HOOK",
     "cmc_slug": "hooked-protocol",
     "name_ko": "훅트 프로토콜",
-    "name_en": "Hooked Protocol",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/28288/small/hooked2.png?1696527288"
+    "name_en": "Hooked Protocol"
   },
   {
     "symbol": "HOT",
     "cmc_slug": "holo",
     "name_ko": "홀로",
-    "name_en": "Holo",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/3348/small/hot-mark-med.png?1747766692"
+    "name_en": "Holo"
   },
   {
     "symbol": "HP",
@@ -1729,8 +1607,7 @@
     "symbol": "HVH",
     "cmc_slug": "havah",
     "name_ko": "하바",
-    "name_en": "HAVAH",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/29156/small/hvh.png?1696528115"
+    "name_en": "HAVAH"
   },
   {
     "symbol": "HYPER",
@@ -1743,8 +1620,7 @@
     "symbol": "ICP",
     "cmc_slug": "internet-computer",
     "name_ko": "인터넷 컴퓨터",
-    "name_en": "Internet Computer",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/14495/small/Internet_Computer_logo.png?1696514180"
+    "name_en": "Internet Computer"
   },
   {
     "symbol": "ICX",
@@ -1764,8 +1640,7 @@
     "symbol": "ILV",
     "cmc_slug": "illuvium",
     "name_ko": "일루비움",
-    "name_en": "Illuvium",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/14468/small/logo-200x200.png?1696514154"
+    "name_en": "Illuvium"
   },
   {
     "symbol": "IMX",
@@ -1848,15 +1723,13 @@
     "symbol": "IRYS",
     "cmc_slug": "irys",
     "name_ko": "아이리스",
-    "name_en": "Irys",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/70808/small/irys.png?1764757341"
+    "name_en": "Irys"
   },
   {
     "symbol": "ISK",
     "cmc_slug": "iskra",
     "name_ko": "이스크라",
-    "name_en": "Iskra",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/27428/small/ISKRA_logo.png?1696526469"
+    "name_en": "Iskra"
   },
   {
     "symbol": "JASMY",
@@ -1869,8 +1742,7 @@
     "symbol": "JOE",
     "cmc_slug": "joe",
     "name_ko": "트레이더 조",
-    "name_en": "JOE",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/17569/small/LFJ_JOE_Logo.png?1727200941"
+    "name_en": "JOE"
   },
   {
     "symbol": "JST",
@@ -1904,15 +1776,13 @@
     "symbol": "K",
     "cmc_slug": "sidekick",
     "name_ko": "사이드킥",
-    "name_en": "Sidekick",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/54964/small/k200.png?1742894885"
+    "name_en": "Sidekick"
   },
   {
     "symbol": "KAIA",
     "cmc_slug": "kaia",
     "name_ko": "카이아",
-    "name_en": "Kaia",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/53570/small/IMG_3404.JPG?1736746725"
+    "name_en": "Kaia"
   },
   {
     "symbol": "KAITO",
@@ -1925,8 +1795,7 @@
     "symbol": "KAS",
     "cmc_slug": "kaspa",
     "name_ko": "카스파",
-    "name_en": "Kaspa",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/25751/small/kaspa-icon-exchanges.png?1696524837"
+    "name_en": "Kaspa"
   },
   {
     "symbol": "KAVA",
@@ -1946,8 +1815,7 @@
     "symbol": "KGEN",
     "cmc_slug": "kgen",
     "name_ko": "케이젠",
-    "name_en": "KGeN",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/69816/small/kgen.png?1759733785"
+    "name_en": "KGeN"
   },
   {
     "symbol": "KITE",
@@ -1960,8 +1828,7 @@
     "symbol": "KMNO",
     "cmc_slug": "kamino-finance",
     "name_ko": "카미노 파이낸스",
-    "name_en": "Kamino Finance",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/35801/small/tP0Lcgwp_400x400.jpg?1709824189"
+    "name_en": "Kamino Finance"
   },
   {
     "symbol": "KNC",
@@ -1974,15 +1841,13 @@
     "symbol": "KSM",
     "cmc_slug": "kusama",
     "name_ko": "쿠사마",
-    "name_en": "Kusama",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/9568/small/m4zRhP5e_400x400.jpg?1696509648"
+    "name_en": "Kusama"
   },
   {
     "symbol": "L3",
     "cmc_slug": "layer3",
     "name_ko": "레이어쓰리",
-    "name_en": "Layer3",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/37768/small/Square.png?1722045128"
+    "name_en": "Layer3"
   },
   {
     "symbol": "LA",
@@ -2002,8 +1867,7 @@
     "symbol": "LDO",
     "cmc_slug": "lido-dao",
     "name_ko": "리도다오",
-    "name_en": "Lido DAO",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/13573/small/Lido_DAO.png?1696513326"
+    "name_en": "Lido DAO"
   },
   {
     "symbol": "LINEA",
@@ -2023,22 +1887,19 @@
     "symbol": "LION",
     "cmc_slug": "loaded-lions",
     "name_ko": "로디드라이언즈",
-    "name_en": "Loaded Lions",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/38770/small/200x200.png?1718769855"
+    "name_en": "Loaded Lions"
   },
   {
     "symbol": "LISTA",
     "cmc_slug": "lista-dao",
     "name_ko": "리스타 다오",
-    "name_en": "Lista DAO",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/38068/small/lista.png?1716443925"
+    "name_en": "Lista DAO"
   },
   {
     "symbol": "LM",
     "cmc_slug": "leisuremeta",
     "name_ko": "레저메타",
-    "name_en": "LeisureMeta",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/25761/small/SVG_16533804486374586M.jpg?1696524846"
+    "name_en": "LeisureMeta"
   },
   {
     "symbol": "LPT",
@@ -2051,8 +1912,7 @@
     "symbol": "LQTY",
     "cmc_slug": "liquity",
     "name_ko": "리퀴티",
-    "name_en": "Liquity",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/14665/small/logo_V2.png?1725437146"
+    "name_en": "Liquity"
   },
   {
     "symbol": "LRC",
@@ -2079,8 +1939,7 @@
     "symbol": "LZM",
     "cmc_slug": null,
     "name_ko": "라운지엠",
-    "name_en": "LoungeM",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/29068/small/_LoungeM_Logo.png?1696528034"
+    "name_en": "LoungeM"
   },
   {
     "symbol": "MAGIC",
@@ -2093,8 +1952,7 @@
     "symbol": "MAK",
     "cmc_slug": "metacene",
     "name_ko": "메타씬",
-    "name_en": "MetaCene",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/70522/small/makina.png?1762329426"
+    "name_en": "MetaCene"
   },
   {
     "symbol": "MANA",
@@ -2107,22 +1965,19 @@
     "symbol": "MANTA",
     "cmc_slug": "manta-network",
     "name_ko": "만타 네트워크",
-    "name_en": "Manta Network",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/34289/small/manta.jpg?1704468717"
+    "name_en": "Manta Network"
   },
   {
     "symbol": "MAPO",
     "cmc_slug": "map-protocol",
     "name_ko": "맵프로토콜",
-    "name_en": "MAP Protocol",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/10085/small/500*500.png?1723560204"
+    "name_en": "MAP Protocol"
   },
   {
     "symbol": "MASA",
     "cmc_slug": null,
     "name_ko": "마사",
-    "name_en": "Masa",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/35538/small/masa.png?1712635899"
+    "name_en": "Masa"
   },
   {
     "symbol": "MASK",
@@ -2135,22 +1990,19 @@
     "symbol": "MAV",
     "cmc_slug": "maverick-protocol",
     "name_ko": "매버릭 프로토콜",
-    "name_en": "Maverick Protocol",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/30850/small/MAV_Logo.png?1696529701"
+    "name_en": "Maverick Protocol"
   },
   {
     "symbol": "MAVIA",
     "cmc_slug": "heroes-of-mavia",
     "name_ko": "히어로즈오브마비아",
-    "name_en": "Heroes of Mavia",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/33895/small/2023-12-20_21.21.41_%281%29.jpg?1703230771"
+    "name_en": "Heroes of Mavia"
   },
   {
     "symbol": "MAY",
     "cmc_slug": null,
     "name_ko": "메이플라워",
-    "name_en": "Mayflower",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/23912/small/MAY.jpg?1750829305"
+    "name_en": "Mayflower"
   },
   {
     "symbol": "MBL",
@@ -2163,8 +2015,7 @@
     "symbol": "MBX",
     "cmc_slug": "marblex",
     "name_ko": "마브렉스",
-    "name_en": "Marblex",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/24423/small/241119_MBX_Token_Flat.png?1737412821"
+    "name_en": "Marblex"
   },
   {
     "symbol": "ME",
@@ -2184,22 +2035,19 @@
     "symbol": "MEME",
     "cmc_slug": "meme",
     "name_ko": "밈코인",
-    "name_en": "Memecoin",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/30198/small/MEME.png?1701783293"
+    "name_en": "Memecoin"
   },
   {
     "symbol": "MERL",
     "cmc_slug": "merlin-chain",
     "name_ko": "멀린 체인",
-    "name_en": "Merlin Chain",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/37118/small/merlin.jpeg?1713352230"
+    "name_en": "Merlin Chain"
   },
   {
     "symbol": "MET",
     "cmc_slug": "meteora",
     "name_ko": "메테오라",
-    "name_en": "Meteora",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/67843/small/logo_%281%29_%281%29.jpg?1754024048"
+    "name_en": "Meteora"
   },
   {
     "symbol": "MET2",
@@ -2219,15 +2067,13 @@
     "symbol": "METIS",
     "cmc_slug": "metisdao",
     "name_ko": "메티스다오",
-    "name_en": "MetisDAO",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/52178/small/medusa_logo.jpg?1732686719"
+    "name_en": "MetisDAO"
   },
   {
     "symbol": "MEV",
     "cmc_slug": "meverse",
     "name_ko": "미버스",
-    "name_en": "MEVerse",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/24566/small/0sp1DWVw_400x400.png?1696523742"
+    "name_en": "MEVerse"
   },
   {
     "symbol": "MEW",
@@ -2240,8 +2086,7 @@
     "symbol": "MILK",
     "cmc_slug": "milkyway",
     "name_ko": "밀키웨이",
-    "name_en": "MilkyWay",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/32829/small/ILLUMICATI_CG.png?1699585511"
+    "name_en": "MilkyWay"
   },
   {
     "symbol": "MINA",
@@ -2296,8 +2141,7 @@
     "symbol": "MOG",
     "cmc_slug": null,
     "name_ko": "모그",
-    "name_en": "Mog",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/69416/small/BA5EDMOGicon.jpg?1758545032"
+    "name_en": "Mog"
   },
   {
     "symbol": "MON",
@@ -2323,8 +2167,7 @@
     "symbol": "MORPHO",
     "cmc_slug": "morpho",
     "name_ko": "모포",
-    "name_en": "Morpho",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/29837/small/Morpho-token-icon.png?1726771230"
+    "name_en": "Morpho"
   },
   {
     "symbol": "MOVE",
@@ -2344,8 +2187,7 @@
     "symbol": "MVC",
     "cmc_slug": "mileverse",
     "name_ko": "마일벌스",
-    "name_en": "MileVerse",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/13146/small/kXSdwuxD_400x400.jpg?1696512931"
+    "name_en": "MileVerse"
   },
   {
     "symbol": "MVL",
@@ -2364,8 +2206,7 @@
     "symbol": "MYX",
     "cmc_slug": "myx-finance",
     "name_ko": "엠와이엑스 파이낸스",
-    "name_en": "MYX Finance",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/55506/small/myx.jpg?1746434335"
+    "name_en": "MYX Finance"
   },
   {
     "symbol": "NAP",
@@ -2378,8 +2219,7 @@
     "symbol": "NAVX",
     "cmc_slug": "navi-protocol",
     "name_ko": "나비 프로토콜",
-    "name_en": "Navi Protocol",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/32650/small/Navi.png?1742022349"
+    "name_en": "Navi Protocol"
   },
   {
     "symbol": "NCT",
@@ -2399,8 +2239,7 @@
     "symbol": "NEIRO",
     "cmc_slug": "neiro",
     "name_ko": "네이로",
-    "name_en": "Neiro",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/39411/small/logo_new_%281%29.png?1722541389"
+    "name_en": "Neiro"
   },
   {
     "symbol": "NEO",
@@ -2413,8 +2252,7 @@
     "symbol": "NEON",
     "cmc_slug": "neon",
     "name_ko": "네온 EVM",
-    "name_en": "NeonEVM",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/28331/small/neon_%281%29.png?1696527338"
+    "name_en": "NeonEVM"
   },
   {
     "symbol": "NEWT",
@@ -2427,15 +2265,13 @@
     "symbol": "NFT",
     "cmc_slug": "apenft",
     "name_ko": "에이피이앤에프티",
-    "name_en": "APENFT",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/15687/small/AINFT.png?1761099340"
+    "name_en": "APENFT"
   },
   {
     "symbol": "NIL",
     "cmc_slug": "nillion",
     "name_ko": "닐리온",
-    "name_en": "Nillion",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/39082/small/nillion.jpg?1723033507"
+    "name_en": "Nillion"
   },
   {
     "symbol": "NKN",
@@ -2462,15 +2298,13 @@
     "symbol": "NS",
     "cmc_slug": "sui-name-service",
     "name_ko": "수이 네임 서비스",
-    "name_en": "Sui Name Service",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/14286/small/Round-black.png?1696513983"
+    "name_en": "Sui Name Service"
   },
   {
     "symbol": "NTRN",
     "cmc_slug": "neutron",
     "name_ko": "뉴트론",
-    "name_en": "Neutron",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/30813/small/NTRN-token-round_-_200x200.png?1758439620"
+    "name_en": "Neutron"
   },
   {
     "symbol": "NXPC",
@@ -2497,8 +2331,7 @@
     "symbol": "OBT",
     "cmc_slug": "orbiter-finance",
     "name_ko": "오비터 파이낸스",
-    "name_en": "Orbiter Finance",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/53783/small/orbiter.jpg?1737352795"
+    "name_en": "Orbiter Finance"
   },
   {
     "symbol": "OCEAN",
@@ -2581,8 +2414,7 @@
     "symbol": "OSMO",
     "cmc_slug": "osmosis",
     "name_ko": "오스모시스",
-    "name_en": "Osmosis",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/16724/small/osmo.png?1696516298"
+    "name_en": "Osmosis"
   },
   {
     "symbol": "OXT",
@@ -2595,29 +2427,25 @@
     "symbol": "PARTI",
     "cmc_slug": "particle-network",
     "name_ko": "파티클 네트워크",
-    "name_en": "Particle Network",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/54955/small/parti-token-200.png?1742822558"
+    "name_en": "Particle Network"
   },
   {
     "symbol": "PAXG",
     "cmc_slug": "pax-gold",
     "name_ko": "팍스골드",
-    "name_en": "PAX Gold",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/70025/small/IMG_7998.webp?1760438148"
+    "name_en": "PAX Gold"
   },
   {
     "symbol": "PCI",
     "cmc_slug": null,
     "name_ko": "페이코인",
-    "name_en": "Paycoin",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/9330/small/new_logo_square.png?1696509434"
+    "name_en": "Paycoin"
   },
   {
     "symbol": "PEAQ",
     "cmc_slug": "peaq",
     "name_ko": "피크",
-    "name_en": "peaq",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/51415/small/peaq-token-brand-icon_%281%29.png?1731122664"
+    "name_en": "peaq"
   },
   {
     "symbol": "PENDLE",
@@ -2644,29 +2472,25 @@
     "symbol": "PHA",
     "cmc_slug": "phala-network",
     "name_ko": "팔라 네트워크",
-    "name_en": "Phala Network",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/12451/small/phala.png?1696512270"
+    "name_en": "Phala Network"
   },
   {
     "symbol": "PIB",
     "cmc_slug": "pibble",
     "name_ko": "피블",
-    "name_en": "PIBBLE",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/2972/small/pibble.jpg?1696503713"
+    "name_en": "PIBBLE"
   },
   {
     "symbol": "PIEVERSE",
     "cmc_slug": "pieverse",
     "name_ko": "파이버스",
-    "name_en": "Pieverse",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/68773/small/pieverse.png?1756546685"
+    "name_en": "Pieverse"
   },
   {
     "symbol": "PIXEL",
     "cmc_slug": "pixels",
     "name_ko": "픽셀즈",
-    "name_en": "Pixels",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/69076/small/ctl1d1yrm2hycpntmkxscx7odnjb.?1757428593"
+    "name_en": "Pixels"
   },
   {
     "symbol": "PLUME",
@@ -2679,8 +2503,7 @@
     "symbol": "PNUT",
     "cmc_slug": "peanut-the-squirrel",
     "name_ko": "피넛",
-    "name_en": "Peanut the Squirrel",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/51323/small/pnutcg.png?1731309358"
+    "name_en": "Peanut the Squirrel"
   },
   {
     "symbol": "POKT",
@@ -2700,8 +2523,7 @@
     "symbol": "POLA",
     "cmc_slug": "polaris-share",
     "name_ko": "폴라리스 쉐어",
-    "name_en": "Polaris Share",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/37314/small/pola.jpg?1713971028"
+    "name_en": "Polaris Share"
   },
   {
     "symbol": "POLYX",
@@ -2714,22 +2536,19 @@
     "symbol": "PONKE",
     "cmc_slug": "ponke",
     "name_ko": "폰케",
-    "name_en": "Ponke",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/33929/small/ponke-logo.png?1747200908"
+    "name_en": "Ponke"
   },
   {
     "symbol": "POPCAT",
     "cmc_slug": "popcat",
     "name_ko": "팝캣",
-    "name_en": "Popcat",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/33760/small/image.jpg?1702964227"
+    "name_en": "Popcat"
   },
   {
     "symbol": "PORT3",
     "cmc_slug": "port3-network",
     "name_ko": "포트쓰리",
-    "name_en": "Port3 Network",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/33383/small/port3-bc-200x200.png?1710075114"
+    "name_en": "Port3 Network"
   },
   {
     "symbol": "POWR",
@@ -2742,15 +2561,13 @@
     "symbol": "PRCL",
     "cmc_slug": "parcl",
     "name_ko": "파클",
-    "name_en": "Parcl",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/37078/small/ParclToken.png?1737478326"
+    "name_en": "Parcl"
   },
   {
     "symbol": "PRIME",
     "cmc_slug": "echelon-prime",
     "name_ko": "에셜론 프라임",
-    "name_en": "Echelon Prime",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/29053/small/prime-logo-small-border_%282%29.png?1696528020"
+    "name_en": "Echelon Prime"
   },
   {
     "symbol": "PROM",
@@ -2763,8 +2580,7 @@
     "symbol": "PROMPT",
     "cmc_slug": "wayfinder",
     "name_ko": "웨이파인더",
-    "name_en": "Wayfinder",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/67227/small/pxa3O3DS_400x400.png?1752131944"
+    "name_en": "Wayfinder"
   },
   {
     "symbol": "PROVE",
@@ -2784,8 +2600,7 @@
     "symbol": "PTB",
     "cmc_slug": null,
     "name_ko": "포털투비트코인",
-    "name_en": "Portal To Bitcoin",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/68774/small/portal.png?1756547114"
+    "name_en": "Portal To Bitcoin"
   },
   {
     "symbol": "PUFFER",
@@ -2805,8 +2620,7 @@
     "symbol": "PUMPBTC",
     "cmc_slug": "pump",
     "name_ko": "펌프",
-    "name_en": "PUMP",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/39232/small/200pxPumpBTCLogo.png?1721227861"
+    "name_en": "PUMP"
   },
   {
     "symbol": "PUNDIX",
@@ -2819,8 +2633,7 @@
     "symbol": "PYR",
     "cmc_slug": null,
     "name_ko": "불칸 포지드",
-    "name_en": "Vulcan Forged",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/14770/small/1617088937196.png?1696514439"
+    "name_en": "Vulcan Forged"
   },
   {
     "symbol": "PYTH",
@@ -2861,8 +2674,7 @@
     "symbol": "RECALL",
     "cmc_slug": null,
     "name_ko": "리콜",
-    "name_en": "Recall",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/69994/small/recall-logo.jpeg?1760337415"
+    "name_en": "Recall"
   },
   {
     "symbol": "RED",
@@ -2882,8 +2694,7 @@
     "symbol": "REKT",
     "cmc_slug": "rekt",
     "name_ko": "렉트",
-    "name_en": "Rekt",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/29954/small/New_Project_%288%29.png?1696528881"
+    "name_en": "Rekt"
   },
   {
     "symbol": "RENDER",
@@ -2896,8 +2707,7 @@
     "symbol": "REQ",
     "cmc_slug": "request",
     "name_ko": "리퀘스트",
-    "name_en": "Request",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/1031/small/Request_icon_green.png?1696502140"
+    "name_en": "Request"
   },
   {
     "symbol": "RESOLV",
@@ -2910,8 +2720,7 @@
     "symbol": "REZ",
     "cmc_slug": "renzo",
     "name_ko": "렌조",
-    "name_en": "Renzo",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/37327/small/renzo_200x200.png?1714025012"
+    "name_en": "Renzo"
   },
   {
     "symbol": "RLC",
@@ -2931,22 +2740,19 @@
     "symbol": "ROA",
     "cmc_slug": "roa-core",
     "name_ko": "로아코어",
-    "name_en": "ROA CORE",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/29153/small/roa.png?1696528112"
+    "name_en": "ROA CORE"
   },
   {
     "symbol": "RON",
     "cmc_slug": "ronin",
     "name_ko": "로닌",
-    "name_en": "Ronin",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/20009/small/photo_2024-04-06_22-52-24.jpg?1712415367"
+    "name_en": "Ronin"
   },
   {
     "symbol": "RPL",
     "cmc_slug": "rocket-pool",
     "name_ko": "로켓풀",
-    "name_en": "Rocket Pool",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/2090/small/rocket_pool_%28RPL%29.png?1696503058"
+    "name_en": "Rocket Pool"
   },
   {
     "symbol": "RSR",
@@ -2959,15 +2765,13 @@
     "symbol": "RSS3",
     "cmc_slug": "rss3",
     "name_ko": "알에스에스쓰리",
-    "name_en": "RSS3",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/23575/small/rss3.jpeg?1718351333"
+    "name_en": "RSS3"
   },
   {
     "symbol": "RUNE",
     "cmc_slug": "thorchain",
     "name_ko": "토르체인",
-    "name_en": "THORChain",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/6595/small/THORChain_Gradient_Logo_Circle_%283%29.png?1764866269"
+    "name_en": "THORChain"
   },
   {
     "symbol": "RVN",
@@ -2980,8 +2784,7 @@
     "symbol": "S",
     "cmc_slug": "sonic",
     "name_ko": "소닉",
-    "name_en": "Sonic",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/53004/small/1000276184.jpg?1734984802"
+    "name_en": "Sonic"
   },
   {
     "symbol": "SAFE",
@@ -3008,15 +2811,13 @@
     "symbol": "SAPIEN",
     "cmc_slug": null,
     "name_ko": "사피엔",
-    "name_en": "Sapien",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/68423/small/logo.png?1755710030"
+    "name_en": "Sapien"
   },
   {
     "symbol": "SAROS",
     "cmc_slug": "saros",
     "name_ko": "사로스",
-    "name_en": "Saros",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/34594/small/_SAROS_-Mark.Purple_-_Token_logo.png?1755658309"
+    "name_en": "Saros"
   },
   {
     "symbol": "SC",
@@ -3029,8 +2830,7 @@
     "symbol": "SCA",
     "cmc_slug": "scallop",
     "name_ko": "스캘럽",
-    "name_en": "Scallop",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/34648/small/sca.png?1705592307"
+    "name_en": "Scallop"
   },
   {
     "symbol": "SCR",
@@ -3043,8 +2843,7 @@
     "symbol": "SD",
     "cmc_slug": "stader",
     "name_ko": "스테이더",
-    "name_en": "Stader",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/20658/small/SD_Token_Logo.png?1696520060"
+    "name_en": "Stader"
   },
   {
     "symbol": "SEI",
@@ -3057,15 +2856,13 @@
     "symbol": "SEND",
     "cmc_slug": "suilend",
     "name_ko": "수이렌드",
-    "name_en": "SuiLend",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/67558/small/generated-icon.png?1753176578"
+    "name_en": "SuiLend"
   },
   {
     "symbol": "SFP",
     "cmc_slug": "safepal",
     "name_ko": "세이프팔",
-    "name_en": "Safepal",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/13905/small/sfp.png?1696513647"
+    "name_en": "Safepal"
   },
   {
     "symbol": "SHELL",
@@ -3092,22 +2889,19 @@
     "symbol": "SIX",
     "cmc_slug": "six",
     "name_ko": "식스",
-    "name_en": "SIX",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/66898/small/sixsigma_green_logo_trans_1.png?1750950326"
+    "name_en": "SIX"
   },
   {
     "symbol": "SKL",
     "cmc_slug": null,
     "name_ko": "스케일",
-    "name_en": "SKALE",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/13245/small/SKALE_token_300x300.png?1696513021"
+    "name_en": "SKALE"
   },
   {
     "symbol": "SKLAY",
     "cmc_slug": "sklay",
     "name_ko": "에스클레이",
-    "name_en": "sKLAY",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/13912/small/sKLAY_logo.png?1696513653"
+    "name_en": "sKLAY"
   },
   {
     "symbol": "SKY",
@@ -3120,8 +2914,7 @@
     "symbol": "SKYAI",
     "cmc_slug": "skyai",
     "name_ko": "스카이에이아이",
-    "name_en": "SkyAI",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/55294/small/1.png?1745517593"
+    "name_en": "SkyAI"
   },
   {
     "symbol": "SNT",
@@ -3141,8 +2934,7 @@
     "symbol": "SODA",
     "cmc_slug": null,
     "name_ko": "소다엑스",
-    "name_en": "SODAX",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/55710/small/sodax.jpg?1747127833"
+    "name_en": "SODAX"
   },
   {
     "symbol": "SOL",
@@ -3155,8 +2947,7 @@
     "symbol": "SOLV",
     "cmc_slug": "solv-protocol",
     "name_ko": "솔브 프로토콜",
-    "name_en": "Solv Protocol",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/27987/small/solv.jpg?1736852670"
+    "name_en": "Solv Protocol"
   },
   {
     "symbol": "SOMI",
@@ -3190,8 +2981,7 @@
     "symbol": "SPA",
     "cmc_slug": "sperax",
     "name_ko": "스페라엑스",
-    "name_en": "Sperax",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/19744/small/3IdUVrGl_400x400.jpg?1696519168"
+    "name_en": "Sperax"
   },
   {
     "symbol": "SPK",
@@ -3211,8 +3001,7 @@
     "symbol": "STAT",
     "cmc_slug": "stat",
     "name_ko": "스탯",
-    "name_en": "STAT",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/26602/small/stat.png?1696525676"
+    "name_en": "STAT"
   },
   {
     "symbol": "STEEM",
@@ -3232,8 +3021,7 @@
     "symbol": "STO",
     "cmc_slug": "stakestone",
     "name_ko": "스테이크스톤",
-    "name_en": "StakeStone",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/55050/small/STO-white-bg.png?1743437541"
+    "name_en": "StakeStone"
   },
   {
     "symbol": "STORJ",
@@ -3253,8 +3041,7 @@
     "symbol": "STRK",
     "cmc_slug": null,
     "name_ko": "스타크넷",
-    "name_en": "Starknet",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/26433/small/starknet.png?1696525507"
+    "name_en": "Starknet"
   },
   {
     "symbol": "STX",
@@ -3281,8 +3068,7 @@
     "symbol": "SUNDOG",
     "cmc_slug": "sundog",
     "name_ko": "썬도그",
-    "name_en": "Sundog",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/39752/small/SUNDOG.jpg?1759385447"
+    "name_en": "Sundog"
   },
   {
     "symbol": "SUPER",
@@ -3295,15 +3081,13 @@
     "symbol": "SUSHI",
     "cmc_slug": "sushiswap",
     "name_ko": "스시스왑",
-    "name_en": "Sushiswap",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/12271/small/512x512_Logo_no_chop.png?1696512101"
+    "name_en": "Sushiswap"
   },
   {
     "symbol": "SWAP",
     "cmc_slug": "trustswap",
     "name_ko": "트러스트스왑",
-    "name_en": "TrustSwap",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/70204/small/hyperswap.png?1761045307"
+    "name_en": "TrustSwap"
   },
   {
     "symbol": "SWELL",
@@ -3323,15 +3107,13 @@
     "symbol": "SXT",
     "cmc_slug": "space-and-time",
     "name_ko": "스페이스 앤드 타임",
-    "name_en": "Space and Time",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/55424/small/sxt-token_circle.jpg?1745935919"
+    "name_en": "Space and Time"
   },
   {
     "symbol": "SYND",
     "cmc_slug": "syndicate",
     "name_ko": "신디케이트",
-    "name_en": "Syndicate",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/69122/small/synd.png?1757576144"
+    "name_en": "Syndicate"
   },
   {
     "symbol": "SYRUP",
@@ -3358,43 +3140,37 @@
     "symbol": "TAKE",
     "cmc_slug": "overtake",
     "name_ko": "오버테이크",
-    "name_en": "Overtake",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/68577/small/overtake.png?1756118725"
+    "name_en": "Overtake"
   },
   {
     "symbol": "TALK",
     "cmc_slug": "talken",
     "name_ko": "톡큰",
-    "name_en": "Talken",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/54965/small/bRKUOO7n_400x400.jpg?1742905904"
+    "name_en": "Talken"
   },
   {
     "symbol": "TAO",
     "cmc_slug": "bittensor",
     "name_ko": "비트텐서",
-    "name_en": "Bittensor",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/28452/small/ARUsPeNQ_400x400.jpeg?1696527447"
+    "name_en": "Bittensor"
   },
   {
     "symbol": "TAVA",
     "cmc_slug": "altava",
     "name_ko": "알타바",
-    "name_en": "ALTAVA",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/26299/small/altava.jpeg?1696525382"
+    "name_en": "ALTAVA"
   },
   {
     "symbol": "TDROP",
     "cmc_slug": "thetadrop",
     "name_ko": "티드랍",
-    "name_en": "ThetaDrop",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/23319/small/tdrop_pf_square_reverse.png?1696522535"
+    "name_en": "ThetaDrop"
   },
   {
     "symbol": "TEMCO",
     "cmc_slug": "temco",
     "name_ko": "템코",
-    "name_en": "TEMCO",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/6210/small/bSZ7HUuS_400x400.jpg?1696506595"
+    "name_en": "TEMCO"
   },
   {
     "symbol": "TFUEL",
@@ -3407,8 +3183,7 @@
     "symbol": "THE",
     "cmc_slug": "thena",
     "name_ko": "테나",
-    "name_en": "THENA",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/68317/small/logo_200.png?1760456804"
+    "name_en": "THENA"
   },
   {
     "symbol": "THETA",
@@ -3428,8 +3203,7 @@
     "symbol": "TNSR",
     "cmc_slug": "tensor",
     "name_ko": "텐서",
-    "name_en": "Tensor",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/35972/small/tnsr.png?1712687367"
+    "name_en": "Tensor"
   },
   {
     "symbol": "TOKAMAK",
@@ -3442,8 +3216,7 @@
     "symbol": "TON",
     "cmc_slug": null,
     "name_ko": "톤코인",
-    "name_en": "Toncoin",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/67547/small/ton.jpeg?1753153388"
+    "name_en": "Toncoin"
   },
   {
     "symbol": "TOSHI",
@@ -3456,15 +3229,13 @@
     "symbol": "TOWNS",
     "cmc_slug": "towns",
     "name_ko": "타운즈",
-    "name_en": "Towns",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/55230/small/Towns_token_2x.png?1754512858"
+    "name_en": "Towns"
   },
   {
     "symbol": "TRAC",
     "cmc_slug": null,
     "name_ko": "오리진트레일",
-    "name_en": "OriginTrail",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/1877/small/TRAC.jpg?1696502873"
+    "name_en": "OriginTrail"
   },
   {
     "symbol": "TREE",
@@ -3505,8 +3276,7 @@
     "symbol": "TURBO",
     "cmc_slug": "turbo",
     "name_ko": "터보",
-    "name_en": "Turbo",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/52830/small/IMG_0966.png?1734454793"
+    "name_en": "Turbo"
   },
   {
     "symbol": "TUSD",
@@ -3519,15 +3289,13 @@
     "symbol": "TWT",
     "cmc_slug": null,
     "name_ko": "트러스트 월렛 토큰",
-    "name_en": "Trust Wallet Token",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/11085/small/Trust.png?1696511026"
+    "name_en": "Trust Wallet Token"
   },
   {
     "symbol": "UMA",
     "cmc_slug": "uma",
     "name_ko": "우마",
-    "name_en": "UMA",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/10951/small/UMA.png?1696510900"
+    "name_en": "UMA"
   },
   {
     "symbol": "UNI",
@@ -3540,8 +3308,7 @@
     "symbol": "UOS",
     "cmc_slug": "ultra",
     "name_ko": "울트라",
-    "name_en": "Ultra",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/4480/small/Ultra.png?1696505069"
+    "name_en": "Ultra"
   },
   {
     "symbol": "USD1",
@@ -3561,8 +3328,7 @@
     "symbol": "USDE",
     "cmc_slug": "ethena-usde",
     "name_ko": "유에스디이",
-    "name_en": "Ethena USDe",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/25463/small/USDE.png?1696524593"
+    "name_en": "Ethena USDe"
   },
   {
     "symbol": "USDP",
@@ -3610,15 +3376,13 @@
     "symbol": "VIC",
     "cmc_slug": "viction",
     "name_ko": "빅션",
-    "name_en": "Viction",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/3416/small/viction.jpeg?1698894318"
+    "name_en": "Viction"
   },
   {
     "symbol": "VINE",
     "cmc_slug": null,
     "name_ko": "바인 코인",
-    "name_en": "Vine Coin",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/66818/small/vine_logo_2.jpeg?1750629715"
+    "name_en": "Vine Coin"
   },
   {
     "symbol": "VIRTUAL",
@@ -3659,8 +3423,7 @@
     "symbol": "WAXL",
     "cmc_slug": "axelar",
     "name_ko": "엑셀라",
-    "name_en": "Axelar",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/32527/small/Axelar_Logo_Symbol_Black_%281%29.png?1698411554"
+    "name_en": "Axelar"
   },
   {
     "symbol": "WAXP",
@@ -3673,8 +3436,7 @@
     "symbol": "WBTC",
     "cmc_slug": null,
     "name_ko": "랩트비트코인",
-    "name_en": "Wrapped Bitcoin",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/39532/small/WBTCLOGO.png?1764570002"
+    "name_en": "Wrapped Bitcoin"
   },
   {
     "symbol": "WCT",
@@ -3687,29 +3449,25 @@
     "symbol": "WEN",
     "cmc_slug": "wen",
     "name_ko": "웬",
-    "name_en": "Wen",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/34856/small/wen-logo-new.jpg?1741334229"
+    "name_en": "Wen"
   },
   {
     "symbol": "WIF",
     "cmc_slug": "dogwifhat",
     "name_ko": "도그위프햇",
-    "name_en": "dogwifhat",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/33566/small/dogwifhat.jpg?1702499428"
+    "name_en": "dogwifhat"
   },
   {
     "symbol": "WIKEN",
     "cmc_slug": "project-with",
     "name_ko": "위드",
-    "name_en": "Project WITH",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/9182/small/2_0C4zaAE66q6I_k4uBmgqkw.png?1696509302"
+    "name_en": "Project WITH"
   },
   {
     "symbol": "WITCH",
     "cmc_slug": null,
     "name_ko": "위치 토큰",
-    "name_en": "Witch Token",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/17205/small/download_%2829%29.png?1696516761"
+    "name_en": "Witch Token"
   },
   {
     "symbol": "WLD",
@@ -3729,50 +3487,43 @@
     "symbol": "WNCG",
     "cmc_slug": "wrapped-ncg",
     "name_ko": "랩트 나인 크로니클 골드",
-    "name_en": "Wrapped NCG",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/17747/small/WNCG_Color.png?1696517274"
+    "name_en": "Wrapped NCG"
   },
   {
     "symbol": "WOO",
     "cmc_slug": null,
     "name_ko": "우",
-    "name_en": "WOO",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/12921/small/WOO_Logos_2023_Profile_Pic_WOO.png?1696512709"
+    "name_en": "WOO"
   },
   {
     "symbol": "XAI",
     "cmc_slug": "xai",
     "name_ko": "자이",
-    "name_en": "Xai",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/67793/small/XAI-tokenicon.png?1753886127"
+    "name_en": "Xai"
   },
   {
     "symbol": "XAN",
     "cmc_slug": "anoma",
     "name_ko": "아노마",
-    "name_en": "Anoma",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/69380/small/Anoma_Logo_Roundel_RGB_Colour-01.png?1758356672"
+    "name_en": "Anoma"
   },
   {
     "symbol": "XAUT",
     "cmc_slug": "tether-gold",
     "name_ko": "테더 골드",
-    "name_en": "Tether Gold",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/10481/small/Tether_Gold.png?1696510471"
+    "name_en": "Tether Gold"
   },
   {
     "symbol": "XCN",
     "cmc_slug": "onyx",
     "name_ko": "오닉스코인",
-    "name_en": "Onyxcoin",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/24210/small/onyxlogo.jpg?1696523397"
+    "name_en": "Onyxcoin"
   },
   {
     "symbol": "XDC",
     "cmc_slug": "xdc-network",
     "name_ko": "엑스디씨 네트워크",
-    "name_en": "XDC Network",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/2912/small/xdc-icon.png?1696503661"
+    "name_en": "XDC Network"
   },
   {
     "symbol": "XEC",
@@ -3785,8 +3536,7 @@
     "symbol": "XION",
     "cmc_slug": "xion",
     "name_ko": "자이온",
-    "name_en": "XION",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/39034/small/Burnt-Xion-Blaise-Logo-White-On-Black-Square.png?1720038410"
+    "name_en": "XION"
   },
   {
     "symbol": "XLM",
@@ -3812,8 +3562,7 @@
     "symbol": "XPR",
     "cmc_slug": null,
     "name_ko": "엑스피알 네트워크",
-    "name_en": "XPR Network",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/10941/small/XPR.jpg?1696510891"
+    "name_en": "XPR Network"
   },
   {
     "symbol": "XRP",
@@ -3826,8 +3575,7 @@
     "symbol": "XTER",
     "cmc_slug": "xterio",
     "name_ko": "엑스테리오",
-    "name_en": "Xterio",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/53378/small/xterio.jpg?1736255691"
+    "name_en": "Xterio"
   },
   {
     "symbol": "XTZ",
@@ -3840,36 +3588,31 @@
     "symbol": "XVS",
     "cmc_slug": "venus",
     "name_ko": "비너스",
-    "name_en": "Venus",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/12677/small/XVS_Token.jpg?1727454303"
+    "name_en": "Venus"
   },
   {
     "symbol": "XYO",
     "cmc_slug": "xyo",
     "name_ko": "엑스와이오",
-    "name_en": "XYO",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/4519/small/XYO_Network-logo.png?1696505103"
+    "name_en": "XYO"
   },
   {
     "symbol": "YALA",
     "cmc_slug": "yala",
     "name_ko": "얄라",
-    "name_en": "Yala",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/67498/small/yala.jpg?1752994443"
+    "name_en": "Yala"
   },
   {
     "symbol": "YB",
     "cmc_slug": "yieldbasis",
     "name_ko": "일드베이시스",
-    "name_en": "YieldBasis",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/54871/small/yieldbasis_400x400.png?1760514173"
+    "name_en": "YieldBasis"
   },
   {
     "symbol": "YFI",
     "cmc_slug": "yearn-finance",
     "name_ko": "연파이낸스",
-    "name_en": "yearn.finance",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/11849/small/yearn.jpg?1696511720"
+    "name_en": "yearn.finance"
   },
   {
     "symbol": "YGG",
@@ -3896,8 +3639,7 @@
     "symbol": "ZEUS",
     "cmc_slug": "zeus-network",
     "name_ko": "제우스 네트워크",
-    "name_en": "Zeus Network",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/56021/small/Pepes_Dog.jpg?1748024354"
+    "name_en": "Zeus Network"
   },
   {
     "symbol": "ZIL",
@@ -3910,8 +3652,7 @@
     "symbol": "ZK",
     "cmc_slug": "zksync",
     "name_ko": "지케이싱크",
-    "name_en": "zkSync",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/38043/small/ZKTokenBlack.png?1718614502"
+    "name_en": "zkSync"
   },
   {
     "symbol": "ZKC",
@@ -3924,15 +3665,13 @@
     "symbol": "ZKJ",
     "cmc_slug": "polyhedra-network",
     "name_ko": "폴리헤데라 네트워크",
-    "name_en": "Polyhedra Network",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/36198/small/Polyhedra_Symbol_Black_on_White.png?1747150504"
+    "name_en": "Polyhedra Network"
   },
   {
     "symbol": "ZKL",
     "cmc_slug": "zklink",
     "name_ko": "지케이링크",
-    "name_en": "zkLink",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/34982/small/Logo1.png?1714980729"
+    "name_en": "zkLink"
   },
   {
     "symbol": "ZORA",
@@ -3945,8 +3684,7 @@
     "symbol": "ZRC",
     "cmc_slug": "zircuit",
     "name_ko": "저킷",
-    "name_en": "Zircuit",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/35960/small/zircuit_token_icon_2.png?1732502352"
+    "name_en": "Zircuit"
   },
   {
     "symbol": "ZRO",
@@ -3966,7 +3704,6 @@
     "symbol": "ZTX",
     "cmc_slug": "ztx",
     "name_ko": "지티엑스",
-    "name_en": "ZTX",
-    "icon_path": "https://coin-images.coingecko.com/coins/images/32340/small/CoinGecko_200_x_200.jpg?1697466589"
+    "name_en": "ZTX"
   }
 ]
