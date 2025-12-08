@@ -14,112 +14,71 @@ const dev = process.env.NODE_ENV !== "production";
 
 console.log(`[BOOT] Starting on ${hostname}:${port} (dev=${dev})`);
 
-// Initialize Next.js - but don't wait for it yet
+// Initialize Next.js
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
 
-// Create minimal HTTP server
+// Create server with instant health check
 const server = createServer((req, res) => {
-  const url = req.url || "/";
-  const method = req.method || "GET";
-
-  // Instant health check endpoint - returns immediately
-  if ((url === "/" || url === "/health") && method === "GET") {
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ status: "ok" }));
+  const pathname = req.url?.split("?")[0] || "/";
+  
+  // INSTANT synchronous health check - no promises, no async
+  if ((pathname === "/" || pathname === "/health") && req.method === "GET") {
+    res.writeHead(200, {
+      "Content-Type": "text/plain",
+      "Content-Length": "2"
+    });
+    res.end("OK");
     return;
   }
 
-  // All other requests delegate to Next.js
+  // Delegate to Next.js
   (async () => {
     try {
-      await handle(req, res, parse(url, true));
+      await handle(req, res, parse(req.url!, true));
     } catch (err) {
-      console.error(`[ERROR] Request failed:`, err);
+      console.error(`[ERROR] ${req.method} ${req.url}:`, err);
       if (!res.headersSent) {
         res.writeHead(500);
-        res.end("Internal Server Error");
+        res.end("Error");
       }
     }
   })();
 });
 
-// CRITICAL: Start listening BEFORE any async operations
-let serverListening = false;
+// Start listening immediately
 server.listen(port, hostname, () => {
-  serverListening = true;
-  console.log(`[BOOT] ✓ Server listening on ${hostname}:${port}`);
+  console.log(`[BOOT] ✓ Listening on port ${port}`);
 });
 
-// Handle server errors
-server.on("error", (err) => {
-  console.error("[ERROR] Server error:", err);
-  process.exit(1);
-});
-
-// Initialize everything else asynchronously WITHOUT blocking startup
-const initializeAsync = async () => {
+// Initialize in background (non-blocking)
+(async () => {
   try {
-    // Wait for server to be listening first
-    let attempts = 0;
-    while (!serverListening && attempts < 100) {
-      await new Promise((r) => setTimeout(r, 10));
-      attempts++;
-    }
-
-    if (!serverListening) {
-      console.error("[ERROR] Server failed to start listening");
-      process.exit(1);
-    }
-
-    console.log("[BOOT] Preparing Next.js app...");
     await app.prepare();
-    console.log("[BOOT] ✓ Next.js app prepared");
+    console.log("[BOOT] ✓ Next.js ready");
 
-    // Setup WebSocket
     createChatServer(server);
-    console.log("[BOOT] ✓ WebSocket server ready");
+    console.log("[BOOT] ✓ WebSocket ready");
 
-    // Start price worker
     startPriceWorker();
-    console.log("[BOOT] ✓ Price worker started");
+    console.log("[BOOT] ✓ Workers started");
 
-    // Schedule market sync
     cron.schedule("*/5 * * * *", () => {
-      const now = new Date().toISOString();
-      console.log(`[SYNC] Starting market sync at ${now}`);
+      console.log(`[SYNC] Starting market sync...`);
       exec("npm run sync:markets", (err, stdout, stderr) => {
-        if (err) {
-          console.error(`[SYNC] Error:`, err.message);
-          return;
-        }
-        if (stdout) console.log(`[SYNC] Output:`, stdout);
-        console.log(`[SYNC] Completed at ${new Date().toISOString()}`);
+        if (err) console.error(`[SYNC]`, err.message);
+        if (stdout) console.log(stdout);
       });
     });
-    console.log("[BOOT] ✓ Market sync scheduled (5-minute intervals)");
+    console.log("[BOOT] ✓ Market sync scheduled");
   } catch (err) {
-    console.error("[FATAL] Initialization failed:", err);
+    console.error("[FATAL]", err);
     process.exit(1);
   }
-};
-
-// Start initialization without blocking server startup
-initializeAsync();
+})();
 
 // Graceful shutdown
 process.on("SIGTERM", () => {
-  console.log("[SHUTDOWN] SIGTERM received");
-  server.close(() => {
-    console.log("[SHUTDOWN] Server closed");
-    process.exit(0);
-  });
-});
-
-process.on("SIGINT", () => {
-  console.log("[SHUTDOWN] SIGINT received");
-  server.close(() => {
-    console.log("[SHUTDOWN] Server closed");
-    process.exit(0);
-  });
+  console.log("[SHUTDOWN] Closing...");
+  server.close(() => process.exit(0));
 });
