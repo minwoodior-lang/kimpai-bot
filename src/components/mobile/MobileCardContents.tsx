@@ -3,6 +3,8 @@
  * 카드 배경/테두리/패딩은 부모에서 처리
  */
 
+import { AiSummaryContentBase } from "@/components/ai-summary/AiSummaryContentBase";
+
 interface AiSummaryMobileContentProps {
   avgPremium: React.ReactNode;
   maxPremium: React.ReactNode;
@@ -26,36 +28,15 @@ export function AiSummaryMobileContent({
         <span>AI 요약</span>
       </h2>
 
-      {/* 정보 그리드 */}
-      <div className="space-y-0.5 flex-1">
-        <div className="flex justify-between">
-          <span className="text-[11px] dark:text-slate-300 light:text-slate-500">평균 김프</span>
-          <span className="text-[13px] font-semibold dark:text-slate-50 light:text-slate-900">{avgPremium}</span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-[11px] dark:text-slate-300 light:text-slate-500">최소 김프</span>
-          <span className="text-[13px] font-semibold dark:text-slate-50 light:text-slate-900">{minPremium}</span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-[11px] dark:text-slate-300 light:text-slate-500">최대 김프</span>
-          <span className="text-[13px] font-semibold dark:text-slate-50 light:text-slate-900">{maxPremium}</span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-[11px] dark:text-slate-300 light:text-slate-500">환율</span>
-          <span className="text-[13px] font-semibold dark:text-slate-50 light:text-slate-900">{fxRate}</span>
-        </div>
-      </div>
-
-      {/* Score 카드 - PC와 동일한 스타일 */}
-      <div className="mt-2 flex items-center justify-between">
-        <div className="flex flex-col">
-          <span className="text-[11px] dark:text-white/60 light:text-indigo-700">KR Premium Score</span>
-          <div className="mt-1 h-1.5 w-28 rounded-full dark:bg-white/10 light:bg-indigo-200/50">
-            <div className="h-full rounded-full dark:bg-[#6366F1] light:bg-indigo-500" style={{width: `${(score / 10) * 100}%`}} />
-          </div>
-        </div>
-        <span className="text-lg font-semibold dark:text-[#A855F7] light:text-purple-600">{score}/10</span>
-      </div>
+      {/* 공통 콘텐츠 베이스 - mobile 레이아웃 */}
+      <AiSummaryContentBase
+        avgPremium={avgPremium}
+        maxPremium={maxPremium}
+        minPremium={minPremium}
+        fxRate={fxRate}
+        score={score}
+        layout="mobile"
+      />
     </div>
   );
 }

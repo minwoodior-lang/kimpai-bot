@@ -227,7 +227,7 @@ export default function Home() {
           </div>
 
           {/* 모바일: 탭 구조 */}
-          <div className="md:hidden mt-3 mb-4">
+          <div className="md:hidden mt-2 md:mt-4 mb-4">
             {/* 탭 버튼 - PRO 배지 강화 */}
             <div className="flex gap-1.5 mb-3">
               <button
@@ -317,7 +317,7 @@ export default function Home() {
           </div>
 
           {/* 프리미엄 차트 섹션 */}
-          <section className="mt-4 sm:mt-5 md:mt-7 mb-4 md:mb-6">
+          <section className="mt-3 md:mt-6 mb-4 md:mb-6">
             {/* 상단 타이틀 + 버튼 영역 */}
             <div className="mb-2 sm:mb-2.5 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3">
               <h2 className="text-xs sm:text-sm text-slate-200">

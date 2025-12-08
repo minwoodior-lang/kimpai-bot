@@ -1,0 +1,190 @@
+📩 전달문 (Replit / Dev Agent용)
+0. 절대 조건
+
+PC 레이아웃(md 이상)은 지금 상태 그대로 유지
+
+md: 이상 브레이크포인트에서 기존 TodayPremiumSection / ProPredictionCard / MyAlertsCard UI, 폰트, 패딩, 정렬 변경 금지
+
+className 수정이 필요하면 반드시 md: prefix를 사용해서만 변경.
+
+이번 작업 범위는 홈 화면의 “AI 요약 카드 (오늘의 AI 김프 요약)” 모바일 버전 동기화 + 모바일 잔손 처리까지만.
+
+1. 공통 내용 컴포넌트로 분리
+
+목표:
+PC/모바일 모두 완전히 같은 내용, 같은 순서의 요약 텍스트·숫자 사용.
+스타일만 브레이크포인트에 따라 달라지게.
+
+파일 구조 확인
+
+PC 카드:
+
+src/components/TodayPremiumSection.tsx
+
+(또는 안에서 사용하는) AiSummaryCard/TodayAiSummaryCard 같은 컴포넌트
+
+모바일 카드:
+
+src/components/mobile/MobileCardContents.tsx
+
+여기 안에 AiSummaryMobileContent, ProForecastMobileContent, MyAlertsMobileContent 존재
+
+아래 형태로 공통 베이스 컴포넌트를 하나 만들어서 PC/모바일에서 같이 사용:
+
+// 예: src/components/ai-summary/AiSummaryContentBase.tsx
+
+interface AiSummaryContentBaseProps {
+  layout?: "desktop" | "mobile";
+}
+
+export function AiSummaryContentBase({ layout = "desktop" }: AiSummaryContentBaseProps) {
+  // 공통 데이터 로직: 평균/최소/최대 김프, 환율, KR Premium Score 등
+  // 지금 PC 카드가 보여주는 그대로를 기준으로 옮긴다.
+  // 텍스트, 숫자 포맷, 증가/하락 색상, +기호 유무, 괄호 안 코인명까지 전부 동일하게.
+
+  // layout에 따라 className만 다르게:
+  const labelClass =
+    layout === "desktop"
+      ? "text-[13px] md:text-[14px] text-slate-300"
+      : "text-[12px] text-slate-300";
+
+  const valueClass =
+    layout === "desktop"
+      ? "text-[14px] md:text-[15px] font-semibold"
+      : "text-[13px] font-semibold";
+
+  return (
+    <div className="flex flex-col gap-2">
+      {/* 예시: 평균/최소/최대/환율 4줄 */}
+      {/* 실제 내용은 지금 PC 요약카드 구현을 그대로 옮긴다. */}
+    </div>
+  );
+}
+
+
+PC 카드에서 사용:
+
+// TodayPremiumSection.tsx (또는 AiSummaryCard.tsx)
+
+import { AiSummaryContentBase } from "@/components/ai-summary/AiSummaryContentBase";
+
+function AiSummaryCardDesktop() {
+  return (
+    <div className="... md:block hidden ...">
+      {/* 카드 헤더, 제목 등 기존 PC 스타일 유지 */}
+      <AiSummaryContentBase layout="desktop" />
+      {/* KR Premium Score 바, 4/10 점수 표시도 여기서 유지 */}
+    </div>
+  );
+}
+
+
+모바일 카드에서 사용:
+
+// MobileCardContents.tsx
+
+import { AiSummaryContentBase } from "@/components/ai-summary/AiSummaryContentBase";
+
+export function AiSummaryMobileContent() {
+  return (
+    <div className="px-4 pt-3 pb-4">
+      {/* 모바일용 제목/서브텍스트가 따로 있으면 유지하되,
+          실제 데이터 블록은 베이스 컴포넌트 사용 */}
+      <AiSummaryContentBase layout="mobile" />
+      {/* KR Premium Score 바, 점수도 PC와 완전히 같은 값/텍스트로 */}
+    </div>
+  );
+}
+
+
+핵심: 데이터 로직 / 텍스트 / 포맷은 모두 AiSummaryContentBase 한 곳에서 관리,
+PC/모바일은 layout props로 className만 다르게.
+
+2. 모바일 AI 요약 카드 스타일 정리
+
+아이폰 14 Pro Max 기준 캡처를 기준으로 다음을 맞춰 달라:
+
+모바일 탭(“AI 요약 / PRO 예측 / 내 알림”)
+
+높이와 폰트 크기는 지금처럼 유지하되,
+요약 카드 상단과의 간격을 mt-2 정도로 조금만 좁게 정리.
+
+이 부분은 모바일에서만 적용:
+
+예) className="mt-2 md:mt-4" 형태로 md 이상은 현상 유지.
+
+모바일 AI 요약 카드 패딩/폰트
+
+카드 전체: rounded-xl + px-4 pt-3 pb-4 정도로 정리.
+
+라벨 폰트: 12px, 값 폰트: 13~14px 수준 (현재 PC보다 한 단계 작게).
+
+줄 사이 간격은 gap-1.5 또는 space-y-1.5 정도로 해서 SE에서도 줄바꿈 안 꼬이게.
+
+KR Premium Score 영역
+
+PC와 같은 텍스트/점수/바 사용.
+
+모바일에서는 위아래 패딩만 줄여서:
+
+<div className="mt-3 md:mt-4">
+  {/* KR Premium Score 라벨/바/점수 */}
+</div>
+
+
+SE(작은 폭) 대응
+
+width 375 이하에서 확인했을 때:
+
+텍스트가 두 줄로 접혀도 카드 안에서 자연스럽게 보이도록 text-xs/text-sm 조합만 미세 조정.
+
+PC에 영향 없게 모든 수정은 기본 클래스 or max-md: 쪽에서 처리.
+
+3. 모바일 홈 잔손 정리(이번 턴에서 같이 처리)
+
+프리미엄 차트와 AI 요약 카드 사이 간격
+
+모바일에서만:
+
+요약 카드 하단 → 차트 섹션까지 mt-3 정도로 좁게 (현재 너무 띄워져 있다면).
+
+className="mt-3 md:mt-6" 같이 분기.
+
+“프리미엄 차트” 타이틀 / 드롭다운 영역
+
+타이틀 폰트: text-[14px] font-semibold
+
+개인화 설정 버튼 높이, 드롭다운 버튼 높이가 PC와 비슷하게 보이도록 height 맞춤.
+
+이 부분도 모바일 전용 여백/폰트만 조절, PC는 수정하지 않기.
+
+코인 테이블 상단 라벨
+
+“암호화폐 총 229개”, 검색창 폭 등
+→ 모바일에서 한 줄 또는 두 줄로 자연스럽게 보이도록 text-xs/text-sm, mt-2 정도로 조정.
+
+4. 테스트 체크리스트
+
+작업 완료 후 아래를 실제 브라우저/디바이스로 확인:
+
+브레이크포인트
+
+iPhone 14 Pro Max (390x844)
+
+iPhone SE (375x667) 또는 DevTools에서 유사 해상도
+
+확인 항목
+
+상단 “AI 요약 / PRO 예측 / 내 알림” 탭 → 잘려 보이는 요소 없는지
+
+AI 요약 카드 내용(평균/최소/최대/환율, KR Premium Score, 4/10 점수)이
+PC와 동일한 텍스트/수치/색상 규칙인지
+
+스크롤 했을 때:
+
+요약 카드 → 프리미엄 차트 → 코인 테이블 → 하단 푸터 순서가 자연스럽고
+중간에 과한 여백이나 끊김 없는지
+
+PC(데스크톱, md 이상)
+
+요약 카드, 프리미엄 차트, 코인 테이블 어떤 시각적 변화도 없는지 최종 확인.
