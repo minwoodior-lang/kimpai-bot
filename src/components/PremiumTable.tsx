@@ -323,7 +323,7 @@ const PremiumTableRow = React.memo(
           </td>
 
           {/* 코인명 (모바일: 즐겨찾기 + 차트 버튼 포함) */}
-          <td className="px-[2px] sm:px-2 md:px-3 lg:px-4 py-1.5 md:py-3 min-h-[40px] sm:min-h-auto">
+          <td className="px-[3px] sm:px-2 md:px-3 lg:px-4 py-1.5 md:py-3 min-h-[40px] sm:min-h-auto">
             <div className="flex items-center gap-[2px] sm:gap-1 md:gap-2 min-w-0">
               {/* 모바일용 즐겨찾기 + 차트 버튼 묶음 */}
               <div className="flex items-center gap-[2px] mr-[2px] md:hidden">
@@ -401,9 +401,8 @@ const PremiumTableRow = React.memo(
           {/* 현재가 */}
           <td
             className="
-              md:w-[120px]
-              px-[0.5px] sm:px-1.5 md:px-3 lg:px-4
-              py-0.5 sm:py-1.5 md:py-3
+              px-[1px] sm:px-1.5 md:px-3 lg:px-4
+              py-1.5 md:py-3
               text-right whitespace-nowrap
               text-[8px] md:text-[14px]
             "
@@ -430,9 +429,8 @@ const PremiumTableRow = React.memo(
           {/* 김프 */}
           <td
             className="
-              md:w-[90px]
-              px-[0.5px] sm:px-1.5 md:px-3 lg:px-4
-              py-0.5 sm:py-1.5 md:py-3
+              px-[1px] sm:px-1.5 md:px-3 lg:px-4
+              py-1.5 md:py-3
               text-right whitespace-nowrap
               text-[8px] md:text-[14px]
             "
@@ -456,9 +454,8 @@ const PremiumTableRow = React.memo(
           {/* 전일대비 */}
           <td
             className="
-              md:w-[170px]
-              px-[0.5px] sm:px-1.5 md:px-3 lg:px-4
-              py-0.5 sm:py-1 md:py-3
+              px-[1px] sm:px-1.5 md:px-3 lg:px-4
+              py-1.5 md:py-3
               text-right whitespace-nowrap
               text-[8px] md:text-[14px]
             "
@@ -497,10 +494,9 @@ const PremiumTableRow = React.memo(
           {/* 거래액(일) */}
           <td
             className="
-              md:w-[130px]
-              px-[0.5px] sm:px-1.5 md:px-3 lg:px-4
-              py-0.5 sm:py-1.5 md:py-3
-              text-right whitespace-nowrap pr-0
+              px-[1px] sm:px-1.5 md:px-3 lg:px-4
+              py-1.5 md:py-3
+              text-right whitespace-nowrap
               text-[8px] md:text-[14px]
             "
           >
@@ -1249,16 +1245,16 @@ export default function PremiumTable({
         </div>
       ) : (
         <div className="w-full border border-white/5 bg-[#050819] overflow-hidden">
-          <table className="w-full border-separate border-spacing-y-0 table-auto md:table-fixed">
+          <table className="w-full border-separate border-spacing-y-0 table-fixed">
             <colgroup>
-              <col className="md:w-[24px]" /> {/* 즐겨찾기 */}
-              <col className="md:w-auto" /> {/* 코인명 */}
-              <col className="md:w-[120px]" /> {/* 현재가 */}
-              <col className="md:w-[90px]" /> {/* 김프 */}
-              <col className="md:w-[170px]" /> {/* 전일대비 */}
-              <col className="hidden md:table-column md:w-[90px]" /> {/* 고가대비 */}
-              <col className="hidden md:table-column md:w-[90px]" /> {/* 저가대비 */}
-              <col className="md:w-[130px]" /> {/* 거래액(일) */}
+              <col className="w-[16px] md:w-[24px]" />
+              <col className="w-auto md:w-auto" />
+              <col className="w-[100px] md:w-[120px]" />
+              <col className="w-[70px] md:w-[90px]" />
+              <col className="w-[85px] md:w-[170px]" />
+              <col className="hidden md:table-column md:w-[90px]" />
+              <col className="hidden md:table-column md:w-[90px]" />
+              <col className="w-[95px] md:w-[130px]" />
             </colgroup>
 
             <thead>
