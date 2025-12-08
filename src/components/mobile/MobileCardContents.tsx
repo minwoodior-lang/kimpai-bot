@@ -23,40 +23,42 @@ export function AiSummaryMobileContent({
   marketSummary,
 }: AiSummaryMobileContentProps) {
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full min-h-[210px]">
       {/* 제목 */}
       <h2 className="text-[14px] font-semibold dark:text-slate-100 light:text-slate-900 mb-2 flex items-center gap-2">
         <span>📊</span>
-        <span>AI 요약</span>
+        <span>오늘의 AI 김프 요약</span>
       </h2>
 
       {/* 공통 콘텐츠 베이스 - mobile 레이아웃 */}
-      <AiSummaryContentBase
-        avgPremium={avgPremium}
-        maxPremium={maxPremium}
-        minPremium={minPremium}
-        fxRate={fxRate}
-        score={score}
-        layout="mobile"
-        marketSummary={marketSummary}
-      />
+      <div className="mt-1">
+        <AiSummaryContentBase
+          avgPremium={avgPremium}
+          maxPremium={maxPremium}
+          minPremium={minPremium}
+          fxRate={fxRate}
+          score={score}
+          layout="mobile"
+          marketSummary={marketSummary}
+        />
+      </div>
     </div>
   );
 }
 
 export function ProForecastMobileContent() {
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full min-h-[210px]">
       {/* 제목 */}
-      <div className="text-[13px] font-bold dark:text-slate-100 light:text-slate-900 mb-1.5 flex items-center gap-2">
+      <div className="text-[14px] font-bold dark:text-slate-100 light:text-slate-900 mb-2 flex items-center gap-2">
         <span>🔒</span>
         <span>PRO 전용 48시간 김프 예측</span>
       </div>
 
       {/* 블러 박스 */}
-      <div className="relative w-full rounded-xl border border-white/10 bg-gradient-to-b from-slate-800/90 to-slate-900/95 px-3 py-2 min-h-[70px] overflow-hidden flex-1 mb-2">
+      <div className="relative w-full rounded-xl border border-white/10 bg-gradient-to-b from-slate-800/90 to-slate-900/95 px-3 py-3 min-h-[80px] overflow-hidden flex-1 mb-3">
         {/* 실제 예측 텍스트 - 희미하게 보이도록 blur + 살짝 어둡게 */}
-        <div className="pointer-events-none select-none text-[10px] leading-relaxed text-slate-100/85 blur-[1.4px]">
+        <div className="pointer-events-none select-none text-[11px] leading-relaxed text-slate-100/85 blur-[1.4px]">
           <p>
             • 향후 48시간 내, 김프 2% 이상 급변 구간이 3회 이상 발생할 가능성이 높습니다.
           </p>
@@ -73,17 +75,17 @@ export function ProForecastMobileContent() {
       </div>
 
       {/* 안내 텍스트 */}
-      <p className="text-white/40 text-[10px] mb-1">
+      <p className="text-white/40 text-[10px] mb-1.5">
         * 전체 예측 데이터는 PRO 구독 시 이용할 수 있습니다.
       </p>
 
       {/* 설명 텍스트 */}
-      <p className="text-[10px] dark:text-slate-400 light:text-slate-600 mb-1.5 leading-snug">
+      <p className="text-[11px] dark:text-slate-400 light:text-slate-600 mb-2 leading-snug">
         최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
       </p>
 
       {/* PRO 버튼 */}
-      <button className="w-full bg-gradient-to-r from-[#8155FF] to-[#5D3DFF] dark:hover:from-[#7043FF] dark:hover:to-[#4C2FFF] h-8 rounded-lg font-semibold text-white text-[10px] flex items-center justify-center gap-1 transition-all">
+      <button className="mt-auto w-full bg-gradient-to-r from-[#8155FF] to-[#5D3DFF] dark:hover:from-[#7043FF] dark:hover:to-[#4C2FFF] h-9 rounded-lg font-semibold text-white text-[11px] flex items-center justify-center gap-1 transition-all">
         <span>🔒</span>
         <span>전체 보기</span>
       </button>
@@ -95,7 +97,7 @@ export function MyAlertsMobileContent() {
   const isLoggedIn = false; // TODO: Connect to auth
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full min-h-[210px]">
       {/* 제목 */}
       <h3 className="text-[14px] font-semibold dark:text-slate-100 light:text-slate-900 mb-2 flex items-center gap-2">
         <span>🔔</span>
@@ -122,10 +124,14 @@ export function MyAlertsMobileContent() {
           </div>
         ) : (
           <div className="text-center w-full">
-            <p className="text-[12px] dark:text-slate-400 light:text-slate-600 mb-2.5 leading-relaxed">
-              로그인하고 알림 설정하기
+            <p className="text-[13px] dark:text-slate-100 light:text-slate-800 mb-1.5 leading-relaxed">
+              김프 급변 구간을 푸시 알림으로 받아보세요.
             </p>
-            <button className="underline underline-offset-4 text-indigo-300 hover:text-indigo-200 transition cursor-pointer font-semibold text-[12px]">
+            <p className="text-[11px] dark:text-slate-400 light:text-slate-600 mb-3 leading-snug">
+              로그인 후 관심 코인과 김프 조건을 설정하면,
+              지정한 구간에 도달할 때마다 바로 알려드립니다.
+            </p>
+            <button className="underline underline-offset-4 text-indigo-300 hover:text-indigo-200 transition cursor-pointer font-semibold text-[13px]">
               로그인
             </button>
           </div>

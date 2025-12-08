@@ -1,3 +1,7 @@
+// src/components/ai-summary/AiSummaryContentBase.tsx
+
+import React, { ReactNode } from "react";
+
 /**
  * AI 요약 카드 - 공통 콘텐츠 베이스
  * PC/모바일에서 동일한 데이터와 텍스트를 사용
@@ -5,10 +9,10 @@
  */
 
 interface AiSummaryContentBaseProps {
-  avgPremium: React.ReactNode;
-  maxPremium: React.ReactNode;
-  minPremium: React.ReactNode;
-  fxRate: React.ReactNode;
+  avgPremium: ReactNode;
+  maxPremium: ReactNode;
+  minPremium: ReactNode;
+  fxRate: ReactNode;
   score: number;
   marketSummary?: string;
   layout?: "desktop" | "mobile";
@@ -46,10 +50,12 @@ export function AiSummaryContentBase({
       ? "text-[13px] font-semibold dark:text-slate-50 light:text-slate-900"
       : "text-sm md:text-[15px] font-semibold dark:text-slate-50 light:text-slate-900";
 
+  // 줄 간격: 모바일은 좀 더 촘촘하게
   const spaceClass =
-    layout === "mobile" ? "space-y-1.5" : "space-y-2 sm:space-y-2";
+    layout === "mobile" ? "space-y-1" : "space-y-2 sm:space-y-2";
 
-  const scoreMarginTop = layout === "mobile" ? "mt-3" : "mt-3";
+  // Score 블록 위 여백: 모바일은 살짝 줄임
+  const scoreMarginTop = layout === "mobile" ? "mt-2" : "mt-3";
 
   return (
     <div className="flex flex-col gap-2 flex-1">
@@ -60,7 +66,8 @@ export function AiSummaryContentBase({
             {marketSummary}
           </p>
           <p className="text-[10px] text-slate-500 mt-0.5">
-            ※ 변동성·추세·역프는 김프(국내-해외 가격 차이) 기준으로 실시간 산출됩니다.
+            ※ 변동성·추세·역프는 김프(국내-해외 가격 차이) 기준으로 실시간
+            산출됩니다.
           </p>
         </div>
       )}
@@ -89,17 +96,20 @@ export function AiSummaryContentBase({
       </div>
 
       {/* Score 카드 - 게이지바 */}
-      <div className={`${scoreMarginTop} flex items-center gap-2 ${
-        layout === "desktop" ? "w-full" : "w-full max-w-[220px]"
-      }`}>
-        <div className="flex flex-col flex-1">
-          <span className="text-[11px] dark:text-slate-400 light:text-slate-500">
+      <div
+        className={`${scoreMarginTop} flex items-center justify-between w-full`}
+      >
+        {/* 게이지 영역 */}
+        <div className="flex flex-col flex-1 pr-3">
+          <span className="text-[12px] dark:text-slate-400 light:text-slate-500">
             KR Premium Score
           </span>
 
-          <div className={`mt-1.5 ${
-            layout === "mobile" ? "h-2 w-24" : "h-2.5 w-full"
-          } rounded-full bg-slate-700/80 overflow-hidden`}>
+          <div
+            className={`mt-1.5 ${
+              layout === "mobile" ? "h-2" : "h-2.5"
+            } w-full rounded-full bg-slate-700/80 overflow-hidden`}
+          >
             <div
               className="h-full rounded-full bg-gradient-to-r from-indigo-400 via-violet-400 to-fuchsia-400 transition-all duration-300"
               style={{ width: `${widthPercent}%` }}
@@ -107,10 +117,12 @@ export function AiSummaryContentBase({
           </div>
         </div>
 
+        {/* 점수 숫자 */}
         <span
           className={`${
             layout === "mobile" ? "text-base" : "text-lg"
-          } font-semibold flex-shrink-0 ${scoreTextClass}`}
+          } font-semibold text-right flex-shrink-0 ${scoreTextClass}`}
+          style={{ minWidth: "42px" }} // 숫자 길이에 따라 튀는거 방지
         >
           {score}/10
         </span>
@@ -118,3 +130,5 @@ export function AiSummaryContentBase({
     </div>
   );
 }
+
+export default AiSummaryContentBase;

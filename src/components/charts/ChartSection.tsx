@@ -1,10 +1,11 @@
+// src/components/ChartSection.tsx
 import { useEffect, useRef, useState } from "react";
 
 // 지원하는 마켓 심볼 매핑
 const SYMBOL_MAP: Record<string, string> = {
-  "BINANCE_BTC": "BINANCE:BTCUSDT",
-  "BINANCE_ETH": "BINANCE:ETHUSDT",
-  "BINANCE_SOL": "BINANCE:SOLUSDT",
+  BINANCE_BTC: "BINANCE:BTCUSDT",
+  BINANCE_ETH: "BINANCE:ETHUSDT",
+  BINANCE_SOL: "BINANCE:SOLUSDT",
 };
 
 interface ChartSectionProps {
@@ -36,8 +37,8 @@ export default function ChartSection({
       const TV = (window as any).TradingView;
       if (TV && TV.widget) {
         new TV.widget({
-          width: "100%",
-          height: 360,
+          // 🔹 컨테이너 크기에 자동 맞춤
+          autosize: true,
           symbol,
           interval: "60",
           timezone: "Asia/Seoul",
@@ -61,11 +62,12 @@ export default function ChartSection({
   }, []);
 
   return (
-    <section className="mb-6 rounded-xl bg-slate-900/60 p-3 border border-slate-800/50">
+    // 🔹 모바일에서는 화면 전체 폭 사용(-mx-4), PC에서는 기존 그대로
+    <section className="mb-6 -mx-4 sm:mx-0 bg-slate-900/60 border-y border-slate-800/50 sm:border sm:rounded-xl sm:p-3">
       <div
         id="kimpai-main-chart"
         ref={containerRef}
-        className="w-full h-[360px] rounded-lg overflow-hidden bg-slate-900"
+        className="w-full h-[360px] bg-slate-900 sm:rounded-lg"
       >
         <div className="w-full h-full flex items-center justify-center text-slate-400 text-sm">
           차트 로딩 중...

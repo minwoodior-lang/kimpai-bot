@@ -64,15 +64,18 @@ export function TodayPremiumSection({
       )}
 
       {/* 공통 콘텐츠 베이스 - desktop 레이아웃 */}
-      <AiSummaryContentBase
-        avgPremium={avgPremium}
-        maxPremium={maxPremium}
-        minPremium={minPremium}
-        fxRate={fxRate}
-        score={score}
-        layout="desktop"
-        marketSummary={marketSummary}
-      />
+      <div className={compact ? "" : "mt-2 md:mt-[20px]"}>
+
+        <AiSummaryContentBase
+          avgPremium={avgPremium}
+          maxPremium={maxPremium}
+          minPremium={minPremium}
+          fxRate={fxRate}
+          score={score}
+          layout="desktop"
+          marketSummary={marketSummary}
+        />
+      </div>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+// src/components/charts/TradingViewChart.tsx
 import React, { useEffect, useRef } from "react";
 
 interface TradingViewChartProps {
@@ -5,7 +6,18 @@ interface TradingViewChartProps {
   height?: number | string;
   domesticExchange?: string;
   foreignExchange?: string;
-  defaultTimeframe?: "1m" | "3m" | "5m" | "15m" | "30m" | "1h" | "2h" | "3h" | "4h" | "1d" | "1w";
+  defaultTimeframe?:
+    | "1m"
+    | "3m"
+    | "5m"
+    | "15m"
+    | "30m"
+    | "1h"
+    | "2h"
+    | "3h"
+    | "4h"
+    | "1d"
+    | "1w";
 }
 
 // 시간간격을 TradingView interval로 변환
@@ -33,9 +45,16 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
   foreignExchange,
   defaultTimeframe = "1h",
 }) => {
-  // 모바일 환경에서 높이 축소
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const chartHeight = isMobile && typeof height === 'number' ? Math.min(height, 240) : height;
+  // 모바일 여부
+  const isMobile =
+    typeof window !== "undefined" && window.innerWidth < 768;
+
+  // 모바일이면 높이 조금 줄이기(선택사항)
+  const chartHeight =
+    isMobile && typeof height === "number"
+      ? Math.min(height, 240)
+      : height;
+
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -50,7 +69,6 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
     script.type = "text/javascript";
     script.async = true;
 
-    // TradingView에서 그대로 요구하는 JSON 설정을 문자열로 넣어줍니다.
     const config = {
       autosize: true,
       symbol: tvSymbol || "BINANCE:BTCUSDT",
@@ -60,7 +78,10 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
       style: "1",
       locale: "kr",
       enable_publishing: false,
-      hide_top_toolbar: false,
+
+      // 🔹 PC에서는 그대로, 모바일에서는 상단 툴바(심볼 드롭다운 포함) 숨김
+      hide_top_toolbar: isMobile ? true : false,
+
       hide_legend: false,
       save_image: false,
       hide_volume: false,
@@ -69,9 +90,8 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
     };
 
     script.innerHTML = JSON.stringify(config);
-
     containerRef.current.appendChild(script);
-  }, [tvSymbol, defaultTimeframe]);
+  }, [tvSymbol, defaultTimeframe, isMobile]);
 
   const getExchangeName = (exchange?: string) => {
     if (!exchange) return "";
@@ -90,7 +110,9 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
           </p>
         </div>
       )}
-      <div className="flex-1 w-full overflow-hidden">
+
+      {/* overflow-hidden 제거해서 위젯은 자유롭게, 대신 툴바는 모바일에서 숨김 */}
+      <div className="flex-1 w-full">
         <div
           ref={containerRef}
           className="tradingview-widget-container h-full w-full"

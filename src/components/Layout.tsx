@@ -1,3 +1,4 @@
+// src/components/Layout.tsx
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
@@ -51,7 +52,9 @@ export default function Layout({ children }: LayoutProps) {
   useEffect(() => {
     let sessionId = localStorage.getItem("kimpai_session_id");
     if (!sessionId) {
-      sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      sessionId = `session_${Date.now()}_${Math.random()
+        .toString(36)
+        .substr(2, 9)}`;
       localStorage.setItem("kimpai_session_id", sessionId);
     }
 
@@ -85,7 +88,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen flex flex-col bg-slate-900 text-slate-100 overflow-x-hidden">
       <header className="w-full bg-[#020617] border-b border-white/5 overflow-x-hidden">
-        <div className="mx-auto max-w-[1280px] px-6 flex items-center justify-between h-14">
+        <div className="mx-auto max-w-[1280px] px-3 sm:px-4 md:px-6 flex items-center justify-between h-14">
           <nav className="border-b border-slate-800 flex-1">
             <div className="flex justify-between items-center h-14">
               <Link href="/" className="flex items-center gap-2">
@@ -182,8 +185,18 @@ export default function Layout({ children }: LayoutProps) {
               className="text-slate-400 hover:text-white transition-colors p-1"
               aria-label="닫기"
             >
-              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-5 h-5 sm:w-6 sm:h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -227,32 +240,30 @@ export default function Layout({ children }: LayoutProps) {
       </div>
 
       <main className="flex-grow w-full text-slate-50 overflow-x-hidden">
-        <div className="mx-auto w-full max-w-[1280px] px-6">
+        <div className="mx-auto w-full max-w-[1280px] px-3 sm:px-4 md:px-6">
           {children}
         </div>
       </main>
 
-
       <footer className="border-t dark:border-slate-800 light:border-slate-200 mt-14">
-        <div className="w-full flex justify-center py-6 sm:py-10 px-4">
+        <div className="w-full flex justify-center py-6 sm:py-10 px-3 sm:px-4">
           <div className="text-center dark:text-slate-400 light:text-slate-600 text-[11px] sm:text-[13px] leading-relaxed">
-
             <p className="mb-1 sm:mb-2">
-              데이터 출처: 업비트, 빗썸, 코인원, 바이낸스 등 주요 국내·글로벌 거래소의 공개 API를 사용합니다.
+              데이터 출처: 업비트, 빗썸, 코인원, 바이낸스 등 주요 국내·글로벌
+              거래소의 공개 API를 사용합니다.
             </p>
 
             <p className="mb-3 sm:mb-4">
-              AI 분석: 과거 김프 패턴과 거래량, 시장 심리를 기반으로 한 예측 모델을 활용합니다.
+              AI 분석: 과거 김프 패턴과 거래량, 시장 심리를 기반으로 한 예측
+              모델을 활용합니다.
             </p>
 
             <p className="dark:text-slate-500 light:text-slate-500 text-[10px] sm:text-[12px]">
               © 2024 KimpAI. 모든 권리 보유.
             </p>
-
           </div>
         </div>
       </footer>
-
 
       <ScrollToTopButton />
     </div>

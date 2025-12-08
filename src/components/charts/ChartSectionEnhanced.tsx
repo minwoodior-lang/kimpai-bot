@@ -1,122 +1,81 @@
-import { useEffect, useRef, useState } from "react";
+// src/components/ChartSectionEnhanced.tsx
+import React, { useEffect, useRef, useState, useMemo } from "react";
+import dynamic from "next/dynamic";
 
-// 전체 지표 매핑 (KIMPGA 스타일)
-const SYMBOL_MAP: Record<string, string> = {
-  // A. BTC / Premium Indicators
-  "UPBIT_BTC_KRW_PREMIUM": "KRW_BTC_PREMIUM",
-  "BITHUMB_BTC_KRW_PREMIUM": "KRW_BTC_BITHUMB_PREMIUM",
-  "COINBASE_BTC_PREMIUM": "BTC_COINBASE_PREMIUM",
-  "BTC_LONGS": "BTC_LONGS",
-  "BTC_SHORTS": "BTC_SHORTS",
-  "BTC_DOMINANCE": "CRYPTOCAP:BTC.D",
+const TradingViewChart = dynamic(() => import("./charts/TradingViewChart"), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[360px] bg-slate-900/50 animate-pulse rounded-xl" />
+  ),
+});
 
-  // B. Market Index
-  "TOTAL_MARKET_CAP": "CRYPTOCAP:TOTAL",
-  "TOTAL2_INDEX": "CRYPTOCAP:TOTAL2",
-  "TOTAL3_INDEX": "CRYPTOCAP:TOTAL3",
-
-  // C. Extended Indicators
-  "ALT_DOMINANCE": "CRYPTOCAP:ALTCAP.D",
-  "KOREA_PREMIUM_INDEX": "KRW_KOREA_PREMIUM_INDEX",
+// 차트 선택 목록 그룹 (예시 — 기존과 동일하게 유지)
+const INDICATOR_GROUPS: Record<string, string[]> = {
+  "BTC / PREMIUM": [
+    "Binance BTC USDT",
+    "Upbit BTC KRW",
+    "Bithumb BTC KRW",
+    "Coinbase BTC USD",
+    "BTC Longs",
+    "BTC Shorts",
+    "BTC Dominance",
+  ],
+  "MARKET INDEX": ["TOTAL Market Cap", "TOTAL2"],
 };
 
-const INDICATOR_GROUPS = {
-  "BTC / Premium": [
-    { id: "UPBIT_BTC_KRW_PREMIUM", label: "BTC 김치프리미엄 (Upbit)" },
-    { id: "BITHUMB_BTC_KRW_PREMIUM", label: "BTC 김치프리미엄 (Bithumb)" },
-    { id: "COINBASE_BTC_PREMIUM", label: "BTC Coinbase Premium" },
-    { id: "BTC_LONGS", label: "BTC Longs" },
-    { id: "BTC_SHORTS", label: "BTC Shorts" },
-    { id: "BTC_DOMINANCE", label: "BTC Dominance" },
-  ],
-  "Market Index": [
-    { id: "TOTAL_MARKET_CAP", label: "TOTAL Market Cap" },
-    { id: "TOTAL2_INDEX", label: "TOTAL2" },
-    { id: "TOTAL3_INDEX", label: "TOTAL3" },
-  ],
-  "Extended Indicators": [
-    { id: "ALT_DOMINANCE", label: "ALT Dominance" },
-    { id: "KOREA_PREMIUM_INDEX", label: "Korea Premium Index" },
-  ],
-};
+export default function ChartSectionEnhanced({ selectedSymbol, onSelect }: any) {
+  const containerRef = useRef<HTMLDivElement>(null);
 
-interface ChartSectionEnhancedProps {
-  selectedIndicator?: string;
-  onIndicatorChange?: (indicator: string) => void;
-  hideDropdown?: boolean;
-}
-
-/**
- * P-1 향상된 차트 섹션 (KIMPGA 스타일 드롭다운)
- * - 그룹별 지표 선택 가능
- * - TradingView 심볼 자동 연동
- */
-export default function ChartSectionEnhanced({
-  selectedIndicator = "BINANCE_BTC",
-  onIndicatorChange,
-  hideDropdown = false,
-}: ChartSectionEnhancedProps) {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [indicator, setIndicator] = useState("Binance BTC USDT");
 
-  const currentLabel = Object.entries(INDICATOR_GROUPS)
-    .flatMap(([, items]) => items)
-    .find((item) => item.id === selectedIndicator)?.label || "BTC Binance";
-
+  // 차트 리사이즈 옵저버
   useEffect(() => {
-    if (!containerRef.current || !isLoaded) return;
+    if (!containerRef.current) return;
 
-    containerRef.current.innerHTML = "";
+    const resizeObserver = new ResizeObserver(() => {
+      window.dispatchEvent(new Event("resize"));
+    });
+    resizeObserver.observe(containerRef.current);
 
-    const symbol = SYMBOL_MAP[selectedIndicator] ?? "BINANCE:BTCUSDT";
-
-    try {
-      // @ts-ignore
-      const TV = (window as any).TradingView;
-      if (TV && TV.widget) {
-        new TV.widget({
-          width: "100%",
-          height: 360,
-          symbol,
-          interval: "60",
-          timezone: "Asia/Seoul",
-          theme: "dark",
-          style: "1",
-          locale: "kr",
-          toolbar_bg: "#020617",
-          hide_side_toolbar: false,
-          hide_top_toolbar: false,
-          container_id: "kimpai-main-chart",
-        });
-      }
-    } catch (error) {
-      console.error("[ChartSectionEnhanced] Error:", error);
-    }
-  }, [selectedIndicator, isLoaded]);
-
-  useEffect(() => {
-    setIsLoaded(true);
+    return () => resizeObserver.disconnect();
   }, []);
 
-  const handleSelect = (indicatorId: string) => {
-    onIndicatorChange?.(indicatorId);
-    setIsDropdownOpen(false);
-  };
+  // 드롭다운 바깥 클릭 감지
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (!(e.target instanceof Node)) return;
+      const dropdown = document.getElementById("chart-dropdown-wrapper");
+      if (dropdown && !dropdown.contains(e.target)) {
+        setIsDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
-    <section className="mb-2 md:mb-4">
-      {/* 드롭다운 - hideDropdown이 false일 때만 우측 정렬 표시 */}
-      {!hideDropdown && (
-        <div className="flex justify-end mb-2">
-          <div className="relative">
+    <section className="mb-6 rounded-xl bg-slate-900/60 p-3 border border-slate-800/50">
+      {/* 상단 - 개인화 설정 + 드롭다운 */}
+      <div className="flex items-center justify-between mb-2">
+        <button className="bg-slate-700 hover:bg-slate-600 text-white text-xs px-3 py-2 rounded-lg border border-slate-600">
+          개인화 설정
+        </button>
+
+        {/* 드롭다운 컨테이너 */}
+        <div id="chart-dropdown-wrapper" className="relative">
+          {/* 선택된 항목 버튼 */}
           <button
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="flex items-center gap-2 bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-white text-sm hover:border-slate-600 transition-colors"
+            type="button"
+            onClick={() => setIsDropdownOpen((v) => !v)}
+            className="flex items-center gap-1 bg-slate-700 rounded-lg px-3 h-10 border border-slate-600 hover:border-slate-500 text-white text-sm"
           >
-            <span>{currentLabel}</span>
+            {indicator}
             <svg
-              className={`w-4 h-4 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}
+              className={`w-4 h-4 text-slate-300 transition-transform ${
+                isDropdownOpen ? "rotate-180" : ""
+              }`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -125,45 +84,55 @@ export default function ChartSectionEnhanced({
             </svg>
           </button>
 
+          {/* ▼ 드롭다운 메뉴 */}
           {isDropdownOpen && (
-            <div className="absolute top-full left-0 mt-2 w-72 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl z-50 overflow-y-auto max-h-[400px]">
-              {Object.entries(INDICATOR_GROUPS).map(([groupName, items]) => (
-                <div key={groupName}>
-                  <div className="sticky top-0 px-4 py-2.5 bg-slate-900/80 backdrop-blur text-slate-300 text-xs font-bold uppercase tracking-wider border-b border-slate-700">
-                    {groupName}
-                  </div>
+            <div
+              className="
+                absolute top-full right-0 mt-2
+                w-72 max-w-[90vw]
+                bg-slate-800 border border-slate-700
+                rounded-lg shadow-2xl z-50
+                overflow-y-auto max-h-[400px]
+              "
+            >
+              {Object.entries(INDICATOR_GROUPS).map(([group, items]) => (
+                <div key={group} className="border-b border-slate-700/50">
+                  <p className="px-3 py-2 text-xs text-slate-400 uppercase">
+                    {group}
+                  </p>
+
                   {items.map((item) => (
                     <button
-                      key={item.id}
-                      onClick={() => handleSelect(item.id)}
-                      className={`w-full text-left px-4 py-2 text-sm transition-colors ${
-                        selectedIndicator === item.id
-                          ? "bg-blue-500/25 text-blue-300 border-l-2 border-blue-400"
-                          : "hover:bg-slate-700/40 text-slate-300 border-l-2 border-transparent"
-                      }`}
+                      key={item}
+                      type="button"
+                      onClick={() => {
+                        setIndicator(item);
+                        setIsDropdownOpen(false);
+                        if (onSelect) onSelect(item);
+                      }}
+                      className={`
+                        w-full text-left px-3 py-2 text-sm
+                        hover:bg-slate-700
+                        ${indicator === item ? "bg-slate-700/60" : ""}
+                      `}
                     >
-                      {item.label}
+                      {item}
                     </button>
                   ))}
                 </div>
               ))}
             </div>
           )}
-          </div>
         </div>
-      )}
+      </div>
 
-      {/* 차트 박스 */}
-      <div className="w-full rounded-2xl border border-slate-700/60 bg-slate-900/20 pt-4 pb-2 px-4 overflow-hidden">
-        <div
-          id="kimpai-main-chart"
-          ref={containerRef}
-          className="w-full h-[220px] md:h-[320px] lg:h-[360px] rounded-lg overflow-hidden"
-        >
-          <div className="w-full h-full flex items-center justify-center text-slate-400 text-sm">
-            차트 로딩 중...
-          </div>
-        </div>
+      {/* ▼ 차트 영역 */}
+      <div
+        id="kimpai-main-chart"
+        ref={containerRef}
+        className="w-full h-[360px] rounded-lg bg-slate-900 overflow-hidden"
+      >
+        <TradingViewChart indicator={indicator} />
       </div>
     </section>
   );

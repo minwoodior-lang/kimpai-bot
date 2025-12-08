@@ -262,8 +262,8 @@ export default function Home() {
               </button>
             </div>
 
-            {/* 공통 카드 껍데기 - 고정 높이 */}
-            <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 px-4 py-3 h-[180px] flex flex-col">
+            {/* 공통 카드 껍데기 - 모바일 전용, 내용에 따라 자동 높이 */}
+            <div className="rounded-2xl border border-slate-700/60 bg-slate-900/40 px-4 py-3 pb-3 min-h-[260px] h-auto flex flex-col">
               {mobileCardTab === "ai" && (
                 <AiSummaryMobileContent
                   avgPremium={
@@ -317,33 +317,46 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 프리미엄 차트 섹션 */}
-          <section className="mt-3 md:mt-6 mb-4 md:mb-6">
-            {/* 상단 타이틀 + 버튼 영역 */}
-            <div className="mb-2 sm:mb-2.5 flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3">
-              <h2 className="text-xs sm:text-sm text-slate-200">
-                프리미엄 차트
-              </h2>
+            {/* 프리미엄 차트 섹션 */}
+            <section className="mt-3 md:mt-6 mb-4 md:mb-6">
 
-              <div className="flex items-center gap-1.5 md:gap-2">
-                <button
-                  onClick={() => setIsPrefsPanelOpen(true)}
-                  className="inline-flex items-center justify-center h-9 rounded-md bg-slate-800 px-3 text-[11px] sm:text-sm text-slate-100 hover:bg-slate-700 transition"
-                >
-                  <span className="mr-1">⚙</span>
-                  <span>개인화 설정</span>
-                </button>
+              {/* 제목 + 버튼 영역 */}
+              <div
+                className="
+                  flex flex-row flex-wrap      /* ★ 모바일도 한 줄, 필요하면 줄바꿈 */
+                  items-center                
+                  md:flex-nowrap              /* ★ PC에서는 줄바꿈 없이 */
+                  md:justify-between
+                  gap-1.5 md:gap-3
+                  mb-2 sm:mb-2.5
+                "
+              >
+                {/* 제목 — 모바일/PC 둘 다 같은 라인 */}
+                <h2 className="text-xs sm:text-sm text-slate-200 mr-2">
+                  프리미엄 차트
+                </h2>
 
-                <IndicatorSelector
-                  selectedIndicator={selectedIndicator}
-                  onIndicatorChange={setSelectedIndicator}
-                />
+                {/* 버튼들 */}
+                <div className="flex items-center gap-1.5 md:gap-2 ml-auto md:ml-0">
+                  <button
+                    onClick={() => setIsPrefsPanelOpen(true)}
+                    className="inline-flex items-center justify-center h-9 rounded-md bg-slate-800 px-3 text-[11px] sm:text-sm text-slate-100 hover:bg-slate-700 transition"
+                  >
+                    <span className="mr-1">⚙</span>
+                    <span>개인화 설정</span>
+                  </button>
+
+                  <IndicatorSelector
+                    selectedIndicator={selectedIndicator}
+                    onIndicatorChange={setSelectedIndicator}
+                  />
+                </div>
               </div>
-            </div>
+
 
             {/* 차트만 hideChart 적용 */}
             {!prefs.hideChart && (
-              <div className="w-full h-[200px] sm:h-[240px] md:h-[320px] overflow-hidden border border-white/5 bg-[#050819]">
+              <div className="w-full h-[200px] sm:h-[240px] md:h-[320px] border border-white/5 bg-[#050819]">
                 <TradingViewChartDynamic
                   tvSymbol={SYMBOL_MAP[selectedIndicator] || "BINANCE:BTCUSDT"}
                   height="100%"
