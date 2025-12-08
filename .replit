@@ -86,4 +86,4 @@ NODE_ENV = "production"
 [deployment]
 run = ["npm", "start"]
 deploymentTarget = "vm"
-build = ["npm", "run"]
+build = ["npm", "run", "build"]
