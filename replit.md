@@ -48,3 +48,26 @@ KimpAI is a real-time analytics dashboard designed to track and display the "Kim
 - **Cloud Platform:** Render (used for proxy services)
 - **APIs:** CoinGecko, TradingView
 - **Frontend Technologies:** Next.js 14, React, Tailwind CSS
+
+### Deployment Configuration
+**⚠️ CRITICAL: This application MUST use Reserved VM deployment, NOT Autoscale.**
+
+**Deployment Type:** Reserved VM (Web Server)
+- **Build Command:** `npm run build`
+- **Run Command:** `npm start` (executes `tsx server.ts`)
+- **Port:** 5000 (internally), forwards to port 80 (externally)
+
+**Why Reserved VM is Required:**
+This application runs continuous background workers and WebSocket connections that operate outside of HTTP request handling:
+- **Price Worker** (`workers/priceWorker.ts`): 300ms update cycle for real-time price collection
+- **WebSocket Streams**: Continuous connections to multiple exchanges (Binance, OKX, Bybit, MEXC, Gate.io)
+- **Chat Server**: WebSocket server for real-time chat functionality
+- **Cron Jobs**: Scheduled market sync every 5 minutes
+
+Autoscale deployments scale down to zero when idle, which would interrupt these continuous processes. Reserved VM keeps the application running continuously, ensuring uninterrupted background operations.
+
+**Health Check Configuration:**
+The server is configured to respond immediately to health checks:
+- **Endpoints:** `/` and `/health`
+- **Response:** 200 OK (immediate, no async operations)
+- **Implementation:** Health check handlers in `server.ts` respond before Next.js initialization completes, ensuring fast response times for deployment health checks.
