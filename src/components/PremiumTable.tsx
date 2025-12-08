@@ -302,23 +302,19 @@ const PremiumTableRow = React.memo(
     return (
       <React.Fragment key={uniqueKey}>
         <tr
-          className="text-[9px] sm:text-[10px] md:text-sm hover:bg-slate-800/60 transition-colors leading-relaxed"
+          className="text-[8px] sm:text-[9px] md:text-sm hover:bg-slate-800/60 transition-colors leading-relaxed"
           data-symbol={row.symbol}
         >
-          {/* 즐겨찾기 */}
-          <td className="w-[24px] sm:w-[30px] text-center py-1 sm:py-1.5 md:py-3 px-1 sm:px-2 md:px-3 lg:px-4 min-h-[44px] sm:min-h-auto">
+          {/* 즐겨찾기 (PC 전용) */}
+          <td className="hidden md:table-cell w-[18px] sm:w-[24px] text-center py-1 sm:py-1.5 md:py-3 px-1 sm:px-2 md:px-3 lg:px-4 min-h-[40px] sm:min-h-auto">
             <button
               type="button"
-              className={`text-[16px] p-0.5 leading-none transition-colors ${
-                isFav
-                  ? "text-[#FDCB52]"
-                  : "text-[#A7B3C6]/40 hover:text-[#FDCB52]"
+              className={`text-[13px] sm:text-[14px] p-0 leading-none transition-colors ${
+                isFav ? "text-[#FDCB52]" : "text-[#A7B3C6]/40 hover:text-[#FDCB52]"
               }`}
               onClick={(e) => {
                 e.stopPropagation();
-                if (toggleFavorite) {
-                  toggleFavorite(row.symbol);
-                }
+                if (toggleFavorite) toggleFavorite(row.symbol);
               }}
               title={isFav ? "즐겨찾기 해제" : "즐겨찾기 추가"}
             >
@@ -326,9 +322,47 @@ const PremiumTableRow = React.memo(
             </button>
           </td>
 
-          {/* 코인명 */}
-          <td className="px-1 sm:px-2 md:px-3 lg:px-4 py-1.5 md:py-3 min-h-[44px] sm:min-h-auto">
-            <div className="flex items-center gap-1 sm:gap-1.5 md:gap-3 min-w-0">
+          {/* 코인명 (모바일: 즐겨찾기 + 차트 버튼 포함) */}
+          <td className="px-[2px] sm:px-2 md:px-3 lg:px-4 py-1.5 md:py-3 min-h-[40px] sm:min-h-auto">
+            <div className="flex items-center gap-[2px] sm:gap-1 md:gap-2 min-w-0">
+              {/* 모바일용 즐겨찾기 + 차트 버튼 묶음 */}
+              <div className="flex items-center gap-[2px] mr-[2px] md:hidden">
+                {/* 즐겨찾기 (모바일) */}
+                <button
+                  type="button"
+                  className={`text-[12px] p-0 leading-none transition-colors ${
+                    isFav
+                      ? "text-[#FDCB52]"
+                      : "text-[#A7B3C6]/40 hover:text-[#FDCB52]"
+                  }`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (toggleFavorite) toggleFavorite?.(row.symbol);
+                  }}
+                  title={isFav ? "즐겨찾기 해제" : "즐겨찾기 추가"}
+                >
+                  ★
+                </button>
+
+                {/* 차트 버튼 (모바일) */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    const next =
+                      expandedSymbol === row.symbol ? null : row.symbol;
+                    setExpandedSymbol(next);
+                    if (onChartSelect && next) {
+                      onChartSelect(row.symbol, domesticExchange, foreignExchange);
+                    }
+                  }}
+                  className="p-0 text-[11px] text-slate-400 hover:text-slate-200 transition-colors flex-shrink-0"
+                  title="차트 보기"
+                >
+                  📈
+                </button>
+              </div>
+
+              {/* 차트 버튼 (PC 전용) */}
               <button
                 type="button"
                 onClick={() => {
@@ -336,21 +370,18 @@ const PremiumTableRow = React.memo(
                     expandedSymbol === row.symbol ? null : row.symbol;
                   setExpandedSymbol(next);
                   if (onChartSelect && next) {
-                    onChartSelect(
-                      row.symbol,
-                      domesticExchange,
-                      foreignExchange
-                    );
+                    onChartSelect(row.symbol, domesticExchange, foreignExchange);
                   }
                 }}
-                className="p-0.5 sm:p-1 text-slate-400 hover:text-slate-200 transition-colors flex-shrink-0 text-xs sm:text-base"
+                className="hidden md:inline-block p-0 text-[11px] sm:text-xs text-slate-400 hover:text-slate-200 transition-colors flex-shrink-0"
                 title="차트 보기"
               >
                 📈
               </button>
+
               <CoinIcon
                 symbol={row.symbol}
-                className="w-3 sm:w-3.5 md:w-8 h-3 sm:h-3.5 md:h-8 flex-shrink-0"
+                className="w-[12px] h-[12px] sm:w-3 sm:h-3 md:w-7 md:h-7 flex-shrink-0"
                 iconUrl={row.icon_url}
               />
               <div
@@ -368,7 +399,15 @@ const PremiumTableRow = React.memo(
           </td>
 
           {/* 현재가 */}
-          <td className="w-[110px] sm:w-[140px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
+          <td
+            className="
+              md:w-[120px]
+              px-[0.5px] sm:px-1.5 md:px-3 lg:px-4
+              py-0.5 sm:py-1.5 md:py-3
+              text-right whitespace-nowrap
+              text-[8px] md:text-[14px]
+            "
+          >
             {priceUnit === "USDT" ? (
               <TwoLinePriceCell
                 topValue={row.koreanPrice}
@@ -389,12 +428,18 @@ const PremiumTableRow = React.memo(
           </td>
 
           {/* 김프 */}
-          <td className="w-[85px] sm:w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
+          <td
+            className="
+              md:w-[90px]
+              px-[0.5px] sm:px-1.5 md:px-3 lg:px-4
+              py-0.5 sm:py-1.5 md:py-3
+              text-right whitespace-nowrap
+              text-[8px] md:text-[14px]
+            "
+          >
             <TwoLineCell
               line1={
-                row.premiumRate !== null
-                  ? formatPercent(row.premiumRate)
-                  : "-"
+                row.premiumRate !== null ? formatPercent(row.premiumRate) : "-"
               }
               line2={
                 row.premiumDiffKrw !== null && row.koreanPrice !== null
@@ -402,21 +447,25 @@ const PremiumTableRow = React.memo(
                   : "-"
               }
               line1Color={
-                isUnlisted
-                  ? "text-gray-500"
-                  : getPremiumColor(row.premiumRate)
+                isUnlisted ? "text-gray-500" : getPremiumColor(row.premiumRate)
               }
               isUnlisted={isUnlisted}
             />
           </td>
 
           {/* 전일대비 */}
-          <td className="w-[140px] sm:w-[160px] md:w-[180px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
+          <td
+            className="
+              md:w-[170px]
+              px-[0.5px] sm:px-1.5 md:px-3 lg:px-4
+              py-0.5 sm:py-1 md:py-3
+              text-right whitespace-nowrap
+              text-[8px] md:text-[14px]
+            "
+          >
             <TwoLineCell
               line1={
-                row.changeRate !== null
-                  ? formatPercent(row.changeRate)
-                  : "-"
+                row.changeRate !== null ? formatPercent(row.changeRate) : "-"
               }
               line2={
                 row.changeAbsKrw !== null && row.koreanPrice !== null
@@ -428,7 +477,7 @@ const PremiumTableRow = React.memo(
           </td>
 
           {/* 고가대비(24h) */}
-          <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
+          <td className="hidden md:table-cell md:w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
             <TwoLineCell
               line1={formatPercent(row.fromHighRate)}
               line2={formatKrwDomestic(row.high24h)}
@@ -437,7 +486,7 @@ const PremiumTableRow = React.memo(
           </td>
 
           {/* 저가대비(24h) */}
-          <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
+          <td className="hidden md:table-cell md:w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
             <TwoLineCell
               line1={formatPercent(row.fromLowRate)}
               line2={formatKrwDomestic(row.low24h)}
@@ -446,7 +495,15 @@ const PremiumTableRow = React.memo(
           </td>
 
           {/* 거래액(일) */}
-          <td className="w-[105px] sm:w-[120px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap pr-0">
+          <td
+            className="
+              md:w-[130px]
+              px-[0.5px] sm:px-1.5 md:px-3 lg:px-4
+              py-0.5 sm:py-1.5 md:py-3
+              text-right whitespace-nowrap pr-0
+              text-[8px] md:text-[14px]
+            "
+          >
             <TwoLineCell
               line1={formatVolumeKRW(row.volume24hKrw)}
               line2={
@@ -1192,21 +1249,22 @@ export default function PremiumTable({
         </div>
       ) : (
         <div className="w-full border border-white/5 bg-[#050819] overflow-hidden">
-          <table className="w-full table-fixed border-separate border-spacing-y-0">
+          <table className="w-full border-separate border-spacing-y-0 table-auto md:table-fixed">
             <colgroup>
-              <col className="w-[24px] sm:w-[30px]" />
-              <col />
-              <col className="w-[110px] sm:w-[140px]" />
-              <col className="w-[85px] sm:w-[90px]" />
-              <col className="w-[140px] sm:w-[160px] md:w-[180px]" />
-              <col className="hidden md:table-column w-[90px] sm:w-[100px]" />
-              <col className="hidden md:table-column w-[90px] sm:w-[100px]" />
-              <col className="w-[105px] sm:w-[120px]" />
+              <col className="md:w-[24px]" /> {/* 즐겨찾기 */}
+              <col className="md:w-auto" /> {/* 코인명 */}
+              <col className="md:w-[120px]" /> {/* 현재가 */}
+              <col className="md:w-[90px]" /> {/* 김프 */}
+              <col className="md:w-[170px]" /> {/* 전일대비 */}
+              <col className="hidden md:table-column md:w-[90px]" /> {/* 고가대비 */}
+              <col className="hidden md:table-column md:w-[90px]" /> {/* 저가대비 */}
+              <col className="md:w-[130px]" /> {/* 거래액(일) */}
             </colgroup>
 
             <thead>
-              <tr className="bg-slate-900/60 text-[#A7B3C6]/60 text-[11px] md:text-sm leading-tight">
-                <th className="w-[26px] sm:w-[30px] min-h-11">
+              <tr className="bg-slate-900/60 text-[#A7B3C6]/60 text-[9px] md:text-sm leading-tight">
+                {/* 즐겨찾기 헤더 (PC 전용) */}
+                <th className="hidden md:table-cell w-[22px] sm:w-[26px] min-h-11">
                   <div className="flex items-center justify-center h-[32px]" />
                 </th>
 
@@ -1215,9 +1273,9 @@ export default function PremiumTable({
                   className="px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 text-left font-medium tracking-wide cursor-pointer hover:text-white transition-colors min-h-11"
                   onClick={() => handleSort("symbol")}
                 >
-                  <div className="flex items-center gap-[2px] sm:gap-[4px]">
-                    <span className="inline-block w-[16px] sm:w-[18px] md:w-[20px]" />
-                    <span className="inline-block w-[18px] sm:w-[20px] md:w-[22px]" />
+                  <div className="flex items-center gap-[1px] sm:gap-[3px] md:gap-[4px]">
+                    <span className="hidden md:inline-block md:w-[18px]" />
+                    <span className="hidden md:inline-block md:w-[20px]" />
                     <span className="whitespace-nowrap">코인명</span>
                     <SortIcon columnKey="symbol" />
                   </div>
@@ -1225,21 +1283,27 @@ export default function PremiumTable({
 
                 {/* 현재가 */}
                 <th
-                  className="w-[110px] sm:w-[140px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11"
+                  className="
+                    px-1 sm:px-2 md:px-3 lg:px-4
+                    py-2.5 text-right font-medium whitespace-nowrap
+                    cursor-pointer hover:text-white transition-colors min-h-11
+                  "
                   onClick={() => handleSort("koreanPrice")}
                 >
                   현재가
                   {prefs?.priceUnit === "USDT" && (
-                    <span className="text-[9px] text-blue-400 ml-0.5">
-                      (USDT)
-                    </span>
+                    <span className="text-[9px] text-blue-400 ml-0.5">(USDT)</span>
                   )}
                   <SortIcon columnKey="koreanPrice" />
                 </th>
 
                 {/* 김프 */}
                 <th
-                  className="w-[80px] sm:w-[95px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11"
+                  className="
+                    px-1 sm:px-2 md:px-3 lg:px-4
+                    py-2.5 text-right font-medium whitespace-nowrap
+                    cursor-pointer hover:text-white transition-colors min-h-11
+                  "
                   onClick={() => handleSort("premiumRate")}
                 >
                   김프
@@ -1248,7 +1312,11 @@ export default function PremiumTable({
 
                 {/* 전일대비 */}
                 <th
-                  className="w-[140px] sm:w-[160px] md:w-[180px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11"
+                  className="
+                    px-1 sm:px-2 md:px-3 lg:px-4
+                    py-2.5 text-right font-medium whitespace-nowrap
+                    cursor-pointer hover:text-white transition-colors min-h-11
+                  "
                   onClick={() => handleSort("changeRate")}
                 >
                   전일대비
@@ -1257,7 +1325,7 @@ export default function PremiumTable({
 
                 {/* 고가대비 */}
                 <th
-                  className="hidden md:table-cell w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11"
+                  className="hidden md:table-cell md:w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11"
                   onClick={() => handleSort("fromHighRate")}
                 >
                   고가대비(24h)
@@ -1266,7 +1334,7 @@ export default function PremiumTable({
 
                 {/* 저가대비 */}
                 <th
-                  className="hidden md:table-cell w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11"
+                  className="hidden md:table-cell md:w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 text-right text-[11px] md:text-xs font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11"
                   onClick={() => handleSort("fromLowRate")}
                 >
                   저가대비(24h)
@@ -1275,7 +1343,11 @@ export default function PremiumTable({
 
                 {/* 거래액 */}
                 <th
-                  className="w-[105px] sm:w-[120px] px-1 sm:px-2 md:px-3 lg:px-4 py-2.5 text-right font-medium whitespace-nowrap cursor-pointer hover:text-white transition-colors min-h-11"
+                  className="
+                    px-1 sm:px-2 md:px-3 lg:px-4
+                    py-2.5 text-right font-medium whitespace-nowrap
+                    cursor-pointer hover:text-white transition-colors min-h-11
+                  "
                   onClick={() => handleSort("volume24hKrw")}
                 >
                   거래액(일)
@@ -1311,6 +1383,7 @@ export default function PremiumTable({
                   openCmcPage={openCmcPage}
                 />
               ))}
+
               {visibleCount < filteredAndSortedData.length && (
                 <tr ref={loadMoreRef}>
                   <td
