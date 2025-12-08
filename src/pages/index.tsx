@@ -309,7 +309,6 @@ export default function Home() {
                     </span>
                   }
                   score={riskScore}
-                  marketSummary={marketSummary}
                 />
               )}
               {mobileCardTab === "pro" && <ProForecastMobileContent />}
