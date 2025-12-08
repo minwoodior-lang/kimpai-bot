@@ -306,10 +306,10 @@ const PremiumTableRow = React.memo(
           data-symbol={row.symbol}
         >
           {/* 즐겨찾기 */}
-          <td className="w-[24px] sm:w-[30px] text-center py-1 sm:py-1.5 md:py-3 px-1 sm:px-2 md:px-3 lg:px-4 min-h-[44px] sm:min-h-auto">
+          <td className="w-[14px] sm:w-[18px] md:w-[26px] text-center py-1 sm:py-1.5 md:py-3 px-0 sm:px-1 md:px-3 lg:px-4 min-h-[44px] sm:min-h-auto">
             <button
               type="button"
-              className={`text-[16px] p-0.5 leading-none transition-colors ${
+              className={`text-[12px] sm:text-[13px] md:text-[16px] p-0 leading-none transition-colors ${
                 isFav
                   ? "text-[#FDCB52]"
                   : "text-[#A7B3C6]/40 hover:text-[#FDCB52]"
@@ -326,49 +326,47 @@ const PremiumTableRow = React.memo(
             </button>
           </td>
 
+
+
           {/* 코인명 */}
-          <td className="px-1 sm:px-2 md:px-3 lg:px-4 py-1.5 md:py-3 min-h-[44px] sm:min-h-auto">
-            <div className="flex items-center gap-1 sm:gap-1.5 md:gap-3 min-w-0">
+          <td className="pl-0 pr-1 sm:px-2 md:px-3 lg:px-4 py-1.5 md:py-3 min-h-[44px] sm:min-h-auto">
+            <div className="flex items-center gap-[1px] sm:gap-1 md:gap-3 min-w-0">
               <button
                 type="button"
                 onClick={() => {
-                  const next =
-                    expandedSymbol === row.symbol ? null : row.symbol;
+                  const next = expandedSymbol === row.symbol ? null : row.symbol;
                   setExpandedSymbol(next);
                   if (onChartSelect && next) {
-                    onChartSelect(
-                      row.symbol,
-                      domesticExchange,
-                      foreignExchange
-                    );
+                    onChartSelect(row.symbol, domesticExchange, foreignExchange);
                   }
                 }}
-                className="p-0.5 sm:p-1 text-slate-400 hover:text-slate-200 transition-colors flex-shrink-0 text-xs sm:text-base"
+                className="p-0.5 sm:p-1 text-slate-400 hover:text-slate-200 transition-colors flex-shrink-0 text-[10px] sm:text-xs md:text-sm leading-none"
                 title="차트 보기"
               >
                 📈
               </button>
               <CoinIcon
                 symbol={row.symbol}
-                className="w-3 sm:w-3.5 md:w-8 h-3 sm:h-3.5 md:h-8 flex-shrink-0"
+                className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-7 md:h-7 flex-shrink-0"
                 iconUrl={row.icon_url}
               />
               <div
                 className="flex flex-col flex-1 min-w-0 cursor-pointer"
                 onClick={() => openCmcPage(row.symbol, row.cmcSlug)}
               >
-                <span className="truncate text-[11px] sm:text-[13px] md:text-[14px] font-medium text-white hover:text-blue-400 transition-colors">
+                <span className="truncate text-[10px] sm:text-[12px] md:text-[14px] font-medium text-white hover:text-blue-400 transition-colors">
                   {getDisplayName(row)}
                 </span>
-                <span className="truncate text-[9px] sm:text-[11px] md:text-[12px] text-gray-500 uppercase tracking-tight">
+                <span className="truncate text-[9px] sm:text-[10px] md:text-[12px] text-gray-500 uppercase tracking-tight">
                   {getDisplaySymbol(row.symbol)}
                 </span>
               </div>
             </div>
           </td>
 
+
           {/* 현재가 */}
-          <td className="w-[110px] sm:w-[140px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
+          <td className="px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap text-[9px] sm:text-[10px] md:text-[13px]">
             {priceUnit === "USDT" ? (
               <TwoLinePriceCell
                 topValue={row.koreanPrice}
@@ -389,12 +387,10 @@ const PremiumTableRow = React.memo(
           </td>
 
           {/* 김프 */}
-          <td className="w-[85px] sm:w-[90px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
+          <td className="px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap text-[9px] sm:text-[10px] md:text-[13px]">
             <TwoLineCell
               line1={
-                row.premiumRate !== null
-                  ? formatPercent(row.premiumRate)
-                  : "-"
+                row.premiumRate !== null ? formatPercent(row.premiumRate) : "-"
               }
               line2={
                 row.premiumDiffKrw !== null && row.koreanPrice !== null
@@ -402,21 +398,17 @@ const PremiumTableRow = React.memo(
                   : "-"
               }
               line1Color={
-                isUnlisted
-                  ? "text-gray-500"
-                  : getPremiumColor(row.premiumRate)
+                isUnlisted ? "text-gray-500" : getPremiumColor(row.premiumRate)
               }
               isUnlisted={isUnlisted}
             />
           </td>
 
           {/* 전일대비 */}
-          <td className="w-[140px] sm:w-[160px] md:w-[180px] px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap">
+          <td className="px-1 sm:px-2 md:px-3 lg:px-4 py-0.5 sm:py-1 md:py-3 text-right whitespace-nowrap text-[9px] sm:text-[10px] md:text-[13px]">
             <TwoLineCell
               line1={
-                row.changeRate !== null
-                  ? formatPercent(row.changeRate)
-                  : "-"
+                row.changeRate !== null ? formatPercent(row.changeRate) : "-"
               }
               line2={
                 row.changeAbsKrw !== null && row.koreanPrice !== null
@@ -427,26 +419,8 @@ const PremiumTableRow = React.memo(
             />
           </td>
 
-          {/* 고가대비(24h) */}
-          <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
-            <TwoLineCell
-              line1={formatPercent(row.fromHighRate)}
-              line2={formatKrwDomestic(row.high24h)}
-              line1Color={getChangeColor(row.fromHighRate)}
-            />
-          </td>
-
-          {/* 저가대비(24h) */}
-          <td className="hidden md:table-cell w-[90px] sm:w-[100px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap">
-            <TwoLineCell
-              line1={formatPercent(row.fromLowRate)}
-              line2={formatKrwDomestic(row.low24h)}
-              line1Color={getChangeColor(row.fromLowRate)}
-            />
-          </td>
-
           {/* 거래액(일) */}
-          <td className="w-[105px] sm:w-[120px] px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap pr-0">
+          <td className="px-1 sm:px-2 md:px-3 lg:px-4 py-1 sm:py-1.5 md:py-3 text-right whitespace-nowrap text-[9px] sm:text-[10px] md:text-[13px]">
             <TwoLineCell
               line1={formatVolumeKRW(row.volume24hKrw)}
               line2={
@@ -456,6 +430,7 @@ const PremiumTableRow = React.memo(
               }
             />
           </td>
+
         </tr>
 
         {/* 펼친 차트 */}
@@ -1192,17 +1167,33 @@ export default function PremiumTable({
         </div>
       ) : (
         <div className="w-full border border-white/5 bg-[#050819] overflow-hidden">
-          <table className="w-full table-fixed border-separate border-spacing-y-0">
-            <colgroup>
-              <col className="w-[24px] sm:w-[30px]" />
-              <col />
-              <col className="w-[110px] sm:w-[140px]" />
-              <col className="w-[85px] sm:w-[90px]" />
-              <col className="w-[140px] sm:w-[160px] md:w-[180px]" />
-              <col className="hidden md:table-column w-[90px] sm:w-[100px]" />
-              <col className="hidden md:table-column w-[90px] sm:w-[100px]" />
-              <col className="w-[105px] sm:w-[120px]" />
-            </colgroup>
+            <table className="w-full table-auto md:table-fixed border-separate border-spacing-y-0">
+              <colgroup>
+                {/* ★ 즐겨찾기 */}
+                <col className="w-[12px] md:w-[26px]" />
+
+                {/* 📈+코인 */}
+                <col className="w-[70px] md:w-auto" />
+
+                {/* 현재가 */}
+                <col className="w-[60px] md:w-[140px]" />
+
+                {/* 김프 */}
+                <col className="w-[42px] md:w-[95px]" />
+
+                {/* 전일대비 */}
+                <col className="w-[60px] md:w-[180px]" />
+
+                {/* 고가/저가는 md 이상에서만 */}
+                <col className="hidden md:table-column w-[90px]" />
+                <col className="hidden md:table-column w-[90px]" />
+
+                {/* 거래액(일) – 모바일 Auto */}
+                <col className="w-auto md:w-[120px]" />
+              </colgroup>
+
+
+
 
             <thead>
               <tr className="bg-slate-900/60 text-[#A7B3C6]/60 text-[11px] md:text-sm leading-tight">
