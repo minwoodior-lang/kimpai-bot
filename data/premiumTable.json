@@ -15,7 +15,7 @@
     "change24hAbs": -1.07,
     "high24h": 55.49,
     "low24h": 49.74,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "EGL1",
@@ -33,7 +33,7 @@
     "change24hAbs": -0.0004299999999999998,
     "high24h": 0.01867,
     "low24h": 0.01802,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "BOA",
@@ -51,7 +51,7 @@
     "change24hAbs": 0.05,
     "high24h": 4.129,
     "low24h": 3.89,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ENJ",
@@ -63,13 +63,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/ENJ.png",
     "cmcSlug": null,
-    "volume24hKrw": 6746871671.297028,
-    "volume24hForeignKrw": 99108831.59845407,
+    "volume24hKrw": 6747536951.103774,
+    "volume24hForeignKrw": 676138548.375794,
     "change24hRate": 32.91,
     "change24hAbs": 15.88,
     "high24h": 75.28,
     "low24h": 52.5,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "SPA",
@@ -87,7 +87,7 @@
     "change24hAbs": 0.005322,
     "high24h": null,
     "low24h": null,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "PRIME",
@@ -105,7 +105,7 @@
     "change24hAbs": -0.04400000000000004,
     "high24h": 0.999,
     "low24h": 0.939,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "CLOUD",
@@ -123,25 +123,25 @@
     "change24hAbs": -0.00655,
     "high24h": 0.09781,
     "low24h": 0.08908,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "CRU",
     "name_ko": "크러스트 네트워크",
     "name_en": "Crust Network",
     "koreanPrice": 50,
-    "globalPrice": 0.02857,
-    "premium": 19.08,
+    "globalPrice": 0.0285,
+    "premium": 19.37,
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": "crust-network",
-    "volume24hKrw": 27161847.79616289,
-    "volume24hForeignKrw": 27161847.79616289,
+    "volume24hKrw": 27186784.395779483,
+    "volume24hForeignKrw": 27186784.395779483,
     "change24hRate": 0,
-    "change24hAbs": 0.02857,
+    "change24hAbs": 0.0285,
     "high24h": null,
     "low24h": null,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "MOG",
@@ -159,7 +159,7 @@
     "change24hAbs": 0.0005,
     "high24h": 0.0005,
     "low24h": 0.0005,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "EVERY",
@@ -177,7 +177,7 @@
     "change24hAbs": 0.0001852,
     "high24h": null,
     "low24h": null,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "ZKL",
@@ -195,7 +195,7 @@
     "change24hAbs": 8.65,
     "high24h": 8.65,
     "low24h": 8.65,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "FIS",
@@ -208,12 +208,12 @@
     "iconUrl": null,
     "cmcSlug": "stafi",
     "volume24hKrw": 964683.3525,
-    "volume24hForeignKrw": 254722611.16400003,
+    "volume24hForeignKrw": 254731135.54,
     "change24hRate": 0,
     "change24hAbs": 50,
     "high24h": 100.3,
     "low24h": 48.78,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "NEON",
@@ -231,25 +231,25 @@
     "change24hAbs": -0.0030999999999999986,
     "high24h": 0.06573,
     "low24h": 0.0616,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "MEME",
     "name_ko": "밈코인",
     "name_en": "Memecoin",
     "koreanPrice": 1.975,
-    "globalPrice": 0.001183,
-    "premium": 13.59,
+    "globalPrice": 0.001182,
+    "premium": 13.69,
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": "meme",
     "volume24hKrw": 32359.9983,
-    "volume24hForeignKrw": 2324697683.5164137,
+    "volume24hForeignKrw": 248153086.9281502,
     "change24hRate": 0,
     "change24hAbs": 1.975,
     "high24h": 1.976,
     "low24h": 1.975,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "SEND",
@@ -267,7 +267,7 @@
     "change24hAbs": 420.5,
     "high24h": 420.5,
     "low24h": 420.5,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "DMAIL",
@@ -285,7 +285,7 @@
     "change24hAbs": 4.612,
     "high24h": 7.45,
     "low24h": 3.543,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "XCN",
@@ -303,7 +303,7 @@
     "change24hAbs": -0.223,
     "high24h": 7.815,
     "low24h": 7.618,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "PIB",
@@ -321,7 +321,7 @@
     "change24hAbs": 0.2933,
     "high24h": 0.2933,
     "low24h": 0.2846,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "AI",
@@ -334,12 +334,12 @@
     "iconUrl": null,
     "cmcSlug": "sleepless-ai",
     "volume24hKrw": 350877.6139,
-    "volume24hForeignKrw": 2029922391.9891028,
+    "volume24hForeignKrw": 2029930355.3288872,
     "change24hRate": 0,
     "change24hAbs": 68.1,
     "high24h": 68.95,
     "low24h": 64.35,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "VINE",
@@ -357,7 +357,7 @@
     "change24hAbs": 46.54,
     "high24h": 46.54,
     "low24h": 46.36,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "PIXEL",
@@ -375,7 +375,7 @@
     "change24hAbs": -0.00033000000000000043,
     "high24h": 0.01051,
     "low24h": 0.00994,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "CLEAR",
@@ -393,7 +393,7 @@
     "change24hAbs": 0.005884,
     "high24h": null,
     "low24h": null,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "SCA",
@@ -411,25 +411,25 @@
     "change24hAbs": -0.00034,
     "high24h": 0.05355,
     "low24h": 0.05092,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "YALA",
     "name_ko": "얄라",
     "name_en": "Yala",
     "koreanPrice": 42,
-    "globalPrice": 0.0276,
-    "premium": 3.54,
+    "globalPrice": 0.02759,
+    "premium": 3.58,
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": "yala",
-    "volume24hKrw": 195304879.0872088,
-    "volume24hForeignKrw": 195304879.0872088,
-    "change24hRate": 0,
-    "change24hAbs": 0.02751,
-    "high24h": null,
-    "low24h": null,
-    "updatedAt": 1765219865638
+    "volume24hKrw": 3753302824.8101315,
+    "volume24hForeignKrw": 3753302824.8101315,
+    "change24hRate": -3.7334263782275,
+    "change24hAbs": null,
+    "high24h": 0.02905,
+    "low24h": 0.02711,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "AEVO",
@@ -447,7 +447,7 @@
     "change24hAbs": -0.0006399999999999947,
     "high24h": 0.04554,
     "low24h": 0.04232,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "PNUT",
@@ -460,12 +460,12 @@
     "iconUrl": null,
     "cmcSlug": "peanut-the-squirrel",
     "volume24hKrw": 2234985.3136,
-    "volume24hForeignKrw": 5895930994.645748,
+    "volume24hForeignKrw": 5895908682.047477,
     "change24hRate": 0,
     "change24hAbs": 136.2,
     "high24h": 156.5,
     "low24h": 124.6,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "PROM",
@@ -478,12 +478,12 @@
     "iconUrl": "/icons/UPBIT/PROM.png",
     "cmcSlug": "prom",
     "volume24hKrw": 0.00174342,
-    "volume24hForeignKrw": 2154535131.48904,
+    "volume24hForeignKrw": 2154644471.2055593,
     "change24hRate": -7.08007341,
     "change24hAbs": -0.00000733,
     "high24h": 0.0000962,
     "low24h": 0.00009615,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "GM",
@@ -496,12 +496,12 @@
     "iconUrl": null,
     "cmcSlug": "gomble",
     "volume24hKrw": 15609.4,
-    "volume24hForeignKrw": 17662657.530616757,
+    "volume24hForeignKrw": 17650635.606671285,
     "change24hRate": 0,
     "change24hAbs": 14.2,
     "high24h": 14.2,
     "low24h": 14.19,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "UOS",
@@ -519,7 +519,7 @@
     "change24hAbs": -0.06,
     "high24h": 15.78,
     "low24h": 15.27,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "FRAG",
@@ -537,25 +537,7 @@
     "change24hAbs": 4.001,
     "high24h": 8.56,
     "low24h": 3.61,
-    "updatedAt": 1765219865637
-  },
-  {
-    "symbol": "DYDX",
-    "name_ko": "디와이디엑스",
-    "name_en": "dYdX",
-    "koreanPrice": 302,
-    "globalPrice": 0.1995,
-    "premium": 3,
-    "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": "dydx",
-    "volume24hKrw": 1237501347.2757688,
-    "volume24hForeignKrw": 3645768020.525832,
-    "change24hRate": -5.33,
-    "change24hAbs": -17,
-    "high24h": 345,
-    "low24h": 300,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "LWA",
@@ -573,43 +555,61 @@
     "change24hAbs": 0.373,
     "high24h": 9.21,
     "low24h": 8.698,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
+  },
+  {
+    "symbol": "DYDX",
+    "name_ko": "디와이디엑스",
+    "name_en": "dYdX",
+    "koreanPrice": 302,
+    "globalPrice": 0.1996,
+    "premium": 2.95,
+    "usdKrw": 1469.72,
+    "iconUrl": null,
+    "cmcSlug": "dydx",
+    "volume24hKrw": 1237501347.2757688,
+    "volume24hForeignKrw": 7365279414.174105,
+    "change24hRate": -5.33,
+    "change24hAbs": -17,
+    "high24h": 345,
+    "low24h": 300,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "GHUB",
     "name_ko": "젬허브",
     "name_en": "GemHUB",
     "koreanPrice": 19.45,
-    "globalPrice": 0.01287,
-    "premium": 2.83,
+    "globalPrice": 0.01288,
+    "premium": 2.75,
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": "gemhub",
     "volume24hKrw": 42890151.7845,
-    "volume24hForeignKrw": 61901008.598926,
+    "volume24hForeignKrw": 61908358.521674,
     "change24hRate": 0,
     "change24hAbs": 19.45,
     "high24h": 20.19,
     "low24h": 19.2,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "TWT",
     "name_ko": "트러스트 월렛 토큰",
     "name_en": "Trust Wallet Token",
     "koreanPrice": 1509,
-    "globalPrice": 0.9991,
-    "premium": 2.77,
+    "globalPrice": 0.9993,
+    "premium": 2.74,
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": null,
-    "volume24hKrw": 3018785731.312064,
-    "volume24hForeignKrw": 3018785731.312064,
-    "change24hRate": -1.6730636748351555,
-    "change24hAbs": null,
-    "high24h": 1.03,
-    "low24h": 0.9885,
-    "updatedAt": 1765219865637
+    "volume24hKrw": 599725361.3814635,
+    "volume24hForeignKrw": 599725361.3814635,
+    "change24hRate": -1.7500000000000002,
+    "change24hAbs": -0.017800000000000038,
+    "high24h": 1.0313,
+    "low24h": 0.99,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "WAXL",
@@ -627,7 +627,7 @@
     "change24hAbs": -2,
     "high24h": 172,
     "low24h": 168,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "ZKJ",
@@ -645,7 +645,7 @@
     "change24hAbs": 69.75,
     "high24h": 69.8,
     "low24h": 68.1,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "AMP",
@@ -663,7 +663,7 @@
     "change24hAbs": -0.01,
     "high24h": 3.204,
     "low24h": 3.127,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "CFG",
@@ -681,7 +681,7 @@
     "change24hAbs": 205,
     "high24h": 215.9,
     "low24h": 191.1,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "TAVA",
@@ -694,12 +694,12 @@
     "iconUrl": null,
     "cmcSlug": "altava",
     "volume24hKrw": 201232944.9219957,
-    "volume24hForeignKrw": 1001696796.2743368,
+    "volume24hForeignKrw": 999905177.0171739,
     "change24hRate": -0.27,
     "change24hAbs": -0.023,
     "high24h": 8.84,
     "low24h": 8.443,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "MAVIA",
@@ -717,7 +717,7 @@
     "change24hAbs": 80,
     "high24h": 93.2,
     "low24h": 77.6,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "OSMO",
@@ -735,7 +735,7 @@
     "change24hAbs": 0,
     "high24h": 108,
     "low24h": 107,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "ACX",
@@ -748,12 +748,12 @@
     "iconUrl": null,
     "cmcSlug": "across-protocol",
     "volume24hKrw": 3145575.870034981,
-    "volume24hForeignKrw": 1293050329.393505,
+    "volume24hForeignKrw": 257410087.77576962,
     "change24hRate": 0.78,
     "change24hAbs": 0.65,
     "high24h": 83.91,
     "low24h": 83.16,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "DAO",
@@ -771,7 +771,7 @@
     "change24hAbs": -0.14,
     "high24h": 90.17,
     "low24h": 88.4,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "HUNT",
@@ -784,12 +784,12 @@
     "iconUrl": "/icons/UPBIT/HUNT.png",
     "cmcSlug": "hunt",
     "volume24hKrw": 434211590.66972214,
-    "volume24hForeignKrw": 2488095808.452297,
+    "volume24hForeignKrw": 2486490757.72714,
     "change24hRate": -0.9478673,
     "change24hAbs": -2,
     "high24h": 212,
     "low24h": 206,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "CRTS",
@@ -807,7 +807,7 @@
     "change24hAbs": 0.0003,
     "high24h": 0.1403,
     "low24h": 0.1384,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "ONT",
@@ -825,7 +825,7 @@
     "change24hAbs": 2,
     "high24h": 107,
     "low24h": 101,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "PEAQ",
@@ -843,7 +843,7 @@
     "change24hAbs": 0.74,
     "high24h": 59.62,
     "low24h": 56.5,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "YGG",
@@ -861,7 +861,25 @@
     "change24hAbs": 2,
     "high24h": 112,
     "low24h": 106,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
+  },
+  {
+    "symbol": "EUL",
+    "name_ko": "오일러",
+    "name_en": "Euler",
+    "koreanPrice": 5845,
+    "globalPrice": 3.895,
+    "premium": 2.1,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/EUL.png",
+    "cmcSlug": null,
+    "volume24hKrw": 91764190.74703065,
+    "volume24hForeignKrw": 399577491.99662,
+    "change24hRate": -2.42,
+    "change24hAbs": -145,
+    "high24h": 5910,
+    "low24h": 5745,
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "SONIC",
@@ -879,25 +897,7 @@
     "change24hAbs": 2,
     "high24h": 127,
     "low24h": 121,
-    "updatedAt": 1765219865631
-  },
-  {
-    "symbol": "EUL",
-    "name_ko": "오일러",
-    "name_en": "Euler",
-    "koreanPrice": 5845,
-    "globalPrice": 3.896,
-    "premium": 2.08,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/EUL.png",
-    "cmcSlug": null,
-    "volume24hKrw": 91764190.74703065,
-    "volume24hForeignKrw": 1088418750.3355544,
-    "change24hRate": -2.42,
-    "change24hAbs": -145,
-    "high24h": 5910,
-    "low24h": 5745,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "OBT",
@@ -915,7 +915,7 @@
     "change24hAbs": -0.036,
     "high24h": 3.668,
     "low24h": 3.62,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "PENDLE",
@@ -933,25 +933,7 @@
     "change24hAbs": 64,
     "high24h": 3689,
     "low24h": 3518,
-    "updatedAt": 1765219865631
-  },
-  {
-    "symbol": "KGEN",
-    "name_ko": "케이젠",
-    "name_en": "KGeN",
-    "koreanPrice": 265.8,
-    "globalPrice": 0.17728,
-    "premium": 2.01,
-    "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": "kgen",
-    "volume24hKrw": 142906569.1218,
-    "volume24hForeignKrw": 458389677.4464,
-    "change24hRate": 0,
-    "change24hAbs": 265.8,
-    "high24h": 270.5,
-    "low24h": 246,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "NOM",
@@ -969,7 +951,7 @@
     "change24hAbs": 0,
     "high24h": 14.8,
     "low24h": 14,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "XTER",
@@ -987,7 +969,7 @@
     "change24hAbs": -0.58,
     "high24h": 59.9,
     "low24h": 56.56,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "BB",
@@ -1000,12 +982,12 @@
     "iconUrl": null,
     "cmcSlug": "bouncebit",
     "volume24hKrw": 393211542.8468273,
-    "volume24hForeignKrw": 243199871.22500965,
+    "volume24hForeignKrw": 3874123445.293861,
     "change24hRate": -4.44,
     "change24hAbs": -6,
     "high24h": 130,
     "low24h": 128,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "VTHO",
@@ -1023,7 +1005,7 @@
     "change24hAbs": 0.02,
     "high24h": 1.46,
     "low24h": 1.38,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "FITFI",
@@ -1041,7 +1023,7 @@
     "change24hAbs": 0.035,
     "high24h": 0.8137,
     "low24h": 0.8092,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "TNSR",
@@ -1054,30 +1036,30 @@
     "iconUrl": null,
     "cmcSlug": "tensor",
     "volume24hKrw": 13342564.9208,
-    "volume24hForeignKrw": 43336849147.54091,
+    "volume24hForeignKrw": 1032377243.3058847,
     "change24hRate": 0,
     "change24hAbs": 164.3,
     "high24h": 184,
     "low24h": 161.7,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
-    "symbol": "PIEVERSE",
-    "name_ko": "파이버스",
-    "name_en": "Pieverse",
-    "koreanPrice": 929,
-    "globalPrice": 0.6203,
+    "symbol": "KGEN",
+    "name_ko": "케이젠",
+    "name_en": "KGeN",
+    "koreanPrice": 265.8,
+    "globalPrice": 0.17747,
     "premium": 1.9,
     "usdKrw": 1469.72,
     "iconUrl": null,
-    "cmcSlug": "pieverse",
-    "volume24hKrw": 34127748937.57273,
-    "volume24hForeignKrw": 521997002839.2944,
-    "change24hRate": -30.1,
-    "change24hAbs": -400,
-    "high24h": 995,
-    "low24h": 891,
-    "updatedAt": 1765219865637
+    "cmcSlug": "kgen",
+    "volume24hKrw": 142906569.1218,
+    "volume24hForeignKrw": 11289052315.771147,
+    "change24hRate": 0,
+    "change24hAbs": 265.8,
+    "high24h": 270.5,
+    "low24h": 246,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "AVNT",
@@ -1090,12 +1072,12 @@
     "iconUrl": "/icons/UPBIT/AVNT.png",
     "cmcSlug": "avantis",
     "volume24hKrw": 5175545505.309771,
-    "volume24hForeignKrw": 677898464.085974,
+    "volume24hForeignKrw": 3451501246.4149675,
     "change24hRate": 1.7738359200000002,
     "change24hAbs": 8,
     "high24h": 476,
     "low24h": 449,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "LSK",
@@ -1108,12 +1090,12 @@
     "iconUrl": "/icons/UPBIT/LSK.png",
     "cmcSlug": "lisk",
     "volume24hKrw": 6399551597.13865,
-    "volume24hForeignKrw": 1745339388.771104,
+    "volume24hForeignKrw": 21721169322.82293,
     "change24hRate": 1.32013201,
     "change24hAbs": 4,
     "high24h": 329,
     "low24h": 298,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "EDGE",
@@ -1131,43 +1113,7 @@
     "change24hAbs": 0.14958,
     "high24h": null,
     "low24h": null,
-    "updatedAt": 1765219865638
-  },
-  {
-    "symbol": "SOON",
-    "name_ko": "쑨",
-    "name_en": "SOON",
-    "koreanPrice": 647,
-    "globalPrice": 0.4321,
-    "premium": 1.88,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/SOON.png",
-    "cmcSlug": "soon",
-    "volume24hKrw": 2841442922.1853833,
-    "volume24hForeignKrw": 10430030212.602465,
-    "change24hRate": -1.52,
-    "change24hAbs": -10,
-    "high24h": 654,
-    "low24h": 610,
-    "updatedAt": 1765219865631
-  },
-  {
-    "symbol": "DKA",
-    "name_ko": "디카르고",
-    "name_en": "dKargo",
-    "koreanPrice": 9.59,
-    "globalPrice": 0.006405,
-    "premium": 1.87,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/DKA.png",
-    "cmcSlug": "dkargo",
-    "volume24hKrw": 148836910.3283852,
-    "volume24hForeignKrw": 17905655.531785667,
-    "change24hRate": -0.20811655,
-    "change24hAbs": -0.02,
-    "high24h": 9.69,
-    "low24h": 9.45,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "RENDER",
@@ -1179,13 +1125,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/RENDER.png",
     "cmcSlug": "render",
-    "volume24hKrw": 579718224.7344952,
-    "volume24hForeignKrw": 6376836713.474097,
+    "volume24hKrw": 579698224.7344744,
+    "volume24hForeignKrw": 6375744850.196877,
     "change24hRate": 2.79187817,
     "change24hAbs": 66,
     "high24h": 2482,
     "low24h": 2348,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ALICE",
@@ -1203,7 +1149,7 @@
     "change24hAbs": -3,
     "high24h": 343,
     "low24h": 338,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "IO",
@@ -1216,12 +1162,12 @@
     "iconUrl": "/icons/UPBIT/IO.png",
     "cmcSlug": "io-net",
     "volume24hKrw": 201258591.7041653,
-    "volume24hForeignKrw": 730033234.49406,
+    "volume24hForeignKrw": 3326865888.8354573,
     "change24hRate": -4.43,
     "change24hAbs": -12,
     "high24h": 265,
     "low24h": 258,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "CSPR",
@@ -1239,7 +1185,7 @@
     "change24hAbs": -0.117,
     "high24h": 8.7,
     "low24h": 8.406,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "HFT",
@@ -1252,12 +1198,12 @@
     "iconUrl": null,
     "cmcSlug": "hashflow",
     "volume24hKrw": 105914882.81186393,
-    "volume24hForeignKrw": 3714583782.037338,
+    "volume24hForeignKrw": 522732420.5623202,
     "change24hRate": -1.66,
     "change24hAbs": -0.84,
     "high24h": 50.51,
     "low24h": 49.62,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "SFP",
@@ -1270,12 +1216,12 @@
     "iconUrl": null,
     "cmcSlug": "safepal",
     "volume24hKrw": 4671483.77255092,
-    "volume24hForeignKrw": 55821435.32,
+    "volume24hForeignKrw": 278239701.55982,
     "change24hRate": -0.8,
     "change24hAbs": -4,
     "high24h": 497,
     "low24h": 492,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "KERNEL",
@@ -1288,12 +1234,12 @@
     "iconUrl": "/icons/UPBIT/KERNEL.png",
     "cmcSlug": null,
     "volume24hKrw": 246815977.4373112,
-    "volume24hForeignKrw": 37181094.137600005,
+    "volume24hForeignKrw": 2122222387.511884,
     "change24hRate": 0.84745763,
     "change24hAbs": 1,
     "high24h": 122,
     "low24h": 117,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "ES",
@@ -1311,7 +1257,7 @@
     "change24hAbs": -6,
     "high24h": 141,
     "low24h": 140,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "CRO",
@@ -1329,7 +1275,7 @@
     "change24hAbs": 0,
     "high24h": 158,
     "low24h": 153,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "GTC",
@@ -1347,7 +1293,7 @@
     "change24hAbs": 0,
     "high24h": 219,
     "low24h": 215,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "AXL",
@@ -1365,7 +1311,7 @@
     "change24hAbs": 2,
     "high24h": 173,
     "low24h": 164,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "TRUST",
@@ -1378,12 +1324,12 @@
     "iconUrl": "/icons/UPBIT/TRUST.png",
     "cmcSlug": "intuition",
     "volume24hKrw": 4974895667.899481,
-    "volume24hForeignKrw": 659657528.7092,
+    "volume24hForeignKrw": 659662275.9048,
     "change24hRate": -2.97029703,
     "change24hAbs": -6,
     "high24h": 206,
     "low24h": 195,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ZRX",
@@ -1401,7 +1347,25 @@
     "change24hAbs": 0,
     "high24h": 216,
     "low24h": 210,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
+  },
+  {
+    "symbol": "H",
+    "name_ko": "휴머니티 프로토콜",
+    "name_en": "Humanity Protocol",
+    "koreanPrice": 78.1,
+    "globalPrice": 0.0522,
+    "premium": 1.8,
+    "usdKrw": 1469.72,
+    "iconUrl": null,
+    "cmcSlug": "humanity-protocol",
+    "volume24hKrw": 19090490637.24095,
+    "volume24hForeignKrw": 97812736449.00635,
+    "change24hRate": 2.33,
+    "change24hAbs": 1.78,
+    "high24h": 93.66,
+    "low24h": 74.92,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "XPLA",
@@ -1419,25 +1383,7 @@
     "change24hAbs": -0.09,
     "high24h": 24.75,
     "low24h": 24.18,
-    "updatedAt": 1765219865637
-  },
-  {
-    "symbol": "H",
-    "name_ko": "휴머니티 프로토콜",
-    "name_en": "Humanity Protocol",
-    "koreanPrice": 78.1,
-    "globalPrice": 0.05221,
-    "premium": 1.78,
-    "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": "humanity-protocol",
-    "volume24hKrw": 19090490637.24095,
-    "volume24hForeignKrw": 97809088063.96182,
-    "change24hRate": 2.33,
-    "change24hAbs": 1.78,
-    "high24h": 93.66,
-    "low24h": 74.92,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "XDC",
@@ -1455,7 +1401,7 @@
     "change24hAbs": 73.25,
     "high24h": 76.95,
     "low24h": 72.7,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "FLOCK",
@@ -1473,7 +1419,7 @@
     "change24hAbs": 0,
     "high24h": 183,
     "low24h": 175,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "IOTX",
@@ -1491,7 +1437,25 @@
     "change24hAbs": 0.18,
     "high24h": 12.43,
     "low24h": 12.29,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
+  },
+  {
+    "symbol": "SOON",
+    "name_ko": "쑨",
+    "name_en": "SOON",
+    "koreanPrice": 646,
+    "globalPrice": 0.4319,
+    "premium": 1.77,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/SOON.png",
+    "cmcSlug": "soon",
+    "volume24hKrw": 2842018876.3960576,
+    "volume24hForeignKrw": 10430712784.374025,
+    "change24hRate": -1.67,
+    "change24hAbs": -11,
+    "high24h": 654,
+    "low24h": 610,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ACE",
@@ -1504,12 +1468,12 @@
     "iconUrl": null,
     "cmcSlug": "fusionist",
     "volume24hKrw": 519789263.05920726,
-    "volume24hForeignKrw": 431848990.9160225,
+    "volume24hForeignKrw": 13507305247.525478,
     "change24hRate": -8.95,
     "change24hAbs": -35,
     "high24h": 363,
     "low24h": 353,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "NIL",
@@ -1527,7 +1491,7 @@
     "change24hAbs": -2,
     "high24h": 104,
     "low24h": 101,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "WCT",
@@ -1539,13 +1503,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/WCT.png",
     "cmcSlug": null,
-    "volume24hKrw": 925059491.0286839,
+    "volume24hKrw": 925046850.978684,
     "volume24hForeignKrw": 321057744.59292436,
     "change24hRate": 0.76923077,
     "change24hAbs": 1,
     "high24h": 135,
     "low24h": 129,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "PUMPBTC",
@@ -1557,13 +1521,13 @@
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": "pump",
-    "volume24hKrw": 6518161749.365238,
+    "volume24hKrw": 6518211749.674938,
     "volume24hForeignKrw": 547601458.453133,
     "change24hRate": 5.73,
     "change24hAbs": 2.4,
     "high24h": 45.78,
     "low24h": 41.78,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "DODO",
@@ -1575,13 +1539,13 @@
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": "dodo",
-    "volume24hKrw": 544530362.9417008,
-    "volume24hForeignKrw": 544530362.9417008,
+    "volume24hKrw": 10038775.488,
+    "volume24hForeignKrw": 10038775.488,
     "change24hRate": -1.8518518518518565,
-    "change24hAbs": null,
+    "change24hAbs": -0.00040000000000000105,
     "high24h": 0.0217,
-    "low24h": 0.0207,
-    "updatedAt": 1765219865637
+    "low24h": 0.0208,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "ILV",
@@ -1599,7 +1563,7 @@
     "change24hAbs": -110,
     "high24h": 10660,
     "low24h": 10550,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "AERO",
@@ -1617,7 +1581,7 @@
     "change24hAbs": 13,
     "high24h": 1027,
     "low24h": 975,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "T",
@@ -1635,7 +1599,7 @@
     "change24hAbs": 0.1,
     "high24h": 16.5,
     "low24h": 16.2,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "CATI",
@@ -1653,7 +1617,7 @@
     "change24hAbs": 90,
     "high24h": 91.75,
     "low24h": 89.55,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "AIXBT",
@@ -1671,25 +1635,7 @@
     "change24hAbs": 59.8,
     "high24h": 63.7,
     "low24h": 57.6,
-    "updatedAt": 1765219865638
-  },
-  {
-    "symbol": "2Z",
-    "name_ko": "더블제로",
-    "name_en": "DoubleZero",
-    "koreanPrice": 196,
-    "globalPrice": 0.13112,
-    "premium": 1.71,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/2Z.png",
-    "cmcSlug": "doublezero",
-    "volume24hKrw": 5892390267.4456835,
-    "volume24hForeignKrw": 15245993956.390844,
-    "change24hRate": -6.22009569,
-    "change24hAbs": -13,
-    "high24h": 218,
-    "low24h": 195,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "ZBT",
@@ -1707,7 +1653,7 @@
     "change24hAbs": 0,
     "high24h": 180,
     "low24h": 157,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "GMX",
@@ -1725,7 +1671,7 @@
     "change24hAbs": -170,
     "high24h": 13260,
     "low24h": 13140,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "MINA",
@@ -1738,12 +1684,12 @@
     "iconUrl": "/icons/UPBIT/MINA.png",
     "cmcSlug": "mina",
     "volume24hKrw": 684044434.9871832,
-    "volume24hForeignKrw": 2045142355.4466407,
+    "volume24hForeignKrw": 628947988.8359607,
     "change24hRate": 1.42857143,
     "change24hAbs": 2,
     "high24h": 147,
     "low24h": 139,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "FCT2",
@@ -1761,7 +1707,7 @@
     "change24hAbs": 0.1,
     "high24h": 19.5,
     "low24h": 18.9,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "OAS",
@@ -1779,7 +1725,7 @@
     "change24hAbs": 0.011,
     "high24h": 3.181,
     "low24h": 3.124,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "XAN",
@@ -1797,7 +1743,7 @@
     "change24hAbs": -0.77,
     "high24h": 29.73,
     "low24h": 29.1,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "A",
@@ -1810,12 +1756,12 @@
     "iconUrl": "/icons/UPBIT/A.png",
     "cmcSlug": "vaulta",
     "volume24hKrw": 611468886.746064,
-    "volume24hForeignKrw": 289333777.08208483,
+    "volume24hForeignKrw": 4449876490.165541,
     "change24hRate": 0.74906367,
     "change24hAbs": 2,
     "high24h": 274,
     "low24h": 263,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "KNC",
@@ -1828,12 +1774,12 @@
     "iconUrl": "/icons/UPBIT/KNC.png",
     "cmcSlug": "kyber-network",
     "volume24hKrw": 426571705.72415215,
-    "volume24hForeignKrw": 20876039.220806982,
+    "volume24hForeignKrw": 492232422.680124,
     "change24hRate": -1.49253731,
     "change24hAbs": -6,
     "high24h": 402,
     "low24h": 380,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "MLK",
@@ -1846,30 +1792,30 @@
     "iconUrl": "/icons/UPBIT/MLK.png",
     "cmcSlug": null,
     "volume24hKrw": 255257438.94053683,
-    "volume24hForeignKrw": 21360939.102209114,
+    "volume24hForeignKrw": 21349034.56127271,
     "change24hRate": 0.84745763,
     "change24hAbs": 1,
     "high24h": 123,
     "low24h": 117,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
-    "symbol": "LDO",
-    "name_ko": "리도다오",
-    "name_en": "Lido DAO",
-    "koreanPrice": 892,
-    "globalPrice": 0.5969,
-    "premium": 1.68,
+    "symbol": "DKA",
+    "name_ko": "디카르고",
+    "name_en": "dKargo",
+    "koreanPrice": 9.59,
+    "globalPrice": 0.006418,
+    "premium": 1.67,
     "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": "lido-dao",
-    "volume24hKrw": 70522489.96294588,
-    "volume24hForeignKrw": 9431217340.653744,
-    "change24hRate": -0.56,
-    "change24hAbs": -5,
-    "high24h": 893,
-    "low24h": 881,
-    "updatedAt": 1765219865637
+    "iconUrl": "/icons/UPBIT/DKA.png",
+    "cmcSlug": "dkargo",
+    "volume24hKrw": 148836910.3283852,
+    "volume24hForeignKrw": 17928723.580687497,
+    "change24hRate": -0.20811655,
+    "change24hAbs": -0.02,
+    "high24h": 9.69,
+    "low24h": 9.45,
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "BNT",
@@ -1887,7 +1833,7 @@
     "change24hAbs": -3,
     "high24h": 669,
     "low24h": 660,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "ERA",
@@ -1900,12 +1846,12 @@
     "iconUrl": "/icons/UPBIT/ERA.png",
     "cmcSlug": "caldera",
     "volume24hKrw": 7549595935.457942,
-    "volume24hForeignKrw": 16021848911.156702,
+    "volume24hForeignKrw": 1025071094.2830204,
     "change24hRate": 1.48367953,
     "change24hAbs": 5,
     "high24h": 383,
     "low24h": 333,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "IN",
@@ -1923,25 +1869,7 @@
     "change24hAbs": -6,
     "high24h": 137,
     "low24h": 128,
-    "updatedAt": 1765219865630
-  },
-  {
-    "symbol": "PLUME",
-    "name_ko": "플룸",
-    "name_en": "Plume",
-    "koreanPrice": 31.9,
-    "globalPrice": 0.02135,
-    "premium": 1.66,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/PLUME.png",
-    "cmcSlug": "plume",
-    "volume24hKrw": 3226457060.284342,
-    "volume24hForeignKrw": 4110166431.2912507,
-    "change24hRate": 5.980066450000001,
-    "change24hAbs": 1.8,
-    "high24h": 32.2,
-    "low24h": 29.4,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "TOSHI",
@@ -1959,7 +1887,7 @@
     "change24hAbs": -0.006,
     "high24h": 0.627,
     "low24h": 0.59,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "LISTA",
@@ -1972,12 +1900,12 @@
     "iconUrl": null,
     "cmcSlug": "lista-dao",
     "volume24hKrw": 11115082.87220539,
-    "volume24hForeignKrw": 35918163.7416,
+    "volume24hForeignKrw": 36065091.65,
     "change24hRate": -0.72,
     "change24hAbs": -2,
     "high24h": 282,
     "low24h": 274,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "MAY",
@@ -1989,13 +1917,13 @@
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": null,
-    "volume24hKrw": 5511655726.357399,
+    "volume24hKrw": 5511703894.937701,
     "volume24hForeignKrw": 208078921.09309092,
     "change24hRate": 24.34,
     "change24hAbs": 6.69,
     "high24h": 35.36,
     "low24h": 29.6,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "HIGH",
@@ -2008,12 +1936,12 @@
     "iconUrl": null,
     "cmcSlug": "highstreet",
     "volume24hKrw": 37131334.58662637,
-    "volume24hForeignKrw": 17027704.433824003,
+    "volume24hForeignKrw": 2242076736.1136646,
     "change24hRate": 0.27,
     "change24hAbs": 1,
     "high24h": 372,
     "low24h": 369,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "GHX",
@@ -2031,7 +1959,7 @@
     "change24hAbs": -0.54,
     "high24h": 17.34,
     "low24h": 17,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "XAUT",
@@ -2049,7 +1977,7 @@
     "change24hAbs": 6260000,
     "high24h": 6290000,
     "low24h": 6240000,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "HIPPO",
@@ -2067,7 +1995,25 @@
     "change24hAbs": 1.83,
     "high24h": 1.91,
     "low24h": 1.807,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
+  },
+  {
+    "symbol": "MYX",
+    "name_ko": "엠와이엑스 파이낸스",
+    "name_en": "MYX Finance",
+    "koreanPrice": 4250,
+    "globalPrice": 2.845,
+    "premium": 1.64,
+    "usdKrw": 1469.72,
+    "iconUrl": null,
+    "cmcSlug": "myx-finance",
+    "volume24hKrw": 99041743.125,
+    "volume24hForeignKrw": 11521263275.886084,
+    "change24hRate": 0,
+    "change24hAbs": 4250,
+    "high24h": 4480,
+    "low24h": 4213,
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "KAVA",
@@ -2080,12 +2026,12 @@
     "iconUrl": "/icons/UPBIT/KAVA.png",
     "cmcSlug": "kava",
     "volume24hKrw": 498135740.76881504,
-    "volume24hForeignKrw": 88052861.18720028,
+    "volume24hForeignKrw": 7480847106.947871,
     "change24hRate": -1.9108280299999998,
     "change24hAbs": -3,
     "high24h": 159,
     "low24h": 153,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "RVN",
@@ -2103,25 +2049,25 @@
     "change24hAbs": 0.2,
     "high24h": 12.1,
     "low24h": 11.6,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
-    "symbol": "A8",
-    "name_ko": "에인션트8",
-    "name_en": "Ancient8",
-    "koreanPrice": 73.34,
-    "globalPrice": 0.0491,
+    "symbol": "LDO",
+    "name_ko": "리도다오",
+    "name_en": "Lido DAO",
+    "koreanPrice": 892,
+    "globalPrice": 0.5972,
     "premium": 1.63,
     "usdKrw": 1469.72,
     "iconUrl": null,
-    "cmcSlug": "ancient8",
-    "volume24hKrw": 1657173162.8955479,
-    "volume24hForeignKrw": 626489232.094455,
-    "change24hRate": -1.82,
-    "change24hAbs": -1.36,
-    "high24h": 76.06,
-    "low24h": 72,
-    "updatedAt": 1765219865636
+    "cmcSlug": "lido-dao",
+    "volume24hKrw": 70522489.96294588,
+    "volume24hForeignKrw": 2187263795.915816,
+    "change24hRate": -0.56,
+    "change24hAbs": -5,
+    "high24h": 893,
+    "low24h": 881,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "PYR",
@@ -2139,7 +2085,7 @@
     "change24hAbs": 6,
     "high24h": 839,
     "low24h": 826,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "D",
@@ -2152,12 +2098,12 @@
     "iconUrl": null,
     "cmcSlug": "d",
     "volume24hKrw": 40985436.523871675,
-    "volume24hForeignKrw": 334555971.174712,
+    "volume24hForeignKrw": 3834117.3527999995,
     "change24hRate": -0.17,
     "change24hAbs": -0.04,
     "high24h": 23.56,
     "low24h": 22.97,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "CHILLGUY",
@@ -2175,7 +2121,25 @@
     "change24hAbs": 30.2,
     "high24h": 47.4,
     "low24h": 29.8,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
+  },
+  {
+    "symbol": "2Z",
+    "name_ko": "더블제로",
+    "name_en": "DoubleZero",
+    "koreanPrice": 196,
+    "globalPrice": 0.13124,
+    "premium": 1.61,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/2Z.png",
+    "cmcSlug": "doublezero",
+    "volume24hKrw": 5892346232.463177,
+    "volume24hForeignKrw": 15238743545.988401,
+    "change24hRate": -6.22009569,
+    "change24hAbs": -13,
+    "high24h": 218,
+    "low24h": 195,
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "ATH",
@@ -2193,7 +2157,7 @@
     "change24hAbs": 0,
     "high24h": 20.7,
     "low24h": 20,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "OGN",
@@ -2211,7 +2175,7 @@
     "change24hAbs": 0.11,
     "high24h": 53.71,
     "low24h": 53.4,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "HOME",
@@ -2229,7 +2193,7 @@
     "change24hAbs": -0.24,
     "high24h": 36.26,
     "low24h": 36.07,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "XAI",
@@ -2247,7 +2211,7 @@
     "change24hAbs": -0.32,
     "high24h": 25.48,
     "low24h": 24.94,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "AL",
@@ -2260,12 +2224,12 @@
     "iconUrl": null,
     "cmcSlug": "archloot",
     "volume24hKrw": 960950396.6064835,
-    "volume24hForeignKrw": 354346634.86432004,
+    "volume24hForeignKrw": 354363841.61122,
     "change24hRate": -1.77,
     "change24hAbs": -0.36,
     "high24h": 20.33,
     "low24h": 19.79,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "FET",
@@ -2278,12 +2242,12 @@
     "iconUrl": null,
     "cmcSlug": null,
     "volume24hKrw": 707748315.0881958,
-    "volume24hForeignKrw": 90688084682.5816,
+    "volume24hForeignKrw": 22459286043.110573,
     "change24hRate": -5.32,
     "change24hAbs": -20,
     "high24h": 360,
     "low24h": 350,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "KSM",
@@ -2301,7 +2265,7 @@
     "change24hAbs": -50,
     "high24h": 12340,
     "low24h": 12160,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "XION",
@@ -2319,25 +2283,7 @@
     "change24hAbs": -29,
     "high24h": 461,
     "low24h": 442,
-    "updatedAt": 1765219865637
-  },
-  {
-    "symbol": "MON",
-    "name_ko": "모나드",
-    "name_en": "Monad",
-    "koreanPrice": 43.3,
-    "globalPrice": 0.029,
-    "premium": 1.59,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/MON.png",
-    "cmcSlug": "monad",
-    "volume24hKrw": 28901927614.00583,
-    "volume24hForeignKrw": 150629177536.47147,
-    "change24hRate": 13.05483029,
-    "change24hAbs": 5,
-    "high24h": 44.3,
-    "low24h": 38,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "C",
@@ -2350,12 +2296,12 @@
     "iconUrl": null,
     "cmcSlug": "chainbase",
     "volume24hKrw": 180573849.2129262,
-    "volume24hForeignKrw": 1791873811.9116127,
+    "volume24hForeignKrw": 5018314571.681119,
     "change24hRate": 0.85,
     "change24hAbs": 1,
     "high24h": 120,
     "low24h": 118,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "BOME",
@@ -2373,7 +2319,7 @@
     "change24hAbs": 1.084,
     "high24h": 1.153,
     "low24h": 0.999,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "ANKR",
@@ -2386,30 +2332,12 @@
     "iconUrl": "/icons/UPBIT/ANKR.png",
     "cmcSlug": "ankr-network",
     "volume24hKrw": 131128988.4774624,
-    "volume24hForeignKrw": 22189034.511887126,
+    "volume24hForeignKrw": 2341172846.103364,
     "change24hRate": 2.65486726,
     "change24hAbs": 0.3,
     "high24h": 11.7,
     "low24h": 11.3,
-    "updatedAt": 1765219865630
-  },
-  {
-    "symbol": "FF",
-    "name_ko": "팔콘 파이낸스",
-    "name_en": "Falcon Finance",
-    "koreanPrice": 168,
-    "globalPrice": 0.11253,
-    "premium": 1.58,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/FF.png",
-    "cmcSlug": "falcon-finance",
-    "volume24hKrw": 1617048944.4971037,
-    "volume24hForeignKrw": 1106499107.6057076,
-    "change24hRate": 0.5988024,
-    "change24hAbs": 1,
-    "high24h": 172,
-    "low24h": 165,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "JUP",
@@ -2427,7 +2355,7 @@
     "change24hAbs": 11,
     "high24h": 346,
     "low24h": 327,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "SNX",
@@ -2440,12 +2368,12 @@
     "iconUrl": "/icons/UPBIT/SNX.png",
     "cmcSlug": "synthetix-network",
     "volume24hKrw": 135973713.6945275,
-    "volume24hForeignKrw": 3153489966.861276,
+    "volume24hForeignKrw": 2599493430.764932,
     "change24hRate": -0.54,
     "change24hAbs": -4,
     "high24h": 751,
     "low24h": 729,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ZORA",
@@ -2458,12 +2386,12 @@
     "iconUrl": "/icons/UPBIT/ZORA.png",
     "cmcSlug": "zora",
     "volume24hKrw": 2223857974.914601,
-    "volume24hForeignKrw": 824912680.995798,
+    "volume24hForeignKrw": 824938819.1116496,
     "change24hRate": 0.27662517000000003,
     "change24hAbs": 0.2,
     "high24h": 76.6,
     "low24h": 70.2,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ALT",
@@ -2481,7 +2409,7 @@
     "change24hAbs": 0.4,
     "high24h": 20.9,
     "low24h": 19.1,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "CARV",
@@ -2499,7 +2427,7 @@
     "change24hAbs": 0,
     "high24h": 210,
     "low24h": 202,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "OM",
@@ -2512,48 +2440,12 @@
     "iconUrl": "/icons/UPBIT/OM.png",
     "cmcSlug": "mantra",
     "volume24hKrw": 423898700.11141497,
-    "volume24hForeignKrw": 3145159593.0341415,
+    "volume24hForeignKrw": 3144576505.7569437,
     "change24hRate": 2.72727273,
     "change24hAbs": 3,
     "high24h": 116,
     "low24h": 109,
-    "updatedAt": 1765219865630
-  },
-  {
-    "symbol": "PEPE",
-    "name_ko": "페페",
-    "name_en": "PEPE",
-    "koreanPrice": 0.00718,
-    "globalPrice": 0.00000481,
-    "premium": 1.57,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/PEPE.png",
-    "cmcSlug": "pepe",
-    "volume24hKrw": 6780797697.363141,
-    "volume24hForeignKrw": 89496207888.8376,
-    "change24hRate": 8.295625939999999,
-    "change24hAbs": 0.00055,
-    "high24h": 0.00749,
-    "low24h": 0.00659,
-    "updatedAt": 1765219865631
-  },
-  {
-    "symbol": "MYX",
-    "name_ko": "엠와이엑스 파이낸스",
-    "name_en": "MYX Finance",
-    "koreanPrice": 4250,
-    "globalPrice": 2.847,
-    "premium": 1.57,
-    "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": "myx-finance",
-    "volume24hKrw": 99041743.125,
-    "volume24hForeignKrw": 985388529.9888,
-    "change24hRate": 0,
-    "change24hAbs": 4250,
-    "high24h": 4480,
-    "low24h": 4213,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "AZIT",
@@ -2571,7 +2463,7 @@
     "change24hAbs": -0.13,
     "high24h": 11.28,
     "low24h": 11.12,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "PUNDIX",
@@ -2589,7 +2481,7 @@
     "change24hAbs": -1,
     "high24h": 371,
     "low24h": 355,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ENSO",
@@ -2607,7 +2499,7 @@
     "change24hAbs": 13,
     "high24h": 1090,
     "low24h": 1043,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "WLFI",
@@ -2620,12 +2512,30 @@
     "iconUrl": "/icons/UPBIT/WLFI.png",
     "cmcSlug": "world-liberty-financial",
     "volume24hKrw": 6187973450.49977,
-    "volume24hForeignKrw": 112407324588.73448,
+    "volume24hForeignKrw": 14931281317.247864,
     "change24hRate": 1.35746606,
     "change24hAbs": 3,
     "high24h": 233,
     "low24h": 220,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
+  },
+  {
+    "symbol": "PIEVERSE",
+    "name_ko": "파이버스",
+    "name_en": "Pieverse",
+    "koreanPrice": 929,
+    "globalPrice": 0.6225,
+    "premium": 1.54,
+    "usdKrw": 1469.72,
+    "iconUrl": null,
+    "cmcSlug": "pieverse",
+    "volume24hKrw": 34125865154.92933,
+    "volume24hForeignKrw": 522025919593.81586,
+    "change24hRate": -30.15,
+    "change24hAbs": -401,
+    "high24h": 995,
+    "low24h": 891,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "ZRC",
@@ -2643,7 +2553,25 @@
     "change24hAbs": -0.64,
     "high24h": 10.65,
     "low24h": 10.38,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
+  },
+  {
+    "symbol": "ALGO",
+    "name_ko": "알고랜드",
+    "name_en": "Algorand",
+    "koreanPrice": 201,
+    "globalPrice": 0.1347,
+    "premium": 1.53,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/ALGO.png",
+    "cmcSlug": "algorand",
+    "volume24hKrw": 1160627262.0931582,
+    "volume24hForeignKrw": 976660128.9449366,
+    "change24hRate": 1.00502513,
+    "change24hAbs": 2,
+    "high24h": 203,
+    "low24h": 198,
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "BARD",
@@ -2656,12 +2584,12 @@
     "iconUrl": "/icons/UPBIT/BARD.png",
     "cmcSlug": "lombard",
     "volume24hKrw": 1451378363.5728643,
-    "volume24hForeignKrw": 592960926.394049,
+    "volume24hForeignKrw": 2943782970.895251,
     "change24hRate": -0.8333333300000001,
     "change24hAbs": -10,
     "high24h": 1208,
     "low24h": 1164,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "SYRUP",
@@ -2674,12 +2602,30 @@
     "iconUrl": "/icons/UPBIT/SYRUP.png",
     "cmcSlug": "maple-finance",
     "volume24hKrw": 1238312527.9191148,
-    "volume24hForeignKrw": 6596286372.57672,
+    "volume24hForeignKrw": 447744671.8528,
     "change24hRate": -3.71287129,
     "change24hAbs": -15,
     "high24h": 413,
     "low24h": 386,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
+  },
+  {
+    "symbol": "BOB",
+    "name_ko": "비오비",
+    "name_en": "BOB",
+    "koreanPrice": 24.3,
+    "globalPrice": 0.016284,
+    "premium": 1.53,
+    "usdKrw": 1469.72,
+    "iconUrl": null,
+    "cmcSlug": null,
+    "volume24hKrw": 2721085350.0134606,
+    "volume24hForeignKrw": 44070936337.249695,
+    "change24hRate": -9.23,
+    "change24hAbs": -2.47,
+    "high24h": 26.1,
+    "low24h": 24.01,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "MANTA",
@@ -2691,13 +2637,13 @@
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": "manta-network",
-    "volume24hKrw": 79251745.46265422,
+    "volume24hKrw": 79243369.26265487,
     "volume24hForeignKrw": 132874105.7917182,
     "change24hRate": -3.6,
     "change24hAbs": -5,
     "high24h": 137,
     "low24h": 134,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "S",
@@ -2710,12 +2656,12 @@
     "iconUrl": null,
     "cmcSlug": "sonic",
     "volume24hKrw": 39530821.44737094,
-    "volume24hForeignKrw": 5507407203.100858,
+    "volume24hForeignKrw": 192227819.09752014,
     "change24hRate": 1.41,
     "change24hAbs": 2,
     "high24h": 145,
     "low24h": 142,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "USDE",
@@ -2733,7 +2679,25 @@
     "change24hAbs": 1491,
     "high24h": 1492,
     "low24h": 1475,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
+  },
+  {
+    "symbol": "CHZ",
+    "name_ko": "칠리즈",
+    "name_en": "Chiliz",
+    "koreanPrice": 47.7,
+    "globalPrice": 0.03197,
+    "premium": 1.52,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/CHZ.png",
+    "cmcSlug": "chiliz",
+    "volume24hKrw": 497365257.0945986,
+    "volume24hForeignKrw": 4151010001.8253946,
+    "change24hRate": 3.6956521700000002,
+    "change24hAbs": 1.7,
+    "high24h": 47.9,
+    "low24h": 45.8,
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "GAME2",
@@ -2746,12 +2710,12 @@
     "iconUrl": "/icons/UPBIT/GAME2.png",
     "cmcSlug": "gamebuild",
     "volume24hKrw": 109077520.09469797,
-    "volume24hForeignKrw": 881875944.628,
+    "volume24hForeignKrw": 882323900.5868,
     "change24hRate": 0.37878788,
     "change24hAbs": 0.01,
     "high24h": 2.67,
     "low24h": 2.63,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "JTO",
@@ -2769,7 +2733,25 @@
     "change24hAbs": -3,
     "high24h": 674,
     "low24h": 650,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
+  },
+  {
+    "symbol": "PLUME",
+    "name_ko": "플룸",
+    "name_en": "Plume",
+    "koreanPrice": 31.9,
+    "globalPrice": 0.02138,
+    "premium": 1.52,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/PLUME.png",
+    "cmcSlug": "plume",
+    "volume24hKrw": 3229174899.3648014,
+    "volume24hForeignKrw": 4305416887.499297,
+    "change24hRate": 5.980066450000001,
+    "change24hAbs": 1.8,
+    "high24h": 32.2,
+    "low24h": 29.4,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "PROVE",
@@ -2782,30 +2764,12 @@
     "iconUrl": "/icons/UPBIT/PROVE.png",
     "cmcSlug": "succinct",
     "volume24hKrw": 306960725.979106,
-    "volume24hForeignKrw": 1555808262.0232263,
+    "volume24hForeignKrw": 340187659.5896036,
     "change24hRate": 0.46801872,
     "change24hAbs": 3,
     "high24h": 660,
     "low24h": 639,
-    "updatedAt": 1765219865631
-  },
-  {
-    "symbol": "HEMI",
-    "name_ko": "헤미",
-    "name_en": "Hemi",
-    "koreanPrice": 22.68,
-    "globalPrice": 0.0152,
-    "premium": 1.52,
-    "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": "hemi",
-    "volume24hKrw": 6943802829.010034,
-    "volume24hForeignKrw": 10348962162.703884,
-    "change24hRate": -12.09,
-    "change24hAbs": -3.12,
-    "high24h": 23.73,
-    "low24h": 22.41,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "BAT",
@@ -2818,12 +2782,12 @@
     "iconUrl": "/icons/UPBIT/BAT.png",
     "cmcSlug": null,
     "volume24hKrw": 4254316672.752518,
-    "volume24hForeignKrw": 1624601264.2899377,
+    "volume24hForeignKrw": 5169215951.257876,
     "change24hRate": 0.26385224,
     "change24hAbs": 1,
     "high24h": 400,
     "low24h": 372,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "CTC",
@@ -2841,7 +2805,7 @@
     "change24hAbs": -3,
     "high24h": 480,
     "low24h": 436,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "GALA",
@@ -2854,12 +2818,12 @@
     "iconUrl": null,
     "cmcSlug": "gala",
     "volume24hKrw": 159831988.37495822,
-    "volume24hForeignKrw": 6178749194.5515,
+    "volume24hForeignKrw": 6177473010.543879,
     "change24hRate": 1.57,
     "change24hAbs": 0.17,
     "high24h": 11.1,
     "low24h": 10.85,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "KMNO",
@@ -2877,25 +2841,25 @@
     "change24hAbs": 0.12,
     "high24h": 96.88,
     "low24h": 93.22,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "DOGE",
     "name_ko": "도지코인",
     "name_en": "Dogecoin",
     "koreanPrice": 213,
-    "globalPrice": 0.14278,
+    "globalPrice": 0.14279,
     "premium": 1.5,
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/DOGE.png",
     "cmcSlug": "dogecoin",
-    "volume24hKrw": 38281455343.603226,
-    "volume24hForeignKrw": 131389878864.25612,
+    "volume24hKrw": 38278123930.79938,
+    "volume24hForeignKrw": 131379188229.88237,
     "change24hRate": 2.40384615,
     "change24hAbs": 5,
     "high24h": 216,
     "low24h": 206,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "JOE",
@@ -2913,25 +2877,7 @@
     "change24hAbs": 2,
     "high24h": 108,
     "low24h": 107,
-    "updatedAt": 1765219865637
-  },
-  {
-    "symbol": "DOOD",
-    "name_ko": "두들즈",
-    "name_en": "Doodles",
-    "koreanPrice": 7.5,
-    "globalPrice": 0.005028,
-    "premium": 1.49,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/DOOD.png",
-    "cmcSlug": "doodles",
-    "volume24hKrw": 8659058055.154331,
-    "volume24hForeignKrw": 685922251.5439259,
-    "change24hRate": -2.84974093,
-    "change24hAbs": -0.22,
-    "high24h": 7.85,
-    "low24h": 7.25,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "STAT",
@@ -2949,7 +2895,7 @@
     "change24hAbs": 0.92,
     "high24h": 62.76,
     "low24h": 61.4,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "SUNDOG",
@@ -2967,7 +2913,7 @@
     "change24hAbs": -0.42,
     "high24h": 17.44,
     "low24h": 16.79,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "AGLD",
@@ -2980,12 +2926,12 @@
     "iconUrl": "/icons/UPBIT/AGLD.png",
     "cmcSlug": "adventure-gold",
     "volume24hKrw": 702591487.8762954,
-    "volume24hForeignKrw": 332934027.4490646,
+    "volume24hForeignKrw": 533597255.27934,
     "change24hRate": 1.85185185,
     "change24hAbs": 8,
     "high24h": 458,
     "low24h": 430,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "CYBER",
@@ -3003,7 +2949,7 @@
     "change24hAbs": -34,
     "high24h": 1296,
     "low24h": 1213,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "ONG",
@@ -3021,7 +2967,7 @@
     "change24hAbs": 0,
     "high24h": 135,
     "low24h": 131,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "W",
@@ -3034,12 +2980,12 @@
     "iconUrl": "/icons/UPBIT/W.png",
     "cmcSlug": "wormhole",
     "volume24hKrw": 953287424.2898638,
-    "volume24hForeignKrw": 2112065075.6970007,
+    "volume24hForeignKrw": 11184710175.790783,
     "change24hRate": 4.29553265,
     "change24hAbs": 2.5,
     "high24h": 62,
     "low24h": 57.8,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "LINK",
@@ -3052,12 +2998,12 @@
     "iconUrl": "/icons/UPBIT/LINK.png",
     "cmcSlug": "chainlink",
     "volume24hKrw": 8882827835.231606,
-    "volume24hForeignKrw": 62147053059.78492,
+    "volume24hForeignKrw": 62143923939.779335,
     "change24hRate": 0,
     "change24hAbs": 0,
     "high24h": 21250,
     "low24h": 20310,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "LPT",
@@ -3075,25 +3021,7 @@
     "change24hAbs": 85,
     "high24h": 5810,
     "low24h": 5605,
-    "updatedAt": 1765219865630
-  },
-  {
-    "symbol": "BOB",
-    "name_ko": "비오비",
-    "name_en": "BOB",
-    "koreanPrice": 24.3,
-    "globalPrice": 0.016294,
-    "premium": 1.47,
-    "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": null,
-    "volume24hKrw": 2721065399.2736306,
-    "volume24hForeignKrw": 44062983567.35497,
-    "change24hRate": -9.23,
-    "change24hAbs": -2.47,
-    "high24h": 26.1,
-    "low24h": 24.01,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "AKT",
@@ -3106,12 +3034,12 @@
     "iconUrl": "/icons/UPBIT/AKT.png",
     "cmcSlug": "akash-network",
     "volume24hKrw": 444903193.6944348,
-    "volume24hForeignKrw": 585819144.6590588,
+    "volume24hForeignKrw": 585910536.7722208,
     "change24hRate": 1.54559505,
     "change24hAbs": 10,
     "high24h": 670,
     "low24h": 642,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "BRETT",
@@ -3129,7 +3057,7 @@
     "change24hAbs": -1.45,
     "high24h": 28.41,
     "low24h": 27.23,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "INJ",
@@ -3142,12 +3070,12 @@
     "iconUrl": "/icons/UPBIT/INJ.png",
     "cmcSlug": "injective",
     "volume24hKrw": 614412161.198432,
-    "volume24hForeignKrw": 61990058970.76295,
+    "volume24hForeignKrw": 7614617041.346112,
     "change24hRate": 3.8200862600000005,
     "change24hAbs": 310,
     "high24h": 8725,
     "low24h": 8090,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "DVI",
@@ -3165,7 +3093,7 @@
     "change24hAbs": -0.007,
     "high24h": 1.968,
     "low24h": 1.862,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "FLR",
@@ -3183,25 +3111,7 @@
     "change24hAbs": -0.16,
     "high24h": 19.76,
     "low24h": 19.31,
-    "updatedAt": 1765219865637
-  },
-  {
-    "symbol": "ALGO",
-    "name_ko": "알고랜드",
-    "name_en": "Algorand",
-    "koreanPrice": 201,
-    "globalPrice": 0.1348,
-    "premium": 1.45,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/ALGO.png",
-    "cmcSlug": "algorand",
-    "volume24hKrw": 1160627262.0931582,
-    "volume24hForeignKrw": 4337803589.00672,
-    "change24hRate": 1.00502513,
-    "change24hAbs": 2,
-    "high24h": 203,
-    "low24h": 198,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "ETC",
@@ -3214,30 +3124,30 @@
     "iconUrl": "/icons/UPBIT/ETC.png",
     "cmcSlug": "ethereum-classic",
     "volume24hKrw": 3543107955.4940624,
-    "volume24hForeignKrw": 5408739719.649084,
+    "volume24hForeignKrw": 2710663030.6238174,
     "change24hRate": 2.08863984,
     "change24hAbs": 410,
     "high24h": 20210,
     "low24h": 19540,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
-    "symbol": "GLM",
-    "name_ko": "골렘",
-    "name_en": "Golem",
-    "koreanPrice": 334,
-    "globalPrice": 0.224,
-    "premium": 1.45,
+    "symbol": "AVAX",
+    "name_ko": "아발란체",
+    "name_en": "Avalanche",
+    "koreanPrice": 20320,
+    "globalPrice": 13.63,
+    "premium": 1.44,
     "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/GLM.png",
-    "cmcSlug": "golem",
-    "volume24hKrw": 753244936.5284443,
-    "volume24hForeignKrw": 149679087.50723943,
-    "change24hRate": -2.33918129,
-    "change24hAbs": -8,
-    "high24h": 342,
-    "low24h": 332,
-    "updatedAt": 1765219865630
+    "iconUrl": "/icons/UPBIT/AVAX.png",
+    "cmcSlug": "avalanche",
+    "volume24hKrw": 4484280208.395425,
+    "volume24hForeignKrw": 13762235155.778559,
+    "change24hRate": 0.5442850100000001,
+    "change24hAbs": 110,
+    "high24h": 20670,
+    "low24h": 20000,
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "AWE",
@@ -3255,7 +3165,7 @@
     "change24hAbs": 3.3,
     "high24h": 89,
     "low24h": 83,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "OPEN",
@@ -3273,7 +3183,7 @@
     "change24hAbs": -4,
     "high24h": 328,
     "low24h": 316,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "SXP",
@@ -3291,7 +3201,7 @@
     "change24hAbs": -1.4,
     "high24h": 83.6,
     "low24h": 79.9,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "WAL",
@@ -3304,12 +3214,12 @@
     "iconUrl": "/icons/UPBIT/WAL.png",
     "cmcSlug": "walrus",
     "volume24hKrw": 945942341.8416871,
-    "volume24hForeignKrw": 7968789996.017676,
+    "volume24hForeignKrw": 1321064263.033203,
     "change24hRate": 0.84388186,
     "change24hAbs": 2,
     "high24h": 245,
     "low24h": 235,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "SKL",
@@ -3327,7 +3237,7 @@
     "change24hAbs": -0.85,
     "high24h": 18.53,
     "low24h": 17.98,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "BIO",
@@ -3339,13 +3249,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/BIO.png",
     "cmcSlug": "bio",
-    "volume24hKrw": 1158707726.277967,
-    "volume24hForeignKrw": 2099804955.9772444,
+    "volume24hKrw": 1158402977.9733655,
+    "volume24hForeignKrw": 4823174173.500545,
     "change24hRate": 2.25352113,
     "change24hAbs": 1.6,
     "high24h": 74.4,
     "low24h": 69.3,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "MAGIC",
@@ -3363,7 +3273,43 @@
     "change24hAbs": -3,
     "high24h": 146,
     "low24h": 144,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
+  },
+  {
+    "symbol": "MON",
+    "name_ko": "모나드",
+    "name_en": "Monad",
+    "koreanPrice": 43.2,
+    "globalPrice": 0.02898,
+    "premium": 1.43,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/MON.png",
+    "cmcSlug": "monad",
+    "volume24hKrw": 28902552005.71391,
+    "volume24hForeignKrw": 150638358254.57642,
+    "change24hRate": 12.793733679999999,
+    "change24hAbs": 4.9,
+    "high24h": 44.3,
+    "low24h": 38,
+    "updatedAt": 1765219873632
+  },
+  {
+    "symbol": "POL",
+    "name_ko": "폴리곤 에코시스템 토큰",
+    "name_en": "Polygon Ecosystem Token",
+    "koreanPrice": 185,
+    "globalPrice": 0.1241,
+    "premium": 1.43,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/POL.png",
+    "cmcSlug": null,
+    "volume24hKrw": 1675948793.6010933,
+    "volume24hForeignKrw": 10042121058.475977,
+    "change24hRate": 2.20994475,
+    "change24hAbs": 4,
+    "high24h": 188,
+    "low24h": 179,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "RAY",
@@ -3381,7 +3327,7 @@
     "change24hAbs": 27,
     "high24h": 1748,
     "low24h": 1661,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "RSR",
@@ -3399,7 +3345,7 @@
     "change24hAbs": -0.049,
     "high24h": 4.887,
     "low24h": 4.811,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "STX",
@@ -3417,7 +3363,7 @@
     "change24hAbs": 9,
     "high24h": 456,
     "low24h": 436,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "XTZ",
@@ -3435,7 +3381,7 @@
     "change24hAbs": 21,
     "high24h": 730,
     "low24h": 707,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "CAMP",
@@ -3453,7 +3399,7 @@
     "change24hAbs": -0.13,
     "high24h": 11.32,
     "low24h": 11.05,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "AUDIO",
@@ -3471,7 +3417,7 @@
     "change24hAbs": -0.63,
     "high24h": 50.17,
     "low24h": 49.55,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "AXS",
@@ -3484,12 +3430,12 @@
     "iconUrl": "/icons/UPBIT/AXS.png",
     "cmcSlug": "axie-infinity",
     "volume24hKrw": 724878254.8019483,
-    "volume24hForeignKrw": 1820144027.433984,
+    "volume24hForeignKrw": 423309053.5271145,
     "change24hRate": 1.83606557,
     "change24hAbs": 28,
     "high24h": 1587,
     "low24h": 1517,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "CELO",
@@ -3501,13 +3447,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/CELO.png",
     "cmcSlug": "celo",
-    "volume24hKrw": 785495230.2973915,
-    "volume24hForeignKrw": 652995724.2040418,
+    "volume24hKrw": 784831055.4853369,
+    "volume24hForeignKrw": 653028394.3159778,
     "change24hRate": -0.79051383,
     "change24hAbs": -2,
     "high24h": 259,
     "low24h": 250,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "COMP",
@@ -3525,7 +3471,7 @@
     "change24hAbs": 1980,
     "high24h": 48100,
     "low24h": 45330,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "CVC",
@@ -3538,12 +3484,12 @@
     "iconUrl": "/icons/UPBIT/CVC.png",
     "cmcSlug": "civic",
     "volume24hKrw": 1340626796.8307557,
-    "volume24hForeignKrw": 6760573236.062862,
+    "volume24hForeignKrw": 6760619705.081933,
     "change24hRate": -0.84745763,
     "change24hAbs": -0.6,
     "high24h": 72.7,
     "low24h": 70,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "HBAR",
@@ -3556,12 +3502,12 @@
     "iconUrl": "/icons/UPBIT/HBAR.png",
     "cmcSlug": "hedera",
     "volume24hKrw": 5210890169.455289,
-    "volume24hForeignKrw": 30659448489.90038,
+    "volume24hForeignKrw": 30655988177.237625,
     "change24hRate": 3.06122449,
     "change24hAbs": 6,
     "high24h": 205,
     "low24h": 195,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "ME",
@@ -3579,7 +3525,7 @@
     "change24hAbs": -3,
     "high24h": 485,
     "low24h": 471,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "SEI",
@@ -3592,12 +3538,12 @@
     "iconUrl": "/icons/UPBIT/SEI.png",
     "cmcSlug": "sei",
     "volume24hKrw": 6398784949.08394,
-    "volume24hForeignKrw": 886055310.7666781,
+    "volume24hForeignKrw": 50030547148.05275,
     "change24hRate": 2.61780105,
     "change24hAbs": 5,
     "high24h": 202,
     "low24h": 190,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "COS",
@@ -3615,7 +3561,25 @@
     "change24hAbs": -0.018,
     "high24h": 2.155,
     "low24h": 2.109,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
+  },
+  {
+    "symbol": "TURBO",
+    "name_ko": "터보",
+    "name_en": "Turbo",
+    "koreanPrice": 3.258,
+    "globalPrice": 0.002186,
+    "premium": 1.41,
+    "usdKrw": 1469.72,
+    "iconUrl": null,
+    "cmcSlug": "turbo",
+    "volume24hKrw": 4966982180.247623,
+    "volume24hForeignKrw": 12383428147.744473,
+    "change24hRate": -2.83,
+    "change24hAbs": -0.095,
+    "high24h": 3.346,
+    "low24h": 3.25,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "SAROS",
@@ -3633,7 +3597,7 @@
     "change24hAbs": 4.65,
     "high24h": 5.05,
     "low24h": 4.604,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "ENS",
@@ -3646,12 +3610,12 @@
     "iconUrl": "/icons/UPBIT/ENS.png",
     "cmcSlug": "ethereum-name-service",
     "volume24hKrw": 2912909573.2764783,
-    "volume24hForeignKrw": 2263059979.935076,
+    "volume24hForeignKrw": 2262589313.862836,
     "change24hRate": 1.99878861,
     "change24hAbs": 330,
     "high24h": 17170,
     "low24h": 16410,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "MOCA",
@@ -3669,7 +3633,7 @@
     "change24hAbs": 0.3,
     "high24h": 33.5,
     "low24h": 32.3,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ACH",
@@ -3681,13 +3645,13 @@
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": "alchemy-pay",
-    "volume24hKrw": 13295951.234491674,
+    "volume24hKrw": 13283783.169499675,
     "volume24hForeignKrw": 61260159.71418042,
-    "change24hRate": -1.57,
-    "change24hAbs": -0.21,
+    "change24hRate": -1.5,
+    "change24hAbs": -0.2,
     "high24h": 13.22,
     "low24h": 13.13,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "K",
@@ -3705,7 +3669,7 @@
     "change24hAbs": 10.03,
     "high24h": 10.03,
     "low24h": 8.93,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "EDEN",
@@ -3723,7 +3687,7 @@
     "change24hAbs": 107.9,
     "high24h": 111.7,
     "low24h": 107.2,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "AUCTION",
@@ -3741,25 +3705,25 @@
     "change24hAbs": 150,
     "high24h": 8445,
     "low24h": 8115,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "BTC",
     "name_ko": "비트코인",
     "name_en": "Bitcoin",
     "koreanPrice": 134603000,
-    "globalPrice": 90328.79,
+    "globalPrice": 90326.25,
     "premium": 1.39,
     "usdKrw": 1469.72,
     "iconUrl": "/icons/BITHUMB/BTC.png",
     "cmcSlug": "bitcoin",
-    "volume24hKrw": 204323845484.2155,
-    "volume24hForeignKrw": 2234988209170.476,
+    "volume24hKrw": 204253351193.58945,
+    "volume24hForeignKrw": 2234820180428.816,
     "change24hRate": -0.43788602,
     "change24hAbs": -592000,
     "high24h": 137296000,
     "low24h": 133800000,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "BTT",
@@ -3777,25 +3741,25 @@
     "change24hAbs": -0.000013,
     "high24h": 0.000632,
     "low24h": 0.000615,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
-    "symbol": "ENA",
-    "name_ko": "에테나",
-    "name_en": "Ethena",
-    "koreanPrice": 411,
-    "globalPrice": 0.2758,
+    "symbol": "MOODENG",
+    "name_ko": "무뎅",
+    "name_en": "Moo Deng",
+    "koreanPrice": 138,
+    "globalPrice": 0.09261,
     "premium": 1.39,
     "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/ENA.png",
-    "cmcSlug": "ethena",
-    "volume24hKrw": 13814719107.11394,
-    "volume24hForeignKrw": 56726575107.185555,
-    "change24hRate": 2.75,
-    "change24hAbs": 11,
-    "high24h": 422,
-    "low24h": 397,
-    "updatedAt": 1765219865630
+    "iconUrl": "/icons/UPBIT/MOODENG.png",
+    "cmcSlug": "moo-deng",
+    "volume24hKrw": 43106265239.9499,
+    "volume24hForeignKrw": 375828645601.4617,
+    "change24hRate": 0.7299270099999999,
+    "change24hAbs": 1,
+    "high24h": 149,
+    "low24h": 132,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ORCA",
@@ -3813,7 +3777,7 @@
     "change24hAbs": -22,
     "high24h": 1947,
     "low24h": 1873,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "FLOKI",
@@ -3826,12 +3790,12 @@
     "iconUrl": null,
     "cmcSlug": "floki",
     "volume24hKrw": 521120174.58286875,
-    "volume24hForeignKrw": 18005594193.350437,
+    "volume24hForeignKrw": 17986883948.94876,
     "change24hRate": 2.12,
     "change24hAbs": 0.0015,
     "high24h": 0.0769,
     "low24h": 0.0717,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "SUSHI",
@@ -3849,7 +3813,7 @@
     "change24hAbs": 0,
     "high24h": 498,
     "low24h": 491,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "0G",
@@ -3861,13 +3825,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/0G.png",
     "cmcSlug": null,
-    "volume24hKrw": 3271883915.276279,
+    "volume24hKrw": 3271772307.08321,
     "volume24hForeignKrw": 2518432395.7718773,
     "change24hRate": 0.47393365,
     "change24hAbs": 7,
     "high24h": 1518,
     "low24h": 1465,
-    "updatedAt": 1765219865629
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "ARK",
@@ -3880,12 +3844,12 @@
     "iconUrl": "/icons/UPBIT/ARK.png",
     "cmcSlug": "ark",
     "volume24hKrw": 729766889.7903965,
-    "volume24hForeignKrw": 218692530.302008,
+    "volume24hForeignKrw": 3101623.602,
     "change24hRate": -1.1682243,
     "change24hAbs": -5,
     "high24h": 431,
     "low24h": 420,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "SUN",
@@ -3898,12 +3862,12 @@
     "iconUrl": "/icons/UPBIT/SUN.png",
     "cmcSlug": "sun",
     "volume24hKrw": 44791119.25482028,
-    "volume24hForeignKrw": 1367991769.0928104,
+    "volume24hForeignKrw": 50960730.99999059,
     "change24hRate": -1.8691588799999999,
     "change24hAbs": -0.6,
     "high24h": 32.1,
     "low24h": 31.5,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "VANA",
@@ -3921,7 +3885,7 @@
     "change24hAbs": -72,
     "high24h": 4308,
     "low24h": 4103,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ZKC",
@@ -3939,25 +3903,25 @@
     "change24hAbs": 1,
     "high24h": 206,
     "low24h": 198,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "BNB",
     "name_ko": "비앤비",
     "name_en": "BNB",
     "koreanPrice": 1335000,
-    "globalPrice": 895.96,
+    "globalPrice": 895.97,
     "premium": 1.38,
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": "binance-coin",
     "volume24hKrw": 696950923.5610471,
-    "volume24hForeignKrw": 745576202617.8685,
+    "volume24hForeignKrw": 168281799182.65704,
     "change24hRate": -0.67,
     "change24hAbs": -9000,
     "high24h": 1350000,
     "low24h": 1329000,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "BABY",
@@ -3975,7 +3939,25 @@
     "change24hAbs": -0.82,
     "high24h": 28.74,
     "low24h": 28.28,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
+  },
+  {
+    "symbol": "SOL",
+    "name_ko": "솔라나",
+    "name_en": "Solana",
+    "koreanPrice": 201400,
+    "globalPrice": 135.18,
+    "premium": 1.37,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/SOL.png",
+    "cmcSlug": "solana",
+    "volume24hKrw": 85412043521.48872,
+    "volume24hForeignKrw": 627972431809.903,
+    "change24hRate": 1.66582534,
+    "change24hAbs": 3300,
+    "high24h": 207400,
+    "low24h": 196700,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "API3",
@@ -3988,30 +3970,48 @@
     "iconUrl": "/icons/UPBIT/API3.png",
     "cmcSlug": "api3",
     "volume24hKrw": 338310972.3052464,
-    "volume24hForeignKrw": 448816492.5605228,
+    "volume24hForeignKrw": 6065538174.55852,
     "change24hRate": 0.67842605,
     "change24hAbs": 5,
     "high24h": 752,
     "low24h": 733,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
-    "symbol": "AVAX",
-    "name_ko": "아발란체",
-    "name_en": "Avalanche",
-    "koreanPrice": 20320,
-    "globalPrice": 13.64,
+    "symbol": "ENA",
+    "name_ko": "에테나",
+    "name_en": "Ethena",
+    "koreanPrice": 411,
+    "globalPrice": 0.2759,
     "premium": 1.36,
     "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/AVAX.png",
-    "cmcSlug": "avalanche",
-    "volume24hKrw": 4484280208.395425,
-    "volume24hForeignKrw": 39897173112.558495,
-    "change24hRate": 0.5442850100000001,
-    "change24hAbs": 110,
-    "high24h": 20670,
-    "low24h": 20000,
-    "updatedAt": 1765219865630
+    "iconUrl": "/icons/UPBIT/ENA.png",
+    "cmcSlug": "ethena",
+    "volume24hKrw": 13814285329.25889,
+    "volume24hForeignKrw": 56696806551.29563,
+    "change24hRate": 2.75,
+    "change24hAbs": 11,
+    "high24h": 422,
+    "low24h": 397,
+    "updatedAt": 1765219873631
+  },
+  {
+    "symbol": "GLM",
+    "name_ko": "골렘",
+    "name_en": "Golem",
+    "koreanPrice": 334,
+    "globalPrice": 0.2242,
+    "premium": 1.36,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/GLM.png",
+    "cmcSlug": "golem",
+    "volume24hKrw": 753593271.9918337,
+    "volume24hForeignKrw": 843530989.9513559,
+    "change24hRate": -2.33918129,
+    "change24hAbs": -8,
+    "high24h": 342,
+    "low24h": 332,
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "HOLO",
@@ -4024,12 +4024,12 @@
     "iconUrl": "/icons/UPBIT/HOLO.png",
     "cmcSlug": "holoworld-ai",
     "volume24hKrw": 619250185.8294647,
-    "volume24hForeignKrw": 348498282.1685876,
+    "volume24hForeignKrw": 3496407947.4097567,
     "change24hRate": 0,
     "change24hAbs": 0,
     "high24h": 119,
     "low24h": 114,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "IMX",
@@ -4047,7 +4047,25 @@
     "change24hAbs": 7,
     "high24h": 444,
     "low24h": 423,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
+  },
+  {
+    "symbol": "UNI",
+    "name_ko": "유니스왑",
+    "name_en": "Uniswap",
+    "koreanPrice": 8375,
+    "globalPrice": 5.622,
+    "premium": 1.36,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/UNI.png",
+    "cmcSlug": "uniswap",
+    "volume24hKrw": 2467936609.1567574,
+    "volume24hForeignKrw": 8035343934.99221,
+    "change24hRate": 2.5091799299999997,
+    "change24hAbs": 205,
+    "high24h": 8590,
+    "low24h": 8130,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "AVAIL",
@@ -4065,7 +4083,7 @@
     "change24hAbs": -0.105,
     "high24h": 9.827,
     "low24h": 9.65,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "AVL",
@@ -4083,7 +4101,7 @@
     "change24hAbs": -10,
     "high24h": 180,
     "low24h": 173,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "PARTI",
@@ -4096,12 +4114,12 @@
     "iconUrl": null,
     "cmcSlug": "particle-network",
     "volume24hKrw": 889304922.8644173,
-    "volume24hForeignKrw": 1065008832.5774826,
+    "volume24hForeignKrw": 31739902737.81483,
     "change24hRate": -9.6,
     "change24hAbs": -17,
     "high24h": 166,
     "low24h": 159,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "TAO",
@@ -4114,30 +4132,30 @@
     "iconUrl": null,
     "cmcSlug": "bittensor",
     "volume24hKrw": 396827276.7861391,
-    "volume24hForeignKrw": 10100630138.617199,
+    "volume24hForeignKrw": 50154876669.436966,
     "change24hRate": 0.67,
     "change24hAbs": 2900,
     "high24h": 441100,
     "low24h": 429500,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
-    "symbol": "POL",
-    "name_ko": "폴리곤 에코시스템 토큰",
-    "name_en": "Polygon Ecosystem Token",
-    "koreanPrice": 185,
-    "globalPrice": 0.1242,
+    "symbol": "PEPE",
+    "name_ko": "페페",
+    "name_en": "PEPE",
+    "koreanPrice": 0.00718,
+    "globalPrice": 0.00000482,
     "premium": 1.35,
     "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/POL.png",
-    "cmcSlug": null,
-    "volume24hKrw": 1675948793.6010933,
-    "volume24hForeignKrw": 10050834514.277315,
-    "change24hRate": 2.20994475,
-    "change24hAbs": 4,
-    "high24h": 188,
-    "low24h": 179,
-    "updatedAt": 1765219865631
+    "iconUrl": "/icons/UPBIT/PEPE.png",
+    "cmcSlug": "pepe",
+    "volume24hKrw": 6780797697.363141,
+    "volume24hForeignKrw": 89494547656.87578,
+    "change24hRate": 8.295625939999999,
+    "change24hAbs": 0.00055,
+    "high24h": 0.00749,
+    "low24h": 0.00659,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "FIDA",
@@ -4150,12 +4168,12 @@
     "iconUrl": null,
     "cmcSlug": "bonfida",
     "volume24hKrw": 130744567.11264095,
-    "volume24hForeignKrw": 29232433.19786692,
+    "volume24hForeignKrw": 4365052213.87076,
     "change24hRate": -2.36,
     "change24hAbs": -1.62,
     "high24h": 68.1,
     "low24h": 66.34,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "REZ",
@@ -4173,7 +4191,7 @@
     "change24hAbs": -0.46,
     "high24h": 8.841,
     "low24h": 8.656,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "STRK",
@@ -4186,12 +4204,12 @@
     "iconUrl": null,
     "cmcSlug": null,
     "volume24hKrw": 996403254.8206527,
-    "volume24hForeignKrw": 9790954403.29415,
+    "volume24hForeignKrw": 51173254952.857475,
     "change24hRate": -4.09,
     "change24hAbs": -7,
     "high24h": 167,
     "low24h": 163,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "XPR",
@@ -4209,7 +4227,7 @@
     "change24hAbs": -0.018,
     "high24h": 5.257,
     "low24h": 4.9,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "FIL",
@@ -4221,13 +4239,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/FIL.png",
     "cmcSlug": null,
-    "volume24hKrw": 1900771402.835448,
-    "volume24hForeignKrw": 145637400802.551,
+    "volume24hKrw": 1900651321.8759434,
+    "volume24hForeignKrw": 145637654148.47543,
     "change24hRate": 2.98438935,
     "change24hAbs": 65,
     "high24h": 2275,
     "low24h": 2168,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "ID",
@@ -4240,12 +4258,12 @@
     "iconUrl": "/icons/UPBIT/ID.png",
     "cmcSlug": "space-id",
     "volume24hKrw": 191806071.06109166,
-    "volume24hForeignKrw": 27731805.485942323,
+    "volume24hForeignKrw": 419608328.21636397,
     "change24hRate": 0,
     "change24hAbs": 0,
     "high24h": 115,
     "low24h": 111,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "LAYER",
@@ -4258,12 +4276,12 @@
     "iconUrl": "/icons/UPBIT/LAYER.png",
     "cmcSlug": "solayer",
     "volume24hKrw": 1229095234.7998106,
-    "volume24hForeignKrw": 305751023.35538006,
+    "volume24hForeignKrw": 8367141304.32199,
     "change24hRate": 0,
     "change24hAbs": 0,
     "high24h": 303,
     "low24h": 296,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "MEW",
@@ -4281,25 +4299,7 @@
     "change24hAbs": 0.06,
     "high24h": 1.73,
     "low24h": 1.6,
-    "updatedAt": 1765219865630
-  },
-  {
-    "symbol": "MOODENG",
-    "name_ko": "무뎅",
-    "name_en": "Moo Deng",
-    "koreanPrice": 138,
-    "globalPrice": 0.09265,
-    "premium": 1.34,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/MOODENG.png",
-    "cmcSlug": "moo-deng",
-    "volume24hKrw": 43108978005.06734,
-    "volume24hForeignKrw": 375825610058.3815,
-    "change24hRate": 0.7299270099999999,
-    "change24hAbs": 1,
-    "high24h": 149,
-    "low24h": 132,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "NEAR",
@@ -4312,12 +4312,12 @@
     "iconUrl": "/icons/UPBIT/NEAR.png",
     "cmcSlug": "near-protocol",
     "volume24hKrw": 4524269121.653516,
-    "volume24hForeignKrw": 7362370197.119916,
+    "volume24hForeignKrw": 129808630294.09323,
     "change24hRate": 2.8257456800000003,
     "change24hAbs": 72,
     "high24h": 2680,
     "low24h": 2526,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "SHELL",
@@ -4330,30 +4330,12 @@
     "iconUrl": "/icons/UPBIT/SHELL.png",
     "cmcSlug": "myshell",
     "volume24hKrw": 188197064.56502676,
-    "volume24hForeignKrw": 562762880.721748,
+    "volume24hForeignKrw": 18859109.0044,
     "change24hRate": -1.28,
     "change24hAbs": -1.06,
     "high24h": 82.28,
     "low24h": 80.89,
-    "updatedAt": 1765219865631
-  },
-  {
-    "symbol": "UNI",
-    "name_ko": "유니스왑",
-    "name_en": "Uniswap",
-    "koreanPrice": 8375,
-    "globalPrice": 5.623,
-    "premium": 1.34,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/UNI.png",
-    "cmcSlug": "uniswap",
-    "volume24hKrw": 2467936609.1567574,
-    "volume24hForeignKrw": 27494097170.73613,
-    "change24hRate": 2.5091799299999997,
-    "change24hAbs": 205,
-    "high24h": 8590,
-    "low24h": 8130,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "AGI",
@@ -4371,7 +4353,7 @@
     "change24hAbs": -0.68,
     "high24h": 25.59,
     "low24h": 25.2,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "AIOZ",
@@ -4389,43 +4371,7 @@
     "change24hAbs": -1,
     "high24h": 180,
     "low24h": 174,
-    "updatedAt": 1765219865636
-  },
-  {
-    "symbol": "CHZ",
-    "name_ko": "칠리즈",
-    "name_en": "Chiliz",
-    "koreanPrice": 47.7,
-    "globalPrice": 0.03203,
-    "premium": 1.33,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/CHZ.png",
-    "cmcSlug": "chiliz",
-    "volume24hKrw": 497365257.0945986,
-    "volume24hForeignKrw": 4149714244.380757,
-    "change24hRate": 3.6956521700000002,
-    "change24hAbs": 1.7,
-    "high24h": 47.9,
-    "low24h": 45.8,
-    "updatedAt": 1765219865630
-  },
-  {
-    "symbol": "USDC",
-    "name_ko": "유에스디코인",
-    "name_en": "USD Coin",
-    "koreanPrice": 1489,
-    "globalPrice": 0.9998,
-    "premium": 1.33,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/USDC.png",
-    "cmcSlug": "usd",
-    "volume24hKrw": 976951995.2914058,
-    "volume24hForeignKrw": 1433223409415.9973,
-    "change24hRate": -0.46791444,
-    "change24hAbs": -7,
-    "high24h": 1497,
-    "low24h": 1486,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "BIGTIME",
@@ -4438,12 +4384,12 @@
     "iconUrl": "/icons/UPBIT/BIGTIME.png",
     "cmcSlug": "big-time",
     "volume24hKrw": 362102626.14566207,
-    "volume24hForeignKrw": 649491978.2451268,
+    "volume24hForeignKrw": 723055043.7340776,
     "change24hRate": 0.29761905,
     "change24hAbs": 0.1,
     "high24h": 34.5,
     "low24h": 33.4,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "CKB",
@@ -4461,7 +4407,25 @@
     "change24hAbs": 0,
     "high24h": 4.05,
     "low24h": 3.95,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
+  },
+  {
+    "symbol": "USDC",
+    "name_ko": "유에스디코인",
+    "name_en": "USD Coin",
+    "koreanPrice": 1489,
+    "globalPrice": 0.9999,
+    "premium": 1.32,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/USDC.png",
+    "cmcSlug": "usd",
+    "volume24hKrw": 976951995.2914058,
+    "volume24hForeignKrw": 1433209887351.9343,
+    "change24hRate": -0.46791444,
+    "change24hAbs": -7,
+    "high24h": 1497,
+    "low24h": 1486,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "CFX",
@@ -4474,12 +4438,12 @@
     "iconUrl": null,
     "cmcSlug": "conflux-network",
     "volume24hKrw": 182205122.90423387,
-    "volume24hForeignKrw": 2182085278.288188,
+    "volume24hForeignKrw": 1055520118.9914311,
     "change24hRate": 0.93,
     "change24hAbs": 1,
     "high24h": 110,
     "low24h": 108,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "GOAT",
@@ -4497,7 +4461,7 @@
     "change24hAbs": -1.3,
     "high24h": 61.16,
     "low24h": 59,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "KAIA",
@@ -4515,7 +4479,7 @@
     "change24hAbs": -3,
     "high24h": 117,
     "low24h": 115,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "RSS3",
@@ -4533,7 +4497,7 @@
     "change24hAbs": -0.25,
     "high24h": 21.66,
     "low24h": 21.33,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "SAPIEN",
@@ -4546,12 +4510,12 @@
     "iconUrl": null,
     "cmcSlug": null,
     "volume24hKrw": 3881866649.4117846,
-    "volume24hForeignKrw": 484197402.1528,
+    "volume24hForeignKrw": 7867753577.232145,
     "change24hRate": -4.13,
     "change24hAbs": -10,
     "high24h": 240,
     "low24h": 231,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "TOWNS",
@@ -4569,7 +4533,7 @@
     "change24hAbs": -0.03,
     "high24h": 11.69,
     "low24h": 11.5,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "ZTX",
@@ -4587,7 +4551,7 @@
     "change24hAbs": 0.0089,
     "high24h": 0.7745,
     "low24h": 0.7469,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "BONK",
@@ -4599,13 +4563,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/BONK.png",
     "cmcSlug": "bonk",
-    "volume24hKrw": 3207679007.355509,
-    "volume24hForeignKrw": 3306653573.9876027,
+    "volume24hKrw": 3202936319.833709,
+    "volume24hForeignKrw": 15293852489.815218,
     "change24hRate": 3.67647059,
     "change24hAbs": 0.0005,
     "high24h": 0.0145,
     "low24h": 0.0135,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "NXPC",
@@ -4623,7 +4587,7 @@
     "change24hAbs": 24,
     "high24h": 737,
     "low24h": 689,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ONDO",
@@ -4635,13 +4599,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/ONDO.png",
     "cmcSlug": "ondo-finance",
-    "volume24hKrw": 25186858471.35553,
-    "volume24hForeignKrw": 24275138081.943344,
+    "volume24hKrw": 25188091155.828403,
+    "volume24hForeignKrw": 24274001981.63733,
     "change24hRate": 3.81231672,
     "change24hAbs": 26,
     "high24h": 757,
     "low24h": 679,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "TRUMP",
@@ -4653,13 +4617,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/TRUMP.png",
     "cmcSlug": "official-trump",
-    "volume24hKrw": 1925017663.7658503,
+    "volume24hKrw": 1924987663.7659159,
     "volume24hForeignKrw": 5945752283.818871,
     "change24hRate": 0.29481132,
     "change24hAbs": 25,
     "high24h": 8580,
     "low24h": 8435,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "XEC",
@@ -4677,25 +4641,7 @@
     "change24hAbs": 0,
     "high24h": 0.0179,
     "low24h": 0.0175,
-    "updatedAt": 1765219865636
-  },
-  {
-    "symbol": "TURBO",
-    "name_ko": "터보",
-    "name_en": "Turbo",
-    "koreanPrice": 3.258,
-    "globalPrice": 0.002188,
-    "premium": 1.31,
-    "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": "turbo",
-    "volume24hKrw": 4967999636.453874,
-    "volume24hForeignKrw": 6605566469.485855,
-    "change24hRate": -2.83,
-    "change24hAbs": -0.095,
-    "high24h": 3.346,
-    "low24h": 3.25,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ARKM",
@@ -4713,7 +4659,7 @@
     "change24hAbs": 8,
     "high24h": 343,
     "low24h": 321,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "ASTR",
@@ -4725,13 +4671,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/ASTR.png",
     "cmcSlug": "astar",
-    "volume24hKrw": 200014454.14802372,
+    "volume24hKrw": 196599024.6840237,
     "volume24hForeignKrw": 60414523.38836134,
     "change24hRate": 1.63043478,
     "change24hAbs": 0.3,
     "high24h": 19,
     "low24h": 18.4,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "G",
@@ -4749,25 +4695,7 @@
     "change24hAbs": -0.02,
     "high24h": 7.5,
     "low24h": 7.28,
-    "updatedAt": 1765219865630
-  },
-  {
-    "symbol": "ZIL",
-    "name_ko": "질리카",
-    "name_en": "Zilliqa",
-    "koreanPrice": 7.95,
-    "globalPrice": 0.00534,
-    "premium": 1.3,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/ZIL.png",
-    "cmcSlug": "zilliqa",
-    "volume24hKrw": 300580585.1254214,
-    "volume24hForeignKrw": 6082325871.644039,
-    "change24hRate": 0.5056889999999999,
-    "change24hAbs": 0.04,
-    "high24h": 8.19,
-    "low24h": 7.88,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "AAVE",
@@ -4779,13 +4707,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/AAVE.png",
     "cmcSlug": "aave",
-    "volume24hKrw": 2243032755.505716,
-    "volume24hForeignKrw": 8800672471.152765,
+    "volume24hKrw": 2243496032.697828,
+    "volume24hForeignKrw": 8800675293.015165,
     "change24hRate": 1.6731933099999998,
     "change24hAbs": 4700,
     "high24h": 297400,
     "low24h": 278100,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "BLAST",
@@ -4803,7 +4731,7 @@
     "change24hAbs": 0.02,
     "high24h": 1.44,
     "low24h": 1.27,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "POWR",
@@ -4821,25 +4749,7 @@
     "change24hAbs": 0,
     "high24h": 134,
     "low24h": 131,
-    "updatedAt": 1765219865631
-  },
-  {
-    "symbol": "SOL",
-    "name_ko": "솔라나",
-    "name_en": "Solana",
-    "koreanPrice": 201200,
-    "globalPrice": 135.16,
-    "premium": 1.29,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/SOL.png",
-    "cmcSlug": "solana",
-    "volume24hKrw": 85414415960.09485,
-    "volume24hForeignKrw": 628088936655.8812,
-    "change24hRate": 1.56486623,
-    "change24hAbs": 3100,
-    "high24h": 207400,
-    "low24h": 196700,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "SOPH",
@@ -4857,7 +4767,7 @@
     "change24hAbs": -0.2,
     "high24h": 23.7,
     "low24h": 22.9,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "STRAX",
@@ -4875,7 +4785,7 @@
     "change24hAbs": -0.1,
     "high24h": 36.4,
     "low24h": 34.5,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "YB",
@@ -4893,25 +4803,7 @@
     "change24hAbs": -28,
     "high24h": 801,
     "low24h": 785,
-    "updatedAt": 1765219865637
-  },
-  {
-    "symbol": "SUI",
-    "name_ko": "수이",
-    "name_en": "SUI",
-    "koreanPrice": 2400,
-    "globalPrice": 1.6123,
-    "premium": 1.28,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/SUI.png",
-    "cmcSlug": "sui",
-    "volume24hKrw": 35777900028.82988,
-    "volume24hForeignKrw": 142165629034.90698,
-    "change24hRate": 1.18043845,
-    "change24hAbs": 28,
-    "high24h": 2466,
-    "low24h": 2350,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "MAPO",
@@ -4924,12 +4816,12 @@
     "iconUrl": null,
     "cmcSlug": "map-protocol",
     "volume24hKrw": 152932071.49946895,
-    "volume24hForeignKrw": 171177333.08200002,
+    "volume24hForeignKrw": 171197953.2536,
     "change24hRate": 3.78,
     "change24hAbs": 0.227,
     "high24h": 6.33,
     "low24h": 6.11,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "THE",
@@ -4947,25 +4839,7 @@
     "change24hAbs": -7,
     "high24h": 252,
     "low24h": 248,
-    "updatedAt": 1765219865637
-  },
-  {
-    "symbol": "BCH",
-    "name_ko": "비트코인 캐시",
-    "name_en": "Bitcoin Cash",
-    "koreanPrice": 862500,
-    "globalPrice": 579.5,
-    "premium": 1.27,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/BCH.png",
-    "cmcSlug": "bitcoin-cash",
-    "volume24hKrw": 15510566995.73407,
-    "volume24hForeignKrw": 31843920417.482964,
-    "change24hRate": -3.8461538500000003,
-    "change24hAbs": -34500,
-    "high24h": 903000,
-    "low24h": 862500,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "CBK",
@@ -4983,7 +4857,7 @@
     "change24hAbs": -2,
     "high24h": 550,
     "low24h": 537,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "MBL",
@@ -4996,12 +4870,12 @@
     "iconUrl": "/icons/UPBIT/MBL.png",
     "cmcSlug": "moviebloc",
     "volume24hKrw": 568755723.0725814,
-    "volume24hForeignKrw": 2589079088.0879517,
+    "volume24hForeignKrw": 2589473462.161949,
     "change24hRate": 1.05263158,
     "change24hAbs": 0.02,
     "high24h": 1.97,
     "low24h": 1.88,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "NEWT",
@@ -5019,7 +4893,7 @@
     "change24hAbs": 1,
     "high24h": 171,
     "low24h": 165,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "SAHARA",
@@ -5032,12 +4906,30 @@
     "iconUrl": "/icons/UPBIT/SAHARA.png",
     "cmcSlug": "sahara-ai",
     "volume24hKrw": 17365848150.501507,
-    "volume24hForeignKrw": 1470797960.30803,
+    "volume24hForeignKrw": 3674195844.0594068,
     "change24hRate": 0,
     "change24hAbs": 0,
     "high24h": 56.1,
     "low24h": 51.5,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
+  },
+  {
+    "symbol": "SUI",
+    "name_ko": "수이",
+    "name_en": "SUI",
+    "koreanPrice": 2400,
+    "globalPrice": 1.6125,
+    "premium": 1.27,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/SUI.png",
+    "cmcSlug": "sui",
+    "volume24hKrw": 35775408150.5299,
+    "volume24hForeignKrw": 142151897545.95847,
+    "change24hRate": 1.18043845,
+    "change24hAbs": 28,
+    "high24h": 2466,
+    "low24h": 2350,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "USD1",
@@ -5055,7 +4947,7 @@
     "change24hAbs": -5,
     "high24h": 1495,
     "low24h": 1485,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "XRP",
@@ -5067,13 +4959,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/XRP.png",
     "cmcSlug": "ripple",
-    "volume24hKrw": 241356032809.63766,
-    "volume24hForeignKrw": 300114496802.20105,
+    "volume24hKrw": 241331161936.9842,
+    "volume24hForeignKrw": 300099305799.13513,
     "change24hRate": 1.24223602,
     "change24hAbs": 38,
     "high24h": 3157,
     "low24h": 3035,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ARDR",
@@ -5086,12 +4978,12 @@
     "iconUrl": "/icons/UPBIT/ARDR.png",
     "cmcSlug": "ardor",
     "volume24hKrw": 383078845.59827715,
-    "volume24hForeignKrw": 8903006706.869267,
+    "volume24hForeignKrw": 8903456517.41281,
     "change24hRate": 0.34364260999999996,
     "change24hAbs": 0.3,
     "high24h": 88.5,
     "low24h": 86.4,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "INIT",
@@ -5104,12 +4996,12 @@
     "iconUrl": "/icons/UPBIT/INIT.png",
     "cmcSlug": "initia",
     "volume24hKrw": 148727036.99719515,
-    "volume24hForeignKrw": 620834960.5791788,
+    "volume24hForeignKrw": 2051368577.034434,
     "change24hRate": -1.42,
     "change24hAbs": -2,
     "high24h": 141,
     "low24h": 138,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "QTUM",
@@ -5127,7 +5019,7 @@
     "change24hAbs": 53,
     "high24h": 2183,
     "low24h": 2101,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "SAND",
@@ -5139,31 +5031,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/SAND.png",
     "cmcSlug": "the-sandbox",
-    "volume24hKrw": 2201777286.509291,
-    "volume24hForeignKrw": 279655590.1970193,
+    "volume24hKrw": 2200601536.7575436,
+    "volume24hForeignKrw": 2300924201.398396,
     "change24hRate": 0.4784689,
     "change24hAbs": 1,
     "high24h": 215,
     "low24h": 207,
-    "updatedAt": 1765219865631
-  },
-  {
-    "symbol": "THETA",
-    "name_ko": "쎄타토큰",
-    "name_en": "Theta Token",
-    "koreanPrice": 509,
-    "globalPrice": 0.342,
-    "premium": 1.26,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/THETA.png",
-    "cmcSlug": "theta",
-    "volume24hKrw": 291926096.412129,
-    "volume24hForeignKrw": 323954880.2892864,
-    "change24hRate": 2.82828283,
-    "change24hAbs": 14,
-    "high24h": 518,
-    "low24h": 492,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "TDROP",
@@ -5176,30 +5050,48 @@
     "iconUrl": null,
     "cmcSlug": "thetadrop",
     "volume24hKrw": 90220616.56625998,
-    "volume24hForeignKrw": 24252829.468846917,
+    "volume24hForeignKrw": 24218648.009120133,
     "change24hRate": 1.78,
     "change24hAbs": 0.02,
     "high24h": 1.15,
     "low24h": 1.141,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
+  },
+  {
+    "symbol": "BCH",
+    "name_ko": "비트코인 캐시",
+    "name_en": "Bitcoin Cash",
+    "koreanPrice": 862500,
+    "globalPrice": 579.6,
+    "premium": 1.25,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/BCH.png",
+    "cmcSlug": "bitcoin-cash",
+    "volume24hKrw": 15510200477.1061,
+    "volume24hForeignKrw": 31747056436.820007,
+    "change24hRate": -3.8461538500000003,
+    "change24hAbs": -34500,
+    "high24h": 903000,
+    "low24h": 862500,
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "ETH",
     "name_ko": "이더리움",
     "name_en": "Ethereum",
     "koreanPrice": 4642000,
-    "globalPrice": 3119.46,
+    "globalPrice": 3119.54,
     "premium": 1.25,
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/ETH.png",
     "cmcSlug": "ethereum",
-    "volume24hKrw": 215384079886.9435,
-    "volume24hForeignKrw": 2133184749185.4148,
+    "volume24hKrw": 215356371492.1105,
+    "volume24hForeignKrw": 2133046315555.3022,
     "change24hRate": 1.30947185,
     "change24hAbs": 60000,
     "high24h": 4730000,
     "low24h": 4550000,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "FLOW",
@@ -5212,12 +5104,12 @@
     "iconUrl": "/icons/UPBIT/FLOW.png",
     "cmcSlug": "flow",
     "volume24hKrw": 1570863730.3296402,
-    "volume24hForeignKrw": 2020086437.8170114,
+    "volume24hForeignKrw": 1179920875.4612808,
     "change24hRate": -2.18068536,
     "change24hAbs": -7,
     "high24h": 325,
     "low24h": 312,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "GMT",
@@ -5235,7 +5127,7 @@
     "change24hAbs": 0.5,
     "high24h": 25.3,
     "low24h": 24.3,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "POKT",
@@ -5253,7 +5145,7 @@
     "change24hAbs": -0.2,
     "high24h": 21.3,
     "low24h": 20.4,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "RESOLV",
@@ -5266,12 +5158,12 @@
     "iconUrl": "/icons/UPBIT/RESOLV.png",
     "cmcSlug": "resolv",
     "volume24hKrw": 5157638381.202538,
-    "volume24hForeignKrw": 70307006860.2981,
+    "volume24hForeignKrw": 70307314157.80658,
     "change24hRate": 7.27,
     "change24hAbs": 8,
     "high24h": 124,
     "low24h": 116,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "TIA",
@@ -5284,12 +5176,12 @@
     "iconUrl": "/icons/UPBIT/TIA.png",
     "cmcSlug": "celestia",
     "volume24hKrw": 920870319.7048696,
-    "volume24hForeignKrw": 10719833471.137486,
+    "volume24hForeignKrw": 10720041662.531025,
     "change24hRate": 4.68187275,
     "change24hAbs": 39,
     "high24h": 895,
     "low24h": 830,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "WAXP",
@@ -5307,7 +5199,7 @@
     "change24hAbs": 0.1,
     "high24h": 13.5,
     "low24h": 13,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "WLD",
@@ -5320,12 +5212,12 @@
     "iconUrl": "/icons/UPBIT/WLD.png",
     "cmcSlug": null,
     "volume24hKrw": 1823361202.3393557,
-    "volume24hForeignKrw": 22732510915.777378,
+    "volume24hForeignKrw": 149111659337.6843,
     "change24hRate": 3.90532544,
     "change24hAbs": 33,
     "high24h": 899,
     "low24h": 842,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ISK",
@@ -5343,7 +5235,7 @@
     "change24hAbs": 1.75,
     "high24h": 1.997,
     "low24h": 1.473,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "MMT",
@@ -5356,12 +5248,12 @@
     "iconUrl": "/icons/UPBIT/MMT.png",
     "cmcSlug": "momentum",
     "volume24hKrw": 3657607228.1323323,
-    "volume24hForeignKrw": 5063123922.891057,
+    "volume24hForeignKrw": 5062953028.978779,
     "change24hRate": 0.30769231,
     "change24hAbs": 1,
     "high24h": 336,
     "low24h": 324,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "NEO",
@@ -5379,7 +5271,7 @@
     "change24hAbs": 70,
     "high24h": 6200,
     "low24h": 6025,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "USDT",
@@ -5391,31 +5283,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/USDT.png",
     "cmcSlug": null,
-    "volume24hKrw": 88091327213.9478,
+    "volume24hKrw": 88090118645.4578,
     "volume24hForeignKrw": null,
     "change24hRate": -0.53475936,
     "change24hAbs": -8,
     "high24h": 1496,
     "low24h": 1486,
-    "updatedAt": 1765219865636
-  },
-  {
-    "symbol": "MERL",
-    "name_ko": "멀린 체인",
-    "name_en": "Merlin Chain",
-    "koreanPrice": 506,
-    "globalPrice": 0.34006,
-    "premium": 1.24,
-    "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": "merlin-chain",
-    "volume24hKrw": 2322587219.0801396,
-    "volume24hForeignKrw": 50274267446.613594,
-    "change24hRate": -2.69,
-    "change24hAbs": -14,
-    "high24h": 515,
-    "low24h": 503,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "FXS",
@@ -5433,7 +5307,25 @@
     "change24hAbs": -38,
     "high24h": 1171,
     "low24h": 1156,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
+  },
+  {
+    "symbol": "MERL",
+    "name_ko": "멀린 체인",
+    "name_en": "Merlin Chain",
+    "koreanPrice": 506,
+    "globalPrice": 0.34009,
+    "premium": 1.23,
+    "usdKrw": 1469.72,
+    "iconUrl": null,
+    "cmcSlug": "merlin-chain",
+    "volume24hKrw": 2322587219.0801396,
+    "volume24hForeignKrw": 50274418389.26792,
+    "change24hRate": -2.69,
+    "change24hAbs": -14,
+    "high24h": 515,
+    "low24h": 503,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "PCI",
@@ -5451,7 +5343,7 @@
     "change24hAbs": 0.44,
     "high24h": 98.96,
     "low24h": 98.02,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "STEEM",
@@ -5464,12 +5356,12 @@
     "iconUrl": "/icons/UPBIT/STEEM.png",
     "cmcSlug": "steem",
     "volume24hKrw": 173439478.34821922,
-    "volume24hForeignKrw": 20235752.0336244,
+    "volume24hForeignKrw": 20243985.037634403,
     "change24hRate": -0.9174311900000001,
     "change24hAbs": -1,
     "high24h": 111,
     "low24h": 107,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "VET",
@@ -5482,12 +5374,12 @@
     "iconUrl": "/icons/UPBIT/VET.png",
     "cmcSlug": "vechain",
     "volume24hKrw": 2190544341.0530953,
-    "volume24hForeignKrw": 159185094.100172,
+    "volume24hForeignKrw": 4647488475.55164,
     "change24hRate": 1.63043478,
     "change24hAbs": 0.3,
     "high24h": 19,
     "low24h": 18.2,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ZETA",
@@ -5505,7 +5397,25 @@
     "change24hAbs": 0,
     "high24h": 129,
     "low24h": 125,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
+  },
+  {
+    "symbol": "AR",
+    "name_ko": "알위브",
+    "name_en": "Arweave",
+    "koreanPrice": 5995,
+    "globalPrice": 4.03,
+    "premium": 1.22,
+    "usdKrw": 1469.72,
+    "iconUrl": null,
+    "cmcSlug": "arweave",
+    "volume24hKrw": 59107701.65349469,
+    "volume24hForeignKrw": 1074825790.518254,
+    "change24hRate": -1.15,
+    "change24hAbs": -70,
+    "high24h": 6075,
+    "low24h": 5965,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "BERA",
@@ -5518,30 +5428,48 @@
     "iconUrl": "/icons/UPBIT/BERA.png",
     "cmcSlug": "berachain",
     "volume24hKrw": 1191153897.3805196,
-    "volume24hForeignKrw": 13422916436.899006,
+    "volume24hForeignKrw": 646350322.6732877,
     "change24hRate": -0.9523809499999999,
     "change24hAbs": -12,
     "high24h": 1284,
     "low24h": 1239,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
-    "symbol": "EPT",
-    "name_ko": "밸런스",
-    "name_en": "Balance",
-    "koreanPrice": 3.109,
-    "globalPrice": 0.00209,
+    "symbol": "CPOOL",
+    "name_ko": "클리어풀",
+    "name_en": "Clearpool",
+    "koreanPrice": 56.3,
+    "globalPrice": 0.03785,
     "premium": 1.21,
     "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/EPT.png",
-    "cmcSlug": "balance",
-    "volume24hKrw": 1680302908.6994143,
-    "volume24hForeignKrw": 3490891121.631079,
-    "change24hRate": -3.12,
-    "change24hAbs": -0.1,
-    "high24h": 3.198,
-    "low24h": 3.107,
-    "updatedAt": 1765219865630
+    "iconUrl": "/icons/UPBIT/CPOOL.png",
+    "cmcSlug": "clearpool",
+    "volume24hKrw": 1279573531.6768022,
+    "volume24hForeignKrw": 539983877.070174,
+    "change24hRate": -1.22807018,
+    "change24hAbs": -0.7,
+    "high24h": 57.2,
+    "low24h": 55.1,
+    "updatedAt": 1765219873631
+  },
+  {
+    "symbol": "DOOD",
+    "name_ko": "두들즈",
+    "name_en": "Doodles",
+    "koreanPrice": 7.5,
+    "globalPrice": 0.005042,
+    "premium": 1.21,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/DOOD.png",
+    "cmcSlug": "doodles",
+    "volume24hKrw": 8661145578.654331,
+    "volume24hForeignKrw": 13836372097.831343,
+    "change24hRate": -2.84974093,
+    "change24hAbs": -0.22,
+    "high24h": 7.85,
+    "low24h": 7.25,
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "FLUID",
@@ -5559,7 +5487,7 @@
     "change24hAbs": 61,
     "high24h": 5430,
     "low24h": 4710,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "LA",
@@ -5577,7 +5505,7 @@
     "change24hAbs": -16,
     "high24h": 551,
     "low24h": 516,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "REI",
@@ -5590,12 +5518,12 @@
     "iconUrl": "/icons/UPBIT/REI.png",
     "cmcSlug": null,
     "volume24hKrw": 3859506599.724345,
-    "volume24hForeignKrw": 7047845967.003964,
+    "volume24hForeignKrw": 487460527.9103343,
     "change24hRate": -4.48,
     "change24hAbs": -0.414,
     "high24h": 9.329,
     "low24h": 8.8,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "TRX",
@@ -5608,30 +5536,30 @@
     "iconUrl": "/icons/UPBIT/TRX.png",
     "cmcSlug": "tron",
     "volume24hKrw": 2863230249.2458897,
-    "volume24hForeignKrw": 75036868971.99101,
+    "volume24hForeignKrw": 75038179843.36006,
     "change24hRate": -1.63170163,
     "change24hAbs": -7,
     "high24h": 430,
     "low24h": 421,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
-    "symbol": "XLM",
-    "name_ko": "스텔라루멘",
-    "name_en": "Stellar Lumens",
-    "koreanPrice": 361,
-    "globalPrice": 0.2427,
+    "symbol": "IRYS",
+    "name_ko": "아이리스",
+    "name_en": "Irys",
+    "koreanPrice": 55.68,
+    "globalPrice": 0.03743,
     "premium": 1.21,
     "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/XLM.png",
-    "cmcSlug": null,
-    "volume24hKrw": 5637681810.3621,
-    "volume24hForeignKrw": 11980486052.65067,
-    "change24hRate": 1.69014085,
-    "change24hAbs": 6,
-    "high24h": 367,
-    "low24h": 354,
-    "updatedAt": 1765219865636
+    "iconUrl": null,
+    "cmcSlug": "irys",
+    "volume24hKrw": 854171095.8693554,
+    "volume24hForeignKrw": 21084675185.94331,
+    "change24hRate": 8.88,
+    "change24hAbs": 4.54,
+    "high24h": 56.09,
+    "low24h": 52.66,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "B3",
@@ -5649,7 +5577,7 @@
     "change24hAbs": -0.058,
     "high24h": 1.6,
     "low24h": 1.532,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "SPK",
@@ -5662,12 +5590,12 @@
     "iconUrl": "/icons/UPBIT/SPK.png",
     "cmcSlug": "spark",
     "volume24hKrw": 209539136.6083948,
-    "volume24hForeignKrw": 5045661722.429348,
+    "volume24hForeignKrw": 5045750286.815927,
     "change24hRate": -0.72,
     "change24hAbs": -0.26,
     "high24h": 36.68,
     "low24h": 35.91,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "VIRTUAL",
@@ -5679,13 +5607,31 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/VIRTUAL.png",
     "cmcSlug": null,
-    "volume24hKrw": 7927702451.388017,
-    "volume24hForeignKrw": 2355352798.4385552,
+    "volume24hKrw": 7926402451.388017,
+    "volume24hForeignKrw": 2355354642.696121,
     "change24hRate": -0.08038585000000001,
     "change24hAbs": -1,
     "high24h": 1307,
     "low24h": 1234,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
+  },
+  {
+    "symbol": "BTR",
+    "name_ko": "비트레이어",
+    "name_en": "Bitlayer",
+    "koreanPrice": 44.13,
+    "globalPrice": 0.02967,
+    "premium": 1.2,
+    "usdKrw": 1469.72,
+    "iconUrl": null,
+    "cmcSlug": "bitlayer",
+    "volume24hKrw": 331629282.0335768,
+    "volume24hForeignKrw": 2050880906.6545267,
+    "change24hRate": -13.16,
+    "change24hAbs": -6.69,
+    "high24h": 47,
+    "low24h": 43.35,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "MET",
@@ -5698,12 +5644,12 @@
     "iconUrl": null,
     "cmcSlug": "meteora",
     "volume24hKrw": 396515502.783102,
-    "volume24hForeignKrw": 2618502846.308736,
+    "volume24hForeignKrw": 10315312258.6965,
     "change24hRate": -2.2,
     "change24hAbs": -11,
     "high24h": 503,
     "low24h": 485,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "GAS",
@@ -5721,7 +5667,7 @@
     "change24hAbs": 1,
     "high24h": 3202,
     "low24h": 3134,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "PUMP",
@@ -5733,31 +5679,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/PUMP.png",
     "cmcSlug": "pump-fun",
-    "volume24hKrw": 2517082052.6183457,
-    "volume24hForeignKrw": 30898866118.16433,
+    "volume24hKrw": 2515630853.218046,
+    "volume24hForeignKrw": 30898401825.618114,
     "change24hRate": 4.816513759999999,
     "change24hAbs": 0.21,
     "high24h": 4.7,
     "low24h": 4.33,
-    "updatedAt": 1765219865631
-  },
-  {
-    "symbol": "ADA",
-    "name_ko": "에이다",
-    "name_en": "Cardano",
-    "koreanPrice": 647,
-    "globalPrice": 0.4351,
-    "premium": 1.18,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/ADA.png",
-    "cmcSlug": "cardano",
-    "volume24hKrw": 15260909223.437185,
-    "volume24hForeignKrw": 392981535100.0969,
-    "change24hRate": 3.52,
-    "change24hAbs": 22,
-    "high24h": 657,
-    "low24h": 620,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ATOM",
@@ -5770,12 +5698,12 @@
     "iconUrl": "/icons/UPBIT/ATOM.png",
     "cmcSlug": "cosmos",
     "volume24hKrw": 528669670.7743298,
-    "volume24hForeignKrw": 1140921840.2809916,
+    "volume24hForeignKrw": 4294318932.2498584,
     "change24hRate": 2.48085758,
     "change24hAbs": 81,
     "high24h": 3373,
     "low24h": 3250,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "MORPHO",
@@ -5793,7 +5721,7 @@
     "change24hAbs": -76,
     "high24h": 1812,
     "low24h": 1777,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "WIF",
@@ -5806,30 +5734,66 @@
     "iconUrl": null,
     "cmcSlug": "dogwifhat",
     "volume24hKrw": 93172823.94869189,
-    "volume24hForeignKrw": 17755214340.52969,
+    "volume24hForeignKrw": 5181332608.362938,
     "change24hRate": 1.23,
     "change24hAbs": 7,
     "high24h": 593,
     "low24h": 577,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
-    "symbol": "DOT",
-    "name_ko": "폴카닷",
-    "name_en": "Polkadot",
-    "koreanPrice": 3185,
-    "globalPrice": 2.142,
+    "symbol": "EPT",
+    "name_ko": "밸런스",
+    "name_en": "Balance",
+    "koreanPrice": 3.109,
+    "globalPrice": 0.002091,
     "premium": 1.17,
     "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/DOT.png",
-    "cmcSlug": "polkadot",
-    "volume24hKrw": 1551348956.3757489,
-    "volume24hForeignKrw": 21514812219.13272,
-    "change24hRate": 1.6922094499999998,
-    "change24hAbs": 53,
-    "high24h": 3236,
-    "low24h": 3118,
-    "updatedAt": 1765219865630
+    "iconUrl": "/icons/UPBIT/EPT.png",
+    "cmcSlug": "balance",
+    "volume24hKrw": 1680302908.6994143,
+    "volume24hForeignKrw": 3490985190.21753,
+    "change24hRate": -3.12,
+    "change24hAbs": -0.1,
+    "high24h": 3.198,
+    "low24h": 3.107,
+    "updatedAt": 1765219873631
+  },
+  {
+    "symbol": "GRT",
+    "name_ko": "더그래프",
+    "name_en": "The Graph",
+    "koreanPrice": 68.5,
+    "globalPrice": 0.04607,
+    "premium": 1.17,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/GRT.png",
+    "cmcSlug": "the-graph",
+    "volume24hKrw": 639578628.9408681,
+    "volume24hForeignKrw": 2217813842.7412186,
+    "change24hRate": 1.1816839000000001,
+    "change24hAbs": 0.8,
+    "high24h": 70.2,
+    "low24h": 67.3,
+    "updatedAt": 1765219873631
+  },
+  {
+    "symbol": "XYO",
+    "name_ko": "엑스와이오",
+    "name_en": "XYO",
+    "koreanPrice": 10.45,
+    "globalPrice": 0.007028,
+    "premium": 1.17,
+    "usdKrw": 1469.72,
+    "iconUrl": null,
+    "cmcSlug": "xyo",
+    "volume24hKrw": 11648963704.301107,
+    "volume24hForeignKrw": 3963427397.2025113,
+    "change24hRate": 10.01,
+    "change24hAbs": 0.951,
+    "high24h": 11.6,
+    "low24h": 10.08,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "BSV",
@@ -5847,7 +5811,7 @@
     "change24hAbs": -350,
     "high24h": 30500,
     "low24h": 29790,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "KITE",
@@ -5860,12 +5824,12 @@
     "iconUrl": "/icons/UPBIT/KITE.png",
     "cmcSlug": "kite",
     "volume24hKrw": 11217102681.135315,
-    "volume24hForeignKrw": 13742109077.034225,
+    "volume24hForeignKrw": 42934895133.67756,
     "change24hRate": -3.8759689899999996,
     "change24hAbs": -5,
     "high24h": 136,
     "low24h": 116,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "MNT",
@@ -5877,13 +5841,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/MNT.png",
     "cmcSlug": "mantle",
-    "volume24hKrw": 2669382930.0373697,
+    "volume24hKrw": 2669377923.0373697,
     "volume24hForeignKrw": 69820794695.99593,
     "change24hRate": 0.42761148000000004,
     "change24hAbs": 7,
     "high24h": 1698,
     "low24h": 1615,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "RAD",
@@ -5901,7 +5865,25 @@
     "change24hAbs": -1,
     "high24h": 449,
     "low24h": 446,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
+  },
+  {
+    "symbol": "XLM",
+    "name_ko": "스텔라루멘",
+    "name_en": "Stellar Lumens",
+    "koreanPrice": 361,
+    "globalPrice": 0.2428,
+    "premium": 1.16,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/XLM.png",
+    "cmcSlug": null,
+    "volume24hKrw": 5637681810.3621,
+    "volume24hForeignKrw": 72129523978.46397,
+    "change24hRate": 1.69014085,
+    "change24hAbs": 6,
+    "high24h": 367,
+    "low24h": 354,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "MAV",
@@ -5919,7 +5901,7 @@
     "change24hAbs": -0.61,
     "high24h": 46.81,
     "low24h": 45.79,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "PAXG",
@@ -5932,12 +5914,30 @@
     "iconUrl": null,
     "cmcSlug": "pax-gold",
     "volume24hKrw": 144215715.34406,
-    "volume24hForeignKrw": 112383725432.84816,
+    "volume24hForeignKrw": 112384101749.51015,
     "change24hRate": -0.57,
     "change24hAbs": -36000,
     "high24h": 6266000,
     "low24h": 6233000,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
+  },
+  {
+    "symbol": "ADA",
+    "name_ko": "에이다",
+    "name_en": "Cardano",
+    "koreanPrice": 647,
+    "globalPrice": 0.4352,
+    "premium": 1.15,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/ADA.png",
+    "cmcSlug": "cardano",
+    "volume24hKrw": 15260909223.437185,
+    "volume24hForeignKrw": 71814505060.37257,
+    "change24hRate": 3.52,
+    "change24hAbs": 22,
+    "high24h": 657,
+    "low24h": 620,
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "ARB",
@@ -5950,12 +5950,12 @@
     "iconUrl": "/icons/UPBIT/ARB.png",
     "cmcSlug": "arbitrum",
     "volume24hKrw": 2388365931.933511,
-    "volume24hForeignKrw": 19067733898.248882,
+    "volume24hForeignKrw": 19067393389.359974,
     "change24hRate": 2.94117647,
     "change24hAbs": 9,
     "high24h": 321,
     "low24h": 304,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "EIGEN",
@@ -5968,12 +5968,12 @@
     "iconUrl": null,
     "cmcSlug": "eigenlayer",
     "volume24hKrw": 753658581.8381163,
-    "volume24hForeignKrw": 12365279654.756294,
+    "volume24hForeignKrw": 62318925364.137024,
     "change24hRate": -4.25,
     "change24hAbs": -32,
     "high24h": 742,
     "low24h": 717,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "SOLV",
@@ -5991,7 +5991,7 @@
     "change24hAbs": -0.25,
     "high24h": 23.37,
     "low24h": 23.06,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "BORA",
@@ -6009,25 +6009,7 @@
     "change24hAbs": -1.5,
     "high24h": 71.4,
     "low24h": 65,
-    "updatedAt": 1765219865630
-  },
-  {
-    "symbol": "GRT",
-    "name_ko": "더그래프",
-    "name_en": "The Graph",
-    "koreanPrice": 68.5,
-    "globalPrice": 0.04608,
-    "premium": 1.14,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/GRT.png",
-    "cmcSlug": "the-graph",
-    "volume24hKrw": 639578628.9408681,
-    "volume24hForeignKrw": 118394350.47542395,
-    "change24hRate": 1.1816839000000001,
-    "change24hAbs": 0.8,
-    "high24h": 70.2,
-    "low24h": 67.3,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "SOMI",
@@ -6039,13 +6021,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/SOMI.png",
     "cmcSlug": "somnia",
-    "volume24hKrw": 538204426.7106723,
+    "volume24hKrw": 538311284.7106725,
     "volume24hForeignKrw": 1317213718.5758712,
     "change24hRate": 2.8037383200000003,
     "change24hAbs": 9,
     "high24h": 334,
     "low24h": 317,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "SUPER",
@@ -6063,7 +6045,25 @@
     "change24hAbs": 25,
     "high24h": 423,
     "low24h": 361,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
+  },
+  {
+    "symbol": "XPL",
+    "name_ko": "플라즈마",
+    "name_en": "Plasma",
+    "koreanPrice": 246,
+    "globalPrice": 0.1655,
+    "premium": 1.14,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/XPL.png",
+    "cmcSlug": "plasma",
+    "volume24hKrw": 16281074219.538353,
+    "volume24hForeignKrw": 162650861132.53253,
+    "change24hRate": -0.80645161,
+    "change24hAbs": -2,
+    "high24h": 264,
+    "low24h": 244,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "OXT",
@@ -6076,30 +6076,30 @@
     "iconUrl": "/icons/UPBIT/OXT.png",
     "cmcSlug": "orchid",
     "volume24hKrw": 56524756.682981454,
-    "volume24hForeignKrw": 9025343.28948,
+    "volume24hForeignKrw": 650132327.76884,
     "change24hRate": -0.29,
     "change24hAbs": -0.12,
     "high24h": 42.1,
     "low24h": 41.32,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
-    "symbol": "BTR",
-    "name_ko": "비트레이어",
-    "name_en": "Bitlayer",
-    "koreanPrice": 44.13,
-    "globalPrice": 0.02969,
-    "premium": 1.13,
+    "symbol": "DOT",
+    "name_ko": "폴카닷",
+    "name_en": "Polkadot",
+    "koreanPrice": 3185,
+    "globalPrice": 2.143,
+    "premium": 1.12,
     "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": "bitlayer",
-    "volume24hKrw": 331629282.0335768,
-    "volume24hForeignKrw": 2050880383.375418,
-    "change24hRate": -13.16,
-    "change24hAbs": -6.69,
-    "high24h": 47,
-    "low24h": 43.35,
-    "updatedAt": 1765219865637
+    "iconUrl": "/icons/UPBIT/DOT.png",
+    "cmcSlug": "polkadot",
+    "volume24hKrw": 1551348933.2472026,
+    "volume24hForeignKrw": 21513177725.560745,
+    "change24hRate": 1.6922094499999998,
+    "change24hAbs": 53,
+    "high24h": 3236,
+    "low24h": 3118,
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "FORT",
@@ -6117,7 +6117,7 @@
     "change24hAbs": 0.02,
     "high24h": 36,
     "low24h": 35.29,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "QKC",
@@ -6135,7 +6135,7 @@
     "change24hAbs": -0.04,
     "high24h": 6.55,
     "low24h": 6.29,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "HAEDAL",
@@ -6153,7 +6153,7 @@
     "change24hAbs": -0.73,
     "high24h": 78.78,
     "low24h": 77.39,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "IQ",
@@ -6171,7 +6171,7 @@
     "change24hAbs": -0.01,
     "high24h": 2.66,
     "low24h": 2.61,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "LRC",
@@ -6189,7 +6189,7 @@
     "change24hAbs": -0.88,
     "high24h": 74.56,
     "low24h": 73.16,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "TAIKO",
@@ -6207,7 +6207,25 @@
     "change24hAbs": 2,
     "high24h": 290,
     "low24h": 278,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
+  },
+  {
+    "symbol": "ZIL",
+    "name_ko": "질리카",
+    "name_en": "Zilliqa",
+    "koreanPrice": 7.95,
+    "globalPrice": 0.00535,
+    "premium": 1.11,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/ZIL.png",
+    "cmcSlug": "zilliqa",
+    "volume24hKrw": 300580585.1254214,
+    "volume24hForeignKrw": 985357734.7193033,
+    "change24hRate": 0.5056889999999999,
+    "change24hAbs": 0.04,
+    "high24h": 8.19,
+    "low24h": 7.88,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "CROSS",
@@ -6225,7 +6243,7 @@
     "change24hAbs": 173.2,
     "high24h": 177.7,
     "low24h": 172.3,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "BLY",
@@ -6243,7 +6261,7 @@
     "change24hAbs": 0.131,
     "high24h": 2.997,
     "low24h": 2.883,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "BOBA",
@@ -6261,7 +6279,7 @@
     "change24hAbs": -1.94,
     "high24h": 67.3,
     "low24h": 66.63,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "HOOK",
@@ -6279,7 +6297,7 @@
     "change24hAbs": -1.28,
     "high24h": 63.75,
     "low24h": 62.14,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "POPCAT",
@@ -6297,7 +6315,7 @@
     "change24hAbs": -1,
     "high24h": 156,
     "low24h": 152,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "ZK",
@@ -6315,7 +6333,7 @@
     "change24hAbs": -0.93,
     "high24h": 49.07,
     "low24h": 47.96,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "APEPE",
@@ -6333,7 +6351,7 @@
     "change24hAbs": 0.0018,
     "high24h": 0.0019,
     "low24h": 0.0017,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "APT",
@@ -6345,13 +6363,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/APT.png",
     "cmcSlug": "aptos",
-    "volume24hKrw": 3326885796.964455,
-    "volume24hForeignKrw": 18145555721.982624,
+    "volume24hKrw": 3321840423.6598516,
+    "volume24hForeignKrw": 18146155474.650055,
     "change24hRate": 3.59796637,
     "change24hAbs": 92,
     "high24h": 2681,
     "low24h": 2519,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "IP",
@@ -6369,7 +6387,7 @@
     "change24hAbs": 74,
     "high24h": 3312,
     "low24h": 3079,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "POLYX",
@@ -6387,7 +6405,7 @@
     "change24hAbs": -1.6,
     "high24h": 91.1,
     "low24h": 86.7,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "SC",
@@ -6405,7 +6423,7 @@
     "change24hAbs": 0,
     "high24h": 2.51,
     "low24h": 2.42,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "TREE",
@@ -6418,12 +6436,12 @@
     "iconUrl": "/icons/UPBIT/TREE.png",
     "cmcSlug": "treehouse",
     "volume24hKrw": 408742856.01646364,
-    "volume24hForeignKrw": 268582849.0395288,
+    "volume24hForeignKrw": 793748256.3639215,
     "change24hRate": 0,
     "change24hAbs": 0,
     "high24h": 187,
     "low24h": 180,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "APE",
@@ -6441,7 +6459,7 @@
     "change24hAbs": 3,
     "high24h": 357,
     "low24h": 350,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "AQT",
@@ -6459,7 +6477,7 @@
     "change24hAbs": 0,
     "high24h": 877,
     "low24h": 863,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "MIRA",
@@ -6477,7 +6495,7 @@
     "change24hAbs": -2,
     "high24h": 222,
     "low24h": 215,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ADP",
@@ -6495,7 +6513,7 @@
     "change24hAbs": 0.016,
     "high24h": 1.332,
     "low24h": 1.268,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "BEL",
@@ -6513,7 +6531,7 @@
     "change24hAbs": -3,
     "high24h": 215,
     "low24h": 212,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ICP",
@@ -6526,12 +6544,12 @@
     "iconUrl": null,
     "cmcSlug": "internet-computer",
     "volume24hKrw": 392064604.8772879,
-    "volume24hForeignKrw": 4383823155.334072,
+    "volume24hForeignKrw": 20008065577.00279,
     "change24hRate": -1.54,
     "change24hAbs": -80,
     "high24h": 5185,
     "low24h": 5095,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "STG",
@@ -6549,25 +6567,7 @@
     "change24hAbs": 1,
     "high24h": 183,
     "low24h": 178,
-    "updatedAt": 1765219865631
-  },
-  {
-    "symbol": "XPL",
-    "name_ko": "플라즈마",
-    "name_en": "Plasma",
-    "koreanPrice": 246,
-    "globalPrice": 0.1656,
-    "premium": 1.07,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/XPL.png",
-    "cmcSlug": "plasma",
-    "volume24hKrw": 16281079219.538353,
-    "volume24hForeignKrw": 25711581005.42387,
-    "change24hRate": -0.80645161,
-    "change24hAbs": -2,
-    "high24h": 264,
-    "low24h": 244,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "DEEP",
@@ -6580,12 +6580,12 @@
     "iconUrl": "/icons/UPBIT/DEEP.png",
     "cmcSlug": null,
     "volume24hKrw": 6057598028.2403965,
-    "volume24hForeignKrw": 13210820215.58552,
+    "volume24hForeignKrw": 3348242097.057746,
     "change24hRate": 6.25,
     "change24hAbs": 3.7,
     "high24h": 66.5,
     "low24h": 58.8,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "DRIFT",
@@ -6603,7 +6603,7 @@
     "change24hAbs": 23,
     "high24h": 365,
     "low24h": 324,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "IOST",
@@ -6621,79 +6621,7 @@
     "change24hAbs": 0,
     "high24h": 2.67,
     "low24h": 2.61,
-    "updatedAt": 1765219865630
-  },
-  {
-    "symbol": "OP",
-    "name_ko": "옵티미즘",
-    "name_en": "Optimism",
-    "koreanPrice": 475,
-    "globalPrice": 0.3198,
-    "premium": 1.06,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/OP.png",
-    "cmcSlug": null,
-    "volume24hKrw": 635421708.3776766,
-    "volume24hForeignKrw": 3815743252.170069,
-    "change24hRate": 4.3956044,
-    "change24hAbs": 20,
-    "high24h": 489,
-    "low24h": 455,
-    "updatedAt": 1765219865630
-  },
-  {
-    "symbol": "SAFE",
-    "name_ko": "세이프",
-    "name_en": "Safe",
-    "koreanPrice": 228,
-    "globalPrice": 0.1535,
-    "premium": 1.06,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/SAFE.png",
-    "cmcSlug": "safe",
-    "volume24hKrw": 649585717.7885439,
-    "volume24hForeignKrw": 1709445500.1007998,
-    "change24hRate": 0,
-    "change24hAbs": 0,
-    "high24h": 233,
-    "low24h": 225,
-    "updatedAt": 1765219865631
-  },
-  {
-    "symbol": "CRV",
-    "name_ko": "커브",
-    "name_en": "Curve DAO Token",
-    "koreanPrice": 589,
-    "globalPrice": 0.3966,
-    "premium": 1.05,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/CRV.png",
-    "cmcSlug": "crv",
-    "volume24hKrw": 20774345.81622555,
-    "volume24hForeignKrw": 1920448665.047026,
-    "change24hRate": -1.01,
-    "change24hAbs": -6,
-    "high24h": 598,
-    "low24h": 585,
-    "updatedAt": 1765219865630
-  },
-  {
-    "symbol": "JST",
-    "name_ko": "저스트",
-    "name_en": "JUST",
-    "koreanPrice": 57.4,
-    "globalPrice": 0.03865,
-    "premium": 1.05,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/JST.png",
-    "cmcSlug": "just",
-    "volume24hKrw": 600891186.1114897,
-    "volume24hForeignKrw": 64597627.89172678,
-    "change24hRate": -1.03448276,
-    "change24hAbs": -0.6,
-    "high24h": 58.4,
-    "low24h": 57.2,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "STORJ",
@@ -6711,7 +6639,7 @@
     "change24hAbs": -1,
     "high24h": 217,
     "low24h": 205,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "SIX",
@@ -6729,7 +6657,7 @@
     "change24hAbs": -0.51,
     "high24h": 20.21,
     "low24h": 19.91,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "IOTA",
@@ -6747,7 +6675,7 @@
     "change24hAbs": 3,
     "high24h": 156,
     "low24h": 150,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "RLC",
@@ -6760,12 +6688,12 @@
     "iconUrl": "/icons/UPBIT/RLC.png",
     "cmcSlug": "rlc",
     "volume24hKrw": 25535436.02918091,
-    "volume24hForeignKrw": 58098950.028028004,
+    "volume24hForeignKrw": 58142255.4748,
     "change24hRate": -1.62,
     "change24hAbs": -18,
     "high24h": 1103,
     "low24h": 1090,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "COOKIE",
@@ -6783,7 +6711,25 @@
     "change24hAbs": -3.79,
     "high24h": 79.74,
     "low24h": 78,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
+  },
+  {
+    "symbol": "JST",
+    "name_ko": "저스트",
+    "name_en": "JUST",
+    "koreanPrice": 57.4,
+    "globalPrice": 0.03866,
+    "premium": 1.02,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/JST.png",
+    "cmcSlug": "just",
+    "volume24hKrw": 600891186.1114897,
+    "volume24hForeignKrw": 4404416735.630571,
+    "change24hRate": -1.03448276,
+    "change24hAbs": -0.6,
+    "high24h": 58.4,
+    "low24h": 57.2,
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "ORDER",
@@ -6801,7 +6747,7 @@
     "change24hAbs": 0,
     "high24h": 169,
     "low24h": 163,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "PUFFER",
@@ -6813,13 +6759,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/PUFFER.png",
     "cmcSlug": "puffer",
-    "volume24hKrw": 2471762679.3018913,
+    "volume24hKrw": 2471773379.3018913,
     "volume24hForeignKrw": 946640135.508433,
     "change24hRate": -0.93,
     "change24hAbs": -1,
     "high24h": 111,
     "low24h": 106,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "BMT",
@@ -6832,12 +6778,12 @@
     "iconUrl": null,
     "cmcSlug": "bubblemaps",
     "volume24hKrw": 793243681.7199417,
-    "volume24hForeignKrw": 12607990804.161945,
+    "volume24hForeignKrw": 1175383946.8975384,
     "change24hRate": -1.87,
     "change24hAbs": -0.76,
     "high24h": 40.47,
     "low24h": 39.37,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "CORE",
@@ -6855,7 +6801,7 @@
     "change24hAbs": -4,
     "high24h": 189,
     "low24h": 185,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "WNCG",
@@ -6873,7 +6819,7 @@
     "change24hAbs": 0.14,
     "high24h": 13.41,
     "low24h": 11.99,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "MOVE",
@@ -6891,7 +6837,7 @@
     "change24hAbs": -2.3,
     "high24h": 67,
     "low24h": 62.5,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "METIS",
@@ -6909,7 +6855,25 @@
     "change24hAbs": -105,
     "high24h": 9720,
     "low24h": 9475,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
+  },
+  {
+    "symbol": "CRV",
+    "name_ko": "커브",
+    "name_en": "Curve DAO Token",
+    "koreanPrice": 589,
+    "globalPrice": 0.3968,
+    "premium": 1,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/CRV.png",
+    "cmcSlug": "crv",
+    "volume24hKrw": 20774345.81622555,
+    "volume24hForeignKrw": 8373673819.04102,
+    "change24hRate": -1.01,
+    "change24hAbs": -6,
+    "high24h": 598,
+    "low24h": 585,
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "EGLD",
@@ -6922,12 +6886,12 @@
     "iconUrl": "/icons/UPBIT/EGLD.png",
     "cmcSlug": null,
     "volume24hKrw": 2919423146.2876377,
-    "volume24hForeignKrw": 216989915.63347536,
+    "volume24hForeignKrw": 2485697877.7513404,
     "change24hRate": 0.25359255999999997,
     "change24hAbs": 30,
     "high24h": 12140,
     "low24h": 11630,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "HIVE",
@@ -6945,7 +6909,25 @@
     "change24hAbs": 0,
     "high24h": 155,
     "low24h": 150,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
+  },
+  {
+    "symbol": "OP",
+    "name_ko": "옵티미즘",
+    "name_en": "Optimism",
+    "koreanPrice": 475,
+    "globalPrice": 0.32,
+    "premium": 1,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/OP.png",
+    "cmcSlug": null,
+    "volume24hKrw": 635421708.3776766,
+    "volume24hForeignKrw": 10364490438.486586,
+    "change24hRate": 4.3956044,
+    "change24hAbs": 20,
+    "high24h": 489,
+    "low24h": 455,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "RED",
@@ -6958,12 +6940,30 @@
     "iconUrl": "/icons/UPBIT/RED.png",
     "cmcSlug": "redstone",
     "volume24hKrw": 2243081746.717002,
-    "volume24hForeignKrw": 1674125773.2304087,
+    "volume24hForeignKrw": 1674102525.4346035,
     "change24hRate": -0.51813472,
     "change24hAbs": -2,
     "high24h": 395,
     "low24h": 371,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
+  },
+  {
+    "symbol": "SAFE",
+    "name_ko": "세이프",
+    "name_en": "Safe",
+    "koreanPrice": 228,
+    "globalPrice": 0.1536,
+    "premium": 1,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/SAFE.png",
+    "cmcSlug": "safe",
+    "volume24hKrw": 649585717.7885439,
+    "volume24hForeignKrw": 991280041.8782915,
+    "change24hRate": 0,
+    "change24hAbs": 0,
+    "high24h": 233,
+    "low24h": 225,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ZRO",
@@ -6976,12 +6976,12 @@
     "iconUrl": "/icons/UPBIT/ZRO.png",
     "cmcSlug": "layerzero",
     "volume24hKrw": 323583572.10132337,
-    "volume24hForeignKrw": 1733488323.1530485,
+    "volume24hForeignKrw": 4537291136.790449,
     "change24hRate": 0.19550342,
     "change24hAbs": 4,
     "high24h": 2104,
     "low24h": 2038,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "SXT",
@@ -6999,7 +6999,7 @@
     "change24hAbs": -3.26,
     "high24h": 43.64,
     "low24h": 42.01,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "UMA",
@@ -7012,12 +7012,12 @@
     "iconUrl": null,
     "cmcSlug": "uma",
     "volume24hKrw": 52514014.68133386,
-    "volume24hForeignKrw": 90830600.04696658,
+    "volume24hForeignKrw": 576361570.98856,
     "change24hRate": -1.4,
     "change24hAbs": -17,
     "high24h": 1218,
     "low24h": 1195,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "ETHFI",
@@ -7030,12 +7030,12 @@
     "iconUrl": "/icons/UPBIT/ETHFI.png",
     "cmcSlug": "ether-fi",
     "volume24hKrw": 679796528.9521388,
-    "volume24hForeignKrw": 9583548393.438095,
+    "volume24hForeignKrw": 2480363580.3889446,
     "change24hRate": 1.4,
     "change24hAbs": 17,
     "high24h": 1246,
     "low24h": 1222,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "HYPER",
@@ -7053,7 +7053,7 @@
     "change24hAbs": -4,
     "high24h": 200,
     "low24h": 193,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "TT",
@@ -7066,12 +7066,12 @@
     "iconUrl": "/icons/UPBIT/TT.png",
     "cmcSlug": "thundercore",
     "volume24hKrw": 122514512.82568225,
-    "volume24hForeignKrw": 18598859.54189315,
+    "volume24hForeignKrw": 18608744.29880861,
     "change24hRate": -1.1299435,
     "change24hAbs": -0.02,
     "high24h": 1.79,
     "low24h": 1.73,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "TON",
@@ -7084,12 +7084,12 @@
     "iconUrl": null,
     "cmcSlug": null,
     "volume24hKrw": 102627937.16241625,
-    "volume24hForeignKrw": 81338420149.03906,
+    "volume24hForeignKrw": 20889012337.86849,
     "change24hRate": -1.51,
     "change24hAbs": -37,
     "high24h": 2465,
     "low24h": 2415,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "CHR",
@@ -7102,12 +7102,12 @@
     "iconUrl": "/icons/UPBIT/CHR.png",
     "cmcSlug": "chromia",
     "volume24hKrw": 13984777.820395347,
-    "volume24hForeignKrw": 9639564.99758,
+    "volume24hForeignKrw": 435726904.56943196,
     "change24hRate": 1.19,
     "change24hAbs": 0.91,
     "high24h": 80.72,
     "low24h": 77.32,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "ICX",
@@ -7125,7 +7125,7 @@
     "change24hAbs": 0.1,
     "high24h": 101,
     "low24h": 97.3,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "KAITO",
@@ -7138,30 +7138,12 @@
     "iconUrl": "/icons/UPBIT/KAITO.png",
     "cmcSlug": "kaito",
     "volume24hKrw": 713501870.4233683,
-    "volume24hForeignKrw": 657342187.6107424,
+    "volume24hForeignKrw": 1877638395.6179974,
     "change24hRate": 0.73221757,
     "change24hAbs": 7,
     "high24h": 988,
     "low24h": 951,
-    "updatedAt": 1765219865630
-  },
-  {
-    "symbol": "XYO",
-    "name_ko": "엑스와이오",
-    "name_en": "XYO",
-    "koreanPrice": 10.43,
-    "globalPrice": 0.007028,
-    "premium": 0.98,
-    "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": "xyo",
-    "volume24hKrw": 11647776582.866205,
-    "volume24hForeignKrw": 3963427397.2025113,
-    "change24hRate": 9.8,
-    "change24hAbs": 0.931,
-    "high24h": 11.6,
-    "low24h": 10.08,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "F",
@@ -7173,31 +7155,49 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/F.png",
     "cmcSlug": "synfutures",
-    "volume24hKrw": 670912970.5595468,
+    "volume24hKrw": 669268470.5595468,
     "volume24hForeignKrw": 179926983.5003832,
     "change24hRate": -0.8928571399999999,
     "change24hAbs": -0.1,
     "high24h": 11.5,
     "low24h": 11,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
-    "symbol": "AR",
-    "name_ko": "알위브",
-    "name_en": "Arweave",
-    "koreanPrice": 5995,
-    "globalPrice": 4.04,
+    "symbol": "FF",
+    "name_ko": "팔콘 파이낸스",
+    "name_en": "Falcon Finance",
+    "koreanPrice": 167,
+    "globalPrice": 0.11253,
     "premium": 0.97,
     "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": "arweave",
-    "volume24hKrw": 59107701.65349469,
-    "volume24hForeignKrw": 5739336138.747876,
-    "change24hRate": -1.15,
-    "change24hAbs": -70,
-    "high24h": 6075,
-    "low24h": 5965,
-    "updatedAt": 1765219865636
+    "iconUrl": "/icons/UPBIT/FF.png",
+    "cmcSlug": "falcon-finance",
+    "volume24hKrw": 1617066851.860305,
+    "volume24hForeignKrw": 1106499107.6057076,
+    "change24hRate": 0,
+    "change24hAbs": 0,
+    "high24h": 172,
+    "low24h": 165,
+    "updatedAt": 1765219873631
+  },
+  {
+    "symbol": "THETA",
+    "name_ko": "쎄타토큰",
+    "name_en": "Theta Token",
+    "koreanPrice": 509,
+    "globalPrice": 0.343,
+    "premium": 0.97,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/THETA.png",
+    "cmcSlug": "theta",
+    "volume24hKrw": 291926096.412129,
+    "volume24hForeignKrw": 1582968779.010416,
+    "change24hRate": 2.82828283,
+    "change24hAbs": 14,
+    "high24h": 518,
+    "low24h": 492,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "BICO",
@@ -7215,7 +7215,7 @@
     "change24hAbs": -1.8,
     "high24h": 76.91,
     "low24h": 75.96,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "EDU",
@@ -7228,12 +7228,12 @@
     "iconUrl": null,
     "cmcSlug": "open-campus",
     "volume24hKrw": 115908042.87468895,
-    "volume24hForeignKrw": 809941986.1437241,
+    "volume24hForeignKrw": 66798349.582782775,
     "change24hRate": -5.04,
     "change24hAbs": -12,
     "high24h": 227,
     "low24h": 224,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "MASK",
@@ -7251,7 +7251,7 @@
     "change24hAbs": 13,
     "high24h": 989,
     "low24h": 946,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "CAKE",
@@ -7264,12 +7264,12 @@
     "iconUrl": null,
     "cmcSlug": "pancakeswap",
     "volume24hKrw": 34966883.85591017,
-    "volume24hForeignKrw": 8997210742.67412,
+    "volume24hForeignKrw": 1449929344.29979,
     "change24hRate": 1.65,
     "change24hAbs": 56,
     "high24h": 3467,
     "low24h": 3425,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "NTRN",
@@ -7282,12 +7282,12 @@
     "iconUrl": null,
     "cmcSlug": "neutron",
     "volume24hKrw": 7269630.8382,
-    "volume24hForeignKrw": 784215524.9310144,
+    "volume24hForeignKrw": 11069490.124,
     "change24hRate": 0,
     "change24hAbs": 46.44,
     "high24h": 48.1,
     "low24h": 45,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "RUNE",
@@ -7300,12 +7300,12 @@
     "iconUrl": null,
     "cmcSlug": "thorchain",
     "volume24hKrw": 2678646.8889,
-    "volume24hForeignKrw": 4298816516.454544,
+    "volume24hForeignKrw": 4298702416.212064,
     "change24hRate": 0,
     "change24hAbs": 998.5,
     "high24h": 1029,
     "low24h": 989.5,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "TFUEL",
@@ -7318,12 +7318,12 @@
     "iconUrl": "/icons/UPBIT/TFUEL.png",
     "cmcSlug": null,
     "volume24hKrw": 390138161.90273905,
-    "volume24hForeignKrw": 27082340.461347304,
+    "volume24hForeignKrw": 27050979.22883944,
     "change24hRate": 0,
     "change24hAbs": 0,
     "high24h": 32.3,
     "low24h": 31.1,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "EL",
@@ -7341,7 +7341,7 @@
     "change24hAbs": -0.005,
     "high24h": 3.387,
     "low24h": 3.207,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "HP",
@@ -7354,12 +7354,12 @@
     "iconUrl": "/icons/UPBIT/HP.png",
     "cmcSlug": null,
     "volume24hKrw": 57035899.36875206,
-    "volume24hForeignKrw": 127704939.05153601,
+    "volume24hForeignKrw": 127654195.23426642,
     "change24hRate": -0.26315789,
     "change24hAbs": -0.1,
     "high24h": 38.1,
     "low24h": 37.4,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "SIGN",
@@ -7372,12 +7372,30 @@
     "iconUrl": "/icons/UPBIT/SIGN.png",
     "cmcSlug": "sign",
     "volume24hKrw": 1069395126.4873803,
-    "volume24hForeignKrw": 3329234176.566491,
+    "volume24hForeignKrw": 655966214.2163732,
     "change24hRate": 1.86757216,
     "change24hAbs": 1.1,
     "high24h": 60.1,
     "low24h": 57.5,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
+  },
+  {
+    "symbol": "NEIRO",
+    "name_ko": "네이로",
+    "name_en": "Neiro",
+    "koreanPrice": 0.2087,
+    "globalPrice": 0.0001407,
+    "premium": 0.92,
+    "usdKrw": 1469.72,
+    "iconUrl": null,
+    "cmcSlug": "neiro",
+    "volume24hKrw": 259508976.15135142,
+    "volume24hForeignKrw": 12622015863.166607,
+    "change24hRate": 1.11,
+    "change24hAbs": 0.0023,
+    "high24h": 0.2181,
+    "low24h": 0.2087,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "ARPA",
@@ -7390,30 +7408,12 @@
     "iconUrl": "/icons/UPBIT/ARPA.png",
     "cmcSlug": null,
     "volume24hKrw": 62108875.8357974,
-    "volume24hForeignKrw": 26005813.568000004,
+    "volume24hForeignKrw": 428189458.5153018,
     "change24hRate": -0.56,
     "change24hAbs": -0.12,
     "high24h": 21.44,
     "low24h": 21.12,
-    "updatedAt": 1765219865630
-  },
-  {
-    "symbol": "PENGU",
-    "name_ko": "펏지 펭귄",
-    "name_en": "Pudgy Penguins",
-    "koreanPrice": 17,
-    "globalPrice": 0.011462,
-    "premium": 0.91,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/PENGU.png",
-    "cmcSlug": "pudgy-penguins",
-    "volume24hKrw": 14345058961.301533,
-    "volume24hForeignKrw": 11348708297.412592,
-    "change24hRate": 3.03030303,
-    "change24hAbs": 0.5,
-    "high24h": 17.7,
-    "low24h": 16.2,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "SCR",
@@ -7426,12 +7426,12 @@
     "iconUrl": "/icons/UPBIT/SCR.png",
     "cmcSlug": "scroll",
     "volume24hKrw": 165690277.4316407,
-    "volume24hForeignKrw": 912821554.5761479,
+    "volume24hForeignKrw": 327951420.96096,
     "change24hRate": -1.49,
     "change24hAbs": -2,
     "high24h": 133,
     "low24h": 132,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "GRASS",
@@ -7449,7 +7449,7 @@
     "change24hAbs": -30,
     "high24h": 467,
     "low24h": 456,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "USDS",
@@ -7467,7 +7467,7 @@
     "change24hAbs": -6,
     "high24h": 1489,
     "low24h": 1482,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "HEI",
@@ -7480,12 +7480,12 @@
     "iconUrl": null,
     "cmcSlug": "heima",
     "volume24hKrw": 2016605.4438,
-    "volume24hForeignKrw": 1512335853.1632876,
+    "volume24hForeignKrw": 56343274.103199996,
     "change24hRate": 0,
     "change24hAbs": 207,
     "high24h": 215,
     "low24h": 207,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "BLUR",
@@ -7503,7 +7503,25 @@
     "change24hAbs": 0.7,
     "high24h": 53.1,
     "low24h": 51.3,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
+  },
+  {
+    "symbol": "PENGU",
+    "name_ko": "펏지 펭귄",
+    "name_en": "Pudgy Penguins",
+    "koreanPrice": 17,
+    "globalPrice": 0.011466,
+    "premium": 0.88,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/PENGU.png",
+    "cmcSlug": "pudgy-penguins",
+    "volume24hKrw": 14345058961.301533,
+    "volume24hForeignKrw": 33137709794.330673,
+    "change24hRate": 3.03030303,
+    "change24hAbs": 0.5,
+    "high24h": 17.7,
+    "low24h": 16.2,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "BLUE",
@@ -7521,7 +7539,7 @@
     "change24hAbs": -1.23,
     "high24h": 63.19,
     "low24h": 61.97,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "YFI",
@@ -7539,7 +7557,25 @@
     "change24hAbs": 45000,
     "high24h": 5597000,
     "low24h": 5523000,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
+  },
+  {
+    "symbol": "PTB",
+    "name_ko": "포털투비트코인",
+    "name_en": "Portal To Bitcoin",
+    "koreanPrice": 6.225,
+    "globalPrice": 0.004199,
+    "premium": 0.87,
+    "usdKrw": 1469.72,
+    "iconUrl": null,
+    "cmcSlug": null,
+    "volume24hKrw": 110605643.3475,
+    "volume24hForeignKrw": 13835782512.119558,
+    "change24hRate": 0,
+    "change24hAbs": 6.225,
+    "high24h": 7.485,
+    "low24h": 5.76,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "CTSI",
@@ -7552,12 +7588,12 @@
     "iconUrl": "/icons/UPBIT/CTSI.png",
     "cmcSlug": "cartesi",
     "volume24hKrw": 53434979.646465816,
-    "volume24hForeignKrw": 377135808.80530804,
+    "volume24hForeignKrw": 45288099.052,
     "change24hRate": -2.01,
     "change24hAbs": -1.15,
     "high24h": 56.85,
     "low24h": 56.06,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "SHIB",
@@ -7570,12 +7606,12 @@
     "iconUrl": "/icons/UPBIT/SHIB.png",
     "cmcSlug": "shiba-inu",
     "volume24hKrw": 6219947725.627678,
-    "volume24hForeignKrw": 11646690772.10303,
+    "volume24hForeignKrw": 11640312775.459106,
     "change24hRate": 0.8,
     "change24hAbs": 0.0001,
     "high24h": 0.0129,
     "low24h": 0.0124,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "CELR",
@@ -7593,43 +7629,25 @@
     "change24hAbs": 0.1,
     "high24h": 6.499,
     "low24h": 6.296,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873632
   },
   {
-    "symbol": "NEIRO",
-    "name_ko": "네이로",
-    "name_en": "Neiro",
-    "koreanPrice": 0.2087,
-    "globalPrice": 0.00014079,
+    "symbol": "HEMI",
+    "name_ko": "헤미",
+    "name_en": "Hemi",
+    "koreanPrice": 22.68,
+    "globalPrice": 0.0153,
     "premium": 0.86,
     "usdKrw": 1469.72,
     "iconUrl": null,
-    "cmcSlug": "neiro",
-    "volume24hKrw": 259508976.15135142,
-    "volume24hForeignKrw": 12622554878.813744,
-    "change24hRate": 1.11,
-    "change24hAbs": 0.0023,
-    "high24h": 0.2181,
-    "low24h": 0.2087,
-    "updatedAt": 1765219865637
-  },
-  {
-    "symbol": "CPOOL",
-    "name_ko": "클리어풀",
-    "name_en": "Clearpool",
-    "koreanPrice": 56.1,
-    "globalPrice": 0.03785,
-    "premium": 0.85,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/CPOOL.png",
-    "cmcSlug": "clearpool",
-    "volume24hKrw": 1279568105.544732,
-    "volume24hForeignKrw": 539983877.070174,
-    "change24hRate": -1.57894737,
-    "change24hAbs": -0.9,
-    "high24h": 57.2,
-    "low24h": 55.1,
-    "updatedAt": 1765219865630
+    "cmcSlug": "hemi",
+    "volume24hKrw": 6940158760.548978,
+    "volume24hForeignKrw": 10349040834.728481,
+    "change24hRate": -11.89,
+    "change24hAbs": -3.06,
+    "high24h": 23.73,
+    "low24h": 22.41,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "MANA",
@@ -7647,25 +7665,7 @@
     "change24hAbs": 2,
     "high24h": 231,
     "low24h": 220,
-    "updatedAt": 1765219865630
-  },
-  {
-    "symbol": "PTB",
-    "name_ko": "포털투비트코인",
-    "name_en": "Portal To Bitcoin",
-    "koreanPrice": 6.225,
-    "globalPrice": 0.0042,
-    "premium": 0.85,
-    "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": null,
-    "volume24hKrw": 110605643.3475,
-    "volume24hForeignKrw": 13833717976.071117,
-    "change24hRate": 0,
-    "change24hAbs": 6.225,
-    "high24h": 7.485,
-    "low24h": 5.76,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "PYTH",
@@ -7678,12 +7678,12 @@
     "iconUrl": "/icons/UPBIT/PYTH.png",
     "cmcSlug": "pyth-network",
     "volume24hKrw": 957253641.9297545,
-    "volume24hForeignKrw": 3098075298.2002516,
+    "volume24hForeignKrw": 1797454586.959793,
     "change24hRate": 3,
     "change24hAbs": 3,
     "high24h": 107,
     "low24h": 100,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "MVL",
@@ -7701,7 +7701,7 @@
     "change24hAbs": -0.01,
     "high24h": 2.56,
     "low24h": 2.52,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "HUMA",
@@ -7719,7 +7719,7 @@
     "change24hAbs": -0.85,
     "high24h": 42.01,
     "low24h": 41.36,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "1INCH",
@@ -7737,7 +7737,7 @@
     "change24hAbs": -4,
     "high24h": 271,
     "low24h": 253,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "ACS",
@@ -7755,7 +7755,7 @@
     "change24hAbs": 0.0003,
     "high24h": 0.5779,
     "low24h": 0.5669,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "KAS",
@@ -7768,12 +7768,12 @@
     "iconUrl": null,
     "cmcSlug": "kaspa",
     "volume24hKrw": 46486107.8557,
-    "volume24hForeignKrw": 4083597388.8558984,
+    "volume24hForeignKrw": 13573400636.497854,
     "change24hRate": 0,
     "change24hAbs": 77,
     "high24h": 80.6,
     "low24h": 75.8,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "SPURS",
@@ -7791,7 +7791,7 @@
     "change24hAbs": -10,
     "high24h": 320,
     "low24h": 310,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ASTER",
@@ -7804,12 +7804,12 @@
     "iconUrl": null,
     "cmcSlug": "aster",
     "volume24hKrw": 349552051.54510707,
-    "volume24hForeignKrw": 109076808717.26884,
+    "volume24hForeignKrw": 109062488535.53108,
     "change24hRate": -0.07,
     "change24hAbs": -1,
     "high24h": 1433,
     "low24h": 1397,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "SKY",
@@ -7827,7 +7827,7 @@
     "change24hAbs": -2.13,
     "high24h": 80.14,
     "low24h": 78.8,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "COTI",
@@ -7845,7 +7845,7 @@
     "change24hAbs": -1.04,
     "high24h": 39.57,
     "low24h": 38.5,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "LINEA",
@@ -7858,12 +7858,12 @@
     "iconUrl": "/icons/UPBIT/LINEA.png",
     "cmcSlug": "linea",
     "volume24hKrw": 1920032731.9894006,
-    "volume24hForeignKrw": 5407866488.920835,
+    "volume24hForeignKrw": 2235639406.966816,
     "change24hRate": 0.85470085,
     "change24hAbs": 0.1,
     "high24h": 12.1,
     "low24h": 11.5,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "C98",
@@ -7881,7 +7881,7 @@
     "change24hAbs": -0.88,
     "high24h": 42.6,
     "low24h": 41.89,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "RON",
@@ -7899,7 +7899,7 @@
     "change24hAbs": -4,
     "high24h": 254,
     "low24h": 252,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "JASMY",
@@ -7912,12 +7912,12 @@
     "iconUrl": "/icons/UPBIT/JASMY.png",
     "cmcSlug": "jasmy",
     "volume24hKrw": 86306721.8121229,
-    "volume24hForeignKrw": 2565882270.0254655,
+    "volume24hForeignKrw": 5783191357.145901,
     "change24hRate": 0.59,
     "change24hAbs": 0.06,
     "high24h": 11.1,
     "low24h": 10.27,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "MTL",
@@ -7935,7 +7935,7 @@
     "change24hAbs": -6,
     "high24h": 605,
     "low24h": 589,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "WOO",
@@ -7953,7 +7953,7 @@
     "change24hAbs": 2.41,
     "high24h": 43.28,
     "low24h": 40.34,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "XVS",
@@ -7971,7 +7971,7 @@
     "change24hAbs": -30,
     "high24h": 7745,
     "low24h": 7000,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "RPL",
@@ -7989,7 +7989,7 @@
     "change24hAbs": -66,
     "high24h": 3622,
     "low24h": 3569,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "GNO",
@@ -8007,7 +8007,7 @@
     "change24hAbs": -4100,
     "high24h": 188900,
     "low24h": 186700,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "BGB",
@@ -8020,12 +8020,30 @@
     "iconUrl": null,
     "cmcSlug": null,
     "volume24hKrw": 25280047.5958,
-    "volume24hForeignKrw": 81240982408.91203,
+    "volume24hForeignKrw": 81249490962.4944,
     "change24hRate": 0,
     "change24hAbs": 5245,
     "high24h": 5375,
     "low24h": 5135,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
+  },
+  {
+    "symbol": "ANIME",
+    "name_ko": "애니메코인",
+    "name_en": "Animecoin",
+    "koreanPrice": 10,
+    "globalPrice": 0.00676,
+    "premium": 0.65,
+    "usdKrw": 1469.72,
+    "iconUrl": "/icons/UPBIT/ANIME.png",
+    "cmcSlug": "anime",
+    "volume24hKrw": 3457804428.5707264,
+    "volume24hForeignKrw": 910452680.1866372,
+    "change24hRate": -0.99009901,
+    "change24hAbs": -0.1,
+    "high24h": 10.3,
+    "low24h": 9.88,
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "CVX",
@@ -8038,12 +8056,12 @@
     "iconUrl": null,
     "cmcSlug": "convex-finance",
     "volume24hKrw": 3440496.3646,
-    "volume24hForeignKrw": 85544879.88344386,
+    "volume24hForeignKrw": 1162566797.2424474,
     "change24hRate": 0,
     "change24hAbs": 2710,
     "high24h": 2780,
     "low24h": 2710,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "STO",
@@ -8056,12 +8074,12 @@
     "iconUrl": null,
     "cmcSlug": "stakestone",
     "volume24hKrw": 10504736986.8537,
-    "volume24hForeignKrw": 1540623804.6052449,
+    "volume24hForeignKrw": 2916800756.4584002,
     "change24hRate": 0,
     "change24hAbs": 174.8,
     "high24h": 181.5,
     "low24h": 164.8,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "CTK",
@@ -8074,12 +8092,12 @@
     "iconUrl": null,
     "cmcSlug": "shentu",
     "volume24hKrw": 48011644.15875071,
-    "volume24hForeignKrw": 36560519.867562324,
+    "volume24hForeignKrw": 36552693.53948548,
     "change24hRate": 0.54,
     "change24hAbs": 2,
     "high24h": 373,
     "low24h": 369,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "RECALL",
@@ -8097,25 +8115,7 @@
     "change24hAbs": -2,
     "high24h": 169,
     "low24h": 165,
-    "updatedAt": 1765219865637
-  },
-  {
-    "symbol": "IRYS",
-    "name_ko": "아이리스",
-    "name_en": "Irys",
-    "koreanPrice": 55.33,
-    "globalPrice": 0.037432,
-    "premium": 0.57,
-    "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": "irys",
-    "volume24hKrw": 851003895.8693554,
-    "volume24hForeignKrw": 12259049305.132,
-    "change24hRate": 8.19,
-    "change24hAbs": 4.19,
-    "high24h": 56.09,
-    "low24h": 52.66,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "GRND",
@@ -8133,7 +8133,7 @@
     "change24hAbs": 0.11,
     "high24h": 52.01,
     "low24h": 48.32,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "CUDIS",
@@ -8151,7 +8151,7 @@
     "change24hAbs": -0.41,
     "high24h": 42.13,
     "low24h": 41.25,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "FLUX",
@@ -8163,13 +8163,13 @@
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": "flux",
-    "volume24hKrw": 225875662.02517542,
+    "volume24hKrw": 225278261.70517543,
     "volume24hForeignKrw": 122396037.33756,
     "change24hRate": 0,
     "change24hAbs": 0,
     "high24h": 167,
     "low24h": 164,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "BAND",
@@ -8187,25 +8187,7 @@
     "change24hAbs": 552.5,
     "high24h": 573,
     "low24h": 552.5,
-    "updatedAt": 1765219865637
-  },
-  {
-    "symbol": "ANIME",
-    "name_ko": "애니메코인",
-    "name_en": "Animecoin",
-    "koreanPrice": 10,
-    "globalPrice": 0.00677,
-    "premium": 0.5,
-    "usdKrw": 1469.72,
-    "iconUrl": "/icons/UPBIT/ANIME.png",
-    "cmcSlug": "anime",
-    "volume24hKrw": 3457804428.5707264,
-    "volume24hForeignKrw": 2082148787.4289308,
-    "change24hRate": -0.99009901,
-    "change24hAbs": -0.1,
-    "high24h": 10.3,
-    "low24h": 9.88,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "MONPRO",
@@ -8223,7 +8205,7 @@
     "change24hAbs": 15.8,
     "high24h": 16.1,
     "low24h": 15.8,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "PHA",
@@ -8236,12 +8218,12 @@
     "iconUrl": null,
     "cmcSlug": "phala-network",
     "volume24hKrw": 1675404.1991,
-    "volume24hForeignKrw": 444819876.40570354,
+    "volume24hForeignKrw": 3162038487.8623524,
     "change24hRate": 0,
     "change24hAbs": 64.5,
     "high24h": 65.9,
     "low24h": 61.15,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "NMR",
@@ -8253,13 +8235,31 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/NMR.png",
     "cmcSlug": "numeraire",
-    "volume24hKrw": 678103999.6625183,
-    "volume24hForeignKrw": 22825350168.896156,
-    "change24hRate": 0.48,
-    "change24hAbs": 80,
+    "volume24hKrw": 678054259.6625183,
+    "volume24hForeignKrw": 3626709661.2873845,
+    "change24hRate": 0.54,
+    "change24hAbs": 90,
     "high24h": 16890,
     "low24h": 16440,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
+  },
+  {
+    "symbol": "ROA",
+    "name_ko": "로아코어",
+    "name_en": "ROA CORE",
+    "koreanPrice": 10.19,
+    "globalPrice": 0.006906,
+    "premium": 0.4,
+    "usdKrw": 1469.72,
+    "iconUrl": null,
+    "cmcSlug": "roa-core",
+    "volume24hKrw": 53311681.90602988,
+    "volume24hForeignKrw": 42739690.380059,
+    "change24hRate": 2.07,
+    "change24hAbs": 0.207,
+    "high24h": 10.45,
+    "low24h": 10.19,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "DIA",
@@ -8277,7 +8277,7 @@
     "change24hAbs": 494.8,
     "high24h": 494.8,
     "low24h": 494.8,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "DBR",
@@ -8295,7 +8295,7 @@
     "change24hAbs": 1.28,
     "high24h": 33.76,
     "low24h": 29.98,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "NS",
@@ -8313,7 +8313,7 @@
     "change24hAbs": 57.2,
     "high24h": 57.2,
     "low24h": 57.2,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "MED",
@@ -8331,7 +8331,7 @@
     "change24hAbs": -0.04,
     "high24h": 4.04,
     "low24h": 3.96,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "COW",
@@ -8344,30 +8344,12 @@
     "iconUrl": "/icons/UPBIT/COW.png",
     "cmcSlug": "cow-protocol",
     "volume24hKrw": 159453828.0504474,
-    "volume24hForeignKrw": 705689812.4585288,
+    "volume24hForeignKrw": 13490971.401600001,
     "change24hRate": 0.69444444,
     "change24hAbs": 2,
     "high24h": 294,
     "low24h": 285,
-    "updatedAt": 1765219865630
-  },
-  {
-    "symbol": "ROA",
-    "name_ko": "로아코어",
-    "name_en": "ROA CORE",
-    "koreanPrice": 10.19,
-    "globalPrice": 0.006921,
-    "premium": 0.18,
-    "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": "roa-core",
-    "volume24hKrw": 53311681.90602988,
-    "volume24hForeignKrw": 42721940.7663569,
-    "change24hRate": 2.07,
-    "change24hAbs": 0.207,
-    "high24h": 10.45,
-    "low24h": 10.19,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "SD",
@@ -8385,7 +8367,7 @@
     "change24hAbs": -9,
     "high24h": 369,
     "low24h": 366,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "SWAP",
@@ -8403,25 +8385,7 @@
     "change24hAbs": 1.23,
     "high24h": 68.82,
     "low24h": 60.88,
-    "updatedAt": 1765219865637
-  },
-  {
-    "symbol": "TAKE",
-    "name_ko": "오버테이크",
-    "name_en": "Overtake",
-    "koreanPrice": 525,
-    "globalPrice": 0.35672,
-    "premium": 0.14,
-    "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": "overtake",
-    "volume24hKrw": 129543049.4196,
-    "volume24hForeignKrw": 217195438855.93576,
-    "change24hRate": 0,
-    "change24hAbs": 525,
-    "high24h": 569.5,
-    "low24h": 475.7,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "SKYAI",
@@ -8439,7 +8403,25 @@
     "change24hAbs": 42.68,
     "high24h": 45.2,
     "low24h": 42.68,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
+  },
+  {
+    "symbol": "TAKE",
+    "name_ko": "오버테이크",
+    "name_en": "Overtake",
+    "koreanPrice": 525,
+    "globalPrice": 0.35684,
+    "premium": 0.1,
+    "usdKrw": 1469.72,
+    "iconUrl": null,
+    "cmcSlug": "overtake",
+    "volume24hKrw": 129543049.4196,
+    "volume24hForeignKrw": 217202047173.4332,
+    "change24hRate": 0,
+    "change24hAbs": 525,
+    "high24h": 569.5,
+    "low24h": 475.7,
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "PRCL",
@@ -8457,7 +8439,7 @@
     "change24hAbs": 39.26,
     "high24h": 42.62,
     "low24h": 39.26,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "EVER",
@@ -8475,7 +8457,7 @@
     "change24hAbs": 13.2,
     "high24h": 13.29,
     "low24h": 13.2,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "BFC",
@@ -8493,7 +8475,7 @@
     "change24hAbs": -0.08,
     "high24h": 33.83,
     "low24h": 30.67,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "CETUS",
@@ -8511,7 +8493,25 @@
     "change24hAbs": 0.00041000000000000064,
     "high24h": 0.03033,
     "low24h": 0.02773,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
+  },
+  {
+    "symbol": "A8",
+    "name_ko": "에인션트8",
+    "name_en": "Ancient8",
+    "koreanPrice": 72.04,
+    "globalPrice": 0.0491,
+    "premium": -0.17,
+    "usdKrw": 1469.72,
+    "iconUrl": null,
+    "cmcSlug": "ancient8",
+    "volume24hKrw": 1658109620.7863648,
+    "volume24hForeignKrw": 626489232.094455,
+    "change24hRate": -3.56,
+    "change24hAbs": -2.66,
+    "high24h": 76.06,
+    "low24h": 72,
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "MBX",
@@ -8529,7 +8529,7 @@
     "change24hAbs": -1,
     "high24h": 122,
     "low24h": 115,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "NCT",
@@ -8547,7 +8547,7 @@
     "change24hAbs": -0.18,
     "high24h": 15.96,
     "low24h": 15.55,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "REQ",
@@ -8565,7 +8565,7 @@
     "change24hAbs": 0,
     "high24h": 163,
     "low24h": 160,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "PROMPT",
@@ -8583,7 +8583,7 @@
     "change24hAbs": -1.86,
     "high24h": 78.77,
     "low24h": 76.51,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "LM",
@@ -8596,12 +8596,12 @@
     "iconUrl": null,
     "cmcSlug": "leisuremeta",
     "volume24hKrw": 71145159.59691311,
-    "volume24hForeignKrw": 29094485.860823013,
+    "volume24hForeignKrw": 29116919.19850325,
     "change24hRate": 0.38,
     "change24hAbs": 0.006,
     "high24h": 1.615,
     "low24h": 1.586,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "WEN",
@@ -8619,7 +8619,25 @@
     "change24hAbs": 0.0192,
     "high24h": 0.0238,
     "low24h": 0.0187,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
+  },
+  {
+    "symbol": "NAVX",
+    "name_ko": "나비 프로토콜",
+    "name_en": "Navi Protocol",
+    "koreanPrice": 29.48,
+    "globalPrice": 0.02022,
+    "premium": -0.8,
+    "usdKrw": 1469.72,
+    "iconUrl": null,
+    "cmcSlug": "navi-protocol",
+    "volume24hKrw": 78692432.0567,
+    "volume24hForeignKrw": 719254266.0804498,
+    "change24hRate": 0,
+    "change24hAbs": 29.48,
+    "high24h": 34.29,
+    "low24h": 24.36,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "DATA",
@@ -8631,13 +8649,13 @@
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": "streamr",
-    "volume24hKrw": 536413538.8353294,
-    "volume24hForeignKrw": 536413538.8353294,
-    "change24hRate": -0.2945508100147283,
-    "change24hAbs": null,
-    "high24h": 0.00704,
-    "low24h": 0.00658,
-    "updatedAt": 1765219865638
+    "volume24hKrw": 18121854.26173836,
+    "volume24hForeignKrw": 18121854.26173836,
+    "change24hRate": 0,
+    "change24hAbs": 0.006762,
+    "high24h": null,
+    "low24h": null,
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "LQTY",
@@ -8655,25 +8673,7 @@
     "change24hAbs": null,
     "high24h": 0.483,
     "low24h": 0.452,
-    "updatedAt": 1765219865637
-  },
-  {
-    "symbol": "NAVX",
-    "name_ko": "나비 프로토콜",
-    "name_en": "Navi Protocol",
-    "koreanPrice": 29.48,
-    "globalPrice": 0.02024,
-    "premium": -0.9,
-    "usdKrw": 1469.72,
-    "iconUrl": null,
-    "cmcSlug": "navi-protocol",
-    "volume24hKrw": 78692432.0567,
-    "volume24hForeignKrw": 719153947.5667245,
-    "change24hRate": 0,
-    "change24hAbs": 29.48,
-    "high24h": 34.29,
-    "low24h": 24.36,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "TRAC",
@@ -8691,7 +8691,7 @@
     "change24hAbs": -18,
     "high24h": 782,
     "low24h": 741,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "WBTC",
@@ -8703,13 +8703,13 @@
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": null,
-    "volume24hKrw": 9422936861.585606,
-    "volume24hForeignKrw": 9422936861.585606,
-    "change24hRate": -1.1978766283342743,
+    "volume24hKrw": 9421988111.013113,
+    "volume24hForeignKrw": 9421988111.013113,
+    "change24hRate": -1.1640060459423276,
     "change24hAbs": null,
     "high24h": 92154.15,
     "low24h": 88864.54,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "MAK",
@@ -8727,7 +8727,7 @@
     "change24hAbs": 2.23,
     "high24h": 2.49,
     "low24h": 2.218,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "SYND",
@@ -8745,7 +8745,7 @@
     "change24hAbs": 140.8,
     "high24h": 148.1,
     "low24h": 138.8,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "HOT",
@@ -8763,7 +8763,7 @@
     "change24hAbs": 0.737,
     "high24h": 0.737,
     "low24h": 0.737,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "MASA",
@@ -8781,7 +8781,7 @@
     "change24hAbs": 6.58,
     "high24h": 7.97,
     "low24h": 6.45,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "VIC",
@@ -8799,25 +8799,25 @@
     "change24hAbs": 0.00010000000000000286,
     "high24h": 0.1063,
     "low24h": 0.1004,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "FAI",
     "name_ko": "프레이사",
     "name_en": "Freysa",
     "koreanPrice": 5.54,
-    "globalPrice": 0.00392,
-    "premium": -3.84,
+    "globalPrice": 0.00393,
+    "premium": -4.09,
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": null,
     "volume24hKrw": 2546986.537,
-    "volume24hForeignKrw": 22146260.056432653,
+    "volume24hForeignKrw": 22198115.648981187,
     "change24hRate": 0,
     "change24hAbs": 5.54,
     "high24h": 5.94,
     "low24h": 5.225,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "NFT",
@@ -8835,7 +8835,7 @@
     "change24hAbs": -0.0001,
     "high24h": 0.0006,
     "low24h": 0.0005,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "FORTH",
@@ -8847,13 +8847,13 @@
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": null,
-    "volume24hKrw": 61624640.5835816,
-    "volume24hForeignKrw": 61624640.5835816,
+    "volume24hKrw": 61615726.173287995,
+    "volume24hForeignKrw": 61615726.173287995,
     "change24hRate": 0,
     "change24hAbs": 1.73,
     "high24h": null,
     "low24h": null,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "SWELL",
@@ -8871,7 +8871,7 @@
     "change24hAbs": -0.07,
     "high24h": 3.425,
     "low24h": 3.359,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "MYRO",
@@ -8889,7 +8889,7 @@
     "change24hAbs": 12.85,
     "high24h": 12.85,
     "low24h": 12.84,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "AERGO",
@@ -8907,7 +8907,7 @@
     "change24hAbs": -0.8,
     "high24h": 82.9,
     "low24h": 81.1,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "PONKE",
@@ -8925,7 +8925,7 @@
     "change24hAbs": -0.63,
     "high24h": 49.27,
     "low24h": 48.08,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "ARIAIP",
@@ -8943,7 +8943,7 @@
     "change24hAbs": 45.13,
     "high24h": 55.15,
     "low24h": 45.12,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "MILK",
@@ -8961,7 +8961,7 @@
     "change24hAbs": 12.44,
     "high24h": 14.85,
     "low24h": 9.9,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "DELABS",
@@ -8979,7 +8979,7 @@
     "change24hAbs": 5.21,
     "high24h": 6.95,
     "low24h": 5.21,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "LION",
@@ -8997,7 +8997,7 @@
     "change24hAbs": 9.005,
     "high24h": 9.01,
     "low24h": 9.005,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "ZEUS",
@@ -9015,7 +9015,7 @@
     "change24hAbs": 34,
     "high24h": 34,
     "low24h": 34,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "BAL",
@@ -9027,13 +9027,13 @@
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": "balancer",
-    "volume24hKrw": 119015739.81667928,
+    "volume24hKrw": 118622539.81667928,
     "volume24hForeignKrw": 42708953.855344005,
     "change24hRate": 3.56,
     "change24hAbs": 35,
     "high24h": 1019,
     "low24h": 1010,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "WAVES",
@@ -9045,13 +9045,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/WAVES.png",
     "cmcSlug": "waves",
-    "volume24hKrw": 21529044479.491016,
+    "volume24hKrw": 21525554748.406425,
     "volume24hForeignKrw": 1415787795.7675729,
     "change24hRate": -1.32743363,
     "change24hAbs": -15,
     "high24h": 1199,
     "low24h": 1107,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "PORT3",
@@ -9069,7 +9069,7 @@
     "change24hAbs": 11.2,
     "high24h": 14.08,
     "low24h": 10.05,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "ALPHA",
@@ -9087,7 +9087,7 @@
     "change24hAbs": 0.006549,
     "high24h": null,
     "low24h": null,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "SNT",
@@ -9105,7 +9105,7 @@
     "change24hAbs": -0.1,
     "high24h": 23.3,
     "low24h": 22.6,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "ELF",
@@ -9123,7 +9123,7 @@
     "change24hAbs": -2,
     "high24h": 137,
     "low24h": 131,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "ORBS",
@@ -9141,7 +9141,7 @@
     "change24hAbs": -0.1,
     "high24h": 15.7,
     "low24h": 15.4,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "HIFI",
@@ -9159,7 +9159,7 @@
     "change24hAbs": 45.9,
     "high24h": 48.29,
     "low24h": 44.29,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "CTXC",
@@ -9172,12 +9172,12 @@
     "iconUrl": null,
     "cmcSlug": "cortex",
     "volume24hKrw": 233574164.10474095,
-    "volume24hForeignKrw": 749720917.9751123,
+    "volume24hForeignKrw": 748688061.9039125,
     "change24hRate": -1.57,
     "change24hAbs": -0.36,
     "high24h": 22.94,
     "low24h": 22.36,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "AI16Z",
@@ -9195,7 +9195,7 @@
     "change24hAbs": -0.32,
     "high24h": 20.93,
     "low24h": 20.64,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "CLV",
@@ -9213,7 +9213,7 @@
     "change24hAbs": -0.00003300000000000004,
     "high24h": 0.00623,
     "low24h": 0.005938,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "EGG",
@@ -9231,7 +9231,7 @@
     "change24hAbs": -0.021,
     "high24h": 1.659,
     "low24h": 1.603,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "BEAM",
@@ -9249,7 +9249,7 @@
     "change24hAbs": 0.05,
     "high24h": 5.01,
     "low24h": 4.8,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "ACM",
@@ -9267,7 +9267,7 @@
     "change24hAbs": 0.013999999999999901,
     "high24h": 0.586,
     "low24h": 0.558,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "AFC",
@@ -9285,7 +9285,7 @@
     "change24hAbs": -1.1e-7,
     "high24h": 0.00000488,
     "low24h": 0.00000406,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "AHT",
@@ -9303,7 +9303,7 @@
     "change24hAbs": 0,
     "high24h": 2.93,
     "low24h": 2.85,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "ATM",
@@ -9321,7 +9321,7 @@
     "change24hAbs": -0.0010000000000000009,
     "high24h": 0.933,
     "low24h": 0.899,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "BAR",
@@ -9339,7 +9339,7 @@
     "change24hAbs": 6e-8,
     "high24h": 0.000007,
     "low24h": 0.00000652,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "BOUNTY",
@@ -9357,25 +9357,25 @@
     "change24hAbs": 0.1,
     "high24h": 30.8,
     "low24h": 29.6,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "CITY",
     "name_ko": "맨체스터시티",
     "name_en": "Manchester City Fan Token",
     "koreanPrice": null,
-    "globalPrice": 0.622,
+    "globalPrice": 0.623,
     "premium": null,
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/CITY.png",
     "cmcSlug": null,
-    "volume24hKrw": 284284408.08031446,
-    "volume24hForeignKrw": 284284408.08031446,
-    "change24hRate": -0.5451338784672229,
-    "change24hAbs": -0.0034000000000000696,
-    "high24h": 0.696,
-    "low24h": 0.6099,
-    "updatedAt": 1765219865630
+    "volume24hKrw": 3253166682.242873,
+    "volume24hForeignKrw": 3253166682.242873,
+    "change24hRate": null,
+    "change24hAbs": null,
+    "high24h": 0.693,
+    "low24h": 0.608,
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "DENT",
@@ -9387,13 +9387,13 @@
     "usdKrw": 1469.72,
     "iconUrl": "/icons/UPBIT/DENT.png",
     "cmcSlug": "dent",
-    "volume24hKrw": 121315379.99926801,
-    "volume24hForeignKrw": 121315379.99926801,
-    "change24hRate": -1.9685039370078792,
-    "change24hAbs": -0.000005000000000000013,
-    "high24h": 0.000285,
+    "volume24hKrw": 5365675882.937413,
+    "volume24hForeignKrw": 5365675882.937413,
+    "change24hRate": -3.1372549019607967,
+    "change24hAbs": null,
+    "high24h": 0.000286,
     "low24h": 0.000244,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "DGB",
@@ -9411,7 +9411,7 @@
     "change24hAbs": 0.001084,
     "high24h": 0.0073,
     "low24h": 0.005501,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "DNT",
@@ -9429,7 +9429,7 @@
     "change24hAbs": 0,
     "high24h": 1.8e-7,
     "low24h": 1.8e-7,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "GLMR",
@@ -9447,7 +9447,7 @@
     "change24hAbs": -3e-8,
     "high24h": 4.8e-7,
     "low24h": 3.8e-7,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "GRS",
@@ -9465,7 +9465,7 @@
     "change24hAbs": -4,
     "high24h": 251,
     "low24h": 226,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "INTER",
@@ -9483,7 +9483,7 @@
     "change24hAbs": 0.00990000000000002,
     "high24h": 0.3556,
     "low24h": 0.3386,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "JUV",
@@ -9501,7 +9501,7 @@
     "change24hAbs": 0.0032999999999999696,
     "high24h": 0.6831,
     "low24h": 0.6571,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873631
   },
   {
     "symbol": "MET2",
@@ -9519,7 +9519,7 @@
     "change24hAbs": 2,
     "high24h": 533,
     "low24h": 480,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "META",
@@ -9537,7 +9537,7 @@
     "change24hAbs": 0,
     "high24h": 17.1,
     "low24h": 16.6,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "MOC",
@@ -9555,7 +9555,7 @@
     "change24hAbs": -0.1,
     "high24h": 53.8,
     "low24h": 53,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "NAP",
@@ -9573,7 +9573,7 @@
     "change24hAbs": -9e-8,
     "high24h": 0.00000495,
     "low24h": 0.00000391,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "NKN",
@@ -9586,12 +9586,12 @@
     "iconUrl": "/icons/UPBIT/NKN.png",
     "cmcSlug": "nkn",
     "volume24hKrw": 0.02124809,
-    "volume24hForeignKrw": 6923142.51496,
+    "volume24hForeignKrw": 2109498248.913566,
     "change24hRate": 6.666666670000001,
     "change24hAbs": 1e-8,
     "high24h": 1.6e-7,
     "low24h": 1.4e-7,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "OBSR",
@@ -9609,7 +9609,7 @@
     "change24hAbs": 0.007,
     "high24h": 1.121,
     "low24h": 1.101,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "OCEAN",
@@ -9627,7 +9627,7 @@
     "change24hAbs": -1.3e-7,
     "high24h": 0.00000231,
     "low24h": 0.0000023,
-    "updatedAt": 1765219865630
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "PSG",
@@ -9645,7 +9645,7 @@
     "change24hAbs": 3.1e-7,
     "high24h": 0.00000993,
     "low24h": 0.00000993,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "TOKAMAK",
@@ -9663,7 +9663,7 @@
     "change24hAbs": 13,
     "high24h": 1140,
     "low24h": 1070,
-    "updatedAt": 1765219865631
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "TUSD",
@@ -9681,7 +9681,7 @@
     "change24hAbs": -0.01,
     "high24h": 0.9791,
     "low24h": 0.979,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "USDP",
@@ -9699,7 +9699,7 @@
     "change24hAbs": -5e-8,
     "high24h": 0.00001095,
     "low24h": 0.00001095,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "AMO",
@@ -9717,7 +9717,7 @@
     "change24hAbs": 0.025,
     "high24h": 0.7296,
     "low24h": 0.7032,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "APM",
@@ -9735,7 +9735,7 @@
     "change24hAbs": -0.123,
     "high24h": 1.857,
     "low24h": 1.823,
-    "updatedAt": 1765219865636
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "BIOT",
@@ -9753,7 +9753,7 @@
     "change24hAbs": 0.018,
     "high24h": 0.5847,
     "low24h": 0.5785,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873632
   },
   {
     "symbol": "EVZ",
@@ -9771,7 +9771,7 @@
     "change24hAbs": -0.0036,
     "high24h": 0.9485,
     "low24h": 0.8626,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "FANC",
@@ -9789,7 +9789,7 @@
     "change24hAbs": 0.047,
     "high24h": 3.364,
     "low24h": 3.214,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "GRACY",
@@ -9807,7 +9807,7 @@
     "change24hAbs": 0.32,
     "high24h": 11.14,
     "low24h": 10.84,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "MEV",
@@ -9825,7 +9825,7 @@
     "change24hAbs": 0.012,
     "high24h": 4.132,
     "low24h": 4.096,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "MVC",
@@ -9843,7 +9843,7 @@
     "change24hAbs": 0.059,
     "high24h": 3.177,
     "low24h": 3.138,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "POLA",
@@ -9861,7 +9861,7 @@
     "change24hAbs": 0.07,
     "high24h": 11.15,
     "low24h": 11.01,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "TEMCO",
@@ -9873,13 +9873,13 @@
     "usdKrw": 1469.72,
     "iconUrl": null,
     "cmcSlug": "temco",
-    "volume24hKrw": 16326837663.437346,
+    "volume24hKrw": 16326374628.084625,
     "volume24hForeignKrw": null,
     "change24hRate": 22,
     "change24hAbs": 0.22,
     "high24h": 1.4,
     "low24h": 1.2,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "WIKEN",
@@ -9897,7 +9897,7 @@
     "change24hAbs": -0.005,
     "high24h": 3.444,
     "low24h": 3.154,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "HVH",
@@ -9915,7 +9915,7 @@
     "change24hAbs": 0.5215,
     "high24h": 0.5246,
     "low24h": 0.5215,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "REKT",
@@ -9933,7 +9933,7 @@
     "change24hAbs": 0.0005,
     "high24h": 0.0005,
     "low24h": 0.0004,
-    "updatedAt": 1765219865637
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "CLBK",
@@ -9951,7 +9951,7 @@
     "change24hAbs": 0.8446,
     "high24h": 0.91,
     "low24h": 0.8446,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "SKLAY",
@@ -9969,7 +9969,7 @@
     "change24hAbs": null,
     "high24h": null,
     "low24h": null,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "FNCY",
@@ -9987,7 +9987,7 @@
     "change24hAbs": 2.79,
     "high24h": 2.79,
     "low24h": 2.789,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "SODA",
@@ -10005,7 +10005,7 @@
     "change24hAbs": null,
     "high24h": null,
     "low24h": null,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873633
   },
   {
     "symbol": "HPP",
@@ -10023,7 +10023,7 @@
     "change24hAbs": 47.2,
     "high24h": 58.4,
     "low24h": 47.2,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "LZM",
@@ -10041,7 +10041,7 @@
     "change24hAbs": 12.39,
     "high24h": 12.4,
     "low24h": 11.63,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "BAAS",
@@ -10059,7 +10059,7 @@
     "change24hAbs": 0.2,
     "high24h": 0.2223,
     "low24h": 0.2,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "L3",
@@ -10077,7 +10077,7 @@
     "change24hAbs": 18.04,
     "high24h": 18.49,
     "low24h": 17.72,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "GXA",
@@ -10095,7 +10095,7 @@
     "change24hAbs": 2.429,
     "high24h": 2.498,
     "low24h": 2.31,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   },
   {
     "symbol": "TALK",
@@ -10113,6 +10113,6 @@
     "change24hAbs": 0.002656,
     "high24h": null,
     "low24h": null,
-    "updatedAt": 1765219865638
+    "updatedAt": 1765219873634
   }
 ]
