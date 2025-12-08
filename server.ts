@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 import { createServer } from "http";
 import { parse } from "url";
 import { exec } from "child_process";
@@ -12,32 +11,24 @@ const hostname = "0.0.0.0";
 const port = parseInt(process.env.PORT || "5000", 10);
 const dev = process.env.NODE_ENV !== "production";
 
-console.log(`[BOOT] Starting on ${hostname}:${port} (dev=${dev})`);
-
-// Initialize Next.js
+// Prepare Next.js app (but don't wait)
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
 
-// Create server with instant health check
+// Create minimal HTTP server
 const server = createServer((req, res) => {
-  const pathname = req.url?.split("?")[0] || "/";
-  
-  // INSTANT synchronous health check - no promises, no async
-  if ((pathname === "/" || pathname === "/health") && req.method === "GET") {
-    res.writeHead(200, {
-      "Content-Type": "text/plain",
-      "Content-Length": "2"
-    });
+  if (req.url === "/" || req.url === "/health") {
+    res.writeHead(200, { "Content-Type": "text/plain" });
     res.end("OK");
     return;
   }
 
-  // Delegate to Next.js
+  // Async handler for all other routes
   (async () => {
     try {
       await handle(req, res, parse(req.url!, true));
     } catch (err) {
-      console.error(`[ERROR] ${req.method} ${req.url}:`, err);
+      console.error("Request error:", err);
       if (!res.headersSent) {
         res.writeHead(500);
         res.end("Error");
@@ -48,37 +39,29 @@ const server = createServer((req, res) => {
 
 // Start listening immediately
 server.listen(port, hostname, () => {
-  console.log(`[BOOT] ✓ Listening on port ${port}`);
+  console.log(`Server listening on ${hostname}:${port}`);
 });
 
-// Initialize in background (non-blocking)
-(async () => {
-  try {
-    await app.prepare();
-    console.log("[BOOT] ✓ Next.js ready");
-
+// Initialize everything in background (non-blocking)
+Promise.resolve()
+  .then(() => app.prepare())
+  .then(() => {
     createChatServer(server);
-    console.log("[BOOT] ✓ WebSocket ready");
-
     startPriceWorker();
-    console.log("[BOOT] ✓ Workers started");
-
     cron.schedule("*/5 * * * *", () => {
-      console.log(`[SYNC] Starting market sync...`);
       exec("npm run sync:markets", (err, stdout, stderr) => {
-        if (err) console.error(`[SYNC]`, err.message);
+        if (err) console.error("[SYNC]", err.message);
         if (stdout) console.log(stdout);
       });
     });
-    console.log("[BOOT] ✓ Market sync scheduled");
-  } catch (err) {
-    console.error("[FATAL]", err);
+    console.log("All services initialized");
+  })
+  .catch((err) => {
+    console.error("Fatal initialization error:", err);
     process.exit(1);
-  }
-})();
+  });
 
 // Graceful shutdown
 process.on("SIGTERM", () => {
-  console.log("[SHUTDOWN] Closing...");
   server.close(() => process.exit(0));
 });

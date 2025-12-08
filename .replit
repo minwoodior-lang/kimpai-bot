@@ -65,10 +65,6 @@ localPort = 44295
 localPort = 44483
 
 [[ports]]
-localPort = 44753
-externalPort = 3001
-
-[[ports]]
 localPort = 44983
 
 [[ports]]
@@ -90,4 +86,4 @@ NODE_ENV = "production"
 [deployment]
 run = ["npm", "start"]
 deploymentTarget = "vm"
-build = ["npm", "run", "build"]
+build = ["npm", "run"]
