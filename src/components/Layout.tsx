@@ -79,7 +79,6 @@ export default function Layout({ children }: LayoutProps) {
     { href: "/", label: "홈" },
     { href: "/markets", label: "시장 지표" },
     { href: "/analysis", label: "AI 분석" },
-    { href: "/alerts", label: "알림" },
     { href: "/news", label: "뉴스" },
   ];
 
