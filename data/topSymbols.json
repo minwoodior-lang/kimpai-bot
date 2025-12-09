@@ -21,8 +21,8 @@
     "ENAUSDT",
     "AVAXUSDT",
     "TAOUSDT",
-    "ATUSDT",
     "PENGUUSDT",
+    "ATUSDT",
     "USDEUSDT",
     "LTCUSDT",
     "NEARUSDT",
@@ -36,8 +36,8 @@
     "EURUSDT",
     "XPLUSDT",
     "DOTUSDT",
-    "TRUMPUSDT",
     "WLDUSDT",
+    "TRUMPUSDT",
     "UNIUSDT",
     "HBARUSDT",
     "PUMPUSDT",
@@ -51,8 +51,8 @@
     "PAXGUSDT",
     "XUSDUSDT",
     "ICPUSDT",
-    "FILUSDT",
     "NMRUSDT",
+    "FILUSDT",
     "XLMUSDT",
     "STRKUSDT",
     "VIRTUALUSDT",
@@ -61,6 +61,6 @@
     "SHIBUSDT",
     "ONDOUSDT"
   ],
-  "updatedAt": "2025-12-09T22:22:37.551Z",
+  "updatedAt": "2025-12-09T22:25:29.803Z",
   "count": 60
 }

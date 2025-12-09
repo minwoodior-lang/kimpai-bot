@@ -17,7 +17,7 @@ export default function Document() {
         <meta name="author" content="KimpAI" />
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#1a1a2e" />
+        <meta name="theme-color" content="#020617" />
         
         {/* Google Search Console Verification */}
         <meta name="google-site-verification" content="G3c1zjMW2wkL2oIJ6wqWkxOwYzguFl28vWJ8d5dDsC0" />
