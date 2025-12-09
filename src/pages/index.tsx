@@ -250,7 +250,7 @@ export default function Home() {
                     : "bg-slate-800 text-slate-300 hover:bg-slate-700"
                 }`}
               >
-                🔔 내 알림
+                📡 시그널 채널
               </button>
             </div>
 

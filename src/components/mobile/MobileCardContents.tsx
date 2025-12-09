@@ -94,49 +94,38 @@ export function ProForecastMobileContent() {
 }
 
 export function MyAlertsMobileContent() {
-  const isLoggedIn = false; // TODO: Connect to auth
+  const TELEGRAM_FREE_SIGNAL_URL = "https://t.me/kimp_ai";
 
   return (
-    <div className="flex flex-col h-full min-h-[210px]">
-      {/* 제목 */}
-      <h3 className="text-[14px] font-semibold dark:text-slate-100 light:text-slate-900 mb-2 flex items-center gap-2">
-        <span>🔔</span>
-        <span>내 알림</span>
-      </h3>
-
-      {/* 콘텐츠 */}
-      <div className="flex-1 flex items-center justify-center">
-        {isLoggedIn ? (
-          <div className="space-y-1 w-full">
-            <div className="text-[11px] dark:text-slate-300 light:text-slate-700">
-              <div className="mb-1">
-                <span className="text-emerald-400">✓</span>
-                <span className="ml-1">김프 3% 이상 상승 시 알림</span>
-              </div>
-              <div>
-                <span className="text-emerald-400">✓</span>
-                <span className="ml-1">김프 급락 구간 경보 예측</span>
-              </div>
-            </div>
-            <button className="w-full mt-1 text-[11px] text-indigo-400 hover:text-indigo-300 transition-colors">
-              + 알림 설정 수정
-            </button>
-          </div>
-        ) : (
-          <div className="text-center w-full">
-            <p className="text-[13px] dark:text-slate-100 light:text-slate-800 mb-1.5 leading-relaxed">
-              김프 급변 구간을 푸시 알림으로 받아보세요.
-            </p>
-            <p className="text-[11px] dark:text-slate-400 light:text-slate-600 mb-3 leading-snug">
-              로그인 후 관심 코인과 김프 조건을 설정하면,
-              지정한 구간에 도달할 때마다 바로 알려드립니다.
-            </p>
-            <button className="underline underline-offset-4 text-indigo-300 hover:text-indigo-200 transition cursor-pointer font-semibold text-[13px]">
-              로그인
-            </button>
-          </div>
-        )}
+    <div className="space-y-3">
+      {/* 타이틀 */}
+      <div className="text-sm font-semibold text-slate-100">
+        📡 실시간 시그널 채널
       </div>
+
+      {/* 본문 */}
+      <p className="text-xs text-slate-300 leading-relaxed">
+        Binance 고래 매매 · 거래량 폭발 · BTC/ETH 김프 급변만 실시간 발송.
+      </p>
+
+      {/* 버튼 */}
+      <a
+        href={TELEGRAM_FREE_SIGNAL_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-xs font-semibold text-white py-2"
+      >
+        {/* 텔레그램 로고 */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          className="w-4 h-4"
+        >
+          <path d="M9.04 15.34 8.9 18.5c.32 0 .46-.14.63-.31l1.5-1.43 3.11 2.28c.57.32.98.15 1.13-.53l2.05-9.62c.19-.81-.31-1.13-.86-.93L3.9 10.27c-.8.31-.79.76-.14.96l3.9 1.22 9.05-5.7c.43-.28.82-.13.5.15l-7.27 6.67Z" />
+        </svg>
+        텔레그램 채널 열기
+      </a>
     </div>
   );
 }
