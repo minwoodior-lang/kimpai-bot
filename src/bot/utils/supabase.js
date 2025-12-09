@@ -1,13 +1,47 @@
 const { createClient } = require("@supabase/supabase-js");
 
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_KEY;
 
-if (!supabaseUrl || !supabaseKey) {
+if (!SUPABASE_URL || !SUPABASE_KEY) {
   console.warn("⚠️ Supabase 환경변수 미설정. 사용자 데이터 저장 기능 비활성화됨.");
 }
 
-const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+const supabase = SUPABASE_URL && SUPABASE_KEY ? createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+
+/**
+ * Telegram ctx에서 유저 정보를 추출하여 telegram_users에 upsert
+ * - 이미 존재하면 username만 업데이트
+ * - 없으면 새로 생성
+ */
+async function upsertTelegramUserFromCtx(ctx) {
+  if (!supabase || !ctx || !ctx.chat || !ctx.from) {
+    return;
+  }
+
+  const chatId = ctx.chat.id;
+  const username = ctx.from.username || null;
+
+  try {
+    const { error } = await supabase
+      .from('telegram_users')
+      .upsert(
+        {
+          telegram_chat_id: chatId,
+          telegram_username: username,
+        },
+        { onConflict: 'telegram_chat_id' }
+      );
+
+    if (error) {
+      console.error('❌ Failed to upsert telegram user:', error);
+    } else {
+      console.log('✅ telegram_users upsert success:', chatId, username);
+    }
+  } catch (err) {
+    console.error('❌ Exception while upserting telegram user:', err);
+  }
+}
 
 // Supabase 사용자 조회 (chat_id로 조회)
 const getUserByChatId = async (chatId) => {
@@ -97,6 +131,7 @@ const getProUsers = async () => {
 
 module.exports = {
   supabase,
+  upsertTelegramUserFromCtx,
   getUserByChatId,
   upsertUser,
   addWatchlist,

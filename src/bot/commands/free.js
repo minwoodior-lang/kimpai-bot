@@ -176,6 +176,11 @@ const removeWatchlistCommand = async (ctx) => {
 
 // /start 명령어
 const startCommand = async (ctx) => {
+  const { upsertTelegramUserFromCtx } = require("../utils/supabase");
+  
+  // 1) 유저 정보 Supabase에 저장
+  await upsertTelegramUserFromCtx(ctx);
+
   const message = `🤖 KimpAI 텔레그램 봇에 오신 것을 환영합니다!
 
 📊 실시간 김프 분석 및 AI 기반 암호화폐 트레이딩 신호를 제공합니다.

@@ -185,3 +185,65 @@ Telegram에서 봇과 대화:
 **시작 가이드**: `QUICK_START.md` 참고
 **상세 설명**: `BOT_README.md` 참고
 **테스트**: `TEST_COMMANDS.md` 참고
+
+## 🆕 추가: Telegram 유저 Supabase 저장 (2024-12-09)
+
+### ✅ 구현 완료
+- [x] `upsertTelegramUserFromCtx()` 함수 추가 (supabase.js)
+- [x] `/start` 명령어에서 유저 자동 저장
+- [x] Watchlist 함수 검증 (add/remove 정상 연동)
+- [x] 테스트 가이드 작성 (SUPABASE_USER_TEST.md)
+
+### 📋 테스트 가이드 (SUPABASE_USER_TEST.md 참고)
+
+#### 1️⃣ 기본 테스트 (유저 저장)
+```bash
+npm run bot:dev
+
+# Telegram에서 /start 전송
+# 콘솔에서 다음 로그 확인:
+✅ telegram_users upsert success: [CHAT_ID] [USERNAME]
+
+# Supabase 대시보드에서 telegram_users 테이블 확인
+# 새로운 행이 생성되었는지 확인
+```
+
+#### 2️⃣ Watchlist 테스트
+```bash
+# Telegram에서
+/add_watchlist BTC
+/add_watchlist SUI
+/watchlist
+
+# Supabase 확인
+# watchlist: ["BTC", "SUI"] 저장됨
+
+# 제거 테스트
+/remove_watchlist SUI
+/watchlist
+
+# Supabase 확인
+# watchlist: ["BTC"] 로 업데이트됨
+```
+
+#### 3️⃣ 중복 /start 테스트
+```bash
+# Telegram에서 /start 여러 번 전송
+# Supabase에서 행이 중복 생성되지 않고 업데이트만 됨 (UNIQUE 제약으로 자동 처리)
+```
+
+### 🔍 정상 작동 확인 체크리스트
+- [ ] `/start` 전송 시 콘솔에 `✅ upsert success` 로그 표시
+- [ ] Supabase `telegram_users` 테이블에 행 생성
+- [ ] `telegram_chat_id` 저장됨
+- [ ] `telegram_username` 저장됨 (또는 NULL)
+- [ ] `/add_watchlist` 명령어 정상 작동
+- [ ] `/remove_watchlist` 명령어 정상 작동
+- [ ] 중복 /start는 행 업데이트만 수행 (중복 생성 X)
+
+### 📁 관련 파일
+- `src/bot/utils/supabase.js` - upsertTelegramUserFromCtx 함수 추가
+- `src/bot/commands/free.js` - startCommand에서 자동 저장 호출
+- `SUPABASE_USER_TEST.md` - 상세 테스트 가이드
+
+---

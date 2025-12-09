@@ -1,0 +1,137 @@
+Replit AI용 전달문 – “텔레그램 유저 Supabase 연동 수정”
+
+프로젝트: 현재 Replit에서 돌아가는 KimpAI Telegram Bot v1.0
+Supabase 프로젝트와 telegram_users 테이블은 이미 생성되어 있음.
+.env/Secrets 에는 다음 값들이 들어가 있음:
+
+TELEGRAM_BOT_TOKEN
+
+SUPABASE_URL
+
+SUPABASE_KEY (anon public key)
+
+현재 /start, /btc, /eth, /alt 명령은 정상 동작하지만,
+Supabase telegram_users 테이블에 아무 행도 저장되지 않는 문제가 있음.
+이 문제를 해결하기 위해 아래 작업을 해줘.
+
+1. Supabase 유틸 파일 생성/수정
+
+경로: src/bot/utils/supabase.js
+
+이 파일이 없거나 비어 있으면 새로 만들고, 이미 있다면 아래 내용으로 교체해줘.
+
+// src/bot/utils/supabase.js
+const { createClient } = require('@supabase/supabase-js');
+
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_KEY; // anon public key 사용
+
+if (!SUPABASE_URL || !SUPABASE_KEY) {
+  console.error('❌ Missing SUPABASE_URL or SUPABASE_KEY in environment variables');
+}
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+/**
+ * 텔레그램 유저 정보를 telegram_users 테이블에 upsert
+ * - 이미 존재하면 username만 업데이트
+ * - 없으면 새로 생성
+ */
+async function upsertTelegramUserFromCtx(ctx) {
+  if (!ctx || !ctx.chat || !ctx.from) return;
+
+  const chatId = ctx.chat.id;
+  const username = ctx.from.username || null;
+
+  try {
+    const { error } = await supabase
+      .from('telegram_users')
+      .upsert(
+        {
+          telegram_chat_id: chatId,
+          telegram_username: username,
+        },
+        { onConflict: 'telegram_chat_id' }
+      );
+
+    if (error) {
+      console.error('❌ Failed to upsert telegram user:', error);
+    } else {
+      console.log('✅ telegram_users upsert success:', chatId, username);
+    }
+  } catch (err) {
+    console.error('❌ Exception while upserting telegram user:', err);
+  }
+}
+
+module.exports = {
+  supabase,
+  upsertTelegramUserFromCtx,
+};
+
+2. /start 명령에서 유저 저장 호출 연결
+
+/start 명령을 등록하는 파일을 찾아서 수정해 줘.
+(예상 경로: src/bot/commands/start.js 또는 src/bot/index.js 내부)
+
+2-1. start 핸들러가 별도 파일인 경우 예시
+// src/bot/commands/start.js (예시)
+// 실제 파일 구조에 맞게 경로만 조정해줘
+const { upsertTelegramUserFromCtx } = require('../utils/supabase');
+
+module.exports = function registerStartCommand(bot) {
+  bot.start(async (ctx) => {
+    // 1) 유저 정보 Supabase에 저장
+    await upsertTelegramUserFromCtx(ctx);
+
+    // 2) 기존에 구현돼 있던 /start 응답 메시지 그대로 유지
+    // (지금 잘 나오고 있는 환영 메시지 로직은 건들지 말고, 그 위/아래에만 추가)
+  });
+};
+
+2-2. /start가 src/bot/index.js 안에 바로 있는 경우 예시
+// src/bot/index.js 상단 import 부분 근처
+const { upsertTelegramUserFromCtx } = require('./utils/supabase');
+
+// ... 중략 ...
+
+bot.start(async (ctx) => {
+  await upsertTelegramUserFromCtx(ctx);  // 🔥 이 줄 추가
+
+  // 아래는 기존 환영 메시지 동일하게 유지
+  // 예: ctx.reply('KimpAI 텔레그램 봇에 오신 것을 환영합니다! ...');
+});
+
+
+중요: 기존 /start 메시지 내용은 그대로 두고,
+await upsertTelegramUserFromCtx(ctx); 한 줄만 추가하는 식으로 수정해줘.
+
+3. 추가로 해줄 수 있으면 좋은 것 (선택)
+
+가능하다면 /add_watchlist, /remove_watchlist, /watchlist 같은 명령에서
+Supabase telegram_users를 사용하는 로직이 있다면,
+upsertTelegramUserFromCtx를 재사용하거나, telegram_chat_id 기준으로 select/update가 잘 되는지 한 번 검증해 줘.
+
+4. 테스트 방법까지 설정해줘
+
+npm run bot:dev 로컬에서 실행
+
+텔레그램에서 @kimpai_bot 에 /start 전송
+
+콘솔에서 ✅ telegram_users upsert success: 로그가 찍히는지 확인
+
+Supabase Dashboard → telegram_users 테이블에서
+
+telegram_chat_id
+
+telegram_username
+값이 들어간 행이 생겼는지 확인
+
+이 네 단계를 FINAL_CHECKLIST.md 또는 비슷한 파일에 “Telegram 유저 저장 테스트” 섹션으로 추가해줘도 좋음.
+
+5. 절대 건들지 말 것
+
+기존 웹용 Supabase 스키마/테이블은 현재 이 프로젝트에 연동되어 있지 않으므로,
+지금은 telegram_users 외 다른 테이블은 수정/삭제하지 말아줘.
+
+텔레봇 명령어 텍스트(한국어 메시지) 내용은 최대한 그대로 유지.
