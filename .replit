@@ -72,7 +72,7 @@ localPort = 45553
 
 [nix]
 channel = "stable-25_05"
-packages = ["lsof", "jq"]
+packages = ["lsof", "jq", "libuuid"]
 
 [userenv]
 
