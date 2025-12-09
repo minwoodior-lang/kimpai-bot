@@ -18,6 +18,9 @@ export default function Document() {
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#3B82F6" />
+        
+        {/* Google Search Console Verification */}
+        <meta name="google-site-verification" content="G3c1zjMW2wkL2oIJ6wqWkxOwYzguFl28vWJ8d5dDsC0" />
 
         {/* Open Graph (카톡, 디스코드 등 공유 썸네일) */}
         <meta property="og:title" content="KimpAI - AI가 포착하는 김프 재정거래 기회" />
