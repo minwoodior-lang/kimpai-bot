@@ -28,16 +28,16 @@
     "NEARUSDT",
     "USTCUSDT",
     "BFUSDUSDT",
-    "DASHUSDT",
     "ZENUSDT",
+    "DASHUSDT",
     "AAVEUSDT",
     "ALLOUSDT",
     "GIGGLEUSDT",
     "EURUSDT",
     "XPLUSDT",
     "DOTUSDT",
-    "WLDUSDT",
     "TRUMPUSDT",
+    "WLDUSDT",
     "UNIUSDT",
     "HBARUSDT",
     "PUMPUSDT",
@@ -61,6 +61,6 @@
     "SHIBUSDT",
     "ONDOUSDT"
   ],
-  "updatedAt": "2025-12-09T22:25:29.803Z",
+  "updatedAt": "2025-12-09T22:37:18.235Z",
   "count": 60
 }

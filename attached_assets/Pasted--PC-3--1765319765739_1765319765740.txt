@@ -1,0 +1,128 @@
+📌 [전달문] 홈 우측 카드 전체 → “실시간 시그널 채널 안내 카드”로 교체 요청
+
+📍 변경 대상
+
+PC 홈 화면 우측 3번째 카드
+
+모바일 홈 화면에서도 동일 카드(세로 배열 시 세 번째)
+→ MyAlertsCard 컴포넌트 전체 교체 시 PC/모바일 모두 자동 반영
+
+📁 파일
+
+src/components/MyAlertsCard.tsx
+
+✅ 변경 요청 사항 (PC·모바일 공통)
+
+기존 “내 알림(My Alerts)” 관련 내용은 모두 제거하고,
+아래 구성으로 완전히 교체해주세요.
+
+1️⃣ 타이틀
+📡 실시간 시그널 채널
+
+2️⃣ 본문 (2줄)
+Binance 고래 매매 · 거래량 폭발 · 
+BTC/ETH 김프 급변만 실시간 발송.
+
+
+PC/모바일 동일하게 두 줄 처리
+
+leading-relaxed 또는 기본 줄간격 유지
+
+3️⃣ 버튼
+
+텍스트:
+
+텔레그램 채널 열기
+
+
+링크:
+
+https://t.me/kimp_ai
+
+
+새 창에서 열기: target="_blank" rel="noopener noreferrer"
+
+4️⃣ 스타일 관련
+
+아래 스타일은 그대로 유지해주세요.
+
+카드 배경: bg-slate-900/80
+
+테두리: border-slate-800
+
+모서리: rounded-2xl
+
+패딩: px-4 py-4
+
+폰트 사이즈: text-xs, text-sm 대략 동일 수준
+
+카드 높이: h-full
+
+Flex 레이아웃: 타이틀 → 본문 → 버튼 순서 유지
+
+요약: **현재 카드 스타일은 그대로 두고 “내용만 교체”**하는 것이 목표입니다.
+
+✅ 버튼 아이콘 요구사항 (텔레그램 로고 추가)
+
+기존 버튼 문구는 그대로 유지하고,
+버튼 안 텍스트 왼쪽에 텔레그램 로고 아이콘(SVG) 을 추가해주세요.
+
+아이콘 스타일:
+
+크기: w-4 h-4
+
+색상: currentColor (버튼 text-white와 통일)
+
+버튼 내부에서 텍스트 앞에 위치
+
+버튼 클래스에 gap-2 추가해 간격 확보
+
+PC/모바일 동일 스타일 적용
+
+🧩 최종 코드 예시 (그대로 복붙 가능)
+import Link from "next/link";
+import clsx from "clsx";
+
+const TELEGRAM_FREE_SIGNAL_URL = "https://t.me/kimp_ai";
+
+export default function MyAlertsCard({ className }: { className?: string }) {
+  return (
+    <div
+      className={clsx(
+        "h-full rounded-2xl bg-slate-900/80 border border-slate-800 px-4 py-4 flex flex-col",
+        className
+      )}
+    >
+      {/* 타이틀 */}
+      <div className="text-sm font-semibold text-slate-100 mb-2">
+        📡 실시간 시그널 채널
+      </div>
+
+      {/* 본문 */}
+      <div className="text-xs text-slate-300 space-y-1 mb-4 leading-relaxed">
+        <p>Binance 고래 매매 · 거래량 폭발 ·</p>
+        <p>BTC/ETH 김프 급변만 실시간 발송.</p>
+      </div>
+
+      {/* 버튼 */}
+      <Link
+        href={TELEGRAM_FREE_SIGNAL_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-auto inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-xs font-semibold text-white py-2"
+      >
+        {/* 텔레그램 로고 */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          className="w-4 h-4"
+        >
+          <path d="M9.04 15.34 8.9 18.5c.32 0 .46-.14.63-.31l1.5-1.43 3.11 2.28c.57.32.98.15 1.13-.53l2.05-9.62c.19-.81-.31-1.13-.86-.93L3.9 10.27c-.8.31-.79.76-.14.96l3.9 1.22 9.05-5.7c.43-.28.82-.13.5.15l-7.27 6.67Z" />
+        </svg>
+
+        텔레그램 채널 열기
+      </Link>
+    </div>
+  );
+}
