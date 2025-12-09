@@ -52,15 +52,6 @@ export function ProPredictionCard({ compact = false }: ProPredictionCardProps) {
           <div className="pointer-events-none absolute inset-0 bg-slate-900/18" />
         </div>
 
-        {/* 안내 텍스트 - 또렷하게 보이는 영역 */}
-        <p
-          className={`text-white/40 ${
-            compact ? "text-[10px] mt-2 mb-1" : "text-[11px] mt-3 mb-2"
-          }`}
-        >
-          * 전체 예측 데이터는 PRO 구독 시 이용할 수 있습니다.
-        </p>
-
         {/* 설명 텍스트 */}
         <p
           className={`dark:text-slate-400 light:text-slate-600 leading-snug ${

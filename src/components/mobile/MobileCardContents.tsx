@@ -74,11 +74,6 @@ export function ProForecastMobileContent() {
         <div className="pointer-events-none absolute inset-0 bg-slate-900/18" />
       </div>
 
-      {/* 안내 텍스트 */}
-      <p className="text-white/40 text-[10px] mb-1.5">
-        * 전체 예측 데이터는 PRO 구독 시 이용할 수 있습니다.
-      </p>
-
       {/* 설명 텍스트 */}
       <p className="text-[11px] dark:text-slate-400 light:text-slate-600 mb-2 leading-snug">
         최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.

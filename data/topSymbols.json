@@ -15,8 +15,8 @@
     "LUNAUSDT",
     "ASTERUSDT",
     "TRXUSDT",
-    "BCHUSDT",
     "PEPEUSDT",
+    "BCHUSDT",
     "LINKUSDT",
     "ENAUSDT",
     "AVAXUSDT",
@@ -61,6 +61,6 @@
     "SHIBUSDT",
     "ONDOUSDT"
   ],
-  "updatedAt": "2025-12-09T23:10:14.360Z",
+  "updatedAt": "2025-12-09T23:12:10.069Z",
   "count": 60
 }
