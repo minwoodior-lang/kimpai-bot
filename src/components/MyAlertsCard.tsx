@@ -14,18 +14,18 @@ export default function MyAlertsCard({ className }: { className?: string }) {
       </div>
 
       {/* 본문 */}
-      <p className="dark:text-slate-400 light:text-slate-600 leading-snug text-[10px] sm:text-xs mb-4 flex-1">
+      <p className="text-[10px] sm:text-xs mb-2 dark:text-slate-400 light:text-slate-600 leading-snug flex-1">
         Binance 고래 매매 · 거래량 폭발 · BTC/ETH 김프 급변만 실시간 발송.
       </p>
 
       {/* 버튼 */}
       <Link href={TELEGRAM_FREE_SIGNAL_URL} className="block mt-auto">
         <button
-          className="w-full bg-gradient-to-r from-[#8155FF] to-[#5D3DFF] dark:hover:from-[#7043FF] dark:hover:to-[#4C2FFF] light:hover:from-[#7043FF] light:hover:to-[#4C2FFF] transition-all h-10 rounded-lg font-semibold text-white text-xs sm:text-sm flex items-center justify-center gap-1"
-          onClick={(e) => {
-            window.open(TELEGRAM_FREE_SIGNAL_URL, "_blank");
-            e.preventDefault();
-          }}
+          className="w-full bg-gradient-to-r from-[#8155FF] to-[#5D3DFF]
+          dark:hover:from-[#7043FF] dark:hover:to-[#4C2FFF]
+          light:hover:from-[#7043FF] light:hover:to-[#4C2FFF]
+          transition-all h-10 rounded-lg
+          font-semibold text-white text-xs sm:text-sm flex items-center justify-center gap-1"
         >
           {/* 텔레그램 로고 */}
           <svg

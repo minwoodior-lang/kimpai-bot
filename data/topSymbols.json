@@ -15,8 +15,8 @@
     "LUNAUSDT",
     "TRXUSDT",
     "ASTERUSDT",
-    "PEPEUSDT",
     "BCHUSDT",
+    "PEPEUSDT",
     "LINKUSDT",
     "ENAUSDT",
     "AVAXUSDT",
@@ -51,8 +51,8 @@
     "PAXGUSDT",
     "XUSDUSDT",
     "ICPUSDT",
-    "NMRUSDT",
     "FILUSDT",
+    "NMRUSDT",
     "XLMUSDT",
     "STRKUSDT",
     "VIRTUALUSDT",
@@ -61,6 +61,6 @@
     "SHIBUSDT",
     "ONDOUSDT"
   ],
-  "updatedAt": "2025-12-09T22:46:26.688Z",
+  "updatedAt": "2025-12-09T22:50:23.382Z",
   "count": 60
 }
