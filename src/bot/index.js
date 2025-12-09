@@ -2,6 +2,16 @@ const { Telegraf } = require("telegraf");
 const cron = require("node-cron");
 require("dotenv").config();
 
+// 봇 활성화 여부 (환경변수로 제어: BOT_ENABLED=false 로 끌 수 있음)
+const BOT_ENABLED = process.env.BOT_ENABLED !== 'false';
+
+if (!BOT_ENABLED) {
+  console.log("🔴 봇이 비활성화되었습니다 (BOT_ENABLED=false)");
+  console.log("💡 봇을 다시 켜려면 환경변수에서 BOT_ENABLED를 삭제하거나 true로 설정하세요");
+  module.exports = { bot: null, startBot: () => Promise.resolve() };
+  return;
+}
+
 console.log("🤖 KimpAI Bot starting...", {
   pid: process.pid,
   env: process.env.NODE_ENV || "development",
@@ -25,7 +35,8 @@ const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 
 if (!BOT_TOKEN) {
   console.error("❌ TELEGRAM_BOT_TOKEN이 설정되지 않았습니다.");
-  process.exit(1);
+  module.exports = { bot: null, startBot: () => Promise.resolve() };
+  return;
 }
 
 const bot = new Telegraf(BOT_TOKEN);
