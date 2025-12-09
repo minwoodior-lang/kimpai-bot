@@ -1,0 +1,136 @@
+[전달문] — KimpAI FREE 알림 템플릿 적용 + FREE/PRO 기능 분리 구현 지시서
+🎯 목표
+
+KimpAI FREE 텔레그램 알림 메시지를 아래 최종 템플릿으로 전면 교체하고,
+FREE 버전은 시그널 요약(signal_line) 형태로만 보내고,
+PRO 버전만 AI 해석(ai_line / GPT) 을 사용하도록 구조를 분리해주세요.
+
+FREE 알림에는 절대 AI 해석을 붙이지 말고,
+PRO DM에서만 고급 AI 해석을 제공하도록 설계하세요.
+
+✅ 1) FREE 알림 템플릿 — 이 형식 그대로 적용
+🚨 [KimpAI FREE] 변동성 급등 감지 — {{symbol}}
+
+💰 현재가: ₩{{current_price}}
+📊 1h 거래량 변화: {{volume_change_1h}}%
+📈 1h 가격 변화: {{price_change_1h}}%
+🌏 국내–해외 스프레드: {{premium}}%
+📉 펀딩율: {{funding_rate}}%
+
+📡 시그널 요약
+{{signal_line}}
+# 예: “단기 변동성 증가가 감지되었습니다. 접근 시 유의가 필요합니다.”
+
+🔍 통계 기반 예측
+• 패턴 성공률: {{pattern_success_rate}}%
+• 예상 변동폭: ±{{pattern_range}}%
+
+🌐 KimpAI는 국내·해외 거래소 가격을 실시간으로 비교해
+김프·변동성·거래량을 자동 분석하는 **실시간 김프 모니터링 서비스**입니다.
+
+👉 **48h 예측 · 목표가 · 손절가 · 시장 리스크 등 고급 AI 해석은**
+KimpAI PRO DM에서 제공합니다.
+
+➡️ https://kimpai.io
+
+✅ 2) FREE와 PRO의 기능 구분을 명확하게 구현
+FREE
+
+AI(GPT) 사용 ❌
+
+signal_line 만 사용
+→ 예: “단기 변동성 증가가 감지되었습니다. 신중한 접근이 필요합니다.”
+
+데이터 소스:
+→ premiumTable.json, marketStats.json, prices.json
+
+PRO
+
+AI(GPT) 사용 O
+
+generateAiLine() 적용
+
+API_BASE_URL 로 실시간 데이터 사용
+
+상세 분석 포함
+→ 48h 예측, 목표가/손절가, 시장 리스크, 패턴 분석
+
+✅ 3) 수정해야 하는 파일
+
+아래 파일에서 FREE 메시지는 signal_line 사용, PRO 메시지는 ai_line 사용으로 분리해주세요.
+
+📁 src/bot/schedulers/
+
+freeAltScan.js → signal_line 사용 / ai_line 제거
+
+freeBtcScan.js → signal_line 사용 / ai_line 제거
+
+freeEthScan.js → signal_line 사용 / ai_line 제거
+
+📁 src/bot/messages/
+
+FREE 템플릿 전체 교체
+
+PRO 템플릿은 ai_line 유지
+
+📁 src/bot/utils/
+
+signal_line 생성 함수 추가
+
+ai_line 생성은 PRO 전용으로 유지
+
+✅ 4) FREE용 signal_line 생성 규칙
+
+FREE용 문구는 간단한 시그널 기반 글귀만 사용:
+
+예시:
+
+“단기 변동성 증가가 감지되었습니다. 접근 시 유의가 필요합니다.”
+
+“거래량이 증가하며 가격 변동 가능성이 커지고 있습니다.”
+
+“강한 매수세 감지 — 단기 변동성 확대 가능성이 있습니다.”
+
+절대 GPT 호출하지 마세요.
+
+✅ 5) PRO용 ai_line
+
+현재 generateAiLine() 유지
+
+PRO BTC, PRO Whale, PRO Risk에서만 사용
+
+FREE에서는 절대 호출하지 않도록 조건 분기 추가.
+
+📌 6) FREE 템플릿 적용 후 테스트 체크리스트
+
+텔레그램 FREE 채널에서 알림 발생 시:
+
+현재가, 거래량 변동, 가격 변동, 스프레드, 펀딩율 모두 kimpai.io 데이터 기반인지 확인
+
+AI 문장이 절대 들어가지 않는지 확인
+
+signal_line 정상 출력 확인
+
+PRO 명령어(/pro btc 등) 테스트:
+
+AI 해석(ai_line) 정상 출력
+
+premiumTable.json 기준 현재가 반영
+
+목표가/손절가 계산 정상
+
+FREE에서 TOP50 자동 스캔 정상 작동 확인
+
+🧩 요약 — Replit이 해야 할 작업
+
+FREE 템플릿 전면 교체
+
+FREE = signal_line
+
+PRO = ai_line
+
+GPT 사용을 PRO에만 제한
+
+모든 데이터는 kimpai.io API 기반으로 통일
+
+템플릿 메시지 정확히 출력되도록 필드 매핑

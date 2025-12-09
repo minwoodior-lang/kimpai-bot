@@ -1,6 +1,6 @@
 const axios = require("axios");
 const messages = require("../utils/messages");
-const { generateAiLine } = require("../utils/aiInterpret");
+const { generateSignalLine } = require("../utils/signalLine");
 
 const API_BASE = process.env.API_BASE_URL || process.env.API_URL || "http://localhost:5000";
 const CHANNEL_ID = process.env.TELEGRAM_CHANNEL_ID;
@@ -42,27 +42,25 @@ const freeAltScan = async (bot) => {
 
     for (const alt of topAlts) {
       try {
-        const payload = {
-          symbol: alt.symbol,
+        const signalLine = generateSignalLine("FREE_ALT", {
           price_change: alt.price_change,
           vol_change: alt.vol_change,
           premium: alt.premium,
-          fund: alt.fund,
-        };
-
-        const aiLine = await generateAiLine("FREE_ALT", payload);
+        });
 
         const messageData = {
           symbol: alt.symbol,
+          korean_price: alt.korean_price,
           vol_change: alt.vol_change,
           price_change: alt.price_change,
+          premium: alt.premium,
           fund: alt.fund,
-          ai_line: aiLine,
+          signal_line: signalLine,
           prob: alt.prob,
           range: alt.range,
         };
 
-        const message = messages.altSignal(messageData);
+        const message = messages.freeAltSignal(messageData);
         await bot.telegram.sendMessage(CHANNEL_ID, message);
         console.log(`✅ [FREE Scan] ${alt.symbol} 메시지 전송 완료`);
 
@@ -97,25 +95,23 @@ const freeBtcScan = async (bot) => {
       return;
     }
 
-    const payload = {
+    const signalLine = generateSignalLine("FREE_BTC", {
       current_kimp: data.current,
       prev_kimp: data.prev,
-      trend: data.trend,
-      change_24h: data.change_24h,
-    };
-
-    const aiLine = await generateAiLine("FREE_BTC", payload);
+    });
 
     const messageData = {
+      korean_price: data.korean_price,
       prev: data.prev,
       current: data.current,
       trend: data.trend,
-      ai_line: aiLine,
+      change_24h: data.change_24h,
+      signal_line: signalLine,
       prob: data.prob,
       future_move: data.future_move,
     };
 
-    const message = messages.btcKimp(messageData);
+    const message = messages.freeBtcSignal(messageData);
     await bot.telegram.sendMessage(CHANNEL_ID, message);
     console.log("✅ [FREE BTC Scan] 메시지 전송 완료");
   } catch (err) {
@@ -142,26 +138,24 @@ const freeEthScan = async (bot) => {
       return;
     }
 
-    const payload = {
+    const signalLine = generateSignalLine("FREE_ETH", {
       oi: data.oi,
       fund: data.fund,
-      bias: data.bias,
-      vol_prev: data.vol_prev,
-      vol_now: data.vol_now,
-    };
-
-    const aiLine = await generateAiLine("FREE_ETH", payload);
+    });
 
     const messageData = {
+      korean_price: data.korean_price,
       oi: data.oi,
       fund: data.fund,
       bias: data.bias,
       vol_prev: data.vol_prev,
       vol_now: data.vol_now,
-      ai_line: aiLine,
+      signal_line: signalLine,
+      prob: data.prob,
+      range: data.range,
     };
 
-    const message = messages.ethVolatility(messageData);
+    const message = messages.freeEthSignal(messageData);
     await bot.telegram.sendMessage(CHANNEL_ID, message);
     console.log("✅ [FREE ETH Scan] 메시지 전송 완료");
   } catch (err) {

@@ -1,10 +1,9 @@
 const axios = require("axios");
 const messages = require("../utils/messages");
-const { generateAiLine, FALLBACK_MESSAGES } = require("../utils/aiInterpret");
+const { generateSignalLine } = require("../utils/signalLine");
 
 const API_BASE = process.env.API_BASE_URL || process.env.API_URL || "http://localhost:5000";
 
-// /btc 명령어
 const btcCommand = async (ctx) => {
   try {
     let data;
@@ -17,13 +16,11 @@ const btcCommand = async (ctx) => {
       return;
     }
 
-    const payload = {
+    const signalLine = generateSignalLine("FREE_BTC", {
       current_kimp: data.current,
       prev_kimp: data.prev,
-      trend: data.trend,
-    };
-    const aiLine = await generateAiLine("FREE_BTC", payload);
-    data.ai_line = aiLine;
+    });
+    data.signal_line = signalLine;
 
     const message = messages.btcKimp(data);
     await ctx.reply(message);
@@ -33,7 +30,6 @@ const btcCommand = async (ctx) => {
   }
 };
 
-// /eth 명령어
 const ethCommand = async (ctx) => {
   try {
     let data;
@@ -46,15 +42,11 @@ const ethCommand = async (ctx) => {
       return;
     }
 
-    const payload = {
+    const signalLine = generateSignalLine("FREE_ETH", {
       oi: data.oi,
       fund: data.fund,
-      bias: data.bias,
-      vol_prev: data.vol_prev,
-      vol_now: data.vol_now,
-    };
-    const aiLine = await generateAiLine("FREE_ETH", payload);
-    data.ai_line = aiLine;
+    });
+    data.signal_line = signalLine;
 
     const message = messages.ethVolatility(data);
     await ctx.reply(message);
@@ -64,7 +56,6 @@ const ethCommand = async (ctx) => {
   }
 };
 
-// /alt {symbol} 명령어
 const altCommand = async (ctx) => {
   try {
     const args = ctx.message.text.split(" ");
@@ -85,15 +76,12 @@ const altCommand = async (ctx) => {
       return;
     }
 
-    const payload = {
-      symbol: data.symbol,
+    const signalLine = generateSignalLine("FREE_ALT", {
       price_change: data.price_change,
       vol_change: data.vol_change,
       premium: data.premium,
-      fund: data.fund,
-    };
-    const aiLine = await generateAiLine("FREE_ALT", payload);
-    data.ai_line = aiLine;
+    });
+    data.signal_line = signalLine;
 
     const message = messages.altSignal(data);
     await ctx.reply(message);
@@ -103,7 +91,6 @@ const altCommand = async (ctx) => {
   }
 };
 
-// /watchlist 명령어 (관심종목 조회)
 const watchlistCommand = async (ctx) => {
   const { getUserByChatId } = require("../utils/supabase");
   try {
@@ -120,7 +107,6 @@ const watchlistCommand = async (ctx) => {
   }
 };
 
-// /add_watchlist 명령어
 const addWatchlistCommand = async (ctx) => {
   const { addWatchlist } = require("../utils/supabase");
   try {
@@ -140,7 +126,6 @@ const addWatchlistCommand = async (ctx) => {
   }
 };
 
-// /remove_watchlist 명령어
 const removeWatchlistCommand = async (ctx) => {
   const { removeWatchlist } = require("../utils/supabase");
   try {
@@ -160,11 +145,9 @@ const removeWatchlistCommand = async (ctx) => {
   }
 };
 
-// /start 명령어
 const startCommand = async (ctx) => {
   const { upsertTelegramUserFromCtx } = require("../utils/supabase");
   
-  // 1:1 DM인 경우에만 유저 정보 Supabase에 저장
   const source = ctx.chat?.type === "private" ? "direct_dm" : "channel";
   await upsertTelegramUserFromCtx(ctx, source);
 
