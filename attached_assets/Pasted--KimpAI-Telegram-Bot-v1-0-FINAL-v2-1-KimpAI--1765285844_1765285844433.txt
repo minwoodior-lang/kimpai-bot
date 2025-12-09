@@ -1,0 +1,254 @@
+📦 KimpAI Telegram Bot v1.0 개발 전달문 – FINAL v2
+🎯 1. 목표
+
+KimpAI의 실시간 알트/김프 시그널을 **“리포트 스타일의 텔레그램 알림”**으로 제공하는 텔레봇을 개발한다.
+단순 수치 알림이 아니라:
+
+AI 분석
+
+과거 패턴 확률
+
+전략 가이드
+
+가 포함된 고급 분석 리포트를 자동으로 보내는 구조로 구현한다.
+
+💡 무료(FREE) 정책
+
+실시간 시장 감지
+
+시총 TOP 50 알트 자동 탐지
+
+AI 리포트 공식 텔레그램 채널에 자동 방송
+
+⭐ PRO 정책
+
+사용자 관심종목 = 모든 코인 가능 (잡알트 포함)
+
+관심종목마다 AI가 자동 감지 후 개인 DM 발송
+
+BTC 48시간 예측 / 고래 매집 / 과열 리스크 모두 PRO 제공
+
+웹사이트는 https://kimpai.io
+ 기준으로 안내
+
+🧱 2. 전체 봇 구조
+무료(FREE) 명령어
+
+/btc → BTC 김프 변화 감지 리포트
+
+/eth → ETH 변동성 증가 신호
+
+/alt {symbol} → TOP50 알트 1종 단기 분석
+
+PRO 명령어
+
+/pro_btc → BTC 48시간 예측 리포트
+
+/pro_whale {symbol} → 고래 매집 포착 리포트
+
+/pro_risk {symbol} → 과열·폭락 리스크 리포트
+
+자동 전송 구조
+구분	자동분석 대상	전송 위치
+FREE	시총 TOP 50 알트	KimpAI 공식 텔레그램 채널
+PRO	사용자가 등록한 관심종목(모든 코인)	사용자 개인 DM(chat_id)
+🔍 3. 데이터 입력(API 요구사항)
+
+KimpAI 백엔드(Replit API)에서 아래 데이터를 제공:
+
+실시간 국내/해외 시세
+
+김프 및 김프 변화율
+
+1h/4h 거래량 변화율
+
+펀딩율
+
+OI(미결제약정)
+
+실현손익(PL) 지표
+
+고래 지갑 입출금 (가능하면 제공)
+
+API 예시
+
+/api/bot/btc
+
+/api/bot/eth
+
+/api/bot/alts?limit=50
+
+/api/bot/signal/{symbol}
+
+/api/bot/pro/{symbol}
+
+🧠 4. 메시지 템플릿 (필수 적용)
+FREE 1 — BTC 김프 변화 감지
+📈 [KimpAI] BTC 김치 프리미엄 변화 감지
+
+— 지난 10분 변동: {{prev}}% → {{current}}%
+— 현재 김프: {{current}}%
+— 국내 가격이 해외보다 {{trend}}
+
+🧠 AI 해석:
+{{ai_line}}
+
+🔍 참고:
+과거 동일 패턴 발생 시 {{prob}}% 확률로 {{future_move}}% 추가 변동이 발생했습니다.
+
+FREE 2 — ETH 변동성 증가 신호
+⚠️ [KimpAI] ETH 변동성 증가 신호
+
+— OI 변화: {{oi}}%
+— Funding: {{fund}}% ({{bias}})
+— 변동폭: {{vol_prev}}% → {{vol_now}}%
+
+🧠 AI 해석:
+{{ai_line}}
+
+FREE 3 — TOP50 ALTS 자동 감지
+🚀 [KimpAI] {{SYMBOL}} 변동성 급등 감지
+
+— 1h 거래량: {{vol_change}}%
+— 가격 변화: {{price_change}}%
+— 펀딩율: {{fund}}%
+
+🧠 AI 분석:
+{{ai_line}}
+
+🔍 통계:
+동일 패턴 후 {{prob}}% 확률로 {{range}}% 움직임.
+
+🔒 PRO 1 — BTC 48시간 예측
+🔒 [KimpAI PRO] 48시간 BTC 예측 리포트
+
+— 현재 김프: {{kimp}}%
+— EA-Score: {{score}}/10
+— 롱·숏 비율: {{ls_ratio}}
+
+📈 예측:
+상승 확률 {{up_prob}}%
+예상 변동: {{min}}% ~ {{max}}%
+
+🧭 전략:
+저점: {{dp1}} / {{dp2}}
+익절: {{tp1}} / {{tp2}}
+
+🔒 PRO 2 — 고래 매집 포착
+🔒 [KimpAI PRO] 고래 매집 포착 — {{SYMBOL}}
+
+— 순입금: {{net_inflow}} {{SYMBOL}}
+— 평균 매수: ${{avg_entry}}
+— 매집 지속: {{duration}}
+
+🧠 결론:
+{{ai_line}}
+
+📌 확률:
+상승 확률 {{prob}}%
+변동 예상 {{range}}%
+
+🔒 PRO 3 — 알트 과열/폭락 리스크
+🔒 [KimpAI PRO] 과열 리스크 경고 — {{SYMBOL}}
+
+— 1h 거래량: {{vol}}%
+— 펀딩율: {{fund}}
+— PL 분석: {{pl_desc}}
+
+🧠 AI 판정:
+“{{pattern_name}}” 패턴  
+동일 조건에서 {{prob}}% 확률로 
+{{min}}% ~ {{max}}% 조정 발생.
+
+🧭 전략:
+· 신규 진입: {{entry}}
+· 기존 포지션: {{manage}}
+
+⚙️ 5. 구현 기술 명세
+A) Bot Framework
+
+Node.js + Telegraf.js (권장)
+or
+
+Python + python-telegram-bot
+
+B) 구조
+
+bot/index.js or bot/main.py
+
+Webhook or Long polling 방식 가능
+
+.env → BOT_TOKEN, CHANNEL_ID, API_URL 등록
+
+C) 스케줄러
+
+FREE: 10분마다 TOP50 자동 스캔 → CHANNEL_ID 로 메시지 전송
+
+PRO: 관심종목 5~10분마다 스캔 → 해당 유저 DM(chat_id)으로 전송
+
+D) PRO 잠금 처리
+
+잠금 시 아래 메시지 자동 추가:
+
+🔒 PRO 전용 기능입니다.
+자세히 보기: https://kimpai.io
+
+
+but 본문 텍스트는 그대로 보여주고 링크로 유도.
+
+🧭 6. Replit에서 필요한 기능
+
+가격/지표 제공용 API 엔드포인트 구축
+
+Supabase or Redis로 사용자 데이터 저장
+
+telegram_chat_id
+
+watchlist: ["SUI", "PEPE", "WIF", ...]
+
+스케줄러 등록:
+
+/cron/free-alt-scan
+
+/cron/pro-watchlist-scan
+
+🎨 7. 브랜드 규칙
+
+[KimpAI] prefix 고정
+
+AI 톤:
+
+한 줄 요약
+
+과거 패턴 확률
+
+전략 1~2줄
+
+무료 = 요약
+
+PRO = 고급 분석 + 전략 + 예측
+
+링크는 항상 → https://kimpai.io
+
+📌 8. 완료 기준 (Definition of Done)
+
+/btc, /eth 명령어 출력 정상
+
+/alt {symbol} → TOP50 즉시 분석 리포트
+
+FREE 자동 스캔 알림이 공식 채널로 정상 발송
+
+PRO 리포트(whale, risk, 48h 예측) 템플릿 출력 정상
+
+PRO 유저는 관심종목(모든 코인 가능) 등록 후
+→ 개별 DM 자동 알림 수신
+
+스케줄링 정상 작동
+
+🧑‍💻 9. 개발자 전달용 메시지
+
+아래 “KimpAI Telegram Bot v1.0 전달문 – FINAL v2” 기준으로 개발해 주세요.
+웹 주소는 https://kimpai.io
+ 입니다.
+무료는 공식 채널 자동 리포트, PRO는 사용자 개별 DM 자동 리포트 구조입니다.
+관심종목은 모든 코인 종목(잡알트 포함) 등록 가능해야 합니다.

@@ -24,7 +24,9 @@
     "sync:meta": "tsx scripts/syncMeta.ts",
     "sync:all": "npm run build:markets:all && npm run sync:meta",
     "sync:markets": "tsx scripts/syncMarkets.ts",
-    "validate": "tsx scripts/validateDataPipeline.ts"
+    "validate": "tsx scripts/validateDataPipeline.ts",
+    "bot:dev": "node src/bot/index.js",
+    "bot:start": "NODE_ENV=production node src/bot/index.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.86.0",
@@ -41,6 +43,7 @@
     "react-intersection-observer": "^10.0.0",
     "react-window": "^2.2.3",
     "sharp": "^0.34.5",
+    "telegraf": "^4.16.3",
     "tsx": "^4.21.0",
     "ws": "^8.18.3"
   },
