@@ -8,17 +8,17 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 - 상세한 설명 요구
 
 ### 최신 변경사항 (2024-12-09)
-**텔레그램 봇 kimpai.io 데이터 파이프라인 완전 통합:**
-- ✅ API_BASE_URL 환경변수 사용 (https://kimpai.io)
-- ✅ 모든 봇 파일에서 API_BASE_URL 우선 사용
-- ✅ PRO API 엔드포인트 실제 데이터 연결 (pro/btc.ts, pro/whale, pro/risk)
-- ✅ PRO 명령어 mock 데이터 완전 제거
-- ✅ Supabase users 테이블 로직 수정 (새 필드 지원)
-- ✅ PRO 메시지 템플릿에 실제 가격 표시
+**FREE/PRO 기능 분리 완료:**
+- ✅ FREE = signal_line만 사용 (GPT 미사용)
+- ✅ PRO = ai_line (GPT-4o-mini) 사용
+- ✅ FREE 템플릿 전면 교체 (새 형식 적용)
+- ✅ signalLine.js 유틸 함수 추가 (시그널 기반 문구 생성)
+- ✅ FREE 스캔/명령어에서 generateAiLine 완전 제거
 
 **이전 변경사항:**
-- FREE 텔레그램 알림 실제 데이터 파이프라인 연결
-- AI 해석 유틸 함수 추가 (GPT-4o-mini 연동)
+- API_BASE_URL 환경변수 사용 (https://kimpai.io)
+- PRO API 엔드포인트 실제 데이터 연결 (pro/btc.ts, pro/whale, pro/risk)
+- Supabase users 테이블 로직 수정 (새 필드 지원)
 
 ### ⛔ CRITICAL: BACKEND PIPELINE FROZEN (v3.4.29)
 **NEVER modify without explicit user permission:**
@@ -90,11 +90,18 @@ CREATE TABLE users (
 );
 ```
 
-### AI 해석 기능
-**파일:** `src/bot/utils/aiInterpret.js`
+### 시그널/AI 해석 기능
+
+**FREE (signal_line):**
+- **파일:** `src/bot/utils/signalLine.js`
+- GPT 미사용 — 패턴 기반 시그널 문구 생성
+- 변동성, 거래량, 김프 변화에 따른 조건부 문구 선택
+- 예: "단기 변동성 증가가 감지되었습니다. 접근 시 유의가 필요합니다."
+
+**PRO (ai_line):**
+- **파일:** `src/bot/utils/aiInterpret.js`
 - GPT-4o-mini 모델 사용
-- 신호 타입별 맞춤 프롬프트 (FREE_BTC, FREE_ALT, FREE_ETH, PRO_*)
-- Fallback 메시지 지원 (API 키 없을 때)
+- PRO 명령어 전용 (pro_btc, pro_whale, pro_risk)
 - **설정 필요:** `OPENAI_API_KEY` 환경변수
 
 ### External Dependencies
