@@ -1,0 +1,502 @@
+📮 [전달문] — KimpAI FREE 텔레그램 “실시간 시그널 + 차트” 전면 재구축 지시서
+🎯 0. 핵심 원칙 (제일 중요)
+
+기존 웹 서비스 파이프라인은 절대 수정 금지
+
+아래 파일/로직은 읽기 전용으로만 사용하고, 구조/스키마/동작을 변경하면 안 됩니다.
+
+예시 (변경 금지):
+
+workers/priceWorker.ts (가격 수집)
+
+workers/statsWorker.ts (거래량/시장 통계)
+
+scripts/refreshExchangeMarkets.ts (거래소 마켓/심볼 수집)
+
+scripts/buildMasterSymbols.ts, syncMetadata.ts
+
+data/prices.json
+
+data/premiumTable.json
+
+data/marketStats.json
+
+Supabase 테이블 구조 (exchange_markets, prices, market_stats, …)
+
+/api/premium/table-filtered
+
+/api/global-metrics, 기타 홈 화면에서 쓰는 API
+
+프론트: PremiumTable.tsx, TodayPremiumSection, HomeLayout 등
+
+👉 새 작업은 모두 src/bot/ / src/lib/ / src/workers/ 쪽에 추가하는 방향으로만 진행해 주세요.
+👉 기존 웹/홈/코인테이블/마켓 API는 “그대로 둔 채로”, 봇이 그 데이터를 “읽어서 사용하는 구조”가 이상적입니다.
+
+PRO 봇 / PRO DM / AI 호출 로직은 손대지 않음
+
+/pro_* 명령어, PRO 전용 GPT 분석, 48h 예측 등은 지금 상태 유지.
+
+이번 작업은 FREE 텔레그램 공개 채널만 대상입니다.
+
+FREE 쪽에서는 GPT / OpenAI / AI 호출 절대 금지
+
+FREE 메시지는 모두 데이터 기반 시그널 + 보조지표 + 차트로만 구성합니다.
+
+1️⃣ 기존 FREE 로직 정리 (삭제/비활성 대상)
+
+아래 FREE 관련 로직은 전부 제거 or 비활성화 해주세요.
+
+FREE ALT 스캔 (10분 주기 TOP50 알트 스캔)
+
+예: src/bot/schedulers/freeAltScan.js 또는 유사 파일
+
+“TOP50 알트 급등/급락/변동성” 뽑아서 최대 3개 보내던 로직 → ❌ 전부 제거
+
+FREE BTC 김프 스캔 (30분 주기)
+
+예: src/bot/schedulers/freeBtcScan.js 또는 유사 파일
+
+메시지 제목: [KimpAI FREE] BTC 김프 변화 감지 사용하던 템플릿 → ❌ 더 이상 사용 금지
+
+FREE 텍스트 중 아래 문구 관련 템플릿 전부 삭제
+
+KimpAI FREE 라벨이 붙은 기존 BTC/ALT 템플릿
+
+48h 예측·목표가·손절가·시장 리스크 등 AI 해석 안내 문구
+
+FREE 관련해서 GPT / OpenAI / generateAiLine 호출하는 부분이 있다면 전부 제거
+
+✅ 정리:
+
+FREE = 데이터 기반 실시간 시그널 + 보조지표 + 차트
+
+PRO = AI 해석 / 48h 예측 / 목표가 / 손절가
+
+2️⃣ 새 FREE 시그널 구조 (3종만 유지)
+
+FREE 텔레그램 채널에서 앞으로 보내는 알림은 딱 3종류입니다.
+
+김프 급변 시그널 (BTC, ETH 전용)
+
+고래 활동 시그널 (Binance Spot USDT 마켓 전 심볼)
+
+분봉 스파이크 시그널 (Binance Spot USDT 마켓 전 심볼)
+
+모든 시그널에는:
+
+실시간 데이터 기준
+
+심볼별/타입별 쿨다운
+
+고래/스파이크에는 1시간 차트 기반 보조지표 + 차트 이미지(PNG) 포함
+
+3️⃣ 김프 급변 시그널 (BTC / ETH)
+3-1. 데이터 소스 (기존 파이프라인 재사용, 변경 없음)
+
+국내 가격:
+
+Upbit BTC/KRW, ETH/KRW
+
+기존 data/premiumTable.json 또는 /api/premium/table-filtered에서 읽기
+
+해외 가격:
+
+Binance BTC/USDT, ETH/USDT
+
+동일하게 premiumTable.json 또는 가격 파이프라인에서 읽기
+
+환율:
+
+기존 프리미엄 계산에 사용하는 fxRate (USD/KRW) 그대로 사용
+
+👉 중요한 점:
+김프 계산 로직/데이터는 현재 KimpAI 홈·코인테이블에서 쓰는 파이프라인을 그대로 재사용해야 합니다.
+새롭게 별도 김프 계산을 만들지 말고, 기존 premiumTable의 premium 값을 사용해 주세요.
+(READ ONLY)
+
+3-2. 계산 규칙
+
+심볼: BTC, ETH 두 개만
+
+각 심볼에 대해:
+
+premiumNow = premium(now)               // 현재 premium (%)
+premiumPrev5m = premium(5분 전)        // 5분 전 premium (%)
+diff = premiumNow - premiumPrev5m
+
+
+트리거 조건 (상수 분리):
+
+Math.abs(diff) >= 0.4 또는
+
+premiumNow >= 1.0 또는 premiumNow <= -1.0
+
+3-3. 텔레그램 텍스트 템플릿 (최종)
+🌏 {{symbol}} 김프 급변 감지
+
+💰 현재가: ₩{{price_krw}} / ${{price_usd}}
+🌏 현재 김프: {{premium_now}}% (5분 전: {{premium_prev}}%)
+↳ 5분 변화: {{premium_diff}}%p / 24h 가격 변동: {{change_24h}}%
+
+📊 시장 상황
+- 국내 가격이 해외보다 더 {{korean_bias}} 움직이고 있는 구간입니다.
+- 단기적으로 국내 {{flow_desc}}세가 우위입니다.
+
+────────────
+📡 KimpAI는 국내·해외 거래소 가격을 실시간으로 비교해
+김프·거래량·변동성 시그널만 자동으로 감지합니다.
+
+👉 실시간 김프 차트·상세 데이터: kimpai.io
+
+
+korean_bias: "빠르게 상승" 또는 "빠르게 하락"
+
+flow_desc: "매수" 또는 "매도"
+
+3-4. 쿨다운
+
+BTC, ETH 각각 10분 쿨다운
+
+if (!canSend('KIMP', symbol, 10 * 60_000)) return;
+
+4️⃣ 고래 활동 시그널 (Binance Spot USDT 전 심볼)
+4-1. 별도 WebSocket or 기존 WS 재사용 (단, 기존 파이프라인 건드리지 말 것)
+
+Binance Spot USDT 마켓 전체를 대상으로 합니다.
+
+고래/스파이크용 WS는 **웹/코인테이블에서 사용 중인 WS 파이프라인과 “완전히 분리된 별도 모듈”**로 구성해 주세요.
+
+예: src/workers/binanceSignalEngine.ts 안에서 자체 WebSocket 관리
+
+기존 Render Proxy / priceWorker의 WS 연결 구조는 손대지 않습니다.
+
+4-2. Trade 집계 구조 (1분 버킷)
+type TradeBucket = {
+  windowStart: number;  // floor to minute (Binance serverTime 기준)
+  buyNotional: number;  // Σ price*qty (매수)
+  sellNotional: number; // Σ price*qty (매도)
+};
+
+
+Binance aggTrade 이벤트를 사용하고:
+
+isBuyerMaker === false → Aggressive BUY (매수 체결)
+
+isBuyerMaker === true → Aggressive SELL (매도 체결)
+
+심볼별로 1분 버킷을 관리하고, 1분이 끝나는 시점에 직전 버킷 기준으로 고래 판단.
+
+4-3. 기준 거래량 (baseline)
+
+baselineVolumeUsdt[symbol] = 최근 N분(예: 20분) 1분 버킷 거래량 평균
+
+저장은 메모리 Map로 충분 (봇 재시작 시 초기화 허용 가능)
+
+4-4. 고래 조건
+const volume1m = buyNotional + sellNotional;
+const ratio = volume1m / baselineVolumeUsdt[symbol];
+const buyRatio = buyNotional / volume1m;
+const sellRatio = sellNotional / volume1m;
+
+
+공통 최소 조건:
+
+volume1m >= 10_000 USDT
+
+ratio >= 5
+
+고래 매수:
+
+buyRatio >= 0.6
+
+고래 매도:
+
+sellRatio >= 0.6
+
+24h 가격 변동/거래액은 가능하면 기존 marketStats.json 또는 Binance 24h Ticker를 사용 (READ ONLY)
+
+4-5. 1시간 차트 보조 지표 (READ ONLY 캔들 기반)
+
+별도 파일: src/lib/indicators/ta.ts
+
+export function calcEMA(candles: Candle[], period: number): number;
+export function calcRSI(candles: Candle[], period: number): number;
+export function calcMACD(candles: Candle[]): { macd: number; signal: number };
+export function getHeikinAshiCandle(c: Candle): '양봉🟢' | '음봉🔴';
+
+
+1시간 차트 캔들은 Binance Kline(kline_1h) WebSocket or REST에서 가져오되,
+👉 여기서도 기존 priceWorker/statsWorker를 건드리지 말고 별도 경로로 수집해 주세요.
+
+계산 결과 텍스트 예시:
+
+EMA200:
+
+ema200_trend: "상승 추세🟢" / "하락 추세🔴" / "횡보⚪"
+
+RSI:
+
+rsi_value: 예: 64.8
+
+MACD:
+
+macd_signal: "골든크로스🟢" / "데드크로스🔴" / "중립⚪"
+
+Heikin-Ashi:
+
+ha_candle: "양봉🟢" 또는 "음봉🔴"
+
+4-6. 텔레그램 텍스트 템플릿 (고래 매수/매도 공통)
+🐋 {{symbol}} 고래 {{side}} 활동 감지 [BINANCE] {{side_emoji}}
+
+⏱ 감지 구간: 최근 1분
+📊 체결 규모: {{volume_usdt}} USDT ({{volume_token}} {{base}})
+↳ 1분 거래량: 최근 {{baseline_window}}분 평균 대비 {{volume_ratio}}배
+
+💰 현재가: ${{price_usdt}}
+📊 24h 가격 변동: {{change_24h}}% / 24h 거래액: {{volume_24h_usdt}} USDT
+
+📉 보조 지표 (1시간 차트)
+- 200EMA: {{ema200_trend}}
+- RSI: {{rsi_value}}
+- MACD: {{macd_signal}}
+- 캔들: {{ha_candle}}
+
+🔁 마지막 고래 알림: {{last_alert_ago}}
+
+────────────
+📡 KimpAI는 Binance 실시간 체결 데이터를 기반으로
+고래 매수·매도 및 거래량 폭발 구간만 자동 추적합니다.
+
+👉 실시간 차트와 시그널: kimpai.io
+
+
+side: "매수" / "매도"
+
+side_emoji: 🟢 / 🔴
+
+4-7. 쿨다운
+
+심볼별 30분 쿨다운
+
+if (!canSend('WHALE', symbol, 30 * 60_000)) return;
+
+5️⃣ 분봉 스파이크 시그널 (가격·거래량 폭발)
+5-1. 1분 캔들 기준 (Binance Kline 1m)
+
+별도 WS or REST로 kline_1m 캔들 수집
+(기존 priceWorker와 분리)
+
+const prev = candles1m[symbol][len - 2];
+const curr = candles1m[symbol][len - 1];
+const priceChange1m = ((curr.close - prev.close) / prev.close) * 100;
+const avgVolume = avg(last 20 candles volume);
+const volumeRatio = curr.volume / avgVolume;
+
+5-2. 조건
+
+Math.abs(priceChange1m) >= 2 (%)
+
+volumeRatio >= 3
+
+5-3. 고래와 중복 처리
+
+같은 심볼이 같은 1분 구간에 고래 조건도 만족하는 경우:
+
+고래 시그널만 발송, 스파이크 시그널은 스킵
+
+5-4. 텍스트 템플릿
+
+급등
+
+⚡ {{symbol}} 단기 스파이크 급등 감지
+
+⏱ 감지 구간: 최근 1분
+💰 현재가: ${{price_usdt}}
+📈 가격 변화: {{price_change_1m}}% (1분) / {{change_24h}}% (24h)
+📊 거래량: 최근 {{baseline_window}}분 평균 대비 {{volume_ratio}}배
+
+📉 보조 지표 (1시간 차트)
+- 200EMA: {{ema200_trend}}
+- RSI: {{rsi_value}}
+- MACD: {{macd_signal}}
+- 캔들: {{ha_candle}}
+
+────────────
+📡 KimpAI는 Binance 1분봉 데이터를 기반으로
+단기 급등·급락 및 거래량 폭발 구간만 자동 포착합니다.
+
+👉 실시간 차트와 시그널: kimpai.io
+
+
+급락
+
+🔻 {{symbol}} 단기 스파이크 급락 감지
+
+⏱ 감지 구간: 최근 1분
+💰 현재가: ${{price_usdt}}
+📉 가격 변화: {{price_change_1m}}% (1분) / {{change_24h}}% (24h)
+📊 거래량: 최근 {{baseline_window}}분 평균 대비 {{volume_ratio}}배
+
+📉 보조 지표 (1시간 차트)
+- 200EMA: {{ema200_trend}}
+- RSI: {{rsi_value}}
+- MACD: {{macd_signal}}
+- 캔들: {{ha_candle}}
+
+────────────
+📡 KimpAI는 Binance 1분봉 데이터를 기반으로
+단기 급등·급락 및 거래량 폭발 구간만 자동 포착합니다.
+
+👉 실시간 차트와 시그널: kimpai.io
+
+5-5. 쿨다운
+
+심볼별 10분 쿨다운
+
+if (!canSend('SPIKE', symbol, 10 * 60_000)) return;
+
+6️⃣ 차트 이미지 생성 + 메시지 전송
+6-1. 의존성
+npm install chart.js chartjs-node-canvas chartjs-chart-financial
+
+6-2. 렌더러 (서버 사이드 캔들 + EMA)
+
+src/lib/chart/renderSignalChart.ts 예시:
+
+import { ChartJSNodeCanvas } from 'chartjs-node-canvas';
+import 'chartjs-chart-financial';
+
+const width = 800;
+const height = 400;
+const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height });
+
+export async function renderSignalChart(params: {
+  symbol: string;
+  candles: Candle[];      // 최근 100개 1분봉 or 5분봉
+  ema200?: number[];
+}) {
+  const labels = params.candles.map(c =>
+    new Date(c.openTime).toISOString().slice(11, 16)
+  );
+
+  const candleData = params.candles.map(c => ({
+    o: c.open,
+    h: c.high,
+    l: c.low,
+    c: c.close,
+  }));
+
+  const configuration: any = {
+    type: 'candlestick',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: `${params.symbol} Price`,
+          data: candleData,
+        },
+        ...(params.ema200
+          ? [{
+              type: 'line',
+              label: 'EMA 200',
+              data: params.ema200,
+            }]
+          : []),
+      ],
+    },
+    options: {
+      responsive: false,
+      animation: false,
+      plugins: {
+        legend: { display: true },
+      },
+      scales: {
+        x: { display: true },
+        y: { display: true },
+      },
+    },
+  };
+
+  const buffer = await chartJSNodeCanvas.renderToBuffer(configuration);
+  return buffer; // PNG buffer
+}
+
+6-3. 텔레그램 전송
+
+고래/스파이크 시그널에서는 차트 + 텍스트를 함께 전송:
+
+const candles = candles1m[symbol].slice(-100);
+const emaSeries = buildEmaSeries(candles, 200);
+
+const png = await renderSignalChart({
+  symbol,
+  candles,
+  ema200: emaSeries,
+});
+
+await bot.sendPhoto(FREE_CHANNEL_ID, png, {
+  caption: textMessage,
+});
+
+
+차트 렌더가 실패할 경우:
+
+Fallback: sendMessage로 텍스트만 발송 (봇이 죽지 않도록 try/catch 처리)
+
+7️⃣ 스케줄러 & 락 구조
+7-1. 공통 락 유틸
+// src/bot/state/freeScanLock.ts
+const locks = new Map<string, number>();
+
+export function canSend(type: string, symbol: string, cooldownMs: number): boolean {
+  const key = `${type}:${symbol}`;
+  const now = Date.now();
+  const expireAt = locks.get(key);
+  if (expireAt && expireAt > now) return false;
+  locks.set(key, now + cooldownMs);
+  return true;
+}
+
+7-2. 스케줄링
+
+src/bot/index.js 내:
+
+Binance WS/데이터 수집은 프로세스 시작 시 1회 초기화
+
+시그널 검사는 10초~30초 간격으로 “직전 1분” 기준으로 수행
+
+setInterval(async () => {
+  await runKimpSignals();    // BTC/ETH 김프
+  await runWhaleSignals();   // 고래
+  await runSpikeSignals();   // 스파이크
+}, 10_000);
+
+8️⃣ 마무리 체크리스트
+
+웹/홈/코인테이블에 영향 없는지 확인
+
+/api/premium/table-filtered, /api/global-metrics 응답 구조 변경 X
+
+data/premiumTable.json, prices.json, marketStats.json 구조 변경 X
+
+심볼 수집 스크립트 (refreshExchangeMarkets.ts, buildMasterSymbols.ts) 변경 X
+
+npm run validate (있다면) 통과
+
+FREE 텔레그램 채널에서 확인할 것
+
+더 이상 [KimpAI FREE] BTC 김프 변화 감지 템플릿이 오지 않을 것
+
+김프 급변 / 고래 / 스파이크 3종 시그널만 도착
+
+고래·스파이크 메시지는 차트 이미지 + 텍스트로 도착
+
+같은 심볼에서 10분/30분 내 중복 발송 안 되는지 확인
+
+PRO DM 동작 유지
+
+기존 /pro_* 명령어, AI 분석 메시지, PRO 시그널 등이 그대로 동작해야 합니다.
+
+여기까지가 기존 파이프라인 절대 건드리지 않고,
+FREE 텔레그램을 실시간 실전 시그널 + 차트 채널로 바꾸는 전체 설계입니다.
