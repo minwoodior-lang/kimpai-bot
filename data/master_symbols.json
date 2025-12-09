@@ -183,6 +183,12 @@
     "name_en": "MyNeighborAlice"
   },
   {
+    "symbol": "ALLO",
+    "cmc_slug": null,
+    "name_ko": "알로라",
+    "name_en": "Allora"
+  },
+  {
     "symbol": "ALPHA",
     "cmc_slug": "alpha",
     "name_ko": "스텔라",
@@ -2998,6 +3004,12 @@
     "icon_path": "/icons/UPBIT/SPURS.png"
   },
   {
+    "symbol": "STABLE",
+    "cmc_slug": null,
+    "name_ko": "스테이블",
+    "name_en": "Stable"
+  },
+  {
     "symbol": "STAT",
     "cmc_slug": "stat",
     "name_ko": "스탯",
@@ -3033,8 +3045,8 @@
   {
     "symbol": "STRAX",
     "cmc_slug": "stratis",
-    "name_ko": "스트라티스",
-    "name_en": "Stratis",
+    "name_ko": "저트라",
+    "name_en": "Xertra",
     "icon_path": "/icons/UPBIT/STRAX.png"
   },
   {

@@ -2493,6 +2493,13 @@
   },
   {
     "exchange": "COINONE",
+    "base_symbol": "STABLE",
+    "quote_symbol": "",
+    "name_ko": "스테이블",
+    "name_en": "Stable"
+  },
+  {
+    "exchange": "COINONE",
     "base_symbol": "LA",
     "quote_symbol": "",
     "name_ko": "라그랑주",

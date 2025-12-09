@@ -348,8 +348,8 @@
     "market_code": "BTC-STRAX",
     "base_symbol": "STRAX",
     "quote_symbol": "BTC",
-    "name_ko": "스트라티스",
-    "name_en": "Stratis"
+    "name_ko": "저트라",
+    "name_en": "Xertra"
   },
   {
     "exchange": "UPBIT",
@@ -5236,8 +5236,8 @@
     "market_code": "KRW-STRAX",
     "base_symbol": "STRAX",
     "quote_symbol": "KRW",
-    "name_ko": "스트라티스",
-    "name_en": "Stratis"
+    "name_ko": "저트라",
+    "name_en": "Xertra"
   },
   {
     "exchange": "UPBIT",

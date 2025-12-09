@@ -240,6 +240,16 @@
     "isDomestic": true
   },
   {
+    "id": "BITHUMB:KRW-ALLO",
+    "exchange": "BITHUMB",
+    "market": "KRW-ALLO",
+    "base": "ALLO",
+    "quote": "KRW",
+    "name_ko": "알로라",
+    "name_en": "Allora",
+    "isDomestic": true
+  },
+  {
     "id": "BITHUMB:KRW-ALT",
     "exchange": "BITHUMB",
     "market": "KRW-ALT",
@@ -3685,8 +3695,8 @@
     "market": "KRW-STRAX",
     "base": "STRAX",
     "quote": "KRW",
-    "name_ko": "스트라티스",
-    "name_en": "Stratis",
+    "name_ko": "저트라",
+    "name_en": "Xertra",
     "isDomestic": true
   },
   {
@@ -7787,6 +7797,16 @@
     "quote": "KRW",
     "name_ko": "토트넘 홋스퍼",
     "name_en": "Tottenham Hotspur",
+    "isDomestic": true
+  },
+  {
+    "id": "COINONE:STABLE-KRW",
+    "exchange": "COINONE",
+    "market": "STABLE-KRW",
+    "base": "STABLE",
+    "quote": "KRW",
+    "name_ko": "스테이블",
+    "name_en": "Stable",
     "isDomestic": true
   },
   {
@@ -13875,8 +13895,8 @@
     "market": "BTC-STRAX",
     "base": "STRAX",
     "quote": "BTC",
-    "name_ko": "스트라티스",
-    "name_en": "Stratis",
+    "name_ko": "저트라",
+    "name_en": "Xertra",
     "isDomestic": true
   },
   {
@@ -13885,8 +13905,8 @@
     "market": "KRW-STRAX",
     "base": "STRAX",
     "quote": "KRW",
-    "name_ko": "스트라티스",
-    "name_en": "Stratis",
+    "name_ko": "저트라",
+    "name_en": "Xertra",
     "isDomestic": true
   },
   {

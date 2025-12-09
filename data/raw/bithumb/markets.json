@@ -2140,8 +2140,8 @@
     "market_code": "KRW-STRAX",
     "base_symbol": "KRW",
     "quote_symbol": "STRAX",
-    "name_ko": "스트라티스",
-    "name_en": "Stratis"
+    "name_ko": "저트라",
+    "name_en": "Xertra"
   },
   {
     "exchange": "BITHUMB",
@@ -3222,6 +3222,14 @@
     "quote_symbol": "RESOLV",
     "name_ko": "리졸브",
     "name_en": "Resolv"
+  },
+  {
+    "exchange": "BITHUMB",
+    "market_code": "KRW-ALLO",
+    "base_symbol": "KRW",
+    "quote_symbol": "ALLO",
+    "name_ko": "알로라",
+    "name_en": "Allora"
   },
   {
     "exchange": "BITHUMB",
