@@ -5,6 +5,16 @@ import { exec } from "child_process";
 import { createChatServer } from "./src/server/chatServer";
 import { startPriceWorker } from "./workers/priceWorker";
 
+const startTelegramBot = async () => {
+  try {
+    const { startBot } = require("./src/bot/index.js");
+    await startBot();
+    console.log("✅ Telegram Bot integrated with server");
+  } catch (err: any) {
+    console.error("❌ Telegram Bot start failed:", err.message);
+  }
+};
+
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -31,7 +41,7 @@ async function bootstrap() {
     });
 
     // 워커는 서버 부팅 후 비동기로 실행
-    setTimeout(() => {
+    setTimeout(async () => {
       try {
         console.log("Starting background workers...");
         createChatServer(server);
@@ -43,6 +53,9 @@ async function bootstrap() {
           });
         });
         console.log("All background workers initialized");
+        
+        // Telegram Bot 시작 (워커 초기화 후)
+        await startTelegramBot();
       } catch (err) {
         console.error("Worker start failed:", err);
       }

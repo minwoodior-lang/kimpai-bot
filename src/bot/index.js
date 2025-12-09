@@ -40,26 +40,30 @@ console.log("📅 스케줄러 등록 중...");
 // FREE 스캔: 10분마다 TOP50 ALT 스캔
 cron.schedule("*/10 * * * *", () => {
   console.log("⏰ FREE ALT 스캔 트리거 (10분마다)");
-  freeAltScan(bot).catch(console.error);
+  freeAltScan(bot).catch((err) => console.error("FREE ALT 스캔 오류:", err.message));
 });
+console.log("✅ FREE ALT 스캔 등록 완료 (10분마다)");
 
 // FREE 스캔: 30분마다 BTC 김프 감시
 cron.schedule("*/30 * * * *", () => {
   console.log("⏰ FREE BTC 스캔 트리거 (30분마다)");
-  freeBtcScan(bot).catch(console.error);
+  freeBtcScan(bot).catch((err) => console.error("FREE BTC 스캔 오류:", err.message));
 });
+console.log("✅ FREE BTC 스캔 등록 완료 (30분마다)");
 
 // PRO 스캔: 5분마다 사용자 관심종목 스캔
 cron.schedule("*/5 * * * *", () => {
   console.log("⏰ PRO 관심종목 스캔 트리거 (5분마다)");
-  proWatchlistScan(bot).catch(console.error);
+  proWatchlistScan(bot).catch((err) => console.error("PRO Watchlist 스캔 오류:", err.message));
 });
+console.log("✅ PRO 관심종목 스캔 등록 완료 (5분마다)");
 
 // PRO 스캔: 6시간마다 BTC 48시간 예측 전송
 cron.schedule("0 */6 * * *", () => {
   console.log("⏰ PRO BTC 예측 스캔 트리거 (6시간마다)");
-  proBtcForcastScan(bot).catch(console.error);
+  proBtcForcastScan(bot).catch((err) => console.error("PRO BTC Forecast 스캔 오류:", err.message));
 });
+console.log("✅ PRO BTC 예측 스캔 등록 완료 (6시간마다)");
 
 // === 봇 시작 ===
 const startBot = async () => {
