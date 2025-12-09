@@ -497,10 +497,11 @@ const PremiumTableRow = React.memo(
           {/* 거래액(일) */}
           <td
             className="
-              md:w-[130px]
+          md:w-[130px]
               px-[0.5px] sm:px-1.5 md:px-3 lg:px-4
               py-0.5 sm:py-1.5 md:py-3
-              text-right whitespace-nowrap pr-0
+              text-right whitespace-nowrap
+              pr-[6px] md:pr-0
               text-[8px] md:text-[14px]
             "
           >
@@ -511,6 +512,7 @@ const PremiumTableRow = React.memo(
                   ? formatVolumeKRW(row.volume24hForeignKrw)
                   : "-"
               }
+              size="compact"
             />
           </td>
         </tr>
@@ -1300,7 +1302,7 @@ export default function PremiumTable({
                 {/* 김프 */}
                 <th
                   className="
-                    px-1 sm:px-2 md:px-3 lg:px-4
+                    px-[1px] sm:px-1.5 md:px-3 lg:px-4
                     py-2.5 text-right font-medium whitespace-nowrap
                     cursor-pointer hover:text-white transition-colors min-h-11
                   "
@@ -1310,10 +1312,11 @@ export default function PremiumTable({
                   <SortIcon columnKey="premiumRate" />
                 </th>
 
+
                 {/* 전일대비 */}
                 <th
                   className="
-                    px-1 sm:px-2 md:px-3 lg:px-4
+                    px-[1px] sm:px-1.5 md:px-3 lg:px-4
                     py-2.5 text-right font-medium whitespace-nowrap
                     cursor-pointer hover:text-white transition-colors min-h-11
                   "

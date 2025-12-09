@@ -27,21 +27,14 @@ export function formatKrwDynamic(
   const abs = Math.abs(value);
   let decimals = 0;
 
-  if (abs >= 1000) {
-    decimals = 0;
-  } else if (abs >= 1) {
-    decimals = 2;
-  } else if (abs >= 0.1) {
-    decimals = 3;
-  } else if (abs >= 0.01) {
-    decimals = 4;
-  } else if (abs >= 0.001) {
-    decimals = 5;
-  } else {
-    decimals = 6;
-  }
+  if (abs >= 1000) decimals = 0;
+  else if (abs >= 1) decimals = 2;
+  else if (abs >= 0.1) decimals = 3;
+  else if (abs >= 0.01) decimals = 4;
+  else if (abs >= 0.001) decimals = 5;
+  else decimals = 6;
 
-  let formatted = new Intl.NumberFormat("ko-KR", {
+  const formatted = new Intl.NumberFormat("ko-KR", {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   }).format(abs);
@@ -97,7 +90,7 @@ export function formatKrwDiffByBase(
   else decimals = 6;
 
   const absDiff = Math.abs(diff);
-  let formatted = new Intl.NumberFormat("ko-KR", {
+  const formatted = new Intl.NumberFormat("ko-KR", {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   }).format(absDiff);
@@ -126,6 +119,7 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   const topTimerRef = useRef<NodeJS.Timeout | null>(null);
   const bottomTimerRef = useRef<NodeJS.Timeout | null>(null);
 
+  // 상단 값 깜빡임
   useEffect(() => {
     if (isUnlisted) {
       prevTopRef.current = null;
@@ -136,24 +130,19 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
     const prevTop = prevTopRef.current;
 
     if (prevTop !== null && currentTop !== prevTop) {
-      if (topTimerRef.current) {
-        clearTimeout(topTimerRef.current);
-      }
+      if (topTimerRef.current) clearTimeout(topTimerRef.current);
       setTopFlash(currentTop > prevTop ? "up" : "down");
-      topTimerRef.current = setTimeout(() => {
-        setTopFlash(null);
-      }, 400);
+      topTimerRef.current = setTimeout(() => setTopFlash(null), 400);
     }
 
     prevTopRef.current = currentTop;
 
     return () => {
-      if (topTimerRef.current) {
-        clearTimeout(topTimerRef.current);
-      }
+      if (topTimerRef.current) clearTimeout(topTimerRef.current);
     };
   }, [topValue, isUnlisted]);
 
+  // 하단 값 깜빡임
   useEffect(() => {
     if (isUnlisted) {
       prevBottomRef.current = null;
@@ -164,33 +153,31 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
     const prevBottom = prevBottomRef.current;
 
     if (prevBottom !== null && currentBottom !== prevBottom) {
-      if (bottomTimerRef.current) {
-        clearTimeout(bottomTimerRef.current);
-      }
+      if (bottomTimerRef.current) clearTimeout(bottomTimerRef.current);
       setBottomFlash(currentBottom > prevBottom ? "up" : "down");
-      bottomTimerRef.current = setTimeout(() => {
-        setBottomFlash(null);
-      }, 400);
+      bottomTimerRef.current = setTimeout(() => setBottomFlash(null), 400);
     }
 
     prevBottomRef.current = currentBottom;
 
     return () => {
-      if (bottomTimerRef.current) {
-        clearTimeout(bottomTimerRef.current);
-      }
+      if (bottomTimerRef.current) clearTimeout(bottomTimerRef.current);
     };
   }, [bottomValue, isUnlisted]);
 
   const topFormatted = topValue != null ? formatTop(topValue) : "-";
   const bottomFormatted = bottomValue != null ? formatBottom(bottomValue) : "-";
 
-  // 🔻 여기서 모바일 폰트/폭 확 줄임 (md 이상은 기존 수준 유지)
+  // ✅ 모바일 공통 + SE(≤375px)에서만 한 단계 더 줄이기
   const getTopClass = () => {
     const base =
       "block text-right whitespace-nowrap tabular-nums " +
-      "text-[10px] md:text-[14px] font-medium " +
-      "min-w-[70px] md:min-w-[92px]";
+      // 폰트: 모바일 10px, md 이상 14px, SE급(≤375px) 9px
+      "text-[10px] md:text-[14px] max-[375px]:text-[9px] " +
+      "font-medium " +
+      // 폭: 모바일 60px, md 이상 92px, SE급 52px
+      "min-w-[60px] md:min-w-[92px] max-[375px]:min-w-[52px]";
+
     if (topValue === null) return `${base} text-gray-500`;
     if (topFlash === "up") return `${base} price-flash-up`;
     if (topFlash === "down") return `${base} price-flash-down`;
@@ -200,8 +187,11 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   const getBottomClass = () => {
     const base =
       "block text-right whitespace-nowrap tabular-nums " +
-      "text-[8px] md:text-[11px] " +
-      "min-w-[70px] md:min-w-[92px]";
+      // 폰트: 모바일 8px, md 이상 11px, SE급 7px
+      "text-[8px] md:text-[11px] max-[375px]:text-[7px] " +
+      // 폭: 모바일 60px, md 이상 92px, SE급 52px
+      "min-w-[60px] md:min-w-[92px] max-[375px]:min-w-[52px]";
+
     if (bottomValue === null) return `${base} text-gray-500`;
     if (bottomFlash === "up") return `${base} price-flash-up`;
     if (bottomFlash === "down") return `${base} price-flash-down`;

@@ -40,16 +40,16 @@ export default function TwoLineCell({
 
   const topColor = isUnlisted ? "text-gray-500" : line1Color;
 
-  // 모바일에서 숫자/폭 축소, md 이상은 기존 유지
+  // ✅ 모바일: min-w 60px, SE(≤375px)에서 52px까지, md 이상: 128px 유지
   const topBaseClass =
     "block text-right whitespace-nowrap tabular-nums " +
-    "min-w-[70px] md:min-w-[128px] " +
-    "text-[10px] md:text-[14px] font-medium";
+    "min-w-[60px] md:min-w-[128px] max-[375px]:min-w-[52px] " +
+    "text-[10px] md:text-[14px] max-[375px]:text-[9px] font-medium";
 
   const bottomBaseClass =
     "block text-right whitespace-nowrap tabular-nums " +
-    "min-w-[70px] md:min-w-[128px] " +
-    "text-[8px] md:text-[11px]";
+    "min-w-[60px] md:min-w-[128px] max-[375px]:min-w-[52px] " +
+    "text-[8px] md:text-[11px] max-[375px]:text-[7px]";
 
   if (isUnlisted) {
     return (
