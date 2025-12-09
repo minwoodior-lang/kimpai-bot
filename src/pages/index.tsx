@@ -234,10 +234,10 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setMobileCardTab("pro")}
-                className={`flex-1 py-2.5 px-3 rounded-lg font-semibold text-[11px] transition-all ${
+                className={`flex-1 py-2.5 px-3 rounded-lg font-semibold text-[11px] transition-colors ${
                   mobileCardTab === "pro"
-                    ? "bg-indigo-600 text-white border-2 border-yellow-500/60"
-                    : "bg-slate-800 text-slate-300 hover:bg-slate-700 border-2 border-yellow-500/30"
+                    ? "bg-indigo-600 text-white"
+                    : "bg-slate-800 text-slate-300 hover:bg-slate-700"
                 }`}
               >
                 🔒 PRO 예측

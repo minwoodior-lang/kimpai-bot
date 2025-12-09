@@ -55,7 +55,7 @@ export function ProPredictionCard({ compact = false }: ProPredictionCardProps) {
         {/* 설명 텍스트 */}
         <p
           className={`dark:text-slate-400 light:text-slate-600 leading-snug ${
-            compact ? "text-[9px] sm:text-[10px] mb-1.5" : "text-[10px] sm:text-xs mb-2"
+            compact ? "text-[9px] sm:text-[10px] mt-2 mb-1.5" : "text-[10px] sm:text-xs mt-4 mb-2"
           }`}
         >
           최근 30일 기준, 이 예측은 김프 2% 이상 급변 구간의 90% 이상을 사전에 포착했습니다.
