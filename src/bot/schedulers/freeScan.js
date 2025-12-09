@@ -1,12 +1,19 @@
 const axios = require("axios");
 const messages = require("../utils/messages");
 const { generateSignalLine } = require("../utils/signalLine");
+const { floorToMinutesBucket } = require("../utils/timeBuckets");
+const { setLock, hasLock } = require("../state/freeScanLock");
 
 const API_BASE = process.env.API_BASE_URL || process.env.API_URL || "http://localhost:5000";
 const CHANNEL_ID = process.env.TELEGRAM_CHANNEL_ID;
 
 const recentAlerts = new Map();
 const COOLDOWN_COUNT = 3;
+
+const ALT_SCAN_INTERVAL_MIN = 10;
+const BTC_SCAN_INTERVAL_MIN = 30;
+const ALT_LOCK_TTL_MS = ALT_SCAN_INTERVAL_MIN * 60 * 1000;
+const BTC_LOCK_TTL_MS = BTC_SCAN_INTERVAL_MIN * 60 * 1000;
 
 function shouldSkipCoin(symbol) {
   const count = recentAlerts.get(symbol) || 0;
@@ -30,8 +37,17 @@ const freeAltScan = async (bot) => {
     return;
   }
 
+  const now = new Date();
+  const bucket = floorToMinutesBucket(now, ALT_SCAN_INTERVAL_MIN);
+  const lockKey = `FREE_ALT_${bucket}`;
+
+  if (hasLock(lockKey)) {
+    console.log(`[FREE ALT Scan] 이미 이 시간대(${bucket})에 발송됨. 중복 방지로 스킵`);
+    return;
+  }
+
   try {
-    console.log("[FREE Scan] TOP50 알트 스캔 시작...");
+    console.log("[FREE Scan] TOP50 알트 스캔 시작...", { bucket, pid: process.pid });
 
     let alts = [];
     try {
@@ -96,10 +112,12 @@ const freeAltScan = async (bot) => {
 
     if (toSend.length === 0) {
       console.log("[FREE Scan] No coins matched thresholds");
+      setLock(lockKey, ALT_LOCK_TTL_MS);
       return;
     }
 
-    console.log(`[FREE Scan] 발송 대상: ${toSend.map(t => `${t.type}:${t.coin.symbol}`).join(", ")}`);
+    setLock(lockKey, ALT_LOCK_TTL_MS);
+    console.log(`[FREE Scan] 발송 대상: ${toSend.map(t => `${t.type}:${t.coin.symbol}`).join(", ")} (락 설정됨)`);
 
     for (const { type, coin } of toSend) {
       try {
@@ -147,8 +165,17 @@ const freeBtcScan = async (bot) => {
     return;
   }
 
+  const now = new Date();
+  const bucket = floorToMinutesBucket(now, BTC_SCAN_INTERVAL_MIN);
+  const lockKey = `FREE_BTC_${bucket}`;
+
+  if (hasLock(lockKey)) {
+    console.log(`[FREE BTC Scan] 이미 이 시간대(${bucket})에 발송됨. 중복 방지로 스킵`);
+    return;
+  }
+
   try {
-    console.log("[FREE BTC Scan] BTC 김프 스캔 시작...");
+    console.log("[FREE BTC Scan] BTC 김프 스캔 시작...", { bucket, pid: process.pid });
 
     let data;
     try {
@@ -182,7 +209,8 @@ const freeBtcScan = async (bot) => {
 
     const message = messages.freeBtcSignal(messageData);
     await bot.telegram.sendMessage(CHANNEL_ID, message);
-    console.log("✅ [FREE BTC Scan] 메시지 전송 완료");
+    setLock(lockKey, BTC_LOCK_TTL_MS);
+    console.log("✅ [FREE BTC Scan] 메시지 전송 완료 (락 설정됨)");
   } catch (err) {
     console.error("[FREE BTC Scan] 오류:", err.message);
   }

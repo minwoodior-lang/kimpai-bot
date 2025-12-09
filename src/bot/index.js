@@ -2,6 +2,12 @@ const { Telegraf } = require("telegraf");
 const cron = require("node-cron");
 require("dotenv").config();
 
+console.log("🤖 KimpAI Bot starting...", {
+  pid: process.pid,
+  env: process.env.NODE_ENV || "development",
+  timestamp: new Date().toISOString(),
+});
+
 // 명령어들
 const freeCommands = require("./commands/free");
 const proCommands = require("./commands/pro");
