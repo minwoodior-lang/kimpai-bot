@@ -8,25 +8,23 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 - 상세한 설명 요구
 
 ### 최신 변경사항 (2024-12-09)
-**FREE 텔레그램 실시간 시그널 + 차트 전면 재구축:**
-- ✅ 기존 FREE ALT/BTC 스캔 삭제 → 새 시그널 시스템으로 대체
-- ✅ **3종 시그널만 유지:**
-  1. 김프 급변 (BTC/ETH): 5분 변화 ±0.4%p 또는 절대값 ±1%
-  2. 고래 활동 (Binance Spot): 1분 거래량 5배 이상, 매수/매도 비중 60%+
-  3. 분봉 스파이크: 1분 가격 ±2%, 거래량 3배+
-- ✅ **보조지표 추가:** EMA200, RSI(14), MACD, Heikin-Ashi 캔들
-- ✅ **차트 이미지 전송:** PNG 차트 + 텍스트 메시지
-- ✅ **쿨다운 시스템:** 김프 10분, 고래 30분, 스파이크 10분
-- ✅ **별도 Binance WebSocket 엔진:** 기존 파이프라인과 완전 분리
+**FREE 텔레그램 시그널 시스템 v2.0:**
+- ✅ **2종 시그널만 유지** (스파이크 시그널 제거):
+  1. 김프 급변 (BTC/ETH): 5분 변화 ±0.35%p 또는 절대값 ±1%
+  2. 고래 활동 (Binance Spot): 1분 거래량 4.5배 이상, 매수/매도 비중 60%+, 최소 10K USDT
+- ✅ **Python mplfinance 차트:** Heikin-Ashi 5분봉, SMA20, EMA200, RSI(14), MACD
+- ✅ **Binance TOP 60 심볼:** 24h 거래량 기준 자동 선택, 15분마다 업데이트
+- ✅ **쿨다운 시스템:** 김프 10분, 고래 30분
+- ✅ **차트 해상도:** 1200x600px, KST 시간대
 - ✅ FREE에서 GPT/AI 호출 완전 제거
-- ✅ 30초마다 시그널 검사
 
-**새 파일 구조:**
+**파일 구조:**
+- `src/chart/priceChart.py` - Python mplfinance 차트 생성기
+- `src/bot/utils/binanceSymbols.js` - TOP 60 심볼 자동 선택
 - `src/workers/binanceSignalEngine.js` - Binance WS 시그널 엔진
 - `src/lib/indicators/ta.js` - 보조지표 계산기
-- `src/lib/chart/renderSignalChart.js` - 차트 렌더러
-- `src/bot/schedulers/freeSignals.js` - 새 FREE 시그널 스케줄러
-- `src/bot/utils/freeSignalTemplates.js` - 시그널 템플릿 3종
+- `src/bot/schedulers/freeSignals.js` - FREE 시그널 스케줄러 (고래 + 김프)
+- `src/bot/utils/freeSignalTemplates.js` - 시그널 템플릿 2종
 
 **이전 변경사항:**
 - API_BASE_URL 환경변수 사용 (https://kimpai.io)
@@ -62,10 +60,11 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 **Telegram Bot v2.0:**
 - **Framework:** Telegraf.js + setInterval (30초)
 - **Commands:** 10개 (FREE 7개 + PRO 3개)
-- **FREE 시그널:** 김프 급변 / 고래 활동 / 분봉 스파이크 (30초마다 검사)
+- **FREE 시그널:** 김프 급변 + 고래 활동 (2종만, 30초마다 검사)
+- **심볼 선택:** Binance TOP 60 (24h 거래량 기준, 15분마다 갱신)
 - **PRO 스캔:** 관심종목 5분, BTC 예측 6시간
 - **보조지표:** EMA200, RSI, MACD, Heikin-Ashi
-- **차트:** PNG 이미지 생성 (chart.js + chartjs-node-canvas)
+- **차트:** Python mplfinance (1200x600px, 5분봉 50개, KST)
 - **AI 해석:** GPT-4o-mini (PRO 전용)
 - **Data:** Supabase `users` 테이블
 
