@@ -78,8 +78,12 @@ const startBot = async () => {
     process.once("SIGINT", () => bot.stop("SIGINT"));
     process.once("SIGTERM", () => bot.stop("SIGTERM"));
   } catch (err) {
-    console.error("❌ 봇 시작 오류:", err);
-    process.exit(1);
+    if (err.response?.error_code === 409) {
+      console.warn("⚠️ 다른 봇 인스턴스가 이미 실행 중입니다. 스케줄러는 계속 작동합니다.");
+      console.warn("⚠️ 프로덕션 환경에서는 하나의 인스턴스만 실행해야 합니다.");
+    } else {
+      console.error("❌ 봇 시작 오류:", err.message);
+    }
   }
 };
 

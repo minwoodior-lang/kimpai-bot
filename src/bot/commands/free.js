@@ -16,13 +16,25 @@ const btcCommand = async (ctx) => {
       return;
     }
 
-    const signalLine = generateSignalLine("FREE_BTC", {
-      current_kimp: data.current,
-      prev_kimp: data.prev,
-    });
-    data.signal_line = signalLine;
+    let signalType = "volatility";
+    if (parseFloat(data.current) > parseFloat(data.prev) + 0.3) {
+      signalType = "up";
+    } else if (parseFloat(data.current) < parseFloat(data.prev) - 0.3) {
+      signalType = "down";
+    }
 
-    const message = messages.btcKimp(data);
+    const signalLine = generateSignalLine(signalType);
+    
+    const messageData = {
+      current_price_krw: data.korean_price,
+      current_price_usdt: data.global_price,
+      prev: data.prev,
+      current: data.current,
+      change_24h: data.change_24h,
+      signal_line: signalLine,
+    };
+
+    const message = messages.btcKimp(messageData);
     await ctx.reply(message);
   } catch (err) {
     console.error("/btc error:", err);
@@ -42,13 +54,20 @@ const ethCommand = async (ctx) => {
       return;
     }
 
-    const signalLine = generateSignalLine("FREE_ETH", {
+    const signalLine = generateSignalLine("volatility");
+    
+    const messageData = {
+      current_price_krw: data.korean_price,
+      current_price_usdt: data.global_price,
       oi: data.oi,
       fund: data.fund,
-    });
-    data.signal_line = signalLine;
+      bias: data.bias,
+      vol_prev: data.vol_prev,
+      vol_now: data.vol_now,
+      signal_line: signalLine,
+    };
 
-    const message = messages.ethVolatility(data);
+    const message = messages.ethVolatility(messageData);
     await ctx.reply(message);
   } catch (err) {
     console.error("/eth error:", err);
@@ -76,14 +95,28 @@ const altCommand = async (ctx) => {
       return;
     }
 
-    const signalLine = generateSignalLine("FREE_ALT", {
-      price_change: data.price_change,
-      vol_change: data.vol_change,
-      premium: data.premium,
-    });
-    data.signal_line = signalLine;
+    const priceChange = parseFloat(data.price_change_1h || data.price_change || 0);
+    let signalType = "volatility";
+    if (priceChange >= 3) {
+      signalType = "up";
+    } else if (priceChange <= -3) {
+      signalType = "down";
+    }
 
-    const message = messages.altSignal(data);
+    const signalLine = generateSignalLine(signalType);
+    
+    const messageData = {
+      symbol: data.symbol,
+      current_price_krw: data.korean_price,
+      current_price_usdt: data.usdt_price || data.global_price,
+      volume_change_1h: data.volume_change_1h || data.vol_change || "0",
+      price_change_1h: data.price_change_1h || data.price_change || "0",
+      premium: data.premium || "0",
+      funding_rate: data.funding_rate || data.fund || "0",
+      signal_line: signalLine,
+    };
+
+    const message = messages.altSignal(messageData);
     await ctx.reply(message);
   } catch (err) {
     console.error("/alt error:", err);
@@ -153,7 +186,7 @@ const startCommand = async (ctx) => {
 
   const message = `🤖 KimpAI 텔레그램 봇에 오신 것을 환영합니다!
 
-📊 실시간 김프 분석 및 AI 기반 암호화폐 트레이딩 신호를 제공합니다.
+📊 실시간 김프 분석 및 시그널 알림을 제공합니다.
 
 💡 무료(FREE) 명령어:
 /btc - BTC 김프 변화 감지

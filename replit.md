@@ -8,12 +8,21 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 - 상세한 설명 요구
 
 ### 최신 변경사항 (2024-12-09)
-**FREE/PRO 기능 분리 완료:**
+**FREE 텔레그램 알림 시스템 전면 재구현:**
+- ✅ FREE 템플릿 3종 교체 (단기 급등/단기 급락/변동성 확대)
+- ✅ signal_line 규칙 단순화 (3가지 고정 문구: up/down/volatility)
+- ✅ 10분 스캔: 급등 1개 + 급락 1개 + 변동성 1개 = 최대 3개 발송
+- ✅ 조건 미충족 시 알림 없음 (No spam)
+- ✅ 중복 방지: 동일 심볼 3회 연속 감지 시 임시 제외 (1시간 쿨다운)
+- ✅ **버그 수정:** price_change_1h ≠ volume_change_1h (분리 계산)
+- ✅ 현재가 표기: ₩KRW / $USD 동시 표시
+- ✅ 가짜 통계 필드 삭제 (pattern_success_rate, pattern_range)
+- ✅ FREE에서 GPT/AI 호출 완전 제거
+- ✅ 봇 409 충돌 오류 graceful 처리 (스케줄러는 계속 작동)
+
+**FREE/PRO 기능 분리:**
 - ✅ FREE = signal_line만 사용 (GPT 미사용)
 - ✅ PRO = ai_line (GPT-4o-mini) 사용
-- ✅ FREE 템플릿 전면 교체 (새 형식 적용)
-- ✅ signalLine.js 유틸 함수 추가 (시그널 기반 문구 생성)
-- ✅ FREE 스캔/명령어에서 generateAiLine 완전 제거
 
 **이전 변경사항:**
 - API_BASE_URL 환경변수 사용 (https://kimpai.io)
@@ -69,8 +78,8 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 - `/pro_whale {symbol}` - 고래 매집 감지 (실제 데이터)
 - `/pro_risk {symbol}` - 리스크 경고 (실제 데이터)
 
-**Auto-Scan:**
-- FREE ALT - 10분마다 TOP50 변동성 (조건 기반 상위 3개 선택)
+**Auto-Scan (v2.0):**
+- FREE ALT - 10분마다 TOP50 스캔 → 급등 1개 + 급락 1개 + 변동성 1개 (최대 3개, 조건 미충족 시 발송 안함)
 - FREE BTC - 30분마다 김프 변화
 - PRO Watchlist - 5분마다 관심종목 감시
 - PRO BTC Forecast - 6시간마다 48시간 예측
@@ -94,9 +103,15 @@ CREATE TABLE users (
 
 **FREE (signal_line):**
 - **파일:** `src/bot/utils/signalLine.js`
-- GPT 미사용 — 패턴 기반 시그널 문구 생성
-- 변동성, 거래량, 김프 변화에 따른 조건부 문구 선택
-- 예: "단기 변동성 증가가 감지되었습니다. 접근 시 유의가 필요합니다."
+- GPT 미사용 — 3가지 고정 시그널 문구
+- **up:** "매수 압력이 빠르게 유입되는 구간입니다. 추격 진입보다는 눌림·조정 구간을 기다리는 편이 안전합니다."
+- **down:** "단기 매도 압력이 강하게 나타나는 구간입니다. 보유 포지션의 리스크 관리가 중요한 시점입니다."
+- **volatility:** "위·아래 변동 폭이 커진 상태입니다. 레버리지·포지션 사이즈를 평소보다 줄이는 것을 권장합니다."
+
+**FREE 스캔 기준:**
+- 급등: price_change_1h >= +5%, volume_change_1h >= +100%
+- 급락: price_change_1h <= -5%, volume_change_1h >= +50%
+- 변동성: abs(price_change_1h) >= 3%, volume_change_1h >= +50%
 
 **PRO (ai_line):**
 - **파일:** `src/bot/utils/aiInterpret.js`

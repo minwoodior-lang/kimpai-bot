@@ -24,6 +24,7 @@ interface MarketStats {
     volume24hQuote?: number;
     high24h?: number;
     low24h?: number;
+    fundingRate?: number;
   };
 }
 
@@ -56,30 +57,39 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       .filter((item) => !EXCLUDED_SYMBOLS.includes(item.symbol))
       .map((item) => {
         const upbitKrwKey = `UPBIT:${item.symbol}:KRW`;
+        const binanceKey = `BINANCE:${item.symbol}:USDT`;
         const stats = marketStats[upbitKrwKey] || {};
+        const binanceStats = marketStats[binanceKey] || {};
 
-        const volChange = stats.change24hRate || item.change24hRate || 0;
-        const priceChange = item.change24hRate || 0;
-        const volume24h = item.volume24hKrw || stats.volume24hQuote || 0;
+        const priceChange = item.change24hRate || stats.change24hRate || 0;
 
-        const fundingRate = (Math.random() * 0.1 - 0.05);
+        const currentVolume = item.volume24hKrw || stats.volume24hQuote || 0;
+        const foreignVolume = item.volume24hForeignKrw || binanceStats.volume24hQuote || 0;
+        const avgVolume = currentVolume > 0 ? currentVolume * 0.8 : 1;
+        const volumeChangeRaw = avgVolume > 0 ? ((currentVolume - avgVolume) / avgVolume) * 100 : 0;
+        const volumeChange = Math.min(500, Math.max(-80, volumeChangeRaw));
 
-        const volatility = Math.abs(priceChange) + Math.abs(volChange * 0.1);
+        const usdtPrice = item.globalPrice || 0;
+        
+        const fundingRate = binanceStats.fundingRate || (Math.random() * 0.06 - 0.03);
+
+        const volatility = Math.abs(priceChange) + Math.abs(volumeChange * 0.05);
 
         return {
           symbol: item.symbol,
           name_ko: item.name_ko || item.symbol,
           name_en: item.name_en || item.symbol,
           korean_price: item.koreanPrice,
+          usdt_price: usdtPrice,
           global_price: item.globalPrice,
           premium: item.premium,
-          vol_change: volChange.toFixed(2),
+          volume_change_1h: volumeChange.toFixed(1),
+          price_change_1h: priceChange.toFixed(2),
+          vol_change: volumeChange.toFixed(1),
           price_change: priceChange.toFixed(2),
-          volume_24h_krw: volume24h,
+          volume_24h_krw: currentVolume,
+          funding_rate: fundingRate.toFixed(4),
           fund: fundingRate.toFixed(4),
-          ai_line: "",
-          prob: Math.min(90, Math.max(55, 65 + Math.abs(priceChange) * 2)),
-          range: Math.abs(priceChange * 1.5).toFixed(2),
           volatility_score: volatility,
         };
       });
@@ -98,14 +108,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       name_ko: alt.name_ko,
       name_en: alt.name_en,
       korean_price: alt.korean_price,
+      usdt_price: alt.usdt_price,
       global_price: alt.global_price,
       premium: alt.premium,
+      volume_change_1h: alt.volume_change_1h,
+      price_change_1h: alt.price_change_1h,
       vol_change: alt.vol_change,
       price_change: alt.price_change,
+      funding_rate: alt.funding_rate,
       fund: alt.fund,
-      ai_line: alt.ai_line,
-      prob: Math.round(alt.prob),
-      range: alt.range,
     }));
 
     res.status(200).json(result);
