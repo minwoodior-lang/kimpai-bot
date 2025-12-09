@@ -1,4 +1,4 @@
-modules = ["nodejs-20", "postgresql-16"]
+modules = ["nodejs-20", "postgresql-16", "python-3.11"]
 [agent]
 expertMode = true
 
@@ -72,7 +72,7 @@ localPort = 45553
 
 [nix]
 channel = "stable-25_05"
-packages = ["lsof", "jq", "libuuid"]
+packages = ["cairo", "ffmpeg-full", "freetype", "ghostscript", "glibcLocales", "gobject-introspection", "gtk3", "jq", "libuuid", "lsof", "pkg-config", "qhull", "tcl", "tk"]
 
 [userenv]
 

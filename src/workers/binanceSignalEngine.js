@@ -1,9 +1,10 @@
 const WebSocket = require('ws');
 const axios = require('axios');
+const { getTopSymbols, FALLBACK_SYMBOLS } = require('../bot/utils/binanceSymbols');
 
 const BASELINE_WINDOW = 20;
 const MIN_VOLUME_USDT = 10000;
-const WHALE_VOLUME_RATIO = 5;
+const WHALE_VOLUME_RATIO = 4.5;
 const SPIKE_PRICE_THRESHOLD = 2;
 const SPIKE_VOLUME_RATIO = 3;
 
@@ -317,6 +318,8 @@ function startKlineStream(symbols) {
   });
 }
 
+let currentSymbols = [];
+
 async function initialize() {
   if (isRunning) return;
   isRunning = true;
@@ -328,12 +331,20 @@ async function initialize() {
   
   await fetch24hTicker();
   
-  const topSymbols = ['btcusdt', 'ethusdt', 'bnbusdt', 'solusdt', 'xrpusdt', 
-                      'dogeusdt', 'adausdt', 'avaxusdt', 'shibusdt', 'dotusdt',
-                      'linkusdt', 'maticusdt', 'ltcusdt', 'uniusdt', 'atomusdt',
-                      'xlmusdt', 'nearusdt', 'aptusdt', 'arbusdt', 'opusdt'];
+  let topSymbols;
+  try {
+    topSymbols = await getTopSymbols();
+    console.log(`[BinanceSignal] Using TOP ${topSymbols.length} symbols by 24h volume`);
+  } catch (err) {
+    console.warn('[BinanceSignal] Failed to get TOP symbols, using fallback:', err.message);
+    topSymbols = FALLBACK_SYMBOLS;
+  }
   
-  for (const sym of topSymbols) {
+  currentSymbols = topSymbols.map(s => s.toLowerCase());
+  
+  const limit = Math.min(currentSymbols.length, 60);
+  for (let i = 0; i < limit; i++) {
+    const sym = currentSymbols[i];
     const klines = await fetchKlines(sym, '1h', 250);
     if (klines.length > 0) {
       candles1h.set(sym.toUpperCase().replace('USDT', ''), klines);
@@ -344,19 +355,29 @@ async function initialize() {
     }
   }
   
-  startAggTradeStream(topSymbols);
-  startKlineStream(topSymbols);
+  startAggTradeStream(currentSymbols.slice(0, 60));
+  startKlineStream(currentSymbols.slice(0, 60));
   
   setInterval(() => {
     cleanOldBuckets();
-    for (const sym of topSymbols) {
+    for (const sym of currentSymbols) {
       updateBaseline(sym.toUpperCase());
     }
   }, 60000);
   
   setInterval(fetch24hTicker, 5 * 60000);
   
-  console.log('[BinanceSignal] Signal engine initialized');
+  setInterval(async () => {
+    try {
+      const newSymbols = await getTopSymbols();
+      currentSymbols = newSymbols.map(s => s.toLowerCase());
+      console.log(`[BinanceSignal] Refreshed symbols: ${currentSymbols.length}`);
+    } catch (err) {
+      console.warn('[BinanceSignal] Symbol refresh failed:', err.message);
+    }
+  }, 15 * 60000);
+  
+  console.log(`[BinanceSignal] Signal engine initialized with ${currentSymbols.length} symbols`);
 }
 
 function stop() {

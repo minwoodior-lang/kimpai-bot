@@ -22,27 +22,23 @@ function kimpSignal(data) {
     price_usd,
     premium_now,
     premium_prev,
-    premium_diff,
-    change_24h,
-    korean_bias,
-    flow_desc
+    premium_diff
   } = data;
 
-  return `🌏 ${symbol} 김프 급변 감지
+  const diffSign = parseFloat(premium_diff) >= 0 ? '+' : '';
+  const emoji = parseFloat(premium_diff) >= 0 ? '📈' : '📉';
 
-💰 현재가: ₩${formatPrice(price_krw)} / $${formatPrice(price_usd)}
-🌏 현재 김프: ${premium_now}% (5분 전: ${premium_prev}%)
-↳ 5분 변화: ${premium_diff > 0 ? '+' : ''}${premium_diff}%p / 24h 가격 변동: ${change_24h}%
+  return `⚡ ${symbol} 김프 급변 감지
 
-📊 시장 상황
-- 국내 가격이 해외보다 더 ${korean_bias} 움직이고 있는 구간입니다.
-- 단기적으로 국내 ${flow_desc}세가 우위입니다.
+🇰🇷 국내가: ₩${formatNumber(price_krw)}
+🌍 해외가: $${formatPrice(price_usd)}
+${emoji} 김프: ${premium_now}%
 
-────────────
-📡 KimpAI는 국내·해외 거래소 가격을 실시간으로 비교해
-김프·거래량·변동성 시그널만 자동으로 감지합니다.
+⏱ 5분 변화: ${diffSign}${premium_diff}%p
 
-👉 실시간 김프 차트·상세 데이터: kimpai.io`;
+────────────────
+김프 급격 변동 구간 자동 추적 시스템.
+실시간 시그널: kimpai.io`;
 }
 
 function whaleSignal(data) {
@@ -65,28 +61,29 @@ function whaleSignal(data) {
     last_alert_ago
   } = data;
 
+  const ema200_emoji = ema200_trend === '상승' ? '🟢' : '🔴';
+  const macd_emoji = macd_signal === 'golden' || macd_signal === '상승' ? '🟢' : '🔴';
+  const candle_emoji = ha_candle === '양봉' ? '🟢' : '🔴';
+
   return `🐋 ${symbol} 고래 ${side} 활동 감지 [BINANCE] ${side_emoji}
 
 ⏱ 감지 구간: 최근 1분
-📊 체결 규모: ${formatNumber(volume_usdt)} USDT (${formatNumber(volume_token)} ${base})
-↳ 1분 거래량: 최근 ${baseline_window}분 평균 대비 ${volume_ratio.toFixed(1)}배
+💵 체결 규모: $${formatNumber(volume_usdt)} (${formatNumber(volume_token)} ${base})
+📊 거래량: 최근 ${baseline_window}분 평균 대비 ${volume_ratio.toFixed(1)}배
 
 💰 현재가: $${formatPrice(price_usdt)}
-📊 24h 가격 변동: ${change_24h}% / 24h 거래액: ${formatNumber(volume_24h_usdt)} USDT
+📊 24h 변동: ${change_24h}% / 거래액: ${formatNumber(volume_24h_usdt)} USDT
 
-📉 보조 지표 (1시간 차트)
-- 200EMA: ${ema200_trend}
+📉 보조지표 (1시간 차트)
+- 200EMA: ${ema200_trend} ${ema200_emoji}
 - RSI: ${rsi_value ? rsi_value.toFixed(1) : 'N/A'}
-- MACD: ${macd_signal}
-- 캔들: ${ha_candle}
+- MACD: ${macd_signal} ${macd_emoji}
+- 캔들: ${ha_candle} ${candle_emoji}
 
-🔁 마지막 고래 알림: ${last_alert_ago}
-
-────────────
+────────────────
 📡 KimpAI는 Binance 실시간 체결 데이터를 기반으로
-고래 매수·매도 및 거래량 폭발 구간만 자동 추적합니다.
-
-👉 실시간 차트와 시그널: kimpai.io`;
+고래 매수·매도 및 거래량 폭발 구간만 자동 분석합니다.
+실시간 시그널 & 차트: kimpai.io`;
 }
 
 function spikeUpSignal(data) {

@@ -1,24 +1,20 @@
 const axios = require("axios");
+const { execSync } = require("child_process");
+const fs = require("fs");
+const path = require("path");
 const { canSend, getLastAlertTime, setLastAlertTime, formatTimeAgo } = require("../state/freeScanLock");
 const templates = require("../utils/freeSignalTemplates");
-const { calcRSI, getEMA200Trend, getMACDSignal, getHeikinAshiCandle, buildEmaSeries } = require("../../lib/indicators/ta");
+const { calcRSI, getEMA200Trend, getMACDSignal, getHeikinAshiCandle } = require("../../lib/indicators/ta");
 const binanceEngine = require("../../workers/binanceSignalEngine");
-
-let renderSignalChart = null;
-try {
-  renderSignalChart = require("../../lib/chart/renderSignalChart").renderSignalChart;
-} catch (err) {
-  console.warn("[FreeSignals] Chart rendering not available:", err.message);
-}
+const { getTopSymbols, startAutoUpdate, getSymbolsWithoutSuffix } = require("../utils/binanceSymbols");
 
 const API_BASE = process.env.API_BASE_URL || process.env.API_URL || "http://localhost:5000";
 const CHANNEL_ID = process.env.TELEGRAM_CHANNEL_ID;
 
 const KIMP_COOLDOWN_MS = 10 * 60 * 1000;
 const WHALE_COOLDOWN_MS = 30 * 60 * 1000;
-const SPIKE_COOLDOWN_MS = 10 * 60 * 1000;
 
-const KIMP_DIFF_THRESHOLD = 0.4;
+const KIMP_DIFF_THRESHOLD = 0.35;
 const KIMP_ABSOLUTE_THRESHOLD = 1.0;
 
 const kimpHistory = new Map();
@@ -49,6 +45,35 @@ function getPremium5minAgo(symbol) {
   }
   
   return history[0].premium;
+}
+
+async function generatePythonChart(symbol) {
+  const scriptPath = path.join(__dirname, "../../chart/priceChart.py");
+  
+  if (!fs.existsSync(scriptPath)) {
+    console.warn("[Chart] Python script not found");
+    return null;
+  }
+  
+  try {
+    const result = execSync(`python ${scriptPath} ${symbol}USDT 5m`, {
+      encoding: "utf-8",
+      timeout: 30000,
+      cwd: process.cwd()
+    });
+    
+    const chartPath = result.trim();
+    
+    if (chartPath && fs.existsSync(chartPath)) {
+      console.log(`[Chart] Generated: ${chartPath}`);
+      return chartPath;
+    }
+    
+    return null;
+  } catch (err) {
+    console.error(`[Chart] Generation failed for ${symbol}:`, err.message);
+    return null;
+  }
 }
 
 async function runKimpSignals(bot) {
@@ -83,24 +108,34 @@ async function runKimpSignals(bot) {
       if (!shouldTrigger) continue;
       if (!canSend('KIMP', symbol, KIMP_COOLDOWN_MS)) continue;
 
-      const koreanBias = diff > 0 ? "빠르게 상승" : "빠르게 하락";
-      const flowDesc = diff > 0 ? "매수" : "매도";
-
       const messageData = {
         symbol,
         price_krw: coin.domesticPrice || coin.korean_price || 0,
         price_usd: coin.foreignPrice || coin.global_price || 0,
         premium_now: premiumNow.toFixed(2),
         premium_prev: premiumPrev.toFixed(2),
-        premium_diff: diff.toFixed(2),
-        change_24h: (coin.change24h || coin.change_24h || 0).toFixed(2),
-        korean_bias: koreanBias,
-        flow_desc: flowDesc
+        premium_diff: diff.toFixed(2)
       };
 
       const message = templates.kimpSignal(messageData);
-      await bot.telegram.sendMessage(CHANNEL_ID, message);
-      console.log(`✅ [KIMP] ${symbol} 김프 급변 시그널 전송 (${diff.toFixed(2)}%p)`);
+      
+      try {
+        const chartPath = await generatePythonChart(symbol);
+        if (chartPath) {
+          await bot.telegram.sendPhoto(CHANNEL_ID, { source: chartPath }, { caption: message });
+          fs.unlinkSync(chartPath);
+        } else {
+          await bot.telegram.sendMessage(CHANNEL_ID, message);
+        }
+        console.log(`✅ [KIMP] ${symbol} 김프 급변 시그널 전송 (${diff.toFixed(2)}%p)`);
+      } catch (sendErr) {
+        console.error(`[KIMP] ${symbol} 전송 실패:`, sendErr.message);
+        try {
+          await bot.telegram.sendMessage(CHANNEL_ID, message);
+        } catch (fallbackErr) {
+          console.error(`[KIMP] ${symbol} 텍스트 전송도 실패:`, fallbackErr.message);
+        }
+      }
     }
   } catch (err) {
     console.error("[KIMP Signal] Error:", err.message);
@@ -111,11 +146,10 @@ async function runWhaleSignals(bot) {
   if (!CHANNEL_ID) return;
 
   try {
-    const topSymbols = ['BTC', 'ETH', 'BNB', 'SOL', 'XRP', 'DOGE', 'ADA', 'AVAX', 
-                        'SHIB', 'DOT', 'LINK', 'MATIC', 'LTC', 'UNI', 'ATOM',
-                        'XLM', 'NEAR', 'APT', 'ARB', 'OP'];
+    const topSymbols = await getTopSymbols();
+    const symbolsWithoutSuffix = topSymbols.map(s => s.replace('USDT', ''));
 
-    for (const symbol of topSymbols) {
+    for (const symbol of symbolsWithoutSuffix) {
       const whaleData = binanceEngine.checkWhaleCondition(symbol);
       if (!whaleData) continue;
       
@@ -157,14 +191,10 @@ async function runWhaleSignals(bot) {
       const message = templates.whaleSignal(messageData);
 
       try {
-        if (renderSignalChart && candles1h.length >= 50) {
-          const emaSeries = buildEmaSeries(candles1h, 50);
-          const png = await renderSignalChart({
-            symbol,
-            candles: candles1h.slice(-100),
-            ema200: emaSeries.slice(-100)
-          });
-          await bot.telegram.sendPhoto(CHANNEL_ID, { source: png }, { caption: message });
+        const chartPath = await generatePythonChart(symbol);
+        if (chartPath) {
+          await bot.telegram.sendPhoto(CHANNEL_ID, { source: chartPath }, { caption: message });
+          fs.unlinkSync(chartPath);
         } else {
           await bot.telegram.sendMessage(CHANNEL_ID, message);
         }
@@ -183,86 +213,18 @@ async function runWhaleSignals(bot) {
   }
 }
 
-async function runSpikeSignals(bot) {
-  if (!CHANNEL_ID) return;
-
-  try {
-    const topSymbols = ['BTC', 'ETH', 'BNB', 'SOL', 'XRP', 'DOGE', 'ADA', 'AVAX', 
-                        'SHIB', 'DOT', 'LINK', 'MATIC', 'LTC', 'UNI', 'ATOM',
-                        'XLM', 'NEAR', 'APT', 'ARB', 'OP'];
-
-    for (const symbol of topSymbols) {
-      const whaleCheck = binanceEngine.checkWhaleCondition(symbol);
-      if (whaleCheck) continue;
-      
-      const spikeData = binanceEngine.checkSpikeCondition(symbol);
-      if (!spikeData) continue;
-      
-      if (!canSend('SPIKE', symbol, SPIKE_COOLDOWN_MS)) continue;
-
-      const ticker = binanceEngine.get24hData(`${symbol}USDT`);
-      const candles1h = binanceEngine.getCandles1h(symbol);
-      
-      const rsiValue = calcRSI(candles1h, 14);
-      const ema200Trend = getEMA200Trend(candles1h);
-      const macdSignal = getMACDSignal(candles1h);
-      const haCandle = candles1h.length > 0 
-        ? getHeikinAshiCandle(candles1h[candles1h.length - 1]) 
-        : "N/A";
-
-      const messageData = {
-        symbol,
-        price_usdt: spikeData.price_usdt,
-        price_change_1m: spikeData.price_change_1m,
-        change_24h: (ticker.priceChange || 0).toFixed(2),
-        baseline_window: spikeData.baseline_window,
-        volume_ratio: spikeData.volume_ratio,
-        ema200_trend: ema200Trend,
-        rsi_value: rsiValue,
-        macd_signal: macdSignal,
-        ha_candle: haCandle
-      };
-
-      const message = spikeData.type === 'up' 
-        ? templates.spikeUpSignal(messageData)
-        : templates.spikeDownSignal(messageData);
-
-      try {
-        if (renderSignalChart && candles1h.length >= 50) {
-          const emaSeries = buildEmaSeries(candles1h, 50);
-          const png = await renderSignalChart({
-            symbol,
-            candles: candles1h.slice(-100),
-            ema200: emaSeries.slice(-100)
-          });
-          await bot.telegram.sendPhoto(CHANNEL_ID, { source: png }, { caption: message });
-        } else {
-          await bot.telegram.sendMessage(CHANNEL_ID, message);
-        }
-        console.log(`✅ [SPIKE] ${symbol} 스파이크 ${spikeData.type} 시그널 전송`);
-      } catch (sendErr) {
-        console.error(`[SPIKE] ${symbol} 전송 실패:`, sendErr.message);
-        try {
-          await bot.telegram.sendMessage(CHANNEL_ID, message);
-        } catch (fallbackErr) {
-          console.error(`[SPIKE] ${symbol} 텍스트 전송도 실패:`, fallbackErr.message);
-        }
-      }
-    }
-  } catch (err) {
-    console.error("[SPIKE Signal] Error:", err.message);
-  }
-}
-
 async function runAllFreeSignals(bot) {
   await runKimpSignals(bot);
   await runWhaleSignals(bot);
-  await runSpikeSignals(bot);
+}
+
+function initializeSymbolUpdater() {
+  startAutoUpdate();
 }
 
 module.exports = {
   runKimpSignals,
   runWhaleSignals,
-  runSpikeSignals,
-  runAllFreeSignals
+  runAllFreeSignals,
+  initializeSymbolUpdater
 };
