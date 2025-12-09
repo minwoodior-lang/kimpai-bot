@@ -70,6 +70,10 @@ localPort = 44983
 [[ports]]
 localPort = 45553
 
+[[ports]]
+localPort = 46057
+externalPort = 3001
+
 [nix]
 channel = "stable-25_05"
 packages = ["lsof", "jq"]
