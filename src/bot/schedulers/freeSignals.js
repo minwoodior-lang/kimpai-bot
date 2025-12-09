@@ -13,11 +13,44 @@ const CHANNEL_ID = process.env.TELEGRAM_CHANNEL_ID;
 
 const KIMP_COOLDOWN_MS = 10 * 60 * 1000;
 const WHALE_COOLDOWN_MS = 30 * 60 * 1000;
+const MAX_SIGNALS_PER_MINUTE = 3;
 
 const KIMP_DIFF_THRESHOLD = 0.35;
 const KIMP_ABSOLUTE_THRESHOLD = 1.0;
 
 const kimpHistory = new Map();
+const minuteSignalLog = new Map();
+
+function getOrCreateMinuteLog() {
+  const now = Math.floor(Date.now() / 60000) * 60000;
+  const key = `minute:${now}`;
+  
+  if (!minuteSignalLog.has(key)) {
+    minuteSignalLog.set(key, []);
+    
+    const cutoff = now - 5 * 60000;
+    for (const [k] of minuteSignalLog) {
+      if (k.startsWith('minute:')) {
+        const time = parseInt(k.split(':')[1]);
+        if (time < cutoff) {
+          minuteSignalLog.delete(k);
+        }
+      }
+    }
+  }
+  
+  return minuteSignalLog.get(key);
+}
+
+function canSendWhaleSignal(symbol) {
+  const minuteLog = getOrCreateMinuteLog();
+  return minuteLog.length < MAX_SIGNALS_PER_MINUTE;
+}
+
+function recordWhaleSignal(symbol) {
+  const minuteLog = getOrCreateMinuteLog();
+  minuteLog.push(symbol);
+}
 
 function recordKimpHistory(symbol, premium) {
   if (!kimpHistory.has(symbol)) {
@@ -150,10 +183,17 @@ async function runWhaleSignals(bot) {
     const symbolsWithoutSuffix = topSymbols.map(s => s.replace('USDT', ''));
 
     for (const symbol of symbolsWithoutSuffix) {
+      if (!canSendWhaleSignal(symbol)) {
+        console.log(`⏭️ [WHALE] ${symbol}: 1분 내 시그널 3개 초과 (폭주 방지)`);
+        continue;
+      }
+
       const whaleData = binanceEngine.checkWhaleCondition(symbol);
       if (!whaleData) continue;
       
       if (!canSend('WHALE', symbol, WHALE_COOLDOWN_MS)) continue;
+      
+      recordWhaleSignal(symbol);
 
       const ticker = binanceEngine.get24hData(`${symbol}USDT`);
       const candles1h = binanceEngine.getCandles1h(symbol);

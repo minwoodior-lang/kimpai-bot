@@ -3,8 +3,8 @@ const axios = require('axios');
 const { getTopSymbols, FALLBACK_SYMBOLS } = require('../bot/utils/binanceSymbols');
 
 const BASELINE_WINDOW = 20;
-const MIN_VOLUME_USDT = 10000;
-const WHALE_VOLUME_RATIO = 4.5;
+const MIN_VOLUME_USDT = 25000;
+const WHALE_VOLUME_RATIO = 7.0;
 const SPIKE_PRICE_THRESHOLD = 2;
 const SPIKE_VOLUME_RATIO = 3;
 
@@ -90,7 +90,7 @@ function checkWhaleCondition(symbol) {
   const buyRatio = bucket.buyNotional / volume1m;
   const sellRatio = bucket.sellNotional / volume1m;
   
-  if (buyRatio >= 0.6) {
+  if (buyRatio >= 0.65) {
     return {
       symbol: symbol.toUpperCase().replace('USDT', ''),
       side: '매수',
@@ -103,7 +103,7 @@ function checkWhaleCondition(symbol) {
     };
   }
   
-  if (sellRatio >= 0.6) {
+  if (sellRatio >= 0.65) {
     return {
       symbol: symbol.toUpperCase().replace('USDT', ''),
       side: '매도',
