@@ -41,8 +41,8 @@
     "UNIUSDT",
     "HBARUSDT",
     "PUMPUSDT",
-    "MAGICUSDT",
     "WIFUSDT",
+    "MAGICUSDT",
     "FETUSDT",
     "ARBUSDT",
     "APTUSDT",
@@ -61,6 +61,6 @@
     "SHIBUSDT",
     "ONDOUSDT"
   ],
-  "updatedAt": "2025-12-09T22:12:31.115Z",
+  "updatedAt": "2025-12-09T22:18:17.609Z",
   "count": 60
 }

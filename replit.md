@@ -20,11 +20,11 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 - ✅ FREE에서 GPT/AI 호출 완전 제거
 
 **파일 구조:**
-- `src/chart/priceChart.py` - Python mplfinance 차트 생성기
+- `src/chart/priceChart.py` - Python mplfinance 차트 생성기 (v1.1: 60캔들 + 라벨)
 - `src/bot/utils/binanceSymbols.js` - TOP 60 심볼 자동 선택
-- `src/workers/binanceSignalEngine.js` - Binance WS 시그널 엔진
+- `src/workers/binanceSignalEngine.js` - Binance WS 시그널 엔진 (v2.1: 7배 거래량, 25K min)
 - `src/lib/indicators/ta.js` - 보조지표 계산기
-- `src/bot/schedulers/freeSignals.js` - FREE 시그널 스케줄러 (고래 + 김프)
+- `src/bot/schedulers/freeSignals.js` - FREE 시그널 스케줄러 (v2.1: 폭주 방지)
 - `src/bot/utils/freeSignalTemplates.js` - 시그널 템플릿 2종
 
 **이전 변경사항:**

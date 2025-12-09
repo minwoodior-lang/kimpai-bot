@@ -114,11 +114,12 @@ def generate_signal_chart(symbol: str, interval: str = "5m") -> str:
     Returns:
         생성된 PNG 파일의 절대 경로
     """
+    LOOKBACK_CANDLES = 60
     df = fetch_klines(symbol, interval, limit=100)
-    if df.empty or len(df) < 50:
+    if df.empty or len(df) < LOOKBACK_CANDLES:
         raise RuntimeError(f"Insufficient kline data for {symbol}")
     
-    df = df.tail(50)
+    df = df.tail(LOOKBACK_CANDLES)
     
     ha_df = to_heikin_ashi(df)
     
@@ -187,12 +188,16 @@ def generate_signal_chart(symbol: str, interval: str = "5m") -> str:
         addplot=apds,
         figsize=(12, 8),
         panel_ratios=(4, 1, 1.5, 1.5),
-        title=f"\n{symbol} {interval} (Heikin-Ashi) - KST",
+        title=f"\n",
         ylabel='Price',
         ylabel_lower='Volume',
         returnfig=True,
         tight_layout=True
     )
+    
+    base_symbol = symbol.replace('USDT', '')
+    suptitle = f"{base_symbol}/USDT · Binance · 5m Heikin-Ashi"
+    fig.suptitle(suptitle, fontsize=12, color='white', y=0.98)
     
     fig.savefig(out_path, dpi=110, bbox_inches='tight', facecolor='#1a1a2e')
     plt.close(fig)
