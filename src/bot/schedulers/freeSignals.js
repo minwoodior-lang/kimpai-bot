@@ -12,7 +12,7 @@ const API_BASE = process.env.API_BASE_URL || process.env.API_URL || "http://loca
 const CHANNEL_ID = process.env.TELEGRAM_CHANNEL_ID;
 
 const KIMP_COOLDOWN_MS = 10 * 60 * 1000;
-const WHALE_COOLDOWN_MS = 30 * 60 * 1000;
+const WHALE_COOLDOWN_MS = 60 * 60 * 1000;
 const MAX_SIGNALS_PER_MINUTE = 3;
 
 const KIMP_DIFF_THRESHOLD = 0.35;

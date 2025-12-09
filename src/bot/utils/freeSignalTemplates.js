@@ -15,6 +15,33 @@ function formatPrice(price) {
   return price.toPrecision(4);
 }
 
+// 보조지표 포맷 헬퍼 함수들
+function formatEmaLine(trend) {
+  if (trend === '상승') return "- 200EMA: 상승 추세 🟢";
+  if (trend === '하락') return "- 200EMA: 하락 추세 🔴";
+  return "- 200EMA: 횡보 ⚪";
+}
+
+function formatRsiLine(rsi) {
+  if (rsi >= 70) {
+    return `- RSI: ${rsi.toFixed(1)} (과열 구간 🔴)`;
+  }
+  if (rsi <= 30) {
+    return `- RSI: ${rsi.toFixed(1)} (저점/과매도 구간 🟢)`;
+  }
+  return `- RSI: ${rsi.toFixed(1)} (중립 ⚪)`;
+}
+
+function formatMacdLine(signal) {
+  if (signal === 'golden' || signal === '상승') return "- MACD: 골든크로스 🟢";
+  if (signal === 'bearish' || signal === '하락') return "- MACD: 데드크로스 🔴";
+  return "- MACD: 중립 ⚪";
+}
+
+function formatCandleLine(isBull) {
+  return isBull ? "- 캔들: 양봉 🟢" : "- 캔들: 음봉 🔴";
+}
+
 function kimpSignal(data) {
   const {
     symbol,
@@ -61,9 +88,7 @@ function whaleSignal(data) {
     last_alert_ago
   } = data;
 
-  const ema200_emoji = ema200_trend === '상승' ? '🟢' : '🔴';
-  const macd_emoji = macd_signal === 'golden' || macd_signal === '상승' ? '🟢' : '🔴';
-  const candle_emoji = ha_candle === '양봉' ? '🟢' : '🔴';
+  const isBullCandle = ha_candle === '양봉';
 
   return `🐋 ${symbol} 고래 ${side} 활동 감지 [BINANCE] ${side_emoji}
 
@@ -75,10 +100,10 @@ function whaleSignal(data) {
 📊 24h 변동: ${change_24h}% / 거래액: ${formatNumber(volume_24h_usdt)} USDT
 
 📉 보조지표 (1시간 차트)
-- 200EMA: ${ema200_trend} ${ema200_emoji}
-- RSI: ${rsi_value ? rsi_value.toFixed(1) : 'N/A'}
-- MACD: ${macd_signal} ${macd_emoji}
-- 캔들: ${ha_candle} ${candle_emoji}
+${formatEmaLine(ema200_trend)}
+${formatRsiLine(rsi_value)}
+${formatMacdLine(macd_signal)}
+${formatCandleLine(isBullCandle)}
 
 ────────────────
 📡 KimpAI는 Binance 실시간 체결 데이터를 기반으로
@@ -160,5 +185,9 @@ module.exports = {
   spikeUpSignal,
   spikeDownSignal,
   formatNumber,
-  formatPrice
+  formatPrice,
+  formatEmaLine,
+  formatRsiLine,
+  formatMacdLine,
+  formatCandleLine
 };

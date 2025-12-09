@@ -105,14 +105,18 @@ export function MyAlertsMobileContent() {
       </div>
 
       {/* 본문 */}
-      <p className="text-[11px] dark:text-slate-400 light:text-slate-600 mb-2 leading-snug flex-1">
+      <p className="text-[12px] dark:text-slate-400 light:text-slate-600 mb-4 leading-relaxed flex-1">
         Binance 고래 매매 · 거래량 폭발 · BTC/ETH 김프 급변만 실시간 발송.
       </p>
 
       {/* 버튼 */}
       <button
+        type="button"
         onClick={() => window.open(TELEGRAM_FREE_SIGNAL_URL, "_blank")}
-        className="mt-auto w-full bg-gradient-to-r from-[#8155FF] to-[#5D3DFF] dark:hover:from-[#7043FF] dark:hover:to-[#4C2FFF] h-9 rounded-lg font-semibold text-white text-[11px] flex items-center justify-center gap-1 transition-all"
+        className="mt-auto w-full h-10 rounded-lg font-semibold text-white text-[12px]
+        bg-gradient-to-r from-[#8155FF] to-[#5D3DFF]
+        hover:from-[#7043FF] hover:to-[#4C2FFF]
+        flex items-center justify-center gap-2 transition-all"
       >
         {/* 텔레그램 로고 */}
         <svg
@@ -123,8 +127,10 @@ export function MyAlertsMobileContent() {
         >
           <path d="M9.04 15.34 8.9 18.5c.32 0 .46-.14.63-.31l1.5-1.43 3.11 2.28c.57.32.98.15 1.13-.53l2.05-9.62c.19-.81-.31-1.13-.86-.93L3.9 10.27c-.8.31-.79.76-.14.96l3.9 1.22 9.05-5.7c.43-.28.82-.13.5.15l-7.27 6.67Z" />
         </svg>
+
         <span>텔레그램 채널 열기</span>
       </button>
     </div>
   );
 }
+
