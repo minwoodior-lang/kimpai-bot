@@ -68,6 +68,10 @@ localPort = 44483
 localPort = 44983
 
 [[ports]]
+localPort = 45017
+externalPort = 3001
+
+[[ports]]
 localPort = 45553
 
 [nix]
