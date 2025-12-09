@@ -20,7 +20,7 @@ import TwoLinePriceCell, {
 } from "@/components/TwoLinePriceCell";
 import TwoLineCell from "@/components/TwoLineCell";
 import { openCmcPage } from "@/lib/coinMarketCapUtils";
-import { normalizeSymbol } from "@/hooks/useUserPrefs";
+import { UserPrefs, normalizeSymbol } from "@/hooks/useUserPrefs";
 
 interface DropdownOption {
   id: string;
@@ -34,12 +34,7 @@ interface PremiumTableProps {
   showFilters?: boolean;
   limit?: number;
   refreshInterval?: number;
-  // 🔹 외부 타입에 안 의존하도록 로컬 타입으로 정의
-  prefs?: {
-    favorites?: string[];
-    filterMode?: "all" | "favorites" | "foreign";
-    priceUnit?: "KRW" | "USDT";
-  };
+  prefs?: UserPrefs;
   onChartSelect?: (
     symbol: string,
     domesticExchange: string,
@@ -335,7 +330,7 @@ const PremiumTableRow = React.memo(
                 {/* 즐겨찾기 (모바일) */}
                 <button
                   type="button"
-                  className={`text-[11px] p-0 leading-none transition-colors ${
+                  className={`text-[12px] p-0 leading-none transition-colors ${
                     isFav
                       ? "text-[#FDCB52]"
                       : "text-[#A7B3C6]/40 hover:text-[#FDCB52]"
@@ -710,6 +705,7 @@ export default function PremiumTable({
     rootMargin: "200px",
   });
 
+  // 즐겨찾기 Set
   const favorites = useMemo(
     () => new Set((prefs?.favorites || []).map((s) => normalizeSymbol(s))),
     [prefs?.favorites]
@@ -1110,6 +1106,10 @@ export default function PremiumTable({
     []
   );
 
+  // =======================
+  // 렌더링
+  // =======================
+
   return (
     <section className="w-full mb-20">
       {showFilters && (
@@ -1251,21 +1251,14 @@ export default function PremiumTable({
         <div className="w-full border border-white/5 bg-[#050819] overflow-hidden">
           <table className="w-full border-separate border-spacing-y-0 table-auto md:table-fixed">
             <colgroup>
-              {/* 즐겨찾기 */}
-              <col className="w-[18px] md:w-[24px]" />
-              {/* 코인명 */}
-              <col className="w-auto" />
-              {/* 현재가 */}
-              <col className="w-[70px] min-[376px]:w-[90px] md:w-[120px]" />
-              {/* 김프 */}
-              <col className="w-[60px] min-[376px]:w-[80px] md:w-[90px]" />
-              {/* 전일대비 */}
-              <col className="w-[80px] min-[376px]:w-[110px] md:w-[170px]" />
-              {/* 고가대비 / 저가대비 (PC 전용) */}
-              <col className="hidden md:table-column md:w-[90px]" />
-              <col className="hidden md:table-column md:w-[90px]" />
-              {/* 거래액(일) */}
-              <col className="w-[80px] min-[376px]:w-[100px] md:w-[130px]" />
+              <col className="md:w-[24px]" /> {/* 즐겨찾기 */}
+              <col className="md:w-auto" /> {/* 코인명 */}
+              <col className="md:w-[120px]" /> {/* 현재가 */}
+              <col className="md:w-[90px]" /> {/* 김프 */}
+              <col className="md:w-[170px]" /> {/* 전일대비 */}
+              <col className="hidden md:table-column md:w-[90px]" /> {/* 고가대비 */}
+              <col className="hidden md:table-column md:w-[90px]" /> {/* 저가대비 */}
+              <col className="md:w-[130px]" /> {/* 거래액(일) */}
             </colgroup>
 
             <thead>

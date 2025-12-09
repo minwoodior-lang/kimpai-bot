@@ -40,35 +40,34 @@ export default function TwoLineCell({
 
   const topColor = isUnlisted ? "text-gray-500" : line1Color;
 
+  // 모바일에서 숫자/폭 축소, md 이상은 기존 유지
+  const topBaseClass =
+    "block text-right whitespace-nowrap tabular-nums " +
+    "min-w-[70px] md:min-w-[128px] " +
+    "text-[10px] md:text-[14px] font-medium";
+
+  const bottomBaseClass =
+    "block text-right whitespace-nowrap tabular-nums " +
+    "min-w-[70px] md:min-w-[128px] " +
+    "text-[8px] md:text-[11px]";
+
   if (isUnlisted) {
     return (
       <div className={`flex flex-col leading-[1.1] ${alignClass}`}>
-        <span
-          className={`block text-right whitespace-nowrap tabular-nums min-w-[90px] md:min-w-[112px] text-[11px] md:text-[14px] font-medium ${topColor}`}
-        >
-          -
-        </span>
-        <span
-          className={`block text-right whitespace-nowrap tabular-nums min-w-[90px] md:min-w-[112px] text-[9px] md:text-[11px] ${line2Color}`}
-        >
-          -
-        </span>
+        <span className={`${topBaseClass} ${topColor}`}>-</span>
+        <span className={`${bottomBaseClass} ${line2Color}`}>-</span>
       </div>
     );
   }
 
   return (
     <div className={`flex flex-col leading-[1.1] ${alignClass}`}>
-      <span
-        className={`block text-right whitespace-nowrap tabular-nums min-w-[90px] md:min-w-[112px] text-[11px] md:text-[14px] font-medium ${topColor}`}
-      >
+      <span className={`${topBaseClass} ${topColor}`}>
         {line1Prefix}
         {formatValue(line1)}
         {line1Suffix}
       </span>
-      <span
-        className={`block text-right whitespace-nowrap tabular-nums min-w-[90px] md:min-w-[112px] text-[9px] md:text-[11px] ${line2Color}`}
-      >
+      <span className={`${bottomBaseClass} ${line2Color}`}>
         {line2Prefix}
         {formatValue(line2)}
         {line2Suffix}
