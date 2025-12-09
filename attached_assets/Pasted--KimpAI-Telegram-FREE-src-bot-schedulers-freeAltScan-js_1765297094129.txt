@@ -1,0 +1,65 @@
+[작업 요청] KimpAI Telegram FREE 알림을 실제 데이터 파이프라인에 연결
+
+현재 상태
+- src/bot/schedulers/freeAltScan.js: BNB, SOL, SUI 3개만 하드코딩되어 있고 mock 데이터 기반으로 신호를 보냄
+- src/bot/schedulers/freeBtcScan.js: BTC 신호도 내부 더미 로직 사용 가능성 높음
+- src/pages/api/bot/*: BTC/ETH/ALTS용 API 엔드포인트가 생성돼 있지만, 아직 KimpAI 본 서비스 데이터 파이프라인(prices.json, premiumTable.json, marketStats.json 등)을 사용하지 않음
+
+목표
+1) FREE 텔레그램 알림이 KimpAI 웹 서비스와 동일한 데이터 파이프라인을 사용하도록 수정
+2) TOP50 알트 전체를 스캔해서, 그 중 조건에 맞는 3개만 선택하여 채널에 전송
+3) 이후 PRO 기능에서 같은 API를 재사용할 수 있도록, API 구조를 깔끔하게 설계
+
+구체 작업
+
+1. API_BASE_URL 환경변수 추가
+- .env.example, .env 모두에 추가:
+  API_BASE_URL=https://kimpai.io
+- 개발 모드에서는 http://localhost:3000 을 사용할 수 있도록 코멘트로 남겨두기
+
+2. API 엔드포인트 구현/수정 (Next.js pages/api)
+- src/pages/api/bot/btc.ts
+  - 기존 premiumTable / prices 파이프라인을 사용하여:
+    - 지난 10분 BTC 김프(prev_kimp, current_kimp)
+    - 현재 김프, 국내/해외 가격, 변동률, 과거 동일 패턴 확률 등
+  - 텔레그램 템플릿에서 사용하는 필드 이름으로 JSON 반환
+
+- src/pages/api/bot/eth.ts
+  - ETH 선물 지표(OI 변화율, Funding Rate, 최근 변동폭 등)를
+    기존 statsWorker/marketStats.json 등에서 가져와 계산
+  - 텔레그램 템플릿에 맞는 JSON 반환
+
+- src/pages/api/bot/alts.ts
+  또는 src/pages/api/bot/alts/index.ts
+  - KimpAI 데이터(예: premiumTable.json, marketStats.json 등)를 사용해서
+    "시총 TOP50 알트" 목록을 만들고,
+    각 심볼에 대해:
+      - 1시간 거래량 변화율
+      - 1시간 가격 변화율
+      - 펀딩율
+      - 과거 패턴 통계(간단히 mock 확률이라도 OK, 나중에 정교화)
+  - 기본 응답은 TOP50 전체 리스트를 JSON 배열로 반환
+  - 요청 시 ?limit=50, ?limit=3 등의 파라미터도 지원
+
+3. 텔레봇 쪽 데이터 유틸 수정
+- src/bot/utils/marketData.js (또는 유사한 이름 파일)를 찾아서:
+  - getBtcSignal() → API_BASE_URL + '/api/bot/btc' 호출하도록 수정
+  - getEthSignal() → API_BASE_URL + '/api/bot/eth' 호출하도록 수정
+  - getAltSignals() → API_BASE_URL + '/api/bot/alts?limit=50' 호출하도록 수정
+  - 현재 남아있는 mock 데이터/랜덤값 생성 부분은 모두 제거
+
+4. FREE 스케줄러 수정
+- src/bot/schedulers/freeAltScan.js:
+  - 지금 BNB/SOL/SUI로 하드코딩된 부분을 제거
+  - getAltSignals()로부터 TOP50 데이터를 받아온 뒤,
+    내부 로직에서 "변동성/거래량/조건"에 따라 상위 3개만 추려서 템플릿 메시지를 생성
+  - 템플릿은 기존 messages.js에 정의된 FREE ALTS 템플릿 그대로 사용하되,
+    API 응답 필드와 잘 매핑되도록 수정
+
+5. 검증
+- npm run bot:dev 로 봇 실행
+- 실제 /btc, /eth, /alt SUI 테스트
+- 스케줄러가 10분마다 호출될 때,
+  채널에 BNB/SOL/SUI만 반복되는 것이 아니라
+  TOP50 중 조건을 만족하는 다른 알트들도 랜덤하게(조건 기반으로) 등장하는지 확인
+- 콘솔 로그에 API 호출 성공/실패 로그도 함께 출력
