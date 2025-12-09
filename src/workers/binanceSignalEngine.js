@@ -72,10 +72,12 @@ function getLastMinuteBucket(symbol) {
 }
 
 function checkWhaleCondition(symbol) {
-  const bucket = getLastMinuteBucket(symbol);
+  const fullSymbol = symbol.toUpperCase().endsWith('USDT') ? symbol.toUpperCase() : `${symbol.toUpperCase()}USDT`;
+  
+  const bucket = getLastMinuteBucket(fullSymbol);
   if (!bucket) return null;
   
-  const baseline = baselineVolumes.get(symbol);
+  const baseline = baselineVolumes.get(fullSymbol);
   if (!baseline || baseline < 100) return null;
   
   const volume1m = bucket.buyNotional + bucket.sellNotional;
@@ -89,7 +91,7 @@ function checkWhaleCondition(symbol) {
   
   if (buyRatio >= 0.6) {
     return {
-      symbol,
+      symbol: symbol.toUpperCase().replace('USDT', ''),
       side: '매수',
       side_emoji: '🟢',
       volume_usdt: volume1m,
@@ -102,7 +104,7 @@ function checkWhaleCondition(symbol) {
   
   if (sellRatio >= 0.6) {
     return {
-      symbol,
+      symbol: symbol.toUpperCase().replace('USDT', ''),
       side: '매도',
       side_emoji: '🔴',
       volume_usdt: volume1m,
@@ -117,8 +119,14 @@ function checkWhaleCondition(symbol) {
 }
 
 function checkSpikeCondition(symbol) {
-  const candles = candles1m.get(symbol);
-  if (!candles || candles.length < 21) return null;
+  const fullSymbol = symbol.toUpperCase().endsWith('USDT') ? symbol.toUpperCase() : `${symbol.toUpperCase()}USDT`;
+  const baseSymbol = symbol.toUpperCase().replace('USDT', '');
+  
+  let candles = candles1m.get(fullSymbol);
+  if (!candles || candles.length < 21) {
+    candles = candles1m.get(baseSymbol);
+    if (!candles || candles.length < 21) return null;
+  }
   
   const prev = candles[candles.length - 2];
   const curr = candles[candles.length - 1];
@@ -135,7 +143,7 @@ function checkSpikeCondition(symbol) {
   
   if (Math.abs(priceChange1m) >= SPIKE_PRICE_THRESHOLD && volumeRatio >= SPIKE_VOLUME_RATIO) {
     return {
-      symbol,
+      symbol: baseSymbol,
       type: priceChange1m > 0 ? 'up' : 'down',
       price_change_1m: priceChange1m,
       price_usdt: currClose,
@@ -204,7 +212,8 @@ function get24hData(symbol) {
 }
 
 function getCandles1h(symbol) {
-  return candles1h.get(symbol.toUpperCase()) || [];
+  const baseSymbol = symbol.toUpperCase().replace('USDT', '');
+  return candles1h.get(baseSymbol) || [];
 }
 
 function startAggTradeStream(symbols) {
@@ -341,7 +350,7 @@ async function initialize() {
   setInterval(() => {
     cleanOldBuckets();
     for (const sym of topSymbols) {
-      updateBaseline(sym.toUpperCase().replace('USDT', ''));
+      updateBaseline(sym.toUpperCase());
     }
   }, 60000);
   

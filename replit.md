@@ -8,21 +8,25 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 - 상세한 설명 요구
 
 ### 최신 변경사항 (2024-12-09)
-**FREE 텔레그램 알림 시스템 전면 재구현:**
-- ✅ FREE 템플릿 3종 교체 (단기 급등/단기 급락/변동성 확대)
-- ✅ signal_line 규칙 단순화 (3가지 고정 문구: up/down/volatility)
-- ✅ 10분 스캔: 급등 1개 + 급락 1개 + 변동성 1개 = 최대 3개 발송
-- ✅ 조건 미충족 시 알림 없음 (No spam)
-- ✅ 중복 방지: 동일 심볼 3회 연속 감지 시 임시 제외 (1시간 쿨다운)
-- ✅ **버그 수정:** price_change_1h ≠ volume_change_1h (분리 계산)
-- ✅ 현재가 표기: ₩KRW / $USD 동시 표시
-- ✅ 가짜 통계 필드 삭제 (pattern_success_rate, pattern_range)
+**FREE 텔레그램 실시간 시그널 + 차트 전면 재구축:**
+- ✅ 기존 FREE ALT/BTC 스캔 삭제 → 새 시그널 시스템으로 대체
+- ✅ **3종 시그널만 유지:**
+  1. 김프 급변 (BTC/ETH): 5분 변화 ±0.4%p 또는 절대값 ±1%
+  2. 고래 활동 (Binance Spot): 1분 거래량 5배 이상, 매수/매도 비중 60%+
+  3. 분봉 스파이크: 1분 가격 ±2%, 거래량 3배+
+- ✅ **보조지표 추가:** EMA200, RSI(14), MACD, Heikin-Ashi 캔들
+- ✅ **차트 이미지 전송:** PNG 차트 + 텍스트 메시지
+- ✅ **쿨다운 시스템:** 김프 10분, 고래 30분, 스파이크 10분
+- ✅ **별도 Binance WebSocket 엔진:** 기존 파이프라인과 완전 분리
 - ✅ FREE에서 GPT/AI 호출 완전 제거
-- ✅ 봇 409 충돌 오류 graceful 처리 (스케줄러는 계속 작동)
+- ✅ 30초마다 시그널 검사
 
-**FREE/PRO 기능 분리:**
-- ✅ FREE = signal_line만 사용 (GPT 미사용)
-- ✅ PRO = ai_line (GPT-4o-mini) 사용
+**새 파일 구조:**
+- `src/workers/binanceSignalEngine.js` - Binance WS 시그널 엔진
+- `src/lib/indicators/ta.js` - 보조지표 계산기
+- `src/lib/chart/renderSignalChart.js` - 차트 렌더러
+- `src/bot/schedulers/freeSignals.js` - 새 FREE 시그널 스케줄러
+- `src/bot/utils/freeSignalTemplates.js` - 시그널 템플릿 3종
 
 **이전 변경사항:**
 - API_BASE_URL 환경변수 사용 (https://kimpai.io)
@@ -55,13 +59,15 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 - **Global API Access:** Render-hosted proxy bypasses regional restrictions
 - **Frontend Performance:** Fast polling (1s), API caching (800ms), infinite scroll, lazy loading with IntersectionObserver
 
-**Telegram Bot v1.2:**
-- **Framework:** Telegraf.js + node-cron
+**Telegram Bot v2.0:**
+- **Framework:** Telegraf.js + setInterval (30초)
 - **Commands:** 10개 (FREE 7개 + PRO 3개)
-- **Auto-Scan:** 4개 (10분, 30분, 5분, 6시간)
-- **API:** 10개 엔드포인트 (BTC, ETH, ALT, PRO) - **모두 실제 데이터 파이프라인 연결**
-- **AI 해석:** GPT-4o-mini 연동 (OPENAI_API_KEY 필요)
-- **Data:** Supabase `users` 테이블 (user_id, username, join_at, joined_from, last_active, is_pro, watchlist)
+- **FREE 시그널:** 김프 급변 / 고래 활동 / 분봉 스파이크 (30초마다 검사)
+- **PRO 스캔:** 관심종목 5분, BTC 예측 6시간
+- **보조지표:** EMA200, RSI, MACD, Heikin-Ashi
+- **차트:** PNG 이미지 생성 (chart.js + chartjs-node-canvas)
+- **AI 해석:** GPT-4o-mini (PRO 전용)
+- **Data:** Supabase `users` 테이블
 
 ### Telegram Bot Features
 **FREE (무료):**
