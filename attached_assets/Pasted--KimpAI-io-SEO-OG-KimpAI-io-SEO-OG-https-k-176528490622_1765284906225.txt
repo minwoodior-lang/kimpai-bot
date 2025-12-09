@@ -1,0 +1,127 @@
+📨 KimpAI.io 기본 SEO · OG 이미지 적용 작업 전달문
+
+[작업명]
+KimpAI.io 기본 SEO 세팅 & OG 이미지 적용
+
+[사이트]
+
+도메인: https://kimpai.io
+
+1️⃣ public 폴더에 필요한 파일들
+
+아래 파일들을 public/ 루트에 존재하도록 맞춰주세요.
+(OG 이미지는 제가 og-image.png 파일로 전달드립니다.)
+
+/public/favicon.ico
+/public/favicon-16x16.png
+/public/favicon-32x32.png
+/public/favicon-180x180.png
+/public/favicon-192x192.png
+/public/og-image.png
+
+
+이미 파비콘이 있다면, 제가 전달한 최신 버전으로 덮어쓰기 해주세요.
+
+2️⃣ _document.tsx 또는 메인 페이지 <Head> 메타태그 세트 추가
+
+Next.js 기준으로, src/pages/_document.tsx 또는 src/app/layout.tsx / 메인 페이지 <Head> 안에
+아래 메타태그들을 추가해주세요.
+(기존 중복되는 태그가 있으면 이 내용 기준으로 정리)
+
+{/* 기본 SEO */}
+<title>KimpAI - AI 기반 김프 분석 & 재정거래 기회 탐지</title>
+<meta
+  name="description"
+  content="실시간 암호화폐 김치 프리미엄 분석, 김프 변동 감지, 재정거래 기회 탐지, 초정밀 AI 시점 예측. 업비트·빗썸·코인원·해외거래소 자동 비교."
+/>
+<meta
+  name="keywords"
+  content="김프, 김치프리미엄, 재정거래, 코인 프리미엄, 암호화폐, AI 분석, KimpAI, 김프 비교 사이트"
+/>
+<meta name="author" content="KimpAI" />
+<meta name="robots" content="index, follow" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#3B82F6" />
+
+{/* Open Graph (카톡, 디스코드 등 공유 썸네일) */}
+<meta property="og:title" content="KimpAI - AI가 포착하는 김프 재정거래 기회" />
+<meta
+  property="og:description"
+  content="실시간 김치 프리미엄 분석 및 AI 기반 초정밀 시점 예측. 국내·해외 9개 거래소 가격 자동 비교."
+/>
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://kimpai.io" />
+<meta property="og:image" content="https://kimpai.io/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content="KimpAI" />
+
+{/* Twitter Card (X 공유 최적화) */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="KimpAI - AI가 포착하는 김프 재정거래 기회" />
+<meta
+  name="twitter:description"
+  content="AI 기반 실시간 김프 분석 · 김치 프리미엄 자동 비교 · 재정거래 탐지 서비스"
+/>
+<meta name="twitter:image" content="https://kimpai.io/og-image.png" />
+{/* 있으면 @핸들, 없으면 삭제 가능 */}
+<meta name="twitter:site" content="@kimpai" />
+
+{/* Canonical URL */}
+<link rel="canonical" href="https://kimpai.io" />
+
+{/* 파비콘 세트 */}
+<link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+
+{/* 구조화 데이터(JSON-LD) */}
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "KimpAI",
+      url: "https://kimpai.io",
+      description:
+        "실시간 김프(김치 프리미엄) 분석 및 AI 기반 재정거래 탐지 플랫폼",
+      publisher: {
+        "@type": "Organization",
+        name: "KimpAI",
+        url: "https://kimpai.io",
+        logo: "https://kimpai.io/favicon-192x192.png",
+      },
+    }),
+  }}
+/>
+
+
+app/ 라우터 쓰는 구조라면 app/layout.tsx의 <head> 부분에 맞게 문법만 살짝 바꿔 넣어주세요.
+
+3️⃣ robots.txt 추가 (도메인 루트)
+
+프로젝트 루트 또는 public/robots.txt에 아래 내용 추가:
+
+User-agent: *
+Allow: /
+
+Sitemap: https://kimpai.io/sitemap.xml
+
+4️⃣ sitemap.xml 생성 (기본 버전)
+
+초기에는 홈만 있어도 되니,
+public/sitemap.xml 파일로 아래 내용 추가:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://kimpai.io/</loc>
+    <priority>1.0</priority>
+  </url>
+</urlset>
+
+
+(추후 서브 페이지 생기면 여기에 추가 예정)
