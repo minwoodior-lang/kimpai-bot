@@ -41,7 +41,7 @@ export function formatKrwDynamic(
     decimals = 6;
   }
 
-  let formatted = new Intl.NumberFormat("ko-KR", {
+  const formatted = new Intl.NumberFormat("ko-KR", {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   }).format(abs);
@@ -97,7 +97,7 @@ export function formatKrwDiffByBase(
   else decimals = 6;
 
   const absDiff = Math.abs(diff);
-  let formatted = new Intl.NumberFormat("ko-KR", {
+  const formatted = new Intl.NumberFormat("ko-KR", {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   }).format(absDiff);
@@ -136,21 +136,15 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
     const prevTop = prevTopRef.current;
 
     if (prevTop !== null && currentTop !== prevTop) {
-      if (topTimerRef.current) {
-        clearTimeout(topTimerRef.current);
-      }
+      if (topTimerRef.current) clearTimeout(topTimerRef.current);
       setTopFlash(currentTop > prevTop ? "up" : "down");
-      topTimerRef.current = setTimeout(() => {
-        setTopFlash(null);
-      }, 400);
+      topTimerRef.current = setTimeout(() => setTopFlash(null), 400);
     }
 
     prevTopRef.current = currentTop;
 
     return () => {
-      if (topTimerRef.current) {
-        clearTimeout(topTimerRef.current);
-      }
+      if (topTimerRef.current) clearTimeout(topTimerRef.current);
     };
   }, [topValue, isUnlisted]);
 
@@ -164,33 +158,24 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
     const prevBottom = prevBottomRef.current;
 
     if (prevBottom !== null && currentBottom !== prevBottom) {
-      if (bottomTimerRef.current) {
-        clearTimeout(bottomTimerRef.current);
-      }
+      if (bottomTimerRef.current) clearTimeout(bottomTimerRef.current);
       setBottomFlash(currentBottom > prevBottom ? "up" : "down");
-      bottomTimerRef.current = setTimeout(() => {
-        setBottomFlash(null);
-      }, 400);
+      bottomTimerRef.current = setTimeout(() => setBottomFlash(null), 400);
     }
 
     prevBottomRef.current = currentBottom;
 
     return () => {
-      if (bottomTimerRef.current) {
-        clearTimeout(bottomTimerRef.current);
-      }
+      if (bottomTimerRef.current) clearTimeout(bottomTimerRef.current);
     };
   }, [bottomValue, isUnlisted]);
 
   const topFormatted = topValue != null ? formatTop(topValue) : "-";
   const bottomFormatted = bottomValue != null ? formatBottom(bottomValue) : "-";
 
-  // 🔻 여기서 모바일 폰트/폭 확 줄임 (md 이상은 기존 수준 유지)
   const getTopClass = () => {
     const base =
-      "block text-right whitespace-nowrap tabular-nums " +
-      "text-[10px] md:text-[14px] font-medium " +
-      "min-w-[70px] md:min-w-[92px]";
+      "block text-right whitespace-nowrap tabular-nums min-w-[80px] md:min-w-[92px] text-[11px] md:text-[14px] font-medium";
     if (topValue === null) return `${base} text-gray-500`;
     if (topFlash === "up") return `${base} price-flash-up`;
     if (topFlash === "down") return `${base} price-flash-down`;
@@ -199,9 +184,7 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
 
   const getBottomClass = () => {
     const base =
-      "block text-right whitespace-nowrap tabular-nums " +
-      "text-[8px] md:text-[11px] " +
-      "min-w-[70px] md:min-w-[92px]";
+      "block text-right whitespace-nowrap tabular-nums min-w-[80px] md:min-w-[92px] text-[9px] md:text-[11px]";
     if (bottomValue === null) return `${base} text-gray-500`;
     if (bottomFlash === "up") return `${base} price-flash-up`;
     if (bottomFlash === "down") return `${base} price-flash-down`;
@@ -209,7 +192,7 @@ const TwoLinePriceCell: React.FC<TwoLinePriceCellProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-end leading-[1.08]">
+    <div className="flex flex-col items-end leading-[1.1]">
       <span className={getTopClass()}>
         {topPrefix}
         {topFormatted}
