@@ -34,10 +34,10 @@
     "ALLOUSDT",
     "GIGGLEUSDT",
     "EURUSDT",
-    "DOTUSDT",
     "XPLUSDT",
-    "WLDUSDT",
+    "DOTUSDT",
     "TRUMPUSDT",
+    "WLDUSDT",
     "UNIUSDT",
     "HBARUSDT",
     "PUMPUSDT",
@@ -61,6 +61,6 @@
     "SHIBUSDT",
     "ONDOUSDT"
   ],
-  "updatedAt": "2025-12-09T22:18:17.609Z",
+  "updatedAt": "2025-12-09T22:22:37.551Z",
   "count": 60
 }
