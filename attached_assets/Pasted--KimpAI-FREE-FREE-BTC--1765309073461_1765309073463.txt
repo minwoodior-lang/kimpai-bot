@@ -1,0 +1,205 @@
+[전달문] — KimpAI FREE 텔레그램 중복 발송 버그 수정 지시서
+🎯 목표
+
+FREE BTC 스캔이 동일 시각/동일 심볼로 여러 번 발송되는 문제를 완전히 차단
+
+설령 봇 프로세스가 2개 이상 떠 있어도,
+같은 10분(또는 30분) 버킷 안에서 동일 시그널은 1회만 발송되도록 잠금 처리
+
+1. 인프라 레벨 점검 (동일 토큰 다중 프로세스 방지)
+
+현재 텔레봇이 돌아가는 프로세스 구조 확인:
+
+Replit에서:
+
+npm run bot:dev로 실행한 dev 프로세스
+
+과거에 Run 버튼으로 띄워둔 bot 프로세스
+
+다른 탭 또는 백그라운드에서 돌고 있는 bot 프로세스가 있는지 확인
+
+아래를 반드시 확인해 주세요:
+
+동일 BOT TOKEN을 사용하는 Node 프로세스가 1개만 존재하도록 정리
+
+만약 bot:dev와 bot:start 또는 다른 스크립트가 동시에 running 상태라면,
+
+하나만 남기고 모두 중지
+
+코드 상에서도 src/bot/index.js 또는 스케줄러 초기화 부분에 다음 로그 추가:
+
+console.log("🤖 KimpAI Bot starting...", {
+  pid: process.pid,
+  env: process.env.NODE_ENV,
+});
+
+
+실행 시 PID와 NODE_ENV 찍히게 해서,
+
+동일 토큰으로 두 개 이상 뜨는지 로그로 쉽게 확인할 수 있도록.
+
+2. “동일 버킷 중복 발송 방지용 락” 도입
+
+핵심 아이디어:
+10분(또는 30분) 단위로 “이번 FREE BTC 스캔은 이미 발송했다”는 상태를
+간단한 저장소에 남겨두고,
+같은 버킷 안에서는 재발송을 막는다.
+
+2-1. 시간 버킷 함수 추가
+
+파일 예: src/bot/utils/timeBuckets.js (또는 유사 유틸 파일)
+
+function floorToMinutesBucket(date, intervalMinutes = 10) {
+  const d = new Date(date);
+  const minutes = d.getMinutes();
+  const bucketMinutes = Math.floor(minutes / intervalMinutes) * intervalMinutes;
+  d.setMinutes(bucketMinutes, 0, 0);
+  return d.toISOString(); // 예: 2025-12-10T04:30:00.000Z
+}
+
+module.exports = { floorToMinutesBucket };
+
+
+FREE BTC는 30분 기준이면 intervalMinutes = 30으로 사용.
+
+2-2. 락 저장소 설계 (간단 버전)
+
+DB까지 갈 필요 없으면,
+src/bot/state/freeScanLock.js 식으로 in-memory + TTL 방식으로 시작해도 됨.
+
+// src/bot/state/freeScanLock.js
+const locks = new Map();
+
+/**
+ * key: string (예: "FREE_BTC_2025-12-10T04:30:00.000Z")
+ * ttlMs: number (예: 10 * 60 * 1000)
+ */
+function setLock(key, ttlMs) {
+  const expireAt = Date.now() + ttlMs;
+  locks.set(key, expireAt);
+}
+
+function hasLock(key) {
+  const now = Date.now();
+  const expireAt = locks.get(key);
+  if (!expireAt) return false;
+  if (expireAt < now) {
+    locks.delete(key);
+    return false;
+  }
+  return true;
+}
+
+module.exports = { setLock, hasLock };
+
+2-3. FREE BTC 스캔에 락 적용
+
+파일 예: src/bot/schedulers/freeBtcScan.js 또는 BTC FREE 스캔 함수 정의부.
+
+const { floorToMinutesBucket } = require("../utils/timeBuckets");
+const { setLock, hasLock } = require("../state/freeScanLock");
+
+async function runFreeBtcScan() {
+  const now = new Date();
+  const bucket = floorToMinutesBucket(now, 30); // 30분 단위 버킷
+  const lockKey = `FREE_BTC_${bucket}`;
+
+  if (hasLock(lockKey)) {
+    console.log("[FREE BTC Scan] 이미 이 시간대에 발송됨. 중복 방지로 스킵");
+    return;
+  }
+
+  console.log("[FREE BTC Scan] BTC 김프 스캔 시작...", { bucket });
+
+  // 여기서 실제 데이터 조회 + 시그널 판별
+  const signal = await buildBtcSignal(); // 기존 로직 재사용
+
+  if (!signal) {
+    console.log("[FREE BTC Scan] 시그널 없음, 발송 스킵");
+    setLock(lockKey, 30 * 60 * 1000); // 그래도 락은 걸어둠 (선택)
+    return;
+  }
+
+  // 메시지 전송 부분
+  await sendTelegramMessage(signal);
+
+  console.log("✅ [FREE BTC Scan] 메시지 전송 완료");
+  setLock(lockKey, 30 * 60 * 1000); // 30분 TTL
+}
+
+
+이렇게 하면:
+
+어떤 이유로든 동일 시각에 runFreeBtcScan이 여러 번 호출되더라도
+→ 맨 처음 1번만 발송되고, 나머지는 “이미 발송됨” 로그 찍고 return.
+
+3. 한 스캔 내에서의 중복 sendMessage 방지
+
+혹시 에이전트가 FREE 템플릿들 구성하면서
+한 번의 BTC 스캔에서 여러 번 sendTelegram 을 호출하는 형태로 바뀌었을 수도 있음.
+이를 방지하기 위해, BTC FREE 스캔은 무조건 1심볼 1메시지 구조로 강제.
+
+예:
+
+async function runFreeBtcScan() {
+  // ... 락 체크 생략
+
+  const signalList = await buildBtcSignals(); 
+  // 혹시라도 배열로 리턴되더라도, BTC는 무조건 첫 번째 것만 사용
+
+  if (!signalList || signalList.length === 0) {
+    console.log("[FREE BTC Scan] 시그널 없음");
+    return;
+  }
+
+  const [bestSignal] = signalList;
+
+  await sendTelegramMessage(bestSignal); // 여기서 단 1번만 호출
+}
+
+
+절대 for문으로 BTC FREE에서 여러 개 sendMessage 돌리지 않기
+
+필요하다면 console.log("Sending BTC FREE signal", { symbol, bucket }) 추가해서
+실제로 몇 번 보내는지 확인 가능하게.
+
+4. FREE ALT 스캔과 BTC 스캔 완전 분리 확인
+
+전달문 작업 중에, FREE ALT 로직과 BTC 로직이 뒤섞였을 수 있으니:
+
+freeAltScan.js (TOP50 알트용):
+
+메시지 제목: [KimpAI FREE] 단기 급등 감지 — {{symbol}} or 단기 급락, 변동성 확대
+
+BTC 김프 변화 감지 같은 문구가 나오지 않도록 템플릿 분리
+
+freeBtcScan.js (BTC 단독 김프용):
+
+메시지 제목: [KimpAI FREE] BTC 김프 변화 감지
+
+알트 스캔에서 BTC 템플릿을 잘못 쓰지 않도록, 파일 역할/템플릿 분리.
+
+5. 최종 테스트 체크리스트
+
+봇 프로세스 1개만 동작하는지 Replit에서 확인
+
+npm run bot:dev 실행 후:
+
+FREE BTC 스케줄이 30분마다 트리거되는지
+
+같은 30분 버킷(예: 04:30) 안에서
+
+로그: [FREE BTC Scan] BTC 김프 스캔 시작...
+
+✅ [FREE BTC Scan] 메시지 전송 완료
+→ 단 1번만 찍히는지 확인
+
+만약 두 번 이상 찍힌다면:
+
+락 로그: [FREE BTC Scan] 이미 이 시간대에 발송됨. 중복 방지로 스킵이 나오는지 확인
+
+텔레그램 채널에서:
+
+같은 시각에 BTC FREE 알림이 1개만 오는지
+
+이후 30분 뒤(예: 05:00)에 새로 한 건만 오는지
