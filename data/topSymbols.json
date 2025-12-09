@@ -1,7 +1,7 @@
 {
   "symbols": [
-    "ETHUSDT",
     "BTCUSDT",
+    "ETHUSDT",
     "USDCUSDT",
     "SOLUSDT",
     "ZECUSDT",
@@ -27,8 +27,8 @@
     "LTCUSDT",
     "NEARUSDT",
     "USTCUSDT",
-    "BFUSDUSDT",
     "AAVEUSDT",
+    "BFUSDUSDT",
     "ZENUSDT",
     "DASHUSDT",
     "ALLOUSDT",
@@ -61,6 +61,6 @@
     "SHIBUSDT",
     "ONDOUSDT"
   ],
-  "updatedAt": "2025-12-09T22:42:55.736Z",
+  "updatedAt": "2025-12-09T22:46:26.688Z",
   "count": 60
 }

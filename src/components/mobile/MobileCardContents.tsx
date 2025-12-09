@@ -97,23 +97,22 @@ export function MyAlertsMobileContent() {
   const TELEGRAM_FREE_SIGNAL_URL = "https://t.me/kimp_ai";
 
   return (
-    <div className="space-y-3">
+    <div className="flex flex-col h-full min-h-[210px]">
       {/* 타이틀 */}
-      <div className="text-sm font-semibold text-slate-100">
-        📡 실시간 시그널 채널
+      <div className="text-[14px] font-bold dark:text-slate-100 light:text-slate-900 mb-2 flex items-center gap-2">
+        <span>📡</span>
+        <span>실시간 시그널 채널</span>
       </div>
 
       {/* 본문 */}
-      <p className="text-xs text-slate-300 leading-relaxed">
+      <p className="text-[11px] dark:text-slate-400 light:text-slate-600 mb-2 leading-snug flex-1">
         Binance 고래 매매 · 거래량 폭발 · BTC/ETH 김프 급변만 실시간 발송.
       </p>
 
       {/* 버튼 */}
-      <a
-        href={TELEGRAM_FREE_SIGNAL_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-xs font-semibold text-white py-2"
+      <button
+        onClick={() => window.open(TELEGRAM_FREE_SIGNAL_URL, "_blank")}
+        className="mt-auto w-full bg-gradient-to-r from-[#8155FF] to-[#5D3DFF] dark:hover:from-[#7043FF] dark:hover:to-[#4C2FFF] h-9 rounded-lg font-semibold text-white text-[11px] flex items-center justify-center gap-1 transition-all"
       >
         {/* 텔레그램 로고 */}
         <svg
@@ -124,8 +123,8 @@ export function MyAlertsMobileContent() {
         >
           <path d="M9.04 15.34 8.9 18.5c.32 0 .46-.14.63-.31l1.5-1.43 3.11 2.28c.57.32.98.15 1.13-.53l2.05-9.62c.19-.81-.31-1.13-.86-.93L3.9 10.27c-.8.31-.79.76-.14.96l3.9 1.22 9.05-5.7c.43-.28.82-.13.5.15l-7.27 6.67Z" />
         </svg>
-        텔레그램 채널 열기
-      </a>
+        <span>텔레그램 채널 열기</span>
+      </button>
     </div>
   );
 }
