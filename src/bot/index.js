@@ -68,7 +68,7 @@ const startBot = async () => {
     console.log("✅ Telegram Bot 시작됨");
     console.log(`📌 BOT_TOKEN: ${BOT_TOKEN.substring(0, 10)}...`);
     console.log(`📌 CHANNEL_ID: ${process.env.TELEGRAM_CHANNEL_ID || "미설정"}`);
-    console.log(`📌 API_URL: ${process.env.API_URL || "http://localhost:5000"}`);
+    console.log(`📌 API_BASE_URL: ${process.env.API_BASE_URL || process.env.API_URL || "http://localhost:5000"}`);
 
     // Graceful shutdown
     process.once("SIGINT", () => bot.stop("SIGINT"));

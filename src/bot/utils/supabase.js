@@ -9,12 +9,78 @@ if (!SUPABASE_URL || !SUPABASE_KEY) {
 
 const supabase = SUPABASE_URL && SUPABASE_KEY ? createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
-/**
- * Telegram ctx에서 유저 정보를 추출하여 telegram_users에 upsert
- * - 이미 존재하면 username만 업데이트
- * - 없으면 새로 생성
- */
-async function upsertTelegramUserFromCtx(ctx) {
+async function upsertTelegramUserFromCtx(ctx, source = "direct_dm") {
+  if (!supabase || !ctx || !ctx.chat || !ctx.from) {
+    return;
+  }
+
+  const chatType = ctx.chat.type;
+  if (chatType !== "private") {
+    console.log(`⏭️ 채널/그룹 메시지 무시 (type: ${chatType})`);
+    return;
+  }
+
+  const chatId = ctx.chat.id;
+  const username = ctx.from.username || null;
+  const firstName = ctx.from.first_name || null;
+  const lastName = ctx.from.last_name || null;
+
+  try {
+    const { data: existingUser, error: fetchError } = await supabase
+      .from('users')
+      .select('*')
+      .eq('user_id', chatId)
+      .single();
+
+    if (fetchError && fetchError.code !== 'PGRST116') {
+      console.error('❌ User fetch error:', fetchError);
+    }
+
+    const now = new Date().toISOString();
+
+    if (existingUser) {
+      const { error: updateError } = await supabase
+        .from('users')
+        .update({
+          username: username,
+          first_name: firstName,
+          last_name: lastName,
+          last_active: now,
+        })
+        .eq('user_id', chatId);
+
+      if (updateError) {
+        console.error('❌ Failed to update user:', updateError);
+      } else {
+        console.log('✅ users update success:', chatId, username);
+      }
+    } else {
+      const { error: insertError } = await supabase
+        .from('users')
+        .insert({
+          user_id: chatId,
+          username: username,
+          first_name: firstName,
+          last_name: lastName,
+          join_at: now,
+          joined_from: source,
+          last_active: now,
+          is_pro: false,
+          watchlist: [],
+        });
+
+      if (insertError) {
+        console.error('❌ Failed to insert user:', insertError);
+      } else {
+        console.log('✅ users insert success:', chatId, username, source);
+      }
+    }
+  } catch (err) {
+    console.error('❌ Exception while upserting user:', err);
+  }
+}
+
+async function upsertTelegramUserLegacy(ctx) {
   if (!supabase || !ctx || !ctx.chat || !ctx.from) {
     return;
   }
@@ -43,15 +109,32 @@ async function upsertTelegramUserFromCtx(ctx) {
   }
 }
 
-// Supabase 사용자 조회 (chat_id로 조회)
 const getUserByChatId = async (chatId) => {
   if (!supabase) return null;
   try {
-    const { data, error } = await supabase
-      .from("telegram_users")
+    let { data, error } = await supabase
+      .from("users")
       .select("*")
-      .eq("telegram_chat_id", chatId)
+      .eq("user_id", chatId)
       .single();
+
+    if (error && error.code === 'PGRST116') {
+      const legacy = await supabase
+        .from("telegram_users")
+        .select("*")
+        .eq("telegram_chat_id", chatId)
+        .single();
+      
+      if (!legacy.error && legacy.data) {
+        return {
+          user_id: legacy.data.telegram_chat_id,
+          username: legacy.data.telegram_username,
+          is_pro: legacy.data.is_pro || false,
+          watchlist: legacy.data.watchlist || [],
+        };
+      }
+    }
+
     return error ? null : data;
   } catch (err) {
     console.error("User query error:", err);
@@ -59,17 +142,17 @@ const getUserByChatId = async (chatId) => {
   }
 };
 
-// 사용자 등록 또는 업데이트
 const upsertUser = async (chatId, userData) => {
   if (!supabase) return null;
   try {
+    const now = new Date().toISOString();
     const { data, error } = await supabase
-      .from("telegram_users")
+      .from("users")
       .upsert({
-        telegram_chat_id: chatId,
+        user_id: chatId,
         ...userData,
-        updated_at: new Date().toISOString(),
-      });
+        last_active: now,
+      }, { onConflict: 'user_id' });
     return error ? null : data;
   } catch (err) {
     console.error("User upsert error:", err);
@@ -77,7 +160,6 @@ const upsertUser = async (chatId, userData) => {
   }
 };
 
-// 사용자 관심종목 추가
 const addWatchlist = async (chatId, symbol) => {
   if (!supabase) return null;
   try {
@@ -98,7 +180,6 @@ const addWatchlist = async (chatId, symbol) => {
   }
 };
 
-// 사용자 관심종목 제거
 const removeWatchlist = async (chatId, symbol) => {
   if (!supabase) return null;
   try {
@@ -114,15 +195,36 @@ const removeWatchlist = async (chatId, symbol) => {
   }
 };
 
-// PRO 사용자 목록 조회
 const getProUsers = async () => {
   if (!supabase) return [];
   try {
     const { data, error } = await supabase
-      .from("telegram_users")
+      .from("users")
       .select("*")
       .eq("is_pro", true);
-    return error ? [] : data || [];
+    
+    if (error) {
+      const legacy = await supabase
+        .from("telegram_users")
+        .select("*")
+        .eq("is_pro", true);
+      
+      if (!legacy.error && legacy.data) {
+        return legacy.data.map(u => ({
+          user_id: u.telegram_chat_id,
+          telegram_chat_id: u.telegram_chat_id,
+          username: u.telegram_username,
+          is_pro: u.is_pro,
+          watchlist: u.watchlist || [],
+        }));
+      }
+      return [];
+    }
+
+    return data.map(u => ({
+      ...u,
+      telegram_chat_id: u.user_id,
+    })) || [];
   } catch (err) {
     console.error("Pro users query error:", err);
     return [];
@@ -132,6 +234,7 @@ const getProUsers = async () => {
 module.exports = {
   supabase,
   upsertTelegramUserFromCtx,
+  upsertTelegramUserLegacy,
   getUserByChatId,
   upsertUser,
   addWatchlist,

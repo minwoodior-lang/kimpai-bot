@@ -2,7 +2,7 @@ const axios = require("axios");
 const messages = require("../utils/messages");
 const { generateAiLine } = require("../utils/aiInterpret");
 
-const API_BASE = process.env.API_URL || "http://localhost:5000";
+const API_BASE = process.env.API_BASE_URL || process.env.API_URL || "http://localhost:5000";
 const CHANNEL_ID = process.env.TELEGRAM_CHANNEL_ID;
 
 const freeAltScan = async (bot) => {

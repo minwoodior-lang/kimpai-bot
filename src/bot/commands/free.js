@@ -2,7 +2,7 @@ const axios = require("axios");
 const messages = require("../utils/messages");
 const { generateAiLine, FALLBACK_MESSAGES } = require("../utils/aiInterpret");
 
-const API_BASE = process.env.API_URL || "http://localhost:5000";
+const API_BASE = process.env.API_BASE_URL || process.env.API_URL || "http://localhost:5000";
 
 // /btc 명령어
 const btcCommand = async (ctx) => {
@@ -164,8 +164,9 @@ const removeWatchlistCommand = async (ctx) => {
 const startCommand = async (ctx) => {
   const { upsertTelegramUserFromCtx } = require("../utils/supabase");
   
-  // 1) 유저 정보 Supabase에 저장
-  await upsertTelegramUserFromCtx(ctx);
+  // 1:1 DM인 경우에만 유저 정보 Supabase에 저장
+  const source = ctx.chat?.type === "private" ? "direct_dm" : "channel";
+  await upsertTelegramUserFromCtx(ctx, source);
 
   const message = `🤖 KimpAI 텔레그램 봇에 오신 것을 환영합니다!
 
