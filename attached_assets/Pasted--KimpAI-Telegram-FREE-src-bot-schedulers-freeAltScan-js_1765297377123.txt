@@ -1,0 +1,196 @@
+[작업 요청] KimpAI Telegram FREE 알림을 실제 데이터 파이프라인에 연결
+
+현재 상태
+- src/bot/schedulers/freeAltScan.js: BNB, SOL, SUI 3개만 하드코딩되어 있고 mock 데이터 기반으로 신호를 보냄
+- src/bot/schedulers/freeBtcScan.js: BTC 신호도 내부 더미 로직 사용 가능성 높음
+- src/pages/api/bot/*: BTC/ETH/ALTS용 API 엔드포인트가 생성돼 있지만, 아직 KimpAI 본 서비스 데이터 파이프라인(prices.json, premiumTable.json, marketStats.json 등)을 사용하지 않음
+
+목표
+1) FREE 텔레그램 알림이 KimpAI 웹 서비스와 동일한 데이터 파이프라인을 사용하도록 수정
+2) TOP50 알트 전체를 스캔해서, 그 중 조건에 맞는 3개만 선택하여 채널에 전송
+3) 이후 PRO 기능에서 같은 API를 재사용할 수 있도록, API 구조를 깔끔하게 설계
+
+구체 작업
+
+1. API_BASE_URL 환경변수 추가
+- .env.example, .env 모두에 추가:
+  API_BASE_URL=https://kimpai.io
+- 개발 모드에서는 http://localhost:3000 을 사용할 수 있도록 코멘트로 남겨두기
+
+2. API 엔드포인트 구현/수정 (Next.js pages/api)
+- src/pages/api/bot/btc.ts
+  - 기존 premiumTable / prices 파이프라인을 사용하여:
+    - 지난 10분 BTC 김프(prev_kimp, current_kimp)
+    - 현재 김프, 국내/해외 가격, 변동률, 과거 동일 패턴 확률 등
+  - 텔레그램 템플릿에서 사용하는 필드 이름으로 JSON 반환
+
+- src/pages/api/bot/eth.ts
+  - ETH 선물 지표(OI 변화율, Funding Rate, 최근 변동폭 등)를
+    기존 statsWorker/marketStats.json 등에서 가져와 계산
+  - 텔레그램 템플릿에 맞는 JSON 반환
+
+- src/pages/api/bot/alts.ts
+  또는 src/pages/api/bot/alts/index.ts
+  - KimpAI 데이터(예: premiumTable.json, marketStats.json 등)를 사용해서
+    "시총 TOP50 알트" 목록을 만들고,
+    각 심볼에 대해:
+      - 1시간 거래량 변화율
+      - 1시간 가격 변화율
+      - 펀딩율
+      - 과거 패턴 통계(간단히 mock 확률이라도 OK, 나중에 정교화)
+  - 기본 응답은 TOP50 전체 리스트를 JSON 배열로 반환
+  - 요청 시 ?limit=50, ?limit=3 등의 파라미터도 지원
+
+3. 텔레봇 쪽 데이터 유틸 수정
+- src/bot/utils/marketData.js (또는 유사한 이름 파일)를 찾아서:
+  - getBtcSignal() → API_BASE_URL + '/api/bot/btc' 호출하도록 수정
+  - getEthSignal() → API_BASE_URL + '/api/bot/eth' 호출하도록 수정
+  - getAltSignals() → API_BASE_URL + '/api/bot/alts?limit=50' 호출하도록 수정
+  - 현재 남아있는 mock 데이터/랜덤값 생성 부분은 모두 제거
+
+4. FREE 스케줄러 수정
+- src/bot/schedulers/freeAltScan.js:
+  - 지금 BNB/SOL/SUI로 하드코딩된 부분을 제거
+  - getAltSignals()로부터 TOP50 데이터를 받아온 뒤,
+    내부 로직에서 "변동성/거래량/조건"에 따라 상위 3개만 추려서 템플릿 메시지를 생성
+  - 템플릿은 기존 messages.js에 정의된 FREE ALTS 템플릿 그대로 사용하되,
+    API 응답 필드와 잘 매핑되도록 수정
+
+5. 검증
+- npm run bot:dev 로 봇 실행
+- 실제 /btc, /eth, /alt SUI 테스트
+- 스케줄러가 10분마다 호출될 때,
+  채널에 BNB/SOL/SUI만 반복되는 것이 아니라
+  TOP50 중 조건을 만족하는 다른 알트들도 랜덤하게(조건 기반으로) 등장하는지 확인
+- 콘솔 로그에 API 호출 성공/실패 로그도 함께 출력
+
+[추가 작업 요청] 텔레그램 ai_line을 실제 GPT 기반 AI 해석으로 변경
+
+6. AI 해석(ai_line) 실제 GPT 연동
+
+현재 상태
+
+모든 텔레그램 템플릿에서 {{ai_line}} 필드는
+
+freeAltScan / freeBtcScan / freeEthScan 내부에서
+
+하드코딩/간단 조건으로 생성되는 문구일 가능성이 높음
+
+실제 GPT(OpenAI)에 의한 자연어 분석이 아님
+
+목표
+
+ai_line을 실제 GPT(OpenAI API) 가 생성한 문장으로 대체
+
+숫자/지표는 KimpAI 기존 로직으로 계산하고,
+그 결과값을 GPT에게 넘겨서 “한 줄 요약 + 톤 통일” 문장을 생성
+
+구체 작업
+
+환경 변수 추가
+
+.env.example, .env 에 추가:
+
+OPENAI_API_KEY=... (실제 키는 내가 직접 넣을 예정)
+
+코드에서는 process.env.OPENAI_API_KEY 사용
+
+AI 해석 유틸 함수 추가
+
+src/bot/utils/aiInterpret.js (또는 ts) 생성
+
+// pseudo code 예시
+import OpenAI from "openai";
+
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+export async function generateAiLine(signalType, payload) {
+  // signalType: "FREE_BTC", "FREE_ALT", "PRO_WHALE", "PRO_RISK" 등
+  // payload: 김프, 변동률, 거래량 변화, 펀딩, OI, PL 등 숫자/플래그
+
+  const systemPrompt = `
+너는 암호화폐 시장을 분석하는 KimpAI의 리서치 어시스턴트다.
+출력은 반드시 한국어 한 문장으로만 작성한다.
+전략 추천은 간단히 톤만 제시하고, 과도한 확신 표현은 피한다.
+`;
+
+  const userPrompt = `
+신호 타입: ${signalType}
+데이터: ${JSON.stringify(payload)}
+
+위 데이터를 기반으로, 텔레그램 알림의 "🧠 AI 해석"에 들어갈 한 줄을 작성해줘.
+조건:
+- 한국어, 최대 1~2문장
+- 과거 패턴/확률 언급은 payload에 없으면 임의로 만들지 말 것
+- 예: "단기 매수세가 우세하지만, 변동성 확대에 유의가 필요합니다."
+`;
+
+  // 실제 구현은 비용 줄이기 위해 gpt-4o-mini 등 사용
+  const res = await client.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: userPrompt },
+    ],
+    max_tokens: 60,
+  });
+
+  return res.choices[0].message.content.trim();
+}
+
+
+에러 발생 시(타임아웃, 잔액 부족 등):
+
+fallback: 기존 하드코딩된 한 줄 문구 사용
+
+FREE 스케줄러에 AI 해석 적용
+
+src/bot/schedulers/freeBtcScan.js
+
+기존에 ai_line 하드코딩 하는 부분을 제거
+
+const ai_line = await generateAiLine("FREE_BTC", payload); 형태로 교체
+
+src/bot/schedulers/freeAltScan.js
+
+상위 3개 알트 선택 후, 각각에 대해
+
+generateAiLine("FREE_ALT", payloadPerSymbol) 호출해서 ai_line 채우기
+
+PRO 템플릿도 동일하게 적용 (선택)
+
+/pro_btc, /pro_whale, /pro_risk에서도
+
+숫자/지표는 기존 로직으로 계산
+
+마지막 요약 문장/리스크 문장을 generateAiLine("PRO_RISK", payload)로 생성
+
+비용/성능 고려
+
+스케줄링 시:
+
+FREE TOP50 스캔 → 상위 3개 알트만 GPT 호출 (3번)
+
+BTC FREE 신호 → 1번
+
+PRO 신호 → 실제 유저 수가 많아지기 전까지 1~수 회
+
+추후 트래픽 커질 경우:
+
+동일/비슷한 payload에 대해 1~2분 캐싱 로직 추가 가능 (optional)
+
+검증
+
+npm run bot:dev 실행
+
+FREE BTC / FREE ALTS 알림이 올 때마다 🧠 AI 해석 문장이
+
+데이터에 맞는 자연스러운 한국어 한 줄로 바뀌어 있는지 확인
+
+콘솔에서
+
+GPT 호출 성공/실패 로그 출력
+
+실패 시 fallback 문구가 정상 동작하는지 확인
+
+ 
