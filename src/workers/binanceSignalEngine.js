@@ -239,9 +239,13 @@ function checkWhaleCondition(symbol) {
 }
 
 function checkSpikeCondition(symbol) {
-  const full = symbol.toUpperCase().endsWith('USDT') ? symbol.toUpperCase() : symbol.toUpperCase() + 'USDT';
+  const full = symbol.toUpperCase().endsWith('USDT')
+    ? symbol.toUpperCase()
+    : symbol.toUpperCase() + 'USDT';
+
   const base = symbol.toUpperCase().replace('USDT', '');
   let candles = candles1m.get(full);
+
   if (!candles || candles.length < 21) {
     candles = candles1m.get(base);
     if (!candles || candles.length < 21) return null;
@@ -272,41 +276,45 @@ function checkSpikeCondition(symbol) {
   return null;
 }
 
+// ============================================================
+// Binance REST Fetchers
+// ============================================================
+
 async function fetchAllUsdtSymbols() {
   try {
-    const res = await axios.get('https://api.binance.com/api/v3/exchangeInfo');
+    const res = await axios.get("https://api.binance.com/api/v3/exchangeInfo");
     return res.data.symbols
-      .filter(s => s.quoteAsset === 'USDT' && s.status === 'TRADING')
+      .filter(s => s.quoteAsset === "USDT" && s.status === "TRADING")
       .map(s => s.symbol.toLowerCase());
   } catch (err) {
-    console.error('[BinanceSignal] Failed to fetch symbols:', err.message);
+    console.error("[BinanceSignal] Failed to fetch symbols:", err.message);
     return [];
   }
 }
 
 async function fetch24hTicker() {
   try {
-    const res = await axios.get('https://api.binance.com/api/v3/ticker/24hr');
+    const res = await axios.get("https://api.binance.com/api/v3/ticker/24hr");
     for (const t of res.data) {
-      if (t.symbol.endsWith('USDT')) {
+      if (t.symbol.endsWith("USDT")) {
         ticker24h.set(t.symbol, {
           priceChange: parseFloat(t.priceChangePercent),
           volume: parseFloat(t.quoteVolume),
-          lastPrice: parseFloat(t.lastPrice)
+          lastPrice: parseFloat(t.lastPrice),
         });
       }
     }
     lastUpdateTime = Date.now();
     console.log(`[BinanceSignal] Updated 24h ticker for ${ticker24h.size} symbols`);
   } catch (err) {
-    console.error('[BinanceSignal] Failed to fetch 24h ticker:', err.message);
+    console.error("[BinanceSignal] Failed to fetch 24h ticker:", err.message);
   }
 }
 
-async function fetchKlines(symbol, interval = '1h', limit = 250) {
+async function fetchKlines(symbol, interval = "1h", limit = 250) {
   try {
-    const res = await axios.get('https://api.binance.com/api/v3/klines', {
-      params: { symbol: symbol.toUpperCase(), interval, limit }
+    const res = await axios.get("https://api.binance.com/api/v3/klines", {
+      params: { symbol: symbol.toUpperCase(), interval, limit },
     });
     return res.data.map(k => ({
       openTime: k[0],
@@ -315,7 +323,7 @@ async function fetchKlines(symbol, interval = '1h', limit = 250) {
       low: k[3],
       close: k[4],
       volume: k[5],
-      closeTime: k[6]
+      closeTime: k[6],
     }));
   } catch (err) {
     console.error(`[BinanceSignal] Failed to fetch klines for ${symbol}:`, err.message);
@@ -324,11 +332,15 @@ async function fetchKlines(symbol, interval = '1h', limit = 250) {
 }
 
 function get24hData(symbol) {
-  return ticker24h.get(symbol.toUpperCase()) || { priceChange: 0, volume: 0, lastPrice: 0 };
+  return ticker24h.get(symbol.toUpperCase()) || {
+    priceChange: 0,
+    volume: 0,
+    lastPrice: 0,
+  };
 }
 
 function getCandles1h(symbol) {
-  const base = symbol.toUpperCase().replace('USDT', '');
+  const base = symbol.toUpperCase().replace("USDT", "");
   return candles1h.get(base) || [];
 }
 
@@ -341,28 +353,31 @@ function closeWebSocket(socket, pingInterval) {
     if (!socket) return;
 
     const noop = () => {};
-    socket.removeAllListeners('error');
-    socket.on('error', noop);
+    socket.removeAllListeners("error");
+    socket.on("error", noop);
 
-    if (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING) {
+    if (
+      socket.readyState === WebSocket.OPEN ||
+      socket.readyState === WebSocket.CONNECTING
+    ) {
       try {
         socket.close();
       } catch (e) {
-        console.error('[BinanceSignal] WS close error:', e.message || e);
+        console.error("[BinanceSignal] WS close error:", e.message || e);
       }
     }
 
-    socket.removeAllListeners('open');
-    socket.removeAllListeners('message');
-    socket.removeAllListeners('close');
-    socket.removeAllListeners('pong');
+    socket.removeAllListeners("open");
+    socket.removeAllListeners("message");
+    socket.removeAllListeners("close");
+    socket.removeAllListeners("pong");
   } catch (err) {
-    console.error('[BinanceSignal] closeWebSocket outer error:', err.message || err);
+    console.error("[BinanceSignal] closeWebSocket outer error:", err.message || err);
   }
 }
 
 // ============================================================
-// 🚨 AggTrade WebSocket (451 무한재접속 차단 포함 패치됨)
+// 🚨 AggTrade WebSocket (451 무한재접속 차단 완전 적용)
 // ============================================================
 function startAggTradeStream(symbols) {
   if (symbols.length === 0) return;
@@ -372,41 +387,50 @@ function startAggTradeStream(symbols) {
   wsPingInterval = null;
   pendingPong = false;
 
-  const stream = symbols.slice(0, 200).map(s => `${s}@aggTrade`).join('/');
+  const stream = symbols.slice(0, 200).map(s => `${s}@aggTrade`).join("/");
   const url = `wss://stream.binance.com:9443/stream?streams=${stream}`;
 
   ws = new WebSocket(url);
 
-  ws.on('open', () => {
-    console.log(`[BinanceSignal] AggTrade WS connected (${Math.min(symbols.length, 200)} symbols)`);
+  ws.on("open", () => {
+    console.log(
+      `[BinanceSignal] AggTrade WS connected (${Math.min(symbols.length, 200)} symbols)`
+    );
     lastTradeTime = Date.now();
     syncGlobalState();
 
     wsPingInterval = setInterval(() => {
       if (ws && ws.readyState === WebSocket.OPEN) {
         if (pendingPong) {
-          console.warn('[BinanceSignal] AggTrade WS pong timeout → reconnect');
-          recordError('AggTrade WS pong timeout');
+          console.warn("[BinanceSignal] AggTrade WS pong timeout → reconnect");
+          recordError("AggTrade WS pong timeout");
           closeWebSocket(ws, wsPingInterval);
-          setTimeout(() => startAggTradeStream(currentSymbols.slice(0, 100)), 1000);
+          setTimeout(
+            () => startAggTradeStream(currentSymbols.slice(0, 100)),
+            1000
+          );
           return;
         }
+
         pendingPong = true;
         try {
           ws.ping();
         } catch (e) {
-          console.error('[BinanceSignal] AggTrade WS ping error:', e.message || e);
-          recordError('AggTrade WS ping error: ' + (e.message || e));
+          console.error("[BinanceSignal] AggTrade WS ping error:", e.message || e);
+          recordError("AggTrade WS ping error: " + (e.message || e));
           closeWebSocket(ws, wsPingInterval);
-          setTimeout(() => startAggTradeStream(currentSymbols.slice(0, 100)), 1000);
+          setTimeout(
+            () => startAggTradeStream(currentSymbols.slice(0, 100)),
+            1000
+          );
         }
       }
     }, WS_PING_INTERVAL);
   });
 
-  ws.on('pong', () => (pendingPong = false));
+  ws.on("pong", () => (pendingPong = false));
 
-  ws.on('message', data => {
+  ws.on("message", data => {
     try {
       const msg = JSON.parse(data);
       const t = msg.data;
@@ -424,33 +448,37 @@ function startAggTradeStream(symbols) {
 
       lastTradeTime = Date.now();
       recentTradeCount++;
-    } catch (e) {}
+    } catch (_) {}
   });
 
   // ------------------------------------------------------------
-  // 🚨 (패치됨) AggTrade error 핸들러 – 451 시 완전 중단
+  // 🚨 AggTrade error — 451 발생 시 즉시 완전 중단
   // ------------------------------------------------------------
-  ws.on('error', err => {
+  ws.on("error", err => {
     const msg = err && (err.message || err);
-    console.error('[BinanceSignal] AggTrade WS error:', msg);
+    console.error("[BinanceSignal] AggTrade WS error:", msg);
 
     if (isRegionalRestrictionError(err)) {
-      recordError('AggTrade WS regional restriction (451) - stop reconnecting');
-      console.warn('🚫 Binance AggTrade Stream BLOCKED by region (451). No more reconnect.');
+      recordError("AggTrade WS regional restriction (451) - stop reconnecting");
+      console.warn(
+        "🚫 Binance AggTrade Stream BLOCKED by region (451). No more reconnect."
+      );
       closeWebSocket(ws, wsPingInterval);
       ws = null;
       wsPingInterval = null;
-      return; // 재접속 중단
+      return;
     }
 
-    recordError('AggTrade WS error: ' + msg);
+    recordError("AggTrade WS error: " + msg);
   });
 
   // ------------------------------------------------------------
-  // 🚨 (패치됨) AggTrade close 핸들러 – 451 인 경우 재접속 금지
+  // 🚨 AggTrade close — 마지막 에러가 451이면 재접속 금지
   // ------------------------------------------------------------
-  ws.on('close', (code, reason) => {
-    console.log(`[BinanceSignal] AggTrade WS disconnected (code: ${code})`);
+  ws.on("close", (code, reason) => {
+    console.log(
+      `[BinanceSignal] AggTrade WS disconnected (code: ${code})`
+    );
     recordError(`AggTrade WS closed: ${code}`);
 
     closeWebSocket(ws, wsPingInterval);
@@ -458,13 +486,14 @@ function startAggTradeStream(symbols) {
     ws = null;
     wsPingInterval = null;
 
-    // 마지막 에러가 451이면 재접속 완전 중단
-    if (lastErrorMessage && lastErrorMessage.includes('regional restriction (451)')) {
-      console.warn('🚫 AggTrade WS blocked by 451 → STOP reconnect loop.');
+    if (
+      lastErrorMessage &&
+      lastErrorMessage.includes("regional restriction (451)")
+    ) {
+      console.warn("🚫 AggTrade WS blocked by 451 → STOP reconnect loop.");
       return;
     }
 
-    // 그 외에는 정상 재연결
     setTimeout(() => {
       if (isRunning) startAggTradeStream(currentSymbols.slice(0, 100));
     }, 3000);
@@ -472,7 +501,7 @@ function startAggTradeStream(symbols) {
 }
 
 // ============================================================
-// 🚨 Kline WebSocket (1m) — 451 무한 재접속 차단 패치 포함
+// 🚨 Kline WebSocket (1m) — 451 완전 차단 적용
 // ============================================================
 function startKlineStream(symbols) {
   if (symbols.length === 0) return;
@@ -482,23 +511,28 @@ function startKlineStream(symbols) {
   klineWsPingInterval = null;
   pendingKlinePong = false;
 
-  const stream = symbols.slice(0, 100).map(s => `${s}@kline_1m`).join('/');
+  const stream = symbols.slice(0, 100).map(s => `${s}@kline_1m`).join("/");
   const url = `wss://stream.binance.com:9443/stream?streams=${stream}`;
 
   klineWs = new WebSocket(url);
 
-  klineWs.on('open', () => {
-    console.log(`[BinanceSignal] Kline WS connected (${Math.min(symbols.length, 100)} symbols)`);
+  klineWs.on("open", () => {
+    console.log(
+      `[BinanceSignal] Kline WS connected (${Math.min(symbols.length, 100)} symbols)`
+    );
 
     syncGlobalState();
 
     klineWsPingInterval = setInterval(() => {
       if (klineWs && klineWs.readyState === WebSocket.OPEN) {
         if (pendingKlinePong) {
-          console.warn('[BinanceSignal] Kline WS pong timeout→reconnect');
-          recordError('Kline WS pong timeout');
+          console.warn("[BinanceSignal] Kline WS pong timeout→reconnect");
+          recordError("Kline WS pong timeout");
           closeWebSocket(klineWs, klineWsPingInterval);
-          setTimeout(() => startKlineStream(currentSymbols.slice(0, 100)), 1000);
+          setTimeout(
+            () => startKlineStream(currentSymbols.slice(0, 100)),
+            1000
+          );
           return;
         }
 
@@ -506,18 +540,21 @@ function startKlineStream(symbols) {
         try {
           klineWs.ping();
         } catch (e) {
-          console.error('[BinanceSignal] Kline WS ping error:', e.message || e);
-          recordError('Kline WS ping error: ' + (e.message || e));
+          console.error("[BinanceSignal] Kline WS ping error:", e.message || e);
+          recordError("Kline WS ping error: " + (e.message || e));
           closeWebSocket(klineWs, klineWsPingInterval);
-          setTimeout(() => startKlineStream(currentSymbols.slice(0, 100)), 1000);
+          setTimeout(
+            () => startKlineStream(currentSymbols.slice(0, 100)),
+            1000
+          );
         }
       }
     }, WS_PING_INTERVAL);
   });
 
-  klineWs.on('pong', () => (pendingKlinePong = false));
+  klineWs.on("pong", () => (pendingKlinePong = false));
 
-  klineWs.on('message', raw => {
+  klineWs.on("message", raw => {
     try {
       const msg = JSON.parse(raw);
       const k = msg.data?.k;
@@ -531,7 +568,7 @@ function startKlineStream(symbols) {
         low: k.l,
         close: k.c,
         volume: k.v,
-        isFinal: k.x
+        isFinal: k.x,
       };
 
       if (!candles1m.has(symbol)) candles1m.set(symbol, []);
@@ -541,37 +578,44 @@ function startKlineStream(symbols) {
         arr.push(candle);
         if (arr.length > 100) arr.shift();
       } else {
-        if (arr.length > 0 && arr[arr.length - 1].openTime === candle.openTime) {
+        if (
+          arr.length > 0 &&
+          arr[arr.length - 1].openTime === candle.openTime
+        ) {
           arr[arr.length - 1] = candle;
         }
       }
-    } catch (e) {}
+    } catch (_) {}
   });
 
   // ------------------------------------------------------------
-  // 🚨 (패치됨) Kline error — 451 발생시 즉시 중단
+  // 🚨 Kline error — 451 발생 시 즉시 종료 & 재접속 금지
   // ------------------------------------------------------------
-  klineWs.on('error', err => {
+  klineWs.on("error", err => {
     const msg = err && (err.message || err);
-    console.error('[BinanceSignal] Kline WS error:', msg);
+    console.error("[BinanceSignal] Kline WS error:", msg);
 
     if (isRegionalRestrictionError(err)) {
-      recordError('Kline WS regional restriction (451) - stop reconnecting');
-      console.warn('🚫 Binance Kline Stream BLOCKED by 451 (Region Restricted)');
+      recordError("Kline WS regional restriction (451) - stop reconnecting");
+      console.warn(
+        "🚫 Binance Kline Stream BLOCKED by 451 (Region Restricted)"
+      );
       closeWebSocket(klineWs, klineWsPingInterval);
       klineWs = null;
       klineWsPingInterval = null;
-      return; // 재접속 금지
+      return;
     }
 
-    recordError('Kline WS error: ' + msg);
+    recordError("Kline WS error: " + msg);
   });
 
   // ------------------------------------------------------------
-  // 🚨 (패치됨) Kline close — 마지막 에러가 451이면 재접속하지 않음
+  // 🚨 마지막 에러가 451이면 재접속 금지
   // ------------------------------------------------------------
-  klineWs.on('close', (code, reason) => {
-    console.log(`[BinanceSignal] Kline WS disconnected (code: ${code})`);
+  klineWs.on("close", (code, reason) => {
+    console.log(
+      `[BinanceSignal] Kline WS disconnected (code: ${code})`
+    );
     recordError(`Kline WS closed: ${code}`);
 
     closeWebSocket(klineWs, klineWsPingInterval);
@@ -579,8 +623,11 @@ function startKlineStream(symbols) {
     klineWs = null;
     klineWsPingInterval = null;
 
-    if (lastErrorMessage && lastErrorMessage.includes('regional restriction (451)')) {
-      console.warn('🚫 Kline WS blocked by 451 → STOP reconnect loop.');
+    if (
+      lastErrorMessage &&
+      lastErrorMessage.includes("regional restriction (451)")
+    ) {
+      console.warn("🚫 Kline WS blocked by 451 → STOP reconnect loop.");
       return;
     }
 
@@ -590,24 +637,18 @@ function startKlineStream(symbols) {
   });
 }
 
-let currentSymbols = [];
-let baselineInterval = null;
-let tickerInterval = null;
-let symbolRefreshInterval = null;
-let healthCheckInterval = null;
-
 // ============================================================
 // initialize()
 // ============================================================
 async function initialize() {
   if (isRunning) {
-    console.log('[BinanceSignal] Engine already running, skip init');
+    console.log("[BinanceSignal] Engine already running, skip init");
     return;
   }
 
   isRunning = true;
   syncGlobalState();
-  console.log('[BinanceSignal] Initializing signal engine...');
+  console.log("[BinanceSignal] Initializing signal engine...");
 
   const symbols = await fetchAllUsdtSymbols();
   console.log(`[BinanceSignal] Found ${symbols.length} USDT trading pairs`);
@@ -619,7 +660,7 @@ async function initialize() {
     topSymbols = await getTopSymbols();
     console.log(`[BinanceSignal] Using TOP ${topSymbols.length} symbols`);
   } catch (err) {
-    console.warn('[BinanceSignal] Failed to get top symbols, fallback used:', err.message);
+    console.warn("[BinanceSignal] Failed to get top symbols, fallback used:", err.message);
     topSymbols = FALLBACK_SYMBOLS;
   }
 
@@ -630,11 +671,11 @@ async function initialize() {
   for (let i = 0; i < limit; i++) {
     const sym = currentSymbols[i];
 
-    const k1h = await fetchKlines(sym, '1h', 250);
-    if (k1h.length > 0) candles1h.set(sym.toUpperCase().replace('USDT', ''), k1h);
+    const k1h = await fetchKlines(sym, "1h", 250);
+    if (k1h.length > 0) candles1h.set(sym.toUpperCase().replace("USDT", ""), k1h);
 
-    const k1m = await fetchKlines(sym, '1m', 100);
-    if (k1m.length > 0) candles1m.set(sym.toUpperCase().replace('USDT', ''), k1m);
+    const k1m = await fetchKlines(sym, "1m", 100);
+    if (k1m.length > 0) candles1m.set(sym.toUpperCase().replace("USDT", ""), k1m);
   }
 
   // WS 시작
@@ -652,14 +693,14 @@ async function initialize() {
   // Ticker 5분 업데이트
   tickerInterval = setInterval(fetch24hTicker, 5 * 60000);
 
-  // 15분마다 Symbol 리프레시
+  // 15분마다 Symbol Refresh
   symbolRefreshInterval = setInterval(async () => {
     try {
       const newList = await getTopSymbols();
       currentSymbols = newList.map(s => s.toLowerCase());
-      console.log('[BinanceSignal] Refreshed symbols:', currentSymbols.length);
+      console.log("[BinanceSignal] Refreshed symbols:", currentSymbols.length);
     } catch (err) {
-      console.warn('[BinanceSignal] Symbol refresh failed:', err.message);
+      console.warn("[BinanceSignal] Symbol refresh failed:", err.message);
     }
   }, 15 * 60000);
 
@@ -673,7 +714,7 @@ async function initialize() {
 // stop()
 // ============================================================
 function stop() {
-  console.log('[BinanceSignal] Stopping engine...');
+  console.log("[BinanceSignal] Stopping engine...");
   isRunning = false;
   syncGlobalState();
 
@@ -697,7 +738,7 @@ function stop() {
   pendingPong = false;
   pendingKlinePong = false;
 
-  console.log('[BinanceSignal] Engine stopped');
+  console.log("[BinanceSignal] Engine stopped");
 }
 
 // ============================================================
@@ -722,6 +763,7 @@ function recordError(message) {
   if (engineErrors.length > 100) {
     engineErrors = engineErrors.slice(-50);
   }
+
   syncGlobalState();
 }
 
@@ -732,7 +774,8 @@ function getStatus() {
   const now = Date.now();
   const wsConnected = ws && ws.readyState === WebSocket.OPEN;
   const klineConnected = klineWs && klineWs.readyState === WebSocket.OPEN;
-  const tradeStale = lastTradeTime > 0 && (now - lastTradeTime) > TRADE_STALE_THRESHOLD;
+  const tradeStale =
+    lastTradeTime > 0 && now - lastTradeTime > TRADE_STALE_THRESHOLD;
 
   syncGlobalState();
 
@@ -749,7 +792,10 @@ function getStatus() {
     lastUpdate: lastUpdateTime,
     lastUpdateAgo: Math.floor((now - lastUpdateTime) / 1000),
     lastTradeTime,
-    lastTradeAgo: lastTradeTime > 0 ? Math.floor((now - lastTradeTime) / 1000) : -1,
+    lastTradeAgo:
+      lastTradeTime > 0
+        ? Math.floor((now - lastTradeTime) / 1000)
+        : -1,
     tradeStale,
     wsConnected,
     klineWsConnected: klineConnected,
@@ -761,7 +807,7 @@ function getStatus() {
     restartCount,
     lastRestartTime,
     lastError: lastErrorMessage,
-    errors: engineErrors.slice(-10)
+    errors: engineErrors.slice(-10),
   };
 }
 
@@ -771,16 +817,19 @@ function getStatus() {
 async function restart() {
   const now = Date.now();
 
-  if (lastRestartTime > 0 && (now - lastRestartTime) < MAX_RESTART_INTERVAL) {
-    console.warn('[BinanceSignal] Restart throttled');
+  if (
+    lastRestartTime > 0 &&
+    now - lastRestartTime < MAX_RESTART_INTERVAL
+  ) {
+    console.warn("[BinanceSignal] Restart throttled");
     return false;
   }
 
-  console.log('[BinanceSignal] ===== FULL RESTART =====');
+  console.log("[BinanceSignal] ===== FULL RESTART =====");
 
   stop();
   clearAllData();
-  await new Promise(r => setTimeout(r, 3000));
+  await new Promise((r) => setTimeout(r, 3000));
 
   restartCount++;
   lastRestartTime = now;
@@ -793,18 +842,23 @@ async function restart() {
 }
 
 // ============================================================
-// startHealthCheck() — 🚨 451 차단 로직 포함됨
+// startHealthCheck() — 🚨 451 발생 시 healthCheck 중단
 // ============================================================
 function startHealthCheck() {
   if (healthCheckInterval) clearInterval(healthCheckInterval);
 
-  console.log('[BinanceSignal] Starting health check (every 30s)...');
+  console.log("[BinanceSignal] Starting health check (every 30s)...");
 
   healthCheckInterval = setInterval(() => {
 
-    // 🚨 regional restriction(451) → healthCheck도 아무것도 안 함
-    if (lastErrorMessage && lastErrorMessage.includes('regional restriction (451)')) {
-      console.warn('[BinanceSignal] Binance WS region-blocked (451). HealthCheck paused.');
+    // 🚨 regional restriction → healthCheck도 중단
+    if (
+      lastErrorMessage &&
+      lastErrorMessage.includes("regional restriction (451)")
+    ) {
+      console.warn(
+        "[BinanceSignal] Binance WS region-blocked (451). HealthCheck paused."
+      );
       return;
     }
 
@@ -812,43 +866,56 @@ function startHealthCheck() {
     const now = Date.now();
 
     // 1) Trade stale
-    if (status.lastTradeTime > 0 && (now - status.lastTradeTime) > TRADE_STALE_THRESHOLD) {
-      console.warn('[BinanceSignal] No trades → restart');
-      recordError('No trades');
-      restart().catch(e => console.error('Restart failed:', e.message));
+    if (
+      status.lastTradeTime > 0 &&
+      now - status.lastTradeTime > TRADE_STALE_THRESHOLD
+    ) {
+      console.warn("[BinanceSignal] No trades → restart");
+      recordError("No trades");
+      restart().catch((e) =>
+        console.error("Restart failed:", e.message)
+      );
       return;
     }
 
-    // 2) WS 끊김 → reconnect
+    // 2) WebSocket 끊김 → reconnect
     if (!status.wsConnected && isRunning) {
-      console.warn('[BinanceSignal] AggTrade WS disconnected → reconnect');
-      recordError('AggTrade WebSocket disconnected');
+      console.warn("[BinanceSignal] AggTrade WS disconnected → reconnect");
+      recordError("AggTrade WebSocket disconnected");
       startAggTradeStream(currentSymbols.slice(0, 100));
     }
 
     if (!status.klineWsConnected && isRunning) {
-      console.warn('[BinanceSignal] Kline WS disconnected → reconnect');
-      recordError('Kline WebSocket disconnected');
+      console.warn("[BinanceSignal] Kline WS disconnected → reconnect");
+      recordError("Kline WebSocket disconnected");
       startKlineStream(currentSymbols.slice(0, 100));
     }
 
-    // 3) 데이터 손상
-    if (isRunning && status.lastTradeTime > 0 && (now - status.lastTradeTime) > 60000) {
-      if (status.tradeBucketCount === 0 || status.baselineCount === 0) {
-        console.warn('[BinanceSignal] Empty buckets/baselines → restart');
-        recordError('Empty buckets/baselines');
-        restart().catch(e => console.error('Restart failed:', e.message));
+    // 3) 데이터 손상 → restart
+    if (
+      isRunning &&
+      status.lastTradeTime > 0 &&
+      now - status.lastTradeTime > 60000
+    ) {
+      if (
+        status.tradeBucketCount === 0 ||
+        status.baselineCount === 0
+      ) {
+        console.warn("[BinanceSignal] Empty buckets/baselines → restart");
+        recordError("Empty buckets/baselines");
+        restart().catch((e) =>
+          console.error("Restart failed:", e.message)
+        );
         return;
       }
     }
 
-    // Debug log
-    if (process.env.NODE_ENV === 'development' || status.tradeStale) {
+    if (process.env.NODE_ENV === "development" || status.tradeStale) {
       console.log(
-        `[BinanceSignal] Health: WS=${status.wsConnected?'✓':'✗'} ` +
-        `Kline=${status.klineWsConnected?'✓':'✗'} ` +
-        `Trades=${status.recentTrades} Buckets=${status.tradeBucketCount} ` +
-        `Baselines=${status.baselineCount} LastTrade=${status.lastTradeAgo}s`
+        `[BinanceSignal] Health: WS=${status.wsConnected ? "✓" : "✗"} ` +
+          `Kline=${status.klineWsConnected ? "✓" : "✗"} ` +
+          `Trades=${status.recentTrades} Buckets=${status.tradeBucketCount} ` +
+          `Baselines=${status.baselineCount} LastTrade=${status.lastTradeAgo}s`
       );
     }
   }, 30000);
@@ -880,5 +947,5 @@ module.exports = {
   ticker24h,
 
   EMA_PERIOD,
-  EMA_SLOPE_THRESHOLD
+  EMA_SLOPE_THRESHOLD,
 };
