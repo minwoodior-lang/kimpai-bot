@@ -4,17 +4,23 @@ const { getTopSymbols, FALLBACK_SYMBOLS } = require('../bot/utils/binanceSymbols
 
 const BASELINE_WINDOW = 20;
 
-// FREE 고래 시그널 v2.3 필터 상수
+// FREE 고래 시그널 v2.3b 필터 상수 (조건 완화)
 const MAJOR_COINS = ['BTC', 'ETH', 'BNB', 'SOL'];
-const MIN_24H_VOLUME_USDT = 3000000; // 24h 거래액 하한
+const MIN_24H_VOLUME_USDT = 2000000; // 24h 거래액 하한 (3M → 2M)
 
 // 일반 코인
-const MIN_VOLUME_USDT = 20000; // 최근 N분 체결 금액
-const WHALE_VOLUME_RATIO = 6.0; // 거래량 배수
+const MIN_VOLUME_USDT = 12000; // 최근 N분 체결 금액 (20K → 12K)
+const WHALE_VOLUME_RATIO = 4.0; // 거래량 배수 (6.0 → 4.0)
 
 // 메이저 코인
-const MAJOR_MIN_VOLUME_USDT = 100000;
-const MAJOR_WHALE_VOLUME_RATIO = 4.0;
+const MAJOR_MIN_VOLUME_USDT = 80000; // (100K → 80K)
+const MAJOR_WHALE_VOLUME_RATIO = 3.0; // (4.0 → 3.0)
+
+// 엔진 상태 추적
+let lastUpdateTime = Date.now();
+let recentTradeCount = 0;
+let lastErrorMessage = null;
+let engineErrors = [];
 
 const SPIKE_PRICE_THRESHOLD = 2;
 const SPIKE_VOLUME_RATIO = 3;
@@ -93,10 +99,10 @@ function checkWhaleCondition(symbol) {
   const baseline = baselineVolumes.get(fullSymbol);
   if (!baseline || baseline < 100) return null;
   
-  // 24h 거래액 필터 확인
+  // 24h 거래액 필터 확인 (volume은 quoteVolume - USDT 기준)
   const ticker24hData = ticker24h.get(fullSymbol);
   if (ticker24hData) {
-    const volume24h = parseFloat(ticker24hData.quoteAssetVolume || 0);
+    const volume24h = ticker24hData.volume || 0;
     if (volume24h < MIN_24H_VOLUME_USDT) return null;
   }
   
@@ -274,6 +280,9 @@ function startAggTradeStream(symbols) {
       } else {
         bucket.buyNotional += notional;
       }
+      
+      lastUpdateTime = Date.now();
+      recentTradeCount++;
     } catch (err) {}
   });
   
@@ -411,9 +420,87 @@ function stop() {
   if (klineWs) klineWs.close();
 }
 
+function getStatus() {
+  const now = Date.now();
+  const wsConnected = ws && ws.readyState === WebSocket.OPEN;
+  const klineWsConnected = klineWs && klineWs.readyState === WebSocket.OPEN;
+  
+  return {
+    running: isRunning,
+    lastUpdate: lastUpdateTime,
+    lastUpdateAgo: Math.floor((now - lastUpdateTime) / 1000),
+    wsConnected,
+    klineWsConnected,
+    recentTrades: recentTradeCount,
+    symbolCount: currentSymbols.length,
+    tradeBucketCount: tradeBuckets.size,
+    baselineCount: baselineVolumes.size,
+    ticker24hCount: ticker24h.size,
+    lastError: lastErrorMessage,
+    errors: engineErrors.slice(-10)
+  };
+}
+
+function recordError(message) {
+  lastErrorMessage = message;
+  engineErrors.push({
+    time: Date.now(),
+    message
+  });
+  if (engineErrors.length > 100) {
+    engineErrors = engineErrors.slice(-50);
+  }
+}
+
+async function restart() {
+  console.log('[BinanceSignal] Restarting engine...');
+  stop();
+  isRunning = false;
+  
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  
+  await initialize();
+  console.log('[BinanceSignal] Engine restarted successfully');
+}
+
+let healthCheckInterval = null;
+
+function startHealthCheck() {
+  if (healthCheckInterval) return;
+  
+  healthCheckInterval = setInterval(() => {
+    const status = getStatus();
+    const now = Date.now();
+    
+    if (now - status.lastUpdate > 5 * 60 * 1000) {
+      console.warn('[BinanceSignal] No updates for 5 minutes, restarting...');
+      recordError('No updates for 5 minutes, auto-restarting');
+      restart().catch(err => {
+        console.error('[BinanceSignal] Restart failed:', err.message);
+        recordError('Restart failed: ' + err.message);
+      });
+    }
+    
+    if (!status.wsConnected && isRunning) {
+      console.warn('[BinanceSignal] WebSocket disconnected, reconnecting...');
+      recordError('WebSocket disconnected, reconnecting');
+      startAggTradeStream(currentSymbols.slice(0, 60));
+    }
+    
+    if (!status.klineWsConnected && isRunning) {
+      console.warn('[BinanceSignal] Kline WebSocket disconnected, reconnecting...');
+      recordError('Kline WebSocket disconnected, reconnecting');
+      startKlineStream(currentSymbols.slice(0, 60));
+    }
+  }, 60 * 1000);
+}
+
 module.exports = {
   initialize,
   stop,
+  restart,
+  getStatus,
+  startHealthCheck,
   checkWhaleCondition,
   checkSpikeCondition,
   get24hData,

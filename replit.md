@@ -7,44 +7,38 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 - 이터러티브 개발 선호
 - 상세한 설명 요구
 
-### 최신 변경사항 (2025-12-10 v2.4)
+### 최신 변경사항 (2025-12-10 v2.5)
 
-**Market Dashboard 페이지 추가 (/market):**
-- ✅ 7개 섹션 구현:
-  - Section A: Summary Cards (7개 KPI - 평균 김프, BTC 도미넌스, 글로벌/국내 거래액, 환율, TOP 상승/하락)
-  - Section B: Long/Short Ratio Chart (Binance Futures 기반)
-  - Section C: Premium Heatmap (6개 거래소 × 20개 코인)
-  - Section D: Exchange Premium Table (거래소별 평균/최대/최소)
-  - Section E: Volatility Index (VIX 스타일)
-  - Section F: Major Coins Market Cap
-  - Section G: Trending List (6개 필터: TOP50, 시총, 거래대금, 급등, 급락, 신규)
-- ✅ 7개 API 엔드포인트: /api/market/summary, futures-long-short, premium-heatmap, exchange-premium, volatility, majors, trending
-- ✅ 실시간 데이터 연동 (prices.json, premiumTable.json, marketStats.json 재활용)
+**FREE 고래 시그널 v2.3b (조건 완화 + 진단/자동복구):**
+- ✅ **조건 완화:**
+  - 24h 거래액(USDT): 3M → 2M
+  - 최근 N분 체결 금액: 20K → 12K USDT (메이저: 100K → 80K)
+  - 거래량 배수: 6.0x → 4.0x (메이저: 4.0x → 3.0x)
+  - 쿨다운: 60분 → 45분
 
-**실시간 고래 시그널 버그 수정:**
-- ✅ binanceSignalEngine.js line 100: 변수명 중복 오류 수정 (ticker24h → ticker24hData)
-- ✅ src/bot/index.js: 초기화 로깅 강화
+- ✅ **진단 명령어 추가:**
+  - `/signal_status` - 엔진 상태, WS 연결, 트레이드 카운트 확인
+  - `/signal_test` - 테스트 시그널 채널 강제 발송
+  - `/signal_restart` - 엔진 수동 재시작
+
+- ✅ **자동 복구 로직:**
+  - 1분마다 헬스 체크 (startHealthCheck)
+  - 5분 이상 업데이트 없으면 자동 재시작
+  - WebSocket 연결 끊김 시 자동 재연결
+
+- ✅ **Admin Health Monitoring (/admin):**
+  - `/api/admin/health` API 엔드포인트
+  - 시그널 엔진 상태 (running, WS 연결, 마지막 업데이트)
+  - 텔레그램 봇 상태 (uptime, 마지막 메시지)
+  - 워커 상태 (Price, Stats, Premium - 파일 갱신 기준)
+  - 에러 로그 표시
+
+**이전 v2.4 변경사항:**
+- Market Dashboard 페이지 (/market) - 7개 섹션, 7개 API
+- 실시간 고래 시그널 버그 수정
 
 **이전 v2.3 변경사항:**
-**FREE 고래 시그널 v2.3 (트리거 강화 + 채널 상한 + 마지막 알림):**
-- ✅ **1) 트리거 필터 강화:**
-  - 24h 거래액(USDT) ≥ 3,000,000 인 심볼만 대상
-  - 최근 N분 체결 금액 ≥ 20,000 USDT (메이저는 100,000 USDT)
-  - 거래량 배수 ≥ 6.0배 (메이저 BTC/ETH/BNB/SOL은 4.0배)
-  
-- ✅ **2) 쿨다운 & 채널 상한:**
-  - 심볼별 쿨다운: 60분 유지
-  - 1분 내 최대 3개, 10분 내 최대 3개, 1시간 내 최대 12개 신호
-  - 조건 초과 시 체결 금액 큰 순으로 정렬해 상위만 발송
-
-- ✅ **3) "마지막 알림" 표시 추가:**
-  - 심볼별 lastAlertAt 저장 (in-memory)
-  - 메시지: "마지막 알림: 최초 감지" 또는 "25분 전" 등
-  - 보조지표 블록 아래 한 줄 추가
-
-- ✅ **4) RSI 라벨 & 푸터 수정:**
-  - RSI: 값 + 이모지만 (괄호 텍스트 제거)
-  - 푸터: "📡 KimpAI – Binance 실시간 체결 기반 고래 시그널\nAI 분석 · 김프 차트: kimpai.io"
+- 트리거 필터 강화, 쿨다운 & 채널 상한, 마지막 알림 표시, RSI 라벨 수정
 
 **이전 v2.1 변경사항:**
 - 2종 시그널만 유지 (스파이크 시그널 제거)
@@ -102,6 +96,11 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 - `/watchlist` - 관심종목 확인
 - `/add_watchlist {symbol}` - 관심종목 추가
 - `/remove_watchlist {symbol}` - 관심종목 제거
+
+**ADMIN (진단):**
+- `/signal_status` - 시그널 엔진 상태 확인
+- `/signal_test` - 테스트 시그널 발송
+- `/signal_restart` - 엔진 수동 재시작
 
 **PRO (구독):**
 - `/pro_btc` - 48시간 예측 (실제 가격 기반)

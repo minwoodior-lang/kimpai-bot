@@ -1,0 +1,189 @@
+📨 1) FREE 고래 시그널 v2.3b 조건 조정 + 전체 반영 요청 전달문
+
+[FREE 고래 시그널 v2.3 튜닝 반영 요청]
+
+현재 v2.3 조건이 너무 빡세서 실제 알림 빈도가 지나치게 낮습니다.
+FREE 버전의 현실적인 감지 빈도를 위해 아래 조건(v2.3b)을 반영해 주세요.
+
+✅ Common (FREE)
+
+24h 거래액 ≥ 2,000,000 USDT
+
+최근 window 내 체결금액 ≥ 12,000 USDT
+
+거래량 배수 ≥ 4.0배
+
+✅ Major (BTC, ETH, BNB, SOL)
+
+체결금액 ≥ 80,000 USDT
+
+거래량 배수 ≥ 3.0배
+
+📌 쿨다운 & 상한 로직 (유지)
+
+심볼별 쿨다운: 45분
+
+10분 상한: 3개
+
+1시간 상한: 12개
+
+상한 초과 시 → 최근 체결금액 높은 순으로 정렬해서 상위 N개만 발송
+
+🧩 시그널 메시지 포맷 개선 요청
+
+RSI 라벨 변경
+
+RSI ≥ 70 → "RSI: {value} 🔴"
+
+RSI ≤ 30 → "RSI: {value} 🟢"
+
+그 외 → "RSI: {value} ⚪️"
+
+“마지막 알림” 문구 추가 (보조지표 아래)
+
+첫 알림: 마지막 알림: 최초 감지
+
+<1시간: 마지막 알림: 25분 전
+
+≥1시간: 마지막 알림: 3시간 전
+
+푸터 2줄 교체:
+
+────────────────
+📡 KimpAI – Binance 실시간 체결 기반 고래 시그널
+AI 분석 · 김프 차트: kimpai.io
+
+🔧 엔진 내부에 필요한 상태값 유지
+
+lastAlertAt 심볼별 timestamp 저장
+
+최근 체결금액 / trade count / multiplier 계산 로직 유지
+
+기존 worker와 충돌 없이 적용
+
+위 변경사항을 FREE 고래 시그널 v2.3b 전체로 반영해 주세요.
+
+📨 2) 텔레봇 “실시간 엔진 정상 작동 여부” 체크 기능 추가 요청 전달문
+
+[텔레그램 봇 엔진 작동 확인 기능 추가 요청]
+
+실시간 고래 시그널 엔진의 정상 동작 여부를 텔레그램에서 바로 확인할 수 있도록 아래 기능을 추가해 주세요.
+
+1) /signal_status 명령어 추가
+
+출력 내용:
+
+엔진 활성화 여부 (running)
+
+WebSocket 연결 여부
+
+최근 업데이트 시각
+
+최근 1분 trade count
+
+감지 대상 심볼 수(top N count)
+
+오류 여부가 있으면 표시
+
+엔진 내 signalEngine.getStatus() 형태로 데이터를 반환하도록 구성해 주세요.
+
+2) /signal_test 명령어 추가
+
+강제 테스트 고래 신호 발송
+
+텔레그램 sendMessage() 정상 작동 여부 확인
+
+스팸 방지를 위해 cooldown 없이 1회성 발송
+
+메시지는 아래 템플릿 사용:
+
+🚨 [TEST] 고래 매도 활동 감지!
+
+⏱ 최근 1분
+💵 체결 규모: $50,000 (TEST)
+📊 거래량: 평균 대비 12배
+
+이는 테스트 메시지이며 실제 시장 시그널이 아닙니다.
+
+3) 엔진이 멈췄을 경우 자동 복구 로직 추가
+
+WebSocket 연결 drop 시 재연결
+
+엔진 실행 중 uncaught error 발생 시 자동 restart
+
+최근 5분간 업데이트 없음 → 엔진 재시작
+
+이 세 가지를 텔레봇 기능으로 추가해 주세요.
+
+📨 3) 어드민 패널 자동 에러 감지(Health Monitor) 추가 요청 전달문
+
+[KimpAI Admin – 시그널 엔진 Health 모니터링 기능 추가 요청]
+
+서버·텔레봇·시그널 엔진 오류를 어드민 페이지에서 바로 감지할 수 있도록 아래 기능을 추가해 주세요.
+
+1) Health API 생성 (/api/admin/health)
+
+반환 데이터:
+
+{
+  "signalEngine": {
+    "running": true/false,
+    "lastUpdate": timestamp,
+    "wsConnected": true/false,
+    "recentTrades": number
+  },
+  "bot": {
+    "uptime": seconds,
+    "lastMessageSent": timestamp
+  },
+  "workers": {
+    "priceWorker": { "ok": true, "lastRun": timestamp },
+    "statsWorker": { "ok": true, "lastRun": timestamp }
+  }
+}
+
+2) 어드민 대시보드에 표시
+
+시그널 엔진 상태
+
+WebSocket 연결 여부
+
+최근 신호 생성 시간
+
+최근 텔레그램 발송 시간
+
+에러 발생 시 빨간색 라벨 표시
+
+3) 자동 에러 감지 조건
+
+3분 이상 엔진 업데이트 없음 → "Warning"
+
+10분 이상 업데이트 없음 → "Critical"
+
+텔레그램 1시간 이상 발송 없음 → "Warning"
+
+WebSocket 연결 drop → "Critical"
+
+4) 서버 콘솔 에러 자동 수집
+
+최근 20개 에러 로그를 admin 패널에서 조회 가능하게
+
+에러 유형별 필터링 (signalEngine, bot, worker)
+
+🔥 요약
+
+이제 Replit에게 아래 3가지 작업을 동시에 요청하면 됨:
+
+FREE 고래 시그널 v2.3 → v2.3b로 완화 조정
+
+텔레봇 엔진 상태 확인 + 강제 테스트 명령어 추가
+
+어드민 페이지에 "엔진 헬스 모니터링" 기능 추가
+
+이걸 적용하면:
+
+시그널이 왜 안 오는지 → 텔레그램에서 즉시 확인 가능
+
+엔진/worker 오류 → 어드민에서 바로 감지 가능
+
+조건 완화 → FREE 시그널 빈도가 정상 수준으로 회복

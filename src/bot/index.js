@@ -20,6 +20,7 @@ console.log("🤖 KimpAI Bot starting...", {
 
 const freeCommands = require("./commands/free");
 const proCommands = require("./commands/pro");
+const signalCommands = require("./commands/signal");
 
 const { runAllFreeSignals } = require("./schedulers/freeSignals");
 const { proWatchlistScan, proBtcForcastScan } = require("./schedulers/proScan");
@@ -53,6 +54,10 @@ bot.command("pro_btc", proCommands.proBtcCommand);
 bot.command("pro_whale", proCommands.proWhaleCommand);
 bot.command("pro_risk", proCommands.proRiskCommand);
 
+bot.command("signal_status", signalCommands.signalStatusCommand);
+bot.command("signal_test", signalCommands.signalTestCommand);
+bot.command("signal_restart", signalCommands.signalRestartCommand);
+
 console.log("📅 스케줄러 등록 중...");
 
 let freeSignalInterval = null;
@@ -67,6 +72,9 @@ async function initializeFreeSignals() {
     console.log("[INIT] Binance Signal Engine 초기화 시작...");
     await binanceEngine.initialize();
     console.log("✅ Binance Signal Engine 초기화 완료");
+    
+    binanceEngine.startHealthCheck();
+    console.log("✅ 엔진 헬스체크 시작됨 (1분마다)");
     
     freeSignalInterval = setInterval(async () => {
       try {
