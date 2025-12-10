@@ -1,14 +1,40 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
+import { useRouter } from "next/router";
 
 export default function AdminLogin() {
-  const [email, setEmail] = useState("");
+  const router = useRouter();
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log("Admin login attempt:", { email, password });
+    setError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        setError(data.error || "로그인에 실패했습니다");
+        setLoading(false);
+        return;
+      }
+
+      router.push("/admin");
+    } catch (err) {
+      setError("서버 연결에 실패했습니다");
+      setLoading(false);
+    }
   };
 
   return (
@@ -30,19 +56,25 @@ export default function AdminLogin() {
             <p className="text-slate-400">Access the KimpAI admin panel</p>
           </div>
 
+          {error && (
+            <div className="bg-red-500/20 border border-red-500/50 text-red-400 px-4 py-3 rounded-lg mb-6">
+              {error}
+            </div>
+          )}
+
           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="email" className="block text-slate-300 text-sm font-medium mb-2">
-                  Admin Email
+                <label htmlFor="username" className="block text-slate-300 text-sm font-medium mb-2">
+                  Username
                 </label>
                 <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  id="username"
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-red-500 transition-colors"
-                  placeholder="admin@kimpai.com"
+                  placeholder="admin@kimpai.io"
                   required
                 />
               </div>
@@ -64,9 +96,10 @@ export default function AdminLogin() {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-red-500 to-orange-600 hover:from-red-600 hover:to-orange-700 text-white py-3 rounded-lg font-medium transition-all"
+                disabled={loading}
+                className="w-full bg-gradient-to-r from-red-500 to-orange-600 hover:from-red-600 hover:to-orange-700 disabled:opacity-50 text-white py-3 rounded-lg font-medium transition-all"
               >
-                Sign In to Admin
+                {loading ? "로그인 중..." : "Sign In to Admin"}
               </button>
             </form>
 
@@ -79,7 +112,7 @@ export default function AdminLogin() {
 
           <p className="text-center text-slate-400 mt-6">
             <Link href="/" className="text-blue-400 hover:text-blue-300">
-              ← Back to main site
+              Back to main site
             </Link>
           </p>
         </div>
