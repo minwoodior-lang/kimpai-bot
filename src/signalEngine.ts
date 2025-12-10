@@ -26,6 +26,13 @@ let isEngineRunning = false;
  */
 export async function startSignalEngine(): Promise<void> {
   try {
+    // 개발 환경에서는 실행하지 않음
+    const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+    if (!IS_PRODUCTION) {
+      console.log('[SignalEngine] Disabled (development environment)');
+      return;
+    }
+
     const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
     const CHANNEL_ID = process.env.TELEGRAM_CHANNEL_ID;
 
