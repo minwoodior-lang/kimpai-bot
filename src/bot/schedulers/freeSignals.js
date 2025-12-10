@@ -14,12 +14,15 @@ const CHANNEL_ID = process.env.TELEGRAM_CHANNEL_ID;
 const KIMP_COOLDOWN_MS = 10 * 60 * 1000;
 const WHALE_COOLDOWN_MS = 60 * 60 * 1000;
 const MAX_SIGNALS_PER_MINUTE = 3;
+const MAX_SIGNALS_PER_10MIN = 3;
+const MAX_SIGNALS_PER_HOUR = 12;
 
 const KIMP_DIFF_THRESHOLD = 0.35;
 const KIMP_ABSOLUTE_THRESHOLD = 1.0;
 
 const kimpHistory = new Map();
 const minuteSignalLog = new Map();
+const signalTimestamps = []; // 전체 신호 타임스탬프 기록
 
 function getOrCreateMinuteLog() {
   const now = Math.floor(Date.now() / 60000) * 60000;
@@ -43,13 +46,33 @@ function getOrCreateMinuteLog() {
 }
 
 function canSendWhaleSignal(symbol) {
+  const now = Date.now();
+  
+  // 1분 내 3개 초과 확인
   const minuteLog = getOrCreateMinuteLog();
-  return minuteLog.length < MAX_SIGNALS_PER_MINUTE;
+  if (minuteLog.length >= MAX_SIGNALS_PER_MINUTE) return false;
+  
+  // 10분 내 3개 초과 확인
+  const last10min = signalTimestamps.filter(t => now - t < 10 * 60000);
+  if (last10min.length >= MAX_SIGNALS_PER_10MIN) return false;
+  
+  // 1시간 내 12개 초과 확인
+  const lastHour = signalTimestamps.filter(t => now - t < 60 * 60000);
+  if (lastHour.length >= MAX_SIGNALS_PER_HOUR) return false;
+  
+  return true;
 }
 
 function recordWhaleSignal(symbol) {
   const minuteLog = getOrCreateMinuteLog();
   minuteLog.push(symbol);
+  signalTimestamps.push(Date.now());
+  
+  // 오래된 타임스탬프 정리 (2시간 이상 된 것 제거)
+  const cutoff = Date.now() - 2 * 60 * 60000;
+  while (signalTimestamps.length > 0 && signalTimestamps[0] < cutoff) {
+    signalTimestamps.shift();
+  }
 }
 
 function recordKimpHistory(symbol, premium) {

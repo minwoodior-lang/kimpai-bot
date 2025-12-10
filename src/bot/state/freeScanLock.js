@@ -40,13 +40,14 @@ function setLastAlertTime(type, symbol) {
 }
 
 function formatTimeAgo(timestamp) {
-  if (!timestamp) return "없음";
+  if (!timestamp) return "최초 감지";
   const diff = Date.now() - timestamp;
   const minutes = Math.floor(diff / 60000);
   if (minutes < 1) return "방금 전";
   if (minutes < 60) return `${minutes}분 전`;
   const hours = Math.floor(minutes / 60);
-  return `${hours}시간 ${minutes % 60}분 전`;
+  const mins = minutes % 60;
+  return mins > 0 ? `${hours}시간 ${mins}분 전` : `${hours}시간 전`;
 }
 
 module.exports = { 

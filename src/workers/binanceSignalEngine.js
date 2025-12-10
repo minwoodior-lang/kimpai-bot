@@ -3,8 +3,19 @@ const axios = require('axios');
 const { getTopSymbols, FALLBACK_SYMBOLS } = require('../bot/utils/binanceSymbols');
 
 const BASELINE_WINDOW = 20;
-const MIN_VOLUME_USDT = 25000;
-const WHALE_VOLUME_RATIO = 7.0;
+
+// FREE 고래 시그널 v2.3 필터 상수
+const MAJOR_COINS = ['BTC', 'ETH', 'BNB', 'SOL'];
+const MIN_24H_VOLUME_USDT = 3000000; // 24h 거래액 하한
+
+// 일반 코인
+const MIN_VOLUME_USDT = 20000; // 최근 N분 체결 금액
+const WHALE_VOLUME_RATIO = 6.0; // 거래량 배수
+
+// 메이저 코인
+const MAJOR_MIN_VOLUME_USDT = 100000;
+const MAJOR_WHALE_VOLUME_RATIO = 4.0;
+
 const SPIKE_PRICE_THRESHOLD = 2;
 const SPIKE_VOLUME_RATIO = 3;
 
@@ -74,6 +85,7 @@ function getLastMinuteBucket(symbol) {
 
 function checkWhaleCondition(symbol) {
   const fullSymbol = symbol.toUpperCase().endsWith('USDT') ? symbol.toUpperCase() : `${symbol.toUpperCase()}USDT`;
+  const baseSymbol = fullSymbol.replace('USDT', '');
   
   const bucket = getLastMinuteBucket(fullSymbol);
   if (!bucket) return null;
@@ -81,18 +93,31 @@ function checkWhaleCondition(symbol) {
   const baseline = baselineVolumes.get(fullSymbol);
   if (!baseline || baseline < 100) return null;
   
+  // 24h 거래액 필터 확인
+  const ticker24h = ticker24h.get(fullSymbol);
+  if (ticker24h) {
+    const volume24h = parseFloat(ticker24h.quoteAssetVolume || 0);
+    if (volume24h < MIN_24H_VOLUME_USDT) return null;
+  }
+  
   const volume1m = bucket.buyNotional + bucket.sellNotional;
-  if (volume1m < MIN_VOLUME_USDT) return null;
+  
+  // 메이저 코인 vs 일반 코인 필터 적용
+  const isMajor = MAJOR_COINS.includes(baseSymbol);
+  const minVolume = isMajor ? MAJOR_MIN_VOLUME_USDT : MIN_VOLUME_USDT;
+  const minRatio = isMajor ? MAJOR_WHALE_VOLUME_RATIO : WHALE_VOLUME_RATIO;
+  
+  if (volume1m < minVolume) return null;
   
   const ratio = volume1m / baseline;
-  if (ratio < WHALE_VOLUME_RATIO) return null;
+  if (ratio < minRatio) return null;
   
   const buyRatio = bucket.buyNotional / volume1m;
   const sellRatio = bucket.sellNotional / volume1m;
   
   if (buyRatio >= 0.65) {
     return {
-      symbol: symbol.toUpperCase().replace('USDT', ''),
+      symbol: baseSymbol,
       side: '매수',
       side_emoji: '🟢',
       volume_usdt: volume1m,
@@ -105,7 +130,7 @@ function checkWhaleCondition(symbol) {
   
   if (sellRatio >= 0.65) {
     return {
-      symbol: symbol.toUpperCase().replace('USDT', ''),
+      symbol: baseSymbol,
       side: '매도',
       side_emoji: '🔴',
       volume_usdt: volume1m,

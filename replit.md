@@ -7,30 +7,36 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 - 이터러티브 개발 선호
 - 상세한 설명 요구
 
-### 최신 변경사항 (2024-12-09 v2.1)
-**FREE 텔레그램 시그널 시스템 v2.1 (폭주 방지 튜닝):**
-- ✅ **2종 시그널만 유지** (스파이크 시그널 제거):
-  1. 김프 급변 (BTC/ETH): 5분 변화 ±0.35%p 또는 절대값 ±1%
-  2. 고래 활동 (Binance Spot): 1분 거래량 **7.0배 이상**, 매수/매도 비중 **65%+**, 최소 **25K USDT**
-- ✅ **Python mplfinance 차트:** Heikin-Ashi 5분봉, SMA20, EMA200, RSI(14), MACD
-- ✅ **Binance TOP 60 심볼:** 24h 거래량 기준 자동 선택, 15분마다 업데이트
-- ✅ **쿨다운 시스템:** 김프 10분, 고래 30분
-- ✅ **동시 발송 제한:** 1분당 최대 3개 신호 (폭주 방지, 스테이블 저유동 알트 필터링)
-- ✅ **차트 해상도:** 1200x600px, KST 시간대
-- ✅ FREE에서 GPT/AI 호출 완전 제거
+### 최신 변경사항 (2025-12-10 v2.3)
+**FREE 고래 시그널 v2.3 (트리거 강화 + 채널 상한 + 마지막 알림):**
+- ✅ **1) 트리거 필터 강화:**
+  - 24h 거래액(USDT) ≥ 3,000,000 인 심볼만 대상
+  - 최근 N분 체결 금액 ≥ 20,000 USDT (메이저는 100,000 USDT)
+  - 거래량 배수 ≥ 6.0배 (메이저 BTC/ETH/BNB/SOL은 4.0배)
+  
+- ✅ **2) 쿨다운 & 채널 상한:**
+  - 심볼별 쿨다운: 60분 유지
+  - 1분 내 최대 3개, 10분 내 최대 3개, 1시간 내 최대 12개 신호
+  - 조건 초과 시 체결 금액 큰 순으로 정렬해 상위만 발송
 
-**파일 구조:**
-- `src/chart/priceChart.py` - Python mplfinance 차트 생성기 (v1.1: 60캔들 + 라벨)
-- `src/bot/utils/binanceSymbols.js` - TOP 60 심볼 자동 선택
-- `src/workers/binanceSignalEngine.js` - Binance WS 시그널 엔진 (v2.1: 7배 거래량, 25K min)
-- `src/lib/indicators/ta.js` - 보조지표 계산기
-- `src/bot/schedulers/freeSignals.js` - FREE 시그널 스케줄러 (v2.1: 폭주 방지)
-- `src/bot/utils/freeSignalTemplates.js` - 시그널 템플릿 2종
+- ✅ **3) "마지막 알림" 표시 추가:**
+  - 심볼별 lastAlertAt 저장 (in-memory)
+  - 메시지: "마지막 알림: 최초 감지" 또는 "25분 전" 등
+  - 보조지표 블록 아래 한 줄 추가
 
-**이전 변경사항:**
+- ✅ **4) RSI 라벨 & 푸터 수정:**
+  - RSI: 값 + 이모지만 (괄호 텍스트 제거)
+  - 푸터: "📡 KimpAI – Binance 실시간 체결 기반 고래 시그널\nAI 분석 · 김프 차트: kimpai.io"
+
+**이전 v2.1 변경사항:**
+- 2종 시그널만 유지 (스파이크 시그널 제거)
+- Python mplfinance 차트: Heikin-Ashi 5분봉, SMA20, EMA200, RSI(14), MACD
+- Binance TOP 60 심볼: 24h 거래량 기준, 15분마다 업데이트
+- 1분당 최대 3개 신호 (폭주 방지)
+- 차트 해상도: 1200x600px, KST 시간대
+- FREE에서 GPT/AI 호출 완전 제거
 - API_BASE_URL 환경변수 사용 (https://kimpai.io)
 - PRO API 엔드포인트 실제 데이터 연결 (pro/btc.ts, pro/whale, pro/risk)
-- Supabase users 테이블 로직 수정 (새 필드 지원)
 
 ### ⛔ CRITICAL: BACKEND PIPELINE FROZEN (v3.4.29)
 **NEVER modify without explicit user permission:**

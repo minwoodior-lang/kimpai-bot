@@ -24,12 +24,12 @@ function formatEmaLine(trend) {
 
 function formatRsiLine(rsi) {
   if (rsi >= 70) {
-    return `- RSI: ${rsi.toFixed(1)} (과열 구간 🔴)`;
+    return `- RSI: ${rsi.toFixed(1)} 🔴`;
   }
   if (rsi <= 30) {
-    return `- RSI: ${rsi.toFixed(1)} (저점/과매도 구간 🟢)`;
+    return `- RSI: ${rsi.toFixed(1)} 🟢`;
   }
-  return `- RSI: ${rsi.toFixed(1)} (중립 ⚪)`;
+  return `- RSI: ${rsi.toFixed(1)} ⚪`;
 }
 
 function formatMacdLine(signal) {
@@ -104,11 +104,11 @@ ${formatEmaLine(ema200_trend)}
 ${formatRsiLine(rsi_value)}
 ${formatMacdLine(macd_signal)}
 ${formatCandleLine(isBullCandle)}
+- 마지막 알림: ${last_alert_ago}
 
 ────────────────
-📡 KimpAI는 Binance 실시간 체결 데이터를 기반으로
-고래 매수·매도 및 거래량 폭발 구간만 자동 분석합니다.
-실시간 시그널 & 차트: kimpai.io`;
+📡 KimpAI – Binance 실시간 체결 기반 고래 시그널
+AI 분석 · 김프 차트: kimpai.io`;
 }
 
 function spikeUpSignal(data) {
