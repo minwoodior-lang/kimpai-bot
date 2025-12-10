@@ -1203,10 +1203,6 @@ export default function PremiumTable({
         <div className="flex items-center justify-center py-20">
           <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500" />
         </div>
-      ) : error ? (
-        <div className="bg-red-900/30 border border-red-700 rounded-lg p-4 text-red-400">
-          {isSlowValidating && "갱신 중..."}
-        </div>
       ) : (
         <div className="w-full border border-white/5 bg-[#050819] overflow-hidden">
           <table className="w-full border-separate border-spacing-y-0 table-auto md:table-fixed">
