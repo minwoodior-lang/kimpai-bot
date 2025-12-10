@@ -429,24 +429,45 @@ function getCandles1h(symbol) {
   return candles1h.get(baseSymbol) || [];
 }
 
-// WebSocket 완전 정리 함수 (예외 안전)
+// WebSocket 완전 정리 함수 (예외 안전 + Unhandled error 방지)
 function closeWebSocket(socket, pingInterval) {
   try {
     if (pingInterval) {
       clearInterval(pingInterval);
     }
-    if (socket) {
-      socket.removeAllListeners();
-      if (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING) {
-        try {
-          socket.terminate();
-        } catch (e) {
-          console.error('[BinanceSignal] Error while terminating WebSocket:', e.message || e);
-        }
+
+    if (!socket) return;
+
+    // unhandled 'error' 막기용 no-op 핸들러
+    const noop = () => {};
+    socket.removeAllListeners('error');
+    socket.on('error', noop);
+
+    // 너무 강한 terminate 대신 graceful close 사용
+    if (
+      socket.readyState === WebSocket.OPEN ||
+      socket.readyState === WebSocket.CONNECTING
+    ) {
+      try {
+        socket.close(); // 연결 시도 중이어도 에러 안 터지고 닫힘
+      } catch (e) {
+        console.error(
+          '[BinanceSignal] WebSocket close error:',
+          e.message || e,
+        );
       }
     }
+
+    // 나머지 리스너 정리
+    socket.removeAllListeners('open');
+    socket.removeAllListeners('message');
+    socket.removeAllListeners('close');
+    socket.removeAllListeners('pong');
   } catch (err) {
-    console.error('[BinanceSignal] closeWebSocket error:', err.message || err);
+    console.error(
+      '[BinanceSignal] closeWebSocket outer error:',
+      err.message || err,
+    );
   }
 }
 
