@@ -24,6 +24,7 @@ async function bootstrap() {
     await app.prepare();
 
     const port = Number(process.env.PORT) || 5000;
+    const isProduction = process.env.NODE_ENV === "production";
 
     const server = http.createServer((req, res) => {
       handle(req, res).catch((err) => {
@@ -37,31 +38,38 @@ async function bootstrap() {
 
     // 배포 환경 호환: 무조건 0.0.0.0 바인딩
     server.listen(port, "0.0.0.0", () => {
-      console.log(`Server listening on 0.0.0.0:${port}`);
+      console.log(`✅ Server listening on 0.0.0.0:${port}`);
     });
 
-    // 워커는 서버 부팅 후 비동기로 실행
-    setTimeout(() => {
+    // 워커는 서버 부팅 후 즉시 비동기로 실행 (타임아웃 방지)
+    setImmediate(() => {
       try {
-        console.log("Starting background workers...");
+        if (!isProduction) {
+          console.log("Starting background workers...");
+        }
+        
         createChatServer(server);
         startPriceWorker();
+        
         cron.schedule("*/5 * * * *", () => {
           exec("npm run sync:markets", (err, stdout, stderr) => {
             if (err) console.error("[SYNC]", err.message);
             if (stdout) console.log(stdout);
           });
         });
-        console.log("All background workers initialized");
         
-        // Telegram Bot은 백그라운드에서 비동기로 시작 (배포 타임아웃 방지)
+        if (!isProduction) {
+          console.log("All background workers initialized");
+        }
+        
+        // Telegram Bot은 background에서 즉시 비동기 시작
         startTelegramBot().catch(err => {
           console.error("❌ Telegram Bot background start error:", err.message);
         });
       } catch (err) {
         console.error("Worker start failed:", err);
       }
-    }, 2000);
+    });
 
   } catch (err) {
     console.error("Fatal bootstrap error:", err);
