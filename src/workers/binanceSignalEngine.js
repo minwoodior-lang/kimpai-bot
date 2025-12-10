@@ -429,16 +429,24 @@ function getCandles1h(symbol) {
   return candles1h.get(baseSymbol) || [];
 }
 
-// WebSocket 완전 정리 함수
+// WebSocket 완전 정리 함수 (예외 안전)
 function closeWebSocket(socket, pingInterval) {
-  if (pingInterval) {
-    clearInterval(pingInterval);
-  }
-  if (socket) {
-    socket.removeAllListeners();
-    if (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING) {
-      socket.terminate();
+  try {
+    if (pingInterval) {
+      clearInterval(pingInterval);
     }
+    if (socket) {
+      socket.removeAllListeners();
+      if (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING) {
+        try {
+          socket.terminate();
+        } catch (e) {
+          console.error('[BinanceSignal] Error while terminating WebSocket:', e.message || e);
+        }
+      }
+    }
+  } catch (err) {
+    console.error('[BinanceSignal] closeWebSocket error:', err.message || err);
   }
 }
 
@@ -472,7 +480,14 @@ function startAggTradeStream(symbols) {
           return;
         }
         pendingPong = true;
-        ws.ping();
+        try {
+          ws.ping();
+        } catch (e) {
+          console.error('[BinanceSignal] AggTrade WS ping error:', e.message || e);
+          recordError('AggTrade WS ping error: ' + (e.message || e));
+          closeWebSocket(ws, wsPingInterval);
+          setTimeout(() => startAggTradeStream(currentSymbols.slice(0, 100)), 1000);
+        }
       }
     }, WS_PING_INTERVAL);
   });
@@ -504,7 +519,10 @@ function startAggTradeStream(symbols) {
       
       lastTradeTime = Date.now(); // 실제 트레이드 시점만 기록
       recentTradeCount++;
-    } catch (err) {}
+    } catch (err) {
+      // 메시지 파싱 오류는 무시 (로그만 찍어도 됨)
+      // console.error('[BinanceSignal] AggTrade WS message parse error:', err.message);
+    }
   });
   
   ws.on('close', (code, reason) => {
@@ -520,8 +538,9 @@ function startAggTradeStream(symbols) {
   });
   
   ws.on('error', (err) => {
-    console.error('[BinanceSignal] AggTrade WS error:', err.message);
-    recordError('AggTrade WS error: ' + err.message);
+    console.error('[BinanceSignal] AggTrade WS error:', err.message || err);
+    recordError('AggTrade WS error: ' + (err.message || err));
+    // 에러 시에도 throw 하지 않고, healthCheck / close 로 처리
   });
 }
 
@@ -554,7 +573,14 @@ function startKlineStream(symbols) {
           return;
         }
         pendingKlinePong = true;
-        klineWs.ping();
+        try {
+          klineWs.ping();
+        } catch (e) {
+          console.error('[BinanceSignal] Kline WS ping error:', e.message || e);
+          recordError('Kline WS ping error: ' + (e.message || e));
+          closeWebSocket(klineWs, klineWsPingInterval);
+          setTimeout(() => startKlineStream(currentSymbols.slice(0, 100)), 1000);
+        }
       }
     }, WS_PING_INTERVAL);
   });
@@ -594,7 +620,9 @@ function startKlineStream(symbols) {
           arr[arr.length - 1] = candle;
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      // console.error('[BinanceSignal] Kline WS message parse error:', err.message);
+    }
   });
   
   klineWs.on('close', (code, reason) => {
@@ -610,8 +638,8 @@ function startKlineStream(symbols) {
   });
   
   klineWs.on('error', (err) => {
-    console.error('[BinanceSignal] Kline WS error:', err.message);
-    recordError('Kline WS error: ' + err.message);
+    console.error('[BinanceSignal] Kline WS error:', err.message || err);
+    recordError('Kline WS error: ' + (err.message || err));
   });
 }
 
@@ -857,9 +885,11 @@ function startHealthCheck() {
     
     // 상태 로그 (디버그용)
     if (process.env.NODE_ENV === 'development' || status.tradeStale) {
-      console.log(`[BinanceSignal] Health: WS=${status.wsConnected ? '✓' : '✗'} Kline=${status.klineWsConnected ? '✓' : '✗'} ` +
-                  `Trades=${status.recentTrades} Buckets=${status.tradeBucketCount} Baselines=${status.baselineCount} ` +
-                  `LastTrade=${status.lastTradeAgo}s ago`);
+      console.log(
+        `[BinanceSignal] Health: WS=${status.wsConnected ? '✓' : '✗'} Kline=${status.klineWsConnected ? '✓' : '✗'} ` +
+        `Trades=${status.recentTrades} Buckets=${status.tradeBucketCount} Baselines=${status.baselineCount} ` +
+        `LastTrade=${status.lastTradeAgo}s ago`
+      );
     }
   }, 30 * 1000); // 30초마다 체크
 }
