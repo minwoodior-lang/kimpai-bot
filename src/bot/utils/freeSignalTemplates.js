@@ -49,11 +49,28 @@ function kimpSignal(data) {
     price_usd,
     premium_now,
     premium_prev,
-    premium_diff
+    premium_diff,
+    ema200_trend,
+    rsi_value,
+    macd_signal,
+    ha_candle,
+    change_24h,
+    volume_24h_usdt,
+    last_alert_ago
   } = data;
 
   const diffSign = parseFloat(premium_diff) >= 0 ? '+' : '';
   const emoji = parseFloat(premium_diff) >= 0 ? '📈' : '📉';
+
+  // 보조지표 표시 (없을 수도 있으므로 선택적)
+  const hasIndicators = ema200_trend || rsi_value !== undefined || macd_signal;
+  const indicatorsSection = hasIndicators ? `
+📉 보조지표 (1시간 차트)
+${ema200_trend ? formatEmaLine(ema200_trend) : '- 200EMA: 분석중 ⚪'}
+${rsi_value !== undefined ? formatRsiLine(rsi_value) : '- RSI: 분석중 ⚪'}
+${macd_signal ? formatMacdLine(macd_signal) : '- MACD: 분석중 ⚪'}
+${ha_candle ? formatCandleLine(ha_candle === '양봉') : '- 캔들: 분석중 ⚪'}
+${last_alert_ago ? `- 마지막 알림: ${last_alert_ago}` : ''}` : '';
 
   return `⚡ ${symbol} 김프 급변 감지
 
@@ -62,10 +79,12 @@ function kimpSignal(data) {
 ${emoji} 김프: ${premium_now}%
 
 ⏱ 5분 변화: ${diffSign}${premium_diff}%p
+📊 24h 변동: ${change_24h}% / 거래액: ${formatNumber(volume_24h_usdt)} USDT
+${indicatorsSection}
 
 ────────────────
-김프 급격 변동 구간 자동 추적 시스템.
-실시간 시그널: kimpai.io`;
+📡 KimpAI – 실시간 김프 급변 감지 시스템
+AI 분석 · 차트: kimpai.io`;
 }
 
 function whaleSignal(data) {

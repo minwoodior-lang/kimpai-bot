@@ -262,13 +262,34 @@ async function runKimpSignals(bot) {
       if (isLong && !shouldSendKimpLong(coin, diff)) continue;
       if (isShort && !shouldSendKimpShort(coin, diff)) continue;
 
+      // 보조지표 정보 추가 (있으면 포함)
+      const ticker = binanceEngine.get24hData(`${symbol}USDT`);
+      const candles1h = binanceEngine.getCandles1h(symbol);
+      const rsiValue = calcRSI(candles1h, 14);
+      const ema200Trend = getEMA200Trend(candles1h);
+      const macdSignal = getMACDSignal(candles1h);
+      const haCandle = candles1h.length > 0 
+        ? getHeikinAshiCandle(candles1h[candles1h.length - 1]) 
+        : "N/A";
+      const lastAlertTime = getLastAlertTime('KIMP', symbol);
+      const lastAlertAgo = formatTimeAgo(lastAlertTime);
+      setLastAlertTime('KIMP', symbol);
+
       const messageData = {
         symbol,
         price_krw: coin.domesticPrice || coin.korean_price || 0,
         price_usd: coin.foreignPrice || coin.global_price || 0,
         premium_now: premiumNow.toFixed(2),
         premium_prev: premiumPrev.toFixed(2),
-        premium_diff: diff.toFixed(2)
+        premium_diff: diff.toFixed(2),
+        // 보조지표
+        ema200_trend: ema200Trend,
+        rsi_value: rsiValue,
+        macd_signal: macdSignal,
+        ha_candle: haCandle,
+        change_24h: (ticker?.priceChange || 0).toFixed(2),
+        volume_24h_usdt: ticker?.volume || 0,
+        last_alert_ago: lastAlertAgo
       };
 
       const message = templates.kimpSignal(messageData);
