@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { createClient } from "@supabase/supabase-js";
 import crypto from "crypto";
 
 const COOKIE_NAME = "kimpai_sid";
@@ -31,8 +31,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const userAgent = (req.headers["user-agent"] as string) || null;
     const now = new Date().toISOString();
 
-    // 3) 최소 필드만 upsert (sid 기준)
-    const { error } = await supabaseAdmin
+    // 3) Supabase 클라이언트 생성
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL || "",
+      process.env.SUPABASE_SERVICE_ROLE_KEY || ""
+    );
+
+    // 4) 최소 필드만 upsert (sid 기준)
+    const { error } = await supabase
       .from("analytics_sessions")
       .upsert(
         {
@@ -60,7 +66,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
     }
 
-    // 4) 새 sid면 쿠키 세팅
+    // 5) 새 sid면 쿠키 세팅
     if (needSetCookie) {
       res.setHeader(
         "Set-Cookie",

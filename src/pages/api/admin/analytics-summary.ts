@@ -3,11 +3,6 @@ import { withAdminAuth } from "@/lib/adminAuth";
 import { createClient } from "@supabase/supabase-js";
 import { UAParser } from "ua-parser-js";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 interface ActiveUser {
   sid: string;
   path_last: string;
@@ -42,6 +37,11 @@ async function handler(
   res: NextApiResponse<AnalyticsSummary | { error: string }>
 ) {
   try {
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL || "",
+      process.env.SUPABASE_SERVICE_ROLE_KEY || ""
+    );
+
     const now = new Date();
     const twoMinutesAgo = new Date(now.getTime() - 2 * 60 * 1000);
     const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
