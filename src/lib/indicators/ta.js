@@ -122,6 +122,77 @@ function getHeikinAshiCandle(candle) {
   return haClose >= haOpen ? "양봉🟢" : "음봉🔴";
 }
 
+// v2.5: EMA200 기반 추세 판단 + slope 계산
+function getEMA200TrendV2(candles) {
+  if (!candles || candles.length < 200) return { trend: "SIDEWAYS", slope: 0 };
+  
+  const ema200Series = buildEmaSeries(candles, 200);
+  if (ema200Series.length < 20) return { trend: "SIDEWAYS", slope: 0 };
+  
+  const currentPrice = parseFloat(candles[candles.length - 1].close || candles[candles.length - 1].c || 0);
+  const currentEMA = ema200Series[ema200Series.length - 1];
+  
+  // 최근 10~20개 EMA 기울기 계산
+  const recentCount = Math.min(20, Math.max(10, ema200Series.length / 10));
+  const emaRecent = ema200Series.slice(-recentCount);
+  
+  let sumDiff = 0;
+  for (let i = 1; i < emaRecent.length; i++) {
+    sumDiff += (emaRecent[i] - emaRecent[i - 1]);
+  }
+  const slope = sumDiff / (recentCount - 1);
+  
+  // 추세 판단
+  let trend = "SIDEWAYS";
+  if (currentPrice > currentEMA && slope > 0) trend = "UP";
+  else if (currentPrice < currentEMA && slope < 0) trend = "DOWN";
+  
+  return { trend, slope };
+}
+
+// v2.5: MACD 크로스오버 상세 감지
+function detectMACDCrossover(candles) {
+  if (!candles || candles.length < 30) return { hasGolden: false, hasDead: false };
+  
+  // 최근 5개 캔들의 MACD 히스토그램 추이
+  const lastCandles = candles.slice(-5);
+  const histograms = [];
+  
+  for (const candle of lastCandles) {
+    const { histogram } = calcMACD([...candles.slice(0, -5 + lastCandles.indexOf(candle)), candle]);
+    histograms.push(histogram);
+  }
+  
+  let hasGolden = false;
+  let hasDead = false;
+  
+  for (let i = 1; i < histograms.length; i++) {
+    // 음수 → 양수 = 골든크로스
+    if (histograms[i - 1] < 0 && histograms[i] > 0) hasGolden = true;
+    // 양수 → 음수 = 데드크로스
+    if (histograms[i - 1] > 0 && histograms[i] < 0) hasDead = true;
+  }
+  
+  const currentHistogram = calcMACD(candles).histogram;
+  if (currentHistogram > 0) hasGolden = true;
+  if (currentHistogram < 0) hasDead = true;
+  
+  return { hasGolden, hasDead };
+}
+
+// v2.5: HA 캔들이 양봉인지 음봉인지만 판단
+function isHeikinAshiBull(candle) {
+  const o = parseFloat(candle.open || candle.o || 0);
+  const h = parseFloat(candle.high || candle.h || 0);
+  const l = parseFloat(candle.low || candle.l || 0);
+  const c = parseFloat(candle.close || candle.c || 0);
+  
+  const haClose = (o + h + l + c) / 4;
+  const haOpen = (o + c) / 2;
+  
+  return haClose >= haOpen;
+}
+
 function getEMA200Trend(candles) {
   const ema = calcEMA(candles, 200);
   if (ema === null) return "데이터 부족⚪";
@@ -150,5 +221,8 @@ module.exports = {
   calcMACD,
   getHeikinAshiCandle,
   getEMA200Trend,
-  getMACDSignal
+  getEMA200TrendV2,
+  getMACDSignal,
+  detectMACDCrossover,
+  isHeikinAshiBull
 };
