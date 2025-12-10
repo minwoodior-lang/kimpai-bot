@@ -1,0 +1,336 @@
+📩 KimpAI Admin v2.0 – 최종 전달문 (이메일 인증 기능 제거한 완성본)
+
+[요청사항: KimpAI Admin v2.0 통합 개발]
+
+🎯 목표
+
+Admin 페이지를 “운영 모니터링 + 데이터 점검 + 수동 조치”가 가능한 운영 콘솔로 확장.
+
+Admin 접근 시 반드시 아이디/비밀번호 로그인 필수.
+
+아이디는 이메일 형식 문자열을 허용하지만, 실제 이메일 인증 기능은 필요 없음.
+
+기존 KimpAI UI 스타일 유지한 채 섹션만 확장.
+
+────────────────
+
+A. Admin 접근 제어 (로그인 시스템)
+1) URL 구조
+
+/admin/login : 로그인 페이지
+
+/admin : 로그인 후 대시보드
+
+/api/admin/* : Admin 전용 API (반드시 인증 필요)
+
+2) 로그인 방식
+
+Admin 계정은 1~2명만 사용 → 이메일 기능 없음 / 단순 문자열 기반 로그인
+
+DB 테이블 예시:
+
+admin_users
+- id (uuid)
+- username (email 형식 문자열 허용)
+- password_hash (bcrypt)
+- role (admin)
+- last_login_at (timestamp)
+
+
+⚠️ username은 admin@kimpai.io처럼 이메일 형태여도 됨
+하지만 실제 이메일 발송/인증/비밀번호 찾기 기능은 구현하지 않음.
+
+3) 인증 플로우
+
+POST /api/admin/login
+
+body: { username, password }
+
+비밀번호 검증 후 OK면:
+
+httpOnly 쿠키에 admin 세션 저장 (JWT 또는 session id)
+
+POST /api/admin/logout
+
+쿠키 삭제 후 /admin/login으로 이동
+
+4) 인증 미들웨어
+
+/admin/* 및 /api/admin/*는 세션 없으면:
+
+페이지: /admin/login redirect
+
+API: 401 Unauthorized
+
+5) 로그인 UI
+
+심플 KimpAI Admin 로그인 페이지
+
+Username / Password 입력
+
+오류 시 상단 배너 표시
+
+로그인 성공 시 /admin 이동
+
+6) 보안
+
+bcrypt 저장
+
+세션 쿠키: httpOnly + secure + sameSite=strict
+
+연속 로그인 실패 시 rate-limit
+
+────────────────
+
+B. Admin 대시보드 레이아웃
+
+상단:
+
+“Admin Dashboard” 타이틀
+
+우측: 로그인한 username 표시 + Logout 버튼
+
+좌측(또는 상단 탭):
+
+System Health
+
+Price Feeds
+
+Symbol & Metadata
+
+Premium Engine
+
+Workers
+
+Exchange Listings
+
+Frontend Status
+
+Tools (수동 액션)
+
+────────────────
+
+C. System Health
+
+요약 카드 구성:
+
+1) Signal Engine
+
+상태: 🟢 / 🟡 / 🔴
+
+AggTrade WS / Kline WS
+
+마지막 업데이트 시각
+
+최근 1분 처리된 이벤트 수
+
+감시 중인 심볼 수
+
+2) Telegram Bot
+
+상태
+
+마지막 메시지 전송 시각
+
+3) Worker 요약
+
+Price / Stats / Premium Worker
+
+마지막 실행 시각
+
+평균 실행 시간(ms)
+
+4) Web/API 상태
+
+주요 API 응답 속도
+
+5xx 비율
+
+오늘 호출 수
+
+────────────────
+
+D. Price Feeds Health (가격 수집 상태)
+
+거래소별 카드 (Upbit, Bithumb, Coinone, Binance, OKX, Bybit, Bitget, Gate, MEXC, HTX, Futures)
+
+각 카드 구성:
+
+상태: 🟢 / 🔴
+
+마지막 가격 수신 시각
+
+최근 1분 틱 수
+
+주요 에러 1개
+
+WS 상태 / REST fallback 비율
+
+5분 이상 미업데이트 시 빨간색 경고
+
+────────────────
+
+E. Symbol Sync Monitoring
+1) 거래소별 마켓 개수
+
+현재 수집 개수 vs 기대 개수
+
+마지막 sync 시각
+
+다음 scheduled sync
+
+2) 신규 상장/폐지 감지
+
+최근 7일 신규 상장·폐지 리스트
+
+3) 문제 심볼 리스트
+
+마켓명 오류(KRW-, USDT_ 등)
+
+중복 심볼
+
+4) 수동 버튼
+
+전체 거래소 Sync
+
+개별 거래소 Sync
+
+────────────────
+
+F. Metadata Health (아이콘/한글명/CMC)
+
+통계:
+
+전체 심볼 수
+
+icon 없는 심볼 수
+
+name_ko 없는 심볼 수
+
+CMC slug 실패 개수
+
+리스트 + 수동 수정 기능:
+
+icon_url 직접 입력
+
+name_ko 직접 입력
+
+CMC slug 직접 입력
+
+자동 작업 버튼:
+
+CoinGecko 아이콘 재수집
+
+CMC slug 다시 시도
+
+────────────────
+
+G. Premium Engine Health
+
+요약 카드:
+
+premiumTable.json 생성 시각
+
+전체 마켓 수
+
+NaN/0 값 개수
+
+이상치(|김프| > 50%) 개수
+
+리스트:
+
+가격 매칭 실패
+
+NaN/Infinity 발생 행
+
+음수/양수 extreme premium
+
+수동:
+
+김프 테이블 강제 재생성
+
+────────────────
+
+H. Workers 상태
+
+각 Worker(Price / Stats / Premium / SymbolSync / Metadata / AiAnalysis 등):
+
+상태 🟢 / 🔴
+
+마지막 실행
+
+평균 실행 시간
+
+오늘 에러 수
+
+최근 에러 메시지
+
+(가능하면) 재시작 버튼
+
+────────────────
+
+I. Exchange Listings Tracker
+
+요약:
+
+오늘 신규 상장 수
+
+최근 7일 신규 상장 수
+
+리스트:
+
+심볼 / 거래소 / 상장 시각
+
+메타데이터 등록 여부
+
+아이콘 등록 여부
+
+수동:
+
+선택 심볼 메타데이터 자동 등록
+
+아이콘 수집
+
+────────────────
+
+J. Frontend/Web Health
+
+API 속도 카드:
+
+premium/table-filtered
+
+global-metrics
+
+ai-summary
+
+페이지 로딩 실패 로그:
+
+홈 / 시장지표 / AI 분석 / 알림 / 뉴스
+
+TradingView 로딩 실패 여부
+
+────────────────
+
+K. Tools / 수동 액션
+
+전체 캐시 초기화
+
+데이터 파일 유효성 검사(prices.json / premiumTable.json 등)
+
+DB migration 상태 확인
+
+문제 심볼 리스트 CSV 다운로드
+
+신규 상장 리스트 CSV 다운로드
+
+────────────────
+
+결론
+
+Admin 접근은 /admin/login에서 아이디/비밀번호 로그인 후 이용
+
+username은 이메일 형식 문자열 가능하지만, 이메일 인증 기능은 없음
+
+모든 /admin 및 /api/admin/*는 인증 미들웨어로 보호
+
+위 A~K 섹션을 통합해 “KimpAI Admin v2.0” 기능을 구축
