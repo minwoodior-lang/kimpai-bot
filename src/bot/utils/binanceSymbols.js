@@ -1,6 +1,6 @@
 /**
- * Binance TOP 60 심볼 자동 선택 모듈
- * 24h 거래량 기준으로 상위 60개 USDT 페어 선택
+ * Binance TOP 100 심볼 자동 선택 모듈 (v2.4)
+ * 24h 거래량 기준으로 상위 100개 USDT 페어 선택
  * 15분마다 자동 업데이트
  */
 
@@ -9,7 +9,7 @@ const path = require('path');
 
 const CACHE_FILE = path.join(__dirname, '../../../data/topSymbols.json');
 const UPDATE_INTERVAL = 15 * 60 * 1000;
-const TOP_LIMIT = 60;
+const TOP_LIMIT = 100;
 const MUST_INCLUDE = ['BTCUSDT', 'ETHUSDT'];
 
 let cachedSymbols = [];
@@ -70,7 +70,7 @@ async function fetchTop60Symbols() {
     cachedSymbols = symbols;
     lastUpdateTime = Date.now();
     
-    console.log(`[TopSymbols] Updated: ${symbols.length} symbols (Top 60 by 24h volume)`);
+    console.log(`[TopSymbols] Updated: ${symbols.length} symbols (Top 100 by 24h volume)`);
     
     return symbols;
   } catch (err) {
@@ -130,10 +130,12 @@ function getSymbolsWithoutSuffix() {
 }
 
 module.exports = {
-  fetchTop60Symbols,
+  fetchTop60Symbols,  // 하위 호환성 유지
+  fetchTop100Symbols: fetchTop60Symbols,  // v2.4 alias
   getTopSymbols,
   getTopSymbolsSync,
   startAutoUpdate,
   getSymbolsWithoutSuffix,
-  FALLBACK_SYMBOLS
+  FALLBACK_SYMBOLS,
+  TOP_LIMIT
 };

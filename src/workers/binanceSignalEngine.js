@@ -4,17 +4,22 @@ const { getTopSymbols, FALLBACK_SYMBOLS } = require('../bot/utils/binanceSymbols
 
 const BASELINE_WINDOW = 20;
 
-// FREE 고래 시그널 v2.3b 필터 상수 (조건 완화)
+// FREE 고래 시그널 v2.4 필터 상수
 const MAJOR_COINS = ['BTC', 'ETH', 'BNB', 'SOL'];
-const MIN_24H_VOLUME_USDT = 2000000; // 24h 거래액 하한 (3M → 2M)
+const MIN_24H_VOLUME_USDT = 5000000; // 24h 거래액 하한 ≥ 5M USDT
 
 // 일반 코인
-const MIN_VOLUME_USDT = 12000; // 최근 N분 체결 금액 (20K → 12K)
-const WHALE_VOLUME_RATIO = 4.0; // 거래량 배수 (6.0 → 4.0)
+const MIN_VOLUME_USDT = 10000; // 최근 N분 체결 금액 ≥ 10K USDT
+const WHALE_VOLUME_RATIO = 5.0; // 거래량 배수 ≥ 5.0x
 
-// 메이저 코인
-const MAJOR_MIN_VOLUME_USDT = 80000; // (100K → 80K)
-const MAJOR_WHALE_VOLUME_RATIO = 3.0; // (4.0 → 3.0)
+// 메이저 코인 (BTC, ETH, BNB, SOL)
+const MAJOR_MIN_VOLUME_USDT = 50000; // 최근 N분 체결 금액 ≥ 50K USDT
+const MAJOR_WHALE_VOLUME_RATIO = 4.0; // 거래량 배수 ≥ 4.0x
+
+// 200EMA 추세 필터 상수 (v2.4)
+const EMA_PERIOD = 200;
+const EMA_SLOPE_WINDOW = 5; // EMA slope 계산 윈도우 (5개 캔들)
+const EMA_SLOPE_THRESHOLD = 0.0001; // slope가 이 값보다 작으면 횡보로 간주
 
 // 전역 상태 저장소 (API 라우트에서 접근 가능)
 const GLOBAL_STATE_KEY = '__binanceSignalState__';
@@ -136,6 +141,94 @@ function getLastMinuteBucket(symbol) {
   return tradeBuckets.get(key);
 }
 
+/**
+ * 200EMA 계산 함수 (v2.4)
+ * @param {Array} candles - OHLC 캔들 배열
+ * @returns {Array} EMA 값 배열
+ */
+function calculateEMA(candles, period = EMA_PERIOD) {
+  if (!candles || candles.length < period) return [];
+  
+  const closes = candles.map(c => parseFloat(c.close));
+  const multiplier = 2 / (period + 1);
+  const ema = [];
+  
+  // 첫 EMA는 SMA로 시작
+  let sum = 0;
+  for (let i = 0; i < period; i++) {
+    sum += closes[i];
+  }
+  ema.push(sum / period);
+  
+  // 나머지 EMA 계산
+  for (let i = period; i < closes.length; i++) {
+    const value = (closes[i] - ema[ema.length - 1]) * multiplier + ema[ema.length - 1];
+    ema.push(value);
+  }
+  
+  return ema;
+}
+
+/**
+ * EMA slope (기울기) 계산 (v2.4)
+ * @param {Array} emaValues - EMA 값 배열
+ * @param {number} window - slope 계산 윈도우
+ * @returns {number} slope 값 (양수: 상승, 음수: 하락, 0 근처: 횡보)
+ */
+function calculateEMASlope(emaValues, window = EMA_SLOPE_WINDOW) {
+  if (!emaValues || emaValues.length < window) return 0;
+  
+  const recent = emaValues.slice(-window);
+  const first = recent[0];
+  const last = recent[recent.length - 1];
+  
+  // 가격 대비 상대적 기울기 (정규화)
+  const slope = (last - first) / first;
+  return slope;
+}
+
+/**
+ * 200EMA 추세 필터 (v2.4)
+ * 매수: close > EMA200 && slope > 0
+ * 매도: close < EMA200 && slope < 0
+ * 횡보: |slope| < threshold → 시그널 무시
+ * 
+ * @param {string} symbol - 심볼 (예: BTC)
+ * @param {string} side - 'buy' 또는 'sell'
+ * @returns {boolean} 트렌드 조건 충족 여부
+ */
+function checkTrendFilter(symbol, side) {
+  const baseSymbol = symbol.toUpperCase().replace('USDT', '');
+  const candles = candles1h.get(baseSymbol);
+  
+  if (!candles || candles.length < EMA_PERIOD + EMA_SLOPE_WINDOW) {
+    // 캔들 데이터 부족 시 필터 통과 (데이터 수집 중)
+    return true;
+  }
+  
+  const emaValues = calculateEMA(candles, EMA_PERIOD);
+  if (emaValues.length === 0) return true;
+  
+  const currentEMA = emaValues[emaValues.length - 1];
+  const currentClose = parseFloat(candles[candles.length - 1].close);
+  const slope = calculateEMASlope(emaValues, EMA_SLOPE_WINDOW);
+  
+  // 횡보 체크: slope가 너무 작으면 시그널 무시
+  if (Math.abs(slope) < EMA_SLOPE_THRESHOLD) {
+    return false; // 횡보 구간 - 시그널 무시
+  }
+  
+  if (side === 'buy') {
+    // 매수 조건: close > EMA200 && slope > 0
+    return currentClose > currentEMA && slope > 0;
+  } else if (side === 'sell') {
+    // 매도 조건: close < EMA200 && slope < 0
+    return currentClose < currentEMA && slope < 0;
+  }
+  
+  return false;
+}
+
 function checkWhaleCondition(symbol) {
   const fullSymbol = symbol.toUpperCase().endsWith('USDT') ? symbol.toUpperCase() : `${symbol.toUpperCase()}USDT`;
   const baseSymbol = fullSymbol.replace('USDT', '');
@@ -168,7 +261,12 @@ function checkWhaleCondition(symbol) {
   const buyRatio = bucket.buyNotional / volume1m;
   const sellRatio = bucket.sellNotional / volume1m;
   
+  // v2.4: 200EMA 추세 필터 적용
   if (buyRatio >= 0.65) {
+    // 매수 시그널: close > EMA200 && slope > 0 체크
+    if (!checkTrendFilter(baseSymbol, 'buy')) {
+      return null; // 추세 조건 미충족 또는 횡보
+    }
     return {
       symbol: baseSymbol,
       side: '매수',
@@ -177,11 +275,16 @@ function checkWhaleCondition(symbol) {
       buy_notional: bucket.buyNotional,
       sell_notional: bucket.sellNotional,
       volume_ratio: ratio,
-      baseline_window: BASELINE_WINDOW
+      baseline_window: BASELINE_WINDOW,
+      trend_filter: 'bullish' // v2.4: 추세 정보 추가
     };
   }
   
   if (sellRatio >= 0.65) {
+    // 매도 시그널: close < EMA200 && slope < 0 체크
+    if (!checkTrendFilter(baseSymbol, 'sell')) {
+      return null; // 추세 조건 미충족 또는 횡보
+    }
     return {
       symbol: baseSymbol,
       side: '매도',
@@ -190,7 +293,8 @@ function checkWhaleCondition(symbol) {
       buy_notional: bucket.buyNotional,
       sell_notional: bucket.sellNotional,
       volume_ratio: ratio,
-      baseline_window: BASELINE_WINDOW
+      baseline_window: BASELINE_WINDOW,
+      trend_filter: 'bearish' // v2.4: 추세 정보 추가
     };
   }
   
@@ -335,7 +439,7 @@ function startAggTradeStream(symbols) {
           console.warn('[BinanceSignal] AggTrade WS pong timeout, forcing reconnect...');
           recordError('AggTrade WS pong timeout');
           closeWebSocket(ws, wsPingInterval);
-          setTimeout(() => startAggTradeStream(currentSymbols.slice(0, 60)), 1000);
+          setTimeout(() => startAggTradeStream(currentSymbols.slice(0, 100)), 1000);
           return;
         }
         pendingPong = true;
@@ -382,7 +486,7 @@ function startAggTradeStream(symbols) {
     ws = null;
     wsPingInterval = null;
     setTimeout(() => {
-      if (isRunning) startAggTradeStream(currentSymbols.slice(0, 60));
+      if (isRunning) startAggTradeStream(currentSymbols.slice(0, 100));
     }, 3000);
   });
   
@@ -417,7 +521,7 @@ function startKlineStream(symbols) {
           console.warn('[BinanceSignal] Kline WS pong timeout, forcing reconnect...');
           recordError('Kline WS pong timeout');
           closeWebSocket(klineWs, klineWsPingInterval);
-          setTimeout(() => startKlineStream(currentSymbols.slice(0, 60)), 1000);
+          setTimeout(() => startKlineStream(currentSymbols.slice(0, 100)), 1000);
           return;
         }
         pendingKlinePong = true;
@@ -472,7 +576,7 @@ function startKlineStream(symbols) {
     klineWs = null;
     klineWsPingInterval = null;
     setTimeout(() => {
-      if (isRunning) startKlineStream(currentSymbols.slice(0, 60));
+      if (isRunning) startKlineStream(currentSymbols.slice(0, 100));
     }, 3000);
   });
   
@@ -513,7 +617,7 @@ async function initialize() {
   
   currentSymbols = topSymbols.map(s => s.toLowerCase());
   
-  const limit = Math.min(currentSymbols.length, 60);
+  const limit = Math.min(currentSymbols.length, 100);
   for (let i = 0; i < limit; i++) {
     const sym = currentSymbols[i];
     const klines = await fetchKlines(sym, '1h', 250);
@@ -526,8 +630,8 @@ async function initialize() {
     }
   }
   
-  startAggTradeStream(currentSymbols.slice(0, 60));
-  startKlineStream(currentSymbols.slice(0, 60));
+  startAggTradeStream(currentSymbols.slice(0, 100));
+  startKlineStream(currentSymbols.slice(0, 100));
   
   // Baseline 업데이트 인터벌
   baselineInterval = setInterval(() => {
@@ -701,13 +805,13 @@ function startHealthCheck() {
     if (!status.wsConnected && isRunning) {
       console.warn('[BinanceSignal] AggTrade WebSocket not connected, reconnecting...');
       recordError('AggTrade WebSocket disconnected');
-      startAggTradeStream(currentSymbols.slice(0, 60));
+      startAggTradeStream(currentSymbols.slice(0, 100));
     }
     
     if (!status.klineWsConnected && isRunning) {
       console.warn('[BinanceSignal] Kline WebSocket not connected, reconnecting...');
       recordError('Kline WebSocket disconnected');
-      startKlineStream(currentSymbols.slice(0, 60));
+      startKlineStream(currentSymbols.slice(0, 100));
     }
     
     // 조건 3: 버킷/베이스라인 없음 (데이터 손상)
@@ -739,10 +843,15 @@ module.exports = {
   startHealthCheck,
   checkWhaleCondition,
   checkSpikeCondition,
+  checkTrendFilter,  // v2.4: 200EMA 추세 필터
+  calculateEMA,      // v2.4: EMA 계산
   get24hData,
   getCandles1h,
   getLastMinuteBucket,
   candles1m,
   candles1h,
-  ticker24h
+  ticker24h,
+  // v2.4 상수 export
+  EMA_PERIOD,
+  EMA_SLOPE_THRESHOLD
 };

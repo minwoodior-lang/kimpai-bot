@@ -7,7 +7,25 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 - 이터러티브 개발 선호
 - 상세한 설명 요구
 
-### 최신 변경사항 (2025-12-10 v2.6.0)
+### 최신 변경사항 (2025-12-10 v2.6.1)
+
+**FREE 고래 시그널 v2.4 업데이트:**
+- ✅ **심볼 범위 확장:** Binance TOP 60 → TOP 100 심볼
+- ✅ **트리거 필터 재조정:**
+  - 24h 거래액(USDT) ≥ 5,000,000 (5M)
+  - 일반 코인: 최근 N분 체결 금액 ≥ 10,000 USDT, 거래량 배수 ≥ 5.0x
+  - 메이저 코인 (BTC, ETH, BNB, SOL): 체결 금액 ≥ 50,000 USDT, 거래량 배수 ≥ 4.0x
+- ✅ **200EMA 추세 필터 추가:**
+  - 매수 시그널: close > EMA200 && slope > 0 (상승 추세)
+  - 매도 시그널: close < EMA200 && slope < 0 (하락 추세)
+  - 횡보 구간 (|slope| < threshold): 시그널 무시
+- ✅ **채널 상한/쿨다운 유지:** 60분 심볼별 쿨다운, 10분간 3개, 1시간간 12개 상한
+
+**v2.4 관련 파일:**
+- `src/workers/binanceSignalEngine.js` - 200EMA 계산, 추세 필터, 필터 상수
+- `src/bot/utils/binanceSymbols.js` - TOP_LIMIT 60 → 100 변경
+
+**이전 v2.6.0 변경사항:**
 
 **Admin v2.0 Dashboard 구현:**
 - ✅ **인증 시스템:** bcrypt 비밀번호 해싱, JWT 세션, httpOnly 쿠키
@@ -77,7 +95,7 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 **이전 v2.1 변경사항:**
 - 2종 시그널만 유지 (스파이크 시그널 제거)
 - Python mplfinance 차트: Heikin-Ashi 5분봉, SMA20, EMA200, RSI(14), MACD
-- Binance TOP 60 심볼: 24h 거래량 기준, 15분마다 업데이트
+- Binance TOP 100 심볼: 24h 거래량 기준, 15분마다 업데이트 (v2.4)
 - 1분당 최대 3개 신호 (폭주 방지)
 - 차트 해상도: 1200x600px, KST 시간대
 - FREE에서 GPT/AI 호출 완전 제거
@@ -114,7 +132,7 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 - **Framework:** Telegraf.js + setInterval (30초)
 - **Commands:** 10개 (FREE 7개 + PRO 3개)
 - **FREE 시그널:** 김프 급변 + 고래 활동 (2종만, 30초마다 검사)
-- **심볼 선택:** Binance TOP 60 (24h 거래량 기준, 15분마다 갱신)
+- **심볼 선택:** Binance TOP 100 (24h 거래량 기준, 15분마다 갱신)
 - **PRO 스캔:** 관심종목 5분, BTC 예측 6시간
 - **보조지표:** EMA200, RSI, MACD, Heikin-Ashi
 - **차트:** Python mplfinance (1200x600px, 5분봉 50개, KST)
