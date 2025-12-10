@@ -27,6 +27,8 @@
     "validate": "tsx scripts/validateDataPipeline.ts",
     "bot:dev": "node src/bot/index.js",
     "bot:start": "NODE_ENV=production node src/bot/index.js",
+    "bot": "npm run bot:start"
+
     "db:init-admin": "bash scripts/init-prod-admin.sh"
   },
   "dependencies": {
