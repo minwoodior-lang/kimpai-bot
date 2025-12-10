@@ -58,22 +58,27 @@ console.log("📅 스케줄러 등록 중...");
 let freeSignalInterval = null;
 
 async function initializeFreeSignals() {
-  if (binanceEngine) {
-    try {
-      await binanceEngine.initialize();
-      console.log("✅ Binance Signal Engine 초기화 완료");
-      
-      freeSignalInterval = setInterval(async () => {
-        try {
-          await runAllFreeSignals(bot);
-        } catch (err) {
-          console.error("[FREE Signals] 실행 오류:", err.message);
-        }
-      }, 30000);
-      console.log("✅ FREE 실시간 시그널 등록 완료 (30초마다 검사)");
-    } catch (err) {
-      console.error("❌ Binance Signal Engine 초기화 실패:", err.message);
-    }
+  if (!binanceEngine) {
+    console.warn("⚠️ Binance Signal Engine을 로드할 수 없습니다. 실시간 시그널이 작동하지 않습니다.");
+    return;
+  }
+  
+  try {
+    console.log("[INIT] Binance Signal Engine 초기화 시작...");
+    await binanceEngine.initialize();
+    console.log("✅ Binance Signal Engine 초기화 완료");
+    
+    freeSignalInterval = setInterval(async () => {
+      try {
+        await runAllFreeSignals(bot);
+      } catch (err) {
+        console.error("[FREE Signals] 실행 오류:", err.message);
+      }
+    }, 30000);
+    console.log("✅ FREE 실시간 시그널 등록 완료 (30초마다 검사)");
+  } catch (err) {
+    console.error("❌ Binance Signal Engine 초기화 실패:", err.message);
+    console.error("[ERROR] 에러 스택:", err.stack);
   }
 }
 

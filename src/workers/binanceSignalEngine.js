@@ -94,9 +94,9 @@ function checkWhaleCondition(symbol) {
   if (!baseline || baseline < 100) return null;
   
   // 24h 거래액 필터 확인
-  const ticker24h = ticker24h.get(fullSymbol);
-  if (ticker24h) {
-    const volume24h = parseFloat(ticker24h.quoteAssetVolume || 0);
+  const ticker24hData = ticker24h.get(fullSymbol);
+  if (ticker24hData) {
+    const volume24h = parseFloat(ticker24hData.quoteAssetVolume || 0);
     if (volume24h < MIN_24H_VOLUME_USDT) return null;
   }
   
