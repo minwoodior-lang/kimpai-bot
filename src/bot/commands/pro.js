@@ -1,8 +1,6 @@
-const axios = require("axios");
 const messages = require("../utils/messages");
 const { generateAiLine } = require("../utils/aiInterpret");
-
-const API_BASE = process.env.API_BASE_URL || process.env.API_URL || "http://localhost:5000";
+const localData = require("../utils/localData");
 
 const checkPro = async (ctx, next) => {
   const { getUserByChatId } = require("../utils/supabase");
@@ -17,16 +15,12 @@ const checkPro = async (ctx, next) => {
 
 const proBtcCommand = async (ctx) => {
   try {
-    let data;
-    try {
-      const response = await axios.get(`${API_BASE}/api/bot/pro/btc`, { timeout: 10000 });
-      data = response.data;
-      console.log(`✅ [PRO BTC] API 응답: 김프 ${data.kimp}%, 국내가 ${data.korean_price?.toLocaleString()}`);
-    } catch (err) {
-      console.error("❌ PRO BTC API 호출 실패:", err.message);
+    const data = localData.getProBtcData();
+    if (!data || !data.korean_price) {
       await ctx.reply("❌ BTC 예측 데이터를 조회할 수 없습니다. 나중에 다시 시도해주세요.");
       return;
     }
+    console.log(`✅ [PRO BTC] 로컬 데이터: 김프 ${data.kimp}%, 국내가 ${data.korean_price?.toLocaleString()}`);
 
     const payload = {
       current_kimp: data.kimp,
@@ -57,16 +51,12 @@ const proWhaleCommand = async (ctx) => {
       return;
     }
 
-    let data;
-    try {
-      const response = await axios.get(`${API_BASE}/api/bot/pro/whale/${symbol}`, { timeout: 10000 });
-      data = response.data;
-      console.log(`✅ [PRO Whale] ${symbol} API 응답: 순입금 ${data.net_inflow}, 추세 ${data.trend}`);
-    } catch (err) {
-      console.error(`❌ PRO Whale ${symbol} API 호출 실패:`, err.message);
+    const data = localData.getProWhaleData(symbol);
+    if (!data) {
       await ctx.reply(`❌ ${symbol} 고래 매집 데이터를 조회할 수 없습니다.`);
       return;
     }
+    console.log(`✅ [PRO Whale] ${symbol} 로컬 데이터: 순입금 ${data.net_inflow}, 추세 ${data.trend}`);
 
     const payload = {
       symbol: data.symbol,
@@ -98,16 +88,12 @@ const proRiskCommand = async (ctx) => {
       return;
     }
 
-    let data;
-    try {
-      const response = await axios.get(`${API_BASE}/api/bot/pro/risk/${symbol}`, { timeout: 10000 });
-      data = response.data;
-      console.log(`✅ [PRO Risk] ${symbol} API 응답: 패턴 ${data.pattern_name}, 리스크 ${data.risk_level}`);
-    } catch (err) {
-      console.error(`❌ PRO Risk ${symbol} API 호출 실패:`, err.message);
+    const data = localData.getProRiskData(symbol);
+    if (!data) {
       await ctx.reply(`❌ ${symbol} 리스크 분석 데이터를 조회할 수 없습니다.`);
       return;
     }
+    console.log(`✅ [PRO Risk] ${symbol} 로컬 데이터: 리스크 ${data.risk_level}`);
 
     const payload = {
       symbol: data.symbol,

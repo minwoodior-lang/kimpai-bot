@@ -1,4 +1,3 @@
-const axios = require("axios");
 const { execSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
@@ -7,8 +6,7 @@ const templates = require("../utils/freeSignalTemplates");
 const { calcRSI, getEMA200Trend, getMACDSignal, getHeikinAshiCandle } = require("../../lib/indicators/ta");
 const binanceEngine = require("../../workers/binanceSignalEngine");
 const { getTopSymbols, startAutoUpdate, getSymbolsWithoutSuffix } = require("../utils/binanceSymbols");
-
-const API_BASE = process.env.API_BASE_URL || process.env.API_URL || "http://localhost:5000";
+const localData = require("../utils/localData");
 const CHANNEL_ID = process.env.TELEGRAM_CHANNEL_ID;
 
 const KIMP_COOLDOWN_MS = 10 * 60 * 1000;
@@ -136,13 +134,8 @@ async function runKimpSignals(bot) {
   if (!CHANNEL_ID) return;
 
   try {
-    const response = await axios.get(`${API_BASE}/api/premium/table-filtered`, {
-      params: { domestic: 'UPBIT_KRW', foreign: 'BINANCE_USDT' },
-      timeout: 10000
-    });
-    
-    const data = response.data;
-    if (!data || !Array.isArray(data)) return;
+    const data = localData.getPremiumFiltered("UPBIT", "KRW", "BINANCE", "USDT");
+    if (!data || !Array.isArray(data) || data.length === 0) return;
 
     for (const symbol of ['BTC', 'ETH']) {
       const coin = data.find(c => c.symbol === symbol);

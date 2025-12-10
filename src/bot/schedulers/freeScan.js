@@ -1,10 +1,8 @@
-const axios = require("axios");
 const messages = require("../utils/messages");
 const { generateSignalLine } = require("../utils/signalLine");
 const { floorToMinutesBucket } = require("../utils/timeBuckets");
 const { setLock, hasLock } = require("../state/freeScanLock");
-
-const API_BASE = process.env.API_BASE_URL || process.env.API_URL || "http://localhost:5000";
+const localData = require("../utils/localData");
 const CHANNEL_ID = process.env.TELEGRAM_CHANNEL_ID;
 
 const recentAlerts = new Map();
@@ -49,15 +47,8 @@ const freeAltScan = async (bot) => {
   try {
     console.log("[FREE Scan] TOP50 알트 스캔 시작...", { bucket, pid: process.pid });
 
-    let alts = [];
-    try {
-      const response = await axios.get(`${API_BASE}/api/bot/alts?limit=50`, { timeout: 10000 });
-      alts = response.data;
-      console.log(`✅ [FREE Scan] API에서 ${alts.length}개 알트 데이터 수신`);
-    } catch (err) {
-      console.error("❌ ALT API 호출 실패:", err.message);
-      return;
-    }
+    const alts = localData.getAltsTop(50);
+    console.log(`✅ [FREE Scan] 로컬에서 ${alts.length}개 알트 데이터 로드`);
 
     if (!alts || alts.length === 0) {
       console.warn("⚠️ [FREE Scan] 알트 데이터 없음");
@@ -177,15 +168,12 @@ const freeBtcScan = async (bot) => {
   try {
     console.log("[FREE BTC Scan] BTC 김프 스캔 시작...", { bucket, pid: process.pid });
 
-    let data;
-    try {
-      const response = await axios.get(`${API_BASE}/api/bot/btc`, { timeout: 10000 });
-      data = response.data;
-      console.log(`✅ [FREE BTC Scan] API 응답: 김프 ${data.current}%`);
-    } catch (err) {
-      console.error("❌ BTC API 호출 실패:", err.message);
+    const data = localData.getBtcData();
+    if (!data || !data.korean_price) {
+      console.error("❌ BTC 로컬 데이터 없음");
       return;
     }
+    console.log(`✅ [FREE BTC Scan] 로컬 데이터: 김프 ${data.current}%`);
 
     const kimpChange = Math.abs(parseFloat(data.current) - parseFloat(data.prev));
     let signalType = "volatility";

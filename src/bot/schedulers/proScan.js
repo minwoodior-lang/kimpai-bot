@@ -1,9 +1,7 @@
-const axios = require("axios");
 const messages = require("../utils/messages");
 const { getProUsers } = require("../utils/supabase");
 const { generateAiLine } = require("../utils/aiInterpret");
-
-const API_BASE = process.env.API_BASE_URL || process.env.API_URL || "http://localhost:5000";
+const localData = require("../utils/localData");
 
 const proWatchlistScan = async (bot) => {
   try {
@@ -23,17 +21,12 @@ const proWatchlistScan = async (bot) => {
 
       for (const symbol of watchlist.slice(0, 2)) {
         try {
-          let data;
-          try {
-            const response = await axios.get(`${API_BASE}/api/bot/pro/whale/${symbol}`, {
-              timeout: 10000,
-            });
-            data = response.data;
-            console.log(`✅ [PRO Scan] ${symbol} API 응답 수신: ${data.trend}`);
-          } catch (err) {
-            console.error(`❌ [PRO Scan] ${symbol} API 호출 실패:`, err.message);
+          const data = localData.getProWhaleData(symbol);
+          if (!data) {
+            console.error(`❌ [PRO Scan] ${symbol} 로컬 데이터 없음`);
             continue;
           }
+          console.log(`✅ [PRO Scan] ${symbol} 로컬 데이터 로드: ${data.trend}`);
 
           const payload = {
             symbol: data.symbol,
@@ -74,15 +67,12 @@ const proBtcForcastScan = async (bot) => {
       return;
     }
 
-    let forecastData;
-    try {
-      const response = await axios.get(`${API_BASE}/api/bot/pro/btc`, { timeout: 10000 });
-      forecastData = response.data;
-      console.log(`✅ [PRO Forecast] BTC API 응답: 김프 ${forecastData.kimp}%, 국내가 ${forecastData.korean_price?.toLocaleString()}`);
-    } catch (err) {
-      console.error("❌ BTC 예측 API 호출 실패:", err.message);
+    const forecastData = localData.getProBtcData();
+    if (!forecastData || !forecastData.korean_price) {
+      console.error("❌ BTC 로컬 데이터 없음");
       return;
     }
+    console.log(`✅ [PRO Forecast] 로컬 데이터: 김프 ${forecastData.kimp}%, 국내가 ${forecastData.korean_price?.toLocaleString()}`);
 
     const payload = {
       current_kimp: forecastData.kimp,

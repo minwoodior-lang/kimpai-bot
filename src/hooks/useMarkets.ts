@@ -21,6 +21,7 @@ type UseMarketsOptions = {
   limit?: number;
   domestic?: string;
   foreign?: string;
+  pollingInterval?: number;
 };
 
 type UseMarketsResult = {
@@ -41,6 +42,7 @@ export function useMarkets(options?: UseMarketsOptions | number): UseMarketsResu
   const limit = typeof options === "number" ? options : options?.limit;
   const domestic = typeof options === "object" ? options?.domestic : undefined;
   const foreign = typeof options === "object" ? options?.foreign : undefined;
+  const pollingInterval = typeof options === "object" ? options?.pollingInterval ?? 3000 : 3000;
 
   const [data, setData] = useState<MarketRow[]>([]);
   const [loading, setLoading] = useState(true);
@@ -126,11 +128,38 @@ export function useMarkets(options?: UseMarketsOptions | number): UseMarketsResu
   useEffect(() => {
     fetchData();
     
-    // 1초마다 폴링하여 실시간 가격 업데이트
-    const interval = setInterval(fetchData, 1000);
+    let interval: NodeJS.Timeout | null = null;
     
-    return () => clearInterval(interval);
-  }, [fetchData]);
+    const startPolling = () => {
+      if (!interval) {
+        interval = setInterval(fetchData, pollingInterval);
+      }
+    };
+    
+    const stopPolling = () => {
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+      }
+    };
+    
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stopPolling();
+      } else {
+        fetchData();
+        startPolling();
+      }
+    };
+    
+    startPolling();
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    
+    return () => {
+      stopPolling();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [fetchData, pollingInterval]);
 
   return {
     data,

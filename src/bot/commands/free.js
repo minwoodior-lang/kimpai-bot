@@ -1,17 +1,11 @@
-const axios = require("axios");
 const messages = require("../utils/messages");
 const { generateSignalLine } = require("../utils/signalLine");
-
-const API_BASE = process.env.API_BASE_URL || process.env.API_URL || "http://localhost:5000";
+const localData = require("../utils/localData");
 
 const btcCommand = async (ctx) => {
   try {
-    let data;
-    try {
-      const response = await axios.get(`${API_BASE}/api/bot/btc`, { timeout: 5000 });
-      data = response.data;
-    } catch (err) {
-      console.warn("⚠️ BTC API 호출 실패:", err.message);
+    const data = localData.getBtcData();
+    if (!data || !data.korean_price) {
       await ctx.reply("❌ BTC 데이터를 조회할 수 없습니다. 나중에 다시 시도해주세요.");
       return;
     }
@@ -44,12 +38,8 @@ const btcCommand = async (ctx) => {
 
 const ethCommand = async (ctx) => {
   try {
-    let data;
-    try {
-      const response = await axios.get(`${API_BASE}/api/bot/eth`, { timeout: 5000 });
-      data = response.data;
-    } catch (err) {
-      console.warn("⚠️ ETH API 호출 실패:", err.message);
+    const data = localData.getEthData();
+    if (!data || !data.korean_price) {
       await ctx.reply("❌ ETH 데이터를 조회할 수 없습니다. 나중에 다시 시도해주세요.");
       return;
     }
@@ -85,12 +75,8 @@ const altCommand = async (ctx) => {
       return;
     }
 
-    let data;
-    try {
-      const response = await axios.get(`${API_BASE}/api/bot/alts/${symbol}`, { timeout: 5000 });
-      data = response.data;
-    } catch (err) {
-      console.warn(`⚠️ ${symbol} API 호출 실패:`, err.message);
+    const data = localData.getAltData(symbol);
+    if (!data) {
       await ctx.reply(`❌ ${symbol} 데이터를 조회할 수 없습니다.`);
       return;
     }
