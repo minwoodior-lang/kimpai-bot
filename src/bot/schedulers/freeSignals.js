@@ -148,14 +148,16 @@ async function runKimpSignals(bot) {
       if (premiumPrev === null) continue;
       
       const diff = premiumNow - premiumPrev;
+      const diffAbs = Math.abs(diff);
+      const premiumAbs = Math.abs(premiumNow);
       
-      const shouldTrigger = 
-        Math.abs(diff) >= KIMP_DIFF_THRESHOLD ||
-        premiumNow >= KIMP_ABSOLUTE_THRESHOLD ||
-        premiumNow <= -KIMP_ABSOLUTE_THRESHOLD;
-
-      if (!shouldTrigger) continue;
-      if (!canSend('KIMP', symbol, KIMP_COOLDOWN_MS)) continue;
+      // v2.4 김프 급변 조건: 모든 조건을 동시에 충족해야 발송
+      // 조건 A: |5분 변화| >= 0.35%p
+      // 조건 B: |현재 김프| >= 1.0%
+      // 조건 C: 심볼별 쿨다운 10분
+      if (diffAbs < KIMP_DIFF_THRESHOLD) continue; // 5분 변화 0.35%p 미만 → 발송 금지
+      if (premiumAbs < KIMP_ABSOLUTE_THRESHOLD) continue; // 김프 절대값 1.0% 미만 → 발송 금지
+      if (!canSend('KIMP', symbol, KIMP_COOLDOWN_MS)) continue; // 쿨다운 확인
 
       const messageData = {
         symbol,
