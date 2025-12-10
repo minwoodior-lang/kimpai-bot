@@ -70,6 +70,10 @@ localPort = 44983
 [[ports]]
 localPort = 45553
 
+[[ports]]
+localPort = 46503
+externalPort = 3001
+
 [nix]
 channel = "stable-25_05"
 packages = ["cairo", "ffmpeg-full", "freetype", "ghostscript", "glibcLocales", "gobject-introspection", "gtk3", "jq", "libuuid", "lsof", "pkg-config", "qhull", "tcl", "tk"]

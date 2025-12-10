@@ -77,7 +77,7 @@ export default function Layout({ children }: LayoutProps) {
 
   const navLinks = [
     { href: "/", label: "홈" },
-    { href: "/markets", label: "시장 지표" },
+    { href: "/market", label: "시장 지표" },
     { href: "/analysis", label: "AI 분석" },
     { href: "/news", label: "뉴스" },
   ];
