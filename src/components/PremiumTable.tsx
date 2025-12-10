@@ -297,13 +297,12 @@ const PremiumTableRow = React.memo(
     getTvSymbolForRow,
     openCmcPage,
   }: PremiumTableRowProps) => {
-    const uniqueKey = `${row.symbol}_${index}`;
     const normalizedSymbol = normalizeSymbol(row.symbol);
     const isFav = favorites.has(normalizedSymbol);
     const isUnlisted = !row.foreignPriceKrw || row.foreignPriceKrw <= 0;
 
     return (
-      <React.Fragment key={uniqueKey}>
+      <React.Fragment key={row.symbol}>
         <tr
           className="text-[8px] sm:text-[9px] md:text-sm hover:bg-slate-800/60 transition-colors leading-relaxed"
           data-symbol={row.symbol}
@@ -1315,7 +1314,7 @@ export default function PremiumTable({
             <tbody>
               {filteredAndSortedData.slice(0, visibleCount).map((row, index) => (
                 <PremiumTableRow
-                  key={`${row.symbol}_${index}`}
+                  key={row.symbol}
                   row={row}
                   index={index}
                   favorites={favorites}

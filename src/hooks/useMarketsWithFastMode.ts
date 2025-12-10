@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 
 export type MarketRow = {
   symbol: string;
@@ -61,6 +61,9 @@ export function useMarketsWithFastMode(
   const [slowData, setSlowData] = useState<MarketRow[] | null>(null);
   // FAST 응답 (TOP30, 1초)
   const [fastData, setFastData] = useState<MarketRow[] | null>(null);
+
+  // 🔥 핵심: 마지막 정상 rows를 기억하는 ref (스크롤 튐 방지)
+  const lastStableDataRef = useRef<MarketRow[]>([]);
 
   // 🔥 핵심: 초기 로딩 판별 (첫 로드 후 다시 undefined가 되지 않음)
   const isInitialLoading = !slowData && !error;
@@ -176,11 +179,14 @@ export function useMarketsWithFastMode(
   }, [fetchSlow, fetchFast]);
 
   // SLOW + FAST 병합: SLOW를 base로, FAST 심볼만 덮어쓰기
+  // 🔥 핵심: 마지막 정상 데이터를 ref에 저장 (스크롤 튐 방지)
   useEffect(() => {
     if (!slowData) return;
 
     const baseRows = [...slowData];
     if (!fastData || fastData.length === 0) {
+      // 마지막 정상 데이터 저장
+      lastStableDataRef.current = baseRows;
       setData(baseRows);
       return;
     }
@@ -191,11 +197,23 @@ export function useMarketsWithFastMode(
     // SLOW 행 중 FAST에 있으면 덮어쓰기
     const mergedRows = baseRows.map((row) => fastMap.get(row.symbol) ?? row);
 
+    // 마지막 정상 데이터 저장
+    lastStableDataRef.current = mergedRows;
     setData(mergedRows);
   }, [slowData, fastData]);
 
+  // 🔥 useMemo로 항상 안정적인 rows 반환
+  const stableData = useMemo(() => {
+    if (data && data.length > 0) {
+      lastStableDataRef.current = data;
+      return data;
+    }
+    // 데이터가 비어있으면 마지막 정상 데이터 사용
+    return lastStableDataRef.current;
+  }, [data]);
+
   return {
-    data,
+    data: stableData,
     loading,
     isInitialLoading,
     isSlowValidating,

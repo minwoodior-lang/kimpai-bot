@@ -17,7 +17,7 @@ import UserPrefsPanel from "@/components/settings/UserPrefsPanel";
 import IndicatorSelector, { SYMBOL_MAP } from "@/components/IndicatorSelector";
 import { useUserPrefs } from "@/hooks/useUserPrefs";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMarkets } from "@/hooks/useMarkets";
 
 const PremiumTable = dynamic(() => import("@/components/PremiumTable"), {
@@ -49,6 +49,17 @@ export default function Home() {
     "ai"
   );
   const [isPrefsPanelOpen, setIsPrefsPanelOpen] = useState(false);
+
+  // 🔥 브라우저 자동 스크롤 복원 비활성화 (SLOW 폴링 시 스크롤 튐 방지)
+  useEffect(() => {
+    if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
+      const prev = window.history.scrollRestoration;
+      window.history.scrollRestoration = "manual";
+      return () => {
+        window.history.scrollRestoration = prev;
+      };
+    }
+  }, []);
 
   const { prefs, setPrefs, isLoaded, toggleFavorite } = useUserPrefs();
   const { data, averagePremium, fxRate } = useMarkets();
