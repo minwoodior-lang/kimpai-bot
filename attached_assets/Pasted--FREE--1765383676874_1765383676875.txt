@@ -1,0 +1,72 @@
+[요청] 텔레그램 봇 & 시그널 엔진 실제 상태 점검
+
+지금 상황:
+- 관리자 페이지에서는 "시그널 엔진 죽음"으로 표시됩니다.
+- 텔레그램 채널에는 FREE 시그널 메시지가 전혀 오지 않습니다.
+
+구조 정리는 이미 했으니, 이제 실제 원인을 찾기 위해 아래 3가지를 순서대로 점검해 주세요.
+
+1️⃣ PM2 시그널 워커 상태 확인
+
+1-1) PM2 전체 상태 확인:
+- pm2 status
+
+1-2) signal-engine 프로세스 로그 확인:
+- pm2 logs signal-engine --lines 80
+
+여기서:
+- 프로세스가 online 인지, stopped / errored 인지 확인
+- 최근 에러 스택이나 "Unhandled" / "error" / "Binance" / "WebSocket" 관련 에러가 있는지 확인
+- 결과를 요약해서 알려주세요.
+
+2️⃣ TypeScript signalEngine 상태 확인 (관리자와 연동된 엔진)
+
+관리자에서 "시그널 엔진 죽음"으로 나오는 이유를 확인하기 위해,
+src/signalEngine.ts의 getSignalEngineStatus()를 실제로 호출해서 결과를 보고 싶습니다.
+
+아래 명령과 비슷한 형태로 실행해 주세요 (TS 환경에 맞게 조정해도 됩니다):
+
+- node - <<'EOF'
+  const { getSignalEngineStatus } = require("./dist/signalEngine.js"); // 또는 build 결과물 경로
+  getSignalEngineStatus().then((status) => {
+    console.log("SignalEngineStatus:", status);
+  }).catch(console.error);
+  EOF
+
+위 명령이 어렵다면:
+- src/signalEngine.ts / signalEngine.js 파일에서
+  - status를 어떤 기준으로 "alive/dead"로 판단하는지
+  - lastRunAt, isRunning, lastError 등의 필드가 있는지
+를 코드 레벨에서 분석해서, 관리자에서 "죽음"으로 보이는 이유를 요약해 주세요.
+
+3️⃣ 텔레그램 봇 자체가 실행되는지 로그 확인
+
+텔레그램 봇 엔트리: ./src/bot/index.js
+
+여기서:
+- startBot()
+- initializeFreeSignals()
+- binanceEngine.initialize()
+- runAllFreeSignals()
+
+이 함수들이 실제로 호출되고 있는지, 로그로 확인하고 싶습니다.
+
+3-1) server.ts 에서 startTelegramBot() 호출 여부 점검:
+- server.ts 파일을 열어서,
+  - NODE_ENV 조건,
+  - BOT_ENABLED 관련 조건,
+  - startTelegramBot() 호출 부분
+을 보여주고, "현재 배포 환경에서 이 함수가 실제로 호출되는지"를 설명해 주세요.
+
+3-2) src/bot/index.js에서 봇 시작 시 찍히는 로그 문자열 (예: "Telegram bot started", "initializeFreeSignals")가 있다면,
+- 현재 서버 로그나 콘솔에서 해당 로그가 보이는지 확인해 주세요.
+- 없다면, startBot() / initializeFreeSignals()에 console.log를 추가해서,
+  서버 재실행 후 실제로 호출되는지까지 확인해 주세요.
+
+📌 목표 요약:
+- PM2 signal-engine 프로세스가 죽어 있는지, 에러로 루프가 멈춰 있는지 확인
+- src/signalEngine.ts 기준으로는 왜 "죽음" 상태로 표시되는지 확인
+- server.ts → src/bot/index.js → startBot() / initializeFreeSignals()가 실제로 실행되고 있는지 확인
+
+수정은 나중에 하고,
+우선 "어디까지는 정상 작동, 어디부터는 죽어 있는지"를 로그/상태 기준으로 정확히 알려주세요.
