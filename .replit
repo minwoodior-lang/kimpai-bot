@@ -82,7 +82,7 @@ packages = ["cairo", "ffmpeg-full", "freetype", "ghostscript", "glibcLocales", "
 
 [userenv.development]
 USE_WS_OVERRIDE = "true"
-DISABLE_SIGNAL_ENGINE = "true"
+DISABLE_SIGNAL_ENGINE = "false"
 
 [userenv.production]
 PORT = "5000"
