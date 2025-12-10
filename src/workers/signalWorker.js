@@ -15,6 +15,13 @@ console.log('🚀 Signal Worker 시작...');
 console.log('📅 시작 시간:', new Date().toISOString());
 console.log('🔧 PID:', process.pid);
 
+// 개발 환경에서는 실행 안 함
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+if (!IS_PRODUCTION) {
+  console.log('[SignalWorker] Disabled (development environment)');
+  process.exit(0);
+}
+
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const CHANNEL_ID = process.env.TELEGRAM_CHANNEL_ID;
 
