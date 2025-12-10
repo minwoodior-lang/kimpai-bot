@@ -31,15 +31,15 @@
     "DASHUSDT",
     "WIFUSDT",
     "GIGGLEUSDT",
-    "XUSDUSDT",
     "TRUMPUSDT",
+    "XUSDUSDT",
     "UNIUSDT",
     "DOTUSDT",
     "BFUSDUSDT",
     "HBARUSDT",
     "FETUSDT",
-    "USTCUSDT",
     "XPLUSDT",
+    "USTCUSDT",
     "EURUSDT",
     "MAGICUSDT",
     "WLDUSDT",
@@ -58,9 +58,9 @@
     "STRKUSDT",
     "VIRTUALUSDT",
     "FLOKIUSDT",
-    "NMRUSDT",
-    "SEIUSDT"
+    "SEIUSDT",
+    "EIGENUSDT"
   ],
-  "updatedAt": "2025-12-10T11:40:06.542Z",
+  "updatedAt": "2025-12-10T11:46:02.473Z",
   "count": 60
 }

@@ -1,12 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import bcrypt from 'bcryptjs';
-import { createClient } from '@supabase/supabase-js';
+import { Pool } from 'pg';
 import { signToken, setSessionCookie } from '@/lib/adminAuth';
 
-const supabase = createClient(
-  process.env.SUPABASE_URL || '',
-  process.env.SUPABASE_KEY || ''
-);
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL || ''
+});
 
 const loginAttempts = new Map<string, { count: number; lastAttempt: number }>();
 const MAX_ATTEMPTS = 5;
@@ -39,18 +38,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { data: user, error } = await supabase
-      .from('admin_users')
-      .select('id, username, password_hash, role')
-      .eq('username', username)
-      .single();
+    const result = await pool.query(
+      'SELECT id, username, password_hash, role FROM admin_users WHERE username = $1',
+      [username]
+    );
 
-    if (error || !user) {
+    if (result.rows.length === 0) {
       recordFailedAttempt(ipKey);
       return res.status(401).json({ success: false, error: '아이디 또는 비밀번호가 올바르지 않습니다' });
     }
 
+    const user = result.rows[0];
     const isValid = await bcrypt.compare(password, user.password_hash);
+    
     if (!isValid) {
       recordFailedAttempt(ipKey);
       return res.status(401).json({ success: false, error: '아이디 또는 비밀번호가 올바르지 않습니다' });
@@ -58,10 +58,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     loginAttempts.delete(ipKey);
 
-    await supabase
-      .from('admin_users')
-      .update({ last_login_at: new Date().toISOString() })
-      .eq('id', user.id);
+    await pool.query(
+      'UPDATE admin_users SET last_login_at = NOW() WHERE id = $1',
+      [user.id]
+    );
 
     const token = signToken({
       userId: user.id,
