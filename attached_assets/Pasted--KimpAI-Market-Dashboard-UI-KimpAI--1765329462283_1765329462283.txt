@@ -1,0 +1,235 @@
+🧾 [전달문] KimpAI – 시장 지표(Market Dashboard) 페이지 구현 지시서 (최종 버전)
+
+UI 스타일: 현재 KimpAI 홈/통계 페이지와 완전히 일관된 다크톤 + 미니멀 + 정보 가독성 극대화
+
+경로: /market
+목적: 시장 전체 상황을 “10초 안에 스캔 가능한 대시보드화”
+
+1️⃣ 페이지 전체 레이아웃 구조
+<Header />
+
+<MainContainer class="max-w-screen-2xl mx-auto px-4 py-4 space-y-6">
+
+    [섹션 A] 상단 Summary 카드 6~8개 (2줄 그리드)
+    [섹션 B] 롱/숏 포지션 비율 (Full-Width)
+    [섹션 C] 김프 히트맵 (국내 3 vs 해외 3)
+    [섹션 D] 거래소별 김프 요약 테이블
+    [섹션 E] 시장 변동성 지수
+    [섹션 F] 메이저 코인 시총 변화 리스트
+    [섹션 G] 트렌드 랭킹 리스트 (TOP50/시총100/거래대금100/급등/급락)
+
+</MainContainer>
+
+<Footer />
+
+2️⃣ 섹션 A – 상단 Summary 카드 UI
+카드 공통 규칙
+
+Tailwind Class
+rounded-2xl bg-slate-900/70 border border-slate-800 p-4 flex flex-col gap-1
+
+숫자(메인 값): text-lg font-semibold
+
+라벨: text-xs text-slate-400
+
+아이콘: 작은 와중에도 KimpAI 스타일로 통일
+
+카드 구성 (총 7개)
+
+🇰🇷 평균 김프 카드
+
+avgPremium
+
+minPremium / maxPremium
+
+🟧 BTC 도미넌스
+
+dominance
+
+daily change
+
+🌍 글로벌 24h 거래액
+
+globalVolumeUsd
+
+change24h
+
+🇰🇷 국내 24h 거래액
+
+upbit + bithumb + coinone
+
+💱 환율 & USDT 김프
+
+USD/KRW 환율
+
+USDT 프리미엄
+
+📈 상승률 TOP3
+
+📉 하락률 TOP3
+
+3️⃣ 섹션 B – 롱/숏 포지션 비율 (Full Width)
+
+→ 이 페이지의 시그니처 요소. 반드시 KimpAI 스타일로 재구성.
+
+UI 구조
+카드 전체: rounded-2xl, bg-slate-900/70, border-slate-800, p-4
+
+제목: "📊 롱 vs 숏 포지션 비율 (Binance Futures 기준)"
+text-sm font-medium text-slate-300 mb-3
+
+각 코인 Row
+flex justify-between items-center py-1.5
+
+[좌측]
+코인명 + 현재가
+
+[중앙]
+가로 바 그래프
+- long: bg-teal-500
+- short: bg-red-500
+- rounded-lg
+- height: 10px
+
+[우측]
+롱/숏 퍼센트 및 금액
+text-xs text-slate-400
+
+정렬
+
+거래대금 기준 상위 50개
+
+BTC/ETH/SOL/XRP는 최상단 고정
+
+4️⃣ 섹션 C – 김프 히트맵 (국내 3 vs 해외 3)
+
+UI 목표: 단순하지만 핵심이 직관적으로 드러나는 KimpAI 스타일
+
+구성 거래소
+
+UPBIT_KRW
+
+BITHUMB_KRW
+
+COINONE_KRW
+
+BINANCE_USDT
+
+OKX_USDT
+
+BYBIT_USDT
+
+셀 디자인
+
+음수 = 파란 계열 (bg-blue-900/40 text-blue-300)
+
+중립 = slate (bg-slate-800 text-slate-300)
+
+양수 = 빨강 (bg-red-900/40 text-red-300)
+
+rounded-md text-xs py-1 px-2 font-medium
+
+테이블 구조
+코인명 | 업비트 | 빗썸 | 코인원 | 바이낸스 | OKX | Bybit
+
+표 기획 포인트
+
+너비 고정, 좌우 스크롤 가능(모바일)
+
+최대 10~20개 주요 코인만 노출
+(나머지는 “전체보기” 버튼 제공)
+
+5️⃣ 섹션 D – 거래소별 김프 요약 표
+예시
+UPBIT     평균 +1.1%   최대 +3.4%(BTC)   최소 -0.7%(XRP)
+BITHUMB   평균 +0.9%   최대 +2.8%(ETH)   최소 -0.6%(SUI)
+COINONE   평균 +1.0%   최대 +2.9%(SOL)   최소 -0.8%(PEPE)
+
+UI 포맷
+
+다크 박스 카드 1개
+
+내부는 3행 리스트
+
+컬러:
+
+플러스 → text-red-400
+
+마이너스 → text-blue-400
+
+6️⃣ 섹션 E – 시장 변동성 지수 (VIX 스타일)
+UI
+카드 상단: "⚡ 시장 변동성 지수"
+메인 수치: 0~100 (text-3xl font-bold)
+소제목: "24시간 변동폭 + 거래대금 변화 기반"
+
+바 차트: 
+[■■■■■■■■■■■■■■□□□□□□]
+색:
+0~30: teal
+30~60: yellow
+60~100: red
+
+7️⃣ 섹션 F – 메이저 코인 시총 변화
+BTC   +3.1%   +22B
+ETH   +4.5%   +12B
+SOL   +7.2%    +4B
+BNB   +1.2%    +1.5B
+
+
+UI:
+
+리스트 형태
+
+작은 미니 바 차트 가능
+
+모든 데이터는 text-xs로 컴팩트하게
+
+8️⃣ 섹션 G – 트렌드 랭킹 리스트 (TOP50/시총100/거래대금100)
+필터 탭
+
+인기 TOP50
+
+시총 TOP100
+
+거래대금 TOP100
+
+급등
+
+급락
+
+신규상장
+
+리스트 형태 예시
+1   BTC     64,210,000원   +1.2%   -9.3%   시총 1274조   [미니차트]
+2   ETH      3,482,000원   +6.0%  -10.8%    462조  
+3   XRP            729원   +1.1%   -0.2%     39조  
+
+
+UI 규칙:
+
+KimpAI 테이블 스타일 재사용 (홈의 PremiumTable 계열)
+
+다크톤 + border-slate-800
+
+행 hover 효과 subtle 적용
+
+9️⃣ API 요구사항
+반드시 필요한 API
+GET /api/market/summary
+GET /api/market/futures-long-short
+GET /api/market/premium-heatmap
+GET /api/market/exchange-premium
+GET /api/market/volatility
+GET /api/market/majors
+GET /api/market/trending
+
+크론 주기
+
+롱/숏 비율: 15분
+
+히트맵/요약: 3초 ~ 10초
+
+트렌드: 1분
+
+변동성: 5분
