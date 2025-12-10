@@ -50,20 +50,12 @@ export default function Layout({ children }: LayoutProps) {
 
   // 세션 ID 초기화 및 하트비트
   useEffect(() => {
-    let sessionId = localStorage.getItem("kimpai_session_id");
-    if (!sessionId) {
-      sessionId = `session_${Date.now()}_${Math.random()
-        .toString(36)
-        .substr(2, 9)}`;
-      localStorage.setItem("kimpai_session_id", sessionId);
-    }
-
     const sendHeartbeat = async () => {
       try {
-        await fetch("/api/heartbeat", {
+        await fetch("/api/analytics/heartbeat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sessionId }),
+          body: JSON.stringify({ path: window.location.pathname }),
         });
       } catch (err) {
         // Silent
@@ -74,6 +66,23 @@ export default function Layout({ children }: LayoutProps) {
     const interval = setInterval(sendHeartbeat, 30000);
     return () => clearInterval(interval);
   }, []);
+
+  // 라우트 변경 시 heartbeat 추가 전송
+  useEffect(() => {
+    const sendHeartbeat = async () => {
+      try {
+        await fetch("/api/analytics/heartbeat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ path: router.pathname }),
+        });
+      } catch (err) {
+        // Silent
+      }
+    };
+
+    sendHeartbeat();
+  }, [router.pathname]);
 
   const navLinks = [
     { href: "/", label: "홈" },

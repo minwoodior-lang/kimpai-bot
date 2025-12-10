@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 
-type TabType = "health" | "price-feeds" | "symbols" | "premium" | "workers" | "listings" | "frontend" | "tools";
+type TabType = "health" | "price-feeds" | "symbols" | "premium" | "workers" | "listings" | "frontend" | "tools" | "analytics";
 
 interface HealthData {
   signalEngine: {
@@ -82,6 +82,7 @@ function formatTimeAgo(seconds: number): string {
 
 const TABS: { id: TabType; label: string; icon: string }[] = [
   { id: "health", label: "시스템 상태", icon: "🏥" },
+  { id: "analytics", label: "실시간 접속", icon: "👥" },
   { id: "price-feeds", label: "가격 피드", icon: "📊" },
   { id: "symbols", label: "심볼 관리", icon: "🔗" },
   { id: "premium", label: "김프 엔진", icon: "💎" },
@@ -91,6 +92,22 @@ const TABS: { id: TabType; label: string; icon: string }[] = [
   { id: "tools", label: "도구", icon: "🛠️" }
 ];
 
+interface AnalyticsData {
+  activeNow: number;
+  todayVisitors: number;
+  activeUsers: Array<{
+    sid: string;
+    path_last: string;
+    last_seen: string;
+    lastSeenAgo: string;
+    user_agent: string;
+    device: string;
+    os: string;
+    browser: string;
+  }>;
+  timestamp: string;
+}
+
 export default function AdminDashboard() {
   const router = useRouter();
   const [user, setUser] = useState<AdminUser | null>(null);
@@ -98,6 +115,7 @@ export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<TabType>("health");
   const [health, setHealth] = useState<HealthData | null>(null);
   const [priceFeeds, setPriceFeeds] = useState<PriceFeedStatus[]>([]);
+  const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -145,17 +163,27 @@ export default function AdminDashboard() {
     } catch {}
   }, []);
 
+  const fetchAnalytics = useCallback(async () => {
+    try {
+      const res = await fetch("/api/admin/analytics-summary");
+      const data = await res.json();
+      setAnalytics(data);
+    } catch {}
+  }, []);
+
   useEffect(() => {
     if (!authLoading && user) {
       fetchHealth();
       fetchPriceFeeds();
+      fetchAnalytics();
       const interval = setInterval(() => {
         fetchHealth();
         fetchPriceFeeds();
-      }, 10000);
+        fetchAnalytics();
+      }, 5000);
       return () => clearInterval(interval);
     }
-  }, [authLoading, user, fetchHealth, fetchPriceFeeds]);
+  }, [authLoading, user, fetchHealth, fetchPriceFeeds, fetchAnalytics]);
 
   const handleLogout = async () => {
     await fetch("/api/admin/logout", { method: "POST" });
@@ -226,6 +254,9 @@ export default function AdminDashboard() {
           {activeTab === "health" && (
             <HealthSection health={health} loading={loading} error={error} />
           )}
+          {activeTab === "analytics" && (
+            <AnalyticsSection analytics={analytics} />
+          )}
           {activeTab === "price-feeds" && (
             <PriceFeedsSection feeds={priceFeeds} />
           )}
@@ -238,6 +269,88 @@ export default function AdminDashboard() {
         </div>
       </div>
     </>
+  );
+}
+
+function AnalyticsSection({ analytics }: { analytics: AnalyticsData | null }) {
+  if (!analytics) {
+    return (
+      <div className="grid sm:grid-cols-2 gap-4">
+        {[1, 2].map((i) => (
+          <div key={i} className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6 animate-pulse">
+            <div className="h-4 bg-slate-700 rounded w-24 mb-4"></div>
+            <div className="h-10 bg-slate-700 rounded w-16"></div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold text-white">실시간 접속자 현황</h2>
+
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 rounded-xl p-6">
+          <div className="flex items-center justify-between">
+            <span className="text-slate-400 text-sm">지금 접속 중</span>
+            <span className="text-4xl font-bold text-blue-400">{analytics.activeNow}</span>
+          </div>
+          <p className="text-slate-500 text-xs mt-2">지난 2분 이내 활동</p>
+        </div>
+
+        <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/10 border border-purple-500/30 rounded-xl p-6">
+          <div className="flex items-center justify-between">
+            <span className="text-slate-400 text-sm">오늘 방문자</span>
+            <span className="text-4xl font-bold text-purple-400">{analytics.todayVisitors}</span>
+          </div>
+          <p className="text-slate-500 text-xs mt-2">고유 세션 수</p>
+        </div>
+      </div>
+
+      <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl overflow-hidden">
+        <div className="p-6">
+          <h3 className="text-white font-medium mb-4">활성 사용자 ({analytics.activeUsers.length}명)</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-slate-700">
+                  <th className="text-left py-3 px-4 text-slate-400 font-medium">기기</th>
+                  <th className="text-left py-3 px-4 text-slate-400 font-medium">OS</th>
+                  <th className="text-left py-3 px-4 text-slate-400 font-medium">브라우저</th>
+                  <th className="text-left py-3 px-4 text-slate-400 font-medium">경로</th>
+                  <th className="text-left py-3 px-4 text-slate-400 font-medium">마지막 활동</th>
+                  <th className="text-left py-3 px-4 text-slate-400 font-medium">세션 ID</th>
+                </tr>
+              </thead>
+              <tbody>
+                {analytics.activeUsers.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} className="py-4 px-4 text-center text-slate-500">
+                      현재 접속자 없음
+                    </td>
+                  </tr>
+                ) : (
+                  analytics.activeUsers.map((user, idx) => (
+                    <tr key={idx} className="border-b border-slate-700/50 hover:bg-slate-700/20">
+                      <td className="py-3 px-4 text-slate-300">{user.device || "desktop"}</td>
+                      <td className="py-3 px-4 text-slate-300">{user.os}</td>
+                      <td className="py-3 px-4 text-slate-300">{user.browser}</td>
+                      <td className="py-3 px-4 text-slate-300">{user.path_last}</td>
+                      <td className="py-3 px-4 text-slate-300">{user.lastSeenAgo}</td>
+                      <td className="py-3 px-4 text-slate-400 text-xs font-mono truncate max-w-xs">{user.sid}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="bg-slate-900/50 border-t border-slate-700 px-6 py-3 text-xs text-slate-500">
+          마지막 업데이트: {new Date(analytics.timestamp).toLocaleTimeString("ko-KR")}
+        </div>
+      </div>
+    </div>
   );
 }
 
