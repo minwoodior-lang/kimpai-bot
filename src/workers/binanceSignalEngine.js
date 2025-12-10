@@ -290,9 +290,12 @@ function checkWhaleCondition(symbol) {
   const buyRatio = bucket.buyNotional / volume1m;
   const sellRatio = bucket.sellNotional / volume1m;
   
-  // NOTE: EMA200 추세 필터는 freeSignals.js에서 계산 (성능 최적화)
-  // 여기서는 고래 조건만 체크하고, 추세 필터는 필터링 시점에만 적용
+  // v2.4: 200EMA 추세 필터 적용
   if (buyRatio >= 0.65) {
+    // 매수 시그널: close > EMA200 && slope > 0 체크
+    if (!checkTrendFilter(baseSymbol, 'buy')) {
+      return null; // 추세 조건 미충족 또는 횡보
+    }
     return {
       symbol: baseSymbol,
       side: '매수',
@@ -302,11 +305,15 @@ function checkWhaleCondition(symbol) {
       sell_notional: bucket.sellNotional,
       volume_ratio: ratio,
       baseline_window: BASELINE_WINDOW,
-      trend_filter: 'pending' // freeSignals에서 판단
+      trend_filter: 'bullish' // v2.4: 추세 정보 추가
     };
   }
   
   if (sellRatio >= 0.65) {
+    // 매도 시그널: close < EMA200 && slope < 0 체크
+    if (!checkTrendFilter(baseSymbol, 'sell')) {
+      return null; // 추세 조건 미충족 또는 횡보
+    }
     return {
       symbol: baseSymbol,
       side: '매도',
@@ -316,7 +323,7 @@ function checkWhaleCondition(symbol) {
       sell_notional: bucket.sellNotional,
       volume_ratio: ratio,
       baseline_window: BASELINE_WINDOW,
-      trend_filter: 'pending' // freeSignals에서 판단
+      trend_filter: 'bearish' // v2.4: 추세 정보 추가
     };
   }
   
