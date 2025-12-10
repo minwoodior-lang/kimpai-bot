@@ -40,14 +40,14 @@ export function getSessionFromRequest(req: NextApiRequest): AdminSession | null 
 export function setSessionCookie(res: NextApiResponse, token: string): void {
   const secureFlag = IS_PRODUCTION ? '; Secure' : '';
   res.setHeader('Set-Cookie', [
-    `${COOKIE_NAME}=${token}; Path=/; HttpOnly; SameSite=Strict${secureFlag}; Max-Age=${60 * 60 * 24}`,
+    `${COOKIE_NAME}=${token}; Path=/; HttpOnly; SameSite=Lax${secureFlag}; Max-Age=${60 * 60 * 24}`,
   ]);
 }
 
 export function clearSessionCookie(res: NextApiResponse): void {
   const secureFlag = IS_PRODUCTION ? '; Secure' : '';
   res.setHeader('Set-Cookie', [
-    `${COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Strict${secureFlag}; Max-Age=0`,
+    `${COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Lax${secureFlag}; Max-Age=0`,
   ]);
 }
 
