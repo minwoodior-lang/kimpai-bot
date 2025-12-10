@@ -15,16 +15,32 @@ const startTelegramBot = async () => {
   }
 };
 
+console.log("🚀 server.ts starting...");
+
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
 async function bootstrap() {
   try {
-    await app.prepare();
+    console.log("[INIT] Next.js app.prepare() starting...");
+    
+    // timeout 보호: 30초 이상 걸리면 에러 로깅하고 강제 진행
+    const preparePromise = app.prepare();
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("app.prepare() timeout after 30s")), 30000)
+    );
+    
+    await Promise.race([preparePromise, timeoutPromise]).catch((err) => {
+      console.warn("[INIT] app.prepare() slow or timeout:", err.message);
+    });
+    
+    console.log("[INIT] Next.js app.prepare() done");
 
     const port = Number(process.env.PORT) || 5000;
     const isProduction = process.env.NODE_ENV === "production";
+
+    console.log(`[INIT] Environment: ${isProduction ? "PRODUCTION" : "DEVELOPMENT"}, PORT: ${port}`);
 
     const server = http.createServer((req, res) => {
       handle(req, res).catch((err) => {
@@ -42,14 +58,15 @@ async function bootstrap() {
     });
 
     // 워커는 서버 부팅 후 즉시 비동기로 실행 (타임아웃 방지)
-    setImmediate(() => {
+    setImmediate(async () => {
       try {
-        if (!isProduction) {
-          console.log("Starting background workers...");
-        }
+        console.log("[WORKERS] Initializing background workers...");
         
         createChatServer(server);
+        console.log("[WORKERS] Chat server initialized");
+        
         startPriceWorker();
+        console.log("[WORKERS] Price worker started");
         
         cron.schedule("*/5 * * * *", () => {
           exec("npm run sync:markets", (err, stdout, stderr) => {
@@ -57,24 +74,24 @@ async function bootstrap() {
             if (stdout) console.log(stdout);
           });
         });
+        console.log("[WORKERS] Cron scheduler initialized");
         
-        if (!isProduction) {
-          console.log("All background workers initialized");
-        }
+        console.log("[WORKERS] All background workers initialized ✅");
         
         // Telegram Bot은 background에서 즉시 비동기 시작
         startTelegramBot().catch(err => {
           console.error("❌ Telegram Bot background start error:", err.message);
         });
       } catch (err) {
-        console.error("Worker start failed:", err);
+        console.error("[ERROR] Worker start failed:", err);
       }
     });
 
   } catch (err) {
-    console.error("Fatal bootstrap error:", err);
+    console.error("[FATAL] Bootstrap error:", err);
     process.exit(1);
   }
 }
 
+console.log("[INIT] Calling bootstrap()...");
 bootstrap();
