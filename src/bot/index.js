@@ -33,12 +33,17 @@ const { proWatchlistScan, proBtcForcastScan } = require("./schedulers/proScan");
 const DISABLE_SIGNAL_ENGINE = process.env.DISABLE_SIGNAL_ENGINE === 'true';
 
 let binanceEngine = null;
+
 if (DISABLE_SIGNAL_ENGINE) {
   console.log("🔴 Signal Engine 비활성화됨 (DISABLE_SIGNAL_ENGINE=true)");
   console.log("💡 프로덕션에서는 pm2로 signalWorker.js를 별도 실행하세요");
 } else {
   try {
-    binanceEngine = require("../workers/binanceSignalEngine");
+    // ✅ Railway에서 require가 100% 정상 로드되도록 .js 확장자 포함
+    // 그리고 정확한 파일명: src/workers/binanceSignalEngine.js
+    binanceEngine = require("../workers/binanceSignalEngine.js");
+
+    console.log("✅ Binance Signal Engine 로드 완료");
   } catch (err) {
     console.warn("⚠️ Binance Signal Engine 로드 실패:", err.message);
   }
@@ -54,6 +59,9 @@ if (!BOT_TOKEN) {
 
 const bot = new Telegraf(BOT_TOKEN);
 
+// =========================
+// Commands
+// =========================
 bot.command("start", freeCommands.startCommand);
 bot.command("btc", freeCommands.btcCommand);
 bot.command("eth", freeCommands.ethCommand);
@@ -72,6 +80,9 @@ bot.command("signal_restart", signalCommands.signalRestartCommand);
 
 console.log("📅 스케줄러 등록 중...");
 
+// =========================
+// FREE Signals Interval
+// =========================
 let freeSignalInterval = null;
 
 async function initializeFreeSignals() {
@@ -79,15 +90,16 @@ async function initializeFreeSignals() {
     console.warn("⚠️ Binance Signal Engine을 로드할 수 없습니다. 실시간 시그널이 작동하지 않습니다.");
     return;
   }
-  
+
   try {
     console.log("[INIT] Binance Signal Engine 초기화 시작...");
     await binanceEngine.initialize();
+
     console.log("✅ Binance Signal Engine 초기화 완료");
-    
+
     binanceEngine.startHealthCheck();
-    console.log("✅ 엔진 헬스체크 시작됨 (1분마다)");
-    
+    console.log("✅ 엔진 헬스체크 시작됨 (30초마다)");
+
     freeSignalInterval = setInterval(async () => {
       try {
         await runAllFreeSignals(bot);
@@ -95,29 +107,38 @@ async function initializeFreeSignals() {
         console.error("[FREE Signals] 실행 오류:", err.message);
       }
     }, 30000);
+
     console.log("✅ FREE 실시간 시그널 등록 완료 (30초마다 검사)");
+
   } catch (err) {
     console.error("❌ Binance Signal Engine 초기화 실패:", err.message);
     console.error("[ERROR] 에러 스택:", err.stack);
   }
 }
 
+// =========================
+// PRO Schedulers
+// =========================
 cron.schedule("*/5 * * * *", () => {
   console.log("⏰ PRO 관심종목 스캔 트리거 (5분마다)");
-  proWatchlistScan(bot).catch((err) => console.error("PRO Watchlist 스캔 오류:", err.message));
+  proWatchlistScan(bot).catch(err => console.error("PRO Watchlist 스캔 오류:", err.message));
 });
 console.log("✅ PRO 관심종목 스캔 등록 완료 (5분마다)");
 
 cron.schedule("0 */6 * * *", () => {
   console.log("⏰ PRO BTC 예측 스캔 트리거 (6시간마다)");
-  proBtcForcastScan(bot).catch((err) => console.error("PRO BTC Forecast 스캔 오류:", err.message));
+  proBtcForcastScan(bot).catch(err => console.error("PRO BTC Forecast 스캔 오류:", err.message));
 });
 console.log("✅ PRO BTC 예측 스캔 등록 완료 (6시간마다)");
 
+
+// =========================
+// Start Bot
+// =========================
 const startBot = async () => {
   try {
     await initializeFreeSignals();
-    
+
     await bot.launch();
     console.log("✅ Telegram Bot 시작됨");
     console.log(`📌 BOT_TOKEN: ${BOT_TOKEN.substring(0, 10)}...`);
@@ -129,11 +150,13 @@ const startBot = async () => {
       if (binanceEngine) binanceEngine.stop();
       bot.stop("SIGINT");
     });
+
     process.once("SIGTERM", () => {
       if (freeSignalInterval) clearInterval(freeSignalInterval);
       if (binanceEngine) binanceEngine.stop();
       bot.stop("SIGTERM");
     });
+
   } catch (err) {
     if (err.response?.error_code === 409) {
       console.warn("⚠️ 다른 봇 인스턴스가 이미 실행 중입니다. 스케줄러는 계속 작동합니다.");
