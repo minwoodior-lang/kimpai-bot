@@ -2,16 +2,11 @@ const { Telegraf } = require("telegraf");
 const cron = require("node-cron");
 require("dotenv").config();
 
-// 개발환경에서는 반드시 봇 비활성화 (중복 실행 방지)
-const IS_PRODUCTION = process.env.NODE_ENV === "production";
-const BOT_ENABLED = IS_PRODUCTION && process.env.BOT_ENABLED !== 'false';
+// BOT_ENABLED 체크 (true/false 플래그로 제어)
+const BOT_ENABLED = process.env.BOT_ENABLED !== 'false';
 
 if (!BOT_ENABLED) {
-  const reason = !IS_PRODUCTION ? "(development environment)" : "(BOT_ENABLED=false)";
-  console.log(`🔴 봇이 비활성화되었습니다 ${reason}`);
-  if (!IS_PRODUCTION) {
-    console.log("💡 프로덕션 배포 시에만 봇이 자동으로 실행됩니다");
-  }
+  console.log(`🔴 봇이 비활성화되었습니다 (BOT_ENABLED=false)`);
   module.exports = { bot: null, startBot: () => Promise.resolve() };
   return;
 }
