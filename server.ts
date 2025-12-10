@@ -41,7 +41,7 @@ async function bootstrap() {
     });
 
     // 워커는 서버 부팅 후 비동기로 실행
-    setTimeout(async () => {
+    setTimeout(() => {
       try {
         console.log("Starting background workers...");
         createChatServer(server);
@@ -54,8 +54,10 @@ async function bootstrap() {
         });
         console.log("All background workers initialized");
         
-        // Telegram Bot 시작 (워커 초기화 후)
-        await startTelegramBot();
+        // Telegram Bot은 백그라운드에서 비동기로 시작 (배포 타임아웃 방지)
+        startTelegramBot().catch(err => {
+          console.error("❌ Telegram Bot background start error:", err.message);
+        });
       } catch (err) {
         console.error("Worker start failed:", err);
       }
