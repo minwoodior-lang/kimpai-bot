@@ -1,0 +1,180 @@
+🧾 [전달문] FREE 텔레봇 v2 – 조건만 교체 (성능 영향 X)
+0. 공통 원칙 (중요)
+
+지금 돌아가는 텔레그램 봇 구조는 그대로 유지
+
+워커에서 데이터 가져오는 방식, 타이머, 루프, sendMessage 채널 등 수정 ❌
+
+이번 작업은 **“조건 함수만 수정”**하는 걸로 한정합니다.
+
+REST 추가 호출, WebSocket 추가 연결, EMA 계산 같은 건 절대 넣지 마세요.
+
+성능에 영향 없게:
+
+이미 API/worker에서 내려주는 필드만 사용 (price_change_1h, kimp_change_5m, premium, volume_1m, volume_avg_3m, side_buy_ratio 등)
+
+루프 안에서 새로운 HTTP 요청/무거운 연산 금지
+
+1. 공통: 추세(상승/하락) 정의 – 가벼운 버전
+
+EMA200 계산을 텔레봇 안에서 새로 하지 말고,
+기존에 내려오는 1시간 변동률로 추세를 정의합니다.
+
+def is_uptrend(ticker) -> bool:
+    """
+    상승추세:
+    - 1시간 가격 변동률 >= +1.5% (price_change_1h)
+    """
+    return ticker.price_change_1h is not None and ticker.price_change_1h >= 1.5
+
+
+def is_downtrend(ticker) -> bool:
+    """
+    하락추세:
+    - 1시간 가격 변동률 <= -1.5%
+    """
+    return ticker.price_change_1h is not None and ticker.price_change_1h <= -1.5
+
+
+🔹 EMA200 필터는 나중에 statsWorker에서 미리 계산해주는 구조로 분리하고,
+지금은 1시간 변동률로 대체해서 “상승추세/하락추세만 쏴준다”는 취지를 그대로 살립니다.
+→ 조건만 바꾸는 수준이라 성능 영향 0에 가깝게 유지.
+
+2. 고래 알림 조건 (매수/매도)
+(1) 기존 루프/채널은 그대로 사용
+
+현재 고래 알림 보내는 함수/채널/루프는 그대로 두고
+
+필터링 조건만 교체합니다.
+
+(2) 새 조건
+def should_send_whale_buy(ticker) -> bool:
+    """
+    고래 매수 시그널 (상승추세에서만)
+    """
+    # ① 기본 고래 조건
+    if ticker.volume_1m is None or ticker.volume_avg_3m is None:
+        return False
+
+    volume_ratio = ticker.volume_1m / max(ticker.volume_avg_3m, 1)
+
+    if volume_ratio < 4.5:
+        return False
+
+    if ticker.side_buy_ratio is None or ticker.side_buy_ratio < 60:
+        return False
+
+    if ticker.notional_1m is None or ticker.notional_1m < 10_000:
+        return False
+
+    # ② 추세 필터: 상승추세일 때만 매수 고래 발송
+    if not is_uptrend(ticker):
+        return False
+
+    return True
+
+
+def should_send_whale_sell(ticker) -> bool:
+    """
+    고래 매도 시그널 (하락추세에서만)
+    """
+    # ① 기본 고래 조건 (위와 동일)
+    if ticker.volume_1m is None or ticker.volume_avg_3m is None:
+        return False
+
+    volume_ratio = ticker.volume_1m / max(ticker.volume_avg_3m, 1)
+    if volume_ratio < 4.5:
+        return False
+
+    if ticker.side_sell_ratio is None or ticker.side_sell_ratio < 60:
+        return False
+
+    if ticker.notional_1m is None or ticker.notional_1m < 10_000:
+        return False
+
+    # ② 추세 필터: 하락추세일 때만 매도 고래 발송
+    if not is_downtrend(ticker):
+        return False
+
+    return True
+
+
+🔹 이렇게 하면 횡보 + 고래 = 전부 버림 →
+웨일헌터처럼 “확실한 상승/하락 추세에서만 고래 시그널”이 나옴.
+🔹 추가 요청/EMA 없음 → 성능 영향 없음.
+
+3. 김프 알림 조건 (매수/매도 방향)
+
+김프 채널도 같은 컨셉으로:
+
+기본 김프 급변 조건 +
+
+추세 필터를 같이 걸어서 “쓰레기 알림” 최대한 제거.
+
+def should_send_kimp_long(ticker) -> bool:
+    """
+    김프 기반 매수(롱) 시그널:
+    - 김프가 빠르게 올라가는 + 상승추세
+    """
+    # ① 기본 김프 급변 조건
+    if ticker.kimp_change_5m is None or ticker.premium is None:
+        return False
+
+    # 5분 동안 김프 +0.35%p 이상
+    if ticker.kimp_change_5m < 0.35:
+        return False
+
+    # 절대 김프 1% 이상
+    if abs(ticker.premium) < 1.0:
+        return False
+
+    # ② 추세 필터: 상승추세에서만 롱 계열 알림
+    if not is_uptrend(ticker):
+        return False
+
+    return True
+
+
+def should_send_kimp_short(ticker) -> bool:
+    """
+    김프 기반 매도(숏) 시그널:
+    - 김프가 빠르게 내려가는 + 하락추세
+    """
+    if ticker.kimp_change_5m is None or ticker.premium is None:
+        return False
+
+    # 5분 동안 김프 -0.35%p 이하
+    if ticker.kimp_change_5m > -0.35:
+        return False
+
+    if abs(ticker.premium) < 1.0:
+        return False
+
+    # ② 추세 필터: 하락추세에서만 숏 계열 알림
+    if not is_downtrend(ticker):
+        return False
+
+    return True
+
+4. 발송 개수 & 쿨다운 (기존 로직 활용)
+
+아래 정책은 기존 텔레봇 구조 안에서, 로직만 이렇게 맞춰달라고 요청하면 됨:
+
+쿨다운 (기존 dict/캐시 그대로 활용)
+
+고래: symbol + 방향(up/down) 기준 30분 쿨다운
+
+김프: symbol + 방향(long/short) 기준 10분 쿨다운
+
+한 사이클당 발송 개수
+
+10분 스캔 루프 기준:
+
+고래: 최대 1개
+
+김프: 최대 1개
+
+조건 미충족 시 → 아무 것도 발송하지 않음
+
+🔹 기존 쿨다운 / last_sent_at 구조 사용하고,
+위 네 함수(should_send_...)만 조건 교체하게 해달라고 해주세요.

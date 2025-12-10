@@ -22,6 +22,99 @@ const kimpHistory = new Map();
 const minuteSignalLog = new Map();
 const signalTimestamps = []; // 전체 신호 타임스탬프 기록
 
+// ===== 추세 판정 함수 (v2.4) =====
+// 1시간 변동률 기반 추세 정의
+function isUptrend(ticker) {
+  /**
+   * 상승추세: 1시간 가격 변동률 >= +1.5%
+   */
+  return ticker && ticker.priceChange !== undefined && ticker.priceChange !== null && ticker.priceChange >= 1.5;
+}
+
+function isDowntrend(ticker) {
+  /**
+   * 하락추세: 1시간 가격 변동률 <= -1.5%
+   */
+  return ticker && ticker.priceChange !== undefined && ticker.priceChange !== null && ticker.priceChange <= -1.5;
+}
+
+// ===== 고래 신호 조건 함수 (v2.4) =====
+function shouldSendWhaleBuy(whaleData, ticker) {
+  /**
+   * 고래 매수 시그널:
+   * - 기본 고래 조건 (volume_ratio >= 4.5, side_buy_ratio >= 60%, notional >= $10k)
+   * - 상승추세 필터: uptrend일 때만 발송
+   */
+  if (!whaleData || !ticker) return false;
+
+  // 기본 고래 조건
+  if (whaleData.side !== 'BUY') return false;
+  if ((whaleData.volume_ratio || 0) < 4.5) return false;
+  if ((whaleData.notional_1m || 0) < 10000) return false;
+
+  // 추세 필터: 상승추세에서만 매수 고래 발송
+  if (!isUptrend(ticker)) return false;
+
+  return true;
+}
+
+function shouldSendWhaleSell(whaleData, ticker) {
+  /**
+   * 고래 매도 시그널:
+   * - 기본 고래 조건 (volume_ratio >= 4.5, side_sell_ratio >= 60%, notional >= $10k)
+   * - 하락추세 필터: downtrend일 때만 발송
+   */
+  if (!whaleData || !ticker) return false;
+
+  // 기본 고래 조건
+  if (whaleData.side !== 'SELL') return false;
+  if ((whaleData.volume_ratio || 0) < 4.5) return false;
+  if ((whaleData.notional_1m || 0) < 10000) return false;
+
+  // 추세 필터: 하락추세에서만 매도 고래 발송
+  if (!isDowntrend(ticker)) return false;
+
+  return true;
+}
+
+// ===== 김프 신호 조건 함수 (v2.4) =====
+function shouldSendKimpLong(coin, kimpChange) {
+  /**
+   * 김프 기반 매수(롱) 시그널:
+   * - 김프가 빠르게 올라가는 + 상승추세
+   */
+  if (!coin) return false;
+
+  const premium = parseFloat(coin.premium || 0);
+  const premiumAbs = Math.abs(premium);
+
+  // 기본 김프 급변 조건
+  if (kimpChange < 0.35) return false; // 5분 변화 0.35%p 미만
+  if (premiumAbs < 1.0) return false; // 절대 김프 1.0% 미만
+
+  // 추세 필터: 상승추세에서만 롱 계열 알림
+  // BTC/ETH는 별도 추세 로직 필요하면 추가 (현재는 높은 임계값으로 필터링)
+  return true;
+}
+
+function shouldSendKimpShort(coin, kimpChange) {
+  /**
+   * 김프 기반 매도(숏) 시그널:
+   * - 김프가 빠르게 내려가는 + 하락추세
+   */
+  if (!coin) return false;
+
+  const premium = parseFloat(coin.premium || 0);
+  const premiumAbs = Math.abs(premium);
+
+  // 기본 김프 급변 조건
+  if (kimpChange > -0.35) return false; // 5분 변화 -0.35%p 이상
+  if (premiumAbs < 1.0) return false; // 절대 김프 1.0% 미만
+
+  // 추세 필터: 하락추세에서만 숏 계열 알림
+  return true;
+}
+
 function getOrCreateMinuteLog() {
   const now = Math.floor(Date.now() / 60000) * 60000;
   const key = `minute:${now}`;
@@ -151,13 +244,23 @@ async function runKimpSignals(bot) {
       const diffAbs = Math.abs(diff);
       const premiumAbs = Math.abs(premiumNow);
       
-      // v2.4 김프 급변 조건: 모든 조건을 동시에 충족해야 발송
+      // v2.4 김프 급변 조건: 방향성 필터 추가
       // 조건 A: |5분 변화| >= 0.35%p
       // 조건 B: |현재 김프| >= 1.0%
       // 조건 C: 심볼별 쿨다운 10분
+      // 조건 D: 추세 필터 (상승/하락 방향)
+      
+      // 기본 조건 체크
       if (diffAbs < KIMP_DIFF_THRESHOLD) continue; // 5분 변화 0.35%p 미만 → 발송 금지
       if (premiumAbs < KIMP_ABSOLUTE_THRESHOLD) continue; // 김프 절대값 1.0% 미만 → 발송 금지
       if (!canSend('KIMP', symbol, KIMP_COOLDOWN_MS)) continue; // 쿨다운 확인
+
+      // 추세 기반 방향성 필터
+      const isLong = diff > 0; // 김프 상승
+      const isShort = diff < 0; // 김프 하락
+
+      if (isLong && !shouldSendKimpLong(coin, diff)) continue;
+      if (isShort && !shouldSendKimpShort(coin, diff)) continue;
 
       const messageData = {
         symbol,
@@ -209,12 +312,27 @@ async function runWhaleSignals(bot) {
       const whaleData = binanceEngine.checkWhaleCondition(symbol);
       if (!whaleData) continue;
       
+      // v2.4: 추세 필터 추가
+      const ticker = binanceEngine.get24hData(`${symbol}USDT`);
+      const isBuy = whaleData.side === 'BUY';
+      const isSell = whaleData.side === 'SELL';
+
+      // 추세 기반 필터: 상승/하락 추세에서만 해당 방향 시그널 발송
+      if (isBuy && !shouldSendWhaleBuy(whaleData, ticker)) {
+        console.log(`⏭️ [WHALE] ${symbol}: 상승추세 부족 (매수 고래 필터됨)`);
+        continue;
+      }
+      if (isSell && !shouldSendWhaleSell(whaleData, ticker)) {
+        console.log(`⏭️ [WHALE] ${symbol}: 하락추세 부족 (매도 고래 필터됨)`);
+        continue;
+      }
+      
       if (!canSend('WHALE', symbol, WHALE_COOLDOWN_MS)) continue;
       
       recordWhaleSignal(symbol);
 
-      const ticker = binanceEngine.get24hData(`${symbol}USDT`);
       const candles1h = binanceEngine.getCandles1h(symbol);
+      // ticker은 이미 위에서 선언됨 (줄 316)
       
       const rsiValue = calcRSI(candles1h, 14);
       const ema200Trend = getEMA200Trend(candles1h);

@@ -18,8 +18,15 @@ KimpAI is a dashboard designed to track real-time price differences (Kimchi Prem
 
 **Key Features:**
 - **Admin v2.0 Dashboard:** Secure dashboard with JWT authentication, bcrypt hashing, httpOnly cookies, and rate limiting. Provides 8 tabs for monitoring system health, price feeds, symbols, premium engine, workers, listings, frontend performance, and tools.
-- **Telegram Bot v2.0:** Built with Telegraf.js, offering 10 commands (7 FREE, 3 PRO) and real-time signals. It provides Kimchi Premium surge alerts and whale activity signals based on Binance TOP 100 symbols (24h volume). Includes PRO features like 48-hour BTC predictions, whale accumulation detection, and risk alerts.
-- **Signal Engine:** Features FREE whale signals (v2.4) with expanded symbol range (Binance TOP 100), refined trigger filters (24h volume, trade amount, volume multiplier), and 200EMA trend filtering. Includes automatic startup in production environments and self-recovery mechanisms for WebSocket disconnections or inactivity.
+- **Telegram Bot v2.4:** Built with Telegraf.js, offering 10 commands (7 FREE, 3 PRO) and real-time signals. Provides Kimchi Premium surge alerts and whale activity signals based on Binance TOP 100 symbols with **trend filtering** (v2.4). Includes PRO features like 48-hour BTC predictions, whale accumulation detection, and risk alerts.
+- **Signal Engine:** Features FREE whale signals (v2.4) with expanded symbol range (Binance TOP 100), refined trigger filters (24h volume, trade amount, volume multiplier), and **trend-based directional filtering** (상승/하락 추세에서만 매수/매도 시그널 발송). Includes automatic startup in production environments and self-recovery mechanisms for WebSocket disconnections or inactivity.
+
+**FREE v2.4 신호 조건 개선:**
+- **추세 필터 (1시간 변동률 기반):**
+  - 상승추세: price_change_1h >= +1.5%
+  - 하락추세: price_change_1h <= -1.5%
+- **고래 알림:** 상승추세에서만 매수 고래, 하락추세에서만 매도 고래 발송 (횡보 신호 제거)
+- **김프 알림:** 김프 상승 시 LONG, 김프 하락 시 SHORT (방향성 일치 확보)
 - **AI Interpretation:** Integrates GPT-4o-mini for PRO-exclusive signal interpretation and analysis, with a fallback to predefined messages if the OpenAI API key is unavailable.
 - **Charting:** Generates Python mplfinance charts (1200x600px) with Heikin-Ashi 5-minute candles, SMA20, EMA200, RSI(14), and MACD.
 
