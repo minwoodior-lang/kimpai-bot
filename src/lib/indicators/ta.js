@@ -122,7 +122,7 @@ function getHeikinAshiCandle(candle) {
   return haClose >= haOpen ? "양봉🟢" : "음봉🔴";
 }
 
-// v2.5: EMA200 기반 추세 판단 + slope 계산
+// v2.5: EMA200 기반 추세 판단 + slope 계산 (강화된 SIDEWAYS 필터)
 function getEMA200TrendV2(candles) {
   if (!candles || candles.length < 200) return { trend: "SIDEWAYS", slope: 0 };
   
@@ -132,8 +132,10 @@ function getEMA200TrendV2(candles) {
   const currentPrice = parseFloat(candles[candles.length - 1].close || candles[candles.length - 1].c || 0);
   const currentEMA = ema200Series[ema200Series.length - 1];
   
-  // 최근 10~20개 EMA 기울기 계산
-  const recentCount = Math.min(20, Math.max(10, ema200Series.length / 10));
+  // 최근 20개 EMA 기울기 계산
+  const recentCount = 20;
+  if (ema200Series.length < recentCount) return { trend: "SIDEWAYS", slope: 0 };
+  
   const emaRecent = ema200Series.slice(-recentCount);
   
   let sumDiff = 0;
@@ -142,10 +144,21 @@ function getEMA200TrendV2(candles) {
   }
   const slope = sumDiff / (recentCount - 1);
   
-  // 추세 판단
+  // SIDEWAYS 기준: 가격이 EMA 근처 ±1% 범위 또는 기울기가 거의 없음 (±0.0001)
+  const priceDeviation = Math.abs((currentPrice - currentEMA) / currentEMA);
+  const slopeThreshold = Math.abs(currentEMA) * 0.0001; // 동적 threshold
+  
+  // 추세 판단 (강화: 확실한 추세만 인정)
   let trend = "SIDEWAYS";
-  if (currentPrice > currentEMA && slope > 0) trend = "UP";
-  else if (currentPrice < currentEMA && slope < 0) trend = "DOWN";
+  
+  // UP: 가격 > EMA 1% 이상 & 기울기 양수 & slope > threshold
+  if (currentPrice > currentEMA * 1.01 && slope > slopeThreshold) {
+    trend = "UP";
+  }
+  // DOWN: 가격 < EMA 1% 이하 & 기울기 음수 & slope < -threshold
+  else if (currentPrice < currentEMA * 0.99 && slope < -slopeThreshold) {
+    trend = "DOWN";
+  }
   
   return { trend, slope };
 }
