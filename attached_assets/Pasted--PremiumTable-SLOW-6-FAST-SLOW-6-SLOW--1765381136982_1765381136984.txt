@@ -1,0 +1,132 @@
+🧾 [전달문]
+PremiumTable SLOW(6초) 폴링 시 화면이 “접히는 문제” 해결
+🎯 현재 문제
+
+FAST/SLOW 구조 적용 후,
+6초마다 SLOW 폴링이 일어날 때 PremiumTable이 순간적으로 로딩 상태로 바뀌어
+
+스크롤이 위로 튐
+
+아래에서 보고 있던 심볼 리스트가 접힌 것처럼 사라졌다가 다시 나타남
+
+UX가 불안정함
+
+이는 useSWR 재검증 시 data가 잠깐 undefined 되는 사이
+테이블 전체가 리렌더링되며 발생하는 문제.
+
+✅ 수정 목표
+
+초기 로딩일 때만 로딩 UI 렌더
+
+이후부터는
+
+slowData가 순간적으로 undefined가 되어도
+
+isValidating 동안에도
+→ PremiumTable UI 자체는 절대 갈아치우지 않는다
+
+테이블 DOM 유지로 스크롤/높이/상태 보존
+
+key 값으로 테이블을 강제 언마운트하는 로직 제거
+
+📌 수정 지시사항 (구현 상세)
+1. useMarkets 훅 수정
+🔧 isInitialLoading 상태 추가
+const {
+  data: slowData,
+  error: slowError,
+  isValidating: isSlowValidating,
+} = useSWR(
+  `/api/premium/table-filtered?${baseQuery}`,
+  fetcher,
+  {
+    refreshInterval: 6000, // SLOW = 6초
+    revalidateOnFocus: true,
+  }
+);
+
+const {
+  data: fastData,
+} = useSWR(
+  `/api/premium/table-filtered?${baseQuery}&mode=fast`,
+  fetcher,
+  {
+    refreshInterval: 1000, // FAST = 1초
+    revalidateOnFocus: true,
+  }
+);
+
+// 🔥 핵심: 초기 로딩 판별
+const isInitialLoading = !slowData && !slowError;
+
+2. PremiumTable에서 로딩 조건 변경
+❌ 기존 문제 코드 패턴 (이런 식이면 안 됨)
+if (!slowData) return <LoadingSpinner />;
+
+
+이걸 없애고 아래처럼 수정.
+
+✅ 최종 PremiumTable 렌더링 구조
+const PremiumTable = () => {
+  const { rows, isInitialLoading, isSlowValidating, fastSymbolSet } = useMarkets(...);
+
+  if (isInitialLoading) {
+    return (
+      <div className="h-[400px] flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
+  // 🔥 여기부터는 slowData가 순간 undefined여도 테이블 유지
+  return (
+    <>
+      {isSlowValidating && (
+        <div className="text-xs text-slate-500 mb-1">
+          최신 시세 갱신 중...
+        </div>
+      )}
+
+      <table className="w-full table-fixed">
+        <tbody>
+          {rows.map(row => {
+            const isFastRow = fastSymbolSet.has(row.symbol);
+            return (
+              <PremiumTableRow
+                key={row.id ?? row.symbol}
+                row={row}
+                isFastRow={isFastRow}
+              />
+            );
+          })}
+        </tbody>
+      </table>
+    </>
+  );
+};
+
+
+→ 초기 로딩 딱 1회만 로딩 UI 보이고,
+SWR 재검증 동안에는 테이블이 절대 사라지지 않음.
+
+3. 테이블/컴포넌트 key 관련 점검
+
+아래와 같은 강제 리마운트 key 사용 금지:
+
+<table key={rows.length}>
+<PremiumTable key={domestic + foreign + Date.now()}>
+
+
+→ 모두 제거해야 스크롤이 리셋되지 않음.
+
+🎉 최종 효과
+
+SLOW(6초) 폴링 시에도 테이블이 유지
+
+화면이 접힐 일 없음
+
+스크롤 위치 유지
+
+UX 안정성 증가
+
+FAST/SLOW 구조 그대로 유지 가능

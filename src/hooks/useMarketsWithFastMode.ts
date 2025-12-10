@@ -1,39 +1,49 @@
-import { useState, useEffect, useCallback, useRef } from "react";
-import type { MarketRow } from "./useMarkets";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 
-type UseMarketsWithFastModeOptions = {
-  limit?: number;
-  domestic?: string;
-  foreign?: string;
+export type MarketRow = {
+  symbol: string;
+  name: string;
+  koreanName: string;
+  upbitPrice: number;
+  binancePrice: number | null;
+  premium: number | null;
+  volume24hKrw: number;
+  volume24hUsdt: number | null;
+  volume24hForeignKrw: number | null;
+  change24h: number | null;
+  domesticExchange?: string;
+  foreignExchange?: string;
+  isListed: boolean;
+  cmcSlug?: string;
 };
 
-type UseMarketsWithFastModeResult = {
+type UseMarketsFastModeResult = {
   data: MarketRow[];
   loading: boolean;
+  isInitialLoading: boolean;
   isSlowValidating: boolean;
   error: Error | null;
   fxRate: number;
   averagePremium: number;
   updatedAt: string;
+  refetch: () => void;
   domesticExchange: string;
   foreignExchange: string;
   totalCoins: number;
   listedCoins: number;
+  fastSymbolSet: Set<string>;
 };
 
 /**
- * FAST/SLOW 이중 갱신 훅
- * - TOP 20: 1초 갱신 (FAST)
- * - 나머지: 6초 갱신 (SLOW)
- * - 스크롤 안정성 100% 보장
+ * FAST(1초, TOP30) + SLOW(6초, 전체) 이중 폴링 훅
+ * - FAST: 국내 KRW 기준 거래대금 TOP30만 1초 간격 폴링
+ * - SLOW: 전체 코인 6초 간격 폴링
+ * - SLOW 응답을 base로 사용하되, FAST 심볼은 덮어쓰기
  */
 export function useMarketsWithFastMode(
-  options?: UseMarketsWithFastModeOptions
-): UseMarketsWithFastModeResult {
-  const domestic = options?.domestic;
-  const foreign = options?.foreign;
-  const limit = options?.limit;
-
+  domestic?: string,
+  foreign?: string
+): UseMarketsFastModeResult {
   const [data, setData] = useState<MarketRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [isSlowValidating, setIsSlowValidating] = useState(false);
@@ -45,152 +55,177 @@ export function useMarketsWithFastMode(
   const [foreignExchange, setForeignExchange] = useState("BINANCE_USDT");
   const [totalCoins, setTotalCoins] = useState(0);
   const [listedCoins, setListedCoins] = useState(0);
+  const [fastSymbolSet, setFastSymbolSet] = useState<Set<string>>(new Set());
 
-  // 마지막 정상 rows 보관 → 스크롤 안정성 확보
-  const lastStableRows = useRef<MarketRow[]>([]);
-  const slowDataRef = useRef<MarketRow[]>([]);
-  const fastDataRef = useRef<MarketRow[]>([]);
+  // SLOW 응답 (전체, 6초)
+  const [slowData, setSlowData] = useState<MarketRow[] | null>(null);
+  // FAST 응답 (TOP30, 1초)
+  const [fastData, setFastData] = useState<MarketRow[] | null>(null);
 
-  // 기본 query 생성
-  const baseQuery = new URLSearchParams();
-  if (domestic) baseQuery.append("domestic", domestic);
-  if (foreign) baseQuery.append("foreign", foreign);
-  const baseQueryString = baseQuery.toString();
+  // 🔥 핵심: 마지막 정상 rows를 기억하는 ref (스크롤 튐 방지)
+  const lastStableDataRef = useRef<MarketRow[]>([]);
 
-  // SLOW API 호출 (전체 데이터)
-  const fetchSlowData = useCallback(async () => {
+  // 🔥 핵심: 초기 로딩 판별 (첫 로드 후 다시 undefined가 되지 않음)
+  const isInitialLoading = !slowData && !error;
+
+  const buildQueryString = useCallback(
+    (mode?: string) => {
+      const params = new URLSearchParams();
+      if (domestic) params.append("domestic", domestic);
+      if (foreign) params.append("foreign", foreign);
+      if (mode) params.append("mode", mode);
+      return params.toString();
+    },
+    [domestic, foreign]
+  );
+
+  // 응답 파싱 헬퍼
+  const parseResponse = useCallback((json: any): MarketRow[] => {
+    if (!json.success || !json.data) return [];
+    return json.data.map((item: any) => ({
+      symbol: item.symbol,
+      name: item.name_en || item.symbol,
+      koreanName: item.name_ko || item.symbol,
+      upbitPrice: item.koreanPrice,
+      binancePrice: item.foreignPriceKrw,
+      premium: item.premiumRate,
+      volume24hKrw: item.volume24hKrw,
+      volume24hUsdt: item.volume24hForeignKrw,
+      volume24hForeignKrw: item.volume24hForeignKrw,
+      change24h: item.changeRate,
+      domesticExchange: item.domesticExchange,
+      foreignExchange: item.foreignExchange,
+      isListed: item.isListed,
+      cmcSlug: item.cmcSlug,
+    }));
+  }, []);
+
+  // SLOW 폴링 (6초)
+  const fetchSlow = useCallback(async () => {
+    setIsSlowValidating(true);
     try {
-      setIsSlowValidating(true);
-      const url = `/api/premium/table-filtered?${baseQueryString}`;
+      const queryString = buildQueryString();
+      const url = `/api/premium/table-filtered${
+        queryString ? `?${queryString}` : ""
+      }`;
       const res = await fetch(url);
-      if (!res.ok) throw new Error("Failed to fetch slow data");
-
+      if (!res.ok) throw new Error("Failed to fetch SLOW data");
       const json = await res.json();
-      if (json.success && json.data) {
-        const rows: MarketRow[] = json.data.map((item: any) => ({
-          symbol: `${item.symbol}/KRW`,
-          name: item.name_en,
-          koreanName: item.name_ko,
-          upbitPrice: item.koreanPrice,
-          binancePrice: item.foreignPriceKrw,
-          premium: item.premiumRate,
-          volume24hKrw: item.volume24hKrw,
-          volume24hUsdt: item.volume24hForeignKrw,
-          volume24hForeignKrw: item.volume24hForeignKrw,
-          change24h: item.changeRate,
-          domesticExchange: item.domesticExchange,
-          foreignExchange: item.foreignExchange,
-          isListed: item.isListed,
-          cmcSlug: item.cmcSlug,
-        }));
-
-        slowDataRef.current = rows;
-
-        // SLOW 데이터로 병합 및 상태 업데이트
-        const fastMap = new Map(fastDataRef.current.map((r) => [r.symbol, r]));
-        const mergedRows = rows.map((row) => fastMap.get(row.symbol) ?? row);
-
-        if (mergedRows.length > 0) {
-          lastStableRows.current = mergedRows;
-          setData(mergedRows);
-        }
-
-        setFxRate(json.fxRate);
-        setAveragePremium(json.averagePremium);
-        setUpdatedAt(json.updatedAt);
-        setDomesticExchange(json.domesticExchange || "UPBIT_KRW");
-        setForeignExchange(json.foreignExchange || "BINANCE_USDT");
-        setTotalCoins(json.totalCoins || 0);
-        setListedCoins(json.listedCoins || 0);
-        setLoading(false);
-        setError(null);
-      }
+      const rows = parseResponse(json);
+      setSlowData(rows);
+      setFxRate(json.fxRate);
+      setAveragePremium(json.averagePremium);
+      setUpdatedAt(json.updatedAt);
+      setDomesticExchange(json.domesticExchange || "UPBIT_KRW");
+      setForeignExchange(json.foreignExchange || "BINANCE_USDT");
+      setTotalCoins(json.totalCoins || 0);
+      setListedCoins(json.listedCoins || 0);
+      setError(null);
     } catch (err) {
       setError(err instanceof Error ? err : new Error("Unknown error"));
-      setLoading(false);
     } finally {
       setIsSlowValidating(false);
     }
-  }, [baseQueryString]);
+  }, [buildQueryString, parseResponse]);
 
-  // FAST API 호출 (TOP 20만)
-  const fetchFastData = useCallback(async () => {
+  // FAST 폴링 (1초)
+  const fetchFast = useCallback(async () => {
     try {
-      const url = `/api/premium/table-filtered?${baseQueryString}&mode=fast`;
+      const queryString = buildQueryString("fast");
+      const url = `/api/premium/table-filtered${
+        queryString ? `?${queryString}` : ""
+      }`;
       const res = await fetch(url);
-      if (!res.ok) throw new Error("Failed to fetch fast data");
-
+      if (!res.ok) throw new Error("Failed to fetch FAST data");
       const json = await res.json();
-      if (json.success && json.data) {
-        const rows: MarketRow[] = json.data.map((item: any) => ({
-          symbol: `${item.symbol}/KRW`,
-          name: item.name_en,
-          koreanName: item.name_ko,
-          upbitPrice: item.koreanPrice,
-          binancePrice: item.foreignPriceKrw,
-          premium: item.premiumRate,
-          volume24hKrw: item.volume24hKrw,
-          volume24hUsdt: item.volume24hForeignKrw,
-          volume24hForeignKrw: item.volume24hForeignKrw,
-          change24h: item.changeRate,
-          domesticExchange: item.domesticExchange,
-          foreignExchange: item.foreignExchange,
-          isListed: item.isListed,
-          cmcSlug: item.cmcSlug,
-        }));
-
-        fastDataRef.current = rows;
-
-        // FAST 데이터와 SLOW 데이터 병합
-        // → SLOW 데이터 순서 유지하되, TOP 20은 FAST 최신값으로 갱신
-        const fastMap = new Map(rows.map((r) => [r.symbol, r]));
-        const mergedRows = slowDataRef.current
-          .map((row) => fastMap.get(row.symbol) ?? row)
-          .slice(0, limit || undefined);
-
-        if (mergedRows.length > 0) {
-          lastStableRows.current = mergedRows;
-          setData(mergedRows);
-        }
-      }
+      const rows = parseResponse(json);
+      setFastData(rows);
+      setFastSymbolSet(new Set(rows.map((r) => r.symbol)));
     } catch (err) {
-      // FAST API 에러는 무시 (SLOW로 복구)
-      console.debug("[FAST] Fetch error (silent fallback):", err);
+      // FAST 에러는 조용히 무시 (SLOW가 있으니까)
     }
-  }, [baseQueryString, limit]);
+  }, [buildQueryString, parseResponse]);
 
-  // 초기 로딩: SLOW 데이터 먼저 가져오기
+  // 초기 로드 + SLOW/FAST 폴링 시작
   useEffect(() => {
-    fetchSlowData();
-  }, [fetchSlowData]);
+    // 초기 로드: SLOW만 먼저
+    setLoading(true);
+    fetchSlow().finally(() => setLoading(false));
 
-  // FAST: 1초마다 갱신
+    // SLOW: 6초 간격
+    const slowInterval = setInterval(fetchSlow, 6000);
+
+    // FAST: 1초 간격
+    const fastInterval = setInterval(fetchFast, 1000);
+
+    // 탭 숨겨짐 감지 (선택사항)
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        clearInterval(slowInterval);
+        clearInterval(fastInterval);
+      } else {
+        fetchSlow();
+        fetchFast();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      clearInterval(slowInterval);
+      clearInterval(fastInterval);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [fetchSlow, fetchFast]);
+
+  // SLOW + FAST 병합: SLOW를 base로, FAST 심볼만 덮어쓰기
+  // 🔥 핵심: 마지막 정상 데이터를 ref에 저장 (스크롤 튐 방지)
   useEffect(() => {
-    const fastInterval = setInterval(fetchFastData, 1000);
-    return () => clearInterval(fastInterval);
-  }, [fetchFastData]);
+    if (!slowData) return;
 
-  // SLOW: 6초마다 갱신
-  useEffect(() => {
-    const slowInterval = setInterval(fetchSlowData, 6000);
-    return () => clearInterval(slowInterval);
-  }, [fetchSlowData]);
+    const baseRows = [...slowData];
+    if (!fastData || fastData.length === 0) {
+      // 마지막 정상 데이터 저장
+      lastStableDataRef.current = baseRows;
+      setData(baseRows);
+      return;
+    }
 
-  // rows=0이 되는 순간 없도록 마지막 정상 rows 반환
-  const rowsToRender =
-    data.length > 0 ? data : lastStableRows.current;
+    // FAST 심볼 맵 생성
+    const fastMap = new Map(fastData.map((r) => [r.symbol, r]));
+
+    // SLOW 행 중 FAST에 있으면 덮어쓰기
+    const mergedRows = baseRows.map((row) => fastMap.get(row.symbol) ?? row);
+
+    // 마지막 정상 데이터 저장
+    lastStableDataRef.current = mergedRows;
+    setData(mergedRows);
+  }, [slowData, fastData]);
+
+  // 🔥 useMemo로 항상 안정적인 rows 반환
+  const stableData = useMemo(() => {
+    if (data && data.length > 0) {
+      lastStableDataRef.current = data;
+      return data;
+    }
+    // 데이터가 비어있으면 마지막 정상 데이터 사용
+    return lastStableDataRef.current;
+  }, [data]);
 
   return {
-    data: rowsToRender,
+    data: stableData,
     loading,
+    isInitialLoading,
     isSlowValidating,
     error,
     fxRate,
     averagePremium,
     updatedAt,
+    refetch: fetchSlow,
     domesticExchange,
     foreignExchange,
     totalCoins,
     listedCoins,
+    fastSymbolSet,
   };
 }
