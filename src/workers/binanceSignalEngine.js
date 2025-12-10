@@ -470,3 +470,415 @@ function startAggTradeStream(symbols) {
     }, 3000);
   });
 }
+
+// ============================================================
+// 🚨 Kline WebSocket (1m) — 451 무한 재접속 차단 패치 포함
+// ============================================================
+function startKlineStream(symbols) {
+  if (symbols.length === 0) return;
+
+  closeWebSocket(klineWs, klineWsPingInterval);
+  klineWs = null;
+  klineWsPingInterval = null;
+  pendingKlinePong = false;
+
+  const stream = symbols.slice(0, 100).map(s => `${s}@kline_1m`).join('/');
+  const url = `wss://stream.binance.com:9443/stream?streams=${stream}`;
+
+  klineWs = new WebSocket(url);
+
+  klineWs.on('open', () => {
+    console.log(`[BinanceSignal] Kline WS connected (${Math.min(symbols.length, 100)} symbols)`);
+
+    syncGlobalState();
+
+    klineWsPingInterval = setInterval(() => {
+      if (klineWs && klineWs.readyState === WebSocket.OPEN) {
+        if (pendingKlinePong) {
+          console.warn('[BinanceSignal] Kline WS pong timeout→reconnect');
+          recordError('Kline WS pong timeout');
+          closeWebSocket(klineWs, klineWsPingInterval);
+          setTimeout(() => startKlineStream(currentSymbols.slice(0, 100)), 1000);
+          return;
+        }
+
+        pendingKlinePong = true;
+        try {
+          klineWs.ping();
+        } catch (e) {
+          console.error('[BinanceSignal] Kline WS ping error:', e.message || e);
+          recordError('Kline WS ping error: ' + (e.message || e));
+          closeWebSocket(klineWs, klineWsPingInterval);
+          setTimeout(() => startKlineStream(currentSymbols.slice(0, 100)), 1000);
+        }
+      }
+    }, WS_PING_INTERVAL);
+  });
+
+  klineWs.on('pong', () => (pendingKlinePong = false));
+
+  klineWs.on('message', raw => {
+    try {
+      const msg = JSON.parse(raw);
+      const k = msg.data?.k;
+      if (!k) return;
+
+      const symbol = k.s;
+      const candle = {
+        openTime: k.t,
+        open: k.o,
+        high: k.h,
+        low: k.l,
+        close: k.c,
+        volume: k.v,
+        isFinal: k.x
+      };
+
+      if (!candles1m.has(symbol)) candles1m.set(symbol, []);
+      const arr = candles1m.get(symbol);
+
+      if (candle.isFinal) {
+        arr.push(candle);
+        if (arr.length > 100) arr.shift();
+      } else {
+        if (arr.length > 0 && arr[arr.length - 1].openTime === candle.openTime) {
+          arr[arr.length - 1] = candle;
+        }
+      }
+    } catch (e) {}
+  });
+
+  // ------------------------------------------------------------
+  // 🚨 (패치됨) Kline error — 451 발생시 즉시 중단
+  // ------------------------------------------------------------
+  klineWs.on('error', err => {
+    const msg = err && (err.message || err);
+    console.error('[BinanceSignal] Kline WS error:', msg);
+
+    if (isRegionalRestrictionError(err)) {
+      recordError('Kline WS regional restriction (451) - stop reconnecting');
+      console.warn('🚫 Binance Kline Stream BLOCKED by 451 (Region Restricted)');
+      closeWebSocket(klineWs, klineWsPingInterval);
+      klineWs = null;
+      klineWsPingInterval = null;
+      return; // 재접속 금지
+    }
+
+    recordError('Kline WS error: ' + msg);
+  });
+
+  // ------------------------------------------------------------
+  // 🚨 (패치됨) Kline close — 마지막 에러가 451이면 재접속하지 않음
+  // ------------------------------------------------------------
+  klineWs.on('close', (code, reason) => {
+    console.log(`[BinanceSignal] Kline WS disconnected (code: ${code})`);
+    recordError(`Kline WS closed: ${code}`);
+
+    closeWebSocket(klineWs, klineWsPingInterval);
+    syncGlobalState();
+    klineWs = null;
+    klineWsPingInterval = null;
+
+    if (lastErrorMessage && lastErrorMessage.includes('regional restriction (451)')) {
+      console.warn('🚫 Kline WS blocked by 451 → STOP reconnect loop.');
+      return;
+    }
+
+    setTimeout(() => {
+      if (isRunning) startKlineStream(currentSymbols.slice(0, 100));
+    }, 3000);
+  });
+}
+
+let currentSymbols = [];
+let baselineInterval = null;
+let tickerInterval = null;
+let symbolRefreshInterval = null;
+let healthCheckInterval = null;
+
+// ============================================================
+// initialize()
+// ============================================================
+async function initialize() {
+  if (isRunning) {
+    console.log('[BinanceSignal] Engine already running, skip init');
+    return;
+  }
+
+  isRunning = true;
+  syncGlobalState();
+  console.log('[BinanceSignal] Initializing signal engine...');
+
+  const symbols = await fetchAllUsdtSymbols();
+  console.log(`[BinanceSignal] Found ${symbols.length} USDT trading pairs`);
+
+  await fetch24hTicker();
+
+  let topSymbols;
+  try {
+    topSymbols = await getTopSymbols();
+    console.log(`[BinanceSignal] Using TOP ${topSymbols.length} symbols`);
+  } catch (err) {
+    console.warn('[BinanceSignal] Failed to get top symbols, fallback used:', err.message);
+    topSymbols = FALLBACK_SYMBOLS;
+  }
+
+  currentSymbols = topSymbols.map(s => s.toLowerCase());
+
+  // 1h / 1m 캔들 초기 로딩
+  const limit = Math.min(currentSymbols.length, 100);
+  for (let i = 0; i < limit; i++) {
+    const sym = currentSymbols[i];
+
+    const k1h = await fetchKlines(sym, '1h', 250);
+    if (k1h.length > 0) candles1h.set(sym.toUpperCase().replace('USDT', ''), k1h);
+
+    const k1m = await fetchKlines(sym, '1m', 100);
+    if (k1m.length > 0) candles1m.set(sym.toUpperCase().replace('USDT', ''), k1m);
+  }
+
+  // WS 시작
+  startAggTradeStream(currentSymbols.slice(0, 100));
+  startKlineStream(currentSymbols.slice(0, 100));
+
+  // Baseline 업데이트 인터벌
+  baselineInterval = setInterval(() => {
+    cleanOldBuckets();
+    for (const sym of currentSymbols) {
+      updateBaseline(sym.toUpperCase());
+    }
+  }, 60000);
+
+  // Ticker 5분 업데이트
+  tickerInterval = setInterval(fetch24hTicker, 5 * 60000);
+
+  // 15분마다 Symbol 리프레시
+  symbolRefreshInterval = setInterval(async () => {
+    try {
+      const newList = await getTopSymbols();
+      currentSymbols = newList.map(s => s.toLowerCase());
+      console.log('[BinanceSignal] Refreshed symbols:', currentSymbols.length);
+    } catch (err) {
+      console.warn('[BinanceSignal] Symbol refresh failed:', err.message);
+    }
+  }, 15 * 60000);
+
+  lastTradeTime = Date.now();
+  syncGlobalState();
+
+  console.log(`[BinanceSignal] Signal engine initialized with ${currentSymbols.length} symbols`);
+}
+
+// ============================================================
+// stop()
+// ============================================================
+function stop() {
+  console.log('[BinanceSignal] Stopping engine...');
+  isRunning = false;
+  syncGlobalState();
+
+  if (baselineInterval) clearInterval(baselineInterval);
+  if (tickerInterval) clearInterval(tickerInterval);
+  if (symbolRefreshInterval) clearInterval(symbolRefreshInterval);
+  if (healthCheckInterval) clearInterval(healthCheckInterval);
+
+  baselineInterval = null;
+  tickerInterval = null;
+  symbolRefreshInterval = null;
+  healthCheckInterval = null;
+
+  closeWebSocket(ws, wsPingInterval);
+  closeWebSocket(klineWs, klineWsPingInterval);
+
+  ws = null;
+  klineWs = null;
+  wsPingInterval = null;
+  klineWsPingInterval = null;
+  pendingPong = false;
+  pendingKlinePong = false;
+
+  console.log('[BinanceSignal] Engine stopped');
+}
+
+// ============================================================
+// clearAllData()
+// ============================================================
+function clearAllData() {
+  tradeBuckets.clear();
+  baselineVolumes.clear();
+  candles1m.clear();
+  candles1h.clear();
+  recentTradeCount = 0;
+  lastTradeTime = 0;
+}
+
+// ============================================================
+// recordError()
+// ============================================================
+function recordError(message) {
+  lastErrorMessage = message;
+  engineErrors.push({ time: Date.now(), message });
+
+  if (engineErrors.length > 100) {
+    engineErrors = engineErrors.slice(-50);
+  }
+  syncGlobalState();
+}
+
+// ============================================================
+// getStatus()
+// ============================================================
+function getStatus() {
+  const now = Date.now();
+  const wsConnected = ws && ws.readyState === WebSocket.OPEN;
+  const klineConnected = klineWs && klineWs.readyState === WebSocket.OPEN;
+  const tradeStale = lastTradeTime > 0 && (now - lastTradeTime) > TRADE_STALE_THRESHOLD;
+
+  syncGlobalState();
+
+  const healthy =
+    wsConnected &&
+    klineConnected &&
+    tradeBuckets.size > 0 &&
+    baselineVolumes.size > 50 &&
+    !tradeStale;
+
+  return {
+    running: isRunning,
+    healthy,
+    lastUpdate: lastUpdateTime,
+    lastUpdateAgo: Math.floor((now - lastUpdateTime) / 1000),
+    lastTradeTime,
+    lastTradeAgo: lastTradeTime > 0 ? Math.floor((now - lastTradeTime) / 1000) : -1,
+    tradeStale,
+    wsConnected,
+    klineWsConnected: klineConnected,
+    recentTrades: recentTradeCount,
+    symbolCount: currentSymbols.length,
+    tradeBucketCount: tradeBuckets.size,
+    baselineCount: baselineVolumes.size,
+    ticker24hCount: ticker24h.size,
+    restartCount,
+    lastRestartTime,
+    lastError: lastErrorMessage,
+    errors: engineErrors.slice(-10)
+  };
+}
+
+// ============================================================
+// restart()
+// ============================================================
+async function restart() {
+  const now = Date.now();
+
+  if (lastRestartTime > 0 && (now - lastRestartTime) < MAX_RESTART_INTERVAL) {
+    console.warn('[BinanceSignal] Restart throttled');
+    return false;
+  }
+
+  console.log('[BinanceSignal] ===== FULL RESTART =====');
+
+  stop();
+  clearAllData();
+  await new Promise(r => setTimeout(r, 3000));
+
+  restartCount++;
+  lastRestartTime = now;
+
+  await initialize();
+  startHealthCheck();
+
+  console.log(`[BinanceSignal] Restarted successfully (#${restartCount})`);
+  return true;
+}
+
+// ============================================================
+// startHealthCheck() — 🚨 451 차단 로직 포함됨
+// ============================================================
+function startHealthCheck() {
+  if (healthCheckInterval) clearInterval(healthCheckInterval);
+
+  console.log('[BinanceSignal] Starting health check (every 30s)...');
+
+  healthCheckInterval = setInterval(() => {
+
+    // 🚨 regional restriction(451) → healthCheck도 아무것도 안 함
+    if (lastErrorMessage && lastErrorMessage.includes('regional restriction (451)')) {
+      console.warn('[BinanceSignal] Binance WS region-blocked (451). HealthCheck paused.');
+      return;
+    }
+
+    const status = getStatus();
+    const now = Date.now();
+
+    // 1) Trade stale
+    if (status.lastTradeTime > 0 && (now - status.lastTradeTime) > TRADE_STALE_THRESHOLD) {
+      console.warn('[BinanceSignal] No trades → restart');
+      recordError('No trades');
+      restart().catch(e => console.error('Restart failed:', e.message));
+      return;
+    }
+
+    // 2) WS 끊김 → reconnect
+    if (!status.wsConnected && isRunning) {
+      console.warn('[BinanceSignal] AggTrade WS disconnected → reconnect');
+      recordError('AggTrade WebSocket disconnected');
+      startAggTradeStream(currentSymbols.slice(0, 100));
+    }
+
+    if (!status.klineWsConnected && isRunning) {
+      console.warn('[BinanceSignal] Kline WS disconnected → reconnect');
+      recordError('Kline WebSocket disconnected');
+      startKlineStream(currentSymbols.slice(0, 100));
+    }
+
+    // 3) 데이터 손상
+    if (isRunning && status.lastTradeTime > 0 && (now - status.lastTradeTime) > 60000) {
+      if (status.tradeBucketCount === 0 || status.baselineCount === 0) {
+        console.warn('[BinanceSignal] Empty buckets/baselines → restart');
+        recordError('Empty buckets/baselines');
+        restart().catch(e => console.error('Restart failed:', e.message));
+        return;
+      }
+    }
+
+    // Debug log
+    if (process.env.NODE_ENV === 'development' || status.tradeStale) {
+      console.log(
+        `[BinanceSignal] Health: WS=${status.wsConnected?'✓':'✗'} ` +
+        `Kline=${status.klineWsConnected?'✓':'✗'} ` +
+        `Trades=${status.recentTrades} Buckets=${status.tradeBucketCount} ` +
+        `Baselines=${status.baselineCount} LastTrade=${status.lastTradeAgo}s`
+      );
+    }
+  }, 30000);
+}
+
+// ============================================================
+// EXPORT
+// ============================================================
+module.exports = {
+  initialize,
+  stop,
+  restart,
+  getStatus,
+  startHealthCheck,
+
+  checkWhaleCondition,
+  checkSpikeCondition,
+
+  checkTrendFilter,
+  calculateEMA,
+  getEMA200TrendStatus,
+
+  get24hData,
+  getCandles1h,
+  getLastMinuteBucket,
+
+  candles1m,
+  candles1h,
+  ticker24h,
+
+  EMA_PERIOD,
+  EMA_SLOPE_THRESHOLD
+};
