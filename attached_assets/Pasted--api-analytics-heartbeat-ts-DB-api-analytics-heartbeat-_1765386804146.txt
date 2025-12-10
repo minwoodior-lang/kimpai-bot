@@ -1,5 +1,21 @@
+[요청] /api/analytics/heartbeat.ts DB 에러 수정 (완전 교체)
+
+현재 /api/analytics/heartbeat 가 500 에러(db_error)를 반환하고 있습니다.
+원인 추적이 길어져서, heartbeat.ts를 아래 코드로 통째로 교체해 주세요.
+
+이 버전은:
+
+supabaseAdmin(service role) 재사용
+
+analytics_sessions 테이블에 upsert (sid 기준) 만 수행
+
+필드는 최소한만 사용: sid, path_last, last_seen, user_agent, ip_hash
+
+중복 sid여도 에러 없이 덮어쓰기
+
+// src/pages/api/analytics/heartbeat.ts
 import type { NextApiRequest, NextApiResponse } from "next";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { supabaseAdmin } from "@/lib/supabaseAdmin"; // 기존 admin API에서 쓰는 클라이언트
 import crypto from "crypto";
 
 const COOKIE_NAME = "kimpai_sid";
@@ -74,3 +90,45 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(500).json({ ok: false, error: "server_error" });
   }
 }
+
+
+🔹 analytics_sessions 현재 스키마:
+
+sid (text, unique)
+
+path_last (text, nullable)
+
+last_seen (timestamptz)
+
+created_at (timestamptz, default now())
+
+user_agent (text, nullable)
+
+ip_hash (text, nullable)
+
+device / os / browser 컬럼은 있어도 되고, 사용은 안 해도 됩니다.
+
+수정 후 확인 부탁드립니다
+
+Dev 서버 재시작
+
+프리뷰 도메인에서 탭 두 개:
+
+탭1: /
+
+탭2: /admin → “실시간 접속” 탭
+
+Network:
+
+/api/analytics/heartbeat → 200 으로 주기적으로 호출되는지
+
+Supabase SQL:
+
+select sid, path_last, last_seen
+from public.analytics_sessions
+order by last_seen desc
+limit 10;
+
+
+여기서 row가 계속 늘어나면 OK입니다.
+그 상태에서 /admin 실시간 접속자 카드에 숫자/리스트가 뜨는지 확인해 주세요.
