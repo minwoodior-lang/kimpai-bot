@@ -42,10 +42,10 @@ export default function Signup() {
       if (data.session) {
         router.push("/dashboard");
       } else {
-        setError("Please check your email to confirm your account.");
+        setError("이메일을 확인하여 계정을 인증해주세요.");
       }
     } catch {
-      setError("An unexpected error occurred. Please try again.");
+      setError("예상치 못한 오류가 발생했습니다. 다시 시도해주세요.");
     } finally {
       setLoading(false);
     }
@@ -54,15 +54,15 @@ export default function Signup() {
   return (
     <Layout>
       <Head>
-        <title>Sign Up - KimpAI</title>
-        <meta name="description" content="Create your KimpAI account" />
+        <title>회원가입 - KimpAI</title>
+        <meta name="description" content="KimpAI 계정을 만드세요" />
       </Head>
 
       <div className="min-h-[calc(100vh-200px)] flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-white mb-2">Create your account</h1>
-            <p className="text-slate-400">Start tracking the Kimchi Premium today</p>
+            <h1 className="text-3xl font-bold text-white mb-2">계정을 만들어 시작하세요</h1>
+            <p className="text-slate-400">지금 바로 김치프리미엄 추적을 시작하세요</p>
           </div>
 
           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-8">
@@ -75,7 +75,7 @@ export default function Signup() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-slate-300 text-sm font-medium mb-2">
-                  Full name
+                  이름
                 </label>
                 <input
                   id="name"
@@ -83,14 +83,14 @@ export default function Signup() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-colors"
-                  placeholder="John Doe"
+                  placeholder="홍길동"
                   required
                 />
               </div>
 
               <div>
                 <label htmlFor="email" className="block text-slate-300 text-sm font-medium mb-2">
-                  Email address
+                  이메일 주소
                 </label>
                 <input
                   id="email"
@@ -98,14 +98,14 @@ export default function Signup() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-colors"
-                  placeholder="you@example.com"
+                  placeholder="example@example.com"
                   required
                 />
               </div>
 
               <div>
                 <label htmlFor="password" className="block text-slate-300 text-sm font-medium mb-2">
-                  Password
+                  비밀번호
                 </label>
                 <input
                   id="password"
@@ -113,11 +113,11 @@ export default function Signup() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-colors"
-                  placeholder="Create a strong password"
+                  placeholder="강력한 비밀번호를 입력하세요"
                   required
                   minLength={8}
                 />
-                <p className="text-slate-500 text-xs mt-1">Must be at least 8 characters</p>
+                <p className="text-slate-500 text-xs mt-1">최소 8자 이상이어야 합니다</p>
               </div>
 
               <button
@@ -125,14 +125,15 @@ export default function Signup() {
                 disabled={loading}
                 className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white py-3 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {loading ? "Creating Account..." : "Create Account"}
+                {loading ? "계정 생성 중..." : "계정 만들기"}
               </button>
 
               <p className="text-slate-500 text-xs text-center">
-                By creating an account, you agree to our{" "}
-                <Link href="/terms" className="text-blue-400 hover:underline">Terms of Service</Link>
-                {" "}and{" "}
-                <Link href="/privacy" className="text-blue-400 hover:underline">Privacy Policy</Link>
+                계정을 만들면 당사의{" "}
+                <Link href="/terms" className="text-blue-400 hover:underline">서비스 약관</Link>
+                {" "}그리고{" "}
+                <Link href="/privacy" className="text-blue-400 hover:underline">개인정보 보호정책</Link>
+                {" "}에 동의합니다
               </p>
             </form>
 
@@ -142,7 +143,7 @@ export default function Signup() {
                   <div className="w-full border-t border-slate-700"></div>
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-slate-800 text-slate-400">Or continue with</span>
+                  <span className="px-2 bg-slate-800 text-slate-400">또는 다음으로 계속하기</span>
                 </div>
               </div>
 
@@ -167,9 +168,9 @@ export default function Signup() {
           </div>
 
           <p className="text-center text-slate-400 mt-6">
-            Already have an account?{" "}
+            이미 계정이 있으신가요?{" "}
             <Link href="/login" className="text-blue-400 hover:text-blue-300">
-              Sign in
+              로그인
             </Link>
           </p>
         </div>

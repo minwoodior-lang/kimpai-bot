@@ -41,10 +41,6 @@ localPort = 36119
 externalPort = 3000
 
 [[ports]]
-localPort = 38509
-externalPort = 3001
-
-[[ports]]
 localPort = 39753
 
 [[ports]]
@@ -87,6 +83,10 @@ DISABLE_SIGNAL_ENGINE = "false"
 [userenv.production]
 PORT = "5000"
 NODE_ENV = "production"
+
+[userenv.shared]
+NEXT_PUBLIC_SUPABASE_URL = "https://wenearulhehumsodekjb.supabase.co"
+NEXT_PUBLIC_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndlbmVhcnVsaGVodW1zb2Rla2piIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUyODY5MDgsImV4cCI6MjA4MDg2MjkwOH0.vNbYx4Yt_9F9H8GhxK3lJy7qWzA_5pQb3sCjR8GzTrA"
 
 [deployment]
 run = ["npm", "start"]

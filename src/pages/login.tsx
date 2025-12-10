@@ -32,7 +32,7 @@ export default function Login() {
         router.push("/dashboard");
       }
     } catch {
-      setError("An unexpected error occurred. Please try again.");
+      setError("예상치 못한 오류가 발생했습니다. 다시 시도해주세요.");
     } finally {
       setLoading(false);
     }
@@ -41,15 +41,15 @@ export default function Login() {
   return (
     <Layout>
       <Head>
-        <title>Login - KimpAI</title>
-        <meta name="description" content="Sign in to your KimpAI account" />
+        <title>로그인 - KimpAI</title>
+        <meta name="description" content="KimpAI 계정에 로그인하세요" />
       </Head>
 
       <div className="min-h-[calc(100vh-200px)] flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-white mb-2">Welcome back</h1>
-            <p className="text-slate-400">Sign in to access your dashboard</p>
+            <h1 className="text-3xl font-bold text-white mb-2">다시 오셨습니다</h1>
+            <p className="text-slate-400">대시보드에 접속하기 위해 로그인하세요</p>
           </div>
 
           <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-8">
@@ -62,7 +62,7 @@ export default function Login() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="email" className="block text-slate-300 text-sm font-medium mb-2">
-                  Email address
+                  이메일 주소
                 </label>
                 <input
                   id="email"
@@ -70,7 +70,7 @@ export default function Login() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-colors"
-                  placeholder="you@example.com"
+                  placeholder="example@example.com"
                   required
                 />
               </div>
@@ -78,10 +78,10 @@ export default function Login() {
               <div>
                 <div className="flex justify-between items-center mb-2">
                   <label htmlFor="password" className="block text-slate-300 text-sm font-medium">
-                    Password
+                    비밀번호
                   </label>
                   <Link href="/forgot-password" className="text-sm text-blue-400 hover:text-blue-300">
-                    Forgot password?
+                    비밀번호를 잊으셨나요?
                   </Link>
                 </div>
                 <input
@@ -90,7 +90,7 @@ export default function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-colors"
-                  placeholder="Enter your password"
+                  placeholder="비밀번호를 입력하세요"
                   required
                 />
               </div>
@@ -100,7 +100,7 @@ export default function Login() {
                 disabled={loading}
                 className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white py-3 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {loading ? "Signing In..." : "Sign In"}
+                {loading ? "로그인 중..." : "로그인"}
               </button>
             </form>
 
@@ -110,7 +110,7 @@ export default function Login() {
                   <div className="w-full border-t border-slate-700"></div>
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-slate-800 text-slate-400">Or continue with</span>
+                  <span className="px-2 bg-slate-800 text-slate-400">또는 다음으로 계속하기</span>
                 </div>
               </div>
 
@@ -135,9 +135,9 @@ export default function Login() {
           </div>
 
           <p className="text-center text-slate-400 mt-6">
-            Don&apos;t have an account?{" "}
+            계정이 없으신가요?{" "}
             <Link href="/signup" className="text-blue-400 hover:text-blue-300">
-              Sign up
+              회원가입
             </Link>
           </p>
         </div>
