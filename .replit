@@ -36,40 +36,6 @@ localPort = 3001
 localPort = 5000
 externalPort = 80
 
-[[ports]]
-localPort = 36119
-externalPort = 3000
-
-[[ports]]
-localPort = 39753
-
-[[ports]]
-localPort = 41445
-
-[[ports]]
-localPort = 43359
-
-[[ports]]
-localPort = 43659
-
-[[ports]]
-localPort = 43677
-
-[[ports]]
-localPort = 43831
-
-[[ports]]
-localPort = 44295
-
-[[ports]]
-localPort = 44483
-
-[[ports]]
-localPort = 44983
-
-[[ports]]
-localPort = 45553
-
 [nix]
 channel = "stable-25_05"
 packages = ["cairo", "ffmpeg-full", "freetype", "ghostscript", "glibcLocales", "gobject-introspection", "gtk3", "jq", "libuuid", "lsof", "pkg-config", "qhull", "tcl", "tk"]
