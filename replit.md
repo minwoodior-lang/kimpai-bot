@@ -6,6 +6,19 @@ KimpAI is a dashboard designed to track real-time price differences (Kimchi Prem
 ### User Preferences
 - 이터러티브 개발 선호
 - 상세한 설명 요구
+- 외부 배포 사용 (Replit 프리뷰 제외)
+
+### Deployment Strategy
+**개발 환경 (npm run dev):**
+- 봇: 완전 비활성화 (NODE_ENV 체크)
+- 신호 엔진: 완전 비활성화 (NODE_ENV 체크)
+- 데이터 수집: 정상 작동 (가격/김프 데이터)
+- API: 정상 작동 (프론트엔드 테스트용)
+
+**프로덕션 (외부 배포):**
+- 봇: 자동 시작
+- 신호 엔진: 자동 시작
+- 모든 기능 활성화
 
 ### System Architecture
 
