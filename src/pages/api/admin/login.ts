@@ -38,23 +38,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
+    console.log(`[Admin Login] Attempt - username: ${username}, DB: ${process.env.DATABASE_URL?.slice(0, 30)}...`);
+    
     const result = await pool.query(
       'SELECT id, username, password_hash, role FROM admin_users WHERE username = $1',
       [username]
     );
 
+    console.log(`[Admin Login] Query result - rows: ${result.rows.length}`);
     if (result.rows.length === 0) {
+      console.log(`[Admin Login] ❌ User not found: ${username}`);
       recordFailedAttempt(ipKey);
       return res.status(401).json({ success: false, error: '아이디 또는 비밀번호가 올바르지 않습니다' });
     }
 
     const user = result.rows[0];
+    console.log(`[Admin Login] User found: ${user.username}, role: ${user.role}`);
+    console.log(`[Admin Login] Password hash: ${user.password_hash.slice(0, 20)}...`);
+    
     const isValid = await bcrypt.compare(password, user.password_hash);
+    console.log(`[Admin Login] Password validation result: ${isValid}`);
     
     if (!isValid) {
+      console.log(`[Admin Login] ❌ Invalid password for: ${username}`);
       recordFailedAttempt(ipKey);
       return res.status(401).json({ success: false, error: '아이디 또는 비밀번호가 올바르지 않습니다' });
     }
+    
+    console.log(`[Admin Login] ✅ Login successful for: ${username}`);
 
     loginAttempts.delete(ipKey);
 
