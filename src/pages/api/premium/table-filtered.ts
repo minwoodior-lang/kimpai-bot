@@ -105,12 +105,23 @@ function getForeignMarketKey(symbol: string, exchange: string, quote: string): s
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const { domestic = "UPBIT_KRW", foreign = "BINANCE_USDT" } = req.query;
+    const { domestic = "UPBIT_KRW", foreign = "BINANCE_USDT", mode } = req.query;
+    
+    // FAST 모드: TOP 20만 반환 (1초 갱신용)
+    const isFastMode = mode === "fast";
 
     // 메모리 캐시 체크 (200ms TTL - priceWorker 300ms 주기보다 짧게)
     const cacheKey = getCacheKey(domestic as string, foreign as string);
     const cachedData = getFromCache(cacheKey);
     if (cachedData) {
+      // FAST 모드: TOP 20만 필터링
+      if (isFastMode && cachedData.data) {
+        const top20Set = new Set(cachedData.top20Symbols || []);
+        return res.status(200).json({
+          ...cachedData,
+          data: cachedData.data.filter((row: any) => top20Set.has(row.symbol)),
+        });
+      }
       return res.status(200).json(cachedData);
     }
 
@@ -122,6 +133,17 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const premiumTable = loadJsonFile("premiumTable.json") as any[];
     const prices = loadJsonFile("prices.json") as PricesMap;
     const marketStats = loadJsonFile("marketStats.json") as MarketStatsMap;
+    
+    // TOP 20 심볼 추출 (거래대금 기준)
+    const top20Symbols = Object.entries(marketStats)
+      .map(([key, stat]: [string, any]) => ({
+        key,
+        volume: stat?.volume24hQuote ?? 0,
+      }))
+      .sort((a, b) => b.volume - a.volume)
+      .slice(0, 20)
+      .map((e) => e.key.split(":")[1]); // "EXCHANGE:SYMBOL:QUOTE" → "SYMBOL"
+    const top20Set = new Set(top20Symbols);
 
     const masterMap = new Map(masterSymbols.map((s: any) => [s.symbol, s]));
     const premiumMap = new Map(premiumTable.map((p: any) => [p.symbol, p]));
@@ -133,6 +155,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         const matchExchange = m.exchange === domesticExchange;
         const matchQuote = m.quote === domesticQuote;
         return matchExchange && matchQuote;
+      })
+      .filter((m) => {
+        // FAST 모드: TOP 20만 반환
+        if (isFastMode) {
+          const symbol = m.base.toUpperCase();
+          return top20Set.has(symbol);
+        }
+        return true;
       })
       .map((market) => {
         const symbol = market.base.toUpperCase();
@@ -368,6 +398,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       foreignExchange,
       totalCoins: totalCryptoCount,
       listedCoins: filtered.filter(r => r.isListed).length,
+      top20Symbols: Array.from(top20Set), // TOP 20 심볼 포함
     };
 
     // 메모리 캐시에 저장 (800ms TTL)

@@ -1,10 +1,10 @@
 // src/components/PremiumTable.tsx
 import React, {
   useState,
-  useEffect,
   useMemo,
   useCallback,
   useRef,
+  useEffect,
 } from "react";
 import dynamic from "next/dynamic";
 import { useInView } from "react-intersection-observer";
@@ -21,6 +21,7 @@ import TwoLinePriceCell, {
 import TwoLineCell from "@/components/TwoLineCell";
 import { openCmcPage } from "@/lib/coinMarketCapUtils";
 import { UserPrefs, normalizeSymbol } from "@/hooks/useUserPrefs";
+import { useMarketsWithFastMode } from "@/hooks/useMarketsWithFastMode";
 
 interface DropdownOption {
   id: string;
@@ -681,20 +682,28 @@ export default function PremiumTable({
   onChartSelect,
   toggleFavorite,
 }: PremiumTableProps) {
-  const [data, setData] = useState<PremiumData[]>([]);
-  const [averagePremium, setAveragePremium] = useState(0);
-  const [fxRate, setFxRate] = useState(0);
-  const [updatedAt, setUpdatedAt] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [totalCoins, setTotalCoins] = useState(0);
-  const [listedCoins, setListedCoins] = useState(0);
-  const [rateLimitRetryAfter, setRateLimitRetryAfter] = useState(0);
-  const [consecutiveRateLimits, setConsecutiveRateLimits] = useState(0);
+  // FAST/SLOW 이중 갱신 훅: TOP 20 (1초) / 나머지 (6초)
   const [domesticExchange, setDomesticExchange] =
     useState<string>("UPBIT_KRW");
   const [foreignExchange, setForeignExchange] =
     useState<string>("BINANCE_USDT");
+
+  const {
+    data,
+    loading,
+    isSlowValidating,
+    fxRate,
+    averagePremium,
+    updatedAt,
+    totalCoins,
+    listedCoins,
+  } = useMarketsWithFastMode({
+    domestic: domesticExchange,
+    foreign: foreignExchange,
+    limit: limit || undefined,
+  });
+
+  // UI 상태
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("volume24hKrw");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
@@ -713,95 +722,6 @@ export default function PremiumTable({
     [prefs?.favorites]
   );
 
-  const fetchData = async () => {
-    try {
-      if (rateLimitRetryAfter > 0) return;
-
-      let response: Response | null = null;
-      try {
-        response = await fetch(
-          `/api/premium/table-filtered?domestic=${domesticExchange}&foreign=${foreignExchange}`
-        );
-      } catch {
-        return;
-      }
-
-      if (!response) return;
-
-      if (response.status === 429) {
-        const retryAfter = Math.max(
-          parseInt(response.headers.get("retry-after") || "10", 10),
-          10
-        );
-        const newCount = consecutiveRateLimits + 1;
-        setConsecutiveRateLimits(newCount);
-        const delayMs = newCount >= 5 ? 60000 : retryAfter * 1000;
-        setRateLimitRetryAfter(delayMs / 1000);
-        setTimeout(() => {
-          setRateLimitRetryAfter(0);
-          setConsecutiveRateLimits(0);
-        }, delayMs);
-        return;
-      }
-
-      if (!response.ok) return;
-
-      let json: ApiResponse | null = null;
-      try {
-        json = await response.json();
-      } catch {
-        return;
-      }
-
-      if (!json || !json.success) {
-        return;
-      }
-
-      if (!Array.isArray(json.data) || json.data.length === 0) {
-        setData([]);
-        return;
-      }
-
-      try {
-        setData(json.data);
-        setAveragePremium(
-          typeof json.averagePremium === "number" ? json.averagePremium : 0
-        );
-        setFxRate(typeof json.fxRate === "number" ? json.fxRate : 0);
-        setUpdatedAt(
-          typeof json.updatedAt === "string"
-            ? json.updatedAt
-            : new Date().toISOString()
-        );
-        setTotalCoins(
-          typeof json.totalCoins === "number" ? json.totalCoins : 0
-        );
-        setListedCoins(
-          typeof json.listedCoins === "number" ? json.listedCoins : 0
-        );
-        setError(null);
-        setConsecutiveRateLimits(0);
-      } catch {
-      } finally {
-        setLoading(false);
-      }
-    } catch {
-      // silent
-    }
-  };
-
-  useEffect(() => {
-    setLoading(true);
-    fetchData();
-
-    const isKoreanExchange = domesticExchange.includes("_KRW");
-    const actualRefreshInterval = isKoreanExchange ? 800 : refreshInterval;
-
-    const interval = setInterval(fetchData, actualRefreshInterval);
-    return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [domesticExchange, foreignExchange, refreshInterval]);
-
   const handleSort = (key: Exclude<SortKey, null>) => {
     if (sortKey === key) {
       if (sortOrder === "desc") {
@@ -816,8 +736,46 @@ export default function PremiumTable({
     }
   };
 
+  // PremiumData 변환
+  const premiumData = useMemo(() => {
+    return (data || []).map((row: any) => ({
+      symbol: row.symbol?.split("/")[0] || row.symbol,
+      name: row.name,
+      koreanName: row.koreanName,
+      koreanPrice: row.upbitPrice,
+      globalPrice: row.binancePrice,
+      globalPriceKrw: row.binancePrice,
+      foreignPriceKrw: row.binancePrice,
+      premium: row.premium,
+      premiumRate: row.premium,
+      volume24hKrw: row.volume24hKrw,
+      volume24hUsdt: row.volume24hUsdt,
+      volume24hForeignKrw: row.volume24hForeignKrw,
+      change24h: row.change24h,
+      change24hRate: row.change24h,
+      domesticExchange: row.domesticExchange,
+      foreignExchange: row.foreignExchange,
+      isListed: row.isListed,
+      cmcSlug: row.cmcSlug,
+      icon_url: row.icon_url,
+      name_ko: row.koreanName,
+      name_en: row.name,
+      exchange: row.domesticExchange,
+      market_symbol: row.symbol,
+      market: `${row.domesticExchange}:${row.symbol}`,
+      market_base: row.symbol?.split("/")[0],
+      market_quote: "KRW",
+      koreanPrice_ts: Date.now(),
+      updated_at: new Date().toISOString(),
+      high24h: row.premium ? row.upbitPrice * 1.01 : null,
+      low24h: row.premium ? row.upbitPrice * 0.99 : null,
+      volume24hQuote: row.volume24hKrw,
+      percentChange24h: row.change24h,
+    }));
+  }, [data]);
+
   const filteredAndSortedData = useMemo(() => {
-    let result = [...data];
+    let result = [...premiumData];
 
     if (prefs?.filterMode === "favorites") {
       result = result.filter((item) =>
@@ -1247,7 +1205,7 @@ export default function PremiumTable({
         </div>
       ) : error ? (
         <div className="bg-red-900/30 border border-red-700 rounded-lg p-4 text-red-400">
-          {error}
+          {isSlowValidating && "갱신 중..."}
         </div>
       ) : (
         <div className="w-full border border-white/5 bg-[#050819] overflow-hidden">
