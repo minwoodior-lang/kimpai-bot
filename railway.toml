@@ -2,13 +2,15 @@
 builder = "NIXPACKS"
 
 [build.nixpacksPlan.phases.setup]
+# Node 20을 명시적으로 사용
 nixPkgs = ["nodejs_20"]
 
 [build.nixpacksPlan.phases.install]
 cmds = ["npm install"]
 
 [build.nixpacksPlan.phases.build]
+# 따로 빌드할 거 없으니 비워둠
 cmds = []
 
 [deploy]
-startCommand = ["npm", "run", "bot"]
+startCommand = "npm run bot"
