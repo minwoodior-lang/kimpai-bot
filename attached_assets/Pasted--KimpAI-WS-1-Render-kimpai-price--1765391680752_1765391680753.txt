@@ -1,0 +1,131 @@
+[전달문] KimpAI 가격 수집 구조 개편 – WS 최소화 & 비용 절감 구조 전환
+
+아래 작업들을 순서대로 적용해주세요.
+
+🟥 1. Render 서버(kimpai-price-proxy) – Binance 외 해외 WebSocket 전부 비활성화
+
+Render 서버는 메모리·대역폭 한계로 인해
+Binance Spot / Binance Futures WebSocket 두 개만 유지합니다.
+
+아래 작업을 진행해주세요.
+
+✅ 수정 지시사항
+(1) src/index.ts 또는 WS를 초기화하는 엔트리 파일에서
+
+아래 함수는 유지합니다:
+
+startBinanceSpotWs();
+startBinanceFuturesWs();
+
+(2) 아래 모든 WebSocket 스타트 함수는 전부 주석 처리 또는 삭제해주세요:
+startBybitWs();
+startOkxWs();
+startGateWs();
+startMexcWs();
+startBitgetWs();
+startHtxWs();
+
+(3) Render 로그에서 더 이상 아래가 표시되지 않아야 합니다:
+WS-MEXC 연결됨
+WS-Bybit 연결됨
+WS-OKX 연결됨
+WS-Gate 연결됨
+WS-Bitget 연결됨
+WS-HTX 연결됨
+
+
+→ 표시되면 안 됨. Binance Spot/Futures만 남겨야 함.
+
+🟦 2. Replit 서버 – 해외 거래소는 REST 기반 가격 수집으로 전환
+
+Render에서 제거한 WebSocket 기능을
+Replit 워커가 REST 2~3초 polling 방식으로 처리합니다.
+
+기본적으로 속도 충분, 부하 최소, 과금 방지 구조입니다.
+
+🔵 (1) 다음 fetcher 파일을 생성 또는 업데이트 해주세요:
+
+폴더: workers/fetchers/
+
+bybit.ts
+
+okx.ts
+
+gate.ts
+
+mexc.ts
+
+(있으면 추가: bitget.ts, htx.ts)
+
+🔵 (2) 각 fetcher 내부에서 다음을 수행합니다:
+✔ 24시간 가격 / 현재가 / 거래량을 얻는
+
+공개 REST 엔드포인트 호출
+(예: ticker/24h 또는 markets/ticker)
+
+✔ 응답을 내부 공통 타입 PriceEntry로 매핑
+✔ prices.json에 merge 저장
+✔ 요청 주기: 2초~3초 간격
+
+예시 함수 형태:
+
+export async function fetchBybitPrices() {
+  const res = await fetch("https://api.bybit.com/v5/market/tickers?category=spot");
+  const data = await res.json();
+  // 변환 → PriceEntry
+  saveToPricesJson(parsedEntries);
+}
+
+🟦 3. Replit priceWorker에서 모든 REST fetcher를 주기적으로 호출하도록 구성
+
+파일: workers/priceWorker.ts 또는 메인 워커 파일
+
+아래 함수들을 주기적으로 실행해주세요:
+setInterval(async () => {
+  await fetchUpbitPrices();
+  await fetchBithumbPrices();
+  await fetchCoinonePrices();
+
+  await fetchBybitPrices();
+  await fetchOkxPrices();
+  await fetchGatePrices();
+  await fetchMexcPrices();
+  // 필요 시 bitget, htx 추가
+}, 2000);
+
+
+→ 2초 기준 추천
+
+🟩 4. Replit에서 WebSocket이 필요할 경우 단 1~2개 심볼만 유지 (선택 사항)
+
+속도 개선이 필요하거나 특정 지표(Kimp score 등)에만 WS가 필요하다면:
+
+Replit에서 Bybit BTCUSDT / ETHUSDT 정도만 WebSocket 추가
+
+나머지 코인은 모두 REST로 유지
+
+➡ 시스템 안정성과 대역폭 절약 극대화.
+
+🟧 5. 최종 목표 구조
+[Render Proxy]
+ ├─ Binance Spot WS (유지)
+ └─ Binance Futures WS (유지)
+
+[Replit Main Server]
+ ├─ Upbit/Bithumb/Coinone (REST)
+ ├─ Bybit/OKX/Gate/MEXC/Bitget/HTX (REST 2초)
+ ├─ (선택) Bybit BTC/ETH WebSocket만 사용
+ ├─ prices.json / premiumTable.json 생성
+ └─ 프론트/텔레봇/Kimp 계산 처리
+
+🧨 기대 효과 (중요)
+
+Render 대역폭 80~90% 감소
+
+Render 메모리 폭발(OOM) 사라짐
+
+Replit은 현재 기준 100GB 무료 안에서 충분히 운영 가능
+
+속도 체감은 바이낸스 WS 때문에 거의 동일
+
+전체 비용 최대 절반 이하로 절감

@@ -88,24 +88,11 @@ function mergeWebSocketPrices(): number {
 }
 
 function initializeWebSockets(): void {
+  // 🔄 DISABLED: Using REST polling instead (Bybit/OKX/Gate/MEXC)
+  // Binance Spot/Futures WebSocket handled by Render proxy server
   if (wsInitialized) return;
-  
-  const allMarkets = loadExchangeMarkets();
-  const upbitMarkets = filterMarkets(allMarkets, 'UPBIT', ['KRW', 'BTC', 'USDT']);
-  const bithumbMarkets = filterMarkets(allMarkets, 'BITHUMB', ['KRW', 'BTC']);
-  const coinoneMarkets = filterMarkets(allMarkets, 'COINONE', ['KRW']);
-  
-  const domesticBases = new Set([
-    ...upbitMarkets.map(m => m.base.toUpperCase()),
-    ...bithumbMarkets.map(m => m.base.toUpperCase()),
-    ...coinoneMarkets.map(m => m.base.toUpperCase())
-  ]);
-  
-  const symbols = Array.from(domesticBases);
-  console.log(`[WS] Initializing WebSocket connections for ${symbols.length} symbols...`);
-  
-  startAllWebSockets(symbols);
   wsInitialized = true;
+  console.log('[WS] WebSocket disabled - using REST polling for all exchanges');
 }
 
 function loadExchangeMarkets(): MarketInfo[] {
@@ -574,20 +561,9 @@ async function updatePricesOnly(): Promise<void> {
   const globalMarkets = getGlobalMarkets();
 
   try {
-    const useWebSocket = isWebSocketRunning();
+    // 🔄 WebSocket disabled - using REST polling for all global exchanges
+    const useWebSocket = false;
     let wsMergedCount = 0;
-    
-    if (useWebSocket) {
-      wsMergedCount = mergeWebSocketPrices();
-      
-      const now = Date.now();
-      if (now - lastWsStatsLog > 10000) {
-        const wsStats = getWebSocketStats();
-        const statsSummary = wsStats.map(s => `${s.exchange}:${s.count}`).join(', ');
-        console.log(`[WS] Active streams: ${statsSummary}`);
-        lastWsStatsLog = now;
-      }
-    }
     
     const domesticPromises = [
       fetchUpbitPrices(upbitMarkets),
@@ -742,7 +718,7 @@ let statsIntervalId: NodeJS.Timeout | null = null;
 let isPriceUpdating = false;
 let isStatsUpdating = false;
 
-const PRICE_INTERVAL_MS = 300;  // 0.3초 주기 (초고속 WS 반영)
+const PRICE_INTERVAL_MS = 2000;  // 2초 주기 (REST polling: Bybit/OKX/Gate/MEXC)
 const STATS_INTERVAL_MS = 3000; // 3초 주기
 
 let lastPricesHash = '';
@@ -755,13 +731,14 @@ function computeHash(obj: object): string {
 }
 
 export function startPriceWorker(): void {
-  console.log(`[Worker] Starting ULTRA-FAST HYBRID worker (WS + REST ${PRICE_INTERVAL_MS}ms) + stats (${STATS_INTERVAL_MS}ms)`);
+  console.log(`[Worker] Starting REST-ONLY worker (2초 주기: Upbit/Bithumb/Coinone/Bybit/OKX/Gate/MEXC) + stats (${STATS_INTERVAL_MS}ms)`);
 
   // Load previous health check state
   loadHealthCheck();
 
-  // Initialize WebSocket connections for global exchanges
-  initializeWebSockets();
+  // 🔄 WebSocket disabled: REST polling for all global exchanges
+  // Render server only handles Binance Spot/Futures WebSocket
+  // initializeWebSockets();
 
   // 초기 실행 (REST fallback for first run)
   updatePricesOnly();
