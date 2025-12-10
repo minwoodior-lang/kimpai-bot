@@ -188,42 +188,71 @@ function calculateEMASlope(emaValues, window = EMA_SLOPE_WINDOW) {
 }
 
 /**
- * 200EMA 추세 필터 (v2.4)
- * 매수: close > EMA200 && slope > 0
- * 매도: close < EMA200 && slope < 0
- * 횡보: |slope| < threshold → 시그널 무시
+ * 200EMA 추세 분석 (v2.4 수정)
+ * trend: "up" | "down" | "flat"
  * 
  * @param {string} symbol - 심볼 (예: BTC)
- * @param {string} side - 'buy' 또는 'sell'
- * @returns {boolean} 트렌드 조건 충족 여부
+ * @returns {string} "up" | "down" | "flat"
  */
-function checkTrendFilter(symbol, side) {
+function getEMA200TrendStatus(symbol) {
   const baseSymbol = symbol.toUpperCase().replace('USDT', '');
   const candles = candles1h.get(baseSymbol);
   
-  if (!candles || candles.length < EMA_PERIOD + EMA_SLOPE_WINDOW) {
-    // 캔들 데이터 부족 시 필터 통과 (데이터 수집 중)
-    return true;
+  if (!candles || candles.length < EMA_PERIOD) {
+    return "flat"; // 데이터 부족
   }
   
   const emaValues = calculateEMA(candles, EMA_PERIOD);
-  if (emaValues.length === 0) return true;
+  if (emaValues.length === 0) return "flat";
   
   const currentEMA = emaValues[emaValues.length - 1];
   const currentClose = parseFloat(candles[candles.length - 1].close);
   const slope = calculateEMASlope(emaValues, EMA_SLOPE_WINDOW);
   
-  // 횡보 체크: slope가 너무 작으면 시그널 무시
+  // 횡보 체크: slope가 threshold 미만이면 flat
   if (Math.abs(slope) < EMA_SLOPE_THRESHOLD) {
-    return false; // 횡보 구간 - 시그널 무시
+    return "flat";
   }
   
-  if (side === 'buy') {
-    // 매수 조건: close > EMA200 && slope > 0
-    return currentClose > currentEMA && slope > 0;
-  } else if (side === 'sell') {
-    // 매도 조건: close < EMA200 && slope < 0
-    return currentClose < currentEMA && slope < 0;
+  // 상승: close > EMA200 && slope > 0
+  if (currentClose > currentEMA && slope > 0) {
+    return "up";
+  }
+  
+  // 하락: close < EMA200 && slope < 0
+  if (currentClose < currentEMA && slope < 0) {
+    return "down";
+  }
+  
+  return "flat";
+}
+
+/**
+ * 200EMA 추세 필터 (v2.4)
+ * trend가 "flat"이면 어떤 신호도 발송하지 않음
+ * 매수: trend === "up"일 때만
+ * 매도: trend === "down"일 때만
+ * 
+ * @param {string} symbol - 심볼 (예: BTC)
+ * @param {string} side - 'buy' 또는 'sell'
+ * @returns {boolean} 신호 발송 가능 여부
+ */
+function checkTrendFilter(symbol, side) {
+  const trend = getEMA200TrendStatus(symbol);
+  
+  // 횡보이면 신호 발송 금지 (어떤 쪽이든)
+  if (trend === 'flat') {
+    return false;
+  }
+  
+  // 매수 신호: 상승 추세일 때만
+  if (side === 'buy' && trend === 'up') {
+    return true;
+  }
+  
+  // 매도 신호: 하락 추세일 때만
+  if (side === 'sell' && trend === 'down') {
+    return true;
   }
   
   return false;
