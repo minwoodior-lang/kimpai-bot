@@ -895,23 +895,33 @@ function startHealthCheck() {
 }
 
 module.exports = {
+  // 엔진 제어
   initialize,
   stop,
   restart,
   getStatus,
   startHealthCheck,
+
+  // 시그널 로직
   checkWhaleCondition,
   checkSpikeCondition,
-  checkTrendFilter,      // v2.4: 200EMA 추세 필터
-  calculateEMA,          // v2.4: EMA 계산
-  getEMA200TrendStatus,  // ✅ EMA200 추세 상태 함수 export
+
+  // 추세 필터 / 보조 함수
+  checkTrendFilter,
+  calculateEMA,
+  getEMA200TrendStatus,
+
+  // 외부에서 쓰는 데이터 조회
   get24hData,
   getCandles1h,
   getLastMinuteBucket,
+
+  // 디버그용 원시 데이터
   candles1m,
   candles1h,
   ticker24h,
-  // v2.4 상수 export
+
+  // 상수들
   EMA_PERIOD,
-  EMA_SLOPE_THRESHOLD
+  EMA_SLOPE_THRESHOLD,
 };
