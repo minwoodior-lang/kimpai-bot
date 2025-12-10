@@ -16,20 +16,32 @@ const signalStatusCommand = async (ctx) => {
     const klineWsStatus = status.klineWsConnected ? "🟢 연결됨" : "🔴 끊김";
     const engineStatus = status.running ? "🟢 실행 중" : "🔴 중지됨";
     
+    // 개선된 헬스 체크 (트레이드 기준)
     let healthStatus = "🟢 정상";
-    if (status.lastUpdateAgo > 300) {
-      healthStatus = "🔴 Critical (5분 이상 업데이트 없음)";
-    } else if (status.lastUpdateAgo > 180) {
-      healthStatus = "🟡 Warning (3분 이상 업데이트 없음)";
+    let healthDetail = "";
+    
+    if (status.tradeStale) {
+      healthStatus = "🔴 Critical";
+      healthDetail = `(${status.lastTradeAgo}초간 트레이드 없음)`;
+    } else if (status.tradeBucketCount === 0 || status.baselineCount === 0) {
+      healthStatus = "🔴 Critical";
+      healthDetail = "(버킷/베이스라인 없음)";
+    } else if (!status.wsConnected || !status.klineWsConnected) {
+      healthStatus = "🟡 Warning";
+      healthDetail = "(WS 연결 문제)";
+    } else if (status.lastTradeAgo > 60) {
+      healthStatus = "🟡 Warning";
+      healthDetail = `(트레이드 ${status.lastTradeAgo}초 지연)`;
     }
     
-    const message = `📊 **고래 시그널 엔진 상태**
+    const message = `📊 **고래 시그널 엔진 상태 v2.4**
 
 🔧 **엔진 상태**: ${engineStatus}
 🌐 **AggTrade WS**: ${wsStatus}
 📈 **Kline WS**: ${klineWsStatus}
-⏱ **마지막 업데이트**: ${formatTimeAgo(status.lastUpdateAgo)}
-📝 **최근 1분 거래**: ${status.recentTrades.toLocaleString()}건
+
+⏱ **마지막 트레이드**: ${status.lastTradeAgo >= 0 ? formatTimeAgo(status.lastTradeAgo) : "없음"}
+📝 **최근 거래 수**: ${status.recentTrades.toLocaleString()}건
 🎯 **감시 심볼 수**: ${status.symbolCount}개
 
 📦 **데이터 상태**:
@@ -37,11 +49,12 @@ const signalStatusCommand = async (ctx) => {
 • Baseline Volumes: ${status.baselineCount}개
 • 24h Ticker: ${status.ticker24hCount}개
 
-🏥 **헬스 체크**: ${healthStatus}
-${status.lastError ? `\n⚠️ **마지막 에러**: ${status.lastError}` : ""}
+🏥 **헬스 체크**: ${healthStatus} ${healthDetail}
+🔄 **재시작 횟수**: ${status.restartCount || 0}회
+${status.lastError ? `⚠️ **마지막 에러**: ${status.lastError}` : ""}
 
 ────────────────
-📡 KimpAI v2.3b 고래 시그널 엔진`;
+📡 KimpAI v2.4 고래 시그널 엔진`;
 
     await ctx.reply(message, { parse_mode: "Markdown" });
   } catch (err) {

@@ -16,12 +16,19 @@ export function setLastMessageSent(time: number) {
 interface HealthStatus {
   signalEngine: {
     running: boolean;
+    healthy: boolean;
     lastUpdate: number | null;
     lastUpdateAgo: number;
+    lastTradeTime: number | null;
+    lastTradeAgo: number;
+    tradeStale: boolean;
     wsConnected: boolean;
     klineWsConnected: boolean;
     recentTrades: number;
     symbolCount: number;
+    tradeBucketCount: number;
+    baselineCount: number;
+    restartCount: number;
     status: "ok" | "warning" | "critical";
     statusMessage: string;
   };
@@ -68,45 +75,77 @@ export default async function handler(
   try {
     let signalEngineStatus = {
       running: false,
+      healthy: false,
       lastUpdate: null as number | null,
       lastUpdateAgo: 0,
+      lastTradeTime: null as number | null,
+      lastTradeAgo: -1,
+      tradeStale: true,
       wsConnected: false,
       klineWsConnected: false,
       recentTrades: 0,
       symbolCount: 0,
+      tradeBucketCount: 0,
+      baselineCount: 0,
+      restartCount: 0,
       status: "critical" as "ok" | "warning" | "critical",
       statusMessage: "엔진 상태 조회 불가"
     };
     
     try {
-      const binanceEngine = require("../../../workers/binanceSignalEngine");
-      const engineStatus = binanceEngine.getStatus();
+      // 전역 상태에서 직접 읽기 (모듈 캐시 문제 우회)
+      const GLOBAL_STATE_KEY = '__binanceSignalState__';
+      const globalState = (global as any)[GLOBAL_STATE_KEY];
       
-      let status: "ok" | "warning" | "critical" = "ok";
-      let statusMessage = "정상 작동 중";
-      
-      if (engineStatus.lastUpdateAgo > 300) {
-        status = "critical";
-        statusMessage = "5분 이상 업데이트 없음";
-      } else if (engineStatus.lastUpdateAgo > 180) {
-        status = "warning";
-        statusMessage = "3분 이상 업데이트 없음";
-      } else if (!engineStatus.wsConnected || !engineStatus.klineWsConnected) {
-        status = "warning";
-        statusMessage = "WebSocket 연결 문제";
+      if (globalState && globalState.isRunning) {
+        const now = Date.now();
+        const lastTradeAgo = globalState.lastTradeTime > 0 
+          ? Math.floor((now - globalState.lastTradeTime) / 1000) 
+          : -1;
+        const lastUpdateAgo = Math.floor((now - globalState.lastUpdateTime) / 1000);
+        const tradeStale = globalState.lastTradeTime > 0 && (now - globalState.lastTradeTime) > 90000;
+        
+        let status: "ok" | "warning" | "critical" = "ok";
+        let statusMessage = "정상 작동 중";
+        
+        // 상태 판단 로직 개선 (트레이드 기준)
+        if (tradeStale) {
+          status = "critical";
+          statusMessage = `트레이드 ${lastTradeAgo}초 동안 수신 없음`;
+        } else if (globalState.tradeBucketCount === 0 || globalState.baselineCount === 0) {
+          status = "critical";
+          statusMessage = "버킷/베이스라인 데이터 없음";
+        } else if (!globalState.wsConnected || !globalState.klineWsConnected) {
+          status = "warning";
+          statusMessage = "WebSocket 연결 문제";
+        } else if (lastTradeAgo > 60) {
+          status = "warning";
+          statusMessage = `트레이드 ${lastTradeAgo}초 지연`;
+        }
+        
+        signalEngineStatus = {
+          running: globalState.isRunning,
+          healthy: globalState.wsConnected && globalState.klineWsConnected && 
+                   globalState.tradeBucketCount > 0 && globalState.baselineCount > 50 && !tradeStale,
+          lastUpdate: globalState.lastUpdateTime,
+          lastUpdateAgo: lastUpdateAgo,
+          lastTradeTime: globalState.lastTradeTime,
+          lastTradeAgo: lastTradeAgo,
+          tradeStale: tradeStale,
+          wsConnected: globalState.wsConnected,
+          klineWsConnected: globalState.klineWsConnected,
+          recentTrades: globalState.recentTradeCount,
+          symbolCount: 60,
+          tradeBucketCount: globalState.tradeBucketCount || 0,
+          baselineCount: globalState.baselineCount || 0,
+          restartCount: globalState.restartCount,
+          status,
+          statusMessage
+        };
+      } else {
+        // 엔진이 시작되지 않은 경우
+        signalEngineStatus.statusMessage = "엔진 미시작";
       }
-      
-      signalEngineStatus = {
-        running: engineStatus.running,
-        lastUpdate: engineStatus.lastUpdate,
-        lastUpdateAgo: engineStatus.lastUpdateAgo,
-        wsConnected: engineStatus.wsConnected,
-        klineWsConnected: engineStatus.klineWsConnected,
-        recentTrades: engineStatus.recentTrades,
-        symbolCount: engineStatus.symbolCount,
-        status,
-        statusMessage
-      };
     } catch (err) {
       console.warn("[Health] Signal engine status check failed:", err);
     }
@@ -131,10 +170,10 @@ export default async function handler(
     
     const errors: Array<{ time: number; message: string }> = [];
     try {
-      const binanceEngine = require("../../../workers/binanceSignalEngine");
-      const engineStatus = binanceEngine.getStatus();
-      if (engineStatus.errors) {
-        errors.push(...engineStatus.errors);
+      const GLOBAL_STATE_KEY = '__binanceSignalState__';
+      const globalState = (global as any)[GLOBAL_STATE_KEY];
+      if (globalState && globalState.engineErrors) {
+        errors.push(...globalState.engineErrors);
       }
     } catch {}
     

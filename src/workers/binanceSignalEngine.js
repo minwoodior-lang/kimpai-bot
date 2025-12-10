@@ -16,11 +16,38 @@ const WHALE_VOLUME_RATIO = 4.0; // 거래량 배수 (6.0 → 4.0)
 const MAJOR_MIN_VOLUME_USDT = 80000; // (100K → 80K)
 const MAJOR_WHALE_VOLUME_RATIO = 3.0; // (4.0 → 3.0)
 
-// 엔진 상태 추적
-let lastUpdateTime = Date.now();
-let recentTradeCount = 0;
-let lastErrorMessage = null;
-let engineErrors = [];
+// 전역 상태 저장소 (API 라우트에서 접근 가능)
+const GLOBAL_STATE_KEY = '__binanceSignalState__';
+if (!global[GLOBAL_STATE_KEY]) {
+  global[GLOBAL_STATE_KEY] = {
+    lastUpdateTime: Date.now(),
+    lastTradeTime: 0,
+    recentTradeCount: 0,
+    lastErrorMessage: null,
+    engineErrors: [],
+    restartCount: 0,
+    lastRestartTime: 0,
+    isRunning: false,
+    wsConnected: false,
+    klineWsConnected: false
+  };
+}
+const globalState = global[GLOBAL_STATE_KEY];
+
+// 엔진 상태 추적 (v2.4 강화) - global에서 읽기/쓰기
+let lastUpdateTime = globalState.lastUpdateTime;
+let lastTradeTime = globalState.lastTradeTime;
+let recentTradeCount = globalState.recentTradeCount;
+let lastErrorMessage = globalState.lastErrorMessage;
+let engineErrors = globalState.engineErrors;
+let restartCount = globalState.restartCount;
+let lastRestartTime = globalState.lastRestartTime;
+
+// WebSocket 헬스 상수
+const WS_PING_INTERVAL = 30000; // 30초마다 ping
+const WS_PONG_TIMEOUT = 10000; // 10초 pong 타임아웃
+const TRADE_STALE_THRESHOLD = 90000; // 90초간 트레이드 없으면 재시작
+const MAX_RESTART_INTERVAL = 300000; // 5분 내 재시작 제한
 
 const SPIKE_PRICE_THRESHOLD = 2;
 const SPIKE_VOLUME_RATIO = 3;
@@ -34,6 +61,26 @@ const ticker24h = new Map();
 let ws = null;
 let klineWs = null;
 let isRunning = false;
+let wsPingInterval = null;
+let klineWsPingInterval = null;
+let pendingPong = false;
+let pendingKlinePong = false;
+
+// 상태 동기화 함수
+function syncGlobalState() {
+  globalState.lastUpdateTime = lastUpdateTime;
+  globalState.lastTradeTime = lastTradeTime;
+  globalState.recentTradeCount = recentTradeCount;
+  globalState.lastErrorMessage = lastErrorMessage;
+  globalState.engineErrors = engineErrors;
+  globalState.restartCount = restartCount;
+  globalState.lastRestartTime = lastRestartTime;
+  globalState.isRunning = isRunning;
+  globalState.wsConnected = ws && ws.readyState === WebSocket.OPEN;
+  globalState.klineWsConnected = klineWs && klineWs.readyState === WebSocket.OPEN;
+  globalState.tradeBucketCount = tradeBuckets.size;
+  globalState.baselineCount = baselineVolumes.size;
+}
 
 function floorToMinute(timestamp) {
   return Math.floor(timestamp / 60000) * 60000;
@@ -212,6 +259,7 @@ async function fetch24hTicker() {
         });
       }
     }
+    lastUpdateTime = Date.now(); // ticker 업데이트만 (트레이드와 분리)
     console.log(`[BinanceSignal] Updated 24h ticker for ${ticker24h.size} symbols`);
   } catch (err) {
     console.error('[BinanceSignal] Failed to fetch 24h ticker:', err.message);
@@ -248,8 +296,27 @@ function getCandles1h(symbol) {
   return candles1h.get(baseSymbol) || [];
 }
 
+// WebSocket 완전 정리 함수
+function closeWebSocket(socket, pingInterval) {
+  if (pingInterval) {
+    clearInterval(pingInterval);
+  }
+  if (socket) {
+    socket.removeAllListeners();
+    if (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING) {
+      socket.terminate();
+    }
+  }
+}
+
 function startAggTradeStream(symbols) {
   if (symbols.length === 0) return;
+  
+  // 기존 소켓 완전 정리
+  closeWebSocket(ws, wsPingInterval);
+  ws = null;
+  wsPingInterval = null;
+  pendingPong = false;
   
   const streams = symbols.slice(0, 200).map(s => `${s}@aggTrade`).join('/');
   const url = `wss://stream.binance.com:9443/stream?streams=${streams}`;
@@ -258,6 +325,27 @@ function startAggTradeStream(symbols) {
   
   ws.on('open', () => {
     console.log(`[BinanceSignal] AggTrade WS connected (${Math.min(symbols.length, 200)} symbols)`);
+    lastTradeTime = Date.now(); // 연결 시점 기록
+    syncGlobalState(); // WS 연결 상태 즉시 동기화
+    
+    // Ping/Pong 헬스체크 시작
+    wsPingInterval = setInterval(() => {
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        if (pendingPong) {
+          console.warn('[BinanceSignal] AggTrade WS pong timeout, forcing reconnect...');
+          recordError('AggTrade WS pong timeout');
+          closeWebSocket(ws, wsPingInterval);
+          setTimeout(() => startAggTradeStream(currentSymbols.slice(0, 60)), 1000);
+          return;
+        }
+        pendingPong = true;
+        ws.ping();
+      }
+    }, WS_PING_INTERVAL);
+  });
+  
+  ws.on('pong', () => {
+    pendingPong = false;
   });
   
   ws.on('message', (data) => {
@@ -281,23 +369,37 @@ function startAggTradeStream(symbols) {
         bucket.buyNotional += notional;
       }
       
-      lastUpdateTime = Date.now();
+      lastTradeTime = Date.now(); // 실제 트레이드 시점만 기록
       recentTradeCount++;
     } catch (err) {}
   });
   
-  ws.on('close', () => {
-    console.log('[BinanceSignal] AggTrade WS disconnected, reconnecting...');
-    setTimeout(() => startAggTradeStream(symbols), 5000);
+  ws.on('close', (code, reason) => {
+    console.log(`[BinanceSignal] AggTrade WS disconnected (code: ${code}), reconnecting in 3s...`);
+    recordError(`AggTrade WS closed: ${code}`);
+    closeWebSocket(ws, wsPingInterval);
+    syncGlobalState(); // WS 연결 해제 상태 즉시 동기화
+    ws = null;
+    wsPingInterval = null;
+    setTimeout(() => {
+      if (isRunning) startAggTradeStream(currentSymbols.slice(0, 60));
+    }, 3000);
   });
   
   ws.on('error', (err) => {
     console.error('[BinanceSignal] AggTrade WS error:', err.message);
+    recordError('AggTrade WS error: ' + err.message);
   });
 }
 
 function startKlineStream(symbols) {
   if (symbols.length === 0) return;
+  
+  // 기존 소켓 완전 정리
+  closeWebSocket(klineWs, klineWsPingInterval);
+  klineWs = null;
+  klineWsPingInterval = null;
+  pendingKlinePong = false;
   
   const streams = symbols.slice(0, 100).map(s => `${s}@kline_1m`).join('/');
   const url = `wss://stream.binance.com:9443/stream?streams=${streams}`;
@@ -306,6 +408,26 @@ function startKlineStream(symbols) {
   
   klineWs.on('open', () => {
     console.log(`[BinanceSignal] Kline WS connected (${Math.min(symbols.length, 100)} symbols)`);
+    syncGlobalState(); // WS 연결 상태 즉시 동기화
+    
+    // Ping/Pong 헬스체크 시작
+    klineWsPingInterval = setInterval(() => {
+      if (klineWs && klineWs.readyState === WebSocket.OPEN) {
+        if (pendingKlinePong) {
+          console.warn('[BinanceSignal] Kline WS pong timeout, forcing reconnect...');
+          recordError('Kline WS pong timeout');
+          closeWebSocket(klineWs, klineWsPingInterval);
+          setTimeout(() => startKlineStream(currentSymbols.slice(0, 60)), 1000);
+          return;
+        }
+        pendingKlinePong = true;
+        klineWs.ping();
+      }
+    }, WS_PING_INTERVAL);
+  });
+  
+  klineWs.on('pong', () => {
+    pendingKlinePong = false;
   });
   
   klineWs.on('message', (data) => {
@@ -342,21 +464,36 @@ function startKlineStream(symbols) {
     } catch (err) {}
   });
   
-  klineWs.on('close', () => {
-    console.log('[BinanceSignal] Kline WS disconnected, reconnecting...');
-    setTimeout(() => startKlineStream(symbols), 5000);
+  klineWs.on('close', (code, reason) => {
+    console.log(`[BinanceSignal] Kline WS disconnected (code: ${code}), reconnecting in 3s...`);
+    recordError(`Kline WS closed: ${code}`);
+    closeWebSocket(klineWs, klineWsPingInterval);
+    syncGlobalState(); // WS 연결 해제 상태 즉시 동기화
+    klineWs = null;
+    klineWsPingInterval = null;
+    setTimeout(() => {
+      if (isRunning) startKlineStream(currentSymbols.slice(0, 60));
+    }, 3000);
   });
   
   klineWs.on('error', (err) => {
     console.error('[BinanceSignal] Kline WS error:', err.message);
+    recordError('Kline WS error: ' + err.message);
   });
 }
 
 let currentSymbols = [];
+let baselineInterval = null;
+let tickerInterval = null;
+let symbolRefreshInterval = null;
 
 async function initialize() {
-  if (isRunning) return;
+  if (isRunning) {
+    console.log('[BinanceSignal] Engine already running, skipping initialize');
+    return;
+  }
   isRunning = true;
+  syncGlobalState();
   
   console.log('[BinanceSignal] Initializing signal engine...');
   
@@ -392,16 +529,19 @@ async function initialize() {
   startAggTradeStream(currentSymbols.slice(0, 60));
   startKlineStream(currentSymbols.slice(0, 60));
   
-  setInterval(() => {
+  // Baseline 업데이트 인터벌
+  baselineInterval = setInterval(() => {
     cleanOldBuckets();
     for (const sym of currentSymbols) {
       updateBaseline(sym.toUpperCase());
     }
   }, 60000);
   
-  setInterval(fetch24hTicker, 5 * 60000);
+  // 24h Ticker 업데이트 인터벌
+  tickerInterval = setInterval(fetch24hTicker, 5 * 60000);
   
-  setInterval(async () => {
+  // 심볼 갱신 인터벌
+  symbolRefreshInterval = setInterval(async () => {
     try {
       const newSymbols = await getTopSymbols();
       currentSymbols = newSymbols.map(s => s.toLowerCase());
@@ -411,24 +551,70 @@ async function initialize() {
     }
   }, 15 * 60000);
   
+  lastTradeTime = Date.now();
+  syncGlobalState();
   console.log(`[BinanceSignal] Signal engine initialized with ${currentSymbols.length} symbols`);
 }
 
+// 완전 정지 함수 (모든 인터벌 및 소켓 정리)
 function stop() {
+  console.log('[BinanceSignal] Stopping engine...');
   isRunning = false;
-  if (ws) ws.close();
-  if (klineWs) klineWs.close();
+  syncGlobalState();
+  
+  // 모든 인터벌 정리
+  if (baselineInterval) { clearInterval(baselineInterval); baselineInterval = null; }
+  if (tickerInterval) { clearInterval(tickerInterval); tickerInterval = null; }
+  if (symbolRefreshInterval) { clearInterval(symbolRefreshInterval); symbolRefreshInterval = null; }
+  if (healthCheckInterval) { clearInterval(healthCheckInterval); healthCheckInterval = null; }
+  
+  // WebSocket 완전 정리
+  closeWebSocket(ws, wsPingInterval);
+  closeWebSocket(klineWs, klineWsPingInterval);
+  ws = null;
+  klineWs = null;
+  wsPingInterval = null;
+  klineWsPingInterval = null;
+  pendingPong = false;
+  pendingKlinePong = false;
+  
+  console.log('[BinanceSignal] Engine stopped');
+}
+
+// 데이터 초기화 함수
+function clearAllData() {
+  tradeBuckets.clear();
+  baselineVolumes.clear();
+  candles1m.clear();
+  candles1h.clear();
+  // ticker24h는 유지 (API 호출 줄이기 위해)
+  recentTradeCount = 0;
+  lastTradeTime = 0;
 }
 
 function getStatus() {
   const now = Date.now();
   const wsConnected = ws && ws.readyState === WebSocket.OPEN;
   const klineWsConnected = klineWs && klineWs.readyState === WebSocket.OPEN;
+  const tradeStale = lastTradeTime > 0 && (now - lastTradeTime) > TRADE_STALE_THRESHOLD;
+  
+  // 전역 상태 동기화
+  syncGlobalState();
+  
+  // 건강 상태 판단
+  const isHealthy = wsConnected && klineWsConnected && 
+                    tradeBuckets.size > 0 && 
+                    baselineVolumes.size > 50 && 
+                    !tradeStale;
   
   return {
     running: isRunning,
+    healthy: isHealthy,
     lastUpdate: lastUpdateTime,
     lastUpdateAgo: Math.floor((now - lastUpdateTime) / 1000),
+    lastTradeTime: lastTradeTime,
+    lastTradeAgo: lastTradeTime > 0 ? Math.floor((now - lastTradeTime) / 1000) : -1,
+    tradeStale: tradeStale,
     wsConnected,
     klineWsConnected,
     recentTrades: recentTradeCount,
@@ -436,6 +622,8 @@ function getStatus() {
     tradeBucketCount: tradeBuckets.size,
     baselineCount: baselineVolumes.size,
     ticker24hCount: ticker24h.size,
+    restartCount: restartCount,
+    lastRestartTime: lastRestartTime,
     lastError: lastErrorMessage,
     errors: engineErrors.slice(-10)
   };
@@ -453,46 +641,94 @@ function recordError(message) {
 }
 
 async function restart() {
-  console.log('[BinanceSignal] Restarting engine...');
-  stop();
-  isRunning = false;
+  const now = Date.now();
   
-  await new Promise(resolve => setTimeout(resolve, 2000));
+  // 재시작 폭주 방지 (5분 내 연속 재시작 제한)
+  if (lastRestartTime > 0 && (now - lastRestartTime) < MAX_RESTART_INTERVAL) {
+    console.warn('[BinanceSignal] Restart throttled (too frequent)');
+    return false;
+  }
+  
+  console.log('[BinanceSignal] ========== FULL RESTART ==========');
+  
+  // 1. 완전 정지
+  stop();
+  
+  // 2. 데이터 초기화
+  clearAllData();
+  
+  // 3. 쿨다운
+  await new Promise(resolve => setTimeout(resolve, 3000));
+  
+  // 4. 재초기화
+  restartCount++;
+  lastRestartTime = now;
   
   await initialize();
-  console.log('[BinanceSignal] Engine restarted successfully');
+  
+  // 5. 헬스체크 재시작
+  startHealthCheck();
+  
+  console.log('[BinanceSignal] Engine restarted successfully (restart #' + restartCount + ')');
+  return true;
 }
 
 let healthCheckInterval = null;
 
 function startHealthCheck() {
-  if (healthCheckInterval) return;
+  if (healthCheckInterval) {
+    clearInterval(healthCheckInterval);
+  }
+  
+  console.log('[BinanceSignal] Starting health check (every 30s)...');
   
   healthCheckInterval = setInterval(() => {
     const status = getStatus();
     const now = Date.now();
     
-    if (now - status.lastUpdate > 5 * 60 * 1000) {
-      console.warn('[BinanceSignal] No updates for 5 minutes, restarting...');
-      recordError('No updates for 5 minutes, auto-restarting');
+    // 조건 1: 90초간 트레이드 없음 (가장 중요)
+    if (status.lastTradeTime > 0 && (now - status.lastTradeTime) > TRADE_STALE_THRESHOLD) {
+      console.warn(`[BinanceSignal] No trades for ${Math.floor((now - status.lastTradeTime) / 1000)}s, forcing restart...`);
+      recordError(`No trades for ${Math.floor((now - status.lastTradeTime) / 1000)}s`);
       restart().catch(err => {
         console.error('[BinanceSignal] Restart failed:', err.message);
         recordError('Restart failed: ' + err.message);
       });
+      return;
     }
     
+    // 조건 2: WebSocket 끊김 (readyState 체크)
     if (!status.wsConnected && isRunning) {
-      console.warn('[BinanceSignal] WebSocket disconnected, reconnecting...');
-      recordError('WebSocket disconnected, reconnecting');
+      console.warn('[BinanceSignal] AggTrade WebSocket not connected, reconnecting...');
+      recordError('AggTrade WebSocket disconnected');
       startAggTradeStream(currentSymbols.slice(0, 60));
     }
     
     if (!status.klineWsConnected && isRunning) {
-      console.warn('[BinanceSignal] Kline WebSocket disconnected, reconnecting...');
-      recordError('Kline WebSocket disconnected, reconnecting');
+      console.warn('[BinanceSignal] Kline WebSocket not connected, reconnecting...');
+      recordError('Kline WebSocket disconnected');
       startKlineStream(currentSymbols.slice(0, 60));
     }
-  }, 60 * 1000);
+    
+    // 조건 3: 버킷/베이스라인 없음 (데이터 손상)
+    if (isRunning && status.lastTradeTime > 0 && (now - status.lastTradeTime) > 60000) {
+      if (status.tradeBucketCount === 0 || status.baselineCount === 0) {
+        console.warn('[BinanceSignal] Empty buckets/baselines detected, forcing restart...');
+        recordError('Empty buckets or baselines');
+        restart().catch(err => {
+          console.error('[BinanceSignal] Restart failed:', err.message);
+        });
+        return;
+      }
+    }
+    
+    // 상태 로그 (디버그용)
+    if (process.env.NODE_ENV === 'development' || status.tradeStale) {
+      console.log(`[BinanceSignal] Health: WS=${status.wsConnected ? '✓' : '✗'} Kline=${status.klineWsConnected ? '✓' : '✗'} ` +
+                  `Trades=${status.recentTrades} Buckets=${status.tradeBucketCount} Baselines=${status.baselineCount} ` +
+                  `LastTrade=${status.lastTradeAgo}s ago`);
+    }
+  }, 30 * 1000); // 30초마다 체크
 }
 
 module.exports = {

@@ -5,12 +5,19 @@ import { useState, useEffect } from "react";
 interface HealthData {
   signalEngine: {
     running: boolean;
+    healthy: boolean;
     lastUpdate: number | null;
     lastUpdateAgo: number;
+    lastTradeTime: number | null;
+    lastTradeAgo: number;
+    tradeStale: boolean;
     wsConnected: boolean;
     klineWsConnected: boolean;
     recentTrades: number;
     symbolCount: number;
+    tradeBucketCount: number;
+    baselineCount: number;
+    restartCount: number;
     status: "ok" | "warning" | "critical";
     statusMessage: string;
   };
@@ -142,13 +149,15 @@ export default function AdminIndex() {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-slate-400 text-sm">시그널 엔진</span>
+                      <span className="text-slate-400 text-sm">시그널 엔진 v2.4</span>
                       <StatusBadge status={health.signalEngine.status} />
                     </div>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-slate-500">상태</span>
-                        <span className="text-white">{health.signalEngine.running ? "실행 중" : "중지됨"}</span>
+                        <span className={health.signalEngine.healthy ? "text-green-400" : "text-red-400"}>
+                          {health.signalEngine.healthy ? "정상" : health.signalEngine.running ? "데이터 없음" : "중지됨"}
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-500">AggTrade WS</span>
@@ -165,12 +174,18 @@ export default function AdminIndex() {
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-500">마지막 업데이트</span>
-                        <span className="text-white">{formatTimeAgo(health.signalEngine.lastUpdateAgo)}</span>
+                        <span className="text-slate-500">마지막 트레이드</span>
+                        <span className={health.signalEngine.tradeStale ? "text-red-400" : "text-white"}>
+                          {health.signalEngine.lastTradeAgo >= 0 ? formatTimeAgo(health.signalEngine.lastTradeAgo) : "없음"}
+                        </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-500">감시 심볼</span>
-                        <span className="text-white">{health.signalEngine.symbolCount}개</span>
+                        <span className="text-slate-500">버킷/베이스라인</span>
+                        <span className="text-white">{health.signalEngine.tradeBucketCount}/{health.signalEngine.baselineCount}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-500">재시작 횟수</span>
+                        <span className="text-white">{health.signalEngine.restartCount}회</span>
                       </div>
                     </div>
                   </div>

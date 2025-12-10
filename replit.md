@@ -7,7 +7,14 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 - 이터러티브 개발 선호
 - 상세한 설명 요구
 
-### 최신 변경사항 (2025-12-10 v2.5)
+### 최신 변경사항 (2025-12-10 v2.5.1)
+
+**Global State Singleton 패턴 적용:**
+- ✅ **문제 해결:** Next.js API 라우트와 봇이 다른 모듈 인스턴스를 참조하던 문제
+- ✅ **해결책:** `global.__binanceSignalState__` 전역 객체에 엔진 상태 저장
+- ✅ **syncGlobalState 함수:** 상태 변경 시점(initialize/stop/getStatus)에 호출
+- ✅ **health.ts 수정:** 모듈 require 대신 global 상태 직접 접근
+- ✅ **결과:** Admin Dashboard에서 시그널 엔진 상태 정확히 표시
 
 **FREE 고래 시그널 v2.3b (조건 완화 + 진단/자동복구):**
 - ✅ **조건 완화:**
@@ -22,8 +29,8 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
   - `/signal_restart` - 엔진 수동 재시작
 
 - ✅ **자동 복구 로직:**
-  - 1분마다 헬스 체크 (startHealthCheck)
-  - 5분 이상 업데이트 없으면 자동 재시작
+  - 30초마다 헬스 체크 (startHealthCheck)
+  - 90초 이상 트레이드 없으면 자동 재시작
   - WebSocket 연결 끊김 시 자동 재연결
 
 - ✅ **Admin Health Monitoring (/admin):**
