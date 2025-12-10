@@ -1,11 +1,17 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { ExchangeSelectionProvider } from "@/contexts/ExchangeSelectionContext";
+import { useAnalyticsHeartbeat } from "@/hooks/useAnalyticsHeartbeat";
 
-export default function App({ Component, pageProps }: AppProps) {
+function AppContent({ Component, pageProps }: AppProps) {
+  useAnalyticsHeartbeat();
+  return <Component {...pageProps} />;
+}
+
+export default function App(props: AppProps) {
   return (
     <ExchangeSelectionProvider>
-      <Component {...pageProps} />
+      <AppContent {...props} />
     </ExchangeSelectionProvider>
   );
 }

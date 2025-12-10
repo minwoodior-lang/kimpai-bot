@@ -48,41 +48,6 @@ export default function Layout({ children }: LayoutProps) {
     };
   }, [mobileMenuOpen]);
 
-  // 세션 ID 초기화 및 하트비트
-  useEffect(() => {
-    const sendHeartbeat = async () => {
-      try {
-        await fetch("/api/analytics/heartbeat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ path: window.location.pathname }),
-        });
-      } catch (err) {
-        // Silent
-      }
-    };
-
-    sendHeartbeat();
-    const interval = setInterval(sendHeartbeat, 30000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // 라우트 변경 시 heartbeat 추가 전송
-  useEffect(() => {
-    const sendHeartbeat = async () => {
-      try {
-        await fetch("/api/analytics/heartbeat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ path: router.pathname }),
-        });
-      } catch (err) {
-        // Silent
-      }
-    };
-
-    sendHeartbeat();
-  }, [router.pathname]);
 
   const navLinks = [
     { href: "/", label: "홈" },
