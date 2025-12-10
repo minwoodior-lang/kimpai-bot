@@ -5,6 +5,7 @@ import { exec } from "child_process";
 import { createChatServer } from "./src/server/chatServer";
 import { startPriceWorker } from "./workers/priceWorker";
 import { startSignalEngine } from "./src/signalEngine";
+import { initProductionAdmin } from "./src/lib/adminInit";
 
 const startTelegramBot = async () => {
   const isProduction = process.env.NODE_ENV === "production";
@@ -70,6 +71,9 @@ async function bootstrap() {
     setImmediate(async () => {
       try {
         console.log("[WORKERS] Initializing background workers...");
+        
+        // 프로덕션 환경: admin 계정 자동 초기화
+        await initProductionAdmin();
         
         createChatServer(server);
         console.log("[WORKERS] Chat server initialized");

@@ -26,7 +26,8 @@
     "sync:markets": "tsx scripts/syncMarkets.ts",
     "validate": "tsx scripts/validateDataPipeline.ts",
     "bot:dev": "node src/bot/index.js",
-    "bot:start": "NODE_ENV=production node src/bot/index.js"
+    "bot:start": "NODE_ENV=production node src/bot/index.js",
+    "db:init-admin": "bash scripts/init-prod-admin.sh"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.86.0",
