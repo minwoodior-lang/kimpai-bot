@@ -81,14 +81,14 @@ function formatTimeAgo(seconds: number): string {
 }
 
 const TABS: { id: TabType; label: string; icon: string }[] = [
-  { id: "health", label: "System Health", icon: "🏥" },
-  { id: "price-feeds", label: "Price Feeds", icon: "📊" },
-  { id: "symbols", label: "Symbols", icon: "🔗" },
-  { id: "premium", label: "Premium Engine", icon: "💎" },
-  { id: "workers", label: "Workers", icon: "⚙️" },
-  { id: "listings", label: "Listings", icon: "📋" },
-  { id: "frontend", label: "Frontend", icon: "🌐" },
-  { id: "tools", label: "Tools", icon: "🛠️" }
+  { id: "health", label: "시스템 상태", icon: "🏥" },
+  { id: "price-feeds", label: "가격 피드", icon: "📊" },
+  { id: "symbols", label: "심볼 관리", icon: "🔗" },
+  { id: "premium", label: "김프 엔진", icon: "💎" },
+  { id: "workers", label: "워커", icon: "⚙️" },
+  { id: "listings", label: "상장 현황", icon: "📋" },
+  { id: "frontend", label: "프론트엔드", icon: "🌐" },
+  { id: "tools", label: "도구", icon: "🛠️" }
 ];
 
 export default function AdminDashboard() {
@@ -165,7 +165,7 @@ export default function AdminDashboard() {
   if (authLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-        <div className="text-white">Loading...</div>
+        <div className="text-white">로딩 중...</div>
       </div>
     );
   }
@@ -175,8 +175,8 @@ export default function AdminDashboard() {
   return (
     <>
       <Head>
-        <title>Admin Dashboard - KimpAI</title>
-        <meta name="description" content="KimpAI Admin Dashboard v2.0" />
+        <title>관리자 대시보드 - KimpAI</title>
+        <meta name="description" content="KimpAI 관리자 대시보드 v2.0" />
       </Head>
 
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
@@ -184,10 +184,8 @@ export default function AdminDashboard() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-orange-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">A</span>
-                </div>
-                <span className="text-xl font-bold text-white">KimpAI Admin</span>
+                <img src="/favicon-32x32.png" alt="KimpAI" className="w-8 h-8" />
+                <span className="text-xl font-bold text-white">KimpAI 관리자</span>
                 <span className="text-xs text-slate-500 ml-2">v2.0</span>
               </div>
               <div className="flex items-center gap-4">
@@ -196,7 +194,7 @@ export default function AdminDashboard() {
                   onClick={handleLogout}
                   className="text-slate-400 hover:text-white transition-colors text-sm px-3 py-1 border border-slate-700 rounded-lg hover:border-slate-500"
                 >
-                  Logout
+                  로그아웃
                 </button>
               </div>
             </div>
@@ -269,12 +267,12 @@ function HealthSection({ health, loading, error }: { health: HealthData | null; 
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-white">System Health</h2>
+      <h2 className="text-2xl font-bold text-white">시스템 상태</h2>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-slate-400 text-sm">Signal Engine</span>
+            <span className="text-slate-400 text-sm">시그널 엔진</span>
             <StatusBadge status={health.signalEngine.status} />
           </div>
           <div className="space-y-2 text-sm">
@@ -311,7 +309,7 @@ function HealthSection({ health, loading, error }: { health: HealthData | null; 
 
         <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-slate-400 text-sm">Telegram Bot</span>
+            <span className="text-slate-400 text-sm">텔레그램 봇</span>
             <StatusBadge status={health.bot.status} />
           </div>
           <div className="space-y-2 text-sm">
@@ -334,25 +332,25 @@ function HealthSection({ health, loading, error }: { health: HealthData | null; 
 
         <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-slate-400 text-sm">Workers</span>
+            <span className="text-slate-400 text-sm">워커</span>
           </div>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between items-center">
-              <span className="text-slate-500">Price</span>
+              <span className="text-slate-500">가격</span>
               <span className="flex items-center gap-1.5">
                 <ConnectionDot connected={health.workers.priceWorker.ok} />
                 <span className="text-white">{health.workers.priceWorker.status}</span>
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-slate-500">Stats</span>
+              <span className="text-slate-500">통계</span>
               <span className="flex items-center gap-1.5">
                 <ConnectionDot connected={health.workers.statsWorker.ok} />
                 <span className="text-white">{health.workers.statsWorker.status}</span>
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-slate-500">Premium</span>
+              <span className="text-slate-500">김프</span>
               <span className="flex items-center gap-1.5">
                 <ConnectionDot connected={health.workers.premiumWorker.ok} />
                 <span className="text-white">{health.workers.premiumWorker.status}</span>
@@ -363,7 +361,7 @@ function HealthSection({ health, loading, error }: { health: HealthData | null; 
 
         <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-slate-400 text-sm">API 상태</span>
+            <span className="text-slate-400 text-sm">API</span>
           </div>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
@@ -418,7 +416,7 @@ function PriceFeedsSection({ feeds }: { feeds: PriceFeedStatus[] }) {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-white">Price Feeds Health</h2>
+      <h2 className="text-2xl font-bold text-white">가격 피드 상태</h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {exchanges.map((ex) => {
           const feed = feeds.find(f => f.exchange === ex.id);
@@ -463,7 +461,7 @@ function PriceFeedsSection({ feeds }: { feeds: PriceFeedStatus[] }) {
 function SymbolsSection() {
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-white">Symbol Sync Monitoring</h2>
+      <h2 className="text-2xl font-bold text-white">심볼 동기화 모니터링</h2>
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
           <h3 className="text-white font-medium mb-4">거래소별 마켓 수</h3>
@@ -486,7 +484,7 @@ function SymbolsSection() {
 function PremiumSection() {
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-white">Premium Engine Health</h2>
+      <h2 className="text-2xl font-bold text-white">김프 엔진 상태</h2>
       <div className="grid lg:grid-cols-3 gap-6">
         <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
           <h3 className="text-white font-medium mb-4">김프 테이블 상태</h3>
@@ -522,16 +520,16 @@ function PremiumSection() {
 
 function WorkersSection({ health }: { health: HealthData | null }) {
   const workers = [
-    { id: "price", name: "Price Worker", desc: "가격 데이터 수집 (300ms)" },
-    { id: "stats", name: "Stats Worker", desc: "거래량/변동률 계산" },
-    { id: "premium", name: "Premium Worker", desc: "김프 테이블 생성" },
-    { id: "symbol", name: "Symbol Sync", desc: "심볼 목록 동기화" },
-    { id: "metadata", name: "Metadata Worker", desc: "아이콘/이름 수집" }
+    { id: "price", name: "가격 워커", desc: "가격 데이터 수집 (300ms)" },
+    { id: "stats", name: "통계 워커", desc: "거래량/변동률 계산" },
+    { id: "premium", name: "김프 워커", desc: "김프 테이블 생성" },
+    { id: "symbol", name: "심볼 동기화", desc: "심볼 목록 동기화" },
+    { id: "metadata", name: "메타데이터 워커", desc: "아이콘/이름 수집" }
   ];
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-white">Workers Status</h2>
+      <h2 className="text-2xl font-bold text-white">워커 상태</h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {workers.map((w) => {
           let workerStatus = { ok: true, status: "정상" };
@@ -565,7 +563,7 @@ function WorkersSection({ health }: { health: HealthData | null }) {
 function ListingsSection() {
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-white">Exchange Listings Tracker</h2>
+      <h2 className="text-2xl font-bold text-white">거래소 상장 현황</h2>
       <div className="grid lg:grid-cols-3 gap-6">
         <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
           <div className="text-3xl font-bold text-white mb-2">0</div>
@@ -587,7 +585,7 @@ function ListingsSection() {
 function FrontendSection() {
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-white">Frontend/Web Health</h2>
+      <h2 className="text-2xl font-bold text-white">프론트엔드/웹 상태</h2>
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5">
           <h3 className="text-white font-medium mb-4">API 응답 속도</h3>
@@ -631,7 +629,7 @@ function FrontendSection() {
 function ToolsSection() {
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-white">Tools / 수동 액션</h2>
+      <h2 className="text-2xl font-bold text-white">도구 / 수동 작업</h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <button className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5 text-left hover:border-blue-500/50 transition-colors">
           <div className="text-xl mb-2">🗑️</div>

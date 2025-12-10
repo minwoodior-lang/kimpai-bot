@@ -40,20 +40,18 @@ export default function AdminLogin() {
   return (
     <>
       <Head>
-        <title>Admin Login - KimpAI</title>
-        <meta name="description" content="KimpAI Admin Login" />
+        <title>관리자 로그인 - KimpAI</title>
+        <meta name="description" content="KimpAI 관리자 로그인" />
       </Head>
 
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center px-4">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">A</span>
-              </div>
+              <img src="/favicon-32x32.png" alt="KimpAI" className="w-12 h-12" />
             </div>
-            <h1 className="text-3xl font-bold text-white mb-2">Admin Login</h1>
-            <p className="text-slate-400">Access the KimpAI admin panel</p>
+            <h1 className="text-3xl font-bold text-white mb-2">관리자 로그인</h1>
+            <p className="text-slate-400">KimpAI 관리자 페이지</p>
           </div>
 
           {error && (
@@ -66,7 +64,7 @@ export default function AdminLogin() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="username" className="block text-slate-300 text-sm font-medium mb-2">
-                  Username
+                  아이디
                 </label>
                 <input
                   id="username"
@@ -74,14 +72,14 @@ export default function AdminLogin() {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-red-500 transition-colors"
-                  placeholder="admin@kimpai.io"
+                  placeholder="아이디 입력"
                   required
                 />
               </div>
 
               <div>
                 <label htmlFor="password" className="block text-slate-300 text-sm font-medium mb-2">
-                  Password
+                  비밀번호
                 </label>
                 <input
                   id="password"
@@ -89,7 +87,7 @@ export default function AdminLogin() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-red-500 transition-colors"
-                  placeholder="Enter admin password"
+                  placeholder="비밀번호 입력"
                   required
                 />
               </div>
@@ -99,20 +97,20 @@ export default function AdminLogin() {
                 disabled={loading}
                 className="w-full bg-gradient-to-r from-red-500 to-orange-600 hover:from-red-600 hover:to-orange-700 disabled:opacity-50 text-white py-3 rounded-lg font-medium transition-all"
               >
-                {loading ? "로그인 중..." : "Sign In to Admin"}
+                {loading ? "로그인 중..." : "로그인"}
               </button>
             </form>
 
             <div className="mt-6 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
               <p className="text-yellow-400 text-sm text-center">
-                This is a restricted area. Unauthorized access attempts are logged.
+                관리자 전용 페이지입니다. 무단 접근 시도는 기록됩니다.
               </p>
             </div>
           </div>
 
           <p className="text-center text-slate-400 mt-6">
             <Link href="/" className="text-blue-400 hover:text-blue-300">
-              Back to main site
+              메인으로 돌아가기
             </Link>
           </p>
         </div>
