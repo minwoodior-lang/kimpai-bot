@@ -2,8 +2,13 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
 import { parse } from 'cookie';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'kimpai-admin-secret-key-2025';
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  console.warn('[AdminAuth] JWT_SECRET not set, using fallback for development only');
+}
+const SECRET = JWT_SECRET || 'dev-only-secret-do-not-use-in-production';
 const COOKIE_NAME = 'kimpai_admin_session';
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 export interface AdminSession {
   userId: string;
@@ -14,12 +19,12 @@ export interface AdminSession {
 }
 
 export function signToken(payload: { userId: string; username: string; role: string }): string {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: '24h' });
+  return jwt.sign(payload, SECRET, { expiresIn: '24h' });
 }
 
 export function verifyToken(token: string): AdminSession | null {
   try {
-    return jwt.verify(token, JWT_SECRET) as AdminSession;
+    return jwt.verify(token, SECRET) as AdminSession;
   } catch {
     return null;
   }
@@ -33,14 +38,16 @@ export function getSessionFromRequest(req: NextApiRequest): AdminSession | null 
 }
 
 export function setSessionCookie(res: NextApiResponse, token: string): void {
+  const secureFlag = IS_PRODUCTION ? '; Secure' : '';
   res.setHeader('Set-Cookie', [
-    `${COOKIE_NAME}=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=${60 * 60 * 24}`,
+    `${COOKIE_NAME}=${token}; Path=/; HttpOnly; SameSite=Strict${secureFlag}; Max-Age=${60 * 60 * 24}`,
   ]);
 }
 
 export function clearSessionCookie(res: NextApiResponse): void {
+  const secureFlag = IS_PRODUCTION ? '; Secure' : '';
   res.setHeader('Set-Cookie', [
-    `${COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0`,
+    `${COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Strict${secureFlag}; Max-Age=0`,
   ]);
 }
 

@@ -7,7 +7,34 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 - 이터러티브 개발 선호
 - 상세한 설명 요구
 
-### 최신 변경사항 (2025-12-10 v2.5.1)
+### 최신 변경사항 (2025-12-10 v2.6.0)
+
+**Admin v2.0 Dashboard 구현:**
+- ✅ **인증 시스템:** bcrypt 비밀번호 해싱, JWT 세션, httpOnly 쿠키
+- ✅ **보안 강화:** Secure 플래그 (production), 로그인 시도 제한 (5회/15분)
+- ✅ **기본 계정:** admin@kimpai.io / Admin@1234! (첫 로그인 후 변경 권장)
+- ✅ **8개 탭 대시보드:**
+  - System Health: Signal Engine, Bot, Workers, API 상태
+  - Price Feeds: 11개 거래소 실시간 피드 상태
+  - Symbols: 심볼 동기화 모니터링
+  - Premium Engine: 김프 테이블 상태
+  - Workers: 백그라운드 워커 상태
+  - Listings: 신규 상장/폐지 추적
+  - Frontend: API 응답 속도, 페이지 상태
+  - Tools: 캐시 초기화, 데이터 검증, CSV 다운로드
+- ✅ **보호된 API:** /api/admin/* 모든 엔드포인트 인증 필수
+
+**Admin 관련 파일:**
+- `src/lib/adminAuth.ts` - JWT 인증 미들웨어
+- `src/pages/api/admin/login.ts` - 로그인 API
+- `src/pages/api/admin/logout.ts` - 로그아웃 API
+- `src/pages/api/admin/session.ts` - 세션 확인 API
+- `src/pages/api/admin/health.ts` - 시스템 헬스 API (인증 필요)
+- `src/pages/api/admin/price-feeds.ts` - 가격 피드 상태 API (인증 필요)
+- `src/pages/admin/login.tsx` - 로그인 페이지
+- `src/pages/admin/index.tsx` - Admin 대시보드
+
+**이전 v2.5.1 변경사항:**
 
 **Global State Singleton 패턴 적용:**
 - ✅ **문제 해결:** Next.js API 라우트와 봇이 다른 모듈 인스턴스를 참조하던 문제

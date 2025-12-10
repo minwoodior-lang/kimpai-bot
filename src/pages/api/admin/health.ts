@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import fs from "fs";
 import path from "path";
+import { withAdminAuth } from "@/lib/adminAuth";
 
 let botStartTime: number | null = null;
 let lastMessageSent: number | null = null;
@@ -68,7 +69,7 @@ function checkFileAge(filePath: string): { ok: boolean; lastRun: number | null; 
   }
 }
 
-export default async function handler(
+async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -203,3 +204,5 @@ export default async function handler(
     return res.status(500).json({ success: false, error: "Health check failed" });
   }
 }
+
+export default withAdminAuth(handler);
