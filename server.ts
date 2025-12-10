@@ -8,6 +8,14 @@ import { startSignalEngine } from "./src/signalEngine";
 import { initProductionAdmin } from "./src/lib/adminInit";
 
 const startTelegramBot = async () => {
+  const isProduction = process.env.NODE_ENV === "production";
+  
+  // 프로덕션에서만 봇 시작 (개발환경에서 중복 실행 방지)
+  if (!isProduction) {
+    console.log("⏭️ 봇은 프로덕션 환경에서만 실행됩니다 (개발환경 스킵)");
+    return;
+  }
+  
   try {
     const { startBot } = require("./src/bot/index.js");
     await startBot();

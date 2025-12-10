@@ -21,7 +21,6 @@ import TwoLinePriceCell, {
 import TwoLineCell from "@/components/TwoLineCell";
 import { openCmcPage } from "@/lib/coinMarketCapUtils";
 import { UserPrefs, normalizeSymbol } from "@/hooks/useUserPrefs";
-import { useMarketsWithFastMode } from "@/hooks/useMarketsWithFastMode";
 
 interface DropdownOption {
   id: string;
@@ -188,7 +187,6 @@ interface PremiumData {
   name_ko?: string;
   name_en?: string;
   icon_url?: string;
-  isFastRow?: boolean;
 }
 
 interface ApiResponse {
@@ -224,7 +222,6 @@ interface PremiumTableRowProps {
   foreignExchange: string;
   priceUnit: "KRW" | "USDT";
   fxRate: number;
-  isFastRow?: boolean;
   toggleFavorite?: (symbol: string) => void;
   setExpandedSymbol: (symbol: string | null) => void;
   onChartSelect?: (
@@ -297,12 +294,13 @@ const PremiumTableRow = React.memo(
     getTvSymbolForRow,
     openCmcPage,
   }: PremiumTableRowProps) => {
+    const uniqueKey = `${row.symbol}_${index}`;
     const normalizedSymbol = normalizeSymbol(row.symbol);
     const isFav = favorites.has(normalizedSymbol);
     const isUnlisted = !row.foreignPriceKrw || row.foreignPriceKrw <= 0;
 
     return (
-      <React.Fragment key={row.symbol}>
+      <React.Fragment key={uniqueKey}>
         <tr
           className="text-[8px] sm:text-[9px] md:text-sm hover:bg-slate-800/60 transition-colors leading-relaxed"
           data-symbol={row.symbol}
@@ -514,6 +512,7 @@ const PremiumTableRow = React.memo(
                   ? formatVolumeKRW(row.volume24hForeignKrw)
                   : "-"
               }
+              size="compact"
             />
           </td>
         </tr>
@@ -682,30 +681,20 @@ export default function PremiumTable({
   onChartSelect,
   toggleFavorite,
 }: PremiumTableProps) {
+  const [data, setData] = useState<PremiumData[]>([]);
+  const [averagePremium, setAveragePremium] = useState(0);
+  const [fxRate, setFxRate] = useState(0);
+  const [updatedAt, setUpdatedAt] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [totalCoins, setTotalCoins] = useState(0);
+  const [listedCoins, setListedCoins] = useState(0);
+  const [rateLimitRetryAfter, setRateLimitRetryAfter] = useState(0);
+  const [consecutiveRateLimits, setConsecutiveRateLimits] = useState(0);
   const [domesticExchange, setDomesticExchange] =
     useState<string>("UPBIT_KRW");
   const [foreignExchange, setForeignExchange] =
     useState<string>("BINANCE_USDT");
-
-  // FAST(1초) + SLOW(6초) 이중 폴링
-  const {
-    data: fastModeData,
-    loading,
-    isInitialLoading,
-    isSlowValidating,
-    error: fastModeError,
-    fxRate,
-    averagePremium,
-    updatedAt,
-    totalCoins,
-    listedCoins,
-    fastSymbolSet,
-  } = useMarketsWithFastMode(domesticExchange, foreignExchange);
-
-  // 기존 호환성: data 상태 유지
-  const [data, setData] = useState<PremiumData[]>([]);
-  const [rateLimitRetryAfter, setRateLimitRetryAfter] = useState(0);
-  const [consecutiveRateLimits, setConsecutiveRateLimits] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("volume24hKrw");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
@@ -724,30 +713,94 @@ export default function PremiumTable({
     [prefs?.favorites]
   );
 
-  // FAST 모드 데이터를 PremiumData 형식으로 변환
-  useEffect(() => {
-    if (!fastModeData || fastModeData.length === 0) return;
-    
-    const converted: PremiumData[] = fastModeData.map((row) => ({
-      symbol: row.symbol,
-      name: row.name,
-      koreanName: row.koreanName,
-      name_ko: row.koreanName,
-      name_en: row.name,
-      koreanPrice: row.upbitPrice,
-      foreignPriceKrw: row.binancePrice,
-      premium: row.premium,
-      premiumRate: row.premium,
-      volume24hKrw: row.volume24hKrw,
-      volume24hForeignKrw: row.volume24hForeignKrw,
-      changeRate: row.change24h,
-      isFastRow: fastSymbolSet.has(row.symbol),
-    })) as any;
-    
-    setData(converted);
-  }, [fastModeData, fastSymbolSet]);
+  const fetchData = async () => {
+    try {
+      if (rateLimitRetryAfter > 0) return;
 
-  // FAST 모드로 이동: fetchData 불필요 (useMarketsWithFastMode가 처리)
+      let response: Response | null = null;
+      try {
+        response = await fetch(
+          `/api/premium/table-filtered?domestic=${domesticExchange}&foreign=${foreignExchange}`
+        );
+      } catch {
+        return;
+      }
+
+      if (!response) return;
+
+      if (response.status === 429) {
+        const retryAfter = Math.max(
+          parseInt(response.headers.get("retry-after") || "10", 10),
+          10
+        );
+        const newCount = consecutiveRateLimits + 1;
+        setConsecutiveRateLimits(newCount);
+        const delayMs = newCount >= 5 ? 60000 : retryAfter * 1000;
+        setRateLimitRetryAfter(delayMs / 1000);
+        setTimeout(() => {
+          setRateLimitRetryAfter(0);
+          setConsecutiveRateLimits(0);
+        }, delayMs);
+        return;
+      }
+
+      if (!response.ok) return;
+
+      let json: ApiResponse | null = null;
+      try {
+        json = await response.json();
+      } catch {
+        return;
+      }
+
+      if (!json || !json.success) {
+        return;
+      }
+
+      if (!Array.isArray(json.data) || json.data.length === 0) {
+        setData([]);
+        return;
+      }
+
+      try {
+        setData(json.data);
+        setAveragePremium(
+          typeof json.averagePremium === "number" ? json.averagePremium : 0
+        );
+        setFxRate(typeof json.fxRate === "number" ? json.fxRate : 0);
+        setUpdatedAt(
+          typeof json.updatedAt === "string"
+            ? json.updatedAt
+            : new Date().toISOString()
+        );
+        setTotalCoins(
+          typeof json.totalCoins === "number" ? json.totalCoins : 0
+        );
+        setListedCoins(
+          typeof json.listedCoins === "number" ? json.listedCoins : 0
+        );
+        setError(null);
+        setConsecutiveRateLimits(0);
+      } catch {
+      } finally {
+        setLoading(false);
+      }
+    } catch {
+      // silent
+    }
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    fetchData();
+
+    const isKoreanExchange = domesticExchange.includes("_KRW");
+    const actualRefreshInterval = isKoreanExchange ? 800 : refreshInterval;
+
+    const interval = setInterval(fetchData, actualRefreshInterval);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [domesticExchange, foreignExchange, refreshInterval]);
 
   const handleSort = (key: Exclude<SortKey, null>) => {
     if (sortKey === key) {
@@ -1188,21 +1241,16 @@ export default function PremiumTable({
         </>
       )}
 
-      {isInitialLoading ? (
+      {loading && data.length === 0 ? (
         <div className="flex items-center justify-center py-20">
           <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500" />
         </div>
-      ) : fastModeError ? (
+      ) : error ? (
         <div className="bg-red-900/30 border border-red-700 rounded-lg p-4 text-red-400">
-          오류 발생: {fastModeError instanceof Error ? fastModeError.message : "알 수 없는 오류"}
+          {error}
         </div>
       ) : (
         <div className="w-full border border-white/5 bg-[#050819] overflow-hidden">
-          {isSlowValidating && (
-            <div className="text-xs text-slate-500 px-3 py-1 bg-slate-900/30">
-              최신 시세 갱신 중...
-            </div>
-          )}
           <table className="w-full border-separate border-spacing-y-0 table-auto md:table-fixed">
             <colgroup>
               <col className="md:w-[24px]" /> {/* 즐겨찾기 */}
@@ -1314,7 +1362,7 @@ export default function PremiumTable({
             <tbody>
               {filteredAndSortedData.slice(0, visibleCount).map((row, index) => (
                 <PremiumTableRow
-                  key={row.symbol}
+                  key={`${row.symbol}_${index}`}
                   row={row}
                   index={index}
                   favorites={favorites}
@@ -1323,7 +1371,6 @@ export default function PremiumTable({
                   foreignExchange={foreignExchange}
                   priceUnit={prefs?.priceUnit ?? "KRW"}
                   fxRate={fxRate}
-                  isFastRow={row.isFastRow || false}
                   toggleFavorite={toggleFavorite}
                   setExpandedSymbol={setExpandedSymbol}
                   onChartSelect={onChartSelect}

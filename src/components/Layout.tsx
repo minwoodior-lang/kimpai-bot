@@ -48,6 +48,32 @@ export default function Layout({ children }: LayoutProps) {
     };
   }, [mobileMenuOpen]);
 
+  // 세션 ID 초기화 및 하트비트
+  useEffect(() => {
+    let sessionId = localStorage.getItem("kimpai_session_id");
+    if (!sessionId) {
+      sessionId = `session_${Date.now()}_${Math.random()
+        .toString(36)
+        .substr(2, 9)}`;
+      localStorage.setItem("kimpai_session_id", sessionId);
+    }
+
+    const sendHeartbeat = async () => {
+      try {
+        await fetch("/api/heartbeat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionId }),
+        });
+      } catch (err) {
+        // Silent
+      }
+    };
+
+    sendHeartbeat();
+    const interval = setInterval(sendHeartbeat, 30000);
+    return () => clearInterval(interval);
+  }, []);
 
   const navLinks = [
     { href: "/", label: "홈" },

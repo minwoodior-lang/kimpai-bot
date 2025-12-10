@@ -103,22 +103,9 @@ function getForeignMarketKey(symbol: string, exchange: string, quote: string): s
 // priceWorker가 이미 WebSocket 가격을 prices.json에 병합하고 있으므로
 // API 레벨에서 별도 override가 불필요함 (프로세스 격리로 인해 작동도 안 함)
 
-/**
- * 국내 KRW 기준 거래대금 상위 심볼 추출 (TOP 30)
- * @param rows 필터링된 행들
- * @returns 상위 30개 심볼 배열
- */
-function getTopSymbolsByDomesticVolume(rows: any[], limit: number = 30): string[] {
-  return rows
-    .filter((r) => r.volume24hKrw && r.volume24hKrw > 0)
-    .sort((a, b) => (b.volume24hKrw ?? 0) - (a.volume24hKrw ?? 0))
-    .slice(0, limit)
-    .map((r) => r.symbol);
-}
-
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const { domestic = "UPBIT_KRW", foreign = "BINANCE_USDT", mode } = req.query;
+    const { domestic = "UPBIT_KRW", foreign = "BINANCE_USDT" } = req.query;
 
     // 메모리 캐시 체크 (200ms TTL - priceWorker 300ms 주기보다 짧게)
     const cacheKey = getCacheKey(domestic as string, foreign as string);
@@ -371,26 +358,19 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const selectedUniqueSymbols = new Set(selectedMarkets.map(m => m.base.toUpperCase()));
     const totalCryptoCount = selectedUniqueSymbols.size;
 
-    // FAST 모드: 국내 KRW 기준 거래대금 TOP30만 반환
-    let finalData = filtered;
-    if (mode === "fast") {
-      const topSymbols = new Set(getTopSymbolsByDomesticVolume(filtered, 30));
-      finalData = filtered.filter((row) => topSymbols.has(row.symbol));
-    }
-
     const responseData = {
       success: true,
-      data: finalData,
+      data: filtered,
       averagePremium: Math.round(avgPremium * 100) / 100,
       fxRate: fxRate,
       updatedAt: new Date().toISOString(),
       domesticExchange,
       foreignExchange,
       totalCoins: totalCryptoCount,
-      listedCoins: finalData.filter(r => r.isListed).length,
+      listedCoins: filtered.filter(r => r.isListed).length,
     };
 
-    // 메모리 캐시에 저장 (200ms TTL)
+    // 메모리 캐시에 저장 (800ms TTL)
     setCache(cacheKey, responseData);
 
     return res.status(200).json(responseData);
