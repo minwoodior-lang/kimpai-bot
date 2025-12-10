@@ -20,6 +20,8 @@ export type MarketRow = {
 type UseMarketsFastModeResult = {
   data: MarketRow[];
   loading: boolean;
+  isInitialLoading: boolean;
+  isSlowValidating: boolean;
   error: Error | null;
   fxRate: number;
   averagePremium: number;
@@ -44,6 +46,7 @@ export function useMarketsWithFastMode(
 ): UseMarketsFastModeResult {
   const [data, setData] = useState<MarketRow[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isSlowValidating, setIsSlowValidating] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [fxRate, setFxRate] = useState(1400);
   const [averagePremium, setAveragePremium] = useState(0);
@@ -58,6 +61,9 @@ export function useMarketsWithFastMode(
   const [slowData, setSlowData] = useState<MarketRow[] | null>(null);
   // FAST 응답 (TOP30, 1초)
   const [fastData, setFastData] = useState<MarketRow[] | null>(null);
+
+  // 🔥 핵심: 초기 로딩 판별 (첫 로드 후 다시 undefined가 되지 않음)
+  const isInitialLoading = !slowData && !error;
 
   const buildQueryString = useCallback(
     (mode?: string) => {
@@ -93,6 +99,7 @@ export function useMarketsWithFastMode(
 
   // SLOW 폴링 (6초)
   const fetchSlow = useCallback(async () => {
+    setIsSlowValidating(true);
     try {
       const queryString = buildQueryString();
       const url = `/api/premium/table-filtered${
@@ -113,6 +120,8 @@ export function useMarketsWithFastMode(
       setError(null);
     } catch (err) {
       setError(err instanceof Error ? err : new Error("Unknown error"));
+    } finally {
+      setIsSlowValidating(false);
     }
   }, [buildQueryString, parseResponse]);
 
@@ -188,6 +197,8 @@ export function useMarketsWithFastMode(
   return {
     data,
     loading,
+    isInitialLoading,
+    isSlowValidating,
     error,
     fxRate,
     averagePremium,

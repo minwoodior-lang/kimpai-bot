@@ -692,6 +692,8 @@ export default function PremiumTable({
   const {
     data: fastModeData,
     loading,
+    isInitialLoading,
+    isSlowValidating,
     error: fastModeError,
     fxRate,
     averagePremium,
@@ -1187,7 +1189,7 @@ export default function PremiumTable({
         </>
       )}
 
-      {loading && data.length === 0 ? (
+      {isInitialLoading ? (
         <div className="flex items-center justify-center py-20">
           <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500" />
         </div>
@@ -1197,6 +1199,11 @@ export default function PremiumTable({
         </div>
       ) : (
         <div className="w-full border border-white/5 bg-[#050819] overflow-hidden">
+          {isSlowValidating && (
+            <div className="text-xs text-slate-500 px-3 py-1 bg-slate-900/30">
+              최신 시세 갱신 중...
+            </div>
+          )}
           <table className="w-full border-separate border-spacing-y-0 table-auto md:table-fixed">
             <colgroup>
               <col className="md:w-[24px]" /> {/* 즐겨찾기 */}
