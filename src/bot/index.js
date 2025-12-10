@@ -25,11 +25,19 @@ const signalCommands = require("./commands/signal");
 const { runAllFreeSignals } = require("./schedulers/freeSignals");
 const { proWatchlistScan, proBtcForcastScan } = require("./schedulers/proScan");
 
+// 시그널 엔진 비활성화 옵션 (개발환경에서 끄기)
+const DISABLE_SIGNAL_ENGINE = process.env.DISABLE_SIGNAL_ENGINE === 'true';
+
 let binanceEngine = null;
-try {
-  binanceEngine = require("../workers/binanceSignalEngine");
-} catch (err) {
-  console.warn("⚠️ Binance Signal Engine 로드 실패:", err.message);
+if (DISABLE_SIGNAL_ENGINE) {
+  console.log("🔴 Signal Engine 비활성화됨 (DISABLE_SIGNAL_ENGINE=true)");
+  console.log("💡 프로덕션에서는 pm2로 signalWorker.js를 별도 실행하세요");
+} else {
+  try {
+    binanceEngine = require("../workers/binanceSignalEngine");
+  } catch (err) {
+    console.warn("⚠️ Binance Signal Engine 로드 실패:", err.message);
+  }
 }
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;

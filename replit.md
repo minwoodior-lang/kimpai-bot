@@ -25,6 +25,18 @@ KimpAI는 한국 거래소(Upbit, Bithumb, Coinone)와 글로벌 거래소(Binan
 - `src/workers/binanceSignalEngine.js` - 200EMA 계산, 추세 필터, 필터 상수
 - `src/bot/utils/binanceSymbols.js` - TOP_LIMIT 60 → 100 변경
 
+**시그널 엔진 프로덕션 분리 (v2.6.2):**
+- ✅ **개발환경 비활성화:** `DISABLE_SIGNAL_ENGINE=true` 환경변수로 개발 환경에서 엔진 OFF
+- ✅ **독립 워커 스크립트:** `src/workers/signalWorker.js` - pm2로 별도 프로세스 실행
+- ✅ **pm2 ecosystem 설정:** `ecosystem.config.js` - autorestart, 로그 설정 포함
+- 💡 **프로덕션 배포:**
+  ```bash
+  # 프로덕션 VM에서 실행
+  pm2 start ecosystem.config.js
+  pm2 status
+  pm2 logs signal-engine
+  ```
+
 **이전 v2.6.0 변경사항:**
 
 **Admin v2.0 Dashboard 구현:**
