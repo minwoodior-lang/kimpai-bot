@@ -286,17 +286,20 @@ async function runWhaleSignals(bot) {
       // 3단계: 심볼별 쿨다운 확인
       if (!canSend('WHALE', symbol, WHALE_COOLDOWN_MS)) continue;
       
-      // 4단계: 1시간 추세 필터
+      // 4단계: 1시간 추세 필터 (극강화: SIDEWAYS 절대 차단)
       const candles1h = binanceEngine.getCandles1h(symbol);
       if (!candles1h || candles1h.length === 0) continue;
       
-      const { trend } = getEMA200TrendV2(candles1h);
+      const { trend, slope } = getEMA200TrendV2(candles1h);
       
-      // SIDEWAYS는 절대 발송 금지
+      // SIDEWAYS는 절대 발송 금지 (극강화 필터 적용)
       if (trend === "SIDEWAYS") {
-        console.log(`⏭️ [WHALE] ${symbol}: SIDEWAYS 추세 (발송 금지)`);
+        console.log(`⏭️ [WHALE] ${symbol}: SIDEWAYS 추세 감지 (slope=${slope.toFixed(6)}) → 발송 금지 ✗`);
         continue;
       }
+      
+      console.log(`✅ [WHALE] ${symbol}: 추세 인정 (trend=${trend}, slope=${slope.toFixed(6)})`);
+
       
       // 5단계: 체결 필터 (공통)
       const ticker = binanceEngine.get24hData(`${symbol}USDT`);
