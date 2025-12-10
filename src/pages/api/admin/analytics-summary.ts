@@ -37,10 +37,26 @@ async function handler(
   res: NextApiResponse<AnalyticsSummary | { error: string }>
 ) {
   try {
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL || "",
-      process.env.SUPABASE_SERVICE_ROLE_KEY || ""
-    );
+    // 로깅: 실제 사용 중인 환경 변수 확인
+    console.log("[analytics-summary] env SUPABASE_URL =", process.env.SUPABASE_URL);
+    console.log("[analytics-summary] env NEXT_PUBLIC_SUPABASE_URL =", process.env.NEXT_PUBLIC_SUPABASE_URL);
+    console.log("[analytics-summary] env SUPABASE_SERVICE_ROLE_KEY startsWith =", process.env.SUPABASE_SERVICE_ROLE_KEY?.slice(0, 20));
+
+    // Supabase 클라이언트 생성 - SUPABASE_URL 사용 (non-public)
+    const supabaseUrl = process.env.SUPABASE_URL!;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error("[analytics-summary] missing supabase env", {
+        supabaseUrl,
+        supabaseServiceKeyExists: !!supabaseServiceKey,
+      });
+      return res.status(500).json({
+        error: "Missing Supabase environment variables",
+      });
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     const now = new Date();
     const twoMinutesAgo = new Date(now.getTime() - 2 * 60 * 1000);

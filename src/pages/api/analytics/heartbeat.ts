@@ -12,6 +12,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const { path } = (req.body || {}) as { path?: string };
 
+    // 로깅: 실제 사용 중인 환경 변수 확인
+    console.log("[heartbeat] env SUPABASE_URL =", process.env.SUPABASE_URL);
+    console.log("[heartbeat] env NEXT_PUBLIC_SUPABASE_URL =", process.env.NEXT_PUBLIC_SUPABASE_URL);
+    console.log("[heartbeat] env SUPABASE_SERVICE_ROLE_KEY startsWith =", process.env.SUPABASE_SERVICE_ROLE_KEY?.slice(0, 20));
+
     // 1) sid 쿠키 가져오기 / 없으면 생성
     let sid = req.cookies[COOKIE_NAME];
     let needSetCookie = false;
@@ -31,11 +36,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const userAgent = (req.headers["user-agent"] as string) || null;
     const now = new Date().toISOString();
 
-    // 3) Supabase 클라이언트 생성
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL || "",
-      process.env.SUPABASE_SERVICE_ROLE_KEY || ""
-    );
+    // 3) Supabase 클라이언트 생성 - SUPABASE_URL 사용 (non-public)
+    const supabaseUrl = process.env.SUPABASE_URL!;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error("[heartbeat] missing supabase env", {
+        supabaseUrl,
+        supabaseServiceKeyExists: !!supabaseServiceKey,
+      });
+      return res.status(500).json({
+        ok: false,
+        error: "missing_env",
+        message: "Missing Supabase environment variables",
+      });
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     // 4) 최소 필드만 upsert (sid 기준)
     const { error } = await supabase
