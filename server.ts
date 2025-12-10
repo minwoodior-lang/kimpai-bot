@@ -4,6 +4,7 @@ import * as cron from "node-cron";
 import { exec } from "child_process";
 import { createChatServer } from "./src/server/chatServer";
 import { startPriceWorker } from "./workers/priceWorker";
+import { startSignalEngine } from "./src/signalEngine";
 
 const startTelegramBot = async () => {
   try {
@@ -82,6 +83,20 @@ async function bootstrap() {
         startTelegramBot().catch(err => {
           console.error("❌ Telegram Bot background start error:", err.message);
         });
+
+        // 시그널 엔진 자동 시작 (프로덕션만)
+        const isProd = isProduction;
+        const signalDisabled = process.env.DISABLE_SIGNAL_ENGINE === "true";
+        
+        if (isProd && !signalDisabled) {
+          console.log("[WORKERS] Starting Signal Engine in production mode...");
+          startSignalEngine()
+            .then(() => console.log("[SignalEngine] ✅ started in production"))
+            .catch((err) => console.error("[SignalEngine] ❌ failed to start:", err.message));
+        } else {
+          const reason = !isProd ? "development environment" : "DISABLE_SIGNAL_ENGINE=true";
+          console.log(`[SignalEngine] Disabled (${reason})`);
+        }
       } catch (err) {
         console.error("[ERROR] Worker start failed:", err);
       }

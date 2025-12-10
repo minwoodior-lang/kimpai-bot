@@ -1,0 +1,96 @@
+📩 [전달문] 시그널 엔진을 Reserved VM에서 24시간 자동 실행되게 구조 변경 요청
+
+목표:
+
+개발 환경에서는 npm run dev, npm run bot:dev로만 테스트
+
+프로덕션 Reserved VM에 Publish 되었을 때는, 웹 서버와 함께 시그널 엔진이 자동으로 24시간 실행되도록 만들어 주세요.
+
+pm2 / 별도 VM Shell 없이 Replit Reserved VM 구조에 맞는 방식으로 구현해 주세요.
+
+요구사항:
+
+시그널 엔진 진입점 정리
+
+현재 시그널 엔진 엔트리 파일 (예: signal-engine/index.ts 또는 src/signalEngine.ts) 을 하나로 정리해 주세요.
+
+그 파일에 startSignalEngine() 같은 함수를 export 해두고, 내부에서:
+
+Binance/OKX WebSocket 구독
+
+JSON 파일(data/prices.json, data/marketStats.json, data/premiumTable.json) 읽기
+
+김프 급변 / 고래 / 변동성 시그널 계산
+
+텔레그램 발송
+를 수행하도록 유지해 주세요.
+
+프로덕션 서버가 시작될 때 자동으로 시그널 엔진 실행
+
+실제 프로덕션 진입점 (예: server.ts 또는 src/index.ts, Replit에서 사용하는 start 스크립트 기준 엔트리) 에서 아래 로직을 추가해 주세요:
+
+import { startSignalEngine } from "./signal-engine"; // 실제 경로에 맞게 수정
+
+const isProd = process.env.NODE_ENV === "production";
+const signalDisabled = process.env.DISABLE_SIGNAL_ENGINE === "true";
+
+if (isProd && !signalDisabled) {
+  startSignalEngine()
+    .then(() => console.log("[SignalEngine] started in production."))
+    .catch((err) => console.error("[SignalEngine] failed to start:", err));
+}
+
+
+이 코드는 서버가 프로덕션(VM)에서 시작될 때 한 번만 실행되고, 그 후엔 시그널 엔진이 내부에서 setInterval / WebSocket loop로 24시간 동작하도록 해 주세요.
+
+개발 환경 (npm run dev) 에서는 NODE_ENV !== "production" 이라서 시그널 엔진이 자동 실행되지 않아야 합니다.
+
+개발 환경에서는 강제 OFF 옵션 유지
+
+이미 사용 중인 DISABLE_SIGNAL_ENGINE 환경변수를 그대로 유지해 주세요.
+
+개발 중에는 .env 또는 Replit Secrets에서 DISABLE_SIGNAL_ENGINE=true 를 주면 엔진이 아예 안 돌도록:
+
+if (!isProd || signalDisabled) {
+  console.log("[SignalEngine] Disabled in this environment.");
+  // startSignalEngine() 호출하지 않음
+}
+
+
+대역폭 최적화 유지
+
+시그널 엔진은 반드시 기존처럼:
+
+HTTP API 호출 없이
+
+data/prices.json, data/premiumTable.json, data/marketStats.json 을 직접 읽는 방식
+
+즉, 코인테이블과 동일한 수집 데이터를 공유하는 구조로 유지해 주세요.
+
+추가적으로 Render/외부로 나가는 트래픽이 늘어나지 않도록 해 주세요.
+
+검증 방법
+
+개발 환경:
+
+DISABLE_SIGNAL_ENGINE=true 상태에서 npm run dev 실행 → 시그널 엔진 자동 실행되지 않아야 함.
+
+npm run bot:dev 로만 수동 테스트 가능.
+
+프로덕션:
+
+Replit에서 Publish 후, 텔레그램 채널에서:
+
+김프 급변: 0.35%p 이상 AND |김프| ≥ 1.0% AND 10분 쿨다운 동작 확인
+
+고래 신호: 200EMA 상승/하락 필터 + 횡보 차단 확인
+
+IDE를 완전히 닫아도 시그널이 24시간 계속 들어오는지 확인.
+
+요약:
+
+pm2 / SSH / 별도 VM Shell 없이,
+
+Replit Reserved VM에서 웹 서버 프로세스가 시작될 때 시그널 엔진도 함께 start 되도록 구조를 바꿔 주세요.
+
+개발 환경에서는 자동으로 돌지 않게 (NODE_ENV !== "production" + DISABLE_SIGNAL_ENGINE) 보호해 주세요.
