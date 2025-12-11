@@ -1,141 +1,181 @@
-/**
- * Binance TOP 100 심볼 자동 선택 모듈 (v2.4)
- * 24h 거래량 기준으로 상위 100개 USDT 페어 선택
- * 15분마다 자동 업데이트
- */
+// src/bot/utils/binanceSymbols.js
+// Binance TOP Symbols 헬퍼
+// 우선 순위:
+//  1) Render Proxy (TOP_SYMBOLS_URL)  → kimpai-price-proxy-1
+//  2) Binance 24h ticker 직접 호출    → 451 나면 조용히 포기
+//  3) FALLBACK_SYMBOLS               → 최소 동작 보장
 
-const fs = require('fs');
-const path = require('path');
+const axios = require("axios");
 
-const CACHE_FILE = path.join(__dirname, '../../../data/topSymbols.json');
-const UPDATE_INTERVAL = 15 * 60 * 1000;
-const TOP_LIMIT = 100;
-const MUST_INCLUDE = ['BTCUSDT', 'ETHUSDT'];
-
-let cachedSymbols = [];
-let lastUpdateTime = 0;
-
+// ✅ 최후 보루용 하드코딩 심볼들 (전부 소문자 usdt 마켓)
 const FALLBACK_SYMBOLS = [
-  'BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'SOLUSDT', 'XRPUSDT',
-  'DOGEUSDT', 'ADAUSDT', 'AVAXUSDT', 'SHIBUSDT', 'DOTUSDT',
-  'LINKUSDT', 'MATICUSDT', 'LTCUSDT', 'UNIUSDT', 'ATOMUSDT',
-  'XLMUSDT', 'NEARUSDT', 'APTUSDT', 'ARBUSDT', 'OPUSDT'
+  "btcusdt",
+  "ethusdt",
+  "bnbusdt",
+  "solusdt",
+  "xrpusdt",
+  "adausdt",
+  "dogeusdt",
+  "linkusdt",
+  "ltcusdt",
+  "uniusdt",
+  "avaxusdt",
+  "opusdt",
+  "arbust",
+  "suiusdt",
+  "tonusdt",
+  "stptusdt",
+  "pepeusdt",
+  "wifusdt",
+  "bonkusdt",
 ];
 
-async function fetchTop60Symbols() {
+// ⏱ 메모리 캐시 – Render / Binance API를 너무 자주 안 두드리게
+const CACHE_TTL_MS = 10 * 60 * 1000; // 10분
+
+let cache = {
+  updatedAt: 0,
+  symbols: FALLBACK_SYMBOLS,
+};
+
+// Render Proxy URL (Railway 환경변수에서 주입)
+// 예) https://kimpai-price-proxy-1.onrender.com/api/internal/top-symbols
+const TOP_SYMBOLS_URL = process.env.TOP_SYMBOLS_URL;
+
+// ------------------------------------------------------------
+// 1) Render(kimpai-price-proxy)에서 TOP 심볼 가져오기
+//    응답 예: { ok:true, count:100, symbols:[ "btcusdt", ... ] }
+//    또는 그냥 ["btcusdt", "ethusdt", ...] 배열일 수도 있다고 가정
+// ------------------------------------------------------------
+async function fetchFromRender() {
+  if (!TOP_SYMBOLS_URL) {
+    console.log("[TopSymbols] TOP_SYMBOLS_URL not set, skip Render fetch");
+    return null;
+  }
+
   try {
-    const response = await fetch('https://api.binance.com/api/v3/ticker/24hr');
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    
-    const data = await response.json();
-    
-    const usdtPairs = data
-      .filter(row => row.symbol.endsWith('USDT') && !row.symbol.includes('UP') && !row.symbol.includes('DOWN'))
-      .map(row => ({
-        symbol: row.symbol,
-        quoteVolume: parseFloat(row.quoteVolume || 0),
-        lastPrice: parseFloat(row.lastPrice || 0),
-        priceChangePercent: parseFloat(row.priceChangePercent || 0)
-      }))
-      .filter(row => row.quoteVolume > 0 && row.lastPrice > 0)
-      .sort((a, b) => b.quoteVolume - a.quoteVolume);
-    
-    let top = usdtPairs.slice(0, TOP_LIMIT);
-    
-    for (const must of MUST_INCLUDE) {
-      if (!top.find(s => s.symbol === must)) {
-        const found = usdtPairs.find(s => s.symbol === must);
-        if (found) {
-          top.push(found);
-        }
-      }
+    const res = await axios.get(TOP_SYMBOLS_URL, { timeout: 5000 });
+
+    let list = res.data;
+
+    // 응답 타입이 배열인지 / { symbols: [...] } 인지 체크
+    if (Array.isArray(list)) {
+      // OK
+    } else if (Array.isArray(list?.symbols)) {
+      list = list.symbols;
+    } else {
+      console.warn(
+        "[TopSymbols] Render API 응답 포맷이 배열이 아님 → FALLBACK 사용"
+      );
+      return null;
     }
-    
-    const symbols = top.map(s => s.symbol);
-    
-    try {
-      const dir = path.dirname(CACHE_FILE);
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-      }
-      fs.writeFileSync(CACHE_FILE, JSON.stringify({
-        symbols,
-        updatedAt: new Date().toISOString(),
-        count: symbols.length
-      }, null, 2));
-    } catch (writeErr) {
-      console.warn('[TopSymbols] Cache write failed:', writeErr.message);
+
+    const symbols = list
+      .map((s) => String(s).toLowerCase())
+      .filter((s) => s.endsWith("usdt"));
+
+    if (symbols.length === 0) {
+      console.warn("[TopSymbols] Render API에서 유효한 USDT 심볼이 없음");
+      return null;
     }
-    
-    cachedSymbols = symbols;
-    lastUpdateTime = Date.now();
-    
-    console.log(`[TopSymbols] Updated: ${symbols.length} symbols (Top 100 by 24h volume)`);
-    
+
+    console.log(
+      `[TopSymbols] Loaded from Render (${symbols.length} symbols)`
+    );
     return symbols;
   } catch (err) {
-    console.error('[TopSymbols] Fetch error:', err.message);
-    return loadCachedOrFallback();
+    const status = err?.response?.status;
+    const msg = status ? `HTTP ${status}` : err.message;
+    console.warn("[TopSymbols] Render fetch error:", msg);
+    return null;
   }
 }
 
-function loadCachedOrFallback() {
+// ------------------------------------------------------------
+// 2) Binance 24h ticker에서 직접 상위 100개 랭킹
+//    지역 제한(451) / 네트워크 에러 나면 그냥 null 리턴
+// ------------------------------------------------------------
+async function fetchFromBinance() {
   try {
-    if (fs.existsSync(CACHE_FILE)) {
-      const data = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
-      if (data.symbols && data.symbols.length > 0) {
-        cachedSymbols = data.symbols;
-        console.log(`[TopSymbols] Loaded from cache: ${cachedSymbols.length} symbols`);
-        return cachedSymbols;
-      }
+    const res = await axios.get(
+      "https://api.binance.com/api/v3/ticker/24hr",
+      { timeout: 7000 }
+    );
+
+    const rows = res.data;
+
+    // USDT 마켓만 필터링
+    const usdtRows = rows.filter(
+      (r) => r.symbol && r.symbol.endsWith("USDT")
+    );
+
+    // quoteVolume 기준 상위 100개
+    const sorted = usdtRows
+      .map((r) => ({
+        symbol: r.symbol.toLowerCase(),
+        quoteVolume: parseFloat(r.quoteVolume || "0"),
+      }))
+      .filter((r) => r.quoteVolume > 0)
+      .sort((a, b) => b.quoteVolume - a.quoteVolume)
+      .slice(0, 100);
+
+    const symbols = sorted.map((r) => r.symbol);
+
+    if (symbols.length === 0) {
+      console.warn("[TopSymbols] Binance 24h ticker에서 심볼 0개 → skip");
+      return null;
     }
+
+    console.log(
+      `[TopSymbols] Loaded from Binance (${symbols.length} symbols)`
+    );
+    return symbols;
   } catch (err) {
-    console.warn('[TopSymbols] Cache read failed:', err.message);
+    const status = err?.response?.status;
+    const msg = status ? `HTTP ${status}` : err.message;
+    console.warn("[TopSymbols] Binance fetch error:", msg);
+    return null;
   }
-  
-  console.log('[TopSymbols] Using fallback symbols');
-  cachedSymbols = FALLBACK_SYMBOLS;
-  return FALLBACK_SYMBOLS;
 }
 
+// ------------------------------------------------------------
+// 3) 공개 함수: getTopSymbols()
+//    - 캐시 유효 → 바로 리턴
+//    - Render → 실패하면 Binance → 실패하면 FALLBACK
+// ------------------------------------------------------------
 async function getTopSymbols() {
   const now = Date.now();
-  
-  if (cachedSymbols.length > 0 && (now - lastUpdateTime) < UPDATE_INTERVAL) {
-    return cachedSymbols;
+
+  // 1) 캐시가 살아있으면 그대로 사용
+  if (now - cache.updatedAt < CACHE_TTL_MS && cache.symbols?.length) {
+    return cache.symbols;
   }
-  
-  return await fetchTop60Symbols();
-}
 
-function getTopSymbolsSync() {
-  if (cachedSymbols.length > 0) {
-    return cachedSymbols;
+  // 2) Render(kimpai-price-proxy) 먼저 시도
+  let symbols = await fetchFromRender();
+
+  // 3) Render 실패 시 Binance 직접 시도
+  if (!symbols) {
+    symbols = await fetchFromBinance();
   }
-  return loadCachedOrFallback();
-}
 
-function startAutoUpdate() {
-  fetchTop60Symbols();
-  
-  setInterval(() => {
-    fetchTop60Symbols();
-  }, UPDATE_INTERVAL);
-  
-  console.log('[TopSymbols] Auto-update started (every 15 minutes)');
-}
+  // 4) 둘 다 실패하면 FALLBACK 사용
+  if (!symbols || symbols.length === 0) {
+    console.warn(
+      "[TopSymbols] All fetch failed → FALLBACK_SYMBOLS 사용"
+    );
+    symbols = FALLBACK_SYMBOLS;
+  }
 
-function getSymbolsWithoutSuffix() {
-  return cachedSymbols.map(s => s.replace('USDT', ''));
+  cache = {
+    updatedAt: now,
+    symbols,
+  };
+
+  return symbols;
 }
 
 module.exports = {
-  fetchTop60Symbols,  // 하위 호환성 유지
-  fetchTop100Symbols: fetchTop60Symbols,  // v2.4 alias
   getTopSymbols,
-  getTopSymbolsSync,
-  startAutoUpdate,
-  getSymbolsWithoutSuffix,
   FALLBACK_SYMBOLS,
-  TOP_LIMIT
 };
