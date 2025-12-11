@@ -76,6 +76,13 @@ let klineWsPingInterval = null;
 let pendingPong = false;
 let pendingKlinePong = false;
 
+// currentSymbols / 인터벌 핸들 (암시적 글로벌 쓰던 거 그대로 유지)
+let currentSymbols = [];
+let baselineInterval = null;
+let tickerInterval = null;
+let symbolRefreshInterval = null;
+let healthCheckInterval = null;
+
 // 상태 동기화
 function syncGlobalState() {
   globalState.lastUpdateTime = lastUpdateTime;
@@ -280,18 +287,9 @@ function checkSpikeCondition(symbol) {
 // Binance REST Fetchers
 // ============================================================
 
-async function fetchAllUsdtSymbols() {
-  try {
-    const res = await axios.get("https://api.binance.com/api/v3/exchangeInfo");
-    return res.data.symbols
-      .filter(s => s.quoteAsset === "USDT" && s.status === "TRADING")
-      .map(s => s.symbol.toLowerCase());
-  } catch (err) {
-    console.error("[BinanceSignal] Failed to fetch symbols:", err.message);
-    return [];
-  }
-}
+// 🔥 더 이상 전체 USDT 심볼 REST로 안 긁어옴 (451 방지)
 
+// 24h ticker (quoteVolume, priceChange, lastPrice)
 async function fetch24hTicker() {
   try {
     const res = await axios.get("https://api.binance.com/api/v3/ticker/24hr");
@@ -650,9 +648,8 @@ async function initialize() {
   syncGlobalState();
   console.log("[BinanceSignal] Initializing signal engine...");
 
-  const symbols = await fetchAllUsdtSymbols();
-  console.log(`[BinanceSignal] Found ${symbols.length} USDT trading pairs`);
-
+  // 🔥 심볼은 전부 Render 프록시 / binanceSymbols 헬퍼에서 관리
+  //    fetchAllUsdtSymbols() 같은 Binance REST는 더 이상 호출 안 함
   await fetch24hTicker();
 
   let topSymbols;
@@ -665,6 +662,7 @@ async function initialize() {
   }
 
   currentSymbols = topSymbols.map(s => s.toLowerCase());
+  console.log(`[BinanceSignal] Final symbol universe: ${currentSymbols.length} symbols`);
 
   // 1h / 1m 캔들 초기 로딩
   const limit = Math.min(currentSymbols.length, 100);
