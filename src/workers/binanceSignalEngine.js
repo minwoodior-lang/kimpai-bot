@@ -2,6 +2,11 @@ const WebSocket = require('ws');
 const axios = require('axios');
 const { getTopSymbols, FALLBACK_SYMBOLS } = require('../bot/utils/binanceSymbols');
 
+const PRICE_PROXY_BASE_URL =
+  process.env.PRICE_PROXY_BASE_URL || "https://kimpai-price-proxy-1.onrender.com";
+
+const BINANCE_HTTP_BASE = `${PRICE_PROXY_BASE_URL}/binance`;
+
 const BASELINE_WINDOW = 20;
 
 // FREE 고래 시그널 v2.4 필터 상수
@@ -292,7 +297,8 @@ function checkSpikeCondition(symbol) {
 // 24h ticker (quoteVolume, priceChange, lastPrice)
 async function fetch24hTicker() {
   try {
-    const res = await axios.get("https://api.binance.com/api/v3/ticker/24hr");
+    // 🔁 Binance 직접 호출 → Render 프록시 경유
+    const res = await axios.get(`${BINANCE_HTTP_BASE}/api/v3/ticker/24hr`);
     for (const t of res.data) {
       if (t.symbol.endsWith("USDT")) {
         ticker24h.set(t.symbol, {
@@ -311,7 +317,8 @@ async function fetch24hTicker() {
 
 async function fetchKlines(symbol, interval = "1h", limit = 250) {
   try {
-    const res = await axios.get("https://api.binance.com/api/v3/klines", {
+    // 🔁 Binance 직접 호출 → Render 프록시 경유
+    const res = await axios.get(`${BINANCE_HTTP_BASE}/api/v3/klines`, {
       params: { symbol: symbol.toUpperCase(), interval, limit },
     });
     return res.data.map(k => ({
